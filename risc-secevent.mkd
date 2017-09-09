@@ -1,0 +1,93 @@
+---
+coding: utf-8
+
+title: RISC profile of IETF Security Events
+abbrev: risc-secevent
+docname: risc-secevent-00
+date: 2017-09-08
+category: info
+
+stand_alone: yes
+pi: [toc, sortrefs, symrefs, comments]
+
+author:
+ -
+    ins: M. Scurtescu
+    name: Marius Scurtescu
+    organization: Google
+    email: mscurtescu@google.com
+ -
+    ins: A. Backman
+    name: Annabelle Backman
+    organization: Amazon
+    email: richanna@amazon.com
+ -
+    ins: P. Hunt
+    name: Phil Hunt
+    organization: Oracle Corporation
+    email: phil.hunt@yahoo.com
+ -
+    ins: J. Bradley
+    name: John Bradley
+    organization: Yubico
+    email: secevemt@ve7jtb.com
+    
+normative:
+  JSON: RFC7159
+  RFC7519:
+  SET:
+    title: Security Event Token (SET)
+    target: https://tools.ietf.org/html/draft-ietf-secevent-token-02
+  DELIVERY:
+    title: SET Token Delivery Using HTTP
+    target: https://tools.ietf.org/html/draft-ietf-secevent-delivery-00
+  API:
+    title: Management API for SET Event Streams
+    target: https://tools.ietf.org/html/draft-scurtescu-secevent-simple-control-plane-00
+  USECASES:
+    title: Security Events RISC Use Cases
+    target: https://tools.ietf.org/html/draft-scurtescu-secevent-risc-use-cases-00
+
+--- abstract
+
+This is a RISC profile for several IETF Security Events drafts:
+
+* [Security Event Token (SET)](https://tools.ietf.org/html/draft-ietf-secevent-token)
+* [SET Token Delivery Using HTTP](https://tools.ietf.org/html/draft-ietf-secevent-delivery)
+* [Management API for SET Event Streams](https://tools.ietf.org/html/draft-scurtescu-secevent-simple-control-plane)
+
+--- middle
+
+# Introduction
+
+
+## Notational Conventions {#conv}
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+"SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+document are to be interpreted as described in {{!RFC2119}}.
+
+
+# Security Event Token Profle
+
+TODO:
+
+* signature key resolution
+* subject composite claim
+* security considerations for Id Token and Access Token confusion
+
+
+# SET Token Delivery Using HTTP Profile
+
+TODO:
+
+* authorization
+
+
+# Management API for SET Event Streams Profile
+
+TODO:
+
+* subject claims for add/remove operations
+* authorization
+
