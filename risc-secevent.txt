@@ -10,7 +10,7 @@
                                                                   Oracle
                                                               J. Bradley
                                                                   Yubico
-                                                       October 011, 2017
+                                                        October 01, 2017
 
 
                   RISC profile of IETF Security Events
@@ -78,12 +78,12 @@ Scurtescu, et al.         Expires April 4, 2018                 [Page 1]
 
 5.  Normative References
 
-   [API]      "Management API for SET Event Streams", n.d.,
+   [API]      IETF, "Management API for SET Event Streams",
               <https://tools.ietf.org/html/draft-scurtescu-secevent-
               simple-control-plane-00>.
 
    [DELIVERY]
-              "SET Token Delivery Using HTTP", n.d., <https://tools.ietf
+              IETF, "SET Token Delivery Using HTTP", <https://tools.ietf
               .org/html/draft-ietf-secevent-delivery-00>.
 
    [JSON]     Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
@@ -99,11 +99,11 @@ Scurtescu, et al.         Expires April 4, 2018                 [Page 1]
               (JWT)", RFC 7519, DOI 10.17487/RFC7519, May 2015,
               <https://www.rfc-editor.org/info/rfc7519>.
 
-   [SET]      "Security Event Token (SET)", n.d., <https://tools.ietf
+   [SET]      IETF, "Security Event Token (SET)", <https://tools.ietf
               .org/html/draft-ietf-secevent-token-02>.
 
    [USECASES]
-              "Security Events RISC Use Cases", n.d.,
+              IETF, "Security Events RISC Use Cases",
               <https://tools.ietf.org/html/draft-scurtescu-secevent-
               risc-use-cases-00>.
 

@@ -51,7 +51,7 @@
       </address>
     </author>
 
-    <date year="2017" month="October" day="011"/>
+    <date year="2017" month="October" day="01"/>
 
     <workgroup>RISC Working Group</workgroup>
 
@@ -134,9 +134,9 @@
         <front>
           <title>Security Event Token (SET)</title>
           <author >
-            <organization></organization>
+            <organization>IETF</organization>
           </author>
-          <date year="n.d."/>
+          <date/>
         </front>
       </reference>
 
@@ -144,9 +144,9 @@
         <front>
           <title>SET Token Delivery Using HTTP</title>
           <author >
-            <organization></organization>
+            <organization>IETF</organization>
           </author>
-          <date year="n.d."/>
+          <date/>
         </front>
       </reference>
 
@@ -154,9 +154,9 @@
         <front>
           <title>Management API for SET Event Streams</title>
           <author >
-            <organization></organization>
+            <organization>IETF</organization>
           </author>
-          <date year="n.d."/>
+          <date/>
         </front>
       </reference>
 
@@ -164,9 +164,9 @@
         <front>
           <title>Security Events RISC Use Cases</title>
           <author >
-            <organization></organization>
+            <organization>IETF</organization>
           </author>
-          <date year="n.d."/>
+          <date/>
         </front>
       </reference>
 
