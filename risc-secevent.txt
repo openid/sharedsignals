@@ -31,25 +31,25 @@ Table of Contents
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
      1.1.  Notational Conventions  . . . . . . . . . . . . . . . . .   2
    2.  Security Event Token Profle . . . . . . . . . . . . . . . . .   2
+     2.1.  Signature Key Resolution  . . . . . . . . . . . . . . . .   2
+     2.2.  Composite Subject Claim . . . . . . . . . . . . . . . . .   2
+     2.3.  Security Considerations . . . . . . . . . . . . . . . . .   2
    3.  SET Token Delivery Using HTTP Profile . . . . . . . . . . . .   2
+     3.1.  Authorization . . . . . . . . . . . . . . . . . . . . . .   2
    4.  Management API for SET Event Streams Profile  . . . . . . . .   2
-   5.  Event Types . . . . . . . . . . . . . . . . . . . . . . . . .   2
-     5.1.  Account Credential Change Required  . . . . . . . . . . .   2
+     4.1.  Authorization . . . . . . . . . . . . . . . . . . . . . .   3
+     4.2.  Subject Claims for Subject Add and Remove Operations  . .   3
+   5.  Event Types . . . . . . . . . . . . . . . . . . . . . . . . .   3
+     5.1.  Account Credential Change Required  . . . . . . . . . . .   3
      5.2.  Account Deleted . . . . . . . . . . . . . . . . . . . . .   3
      5.3.  Account Disabled  . . . . . . . . . . . . . . . . . . . .   3
-     5.4.  Account Enabled . . . . . . . . . . . . . . . . . . . . .   3
-     5.5.  Identifier Changed  . . . . . . . . . . . . . . . . . . .   3
+     5.4.  Account Enabled . . . . . . . . . . . . . . . . . . . . .   4
+     5.5.  Identifier Changed  . . . . . . . . . . . . . . . . . . .   4
      5.6.  Identifier Recycled . . . . . . . . . . . . . . . . . . .   4
      5.7.  Opt Out . . . . . . . . . . . . . . . . . . . . . . . . .   4
        5.7.1.  Opt In  . . . . . . . . . . . . . . . . . . . . . . .   5
-       5.7.2.  Opt Out Initiated . . . . . . . . . . . . . . . . . .   5
+       5.7.2.  Opt Out Initiated . . . . . . . . . . . . . . . . . .   6
        5.7.3.  Opt Out Cancelled . . . . . . . . . . . . . . . . . .   6
-       5.7.4.  Opt Out Effective . . . . . . . . . . . . . . . . . .   6
-     5.8.  Recovery Activated  . . . . . . . . . . . . . . . . . . .   6
-     5.9.  Recovery Information Changed  . . . . . . . . . . . . . .   6
-     5.10. Sessions Revoked  . . . . . . . . . . . . . . . . . . . .   7
-   6.  Normative References  . . . . . . . . . . . . . . . . . . . .   7
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   7
 
 
 
@@ -57,6 +57,13 @@ Scurtescu, et al.         Expires April 4, 2018                 [Page 1]
 
                               risc-secevent                 October 2017
 
+
+       5.7.4.  Opt Out Effective . . . . . . . . . . . . . . . . . .   6
+     5.8.  Recovery Activated  . . . . . . . . . . . . . . . . . . .   6
+     5.9.  Recovery Information Changed  . . . . . . . . . . . . . .   6
+     5.10. Sessions Revoked  . . . . . . . . . . . . . . . . . . . .   7
+   6.  Normative References  . . . . . . . . . . . . . . . . . . . .   7
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   8
 
 1.  Introduction
 
@@ -68,27 +75,52 @@ Scurtescu, et al.         Expires April 4, 2018                 [Page 1]
 
 2.  Security Event Token Profle
 
-   TODO:
+   TODO: intro paragraph
 
-   o  signature key resolution
+2.1.  Signature Key Resolution
 
-   o  subject composite claim
+   TODO: pointer to Management API section that describes discovery doc
+   and the property that points to the key.
 
-   o  security considerations for Id Token and Access Token confusion
+2.2.  Composite Subject Claim
+
+   TODO
+
+2.3.  Security Considerations
+
+   TODO: Id Token and Access Token confusion
 
 3.  SET Token Delivery Using HTTP Profile
 
-   TODO:
+   TODO: intro paragraph
 
-   o  authorization
+3.1.  Authorization
+
+   TODO
 
 4.  Management API for SET Event Streams Profile
 
-   TODO:
+   TODO: intro paragraph
 
-   o  subject claims for add/remove operations
 
-   o  authorization
+
+
+
+
+
+
+Scurtescu, et al.         Expires April 4, 2018                 [Page 2]
+
+                              risc-secevent                 October 2017
+
+
+4.1.  Authorization
+
+   TODO
+
+4.2.  Subject Claims for Subject Add and Remove Operations
+
+   TODO
 
 5.  Event Types
 
@@ -103,16 +135,6 @@ Scurtescu, et al.         Expires April 4, 2018                 [Page 1]
    example the user was required to go through a password change.
 
    Attributes: none
-
-
-
-
-
-
-Scurtescu, et al.         Expires April 4, 2018                 [Page 2]
-
-                              risc-secevent                 October 2017
-
 
 5.2.  Account Deleted
 
@@ -141,6 +163,13 @@ Scurtescu, et al.         Expires April 4, 2018                 [Page 2]
 
       *  hijacking
 
+
+
+Scurtescu, et al.         Expires April 4, 2018                 [Page 3]
+
+                              risc-secevent                 October 2017
+
+
       *  bulk-account
 
    o  cause-time - the initial cause that lead to the account to be
@@ -161,14 +190,6 @@ Scurtescu, et al.         Expires April 4, 2018                 [Page 2]
 
    Event Type URI:
    http://schemas.openid.net/secevent/risc/event-type/identifier-changed
-
-
-
-
-Scurtescu, et al.         Expires April 4, 2018                 [Page 3]
-
-                              risc-secevent                 October 2017
-
 
    Identifier Changed signals that the identifier specified in the
    subject has changed.  The subject MUST be either 'email' or 'phone-
@@ -198,6 +219,13 @@ Scurtescu, et al.         Expires April 4, 2018                 [Page 3]
 
    1.  opt-in - the account is participating in RISC event exchange.
 
+
+
+Scurtescu, et al.         Expires April 4, 2018                 [Page 4]
+
+                              risc-secevent                 October 2017
+
+
    2.  opt-out-initiated - the user requested to be excluded from RISC
        event exchanges, but for practical security reasons for a period
        of time RISC events are still exchanged.  The main reason for
@@ -206,25 +234,6 @@ Scurtescu, et al.         Expires April 4, 2018                 [Page 3]
 
    3.  opt-out - the account is NOT participating in RISC event
        exchange.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Scurtescu, et al.         Expires April 4, 2018                 [Page 4]
-
-                              risc-secevent                 October 2017
-
 
    State changes trigger Opt-Out Events as represented bellow:
 
@@ -261,16 +270,7 @@ Scurtescu, et al.         Expires April 4, 2018                 [Page 4]
 
    Attributes: none
 
-5.7.2.  Opt Out Initiated
 
-   Event Type URI:
-   http://schemas.openid.net/secevent/risc/event-type/opt-out-initiated
-
-   Opt Out Initiated signals that the account identified by the subject
-   initiated to opt out from RISC event exchanges.  The account is in
-   the 'opt-out-initiated' state.
-
-   Attributes: none
 
 
 
@@ -281,6 +281,17 @@ Scurtescu, et al.         Expires April 4, 2018                 [Page 5]
 
                               risc-secevent                 October 2017
 
+
+5.7.2.  Opt Out Initiated
+
+   Event Type URI:
+   http://schemas.openid.net/secevent/risc/event-type/opt-out-initiated
+
+   Opt Out Initiated signals that the account identified by the subject
+   initiated to opt out from RISC event exchanges.  The account is in
+   the 'opt-out-initiated' state.
+
+   Attributes: none
 
 5.7.3.  Opt Out Cancelled
 
@@ -320,23 +331,18 @@ Scurtescu, et al.         Expires April 4, 2018                 [Page 5]
    http://schemas.openid.net/secevent/risc/event-type/recovery-
    information-changed
 
-   Recovery Information Changed signals that the account identified by
-   the subject has changed some of its recovery information.  For
-   example a recovery email address was added or removed.
-
-   Attributes: none
-
-
-
-
-
-
 
 
 Scurtescu, et al.         Expires April 4, 2018                 [Page 6]
 
                               risc-secevent                 October 2017
 
+
+   Recovery Information Changed signals that the account identified by
+   the subject has changed some of its recovery information.  For
+   example a recovery email address was added or removed.
+
+   Attributes: none
 
 5.10.  Sessions Revoked
 
@@ -379,12 +385,6 @@ Scurtescu, et al.         Expires April 4, 2018                 [Page 6]
               <https://tools.ietf.org/html/draft-scurtescu-secevent-
               risc-use-cases-00>.
 
-Authors' Addresses
-
-   Marius Scurtescu
-   Google
-
-   Email: mscurtescu@google.com
 
 
 
@@ -392,6 +392,14 @@ Authors' Addresses
 Scurtescu, et al.         Expires April 4, 2018                 [Page 7]
 
                               risc-secevent                 October 2017
+
+
+Authors' Addresses
+
+   Marius Scurtescu
+   Google
+
+   Email: mscurtescu@google.com
 
 
    Annabelle Backman
@@ -410,14 +418,6 @@ Scurtescu, et al.         Expires April 4, 2018                 [Page 7]
    Yubico
 
    Email: secevemt@ve7jtb.com
-
-
-
-
-
-
-
-
 
 
 

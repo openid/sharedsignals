@@ -76,30 +76,40 @@
     </section>
 
     <section anchor="set-profle" title="Security Event Token Profle">
-      <t>TODO:</t>
+      <t>TODO: intro paragraph</t>
 
-      <t><list style="symbols">
-        <t>signature key resolution</t>
-        <t>subject composite claim</t>
-        <t>security considerations for Id Token and Access Token confusion</t>
-      </list></t>
+      <section anchor="signature-key-resolution" title="Signature Key Resolution">
+        <t>TODO: pointer to Management API section that describes discovery doc and the
+        property that points to the key.</t>
+      </section>
+      
+      <section title="Composite Subject Claim">
+        <t>TODO</t>
+      </section>
+      
+      <section title="Security Considerations">
+        <t>TODO: Id Token and Access Token confusion</t>
+      </section>
     </section>
 
     <section anchor="set-token-delivery-using-http-profile" title="SET Token Delivery Using HTTP Profile">
-      <t>TODO:</t>
+      <t>TODO: intro paragraph</t>
 
-      <t><list style="symbols">
-        <t>authorization</t>
-      </list></t>
+      <section title="Authorization">
+        <t>TODO</t>
+      </section>
     </section>
 
     <section anchor="management-api-for-set-event-streams-profile" title="Management API for SET Event Streams Profile">
-      <t>TODO:</t>
-
-      <t><list style="symbols">
-        <t>subject claims for add/remove operations</t>
-        <t>authorization</t>
-      </list></t>
+      <t>TODO: intro paragraph</t>
+      
+      <section title="Authorization">
+        <t>TODO</t>
+      </section>
+      
+      <section title="Subject Claims for Subject Add and Remove Operations">
+        <t>TODO</t>
+      </section>
     </section>
 
     <section anchor="event-types" title="Event Types">
