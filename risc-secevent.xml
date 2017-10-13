@@ -101,6 +101,180 @@
         <t>authorization</t>
       </list></t>
     </section>
+
+    <section anchor="event-types" title="Event Types">
+      <section anchor="account-credential-change-required" title="Account Credential Change Required">
+        <t>Event Type URI:<vspace blankLines="0" />
+        http://schemas.openid.net/secevent/risc/event-type/account-credential-change-required</t>
+        
+        <t>Account Credential Change Required signals that the account identified by the subject was required to
+        change a credential. For example the user was required to go through a password change.</t>
+        
+        <t>Attributes: none</t>
+      </section>
+
+      <section anchor="account-deleted" title="Account Deleted">
+        <t>Event Type URI:<vspace blankLines="0" />
+        http://schemas.openid.net/secevent/risc/event-type/account-deleted</t>
+        
+        <t>Account Deleted signals that the account identified by the subject has been permanently deleted.</t>
+        
+        <t>Attributes: none</t>
+      </section>
+
+      <section anchor="account-disabled" title="Account Disabled">
+        <t>Event Type URI:<vspace blankLines="0" />
+        http://schemas.openid.net/secevent/risc/event-type/account-disabled</t>
+        
+        <t>Account Disabled signals that the account identified by the subject has been disabled. The actual reason why the
+        account was disabled might be specified with the nested 'reason' attribute described below. The accoount may be
+        <xref target="account-enabled">enabled</xref> in the future.</t>
+        
+        <t>Attributes:<list style="symbols">
+          <t>reason - optional, describes why was the account disabled. Possible values:<list style="symbols">
+            <t>hijacking</t>
+            <t>bulk-account</t>
+          </list></t>
+          <t>cause-time - the initial cause that lead to the account to be disabled. In most cases this is an 
+          estimated time. For example, the actual hijacking time. This is before the event time.</t>
+        </list></t>
+      </section>
+
+      <section anchor="account-enabled" title="Account Enabled">
+        <t>Event Type URI:<vspace blankLines="0" />
+        http://schemas.openid.net/secevent/risc/event-type/account-enabled</t>
+        
+        <t>Account Enabled signals that the account identified by the subject has been enabled.</t>
+        
+        <t>Attributes: none</t>
+      </section>
+
+      <section anchor="identifier-changed" title="Identifier Changed">
+        <t>Event Type URI:<vspace blankLines="0" />
+        http://schemas.openid.net/secevent/risc/event-type/identifier-changed</t>
+        
+        <t>Identifier Changed signals that the identifier specified in the subject has changed. The subject
+        MUST be either 'email' or 'phone-number' and it MUST specify the old value.</t>
+        
+        <t>Attributes:<list style="symbols">
+          <t>new-value - required, the new value of the identifier.</t>
+        </list></t>
+      </section>
+
+      <section anchor="identifier-recycled" title="Identifier Recycled">
+        <t>Event Type URI:<vspace blankLines="0" />
+        http://schemas.openid.net/secevent/risc/event-type/identifier-recycled</t>
+        
+        <t>Identifier Recycled signals that the identifier specified in the subject was recycled and now it
+        belongs to a new user. The subject MUST be either 'email' or 'phone-number'.</t>
+        
+        <t>Attributes: none</t>
+      </section>
+
+      <section anchor="opt-out" title="Opt Out">
+        <t>Users SHOULD be allowed to opt-in and out of RISC events being sent for their accounts. With regards
+        to opt-out an account can be in one of these three states:<list style="numbers">
+          <t>opt-in - the account is participating in RISC event exchange.</t>
+          <t>opt-out-initiated - the user requested to be excluded from RISC event exchanges, but for
+          practical security reasons for a period of time RISC evnets are still exchanged. The main reason
+          for this state is to prevent a hiajcker from immediately opting out of RISC.</t>
+          <t>opt-out - the account is NOT participating in RISC event exchange.</t>
+        </list></t>
+        
+        <figure anchor="opt-out-states">
+          <preamble>State changes trigger Opt-Out Events as represented bellow:</preamble>
+          <artwork><![CDATA[
+          +--------+  opt-out-initiated  +-------------------+
+          |        +--------------------->                   |
+          | opt-in |                     | opt-out-initiated |
+          |        |  pt-out-cancelled   |                   |
+          |        <---------------------+                   |
+          +---^----+                     +----------+--------+
+              |                                     |
+              | opt-in                              | opt-out-effective
+              |                                     |
+              |                          +----------V--------+
+              |                          |                   |
+              +--------------------------| opt-out           |
+                                         |                   |
+                                         +-------------------+
+          ]]></artwork>
+          <postamble>Opt-Out States and Opt-Out Events</postamble>
+        </figure>
+        
+        <t>Both Transmitters and Receivers SHOULD manage Opt-Out state for users. Transmitters should send the
+        events defined in this section when the Opt-Out state changes.</t>
+        
+        <section anchor="opt-in" title="Opt In">
+          <t>Event Type URI:<vspace blankLines="0" />
+          http://schemas.openid.net/secevent/risc/event-type/opt-in</t>
+        
+          <t>Opt In signals that the account identified by the subject opted into RISC event exchanges.
+          The accout is in the 'opt-in' state.</t>
+        
+          <t>Attributes: none</t>
+        </section>
+        
+        <section anchor="opt-out-initiated" title="Opt Out Initiated">
+          <t>Event Type URI:<vspace blankLines="0" />
+          http://schemas.openid.net/secevent/risc/event-type/opt-out-initiated</t>
+        
+          <t>Opt Out Initiated signals that the account identified by the subject initiated to opt out
+          from RISC event exchanges. The account is in the 'opt-out-initiated' state.</t>
+        
+          <t>Attributes: none</t>
+        </section>
+        
+        <section anchor="opt-out-cancelled" title="Opt Out Cancelled">
+          <t>Event Type URI:<vspace blankLines="0" />
+          http://schemas.openid.net/secevent/risc/event-type/opt-out-cancelled</t>
+        
+          <t>Opt Out Cancelled signals that the account identified by the subject cancelled the opt out from RISC
+          event exchanges. The account is in the 'opt-in' state.</t>
+        
+          <t>Attributes: none</t>
+        </section>
+        
+        <section anchor="opt-out-effective" title="Opt Out Effective">
+          <t>Event Type URI:<vspace blankLines="0" />
+          http://schemas.openid.net/secevent/risc/event-type/opt-out-effective</t>
+        
+          <t>Opt Out Effective signals that the account identified by the subject was effectively opted out from
+          RISC event exchanges. The account is in the 'opt-out' state.</t>
+        
+          <t>Attributes: none</t>
+        </section>
+      </section>
+      
+      <section anchor="recovery-activated" title="Recovery Activated">
+        <t>Event Type URI:<vspace blankLines="0" />
+        http://schemas.openid.net/secevent/risc/event-type/recovery-activated</t>
+        
+        <t>Recovery Activated signals that the account identified by the subject activated a recovery flow.</t>
+        
+        <t>Attributes: none</t>
+      </section>
+
+      <section anchor="recovery-information-changed" title="Recovery Information Changed">
+        <t>Event Type URI:<vspace blankLines="0" />
+        http://schemas.openid.net/secevent/risc/event-type/recovery-information-changed</t>
+        
+        <t>Recovery Information Changed signals that the account identified by the subject has changed some of
+        its recovery information. For example a recovery email address was added or removed.</t>
+        
+        <t>Attributes: none</t>
+      </section>
+
+      <section anchor="sessions-revoked" title="Sessions Revoked">
+        <t>Event Type URI:<vspace blankLines="0" />
+        http://schemas.openid.net/secevent/risc/event-type/sessions-revoked</t>
+        
+        <t>Sessions Revoked signals that all the sessions for the account identified by the subject have been
+        revoked.</t>
+        
+        <t>Attributes: none</t>
+      </section>
+    </section>
   </middle>
 
   <back>
