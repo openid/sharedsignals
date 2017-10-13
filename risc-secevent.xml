@@ -127,7 +127,7 @@
         http://schemas.openid.net/secevent/risc/event-type/account-disabled</t>
         
         <t>Account Disabled signals that the account identified by the subject has been disabled. The actual reason why the
-        account was disabled might be specified with the nested 'reason' attribute described below. The accoount may be
+        account was disabled might be specified with the nested 'reason' attribute described below. The account may be
         <xref target="account-enabled">enabled</xref> in the future.</t>
         
         <t>Attributes:<list style="symbols">
@@ -176,8 +176,8 @@
         to opt-out an account can be in one of these three states:<list style="numbers">
           <t>opt-in - the account is participating in RISC event exchange.</t>
           <t>opt-out-initiated - the user requested to be excluded from RISC event exchanges, but for
-          practical security reasons for a period of time RISC evnets are still exchanged. The main reason
-          for this state is to prevent a hiajcker from immediately opting out of RISC.</t>
+          practical security reasons for a period of time RISC events are still exchanged. The main reason
+          for this state is to prevent a hijacker from immediately opting out of RISC.</t>
           <t>opt-out - the account is NOT participating in RISC event exchange.</t>
         </list></t>
         
@@ -210,7 +210,7 @@
           http://schemas.openid.net/secevent/risc/event-type/opt-in</t>
         
           <t>Opt In signals that the account identified by the subject opted into RISC event exchanges.
-          The accout is in the 'opt-in' state.</t>
+          The account is in the 'opt-in' state.</t>
         
           <t>Attributes: none</t>
         </section>
