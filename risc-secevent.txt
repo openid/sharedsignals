@@ -132,7 +132,7 @@ Scurtescu, et al.         Expires April 4, 2018                 [Page 2]
    Account Disabled signals that the account identified by the subject
    has been disabled.  The actual reason why the account was disabled
    might be specified with the nested 'reason' attribute described
-   below.  The accoount may be enabled (Section 5.4) in the future.
+   below.  The account may be enabled (Section 5.4) in the future.
 
    Attributes:
 
@@ -200,8 +200,8 @@ Scurtescu, et al.         Expires April 4, 2018                 [Page 3]
 
    2.  opt-out-initiated - the user requested to be excluded from RISC
        event exchanges, but for practical security reasons for a period
-       of time RISC evnets are still exchanged.  The main reason for
-       this state is to prevent a hiajcker from immediately opting out
+       of time RISC events are still exchanged.  The main reason for
+       this state is to prevent a hijacker from immediately opting out
        of RISC.
 
    3.  opt-out - the account is NOT participating in RISC event
@@ -226,7 +226,7 @@ Scurtescu, et al.         Expires April 4, 2018                 [Page 4]
                               risc-secevent                 October 2017
 
 
-   State changes trigger Opt-Out Events as represented bellow.
+   State changes trigger Opt-Out Events as represented bellow:
 
            +--------+  opt-out-initiated  +-------------------+
            |        +--------------------->                   |
@@ -257,7 +257,7 @@ Scurtescu, et al.         Expires April 4, 2018                 [Page 4]
    http://schemas.openid.net/secevent/risc/event-type/opt-in
 
    Opt In signals that the account identified by the subject opted into
-   RISC event exchanges.  The accout is in the 'opt-in' state.
+   RISC event exchanges.  The account is in the 'opt-in' state.
 
    Attributes: none
 
