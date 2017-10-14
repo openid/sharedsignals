@@ -20,11 +20,11 @@ Abstract
 
    This is a RISC profile for several IETF Security Events drafts:
 
-   o  Security Event Token (SET) [1]
+   o  Security Event Token (SET) [SET]
 
-   o  SET Token Delivery Using HTTP [2]
+   o  SET Token Delivery Using HTTP [DELIVERY]
 
-   o  Management API for SET Event Streams [3]
+   o  Management API for SET Event Streams [API]
 
 Table of Contents
 
@@ -75,7 +75,8 @@ Scurtescu, et al.         Expires April 4, 2018                 [Page 1]
 
 2.  Security Event Token Profle
 
-   TODO: intro paragraph
+   This section provides RISC profiling specifications for the "Security
+   Event Token (SET)" [SET] spec.
 
 2.1.  Signature Key Resolution
 
@@ -92,7 +93,8 @@ Scurtescu, et al.         Expires April 4, 2018                 [Page 1]
 
 3.  SET Token Delivery Using HTTP Profile
 
-   TODO: intro paragraph
+   This section provides RISC profiling specifications for the "SET
+   Token Delivery Using HTTP" [DELIVERY] spec.
 
 3.1.  Authorization
 
@@ -100,10 +102,8 @@ Scurtescu, et al.         Expires April 4, 2018                 [Page 1]
 
 4.  Management API for SET Event Streams Profile
 
-   TODO: intro paragraph
-
-
-
+   This section provides RISC profiling specifications for the
+   "Management API for SET Event Streams" [API] spec.
 
 
 
@@ -358,11 +358,11 @@ Scurtescu, et al.         Expires April 4, 2018                 [Page 6]
 
    [API]      IETF, "Management API for SET Event Streams",
               <https://tools.ietf.org/html/draft-scurtescu-secevent-
-              simple-control-plane-00>.
+              simple-control-plane>.
 
    [DELIVERY]
               IETF, "SET Token Delivery Using HTTP", <https://tools.ietf
-              .org/html/draft-ietf-secevent-delivery-00>.
+              .org/html/draft-ietf-secevent-delivery>.
 
    [JSON]     Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
               Interchange Format", RFC 7159, DOI 10.17487/RFC7159, March
@@ -378,7 +378,7 @@ Scurtescu, et al.         Expires April 4, 2018                 [Page 6]
               <https://www.rfc-editor.org/info/rfc7519>.
 
    [SET]      IETF, "Security Event Token (SET)", <https://tools.ietf
-              .org/html/draft-ietf-secevent-token-02>.
+              .org/html/draft-ietf-secevent-token>.
 
    [USECASES]
               IETF, "Security Events RISC Use Cases",

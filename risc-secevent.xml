@@ -59,9 +59,9 @@
       <t>This is a RISC profile for several IETF Security Events drafts:</t>
 
       <t><list style="symbols">
-        <t><eref target="https://tools.ietf.org/html/draft-ietf-secevent-token">Security Event Token (SET)</eref></t>
-        <t><eref target="https://tools.ietf.org/html/draft-ietf-secevent-delivery">SET Token Delivery Using HTTP</eref></t>
-        <t><eref target="https://tools.ietf.org/html/draft-scurtescu-secevent-simple-control-plane">Management API for SET Event Streams</eref></t>
+        <t><xref target="SET">Security Event Token (SET)</xref></t>
+        <t><xref target="DELIVERY">SET Token Delivery Using HTTP</xref></t>
+        <t><xref target="API">Management API for SET Event Streams</xref></t>
       </list></t>
     </abstract>
   </front>
@@ -76,8 +76,9 @@
     </section>
 
     <section anchor="set-profle" title="Security Event Token Profle">
-      <t>TODO: intro paragraph</t>
-
+      <t>This section provides RISC profiling specifications for the
+        <xref target="SET">"Security Event Token (SET)"</xref> spec.</t>
+      
       <section anchor="signature-key-resolution" title="Signature Key Resolution">
         <t>TODO: pointer to Management API section that describes discovery doc and the
         property that points to the key.</t>
@@ -93,15 +94,17 @@
     </section>
 
     <section anchor="set-token-delivery-using-http-profile" title="SET Token Delivery Using HTTP Profile">
-      <t>TODO: intro paragraph</t>
-
+      <t>This section provides RISC profiling specifications for the 
+        <xref target="DELIVERY">"SET Token Delivery Using HTTP"</xref> spec.</t>
+      
       <section title="Authorization">
         <t>TODO</t>
       </section>
     </section>
 
     <section anchor="management-api-for-set-event-streams-profile" title="Management API for SET Event Streams Profile">
-      <t>TODO: intro paragraph</t>
+      <t>This section provides RISC profiling specifications for the 
+        <xref target="API">"Management API for SET Event Streams"</xref> spec.</t>
       
       <section title="Authorization">
         <t>TODO</t>
@@ -314,7 +317,7 @@
         <seriesInfo name='DOI' value='10.17487/RFC7519'/>
       </reference>
 
-      <reference anchor="SET" target="https://tools.ietf.org/html/draft-ietf-secevent-token-02">
+      <reference anchor="SET" target="https://tools.ietf.org/html/draft-ietf-secevent-token">
         <front>
           <title>Security Event Token (SET)</title>
           <author >
@@ -324,7 +327,7 @@
         </front>
       </reference>
 
-      <reference anchor="DELIVERY" target="https://tools.ietf.org/html/draft-ietf-secevent-delivery-00">
+      <reference anchor="DELIVERY" target="https://tools.ietf.org/html/draft-ietf-secevent-delivery">
         <front>
           <title>SET Token Delivery Using HTTP</title>
           <author >
@@ -334,7 +337,7 @@
         </front>
       </reference>
 
-      <reference anchor="API" target="https://tools.ietf.org/html/draft-scurtescu-secevent-simple-control-plane-00">
+      <reference anchor="API" target="https://tools.ietf.org/html/draft-scurtescu-secevent-simple-control-plane">
         <front>
           <title>Management API for SET Event Streams</title>
           <author >
