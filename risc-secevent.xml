@@ -75,46 +75,65 @@
       </section>
     </section>
 
-    <section anchor="set-profle" title="Security Event Token Profle">
-      <t>This section provides RISC profiling specifications for the
-        <xref target="SET">"Security Event Token (SET)"</xref> spec.</t>
+    <section title="Profiles">
+      <t>This section profiles several IETF secevent specifications.</t>
       
-      <section anchor="signature-key-resolution" title="Signature Key Resolution">
-        <t>TODO: pointer to Management API section that describes discovery doc and the
-        property that points to the key.</t>
+      <t>The RISC Profile makes several assumptions:<list style="symbols">
+        <t>Transmitters are OpenID Connect Identity Providers</t>
+        <t>Receivers are OpenID Connect Clients and as such have client ids issued by Transmitters</t>
+        <t>In general the way subjects are identified is similar to
+          <xref target="OIDC">OpenID Connect</xref> and
+          <xref target="IDTOKEN">Id Tokens</xref> in particular.</t>
+      </list></t>
+
+      <t>The RISC use cases that set the requirements are described in
+        <xref target="USECASES">"Security Events RISC Use Cases"</xref>.</t>
+      
+      <section anchor="set-profle" title="Security Event Token Profle">
+        <t>This section provides RISC profiling specifications for the
+          <xref target="SET">"Security Event Token (SET)"</xref> spec.</t>
+        
+        <section anchor="signature-key-resolution" title="Signature Key Resolution">
+          <t>TODO: pointer to Management API section that describes discovery doc and the
+          property that points to the key.</t>
+        </section>
+        
+        <section title="Composite Subject Claim">
+          <t>TODO</t>
+        </section>
+        
+        <section title="Security Considerations">
+          <t>TODO: Id Token and Access Token confusion</t>
+        </section>
       </section>
-      
-      <section title="Composite Subject Claim">
-        <t>TODO</t>
+  
+      <section anchor="set-token-delivery-using-http-profile" title="SET Token Delivery Using HTTP Profile">
+        <t>This section provides RISC profiling specifications for the 
+          <xref target="DELIVERY">"SET Token Delivery Using HTTP"</xref> spec.</t>
+        
+        <section title="Authorization">
+          <t>TODO</t>
+        </section>
       </section>
-      
-      <section title="Security Considerations">
-        <t>TODO: Id Token and Access Token confusion</t>
+  
+      <section anchor="management-api-for-set-event-streams-profile" title="Management API for SET Event Streams Profile">
+        <t>This section provides RISC profiling specifications for the 
+          <xref target="API">"Management API for SET Event Streams"</xref> spec.</t>
+        
+        <section title="Authorization">
+          <t>HTTP API calls from a receiver to a transmitter SHOULD be authorized using OAuth 2 Access Tokens.
+          The client id associated with the Access Token uniquely identifies the Receiver and the Stream.</t>
+          
+          <t>Receivers SHOULD use the <xref target="CLIENTCRED">Client Credential Grant</xref> to obtain
+            access tokens on its own behalf.</t>
+        </section>
+        
+        <section title="Subject Claims for Subject Add and Remove Operations">
+          <t>TODO</t>
+        </section>
       </section>
     </section>
-
-    <section anchor="set-token-delivery-using-http-profile" title="SET Token Delivery Using HTTP Profile">
-      <t>This section provides RISC profiling specifications for the 
-        <xref target="DELIVERY">"SET Token Delivery Using HTTP"</xref> spec.</t>
-      
-      <section title="Authorization">
-        <t>TODO</t>
-      </section>
-    </section>
-
-    <section anchor="management-api-for-set-event-streams-profile" title="Management API for SET Event Streams Profile">
-      <t>This section provides RISC profiling specifications for the 
-        <xref target="API">"Management API for SET Event Streams"</xref> spec.</t>
-      
-      <section title="Authorization">
-        <t>TODO</t>
-      </section>
-      
-      <section title="Subject Claims for Subject Add and Remove Operations">
-        <t>TODO</t>
-      </section>
-    </section>
-
+    
     <section anchor="event-types" title="Event Types">
       <section anchor="account-credential-change-required" title="Account Credential Change Required">
         <t>Event Type URI:<vspace blankLines="0" />
@@ -357,6 +376,31 @@
         </front>
       </reference>
 
+      <reference anchor="CLIENTCRED" target="https://tools.ietf.org/html/rfc6749#section-4.4">
+        <front>
+          <title>The OAuth 2.0 Authorization Framework - Client Credentials Grant</title>
+          <author initials="D." surname="Hardt" fullname="D. Hardt"><organization>Microsoft</organization></author>
+          <date/>
+        </front>
+        <seriesInfo name="RFC" value="6749"/>
+      </reference>
+
+      <reference anchor="OIDC" target="http://openid.net/specs/openid-connect-core-1_0.html">
+        <front>
+          <title>OpenID Connect Core 1.0</title>
+          <author><organization>OpenID Foundation</organization></author>
+          <date/>
+        </front>
+      </reference>
+      
+      <reference anchor="IDTOKEN" target="http://openid.net/specs/openid-connect-core-1_0.html#IDToken">
+        <front>
+          <title>OpenID Connect Core 1.0 - ID Token</title>
+          <author><organization>OpenID Foundation</organization></author>
+          <date/>
+        </front>
+      </reference>
+      
       <reference  anchor="RFC2119" target='https://www.rfc-editor.org/info/rfc2119'>
         <front>
           <title>Key words for use in RFCs to Indicate Requirement Levels</title>
