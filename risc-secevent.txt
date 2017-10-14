@@ -10,7 +10,7 @@
                                                                   Oracle
                                                               J. Bradley
                                                                   Yubico
-                                                        October 01, 2017
+                                                        October 13, 2017
 
 
                   RISC profile of IETF Security Events
@@ -53,7 +53,7 @@ Table of Contents
 
 
 
-Scurtescu, et al.         Expires April 4, 2018                 [Page 1]
+Scurtescu, et al.        Expires April 16, 2018                 [Page 1]
 
                               risc-secevent                 October 2017
 
@@ -109,7 +109,7 @@ Scurtescu, et al.         Expires April 4, 2018                 [Page 1]
 
 
 
-Scurtescu, et al.         Expires April 4, 2018                 [Page 2]
+Scurtescu, et al.        Expires April 16, 2018                 [Page 2]
 
                               risc-secevent                 October 2017
 
@@ -165,7 +165,7 @@ Scurtescu, et al.         Expires April 4, 2018                 [Page 2]
 
 
 
-Scurtescu, et al.         Expires April 4, 2018                 [Page 3]
+Scurtescu, et al.        Expires April 16, 2018                 [Page 3]
 
                               risc-secevent                 October 2017
 
@@ -221,7 +221,7 @@ Scurtescu, et al.         Expires April 4, 2018                 [Page 3]
 
 
 
-Scurtescu, et al.         Expires April 4, 2018                 [Page 4]
+Scurtescu, et al.        Expires April 16, 2018                 [Page 4]
 
                               risc-secevent                 October 2017
 
@@ -277,7 +277,7 @@ Scurtescu, et al.         Expires April 4, 2018                 [Page 4]
 
 
 
-Scurtescu, et al.         Expires April 4, 2018                 [Page 5]
+Scurtescu, et al.        Expires April 16, 2018                 [Page 5]
 
                               risc-secevent                 October 2017
 
@@ -333,7 +333,7 @@ Scurtescu, et al.         Expires April 4, 2018                 [Page 5]
 
 
 
-Scurtescu, et al.         Expires April 4, 2018                 [Page 6]
+Scurtescu, et al.        Expires April 16, 2018                 [Page 6]
 
                               risc-secevent                 October 2017
 
@@ -389,7 +389,7 @@ Scurtescu, et al.         Expires April 4, 2018                 [Page 6]
 
 
 
-Scurtescu, et al.         Expires April 4, 2018                 [Page 7]
+Scurtescu, et al.        Expires April 16, 2018                 [Page 7]
 
                               risc-secevent                 October 2017
 
@@ -445,7 +445,7 @@ Scurtescu, et al.         Expires April 4, 2018                 [Page 7]
 
 
 
-Scurtescu, et al.         Expires April 4, 2018                 [Page 8]
+Scurtescu, et al.        Expires April 16, 2018                 [Page 8]
 
                               risc-secevent                 October 2017
 
@@ -501,4 +501,4 @@ Authors' Addresses
 
 
 
-Scurtescu, et al.         Expires April 4, 2018                 [Page 9]
+Scurtescu, et al.        Expires April 16, 2018                 [Page 9]
