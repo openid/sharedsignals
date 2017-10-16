@@ -98,8 +98,57 @@
           property that points to the key.</t>
         </section>
         
-        <section title="Composite Subject Claim">
-          <t>TODO</t>
+        <section anchor="composite-subject" title="Composite Subject Claim">
+          <t>Subjects can be identified with one or more of the following claim sets: <list style="symbols">
+            <t>'iss' and 'sub'</t>
+            <t>'email'</t>
+            <t>'phone_number'</t>
+          </list></t>
+          
+          <t>If there are no 'iss' claim conflicts then these claims can be added a top level. The 
+          issuer of the SET and the issuer that provides context for the 'sub' claim might be different.
+          The claims that indetify the subject SHOULD be nexted under a 'risc_subject' claim.</t>
+          
+          <figure anchor="composite-subject-top" title="Example: Top Level Claims">
+            <artwork>
+              {
+                iss: "https://tr.example.com/",
+                sub: "123abc",
+                email: "bob@example.com",
+                ...
+              }
+            </artwork>
+            <postamble>In this case the 'iss' claim represents both the issuer of the SET and the
+            issuer that provides context for the 'sub' claim.</postamble>
+          </figure>
+          
+          <figure anchor="composite-subject-nested" title="Example: Nested Claims">
+            <artwork>
+              {
+                iss: "https://secevent.example.com",
+                risc_subject: {
+                  iss: "https://tr.example.com/",
+                  sub: "123abc",
+                  email: "bob@example.com",
+                }
+                ...
+              }
+            </artwork>
+            <postamble>Note that the SET ("https://secevent.example.com") issuer and subject issuer
+              ("https://tr.example.com/") are different.</postamble>
+          </figure>
+          
+          <section anchor="composite-subject-privacy" title="Privacy Considerations">
+            <t>Only the minimum number of subject claims SHOULD be sent to a Receiver. For example, if
+            the Receiver can identify a subject by 'iss" and 'sub" then the Transmitter SHOULD not send
+            'email' nor 'phone_number'.</t>
+            
+            <t>TODO: should the Receiver advertise in stream config what subject claims it needs?</t>
+          </section>
+        </section>
+
+        <section anchor="aud" title="aud Claim">
+          <t>The 'aud' claim MUST be the client id of the Receiver.</t>
         </section>
         
         <section title="Security Considerations">
