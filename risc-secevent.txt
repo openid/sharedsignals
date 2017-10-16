@@ -10,7 +10,7 @@
                                                                   Oracle
                                                               J. Bradley
                                                                   Yubico
-                                                        October 13, 2017
+                                                        October 16, 2017
 
 
                   RISC profile of IETF Security Events
@@ -43,17 +43,17 @@ Table of Contents
        2.3.1.  Authorization . . . . . . . . . . . . . . . . . . . .   4
        2.3.2.  Subject Claims for Subject Add and Remove Operations    4
    3.  Event Types . . . . . . . . . . . . . . . . . . . . . . . . .   4
-     3.1.  Account Credential Change Required  . . . . . . . . . . .   4
+     3.1.  Account Credential Change Required  . . . . . . . . . . .   5
      3.2.  Account Deleted . . . . . . . . . . . . . . . . . . . . .   5
      3.3.  Account Disabled  . . . . . . . . . . . . . . . . . . . .   5
-     3.4.  Account Enabled . . . . . . . . . . . . . . . . . . . . .   5
+     3.4.  Account Enabled . . . . . . . . . . . . . . . . . . . . .   6
      3.5.  Identifier Changed  . . . . . . . . . . . . . . . . . . .   6
      3.6.  Identifier Recycled . . . . . . . . . . . . . . . . . . .   6
      3.7.  Opt Out . . . . . . . . . . . . . . . . . . . . . . . . .   6
 
 
 
-Scurtescu, et al.        Expires April 16, 2018                 [Page 1]
+Scurtescu, et al.        Expires April 19, 2018                 [Page 1]
 
                               risc-secevent                 October 2017
 
@@ -109,7 +109,7 @@ Scurtescu, et al.        Expires April 16, 2018                 [Page 1]
 
 
 
-Scurtescu, et al.        Expires April 16, 2018                 [Page 2]
+Scurtescu, et al.        Expires April 19, 2018                 [Page 2]
 
                               risc-secevent                 October 2017
 
@@ -130,27 +130,27 @@ Scurtescu, et al.        Expires April 16, 2018                 [Page 2]
    context for the 'sub' claim might be different.  The claims that
    indetify the subject SHOULD be nexted under a 'risc_subject' claim.
 
-                 {
-                   iss: "https://tr.example.com/",
-                   sub: "123abc",
-                   email: "bob@example.com",
-                   ...
-                 }
+   {
+     iss: "https://tr.example.com/",
+     sub: "123abc",
+     email: "bob@example.com",
+     ...
+   }
 
    In this case the 'iss' claim represents both the issuer of the SET
    and the issuer that provides context for the 'sub' claim.
 
                     Figure 1: Example: Top Level Claims
 
-                 {
-                   iss: "https://secevent.example.com",
-                   risc_subject: {
-                     iss: "https://tr.example.com/",
-                     sub: "123abc",
-                     email: "bob@example.com",
-                   }
-                   ...
-                 }
+   {
+     iss: "https://secevent.example.com",
+     risc_subject: {
+       iss: "https://tr.example.com/",
+       sub: "123abc",
+       email: "bob@example.com",
+     }
+     ...
+   }
 
    Note that the SET ("https://secevent.example.com") issuer and subject
    issuer ("https://tr.example.com/") are different.
@@ -165,7 +165,7 @@ Scurtescu, et al.        Expires April 16, 2018                 [Page 2]
 
 
 
-Scurtescu, et al.        Expires April 16, 2018                 [Page 3]
+Scurtescu, et al.        Expires April 19, 2018                 [Page 3]
 
                               risc-secevent                 October 2017
 
@@ -213,18 +213,24 @@ Scurtescu, et al.        Expires April 16, 2018                 [Page 3]
 
 3.  Event Types
 
+   The base URI for RISC event types is:
+   http://schemas.openid.net/secevent/risc/event-type/
+
+
+
+
+
+
+Scurtescu, et al.        Expires April 19, 2018                 [Page 4]
+
+                              risc-secevent                 October 2017
+
+
 3.1.  Account Credential Change Required
 
    Event Type URI:
    http://schemas.openid.net/secevent/risc/event-type/account-
    credential-change-required
-
-
-
-Scurtescu, et al.        Expires April 16, 2018                 [Page 4]
-
-                              risc-secevent                 October 2017
-
 
    Account Credential Change Required signals that the account
    identified by the subject was required to change a credential.  For
@@ -265,6 +271,17 @@ Scurtescu, et al.        Expires April 16, 2018                 [Page 4]
       disabled.  In most cases this is an estimated time.  For example,
       the actual hijacking time.  This is before the event time.
 
+
+
+
+
+
+
+Scurtescu, et al.        Expires April 19, 2018                 [Page 5]
+
+                              risc-secevent                 October 2017
+
+
 3.4.  Account Enabled
 
    Event Type URI:
@@ -274,13 +291,6 @@ Scurtescu, et al.        Expires April 16, 2018                 [Page 4]
    has been enabled.
 
    Attributes: none
-
-
-
-Scurtescu, et al.        Expires April 16, 2018                 [Page 5]
-
-                              risc-secevent                 October 2017
-
 
 3.5.  Identifier Changed
 
@@ -321,43 +331,34 @@ Scurtescu, et al.        Expires April 16, 2018                 [Page 5]
        this state is to prevent a hijacker from immediately opting out
        of RISC.
 
-   3.  opt-out - the account is NOT participating in RISC event
-       exchange.
 
 
-
-
-
-
-
-
-
-
-Scurtescu, et al.        Expires April 16, 2018                 [Page 6]
+Scurtescu, et al.        Expires April 19, 2018                 [Page 6]
 
                               risc-secevent                 October 2017
 
 
+   3.  opt-out - the account is NOT participating in RISC event
+       exchange.
+
    State changes trigger Opt-Out Events as represented bellow:
 
-           +--------+  opt-out-initiated  +-------------------+
-           |        +--------------------->                   |
-           | opt-in |                     | opt-out-initiated |
-           |        |  pt-out-cancelled   |                   |
-           |        <---------------------+                   |
-           +---^----+                     +----------+--------+
-               |                                     |
-               | opt-in                              | opt-out-effective
-               |                                     |
-               |                          +----------V--------+
-               |                          |                   |
-               +--------------------------| opt-out           |
-                                          |                   |
-                                          +-------------------+
+   +--------+  opt-out-initiated  +-------------------+
+   |        +--------------------->                   |
+   | opt-in |                     | opt-out-initiated |
+   |        |  pt-out-cancelled   |                   |
+   |        <---------------------+                   |
+   +---^----+                     +----------+--------+
+       |                                     |
+       | opt-in                              | opt-out-effective
+       |                                     |
+       |                          +----------V--------+
+       |                          |                   |
+       +--------------------------| opt-out           |
+                                  |                   |
+                                  +-------------------+
 
-   Opt-Out States and Opt-Out Events
-
-                                 Figure 3
+                Figure 3: Opt-Out States and Opt-Out Events
 
    Both Transmitters and Receivers SHOULD manage Opt-Out state for
    users.  Transmitters should send the events defined in this section
@@ -388,8 +389,7 @@ Scurtescu, et al.        Expires April 16, 2018                 [Page 6]
 
 
 
-
-Scurtescu, et al.        Expires April 16, 2018                 [Page 7]
+Scurtescu, et al.        Expires April 19, 2018                 [Page 7]
 
                               risc-secevent                 October 2017
 
@@ -445,7 +445,7 @@ Scurtescu, et al.        Expires April 16, 2018                 [Page 7]
 
 
 
-Scurtescu, et al.        Expires April 16, 2018                 [Page 8]
+Scurtescu, et al.        Expires April 19, 2018                 [Page 8]
 
                               risc-secevent                 October 2017
 
@@ -501,7 +501,7 @@ Scurtescu, et al.        Expires April 16, 2018                 [Page 8]
 
 
 
-Scurtescu, et al.        Expires April 16, 2018                 [Page 9]
+Scurtescu, et al.        Expires April 19, 2018                 [Page 9]
 
                               risc-secevent                 October 2017
 
@@ -557,4 +557,4 @@ Authors' Addresses
 
 
 
-Scurtescu, et al.        Expires April 16, 2018                [Page 10]
+Scurtescu, et al.        Expires April 19, 2018                [Page 10]

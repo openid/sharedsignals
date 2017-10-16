@@ -51,7 +51,7 @@
       </address>
     </author>
 
-    <date year="2017" month="October" day="13"/>
+    <date year="2017" month="October" day="16"/>
 
     <workgroup>RISC Working Group</workgroup>
 
@@ -75,7 +75,7 @@
       </section>
     </section>
 
-    <section title="Profiles">
+    <section anchor="profiles" title="Profiles">
       <t>This section profiles several IETF secevent specifications.</t>
       
       <t>The RISC Profile makes several assumptions:<list style="symbols">
@@ -110,30 +110,30 @@
           The claims that indetify the subject SHOULD be nexted under a 'risc_subject' claim.</t>
           
           <figure anchor="composite-subject-top" title="Example: Top Level Claims">
-            <artwork>
-              {
-                iss: "https://tr.example.com/",
-                sub: "123abc",
-                email: "bob@example.com",
-                ...
-              }
-            </artwork>
+            <artwork><![CDATA[
+{
+  iss: "https://tr.example.com/",
+  sub: "123abc",
+  email: "bob@example.com",
+  ...
+}
+            ]]></artwork>
             <postamble>In this case the 'iss' claim represents both the issuer of the SET and the
             issuer that provides context for the 'sub' claim.</postamble>
           </figure>
           
           <figure anchor="composite-subject-nested" title="Example: Nested Claims">
-            <artwork>
-              {
-                iss: "https://secevent.example.com",
-                risc_subject: {
-                  iss: "https://tr.example.com/",
-                  sub: "123abc",
-                  email: "bob@example.com",
-                }
-                ...
-              }
-            </artwork>
+            <artwork><![CDATA[
+{
+  iss: "https://secevent.example.com",
+  risc_subject: {
+    iss: "https://tr.example.com/",
+    sub: "123abc",
+    email: "bob@example.com",
+  }
+  ...
+}
+            ]]></artwork>
             <postamble>Note that the SET ("https://secevent.example.com") issuer and subject issuer
               ("https://tr.example.com/") are different.</postamble>
           </figure>
@@ -184,8 +184,11 @@
     </section>
     
     <section anchor="event-types" title="Event Types">
+      <t>The base URI for RISC event types is:<vspace />
+        http://schemas.openid.net/secevent/risc/event-type/</t>
+      
       <section anchor="account-credential-change-required" title="Account Credential Change Required">
-        <t>Event Type URI:<vspace blankLines="0" />
+        <t>Event Type URI:<vspace />
         http://schemas.openid.net/secevent/risc/event-type/account-credential-change-required</t>
         
         <t>Account Credential Change Required signals that the account identified by the subject was required to
@@ -195,7 +198,7 @@
       </section>
 
       <section anchor="account-deleted" title="Account Deleted">
-        <t>Event Type URI:<vspace blankLines="0" />
+        <t>Event Type URI:<vspace />
         http://schemas.openid.net/secevent/risc/event-type/account-deleted</t>
         
         <t>Account Deleted signals that the account identified by the subject has been permanently deleted.</t>
@@ -204,7 +207,7 @@
       </section>
 
       <section anchor="account-disabled" title="Account Disabled">
-        <t>Event Type URI:<vspace blankLines="0" />
+        <t>Event Type URI:<vspace />
         http://schemas.openid.net/secevent/risc/event-type/account-disabled</t>
         
         <t>Account Disabled signals that the account identified by the subject has been disabled. The actual reason why the
@@ -222,7 +225,7 @@
       </section>
 
       <section anchor="account-enabled" title="Account Enabled">
-        <t>Event Type URI:<vspace blankLines="0" />
+        <t>Event Type URI:<vspace />
         http://schemas.openid.net/secevent/risc/event-type/account-enabled</t>
         
         <t>Account Enabled signals that the account identified by the subject has been enabled.</t>
@@ -231,7 +234,7 @@
       </section>
 
       <section anchor="identifier-changed" title="Identifier Changed">
-        <t>Event Type URI:<vspace blankLines="0" />
+        <t>Event Type URI:<vspace />
         http://schemas.openid.net/secevent/risc/event-type/identifier-changed</t>
         
         <t>Identifier Changed signals that the identifier specified in the subject has changed. The subject
@@ -243,7 +246,7 @@
       </section>
 
       <section anchor="identifier-recycled" title="Identifier Recycled">
-        <t>Event Type URI:<vspace blankLines="0" />
+        <t>Event Type URI:<vspace />
         http://schemas.openid.net/secevent/risc/event-type/identifier-recycled</t>
         
         <t>Identifier Recycled signals that the identifier specified in the subject was recycled and now it
@@ -262,32 +265,31 @@
           <t>opt-out - the account is NOT participating in RISC event exchange.</t>
         </list></t>
         
-        <figure anchor="opt-out-states">
+        <figure anchor="opt-out-states" title="Opt-Out States and Opt-Out Events">
           <preamble>State changes trigger Opt-Out Events as represented bellow:</preamble>
           <artwork><![CDATA[
-          +--------+  opt-out-initiated  +-------------------+
-          |        +--------------------->                   |
-          | opt-in |                     | opt-out-initiated |
-          |        |  pt-out-cancelled   |                   |
-          |        <---------------------+                   |
-          +---^----+                     +----------+--------+
-              |                                     |
-              | opt-in                              | opt-out-effective
-              |                                     |
-              |                          +----------V--------+
-              |                          |                   |
-              +--------------------------| opt-out           |
-                                         |                   |
-                                         +-------------------+
++--------+  opt-out-initiated  +-------------------+
+|        +--------------------->                   |
+| opt-in |                     | opt-out-initiated |
+|        |  pt-out-cancelled   |                   |
+|        <---------------------+                   |
++---^----+                     +----------+--------+
+    |                                     |
+    | opt-in                              | opt-out-effective
+    |                                     |
+    |                          +----------V--------+
+    |                          |                   |
+    +--------------------------| opt-out           |
+                               |                   |
+                               +-------------------+
           ]]></artwork>
-          <postamble>Opt-Out States and Opt-Out Events</postamble>
         </figure>
         
         <t>Both Transmitters and Receivers SHOULD manage Opt-Out state for users. Transmitters should send the
         events defined in this section when the Opt-Out state changes.</t>
         
         <section anchor="opt-in" title="Opt In">
-          <t>Event Type URI:<vspace blankLines="0" />
+          <t>Event Type URI:<vspace />
           http://schemas.openid.net/secevent/risc/event-type/opt-in</t>
         
           <t>Opt In signals that the account identified by the subject opted into RISC event exchanges.
@@ -297,7 +299,7 @@
         </section>
         
         <section anchor="opt-out-initiated" title="Opt Out Initiated">
-          <t>Event Type URI:<vspace blankLines="0" />
+          <t>Event Type URI:<vspace />
           http://schemas.openid.net/secevent/risc/event-type/opt-out-initiated</t>
         
           <t>Opt Out Initiated signals that the account identified by the subject initiated to opt out
@@ -307,7 +309,7 @@
         </section>
         
         <section anchor="opt-out-cancelled" title="Opt Out Cancelled">
-          <t>Event Type URI:<vspace blankLines="0" />
+          <t>Event Type URI:<vspace />
           http://schemas.openid.net/secevent/risc/event-type/opt-out-cancelled</t>
         
           <t>Opt Out Cancelled signals that the account identified by the subject cancelled the opt out from RISC
@@ -317,7 +319,7 @@
         </section>
         
         <section anchor="opt-out-effective" title="Opt Out Effective">
-          <t>Event Type URI:<vspace blankLines="0" />
+          <t>Event Type URI:<vspace />
           http://schemas.openid.net/secevent/risc/event-type/opt-out-effective</t>
         
           <t>Opt Out Effective signals that the account identified by the subject was effectively opted out from
@@ -328,7 +330,7 @@
       </section>
       
       <section anchor="recovery-activated" title="Recovery Activated">
-        <t>Event Type URI:<vspace blankLines="0" />
+        <t>Event Type URI:<vspace />
         http://schemas.openid.net/secevent/risc/event-type/recovery-activated</t>
         
         <t>Recovery Activated signals that the account identified by the subject activated a recovery flow.</t>
@@ -337,7 +339,7 @@
       </section>
 
       <section anchor="recovery-information-changed" title="Recovery Information Changed">
-        <t>Event Type URI:<vspace blankLines="0" />
+        <t>Event Type URI:<vspace />
         http://schemas.openid.net/secevent/risc/event-type/recovery-information-changed</t>
         
         <t>Recovery Information Changed signals that the account identified by the subject has changed some of
@@ -347,7 +349,7 @@
       </section>
 
       <section anchor="sessions-revoked" title="Sessions Revoked">
-        <t>Event Type URI:<vspace blankLines="0" />
+        <t>Event Type URI:<vspace />
         http://schemas.openid.net/secevent/risc/event-type/sessions-revoked</t>
         
         <t>Sessions Revoked signals that all the sessions for the account identified by the subject have been
