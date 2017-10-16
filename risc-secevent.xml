@@ -112,9 +112,9 @@
           <figure anchor="composite-subject-top" title="Example: Top Level Claims">
             <artwork><![CDATA[
 {
-  iss: "https://tr.example.com/",
-  sub: "123abc",
-  email: "bob@example.com",
+  "iss": "https://idp.example.com/",
+  "sub": "7375626A656374",
+  "email": "foo@example.com",
   ...
 }
             ]]></artwork>
@@ -125,11 +125,11 @@
           <figure anchor="composite-subject-nested" title="Example: Nested Claims">
             <artwork><![CDATA[
 {
-  iss: "https://secevent.example.com",
-  risc_subject: {
-    iss: "https://tr.example.com/",
-    sub: "123abc",
-    email: "bob@example.com",
+  "iss": "https://idp.example.com",
+  "risc_subject": {
+    "iss": "https://tr.example.com/",
+    "sub": "7375626A656374",
+    "phone_number": "+99-123-456-7890",
   }
   ...
 }
@@ -148,7 +148,7 @@
         </section>
 
         <section anchor="aud" title="aud Claim">
-          <t>The 'aud' claim MUST be the client id of the Receiver.</t>
+          <t>The 'aud' claim MUST be a single value which is the client id of the Receiver.</t>
         </section>
         
         <section title="Security Considerations">
@@ -195,6 +195,23 @@
         change a credential. For example the user was required to go through a password change.</t>
         
         <t>Attributes: none</t>
+
+        <figure anchor="account-credential-change-required-example" title="Example: Account Credential Change Required">
+          <artwork><![CDATA[
+{
+  "iss": "https://idp.example.com/",
+  "sub": "7375626A656374",
+  "jti": "756E69717565206964656E746966696572",
+  "iat": 1508184845,
+  "aud": "636C69656E745F6964",
+  "events": {
+    "http://schemas.openid.net/secevent/risc/event-type/\
+    account-credential-change-required": {}
+  }
+}
+            ]]></artwork>
+          <postamble>(the event type URI is wrapped, the backslash is the continuation character)</postamble>
+        </figure>
       </section>
 
       <section anchor="account-deleted" title="Account Deleted">
@@ -222,6 +239,25 @@
           <t>cause-time - the initial cause that lead to the account to be disabled. In most cases this is an 
           estimated time. For example, the actual hijacking time. This is before the event time.</t>
         </list></t>
+
+        <figure anchor="account-disabled-example" title="Example: Account Disabled">
+          <artwork><![CDATA[
+{
+  "iss": "https://idp.example.com/",
+  "sub": "7375626A656374",
+  "jti": "756E69717565206964656E746966696572",
+  "iat": 1508184845,
+  "aud": "636C69656E745F6964",
+  "events": {
+    "http://schemas.openid.net/secevent/risc/event-type/\
+    account-disabled": {
+      "reason": "hijacking",
+      "cause-time": 1508012752,
+    }
+  }
+}
+            ]]></artwork>
+        </figure>
       </section>
 
       <section anchor="account-enabled" title="Account Enabled">
@@ -243,6 +279,25 @@
         <t>Attributes:<list style="symbols">
           <t>new-value - required, the new value of the identifier.</t>
         </list></t>
+        
+        <figure anchor="identifier-changed-example" title="Example: Identifier Changed">
+          <artwork><![CDATA[
+{
+  "iss": "https://idp.example.com/",
+  "email": "foo@example.com",
+  "jti": "756E69717565206964656E746966696572",
+  "iat": 1508184845,
+  "aud": "636C69656E745F6964",
+  "events": {
+    "http://schemas.openid.net/secevent/risc/event-type/\
+    identifier-changed": {
+      "new-value": "bar@example.com",
+    }
+  }
+}
+            ]]></artwork>
+          <postamble>The 'foo@example.com' email changed to 'bar@example.com'.</postamble>
+        </figure>
       </section>
 
       <section anchor="identifier-recycled" title="Identifier Recycled">
@@ -253,6 +308,23 @@
         belongs to a new user. The subject MUST be either 'email' or 'phone-number'.</t>
         
         <t>Attributes: none</t>
+        
+        <figure anchor="identifier-recycled-example" title="Example: Identifier Recycled">
+          <artwork><![CDATA[
+{
+  "iss": "https://idp.example.com/",
+  "email": "foo@example.com",
+  "jti": "756E69717565206964656E746966696572",
+  "iat": 1508184845,
+  "aud": "636C69656E745F6964",
+  "events": {
+    "http://schemas.openid.net/secevent/risc/event-type/\
+    identifier-recycled": {}
+  }
+}
+            ]]></artwork>
+          <postamble>The 'foo@example.com' email address was recycled.</postamble>
+        </figure>
       </section>
 
       <section anchor="opt-out" title="Opt Out">

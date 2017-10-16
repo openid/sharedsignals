@@ -48,8 +48,8 @@ Table of Contents
      3.3.  Account Disabled  . . . . . . . . . . . . . . . . . . . .   5
      3.4.  Account Enabled . . . . . . . . . . . . . . . . . . . . .   6
      3.5.  Identifier Changed  . . . . . . . . . . . . . . . . . . .   6
-     3.6.  Identifier Recycled . . . . . . . . . . . . . . . . . . .   6
-     3.7.  Opt Out . . . . . . . . . . . . . . . . . . . . . . . . .   6
+     3.6.  Identifier Recycled . . . . . . . . . . . . . . . . . . .   7
+     3.7.  Opt Out . . . . . . . . . . . . . . . . . . . . . . . . .   8
 
 
 
@@ -58,15 +58,15 @@ Scurtescu, et al.        Expires April 19, 2018                 [Page 1]
                               risc-secevent                 October 2017
 
 
-       3.7.1.  Opt In  . . . . . . . . . . . . . . . . . . . . . . .   7
-       3.7.2.  Opt Out Initiated . . . . . . . . . . . . . . . . . .   7
-       3.7.3.  Opt Out Cancelled . . . . . . . . . . . . . . . . . .   8
-       3.7.4.  Opt Out Effective . . . . . . . . . . . . . . . . . .   8
-     3.8.  Recovery Activated  . . . . . . . . . . . . . . . . . . .   8
-     3.9.  Recovery Information Changed  . . . . . . . . . . . . . .   8
-     3.10. Sessions Revoked  . . . . . . . . . . . . . . . . . . . .   9
-   4.  Normative References  . . . . . . . . . . . . . . . . . . . .   9
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  10
+       3.7.1.  Opt In  . . . . . . . . . . . . . . . . . . . . . . .   9
+       3.7.2.  Opt Out Initiated . . . . . . . . . . . . . . . . . .   9
+       3.7.3.  Opt Out Cancelled . . . . . . . . . . . . . . . . . .  10
+       3.7.4.  Opt Out Effective . . . . . . . . . . . . . . . . . .  10
+     3.8.  Recovery Activated  . . . . . . . . . . . . . . . . . . .  10
+     3.9.  Recovery Information Changed  . . . . . . . . . . . . . .  10
+     3.10. Sessions Revoked  . . . . . . . . . . . . . . . . . . . .  11
+   4.  Normative References  . . . . . . . . . . . . . . . . . . . .  11
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  12
 
 1.  Introduction
 
@@ -131,9 +131,9 @@ Scurtescu, et al.        Expires April 19, 2018                 [Page 2]
    indetify the subject SHOULD be nexted under a 'risc_subject' claim.
 
    {
-     iss: "https://tr.example.com/",
-     sub: "123abc",
-     email: "bob@example.com",
+     "iss": "https://idp.example.com/",
+     "sub": "7375626A656374",
+     "email": "foo@example.com",
      ...
    }
 
@@ -143,11 +143,11 @@ Scurtescu, et al.        Expires April 19, 2018                 [Page 2]
                     Figure 1: Example: Top Level Claims
 
    {
-     iss: "https://secevent.example.com",
-     risc_subject: {
-       iss: "https://tr.example.com/",
-       sub: "123abc",
-       email: "bob@example.com",
+     "iss": "https://idp.example.com",
+     "risc_subject": {
+       "iss": "https://tr.example.com/",
+       "sub": "7375626A656374",
+       "phone_number": "+99-123-456-7890",
      }
      ...
    }
@@ -178,7 +178,8 @@ Scurtescu, et al.        Expires April 19, 2018                 [Page 3]
 
 2.1.3.  aud Claim
 
-   The 'aud' claim MUST be the client id of the Receiver.
+   The 'aud' claim MUST be a single value which is the client id of the
+   Receiver.
 
 2.1.4.  Security Considerations
 
@@ -220,7 +221,6 @@ Scurtescu, et al.        Expires April 19, 2018                 [Page 3]
 
 
 
-
 Scurtescu, et al.        Expires April 19, 2018                 [Page 4]
 
                               risc-secevent                 October 2017
@@ -237,6 +237,23 @@ Scurtescu, et al.        Expires April 19, 2018                 [Page 4]
    example the user was required to go through a password change.
 
    Attributes: none
+
+   {
+     "iss": "https://idp.example.com/",
+     "sub": "7375626A656374",
+     "jti": "756E69717565206964656E746966696572",
+     "iat": 1508184845,
+     "aud": "636C69656E745F6964",
+     "events": {
+       "http://schemas.openid.net/secevent/risc/event-type/\
+       account-credential-change-required": {}
+     }
+   }
+
+   (the event type URI is wrapped, the backslash is the continuation
+   character)
+
+           Figure 3: Example: Account Credential Change Required
 
 3.2.  Account Deleted
 
@@ -258,6 +275,13 @@ Scurtescu, et al.        Expires April 19, 2018                 [Page 4]
    might be specified with the nested 'reason' attribute described
    below.  The account may be enabled (Section 3.4) in the future.
 
+
+
+Scurtescu, et al.        Expires April 19, 2018                 [Page 5]
+
+                              risc-secevent                 October 2017
+
+
    Attributes:
 
    o  reason - optional, describes why was the account disabled.
@@ -271,16 +295,22 @@ Scurtescu, et al.        Expires April 19, 2018                 [Page 4]
       disabled.  In most cases this is an estimated time.  For example,
       the actual hijacking time.  This is before the event time.
 
+   {
+     "iss": "https://idp.example.com/",
+     "sub": "7375626A656374",
+     "jti": "756E69717565206964656E746966696572",
+     "iat": 1508184845,
+     "aud": "636C69656E745F6964",
+     "events": {
+       "http://schemas.openid.net/secevent/risc/event-type/\
+       account-disabled": {
+         "reason": "hijacking",
+         "cause-time": 1508012752,
+       }
+     }
+   }
 
-
-
-
-
-
-Scurtescu, et al.        Expires April 19, 2018                 [Page 5]
-
-                              risc-secevent                 October 2017
-
+                    Figure 4: Example: Account Disabled
 
 3.4.  Account Enabled
 
@@ -301,9 +331,34 @@ Scurtescu, et al.        Expires April 19, 2018                 [Page 5]
    subject has changed.  The subject MUST be either 'email' or 'phone-
    number' and it MUST specify the old value.
 
+
+
+Scurtescu, et al.        Expires April 19, 2018                 [Page 6]
+
+                              risc-secevent                 October 2017
+
+
    Attributes:
 
    o  new-value - required, the new value of the identifier.
+
+   {
+     "iss": "https://idp.example.com/",
+     "email": "foo@example.com",
+     "jti": "756E69717565206964656E746966696572",
+     "iat": 1508184845,
+     "aud": "636C69656E745F6964",
+     "events": {
+       "http://schemas.openid.net/secevent/risc/event-type/\
+       identifier-changed": {
+         "new-value": "bar@example.com",
+       }
+     }
+   }
+
+   The 'foo@example.com' email changed to 'bar@example.com'.
+
+                   Figure 5: Example: Identifier Changed
 
 3.6.  Identifier Recycled
 
@@ -316,6 +371,44 @@ Scurtescu, et al.        Expires April 19, 2018                 [Page 5]
    MUST be either 'email' or 'phone-number'.
 
    Attributes: none
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Scurtescu, et al.        Expires April 19, 2018                 [Page 7]
+
+                              risc-secevent                 October 2017
+
+
+   {
+     "iss": "https://idp.example.com/",
+     "email": "foo@example.com",
+     "jti": "756E69717565206964656E746966696572",
+     "iat": 1508184845,
+     "aud": "636C69656E745F6964",
+     "events": {
+       "http://schemas.openid.net/secevent/risc/event-type/\
+       identifier-recycled": {}
+     }
+   }
+
+   The 'foo@example.com' email address was recycled.
+
+                  Figure 6: Example: Identifier Recycled
 
 3.7.  Opt Out
 
@@ -331,15 +424,31 @@ Scurtescu, et al.        Expires April 19, 2018                 [Page 5]
        this state is to prevent a hijacker from immediately opting out
        of RISC.
 
+   3.  opt-out - the account is NOT participating in RISC event
+       exchange.
 
 
-Scurtescu, et al.        Expires April 19, 2018                 [Page 6]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Scurtescu, et al.        Expires April 19, 2018                 [Page 8]
 
                               risc-secevent                 October 2017
 
-
-   3.  opt-out - the account is NOT participating in RISC event
-       exchange.
 
    State changes trigger Opt-Out Events as represented bellow:
 
@@ -358,7 +467,7 @@ Scurtescu, et al.        Expires April 19, 2018                 [Page 6]
                                   |                   |
                                   +-------------------+
 
-                Figure 3: Opt-Out States and Opt-Out Events
+                Figure 7: Opt-Out States and Opt-Out Events
 
    Both Transmitters and Receivers SHOULD manage Opt-Out state for
    users.  Transmitters should send the events defined in this section
@@ -389,7 +498,10 @@ Scurtescu, et al.        Expires April 19, 2018                 [Page 6]
 
 
 
-Scurtescu, et al.        Expires April 19, 2018                 [Page 7]
+
+
+
+Scurtescu, et al.        Expires April 19, 2018                 [Page 9]
 
                               risc-secevent                 October 2017
 
@@ -445,7 +557,7 @@ Scurtescu, et al.        Expires April 19, 2018                 [Page 7]
 
 
 
-Scurtescu, et al.        Expires April 19, 2018                 [Page 8]
+Scurtescu, et al.        Expires April 19, 2018                [Page 10]
 
                               risc-secevent                 October 2017
 
@@ -501,7 +613,7 @@ Scurtescu, et al.        Expires April 19, 2018                 [Page 8]
 
 
 
-Scurtescu, et al.        Expires April 19, 2018                 [Page 9]
+Scurtescu, et al.        Expires April 19, 2018                [Page 11]
 
                               risc-secevent                 October 2017
 
@@ -557,4 +669,4 @@ Authors' Addresses
 
 
 
-Scurtescu, et al.        Expires April 19, 2018                [Page 10]
+Scurtescu, et al.        Expires April 19, 2018                [Page 12]
