@@ -99,10 +99,10 @@
         <postamble>A Subject Identifier that identifies a subject by an identifier provided by an issuer.</postamble>
       </figure>
 
-      <section anchor="subject-id-types" title="Subject Identifier Types">
-        <t>A Subject Identifier Type is a light-weight schema that describes a set of claims that uniquely identifies a subject. Every Subject Identifier Type MUST have a unique name registered in the IANA "RISC Subject Identifier Types" registry established by Section 4.1. A Subject Identifier Type MAY contain more claims than are strictly necessary to uniquely identify a subject, however a Subject Identifier MUST contain all of the claims required by its type (See Privacy Considerations).</t>
+      <section anchor="sub-id-types" title="Subject Identifier Types">
+        <t>A Subject Identifier Type is a light-weight schema that describes a set of claims that uniquely identifies a subject. Every Subject Identifier Type MUST have a unique name registered in the IANA "RISC Subject Identifier Types" registry established by <xref target="iana-sub-id-types"/>. A Subject Identifier Type MAY contain more claims than are strictly necessary to uniquely identify a subject, however a Subject Identifier MUST contain all of the claims required by its type (See <xref target="privacy" format="title"/>).</t>
         
-        <t> The following Subject Identifier Types are registered in the IANA "RISC Subject Identifier Types" registry established by Section 4.1.</t>
+        <t> The following Subject Identifier Types are registered in the IANA "RISC Subject Identifier Types" registry established by <xref target="iana-sub-id-types"/>.</t>
 
         <section anchor="sub-id-email" title="Email Subject Identifier Type">
           <t>The Email Subject Identifier Type describes a subject by email address. Subject Identifiers of this type MUST contain an "email" claim whose value is a string containing the email address of the subject. The "email" claim MUST NOT be null or empty. The Email Subject Identifier Type is identified by the name "email".</t>
@@ -115,10 +115,6 @@
         <section anchor="sub-id-iss-sub" title="Issuer and Subject Subject Identifier Type">
           <t>The Issuer and Subject Subject Identifier Type describes a subject by an issuer and a subject. Subject Identifiers of this type MUST contain an "iss" claim whose value identifies the issuer, and a "sub" claim whose value identifies the subject with respect to the issuer. These claims MUST follow the formats of the "iss" claim and "sub" claim defined by <xref target="RFC7519"/>, respectively. Both the "iss" claim and the "sub" claim MUST NOT be null or empty. The Issuer and Subject Subject Identifier Type is identified by the name "iss-sub".</t>
         </section>
-      </section>
-
-      <section anchor="sub-id-security" title="Privacy Considerations">
-        <t>Event issuers and recipients SHOULD take precautions to ensure that they do not leak information about subjects via Subject Identifiers, and choose appropriate Subject Identifier Types accordingly. Parties SHOULD NOT identify a subject using a given Subject Identifier Type if doing so will allow the recipient to correlate different claims about the subject that they are not known to already have knowledge of. Issuers and recipients SHOULD always use the same Subject Identifier Type and the same claim values to identify a given subject when communicating with a given party in order to reduce the possibility of information leakage.</t>
       </section>
     </section>
 
@@ -202,13 +198,18 @@
           <artwork><![CDATA[
 {
   "iss": "https://idp.example.com/",
-  "sub": "7375626A656374",
   "jti": "756E69717565206964656E746966696572",
   "iat": 1508184845,
   "aud": "636C69656E745F6964",
   "events": {
     "http://schemas.openid.net/secevent/risc/event-type/\
-    account-credential-change-required": {}
+    account-credential-change-required": {
+      "subject": {
+        "subject_type": "iss-sub",
+        "iss": "https://idp.example.com/",
+        "sub": "7375626A656374",
+      }
+    }
   }
 }
             ]]></artwork>
@@ -246,13 +247,17 @@
           <artwork><![CDATA[
 {
   "iss": "https://idp.example.com/",
-  "sub": "7375626A656374",
   "jti": "756E69717565206964656E746966696572",
   "iat": 1508184845,
   "aud": "636C69656E745F6964",
   "events": {
     "http://schemas.openid.net/secevent/risc/event-type/\
     account-disabled": {
+      "subject": {
+        "subject_type": "iss-sub",
+        "iss": "https://idp.example.com/",
+        "sub": "7375626A656374",
+      },
       "reason": "hijacking",
       "cause-time": 1508012752,
     }
@@ -275,8 +280,8 @@
         <t>Event Type URI:<vspace />
         http://schemas.openid.net/secevent/risc/event-type/identifier-changed</t>
         
-        <t>Identifier Changed signals that the identifier specified in the subject has changed. The subject
-        MUST be either 'email' or 'phone-number' and it MUST specify the old value.</t>
+        <t>Identifier Changed signals that the identifier specified in the subject has changed. The subject's
+        type MUST be either 'email' or 'phone' and it MUST specify the old value.</t>
         
         <t>Attributes:<list style="symbols">
           <t>new-value - required, the new value of the identifier.</t>
@@ -286,13 +291,16 @@
           <artwork><![CDATA[
 {
   "iss": "https://idp.example.com/",
-  "email": "foo@example.com",
   "jti": "756E69717565206964656E746966696572",
   "iat": 1508184845,
   "aud": "636C69656E745F6964",
   "events": {
     "http://schemas.openid.net/secevent/risc/event-type/\
     identifier-changed": {
+      "subject": {
+        "subject_type": "email",
+        "email": "foo@example.com",
+      },
       "new-value": "bar@example.com",
     }
   }
@@ -315,13 +323,17 @@
           <artwork><![CDATA[
 {
   "iss": "https://idp.example.com/",
-  "email": "foo@example.com",
   "jti": "756E69717565206964656E746966696572",
   "iat": 1508184845,
   "aud": "636C69656E745F6964",
   "events": {
     "http://schemas.openid.net/secevent/risc/event-type/\
-    identifier-recycled": {}
+    identifier-recycled": {
+      "subject": {
+        "subject_type": "email",
+        "email": "foo@example.com",
+      }
+    }
   }
 }
             ]]></artwork>
@@ -432,6 +444,20 @@
         <t>Attributes: none</t>
       </section>
     </section>
+
+		<section anchor="iana" title="IANA Considerations">
+		  <section anchor="iana-sub-id-types" title="RISC Subject Identifier Types Registry">
+				<t>This section establishes the IANA "RISC Subject Identifier Types" registry for Subject Identifier Types. The registry records the name of the Subject Identifier Type and a reference to the specification that defines it. This section registers the Subject Identifier Types defined in <xref target="sub-id-types"/>.</t>
+
+			  <t>TODO: Finish registry definition</t>
+			</section>
+		</section>
+
+		<section anchor="privacy" title="Privacy Considerations">
+      <section anchor="sub-info-leakage" title="Subject Information Leakage">
+        <t>Event issuers and recipients SHOULD take precautions to ensure that they do not leak information about subjects via Subject Identifiers, and choose appropriate Subject Identifier Types accordingly. Parties SHOULD NOT identify a subject using a given Subject Identifier Type if doing so will allow the recipient to correlate different claims about the subject that they are not known to already have knowledge of. Issuers and recipients SHOULD always use the same Subject Identifier Type and the same claim values to identify a given subject when communicating with a given party in order to reduce the possibility of information leakage.</t>
+      </section>
+		</section>
   </middle>
 
   <back>
