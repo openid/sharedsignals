@@ -537,6 +537,14 @@
         <seriesInfo name='RFC' value='2119'/>
         <seriesInfo name='DOI' value='10.17487/RFC2119'/>
       </reference>
+
+      <reference anchor="E164" target="http://www.itu.int/rec/T-REC-E.164-201011-I/en">
+        <front>
+					<title>The international public telecommunication numbering plan</title>
+					<author><organization>International Telecommunication Union</organization></author>
+					<date year="2010" />
+				</front>
+			</reference>
     </references>
   </back>
 </rfc>
