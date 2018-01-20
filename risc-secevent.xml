@@ -75,6 +75,53 @@
       </section>
     </section>
 
+    <section anchor="subject-ids" title="Subject Identifiers">
+      <t>The RISC profile defines a structure called a Subject Identifier: a JSON object containing a set of claims that collectively uniquely identify a subject, according to a simple schema called a Subject Identifier Type. Every Subject Identifier MUST contain a "subject_type" claim, whose value MUST be a name that uniquely identifies the Subject Identifier Type of the Subject Identifier. Any remaining claims within the Subject Identifier MUST be interpreted according to the definition of the Subject Identifier Type. A Subject Identifier MUST conform to the Subject Identifier Type identified by its "subject_type" claim, and MUST NOT contain any claims not defined by its Subject Identifier Type.</t>
+
+      <figure anchor="subject-ids-ex-email" title="Example: Email Subject Identifier">
+        <artwork><![CDATA[
+{
+"subject_type": "email",
+"email": "foo@example.com"
+}
+        ]]></artwork>
+        <postamble>A Subject Identifier that identifies a subject by email address.</postamble>
+      </figure>
+
+      <figure anchor="subject-ids-ex-iss-sub" title="Example: Issuer and Subject Subject Identifier">
+        <artwork><![CDATA[
+{
+"subject_type": "iss-sub",
+"iss": "https://issuer.example.com/",
+"sub": "abc1234"
+}
+        ]]></artwork>
+        <postamble>A Subject Identifier that identifies a subject by an identifier provided by an issuer.</postamble>
+      </figure>
+
+      <section anchor="subject-id-types" title="Subject Identifier Types">
+        <t>A Subject Identifier Type is a light-weight schema that describes a set of claims that uniquely identifies a subject. Every Subject Identifier Type MUST have a unique name registered in the IANA "RISC Subject Identifier Types" registry established by Section 4.1. A Subject Identifier Type MAY contain more claims than are strictly necessary to uniquely identify a subject, however a Subject Identifier MUST contain all of the claims required by its type (See Privacy Considerations).</t>
+        
+        <t> The following Subject Identifier Types are registered in the IANA "RISC Subject Identifier Types" registry established by Section 4.1.</t>
+
+        <section anchor="sub-id-email" title="Email Subject Identifier Type">
+          <t>The Email Subject Identifier Type describes a subject by email address. Subject Identifiers of this type MUST contain an "email" claim whose value is a string containing the email address of the subject. The "email" claim MUST NOT be null or empty. The Email Subject Identifier Type is identified by the name "email".</t>
+        </section>
+
+        <section anchor="sub-id-phone" title="Phone Number Subject Identifier Type">
+          <t>The Phone Number Subject Identifier Type describes a subject by telephone number. Subject Identifiers of this type MUST contain a "phone" claim whose value is a string containing the full telephone number of the subject, including international dialing prefix, formatted according to <xref target="E164">E.164</xref>. The "phone" claim MUST NOT be null or empty. The Phone Number Subject Identifier Type is identified by the name "phone".</t>
+        </section>
+
+        <section anchor="sub-id-iss-sub" title="Issuer and Subject Subject Identifier Type">
+          <t>The Issuer and Subject Subject Identifier Type describes a subject by an issuer and a subject. Subject Identifiers of this type MUST contain an "iss" claim whose value identifies the issuer, and a "sub" claim whose value identifies the subject with respect to the issuer. These claims MUST follow the formats of the "iss" claim and "sub" claim defined by <xref target="RFC7519"/>, respectively. Both the "iss" claim and the "sub" claim MUST NOT be null or empty. The Issuer and Subject Subject Identifier Type is identified by the name "iss-sub".</t>
+        </section>
+      </section>
+
+      <section anchor="sub-id-security" title="Privacy Considerations">
+        <t>Event issuers and recipients SHOULD take precautions to ensure that they do not leak information about subjects via Subject Identifiers, and choose appropriate Subject Identifier Types accordingly. Parties SHOULD NOT identify a subject using a given Subject Identifier Type if doing so will allow the recipient to correlate different claims about the subject that they are not known to already have knowledge of. Issuers and recipients SHOULD always use the same Subject Identifier Type and the same claim values to identify a given subject when communicating with a given party in order to reduce the possibility of information leakage.</t>
+      </section>
+    </section>
+
     <section anchor="profiles" title="Profiles">
       <t>This section profiles several IETF secevent specifications.</t>
       
@@ -98,53 +145,8 @@
           property that points to the key.</t>
         </section>
         
-        <section anchor="composite-subject" title="Composite Subject Claim">
-          <t>Subjects can be identified with one or more of the following claim sets: <list style="symbols">
-            <t>'iss' and 'sub'</t>
-            <t>'email'</t>
-            <t>'phone_number'</t>
-          </list></t>
-          
-          <t>If there are no 'iss' claim conflicts then these claims can be added a top level. The 
-          issuer of the SET and the issuer that provides context for the 'sub' claim might be different.
-          The claims that indetify the subject SHOULD be nexted under a 'risc_subject' claim.</t>
-          
-          <figure anchor="composite-subject-top" title="Example: Top Level Claims">
-            <artwork><![CDATA[
-{
-  "iss": "https://idp.example.com/",
-  "sub": "7375626A656374",
-  "email": "foo@example.com",
-  ...
-}
-            ]]></artwork>
-            <postamble>In this case the 'iss' claim represents both the issuer of the SET and the
-            issuer that provides context for the 'sub' claim.</postamble>
-          </figure>
-          
-          <figure anchor="composite-subject-nested" title="Example: Nested Claims">
-            <artwork><![CDATA[
-{
-  "iss": "https://idp.example.com",
-  "risc_subject": {
-    "iss": "https://tr.example.com/",
-    "sub": "7375626A656374",
-    "phone_number": "+99-123-456-7890",
-  }
-  ...
-}
-            ]]></artwork>
-            <postamble>Note that the SET ("https://secevent.example.com") issuer and subject issuer
-              ("https://tr.example.com/") are different.</postamble>
-          </figure>
-          
-          <section anchor="composite-subject-privacy" title="Privacy Considerations">
-            <t>Only the minimum number of subject claims SHOULD be sent to a Receiver. For example, if
-            the Receiver can identify a subject by 'iss" and 'sub" then the Transmitter SHOULD not send
-            'email' nor 'phone_number'.</t>
-            
-            <t>TODO: should the Receiver advertise in stream config what subject claims it needs?</t>
-          </section>
+        <section anchor="event-subjects" title="RISC Event Subject">
+          <t>The subject of a RISC event is identified by the "subject" claim within the event payload, whose value is a Subject Identifier. The "subject" claim is REQUIRED for all RISC events. The JWT "sub" claim MUST NOT be present in any SET containing a RISC event.</t>
         </section>
 
         <section anchor="aud" title="aud Claim">
