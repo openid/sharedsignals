@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type='text/xsl' href='http://xml2rfc.tools.ietf.org/authoring/rfc2629.xslt' ?>
+<!DOCTYPE rfc PUBLIC "-//IETF//DTD RFC 2629//EN" "http://xml2rfc.tools.ietf.org/authoring/rfc2629.dtd">
+<!--
+  NOTE:  This XML file is input used to produce the authoritative copy of an
+  OpenID Foundation specification.  The authoritative copy is the HTML output.
+  This XML source file is not authoritative.  The statement ipr="none" is
+  present only to satisfy the document compilation tool and is not indicative
+  of the IPR status of this specification.  The IPR for this specification is
+  described in the "Notices" section.  This is a public OpenID Foundation
+  document and not a private document, as the private="..." declaration could
+  be taken to indicate.
+-->
+
+<rfc docName="risc-event-types-00" category="std" ipr="none">
+
+  <?rfc toc="yes" ?>
+  <?rfc tocdepth="5" ?>
+  <?rfc symrefs="yes" ?>
+  <?rfc sortrefs="yes"?>
+  <?rfc strict="yes" ?>
+  <?rfc iprnotified="no" ?>
+  <?rfc private="Draft" ?>
+  <?rfc comments="yes"?>
+
+  <front>
+    <title abbrev="risc-event-types">RISC Event Types</title>
+
+    <author initials="M." surname="Scurtescu" fullname="Marius Scurtescu">
+      <organization abbrev="Google">Google</organization>
+      <address>
+        <email>mscurtescu@google.com</email>
+      </address>
+    </author>
+    <author initials="A." surname="Backman" fullname="Annabelle Backman">
+      <organization abbrev="Amazon">Amazon</organization>
+      <address>
+        <email>richanna@amazon.com</email>
+      </address>
+    </author>
+    <author initials="P." surname="Hunt" fullname="Phil Hunt">
+      <organization abbrev="Oracle">Oracle Corporation</organization>
+      <address>
+        <email>phil.hunt@yahoo.com</email>
+      </address>
+    </author>
+    <author initials="J." surname="Bradley" fullname="John Bradley">
+      <organization abbrev="Yubico">Yubico</organization>
+      <address>
+        <email>secevemt@ve7jtb.com</email>
+      </address>
+    </author>
+
+    <date year="2018" month="January" day="26"/>
+
+    <workgroup>RISC Working Group</workgroup>
+
+    <abstract>
+      <t>This document defines the RTISC Event Types. Event Types are introduced and defined in <xref target="SET">Security Event Token (SET)</xref>.</t>
+    </abstract>
+  </front>
+
+  <middle>
+    <section anchor="intro" title="Introduction">
+      <section anchor="conv" title="Notational Conventions">
+        <t>The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”,
+        “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” in this
+        document are to be interpreted as described in <xref target="RFC2119"/>.</t>
+      </section>
+    </section>
+    
+    <section anchor="event-types" title="Event Types">
+      <t>The base URI for RISC event types is:<vspace />
+        http://schemas.openid.net/secevent/risc/event-type/</t>
+      
+      <section anchor="account-credential-change-required" title="Account Credential Change Required">
+        <t>Event Type URI:<vspace />
+        http://schemas.openid.net/secevent/risc/event-type/account-credential-change-required</t>
+        
+        <t>Account Credential Change Required signals that the account identified by the subject was required to
+        change a credential. For example the user was required to go through a password change.</t>
+        
+        <t>Attributes: none</t>
+
+        <figure anchor="account-credential-change-required-example" title="Example: Account Credential Change Required">
+          <artwork><![CDATA[
+{
+  "iss": "https://idp.example.com/",
+  "jti": "756E69717565206964656E746966696572",
+  "iat": 1508184845,
+  "aud": "636C69656E745F6964",
+  "events": {
+    "http://schemas.openid.net/secevent/risc/event-type/\
+    account-credential-change-required": {
+      "subject": {
+        "subject_type": "iss-sub",
+        "iss": "https://idp.example.com/",
+        "sub": "7375626A656374",
+      }
+    }
+  }
+}
+            ]]></artwork>
+          <postamble>(the event type URI is wrapped, the backslash is the continuation character)</postamble>
+        </figure>
+      </section>
+
+      <section anchor="account-deleted" title="Account Deleted">
+        <t>Event Type URI:<vspace />
+        http://schemas.openid.net/secevent/risc/event-type/account-deleted</t>
+        
+        <t>Account Deleted signals that the account identified by the subject has been permanently deleted.</t>
+        
+        <t>Attributes: none</t>
+      </section>
+
+      <section anchor="account-disabled" title="Account Disabled">
+        <t>Event Type URI:<vspace />
+        http://schemas.openid.net/secevent/risc/event-type/account-disabled</t>
+        
+        <t>Account Disabled signals that the account identified by the subject has been disabled. The actual reason why the
+        account was disabled might be specified with the nested 'reason' attribute described below. The account may be
+        <xref target="account-enabled">enabled</xref> in the future.</t>
+        
+        <t>Attributes:<list style="symbols">
+          <t>reason - optional, describes why was the account disabled. Possible values:<list style="symbols">
+            <t>hijacking</t>
+            <t>bulk-account</t>
+          </list></t>
+          <t>cause-time - the initial cause that lead to the account to be disabled. In most cases this is an 
+          estimated time. For example, the actual hijacking time. This is before the event time.</t>
+        </list></t>
+
+        <figure anchor="account-disabled-example" title="Example: Account Disabled">
+          <artwork><![CDATA[
+{
+  "iss": "https://idp.example.com/",
+  "jti": "756E69717565206964656E746966696572",
+  "iat": 1508184845,
+  "aud": "636C69656E745F6964",
+  "events": {
+    "http://schemas.openid.net/secevent/risc/event-type/\
+    account-disabled": {
+      "subject": {
+        "subject_type": "iss-sub",
+        "iss": "https://idp.example.com/",
+        "sub": "7375626A656374",
+      },
+      "reason": "hijacking",
+      "cause-time": 1508012752,
+    }
+  }
+}
+            ]]></artwork>
+        </figure>
+      </section>
+
+      <section anchor="account-enabled" title="Account Enabled">
+        <t>Event Type URI:<vspace />
+        http://schemas.openid.net/secevent/risc/event-type/account-enabled</t>
+        
+        <t>Account Enabled signals that the account identified by the subject has been enabled.</t>
+        
+        <t>Attributes: none</t>
+      </section>
+
+      <section anchor="identifier-changed" title="Identifier Changed">
+        <t>Event Type URI:<vspace />
+        http://schemas.openid.net/secevent/risc/event-type/identifier-changed</t>
+        
+        <t>Identifier Changed signals that the identifier specified in the subject has changed. The subject's
+        type MUST be either 'email' or 'phone' and it MUST specify the old value.</t>
+        
+        <t>Attributes:<list style="symbols">
+          <t>new-value - required, the new value of the identifier.</t>
+        </list></t>
+        
+        <figure anchor="identifier-changed-example" title="Example: Identifier Changed">
+          <artwork><![CDATA[
+{
+  "iss": "https://idp.example.com/",
+  "jti": "756E69717565206964656E746966696572",
+  "iat": 1508184845,
+  "aud": "636C69656E745F6964",
+  "events": {
+    "http://schemas.openid.net/secevent/risc/event-type/\
+    identifier-changed": {
+      "subject": {
+        "subject_type": "email",
+        "email": "foo@example.com",
+      },
+      "new-value": "bar@example.com",
+    }
+  }
+}
+            ]]></artwork>
+          <postamble>The 'foo@example.com' email changed to 'bar@example.com'.</postamble>
+        </figure>
+      </section>
+
+      <section anchor="identifier-recycled" title="Identifier Recycled">
+        <t>Event Type URI:<vspace />
+        http://schemas.openid.net/secevent/risc/event-type/identifier-recycled</t>
+        
+        <t>Identifier Recycled signals that the identifier specified in the subject was recycled and now it
+        belongs to a new user. The subject MUST be either 'email' or 'phone-number'.</t>
+        
+        <t>Attributes: none</t>
+        
+        <figure anchor="identifier-recycled-example" title="Example: Identifier Recycled">
+          <artwork><![CDATA[
+{
+  "iss": "https://idp.example.com/",
+  "jti": "756E69717565206964656E746966696572",
+  "iat": 1508184845,
+  "aud": "636C69656E745F6964",
+  "events": {
+    "http://schemas.openid.net/secevent/risc/event-type/\
+    identifier-recycled": {
+      "subject": {
+        "subject_type": "email",
+        "email": "foo@example.com",
+      }
+    }
+  }
+}
+            ]]></artwork>
+          <postamble>The 'foo@example.com' email address was recycled.</postamble>
+        </figure>
+      </section>
+
+      <section anchor="opt-out" title="Opt Out">
+        <t>Users SHOULD be allowed to opt-in and out of RISC events being sent for their accounts. With regards
+        to opt-out an account can be in one of these three states:<list style="numbers">
+          <t>opt-in - the account is participating in RISC event exchange.</t>
+          <t>opt-out-initiated - the user requested to be excluded from RISC event exchanges, but for
+          practical security reasons for a period of time RISC events are still exchanged. The main reason
+          for this state is to prevent a hijacker from immediately opting out of RISC.</t>
+          <t>opt-out - the account is NOT participating in RISC event exchange.</t>
+        </list></t>
+        
+        <figure anchor="opt-out-states" title="Opt-Out States and Opt-Out Events">
+          <preamble>State changes trigger Opt-Out Events as represented bellow:</preamble>
+          <artwork><![CDATA[
++--------+  opt-out-initiated  +-------------------+
+|        +--------------------->                   |
+| opt-in |                     | opt-out-initiated |
+|        |  pt-out-cancelled   |                   |
+|        <---------------------+                   |
++---^----+                     +----------+--------+
+    |                                     |
+    | opt-in                              | opt-out-effective
+    |                                     |
+    |                          +----------V--------+
+    |                          |                   |
+    +--------------------------| opt-out           |
+                               |                   |
+                               +-------------------+
+          ]]></artwork>
+        </figure>
+        
+        <t>Both Transmitters and Receivers SHOULD manage Opt-Out state for users. Transmitters should send the
+        events defined in this section when the Opt-Out state changes.</t>
+        
+        <section anchor="opt-in" title="Opt In">
+          <t>Event Type URI:<vspace />
+          http://schemas.openid.net/secevent/risc/event-type/opt-in</t>
+        
+          <t>Opt In signals that the account identified by the subject opted into RISC event exchanges.
+          The account is in the 'opt-in' state.</t>
+        
+          <t>Attributes: none</t>
+        </section>
+        
+        <section anchor="opt-out-initiated" title="Opt Out Initiated">
+          <t>Event Type URI:<vspace />
+          http://schemas.openid.net/secevent/risc/event-type/opt-out-initiated</t>
+        
+          <t>Opt Out Initiated signals that the account identified by the subject initiated to opt out
+          from RISC event exchanges. The account is in the 'opt-out-initiated' state.</t>
+        
+          <t>Attributes: none</t>
+        </section>
+        
+        <section anchor="opt-out-cancelled" title="Opt Out Cancelled">
+          <t>Event Type URI:<vspace />
+          http://schemas.openid.net/secevent/risc/event-type/opt-out-cancelled</t>
+        
+          <t>Opt Out Cancelled signals that the account identified by the subject cancelled the opt out from RISC
+          event exchanges. The account is in the 'opt-in' state.</t>
+        
+          <t>Attributes: none</t>
+        </section>
+        
+        <section anchor="opt-out-effective" title="Opt Out Effective">
+          <t>Event Type URI:<vspace />
+          http://schemas.openid.net/secevent/risc/event-type/opt-out-effective</t>
+        
+          <t>Opt Out Effective signals that the account identified by the subject was effectively opted out from
+          RISC event exchanges. The account is in the 'opt-out' state.</t>
+        
+          <t>Attributes: none</t>
+        </section>
+      </section>
+      
+      <section anchor="recovery-activated" title="Recovery Activated">
+        <t>Event Type URI:<vspace />
+        http://schemas.openid.net/secevent/risc/event-type/recovery-activated</t>
+        
+        <t>Recovery Activated signals that the account identified by the subject activated a recovery flow.</t>
+        
+        <t>Attributes: none</t>
+      </section>
+
+      <section anchor="recovery-information-changed" title="Recovery Information Changed">
+        <t>Event Type URI:<vspace />
+        http://schemas.openid.net/secevent/risc/event-type/recovery-information-changed</t>
+        
+        <t>Recovery Information Changed signals that the account identified by the subject has changed some of
+        its recovery information. For example a recovery email address was added or removed.</t>
+        
+        <t>Attributes: none</t>
+      </section>
+
+      <section anchor="sessions-revoked" title="Sessions Revoked">
+        <t>Event Type URI:<vspace />
+        http://schemas.openid.net/secevent/risc/event-type/sessions-revoked</t>
+        
+        <t>Sessions Revoked signals that all the sessions for the account identified by the subject have been
+        revoked.</t>
+        
+        <t>Attributes: none</t>
+      </section>
+    </section>
+  </middle>
+
+  <back>
+    <references title='Normative References'>
+
+      <reference  anchor="JSON" target='https://www.rfc-editor.org/info/rfc7159'>
+        <front>
+          <title>The JavaScript Object Notation (JSON) Data Interchange Format</title>
+            <author initials='T.' surname='Bray' fullname='T. Bray' role='editor'><organization /></author>
+            <date year='2014' month='March' />
+            <abstract><t>JavaScript Object Notation (JSON) is a lightweight, text-based, language-independent data interchange format.  It was derived from the ECMAScript Programming Language Standard.  JSON defines a small set of formatting rules for the portable representation of structured data.</t><t>This document removes inconsistencies with other specifications of JSON, repairs specification errors, and offers experience-based interoperability guidance.</t></abstract>
+        </front>
+        <seriesInfo name='RFC' value='7159'/>
+        <seriesInfo name='DOI' value='10.17487/RFC7159'/>
+      </reference>
+
+      <reference anchor="SET" target="https://tools.ietf.org/html/draft-ietf-secevent-token">
+        <front>
+          <title>Security Event Token (SET)</title>
+          <author >
+            <organization>IETF</organization>
+          </author>
+          <date/>
+        </front>
+      </reference>
+
+      <reference  anchor="RFC2119" target='https://www.rfc-editor.org/info/rfc2119'>
+        <front>
+          <title>Key words for use in RFCs to Indicate Requirement Levels</title>
+          <author initials='S.' surname='Bradner' fullname='S. Bradner'><organization /></author>
+          <date year='1997' month='March' />
+          <abstract><t>In many standards track documents several words are used to signify the requirements in the specification.  These words are often capitalized. This document defines these words as they should be interpreted in IETF documents.  This document specifies an Internet Best Current Practices for the Internet Community, and requests discussion and suggestions for improvements.</t></abstract>
+        </front>
+        <seriesInfo name='BCP' value='14'/>
+        <seriesInfo name='RFC' value='2119'/>
+        <seriesInfo name='DOI' value='10.17487/RFC2119'/>
+      </reference>
+    </references>
+  </back>
+</rfc>
+

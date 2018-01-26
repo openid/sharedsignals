@@ -10,7 +10,7 @@
                                                                   Oracle
                                                               J. Bradley
                                                                   Yubico
-                                                        October 16, 2017
+                                                        January 26, 2018
 
 
                   RISC profile of IETF Security Events
@@ -35,46 +35,31 @@ Table of Contents
        2.1.1.  Email Subject Identifier Type . . . . . . . . . . . .   3
        2.1.2.  Phone Number Subject Identifier Type  . . . . . . . .   3
        2.1.3.  Issuer and Subject Subject Identifier Type  . . . . .   3
-   3.  Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .   4
+   3.  Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .   3
      3.1.  Security Event Token Profle . . . . . . . . . . . . . . .   4
        3.1.1.  Signature Key Resolution  . . . . . . . . . . . . . .   4
        3.1.2.  RISC Event Subject  . . . . . . . . . . . . . . . . .   4
        3.1.3.  aud Claim . . . . . . . . . . . . . . . . . . . . . .   4
-       3.1.4.  Security Considerations . . . . . . . . . . . . . . .   5
-     3.2.  SET Token Delivery Using HTTP Profile . . . . . . . . . .   5
-       3.2.1.  Authorization . . . . . . . . . . . . . . . . . . . .   5
+       3.1.4.  Security Considerations . . . . . . . . . . . . . . .   4
+     3.2.  SET Token Delivery Using HTTP Profile . . . . . . . . . .   4
+       3.2.1.  Authorization . . . . . . . . . . . . . . . . . . . .   4
      3.3.  Management API for SET Event Streams Profile  . . . . . .   5
        3.3.1.  Authorization . . . . . . . . . . . . . . . . . . . .   5
        3.3.2.  Subject Claims for Subject Add and Remove Operations    5
-   4.  Event Types . . . . . . . . . . . . . . . . . . . . . . . . .   5
-     4.1.  Account Credential Change Required  . . . . . . . . . . .   5
-     4.2.  Account Deleted . . . . . . . . . . . . . . . . . . . . .   6
-     4.3.  Account Disabled  . . . . . . . . . . . . . . . . . . . .   6
+   4.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   5
+     4.1.  RISC Subject Identifier Types Registry  . . . . . . . . .   5
+   5.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .   5
+     5.1.  Subject Information Leakage . . . . . . . . . . . . . . .   5
 
 
 
-Scurtescu, et al.        Expires April 19, 2018                 [Page 1]
+Scurtescu, et al.         Expires July 30, 2018                 [Page 1]
 
-                              risc-secevent                 October 2017
+                              risc-secevent                 January 2018
 
 
-     4.4.  Account Enabled . . . . . . . . . . . . . . . . . . . . .   7
-     4.5.  Identifier Changed  . . . . . . . . . . . . . . . . . . .   7
-     4.6.  Identifier Recycled . . . . . . . . . . . . . . . . . . .   8
-     4.7.  Opt Out . . . . . . . . . . . . . . . . . . . . . . . . .   9
-       4.7.1.  Opt In  . . . . . . . . . . . . . . . . . . . . . . .  10
-       4.7.2.  Opt Out Initiated . . . . . . . . . . . . . . . . . .  10
-       4.7.3.  Opt Out Cancelled . . . . . . . . . . . . . . . . . .  11
-       4.7.4.  Opt Out Effective . . . . . . . . . . . . . . . . . .  11
-     4.8.  Recovery Activated  . . . . . . . . . . . . . . . . . . .  11
-     4.9.  Recovery Information Changed  . . . . . . . . . . . . . .  11
-     4.10. Sessions Revoked  . . . . . . . . . . . . . . . . . . . .  12
-   5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  12
-     5.1.  RISC Subject Identifier Types Registry  . . . . . . . . .  12
-   6.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .  12
-     6.1.  Subject Information Leakage . . . . . . . . . . . . . . .  12
-   7.  Normative References  . . . . . . . . . . . . . . . . . . . .  12
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  13
+   6.  Normative References  . . . . . . . . . . . . . . . . . . . .   6
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   7
 
 1.  Introduction
 
@@ -107,13 +92,6 @@ Scurtescu, et al.        Expires April 19, 2018                 [Page 1]
 
                 Figure 1: Example: Email Subject Identifier
 
-
-
-Scurtescu, et al.        Expires April 19, 2018                 [Page 2]
-
-                              risc-secevent                 October 2017
-
-
    {
    "subject_type": "iss-sub",
    "iss": "https://issuer.example.com/",
@@ -125,19 +103,30 @@ Scurtescu, et al.        Expires April 19, 2018                 [Page 2]
 
          Figure 2: Example: Issuer and Subject Subject Identifier
 
+
+
+
+
+
+
+Scurtescu, et al.         Expires July 30, 2018                 [Page 2]
+
+                              risc-secevent                 January 2018
+
+
 2.1.  Subject Identifier Types
 
    A Subject Identifier Type is a light-weight schema that describes a
    set of claims that uniquely identifies a subject.  Every Subject
    Identifier Type MUST have a unique name registered in the IANA "RISC
-   Subject Identifier Types" registry established by Section 5.1.  A
+   Subject Identifier Types" registry established by Section 4.1.  A
    Subject Identifier Type MAY contain more claims than are strictly
    necessary to uniquely identify a subject, however a Subject
    Identifier MUST contain all of the claims required by its type (See
    Privacy Considerations).
 
    The following Subject Identifier Types are registered in the IANA
-   "RISC Subject Identifier Types" registry established by Section 5.1.
+   "RISC Subject Identifier Types" registry established by Section 4.1.
 
 2.1.1.  Email Subject Identifier Type
 
@@ -162,14 +151,6 @@ Scurtescu, et al.        Expires April 19, 2018                 [Page 2]
    The Issuer and Subject Subject Identifier Type describes a subject by
    an issuer and a subject.  Subject Identifiers of this type MUST
    contain an "iss" claim whose value identifies the issuer, and a "sub"
-
-
-
-Scurtescu, et al.        Expires April 19, 2018                 [Page 3]
-
-                              risc-secevent                 October 2017
-
-
    claim whose value identifies the subject with respect to the issuer.
    These claims MUST follow the formats of the "iss" claim and "sub"
    claim defined by [RFC7519], respectively.  Both the "iss" claim and
@@ -181,6 +162,13 @@ Scurtescu, et al.        Expires April 19, 2018                 [Page 3]
    This section profiles several IETF secevent specifications.
 
    The RISC Profile makes several assumptions:
+
+
+
+Scurtescu, et al.         Expires July 30, 2018                 [Page 3]
+
+                              risc-secevent                 January 2018
+
 
    o  Transmitters are OpenID Connect Identity Providers
 
@@ -215,17 +203,6 @@ Scurtescu, et al.        Expires April 19, 2018                 [Page 3]
    The 'aud' claim MUST be a single value which is the client id of the
    Receiver.
 
-
-
-
-
-
-
-Scurtescu, et al.        Expires April 19, 2018                 [Page 4]
-
-                              risc-secevent                 October 2017
-
-
 3.1.4.  Security Considerations
 
    TODO: Id Token and Access Token confusion
@@ -238,6 +215,16 @@ Scurtescu, et al.        Expires April 19, 2018                 [Page 4]
 3.2.1.  Authorization
 
    TODO
+
+
+
+
+
+
+Scurtescu, et al.         Expires July 30, 2018                 [Page 4]
+
+                              risc-secevent                 January 2018
+
 
 3.3.  Management API for SET Event Streams Profile
 
@@ -257,380 +244,9 @@ Scurtescu, et al.        Expires April 19, 2018                 [Page 4]
 
    TODO
 
-4.  Event Types
+4.  IANA Considerations
 
-   The base URI for RISC event types is:
-   http://schemas.openid.net/secevent/risc/event-type/
-
-4.1.  Account Credential Change Required
-
-   Event Type URI:
-   http://schemas.openid.net/secevent/risc/event-type/account-
-   credential-change-required
-
-   Account Credential Change Required signals that the account
-   identified by the subject was required to change a credential.  For
-   example the user was required to go through a password change.
-
-   Attributes: none
-
-
-
-
-Scurtescu, et al.        Expires April 19, 2018                 [Page 5]
-
-                              risc-secevent                 October 2017
-
-
-   {
-     "iss": "https://idp.example.com/",
-     "jti": "756E69717565206964656E746966696572",
-     "iat": 1508184845,
-     "aud": "636C69656E745F6964",
-     "events": {
-       "http://schemas.openid.net/secevent/risc/event-type/\
-       account-credential-change-required": {
-         "subject": {
-           "subject_type": "iss-sub",
-           "iss": "https://idp.example.com/",
-           "sub": "7375626A656374",
-         }
-       }
-     }
-   }
-
-   (the event type URI is wrapped, the backslash is the continuation
-   character)
-
-           Figure 3: Example: Account Credential Change Required
-
-4.2.  Account Deleted
-
-   Event Type URI:
-   http://schemas.openid.net/secevent/risc/event-type/account-deleted
-
-   Account Deleted signals that the account identified by the subject
-   has been permanently deleted.
-
-   Attributes: none
-
-4.3.  Account Disabled
-
-   Event Type URI:
-   http://schemas.openid.net/secevent/risc/event-type/account-disabled
-
-   Account Disabled signals that the account identified by the subject
-   has been disabled.  The actual reason why the account was disabled
-   might be specified with the nested 'reason' attribute described
-   below.  The account may be enabled (Section 4.4) in the future.
-
-   Attributes:
-
-   o  reason - optional, describes why was the account disabled.
-      Possible values:
-
-      *  hijacking
-
-
-
-Scurtescu, et al.        Expires April 19, 2018                 [Page 6]
-
-                              risc-secevent                 October 2017
-
-
-      *  bulk-account
-
-   o  cause-time - the initial cause that lead to the account to be
-      disabled.  In most cases this is an estimated time.  For example,
-      the actual hijacking time.  This is before the event time.
-
-   {
-     "iss": "https://idp.example.com/",
-     "jti": "756E69717565206964656E746966696572",
-     "iat": 1508184845,
-     "aud": "636C69656E745F6964",
-     "events": {
-       "http://schemas.openid.net/secevent/risc/event-type/\
-       account-disabled": {
-         "subject": {
-           "subject_type": "iss-sub",
-           "iss": "https://idp.example.com/",
-           "sub": "7375626A656374",
-         },
-         "reason": "hijacking",
-         "cause-time": 1508012752,
-       }
-     }
-   }
-
-                    Figure 4: Example: Account Disabled
-
-4.4.  Account Enabled
-
-   Event Type URI:
-   http://schemas.openid.net/secevent/risc/event-type/account-enabled
-
-   Account Enabled signals that the account identified by the subject
-   has been enabled.
-
-   Attributes: none
-
-4.5.  Identifier Changed
-
-   Event Type URI:
-   http://schemas.openid.net/secevent/risc/event-type/identifier-changed
-
-   Identifier Changed signals that the identifier specified in the
-   subject has changed.  The subject's type MUST be either 'email' or
-   'phone' and it MUST specify the old value.
-
-   Attributes:
-
-
-
-
-Scurtescu, et al.        Expires April 19, 2018                 [Page 7]
-
-                              risc-secevent                 October 2017
-
-
-   o  new-value - required, the new value of the identifier.
-
-   {
-     "iss": "https://idp.example.com/",
-     "jti": "756E69717565206964656E746966696572",
-     "iat": 1508184845,
-     "aud": "636C69656E745F6964",
-     "events": {
-       "http://schemas.openid.net/secevent/risc/event-type/\
-       identifier-changed": {
-         "subject": {
-           "subject_type": "email",
-           "email": "foo@example.com",
-         },
-         "new-value": "bar@example.com",
-       }
-     }
-   }
-
-   The 'foo@example.com' email changed to 'bar@example.com'.
-
-                   Figure 5: Example: Identifier Changed
-
-4.6.  Identifier Recycled
-
-   Event Type URI:
-   http://schemas.openid.net/secevent/risc/event-type/identifier-
-   recycled
-
-   Identifier Recycled signals that the identifier specified in the
-   subject was recycled and now it belongs to a new user.  The subject
-   MUST be either 'email' or 'phone-number'.
-
-   Attributes: none
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Scurtescu, et al.        Expires April 19, 2018                 [Page 8]
-
-                              risc-secevent                 October 2017
-
-
-   {
-     "iss": "https://idp.example.com/",
-     "jti": "756E69717565206964656E746966696572",
-     "iat": 1508184845,
-     "aud": "636C69656E745F6964",
-     "events": {
-       "http://schemas.openid.net/secevent/risc/event-type/\
-       identifier-recycled": {
-         "subject": {
-           "subject_type": "email",
-           "email": "foo@example.com",
-         }
-       }
-     }
-   }
-
-   The 'foo@example.com' email address was recycled.
-
-                  Figure 6: Example: Identifier Recycled
-
-4.7.  Opt Out
-
-   Users SHOULD be allowed to opt-in and out of RISC events being sent
-   for their accounts.  With regards to opt-out an account can be in one
-   of these three states:
-
-   1.  opt-in - the account is participating in RISC event exchange.
-
-   2.  opt-out-initiated - the user requested to be excluded from RISC
-       event exchanges, but for practical security reasons for a period
-       of time RISC events are still exchanged.  The main reason for
-       this state is to prevent a hijacker from immediately opting out
-       of RISC.
-
-   3.  opt-out - the account is NOT participating in RISC event
-       exchange.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Scurtescu, et al.        Expires April 19, 2018                 [Page 9]
-
-                              risc-secevent                 October 2017
-
-
-   State changes trigger Opt-Out Events as represented bellow:
-
-   +--------+  opt-out-initiated  +-------------------+
-   |        +--------------------->                   |
-   | opt-in |                     | opt-out-initiated |
-   |        |  pt-out-cancelled   |                   |
-   |        <---------------------+                   |
-   +---^----+                     +----------+--------+
-       |                                     |
-       | opt-in                              | opt-out-effective
-       |                                     |
-       |                          +----------V--------+
-       |                          |                   |
-       +--------------------------| opt-out           |
-                                  |                   |
-                                  +-------------------+
-
-                Figure 7: Opt-Out States and Opt-Out Events
-
-   Both Transmitters and Receivers SHOULD manage Opt-Out state for
-   users.  Transmitters should send the events defined in this section
-   when the Opt-Out state changes.
-
-4.7.1.  Opt In
-
-   Event Type URI:
-   http://schemas.openid.net/secevent/risc/event-type/opt-in
-
-   Opt In signals that the account identified by the subject opted into
-   RISC event exchanges.  The account is in the 'opt-in' state.
-
-   Attributes: none
-
-4.7.2.  Opt Out Initiated
-
-   Event Type URI:
-   http://schemas.openid.net/secevent/risc/event-type/opt-out-initiated
-
-   Opt Out Initiated signals that the account identified by the subject
-   initiated to opt out from RISC event exchanges.  The account is in
-   the 'opt-out-initiated' state.
-
-   Attributes: none
-
-
-
-
-
-
-
-
-Scurtescu, et al.        Expires April 19, 2018                [Page 10]
-
-                              risc-secevent                 October 2017
-
-
-4.7.3.  Opt Out Cancelled
-
-   Event Type URI:
-   http://schemas.openid.net/secevent/risc/event-type/opt-out-cancelled
-
-   Opt Out Cancelled signals that the account identified by the subject
-   cancelled the opt out from RISC event exchanges.  The account is in
-   the 'opt-in' state.
-
-   Attributes: none
-
-4.7.4.  Opt Out Effective
-
-   Event Type URI:
-   http://schemas.openid.net/secevent/risc/event-type/opt-out-effective
-
-   Opt Out Effective signals that the account identified by the subject
-   was effectively opted out from RISC event exchanges.  The account is
-   in the 'opt-out' state.
-
-   Attributes: none
-
-4.8.  Recovery Activated
-
-   Event Type URI:
-   http://schemas.openid.net/secevent/risc/event-type/recovery-activated
-
-   Recovery Activated signals that the account identified by the subject
-   activated a recovery flow.
-
-   Attributes: none
-
-4.9.  Recovery Information Changed
-
-   Event Type URI:
-   http://schemas.openid.net/secevent/risc/event-type/recovery-
-   information-changed
-
-   Recovery Information Changed signals that the account identified by
-   the subject has changed some of its recovery information.  For
-   example a recovery email address was added or removed.
-
-   Attributes: none
-
-
-
-
-
-
-
-
-Scurtescu, et al.        Expires April 19, 2018                [Page 11]
-
-                              risc-secevent                 October 2017
-
-
-4.10.  Sessions Revoked
-
-   Event Type URI:
-   http://schemas.openid.net/secevent/risc/event-type/sessions-revoked
-
-   Sessions Revoked signals that all the sessions for the account
-   identified by the subject have been revoked.
-
-   Attributes: none
-
-5.  IANA Considerations
-
-5.1.  RISC Subject Identifier Types Registry
+4.1.  RISC Subject Identifier Types Registry
 
    This section establishes the IANA "RISC Subject Identifier Types"
    registry for Subject Identifier Types.  The registry records the name
@@ -640,9 +256,9 @@ Scurtescu, et al.        Expires April 19, 2018                [Page 11]
 
    TODO: Finish registry definition
 
-6.  Privacy Considerations
+5.  Privacy Considerations
 
-6.1.  Subject Information Leakage
+5.1.  Subject Information Leakage
 
    Event issuers and recipients SHOULD take precautions to ensure that
    they do not leak information about subjects via Subject Identifiers,
@@ -655,7 +271,18 @@ Scurtescu, et al.        Expires April 19, 2018                [Page 11]
    when communicating with a given party in order to reduce the
    possibility of information leakage.
 
-7.  Normative References
+
+
+
+
+
+
+Scurtescu, et al.         Expires July 30, 2018                 [Page 5]
+
+                              risc-secevent                 January 2018
+
+
+6.  Normative References
 
    [API]      IETF, "Management API for SET Event Streams",
               <https://tools.ietf.org/html/draft-scurtescu-secevent-
@@ -665,14 +292,6 @@ Scurtescu, et al.        Expires April 19, 2018                [Page 11]
               Hardt, D., "The OAuth 2.0 Authorization Framework - Client
               Credentials Grant", RFC 6749,
               <https://tools.ietf.org/html/rfc6749#section-4.4>.
-
-
-
-
-Scurtescu, et al.        Expires April 19, 2018                [Page 12]
-
-                              risc-secevent                 October 2017
-
 
    [DELIVERY]
               IETF, "SET Token Delivery Using HTTP",
@@ -711,23 +330,20 @@ Scurtescu, et al.        Expires April 19, 2018                [Page 12]
               <https://tools.ietf.org/html/draft-scurtescu-secevent-
               risc-use-cases-00>.
 
+
+
+
+Scurtescu, et al.         Expires July 30, 2018                 [Page 6]
+
+                              risc-secevent                 January 2018
+
+
 Authors' Addresses
 
    Marius Scurtescu
    Google
 
    Email: mscurtescu@google.com
-
-
-
-
-
-
-
-
-Scurtescu, et al.        Expires April 19, 2018                [Page 13]
-
-                              risc-secevent                 October 2017
 
 
    Annabelle Backman
@@ -773,12 +389,4 @@ Scurtescu, et al.        Expires April 19, 2018                [Page 13]
 
 
 
-
-
-
-
-
-
-
-
-Scurtescu, et al.        Expires April 19, 2018                [Page 14]
+Scurtescu, et al.         Expires July 30, 2018                 [Page 7]
