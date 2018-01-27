@@ -191,8 +191,26 @@
         <t>This section provides RISC profiling specifications for the <xref target="DELIVERY">"SET
             Token Delivery Using HTTP"</xref> spec.</t>
 
-        <section title="Authorization">
-          <t>TODO</t>
+        <section title="Stream Configuration Metadata">
+          <t>Each delivery method is identified by a URI, specified below by the "method" metadata.</t>
+          
+          <section title="Push Delivery using HTTP">
+            <t><list style="hanging">
+              <t hangText="method"> TODO</t>
+              <t hangText="endpoint_url"> The URL where events are pushed through HTTP POST.
+              This is set by the Receiver.</t>
+              <t hangText="authorization_header">The HTTP Authorization header that the Transmitter MUST
+              set with each event delivery. The value is optional and it is set by the Receiver.</t>
+            </list></t>
+          </section>
+          
+          <section title="Polling Delivery using HTTP">
+            <t><list style="hanging">
+              <t hangText="method"> TODO</t>
+              <t hangText="endpoint_url"> The URL where events can be retrieved from. This is
+              specified by the Transmitter.</t>
+            </list></t>
+          </section>
         </section>
       </section>
 
