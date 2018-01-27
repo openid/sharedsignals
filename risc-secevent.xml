@@ -166,8 +166,8 @@
             Event Token (SET)"</xref> spec.</t>
 
         <section anchor="signature-key-resolution" title="Signature Key Resolution">
-          <t>TODO: pointer to Management API section that describes discovery doc and the property
-            that points to the key.</t>
+          <t>The signature key can be obtained through the "jwks_uri" <eref target="discovery">
+            Transmitter configuration</eref>.</t>
         </section>
 
         <section anchor="event-subjects" title="RISC Event Subject">
@@ -228,15 +228,36 @@
               Transmitter.</t>
             <t hangText="delivery_methods_supported"> RECOMMENDED. List of supported delivery method 
               URIs.</t>
-            <t hangText="configuration_endpoint"> REQUIRED if Event Stream Management supported. The URL of 
-              the Configuration Endpoint.</t>
-            <t hangText="status_endpoint"> REQUIRED if Event Stream Management supported. The URL of 
-              the Status Endpoint.</t>
-            <t hangText="add_subject_endpoint"> REQUIRED if Event Stream Management supported. The URL of 
-              the Add Subject Endpoint.</t>
-            <t hangText="remove_subject_endpoint"> REQUIRED if Event Stream Management supported. The URL of 
-              the Remove Subject Endpoint.</t>
+            <t hangText="configuration_endpoint"> OPTIONAL. The URL of the Configuration Endpoint.</t>
+            <t hangText="status_endpoint"> OPTIONAL. The URL of the Status Endpoint.</t>
+            <t hangText="add_subject_endpoint"> OPTIONAL. The URL of the Add Subject Endpoint.</t>
+            <t hangText="remove_subject_endpoint"> OPTIONAL. The URL of the Remove Subject Endpoint.</t>
+            <t hangText="verification_endpoint"> OPTIONAL. The URL of the Verification Endpoint.</t>
           </list></t>
+        </section>
+        
+        <section title="Obtaining Transmitter Configuration Information">
+          <t>Using the Issuer as documented by the Transmitter, the Transmitter configuration
+          information can be retrieved.</t>
+          
+          <t>Transmitters supporting Discovery MUST make a JSON document available at the path formed 
+            by concatenating the string "/.well-known/risc-configuration" to the Issuer. The syntax and 
+            semantics of ".well-known" are defined in RFC 5785 and apply to the Issuer value 
+            when it contains no path component. "risc-configuration" MUST point to a JSON document 
+            compliant with this specification and MUST be returned using the "application/json" content 
+            type.</t>
+          
+          <section title="Transmitter Configuration Request">
+            <t>TODO</t>
+          </section>
+          
+          <section title="Transmitter Configuration Response">
+            <t>TODO</t>
+          </section>
+          
+          <section title="Transmitter Configuration Validation">
+            <t>TODO</t>
+          </section>
         </section>
       </section>
       
