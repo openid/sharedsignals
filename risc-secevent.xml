@@ -273,6 +273,9 @@
                   frequently than this, the Event Transmitter MAY respond with a 429 status code. An
                   Event Transmitter SHOULD NOT respond with a 429 status code if an Event Receiver
                   is not exceeding this frequency.</t>
+                <t hangText="subject_type"> The subject type that the Receiver wants for the events.
+                  If not set then the Transmitter might decide to use a subject type that discloses more
+                  infirmation than necessary.</t>
                 <t hangText="status"><vspace blankLines="0"/> A string indicating the current status
                   of the event stream. It MUST have one of the following values: <list
                     style="hanging">
