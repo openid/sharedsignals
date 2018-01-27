@@ -214,6 +214,32 @@
         </section>
       </section>
 
+      <section anchor="discovery" title="Transmitter Configuration Discovery">
+        <t>This section defines a mechanism for Receivers to obtain Transmitter configuration 
+        information.</t>
+        
+        <section title="Transmitter Configuration Metadata">
+          <t>Transmitters have metadata describing their configuration:<list style="hanging">
+            <t hangText="issuer">REQUIRED. URL using the https scheme with no query or fragment component that the
+              Transmitter asserts as its Issuer Identifier. This MUST be identical to the iss Claim value in
+              Security Event Tokens issued from this Transmitter.</t>
+            <t hangText="jwks_uri"> REQUIRED. URL of the Transmitter's JSON Web Key Set [JWK] document.
+              This contains the signing key(s) the Receiver uses to validate signatures from the 
+              Transmitter.</t>
+            <t hangText="delivery_methods_supported"> RECOMMENDED. List of supported delivery method 
+              URIs.</t>
+            <t hangText="configuration_endpoint"> REQUIRED if Event Stream Management supported. The URL of 
+              the Configuration Endpoint.</t>
+            <t hangText="status_endpoint"> REQUIRED if Event Stream Management supported. The URL of 
+              the Status Endpoint.</t>
+            <t hangText="add_subject_endpoint"> REQUIRED if Event Stream Management supported. The URL of 
+              the Add Subject Endpoint.</t>
+            <t hangText="remove_subject_endpoint"> REQUIRED if Event Stream Management supported. The URL of 
+              the Remove Subject Endpoint.</t>
+          </list></t>
+        </section>
+      </section>
+      
       <section anchor="management" title="Management API for SET Event Streams">
         <t>This section defines an HTTP API to be implemented by Event Transmitters
           and that can be used by Event Receivers to query the Event Stream status, to
