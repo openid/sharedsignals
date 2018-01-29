@@ -24,32 +24,32 @@ Abstract
 Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   1
-     1.1.  Notational Conventions  . . . . . . . . . . . . . . . . .   1
+     1.1.  Notational Conventions  . . . . . . . . . . . . . . . . .   2
    2.  Event Types . . . . . . . . . . . . . . . . . . . . . . . . .   2
      2.1.  Account Credential Change Required  . . . . . . . . . . .   2
-     2.2.  Account Deleted . . . . . . . . . . . . . . . . . . . . .   2
+     2.2.  Account Deleted . . . . . . . . . . . . . . . . . . . . .   3
      2.3.  Account Disabled  . . . . . . . . . . . . . . . . . . . .   3
      2.4.  Account Enabled . . . . . . . . . . . . . . . . . . . . .   4
      2.5.  Identifier Changed  . . . . . . . . . . . . . . . . . . .   4
      2.6.  Identifier Recycled . . . . . . . . . . . . . . . . . . .   5
-     2.7.  Opt Out . . . . . . . . . . . . . . . . . . . . . . . . .   5
-       2.7.1.  Opt In  . . . . . . . . . . . . . . . . . . . . . . .   6
-       2.7.2.  Opt Out Initiated . . . . . . . . . . . . . . . . . .   6
-       2.7.3.  Opt Out Cancelled . . . . . . . . . . . . . . . . . .   7
-       2.7.4.  Opt Out Effective . . . . . . . . . . . . . . . . . .   7
-     2.8.  Recovery Activated  . . . . . . . . . . . . . . . . . . .   7
-     2.9.  Recovery Information Changed  . . . . . . . . . . . . . .   7
-     2.10. Sessions Revoked  . . . . . . . . . . . . . . . . . . . .   8
-   3.  Normative References  . . . . . . . . . . . . . . . . . . . .   8
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   8
+     2.7.  Opt Out . . . . . . . . . . . . . . . . . . . . . . . . .   6
+       2.7.1.  Opt In  . . . . . . . . . . . . . . . . . . . . . . .   7
+       2.7.2.  Opt Out Initiated . . . . . . . . . . . . . . . . . .   7
+       2.7.3.  Opt Out Cancelled . . . . . . . . . . . . . . . . . .   8
+       2.7.4.  Opt Out Effective . . . . . . . . . . . . . . . . . .   8
+     2.8.  Recovery Activated  . . . . . . . . . . . . . . . . . . .   8
+     2.9.  Recovery Information Changed  . . . . . . . . . . . . . .   8
+     2.10. Sessions Revoked  . . . . . . . . . . . . . . . . . . . .   9
+   3.  Normative References  . . . . . . . . . . . . . . . . . . . .   9
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   9
 
 1.  Introduction
 
-1.1.  Notational Conventions
+   This specification is based on RISC Profile [RISC-PROFILE] and uses
+   the subject identifiers defined there.
 
-   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
-   document are to be interpreted as described in [RFC2119].
+
+
 
 
 
@@ -57,6 +57,12 @@ Scurtescu, et al.         Expires July 30, 2018                 [Page 1]
 
                             risc-event-types                January 2018
 
+
+1.1.  Notational Conventions
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+   document are to be interpreted as described in [RFC2119].
 
 2.  Event Types
 
@@ -92,10 +98,21 @@ Scurtescu, et al.         Expires July 30, 2018                 [Page 1]
      }
    }
 
-   (the event type URI is wrapped, the backslash is the continuation
-   character)
+   _(the event type URI is wrapped, the backslash is the continuation
+   character)_
 
            Figure 1: Example: Account Credential Change Required
+
+
+
+
+
+
+
+Scurtescu, et al.         Expires July 30, 2018                 [Page 2]
+
+                            risc-event-types                January 2018
+
 
 2.2.  Account Deleted
 
@@ -106,13 +123,6 @@ Scurtescu, et al.         Expires July 30, 2018                 [Page 1]
    has been permanently deleted.
 
    Attributes: none
-
-
-
-Scurtescu, et al.         Expires July 30, 2018                 [Page 2]
-
-                            risc-event-types                January 2018
-
 
 2.3.  Account Disabled
 
@@ -137,6 +147,29 @@ Scurtescu, et al.         Expires July 30, 2018                 [Page 2]
       disabled.  In most cases this is an estimated time.  For example,
       the actual hijacking time.  This is before the event time.
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Scurtescu, et al.         Expires July 30, 2018                 [Page 3]
+
+                            risc-event-types                January 2018
+
+
    {
      "iss": "https://idp.example.com/",
      "jti": "756E69717565206964656E746966696572",
@@ -156,19 +189,10 @@ Scurtescu, et al.         Expires July 30, 2018                 [Page 2]
      }
    }
 
+   _(the event type URI is wrapped, the backslash is the continuation
+   character)_
+
                     Figure 2: Example: Account Disabled
-
-
-
-
-
-
-
-
-Scurtescu, et al.         Expires July 30, 2018                 [Page 3]
-
-                            risc-event-types                January 2018
-
 
 2.4.  Account Enabled
 
@@ -193,6 +217,15 @@ Scurtescu, et al.         Expires July 30, 2018                 [Page 3]
 
    o  new-value - required, the new value of the identifier.
 
+
+
+
+
+Scurtescu, et al.         Expires July 30, 2018                 [Page 4]
+
+                            risc-event-types                January 2018
+
+
    {
      "iss": "https://idp.example.com/",
      "jti": "756E69717565206964656E746966696572",
@@ -210,21 +243,11 @@ Scurtescu, et al.         Expires July 30, 2018                 [Page 3]
      }
    }
 
-   The 'foo@example.com' email changed to 'bar@example.com'.
+   The 'foo@example.com' email changed to 'bar@example.com'.  _(the
+   event type URI is wrapped, the backslash is the continuation
+   character)_
 
                    Figure 3: Example: Identifier Changed
-
-
-
-
-
-
-
-
-Scurtescu, et al.         Expires July 30, 2018                 [Page 4]
-
-                            risc-event-types                January 2018
-
 
 2.6.  Identifier Recycled
 
@@ -237,6 +260,27 @@ Scurtescu, et al.         Expires July 30, 2018                 [Page 4]
    MUST be either 'email' or 'phone-number'.
 
    Attributes: none
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Scurtescu, et al.         Expires July 30, 2018                 [Page 5]
+
+                            risc-event-types                January 2018
+
 
    {
      "iss": "https://idp.example.com/",
@@ -254,7 +298,8 @@ Scurtescu, et al.         Expires July 30, 2018                 [Page 4]
      }
    }
 
-   The 'foo@example.com' email address was recycled.
+   The 'foo@example.com' email address was recycled.  _(the event type
+   URI is wrapped, the backslash is the continuation character)_
 
                   Figure 4: Example: Identifier Recycled
 
@@ -277,7 +322,18 @@ Scurtescu, et al.         Expires July 30, 2018                 [Page 4]
 
 
 
-Scurtescu, et al.         Expires July 30, 2018                 [Page 5]
+
+
+
+
+
+
+
+
+
+
+
+Scurtescu, et al.         Expires July 30, 2018                 [Page 6]
 
                             risc-event-types                January 2018
 
@@ -333,7 +389,7 @@ Scurtescu, et al.         Expires July 30, 2018                 [Page 5]
 
 
 
-Scurtescu, et al.         Expires July 30, 2018                 [Page 6]
+Scurtescu, et al.         Expires July 30, 2018                 [Page 7]
 
                             risc-event-types                January 2018
 
@@ -389,7 +445,7 @@ Scurtescu, et al.         Expires July 30, 2018                 [Page 6]
 
 
 
-Scurtescu, et al.         Expires July 30, 2018                 [Page 7]
+Scurtescu, et al.         Expires July 30, 2018                 [Page 8]
 
                             risc-event-types                January 2018
 
@@ -411,12 +467,15 @@ Scurtescu, et al.         Expires July 30, 2018                 [Page 7]
               2014, <https://www.rfc-editor.org/info/rfc7159>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", BCP 14, RFC 2119,
-              DOI 10.17487/RFC2119, March 1997, <https://www.rfc-
-              editor.org/info/rfc2119>.
+              Requirement Levels", BCP 14, RFC 2119, DOI 10.17487/
+              RFC2119, March 1997, <https://www.rfc-editor.org/info/
+              rfc2119>.
 
-   [SET]      IETF, "Security Event Token (SET)",
-              <https://tools.ietf.org/html/draft-ietf-secevent-token>.
+   [RISC-PROFILE]
+              OpenID Foundation, "RISC Profile", .
+
+   [SET]      IETF, "Security Event Token (SET)", <https://tools.ietf
+              .org/html/draft-ietf-secevent-token>.
 
 Authors' Addresses
 
@@ -438,6 +497,15 @@ Authors' Addresses
    Email: phil.hunt@yahoo.com
 
 
+
+
+
+
+Scurtescu, et al.         Expires July 30, 2018                 [Page 9]
+
+                            risc-event-types                January 2018
+
+
    John Bradley
    Yubico
 
@@ -445,4 +513,48 @@ Authors' Addresses
 
 
 
-Scurtescu, et al.         Expires July 30, 2018                 [Page 8]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Scurtescu, et al.         Expires July 30, 2018                [Page 10]
