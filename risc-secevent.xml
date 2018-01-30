@@ -92,8 +92,8 @@
       <figure anchor="subject-ids-ex-email" title="Example: Email Subject Identifier">
         <artwork><![CDATA[
 {
-"subject_type": "email",
-"email": "foo@example.com"
+  "subject_type": "email",
+  "email": "foo@example.com"
 }
         ]]></artwork>
         <postamble>A Subject Identifier that identifies a subject by email address.</postamble>
@@ -102,9 +102,9 @@
       <figure anchor="subject-ids-ex-iss-sub" title="Example: Issuer and Subject Subject Identifier">
         <artwork><![CDATA[
 {
-"subject_type": "iss-sub",
-"iss": "https://issuer.example.com/",
-"sub": "abc1234"
+  "subject_type": "iss-sub",
+  "iss": "https://issuer.example.com/",
+  "sub": "abc1234"
 }
         ]]></artwork>
         <postamble>A Subject Identifier that identifies a subject by an identifier provided by an
@@ -323,7 +323,7 @@ Cache-Control: no-store
 Pragma: no-cache
 
 {
-"status": "enabled"
+  "status": "enabled"
 }
 ]]></artwork>
             </figure>
@@ -357,18 +357,18 @@ Cache-Control: no-store
 Pragma: no-cache
 
 {
-"aud": "http://www.example.com",
-"delivery": {
-  "delivery_method": "urn:example:secevent:delivery:http_post",
-  "url": "https://receiver.example.com/events"
-},
-"status": "enabled",
-"events": [
-  "urn:example:secevent:events:type_1",
-  "urn:example:secevent:events:type_2",
-  "urn:example:secevent:events:type_3"
-],
-"min_verification_interval": 60,
+  "aud": "http://www.example.com",
+  "delivery": {
+    "delivery_method": "urn:example:secevent:delivery:http_post",
+    "url": "https://receiver.example.com/events"
+  },
+  "status": "enabled",
+  "events": [
+    "urn:example:secevent:events:type_1",
+    "urn:example:secevent:events:type_2",
+    "urn:example:secevent:events:type_3"
+  ],
+  "min_verification_interval": 60,
 }
 ]]></artwork>
             </figure>
@@ -415,17 +415,17 @@ Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
 {
-"aud": "http://www.example.com",
-"delivery": {
-  "delivery_method": "urn:example:secevent:delivery:http_post",
-  "url": "https://receiver.example.com/events"
-},
-"status": "paused",
-"events": [
-  "urn:example:secevent:events:type_1",
-  "urn:example:secevent:events:type_2",
-  "urn:example:secevent:events:type_3"
-]
+  "aud": "http://www.example.com",
+  "delivery": {
+    "delivery_method": "urn:example:secevent:delivery:http_post",
+    "url": "https://receiver.example.com/events"
+  },
+  "status": "paused",
+  "events": [
+    "urn:example:secevent:events:type_1",
+    "urn:example:secevent:events:type_2",
+    "urn:example:secevent:events:type_3"
+  ]
 }
 ]]></artwork>
             </figure>
@@ -441,17 +441,17 @@ Cache-Control: no-store
 Pragma: no-cache
 
 {
-"aud": "http://www.example.com",
-"delivery": {
-  "delivery_method": "urn:example:secevent:delivery:http_post",
-  "url": "https://receiver.example.com/events"
-},
-"status": "paused",
-"events": [
-  "urn:example:secevent:events:type_1",
-  "urn:example:secevent:events:type_2",
-  "urn:example:secevent:events:type_3"
-]
+  "aud": "http://www.example.com",
+  "delivery": {
+    "delivery_method": "urn:example:secevent:delivery:http_post",
+    "url": "https://receiver.example.com/events"
+  },
+  "status": "paused",
+  "events": [
+    "urn:example:secevent:events:type_1",
+    "urn:example:secevent:events:type_2",
+    "urn:example:secevent:events:type_3"
+  ]
 }
 ]]></artwork>
             </figure>
@@ -516,7 +516,7 @@ Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
 {
-"email": "example.user@example.com"
+  "email": "example.user@example.com"
 }
 ]]></artwork>
             </figure>
@@ -567,7 +567,7 @@ Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
 {
-"phone_number": "+1 206 555 0123"
+  "phone_number": "+1 206 555 0123"
 }
 ]]></artwork>
             </figure>
@@ -669,7 +669,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 Content-Type: application/json; charset=UTF-8
 
 {
-"state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
+  "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
 }
 ]]></artwork>
             </figure>
@@ -691,15 +691,15 @@ Pragma: no-cache
             <figure title="Example: Verification SET" anchor="figverifyset">
               <artwork><![CDATA[
 {
-"jti": "123456",
-"iss": "https://transmitter.example.com",
-"aud": "receiver.example.com",
-"iat": "1493856000",
-"events": [
-  "urn:ietf:params:secevent:event-type:core:verification" : {
-    "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo=",
-  },
-],
+  "jti": "123456",
+  "iss": "https://transmitter.example.com",
+  "aud": "receiver.example.com",
+  "iat": "1493856000",
+  "events": [
+    "urn:ietf:params:secevent:event-type:core:verification" : {
+      "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo=",
+    },
+  ],
 }
 ]]></artwork>
             </figure>
