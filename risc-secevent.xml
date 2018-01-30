@@ -179,7 +179,7 @@
         
         <t>Transmitters supporting Discovery MUST make a JSON document available at the path formed 
           by concatenating the string "/.well-known/risc-configuration" to the Issuer. The syntax and 
-          semantics of ".well-known" are defined in RFC 5785 and apply to the Issuer value 
+          semantics of ".well-known" are defined in <xref target="RFC5785">RFC 5785</xref> and apply to the Issuer value 
           when it contains no path component. "risc-configuration" MUST point to a JSON document 
           compliant with this specification and MUST be returned using the "application/json" content 
           type.</t>
@@ -1023,6 +1023,26 @@ Pragma: no-cache
           </author>
           <date year="2010"/>
         </front>
+      </reference>
+      
+      <reference anchor="RFC5785" target="https://www.rfc-editor.org/info/rfc5785">
+        <front>
+          <title>Defining Well-Known Uniform Resource Identifiers (URIs)</title>
+          <author initials="M." surname="Nottingham" fullname="M. Nottingham">
+            <organization/>
+          </author>
+          <author initials="E." surname="Hammer-Lahav" fullname="E. Hammer-Lahav">
+            <organization/>
+          </author>
+          <date year="2010" month="April"/>
+          <abstract>
+            <t>This memo defines a path prefix for "well-known locations",
+              "/.well-known/", in selected Uniform Resource Identifier (URI)
+              schemes.</t>
+          </abstract>
+        </front>
+        <seriesInfo name="RFC" value="5785"/>
+        <seriesInfo name="DOI" value="10.17487/RFC5785"/>
       </reference>
     </references>
   </back>
