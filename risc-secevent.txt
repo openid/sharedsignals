@@ -10,7 +10,7 @@
                                                                   Oracle
                                                               J. Bradley
                                                                   Yubico
-                                                        January 26, 2018
+                                                        January 29, 2018
 
 
                   RISC profile of IETF Security Events
@@ -53,7 +53,7 @@ Table of Contents
 
 
 
-Scurtescu, et al.         Expires July 30, 2018                 [Page 1]
+Scurtescu, et al.        Expires August 2, 2018                 [Page 1]
 
                               risc-secevent                 January 2018
 
@@ -109,7 +109,7 @@ Scurtescu, et al.         Expires July 30, 2018                 [Page 1]
 
 
 
-Scurtescu, et al.         Expires July 30, 2018                 [Page 2]
+Scurtescu, et al.        Expires August 2, 2018                 [Page 2]
 
                               risc-secevent                 January 2018
 
@@ -165,7 +165,7 @@ Scurtescu, et al.         Expires July 30, 2018                 [Page 2]
 
 
 
-Scurtescu, et al.         Expires July 30, 2018                 [Page 3]
+Scurtescu, et al.        Expires August 2, 2018                 [Page 3]
 
                               risc-secevent                 January 2018
 
@@ -221,7 +221,7 @@ Scurtescu, et al.         Expires July 30, 2018                 [Page 3]
 
 
 
-Scurtescu, et al.         Expires July 30, 2018                 [Page 4]
+Scurtescu, et al.        Expires August 2, 2018                 [Page 4]
 
                               risc-secevent                 January 2018
 
@@ -277,7 +277,7 @@ Scurtescu, et al.         Expires July 30, 2018                 [Page 4]
 
 
 
-Scurtescu, et al.         Expires July 30, 2018                 [Page 5]
+Scurtescu, et al.        Expires August 2, 2018                 [Page 5]
 
                               risc-secevent                 January 2018
 
@@ -333,7 +333,7 @@ Scurtescu, et al.         Expires July 30, 2018                 [Page 5]
 
 
 
-Scurtescu, et al.         Expires July 30, 2018                 [Page 6]
+Scurtescu, et al.        Expires August 2, 2018                 [Page 6]
 
                               risc-secevent                 January 2018
 
@@ -389,7 +389,7 @@ Scurtescu, et al.         Expires July 30, 2018                 [Page 6]
 
 
 
-Scurtescu, et al.         Expires July 30, 2018                 [Page 7]
+Scurtescu, et al.        Expires August 2, 2018                 [Page 7]
 
                               risc-secevent                 January 2018
 
@@ -445,7 +445,7 @@ Scurtescu, et al.         Expires July 30, 2018                 [Page 7]
 
 
 
-Scurtescu, et al.         Expires July 30, 2018                 [Page 8]
+Scurtescu, et al.        Expires August 2, 2018                 [Page 8]
 
                               risc-secevent                 January 2018
 
@@ -501,7 +501,7 @@ Scurtescu, et al.         Expires July 30, 2018                 [Page 8]
 
 
 
-Scurtescu, et al.         Expires July 30, 2018                 [Page 9]
+Scurtescu, et al.        Expires August 2, 2018                 [Page 9]
 
                               risc-secevent                 January 2018
 
@@ -557,7 +557,7 @@ Scurtescu, et al.         Expires July 30, 2018                 [Page 9]
 
 
 
-Scurtescu, et al.         Expires July 30, 2018                [Page 10]
+Scurtescu, et al.        Expires August 2, 2018                [Page 10]
 
                               risc-secevent                 January 2018
 
@@ -613,7 +613,7 @@ Scurtescu, et al.         Expires July 30, 2018                [Page 10]
 
 
 
-Scurtescu, et al.         Expires July 30, 2018                [Page 11]
+Scurtescu, et al.        Expires August 2, 2018                [Page 11]
 
                               risc-secevent                 January 2018
 
@@ -669,7 +669,7 @@ Scurtescu, et al.         Expires July 30, 2018                [Page 11]
 
 
 
-Scurtescu, et al.         Expires July 30, 2018                [Page 12]
+Scurtescu, et al.        Expires August 2, 2018                [Page 12]
 
                               risc-secevent                 January 2018
 
@@ -725,7 +725,7 @@ Scurtescu, et al.         Expires July 30, 2018                [Page 12]
 
 
 
-Scurtescu, et al.         Expires July 30, 2018                [Page 13]
+Scurtescu, et al.        Expires August 2, 2018                [Page 13]
 
                               risc-secevent                 January 2018
 
@@ -781,7 +781,7 @@ Scurtescu, et al.         Expires July 30, 2018                [Page 13]
 
 
 
-Scurtescu, et al.         Expires July 30, 2018                [Page 14]
+Scurtescu, et al.        Expires August 2, 2018                [Page 14]
 
                               risc-secevent                 January 2018
 
@@ -837,7 +837,7 @@ Scurtescu, et al.         Expires July 30, 2018                [Page 14]
 
 
 
-Scurtescu, et al.         Expires July 30, 2018                [Page 15]
+Scurtescu, et al.        Expires August 2, 2018                [Page 15]
 
                               risc-secevent                 January 2018
 
@@ -893,7 +893,7 @@ Scurtescu, et al.         Expires July 30, 2018                [Page 15]
 
 
 
-Scurtescu, et al.         Expires July 30, 2018                [Page 16]
+Scurtescu, et al.        Expires August 2, 2018                [Page 16]
 
                               risc-secevent                 January 2018
 
@@ -949,7 +949,7 @@ Scurtescu, et al.         Expires July 30, 2018                [Page 16]
 
 
 
-Scurtescu, et al.         Expires July 30, 2018                [Page 17]
+Scurtescu, et al.        Expires August 2, 2018                [Page 17]
 
                               risc-secevent                 January 2018
 
@@ -1005,7 +1005,7 @@ Scurtescu, et al.         Expires July 30, 2018                [Page 17]
 
 
 
-Scurtescu, et al.         Expires July 30, 2018                [Page 18]
+Scurtescu, et al.        Expires August 2, 2018                [Page 18]
 
                               risc-secevent                 January 2018
 
@@ -1061,7 +1061,7 @@ Scurtescu, et al.         Expires July 30, 2018                [Page 18]
 
 
 
-Scurtescu, et al.         Expires July 30, 2018                [Page 19]
+Scurtescu, et al.        Expires August 2, 2018                [Page 19]
 
                               risc-secevent                 January 2018
 
@@ -1117,7 +1117,7 @@ Scurtescu, et al.         Expires July 30, 2018                [Page 19]
 
 
 
-Scurtescu, et al.         Expires July 30, 2018                [Page 20]
+Scurtescu, et al.        Expires August 2, 2018                [Page 20]
 
                               risc-secevent                 January 2018
 
@@ -1173,7 +1173,7 @@ Scurtescu, et al.         Expires July 30, 2018                [Page 20]
 
 
 
-Scurtescu, et al.         Expires July 30, 2018                [Page 21]
+Scurtescu, et al.        Expires August 2, 2018                [Page 21]
 
                               risc-secevent                 January 2018
 
@@ -1229,7 +1229,7 @@ Authors' Addresses
 
 
 
-Scurtescu, et al.         Expires July 30, 2018                [Page 22]
+Scurtescu, et al.        Expires August 2, 2018                [Page 22]
 
                               risc-secevent                 January 2018
 
@@ -1285,4 +1285,4 @@ Scurtescu, et al.         Expires July 30, 2018                [Page 22]
 
 
 
-Scurtescu, et al.         Expires July 30, 2018                [Page 23]
+Scurtescu, et al.        Expires August 2, 2018                [Page 23]

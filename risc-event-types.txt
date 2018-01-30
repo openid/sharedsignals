@@ -10,7 +10,7 @@
                                                                   Oracle
                                                               J. Bradley
                                                                   Yubico
-                                                        January 26, 2018
+                                                        January 29, 2018
 
 
                             RISC Event Types
@@ -53,7 +53,7 @@ Table of Contents
 
 
 
-Scurtescu, et al.         Expires July 30, 2018                 [Page 1]
+Scurtescu, et al.        Expires August 2, 2018                 [Page 1]
 
                             risc-event-types                January 2018
 
@@ -109,7 +109,7 @@ Scurtescu, et al.         Expires July 30, 2018                 [Page 1]
 
 
 
-Scurtescu, et al.         Expires July 30, 2018                 [Page 2]
+Scurtescu, et al.        Expires August 2, 2018                 [Page 2]
 
                             risc-event-types                January 2018
 
@@ -165,7 +165,7 @@ Scurtescu, et al.         Expires July 30, 2018                 [Page 2]
 
 
 
-Scurtescu, et al.         Expires July 30, 2018                 [Page 3]
+Scurtescu, et al.        Expires August 2, 2018                 [Page 3]
 
                             risc-event-types                January 2018
 
@@ -221,7 +221,7 @@ Scurtescu, et al.         Expires July 30, 2018                 [Page 3]
 
 
 
-Scurtescu, et al.         Expires July 30, 2018                 [Page 4]
+Scurtescu, et al.        Expires August 2, 2018                 [Page 4]
 
                             risc-event-types                January 2018
 
@@ -277,7 +277,7 @@ Scurtescu, et al.         Expires July 30, 2018                 [Page 4]
 
 
 
-Scurtescu, et al.         Expires July 30, 2018                 [Page 5]
+Scurtescu, et al.        Expires August 2, 2018                 [Page 5]
 
                             risc-event-types                January 2018
 
@@ -333,7 +333,7 @@ Scurtescu, et al.         Expires July 30, 2018                 [Page 5]
 
 
 
-Scurtescu, et al.         Expires July 30, 2018                 [Page 6]
+Scurtescu, et al.        Expires August 2, 2018                 [Page 6]
 
                             risc-event-types                January 2018
 
@@ -389,7 +389,7 @@ Scurtescu, et al.         Expires July 30, 2018                 [Page 6]
 
 
 
-Scurtescu, et al.         Expires July 30, 2018                 [Page 7]
+Scurtescu, et al.        Expires August 2, 2018                 [Page 7]
 
                             risc-event-types                January 2018
 
@@ -445,7 +445,7 @@ Scurtescu, et al.         Expires July 30, 2018                 [Page 7]
 
 
 
-Scurtescu, et al.         Expires July 30, 2018                 [Page 8]
+Scurtescu, et al.        Expires August 2, 2018                 [Page 8]
 
                             risc-event-types                January 2018
 
@@ -501,7 +501,7 @@ Authors' Addresses
 
 
 
-Scurtescu, et al.         Expires July 30, 2018                 [Page 9]
+Scurtescu, et al.        Expires August 2, 2018                 [Page 9]
 
                             risc-event-types                January 2018
 
@@ -557,4 +557,4 @@ Scurtescu, et al.         Expires July 30, 2018                 [Page 9]
 
 
 
-Scurtescu, et al.         Expires July 30, 2018                [Page 10]
+Scurtescu, et al.        Expires August 2, 2018                [Page 10]
