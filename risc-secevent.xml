@@ -56,12 +56,16 @@
     <workgroup>RISC Working Group</workgroup>
 
     <abstract>
-      <t>This is a RISC profile for several IETF Security Events drafts:</t>
+      <t>This spec is a general profile for <xref target="SECEVENT">IETF Security Events</xref>
+        and it defines:<list style="symbols">
+        <t>Subject Identifiers</t>
+        <t>a configuration information discovery method for Transmitters</t>
+        <t>a Management API for Event Streams</t>
+      </list></t>
 
-      <t><list style="symbols">
+      <t>This spec also directly profiles several IETF Security Events drafts:<list style="symbols">
           <t><xref target="SET">Security Event Token (SET)</xref></t>
           <t><xref target="DELIVERY">SET Token Delivery Using HTTP</xref></t>
-          <t><xref target="API">Management API for SET Event Streams</xref></t>
         </list></t>
     </abstract>
   </front>
@@ -147,6 +151,627 @@
       </section>
     </section>
 
+    <section anchor="discovery" title="Transmitter Configuration Discovery">
+      <t>This section defines a mechanism for Receivers to obtain Transmitter configuration 
+      information.</t>
+      
+      <section title="Transmitter Configuration Metadata">
+        <t>Transmitters have metadata describing their configuration:<list style="hanging">
+          <t hangText="issuer">REQUIRED. URL using the https scheme with no query or fragment component that the
+            Transmitter asserts as its Issuer Identifier. This MUST be identical to the iss Claim value in
+            Security Event Tokens issued from this Transmitter.</t>
+          <t hangText="jwks_uri"> REQUIRED. URL of the Transmitter's JSON Web Key Set [JWK] document.
+            This contains the signing key(s) the Receiver uses to validate signatures from the 
+            Transmitter.</t>
+          <t hangText="delivery_methods_supported"> RECOMMENDED. List of supported delivery method 
+            URIs.</t>
+          <t hangText="configuration_endpoint"> OPTIONAL. The URL of the Configuration Endpoint.</t>
+          <t hangText="status_endpoint"> OPTIONAL. The URL of the Status Endpoint.</t>
+          <t hangText="add_subject_endpoint"> OPTIONAL. The URL of the Add Subject Endpoint.</t>
+          <t hangText="remove_subject_endpoint"> OPTIONAL. The URL of the Remove Subject Endpoint.</t>
+          <t hangText="verification_endpoint"> OPTIONAL. The URL of the Verification Endpoint.</t>
+        </list></t>
+      </section>
+      
+      <section title="Obtaining Transmitter Configuration Information">
+        <t>Using the Issuer as documented by the Transmitter, the Transmitter configuration
+        information can be retrieved.</t>
+        
+        <t>Transmitters supporting Discovery MUST make a JSON document available at the path formed 
+          by concatenating the string "/.well-known/risc-configuration" to the Issuer. The syntax and 
+          semantics of ".well-known" are defined in RFC 5785 and apply to the Issuer value 
+          when it contains no path component. "risc-configuration" MUST point to a JSON document 
+          compliant with this specification and MUST be returned using the "application/json" content 
+          type.</t>
+        
+        <section title="Transmitter Configuration Request">
+          <t>TODO</t>
+        </section>
+        
+        <section title="Transmitter Configuration Response">
+          <t>TODO</t>
+        </section>
+        
+        <section title="Transmitter Configuration Validation">
+          <t>TODO</t>
+        </section>
+      </section>
+    </section>
+    
+    <section anchor="management" title="Management API for SET Event Streams">
+      <t>This section defines an HTTP API to be implemented by Event Transmitters
+        and that can be used by Event Receivers to query the Event Stream status, to
+        add and remove subjects and to trigger verification.</t>
+      
+      <figure title="Event Stream Management API" anchor="figintro"><artwork><![CDATA[
++------------+                +------------+
+|            | Stream Config  |            |
+| Event      <----------------+ Event      |
+| Stream     |                | Receiver   |
+| Management | Stream Status  |            |
+| API        <----------------+            |
+|            |                |            |
+|            | Add Subject    |            |
+|            <----------------+            |
+|            |                |            |
+|            | Remove Subject |            |
+|            <----------------+            |
+|            |                |            |
+|            | Verification   |            |
+|            <----------------+            |
+|            |                |            |
++------------+                +------------+
+]]></artwork></figure>
+      
+      <t>How events are delivered and the structure of events are not in scope for this
+        specification.</t>
+      
+      <section anchor="management-api" title="Event Stream Management">
+        <t>Event Receivers manage how they receive events, and the subjects about which they want
+          to receive events over an Event Stream by making HTTP requests to endpoints in the Event
+          Stream Management API.</t>
+
+        <t>The Event Stream Management API is implemented by the Event Transmitter and consists of
+          the following endpoints:</t>
+
+        <t><list style="hanging">
+            <t hangText="Configuration Endpoint"><vspace blankLines="0"/> An endpoint used to read
+              the Event Stream’s current configuration.</t>
+            <t hangText="Status Endpoint"><vspace blankLines="0"/> An endpoint used to read the
+              Event Stream’s current status.</t>
+            <t hangText="Add Subject Endpoint"><vspace blankLines="0"/> An endpoint used to add
+              subjects to an Event Stream.</t>
+            <t hangText="Remove Subject Endpoint"><vspace blankLines="0"/> An endpoint used to
+              remove subjects from an Event Stream.</t>
+            <t hangText="Verification Endpoint"><vspace blankLines="0"/> An endpoint used to
+              request the Event Transmitter transmit a Verification Event over the Event
+              Stream.</t>
+          </list></t>
+
+        <t>An Event Transmitter MAY use the same URLs as endpoints for multiple streams, provided
+          that the Event Transmitter has some mechanism through which they can identify the
+          applicable Event Stream for any given request, e.g. from authentication credentials. The
+          definition of such mechanisms is outside the scope of this specification.</t>
+
+        <section anchor="stream" title="Stream Configuration">
+          <t>An Event Stream’s configuration is represented as a JSON object with the following
+            properties:</t>
+
+          <t><list style="hanging">
+              <t hangText="aud"><vspace blankLines="0"/> A string containing an audience claim as
+                defined in <xref target="RFC7519">JSON Web Token (JWT)</xref> that identifies the
+                Event Receiver for the Event Stream. This property cannot be updated.</t>
+              <t hangText="events"><vspace blankLines="0"/> OPTIONAL. An array of URIs identifying
+                the set of events which MAY be delivered over the Event Stream. If omitted, Event
+                Transmitters SHOULD make this set available to the Event Receiver via some other
+                means (e.g. publishing it in online documentation).</t>
+              <t hangText="delivery"><vspace blankLines="0"/> A JSON object containing a set of
+                name/value pairs specifying configuration parameters for the SET delivery method.
+                The actual delivery method is identified by the special key “delivery_method” with
+                the value being a URI as defined in <xref target="DELIVERY"/>.</t>
+              <t hangText="min_verification_interval"><vspace blankLines="0"/> An integer
+                indicating the minimum amount of time in seconds that must pass in between
+                verification requests. If an Event Receiver submits verification requests more
+                frequently than this, the Event Transmitter MAY respond with a 429 status code. An
+                Event Transmitter SHOULD NOT respond with a 429 status code if an Event Receiver
+                is not exceeding this frequency.</t>
+              <t hangText="subject_type"> The subject type that the Receiver wants for the events.
+                If not set then the Transmitter might decide to use a subject type that discloses more
+                infirmation than necessary.</t>
+              <t hangText="status"><vspace blankLines="0"/> A string indicating the current status
+                of the event stream. It MUST have one of the following values: <list
+                  style="hanging">
+                  <t hangText="enabled"><vspace blankLines="0"/> The transmitter will transmit
+                    events over the stream, according to the stream’s configured delivery
+                    method.</t>
+                  <t hangText="paused"><vspace blankLines="0"/> The transmitter will not transmit
+                    events over the stream. The transmitter will hold any events it would have
+                    transmitted while paused, and will transmit them when the stream’s status
+                    becomes “enabled”.</t>
+                  <t hangText="disabled"><vspace blankLines="0"/> The transmitter will not
+                    transmit events over the stream, and will not hold any events for later
+                    transmission.</t>
+                </list>
+              </t>
+            </list></t>
+
+          <section anchor="checking-a-streams-status" title="Checking a Stream’s Status">
+            <t>An Event Receiver checks the current status of an event stream by making an HTTP
+              GET request to the stream’s Status Endpoint. On receiving a valid request the Event
+              Transmitter responds with a 200 OK response containing a <xref target="JSON"/>
+              object with a single attribute “status”, whose string value is the value of the
+              stream’s status.</t>
+
+            <t>The following is a non-normative example request to check an event stream’s
+              status:</t>
+
+            <figure title="Example: Check Stream Status Request" anchor="figstatusreq">
+              <artwork><![CDATA[
+GET /set/stream/status HTTP/1.1
+Host: transmitter.example.com
+Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
+]]></artwork>
+            </figure>
+
+            <t>The following is a non-normative example response:</t>
+
+            <figure title="Example: Check Stream Status Response" anchor="figstatusresp">
+              <artwork><![CDATA[
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=UTF-8
+Cache-Control: no-store
+Pragma: no-cache
+
+{
+"status": "enabled"
+}
+]]></artwork>
+            </figure>
+          </section>
+
+          <section anchor="reading-a-streams-configuration"
+            title="Reading a Stream’s Configuration">
+            <t>An Event Receiver gets the current configuration of a stream by making an HTTP GET
+              request to the Configuration Endpoint. On receiving a valid request the Event
+              Transmitter responds with a 200 OK response containing a <xref target="JSON"/>
+              representation of the stream’s configuration in the body.</t>
+
+            <t>The following is a non-normative example request to read an Event Stream’s
+              configuration:</t>
+
+            <figure title="Example: Read Stream Configuration Request" anchor="figreadconfigreq">
+              <artwork><![CDATA[
+GET /set/stream HTTP/1.1
+Host: transmitter.example.com
+Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
+]]></artwork>
+            </figure>
+
+            <t>The following is a non-normative example response:</t>
+
+            <figure title="Example: Read Stream Configuration Response" anchor="figreadconfigresp">
+              <artwork><![CDATA[
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=UTF-8
+Cache-Control: no-store
+Pragma: no-cache
+
+{
+"aud": "http://www.example.com",
+"delivery": {
+  "delivery_method": "urn:example:secevent:delivery:http_post",
+  "url": "https://receiver.example.com/events"
+},
+"status": "enabled",
+"events": [
+  "urn:example:secevent:events:type_1",
+  "urn:example:secevent:events:type_2",
+  "urn:example:secevent:events:type_3"
+],
+"min_verification_interval": 60,
+}
+]]></artwork>
+            </figure>
+
+            <t>Errors are signaled with HTTP staus codes as follows:</t>
+
+            <texttable title="Read Stream Configuration Errors" anchor="tabreadconfig">
+              <ttcol align="left">Code</ttcol>
+              <ttcol align="left">Description</ttcol>
+              <c>401</c>
+              <c>if authorization failed or it is missing</c>
+              <c>403</c>
+              <c>if the Event Receiver is not allowed to read the stream configuration</c>
+              <c>404</c>
+              <c>if there is no Event Stream configured for this Event Receiver</c>
+            </texttable>
+          </section>
+
+          <section anchor="updating-a-streams-configuration"
+            title="Updating a Stream’s Configuration">
+            <t>An Event Receiver updates the current configuration of a stream by making an HTTP
+              POST request to the Configuration Endpoint. The POST body contains a {{!JSON}
+              representation of the updated configuration. On receiving a valid request the Event
+              Transmitter responds with a 200 OK response containing a <xref target="JSON"/>
+              representation of the updated stream configuration in the body.</t>
+
+            <t>The full set of editable properties must be present in the POST body, not only the
+              ones that are specifically intended to be changed. Missing properties SHOULD be
+              interpreted as requested to be deleted. Event Receivers should read the
+              configuration first, modify the <xref target="JSON"/> representation, then make an
+              update request.</t>
+
+            <t>Properties that cannot be updated MAY be present, but they MUST match the expected
+              value.</t>
+
+            <t>The following is a non-normative example request to read an Event Stream’s
+              configuration:</t>
+
+            <figure title="Example: Update Stream Configuration Request"
+              anchor="figupdateconfigreq">
+              <artwork><![CDATA[
+POST /set/stream HTTP/1.1
+Host: transmitter.example.com
+Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
+
+{
+"aud": "http://www.example.com",
+"delivery": {
+  "delivery_method": "urn:example:secevent:delivery:http_post",
+  "url": "https://receiver.example.com/events"
+},
+"status": "paused",
+"events": [
+  "urn:example:secevent:events:type_1",
+  "urn:example:secevent:events:type_2",
+  "urn:example:secevent:events:type_3"
+]
+}
+]]></artwork>
+            </figure>
+
+            <t>The following is a non-normative example response:</t>
+
+            <figure title="Example: Update Stream Configuration Response"
+              anchor="figupdateconfigresp">
+              <artwork><![CDATA[
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=UTF-8
+Cache-Control: no-store
+Pragma: no-cache
+
+{
+"aud": "http://www.example.com",
+"delivery": {
+  "delivery_method": "urn:example:secevent:delivery:http_post",
+  "url": "https://receiver.example.com/events"
+},
+"status": "paused",
+"events": [
+  "urn:example:secevent:events:type_1",
+  "urn:example:secevent:events:type_2",
+  "urn:example:secevent:events:type_3"
+]
+}
+]]></artwork>
+            </figure>
+
+            <t>Errors are signaled with HTTP staus codes as follows:</t>
+
+            <texttable title="Update Stream Configuration Errors" anchor="tabupdateconfig">
+              <ttcol align="left">Code</ttcol>
+              <ttcol align="left">Description</ttcol>
+              <c>400</c>
+              <c>if the request body cannot be parsed or if the request is otherwise invalid</c>
+              <c>401</c>
+              <c>if authorization failed or it is missing</c>
+              <c>403</c>
+              <c>if the Event Receiver is not allowed to update the stream configuration</c>
+            </texttable>
+
+          </section>
+        </section>
+        <section anchor="subjects" title="Subjects">
+          <t>An Event Receiver can indicate to an Event Transmitter whether or not the receiver
+            wants to receive events about a particular subject by “adding” or “removing” that
+            subject to the Event Stream, respectively.</t>
+
+          <section anchor="adding-a-subject-to-a-stream" title="Adding a Subject to a Stream">
+            <t>To add a subject to an Event Stream, the Event Receiver makes an HTTP POST request
+              to the Add Subject Endpoint, containing in the body a Subject Identifier Object
+              identifying the subject to be added. On a successful response, the Event Transmitter
+              responds with an empty 200 OK response.</t>
+
+            <t>The Event Transmitter MAY choose to silently ignore the request, for example if the
+              subject has previously indicated to the transmitter that they do not want events to
+              be transmitted to the Event Receiver. In this case, the transmitter MAY return an
+              empty 200 OK response or an appropriate error code (See <xref target="management-sec"
+                >Security Considerations</xref>).</t>
+
+            <t>Errors are signaled with HTTP status codes as follows:</t>
+
+            <texttable title="Add Subject Errors" anchor="tabadderr">
+              <ttcol align="left">Code</ttcol>
+              <ttcol align="left">Description</ttcol>
+              <c>400</c>
+              <c>if the request body cannot be parsed or if the request is otherwise invalid</c>
+              <c>401</c>
+              <c>if authorization failed or it is missing</c>
+              <c>403</c>
+              <c>if the Event Receiver is not allowed to add this particular subject</c>
+              <c>404</c>
+              <c>if the subject is not recognized by the Event Transmitter, the Event Transmitter
+                may chose to stay silent in this case and respond with 200</c>
+              <c>429</c>
+              <c>if the Event Receiver is sending too many requests in a gvien amount of time</c>
+            </texttable>
+
+            <t>The following is a non-normative example request to add a subject to a stream,
+              where the subject is identified by an OpenID Connect email claim:</t>
+
+            <figure title="Example: Add Subject Request" anchor="figaddreq">
+              <artwork><![CDATA[
+POST /set/subjects:add HTTP/1.1
+Host: transmitter.example.com
+Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
+
+{
+"email": "example.user@example.com"
+}
+]]></artwork>
+            </figure>
+
+            <t>The following is a non-normative example response to a successful request:</t>
+
+            <figure title="Example: Add Subject Response" anchor="figaddresp">
+              <artwork><![CDATA[
+HTTP/1.1 200 OK
+Server: transmitter.example.com
+Cache-Control: no-store
+Pragma: no-cache
+]]></artwork>
+            </figure>
+
+          </section>
+          <section anchor="removing-a-subject" title="Removing a Subject">
+            <t>To remove a subject from an Event Stream, the Event Receiver makes an HTTP POST
+              request to the Remove Subject Endpoint, containing in the body a Subject Identifier
+              Object identifying the subject to be removed. On a successful response, the Event
+              Transmitter responds with a 204 No Content response.</t>
+
+            <t>Errors are signaled with HTTP staus codes as follows:</t>
+
+            <texttable title="Remove Subject Errors" anchor="tabremoveerr">
+              <ttcol align="left">Code</ttcol>
+              <ttcol align="left">Description</ttcol>
+              <c>400</c>
+              <c>if the request body cannot be parsed or if the request is otherwise invalid</c>
+              <c>401</c>
+              <c>if authorization failed or it is missing</c>
+              <c>403</c>
+              <c>if the Event Receiver is not allowed to remove this particular subject</c>
+              <c>404</c>
+              <c>if the subject is not recognized by the Event Transmitter, the Event Transmitter
+                may chose to stay silent in this case and respond with 204</c>
+              <c>429</c>
+              <c>if the Event Receiver is sending too many requests in a gvien amount of time</c>
+            </texttable>
+
+            <t>The following is a non-normative example request where the subject is identified by
+              a phone_number claim:</t>
+
+            <figure title="Example: Remove Subject Request" anchor="figremovereq">
+              <artwork><![CDATA[
+POST /set/subjects:remove HTTP/1.1
+Host: transmitter.example.com
+Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
+
+{
+"phone_number": "+1 206 555 0123"
+}
+]]></artwork>
+            </figure>
+
+            <t>The following is a non-normative example response to a successful request:</t>
+
+            <figure title="Example: Remove Subject Response" anchor="figremoveresp">
+              <artwork><![CDATA[
+HTTP/1.1 204 No Content
+Server: transmitter.example.com
+Cache-Control: no-store
+Pragma: no-cache
+]]></artwork>
+            </figure>
+
+          </section>
+        </section>
+        <section anchor="verification" title="Verification">
+          <t>In some cases, the frequency of event transmission on an Event Stream will be very
+            low, making it difficult for an Event Receiver to tell the difference between expected
+            behavior and event transmission failure due to a misconfigured stream. Event Receivers
+            can request that a verification event be transmitted over the Event Stream, allowing
+            the receiver to confirm that the stream is configured correctly upon successful
+            receipt of the event. The acknowledgment of a Verification Event also confirms to the
+            Event Transmitter that end-to-end delivery is working, including signature
+            verification and encryption.</t>
+
+          <t>An Event Transmitter MAY send a Verification Event at any time, even if one was not
+            requested by the Event Receiver.</t>
+
+          <section anchor="verification-event" title="Verification Event">
+            <t>The Verification Event is a standard SET with the following attributes:</t>
+
+            <t><list style="hanging">
+                <t hangText="event type"><vspace blankLines="0"/> The Event Type URI is:
+                  “urn:ietf:params:secevent:event-type:core:verification”.</t>
+                <t hangText="state"><vspace blankLines="0"/> OPTIONAL An opaque value provided by
+                  the Event Receiver when the event is triggered. This is a nested attribute in
+                  the event payload.</t>
+              </list></t>
+
+            <t>Upon receiving a Verification Event, the Event Receiver SHALL parse the SET and
+              validate its claims. In particular, the Event Receiver SHALL confirm that the value
+              for “state” is as expected. If the value of “state” does not match, an error
+              response of “setData” SHOULD be returned (see Section 2.4 of <xref target="DELIVERY"
+              />).</t>
+
+            <t>In many cases, Event Transmitters MAY disable or suspend an Event Stream that fails
+              to successfully verify based on the acknowledgement or lack of acknowledgement by
+              the Event Receiver.</t>
+
+          </section>
+          <section anchor="triggering-a-verification-event"
+            title="Triggering a Verification Event.">
+            <t>To request that a verification event be sent over an Event Stream, the Event
+              Receiver makes an HTTP POST request to the Verification Endpoint, with a JSON object
+              containing the parameters of the verification request, if any. On a successful
+              request, the event transmitter responds with an empty 204 No Content response.</t>
+
+            <t>Verification requests have the following properties:</t>
+
+            <t><list style="hanging">
+                <t hangText="state"><vspace blankLines="0"/> OPTIONAL. An arbitrary string that
+                  the Event Transmitter MUST echo back to the Event Receiver in the verification
+                  event’s payload. Event Receivers MAY use the value of this parameter to
+                  correlate a verification event with a verification request. If the verification
+                  event is initiated by the transmitter then this parameter MUST not be set.</t>
+              </list></t>
+
+            <t>A successful response from a POST to the Verification Endpoint does not indicate
+              that the verification event was transmitted successfully, only that the Event
+              Transmitter has transmitted the event or will do so at some point in the future.
+              Event Transmitters MAY transmit the event via an asynchronous process, and SHOULD
+              publish an SLA for verification event transmission times. Event Receivers MUST NOT
+              depend on the verification event being transmitted synchronously or in any
+              particular order relative to the current queue of events.</t>
+
+            <t>Errors are signaled with HTTP staus codes as follows:</t>
+
+            <texttable title="Verification Errors" anchor="taberifyerr">
+              <ttcol align="left">Code</ttcol>
+              <ttcol align="left">Description</ttcol>
+              <c>400</c>
+              <c>if the request body cannot be parsed or if the request is otherwise invalid</c>
+              <c>401</c>
+              <c>if authorization failed or it is missing</c>
+              <c>429</c>
+              <c>if the Event Receiver is sending too many requests in a gvien amount of time</c>
+            </texttable>
+
+            <t>The following is a non-normative example request to trigger a verification
+              event:</t>
+
+            <figure title="Example: Trigger Verification Request" anchor="figverifyreq">
+              <artwork><![CDATA[
+POST /set/verify HTTP/1.1
+Host: transmitter.example.com
+Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
+Content-Type: application/json; charset=UTF-8
+
+{
+"state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
+}
+]]></artwork>
+            </figure>
+
+            <t>The following is a non-normative example response to a successful request:</t>
+
+            <figure title="Example: Trigger Verification Response" anchor="figverifyresp">
+              <artwork><![CDATA[
+HTTP/1.1 204 No Content
+Server: transmitter.example.com
+Cache-Control: no-store
+Pragma: no-cache
+]]></artwork>
+            </figure>
+
+            <t>And the following is a non-normative example of a verification event sent to the
+              Event Receiver as a result of the above request:</t>
+
+            <figure title="Example: Verification SET" anchor="figverifyset">
+              <artwork><![CDATA[
+{
+"jti": "123456",
+"iss": "https://transmitter.example.com",
+"aud": "receiver.example.com",
+"iat": "1493856000",
+"events": [
+  "urn:ietf:params:secevent:event-type:core:verification" : {
+    "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo=",
+  },
+],
+}
+]]></artwork>
+            </figure>
+
+          </section>
+        </section>
+      </section>
+
+      <section anchor="management-api-auth" title="Authorization">
+        <t>HTTP API calls from a receiver to a transmitter SHOULD be authorized using OAuth 2
+          Access Tokens. The client id associated with the Access Token uniquely identifies the
+          Receiver and the Stream.</t>
+        
+        <t>Receivers SHOULD use the <xref target="CLIENTCRED">Client Credential Grant</xref> to
+          obtain access tokens on its own behalf.</t>
+      </section>
+      
+      <section anchor="management-api-subject" title="Subject Claims for Subject Add and Remove Operations">
+        <t>TODO</t>
+      </section>
+
+      <section anchor="management-sec" title="Security Considerations">
+        <section anchor="management-sec-subject-probing" title="Subject Probing">
+          <t>It may be possible for an Event Transmitter to leak information about subjects
+            through their responses to add subject requests. A 404 response may indicate to the
+            Event Receiver that the subject does not exist, which may inadvertantly reveal
+            information about the subject (e.g. that a particular individual does or does not use
+            the Event Transmitter’s service).</t>
+
+          <t>Event Transmitters SHOULD carefully evaluate the conditions under which they will
+            return error responses to add subject requests. Event Transmitters MAY return a 204
+            response even if they will not actually send any events related to the subject, and
+            Event Receivers MUST NOT assume that a 204 response means that they will receive
+            events related to the subject.</t>
+
+        </section>
+        
+        <section anchor="management-sec-information-harvesting" title="Information Harvesting">
+          <t>SETs may contain personally identifiable information (PII) or other non-public
+            information about the event transmitter, the subject (of an event in the SET), or the
+            relationship between the two. It is important for Event Transmitters to understand
+            what information they are revealing to Event Receivers when transmitting events to
+            them, lest the event stream become a vector for unauthorized access to private
+            information.</t>
+
+          <t>Event Transmitters SHOULD interpret add subject requests as statements of interest in
+            a subject by an Event Receiver, and ARE NOT obligated to transmit events related to
+            every subject an Event Receiver adds to the stream. Event Transmitters MAY choose to
+            transmit some, all, or no events related to any given subject and SHOULD validate that
+            they are permitted to share the information contained within an event with the Event
+            Receiver before transmitting the event. The mechanisms by which such validation is
+            performed are outside the scope of this specification.</t>
+
+        </section>
+        
+        <section anchor="management-sec-malicious-subject-removal" title="Malicious Subject Removal">
+          <t>A malicious party may find it advantageous to remove a particular subject from a
+            stream, in order to reduce the Event Receiver’s ability to detect malicious activity
+            related to the subject, inconvenience the subject, or for other reasons. Consequently
+            it may be in the best interests of the subject for the Event Transmitter to continue
+            to send events related to the subject for some time after the subject has been removed
+            from a stream.</t>
+
+          <t>Event Transmitters MAY continue sending events related to a subject for some amount
+            of time after that subject has been removed from the stream. Event Receivers MUST
+            tolerate receiving events for subjects that have been removed from the stream, and
+            MUST NOT report these events as errors to the Event Transmitter.</t>
+
+        </section>
+      </section>
+    </section>
+
     <section anchor="profiles" title="Profiles">
       <t>This section profiles several IETF secevent specifications.</t>
 
@@ -154,8 +779,6 @@
           <t>Transmitters are OpenID Connect Identity Providers</t>
           <t>Receivers are OpenID Connect Clients and as such have client ids issued by
             Transmitters</t>
-          <t>In general the way subjects are identified is similar to <xref target="OIDC">OpenID
-              Connect</xref> and <xref target="IDTOKEN">Id Tokens</xref> in particular.</t>
         </list></t>
 
       <t>The RISC use cases that set the requirements are described in <xref target="USECASES"
@@ -210,627 +833,6 @@
               <t hangText="endpoint_url"> The URL where events can be retrieved from. This is
               specified by the Transmitter.</t>
             </list></t>
-          </section>
-        </section>
-      </section>
-
-      <section anchor="discovery" title="Transmitter Configuration Discovery">
-        <t>This section defines a mechanism for Receivers to obtain Transmitter configuration 
-        information.</t>
-        
-        <section title="Transmitter Configuration Metadata">
-          <t>Transmitters have metadata describing their configuration:<list style="hanging">
-            <t hangText="issuer">REQUIRED. URL using the https scheme with no query or fragment component that the
-              Transmitter asserts as its Issuer Identifier. This MUST be identical to the iss Claim value in
-              Security Event Tokens issued from this Transmitter.</t>
-            <t hangText="jwks_uri"> REQUIRED. URL of the Transmitter's JSON Web Key Set [JWK] document.
-              This contains the signing key(s) the Receiver uses to validate signatures from the 
-              Transmitter.</t>
-            <t hangText="delivery_methods_supported"> RECOMMENDED. List of supported delivery method 
-              URIs.</t>
-            <t hangText="configuration_endpoint"> OPTIONAL. The URL of the Configuration Endpoint.</t>
-            <t hangText="status_endpoint"> OPTIONAL. The URL of the Status Endpoint.</t>
-            <t hangText="add_subject_endpoint"> OPTIONAL. The URL of the Add Subject Endpoint.</t>
-            <t hangText="remove_subject_endpoint"> OPTIONAL. The URL of the Remove Subject Endpoint.</t>
-            <t hangText="verification_endpoint"> OPTIONAL. The URL of the Verification Endpoint.</t>
-          </list></t>
-        </section>
-        
-        <section title="Obtaining Transmitter Configuration Information">
-          <t>Using the Issuer as documented by the Transmitter, the Transmitter configuration
-          information can be retrieved.</t>
-          
-          <t>Transmitters supporting Discovery MUST make a JSON document available at the path formed 
-            by concatenating the string "/.well-known/risc-configuration" to the Issuer. The syntax and 
-            semantics of ".well-known" are defined in RFC 5785 and apply to the Issuer value 
-            when it contains no path component. "risc-configuration" MUST point to a JSON document 
-            compliant with this specification and MUST be returned using the "application/json" content 
-            type.</t>
-          
-          <section title="Transmitter Configuration Request">
-            <t>TODO</t>
-          </section>
-          
-          <section title="Transmitter Configuration Response">
-            <t>TODO</t>
-          </section>
-          
-          <section title="Transmitter Configuration Validation">
-            <t>TODO</t>
-          </section>
-        </section>
-      </section>
-      
-      <section anchor="management" title="Management API for SET Event Streams">
-        <t>This section defines an HTTP API to be implemented by Event Transmitters
-          and that can be used by Event Receivers to query the Event Stream status, to
-          add and remove subjects and to trigger verification.</t>
-        
-        <figure title="Event Stream Management API" anchor="figintro"><artwork><![CDATA[
-+------------+                +------------+
-|            | Stream Config  |            |
-| Event      <----------------+ Event      |
-| Stream     |                | Receiver   |
-| Management | Stream Status  |            |
-| API        <----------------+            |
-|            |                |            |
-|            | Add Subject    |            |
-|            <----------------+            |
-|            |                |            |
-|            | Remove Subject |            |
-|            <----------------+            |
-|            |                |            |
-|            | Verification   |            |
-|            <----------------+            |
-|            |                |            |
-+------------+                +------------+
-]]></artwork></figure>
-        
-        <t>How events are delivered and the structure of events are not in scope for this
-          specification.</t>
-        
-        <section anchor="management-api" title="Event Stream Management">
-          <t>Event Receivers manage how they receive events, and the subjects about which they want
-            to receive events over an Event Stream by making HTTP requests to endpoints in the Event
-            Stream Management API.</t>
-
-          <t>The Event Stream Management API is implemented by the Event Transmitter and consists of
-            the following endpoints:</t>
-
-          <t><list style="hanging">
-              <t hangText="Configuration Endpoint"><vspace blankLines="0"/> An endpoint used to read
-                the Event Stream’s current configuration.</t>
-              <t hangText="Status Endpoint"><vspace blankLines="0"/> An endpoint used to read the
-                Event Stream’s current status.</t>
-              <t hangText="Add Subject Endpoint"><vspace blankLines="0"/> An endpoint used to add
-                subjects to an Event Stream.</t>
-              <t hangText="Remove Subject Endpoint"><vspace blankLines="0"/> An endpoint used to
-                remove subjects from an Event Stream.</t>
-              <t hangText="Verification Endpoint"><vspace blankLines="0"/> An endpoint used to
-                request the Event Transmitter transmit a Verification Event over the Event
-                Stream.</t>
-            </list></t>
-
-          <t>An Event Transmitter MAY use the same URLs as endpoints for multiple streams, provided
-            that the Event Transmitter has some mechanism through which they can identify the
-            applicable Event Stream for any given request, e.g. from authentication credentials. The
-            definition of such mechanisms is outside the scope of this specification.</t>
-
-          <section anchor="stream" title="Stream Configuration">
-            <t>An Event Stream’s configuration is represented as a JSON object with the following
-              properties:</t>
-
-            <t><list style="hanging">
-                <t hangText="aud"><vspace blankLines="0"/> A string containing an audience claim as
-                  defined in <xref target="RFC7519">JSON Web Token (JWT)</xref> that identifies the
-                  Event Receiver for the Event Stream. This property cannot be updated.</t>
-                <t hangText="events"><vspace blankLines="0"/> OPTIONAL. An array of URIs identifying
-                  the set of events which MAY be delivered over the Event Stream. If omitted, Event
-                  Transmitters SHOULD make this set available to the Event Receiver via some other
-                  means (e.g. publishing it in online documentation).</t>
-                <t hangText="delivery"><vspace blankLines="0"/> A JSON object containing a set of
-                  name/value pairs specifying configuration parameters for the SET delivery method.
-                  The actual delivery method is identified by the special key “delivery_method” with
-                  the value being a URI as defined in <xref target="DELIVERY"/>.</t>
-                <t hangText="min_verification_interval"><vspace blankLines="0"/> An integer
-                  indicating the minimum amount of time in seconds that must pass in between
-                  verification requests. If an Event Receiver submits verification requests more
-                  frequently than this, the Event Transmitter MAY respond with a 429 status code. An
-                  Event Transmitter SHOULD NOT respond with a 429 status code if an Event Receiver
-                  is not exceeding this frequency.</t>
-                <t hangText="subject_type"> The subject type that the Receiver wants for the events.
-                  If not set then the Transmitter might decide to use a subject type that discloses more
-                  infirmation than necessary.</t>
-                <t hangText="status"><vspace blankLines="0"/> A string indicating the current status
-                  of the event stream. It MUST have one of the following values: <list
-                    style="hanging">
-                    <t hangText="enabled"><vspace blankLines="0"/> The transmitter will transmit
-                      events over the stream, according to the stream’s configured delivery
-                      method.</t>
-                    <t hangText="paused"><vspace blankLines="0"/> The transmitter will not transmit
-                      events over the stream. The transmitter will hold any events it would have
-                      transmitted while paused, and will transmit them when the stream’s status
-                      becomes “enabled”.</t>
-                    <t hangText="disabled"><vspace blankLines="0"/> The transmitter will not
-                      transmit events over the stream, and will not hold any events for later
-                      transmission.</t>
-                  </list>
-                </t>
-              </list></t>
-
-            <section anchor="checking-a-streams-status" title="Checking a Stream’s Status">
-              <t>An Event Receiver checks the current status of an event stream by making an HTTP
-                GET request to the stream’s Status Endpoint. On receiving a valid request the Event
-                Transmitter responds with a 200 OK response containing a <xref target="JSON"/>
-                object with a single attribute “status”, whose string value is the value of the
-                stream’s status.</t>
-
-              <t>The following is a non-normative example request to check an event stream’s
-                status:</t>
-
-              <figure title="Example: Check Stream Status Request" anchor="figstatusreq">
-                <artwork><![CDATA[
-GET /set/stream/status HTTP/1.1
-Host: transmitter.example.com
-Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
-]]></artwork>
-              </figure>
-
-              <t>The following is a non-normative example response:</t>
-
-              <figure title="Example: Check Stream Status Response" anchor="figstatusresp">
-                <artwork><![CDATA[
-HTTP/1.1 200 OK
-Content-Type: application/json; charset=UTF-8
-Cache-Control: no-store
-Pragma: no-cache
-
-{
-  "status": "enabled"
-}
-]]></artwork>
-              </figure>
-            </section>
-
-            <section anchor="reading-a-streams-configuration"
-              title="Reading a Stream’s Configuration">
-              <t>An Event Receiver gets the current configuration of a stream by making an HTTP GET
-                request to the Configuration Endpoint. On receiving a valid request the Event
-                Transmitter responds with a 200 OK response containing a <xref target="JSON"/>
-                representation of the stream’s configuration in the body.</t>
-
-              <t>The following is a non-normative example request to read an Event Stream’s
-                configuration:</t>
-
-              <figure title="Example: Read Stream Configuration Request" anchor="figreadconfigreq">
-                <artwork><![CDATA[
-GET /set/stream HTTP/1.1
-Host: transmitter.example.com
-Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
-]]></artwork>
-              </figure>
-
-              <t>The following is a non-normative example response:</t>
-
-              <figure title="Example: Read Stream Configuration Response" anchor="figreadconfigresp">
-                <artwork><![CDATA[
-HTTP/1.1 200 OK
-Content-Type: application/json; charset=UTF-8
-Cache-Control: no-store
-Pragma: no-cache
-
-{
-  "aud": "http://www.example.com",
-  "delivery": {
-    "delivery_method": "urn:example:secevent:delivery:http_post",
-    "url": "https://receiver.example.com/events"
-  },
-  "status": "enabled",
-  "events": [
-    "urn:example:secevent:events:type_1",
-    "urn:example:secevent:events:type_2",
-    "urn:example:secevent:events:type_3"
-  ],
-  "min_verification_interval": 60,
-}
-]]></artwork>
-              </figure>
-
-              <t>Errors are signaled with HTTP staus codes as follows:</t>
-
-              <texttable title="Read Stream Configuration Errors" anchor="tabreadconfig">
-                <ttcol align="left">Code</ttcol>
-                <ttcol align="left">Description</ttcol>
-                <c>401</c>
-                <c>if authorization failed or it is missing</c>
-                <c>403</c>
-                <c>if the Event Receiver is not allowed to read the stream configuration</c>
-                <c>404</c>
-                <c>if there is no Event Stream configured for this Event Receiver</c>
-              </texttable>
-            </section>
-
-            <section anchor="updating-a-streams-configuration"
-              title="Updating a Stream’s Configuration">
-              <t>An Event Receiver updates the current configuration of a stream by making an HTTP
-                POST request to the Configuration Endpoint. The POST body contains a {{!JSON}
-                representation of the updated configuration. On receiving a valid request the Event
-                Transmitter responds with a 200 OK response containing a <xref target="JSON"/>
-                representation of the updated stream configuration in the body.</t>
-
-              <t>The full set of editable properties must be present in the POST body, not only the
-                ones that are specifically intended to be changed. Missing properties SHOULD be
-                interpreted as requested to be deleted. Event Receivers should read the
-                configuration first, modify the <xref target="JSON"/> representation, then make an
-                update request.</t>
-
-              <t>Properties that cannot be updated MAY be present, but they MUST match the expected
-                value.</t>
-
-              <t>The following is a non-normative example request to read an Event Stream’s
-                configuration:</t>
-
-              <figure title="Example: Update Stream Configuration Request"
-                anchor="figupdateconfigreq">
-                <artwork><![CDATA[
-POST /set/stream HTTP/1.1
-Host: transmitter.example.com
-Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
-
-{
-  "aud": "http://www.example.com",
-  "delivery": {
-    "delivery_method": "urn:example:secevent:delivery:http_post",
-    "url": "https://receiver.example.com/events"
-  },
-  "status": "paused",
-  "events": [
-    "urn:example:secevent:events:type_1",
-    "urn:example:secevent:events:type_2",
-    "urn:example:secevent:events:type_3"
-  ]
-}
-]]></artwork>
-              </figure>
-
-              <t>The following is a non-normative example response:</t>
-
-              <figure title="Example: Update Stream Configuration Response"
-                anchor="figupdateconfigresp">
-                <artwork><![CDATA[
-HTTP/1.1 200 OK
-Content-Type: application/json; charset=UTF-8
-Cache-Control: no-store
-Pragma: no-cache
-
-{
-  "aud": "http://www.example.com",
-  "delivery": {
-    "delivery_method": "urn:example:secevent:delivery:http_post",
-    "url": "https://receiver.example.com/events"
-  },
-  "status": "paused",
-  "events": [
-    "urn:example:secevent:events:type_1",
-    "urn:example:secevent:events:type_2",
-    "urn:example:secevent:events:type_3"
-  ]
-}
-]]></artwork>
-              </figure>
-
-              <t>Errors are signaled with HTTP staus codes as follows:</t>
-
-              <texttable title="Update Stream Configuration Errors" anchor="tabupdateconfig">
-                <ttcol align="left">Code</ttcol>
-                <ttcol align="left">Description</ttcol>
-                <c>400</c>
-                <c>if the request body cannot be parsed or if the request is otherwise invalid</c>
-                <c>401</c>
-                <c>if authorization failed or it is missing</c>
-                <c>403</c>
-                <c>if the Event Receiver is not allowed to update the stream configuration</c>
-              </texttable>
-
-            </section>
-          </section>
-          <section anchor="subjects" title="Subjects">
-            <t>An Event Receiver can indicate to an Event Transmitter whether or not the receiver
-              wants to receive events about a particular subject by “adding” or “removing” that
-              subject to the Event Stream, respectively.</t>
-
-            <section anchor="adding-a-subject-to-a-stream" title="Adding a Subject to a Stream">
-              <t>To add a subject to an Event Stream, the Event Receiver makes an HTTP POST request
-                to the Add Subject Endpoint, containing in the body a Subject Identifier Object
-                identifying the subject to be added. On a successful response, the Event Transmitter
-                responds with an empty 200 OK response.</t>
-
-              <t>The Event Transmitter MAY choose to silently ignore the request, for example if the
-                subject has previously indicated to the transmitter that they do not want events to
-                be transmitted to the Event Receiver. In this case, the transmitter MAY return an
-                empty 200 OK response or an appropriate error code (See <xref target="management-sec"
-                  >Security Considerations</xref>).</t>
-
-              <t>Errors are signaled with HTTP status codes as follows:</t>
-
-              <texttable title="Add Subject Errors" anchor="tabadderr">
-                <ttcol align="left">Code</ttcol>
-                <ttcol align="left">Description</ttcol>
-                <c>400</c>
-                <c>if the request body cannot be parsed or if the request is otherwise invalid</c>
-                <c>401</c>
-                <c>if authorization failed or it is missing</c>
-                <c>403</c>
-                <c>if the Event Receiver is not allowed to add this particular subject</c>
-                <c>404</c>
-                <c>if the subject is not recognized by the Event Transmitter, the Event Transmitter
-                  may chose to stay silent in this case and respond with 200</c>
-                <c>429</c>
-                <c>if the Event Receiver is sending too many requests in a gvien amount of time</c>
-              </texttable>
-
-              <t>The following is a non-normative example request to add a subject to a stream,
-                where the subject is identified by an OpenID Connect email claim:</t>
-
-              <figure title="Example: Add Subject Request" anchor="figaddreq">
-                <artwork><![CDATA[
-POST /set/subjects:add HTTP/1.1
-Host: transmitter.example.com
-Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
-
-{
-  "email": "example.user@example.com"
-}
-]]></artwork>
-              </figure>
-
-              <t>The following is a non-normative example response to a successful request:</t>
-
-              <figure title="Example: Add Subject Response" anchor="figaddresp">
-                <artwork><![CDATA[
-HTTP/1.1 200 OK
-Server: transmitter.example.com
-Cache-Control: no-store
-Pragma: no-cache
-]]></artwork>
-              </figure>
-
-            </section>
-            <section anchor="removing-a-subject" title="Removing a Subject">
-              <t>To remove a subject from an Event Stream, the Event Receiver makes an HTTP POST
-                request to the Remove Subject Endpoint, containing in the body a Subject Identifier
-                Object identifying the subject to be removed. On a successful response, the Event
-                Transmitter responds with a 204 No Content response.</t>
-
-              <t>Errors are signaled with HTTP staus codes as follows:</t>
-
-              <texttable title="Remove Subject Errors" anchor="tabremoveerr">
-                <ttcol align="left">Code</ttcol>
-                <ttcol align="left">Description</ttcol>
-                <c>400</c>
-                <c>if the request body cannot be parsed or if the request is otherwise invalid</c>
-                <c>401</c>
-                <c>if authorization failed or it is missing</c>
-                <c>403</c>
-                <c>if the Event Receiver is not allowed to remove this particular subject</c>
-                <c>404</c>
-                <c>if the subject is not recognized by the Event Transmitter, the Event Transmitter
-                  may chose to stay silent in this case and respond with 204</c>
-                <c>429</c>
-                <c>if the Event Receiver is sending too many requests in a gvien amount of time</c>
-              </texttable>
-
-              <t>The following is a non-normative example request where the subject is identified by
-                a phone_number claim:</t>
-
-              <figure title="Example: Remove Subject Request" anchor="figremovereq">
-                <artwork><![CDATA[
-POST /set/subjects:remove HTTP/1.1
-Host: transmitter.example.com
-Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
-
-{
-  "phone_number": "+1 206 555 0123"
-}
-]]></artwork>
-              </figure>
-
-              <t>The following is a non-normative example response to a successful request:</t>
-
-              <figure title="Example: Remove Subject Response" anchor="figremoveresp">
-                <artwork><![CDATA[
-HTTP/1.1 204 No Content
-Server: transmitter.example.com
-Cache-Control: no-store
-Pragma: no-cache
-]]></artwork>
-              </figure>
-
-            </section>
-          </section>
-          <section anchor="verification" title="Verification">
-            <t>In some cases, the frequency of event transmission on an Event Stream will be very
-              low, making it difficult for an Event Receiver to tell the difference between expected
-              behavior and event transmission failure due to a misconfigured stream. Event Receivers
-              can request that a verification event be transmitted over the Event Stream, allowing
-              the receiver to confirm that the stream is configured correctly upon successful
-              receipt of the event. The acknowledgment of a Verification Event also confirms to the
-              Event Transmitter that end-to-end delivery is working, including signature
-              verification and encryption.</t>
-
-            <t>An Event Transmitter MAY send a Verification Event at any time, even if one was not
-              requested by the Event Receiver.</t>
-
-            <section anchor="verification-event" title="Verification Event">
-              <t>The Verification Event is a standard SET with the following attributes:</t>
-
-              <t><list style="hanging">
-                  <t hangText="event type"><vspace blankLines="0"/> The Event Type URI is:
-                    “urn:ietf:params:secevent:event-type:core:verification”.</t>
-                  <t hangText="state"><vspace blankLines="0"/> OPTIONAL An opaque value provided by
-                    the Event Receiver when the event is triggered. This is a nested attribute in
-                    the event payload.</t>
-                </list></t>
-
-              <t>Upon receiving a Verification Event, the Event Receiver SHALL parse the SET and
-                validate its claims. In particular, the Event Receiver SHALL confirm that the value
-                for “state” is as expected. If the value of “state” does not match, an error
-                response of “setData” SHOULD be returned (see Section 2.4 of <xref target="DELIVERY"
-                />).</t>
-
-              <t>In many cases, Event Transmitters MAY disable or suspend an Event Stream that fails
-                to successfully verify based on the acknowledgement or lack of acknowledgement by
-                the Event Receiver.</t>
-
-            </section>
-            <section anchor="triggering-a-verification-event"
-              title="Triggering a Verification Event.">
-              <t>To request that a verification event be sent over an Event Stream, the Event
-                Receiver makes an HTTP POST request to the Verification Endpoint, with a JSON object
-                containing the parameters of the verification request, if any. On a successful
-                request, the event transmitter responds with an empty 204 No Content response.</t>
-
-              <t>Verification requests have the following properties:</t>
-
-              <t><list style="hanging">
-                  <t hangText="state"><vspace blankLines="0"/> OPTIONAL. An arbitrary string that
-                    the Event Transmitter MUST echo back to the Event Receiver in the verification
-                    event’s payload. Event Receivers MAY use the value of this parameter to
-                    correlate a verification event with a verification request. If the verification
-                    event is initiated by the transmitter then this parameter MUST not be set.</t>
-                </list></t>
-
-              <t>A successful response from a POST to the Verification Endpoint does not indicate
-                that the verification event was transmitted successfully, only that the Event
-                Transmitter has transmitted the event or will do so at some point in the future.
-                Event Transmitters MAY transmit the event via an asynchronous process, and SHOULD
-                publish an SLA for verification event transmission times. Event Receivers MUST NOT
-                depend on the verification event being transmitted synchronously or in any
-                particular order relative to the current queue of events.</t>
-
-              <t>Errors are signaled with HTTP staus codes as follows:</t>
-
-              <texttable title="Verification Errors" anchor="taberifyerr">
-                <ttcol align="left">Code</ttcol>
-                <ttcol align="left">Description</ttcol>
-                <c>400</c>
-                <c>if the request body cannot be parsed or if the request is otherwise invalid</c>
-                <c>401</c>
-                <c>if authorization failed or it is missing</c>
-                <c>429</c>
-                <c>if the Event Receiver is sending too many requests in a gvien amount of time</c>
-              </texttable>
-
-              <t>The following is a non-normative example request to trigger a verification
-                event:</t>
-
-              <figure title="Example: Trigger Verification Request" anchor="figverifyreq">
-                <artwork><![CDATA[
-POST /set/verify HTTP/1.1
-Host: transmitter.example.com
-Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
-Content-Type: application/json; charset=UTF-8
-
-{
-  "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
-}
-]]></artwork>
-              </figure>
-
-              <t>The following is a non-normative example response to a successful request:</t>
-
-              <figure title="Example: Trigger Verification Response" anchor="figverifyresp">
-                <artwork><![CDATA[
-HTTP/1.1 204 No Content
-Server: transmitter.example.com
-Cache-Control: no-store
-Pragma: no-cache
-]]></artwork>
-              </figure>
-
-              <t>And the following is a non-normative example of a verification event sent to the
-                Event Receiver as a result of the above request:</t>
-
-              <figure title="Example: Verification SET" anchor="figverifyset">
-                <artwork><![CDATA[
-{
-  "jti": "123456",
-  "iss": "https://transmitter.example.com",
-  "aud": "receiver.example.com",
-  "iat": "1493856000",
-  "events": [
-    "urn:ietf:params:secevent:event-type:core:verification" : {
-      "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo=",
-    },
-  ],
-}
-]]></artwork>
-              </figure>
-
-            </section>
-          </section>
-        </section>
-
-        <section anchor="management-api-auth" title="Authorization">
-          <t>HTTP API calls from a receiver to a transmitter SHOULD be authorized using OAuth 2
-            Access Tokens. The client id associated with the Access Token uniquely identifies the
-            Receiver and the Stream.</t>
-          
-          <t>Receivers SHOULD use the <xref target="CLIENTCRED">Client Credential Grant</xref> to
-            obtain access tokens on its own behalf.</t>
-        </section>
-        
-        <section anchor="management-api-subject" title="Subject Claims for Subject Add and Remove Operations">
-          <t>TODO</t>
-        </section>
-
-        <section anchor="management-sec" title="Security Considerations">
-          <section anchor="management-sec-subject-probing" title="Subject Probing">
-            <t>It may be possible for an Event Transmitter to leak information about subjects
-              through their responses to add subject requests. A 404 response may indicate to the
-              Event Receiver that the subject does not exist, which may inadvertantly reveal
-              information about the subject (e.g. that a particular individual does or does not use
-              the Event Transmitter’s service).</t>
-
-            <t>Event Transmitters SHOULD carefully evaluate the conditions under which they will
-              return error responses to add subject requests. Event Transmitters MAY return a 204
-              response even if they will not actually send any events related to the subject, and
-              Event Receivers MUST NOT assume that a 204 response means that they will receive
-              events related to the subject.</t>
-
-          </section>
-          
-          <section anchor="management-sec-information-harvesting" title="Information Harvesting">
-            <t>SETs may contain personally identifiable information (PII) or other non-public
-              information about the event transmitter, the subject (of an event in the SET), or the
-              relationship between the two. It is important for Event Transmitters to understand
-              what information they are revealing to Event Receivers when transmitting events to
-              them, lest the event stream become a vector for unauthorized access to private
-              information.</t>
-
-            <t>Event Transmitters SHOULD interpret add subject requests as statements of interest in
-              a subject by an Event Receiver, and ARE NOT obligated to transmit events related to
-              every subject an Event Receiver adds to the stream. Event Transmitters MAY choose to
-              transmit some, all, or no events related to any given subject and SHOULD validate that
-              they are permitted to share the information contained within an event with the Event
-              Receiver before transmitting the event. The mechanisms by which such validation is
-              performed are outside the scope of this specification.</t>
-
-          </section>
-          
-          <section anchor="management-sec-malicious-subject-removal" title="Malicious Subject Removal">
-            <t>A malicious party may find it advantageous to remove a particular subject from a
-              stream, in order to reduce the Event Receiver’s ability to detect malicious activity
-              related to the subject, inconvenience the subject, or for other reasons. Consequently
-              it may be in the best interests of the subject for the Event Transmitter to continue
-              to send events related to the subject for some time after the subject has been removed
-              from a stream.</t>
-
-            <t>Event Transmitters MAY continue sending events related to a subject for some amount
-              of time after that subject has been removed from the stream. Event Receivers MUST
-              tolerate receiving events for subjects that have been removed from the stream, and
-              MUST NOT report these events as errors to the Event Transmitter.</t>
-
           </section>
         </section>
       </section>
@@ -909,6 +911,16 @@ Pragma: no-cache
         <seriesInfo name="DOI" value="10.17487/RFC7519"/>
       </reference>
 
+      <reference anchor="SECEVENT" target="https://datatracker.ietf.org/wg/secevent/about/">
+        <front>
+          <title>Security Events IETF Working Group</title>
+          <author>
+            <organization>IETF</organization>
+          </author>
+          <date/>
+        </front>
+      </reference>
+      
       <reference anchor="SET" target="https://tools.ietf.org/html/draft-ietf-secevent-token">
         <front>
           <title>Security Event Token (SET)</title>
