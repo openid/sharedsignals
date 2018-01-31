@@ -800,7 +800,8 @@ Pragma: no-cache
               <c>401</c>
               <c>if authorization failed or it is missing</c>
               <c>429</c>
-              <c>if the Event Receiver is sending too many requests in a gvien amount of time</c>
+              <c>if the Event Receiver is sending too many requests in a gvien amount of time;
+                see related <spanx style="verb">min_verification_interval</spanx> in <xref target="stream"/></c>
             </texttable>
 
             <t>The following is a non-normative example request to trigger a verification

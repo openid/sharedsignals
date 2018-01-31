@@ -1097,14 +1097,14 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 19]
    | 401  | if authorization failed or it is missing                   |
    |      |                                                            |
    | 429  | if the Event Receiver is sending too many requests in a    |
-   |      | gvien amount of time                                       |
+   |      | gvien amount of time; see related                          |
+   |      | "min_verification_interval" in Section 4.1.2               |
    +------+------------------------------------------------------------+
 
                        Table 6: Verification Errors
 
    The following is a non-normative example request to trigger a
    verification event:
-
 
 
 
