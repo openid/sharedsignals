@@ -333,38 +333,44 @@ Content-Type: application/json
               <t hangText="aud"><vspace blankLines="0"/> A string containing an audience claim as
                 defined in <xref target="RFC7519">JSON Web Token (JWT)</xref> that identifies the
                 Event Receiver for the Event Stream. This property cannot be updated.</t>
-              <t hangText="events"><vspace blankLines="0"/> OPTIONAL. An array of URIs identifying
-                the set of events which MAY be delivered over the Event Stream. If omitted, Event
-                Transmitters SHOULD make this set available to the Event Receiver via some other
-                means (e.g. publishing it in online documentation).</t>
-              <t hangText="delivery"><vspace blankLines="0"/> A JSON object containing a set of
+              <t hangText="events_supported"><vspace blankLines="0"/> OPTIONAL. An array of URIs identifying
+                the set of events supported by the Transmitter for this Receiver. If omitted, 
+                Event Transmitters SHOULD make this set available to the Event Receiver via some 
+                other means (e.g. publishing it in online documentation).</t>
+            <t hangText="events_requested"><vspace blankLines="0"/> OPTIONAL. An array of URIs identifying
+              the set of events that the Receiver requested. A Receiver should request only the events
+              that it understands and it can act on. This is configurabel by the Receuver.</t>
+            <t hangText="events_delivered"><vspace blankLines="0"/> OPTIONAL. An array of URIs 
+              which is the intersection of <spanx style="verb">events_supported</spanx> and
+              <spanx style="verb">events_requested</spanx>. These evebts MAY be delivered over 
+              the Event Stream.</t>
+            <t hangText="delivery"><vspace blankLines="0"/> A JSON object containing a set of
                 name/value pairs specifying configuration parameters for the SET delivery method.
                 The actual delivery method is identified by the special key “delivery_method” with
                 the value being a URI as defined in <xref target="DELIVERY"/>.</t>
-              <t hangText="min_verification_interval"><vspace blankLines="0"/> An integer
-                indicating the minimum amount of time in seconds that must pass in between
-                verification requests. If an Event Receiver submits verification requests more
-                frequently than this, the Event Transmitter MAY respond with a 429 status code. An
-                Event Transmitter SHOULD NOT respond with a 429 status code if an Event Receiver
-                is not exceeding this frequency.</t>
-              <t hangText="subject_type"> The subject type that the Receiver wants for the events.
-                If not set then the Transmitter might decide to use a subject type that discloses more
-                infirmation than necessary.</t>
-              <t hangText="status"><vspace blankLines="0"/> A string indicating the current status
-                of the event stream. It MUST have one of the following values: <list
-                  style="hanging">
-                  <t hangText="enabled"><vspace blankLines="0"/> The transmitter will transmit
-                    events over the stream, according to the stream’s configured delivery
-                    method.</t>
-                  <t hangText="paused"><vspace blankLines="0"/> The transmitter will not transmit
-                    events over the stream. The transmitter will hold any events it would have
-                    transmitted while paused, and will transmit them when the stream’s status
-                    becomes “enabled”.</t>
-                  <t hangText="disabled"><vspace blankLines="0"/> The transmitter will not
-                    transmit events over the stream, and will not hold any events for later
-                    transmission.</t>
-                </list>
-              </t>
+            <t hangText="min_verification_interval"><vspace blankLines="0"/> An integer
+              indicating the minimum amount of time in seconds that must pass in between
+              verification requests. If an Event Receiver submits verification requests more
+              frequently than this, the Event Transmitter MAY respond with a 429 status code. An
+              Event Transmitter SHOULD NOT respond with a 429 status code if an Event Receiver
+              is not exceeding this frequency.</t>
+            <t hangText="subject_type"> The subject type that the Receiver wants for the events.
+              If not set then the Transmitter might decide to use a subject type that discloses more
+              infirmation than necessary.</t>
+            <t hangText="status"><vspace blankLines="0"/> A string indicating the current status
+              of the event stream. It MUST have one of the following values: <list
+                style="hanging">
+                <t hangText="enabled"><vspace blankLines="0"/> The transmitter will transmit
+                  events over the stream, according to the stream’s configured delivery
+                  method.</t>
+                <t hangText="paused"><vspace blankLines="0"/> The transmitter will not transmit
+                  events over the stream. The transmitter will hold any events it would have
+                  transmitted while paused, and will transmit them when the stream’s status
+                  becomes “enabled”.</t>
+                <t hangText="disabled"><vspace blankLines="0"/> The transmitter will not
+                  transmit events over the stream, and will not hold any events for later
+                  transmission.</t>
+              </list></t>
             </list></t>
 
           <section anchor="checking-a-streams-status" title="Checking a Stream’s Status">
@@ -432,13 +438,22 @@ Pragma: no-cache
   "aud": "http://www.example.com",
   "delivery": {
     "delivery_method": "urn:example:secevent:delivery:http_post",
-    "url": "https://receiver.example.com/events"
+    "url": "https://receiver.example.com/events",
   },
   "status": "enabled",
-  "events": [
+  "events_supported": [
     "urn:example:secevent:events:type_1",
     "urn:example:secevent:events:type_2",
-    "urn:example:secevent:events:type_3"
+    "urn:example:secevent:events:type_3",
+  ],
+  "events_requested": [
+    "urn:example:secevent:events:type_2",
+    "urn:example:secevent:events:type_3",
+    "urn:example:secevent:events:type_4",
+  ],
+  "events_delivered": [
+    "urn:example:secevent:events:type_2",
+    "urn:example:secevent:events:type_3",
   ],
   "min_verification_interval": 60,
 }
@@ -490,14 +505,14 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
   "aud": "http://www.example.com",
   "delivery": {
     "delivery_method": "urn:example:secevent:delivery:http_post",
-    "url": "https://receiver.example.com/events"
+    "url": "https://receiver.example.com/events",
   },
   "status": "paused",
-  "events": [
-    "urn:example:secevent:events:type_1",
+  "events_requested": [
     "urn:example:secevent:events:type_2",
-    "urn:example:secevent:events:type_3"
-  ]
+    "urn:example:secevent:events:type_3",
+    "urn:example:secevent:events:type_4",
+  ],
 }
 ]]></artwork>
             </figure>
@@ -516,14 +531,23 @@ Pragma: no-cache
   "aud": "http://www.example.com",
   "delivery": {
     "delivery_method": "urn:example:secevent:delivery:http_post",
-    "url": "https://receiver.example.com/events"
+    "url": "https://receiver.example.com/events",
   },
   "status": "paused",
-  "events": [
+  "events_supported": [
     "urn:example:secevent:events:type_1",
     "urn:example:secevent:events:type_2",
-    "urn:example:secevent:events:type_3"
-  ]
+    "urn:example:secevent:events:type_3",
+  ],
+  "events_requested": [
+    "urn:example:secevent:events:type_2",
+    "urn:example:secevent:events:type_3",
+    "urn:example:secevent:events:type_4",
+  ],
+  "events_delivered": [
+    "urn:example:secevent:events:type_2",
+    "urn:example:secevent:events:type_3",
+  ],
 }
 ]]></artwork>
             </figure>
