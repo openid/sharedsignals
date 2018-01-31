@@ -37,9 +37,9 @@ Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
      1.1.  Notational Conventions  . . . . . . . . . . . . . . . . .   2
-   2.  Subject Identifiers . . . . . . . . . . . . . . . . . . . . .   2
+   2.  Subject Identifiers . . . . . . . . . . . . . . . . . . . . .   3
      2.1.  Subject Identifier Types  . . . . . . . . . . . . . . . .   3
-       2.1.1.  Email Subject Identifier Type . . . . . . . . . . . .   3
+       2.1.1.  Email Subject Identifier Type . . . . . . . . . . . .   4
        2.1.2.  Phone Number Subject Identifier Type  . . . . . . . .   4
        2.1.3.  Issuer and Subject Subject Identifier Type  . . . . .   4
    3.  Transmitter Configuration Discovery . . . . . . . . . . . . .   4
@@ -49,7 +49,7 @@ Table of Contents
        3.2.2.  Transmitter Configuration Response  . . . . . . . . .   6
        3.2.3.  Transmitter Configuration Validation  . . . . . . . .   7
    4.  Management API for SET Event Streams  . . . . . . . . . . . .   7
-     4.1.  Event Stream Management . . . . . . . . . . . . . . . . .   7
+     4.1.  Event Stream Management . . . . . . . . . . . . . . . . .   8
 
 
 
@@ -58,39 +58,41 @@ Scurtescu, et al.        Expires August 3, 2018                 [Page 1]
                               risc-secevent                 January 2018
 
 
-       4.1.1.  Stream Configuration  . . . . . . . . . . . . . . . .   8
-         4.1.1.1.  Checking a Stream's Status  . . . . . . . . . . .   9
-         4.1.1.2.  Reading a Stream's Configuration  . . . . . . . .  10
-         4.1.1.3.  Updating a Stream's Configuration . . . . . . . .  11
-       4.1.2.  Subjects  . . . . . . . . . . . . . . . . . . . . . .  13
-         4.1.2.1.  Adding a Subject to a Stream  . . . . . . . . . .  14
-         4.1.2.2.  Removing a Subject  . . . . . . . . . . . . . . .  15
-       4.1.3.  Verification  . . . . . . . . . . . . . . . . . . . .  17
-         4.1.3.1.  Verification Event  . . . . . . . . . . . . . . .  17
-         4.1.3.2.  Triggering a Verification Event.  . . . . . . . .  17
-     4.2.  Authorization . . . . . . . . . . . . . . . . . . . . . .  19
-     4.3.  Subject Claims for Subject Add and Remove Operations  . .  20
-     4.4.  Security Considerations . . . . . . . . . . . . . . . . .  20
-       4.4.1.  Subject Probing . . . . . . . . . . . . . . . . . . .  20
-       4.4.2.  Information Harvesting  . . . . . . . . . . . . . . .  20
-       4.4.3.  Malicious Subject Removal . . . . . . . . . . . . . .  20
-   5.  Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .  21
-     5.1.  Security Event Token Profle . . . . . . . . . . . . . . .  21
-       5.1.1.  Signature Key Resolution  . . . . . . . . . . . . . .  21
-       5.1.2.  RISC Event Subject  . . . . . . . . . . . . . . . . .  21
-       5.1.3.  aud Claim . . . . . . . . . . . . . . . . . . . . . .  21
-       5.1.4.  Security Considerations . . . . . . . . . . . . . . .  22
-     5.2.  SET Token Delivery Using HTTP Profile . . . . . . . . . .  22
-       5.2.1.  Stream Configuration Metadata . . . . . . . . . . . .  22
-         5.2.1.1.  Push Delivery using HTTP  . . . . . . . . . . . .  22
-         5.2.1.2.  Polling Delivery using HTTP . . . . . . . . . . .  22
-   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  22
-     6.1.  RISC Subject Identifier Types Registry  . . . . . . . . .  22
-   7.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .  23
-     7.1.  Subject Information Leakage . . . . . . . . . . . . . . .  23
-   8.  Normative References  . . . . . . . . . . . . . . . . . . . .  23
-   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  24
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  24
+       4.1.1.  Stream Status . . . . . . . . . . . . . . . . . . . .   9
+         4.1.1.1.  Reading a Stream's Status . . . . . . . . . . . .   9
+         4.1.1.2.  Updating a Stream's Status  . . . . . . . . . . .  10
+       4.1.2.  Stream Configuration  . . . . . . . . . . . . . . . .  11
+         4.1.2.1.  Reading a Stream's Configuration  . . . . . . . .  12
+         4.1.2.2.  Updating a Stream's Configuration . . . . . . . .  14
+       4.1.3.  Subjects  . . . . . . . . . . . . . . . . . . . . . .  16
+         4.1.3.1.  Adding a Subject to a Stream  . . . . . . . . . .  16
+         4.1.3.2.  Removing a Subject  . . . . . . . . . . . . . . .  17
+       4.1.4.  Verification  . . . . . . . . . . . . . . . . . . . .  19
+         4.1.4.1.  Verification Event  . . . . . . . . . . . . . . .  19
+         4.1.4.2.  Triggering a Verification Event.  . . . . . . . .  19
+     4.2.  Authorization . . . . . . . . . . . . . . . . . . . . . .  21
+     4.3.  Subject Claims for Subject Add and Remove Operations  . .  22
+     4.4.  Security Considerations . . . . . . . . . . . . . . . . .  22
+       4.4.1.  Subject Probing . . . . . . . . . . . . . . . . . . .  22
+       4.4.2.  Information Harvesting  . . . . . . . . . . . . . . .  22
+       4.4.3.  Malicious Subject Removal . . . . . . . . . . . . . .  22
+   5.  Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .  23
+     5.1.  Security Event Token Profle . . . . . . . . . . . . . . .  23
+       5.1.1.  Signature Key Resolution  . . . . . . . . . . . . . .  23
+       5.1.2.  RISC Event Subject  . . . . . . . . . . . . . . . . .  23
+       5.1.3.  aud Claim . . . . . . . . . . . . . . . . . . . . . .  23
+       5.1.4.  Security Considerations . . . . . . . . . . . . . . .  24
+     5.2.  SET Token Delivery Using HTTP Profile . . . . . . . . . .  24
+       5.2.1.  Stream Configuration Metadata . . . . . . . . . . . .  24
+         5.2.1.1.  Push Delivery using HTTP  . . . . . . . . . . . .  24
+         5.2.1.2.  Polling Delivery using HTTP . . . . . . . . . . .  24
+   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  24
+     6.1.  RISC Subject Identifier Types Registry  . . . . . . . . .  24
+   7.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .  25
+     7.1.  Subject Information Leakage . . . . . . . . . . . . . . .  25
+   8.  Normative References  . . . . . . . . . . . . . . . . . . . .  25
+   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  26
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  26
 
 1.  Introduction
 
@@ -100,12 +102,10 @@ Scurtescu, et al.        Expires August 3, 2018                 [Page 1]
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
    document are to be interpreted as described in [RFC2119].
 
-2.  Subject Identifiers
 
-   The RISC profile defines a structure called a Subject Identifier: a
-   JSON object containing a set of claims that collectively uniquely
-   identify a subject, according to a simple schema called a Subject
-   Identifier Type.  Every Subject Identifier MUST contain a
+
+
+
 
 
 
@@ -114,6 +114,12 @@ Scurtescu, et al.        Expires August 3, 2018                 [Page 2]
                               risc-secevent                 January 2018
 
 
+2.  Subject Identifiers
+
+   The RISC profile defines a structure called a Subject Identifier: a
+   JSON object containing a set of claims that collectively uniquely
+   identify a subject, according to a simple schema called a Subject
+   Identifier Type.  Every Subject Identifier MUST contain a
    "subject_type" claim, whose value MUST be a name that uniquely
    identifies the Subject Identifier Type of the Subject Identifier.
    Any remaining claims within the Subject Identifier MUST be
@@ -156,12 +162,6 @@ Scurtescu, et al.        Expires August 3, 2018                 [Page 2]
    The following Subject Identifier Types are registered in the IANA
    "RISC Subject Identifier Types" registry established by Section 6.1.
 
-2.1.1.  Email Subject Identifier Type
-
-   The Email Subject Identifier Type describes a subject by email
-   address.  Subject Identifiers of this type MUST contain an "email"
-   claim whose value is a string containing the email address of the
-
 
 
 
@@ -170,6 +170,11 @@ Scurtescu, et al.        Expires August 3, 2018                 [Page 3]
                               risc-secevent                 January 2018
 
 
+2.1.1.  Email Subject Identifier Type
+
+   The Email Subject Identifier Type describes a subject by email
+   address.  Subject Identifiers of this type MUST contain an "email"
+   claim whose value is a string containing the email address of the
    subject.  The "email" claim MUST NOT be null or empty.  The Email
    Subject Identifier Type is identified by the name "email".
 
@@ -212,11 +217,6 @@ Scurtescu, et al.        Expires August 3, 2018                 [Page 3]
       document.  This contains the signing key(s) the Receiver uses to
       validate signatures from the Transmitter.
 
-   delivery_methods_supported  RECOMMENDED.  List of supported delivery
-      method URIs.
-
-   configuration_endpoint  OPTIONAL.  The URL of the Configuration
-      Endpoint.
 
 
 
@@ -225,6 +225,12 @@ Scurtescu, et al.        Expires August 3, 2018                 [Page 4]
 
                               risc-secevent                 January 2018
 
+
+   delivery_methods_supported  RECOMMENDED.  List of supported delivery
+      method URIs.
+
+   configuration_endpoint  OPTIONAL.  The URL of the Configuration
+      Endpoint.
 
    status_endpoint  OPTIONAL.  The URL of the Status Endpoint.
 
@@ -269,18 +275,17 @@ Scurtescu, et al.        Expires August 3, 2018                 [Page 4]
    "https://tr.example.com/issuer1" to obtain its Configuration
    information, since the Issuer contains a path component:
 
-   GET /issuer1/.well-known/risc-configuration HTTP/1.1
-   Host: tr.example.com
-
-     Figure 4: Example: Transmitter Configuration Request (with path)
-
-
 
 
 Scurtescu, et al.        Expires August 3, 2018                 [Page 5]
 
                               risc-secevent                 January 2018
 
+
+   GET /issuer1/.well-known/risc-configuration HTTP/1.1
+   Host: tr.example.com
+
+     Figure 4: Example: Transmitter Configuration Request (with path)
 
    Using path components enables supporting multiple issuers per host.
    This is required in some multi-tenant hosting configurations.  This
@@ -302,6 +307,36 @@ Scurtescu, et al.        Expires August 3, 2018                 [Page 5]
    Claims with zero elements MUST be omitted from the response.
 
    An error response uses the applicable HTTP status code value.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Scurtescu, et al.        Expires August 3, 2018                 [Page 6]
+
+                              risc-secevent                 January 2018
+
 
    HTTP/1.1 200 OK
    Content-Type: application/json
@@ -328,16 +363,6 @@ Scurtescu, et al.        Expires August 3, 2018                 [Page 5]
 
            Figure 5: Example: Transmitter Configuration Response
 
-
-
-
-
-
-Scurtescu, et al.        Expires August 3, 2018                 [Page 6]
-
-                              risc-secevent                 January 2018
-
-
 3.2.3.  Transmitter Configuration Validation
 
    If any of the validation procedures defined in this specification
@@ -356,6 +381,18 @@ Scurtescu, et al.        Expires August 3, 2018                 [Page 6]
    Transmitters and that can be used by Event Receivers to query the
    Event Stream status, to add and remove subjects and to trigger
    verification.
+
+
+
+
+
+
+
+
+Scurtescu, et al.        Expires August 3, 2018                 [Page 7]
+
+                              risc-secevent                 January 2018
+
 
    +------------+                +------------+
    |            | Stream Config  |            |
@@ -377,22 +414,11 @@ Scurtescu, et al.        Expires August 3, 2018                 [Page 6]
 
                    Figure 6: Event Stream Management API
 
-   How events are delivered and the structure of events are not in scope
-   for this specification.
-
 4.1.  Event Stream Management
 
    Event Receivers manage how they receive events, and the subjects
    about which they want to receive events over an Event Stream by
    making HTTP requests to endpoints in the Event Stream Management API.
-
-
-
-
-Scurtescu, et al.        Expires August 3, 2018                 [Page 7]
-
-                              risc-secevent                 January 2018
-
 
    The Event Stream Management API is implemented by the Event
    Transmitter and consists of the following endpoints:
@@ -416,32 +442,6 @@ Scurtescu, et al.        Expires August 3, 2018                 [Page 7]
    An Event Transmitter MAY use the same URLs as endpoints for multiple
    streams, provided that the Event Transmitter has some mechanism
    through which they can identify the applicable Event Stream for any
-   given request, e.g. from authentication credentials.  The definition
-   of such mechanisms is outside the scope of this specification.
-
-4.1.1.  Stream Configuration
-
-   An Event Stream's configuration is represented as a JSON object with
-   the following properties:
-
-   aud
-      A string containing an audience claim as defined in JSON Web Token
-      (JWT) [RFC7519] that identifies the Event Receiver for the Event
-      Stream.  This property cannot be updated.
-
-   events
-      OPTIONAL.  An array of URIs identifying the set of events which
-      MAY be delivered over the Event Stream.  If omitted, Event
-      Transmitters SHOULD make this set available to the Event Receiver
-      via some other means (e.g. publishing it in online documentation).
-
-   delivery
-      A JSON object containing a set of name/value pairs specifying
-      configuration parameters for the SET delivery method.  The actual
-      delivery method is identified by the special key "delivery_method"
-      with the value being a URI as defined in [DELIVERY].
-
-   min_verification_interval
 
 
 
@@ -450,61 +450,43 @@ Scurtescu, et al.        Expires August 3, 2018                 [Page 8]
                               risc-secevent                 January 2018
 
 
-      An integer indicating the minimum amount of time in seconds that
-      must pass in between verification requests.  If an Event Receiver
-      submits verification requests more frequently than this, the Event
-      Transmitter MAY respond with a 429 status code.  An Event
-      Transmitter SHOULD NOT respond with a 429 status code if an Event
-      Receiver is not exceeding this frequency.
+   given request, e.g. from authentication credentials.  The definition
+   of such mechanisms is outside the scope of this specification.
 
-   subject_type  The subject type that the Receiver wants for the
-      events.  If not set then the Transmitter might decide to use a
-      subject type that discloses more infirmation than necessary.
+4.1.1.  Stream Status
 
-   status
-      A string indicating the current status of the event stream.  It
-      MUST have one of the following values:
-
-      enabled
-         The transmitter will transmit events over the stream, according
-         to the stream's configured delivery method.
-
-      paused
-         The transmitter will not transmit events over the stream.  The
-         transmitter will hold any events it would have transmitted
-         while paused, and will transmit them when the stream's status
-         becomes "enabled".
-
-      disabled
-         The transmitter will not transmit events over the stream, and
-         will not hold any events for later transmission.
-
-4.1.1.1.  Checking a Stream's Status
+4.1.1.1.  Reading a Stream's Status
 
    An Event Receiver checks the current status of an event stream by
    making an HTTP GET request to the stream's Status Endpoint.  On
    receiving a valid request the Event Transmitter responds with a 200
    OK response containing a [JSON] object with a single attribute
-   "status", whose string value is the value of the stream's status.
+   "status", whose string value MUST have one of the following values:
+
+   enabled
+      The transmitter will transmit events over the stream, according to
+      the stream's configured delivery method.
+
+   paused
+      The transmitter will not transmit events over the stream.  The
+      transmitter will hold any events it would have transmitted while
+      paused, and will transmit them when the stream's status becomes
+      "enabled".
+
+   disabled
+      The transmitter will not transmit events over the stream, and will
+      not hold any events for later transmission.
 
    The following is a non-normative example request to check an event
    stream's status:
 
-   GET /set/stream/status HTTP/1.1
+   GET /set/status HTTP/1.1
    Host: transmitter.example.com
    Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
               Figure 7: Example: Check Stream Status Request
 
    The following is a non-normative example response:
-
-
-
-
-Scurtescu, et al.        Expires August 3, 2018                 [Page 9]
-
-                              risc-secevent                 January 2018
-
 
    HTTP/1.1 200 OK
    Content-Type: application/json; charset=UTF-8
@@ -517,31 +499,49 @@ Scurtescu, et al.        Expires August 3, 2018                 [Page 9]
 
               Figure 8: Example: Check Stream Status Response
 
-4.1.1.2.  Reading a Stream's Configuration
 
-   An Event Receiver gets the current configuration of a stream by
-   making an HTTP GET request to the Configuration Endpoint.  On
-   receiving a valid request the Event Transmitter responds with a 200
-   OK response containing a [JSON] representation of the stream's
-   configuration in the body.
 
-   The following is a non-normative example request to read an Event
-   Stream's configuration:
+Scurtescu, et al.        Expires August 3, 2018                 [Page 9]
+
+                              risc-secevent                 January 2018
 
-   GET /set/stream HTTP/1.1
+
+4.1.1.2.  Updating a Stream's Status
+
+   An Event Receiver updates the current status of a stream by making an
+   HTTP POST request to the Status Endpoint.  The POST body contains a
+   [JSON] representation of the updated status.  On receiving a valid
+   request the Event Transmitter responds with a 200 OK response
+   containing a [JSON] representation of the updated stream status in
+   the body.
+
+   The following is a non-normative example request to update an Event
+   Stream's status:
+
+   POST /set/status HTTP/1.1
    Host: transmitter.example.com
    Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
-           Figure 9: Example: Read Stream Configuration Request
+   {
+     "status": "paused",
+   }
+
+              Figure 9: Example: Update Stream Status Request
 
    The following is a non-normative example response:
 
+   HTTP/1.1 200 OK
+   Content-Type: application/json; charset=UTF-8
+   Cache-Control: no-store
+   Pragma: no-cache
 
+   {
+     "status": "paused",
+   }
 
+             Figure 10: Example: Update Stream Status Response
 
-
-
-
+   Errors are signaled with HTTP staus codes as follows:
 
 
 
@@ -562,54 +562,54 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 10]
                               risc-secevent                 January 2018
 
 
-   HTTP/1.1 200 OK
-   Content-Type: application/json; charset=UTF-8
-   Cache-Control: no-store
-   Pragma: no-cache
-
-   {
-     "aud": "http://www.example.com",
-     "delivery": {
-       "delivery_method": "urn:example:secevent:delivery:http_post",
-       "url": "https://receiver.example.com/events"
-     },
-     "status": "enabled",
-     "events": [
-       "urn:example:secevent:events:type_1",
-       "urn:example:secevent:events:type_2",
-       "urn:example:secevent:events:type_3"
-     ],
-     "min_verification_interval": 60,
-   }
-
-          Figure 10: Example: Read Stream Configuration Response
-
-   Errors are signaled with HTTP staus codes as follows:
-
    +------+------------------------------------------------------------+
    | Code | Description                                                |
    +------+------------------------------------------------------------+
+   | 400  | if the request body cannot be parsed or if the request is  |
+   |      | otherwise invalid                                          |
+   |      |                                                            |
    | 401  | if authorization failed or it is missing                   |
    |      |                                                            |
-   | 403  | if the Event Receiver is not allowed to read the stream    |
-   |      | configuration                                              |
-   |      |                                                            |
-   | 404  | if there is no Event Stream configured for this Event      |
-   |      | Receiver                                                   |
+   | 403  | if the Event Receiver is not allowed to update the stream  |
+   |      | status                                                     |
    +------+------------------------------------------------------------+
 
-                 Table 1: Read Stream Configuration Errors
+                Table 1: Update Stream Configuration Errors
 
-4.1.1.3.  Updating a Stream's Configuration
+4.1.2.  Stream Configuration
 
-   An Event Receiver updates the current configuration of a stream by
-   making an HTTP POST request to the Configuration Endpoint.  The POST
-   body contains a {{!JSON} representation of the updated configuration.
-   On receiving a valid request the Event Transmitter responds with a
-   200 OK response containing a [JSON] representation of the updated
-   stream configuration in the body.
+   An Event Stream's configuration is represented as a JSON object with
+   the following properties:
 
+   aud
+      A string containing an audience claim as defined in JSON Web Token
+      (JWT) [RFC7519] that identifies the Event Receiver for the Event
+      Stream.  This property cannot be updated.
 
+   events_supported
+      OPTIONAL.  An array of URIs identifying the set of events
+      supported by the Transmitter for this Receiver.  If omitted, Event
+      Transmitters SHOULD make this set available to the Event Receiver
+      via some other means (e.g. publishing it in online documentation).
+
+   events_requested
+      OPTIONAL.  An array of URIs identifying the set of events that the
+      Receiver requested.  A Receiver should request only the events
+      that it understands and it can act on.  This is configurabel by
+      the Receuver.
+
+   events_delivered
+      OPTIONAL.  An array of URIs which is the intersection of
+      "events_supported" and "events_requested".  These evebts MAY be
+      delivered over the Event Stream.
+
+   delivery
+      A JSON object containing a set of name/value pairs specifying
+      configuration parameters for the SET delivery method.  The actual
+      delivery method is identified by the special key "delivery_method"
+      with the value being a URI as defined in [DELIVERY].
+
+   min_verification_interval
 
 
 
@@ -618,39 +618,39 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 11]
                               risc-secevent                 January 2018
 
 
-   The full set of editable properties must be present in the POST body,
-   not only the ones that are specifically intended to be changed.
-   Missing properties SHOULD be interpreted as requested to be deleted.
-   Event Receivers should read the configuration first, modify the
-   [JSON] representation, then make an update request.
+      An integer indicating the minimum amount of time in seconds that
+      must pass in between verification requests.  If an Event Receiver
+      submits verification requests more frequently than this, the Event
+      Transmitter MAY respond with a 429 status code.  An Event
+      Transmitter SHOULD NOT respond with a 429 status code if an Event
+      Receiver is not exceeding this frequency.
 
-   Properties that cannot be updated MAY be present, but they MUST match
-   the expected value.
+   subject_type  The subject type that the Receiver wants for the
+      events.  If not set then the Transmitter might decide to use a
+      subject type that discloses more infirmation than necessary.
+
+4.1.2.1.  Reading a Stream's Configuration
+
+   An Event Receiver gets the current configuration of a stream by
+   making an HTTP GET request to the Configuration Endpoint.  On
+   receiving a valid request the Event Transmitter responds with a 200
+   OK response containing a [JSON] representation of the stream's
+   configuration in the body.
 
    The following is a non-normative example request to read an Event
    Stream's configuration:
 
-   POST /set/stream HTTP/1.1
+   GET /set/stream HTTP/1.1
    Host: transmitter.example.com
    Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
-   {
-     "aud": "http://www.example.com",
-     "delivery": {
-       "delivery_method": "urn:example:secevent:delivery:http_post",
-       "url": "https://receiver.example.com/events"
-     },
-     "status": "paused",
-     "events": [
-       "urn:example:secevent:events:type_1",
-       "urn:example:secevent:events:type_2",
-       "urn:example:secevent:events:type_3"
-     ]
-   }
-
-          Figure 11: Example: Update Stream Configuration Request
+           Figure 11: Example: Read Stream Configuration Request
 
    The following is a non-normative example response:
+
+
+
+
 
 
 
@@ -683,17 +683,137 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 12]
      "aud": "http://www.example.com",
      "delivery": {
        "delivery_method": "urn:example:secevent:delivery:http_post",
-       "url": "https://receiver.example.com/events"
+       "url": "https://receiver.example.com/events",
      },
-     "status": "paused",
-     "events": [
+     "events_supported": [
        "urn:example:secevent:events:type_1",
        "urn:example:secevent:events:type_2",
-       "urn:example:secevent:events:type_3"
-     ]
+       "urn:example:secevent:events:type_3",
+     ],
+     "events_requested": [
+       "urn:example:secevent:events:type_2",
+       "urn:example:secevent:events:type_3",
+       "urn:example:secevent:events:type_4",
+     ],
+     "events_delivered": [
+       "urn:example:secevent:events:type_2",
+       "urn:example:secevent:events:type_3",
+     ],
+     "min_verification_interval": 60,
    }
 
-         Figure 12: Example: Update Stream Configuration Response
+          Figure 12: Example: Read Stream Configuration Response
+
+   Errors are signaled with HTTP staus codes as follows:
+
+   +------+------------------------------------------------------------+
+   | Code | Description                                                |
+   +------+------------------------------------------------------------+
+   | 401  | if authorization failed or it is missing                   |
+   |      |                                                            |
+   | 403  | if the Event Receiver is not allowed to read the stream    |
+   |      | configuration                                              |
+   |      |                                                            |
+   | 404  | if there is no Event Stream configured for this Event      |
+   |      | Receiver                                                   |
+   +------+------------------------------------------------------------+
+
+                 Table 2: Read Stream Configuration Errors
+
+
+
+
+
+
+Scurtescu, et al.        Expires August 3, 2018                [Page 13]
+
+                              risc-secevent                 January 2018
+
+
+4.1.2.2.  Updating a Stream's Configuration
+
+   An Event Receiver updates the current configuration of a stream by
+   making an HTTP POST request to the Configuration Endpoint.  The POST
+   body contains a [JSON] representation of the updated configuration.
+   On receiving a valid request the Event Transmitter responds with a
+   200 OK response containing a [JSON] representation of the updated
+   stream configuration in the body.
+
+   The full set of editable properties must be present in the POST body,
+   not only the ones that are specifically intended to be changed.
+   Missing properties SHOULD be interpreted as requested to be deleted.
+   Event Receivers should read the configuration first, modify the
+   [JSON] representation, then make an update request.
+
+   Properties that cannot be updated MAY be present, but they MUST match
+   the expected value.
+
+   The following is a non-normative example request to update an Event
+   Stream's configuration:
+
+   POST /set/stream HTTP/1.1
+   Host: transmitter.example.com
+   Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
+
+   {
+     "aud": "http://www.example.com",
+     "delivery": {
+       "delivery_method": "urn:example:secevent:delivery:http_post",
+       "url": "https://receiver.example.com/events",
+     },
+     "events_requested": [
+       "urn:example:secevent:events:type_2",
+       "urn:example:secevent:events:type_3",
+       "urn:example:secevent:events:type_4",
+     ],
+   }
+
+          Figure 13: Example: Update Stream Configuration Request
+
+   The following is a non-normative example response:
+
+
+
+
+
+
+
+
+
+
+Scurtescu, et al.        Expires August 3, 2018                [Page 14]
+
+                              risc-secevent                 January 2018
+
+
+   HTTP/1.1 200 OK
+   Content-Type: application/json; charset=UTF-8
+   Cache-Control: no-store
+   Pragma: no-cache
+
+   {
+     "aud": "http://www.example.com",
+     "delivery": {
+       "delivery_method": "urn:example:secevent:delivery:http_post",
+       "url": "https://receiver.example.com/events",
+     },
+     "events_supported": [
+       "urn:example:secevent:events:type_1",
+       "urn:example:secevent:events:type_2",
+       "urn:example:secevent:events:type_3",
+     ],
+     "events_requested": [
+       "urn:example:secevent:events:type_2",
+       "urn:example:secevent:events:type_3",
+       "urn:example:secevent:events:type_4",
+     ],
+     "events_delivered": [
+       "urn:example:secevent:events:type_2",
+       "urn:example:secevent:events:type_3",
+     ],
+   }
+
+         Figure 14: Example: Update Stream Configuration Response
 
    Errors are signaled with HTTP staus codes as follows:
 
@@ -709,28 +829,27 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 12]
    |      | configuration                                              |
    +------+------------------------------------------------------------+
 
-                Table 2: Update Stream Configuration Errors
+                Table 3: Update Stream Configuration Errors
 
-4.1.2.  Subjects
+
+
+
+
+
+
+Scurtescu, et al.        Expires August 3, 2018                [Page 15]
+
+                              risc-secevent                 January 2018
+
+
+4.1.3.  Subjects
 
    An Event Receiver can indicate to an Event Transmitter whether or not
    the receiver wants to receive events about a particular subject by
    "adding" or "removing" that subject to the Event Stream,
    respectively.
 
-
-
-
-
-
-
-
-Scurtescu, et al.        Expires August 3, 2018                [Page 13]
-
-                              risc-secevent                 January 2018
-
-
-4.1.2.1.  Adding a Subject to a Stream
+4.1.3.1.  Adding a Subject to a Stream
 
    To add a subject to an Event Stream, the Event Receiver makes an HTTP
    POST request to the Add Subject Endpoint, containing in the body a
@@ -766,7 +885,7 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 13]
    |      | gvien amount of time                                       |
    +------+------------------------------------------------------------+
 
-                        Table 3: Add Subject Errors
+                        Table 4: Add Subject Errors
 
    The following is a non-normative example request to add a subject to
    a stream, where the subject is identified by an OpenID Connect email
@@ -774,14 +893,7 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 13]
 
 
 
-
-
-
-
-
-
-
-Scurtescu, et al.        Expires August 3, 2018                [Page 14]
+Scurtescu, et al.        Expires August 3, 2018                [Page 16]
 
                               risc-secevent                 January 2018
 
@@ -794,7 +906,7 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 14]
      "email": "example.user@example.com"
    }
 
-                  Figure 13: Example: Add Subject Request
+                  Figure 15: Example: Add Subject Request
 
    The following is a non-normative example response to a successful
    request:
@@ -804,9 +916,9 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 14]
    Cache-Control: no-store
    Pragma: no-cache
 
-                 Figure 14: Example: Add Subject Response
+                 Figure 16: Example: Add Subject Response
 
-4.1.2.2.  Removing a Subject
+4.1.3.2.  Removing a Subject
 
    To remove a subject from an Event Stream, the Event Receiver makes an
    HTTP POST request to the Remove Subject Endpoint, containing in the
@@ -837,7 +949,7 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 14]
 
 
 
-Scurtescu, et al.        Expires August 3, 2018                [Page 15]
+Scurtescu, et al.        Expires August 3, 2018                [Page 17]
 
                               risc-secevent                 January 2018
 
@@ -861,7 +973,7 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 15]
    |      | gvien amount of time                                       |
    +------+------------------------------------------------------------+
 
-                      Table 4: Remove Subject Errors
+                      Table 5: Remove Subject Errors
 
    The following is a non-normative example request where the subject is
    identified by a phone_number claim:
@@ -874,7 +986,7 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 15]
      "phone_number": "+1 206 555 0123"
    }
 
-                Figure 15: Example: Remove Subject Request
+                Figure 17: Example: Remove Subject Request
 
    The following is a non-normative example response to a successful
    request:
@@ -884,7 +996,7 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 15]
    Cache-Control: no-store
    Pragma: no-cache
 
-                Figure 16: Example: Remove Subject Response
+                Figure 18: Example: Remove Subject Response
 
 
 
@@ -893,12 +1005,12 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 15]
 
 
 
-Scurtescu, et al.        Expires August 3, 2018                [Page 16]
+Scurtescu, et al.        Expires August 3, 2018                [Page 18]
 
                               risc-secevent                 January 2018
 
 
-4.1.3.  Verification
+4.1.4.  Verification
 
    In some cases, the frequency of event transmission on an Event Stream
    will be very low, making it difficult for an Event Receiver to tell
@@ -914,7 +1026,7 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 16]
    An Event Transmitter MAY send a Verification Event at any time, even
    if one was not requested by the Event Receiver.
 
-4.1.3.1.  Verification Event
+4.1.4.1.  Verification Event
 
    The Verification Event is a standard SET with the following
    attributes:
@@ -938,7 +1050,7 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 16]
    Stream that fails to successfully verify based on the acknowledgement
    or lack of acknowledgement by the Event Receiver.
 
-4.1.3.2.  Triggering a Verification Event.
+4.1.4.2.  Triggering a Verification Event.
 
    To request that a verification event be sent over an Event Stream,
    the Event Receiver makes an HTTP POST request to the Verification
@@ -949,7 +1061,7 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 16]
 
 
 
-Scurtescu, et al.        Expires August 3, 2018                [Page 17]
+Scurtescu, et al.        Expires August 3, 2018                [Page 19]
 
                               risc-secevent                 January 2018
 
@@ -988,7 +1100,7 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 17]
    |      | gvien amount of time                                       |
    +------+------------------------------------------------------------+
 
-                       Table 5: Verification Errors
+                       Table 6: Verification Errors
 
    The following is a non-normative example request to trigger a
    verification event:
@@ -1005,7 +1117,7 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 17]
 
 
 
-Scurtescu, et al.        Expires August 3, 2018                [Page 18]
+Scurtescu, et al.        Expires August 3, 2018                [Page 20]
 
                               risc-secevent                 January 2018
 
@@ -1019,7 +1131,7 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 18]
      "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
    }
 
-             Figure 17: Example: Trigger Verification Request
+             Figure 19: Example: Trigger Verification Request
 
    The following is a non-normative example response to a successful
    request:
@@ -1029,7 +1141,7 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 18]
    Cache-Control: no-store
    Pragma: no-cache
 
-             Figure 18: Example: Trigger Verification Response
+             Figure 20: Example: Trigger Verification Response
 
    And the following is a non-normative example of a verification event
    sent to the Event Receiver as a result of the above request:
@@ -1046,7 +1158,7 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 18]
      ],
    }
 
-                   Figure 19: Example: Verification SET
+                   Figure 21: Example: Verification SET
 
 4.2.  Authorization
 
@@ -1061,7 +1173,7 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 18]
 
 
 
-Scurtescu, et al.        Expires August 3, 2018                [Page 19]
+Scurtescu, et al.        Expires August 3, 2018                [Page 21]
 
                               risc-secevent                 January 2018
 
@@ -1117,7 +1229,7 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 19]
 
 
 
-Scurtescu, et al.        Expires August 3, 2018                [Page 20]
+Scurtescu, et al.        Expires August 3, 2018                [Page 22]
 
                               risc-secevent                 January 2018
 
@@ -1173,7 +1285,7 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 20]
 
 
 
-Scurtescu, et al.        Expires August 3, 2018                [Page 21]
+Scurtescu, et al.        Expires August 3, 2018                [Page 23]
 
                               risc-secevent                 January 2018
 
@@ -1229,7 +1341,7 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 21]
 
 
 
-Scurtescu, et al.        Expires August 3, 2018                [Page 22]
+Scurtescu, et al.        Expires August 3, 2018                [Page 24]
 
                               risc-secevent                 January 2018
 
@@ -1285,7 +1397,7 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 22]
 
 
 
-Scurtescu, et al.        Expires August 3, 2018                [Page 23]
+Scurtescu, et al.        Expires August 3, 2018                [Page 25]
 
                               risc-secevent                 January 2018
 
@@ -1341,7 +1453,7 @@ Authors' Addresses
 
 
 
-Scurtescu, et al.        Expires August 3, 2018                [Page 24]
+Scurtescu, et al.        Expires August 3, 2018                [Page 26]
 
                               risc-secevent                 January 2018
 
@@ -1397,4 +1509,4 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 24]
 
 
 
-Scurtescu, et al.        Expires August 3, 2018                [Page 25]
+Scurtescu, et al.        Expires August 3, 2018                [Page 27]

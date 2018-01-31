@@ -325,6 +325,106 @@ Content-Type: application/json
           applicable Event Stream for any given request, e.g. from authentication credentials. The
           definition of such mechanisms is outside the scope of this specification.</t>
 
+        <section anchor="status" title="Stream Status">
+          <section anchor="reading-a-streams-status" title="Reading a Stream’s Status">
+            <t>An Event Receiver checks the current status of an event stream by making an HTTP
+              GET request to the stream’s Status Endpoint. On receiving a valid request the Event
+              Transmitter responds with a 200 OK response containing a <xref target="JSON"/>
+              object with a single attribute <spanx style="verb">status</spanx>, whose string value 
+              MUST have one of the following values:<list style="hanging">
+                <t hangText="enabled"><vspace blankLines="0"/> The transmitter will transmit
+                  events over the stream, according to the stream’s configured delivery
+                  method.</t>
+                <t hangText="paused"><vspace blankLines="0"/> The transmitter will not transmit
+                  events over the stream. The transmitter will hold any events it would have
+                  transmitted while paused, and will transmit them when the stream’s status
+                  becomes “enabled”.</t>
+                <t hangText="disabled"><vspace blankLines="0"/> The transmitter will not
+                  transmit events over the stream, and will not hold any events for later
+                  transmission.</t>
+              </list></t>
+            
+            <t>The following is a non-normative example request to check an event stream’s
+              status:</t>
+            
+            <figure title="Example: Check Stream Status Request" anchor="figstatusreq">
+              <artwork><![CDATA[
+GET /set/status HTTP/1.1
+Host: transmitter.example.com
+Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
+]]></artwork>
+            </figure>
+            
+            <t>The following is a non-normative example response:</t>
+            
+            <figure title="Example: Check Stream Status Response" anchor="figstatusresp">
+              <artwork><![CDATA[
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=UTF-8
+Cache-Control: no-store
+Pragma: no-cache
+
+{
+  "status": "enabled"
+}
+]]></artwork>
+            </figure>
+          </section>
+          
+          <section anchor="updating-a-streams-status" title="Updating a Stream's Status">
+            <t>An Event Receiver updates the current status of a stream by making an HTTP
+              POST request to the Status Endpoint. The POST body contains a <xref target="JSON"/>
+              representation of the updated status. On receiving a valid request the Event
+              Transmitter responds with a 200 OK response containing a <xref target="JSON"/>
+              representation of the updated stream status in the body.</t>
+            
+            <t>The following is a non-normative example request to update an Event Stream’s
+              status:</t>
+            
+            <figure title="Example: Update Stream Status Request"
+              anchor="figupdatestatusreq">
+              <artwork><![CDATA[
+POST /set/status HTTP/1.1
+Host: transmitter.example.com
+Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
+
+{
+  "status": "paused",
+}
+]]></artwork>
+            </figure>
+            
+            <t>The following is a non-normative example response:</t>
+            
+            <figure title="Example: Update Stream Status Response"
+              anchor="figupdatestatusresp">
+              <artwork><![CDATA[
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=UTF-8
+Cache-Control: no-store
+Pragma: no-cache
+
+{
+  "status": "paused",
+}
+]]></artwork>
+            </figure>
+            
+            <t>Errors are signaled with HTTP staus codes as follows:</t>
+            
+            <texttable title="Update Stream Configuration Errors" anchor="tabupdatestatus">
+              <ttcol align="left">Code</ttcol>
+              <ttcol align="left">Description</ttcol>
+              <c>400</c>
+              <c>if the request body cannot be parsed or if the request is otherwise invalid</c>
+              <c>401</c>
+              <c>if authorization failed or it is missing</c>
+              <c>403</c>
+              <c>if the Event Receiver is not allowed to update the stream status</c>
+            </texttable>
+          </section>
+        </section>
+        
         <section anchor="stream" title="Stream Configuration">
           <t>An Event Stream’s configuration is represented as a JSON object with the following
             properties:</t>
@@ -357,56 +457,8 @@ Content-Type: application/json
             <t hangText="subject_type"> The subject type that the Receiver wants for the events.
               If not set then the Transmitter might decide to use a subject type that discloses more
               infirmation than necessary.</t>
-            <t hangText="status"><vspace blankLines="0"/> A string indicating the current status
-              of the event stream. It MUST have one of the following values: <list
-                style="hanging">
-                <t hangText="enabled"><vspace blankLines="0"/> The transmitter will transmit
-                  events over the stream, according to the stream’s configured delivery
-                  method.</t>
-                <t hangText="paused"><vspace blankLines="0"/> The transmitter will not transmit
-                  events over the stream. The transmitter will hold any events it would have
-                  transmitted while paused, and will transmit them when the stream’s status
-                  becomes “enabled”.</t>
-                <t hangText="disabled"><vspace blankLines="0"/> The transmitter will not
-                  transmit events over the stream, and will not hold any events for later
-                  transmission.</t>
-              </list></t>
             </list></t>
-
-          <section anchor="checking-a-streams-status" title="Checking a Stream’s Status">
-            <t>An Event Receiver checks the current status of an event stream by making an HTTP
-              GET request to the stream’s Status Endpoint. On receiving a valid request the Event
-              Transmitter responds with a 200 OK response containing a <xref target="JSON"/>
-              object with a single attribute “status”, whose string value is the value of the
-              stream’s status.</t>
-
-            <t>The following is a non-normative example request to check an event stream’s
-              status:</t>
-
-            <figure title="Example: Check Stream Status Request" anchor="figstatusreq">
-              <artwork><![CDATA[
-GET /set/stream/status HTTP/1.1
-Host: transmitter.example.com
-Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
-]]></artwork>
-            </figure>
-
-            <t>The following is a non-normative example response:</t>
-
-            <figure title="Example: Check Stream Status Response" anchor="figstatusresp">
-              <artwork><![CDATA[
-HTTP/1.1 200 OK
-Content-Type: application/json; charset=UTF-8
-Cache-Control: no-store
-Pragma: no-cache
-
-{
-  "status": "enabled"
-}
-]]></artwork>
-            </figure>
-          </section>
-
+          
           <section anchor="reading-a-streams-configuration"
             title="Reading a Stream’s Configuration">
             <t>An Event Receiver gets the current configuration of a stream by making an HTTP GET
@@ -440,7 +492,6 @@ Pragma: no-cache
     "delivery_method": "urn:example:secevent:delivery:http_post",
     "url": "https://receiver.example.com/events",
   },
-  "status": "enabled",
   "events_supported": [
     "urn:example:secevent:events:type_1",
     "urn:example:secevent:events:type_2",
@@ -477,7 +528,7 @@ Pragma: no-cache
           <section anchor="updating-a-streams-configuration"
             title="Updating a Stream’s Configuration">
             <t>An Event Receiver updates the current configuration of a stream by making an HTTP
-              POST request to the Configuration Endpoint. The POST body contains a {{!JSON}
+              POST request to the Configuration Endpoint. The POST body contains a <xref target="JSON"/>
               representation of the updated configuration. On receiving a valid request the Event
               Transmitter responds with a 200 OK response containing a <xref target="JSON"/>
               representation of the updated stream configuration in the body.</t>
@@ -491,7 +542,7 @@ Pragma: no-cache
             <t>Properties that cannot be updated MAY be present, but they MUST match the expected
               value.</t>
 
-            <t>The following is a non-normative example request to read an Event Stream’s
+            <t>The following is a non-normative example request to update an Event Stream’s
               configuration:</t>
 
             <figure title="Example: Update Stream Configuration Request"
@@ -507,7 +558,6 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
     "delivery_method": "urn:example:secevent:delivery:http_post",
     "url": "https://receiver.example.com/events",
   },
-  "status": "paused",
   "events_requested": [
     "urn:example:secevent:events:type_2",
     "urn:example:secevent:events:type_3",
@@ -533,7 +583,6 @@ Pragma: no-cache
     "delivery_method": "urn:example:secevent:delivery:http_post",
     "url": "https://receiver.example.com/events",
   },
-  "status": "paused",
   "events_supported": [
     "urn:example:secevent:events:type_1",
     "urn:example:secevent:events:type_2",
