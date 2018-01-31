@@ -51,7 +51,7 @@
       </address>
     </author>
 
-    <date year="2018" month="January" day="29"/>
+    <date year="2018" month="January" day="30"/>
 
     <workgroup>RISC Working Group</workgroup>
 
@@ -155,7 +155,7 @@
       <t>This section defines a mechanism for Receivers to obtain Transmitter configuration 
       information.</t>
       
-      <section title="Transmitter Configuration Metadata">
+      <section anchor="discovery-meta" title="Transmitter Configuration Metadata">
         <t>Transmitters have metadata describing their configuration:<list style="hanging">
           <t hangText="issuer">REQUIRED. URL using the https scheme with no query or fragment component that the
             Transmitter asserts as its Issuer Identifier. This MUST be identical to the iss Claim value in
@@ -174,26 +174,101 @@
       </section>
       
       <section title="Obtaining Transmitter Configuration Information">
-        <t>Using the Issuer as documented by the Transmitter, the Transmitter configuration
-        information can be retrieved.</t>
+        <t>Using the Issuer as documented by the Transmitter, the Transmitter Configuration
+        Information can be retrieved.</t>
         
         <t>Transmitters supporting Discovery MUST make a JSON document available at the path formed 
-          by concatenating the string "/.well-known/risc-configuration" to the Issuer. The syntax and 
-          semantics of ".well-known" are defined in <xref target="RFC5785">RFC 5785</xref> and apply to the Issuer value 
-          when it contains no path component. "risc-configuration" MUST point to a JSON document 
-          compliant with this specification and MUST be returned using the "application/json" content 
+          by concatenating the string <spanx style="verb">/.well-known/risc-configuration</spanx> to the Issuer. The syntax and 
+          semantics of <spanx style="verb">.well-known</spanx> are defined in <xref target="RFC5785"/> and apply to the Issuer value 
+          when it contains no path component. <spanx style="verb">risc-configuration</spanx> MUST point to a JSON document 
+          compliant with this specification and MUST be returned using the <spanx style="verb">application/json</spanx> content 
           type.</t>
         
         <section title="Transmitter Configuration Request">
-          <t>TODO</t>
+          <t>A Transmitter Configuration Document MUST be queried using an HTTP
+            <spanx style="verb">GET</spanx> request at the previously specified path.</t>
+          
+          <t>The Receiver would make the following request to the Issuer <spanx style="verb">https://tr.example.com</spanx>
+            to obtain its Configuration information, since the Issuer contains no path component:
+            <figure title="Example: Transmitter Configuration Request (without path)" anchor="figdiscoveryrequest">
+              <artwork><![CDATA[
+GET /.well-known/risc-configuration HTTP/1.1
+Host: tr.example.com
+]]></artwork>
+            </figure>
+          </t>
+          
+          <t>
+            If the  Issuer value contains a path component, any terminating <spanx style="verb">/</spanx> MUST be
+            removed before appending <spanx style="verb">/.well-known/risc-configuration</spanx>.
+            The Receiver would make the following request to the Issuer <spanx style="verb">https://tr.example.com/issuer1</spanx>
+            to obtain its Configuration information, since the Issuer contains a path component:
+            <figure title="Example: Transmitter Configuration Request (with path)" anchor="figdiscoveryrequestpath">
+              <artwork><![CDATA[
+GET /issuer1/.well-known/risc-configuration HTTP/1.1
+Host: tr.example.com
+]]></artwork>
+            </figure>
+          </t>
+          
+          <t>
+            Using path components enables supporting multiple issuers per host. This is required in some multi-tenant hosting 
+            configurations. This use of <spanx style="verb">.well-known</spanx> is for supporting multiple issuers per host; 
+            unlike its use in <xref target="RFC5785"/>, it does not provide general information about the host.
+          </t>
         </section>
         
         <section title="Transmitter Configuration Response">
-          <t>TODO</t>
+          <t>The response is a set of Claims about the Transmitter's configuration, including all necessary endpoints and
+            public key location information. A successful response MUST use the 200 OK HTTP status code and return
+            a JSON object using the <spanx style="verb">application/json</spanx> content type that contains a set of Claims 
+            as its members that are a subset of the Metadata values defined in <xref target="discovery-meta"/>.
+            Other Claims MAY also be returned.</t>
+          
+          <t>Claims that return multiple values are represented as JSON arrays. Claims with zero elements MUST be omitted 
+            from the response.</t>
+          
+          <t>An error response uses the applicable HTTP status code value.</t>
+          
+          <t>
+            <figure title="Example: Transmitter Configuration Response" anchor="figdiscoveryresponse">
+              <artwork><![CDATA[
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "issuer":
+    "https://tr.example.com",
+  "jwks_uri":
+    "https://tr.example.com/jwks.json",
+  "delivery_methods_supported": [
+    "TODO", 
+    "TODO"],
+  "configuration_endpoint":
+    "https://tr.example.com/risc/mgmt/stream",
+  "status_endpoint":
+    "https://tr.example.com/risc/mgmt/status",
+  "add_subject_endpoint":
+    "https://tr.example.com/risc/mgmt/subject:add",
+  "remove_subject_endpoint":
+    "https://tr.example.com/risc/mgmt/subject:remove",
+  "verification_endpoint":
+    "https://tr.example.com/risc/mgmt/verification",
+}
+]]></artwork>
+            </figure>
+          </t>
         </section>
         
         <section title="Transmitter Configuration Validation">
-          <t>TODO</t>
+          <t>If any of the validation procedures defined in this specification fail, any operations requiring
+            the information that failed to correctly validate MUST be aborted and the information that failed 
+            to validate MUST NOT be used.</t>
+          
+          <t>The <spanx style="verb">issuer</spanx> value returned MUST be identical to the Issuer URL that 
+            was directly used to retrieve the configuration information. This MUST also be identical to the 
+            <spanx style="verb">iss</spanx> Claim value in Security Event Tokens issued from this Transmitter.
+          </t>
         </section>
       </section>
     </section>
@@ -485,8 +560,8 @@ Pragma: no-cache
             <t>The Event Transmitter MAY choose to silently ignore the request, for example if the
               subject has previously indicated to the transmitter that they do not want events to
               be transmitted to the Event Receiver. In this case, the transmitter MAY return an
-              empty 200 OK response or an appropriate error code (See <xref target="management-sec"
-                >Security Considerations</xref>).</t>
+              empty 200 OK response or an appropriate error code. See <xref target="management-sec"
+                >Security Considerations</xref>.</t>
 
             <t>Errors are signaled with HTTP status codes as follows:</t>
 
@@ -789,8 +864,7 @@ Pragma: no-cache
             Event Token (SET)"</xref> spec.</t>
 
         <section anchor="signature-key-resolution" title="Signature Key Resolution">
-          <t>The signature key can be obtained through the "jwks_uri" <eref target="discovery">
-            Transmitter configuration</eref>.</t>
+          <t>The signature key can be obtained through the "jwks_uri", see <xref target="discovery"/>.</t>
         </section>
 
         <section anchor="event-subjects" title="RISC Event Subject">
@@ -977,10 +1051,22 @@ Pragma: no-cache
       <reference anchor="OIDC" target="http://openid.net/specs/openid-connect-core-1_0.html">
         <front>
           <title>OpenID Connect Core 1.0</title>
-          <author>
-            <organization>OpenID Foundation</organization>
+          <author fullname="Nat Sakimura" initials="N." surname="Sakimura">
+            <organization abbrev="NRI">Nomura Research Institute, Ltd.</organization>
           </author>
-          <date/>
+          <author fullname="John Bradley" initials="J." surname="Bradley">
+            <organization abbrev="Ping Identity">Ping Identity</organization>
+          </author>
+          <author fullname="Michael B. Jones" initials="M.B." surname="Jones">
+            <organization abbrev="Microsoft">Microsoft</organization>
+          </author>
+          <author fullname="Breno de Medeiros" initials="B." surname="de Medeiros">
+            <organization abbrev="Google">Google</organization>
+          </author>
+          <author fullname="Chuck Mortimore" initials="C." surname="Mortimore">
+            <organization abbrev="Salesforce">Salesforce</organization>
+          </author>
+          <date day="8" month="November" year="2014"/>
         </front>
       </reference>
 
@@ -1044,6 +1130,35 @@ Pragma: no-cache
         <seriesInfo name="RFC" value="5785"/>
         <seriesInfo name="DOI" value="10.17487/RFC5785"/>
       </reference>
+      
+      <reference anchor="OIDC-DISCOVERY" target="https://openid.net/specs/openid-connect-discovery-1_0.html">
+        <front>
+          <title>OpenID Connect Discovery 1.0</title>
+          <author fullname="Nat Sakimura" initials="N." surname="Sakimura">
+            <organization abbrev="NRI">Nomura Research Institute, Ltd.</organization>
+          </author>
+          <author fullname="John Bradley" initials="J." surname="Bradley">
+            <organization abbrev="Ping Identity">Ping Identity</organization>
+          </author>
+          <author fullname="Michael B. Jones" initials="M.B." surname="Jones">
+            <organization abbrev="Microsoft">Microsoft</organization>
+          </author>
+          <author fullname="Edmund Jay" initials="E." surname="Jay">
+            <organization abbrev="Illumila">Illumila</organization>
+          </author>
+          <date year="2014" month="November" day="8"/>
+          <abstract>
+            <t>This specification defines a mechanism for an OpenID Connect Relying Party to discover the End-User's
+              OpenID Provider and obtain information needed to interact with it, including its OAuth 2.0 endpoint 
+              locations.</t>
+          </abstract>
+        </front>
+      </reference>
     </references>
+    
+    <section title="Acknowledgements" anchor="ack">
+      <t><xref target="discovery">Transmitter Configuration Discovery</xref> is based on 
+        <xref target="OIDC-DISCOVERY">OpenID Connect Discovery 1.0</xref>.</t>
+    </section>
   </back>
 </rfc>

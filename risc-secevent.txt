@@ -10,7 +10,7 @@
                                                                   Oracle
                                                               J. Bradley
                                                                   Yubico
-                                                        January 29, 2018
+                                                        January 30, 2018
 
 
                   RISC profile of IETF Security Events
@@ -46,52 +46,51 @@ Table of Contents
      3.1.  Transmitter Configuration Metadata  . . . . . . . . . . .   4
      3.2.  Obtaining Transmitter Configuration Information . . . . .   5
        3.2.1.  Transmitter Configuration Request . . . . . . . . . .   5
-       3.2.2.  Transmitter Configuration Response  . . . . . . . . .   5
-       3.2.3.  Transmitter Configuration Validation  . . . . . . . .   5
-   4.  Management API for SET Event Streams  . . . . . . . . . . . .   5
-     4.1.  Event Stream Management . . . . . . . . . . . . . . . . .   6
+       3.2.2.  Transmitter Configuration Response  . . . . . . . . .   6
+       3.2.3.  Transmitter Configuration Validation  . . . . . . . .   7
+   4.  Management API for SET Event Streams  . . . . . . . . . . . .   7
+     4.1.  Event Stream Management . . . . . . . . . . . . . . . . .   7
 
 
 
-Scurtescu, et al.        Expires August 2, 2018                 [Page 1]
+Scurtescu, et al.        Expires August 3, 2018                 [Page 1]
 
                               risc-secevent                 January 2018
 
 
-       4.1.1.  Stream Configuration  . . . . . . . . . . . . . . . .   7
-         4.1.1.1.  Checking a Stream's Status  . . . . . . . . . . .   8
-         4.1.1.2.  Reading a Stream's Configuration  . . . . . . . .   8
-         4.1.1.3.  Updating a Stream's Configuration . . . . . . . .  10
-       4.1.2.  Subjects  . . . . . . . . . . . . . . . . . . . . . .  11
-         4.1.2.1.  Adding a Subject to a Stream  . . . . . . . . . .  12
-         4.1.2.2.  Removing a Subject  . . . . . . . . . . . . . . .  13
-       4.1.3.  Verification  . . . . . . . . . . . . . . . . . . . .  15
-         4.1.3.1.  Verification Event  . . . . . . . . . . . . . . .  15
-         4.1.3.2.  Triggering a Verification Event.  . . . . . . . .  15
-     4.2.  Authorization . . . . . . . . . . . . . . . . . . . . . .  17
-     4.3.  Subject Claims for Subject Add and Remove Operations  . .  18
-     4.4.  Security Considerations . . . . . . . . . . . . . . . . .  18
-       4.4.1.  Subject Probing . . . . . . . . . . . . . . . . . . .  18
-       4.4.2.  Information Harvesting  . . . . . . . . . . . . . . .  18
-       4.4.3.  Malicious Subject Removal . . . . . . . . . . . . . .  18
-   5.  Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .  19
-     5.1.  Security Event Token Profle . . . . . . . . . . . . . . .  19
-       5.1.1.  Signature Key Resolution  . . . . . . . . . . . . . .  19
-       5.1.2.  RISC Event Subject  . . . . . . . . . . . . . . . . .  19
-       5.1.3.  aud Claim . . . . . . . . . . . . . . . . . . . . . .  19
-       5.1.4.  Security Considerations . . . . . . . . . . . . . . .  20
-     5.2.  SET Token Delivery Using HTTP Profile . . . . . . . . . .  20
-       5.2.1.  Stream Configuration Metadata . . . . . . . . . . . .  20
-         5.2.1.1.  Push Delivery using HTTP  . . . . . . . . . . . .  20
-         5.2.1.2.  Polling Delivery using HTTP . . . . . . . . . . .  20
-   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  20
-     6.1.  RISC Subject Identifier Types Registry  . . . . . . . . .  20
-   7.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .  21
-     7.1.  Subject Information Leakage . . . . . . . . . . . . . . .  21
-   8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  21
-     8.1.  Normative References  . . . . . . . . . . . . . . . . . .  21
-     8.2.  URIs  . . . . . . . . . . . . . . . . . . . . . . . . . .  22
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  22
+       4.1.1.  Stream Configuration  . . . . . . . . . . . . . . . .   8
+         4.1.1.1.  Checking a Stream's Status  . . . . . . . . . . .   9
+         4.1.1.2.  Reading a Stream's Configuration  . . . . . . . .  10
+         4.1.1.3.  Updating a Stream's Configuration . . . . . . . .  11
+       4.1.2.  Subjects  . . . . . . . . . . . . . . . . . . . . . .  13
+         4.1.2.1.  Adding a Subject to a Stream  . . . . . . . . . .  14
+         4.1.2.2.  Removing a Subject  . . . . . . . . . . . . . . .  15
+       4.1.3.  Verification  . . . . . . . . . . . . . . . . . . . .  17
+         4.1.3.1.  Verification Event  . . . . . . . . . . . . . . .  17
+         4.1.3.2.  Triggering a Verification Event.  . . . . . . . .  17
+     4.2.  Authorization . . . . . . . . . . . . . . . . . . . . . .  19
+     4.3.  Subject Claims for Subject Add and Remove Operations  . .  20
+     4.4.  Security Considerations . . . . . . . . . . . . . . . . .  20
+       4.4.1.  Subject Probing . . . . . . . . . . . . . . . . . . .  20
+       4.4.2.  Information Harvesting  . . . . . . . . . . . . . . .  20
+       4.4.3.  Malicious Subject Removal . . . . . . . . . . . . . .  20
+   5.  Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .  21
+     5.1.  Security Event Token Profle . . . . . . . . . . . . . . .  21
+       5.1.1.  Signature Key Resolution  . . . . . . . . . . . . . .  21
+       5.1.2.  RISC Event Subject  . . . . . . . . . . . . . . . . .  21
+       5.1.3.  aud Claim . . . . . . . . . . . . . . . . . . . . . .  21
+       5.1.4.  Security Considerations . . . . . . . . . . . . . . .  22
+     5.2.  SET Token Delivery Using HTTP Profile . . . . . . . . . .  22
+       5.2.1.  Stream Configuration Metadata . . . . . . . . . . . .  22
+         5.2.1.1.  Push Delivery using HTTP  . . . . . . . . . . . .  22
+         5.2.1.2.  Polling Delivery using HTTP . . . . . . . . . . .  22
+   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  22
+     6.1.  RISC Subject Identifier Types Registry  . . . . . . . . .  22
+   7.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .  23
+     7.1.  Subject Information Leakage . . . . . . . . . . . . . . .  23
+   8.  Normative References  . . . . . . . . . . . . . . . . . . . .  23
+   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  24
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  24
 
 1.  Introduction
 
@@ -106,15 +105,15 @@ Scurtescu, et al.        Expires August 2, 2018                 [Page 1]
    The RISC profile defines a structure called a Subject Identifier: a
    JSON object containing a set of claims that collectively uniquely
    identify a subject, according to a simple schema called a Subject
+   Identifier Type.  Every Subject Identifier MUST contain a
 
 
 
-Scurtescu, et al.        Expires August 2, 2018                 [Page 2]
+Scurtescu, et al.        Expires August 3, 2018                 [Page 2]
 
                               risc-secevent                 January 2018
 
 
-   Identifier Type.  Every Subject Identifier MUST contain a
    "subject_type" claim, whose value MUST be a name that uniquely
    identifies the Subject Identifier Type of the Subject Identifier.
    Any remaining claims within the Subject Identifier MUST be
@@ -124,8 +123,8 @@ Scurtescu, et al.        Expires August 2, 2018                 [Page 2]
    claims not defined by its Subject Identifier Type.
 
    {
-   "subject_type": "email",
-   "email": "foo@example.com"
+     "subject_type": "email",
+     "email": "foo@example.com"
    }
 
    A Subject Identifier that identifies a subject by email address.
@@ -133,9 +132,9 @@ Scurtescu, et al.        Expires August 2, 2018                 [Page 2]
                 Figure 1: Example: Email Subject Identifier
 
    {
-   "subject_type": "iss-sub",
-   "iss": "https://issuer.example.com/",
-   "sub": "abc1234"
+     "subject_type": "iss-sub",
+     "iss": "https://issuer.example.com/",
+     "sub": "abc1234"
    }
 
    A Subject Identifier that identifies a subject by an identifier
@@ -165,7 +164,8 @@ Scurtescu, et al.        Expires August 2, 2018                 [Page 2]
 
 
 
-Scurtescu, et al.        Expires August 2, 2018                 [Page 3]
+
+Scurtescu, et al.        Expires August 3, 2018                 [Page 3]
 
                               risc-secevent                 January 2018
 
@@ -221,7 +221,7 @@ Scurtescu, et al.        Expires August 2, 2018                 [Page 3]
 
 
 
-Scurtescu, et al.        Expires August 2, 2018                 [Page 4]
+Scurtescu, et al.        Expires August 3, 2018                 [Page 4]
 
                               risc-secevent                 January 2018
 
@@ -239,27 +239,116 @@ Scurtescu, et al.        Expires August 2, 2018                 [Page 4]
 3.2.  Obtaining Transmitter Configuration Information
 
    Using the Issuer as documented by the Transmitter, the Transmitter
-   configuration information can be retrieved.
+   Configuration Information can be retrieved.
 
    Transmitters supporting Discovery MUST make a JSON document available
    at the path formed by concatenating the string "/.well-known/risc-
    configuration" to the Issuer.  The syntax and semantics of ".well-
-   known" are defined in RFC 5785 and apply to the Issuer value when it
+   known" are defined in [RFC5785] and apply to the Issuer value when it
    contains no path component. "risc-configuration" MUST point to a JSON
    document compliant with this specification and MUST be returned using
    the "application/json" content type.
 
 3.2.1.  Transmitter Configuration Request
 
-   TODO
+   A Transmitter Configuration Document MUST be queried using an HTTP
+   "GET" request at the previously specified path.
+
+   The Receiver would make the following request to the Issuer
+   "https://tr.example.com" to obtain its Configuration information,
+   since the Issuer contains no path component:
+
+   GET /.well-known/risc-configuration HTTP/1.1
+   Host: tr.example.com
+
+    Figure 3: Example: Transmitter Configuration Request (without path)
+
+   If the Issuer value contains a path component, any terminating "/"
+   MUST be removed before appending "/.well-known/risc-configuration".
+   The Receiver would make the following request to the Issuer
+   "https://tr.example.com/issuer1" to obtain its Configuration
+   information, since the Issuer contains a path component:
+
+   GET /issuer1/.well-known/risc-configuration HTTP/1.1
+   Host: tr.example.com
+
+     Figure 4: Example: Transmitter Configuration Request (with path)
+
+
+
+
+Scurtescu, et al.        Expires August 3, 2018                 [Page 5]
+
+                              risc-secevent                 January 2018
+
+
+   Using path components enables supporting multiple issuers per host.
+   This is required in some multi-tenant hosting configurations.  This
+   use of ".well-known" is for supporting multiple issuers per host;
+   unlike its use in [RFC5785], it does not provide general information
+   about the host.
 
 3.2.2.  Transmitter Configuration Response
 
-   TODO
+   The response is a set of Claims about the Transmitter's
+   configuration, including all necessary endpoints and public key
+   location information.  A successful response MUST use the 200 OK HTTP
+   status code and return a JSON object using the "application/json"
+   content type that contains a set of Claims as its members that are a
+   subset of the Metadata values defined in Section 3.1.  Other Claims
+   MAY also be returned.
+
+   Claims that return multiple values are represented as JSON arrays.
+   Claims with zero elements MUST be omitted from the response.
+
+   An error response uses the applicable HTTP status code value.
+
+   HTTP/1.1 200 OK
+   Content-Type: application/json
+
+   {
+     "issuer":
+       "https://tr.example.com",
+     "jwks_uri":
+       "https://tr.example.com/jwks.json",
+     "delivery_methods_supported": [
+       "TODO",
+       "TODO"],
+     "configuration_endpoint":
+       "https://tr.example.com/risc/mgmt/stream",
+     "status_endpoint":
+       "https://tr.example.com/risc/mgmt/status",
+     "add_subject_endpoint":
+       "https://tr.example.com/risc/mgmt/subject:add",
+     "remove_subject_endpoint":
+       "https://tr.example.com/risc/mgmt/subject:remove",
+     "verification_endpoint":
+       "https://tr.example.com/risc/mgmt/verification",
+   }
+
+           Figure 5: Example: Transmitter Configuration Response
+
+
+
+
+
+
+Scurtescu, et al.        Expires August 3, 2018                 [Page 6]
+
+                              risc-secevent                 January 2018
+
 
 3.2.3.  Transmitter Configuration Validation
 
-   TODO
+   If any of the validation procedures defined in this specification
+   fail, any operations requiring the information that failed to
+   correctly validate MUST be aborted and the information that failed to
+   validate MUST NOT be used.
+
+   The "issuer" value returned MUST be identical to the Issuer URL that
+   was directly used to retrieve the configuration information.  This
+   MUST also be identical to the "iss" Claim value in Security Event
+   Tokens issued from this Transmitter.
 
 4.  Management API for SET Event Streams
 
@@ -267,20 +356,6 @@ Scurtescu, et al.        Expires August 2, 2018                 [Page 4]
    Transmitters and that can be used by Event Receivers to query the
    Event Stream status, to add and remove subjects and to trigger
    verification.
-
-
-
-
-
-
-
-
-
-
-Scurtescu, et al.        Expires August 2, 2018                 [Page 5]
-
-                              risc-secevent                 January 2018
-
 
    +------------+                +------------+
    |            | Stream Config  |            |
@@ -300,7 +375,7 @@ Scurtescu, et al.        Expires August 2, 2018                 [Page 5]
    |            |                |            |
    +------------+                +------------+
 
-                   Figure 3: Event Stream Management API
+                   Figure 6: Event Stream Management API
 
    How events are delivered and the structure of events are not in scope
    for this specification.
@@ -310,6 +385,14 @@ Scurtescu, et al.        Expires August 2, 2018                 [Page 5]
    Event Receivers manage how they receive events, and the subjects
    about which they want to receive events over an Event Stream by
    making HTTP requests to endpoints in the Event Stream Management API.
+
+
+
+
+Scurtescu, et al.        Expires August 3, 2018                 [Page 7]
+
+                              risc-secevent                 January 2018
+
 
    The Event Stream Management API is implemented by the Event
    Transmitter and consists of the following endpoints:
@@ -329,14 +412,6 @@ Scurtescu, et al.        Expires August 2, 2018                 [Page 5]
    Verification Endpoint
       An endpoint used to request the Event Transmitter transmit a
       Verification Event over the Event Stream.
-
-
-
-
-Scurtescu, et al.        Expires August 2, 2018                 [Page 6]
-
-                              risc-secevent                 January 2018
-
 
    An Event Transmitter MAY use the same URLs as endpoints for multiple
    streams, provided that the Event Transmitter has some mechanism
@@ -367,6 +442,14 @@ Scurtescu, et al.        Expires August 2, 2018                 [Page 6]
       with the value being a URI as defined in [DELIVERY].
 
    min_verification_interval
+
+
+
+Scurtescu, et al.        Expires August 3, 2018                 [Page 8]
+
+                              risc-secevent                 January 2018
+
+
       An integer indicating the minimum amount of time in seconds that
       must pass in between verification requests.  If an Event Receiver
       submits verification requests more frequently than this, the Event
@@ -385,14 +468,6 @@ Scurtescu, et al.        Expires August 2, 2018                 [Page 6]
       enabled
          The transmitter will transmit events over the stream, according
          to the stream's configured delivery method.
-
-
-
-
-Scurtescu, et al.        Expires August 2, 2018                 [Page 7]
-
-                              risc-secevent                 January 2018
-
 
       paused
          The transmitter will not transmit events over the stream.  The
@@ -419,9 +494,17 @@ Scurtescu, et al.        Expires August 2, 2018                 [Page 7]
    Host: transmitter.example.com
    Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
-              Figure 4: Example: Check Stream Status Request
+              Figure 7: Example: Check Stream Status Request
 
    The following is a non-normative example response:
+
+
+
+
+Scurtescu, et al.        Expires August 3, 2018                 [Page 9]
+
+                              risc-secevent                 January 2018
+
 
    HTTP/1.1 200 OK
    Content-Type: application/json; charset=UTF-8
@@ -429,10 +512,10 @@ Scurtescu, et al.        Expires August 2, 2018                 [Page 7]
    Pragma: no-cache
 
    {
-   "status": "enabled"
+     "status": "enabled"
    }
 
-              Figure 5: Example: Check Stream Status Response
+              Figure 8: Example: Check Stream Status Response
 
 4.1.1.2.  Reading a Stream's Configuration
 
@@ -442,14 +525,6 @@ Scurtescu, et al.        Expires August 2, 2018                 [Page 7]
    OK response containing a [JSON] representation of the stream's
    configuration in the body.
 
-
-
-
-Scurtescu, et al.        Expires August 2, 2018                 [Page 8]
-
-                              risc-secevent                 January 2018
-
-
    The following is a non-normative example request to read an Event
    Stream's configuration:
 
@@ -457,9 +532,35 @@ Scurtescu, et al.        Expires August 2, 2018                 [Page 8]
    Host: transmitter.example.com
    Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
-           Figure 6: Example: Read Stream Configuration Request
+           Figure 9: Example: Read Stream Configuration Request
 
    The following is a non-normative example response:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Scurtescu, et al.        Expires August 3, 2018                [Page 10]
+
+                              risc-secevent                 January 2018
+
 
    HTTP/1.1 200 OK
    Content-Type: application/json; charset=UTF-8
@@ -467,21 +568,21 @@ Scurtescu, et al.        Expires August 2, 2018                 [Page 8]
    Pragma: no-cache
 
    {
-   "aud": "http://www.example.com",
-   "delivery": {
-     "delivery_method": "urn:example:secevent:delivery:http_post",
-     "url": "https://receiver.example.com/events"
-   },
-   "status": "enabled",
-   "events": [
-     "urn:example:secevent:events:type_1",
-     "urn:example:secevent:events:type_2",
-     "urn:example:secevent:events:type_3"
-   ],
-   "min_verification_interval": 60,
+     "aud": "http://www.example.com",
+     "delivery": {
+       "delivery_method": "urn:example:secevent:delivery:http_post",
+       "url": "https://receiver.example.com/events"
+     },
+     "status": "enabled",
+     "events": [
+       "urn:example:secevent:events:type_1",
+       "urn:example:secevent:events:type_2",
+       "urn:example:secevent:events:type_3"
+     ],
+     "min_verification_interval": 60,
    }
 
-           Figure 7: Example: Read Stream Configuration Response
+          Figure 10: Example: Read Stream Configuration Response
 
    Errors are signaled with HTTP staus codes as follows:
 
@@ -499,13 +600,6 @@ Scurtescu, et al.        Expires August 2, 2018                 [Page 8]
 
                  Table 1: Read Stream Configuration Errors
 
-
-
-Scurtescu, et al.        Expires August 2, 2018                 [Page 9]
-
-                              risc-secevent                 January 2018
-
-
 4.1.1.3.  Updating a Stream's Configuration
 
    An Event Receiver updates the current configuration of a stream by
@@ -514,6 +608,15 @@ Scurtescu, et al.        Expires August 2, 2018                 [Page 9]
    On receiving a valid request the Event Transmitter responds with a
    200 OK response containing a [JSON] representation of the updated
    stream configuration in the body.
+
+
+
+
+
+Scurtescu, et al.        Expires August 3, 2018                [Page 11]
+
+                              risc-secevent                 January 2018
+
 
    The full set of editable properties must be present in the POST body,
    not only the ones that are specifically intended to be changed.
@@ -532,20 +635,20 @@ Scurtescu, et al.        Expires August 2, 2018                 [Page 9]
    Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
    {
-   "aud": "http://www.example.com",
-   "delivery": {
-     "delivery_method": "urn:example:secevent:delivery:http_post",
-     "url": "https://receiver.example.com/events"
-   },
-   "status": "paused",
-   "events": [
-     "urn:example:secevent:events:type_1",
-     "urn:example:secevent:events:type_2",
-     "urn:example:secevent:events:type_3"
-   ]
+     "aud": "http://www.example.com",
+     "delivery": {
+       "delivery_method": "urn:example:secevent:delivery:http_post",
+       "url": "https://receiver.example.com/events"
+     },
+     "status": "paused",
+     "events": [
+       "urn:example:secevent:events:type_1",
+       "urn:example:secevent:events:type_2",
+       "urn:example:secevent:events:type_3"
+     ]
    }
 
-          Figure 8: Example: Update Stream Configuration Request
+          Figure 11: Example: Update Stream Configuration Request
 
    The following is a non-normative example response:
 
@@ -557,7 +660,16 @@ Scurtescu, et al.        Expires August 2, 2018                 [Page 9]
 
 
 
-Scurtescu, et al.        Expires August 2, 2018                [Page 10]
+
+
+
+
+
+
+
+
+
+Scurtescu, et al.        Expires August 3, 2018                [Page 12]
 
                               risc-secevent                 January 2018
 
@@ -568,20 +680,20 @@ Scurtescu, et al.        Expires August 2, 2018                [Page 10]
    Pragma: no-cache
 
    {
-   "aud": "http://www.example.com",
-   "delivery": {
-     "delivery_method": "urn:example:secevent:delivery:http_post",
-     "url": "https://receiver.example.com/events"
-   },
-   "status": "paused",
-   "events": [
-     "urn:example:secevent:events:type_1",
-     "urn:example:secevent:events:type_2",
-     "urn:example:secevent:events:type_3"
-   ]
+     "aud": "http://www.example.com",
+     "delivery": {
+       "delivery_method": "urn:example:secevent:delivery:http_post",
+       "url": "https://receiver.example.com/events"
+     },
+     "status": "paused",
+     "events": [
+       "urn:example:secevent:events:type_1",
+       "urn:example:secevent:events:type_2",
+       "urn:example:secevent:events:type_3"
+     ]
    }
 
-          Figure 9: Example: Update Stream Configuration Response
+         Figure 12: Example: Update Stream Configuration Response
 
    Errors are signaled with HTTP staus codes as follows:
 
@@ -613,7 +725,7 @@ Scurtescu, et al.        Expires August 2, 2018                [Page 10]
 
 
 
-Scurtescu, et al.        Expires August 2, 2018                [Page 11]
+Scurtescu, et al.        Expires August 3, 2018                [Page 13]
 
                               risc-secevent                 January 2018
 
@@ -630,8 +742,8 @@ Scurtescu, et al.        Expires August 2, 2018                [Page 11]
    example if the subject has previously indicated to the transmitter
    that they do not want events to be transmitted to the Event Receiver.
    In this case, the transmitter MAY return an empty 200 OK response or
-   an appropriate error code (See Security Considerations
-   (Section 4.4)).
+   an appropriate error code.  See Security Considerations
+   (Section 4.4).
 
    Errors are signaled with HTTP status codes as follows:
 
@@ -669,7 +781,7 @@ Scurtescu, et al.        Expires August 2, 2018                [Page 11]
 
 
 
-Scurtescu, et al.        Expires August 2, 2018                [Page 12]
+Scurtescu, et al.        Expires August 3, 2018                [Page 14]
 
                               risc-secevent                 January 2018
 
@@ -679,10 +791,10 @@ Scurtescu, et al.        Expires August 2, 2018                [Page 12]
    Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
    {
-   "email": "example.user@example.com"
+     "email": "example.user@example.com"
    }
 
-                  Figure 10: Example: Add Subject Request
+                  Figure 13: Example: Add Subject Request
 
    The following is a non-normative example response to a successful
    request:
@@ -692,7 +804,7 @@ Scurtescu, et al.        Expires August 2, 2018                [Page 12]
    Cache-Control: no-store
    Pragma: no-cache
 
-                 Figure 11: Example: Add Subject Response
+                 Figure 14: Example: Add Subject Response
 
 4.1.2.2.  Removing a Subject
 
@@ -725,7 +837,7 @@ Scurtescu, et al.        Expires August 2, 2018                [Page 12]
 
 
 
-Scurtescu, et al.        Expires August 2, 2018                [Page 13]
+Scurtescu, et al.        Expires August 3, 2018                [Page 15]
 
                               risc-secevent                 January 2018
 
@@ -759,10 +871,10 @@ Scurtescu, et al.        Expires August 2, 2018                [Page 13]
    Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
    {
-   "phone_number": "+1 206 555 0123"
+     "phone_number": "+1 206 555 0123"
    }
 
-                Figure 12: Example: Remove Subject Request
+                Figure 15: Example: Remove Subject Request
 
    The following is a non-normative example response to a successful
    request:
@@ -772,7 +884,7 @@ Scurtescu, et al.        Expires August 2, 2018                [Page 13]
    Cache-Control: no-store
    Pragma: no-cache
 
-                Figure 13: Example: Remove Subject Response
+                Figure 16: Example: Remove Subject Response
 
 
 
@@ -781,7 +893,7 @@ Scurtescu, et al.        Expires August 2, 2018                [Page 13]
 
 
 
-Scurtescu, et al.        Expires August 2, 2018                [Page 14]
+Scurtescu, et al.        Expires August 3, 2018                [Page 16]
 
                               risc-secevent                 January 2018
 
@@ -837,7 +949,7 @@ Scurtescu, et al.        Expires August 2, 2018                [Page 14]
 
 
 
-Scurtescu, et al.        Expires August 2, 2018                [Page 15]
+Scurtescu, et al.        Expires August 3, 2018                [Page 17]
 
                               risc-secevent                 January 2018
 
@@ -893,7 +1005,7 @@ Scurtescu, et al.        Expires August 2, 2018                [Page 15]
 
 
 
-Scurtescu, et al.        Expires August 2, 2018                [Page 16]
+Scurtescu, et al.        Expires August 3, 2018                [Page 18]
 
                               risc-secevent                 January 2018
 
@@ -904,10 +1016,10 @@ Scurtescu, et al.        Expires August 2, 2018                [Page 16]
    Content-Type: application/json; charset=UTF-8
 
    {
-   "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
+     "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
    }
 
-             Figure 14: Example: Trigger Verification Request
+             Figure 17: Example: Trigger Verification Request
 
    The following is a non-normative example response to a successful
    request:
@@ -917,24 +1029,24 @@ Scurtescu, et al.        Expires August 2, 2018                [Page 16]
    Cache-Control: no-store
    Pragma: no-cache
 
-             Figure 15: Example: Trigger Verification Response
+             Figure 18: Example: Trigger Verification Response
 
    And the following is a non-normative example of a verification event
    sent to the Event Receiver as a result of the above request:
 
    {
-   "jti": "123456",
-   "iss": "https://transmitter.example.com",
-   "aud": "receiver.example.com",
-   "iat": "1493856000",
-   "events": [
-     "urn:ietf:params:secevent:event-type:core:verification" : {
-       "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo=",
-     },
-   ],
+     "jti": "123456",
+     "iss": "https://transmitter.example.com",
+     "aud": "receiver.example.com",
+     "iat": "1493856000",
+     "events": [
+       "urn:ietf:params:secevent:event-type:core:verification" : {
+         "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo=",
+       },
+     ],
    }
 
-                   Figure 16: Example: Verification SET
+                   Figure 19: Example: Verification SET
 
 4.2.  Authorization
 
@@ -949,7 +1061,7 @@ Scurtescu, et al.        Expires August 2, 2018                [Page 16]
 
 
 
-Scurtescu, et al.        Expires August 2, 2018                [Page 17]
+Scurtescu, et al.        Expires August 3, 2018                [Page 19]
 
                               risc-secevent                 January 2018
 
@@ -1005,7 +1117,7 @@ Scurtescu, et al.        Expires August 2, 2018                [Page 17]
 
 
 
-Scurtescu, et al.        Expires August 2, 2018                [Page 18]
+Scurtescu, et al.        Expires August 3, 2018                [Page 20]
 
                               risc-secevent                 January 2018
 
@@ -1041,8 +1153,8 @@ Scurtescu, et al.        Expires August 2, 2018                [Page 18]
 
 5.1.1.  Signature Key Resolution
 
-   The signature key can be obtained through the "jwks_uri" Transmitter
-   configuration [1].
+   The signature key can be obtained through the "jwks_uri", see
+   Section 3.
 
 5.1.2.  RISC Event Subject
 
@@ -1061,7 +1173,7 @@ Scurtescu, et al.        Expires August 2, 2018                [Page 18]
 
 
 
-Scurtescu, et al.        Expires August 2, 2018                [Page 19]
+Scurtescu, et al.        Expires August 3, 2018                [Page 21]
 
                               risc-secevent                 January 2018
 
@@ -1117,7 +1229,7 @@ Scurtescu, et al.        Expires August 2, 2018                [Page 19]
 
 
 
-Scurtescu, et al.        Expires August 2, 2018                [Page 20]
+Scurtescu, et al.        Expires August 3, 2018                [Page 22]
 
                               risc-secevent                 January 2018
 
@@ -1137,9 +1249,7 @@ Scurtescu, et al.        Expires August 2, 2018                [Page 20]
    when communicating with a given party in order to reduce the
    possibility of information leakage.
 
-8.  References
-
-8.1.  Normative References
+8.  Normative References
 
    [API]      IETF, "Management API for SET Event Streams",
               <https://tools.ietf.org/html/draft-scurtescu-secevent-
@@ -1147,12 +1257,13 @@ Scurtescu, et al.        Expires August 2, 2018                [Page 20]
 
    [CLIENTCRED]
               Hardt, D., "The OAuth 2.0 Authorization Framework - Client
-              Credentials Grant", RFC 6749, <https://tools.ietf.org/
-              html/rfc6749#section-4.4>.
+              Credentials Grant", RFC 6749,
+              <https://tools.ietf.org/html/rfc6749#section-4.4>.
 
    [DELIVERY]
-              IETF, "SET Token Delivery Using HTTP", <https://tools.ietf
-              .org/html/draft-ietf-secevent-delivery>.
+              IETF, "SET Token Delivery Using HTTP",
+              <https://tools.ietf.org/html/draft-ietf-secevent-
+              delivery>.
 
    [E164]     International Telecommunication Union, "The international
               public telecommunication numbering plan", 2010,
@@ -1166,22 +1277,34 @@ Scurtescu, et al.        Expires August 2, 2018                [Page 20]
               Interchange Format", RFC 7159, DOI 10.17487/RFC7159, March
               2014, <https://www.rfc-editor.org/info/rfc7159>.
 
-   [OIDC]     OpenID Foundation, "OpenID Connect Core 1.0",
+   [OIDC]     Sakimura, N., Bradley, J., Jones, M., de Medeiros, B., and
+              C. Mortimore, "OpenID Connect Core 1.0", November 2014,
               <http://openid.net/specs/openid-connect-core-1_0.html>.
 
 
 
 
 
-Scurtescu, et al.        Expires August 2, 2018                [Page 21]
+Scurtescu, et al.        Expires August 3, 2018                [Page 23]
 
                               risc-secevent                 January 2018
 
 
+   [OIDC-DISCOVERY]
+              Sakimura, N., Bradley, J., Jones, M., and E. Jay, "OpenID
+              Connect Discovery 1.0", November 2014,
+              <https://openid.net/specs/openid-connect-discovery-
+              1_0.html>.
+
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", BCP 14, RFC 2119, DOI 10.17487/
-              RFC2119, March 1997, <https://www.rfc-editor.org/info/
-              rfc2119>.
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997, <https://www.rfc-
+              editor.org/info/rfc2119>.
+
+   [RFC5785]  Nottingham, M. and E. Hammer-Lahav, "Defining Well-Known
+              Uniform Resource Identifiers (URIs)", RFC 5785,
+              DOI 10.17487/RFC5785, April 2010, <https://www.rfc-
+              editor.org/info/rfc5785>.
 
    [RFC7519]  Jones, M., Bradley, J., and N. Sakimura, "JSON Web Token
               (JWT)", RFC 7519, DOI 10.17487/RFC7519, May 2015,
@@ -1191,17 +1314,18 @@ Scurtescu, et al.        Expires August 2, 2018                [Page 21]
               IETF, "Security Events IETF Working Group",
               <https://datatracker.ietf.org/wg/secevent/about/>.
 
-   [SET]      IETF, "Security Event Token (SET)", <https://tools.ietf
-              .org/html/draft-ietf-secevent-token>.
+   [SET]      IETF, "Security Event Token (SET)",
+              <https://tools.ietf.org/html/draft-ietf-secevent-token>.
 
    [USECASES]
               IETF, "Security Events RISC Use Cases",
               <https://tools.ietf.org/html/draft-scurtescu-secevent-
               risc-use-cases-00>.
 
-8.2.  URIs
+Appendix A.  Acknowledgements
 
-   [1] discovery
+   Transmitter Configuration Discovery (Section 3) is based on OpenID
+   Connect Discovery 1.0 [OIDC-DISCOVERY].
 
 Authors' Addresses
 
@@ -1209,6 +1333,17 @@ Authors' Addresses
    Google
 
    Email: mscurtescu@google.com
+
+
+
+
+
+
+
+
+Scurtescu, et al.        Expires August 3, 2018                [Page 24]
+
+                              risc-secevent                 January 2018
 
 
    Annabelle Backman
@@ -1221,17 +1356,6 @@ Authors' Addresses
    Oracle Corporation
 
    Email: phil.hunt@yahoo.com
-
-
-
-
-
-
-
-
-Scurtescu, et al.        Expires August 2, 2018                [Page 22]
-
-                              risc-secevent                 January 2018
 
 
    John Bradley
@@ -1273,16 +1397,4 @@ Scurtescu, et al.        Expires August 2, 2018                [Page 22]
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-Scurtescu, et al.        Expires August 2, 2018                [Page 23]
+Scurtescu, et al.        Expires August 3, 2018                [Page 25]
