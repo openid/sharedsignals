@@ -298,9 +298,6 @@ Content-Type: application/json
 +------------+                +------------+
 ]]></artwork></figure>
       
-      <t>How events are delivered and the structure of events are not in scope for this
-        specification.</t>
-      
       <section anchor="management-api" title="Event Stream Management">
         <t>Event Receivers manage how they receive events, and the subjects about which they want
           to receive events over an Event Stream by making HTTP requests to endpoints in the Event
