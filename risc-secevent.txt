@@ -10,7 +10,7 @@
                                                                   Oracle
                                                               J. Bradley
                                                                   Yubico
-                                                        January 30, 2018
+                                                        January 31, 2018
 
 
                   RISC profile of IETF Security Events
@@ -53,7 +53,7 @@ Table of Contents
 
 
 
-Scurtescu, et al.        Expires August 3, 2018                 [Page 1]
+Scurtescu, et al.        Expires August 4, 2018                 [Page 1]
 
                               risc-secevent                 January 2018
 
@@ -109,7 +109,7 @@ Scurtescu, et al.        Expires August 3, 2018                 [Page 1]
 
 
 
-Scurtescu, et al.        Expires August 3, 2018                 [Page 2]
+Scurtescu, et al.        Expires August 4, 2018                 [Page 2]
 
                               risc-secevent                 January 2018
 
@@ -165,7 +165,7 @@ Scurtescu, et al.        Expires August 3, 2018                 [Page 2]
 
 
 
-Scurtescu, et al.        Expires August 3, 2018                 [Page 3]
+Scurtescu, et al.        Expires August 4, 2018                 [Page 3]
 
                               risc-secevent                 January 2018
 
@@ -221,7 +221,7 @@ Scurtescu, et al.        Expires August 3, 2018                 [Page 3]
 
 
 
-Scurtescu, et al.        Expires August 3, 2018                 [Page 4]
+Scurtescu, et al.        Expires August 4, 2018                 [Page 4]
 
                               risc-secevent                 January 2018
 
@@ -277,7 +277,7 @@ Scurtescu, et al.        Expires August 3, 2018                 [Page 4]
 
 
 
-Scurtescu, et al.        Expires August 3, 2018                 [Page 5]
+Scurtescu, et al.        Expires August 4, 2018                 [Page 5]
 
                               risc-secevent                 January 2018
 
@@ -333,7 +333,7 @@ Scurtescu, et al.        Expires August 3, 2018                 [Page 5]
 
 
 
-Scurtescu, et al.        Expires August 3, 2018                 [Page 6]
+Scurtescu, et al.        Expires August 4, 2018                 [Page 6]
 
                               risc-secevent                 January 2018
 
@@ -347,8 +347,8 @@ Scurtescu, et al.        Expires August 3, 2018                 [Page 6]
      "jwks_uri":
        "https://tr.example.com/jwks.json",
      "delivery_methods_supported": [
-       "TODO",
-       "TODO"],
+       "http://schemas.openid.net/secevent/risc/delivery-method/push",
+       "http://schemas.openid.net/secevent/risc/delivery-method/poll"],
      "configuration_endpoint":
        "https://tr.example.com/risc/mgmt/stream",
      "status_endpoint":
@@ -389,7 +389,7 @@ Scurtescu, et al.        Expires August 3, 2018                 [Page 6]
 
 
 
-Scurtescu, et al.        Expires August 3, 2018                 [Page 7]
+Scurtescu, et al.        Expires August 4, 2018                 [Page 7]
 
                               risc-secevent                 January 2018
 
@@ -445,7 +445,7 @@ Scurtescu, et al.        Expires August 3, 2018                 [Page 7]
 
 
 
-Scurtescu, et al.        Expires August 3, 2018                 [Page 8]
+Scurtescu, et al.        Expires August 4, 2018                 [Page 8]
 
                               risc-secevent                 January 2018
 
@@ -501,7 +501,7 @@ Scurtescu, et al.        Expires August 3, 2018                 [Page 8]
 
 
 
-Scurtescu, et al.        Expires August 3, 2018                 [Page 9]
+Scurtescu, et al.        Expires August 4, 2018                 [Page 9]
 
                               risc-secevent                 January 2018
 
@@ -557,7 +557,7 @@ Scurtescu, et al.        Expires August 3, 2018                 [Page 9]
 
 
 
-Scurtescu, et al.        Expires August 3, 2018                [Page 10]
+Scurtescu, et al.        Expires August 4, 2018                [Page 10]
 
                               risc-secevent                 January 2018
 
@@ -613,7 +613,7 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 10]
 
 
 
-Scurtescu, et al.        Expires August 3, 2018                [Page 11]
+Scurtescu, et al.        Expires August 4, 2018                [Page 11]
 
                               risc-secevent                 January 2018
 
@@ -669,38 +669,38 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 11]
 
 
 
-Scurtescu, et al.        Expires August 3, 2018                [Page 12]
+Scurtescu, et al.        Expires August 4, 2018                [Page 12]
 
                               risc-secevent                 January 2018
 
 
-   HTTP/1.1 200 OK
-   Content-Type: application/json; charset=UTF-8
-   Cache-Control: no-store
-   Pragma: no-cache
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=UTF-8
+Cache-Control: no-store
+Pragma: no-cache
 
-   {
-     "aud": "http://www.example.com",
-     "delivery": {
-       "delivery_method": "urn:example:secevent:delivery:http_post",
-       "url": "https://receiver.example.com/events",
-     },
-     "events_supported": [
-       "urn:example:secevent:events:type_1",
-       "urn:example:secevent:events:type_2",
-       "urn:example:secevent:events:type_3",
-     ],
-     "events_requested": [
-       "urn:example:secevent:events:type_2",
-       "urn:example:secevent:events:type_3",
-       "urn:example:secevent:events:type_4",
-     ],
-     "events_delivered": [
-       "urn:example:secevent:events:type_2",
-       "urn:example:secevent:events:type_3",
-     ],
-     "min_verification_interval": 60,
-   }
+{
+  "aud": "http://www.example.com",
+  "delivery": {
+    "delivery_method": "http://schemas.openid.net/secevent/risc/delivery-method/push",
+    "url": "https://receiver.example.com/events",
+  },
+  "events_supported": [
+    "urn:example:secevent:events:type_1",
+    "urn:example:secevent:events:type_2",
+    "urn:example:secevent:events:type_3",
+  ],
+  "events_requested": [
+    "urn:example:secevent:events:type_2",
+    "urn:example:secevent:events:type_3",
+    "urn:example:secevent:events:type_4",
+  ],
+  "events_delivered": [
+    "urn:example:secevent:events:type_2",
+    "urn:example:secevent:events:type_3",
+  ],
+  "min_verification_interval": 60,
+}
 
           Figure 12: Example: Read Stream Configuration Response
 
@@ -725,7 +725,7 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 12]
 
 
 
-Scurtescu, et al.        Expires August 3, 2018                [Page 13]
+Scurtescu, et al.        Expires August 4, 2018                [Page 13]
 
                               risc-secevent                 January 2018
 
@@ -751,22 +751,22 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 13]
    The following is a non-normative example request to update an Event
    Stream's configuration:
 
-   POST /set/stream HTTP/1.1
-   Host: transmitter.example.com
-   Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
+POST /set/stream HTTP/1.1
+Host: transmitter.example.com
+Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
-   {
-     "aud": "http://www.example.com",
-     "delivery": {
-       "delivery_method": "urn:example:secevent:delivery:http_post",
-       "url": "https://receiver.example.com/events",
-     },
-     "events_requested": [
-       "urn:example:secevent:events:type_2",
-       "urn:example:secevent:events:type_3",
-       "urn:example:secevent:events:type_4",
-     ],
-   }
+{
+  "aud": "http://www.example.com",
+  "delivery": {
+    "delivery_method": "http://schemas.openid.net/secevent/risc/delivery-method/push",
+    "url": "https://receiver.example.com/events",
+  },
+  "events_requested": [
+    "urn:example:secevent:events:type_2",
+    "urn:example:secevent:events:type_3",
+    "urn:example:secevent:events:type_4",
+  ],
+}
 
           Figure 13: Example: Update Stream Configuration Request
 
@@ -781,37 +781,37 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 13]
 
 
 
-Scurtescu, et al.        Expires August 3, 2018                [Page 14]
+Scurtescu, et al.        Expires August 4, 2018                [Page 14]
 
                               risc-secevent                 January 2018
 
 
-   HTTP/1.1 200 OK
-   Content-Type: application/json; charset=UTF-8
-   Cache-Control: no-store
-   Pragma: no-cache
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=UTF-8
+Cache-Control: no-store
+Pragma: no-cache
 
-   {
-     "aud": "http://www.example.com",
-     "delivery": {
-       "delivery_method": "urn:example:secevent:delivery:http_post",
-       "url": "https://receiver.example.com/events",
-     },
-     "events_supported": [
-       "urn:example:secevent:events:type_1",
-       "urn:example:secevent:events:type_2",
-       "urn:example:secevent:events:type_3",
-     ],
-     "events_requested": [
-       "urn:example:secevent:events:type_2",
-       "urn:example:secevent:events:type_3",
-       "urn:example:secevent:events:type_4",
-     ],
-     "events_delivered": [
-       "urn:example:secevent:events:type_2",
-       "urn:example:secevent:events:type_3",
-     ],
-   }
+{
+  "aud": "http://www.example.com",
+  "delivery": {
+    "delivery_method": "http://schemas.openid.net/secevent/risc/delivery-method/push",
+    "url": "https://receiver.example.com/events",
+  },
+  "events_supported": [
+    "urn:example:secevent:events:type_1",
+    "urn:example:secevent:events:type_2",
+    "urn:example:secevent:events:type_3",
+  ],
+  "events_requested": [
+    "urn:example:secevent:events:type_2",
+    "urn:example:secevent:events:type_3",
+    "urn:example:secevent:events:type_4",
+  ],
+  "events_delivered": [
+    "urn:example:secevent:events:type_2",
+    "urn:example:secevent:events:type_3",
+  ],
+}
 
          Figure 14: Example: Update Stream Configuration Response
 
@@ -837,7 +837,7 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 14]
 
 
 
-Scurtescu, et al.        Expires August 3, 2018                [Page 15]
+Scurtescu, et al.        Expires August 4, 2018                [Page 15]
 
                               risc-secevent                 January 2018
 
@@ -893,7 +893,7 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 15]
 
 
 
-Scurtescu, et al.        Expires August 3, 2018                [Page 16]
+Scurtescu, et al.        Expires August 4, 2018                [Page 16]
 
                               risc-secevent                 January 2018
 
@@ -949,7 +949,7 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 16]
 
 
 
-Scurtescu, et al.        Expires August 3, 2018                [Page 17]
+Scurtescu, et al.        Expires August 4, 2018                [Page 17]
 
                               risc-secevent                 January 2018
 
@@ -1005,7 +1005,7 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 17]
 
 
 
-Scurtescu, et al.        Expires August 3, 2018                [Page 18]
+Scurtescu, et al.        Expires August 4, 2018                [Page 18]
 
                               risc-secevent                 January 2018
 
@@ -1032,8 +1032,8 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 18]
    attributes:
 
    event type
-      The Event Type URI is: "urn:ietf:params:secevent:event-
-      type:core:verification".
+      The Event Type URI is: "http://schemas.openid.net/secevent/risc/
+      event-type/verification".
 
    state
       OPTIONAL An opaque value provided by the Event Receiver when the
@@ -1061,7 +1061,7 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 18]
 
 
 
-Scurtescu, et al.        Expires August 3, 2018                [Page 19]
+Scurtescu, et al.        Expires August 4, 2018                [Page 19]
 
                               risc-secevent                 January 2018
 
@@ -1117,7 +1117,7 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 19]
 
 
 
-Scurtescu, et al.        Expires August 3, 2018                [Page 20]
+Scurtescu, et al.        Expires August 4, 2018                [Page 20]
 
                               risc-secevent                 January 2018
 
@@ -1146,17 +1146,17 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 20]
    And the following is a non-normative example of a verification event
    sent to the Event Receiver as a result of the above request:
 
-   {
-     "jti": "123456",
-     "iss": "https://transmitter.example.com",
-     "aud": "receiver.example.com",
-     "iat": "1493856000",
-     "events": [
-       "urn:ietf:params:secevent:event-type:core:verification" : {
-         "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo=",
-       },
-     ],
-   }
+{
+  "jti": "123456",
+  "iss": "https://transmitter.example.com",
+  "aud": "receiver.example.com",
+  "iat": "1493856000",
+  "events": [
+    "http://schemas.openid.net/secevent/risc/event-type/verification" : {
+      "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo=",
+    },
+  ],
+}
 
                    Figure 21: Example: Verification SET
 
@@ -1173,7 +1173,7 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 20]
 
 
 
-Scurtescu, et al.        Expires August 3, 2018                [Page 21]
+Scurtescu, et al.        Expires August 4, 2018                [Page 21]
 
                               risc-secevent                 January 2018
 
@@ -1229,7 +1229,7 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 21]
 
 
 
-Scurtescu, et al.        Expires August 3, 2018                [Page 22]
+Scurtescu, et al.        Expires August 4, 2018                [Page 22]
 
                               risc-secevent                 January 2018
 
@@ -1285,7 +1285,7 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 22]
 
 
 
-Scurtescu, et al.        Expires August 3, 2018                [Page 23]
+Scurtescu, et al.        Expires August 4, 2018                [Page 23]
 
                               risc-secevent                 January 2018
 
@@ -1306,7 +1306,7 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 23]
 
 5.2.1.1.  Push Delivery using HTTP
 
-   method  TODO
+   method  http://schemas.openid.net/secevent/risc/delivery-method/push
 
    endpoint_url  The URL where events are pushed through HTTP POST.
       This is set by the Receiver.
@@ -1317,7 +1317,7 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 23]
 
 5.2.1.2.  Polling Delivery using HTTP
 
-   method  TODO
+   method  http://schemas.openid.net/secevent/risc/delivery-method/poll
 
    endpoint_url  The URL where events can be retrieved from.  This is
       specified by the Transmitter.
@@ -1341,7 +1341,7 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 23]
 
 
 
-Scurtescu, et al.        Expires August 3, 2018                [Page 24]
+Scurtescu, et al.        Expires August 4, 2018                [Page 24]
 
                               risc-secevent                 January 2018
 
@@ -1397,7 +1397,7 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 24]
 
 
 
-Scurtescu, et al.        Expires August 3, 2018                [Page 25]
+Scurtescu, et al.        Expires August 4, 2018                [Page 25]
 
                               risc-secevent                 January 2018
 
@@ -1453,7 +1453,7 @@ Authors' Addresses
 
 
 
-Scurtescu, et al.        Expires August 3, 2018                [Page 26]
+Scurtescu, et al.        Expires August 4, 2018                [Page 26]
 
                               risc-secevent                 January 2018
 
@@ -1509,4 +1509,4 @@ Scurtescu, et al.        Expires August 3, 2018                [Page 26]
 
 
 
-Scurtescu, et al.        Expires August 3, 2018                [Page 27]
+Scurtescu, et al.        Expires August 4, 2018                [Page 27]
