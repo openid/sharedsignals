@@ -80,19 +80,22 @@ Scurtescu, et al.        Expires August 4, 2018                 [Page 1]
      5.1.  Security Event Token Profle . . . . . . . . . . . . . . .  23
        5.1.1.  Signature Key Resolution  . . . . . . . . . . . . . .  23
        5.1.2.  RISC Event Subject  . . . . . . . . . . . . . . . . .  23
-       5.1.3.  aud Claim . . . . . . . . . . . . . . . . . . . . . .  23
-       5.1.4.  Security Considerations . . . . . . . . . . . . . . .  24
+       5.1.3.  Explicit Typing of SETs . . . . . . . . . . . . . . .  23
+       5.1.4.  The "exp" Claim . . . . . . . . . . . . . . . . . . .  24
+       5.1.5.  aud Claim . . . . . . . . . . . . . . . . . . . . . .  24
+       5.1.6.  Security Considerations . . . . . . . . . . . . . . .  24
+         5.1.6.1.  Distingushing SETs from other Kinds of JWTs . . .  24
      5.2.  SET Token Delivery Using HTTP Profile . . . . . . . . . .  24
-       5.2.1.  Stream Configuration Metadata . . . . . . . . . . . .  24
-         5.2.1.1.  Push Delivery using HTTP  . . . . . . . . . . . .  24
-         5.2.1.2.  Polling Delivery using HTTP . . . . . . . . . . .  24
-   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  24
-     6.1.  RISC Subject Identifier Types Registry  . . . . . . . . .  24
+       5.2.1.  Stream Configuration Metadata . . . . . . . . . . . .  25
+         5.2.1.1.  Push Delivery using HTTP  . . . . . . . . . . . .  25
+         5.2.1.2.  Polling Delivery using HTTP . . . . . . . . . . .  25
+   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  25
+     6.1.  RISC Subject Identifier Types Registry  . . . . . . . . .  25
    7.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .  25
      7.1.  Subject Information Leakage . . . . . . . . . . . . . . .  25
-   8.  Normative References  . . . . . . . . . . . . . . . . . . . .  25
-   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  26
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  26
+   8.  Normative References  . . . . . . . . . . . . . . . . . . . .  26
+   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  27
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  27
 
 1.  Introduction
 
@@ -101,9 +104,6 @@ Scurtescu, et al.        Expires August 4, 2018                 [Page 1]
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
    document are to be interpreted as described in [RFC2119].
-
-
-
 
 
 
@@ -674,33 +674,34 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 12]
                               risc-secevent                 January 2018
 
 
-HTTP/1.1 200 OK
-Content-Type: application/json; charset=UTF-8
-Cache-Control: no-store
-Pragma: no-cache
+   HTTP/1.1 200 OK
+   Content-Type: application/json; charset=UTF-8
+   Cache-Control: no-store
+   Pragma: no-cache
 
-{
-  "aud": "http://www.example.com",
-  "delivery": {
-    "delivery_method": "http://schemas.openid.net/secevent/risc/delivery-method/push",
-    "url": "https://receiver.example.com/events",
-  },
-  "events_supported": [
-    "urn:example:secevent:events:type_1",
-    "urn:example:secevent:events:type_2",
-    "urn:example:secevent:events:type_3",
-  ],
-  "events_requested": [
-    "urn:example:secevent:events:type_2",
-    "urn:example:secevent:events:type_3",
-    "urn:example:secevent:events:type_4",
-  ],
-  "events_delivered": [
-    "urn:example:secevent:events:type_2",
-    "urn:example:secevent:events:type_3",
-  ],
-  "min_verification_interval": 60,
-}
+   {
+     "aud": "http://www.example.com",
+     "delivery": {
+       "delivery_method":
+         "http://schemas.openid.net/secevent/risc/delivery-method/push",
+       "url": "https://receiver.example.com/events",
+     },
+     "events_supported": [
+       "urn:example:secevent:events:type_1",
+       "urn:example:secevent:events:type_2",
+       "urn:example:secevent:events:type_3",
+     ],
+     "events_requested": [
+       "urn:example:secevent:events:type_2",
+       "urn:example:secevent:events:type_3",
+       "urn:example:secevent:events:type_4",
+     ],
+     "events_delivered": [
+       "urn:example:secevent:events:type_2",
+       "urn:example:secevent:events:type_3",
+     ],
+     "min_verification_interval": 60,
+   }
 
           Figure 12: Example: Read Stream Configuration Response
 
@@ -719,7 +720,6 @@ Pragma: no-cache
    +------+------------------------------------------------------------+
 
                  Table 2: Read Stream Configuration Errors
-
 
 
 
@@ -751,27 +751,27 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 13]
    The following is a non-normative example request to update an Event
    Stream's configuration:
 
-POST /set/stream HTTP/1.1
-Host: transmitter.example.com
-Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
+   POST /set/stream HTTP/1.1
+   Host: transmitter.example.com
+   Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
-{
-  "aud": "http://www.example.com",
-  "delivery": {
-    "delivery_method": "http://schemas.openid.net/secevent/risc/delivery-method/push",
-    "url": "https://receiver.example.com/events",
-  },
-  "events_requested": [
-    "urn:example:secevent:events:type_2",
-    "urn:example:secevent:events:type_3",
-    "urn:example:secevent:events:type_4",
-  ],
-}
+   {
+     "aud": "http://www.example.com",
+     "delivery": {
+       "delivery_method":
+         "http://schemas.openid.net/secevent/risc/delivery-method/push",
+       "url": "https://receiver.example.com/events",
+     },
+     "events_requested": [
+       "urn:example:secevent:events:type_2",
+       "urn:example:secevent:events:type_3",
+       "urn:example:secevent:events:type_4",
+     ],
+   }
 
           Figure 13: Example: Update Stream Configuration Request
 
    The following is a non-normative example response:
-
 
 
 
@@ -786,32 +786,33 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 14]
                               risc-secevent                 January 2018
 
 
-HTTP/1.1 200 OK
-Content-Type: application/json; charset=UTF-8
-Cache-Control: no-store
-Pragma: no-cache
+   HTTP/1.1 200 OK
+   Content-Type: application/json; charset=UTF-8
+   Cache-Control: no-store
+   Pragma: no-cache
 
-{
-  "aud": "http://www.example.com",
-  "delivery": {
-    "delivery_method": "http://schemas.openid.net/secevent/risc/delivery-method/push",
-    "url": "https://receiver.example.com/events",
-  },
-  "events_supported": [
-    "urn:example:secevent:events:type_1",
-    "urn:example:secevent:events:type_2",
-    "urn:example:secevent:events:type_3",
-  ],
-  "events_requested": [
-    "urn:example:secevent:events:type_2",
-    "urn:example:secevent:events:type_3",
-    "urn:example:secevent:events:type_4",
-  ],
-  "events_delivered": [
-    "urn:example:secevent:events:type_2",
-    "urn:example:secevent:events:type_3",
-  ],
-}
+   {
+     "aud": "http://www.example.com",
+     "delivery": {
+       "delivery_method":
+         "http://schemas.openid.net/secevent/risc/delivery-method/push",
+       "url": "https://receiver.example.com/events",
+     },
+     "events_supported": [
+       "urn:example:secevent:events:type_1",
+       "urn:example:secevent:events:type_2",
+       "urn:example:secevent:events:type_3",
+     ],
+     "events_requested": [
+       "urn:example:secevent:events:type_2",
+       "urn:example:secevent:events:type_3",
+       "urn:example:secevent:events:type_4",
+     ],
+     "events_delivered": [
+       "urn:example:secevent:events:type_2",
+       "urn:example:secevent:events:type_3",
+     ],
+   }
 
          Figure 14: Example: Update Stream Configuration Response
 
@@ -830,7 +831,6 @@ Pragma: no-cache
    +------+------------------------------------------------------------+
 
                 Table 3: Update Stream Configuration Errors
-
 
 
 
@@ -1146,17 +1146,17 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 20]
    And the following is a non-normative example of a verification event
    sent to the Event Receiver as a result of the above request:
 
-{
-  "jti": "123456",
-  "iss": "https://transmitter.example.com",
-  "aud": "receiver.example.com",
-  "iat": "1493856000",
-  "events": [
-    "http://schemas.openid.net/secevent/risc/event-type/verification" : {
-      "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo=",
-    },
-  ],
-}
+ {
+   "jti": "123456",
+   "iss": "https://transmitter.example.com",
+   "aud": "receiver.example.com",
+   "iat": "1493856000",
+   "events": [
+     "http://schemas.openid.net/secevent/risc/event-type/verification":{
+       "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo=",
+     },
+   ],
+ }
 
                    Figure 21: Example: Verification SET
 
@@ -1275,10 +1275,10 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 22]
    "subject" claim is REQUIRED for all RISC events.  The JWT "sub" claim
    MUST NOT be present in any SET containing a RISC event.
 
-5.1.3.  aud Claim
+5.1.3.  Explicit Typing of SETs
 
-   The 'aud' claim MUST be a single value which is the client id of the
-   Receiver.
+   RISC events MUST use explicit typing as defined in Section 2.3 of
+   [SET].
 
 
 
@@ -1290,14 +1290,61 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 23]
                               risc-secevent                 January 2018
 
 
-5.1.4.  Security Considerations
+   {
+     "typ":"secevent+jwt",
+     "alg":"HS256"
+   }
 
-   TODO: Id Token and Access Token confusion
+                  Figure 22: Explicitly Typed JOSE Header
+
+   The purpose is defense against confusion with other JWTs, as
+   described in Sections 4.5, 4.6 and 4.7 of [SET].  While current Id
+   Token validators may not be using the "typ" header parameter, by
+   requiring it for RISC SETs a distinct value is guaranteed for future
+   validators.
+
+5.1.4.  The "exp" Claim
+
+   The "exp" claim MUST NOT be used in RISC SETs.
+
+   The purpose is defense in depth against confusion with other JWTs, as
+   described in Sections 4.5 and 4.6 of [SET].
+
+5.1.5.  aud Claim
+
+   The 'aud' claim MUST be a single value which is the client id of the
+   Receiver.
+
+5.1.6.  Security Considerations
+
+5.1.6.1.  Distingushing SETs from other Kinds of JWTs
+
+   Of particular concern is the possibility that SETs are confused for
+   other kinds of JWTs.  The Security Considerations sesction of [SET]
+   has several sub-sections on this subject.  The RISC Profile is asking
+   for further restrioctons:
+
+   o  The "sub" claim MUST NOT be present, as described in
+      Section 5.1.2.
+
+   o  RISC SETs MUST use explicit typing, as described in Section 5.1.3.
+
+   o  The "exp" claim MUST NOT be present, as described in
+      Section 5.1.4.
 
 5.2.  SET Token Delivery Using HTTP Profile
 
    This section provides RISC profiling specifications for the "SET
    Token Delivery Using HTTP" [DELIVERY] spec.
+
+
+
+
+
+Scurtescu, et al.        Expires August 4, 2018                [Page 24]
+
+                              risc-secevent                 January 2018
+
 
 5.2.1.  Stream Configuration Metadata
 
@@ -1334,18 +1381,6 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 23]
 
    TODO: Finish registry definition
 
-
-
-
-
-
-
-
-Scurtescu, et al.        Expires August 4, 2018                [Page 24]
-
-                              risc-secevent                 January 2018
-
-
 7.  Privacy Considerations
 
 7.1.  Subject Information Leakage
@@ -1358,6 +1393,15 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 24]
    about the subject that they are not known to already have knowledge
    of.  Issuers and recipients SHOULD always use the same Subject
    Identifier Type and the same claim values to identify a given subject
+
+
+
+
+Scurtescu, et al.        Expires August 4, 2018                [Page 25]
+
+                              risc-secevent                 January 2018
+
+
    when communicating with a given party in order to reduce the
    possibility of information leakage.
 
@@ -1393,15 +1437,6 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 24]
               C. Mortimore, "OpenID Connect Core 1.0", November 2014,
               <http://openid.net/specs/openid-connect-core-1_0.html>.
 
-
-
-
-
-Scurtescu, et al.        Expires August 4, 2018                [Page 25]
-
-                              risc-secevent                 January 2018
-
-
    [OIDC-DISCOVERY]
               Sakimura, N., Bradley, J., Jones, M., and E. Jay, "OpenID
               Connect Discovery 1.0", November 2014,
@@ -1412,6 +1447,16 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 25]
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997, <https://www.rfc-
               editor.org/info/rfc2119>.
+
+
+
+
+
+
+Scurtescu, et al.        Expires August 4, 2018                [Page 26]
+
+                              risc-secevent                 January 2018
+
 
    [RFC5785]  Nottingham, M. and E. Hammer-Lahav, "Defining Well-Known
               Uniform Resource Identifiers (URIs)", RFC 5785,
@@ -1447,17 +1492,6 @@ Authors' Addresses
    Email: mscurtescu@google.com
 
 
-
-
-
-
-
-
-Scurtescu, et al.        Expires August 4, 2018                [Page 26]
-
-                              risc-secevent                 January 2018
-
-
    Annabelle Backman
    Amazon
 
@@ -1468,6 +1502,16 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 26]
    Oracle Corporation
 
    Email: phil.hunt@yahoo.com
+
+
+
+
+
+
+
+Scurtescu, et al.        Expires August 4, 2018                [Page 27]
+
+                              risc-secevent                 January 2018
 
 
    John Bradley
@@ -1509,4 +1553,16 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 26]
 
 
 
-Scurtescu, et al.        Expires August 4, 2018                [Page 27]
+
+
+
+
+
+
+
+
+
+
+
+
+Scurtescu, et al.        Expires August 4, 2018                [Page 28]

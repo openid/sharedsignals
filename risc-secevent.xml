@@ -489,7 +489,8 @@ Pragma: no-cache
 {
   "aud": "http://www.example.com",
   "delivery": {
-    "delivery_method": "http://schemas.openid.net/secevent/risc/delivery-method/push",
+    "delivery_method": 
+      "http://schemas.openid.net/secevent/risc/delivery-method/push",
     "url": "https://receiver.example.com/events",
   },
   "events_supported": [
@@ -555,7 +556,8 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 {
   "aud": "http://www.example.com",
   "delivery": {
-    "delivery_method": "http://schemas.openid.net/secevent/risc/delivery-method/push",
+    "delivery_method":
+      "http://schemas.openid.net/secevent/risc/delivery-method/push",
     "url": "https://receiver.example.com/events",
   },
   "events_requested": [
@@ -580,7 +582,8 @@ Pragma: no-cache
 {
   "aud": "http://www.example.com",
   "delivery": {
-    "delivery_method": "http://schemas.openid.net/secevent/risc/delivery-method/push",
+    "delivery_method": 
+      "http://schemas.openid.net/secevent/risc/delivery-method/push",
     "url": "https://receiver.example.com/events",
   },
   "events_supported": [
@@ -842,7 +845,7 @@ Pragma: no-cache
   "aud": "receiver.example.com",
   "iat": "1493856000",
   "events": [
-    "http://schemas.openid.net/secevent/risc/event-type/verification" : {
+    "http://schemas.openid.net/secevent/risc/event-type/verification":{
       "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo=",
     },
   ],
@@ -944,13 +947,48 @@ Pragma: no-cache
             RISC events. The JWT "sub" claim MUST NOT be present in any SET containing a RISC
             event.</t>
         </section>
+        
+        <section anchor="explicit-typing" title="Explicit Typing of SETs">
+          <t>RISC events MUST use explicit typing as defined in Section 2.3 of <xref target="SET"/>.</t>
+          
+          <figure title="Explicitly Typed JOSE Header" anchor="explicit-type-header">
+            <artwork><![CDATA[
+{
+  "typ":"secevent+jwt",
+  "alg":"HS256"
+}
+]]></artwork>
+          </figure>
+          
+          <t>The purpose is defense against confusion with other JWTs, as described in Sections
+          4.5, 4.6 and 4.7 of <xref target="SET"/>. While current Id Token validators may not
+          be using the <spanx style="verb">typ</spanx> header parameter, by requiring it for RISC
+          SETs a distinct value is guaranteed for future validators.</t>
+        </section>
+        
+        <section anchor="exp-claim" title='The "exp" Claim'>
+          <t>The <spanx style="verb">exp</spanx> claim MUST NOT be used in RISC SETs.</t>
+          
+          <t>The purpose is defense in depth against confusion with other JWTs, as described
+          in Sections 4.5 and 4.6 of <xref target="SET"/>.</t>
+        </section>
 
         <section anchor="aud" title="aud Claim">
           <t>The 'aud' claim MUST be a single value which is the client id of the Receiver.</t>
         </section>
 
         <section title="Security Considerations">
-          <t>TODO: Id Token and Access Token confusion</t>
+          <section title="Distingushing SETs from other Kinds of JWTs">
+            <t>Of particular concern is the possibility that SETs are confused for other kinds
+            of JWTs. The Security Considerations sesction of <xref target="SET"/> has several
+            sub-sections on this subject. The RISC Profile is asking for further restrioctons:<list style="symbols">
+              <t>The <spanx style="verb">sub</spanx> claim MUST NOT be present, as described
+                in <xref target="event-subjects"/>.</t>
+              <t>RISC SETs MUST use explicit typing, as described in <xref target="explicit-typing"/>.</t>
+              <t>The <spanx style="verb">exp</spanx> claim MUST NOT be present, as described in 
+              <xref target="exp-claim"/>.</t>
+            </list></t>
+          </section>
         </section>
       </section>
 
@@ -960,7 +998,8 @@ Pragma: no-cache
             Token Delivery Using HTTP"</xref> spec.</t>
 
         <section title="Stream Configuration Metadata">
-          <t>Each delivery method is identified by a URI, specified below by the "method" metadata.</t>
+          <t>Each delivery method is identified by a URI, specified below by the 
+            <spanx style="verb">method</spanx> metadata.</t>
           
           <section title="Push Delivery using HTTP">
             <t><list style="hanging">
