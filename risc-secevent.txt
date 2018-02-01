@@ -606,8 +606,8 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 10]
    delivery
       A JSON object containing a set of name/value pairs specifying
       configuration parameters for the SET delivery method.  The actual
-      delivery method is identified by the special key "delivery_method"
-      with the value being a URI as defined in [DELIVERY].
+      delivery method is identified by the special key "method" with the
+      value being a URI as defined in Section 5.2.1.
 
    min_verification_interval
 

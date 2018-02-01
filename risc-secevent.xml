@@ -448,9 +448,9 @@ Pragma: no-cache
               <spanx style="verb">events_requested</spanx>. These evebts MAY be delivered over 
               the Event Stream.</t>
             <t hangText="delivery"><vspace blankLines="0"/> A JSON object containing a set of
-                name/value pairs specifying configuration parameters for the SET delivery method.
-                The actual delivery method is identified by the special key “delivery_method” with
-                the value being a URI as defined in <xref target="DELIVERY"/>.</t>
+              name/value pairs specifying configuration parameters for the SET delivery method.
+              The actual delivery method is identified by the special key <spanx style="verb">method</spanx> with
+              the value being a URI as defined in <xref target="delivery-meta"/>.</t>
             <t hangText="min_verification_interval"><vspace blankLines="0"/> An integer
               indicating the minimum amount of time in seconds that must pass in between
               verification requests. If an Event Receiver submits verification requests more
@@ -1001,7 +1001,7 @@ Pragma: no-cache
         <t>This section provides RISC profiling specifications for the <xref target="DELIVERY">"SET
             Token Delivery Using HTTP"</xref> spec.</t>
 
-        <section title="Stream Configuration Metadata">
+        <section anchor="delivery-meta" title="Stream Configuration Metadata">
           <t>Each delivery method is identified by a URI, specified below by the 
             <spanx style="verb">method</spanx> metadata.</t>
           
