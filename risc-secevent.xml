@@ -80,14 +80,15 @@
     </section>
 
     <section anchor="subject-ids" title="Subject Identifiers">
-      <t>The RISC profile defines a structure called a Subject Identifier: a JSON object containing
-        a set of claims that collectively uniquely identify a subject, according to a simple schema
-        called a Subject Identifier Type. Every Subject Identifier MUST contain a "subject_type"
-        claim, whose value MUST be a name that uniquely identifies the Subject Identifier Type of
-        the Subject Identifier. Any remaining claims within the Subject Identifier MUST be
-        interpreted according to the definition of the Subject Identifier Type. A Subject Identifier
-        MUST conform to the Subject Identifier Type identified by its "subject_type" claim, and MUST
-        NOT contain any claims not defined by its Subject Identifier Type.</t>
+      <t>The RISC profile defines a structure called a Subject Identifier: a <xref target="RFC7159">JSON</xref>
+        object containing a set of claims that collectively uniquely identify a subject, according 
+        to a simple schema called a Subject Identifier Type. Every Subject Identifier MUST contain 
+        a <spanx style="verb">subject_type</spanx> claim, whose value MUST be a name that uniquely 
+        identifies the Subject Identifier Type of the Subject Identifier. Any remaining claims 
+        within the Subject Identifier MUST be interpreted according to the definition of the 
+        Subject Identifier Type. A Subject Identifier MUST conform to the Subject Identifier Type 
+        identified by its <spanx style="verb">subject_type</spanx> claim, and MUST NOT contain any 
+        claims not defined by its Subject Identifier Type.</t>
 
       <figure anchor="subject-ids-ex-email" title="Example: Email Subject Identifier">
         <artwork><![CDATA[
@@ -160,8 +161,8 @@
           <t hangText="issuer">REQUIRED. URL using the https scheme with no query or fragment component that the
             Transmitter asserts as its Issuer Identifier. This MUST be identical to the iss Claim value in
             Security Event Tokens issued from this Transmitter.</t>
-          <t hangText="jwks_uri"> REQUIRED. URL of the Transmitter's JSON Web Key Set [JWK] document.
-            This contains the signing key(s) the Receiver uses to validate signatures from the 
+          <t hangText="jwks_uri"> REQUIRED. URL of the Transmitter's <xref target="RFC7517">JSON Web Key Set</xref>
+            document. This contains the signing key(s) the Receiver uses to validate signatures from the 
             Transmitter.</t>
           <t hangText="delivery_methods_supported"> RECOMMENDED. List of supported delivery method 
             URIs.</t>
@@ -278,6 +279,8 @@ Content-Type: application/json
         and that can be used by Event Receivers to query the Event Stream status, to
         add and remove subjects and to trigger verification.</t>
       
+      <t>This section is based on <xref target="MGMTAPI">Management API for SET Event Streams</xref>.</t>
+      
       <figure title="Event Stream Management API" anchor="figintro"><artwork><![CDATA[
 +------------+                +------------+
 |            | Stream Config  |            |
@@ -329,7 +332,7 @@ Content-Type: application/json
           <section anchor="reading-a-streams-status" title="Reading a Stream’s Status">
             <t>An Event Receiver checks the current status of an event stream by making an HTTP
               GET request to the stream’s Status Endpoint. On receiving a valid request the Event
-              Transmitter responds with a 200 OK response containing a <xref target="JSON"/>
+              Transmitter responds with a 200 OK response containing a <xref target="RFC7159">JSON</xref>
               object with a single attribute <spanx style="verb">status</spanx>, whose string value 
               MUST have one of the following values:<list style="hanging">
                 <t hangText="enabled"><vspace blankLines="0"/> The transmitter will transmit
@@ -373,9 +376,9 @@ Pragma: no-cache
           
           <section anchor="updating-a-streams-status" title="Updating a Stream's Status">
             <t>An Event Receiver updates the current status of a stream by making an HTTP
-              POST request to the Status Endpoint. The POST body contains a <xref target="JSON"/>
+              POST request to the Status Endpoint. The POST body contains a <xref target="RFC7159">JSON</xref>
               representation of the updated status. On receiving a valid request the Event
-              Transmitter responds with a 200 OK response containing a <xref target="JSON"/>
+              Transmitter responds with a 200 OK response containing a <xref target="RFC7159">JSON</xref>
               representation of the updated stream status in the body.</t>
             
             <t>The following is a non-normative example request to update an Event Stream’s
@@ -426,8 +429,8 @@ Pragma: no-cache
         </section>
         
         <section anchor="stream" title="Stream Configuration">
-          <t>An Event Stream’s configuration is represented as a JSON object with the following
-            properties:</t>
+          <t>An Event Stream’s configuration is represented as a <xref target="RFC7159">JSON</xref> object with
+            the following properties:</t>
 
           <t><list style="hanging">
               <t hangText="aud"><vspace blankLines="0"/> A string containing an audience claim as
@@ -463,7 +466,7 @@ Pragma: no-cache
             title="Reading a Stream’s Configuration">
             <t>An Event Receiver gets the current configuration of a stream by making an HTTP GET
               request to the Configuration Endpoint. On receiving a valid request the Event
-              Transmitter responds with a 200 OK response containing a <xref target="JSON"/>
+              Transmitter responds with a 200 OK response containing a <xref target="RFC7159">JSON</xref>
               representation of the stream’s configuration in the body.</t>
 
             <t>The following is a non-normative example request to read an Event Stream’s
@@ -529,15 +532,15 @@ Pragma: no-cache
           <section anchor="updating-a-streams-configuration"
             title="Updating a Stream’s Configuration">
             <t>An Event Receiver updates the current configuration of a stream by making an HTTP
-              POST request to the Configuration Endpoint. The POST body contains a <xref target="JSON"/>
+              POST request to the Configuration Endpoint. The POST body contains a <xref target="RFC7159">JSON</xref>
               representation of the updated configuration. On receiving a valid request the Event
-              Transmitter responds with a 200 OK response containing a <xref target="JSON"/>
+              Transmitter responds with a 200 OK response containing a <xref target="RFC7159">JSON</xref>
               representation of the updated stream configuration in the body.</t>
 
             <t>The full set of editable properties must be present in the POST body, not only the
               ones that are specifically intended to be changed. Missing properties SHOULD be
               interpreted as requested to be deleted. Event Receivers should read the
-              configuration first, modify the <xref target="JSON"/> representation, then make an
+              configuration first, modify the <xref target="RFC7159">JSON</xref> representation, then make an
               update request.</t>
 
             <t>Properties that cannot be updated MAY be present, but they MUST match the expected
@@ -655,7 +658,7 @@ Pragma: no-cache
             </texttable>
 
             <t>The following is a non-normative example request to add a subject to a stream,
-              where the subject is identified by an OpenID Connect email claim:</t>
+              where the subject is identified by an <xref target="OIDC">OpenID Connect</xref> email claim:</t>
 
             <figure title="Example: Add Subject Request" anchor="figaddreq">
               <artwork><![CDATA[
@@ -771,9 +774,10 @@ Pragma: no-cache
           <section anchor="triggering-a-verification-event"
             title="Triggering a Verification Event.">
             <t>To request that a verification event be sent over an Event Stream, the Event
-              Receiver makes an HTTP POST request to the Verification Endpoint, with a JSON object
-              containing the parameters of the verification request, if any. On a successful
-              request, the event transmitter responds with an empty 204 No Content response.</t>
+              Receiver makes an HTTP POST request to the Verification Endpoint, with a 
+              <xref target="RFC7159">JSON</xref> object containing the parameters of the verification request,
+              if any. On a successful request, the event transmitter responds with an empty 
+              <spanx style="verb">204 No Content</spanx> response.</t>
 
             <t>Verification requests have the following properties:</t>
 
@@ -961,7 +965,7 @@ Pragma: no-cache
           </figure>
           
           <t>The purpose is defense against confusion with other JWTs, as described in Sections
-          4.5, 4.6 and 4.7 of <xref target="SET"/>. While current Id Token validators may not
+          4.5, 4.6 and 4.7 of <xref target="SET"/>. While current <xref target="IDTOKEN">Id Token</xref> validators may not
           be using the <spanx style="verb">typ</spanx> header parameter, by requiring it for RISC
           SETs a distinct value is guaranteed for future validators.</t>
         </section>
@@ -1050,7 +1054,7 @@ Pragma: no-cache
   <back>
     <references title="Normative References">
 
-      <reference anchor="JSON" target="https://www.rfc-editor.org/info/rfc7159">
+      <reference anchor="RFC7159" target="https://www.rfc-editor.org/info/rfc7159">
         <front>
           <title>The JavaScript Object Notation (JSON) Data Interchange Format</title>
           <author initials="T." surname="Bray" fullname="T. Bray" role="editor">
@@ -1070,6 +1074,17 @@ Pragma: no-cache
         <seriesInfo name="DOI" value="10.17487/RFC7159"/>
       </reference>
 
+      <reference anchor='RFC7517' target='https://www.rfc-editor.org/info/rfc7517'>
+        <front>
+          <title>JSON Web Key (JWK)</title>
+          <author initials='M.' surname='Jones' fullname='M. Jones'><organization /></author>
+          <date year='2015' month='May' />
+          <abstract><t>A JSON Web Key (JWK) is a JavaScript Object Notation (JSON) data structure that represents a cryptographic key.  This specification also defines a JWK Set JSON data structure that represents a set of JWKs.  Cryptographic algorithms and identifiers for use with this specification are described in the separate JSON Web Algorithms (JWA) specification and IANA registries established by that specification.</t></abstract>
+        </front>
+        <seriesInfo name='RFC' value='7517'/>
+        <seriesInfo name='DOI' value='10.17487/RFC7517'/>
+      </reference>
+      
       <reference anchor="RFC7519" target="https://www.rfc-editor.org/info/rfc7519">
         <front>
           <title>JSON Web Token (JWT)</title>
@@ -1125,7 +1140,7 @@ Pragma: no-cache
         </front>
       </reference>
 
-      <reference anchor="API"
+      <reference anchor="MGMTAPI"
         target="https://tools.ietf.org/html/draft-scurtescu-secevent-simple-control-plane">
         <front>
           <title>Management API for SET Event Streams</title>

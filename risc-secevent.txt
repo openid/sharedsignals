@@ -117,9 +117,9 @@ Scurtescu, et al.        Expires August 4, 2018                 [Page 2]
 2.  Subject Identifiers
 
    The RISC profile defines a structure called a Subject Identifier: a
-   JSON object containing a set of claims that collectively uniquely
-   identify a subject, according to a simple schema called a Subject
-   Identifier Type.  Every Subject Identifier MUST contain a
+   JSON [RFC7159] object containing a set of claims that collectively
+   uniquely identify a subject, according to a simple schema called a
+   Subject Identifier Type.  Every Subject Identifier MUST contain a
    "subject_type" claim, whose value MUST be a name that uniquely
    identifies the Subject Identifier Type of the Subject Identifier.
    Any remaining claims within the Subject Identifier MUST be
@@ -213,9 +213,9 @@ Scurtescu, et al.        Expires August 4, 2018                 [Page 3]
       Identifier.  This MUST be identical to the iss Claim value in
       Security Event Tokens issued from this Transmitter.
 
-   jwks_uri  REQUIRED.  URL of the Transmitter's JSON Web Key Set [JWK]
-      document.  This contains the signing key(s) the Receiver uses to
-      validate signatures from the Transmitter.
+   jwks_uri  REQUIRED.  URL of the Transmitter's JSON Web Key Set
+      [RFC7517] document.  This contains the signing key(s) the Receiver
+      uses to validate signatures from the Transmitter.
 
 
 
@@ -382,8 +382,8 @@ Scurtescu, et al.        Expires August 4, 2018                 [Page 6]
    Event Stream status, to add and remove subjects and to trigger
    verification.
 
-
-
+   This section is based on Management API for SET Event Streams
+   [MGMTAPI].
 
 
 
@@ -460,8 +460,9 @@ Scurtescu, et al.        Expires August 4, 2018                 [Page 8]
    An Event Receiver checks the current status of an event stream by
    making an HTTP GET request to the stream's Status Endpoint.  On
    receiving a valid request the Event Transmitter responds with a 200
-   OK response containing a [JSON] object with a single attribute
-   "status", whose string value MUST have one of the following values:
+   OK response containing a JSON [RFC7159] object with a single
+   attribute "status", whose string value MUST have one of the following
+   values:
 
    enabled
       The transmitter will transmit events over the stream, according to
@@ -488,6 +489,23 @@ Scurtescu, et al.        Expires August 4, 2018                 [Page 8]
 
    The following is a non-normative example response:
 
+
+
+
+
+
+
+
+
+
+
+
+
+Scurtescu, et al.        Expires August 4, 2018                 [Page 9]
+
+                              risc-secevent                 January 2018
+
+
    HTTP/1.1 200 OK
    Content-Type: application/json; charset=UTF-8
    Cache-Control: no-store
@@ -499,21 +517,14 @@ Scurtescu, et al.        Expires August 4, 2018                 [Page 8]
 
               Figure 8: Example: Check Stream Status Response
 
-
-
-Scurtescu, et al.        Expires August 4, 2018                 [Page 9]
-
-                              risc-secevent                 January 2018
-
-
 4.1.1.2.  Updating a Stream's Status
 
    An Event Receiver updates the current status of a stream by making an
    HTTP POST request to the Status Endpoint.  The POST body contains a
-   [JSON] representation of the updated status.  On receiving a valid
-   request the Event Transmitter responds with a 200 OK response
-   containing a [JSON] representation of the updated stream status in
-   the body.
+   JSON [RFC7159] representation of the updated status.  On receiving a
+   valid request the Event Transmitter responds with a 200 OK response
+   containing a JSON [RFC7159] representation of the updated stream
+   status in the body.
 
    The following is a non-normative example request to update an Event
    Stream's status:
@@ -546,17 +557,6 @@ Scurtescu, et al.        Expires August 4, 2018                 [Page 9]
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 Scurtescu, et al.        Expires August 4, 2018                [Page 10]
 
                               risc-secevent                 January 2018
@@ -578,8 +578,8 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 10]
 
 4.1.2.  Stream Configuration
 
-   An Event Stream's configuration is represented as a JSON object with
-   the following properties:
+   An Event Stream's configuration is represented as a JSON [RFC7159]
+   object with the following properties:
 
    aud
       A string containing an audience claim as defined in JSON Web Token
@@ -634,8 +634,8 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 11]
    An Event Receiver gets the current configuration of a stream by
    making an HTTP GET request to the Configuration Endpoint.  On
    receiving a valid request the Event Transmitter responds with a 200
-   OK response containing a [JSON] representation of the stream's
-   configuration in the body.
+   OK response containing a JSON [RFC7159] representation of the
+   stream's configuration in the body.
 
    The following is a non-normative example request to read an Event
    Stream's configuration:
@@ -734,16 +734,16 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 13]
 
    An Event Receiver updates the current configuration of a stream by
    making an HTTP POST request to the Configuration Endpoint.  The POST
-   body contains a [JSON] representation of the updated configuration.
-   On receiving a valid request the Event Transmitter responds with a
-   200 OK response containing a [JSON] representation of the updated
-   stream configuration in the body.
+   body contains a JSON [RFC7159] representation of the updated
+   configuration.  On receiving a valid request the Event Transmitter
+   responds with a 200 OK response containing a JSON [RFC7159]
+   representation of the updated stream configuration in the body.
 
    The full set of editable properties must be present in the POST body,
    not only the ones that are specifically intended to be changed.
    Missing properties SHOULD be interpreted as requested to be deleted.
-   Event Receivers should read the configuration first, modify the
-   [JSON] representation, then make an update request.
+   Event Receivers should read the configuration first, modify the JSON
+   [RFC7159] representation, then make an update request.
 
    Properties that cannot be updated MAY be present, but they MUST match
    the expected value.
@@ -888,8 +888,8 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 15]
                         Table 4: Add Subject Errors
 
    The following is a non-normative example request to add a subject to
-   a stream, where the subject is identified by an OpenID Connect email
-   claim:
+   a stream, where the subject is identified by an OpenID Connect [OIDC]
+   email claim:
 
 
 
@@ -1054,9 +1054,9 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 18]
 
    To request that a verification event be sent over an Event Stream,
    the Event Receiver makes an HTTP POST request to the Verification
-   Endpoint, with a JSON object containing the parameters of the
-   verification request, if any.  On a successful request, the event
-   transmitter responds with an empty 204 No Content response.
+   Endpoint, with a JSON [RFC7159] object containing the parameters of
+   the verification request, if any.  On a successful request, the event
+   transmitter responds with an empty "204 No Content" response.
 
 
 
@@ -1299,9 +1299,9 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 23]
 
    The purpose is defense against confusion with other JWTs, as
    described in Sections 4.5, 4.6 and 4.7 of [SET].  While current Id
-   Token validators may not be using the "typ" header parameter, by
-   requiring it for RISC SETs a distinct value is guaranteed for future
-   validators.
+   Token [IDTOKEN] validators may not be using the "typ" header
+   parameter, by requiring it for RISC SETs a distinct value is
+   guaranteed for future validators.
 
 5.1.4.  The "exp" Claim
 
@@ -1407,10 +1407,6 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 25]
 
 8.  Normative References
 
-   [API]      IETF, "Management API for SET Event Streams",
-              <https://tools.ietf.org/html/draft-scurtescu-secevent-
-              simple-control-plane>.
-
    [CLIENTCRED]
               Hardt, D., "The OAuth 2.0 Authorization Framework - Client
               Credentials Grant", RFC 6749,
@@ -1429,9 +1425,9 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 25]
               <http://openid.net/specs/
               openid-connect-core-1_0.html#IDToken>.
 
-   [JSON]     Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
-              Interchange Format", RFC 7159, DOI 10.17487/RFC7159, March
-              2014, <https://www.rfc-editor.org/info/rfc7159>.
+   [MGMTAPI]  IETF, "Management API for SET Event Streams",
+              <https://tools.ietf.org/html/draft-scurtescu-secevent-
+              simple-control-plane>.
 
    [OIDC]     Sakimura, N., Bradley, J., Jones, M., de Medeiros, B., and
               C. Mortimore, "OpenID Connect Core 1.0", November 2014,
@@ -1448,6 +1444,10 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 25]
               DOI 10.17487/RFC2119, March 1997, <https://www.rfc-
               editor.org/info/rfc2119>.
 
+   [RFC5785]  Nottingham, M. and E. Hammer-Lahav, "Defining Well-Known
+              Uniform Resource Identifiers (URIs)", RFC 5785,
+              DOI 10.17487/RFC5785, April 2010, <https://www.rfc-
+              editor.org/info/rfc5785>.
 
 
 
@@ -1458,10 +1458,13 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 26]
                               risc-secevent                 January 2018
 
 
-   [RFC5785]  Nottingham, M. and E. Hammer-Lahav, "Defining Well-Known
-              Uniform Resource Identifiers (URIs)", RFC 5785,
-              DOI 10.17487/RFC5785, April 2010, <https://www.rfc-
-              editor.org/info/rfc5785>.
+   [RFC7159]  Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
+              Interchange Format", RFC 7159, DOI 10.17487/RFC7159, March
+              2014, <https://www.rfc-editor.org/info/rfc7159>.
+
+   [RFC7517]  Jones, M., "JSON Web Key (JWK)", RFC 7517,
+              DOI 10.17487/RFC7517, May 2015, <https://www.rfc-
+              editor.org/info/rfc7517>.
 
    [RFC7519]  Jones, M., Bradley, J., and N. Sakimura, "JSON Web Token
               (JWT)", RFC 7519, DOI 10.17487/RFC7519, May 2015,
@@ -1502,9 +1505,6 @@ Authors' Addresses
    Oracle Corporation
 
    Email: phil.hunt@yahoo.com
-
-
-
 
 
 
