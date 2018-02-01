@@ -522,7 +522,7 @@ Scurtescu, et al.        Expires August 4, 2018                 [Page 9]
    An Event Receiver updates the current status of a stream by making an
    HTTP POST request to the Status Endpoint.  The POST body contains a
    JSON [RFC7159] representation of the updated status.  On receiving a
-   valid request the Event Transmitter responds with a 200 OK response
+   valid request the Event Transmitter responds with a "200 OK" response
    containing a JSON [RFC7159] representation of the updated stream
    status in the body.
 
@@ -633,8 +633,8 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 11]
 
    An Event Receiver gets the current configuration of a stream by
    making an HTTP GET request to the Configuration Endpoint.  On
-   receiving a valid request the Event Transmitter responds with a 200
-   OK response containing a JSON [RFC7159] representation of the
+   receiving a valid request the Event Transmitter responds with a "200
+   OK" response containing a JSON [RFC7159] representation of the
    stream's configuration in the body.
 
    The following is a non-normative example request to read an Event
@@ -736,7 +736,7 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 13]
    making an HTTP POST request to the Configuration Endpoint.  The POST
    body contains a JSON [RFC7159] representation of the updated
    configuration.  On receiving a valid request the Event Transmitter
-   responds with a 200 OK response containing a JSON [RFC7159]
+   responds with a "200 OK" response containing a JSON [RFC7159]
    representation of the updated stream configuration in the body.
 
    The full set of editable properties must be present in the POST body,
@@ -854,14 +854,14 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 15]
    To add a subject to an Event Stream, the Event Receiver makes an HTTP
    POST request to the Add Subject Endpoint, containing in the body a
    Subject Identifier Object identifying the subject to be added.  On a
-   successful response, the Event Transmitter responds with an empty 200
-   OK response.
+   successful response, the Event Transmitter responds with an empty
+   "200 OK" response.
 
    The Event Transmitter MAY choose to silently ignore the request, for
    example if the subject has previously indicated to the transmitter
    that they do not want events to be transmitted to the Event Receiver.
-   In this case, the transmitter MAY return an empty 200 OK response or
-   an appropriate error code.  See Security Considerations
+   In this case, the transmitter MAY return an empty "200 OK" response
+   or an appropriate error code.  See Security Considerations
    (Section 4.4).
 
    Errors are signaled with HTTP status codes as follows:
@@ -879,7 +879,7 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 15]
    |      |                                                            |
    | 404  | if the subject is not recognized by the Event Transmitter, |
    |      | the Event Transmitter may chose to stay silent in this     |
-   |      | case and respond with 200                                  |
+   |      | case and respond with "200"                                |
    |      |                                                            |
    | 429  | if the Event Receiver is sending too many requests in a    |
    |      | gvien amount of time                                       |
@@ -924,7 +924,7 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 16]
    HTTP POST request to the Remove Subject Endpoint, containing in the
    body a Subject Identifier Object identifying the subject to be
    removed.  On a successful response, the Event Transmitter responds
-   with a 204 No Content response.
+   with a "204 No Content" response.
 
    Errors are signaled with HTTP staus codes as follows:
 
@@ -967,7 +967,7 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 17]
    |      |                                                            |
    | 404  | if the subject is not recognized by the Event Transmitter, |
    |      | the Event Transmitter may chose to stay silent in this     |
-   |      | case and respond with 204                                  |
+   |      | case and respond with "204"                                |
    |      |                                                            |
    | 429  | if the Event Receiver is sending too many requests in a    |
    |      | gvien amount of time                                       |
@@ -1187,7 +1187,7 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 21]
 4.4.1.  Subject Probing
 
    It may be possible for an Event Transmitter to leak information about
-   subjects through their responses to add subject requests.  A 404
+   subjects through their responses to add subject requests.  A "404"
    response may indicate to the Event Receiver that the subject does not
    exist, which may inadvertantly reveal information about the subject
    (e.g. that a particular individual does or does not use the Event
@@ -1195,7 +1195,7 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 21]
 
    Event Transmitters SHOULD carefully evaluate the conditions under
    which they will return error responses to add subject requests.
-   Event Transmitters MAY return a 204 response even if they will not
+   Event Transmitters MAY return a "204" response even if they will not
    actually send any events related to the subject, and Event Receivers
    MUST NOT assume that a 204 response means that they will receive
    events related to the subject.
@@ -1256,7 +1256,7 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 22]
       by Transmitters
 
    The RISC use cases that set the requirements are described in
-   "Security Events RISC Use Cases" [USECASES].
+   Security Events RISC Use Cases [USECASES].
 
 5.1.  Security Event Token Profle
 
@@ -1265,8 +1265,7 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 22]
 
 5.1.1.  Signature Key Resolution
 
-   The signature key can be obtained through the "jwks_uri", see
-   Section 3.
+   The signature key can be obtained through "jwks_uri", see Section 3.
 
 5.1.2.  RISC Event Subject
 
@@ -1279,6 +1278,7 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 22]
 
    RISC events MUST use explicit typing as defined in Section 2.3 of
    [SET].
+
 
 
 
@@ -1353,18 +1353,21 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 24]
 
 5.2.1.1.  Push Delivery using HTTP
 
-   method  http://schemas.openid.net/secevent/risc/delivery-method/push
+   method  "http://schemas.openid.net/secevent/risc/delivery-method/
+      push"
 
    endpoint_url  The URL where events are pushed through HTTP POST.
       This is set by the Receiver.
 
    authorization_header  The HTTP Authorization header that the
-      Transmitter MUST set with each event delivery.  The value is
-      optional and it is set by the Receiver.
+      Transmitter MUST set with each event delivery, if the
+      configuration is present.  The value is optional and it is set by
+      the Receiver.
 
 5.2.1.2.  Polling Delivery using HTTP
 
-   method  http://schemas.openid.net/secevent/risc/delivery-method/poll
+   method  "http://schemas.openid.net/secevent/risc/delivery-method/
+      poll"
 
    endpoint_url  The URL where events can be retrieved from.  This is
       specified by the Transmitter.
@@ -1391,9 +1394,6 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 24]
    SHOULD NOT identify a subject using a given Subject Identifier Type
    if doing so will allow the recipient to correlate different claims
    about the subject that they are not known to already have knowledge
-   of.  Issuers and recipients SHOULD always use the same Subject
-   Identifier Type and the same claim values to identify a given subject
-
 
 
 
@@ -1402,6 +1402,8 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 25]
                               risc-secevent                 January 2018
 
 
+   of.  Issuers and recipients SHOULD always use the same Subject
+   Identifier Type and the same claim values to identify a given subject
    when communicating with a given party in order to reduce the
    possibility of information leakage.
 
@@ -1448,8 +1450,6 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 25]
               Uniform Resource Identifiers (URIs)", RFC 5785,
               DOI 10.17487/RFC5785, April 2010, <https://www.rfc-
               editor.org/info/rfc5785>.
-
-
 
 
 
