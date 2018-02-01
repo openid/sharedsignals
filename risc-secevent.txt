@@ -71,11 +71,10 @@ Scurtescu, et al.        Expires August 4, 2018                 [Page 1]
          4.1.4.1.  Verification Event  . . . . . . . . . . . . . . .  19
          4.1.4.2.  Triggering a Verification Event.  . . . . . . . .  19
      4.2.  Authorization . . . . . . . . . . . . . . . . . . . . . .  21
-     4.3.  Subject Claims for Subject Add and Remove Operations  . .  22
-     4.4.  Security Considerations . . . . . . . . . . . . . . . . .  22
-       4.4.1.  Subject Probing . . . . . . . . . . . . . . . . . . .  22
-       4.4.2.  Information Harvesting  . . . . . . . . . . . . . . .  22
-       4.4.3.  Malicious Subject Removal . . . . . . . . . . . . . .  22
+     4.3.  Security Considerations . . . . . . . . . . . . . . . . .  22
+       4.3.1.  Subject Probing . . . . . . . . . . . . . . . . . . .  22
+       4.3.2.  Information Harvesting  . . . . . . . . . . . . . . .  22
+       4.3.3.  Malicious Subject Removal . . . . . . . . . . . . . .  22
    5.  Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .  23
      5.1.  Security Event Token Profle . . . . . . . . . . . . . . .  23
        5.1.1.  Signature Key Resolution  . . . . . . . . . . . . . .  23
@@ -86,7 +85,7 @@ Scurtescu, et al.        Expires August 4, 2018                 [Page 1]
        5.1.6.  Security Considerations . . . . . . . . . . . . . . .  24
          5.1.6.1.  Distingushing SETs from other Kinds of JWTs . . .  24
      5.2.  SET Token Delivery Using HTTP Profile . . . . . . . . . .  24
-       5.2.1.  Stream Configuration Metadata . . . . . . . . . . . .  25
+       5.2.1.  Stream Configuration Metadata . . . . . . . . . . . .  24
          5.2.1.1.  Push Delivery using HTTP  . . . . . . . . . . . .  25
          5.2.1.2.  Polling Delivery using HTTP . . . . . . . . . . .  25
    6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  25
@@ -104,6 +103,7 @@ Scurtescu, et al.        Expires August 4, 2018                 [Page 1]
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
    document are to be interpreted as described in [RFC2119].
+
 
 
 
@@ -625,9 +625,9 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 11]
       Transmitter SHOULD NOT respond with a 429 status code if an Event
       Receiver is not exceeding this frequency.
 
-   subject_type  The subject type that the Receiver wants for the
-      events.  If not set then the Transmitter might decide to use a
-      subject type that discloses more infirmation than necessary.
+   subject_type  The Subject Identifier Type that the Receiver wants for
+      the events.  If not set then the Transmitter might decide to use a
+      type that discloses more information than necessary.
 
 4.1.2.1.  Reading a Stream's Configuration
 
@@ -853,7 +853,7 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 15]
 
    To add a subject to an Event Stream, the Event Receiver makes an HTTP
    POST request to the Add Subject Endpoint, containing in the body a
-   Subject Identifier Object identifying the subject to be added.  On a
+   Subject Identifier identifying the subject to be added.  On a
    successful response, the Event Transmitter responds with an empty
    "200 OK" response.
 
@@ -862,7 +862,7 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 15]
    that they do not want events to be transmitted to the Event Receiver.
    In this case, the transmitter MAY return an empty "200 OK" response
    or an appropriate error code.  See Security Considerations
-   (Section 4.4).
+   (Section 4.3).
 
    Errors are signaled with HTTP status codes as follows:
 
@@ -888,8 +888,8 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 15]
                         Table 4: Add Subject Errors
 
    The following is a non-normative example request to add a subject to
-   a stream, where the subject is identified by an OpenID Connect [OIDC]
-   email claim:
+   a stream, where the subject is identified by an Email Subject
+   Identifier.
 
 
 
@@ -903,6 +903,7 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 16]
    Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
    {
+     "subject_type": "email",
      "email": "example.user@example.com"
    }
 
@@ -922,12 +923,11 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 16]
 
    To remove a subject from an Event Stream, the Event Receiver makes an
    HTTP POST request to the Remove Subject Endpoint, containing in the
-   body a Subject Identifier Object identifying the subject to be
-   removed.  On a successful response, the Event Transmitter responds
-   with a "204 No Content" response.
+   body a Subject Identifier identifying the subject to be removed.  On
+   a successful response, the Event Transmitter responds with a "204 No
+   Content" response.
 
    Errors are signaled with HTTP staus codes as follows:
-
 
 
 
@@ -976,13 +976,14 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 17]
                       Table 5: Remove Subject Errors
 
    The following is a non-normative example request where the subject is
-   identified by a phone_number claim:
+   identified by a Phone Number Subject Identifier:
 
    POST /set/subjects:remove HTTP/1.1
    Host: transmitter.example.com
    Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
    {
+     "subject_type": "phone",
      "phone_number": "+1 206 555 0123"
    }
 
@@ -997,7 +998,6 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 17]
    Pragma: no-cache
 
                 Figure 18: Example: Remove Subject Response
-
 
 
 
@@ -1178,13 +1178,9 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 21]
                               risc-secevent                 January 2018
 
 
-4.3.  Subject Claims for Subject Add and Remove Operations
+4.3.  Security Considerations
 
-   TODO
-
-4.4.  Security Considerations
-
-4.4.1.  Subject Probing
+4.3.1.  Subject Probing
 
    It may be possible for an Event Transmitter to leak information about
    subjects through their responses to add subject requests.  A "404"
@@ -1200,7 +1196,7 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 21]
    MUST NOT assume that a 204 response means that they will receive
    events related to the subject.
 
-4.4.2.  Information Harvesting
+4.3.2.  Information Harvesting
 
    SETs may contain personally identifiable information (PII) or other
    non-public information about the event transmitter, the subject (of
@@ -1220,12 +1216,16 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 21]
    the event.  The mechanisms by which such validation is performed are
    outside the scope of this specification.
 
-4.4.3.  Malicious Subject Removal
+4.3.3.  Malicious Subject Removal
 
    A malicious party may find it advantageous to remove a particular
    subject from a stream, in order to reduce the Event Receiver's
    ability to detect malicious activity related to the subject,
    inconvenience the subject, or for other reasons.  Consequently it may
+   be in the best interests of the subject for the Event Transmitter to
+   continue to send events related to the subject for some time after
+   the subject has been removed from a stream.
+
 
 
 
@@ -1233,10 +1233,6 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 22]
 
                               risc-secevent                 January 2018
 
-
-   be in the best interests of the subject for the Event Transmitter to
-   continue to send events related to the subject for some time after
-   the subject has been removed from a stream.
 
    Event Transmitters MAY continue sending events related to a subject
    for some amount of time after that subject has been removed from the
@@ -1279,8 +1275,12 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 22]
    RISC events MUST use explicit typing as defined in Section 2.3 of
    [SET].
 
+   {
+     "typ":"secevent+jwt",
+     "alg":"HS256"
+   }
 
-
+                  Figure 22: Explicitly Typed JOSE Header
 
 
 
@@ -1289,13 +1289,6 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 23]
 
                               risc-secevent                 January 2018
 
-
-   {
-     "typ":"secevent+jwt",
-     "alg":"HS256"
-   }
-
-                  Figure 22: Explicitly Typed JOSE Header
 
    The purpose is defense against confusion with other JWTs, as
    described in Sections 4.5, 4.6 and 4.7 of [SET].  While current Id
@@ -1337,6 +1330,13 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 23]
    This section provides RISC profiling specifications for the "SET
    Token Delivery Using HTTP" [DELIVERY] spec.
 
+5.2.1.  Stream Configuration Metadata
+
+   Each delivery method is identified by a URI, specified below by the
+   "method" metadata.
+
+
+
 
 
 
@@ -1345,11 +1345,6 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 24]
 
                               risc-secevent                 January 2018
 
-
-5.2.1.  Stream Configuration Metadata
-
-   Each delivery method is identified by a URI, specified below by the
-   "method" metadata.
 
 5.2.1.1.  Push Delivery using HTTP
 
@@ -1394,6 +1389,11 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 24]
    SHOULD NOT identify a subject using a given Subject Identifier Type
    if doing so will allow the recipient to correlate different claims
    about the subject that they are not known to already have knowledge
+   of.  Issuers and recipients SHOULD always use the same Subject
+   Identifier Type and the same claim values to identify a given subject
+   when communicating with a given party in order to reduce the
+   possibility of information leakage.
+
 
 
 
@@ -1401,11 +1401,6 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 25]
 
                               risc-secevent                 January 2018
 
-
-   of.  Issuers and recipients SHOULD always use the same Subject
-   Identifier Type and the same claim values to identify a given subject
-   when communicating with a given party in order to reduce the
-   possibility of information leakage.
 
 8.  Normative References
 
@@ -1431,10 +1426,6 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 25]
               <https://tools.ietf.org/html/draft-scurtescu-secevent-
               simple-control-plane>.
 
-   [OIDC]     Sakimura, N., Bradley, J., Jones, M., de Medeiros, B., and
-              C. Mortimore, "OpenID Connect Core 1.0", November 2014,
-              <http://openid.net/specs/openid-connect-core-1_0.html>.
-
    [OIDC-DISCOVERY]
               Sakimura, N., Bradley, J., Jones, M., and E. Jay, "OpenID
               Connect Discovery 1.0", November 2014,
@@ -1451,13 +1442,6 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 25]
               DOI 10.17487/RFC5785, April 2010, <https://www.rfc-
               editor.org/info/rfc5785>.
 
-
-
-Scurtescu, et al.        Expires August 4, 2018                [Page 26]
-
-                              risc-secevent                 January 2018
-
-
    [RFC7159]  Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
               Interchange Format", RFC 7159, DOI 10.17487/RFC7159, March
               2014, <https://www.rfc-editor.org/info/rfc7159>.
@@ -1465,6 +1449,14 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 26]
    [RFC7517]  Jones, M., "JSON Web Key (JWK)", RFC 7517,
               DOI 10.17487/RFC7517, May 2015, <https://www.rfc-
               editor.org/info/rfc7517>.
+
+
+
+
+Scurtescu, et al.        Expires August 4, 2018                [Page 26]
+
+                              risc-secevent                 January 2018
+
 
    [RFC7519]  Jones, M., Bradley, J., and N. Sakimura, "JSON Web Token
               (JWT)", RFC 7519, DOI 10.17487/RFC7519, May 2015,
@@ -1507,13 +1499,6 @@ Authors' Addresses
    Email: phil.hunt@yahoo.com
 
 
-
-
-Scurtescu, et al.        Expires August 4, 2018                [Page 27]
-
-                              risc-secevent                 January 2018
-
-
    John Bradley
    Yubico
 
@@ -1524,45 +1509,4 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 27]
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Scurtescu, et al.        Expires August 4, 2018                [Page 28]
+Scurtescu, et al.        Expires August 4, 2018                [Page 27]

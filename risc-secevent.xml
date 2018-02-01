@@ -456,9 +456,9 @@ Pragma: no-cache
               frequently than this, the Event Transmitter MAY respond with a 429 status code. An
               Event Transmitter SHOULD NOT respond with a 429 status code if an Event Receiver
               is not exceeding this frequency.</t>
-            <t hangText="subject_type"> The subject type that the Receiver wants for the events.
-              If not set then the Transmitter might decide to use a subject type that discloses more
-              infirmation than necessary.</t>
+            <t hangText="subject_type"> The Subject Identifier Type that the Receiver wants for the events.
+              If not set then the Transmitter might decide to use a type that discloses more information
+              than necessary.</t>
             </list></t>
           
           <section anchor="reading-a-streams-configuration"
@@ -628,9 +628,9 @@ Pragma: no-cache
 
           <section anchor="adding-a-subject-to-a-stream" title="Adding a Subject to a Stream">
             <t>To add a subject to an Event Stream, the Event Receiver makes an HTTP POST request
-              to the Add Subject Endpoint, containing in the body a Subject Identifier Object
-              identifying the subject to be added. On a successful response, the Event Transmitter
-              responds with an empty <spanx style="verb">200 OK</spanx> response.</t>
+              to the Add Subject Endpoint, containing in the body a Subject Identifier identifying
+              the subject to be added. On a successful response, the Event Transmitter responds
+              with an empty <spanx style="verb">200 OK</spanx> response.</t>
 
             <t>The Event Transmitter MAY choose to silently ignore the request, for example if the
               subject has previously indicated to the transmitter that they do not want events to
@@ -657,7 +657,7 @@ Pragma: no-cache
             </texttable>
 
             <t>The following is a non-normative example request to add a subject to a stream,
-              where the subject is identified by an <xref target="OIDC">OpenID Connect</xref> email claim:</t>
+              where the subject is identified by an Email Subject Identifier.</t>
 
             <figure title="Example: Add Subject Request" anchor="figaddreq">
               <artwork><![CDATA[
@@ -666,6 +666,7 @@ Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
 {
+  "subject_type": "email",
   "email": "example.user@example.com"
 }
 ]]></artwork>
@@ -686,7 +687,7 @@ Pragma: no-cache
           <section anchor="removing-a-subject" title="Removing a Subject">
             <t>To remove a subject from an Event Stream, the Event Receiver makes an HTTP POST
               request to the Remove Subject Endpoint, containing in the body a Subject Identifier
-              Object identifying the subject to be removed. On a successful response, the Event
+              identifying the subject to be removed. On a successful response, the Event
               Transmitter responds with a <spanx style="verb">204 No Content</spanx> response.</t>
 
             <t>Errors are signaled with HTTP staus codes as follows:</t>
@@ -708,7 +709,7 @@ Pragma: no-cache
             </texttable>
 
             <t>The following is a non-normative example request where the subject is identified by
-              a phone_number claim:</t>
+              a Phone Number Subject Identifier:</t>
 
             <figure title="Example: Remove Subject Request" anchor="figremovereq">
               <artwork><![CDATA[
@@ -717,6 +718,7 @@ Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
 {
+  "subject_type": "phone",
   "phone_number": "+1 206 555 0123"
 }
 ]]></artwork>
@@ -868,10 +870,6 @@ Pragma: no-cache
           obtain access tokens on its own behalf.</t>
       </section>
       
-      <section anchor="management-api-subject" title="Subject Claims for Subject Add and Remove Operations">
-        <t>TODO</t>
-      </section>
-
       <section anchor="management-sec" title="Security Considerations">
         <section anchor="management-sec-subject-probing" title="Subject Probing">
           <t>It may be possible for an Event Transmitter to leak information about subjects
@@ -1169,28 +1167,6 @@ Pragma: no-cache
           <date/>
         </front>
         <seriesInfo name="RFC" value="6749"/>
-      </reference>
-
-      <reference anchor="OIDC" target="http://openid.net/specs/openid-connect-core-1_0.html">
-        <front>
-          <title>OpenID Connect Core 1.0</title>
-          <author fullname="Nat Sakimura" initials="N." surname="Sakimura">
-            <organization abbrev="NRI">Nomura Research Institute, Ltd.</organization>
-          </author>
-          <author fullname="John Bradley" initials="J." surname="Bradley">
-            <organization abbrev="Ping Identity">Ping Identity</organization>
-          </author>
-          <author fullname="Michael B. Jones" initials="M.B." surname="Jones">
-            <organization abbrev="Microsoft">Microsoft</organization>
-          </author>
-          <author fullname="Breno de Medeiros" initials="B." surname="de Medeiros">
-            <organization abbrev="Google">Google</organization>
-          </author>
-          <author fullname="Chuck Mortimore" initials="C." surname="Mortimore">
-            <organization abbrev="Salesforce">Salesforce</organization>
-          </author>
-          <date day="8" month="November" year="2014"/>
-        </front>
       </reference>
 
       <reference anchor="IDTOKEN"
