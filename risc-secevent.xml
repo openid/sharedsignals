@@ -925,8 +925,8 @@ Pragma: no-cache
       <t>This section profiles several IETF secevent specifications.</t>
 
       <t>The RISC Profile makes several assumptions:<list style="symbols">
-          <t>Transmitters are OpenID Connect Identity Providers</t>
-          <t>Receivers are OpenID Connect Clients and as such have client ids issued by
+          <t>Transmitters are Oauth 2 Authorization Servers</t>
+          <t>Receivers are OAuth 2 Clients and as such have client ids issued by
             Transmitters</t>
         </list></t>
 

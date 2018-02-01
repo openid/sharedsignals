@@ -1250,10 +1250,10 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 22]
 
    The RISC Profile makes several assumptions:
 
-   o  Transmitters are OpenID Connect Identity Providers
+   o  Transmitters are Oauth 2 Authorization Servers
 
-   o  Receivers are OpenID Connect Clients and as such have client ids
-      issued by Transmitters
+   o  Receivers are OAuth 2 Clients and as such have client ids issued
+      by Transmitters
 
    The RISC use cases that set the requirements are described in
    "Security Events RISC Use Cases" [USECASES].
