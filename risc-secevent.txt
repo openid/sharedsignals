@@ -42,14 +42,14 @@ Table of Contents
        2.1.1.  Email Subject Identifier Type . . . . . . . . . . . .   4
        2.1.2.  Phone Number Subject Identifier Type  . . . . . . . .   4
        2.1.3.  Issuer and Subject Subject Identifier Type  . . . . .   4
-   3.  Transmitter Configuration Discovery . . . . . . . . . . . . .   4
-     3.1.  Transmitter Configuration Metadata  . . . . . . . . . . .   4
+       2.1.4.  ID Token Claims Subject Identifier Type . . . . . . .   4
+   3.  Transmitter Configuration Discovery . . . . . . . . . . . . .   5
+     3.1.  Transmitter Configuration Metadata  . . . . . . . . . . .   5
      3.2.  Obtaining Transmitter Configuration Information . . . . .   5
-       3.2.1.  Transmitter Configuration Request . . . . . . . . . .   5
+       3.2.1.  Transmitter Configuration Request . . . . . . . . . .   6
        3.2.2.  Transmitter Configuration Response  . . . . . . . . .   6
        3.2.3.  Transmitter Configuration Validation  . . . . . . . .   7
    4.  Management API for SET Event Streams  . . . . . . . . . . . .   7
-     4.1.  Event Stream Management . . . . . . . . . . . . . . . . .   8
 
 
 
@@ -58,6 +58,7 @@ Scurtescu, et al.        Expires August 4, 2018                 [Page 1]
                               risc-secevent                 January 2018
 
 
+     4.1.  Event Stream Management . . . . . . . . . . . . . . . . .   8
        4.1.1.  Stream Status . . . . . . . . . . . . . . . . . . . .   9
          4.1.1.1.  Reading a Stream's Status . . . . . . . . . . . .   9
          4.1.1.2.  Updating a Stream's Status  . . . . . . . . . . .  10
@@ -103,7 +104,6 @@ Scurtescu, et al.        Expires August 4, 2018                 [Page 1]
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
    document are to be interpreted as described in [RFC2119].
-
 
 
 
@@ -199,6 +199,33 @@ Scurtescu, et al.        Expires August 4, 2018                 [Page 3]
    the "sub" claim MUST NOT be null or empty.  The Issuer and Subject
    Subject Identifier Type is identified by the name "iss-sub".
 
+2.1.4.  ID Token Claims Subject Identifier Type
+
+   The ID Token Claims Subject Identifier Type describes a subject by a
+   subset of the claims from an ID token.  Subject Identifiers of this
+   type MUST contain at least one of the following claims:
+
+   email
+      An "email" claim, as defined in [IDTOKEN].
+
+   phone_number
+      An "phone_number" claim, as defined in [IDTOKEN].
+
+   sub
+      A "sub" claim, as defined in [RFC7519].
+
+   If the Subject Identifier contains a "sub" claim, it MUST also
+   contain an "iss" claim, as defined in [RFC7519].  The ID Token Claims
+   Subject Identifier Type is identified by the name "id-token-claims".
+
+
+
+
+Scurtescu, et al.        Expires August 4, 2018                 [Page 4]
+
+                              risc-secevent                 January 2018
+
+
 3.  Transmitter Configuration Discovery
 
    This section defines a mechanism for Receivers to obtain Transmitter
@@ -216,15 +243,6 @@ Scurtescu, et al.        Expires August 4, 2018                 [Page 3]
    jwks_uri  REQUIRED.  URL of the Transmitter's JSON Web Key Set
       [RFC7517] document.  This contains the signing key(s) the Receiver
       uses to validate signatures from the Transmitter.
-
-
-
-
-
-Scurtescu, et al.        Expires August 4, 2018                 [Page 4]
-
-                              risc-secevent                 January 2018
-
 
    delivery_methods_supported  RECOMMENDED.  List of supported delivery
       method URIs.
@@ -255,6 +273,15 @@ Scurtescu, et al.        Expires August 4, 2018                 [Page 4]
    document compliant with this specification and MUST be returned using
    the "application/json" content type.
 
+
+
+
+
+Scurtescu, et al.        Expires August 4, 2018                 [Page 5]
+
+                              risc-secevent                 January 2018
+
+
 3.2.1.  Transmitter Configuration Request
 
    A Transmitter Configuration Document MUST be queried using an HTTP
@@ -274,13 +301,6 @@ Scurtescu, et al.        Expires August 4, 2018                 [Page 4]
    The Receiver would make the following request to the Issuer
    "https://tr.example.com/issuer1" to obtain its Configuration
    information, since the Issuer contains a path component:
-
-
-
-Scurtescu, et al.        Expires August 4, 2018                 [Page 5]
-
-                              risc-secevent                 January 2018
-
 
    GET /issuer1/.well-known/risc-configuration HTTP/1.1
    Host: tr.example.com
@@ -307,26 +327,6 @@ Scurtescu, et al.        Expires August 4, 2018                 [Page 5]
    Claims with zero elements MUST be omitted from the response.
 
    An error response uses the applicable HTTP status code value.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

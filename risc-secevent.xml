@@ -148,6 +148,17 @@
             claim MUST NOT be null or empty. The Issuer and Subject Subject Identifier Type is
             identified by the name <spanx style="verb">iss-sub</spanx>.</t>
         </section>
+
+	<section anchor="sub-id-id-token-claims" title="ID Token Claims Subject Identifier Type">
+          <t>The ID Token Claims Subject Identifier Type describes a subject by a subset of the claims from an ID token. Subject Identifiers of this type MUST contain at least one of the following claims:<list style="hanging">
+            <t hangText="email"><vspace blankLines="0"/>An <spanx style="verb">email</spanx> claim, as defined in <xref target="IDTOKEN"/>.</t>
+            <t hangText="phone_number"><vspace blankLines="0"/>An <spanx style="verb">phone_number</spanx> claim, as defined in <xref target="IDTOKEN"/>.</t>
+            <t hangText="sub"><vspace blankLines="0"/>A <spanx style="verb">sub</spanx> claim, as defined in <xref target="RFC7519"/>.</t>
+          </list></t>
+
+          <t>If the Subject Identifier contains a <spanx style="verb">sub</spanx> claim, it MUST also contain an
+          <spanx style="verb">iss</spanx> claim, as defined in <xref target="RFC7519"/>.  The ID Token Claims Subject Identifier Type is identified by the name <spanx style="verb">id-token-claims</spanx>.</t>
+        </section>
       </section>
     </section>
 
