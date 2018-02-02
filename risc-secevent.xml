@@ -639,14 +639,18 @@ Pragma: no-cache
 
           <section anchor="adding-a-subject-to-a-stream" title="Adding a Subject to a Stream">
             <t>To add a subject to an Event Stream, the Event Receiver makes an HTTP POST request
-              to the Add Subject Endpoint, containing in the body a Subject Identifier identifying
-              the subject to be added. On a successful response, the Event Transmitter responds
-              with an empty <spanx style="verb">200 OK</spanx> response.</t>
+              to the Add Subject Endpoint, containing in the body a JSON object the following
+              claims:<list style="hanging">
+                <t hangText="subject"><vspace blankLines="0"/>A Subject Identifier identifying
+              the subject to be added.  REQUIRED.</t>
+              </list></t>
 
-            <t>The Event Transmitter MAY choose to silently ignore the request, for example if the
-              subject has previously indicated to the transmitter that they do not want events to
-              be transmitted to the Event Receiver. In this case, the transmitter MAY return an
-              empty <spanx style="verb">200 OK</spanx> response or an appropriate error code. See 
+            <t>On a successful response, the Event Transmitter responds with an empty
+              <spanx style="verb">200 OK</spanx> response.  The Event Transmitter MAY choose
+              to silently ignore the request, for example if the subject has previously indicated
+              to the transmitter that they do not want events to be transmitted to the Event
+              Receiver. In this case, the transmitter MAY return an empty
+              <spanx style="verb">200 OK</spanx> response or an appropriate error code. See
               <xref target="management-sec">Security Considerations</xref>.</t>
 
             <t>Errors are signaled with HTTP status codes as follows:</t>
@@ -677,8 +681,10 @@ Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
 {
-  "subject_type": "email",
-  "email": "example.user@example.com"
+  "subject": {
+    "subject_type": "email",
+    "email": "example.user@example.com"
+  }
 }
 ]]></artwork>
             </figure>
@@ -697,9 +703,14 @@ Pragma: no-cache
           </section>
           <section anchor="removing-a-subject" title="Removing a Subject">
             <t>To remove a subject from an Event Stream, the Event Receiver makes an HTTP POST
-              request to the Remove Subject Endpoint, containing in the body a Subject Identifier
-              identifying the subject to be removed. On a successful response, the Event
-              Transmitter responds with a <spanx style="verb">204 No Content</spanx> response.</t>
+              request to the Remove Subject Endpoint, containing in the body a JSON object with
+              the following claims:<list style="hanging">
+                <t hangText="subject"><vspace blankLines="0"/>A Subject Identifier identifying
+              the subject to be removed.  REQUIRED.</t>
+              </list></t>
+
+            <t>On a successful response, the Event Transmitter responds with a
+              <spanx style="verb">204 No Content</spanx> response.</t>
 
             <t>Errors are signaled with HTTP staus codes as follows:</t>
 
@@ -729,8 +740,10 @@ Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
 {
-  "subject_type": "phone",
-  "phone_number": "+1 206 555 0123"
+  "subject": {
+    "subject_type": "phone",
+    "phone_number": "+1 206 555 0123"
+  }
 }
 ]]></artwork>
             </figure>

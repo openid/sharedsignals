@@ -853,16 +853,19 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 15]
 
    To add a subject to an Event Stream, the Event Receiver makes an HTTP
    POST request to the Add Subject Endpoint, containing in the body a
-   Subject Identifier identifying the subject to be added.  On a
-   successful response, the Event Transmitter responds with an empty
-   "200 OK" response.
+   JSON object the following claims:
 
-   The Event Transmitter MAY choose to silently ignore the request, for
-   example if the subject has previously indicated to the transmitter
-   that they do not want events to be transmitted to the Event Receiver.
-   In this case, the transmitter MAY return an empty "200 OK" response
-   or an appropriate error code.  See Security Considerations
-   (Section 4.3).
+   subject
+      A Subject Identifier identifying the subject to be added.
+      REQUIRED.
+
+   On a successful response, the Event Transmitter responds with an
+   empty "200 OK" response.  The Event Transmitter MAY choose to
+   silently ignore the request, for example if the subject has
+   previously indicated to the transmitter that they do not want events
+   to be transmitted to the Event Receiver.  In this case, the
+   transmitter MAY return an empty "200 OK" response or an appropriate
+   error code.  See Security Considerations (Section 4.3).
 
    Errors are signaled with HTTP status codes as follows:
 
@@ -887,9 +890,6 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 15]
 
                         Table 4: Add Subject Errors
 
-   The following is a non-normative example request to add a subject to
-   a stream, where the subject is identified by an Email Subject
-   Identifier.
 
 
 
@@ -898,13 +898,19 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 16]
                               risc-secevent                 January 2018
 
 
+   The following is a non-normative example request to add a subject to
+   a stream, where the subject is identified by an Email Subject
+   Identifier.
+
    POST /set/subjects:add HTTP/1.1
    Host: transmitter.example.com
    Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
    {
-     "subject_type": "email",
-     "email": "example.user@example.com"
+     "subject": {
+       "subject_type": "email",
+       "email": "example.user@example.com"
+     }
    }
 
                   Figure 15: Example: Add Subject Request
@@ -923,22 +929,16 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 16]
 
    To remove a subject from an Event Stream, the Event Receiver makes an
    HTTP POST request to the Remove Subject Endpoint, containing in the
-   body a Subject Identifier identifying the subject to be removed.  On
-   a successful response, the Event Transmitter responds with a "204 No
-   Content" response.
+   body a JSON object with the following claims:
+
+   subject
+      A Subject Identifier identifying the subject to be removed.
+      REQUIRED.
+
+   On a successful response, the Event Transmitter responds with a "204
+   No Content" response.
 
    Errors are signaled with HTTP staus codes as follows:
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -983,8 +983,10 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 17]
    Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
    {
-     "subject_type": "phone",
-     "phone_number": "+1 206 555 0123"
+     "subject": {
+       "subject_type": "phone",
+       "phone_number": "+1 206 555 0123"
+     }
    }
 
                 Figure 17: Example: Remove Subject Request
@@ -998,8 +1000,6 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 17]
    Pragma: no-cache
 
                 Figure 18: Example: Remove Subject Response
-
-
 
 
 
