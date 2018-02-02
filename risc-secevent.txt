@@ -36,7 +36,7 @@ Abstract
 Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
-     1.1.  Notational Conventions  . . . . . . . . . . . . . . . . .   2
+     1.1.  Notational Conventions  . . . . . . . . . . . . . . . . .   3
    2.  Subject Identifiers . . . . . . . . . . . . . . . . . . . . .   3
      2.1.  Subject Identifier Types  . . . . . . . . . . . . . . . .   3
        2.1.1.  Email Subject Identifier Type . . . . . . . . . . . .   4
@@ -90,20 +90,20 @@ Scurtescu, et al.        Expires August 4, 2018                 [Page 1]
          5.2.1.1.  Push Delivery using HTTP  . . . . . . . . . . . .  25
          5.2.1.2.  Polling Delivery using HTTP . . . . . . . . . . .  25
    6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  25
-     6.1.  RISC Subject Identifier Types Registry  . . . . . . . . .  25
-   7.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .  25
-     7.1.  Subject Information Leakage . . . . . . . . . . . . . . .  25
-   8.  Normative References  . . . . . . . . . . . . . . . . . . . .  26
-   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  27
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  27
+     6.1.  Security Event Subject Identifier Types Registry  . . . .  25
+       6.1.1.  Registration Template . . . . . . . . . . . . . . . .  25
+       6.1.2.  Initial Registry Contents . . . . . . . . . . . . . .  26
+     6.2.  Guidance for Expert Reviewers . . . . . . . . . . . . . .  26
+   7.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .  27
+     7.1.  Subject Information Leakage . . . . . . . . . . . . . . .  27
+   8.  Normative References  . . . . . . . . . . . . . . . . . . . .  27
+   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  29
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  29
 
 1.  Introduction
 
-1.1.  Notational Conventions
 
-   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
-   document are to be interpreted as described in [RFC2119].
+
 
 
 
@@ -113,6 +113,12 @@ Scurtescu, et al.        Expires August 4, 2018                 [Page 2]
 
                               risc-secevent                 January 2018
 
+
+1.1.  Notational Conventions
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+   document are to be interpreted as described in [RFC2119].
 
 2.  Subject Identifiers
 
@@ -152,16 +158,10 @@ Scurtescu, et al.        Expires August 4, 2018                 [Page 2]
 
    A Subject Identifier Type is a light-weight schema that describes a
    set of claims that uniquely identifies a subject.  Every Subject
-   Identifier Type MUST have a unique name registered in the IANA "RISC
-   Subject Identifier Types" registry established by Section 6.1.  A
-   Subject Identifier Type MAY contain more claims than are strictly
-   necessary to uniquely identify a subject, however a Subject
-   Identifier MUST contain all of the claims required by its type (See
-   Privacy Considerations).
-
-   The following Subject Identifier Types are registered in the IANA
-   "RISC Subject Identifier Types" registry established by Section 6.1.
-
+   Identifier Type MUST have a unique name registered in the IANA
+   "Security Event Subject Identifier Types" registry established by
+   Section 6.1.  A Subject Identifier Type MAY contain more claims than
+   are strictly necessary to uniquely identify a subject, however a
 
 
 
@@ -169,6 +169,13 @@ Scurtescu, et al.        Expires August 4, 2018                 [Page 3]
 
                               risc-secevent                 January 2018
 
+
+   Subject Identifier MUST contain all of the claims required by its
+   type (See Privacy Considerations).
+
+   The following Subject Identifier Types are registered in the IANA
+   "Security Event Subject Identifier Types" registry established by
+   Section 6.1.
 
 2.1.1.  Email Subject Identifier Type
 
@@ -211,13 +218,6 @@ Scurtescu, et al.        Expires August 4, 2018                 [Page 3]
    phone_number
       An "phone_number" claim, as defined in [IDTOKEN].
 
-   sub
-      A "sub" claim, as defined in [RFC7519].
-
-   If the Subject Identifier contains a "sub" claim, it MUST also
-   contain an "iss" claim, as defined in [RFC7519].  The ID Token Claims
-   Subject Identifier Type is identified by the name "id-token-claims".
-
 
 
 
@@ -225,6 +225,13 @@ Scurtescu, et al.        Expires August 4, 2018                 [Page 4]
 
                               risc-secevent                 January 2018
 
+
+   sub
+      A "sub" claim, as defined in [RFC7519].
+
+   If the Subject Identifier contains a "sub" claim, it MUST also
+   contain an "iss" claim, as defined in [RFC7519].  The ID Token Claims
+   Subject Identifier Type is identified by the name "id-token-claims".
 
 3.  Transmitter Configuration Discovery
 
@@ -267,13 +274,6 @@ Scurtescu, et al.        Expires August 4, 2018                 [Page 4]
 
    Transmitters supporting Discovery MUST make a JSON document available
    at the path formed by concatenating the string "/.well-known/risc-
-   configuration" to the Issuer.  The syntax and semantics of ".well-
-   known" are defined in [RFC5785] and apply to the Issuer value when it
-   contains no path component. "risc-configuration" MUST point to a JSON
-   document compliant with this specification and MUST be returned using
-   the "application/json" content type.
-
-
 
 
 
@@ -281,6 +281,12 @@ Scurtescu, et al.        Expires August 4, 2018                 [Page 5]
 
                               risc-secevent                 January 2018
 
+
+   configuration" to the Issuer.  The syntax and semantics of ".well-
+   known" are defined in [RFC5785] and apply to the Issuer value when it
+   contains no path component. "risc-configuration" MUST point to a JSON
+   document compliant with this specification and MUST be returned using
+   the "application/json" content type.
 
 3.2.1.  Transmitter Configuration Request
 
@@ -323,12 +329,6 @@ Scurtescu, et al.        Expires August 4, 2018                 [Page 5]
    subset of the Metadata values defined in Section 3.1.  Other Claims
    MAY also be returned.
 
-   Claims that return multiple values are represented as JSON arrays.
-   Claims with zero elements MUST be omitted from the response.
-
-   An error response uses the applicable HTTP status code value.
-
-
 
 
 
@@ -337,6 +337,11 @@ Scurtescu, et al.        Expires August 4, 2018                 [Page 6]
 
                               risc-secevent                 January 2018
 
+
+   Claims that return multiple values are represented as JSON arrays.
+   Claims with zero elements MUST be omitted from the response.
+
+   An error response uses the applicable HTTP status code value.
 
    HTTP/1.1 200 OK
    Content-Type: application/json
@@ -382,17 +387,15 @@ Scurtescu, et al.        Expires August 4, 2018                 [Page 6]
    Event Stream status, to add and remove subjects and to trigger
    verification.
 
-   This section is based on Management API for SET Event Streams
-   [MGMTAPI].
-
-
-
 
 
 Scurtescu, et al.        Expires August 4, 2018                 [Page 7]
 
                               risc-secevent                 January 2018
 
+
+   This section is based on Management API for SET Event Streams
+   [MGMTAPI].
 
    +------------+                +------------+
    |            | Stream Config  |            |
@@ -439,9 +442,6 @@ Scurtescu, et al.        Expires August 4, 2018                 [Page 7]
       An endpoint used to request the Event Transmitter transmit a
       Verification Event over the Event Stream.
 
-   An Event Transmitter MAY use the same URLs as endpoints for multiple
-   streams, provided that the Event Transmitter has some mechanism
-   through which they can identify the applicable Event Stream for any
 
 
 
@@ -450,6 +450,9 @@ Scurtescu, et al.        Expires August 4, 2018                 [Page 8]
                               risc-secevent                 January 2018
 
 
+   An Event Transmitter MAY use the same URLs as endpoints for multiple
+   streams, provided that the Event Transmitter has some mechanism
+   through which they can identify the applicable Event Stream for any
    given request, e.g. from authentication credentials.  The definition
    of such mechanisms is outside the scope of this specification.
 
@@ -488,9 +491,6 @@ Scurtescu, et al.        Expires August 4, 2018                 [Page 8]
               Figure 7: Example: Check Stream Status Request
 
    The following is a non-normative example response:
-
-
-
 
 
 
@@ -1369,15 +1369,103 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 24]
 
 6.  IANA Considerations
 
-6.1.  RISC Subject Identifier Types Registry
+6.1.  Security Event Subject Identifier Types Registry
 
-   This section establishes the IANA "RISC Subject Identifier Types"
-   registry for Subject Identifier Types.  The registry records the name
-   of the Subject Identifier Type and a reference to the specification
-   that defines it.  This section registers the Subject Identifier Types
-   defined in Section 2.1.
+   This document defines Subject Identifier Types, for which IANA is
+   asked to create and maintain a new registry titled "Security Event
+   Subject Identifier Types".  Initial values for the Security Event
+   Subject Identifier Types registry are given in Section 6.1.2.  Future
+   assignments are to be made through the Expert Review registration
+   policy [BCP26] and shall follow the template presented in
+   Section 6.1.1.
 
-   TODO: Finish registry definition
+6.1.1.  Registration Template
+
+   Type Name:
+      The name of the Subject Identifier Type, as described in
+      Section 2.1.  The name MUST be an ASCII string consisting only of
+      lower-case characters ("a" - "z"), digits ("0" - "9"), and hyphens
+      ("-"), and SHOULD NOT exceed 20 characters in length.
+
+   Type Description:
+      A brief description of the Subject Identifier Type.
+
+   Change Controller:
+      For types defined in documents published by the OpenID Foundation
+      or its working groups, list "OIDF RISC Working Group".  For all
+      other types, list the name of the party responsible for the
+
+
+
+Scurtescu, et al.        Expires August 4, 2018                [Page 25]
+
+                              risc-secevent                 January 2018
+
+
+      registration.  Contact information such as mailing address, email
+      address, or phone number may also be provided.
+
+   Defining Document(s):
+      A reference to the document or documents that define the Subject
+      Identifier Type.  The definition MUST specify the name, format,
+      and meaning of each claim that may occur within a Subject
+      Identifier of the defined type, as well as whether each claim is
+      optional or required, or the circumstances under which the claim
+      is optional or required.  URIs that can be used to retrieve copies
+      of each document SHOULD be included.
+
+6.1.2.  Initial Registry Contents
+
+   o  Type Name: "email"
+   o  Type Description: Subject identifier based on email address.
+   o  Change Controller: OIDF RISC Working Group
+   o  Defining Document(s): Section 2.1.1 of this document.
+
+   o  Type Name: "id-token-claims"
+   o  Type Description: Subject identifier based on OpenID Connect ID
+      Token claims.
+   o  Change Controller: OIDF RISC Working Group
+   o  Defining Document(s): Section 2.1.4 of this document.
+
+   o  Type Name: "iss-sub"
+   o  Type Description: Subject identifier based on issuer and subject.
+   o  Change Controller: OIDF RISC Working Group
+   o  Defining Document(s): Section 2.1.3 of this document.
+
+   o  Type Name: "phone"
+   o  Type Description: Subject identifier based on phone number.
+   o  Change Controller: OIDF RISC Working Group
+   o  Defining Document(s): Section 2.1.2 of this document.
+
+6.2.  Guidance for Expert Reviewers
+
+   The Expert Reviewer is expected to review the documentation
+   referenced in a registration request to verify its completeness.  The
+   Expert Reviewer must base their decision to accept or reject the
+   request on a fair and impartial assessment of the request.  If the
+   Expert Reviewer has a conflict of interest, such as being an author
+   of a defining document referenced by the request, they must recuse
+   themselves from the approval process for that request.  In the case
+   where a request is rejected, the Expert Reviewer should provide the
+   requesting party with a written statement expressing the reason for
+   rejection, and be prepared to cite any sources of information that
+   went into that decision.
+
+
+
+Scurtescu, et al.        Expires August 4, 2018                [Page 26]
+
+                              risc-secevent                 January 2018
+
+
+   Subject Identifier Types need not be generally applicable and may be
+   highly specific to a particular domain; it is expected that types may
+   be registered for niche or industry-specific use cases.  The Expert
+   Reviewer should focus on whether the type is thoroughly documented,
+   and whether its registration will promote or harm interoperability.
+   In most cases, the Expert Reviewer should not approve a request if
+   the registration would contribute to confusion, or amount to a
+   synonym for an existing type.
 
 7.  Privacy Considerations
 
@@ -1394,15 +1482,12 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 24]
    when communicating with a given party in order to reduce the
    possibility of information leakage.
 
-
-
-
-Scurtescu, et al.        Expires August 4, 2018                [Page 25]
-
-                              risc-secevent                 January 2018
-
-
 8.  Normative References
+
+   [BCP26]    Cotton, M., Leiba, B., and T. Narten, "Guidelines for
+              Writing an IANA Considerations Section in RFCs", BCP 26,
+              RFC 8126, DOI 10.17487/RFC8126, June 2017,
+              <https://tools.ietf.org/html/rfc8126>.
 
    [CLIENTCRED]
               Hardt, D., "The OAuth 2.0 Authorization Framework - Client
@@ -1421,6 +1506,13 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 25]
    [IDTOKEN]  OpenID Foundation, "OpenID Connect Core 1.0 - ID Token",
               <http://openid.net/specs/
               openid-connect-core-1_0.html#IDToken>.
+
+
+
+Scurtescu, et al.        Expires August 4, 2018                [Page 27]
+
+                              risc-secevent                 January 2018
+
 
    [MGMTAPI]  IETF, "Management API for SET Event Streams",
               <https://tools.ietf.org/html/draft-scurtescu-secevent-
@@ -1450,14 +1542,6 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 25]
               DOI 10.17487/RFC7517, May 2015, <https://www.rfc-
               editor.org/info/rfc7517>.
 
-
-
-
-Scurtescu, et al.        Expires August 4, 2018                [Page 26]
-
-                              risc-secevent                 January 2018
-
-
    [RFC7519]  Jones, M., Bradley, J., and N. Sakimura, "JSON Web Token
               (JWT)", RFC 7519, DOI 10.17487/RFC7519, May 2015,
               <https://www.rfc-editor.org/info/rfc7519>.
@@ -1473,6 +1557,18 @@ Scurtescu, et al.        Expires August 4, 2018                [Page 26]
               IETF, "Security Events RISC Use Cases",
               <https://tools.ietf.org/html/draft-scurtescu-secevent-
               risc-use-cases-00>.
+
+
+
+
+
+
+
+
+Scurtescu, et al.        Expires August 4, 2018                [Page 28]
+
+                              risc-secevent                 January 2018
+
 
 Appendix A.  Acknowledgements
 
@@ -1509,4 +1605,20 @@ Authors' Addresses
 
 
 
-Scurtescu, et al.        Expires August 4, 2018                [Page 27]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Scurtescu, et al.        Expires August 4, 2018                [Page 29]
