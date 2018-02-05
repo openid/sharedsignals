@@ -10,7 +10,7 @@
                                                                   Oracle
                                                               J. Bradley
                                                                   Yubico
-                                                        February 1, 2018
+                                                        February 5, 2018
 
 
                   RISC profile of IETF Security Events
@@ -53,7 +53,7 @@ Table of Contents
 
 
 
-Scurtescu, et al.        Expires August 5, 2018                 [Page 1]
+Scurtescu, et al.        Expires August 9, 2018                 [Page 1]
 
                               risc-secevent                February 2018
 
@@ -97,7 +97,7 @@ Scurtescu, et al.        Expires August 5, 2018                 [Page 1]
    7.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .  27
      7.1.  Subject Information Leakage . . . . . . . . . . . . . . .  27
    8.  Normative References  . . . . . . . . . . . . . . . . . . . .  27
-   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  28
+   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  29
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  29
 
 1.  Introduction
@@ -109,7 +109,7 @@ Scurtescu, et al.        Expires August 5, 2018                 [Page 1]
 
 
 
-Scurtescu, et al.        Expires August 5, 2018                 [Page 2]
+Scurtescu, et al.        Expires August 9, 2018                 [Page 2]
 
                               risc-secevent                February 2018
 
@@ -117,8 +117,10 @@ Scurtescu, et al.        Expires August 5, 2018                 [Page 2]
 1.1.  Notational Conventions
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
-   document are to be interpreted as described in [RFC2119].
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in BCP
+   14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
 
 2.  Subject Identifiers
 
@@ -160,16 +162,16 @@ Scurtescu, et al.        Expires August 5, 2018                 [Page 2]
    set of claims that uniquely identifies a subject.  Every Subject
    Identifier Type MUST have a unique name registered in the IANA
    "Security Event Subject Identifier Types" registry established by
-   Section 6.1.  A Subject Identifier Type MAY contain more claims than
-   are strictly necessary to uniquely identify a subject, however a
 
 
 
-Scurtescu, et al.        Expires August 5, 2018                 [Page 3]
+Scurtescu, et al.        Expires August 9, 2018                 [Page 3]
 
                               risc-secevent                February 2018
 
 
+   Section 6.1.  A Subject Identifier Type MAY contain more claims than
+   are strictly necessary to uniquely identify a subject, however a
    Subject Identifier MUST contain all of the claims required by its
    type (See Privacy Considerations).
 
@@ -216,15 +218,15 @@ Scurtescu, et al.        Expires August 5, 2018                 [Page 3]
       An "email" claim, as defined in [IDTOKEN].
 
    phone_number
-      An "phone_number" claim, as defined in [IDTOKEN].
 
 
 
-
-Scurtescu, et al.        Expires August 5, 2018                 [Page 4]
+Scurtescu, et al.        Expires August 9, 2018                 [Page 4]
 
                               risc-secevent                February 2018
 
+
+      An "phone_number" claim, as defined in [IDTOKEN].
 
    sub
       A "sub" claim, as defined in [RFC7519].
@@ -272,16 +274,16 @@ Scurtescu, et al.        Expires August 5, 2018                 [Page 4]
    Using the Issuer as documented by the Transmitter, the Transmitter
    Configuration Information can be retrieved.
 
-   Transmitters supporting Discovery MUST make a JSON document available
-   at the path formed by concatenating the string "/.well-known/risc-
 
 
 
-Scurtescu, et al.        Expires August 5, 2018                 [Page 5]
+Scurtescu, et al.        Expires August 9, 2018                 [Page 5]
 
                               risc-secevent                February 2018
 
 
+   Transmitters supporting Discovery MUST make a JSON document available
+   at the path formed by concatenating the string "/.well-known/risc-
    configuration" to the Issuer.  The syntax and semantics of ".well-
    known" are defined in [RFC5785] and apply to the Issuer value when it
    contains no path component. "risc-configuration" MUST point to a JSON
@@ -331,9 +333,7 @@ Scurtescu, et al.        Expires August 5, 2018                 [Page 5]
 
 
 
-
-
-Scurtescu, et al.        Expires August 5, 2018                 [Page 6]
+Scurtescu, et al.        Expires August 9, 2018                 [Page 6]
 
                               risc-secevent                February 2018
 
@@ -389,7 +389,7 @@ Scurtescu, et al.        Expires August 5, 2018                 [Page 6]
 
 
 
-Scurtescu, et al.        Expires August 5, 2018                 [Page 7]
+Scurtescu, et al.        Expires August 9, 2018                 [Page 7]
 
                               risc-secevent                February 2018
 
@@ -445,7 +445,7 @@ Scurtescu, et al.        Expires August 5, 2018                 [Page 7]
 
 
 
-Scurtescu, et al.        Expires August 5, 2018                 [Page 8]
+Scurtescu, et al.        Expires August 9, 2018                 [Page 8]
 
                               risc-secevent                February 2018
 
@@ -501,7 +501,7 @@ Scurtescu, et al.        Expires August 5, 2018                 [Page 8]
 
 
 
-Scurtescu, et al.        Expires August 5, 2018                 [Page 9]
+Scurtescu, et al.        Expires August 9, 2018                 [Page 9]
 
                               risc-secevent                February 2018
 
@@ -557,7 +557,7 @@ Scurtescu, et al.        Expires August 5, 2018                 [Page 9]
 
 
 
-Scurtescu, et al.        Expires August 5, 2018                [Page 10]
+Scurtescu, et al.        Expires August 9, 2018                [Page 10]
 
                               risc-secevent                February 2018
 
@@ -613,7 +613,7 @@ Scurtescu, et al.        Expires August 5, 2018                [Page 10]
 
 
 
-Scurtescu, et al.        Expires August 5, 2018                [Page 11]
+Scurtescu, et al.        Expires August 9, 2018                [Page 11]
 
                               risc-secevent                February 2018
 
@@ -669,7 +669,7 @@ Scurtescu, et al.        Expires August 5, 2018                [Page 11]
 
 
 
-Scurtescu, et al.        Expires August 5, 2018                [Page 12]
+Scurtescu, et al.        Expires August 9, 2018                [Page 12]
 
                               risc-secevent                February 2018
 
@@ -725,7 +725,7 @@ Scurtescu, et al.        Expires August 5, 2018                [Page 12]
 
 
 
-Scurtescu, et al.        Expires August 5, 2018                [Page 13]
+Scurtescu, et al.        Expires August 9, 2018                [Page 13]
 
                               risc-secevent                February 2018
 
@@ -781,7 +781,7 @@ Scurtescu, et al.        Expires August 5, 2018                [Page 13]
 
 
 
-Scurtescu, et al.        Expires August 5, 2018                [Page 14]
+Scurtescu, et al.        Expires August 9, 2018                [Page 14]
 
                               risc-secevent                February 2018
 
@@ -837,7 +837,7 @@ Scurtescu, et al.        Expires August 5, 2018                [Page 14]
 
 
 
-Scurtescu, et al.        Expires August 5, 2018                [Page 15]
+Scurtescu, et al.        Expires August 9, 2018                [Page 15]
 
                               risc-secevent                February 2018
 
@@ -893,7 +893,7 @@ Scurtescu, et al.        Expires August 5, 2018                [Page 15]
 
 
 
-Scurtescu, et al.        Expires August 5, 2018                [Page 16]
+Scurtescu, et al.        Expires August 9, 2018                [Page 16]
 
                               risc-secevent                February 2018
 
@@ -949,7 +949,7 @@ Scurtescu, et al.        Expires August 5, 2018                [Page 16]
 
 
 
-Scurtescu, et al.        Expires August 5, 2018                [Page 17]
+Scurtescu, et al.        Expires August 9, 2018                [Page 17]
 
                               risc-secevent                February 2018
 
@@ -1005,7 +1005,7 @@ Scurtescu, et al.        Expires August 5, 2018                [Page 17]
 
 
 
-Scurtescu, et al.        Expires August 5, 2018                [Page 18]
+Scurtescu, et al.        Expires August 9, 2018                [Page 18]
 
                               risc-secevent                February 2018
 
@@ -1061,7 +1061,7 @@ Scurtescu, et al.        Expires August 5, 2018                [Page 18]
 
 
 
-Scurtescu, et al.        Expires August 5, 2018                [Page 19]
+Scurtescu, et al.        Expires August 9, 2018                [Page 19]
 
                               risc-secevent                February 2018
 
@@ -1117,7 +1117,7 @@ Scurtescu, et al.        Expires August 5, 2018                [Page 19]
 
 
 
-Scurtescu, et al.        Expires August 5, 2018                [Page 20]
+Scurtescu, et al.        Expires August 9, 2018                [Page 20]
 
                               risc-secevent                February 2018
 
@@ -1173,7 +1173,7 @@ Scurtescu, et al.        Expires August 5, 2018                [Page 20]
 
 
 
-Scurtescu, et al.        Expires August 5, 2018                [Page 21]
+Scurtescu, et al.        Expires August 9, 2018                [Page 21]
 
                               risc-secevent                February 2018
 
@@ -1229,7 +1229,7 @@ Scurtescu, et al.        Expires August 5, 2018                [Page 21]
 
 
 
-Scurtescu, et al.        Expires August 5, 2018                [Page 22]
+Scurtescu, et al.        Expires August 9, 2018                [Page 22]
 
                               risc-secevent                February 2018
 
@@ -1285,7 +1285,7 @@ Scurtescu, et al.        Expires August 5, 2018                [Page 22]
 
 
 
-Scurtescu, et al.        Expires August 5, 2018                [Page 23]
+Scurtescu, et al.        Expires August 9, 2018                [Page 23]
 
                               risc-secevent                February 2018
 
@@ -1341,7 +1341,7 @@ Scurtescu, et al.        Expires August 5, 2018                [Page 23]
 
 
 
-Scurtescu, et al.        Expires August 5, 2018                [Page 24]
+Scurtescu, et al.        Expires August 9, 2018                [Page 24]
 
                               risc-secevent                February 2018
 
@@ -1397,7 +1397,7 @@ Scurtescu, et al.        Expires August 5, 2018                [Page 24]
 
 
 
-Scurtescu, et al.        Expires August 5, 2018                [Page 25]
+Scurtescu, et al.        Expires August 9, 2018                [Page 25]
 
                               risc-secevent                February 2018
 
@@ -1453,7 +1453,7 @@ Scurtescu, et al.        Expires August 5, 2018                [Page 25]
 
 
 
-Scurtescu, et al.        Expires August 5, 2018                [Page 26]
+Scurtescu, et al.        Expires August 9, 2018                [Page 26]
 
                               risc-secevent                February 2018
 
@@ -1491,12 +1491,13 @@ Scurtescu, et al.        Expires August 5, 2018                [Page 26]
 
    [CLIENTCRED]
               Hardt, D., "The OAuth 2.0 Authorization Framework - Client
-              Credentials Grant", RFC 6749, <https://tools.ietf.org/
-              html/rfc6749#section-4.4>.
+              Credentials Grant", RFC 6749,
+              <https://tools.ietf.org/html/rfc6749#section-4.4>.
 
    [DELIVERY]
-              IETF, "SET Token Delivery Using HTTP", <https://tools.ietf
-              .org/html/draft-ietf-secevent-delivery>.
+              IETF, "SET Token Delivery Using HTTP",
+              <https://tools.ietf.org/html/draft-ietf-secevent-
+              delivery>.
 
    [E164]     International Telecommunication Union, "The international
               public telecommunication numbering plan", 2010,
@@ -1508,8 +1509,7 @@ Scurtescu, et al.        Expires August 5, 2018                [Page 26]
 
 
 
-
-Scurtescu, et al.        Expires August 5, 2018                [Page 27]
+Scurtescu, et al.        Expires August 9, 2018                [Page 27]
 
                               risc-secevent                February 2018
 
@@ -1520,55 +1520,60 @@ Scurtescu, et al.        Expires August 5, 2018                [Page 27]
 
    [OIDC-DISCOVERY]
               Sakimura, N., Bradley, J., Jones, M., and E. Jay, "OpenID
-              Connect Discovery 1.0", November 2014, <https://openid
-              .net/specs/openid-connect-discovery-1_0.html>.
+              Connect Discovery 1.0", November 2014,
+              <https://openid.net/specs/openid-connect-discovery-
+              1_0.html>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", BCP 14, RFC 2119, DOI 10.17487/
-              RFC2119, March 1997, <https://www.rfc-editor.org/info/
-              rfc2119>.
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997, <https://www.rfc-
+              editor.org/info/rfc2119>.
 
    [RFC5785]  Nottingham, M. and E. Hammer-Lahav, "Defining Well-Known
-              Uniform Resource Identifiers (URIs)", RFC 5785, DOI 10
-              .17487/RFC5785, April 2010, <https://www.rfc-editor.org/
-              info/rfc5785>.
+              Uniform Resource Identifiers (URIs)", RFC 5785,
+              DOI 10.17487/RFC5785, April 2010, <https://www.rfc-
+              editor.org/info/rfc5785>.
 
    [RFC7159]  Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
               Interchange Format", RFC 7159, DOI 10.17487/RFC7159, March
               2014, <https://www.rfc-editor.org/info/rfc7159>.
 
-   [RFC7517]  Jones, M., "JSON Web Key (JWK)", RFC 7517, DOI 10.17487/
-              RFC7517, May 2015, <https://www.rfc-editor.org/info/
-              rfc7517>.
+   [RFC7517]  Jones, M., "JSON Web Key (JWK)", RFC 7517,
+              DOI 10.17487/RFC7517, May 2015, <https://www.rfc-
+              editor.org/info/rfc7517>.
 
    [RFC7519]  Jones, M., Bradley, J., and N. Sakimura, "JSON Web Token
               (JWT)", RFC 7519, DOI 10.17487/RFC7519, May 2015,
               <https://www.rfc-editor.org/info/rfc7519>.
 
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/info/rfc8174>.
+
    [SECEVENT]
               IETF, "Security Events IETF Working Group",
               <https://datatracker.ietf.org/wg/secevent/about/>.
 
-   [SET]      IETF, "Security Event Token (SET)", <https://tools.ietf
-              .org/html/draft-ietf-secevent-token>.
+   [SET]      IETF, "Security Event Token (SET)",
+              <https://tools.ietf.org/html/draft-ietf-secevent-token>.
 
    [USECASES]
               IETF, "Security Events RISC Use Cases",
               <https://tools.ietf.org/html/draft-scurtescu-secevent-
               risc-use-cases-00>.
 
+
+
+
+Scurtescu, et al.        Expires August 9, 2018                [Page 28]
+
+                              risc-secevent                February 2018
+
+
 Appendix A.  Acknowledgements
 
    Transmitter Configuration Discovery (Section 3) is based on OpenID
    Connect Discovery 1.0 [OIDC-DISCOVERY].
-
-
-
-
-Scurtescu, et al.        Expires August 5, 2018                [Page 28]
-
-                              risc-secevent                February 2018
-
 
 Authors' Addresses
 
@@ -1616,9 +1621,4 @@ Authors' Addresses
 
 
 
-
-
-
-
-
-Scurtescu, et al.        Expires August 5, 2018                [Page 29]
+Scurtescu, et al.        Expires August 9, 2018                [Page 29]
