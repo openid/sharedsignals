@@ -10,7 +10,7 @@
                                                                   Oracle
                                                               J. Bradley
                                                                   Yubico
-                                                        February 5, 2018
+                                                       February 22, 2018
 
 
                   RISC profile of IETF Security Events
@@ -53,7 +53,7 @@ Table of Contents
 
 
 
-Scurtescu, et al.        Expires August 9, 2018                 [Page 1]
+Scurtescu, et al.        Expires August 26, 2018                [Page 1]
 
                               risc-secevent                February 2018
 
@@ -82,11 +82,12 @@ Scurtescu, et al.        Expires August 9, 2018                 [Page 1]
        5.1.2.  RISC Event Subject  . . . . . . . . . . . . . . . . .  23
        5.1.3.  Explicit Typing of SETs . . . . . . . . . . . . . . .  23
        5.1.4.  The "exp" Claim . . . . . . . . . . . . . . . . . . .  24
-       5.1.5.  aud Claim . . . . . . . . . . . . . . . . . . . . . .  24
-       5.1.6.  Security Considerations . . . . . . . . . . . . . . .  24
-         5.1.6.1.  Distingushing SETs from other Kinds of JWTs . . .  24
+       5.1.5.  The "aud" Claim . . . . . . . . . . . . . . . . . . .  24
+       5.1.6.  The "events" claim  . . . . . . . . . . . . . . . . .  24
+       5.1.7.  Security Considerations . . . . . . . . . . . . . . .  24
+         5.1.7.1.  Distingushing SETs from other Kinds of JWTs . . .  24
      5.2.  SET Token Delivery Using HTTP Profile . . . . . . . . . .  24
-       5.2.1.  Stream Configuration Metadata . . . . . . . . . . . .  24
+       5.2.1.  Stream Configuration Metadata . . . . . . . . . . . .  25
          5.2.1.1.  Push Delivery using HTTP  . . . . . . . . . . . .  25
          5.2.1.2.  Polling Delivery using HTTP . . . . . . . . . . .  25
    6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  25
@@ -108,8 +109,7 @@ Scurtescu, et al.        Expires August 9, 2018                 [Page 1]
 
 
 
-
-Scurtescu, et al.        Expires August 9, 2018                 [Page 2]
+Scurtescu, et al.        Expires August 26, 2018                [Page 2]
 
                               risc-secevent                February 2018
 
@@ -165,7 +165,7 @@ Scurtescu, et al.        Expires August 9, 2018                 [Page 2]
 
 
 
-Scurtescu, et al.        Expires August 9, 2018                 [Page 3]
+Scurtescu, et al.        Expires August 26, 2018                [Page 3]
 
                               risc-secevent                February 2018
 
@@ -221,7 +221,7 @@ Scurtescu, et al.        Expires August 9, 2018                 [Page 3]
 
 
 
-Scurtescu, et al.        Expires August 9, 2018                 [Page 4]
+Scurtescu, et al.        Expires August 26, 2018                [Page 4]
 
                               risc-secevent                February 2018
 
@@ -277,7 +277,7 @@ Scurtescu, et al.        Expires August 9, 2018                 [Page 4]
 
 
 
-Scurtescu, et al.        Expires August 9, 2018                 [Page 5]
+Scurtescu, et al.        Expires August 26, 2018                [Page 5]
 
                               risc-secevent                February 2018
 
@@ -333,7 +333,7 @@ Scurtescu, et al.        Expires August 9, 2018                 [Page 5]
 
 
 
-Scurtescu, et al.        Expires August 9, 2018                 [Page 6]
+Scurtescu, et al.        Expires August 26, 2018                [Page 6]
 
                               risc-secevent                February 2018
 
@@ -389,7 +389,7 @@ Scurtescu, et al.        Expires August 9, 2018                 [Page 6]
 
 
 
-Scurtescu, et al.        Expires August 9, 2018                 [Page 7]
+Scurtescu, et al.        Expires August 26, 2018                [Page 7]
 
                               risc-secevent                February 2018
 
@@ -445,7 +445,7 @@ Scurtescu, et al.        Expires August 9, 2018                 [Page 7]
 
 
 
-Scurtescu, et al.        Expires August 9, 2018                 [Page 8]
+Scurtescu, et al.        Expires August 26, 2018                [Page 8]
 
                               risc-secevent                February 2018
 
@@ -501,7 +501,7 @@ Scurtescu, et al.        Expires August 9, 2018                 [Page 8]
 
 
 
-Scurtescu, et al.        Expires August 9, 2018                 [Page 9]
+Scurtescu, et al.        Expires August 26, 2018                [Page 9]
 
                               risc-secevent                February 2018
 
@@ -557,7 +557,7 @@ Scurtescu, et al.        Expires August 9, 2018                 [Page 9]
 
 
 
-Scurtescu, et al.        Expires August 9, 2018                [Page 10]
+Scurtescu, et al.        Expires August 26, 2018               [Page 10]
 
                               risc-secevent                February 2018
 
@@ -613,7 +613,7 @@ Scurtescu, et al.        Expires August 9, 2018                [Page 10]
 
 
 
-Scurtescu, et al.        Expires August 9, 2018                [Page 11]
+Scurtescu, et al.        Expires August 26, 2018               [Page 11]
 
                               risc-secevent                February 2018
 
@@ -669,7 +669,7 @@ Scurtescu, et al.        Expires August 9, 2018                [Page 11]
 
 
 
-Scurtescu, et al.        Expires August 9, 2018                [Page 12]
+Scurtescu, et al.        Expires August 26, 2018               [Page 12]
 
                               risc-secevent                February 2018
 
@@ -725,7 +725,7 @@ Scurtescu, et al.        Expires August 9, 2018                [Page 12]
 
 
 
-Scurtescu, et al.        Expires August 9, 2018                [Page 13]
+Scurtescu, et al.        Expires August 26, 2018               [Page 13]
 
                               risc-secevent                February 2018
 
@@ -781,7 +781,7 @@ Scurtescu, et al.        Expires August 9, 2018                [Page 13]
 
 
 
-Scurtescu, et al.        Expires August 9, 2018                [Page 14]
+Scurtescu, et al.        Expires August 26, 2018               [Page 14]
 
                               risc-secevent                February 2018
 
@@ -837,7 +837,7 @@ Scurtescu, et al.        Expires August 9, 2018                [Page 14]
 
 
 
-Scurtescu, et al.        Expires August 9, 2018                [Page 15]
+Scurtescu, et al.        Expires August 26, 2018               [Page 15]
 
                               risc-secevent                February 2018
 
@@ -893,7 +893,7 @@ Scurtescu, et al.        Expires August 9, 2018                [Page 15]
 
 
 
-Scurtescu, et al.        Expires August 9, 2018                [Page 16]
+Scurtescu, et al.        Expires August 26, 2018               [Page 16]
 
                               risc-secevent                February 2018
 
@@ -949,7 +949,7 @@ Scurtescu, et al.        Expires August 9, 2018                [Page 16]
 
 
 
-Scurtescu, et al.        Expires August 9, 2018                [Page 17]
+Scurtescu, et al.        Expires August 26, 2018               [Page 17]
 
                               risc-secevent                February 2018
 
@@ -1005,7 +1005,7 @@ Scurtescu, et al.        Expires August 9, 2018                [Page 17]
 
 
 
-Scurtescu, et al.        Expires August 9, 2018                [Page 18]
+Scurtescu, et al.        Expires August 26, 2018               [Page 18]
 
                               risc-secevent                February 2018
 
@@ -1061,7 +1061,7 @@ Scurtescu, et al.        Expires August 9, 2018                [Page 18]
 
 
 
-Scurtescu, et al.        Expires August 9, 2018                [Page 19]
+Scurtescu, et al.        Expires August 26, 2018               [Page 19]
 
                               risc-secevent                February 2018
 
@@ -1117,7 +1117,7 @@ Scurtescu, et al.        Expires August 9, 2018                [Page 19]
 
 
 
-Scurtescu, et al.        Expires August 9, 2018                [Page 20]
+Scurtescu, et al.        Expires August 26, 2018               [Page 20]
 
                               risc-secevent                February 2018
 
@@ -1173,7 +1173,7 @@ Scurtescu, et al.        Expires August 9, 2018                [Page 20]
 
 
 
-Scurtescu, et al.        Expires August 9, 2018                [Page 21]
+Scurtescu, et al.        Expires August 26, 2018               [Page 21]
 
                               risc-secevent                February 2018
 
@@ -1229,7 +1229,7 @@ Scurtescu, et al.        Expires August 9, 2018                [Page 21]
 
 
 
-Scurtescu, et al.        Expires August 9, 2018                [Page 22]
+Scurtescu, et al.        Expires August 26, 2018               [Page 22]
 
                               risc-secevent                February 2018
 
@@ -1285,7 +1285,7 @@ Scurtescu, et al.        Expires August 9, 2018                [Page 22]
 
 
 
-Scurtescu, et al.        Expires August 9, 2018                [Page 23]
+Scurtescu, et al.        Expires August 26, 2018               [Page 23]
 
                               risc-secevent                February 2018
 
@@ -1303,14 +1303,20 @@ Scurtescu, et al.        Expires August 9, 2018                [Page 23]
    The purpose is defense in depth against confusion with other JWTs, as
    described in Sections 4.5 and 4.6 of [SET].
 
-5.1.5.  aud Claim
+5.1.5.  The "aud" Claim
 
    The 'aud' claim MUST be a single value which is the client id of the
    Receiver.
 
-5.1.6.  Security Considerations
+5.1.6.  The "events" claim
 
-5.1.6.1.  Distingushing SETs from other Kinds of JWTs
+   The "events" claim SHOULD contain only one event.  Multiple event
+   type URIs are permitted only if they are alternative URIs defining
+   the exact same event type.
+
+5.1.7.  Security Considerations
+
+5.1.7.1.  Distingushing SETs from other Kinds of JWTs
 
    Of particular concern is the possibility that SETs are confused for
    other kinds of JWTs.  The Security Considerations sesction of [SET]
@@ -1330,21 +1336,20 @@ Scurtescu, et al.        Expires August 9, 2018                [Page 23]
    This section provides RISC profiling specifications for the "SET
    Token Delivery Using HTTP" [DELIVERY] spec.
 
+
+
+
+
+
+Scurtescu, et al.        Expires August 26, 2018               [Page 24]
+
+                              risc-secevent                February 2018
+
+
 5.2.1.  Stream Configuration Metadata
 
    Each delivery method is identified by a URI, specified below by the
    "method" metadata.
-
-
-
-
-
-
-
-Scurtescu, et al.        Expires August 9, 2018                [Page 24]
-
-                              risc-secevent                February 2018
-
 
 5.2.1.1.  Push Delivery using HTTP
 
@@ -1390,18 +1395,17 @@ Scurtescu, et al.        Expires August 9, 2018                [Page 24]
    Type Description:
       A brief description of the Subject Identifier Type.
 
-   Change Controller:
-      For types defined in documents published by the OpenID Foundation
-      or its working groups, list "OIDF RISC Working Group".  For all
-      other types, list the name of the party responsible for the
 
 
-
-Scurtescu, et al.        Expires August 9, 2018                [Page 25]
+Scurtescu, et al.        Expires August 26, 2018               [Page 25]
 
                               risc-secevent                February 2018
 
 
+   Change Controller:
+      For types defined in documents published by the OpenID Foundation
+      or its working groups, list "OIDF RISC Working Group".  For all
+      other types, list the name of the party responsible for the
       registration.  Contact information such as mailing address, email
       address, or phone number may also be provided.
 
@@ -1446,17 +1450,18 @@ Scurtescu, et al.        Expires August 9, 2018                [Page 25]
    Expert Reviewer has a conflict of interest, such as being an author
    of a defining document referenced by the request, they must recuse
    themselves from the approval process for that request.  In the case
+
+
+
+Scurtescu, et al.        Expires August 26, 2018               [Page 26]
+
+                              risc-secevent                February 2018
+
+
    where a request is rejected, the Expert Reviewer should provide the
    requesting party with a written statement expressing the reason for
    rejection, and be prepared to cite any sources of information that
    went into that decision.
-
-
-
-Scurtescu, et al.        Expires August 9, 2018                [Page 26]
-
-                              risc-secevent                February 2018
-
 
    Subject Identifier Types need not be generally applicable and may be
    highly specific to a particular domain; it is expected that types may
@@ -1499,6 +1504,16 @@ Scurtescu, et al.        Expires August 9, 2018                [Page 26]
               <https://tools.ietf.org/html/draft-ietf-secevent-
               delivery>.
 
+
+
+
+
+
+Scurtescu, et al.        Expires August 26, 2018               [Page 27]
+
+                              risc-secevent                February 2018
+
+
    [E164]     International Telecommunication Union, "The international
               public telecommunication numbering plan", 2010,
               <http://www.itu.int/rec/T-REC-E.164-201011-I/en>.
@@ -1506,13 +1521,6 @@ Scurtescu, et al.        Expires August 9, 2018                [Page 26]
    [IDTOKEN]  OpenID Foundation, "OpenID Connect Core 1.0 - ID Token",
               <http://openid.net/specs/
               openid-connect-core-1_0.html#IDToken>.
-
-
-
-Scurtescu, et al.        Expires August 9, 2018                [Page 27]
-
-                              risc-secevent                February 2018
-
 
    [MGMTAPI]  IETF, "Management API for SET Event Streams",
               <https://tools.ietf.org/html/draft-scurtescu-secevent-
@@ -1554,6 +1562,14 @@ Scurtescu, et al.        Expires August 9, 2018                [Page 27]
               IETF, "Security Events IETF Working Group",
               <https://datatracker.ietf.org/wg/secevent/about/>.
 
+
+
+
+Scurtescu, et al.        Expires August 26, 2018               [Page 28]
+
+                              risc-secevent                February 2018
+
+
    [SET]      IETF, "Security Event Token (SET)",
               <https://tools.ietf.org/html/draft-ietf-secevent-token>.
 
@@ -1561,14 +1577,6 @@ Scurtescu, et al.        Expires August 9, 2018                [Page 27]
               IETF, "Security Events RISC Use Cases",
               <https://tools.ietf.org/html/draft-scurtescu-secevent-
               risc-use-cases-00>.
-
-
-
-
-Scurtescu, et al.        Expires August 9, 2018                [Page 28]
-
-                              risc-secevent                February 2018
-
 
 Appendix A.  Acknowledgements
 
@@ -1613,12 +1621,4 @@ Authors' Addresses
 
 
 
-
-
-
-
-
-
-
-
-Scurtescu, et al.        Expires August 9, 2018                [Page 29]
+Scurtescu, et al.        Expires August 26, 2018               [Page 29]

@@ -51,7 +51,7 @@
       </address>
     </author>
 
-    <date year="2018" month="February" day="5"/>
+    <date year="2018" month="February" day="22"/>
 
     <workgroup>RISC Working Group</workgroup>
 
@@ -999,8 +999,14 @@ Pragma: no-cache
           in Sections 4.5 and 4.6 of <xref target="SET"/>.</t>
         </section>
 
-        <section anchor="aud" title="aud Claim">
+        <section anchor="aud-claim" title='The "aud" Claim'>
           <t>The 'aud' claim MUST be a single value which is the client id of the Receiver.</t>
+        </section>
+        
+        <section anchor="events-claim" title='The "events" claim'>
+          <t>The <spanx style="verb">events</spanx> claim SHOULD contain only one event. Multiple
+          event type URIs are permitted only if they are alternative URIs defining the exact same
+          event type.</t>
         </section>
 
         <section title="Security Considerations">
