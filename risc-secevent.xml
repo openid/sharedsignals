@@ -51,7 +51,7 @@
       </address>
     </author>
 
-    <date year="2018" month="February" day="22"/>
+    <date year="2018" month="March" day="5"/>
 
     <workgroup>RISC Working Group</workgroup>
 
@@ -888,12 +888,13 @@ Pragma: no-cache
       </section>
 
       <section anchor="management-api-auth" title="Authorization">
-        <t>HTTP API calls from a receiver to a transmitter SHOULD be authorized using OAuth 2
-          Access Tokens. The client id associated with the Access Token uniquely identifies the
-          Receiver and the Stream.</t>
+        <t>HTTP API calls from a Receiver to a Transmitter SHOULD be authorized
+          by providing an access token in the <spanx style="verb">Authorization</spanx> HTTP 
+          header value per Section 2.1 of <xref target="RFC6750"></xref>.</t>
         
-        <t>Receivers SHOULD use the <xref target="CLIENTCRED">Client Credential Grant</xref> to
-          obtain access tokens on its own behalf.</t>
+        <t>The receiver may obtain an access token using the <xref target="CLIENTCRED">Client 
+          Credential Grant</xref>, or any other method suitable for the Receiver and the 
+          Transmitter.</t>
       </section>
       
       <section anchor="management-sec" title="Security Considerations">
@@ -948,13 +949,10 @@ Pragma: no-cache
     </section>
 
     <section anchor="profiles" title="Profiles">
-      <t>This section profiles several IETF secevent specifications.</t>
-
-      <t>The RISC Profile makes several assumptions:<list style="symbols">
-          <t>Transmitters are Oauth 2 Authorization Servers</t>
-          <t>Receivers are OAuth 2 Clients and as such have client ids issued by
-            Transmitters</t>
-        </list></t>
+      <t>This section is a profile of the following IETF SecEvent specifications:<list style="symbols">
+        <t><xref target="SET">"Security Event Token (SET)"</xref></t>
+        <t><xref target="DELIVERY">"SET Token Delivery Using HTTP"</xref></t>
+      </list></t>
 
       <t>The RISC use cases that set the requirements are described in <xref target="USECASES"
           >Security Events RISC Use Cases</xref>.</t>
@@ -1000,7 +998,9 @@ Pragma: no-cache
         </section>
 
         <section anchor="aud-claim" title='The "aud" Claim'>
-          <t>The 'aud' claim MUST be a single value which is the client id of the Receiver.</t>
+          <t>The <spanx style="verb">aud</spanx> claim MUST be a single value. It MAY be the client id if the 
+            receiver is an OAuth 2.0 client, or any other value that uniquely identifies the Receiver to the 
+            Transmitter.</t>
         </section>
         
         <section anchor="events-claim" title='The "events" claim'>
@@ -1156,6 +1156,28 @@ Pragma: no-cache
   <back>
     <references title="Normative References">
 
+      <reference anchor="RFC6750" target="https://www.rfc-editor.org/info/rfc6750">
+        <front>
+          <title>
+            The OAuth 2.0 Authorization Framework: Bearer Token Usage
+          </title>
+          <author initials="M." surname="Jones" fullname="M. Jones">
+            <organization/>
+          </author>
+          <author initials="D." surname="Hardt" fullname="D. Hardt">
+            <organization/>
+          </author>
+          <date year="2012" month="October"/>
+          <abstract>
+            <t>
+              This specification describes how to use bearer tokens in HTTP requests to access OAuth 2.0 protected resources. Any party in possession of a bearer token (a "bearer") can use it to get access to the associated resources (without demonstrating possession of a cryptographic key). To prevent misuse, bearer tokens need to be protected from disclosure in storage and in transport. [STANDARDS-TRACK]
+            </t>
+          </abstract>
+        </front>
+        <seriesInfo name="RFC" value="6750"/>
+        <seriesInfo name="DOI" value="10.17487/RFC6750"/>
+      </reference>
+      
       <reference anchor="RFC7159" target="https://www.rfc-editor.org/info/rfc7159">
         <front>
           <title>The JavaScript Object Notation (JSON) Data Interchange Format</title>

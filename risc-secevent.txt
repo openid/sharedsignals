@@ -10,7 +10,7 @@
                                                                   Oracle
                                                               J. Bradley
                                                                   Yubico
-                                                       February 22, 2018
+                                                           March 5, 2018
 
 
                   RISC profile of IETF Security Events
@@ -53,9 +53,9 @@ Table of Contents
 
 
 
-Scurtescu, et al.        Expires August 26, 2018                [Page 1]
+Scurtescu, et al.       Expires September 6, 2018               [Page 1]
 
-                              risc-secevent                February 2018
+                              risc-secevent                   March 2018
 
 
      4.1.  Event Stream Management . . . . . . . . . . . . . . . . .   8
@@ -109,9 +109,9 @@ Scurtescu, et al.        Expires August 26, 2018                [Page 1]
 
 
 
-Scurtescu, et al.        Expires August 26, 2018                [Page 2]
+Scurtescu, et al.       Expires September 6, 2018               [Page 2]
 
-                              risc-secevent                February 2018
+                              risc-secevent                   March 2018
 
 
 1.1.  Notational Conventions
@@ -165,9 +165,9 @@ Scurtescu, et al.        Expires August 26, 2018                [Page 2]
 
 
 
-Scurtescu, et al.        Expires August 26, 2018                [Page 3]
+Scurtescu, et al.       Expires September 6, 2018               [Page 3]
 
-                              risc-secevent                February 2018
+                              risc-secevent                   March 2018
 
 
    Section 6.1.  A Subject Identifier Type MAY contain more claims than
@@ -221,9 +221,9 @@ Scurtescu, et al.        Expires August 26, 2018                [Page 3]
 
 
 
-Scurtescu, et al.        Expires August 26, 2018                [Page 4]
+Scurtescu, et al.       Expires September 6, 2018               [Page 4]
 
-                              risc-secevent                February 2018
+                              risc-secevent                   March 2018
 
 
       An "phone_number" claim, as defined in [IDTOKEN].
@@ -277,9 +277,9 @@ Scurtescu, et al.        Expires August 26, 2018                [Page 4]
 
 
 
-Scurtescu, et al.        Expires August 26, 2018                [Page 5]
+Scurtescu, et al.       Expires September 6, 2018               [Page 5]
 
-                              risc-secevent                February 2018
+                              risc-secevent                   March 2018
 
 
    Transmitters supporting Discovery MUST make a JSON document available
@@ -333,9 +333,9 @@ Scurtescu, et al.        Expires August 26, 2018                [Page 5]
 
 
 
-Scurtescu, et al.        Expires August 26, 2018                [Page 6]
+Scurtescu, et al.       Expires September 6, 2018               [Page 6]
 
-                              risc-secevent                February 2018
+                              risc-secevent                   March 2018
 
 
    Claims that return multiple values are represented as JSON arrays.
@@ -389,9 +389,9 @@ Scurtescu, et al.        Expires August 26, 2018                [Page 6]
 
 
 
-Scurtescu, et al.        Expires August 26, 2018                [Page 7]
+Scurtescu, et al.       Expires September 6, 2018               [Page 7]
 
-                              risc-secevent                February 2018
+                              risc-secevent                   March 2018
 
 
    This section is based on Management API for SET Event Streams
@@ -445,9 +445,9 @@ Scurtescu, et al.        Expires August 26, 2018                [Page 7]
 
 
 
-Scurtescu, et al.        Expires August 26, 2018                [Page 8]
+Scurtescu, et al.       Expires September 6, 2018               [Page 8]
 
-                              risc-secevent                February 2018
+                              risc-secevent                   March 2018
 
 
    An Event Transmitter MAY use the same URLs as endpoints for multiple
@@ -501,9 +501,9 @@ Scurtescu, et al.        Expires August 26, 2018                [Page 8]
 
 
 
-Scurtescu, et al.        Expires August 26, 2018                [Page 9]
+Scurtescu, et al.       Expires September 6, 2018               [Page 9]
 
-                              risc-secevent                February 2018
+                              risc-secevent                   March 2018
 
 
    HTTP/1.1 200 OK
@@ -557,9 +557,9 @@ Scurtescu, et al.        Expires August 26, 2018                [Page 9]
 
 
 
-Scurtescu, et al.        Expires August 26, 2018               [Page 10]
+Scurtescu, et al.       Expires September 6, 2018              [Page 10]
 
-                              risc-secevent                February 2018
+                              risc-secevent                   March 2018
 
 
    +------+------------------------------------------------------------+
@@ -613,9 +613,9 @@ Scurtescu, et al.        Expires August 26, 2018               [Page 10]
 
 
 
-Scurtescu, et al.        Expires August 26, 2018               [Page 11]
+Scurtescu, et al.       Expires September 6, 2018              [Page 11]
 
-                              risc-secevent                February 2018
+                              risc-secevent                   March 2018
 
 
       An integer indicating the minimum amount of time in seconds that
@@ -669,9 +669,9 @@ Scurtescu, et al.        Expires August 26, 2018               [Page 11]
 
 
 
-Scurtescu, et al.        Expires August 26, 2018               [Page 12]
+Scurtescu, et al.       Expires September 6, 2018              [Page 12]
 
-                              risc-secevent                February 2018
+                              risc-secevent                   March 2018
 
 
    HTTP/1.1 200 OK
@@ -725,9 +725,9 @@ Scurtescu, et al.        Expires August 26, 2018               [Page 12]
 
 
 
-Scurtescu, et al.        Expires August 26, 2018               [Page 13]
+Scurtescu, et al.       Expires September 6, 2018              [Page 13]
 
-                              risc-secevent                February 2018
+                              risc-secevent                   March 2018
 
 
 4.1.2.2.  Updating a Stream's Configuration
@@ -781,9 +781,9 @@ Scurtescu, et al.        Expires August 26, 2018               [Page 13]
 
 
 
-Scurtescu, et al.        Expires August 26, 2018               [Page 14]
+Scurtescu, et al.       Expires September 6, 2018              [Page 14]
 
-                              risc-secevent                February 2018
+                              risc-secevent                   March 2018
 
 
    HTTP/1.1 200 OK
@@ -837,9 +837,9 @@ Scurtescu, et al.        Expires August 26, 2018               [Page 14]
 
 
 
-Scurtescu, et al.        Expires August 26, 2018               [Page 15]
+Scurtescu, et al.       Expires September 6, 2018              [Page 15]
 
-                              risc-secevent                February 2018
+                              risc-secevent                   March 2018
 
 
 4.1.3.  Subjects
@@ -893,9 +893,9 @@ Scurtescu, et al.        Expires August 26, 2018               [Page 15]
 
 
 
-Scurtescu, et al.        Expires August 26, 2018               [Page 16]
+Scurtescu, et al.       Expires September 6, 2018              [Page 16]
 
-                              risc-secevent                February 2018
+                              risc-secevent                   March 2018
 
 
    The following is a non-normative example request to add a subject to
@@ -949,9 +949,9 @@ Scurtescu, et al.        Expires August 26, 2018               [Page 16]
 
 
 
-Scurtescu, et al.        Expires August 26, 2018               [Page 17]
+Scurtescu, et al.       Expires September 6, 2018              [Page 17]
 
-                              risc-secevent                February 2018
+                              risc-secevent                   March 2018
 
 
    +------+------------------------------------------------------------+
@@ -1005,9 +1005,9 @@ Scurtescu, et al.        Expires August 26, 2018               [Page 17]
 
 
 
-Scurtescu, et al.        Expires August 26, 2018               [Page 18]
+Scurtescu, et al.       Expires September 6, 2018              [Page 18]
 
-                              risc-secevent                February 2018
+                              risc-secevent                   March 2018
 
 
 4.1.4.  Verification
@@ -1061,9 +1061,9 @@ Scurtescu, et al.        Expires August 26, 2018               [Page 18]
 
 
 
-Scurtescu, et al.        Expires August 26, 2018               [Page 19]
+Scurtescu, et al.       Expires September 6, 2018              [Page 19]
 
-                              risc-secevent                February 2018
+                              risc-secevent                   March 2018
 
 
    Verification requests have the following properties:
@@ -1117,9 +1117,9 @@ Scurtescu, et al.        Expires August 26, 2018               [Page 19]
 
 
 
-Scurtescu, et al.        Expires August 26, 2018               [Page 20]
+Scurtescu, et al.       Expires September 6, 2018              [Page 20]
 
-                              risc-secevent                February 2018
+                              risc-secevent                   March 2018
 
 
    POST /set/verify HTTP/1.1
@@ -1162,20 +1162,20 @@ Scurtescu, et al.        Expires August 26, 2018               [Page 20]
 
 4.2.  Authorization
 
-   HTTP API calls from a receiver to a transmitter SHOULD be authorized
-   using OAuth 2 Access Tokens.  The client id associated with the
-   Access Token uniquely identifies the Receiver and the Stream.
+   HTTP API calls from a Receiver to a Transmitter SHOULD be authorized
+   by providing an access token in the "Authorization" HTTP header value
+   per Section 2.1 of [RFC6750].
 
-   Receivers SHOULD use the Client Credential Grant [CLIENTCRED] to
-   obtain access tokens on its own behalf.
-
-
-
+   The receiver may obtain an access token using the Client Credential
+   Grant [CLIENTCRED], or any other method suitable for the Receiver and
+   the Transmitter.
 
 
-Scurtescu, et al.        Expires August 26, 2018               [Page 21]
+
+
+Scurtescu, et al.       Expires September 6, 2018              [Page 21]
 
-                              risc-secevent                February 2018
+                              risc-secevent                   March 2018
 
 
 4.3.  Security Considerations
@@ -1229,9 +1229,9 @@ Scurtescu, et al.        Expires August 26, 2018               [Page 21]
 
 
 
-Scurtescu, et al.        Expires August 26, 2018               [Page 22]
+Scurtescu, et al.       Expires September 6, 2018              [Page 22]
 
-                              risc-secevent                February 2018
+                              risc-secevent                   March 2018
 
 
    Event Transmitters MAY continue sending events related to a subject
@@ -1242,14 +1242,12 @@ Scurtescu, et al.        Expires August 26, 2018               [Page 22]
 
 5.  Profiles
 
-   This section profiles several IETF secevent specifications.
+   This section is a profile of the following IETF SecEvent
+   specifications:
 
-   The RISC Profile makes several assumptions:
+   o  "Security Event Token (SET)" [SET]
 
-   o  Transmitters are Oauth 2 Authorization Servers
-
-   o  Receivers are OAuth 2 Clients and as such have client ids issued
-      by Transmitters
+   o  "SET Token Delivery Using HTTP" [DELIVERY]
 
    The RISC use cases that set the requirements are described in
    Security Events RISC Use Cases [USECASES].
@@ -1282,16 +1280,16 @@ Scurtescu, et al.        Expires August 26, 2018               [Page 22]
 
                   Figure 22: Explicitly Typed JOSE Header
 
-
-
-
-Scurtescu, et al.        Expires August 26, 2018               [Page 23]
-
-                              risc-secevent                February 2018
-
-
    The purpose is defense against confusion with other JWTs, as
    described in Sections 4.5, 4.6 and 4.7 of [SET].  While current Id
+
+
+
+Scurtescu, et al.       Expires September 6, 2018              [Page 23]
+
+                              risc-secevent                   March 2018
+
+
    Token [IDTOKEN] validators may not be using the "typ" header
    parameter, by requiring it for RISC SETs a distinct value is
    guaranteed for future validators.
@@ -1305,8 +1303,9 @@ Scurtescu, et al.        Expires August 26, 2018               [Page 23]
 
 5.1.5.  The "aud" Claim
 
-   The 'aud' claim MUST be a single value which is the client id of the
-   Receiver.
+   The "aud" claim MUST be a single value.  It MAY be the client id if
+   the receiver is an OAuth 2.0 client, or any other value that uniquely
+   identifies the Receiver to the Transmitter.
 
 5.1.6.  The "events" claim
 
@@ -1341,9 +1340,10 @@ Scurtescu, et al.        Expires August 26, 2018               [Page 23]
 
 
 
-Scurtescu, et al.        Expires August 26, 2018               [Page 24]
+
+Scurtescu, et al.       Expires September 6, 2018              [Page 24]
 
-                              risc-secevent                February 2018
+                              risc-secevent                   March 2018
 
 
 5.2.1.  Stream Configuration Metadata
@@ -1397,9 +1397,9 @@ Scurtescu, et al.        Expires August 26, 2018               [Page 24]
 
 
 
-Scurtescu, et al.        Expires August 26, 2018               [Page 25]
+Scurtescu, et al.       Expires September 6, 2018              [Page 25]
 
-                              risc-secevent                February 2018
+                              risc-secevent                   March 2018
 
 
    Change Controller:
@@ -1453,9 +1453,9 @@ Scurtescu, et al.        Expires August 26, 2018               [Page 25]
 
 
 
-Scurtescu, et al.        Expires August 26, 2018               [Page 26]
+Scurtescu, et al.       Expires September 6, 2018              [Page 26]
 
-                              risc-secevent                February 2018
+                              risc-secevent                   March 2018
 
 
    where a request is rejected, the Expert Reviewer should provide the
@@ -1509,9 +1509,9 @@ Scurtescu, et al.        Expires August 26, 2018               [Page 26]
 
 
 
-Scurtescu, et al.        Expires August 26, 2018               [Page 27]
+Scurtescu, et al.       Expires September 6, 2018              [Page 27]
 
-                              risc-secevent                February 2018
+                              risc-secevent                   March 2018
 
 
    [E164]     International Telecommunication Union, "The international
@@ -1542,6 +1542,11 @@ Scurtescu, et al.        Expires August 26, 2018               [Page 27]
               DOI 10.17487/RFC5785, April 2010, <https://www.rfc-
               editor.org/info/rfc5785>.
 
+   [RFC6750]  Jones, M. and D. Hardt, "The OAuth 2.0 Authorization
+              Framework: Bearer Token Usage", RFC 6750,
+              DOI 10.17487/RFC6750, October 2012, <https://www.rfc-
+              editor.org/info/rfc6750>.
+
    [RFC7159]  Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
               Interchange Format", RFC 7159, DOI 10.17487/RFC7159, March
               2014, <https://www.rfc-editor.org/info/rfc7159>.
@@ -1558,17 +1563,16 @@ Scurtescu, et al.        Expires August 26, 2018               [Page 27]
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
+
+
+Scurtescu, et al.       Expires September 6, 2018              [Page 28]
+
+                              risc-secevent                   March 2018
+
+
    [SECEVENT]
               IETF, "Security Events IETF Working Group",
               <https://datatracker.ietf.org/wg/secevent/about/>.
-
-
-
-
-Scurtescu, et al.        Expires August 26, 2018               [Page 28]
-
-                              risc-secevent                February 2018
-
 
    [SET]      IETF, "Security Event Token (SET)",
               <https://tools.ietf.org/html/draft-ietf-secevent-token>.
@@ -1617,8 +1621,4 @@ Authors' Addresses
 
 
 
-
-
-
-
-Scurtescu, et al.        Expires August 26, 2018               [Page 29]
+Scurtescu, et al.       Expires September 6, 2018              [Page 29]
