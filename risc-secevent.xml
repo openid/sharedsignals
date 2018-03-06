@@ -100,7 +100,8 @@
   "iat": 1520364019,
   "aud": "636C69656E745F6964",
   "events": {
-    "http://schemas.openid.net/secevent/risc/event-type/account-enabled": {
+    "http://schemas.openid.net/secevent/risc/event-type/account-\
+enabled": {
       "subject": {
         "subject_type": "email",
         "email": "foo@example.com",
@@ -120,7 +121,8 @@
   "iat": 1520364019,
   "aud": "636C69656E745F6964",
   "events": {
-    "http://schemas.openid.net/secevent/risc/event-type/account-enabled": {
+    "http://schemas.openid.net/secevent/risc/event-type/account-\
+enabled": {
       "subject": {
         "subject_type": "iss-sub",
         "iss": "https://issuer.example.com/",
@@ -668,7 +670,7 @@ Pragma: no-cache
                 <t hangText="verified"><vspace blankLines="0"/>OPTIONAL.  A boolean value; when true, it
               indicates that the Event Receiver has verified the Subject Identifier. When false,
               it indicates that the Event Receiver has not verified the Subject Identifier. If
-              omitted, Event Transmitters SHOULD NOT assume that verification has not occurred.
+              omitted, Event Transmitters SHOULD NOT assume that verification has not occurred.</t>
               </list></t>
 
             <t>On a successful response, the Event Transmitter responds with an empty
@@ -996,7 +998,7 @@ Pragma: no-cache
             RISC events. The JWT <spanx style="verb">sub</spanx> claim MUST NOT be present in any SET containing a RISC
             event.</t>
 
-          <figure anchor="subject-ids-ex-iss-sub" title="Example: SET Containing a RISC Event with a Phone Number Subject">
+          <figure anchor="risc-event-subject-example" title="Example: SET Containing a RISC Event with a Phone Number Subject">
             <artwork><![CDATA[
 {
   "iss": "https://idp.example.com/",
@@ -1004,7 +1006,8 @@ Pragma: no-cache
   "iat": 1520364019,
   "aud": "636C69656E745F6964",
   "events": {
-    "http://schemas.openid.net/secevent/risc/event-type/account-disabled": {
+    "http://schemas.openid.net/secevent/risc/event-type/account-\
+disabled": {
       "subject": {
         "subject_type": "phone",
         "phone_number": "+1 206 555 0123"
