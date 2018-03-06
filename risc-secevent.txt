@@ -38,18 +38,18 @@ Table of Contents
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
      1.1.  Notational Conventions  . . . . . . . . . . . . . . . . .   3
    2.  Subject Identifiers . . . . . . . . . . . . . . . . . . . . .   3
-     2.1.  Subject Identifier Types  . . . . . . . . . . . . . . . .   3
+     2.1.  Subject Identifier Types  . . . . . . . . . . . . . . . .   4
        2.1.1.  Email Subject Identifier Type . . . . . . . . . . . .   4
-       2.1.2.  Phone Number Subject Identifier Type  . . . . . . . .   4
-       2.1.3.  Issuer and Subject Subject Identifier Type  . . . . .   4
-       2.1.4.  ID Token Claims Subject Identifier Type . . . . . . .   4
+       2.1.2.  Phone Number Subject Identifier Type  . . . . . . . .   5
+       2.1.3.  Issuer and Subject Subject Identifier Type  . . . . .   5
+       2.1.4.  ID Token Claims Subject Identifier Type . . . . . . .   5
    3.  Transmitter Configuration Discovery . . . . . . . . . . . . .   5
-     3.1.  Transmitter Configuration Metadata  . . . . . . . . . . .   5
-     3.2.  Obtaining Transmitter Configuration Information . . . . .   5
+     3.1.  Transmitter Configuration Metadata  . . . . . . . . . . .   6
+     3.2.  Obtaining Transmitter Configuration Information . . . . .   6
        3.2.1.  Transmitter Configuration Request . . . . . . . . . .   6
-       3.2.2.  Transmitter Configuration Response  . . . . . . . . .   6
-       3.2.3.  Transmitter Configuration Validation  . . . . . . . .   7
-   4.  Management API for SET Event Streams  . . . . . . . . . . . .   7
+       3.2.2.  Transmitter Configuration Response  . . . . . . . . .   7
+       3.2.3.  Transmitter Configuration Validation  . . . . . . . .   8
+   4.  Management API for SET Event Streams  . . . . . . . . . . . .   8
 
 
 
@@ -58,48 +58,48 @@ Scurtescu, et al.       Expires September 6, 2018               [Page 1]
                               risc-secevent                   March 2018
 
 
-     4.1.  Event Stream Management . . . . . . . . . . . . . . . . .   8
-       4.1.1.  Stream Status . . . . . . . . . . . . . . . . . . . .   9
-         4.1.1.1.  Reading a Stream's Status . . . . . . . . . . . .   9
-         4.1.1.2.  Updating a Stream's Status  . . . . . . . . . . .  10
-       4.1.2.  Stream Configuration  . . . . . . . . . . . . . . . .  11
-         4.1.2.1.  Reading a Stream's Configuration  . . . . . . . .  12
-         4.1.2.2.  Updating a Stream's Configuration . . . . . . . .  14
-       4.1.3.  Subjects  . . . . . . . . . . . . . . . . . . . . . .  16
-         4.1.3.1.  Adding a Subject to a Stream  . . . . . . . . . .  16
-         4.1.3.2.  Removing a Subject  . . . . . . . . . . . . . . .  17
-       4.1.4.  Verification  . . . . . . . . . . . . . . . . . . . .  19
-         4.1.4.1.  Verification Event  . . . . . . . . . . . . . . .  19
-         4.1.4.2.  Triggering a Verification Event.  . . . . . . . .  19
-     4.2.  Authorization . . . . . . . . . . . . . . . . . . . . . .  21
-     4.3.  Security Considerations . . . . . . . . . . . . . . . . .  22
-       4.3.1.  Subject Probing . . . . . . . . . . . . . . . . . . .  22
-       4.3.2.  Information Harvesting  . . . . . . . . . . . . . . .  22
-       4.3.3.  Malicious Subject Removal . . . . . . . . . . . . . .  22
-   5.  Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .  23
-     5.1.  Security Event Token Profle . . . . . . . . . . . . . . .  23
-       5.1.1.  Signature Key Resolution  . . . . . . . . . . . . . .  23
-       5.1.2.  RISC Event Subject  . . . . . . . . . . . . . . . . .  23
-       5.1.3.  Explicit Typing of SETs . . . . . . . . . . . . . . .  23
-       5.1.4.  The "exp" Claim . . . . . . . . . . . . . . . . . . .  24
-       5.1.5.  The "aud" Claim . . . . . . . . . . . . . . . . . . .  24
-       5.1.6.  The "events" claim  . . . . . . . . . . . . . . . . .  24
-       5.1.7.  Security Considerations . . . . . . . . . . . . . . .  24
-         5.1.7.1.  Distingushing SETs from other Kinds of JWTs . . .  24
-     5.2.  SET Token Delivery Using HTTP Profile . . . . . . . . . .  24
-       5.2.1.  Stream Configuration Metadata . . . . . . . . . . . .  25
-         5.2.1.1.  Push Delivery using HTTP  . . . . . . . . . . . .  25
-         5.2.1.2.  Polling Delivery using HTTP . . . . . . . . . . .  25
-   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  25
-     6.1.  Security Event Subject Identifier Types Registry  . . . .  25
-       6.1.1.  Registration Template . . . . . . . . . . . . . . . .  25
-       6.1.2.  Initial Registry Contents . . . . . . . . . . . . . .  26
-     6.2.  Guidance for Expert Reviewers . . . . . . . . . . . . . .  26
-   7.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .  27
-     7.1.  Subject Information Leakage . . . . . . . . . . . . . . .  27
-   8.  Normative References  . . . . . . . . . . . . . . . . . . . .  27
-   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  29
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  29
+     4.1.  Event Stream Management . . . . . . . . . . . . . . . . .   9
+       4.1.1.  Stream Status . . . . . . . . . . . . . . . . . . . .  10
+         4.1.1.1.  Reading a Stream's Status . . . . . . . . . . . .  10
+         4.1.1.2.  Updating a Stream's Status  . . . . . . . . . . .  11
+       4.1.2.  Stream Configuration  . . . . . . . . . . . . . . . .  12
+         4.1.2.1.  Reading a Stream's Configuration  . . . . . . . .  13
+         4.1.2.2.  Updating a Stream's Configuration . . . . . . . .  15
+       4.1.3.  Subjects  . . . . . . . . . . . . . . . . . . . . . .  17
+         4.1.3.1.  Adding a Subject to a Stream  . . . . . . . . . .  17
+         4.1.3.2.  Removing a Subject  . . . . . . . . . . . . . . .  19
+       4.1.4.  Verification  . . . . . . . . . . . . . . . . . . . .  20
+         4.1.4.1.  Verification Event  . . . . . . . . . . . . . . .  20
+         4.1.4.2.  Triggering a Verification Event.  . . . . . . . .  21
+     4.2.  Authorization . . . . . . . . . . . . . . . . . . . . . .  23
+     4.3.  Security Considerations . . . . . . . . . . . . . . . . .  23
+       4.3.1.  Subject Probing . . . . . . . . . . . . . . . . . . .  23
+       4.3.2.  Information Harvesting  . . . . . . . . . . . . . . .  23
+       4.3.3.  Malicious Subject Removal . . . . . . . . . . . . . .  24
+   5.  Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .  24
+     5.1.  Security Event Token Profle . . . . . . . . . . . . . . .  24
+       5.1.1.  Signature Key Resolution  . . . . . . . . . . . . . .  25
+       5.1.2.  RISC Event Subject  . . . . . . . . . . . . . . . . .  25
+       5.1.3.  Explicit Typing of SETs . . . . . . . . . . . . . . .  25
+       5.1.4.  The "exp" Claim . . . . . . . . . . . . . . . . . . .  26
+       5.1.5.  The "aud" Claim . . . . . . . . . . . . . . . . . . .  26
+       5.1.6.  The "events" claim  . . . . . . . . . . . . . . . . .  26
+       5.1.7.  Security Considerations . . . . . . . . . . . . . . .  26
+         5.1.7.1.  Distingushing SETs from other Kinds of JWTs . . .  26
+     5.2.  SET Token Delivery Using HTTP Profile . . . . . . . . . .  26
+       5.2.1.  Stream Configuration Metadata . . . . . . . . . . . .  27
+         5.2.1.1.  Push Delivery using HTTP  . . . . . . . . . . . .  27
+         5.2.1.2.  Polling Delivery using HTTP . . . . . . . . . . .  27
+   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  27
+     6.1.  Security Event Subject Identifier Types Registry  . . . .  27
+       6.1.1.  Registration Template . . . . . . . . . . . . . . . .  27
+       6.1.2.  Initial Registry Contents . . . . . . . . . . . . . .  28
+     6.2.  Guidance for Expert Reviewers . . . . . . . . . . . . . .  28
+   7.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .  29
+     7.1.  Subject Information Leakage . . . . . . . . . . . . . . .  29
+   8.  Normative References  . . . . . . . . . . . . . . . . . . . .  29
+   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  31
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  31
 
 1.  Introduction
 
@@ -137,31 +137,31 @@ Scurtescu, et al.       Expires September 6, 2018               [Page 2]
    claims not defined by its Subject Identifier Type.
 
    {
-     "subject_type": "email",
-     "email": "foo@example.com"
+     "iss": "https://idp.example.com/",
+     "jti": "756E69717565206964656E746966696572",
+     "iat": 1520364019,
+     "aud": "636C69656E745F6964",
+     "events": {
+       "http://schemas.openid.net/secevent/risc/event-type/account-\
+   enabled": {
+         "subject": {
+           "subject_type": "email",
+           "email": "foo@example.com",
+         }
+       }
+     }
    }
 
    A Subject Identifier that identifies a subject by email address.
 
-                Figure 1: Example: Email Subject Identifier
+   Figure 1: Example: SET Containing a RISC Event with an Email Subject
+                                Identifier
 
-   {
-     "subject_type": "iss-sub",
-     "iss": "https://issuer.example.com/",
-     "sub": "abc1234"
-   }
 
-   A Subject Identifier that identifies a subject by an identifier
-   provided by an issuer.
 
-         Figure 2: Example: Issuer and Subject Subject Identifier
 
-2.1.  Subject Identifier Types
 
-   A Subject Identifier Type is a light-weight schema that describes a
-   set of claims that uniquely identifies a subject.  Every Subject
-   Identifier Type MUST have a unique name registered in the IANA
-   "Security Event Subject Identifier Types" registry established by
+
 
 
 
@@ -170,6 +170,35 @@ Scurtescu, et al.       Expires September 6, 2018               [Page 3]
                               risc-secevent                   March 2018
 
 
+   {
+     "iss": "https://idp.example.com/",
+     "jti": "756E69717565206964656E746966696572",
+     "iat": 1520364019,
+     "aud": "636C69656E745F6964",
+     "events": {
+       "http://schemas.openid.net/secevent/risc/event-type/account-\
+   enabled": {
+         "subject": {
+           "subject_type": "iss-sub",
+           "iss": "https://issuer.example.com/",
+           "sub": "abc1234",
+         }
+       }
+     }
+   }
+
+   A Subject Identifier that identifies a subject by an identifier
+   provided by an issuer.
+
+     Figure 2: Example: SET Containing a RISC Event with an Issuer and
+                        Subject Subject Identifier
+
+2.1.  Subject Identifier Types
+
+   A Subject Identifier Type is a light-weight schema that describes a
+   set of claims that uniquely identifies a subject.  Every Subject
+   Identifier Type MUST have a unique name registered in the IANA
+   "Security Event Subject Identifier Types" registry established by
    Section 6.1.  A Subject Identifier Type MAY contain more claims than
    are strictly necessary to uniquely identify a subject, however a
    Subject Identifier MUST contain all of the claims required by its
@@ -186,6 +215,16 @@ Scurtescu, et al.       Expires September 6, 2018               [Page 3]
    claim whose value is a string containing the email address of the
    subject.  The "email" claim MUST NOT be null or empty.  The Email
    Subject Identifier Type is identified by the name "email".
+
+
+
+
+
+
+Scurtescu, et al.       Expires September 6, 2018               [Page 4]
+
+                              risc-secevent                   March 2018
+
 
 2.1.2.  Phone Number Subject Identifier Type
 
@@ -218,14 +257,6 @@ Scurtescu, et al.       Expires September 6, 2018               [Page 3]
       An "email" claim, as defined in [IDTOKEN].
 
    phone_number
-
-
-
-Scurtescu, et al.       Expires September 6, 2018               [Page 4]
-
-                              risc-secevent                   March 2018
-
-
       An "phone_number" claim, as defined in [IDTOKEN].
 
    sub
@@ -239,6 +270,17 @@ Scurtescu, et al.       Expires September 6, 2018               [Page 4]
 
    This section defines a mechanism for Receivers to obtain Transmitter
    configuration information.
+
+
+
+
+
+
+
+Scurtescu, et al.       Expires September 6, 2018               [Page 5]
+
+                              risc-secevent                   March 2018
+
 
 3.1.  Transmitter Configuration Metadata
 
@@ -274,14 +316,6 @@ Scurtescu, et al.       Expires September 6, 2018               [Page 4]
    Using the Issuer as documented by the Transmitter, the Transmitter
    Configuration Information can be retrieved.
 
-
-
-
-Scurtescu, et al.       Expires September 6, 2018               [Page 5]
-
-                              risc-secevent                   March 2018
-
-
    Transmitters supporting Discovery MUST make a JSON document available
    at the path formed by concatenating the string "/.well-known/risc-
    configuration" to the Issuer.  The syntax and semantics of ".well-
@@ -294,6 +328,15 @@ Scurtescu, et al.       Expires September 6, 2018               [Page 5]
 
    A Transmitter Configuration Document MUST be queried using an HTTP
    "GET" request at the previously specified path.
+
+
+
+
+
+Scurtescu, et al.       Expires September 6, 2018               [Page 6]
+
+                              risc-secevent                   March 2018
+
 
    The Receiver would make the following request to the Issuer
    "https://tr.example.com" to obtain its Configuration information,
@@ -331,17 +374,25 @@ Scurtescu, et al.       Expires September 6, 2018               [Page 5]
    subset of the Metadata values defined in Section 3.1.  Other Claims
    MAY also be returned.
 
-
-
-Scurtescu, et al.       Expires September 6, 2018               [Page 6]
-
-                              risc-secevent                   March 2018
-
-
    Claims that return multiple values are represented as JSON arrays.
    Claims with zero elements MUST be omitted from the response.
 
    An error response uses the applicable HTTP status code value.
+
+
+
+
+
+
+
+
+
+
+
+Scurtescu, et al.       Expires September 6, 2018               [Page 7]
+
+                              risc-secevent                   March 2018
+
 
    HTTP/1.1 200 OK
    Content-Type: application/json
@@ -387,15 +438,17 @@ Scurtescu, et al.       Expires September 6, 2018               [Page 6]
    Event Stream status, to add and remove subjects and to trigger
    verification.
 
+   This section is based on Management API for SET Event Streams
+   [MGMTAPI].
 
 
-Scurtescu, et al.       Expires September 6, 2018               [Page 7]
+
+
+
+Scurtescu, et al.       Expires September 6, 2018               [Page 8]
 
                               risc-secevent                   March 2018
 
-
-   This section is based on Management API for SET Event Streams
-   [MGMTAPI].
 
    +------------+                +------------+
    |            | Stream Config  |            |
@@ -442,17 +495,17 @@ Scurtescu, et al.       Expires September 6, 2018               [Page 7]
       An endpoint used to request the Event Transmitter transmit a
       Verification Event over the Event Stream.
 
+   An Event Transmitter MAY use the same URLs as endpoints for multiple
+   streams, provided that the Event Transmitter has some mechanism
+   through which they can identify the applicable Event Stream for any
 
 
 
-Scurtescu, et al.       Expires September 6, 2018               [Page 8]
+Scurtescu, et al.       Expires September 6, 2018               [Page 9]
 
                               risc-secevent                   March 2018
 
 
-   An Event Transmitter MAY use the same URLs as endpoints for multiple
-   streams, provided that the Event Transmitter has some mechanism
-   through which they can identify the applicable Event Stream for any
    given request, e.g. from authentication credentials.  The definition
    of such mechanisms is outside the scope of this specification.
 
@@ -501,7 +554,10 @@ Scurtescu, et al.       Expires September 6, 2018               [Page 8]
 
 
 
-Scurtescu, et al.       Expires September 6, 2018               [Page 9]
+
+
+
+Scurtescu, et al.       Expires September 6, 2018              [Page 10]
 
                               risc-secevent                   March 2018
 
@@ -557,7 +613,7 @@ Scurtescu, et al.       Expires September 6, 2018               [Page 9]
 
 
 
-Scurtescu, et al.       Expires September 6, 2018              [Page 10]
+Scurtescu, et al.       Expires September 6, 2018              [Page 11]
 
                               risc-secevent                   March 2018
 
@@ -613,7 +669,7 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 10]
 
 
 
-Scurtescu, et al.       Expires September 6, 2018              [Page 11]
+Scurtescu, et al.       Expires September 6, 2018              [Page 12]
 
                               risc-secevent                   March 2018
 
@@ -669,7 +725,7 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 11]
 
 
 
-Scurtescu, et al.       Expires September 6, 2018              [Page 12]
+Scurtescu, et al.       Expires September 6, 2018              [Page 13]
 
                               risc-secevent                   March 2018
 
@@ -725,7 +781,7 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 12]
 
 
 
-Scurtescu, et al.       Expires September 6, 2018              [Page 13]
+Scurtescu, et al.       Expires September 6, 2018              [Page 14]
 
                               risc-secevent                   March 2018
 
@@ -781,7 +837,7 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 13]
 
 
 
-Scurtescu, et al.       Expires September 6, 2018              [Page 14]
+Scurtescu, et al.       Expires September 6, 2018              [Page 15]
 
                               risc-secevent                   March 2018
 
@@ -837,7 +893,7 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 14]
 
 
 
-Scurtescu, et al.       Expires September 6, 2018              [Page 15]
+Scurtescu, et al.       Expires September 6, 2018              [Page 16]
 
                               risc-secevent                   March 2018
 
@@ -856,8 +912,15 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 15]
    JSON object the following claims:
 
    subject
-      A Subject Identifier identifying the subject to be added.
-      REQUIRED.
+      REQUIRED.  A Subject Identifier identifying the subject to be
+      added.
+
+   verified
+      OPTIONAL.  A boolean value; when true, it indicates that the Event
+      Receiver has verified the Subject Identifier.  When false, it
+      indicates that the Event Receiver has not verified the Subject
+      Identifier.  If omitted, Event Transmitters SHOULD NOT assume that
+      verification has not occurred.
 
    On a successful response, the Event Transmitter responds with an
    empty "200 OK" response.  The Event Transmitter MAY choose to
@@ -868,6 +931,28 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 15]
    error code.  See Security Considerations (Section 4.3).
 
    Errors are signaled with HTTP status codes as follows:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Scurtescu, et al.       Expires September 6, 2018              [Page 17]
+
+                              risc-secevent                   March 2018
+
 
    +------+------------------------------------------------------------+
    | Code | Description                                                |
@@ -890,14 +975,6 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 15]
 
                         Table 4: Add Subject Errors
 
-
-
-
-Scurtescu, et al.       Expires September 6, 2018              [Page 16]
-
-                              risc-secevent                   March 2018
-
-
    The following is a non-normative example request to add a subject to
    a stream, where the subject is identified by an Email Subject
    Identifier.
@@ -910,7 +987,8 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 16]
      "subject": {
        "subject_type": "email",
        "email": "example.user@example.com"
-     }
+     },
+     "verified": true,
    }
 
                   Figure 15: Example: Add Subject Request
@@ -924,6 +1002,13 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 16]
    Pragma: no-cache
 
                  Figure 16: Example: Add Subject Response
+
+
+
+Scurtescu, et al.       Expires September 6, 2018              [Page 18]
+
+                              risc-secevent                   March 2018
+
 
 4.1.3.2.  Removing a Subject
 
@@ -939,20 +1024,6 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 16]
    No Content" response.
 
    Errors are signaled with HTTP staus codes as follows:
-
-
-
-
-
-
-
-
-
-
-Scurtescu, et al.       Expires September 6, 2018              [Page 17]
-
-                              risc-secevent                   March 2018
-
 
    +------+------------------------------------------------------------+
    | Code | Description                                                |
@@ -978,6 +1049,23 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 17]
    The following is a non-normative example request where the subject is
    identified by a Phone Number Subject Identifier:
 
+
+
+
+
+
+
+
+
+
+
+
+
+Scurtescu, et al.       Expires September 6, 2018              [Page 19]
+
+                              risc-secevent                   March 2018
+
+
    POST /set/subjects:remove HTTP/1.1
    Host: transmitter.example.com
    Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
@@ -1000,15 +1088,6 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 17]
    Pragma: no-cache
 
                 Figure 18: Example: Remove Subject Response
-
-
-
-
-
-Scurtescu, et al.       Expires September 6, 2018              [Page 18]
-
-                              risc-secevent                   March 2018
-
 
 4.1.4.  Verification
 
@@ -1035,6 +1114,14 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 18]
       The Event Type URI is: "http://schemas.openid.net/secevent/risc/
       event-type/verification".
 
+
+
+
+Scurtescu, et al.       Expires September 6, 2018              [Page 20]
+
+                              risc-secevent                   March 2018
+
+
    state
       OPTIONAL An opaque value provided by the Event Receiver when the
       event is triggered.  This is a nested attribute in the event
@@ -1058,14 +1145,6 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 18]
    the verification request, if any.  On a successful request, the event
    transmitter responds with an empty "204 No Content" response.
 
-
-
-
-Scurtescu, et al.       Expires September 6, 2018              [Page 19]
-
-                              risc-secevent                   March 2018
-
-
    Verification requests have the following properties:
 
    state
@@ -1088,6 +1167,17 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 19]
 
    Errors are signaled with HTTP staus codes as follows:
 
+
+
+
+
+
+
+Scurtescu, et al.       Expires September 6, 2018              [Page 21]
+
+                              risc-secevent                   March 2018
+
+
    +------+------------------------------------------------------------+
    | Code | Description                                                |
    +------+------------------------------------------------------------+
@@ -1105,22 +1195,6 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 19]
 
    The following is a non-normative example request to trigger a
    verification event:
-
-
-
-
-
-
-
-
-
-
-
-
-Scurtescu, et al.       Expires September 6, 2018              [Page 20]
-
-                              risc-secevent                   March 2018
-
 
    POST /set/verify HTTP/1.1
    Host: transmitter.example.com
@@ -1146,6 +1220,20 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 20]
    And the following is a non-normative example of a verification event
    sent to the Event Receiver as a result of the above request:
 
+
+
+
+
+
+
+
+
+
+Scurtescu, et al.       Expires September 6, 2018              [Page 22]
+
+                              risc-secevent                   March 2018
+
+
  {
    "jti": "123456",
    "iss": "https://transmitter.example.com",
@@ -1169,14 +1257,6 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 20]
    The receiver may obtain an access token using the Client Credential
    Grant [CLIENTCRED], or any other method suitable for the Receiver and
    the Transmitter.
-
-
-
-
-Scurtescu, et al.       Expires September 6, 2018              [Page 21]
-
-                              risc-secevent                   March 2018
-
 
 4.3.  Security Considerations
 
@@ -1202,6 +1282,14 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 21]
    non-public information about the event transmitter, the subject (of
    an event in the SET), or the relationship between the two.  It is
    important for Event Transmitters to understand what information they
+
+
+
+Scurtescu, et al.       Expires September 6, 2018              [Page 23]
+
+                              risc-secevent                   March 2018
+
+
    are revealing to Event Receivers when transmitting events to them,
    lest the event stream become a vector for unauthorized access to
    private information.
@@ -1226,14 +1314,6 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 21]
    continue to send events related to the subject for some time after
    the subject has been removed from a stream.
 
-
-
-
-Scurtescu, et al.       Expires September 6, 2018              [Page 22]
-
-                              risc-secevent                   March 2018
-
-
    Event Transmitters MAY continue sending events related to a subject
    for some amount of time after that subject has been removed from the
    stream.  Event Receivers MUST tolerate receiving events for subjects
@@ -1257,6 +1337,15 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 22]
    This section provides RISC profiling specifications for the "Security
    Event Token (SET)" [SET] spec.
 
+
+
+
+
+Scurtescu, et al.       Expires September 6, 2018              [Page 24]
+
+                              risc-secevent                   March 2018
+
+
 5.1.1.  Signature Key Resolution
 
    The signature key can be obtained through "jwks_uri", see Section 3.
@@ -1268,6 +1357,27 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 22]
    "subject" claim is REQUIRED for all RISC events.  The JWT "sub" claim
    MUST NOT be present in any SET containing a RISC event.
 
+   {
+     "iss": "https://idp.example.com/",
+     "jti": "756E69717565206964656E746966696572",
+     "iat": 1520364019,
+     "aud": "636C69656E745F6964",
+     "events": {
+       "http://schemas.openid.net/secevent/risc/event-type/account-\
+   disabled": {
+         "subject": {
+           "subject_type": "phone",
+           "phone_number": "+1 206 555 0123"
+         },
+         "reason": "hijacking",
+         "cause-time": 1508012752,
+       }
+     }
+   }
+
+    Figure 22: Example: SET Containing a RISC Event with a Phone Number
+                                  Subject
+
 5.1.3.  Explicit Typing of SETs
 
    RISC events MUST use explicit typing as defined in Section 2.3 of
@@ -1278,19 +1388,20 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 22]
      "alg":"HS256"
    }
 
-                  Figure 22: Explicitly Typed JOSE Header
+                  Figure 23: Explicitly Typed JOSE Header
 
    The purpose is defense against confusion with other JWTs, as
    described in Sections 4.5, 4.6 and 4.7 of [SET].  While current Id
+   Token [IDTOKEN] validators may not be using the "typ" header
 
 
 
-Scurtescu, et al.       Expires September 6, 2018              [Page 23]
+
+Scurtescu, et al.       Expires September 6, 2018              [Page 25]
 
                               risc-secevent                   March 2018
 
 
-   Token [IDTOKEN] validators may not be using the "typ" header
    parameter, by requiring it for RISC SETs a distinct value is
    guaranteed for future validators.
 
@@ -1341,7 +1452,8 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 23]
 
 
 
-Scurtescu, et al.       Expires September 6, 2018              [Page 24]
+
+Scurtescu, et al.       Expires September 6, 2018              [Page 26]
 
                               risc-secevent                   March 2018
 
@@ -1397,7 +1509,7 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 24]
 
 
 
-Scurtescu, et al.       Expires September 6, 2018              [Page 25]
+Scurtescu, et al.       Expires September 6, 2018              [Page 27]
 
                               risc-secevent                   March 2018
 
@@ -1453,7 +1565,7 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 25]
 
 
 
-Scurtescu, et al.       Expires September 6, 2018              [Page 26]
+Scurtescu, et al.       Expires September 6, 2018              [Page 28]
 
                               risc-secevent                   March 2018
 
@@ -1509,7 +1621,7 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 26]
 
 
 
-Scurtescu, et al.       Expires September 6, 2018              [Page 27]
+Scurtescu, et al.       Expires September 6, 2018              [Page 29]
 
                               risc-secevent                   March 2018
 
@@ -1565,7 +1677,7 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 27]
 
 
 
-Scurtescu, et al.       Expires September 6, 2018              [Page 28]
+Scurtescu, et al.       Expires September 6, 2018              [Page 30]
 
                               risc-secevent                   March 2018
 
@@ -1621,4 +1733,4 @@ Authors' Addresses
 
 
 
-Scurtescu, et al.       Expires September 6, 2018              [Page 29]
+Scurtescu, et al.       Expires September 6, 2018              [Page 31]
