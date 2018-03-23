@@ -110,11 +110,11 @@
         </figure>
       </section>
 
-      <section anchor="account-deleted" title="Account Deleted">
+      <section anchor="account-purged" title="Account Purged">
         <t>Event Type URI:<vspace />
-        http://schemas.openid.net/secevent/risc/event-type/account-deleted</t>
+        http://schemas.openid.net/secevent/risc/event-type/account-purged</t>
         
-        <t>Account Deleted signals that the account identified by the subject has been permanently deleted.</t>
+        <t>Account Purged signals that the account identified by the subject has been permanently deleted.</t>
         
         <t>Attributes: none</t>
       </section>

@@ -27,7 +27,7 @@ Table of Contents
      1.1.  Notational Conventions  . . . . . . . . . . . . . . . . .   2
    2.  Event Types . . . . . . . . . . . . . . . . . . . . . . . . .   2
      2.1.  Account Credential Change Required  . . . . . . . . . . .   2
-     2.2.  Account Deleted . . . . . . . . . . . . . . . . . . . . .   3
+     2.2.  Account Purged  . . . . . . . . . . . . . . . . . . . . .   3
      2.3.  Account Disabled  . . . . . . . . . . . . . . . . . . . .   3
      2.4.  Account Enabled . . . . . . . . . . . . . . . . . . . . .   4
      2.5.  Identifier Changed  . . . . . . . . . . . . . . . . . . .   4
@@ -114,13 +114,13 @@ Scurtescu, et al.        Expires August 9, 2018                 [Page 2]
                             risc-event-types               February 2018
 
 
-2.2.  Account Deleted
+2.2.  Account Purged
 
    Event Type URI:
-   http://schemas.openid.net/secevent/risc/event-type/account-deleted
+   http://schemas.openid.net/secevent/risc/event-type/account-purged
 
-   Account Deleted signals that the account identified by the subject
-   has been permanently deleted.
+   Account Purged signals that the account identified by the subject has
+   been permanently deleted.
 
    Attributes: none
 
