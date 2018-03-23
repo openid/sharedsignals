@@ -214,7 +214,7 @@ Scurtescu, et al.        Expires August 9, 2018                 [Page 3]
 
    Attributes:
 
-   o  new-value - required, the new value of the identifier.
+   o  new-value - optional, the new value of the identifier.
 
 
 

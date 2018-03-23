@@ -175,7 +175,7 @@
         type MUST be either 'email' or 'phone' and it MUST specify the old value.</t>
         
         <t>Attributes:<list style="symbols">
-          <t>new-value - required, the new value of the identifier.</t>
+          <t>new-value - optional, the new value of the identifier.</t>
         </list></t>
         
         <figure anchor="identifier-changed-example" title="Example: Identifier Changed">
