@@ -143,9 +143,9 @@ Scurtescu, et al.        Expires August 9, 2018                 [Page 2]
 
       *  bulk-account
 
-   o  cause-time - the initial cause that lead to the account to be
-      disabled.  In most cases this is an estimated time.  For example,
-      the actual hijacking time.  This is before the event time.
+
+
+
 
 
 
@@ -184,7 +184,6 @@ Scurtescu, et al.        Expires August 9, 2018                 [Page 3]
            "sub": "7375626A656374",
          },
          "reason": "hijacking",
-         "cause-time": 1508012752,
        }
      }
    }
@@ -216,6 +215,7 @@ Scurtescu, et al.        Expires August 9, 2018                 [Page 3]
    Attributes:
 
    o  new-value - required, the new value of the identifier.
+
 
 
 

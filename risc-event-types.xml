@@ -132,8 +132,6 @@
             <t>hijacking</t>
             <t>bulk-account</t>
           </list></t>
-          <t>cause-time - the initial cause that lead to the account to be disabled. In most cases this is an 
-          estimated time. For example, the actual hijacking time. This is before the event time.</t>
         </list></t>
 
         <figure anchor="account-disabled-example" title="Example: Account Disabled">
@@ -152,7 +150,6 @@
         "sub": "7375626A656374",
       },
       "reason": "hijacking",
-      "cause-time": 1508012752,
     }
   }
 }
