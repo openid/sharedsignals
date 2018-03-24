@@ -174,6 +174,16 @@
         <t>Identifier Changed signals that the identifier specified in the subject has changed. The subject's
         type MUST be either 'email' or 'phone' and it MUST specify the old value.</t>
         
+        <t>This event SHOULD be issued only by the provider that is authoritative over the identifier.
+        For example, if the person that owns <spanx style="verb">john.doe@example.com</spanx> goes 
+        through a name change and wants the new <spanx style="verb">john.row@example.com</spanx> email
+        then <spanx style="strong">only</spanx> the email provider <spanx style="verb">example.com</spanx>
+        SHOULD issue an Identifier Changed event as shown in the example below.</t>
+        
+        <t>If an identifier used as a username or recovery option is changed, at a provide that is not
+          authoritative over that identifier, then <xref target="recovery-information-changed">Recovery Information Changed</xref> 
+        SHOULD be used instead.</t>
+        
         <t>Attributes:<list style="symbols">
           <t>new-value - optional, the new value of the identifier.</t>
         </list></t>
@@ -190,9 +200,9 @@
     identifier-changed": {
       "subject": {
         "subject_type": "email",
-        "email": "foo@example.com",
+        "email": "john.doe@example.com",
       },
-      "new-value": "bar@example.com",
+      "new-value": "john.roe@example.com",
     }
   }
 }

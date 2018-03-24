@@ -212,12 +212,12 @@ Scurtescu, et al.        Expires August 9, 2018                 [Page 3]
    subject has changed.  The subject's type MUST be either 'email' or
    'phone' and it MUST specify the old value.
 
-   Attributes:
-
-   o  new-value - optional, the new value of the identifier.
-
-
-
+   This event SHOULD be issued only by the provider that is
+   authoritative over the identifier.  For example, if the person that
+   owns "john.doe@example.com" goes through a name change and wants the
+   new "john.row@example.com" email then *only* the email provider
+   "example.com" SHOULD issue an Identifier Changed event as shown in
+   the example below.
 
 
 
@@ -225,6 +225,14 @@ Scurtescu, et al.        Expires August 9, 2018                 [Page 4]
 
                             risc-event-types               February 2018
 
+
+   If an identifier used as a username or recovery option is changed, at
+   a provide that is not authoritative over that identifier, then
+   Recovery Information Changed (Section 2.9) SHOULD be used instead.
+
+   Attributes:
+
+   o  new-value - optional, the new value of the identifier.
 
    {
      "iss": "https://idp.example.com/",
@@ -236,9 +244,9 @@ Scurtescu, et al.        Expires August 9, 2018                 [Page 4]
        identifier-changed": {
          "subject": {
            "subject_type": "email",
-           "email": "foo@example.com",
+           "email": "john.doe@example.com",
          },
-         "new-value": "bar@example.com",
+         "new-value": "john.roe@example.com",
        }
      }
    }
@@ -260,14 +268,6 @@ Scurtescu, et al.        Expires August 9, 2018                 [Page 4]
    MUST be either 'email' or 'phone-number'.
 
    Attributes: none
-
-
-
-
-
-
-
-
 
 
 
