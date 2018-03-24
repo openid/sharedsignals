@@ -10,7 +10,7 @@
                                                                   Oracle
                                                               J. Bradley
                                                                   Yubico
-                                                        February 5, 2018
+                                                          March 24, 2018
 
 
                             RISC Event Types
@@ -53,9 +53,9 @@ Table of Contents
 
 
 
-Scurtescu, et al.        Expires August 9, 2018                 [Page 1]
+Scurtescu, et al.      Expires September 25, 2018               [Page 1]
 
-                            risc-event-types               February 2018
+                            risc-event-types                  March 2018
 
 
 1.1.  Notational Conventions
@@ -109,9 +109,9 @@ Scurtescu, et al.        Expires August 9, 2018                 [Page 1]
 
 
 
-Scurtescu, et al.        Expires August 9, 2018                 [Page 2]
+Scurtescu, et al.      Expires September 25, 2018               [Page 2]
 
-                            risc-event-types               February 2018
+                            risc-event-types                  March 2018
 
 
 2.2.  Account Purged
@@ -165,9 +165,9 @@ Scurtescu, et al.        Expires August 9, 2018                 [Page 2]
 
 
 
-Scurtescu, et al.        Expires August 9, 2018                 [Page 3]
+Scurtescu, et al.      Expires September 25, 2018               [Page 3]
 
-                            risc-event-types               February 2018
+                            risc-event-types                  March 2018
 
 
    {
@@ -221,9 +221,9 @@ Scurtescu, et al.        Expires August 9, 2018                 [Page 3]
 
 
 
-Scurtescu, et al.        Expires August 9, 2018                 [Page 4]
+Scurtescu, et al.      Expires September 25, 2018               [Page 4]
 
-                            risc-event-types               February 2018
+                            risc-event-types                  March 2018
 
 
    If an identifier used as a username or recovery option is changed, at
@@ -277,9 +277,9 @@ Scurtescu, et al.        Expires August 9, 2018                 [Page 4]
 
 
 
-Scurtescu, et al.        Expires August 9, 2018                 [Page 5]
+Scurtescu, et al.      Expires September 25, 2018               [Page 5]
 
-                            risc-event-types               February 2018
+                            risc-event-types                  March 2018
 
 
    {
@@ -333,9 +333,9 @@ Scurtescu, et al.        Expires August 9, 2018                 [Page 5]
 
 
 
-Scurtescu, et al.        Expires August 9, 2018                 [Page 6]
+Scurtescu, et al.      Expires September 25, 2018               [Page 6]
 
-                            risc-event-types               February 2018
+                            risc-event-types                  March 2018
 
 
    State changes trigger Opt-Out Events as represented bellow:
@@ -389,9 +389,9 @@ Scurtescu, et al.        Expires August 9, 2018                 [Page 6]
 
 
 
-Scurtescu, et al.        Expires August 9, 2018                 [Page 7]
+Scurtescu, et al.      Expires September 25, 2018               [Page 7]
 
-                            risc-event-types               February 2018
+                            risc-event-types                  March 2018
 
 
 2.7.3.  Opt Out Cancelled
@@ -445,9 +445,9 @@ Scurtescu, et al.        Expires August 9, 2018                 [Page 7]
 
 
 
-Scurtescu, et al.        Expires August 9, 2018                 [Page 8]
+Scurtescu, et al.      Expires September 25, 2018               [Page 8]
 
-                            risc-event-types               February 2018
+                            risc-event-types                  March 2018
 
 
 2.10.  Sessions Revoked
@@ -501,9 +501,9 @@ Authors' Addresses
 
 
 
-Scurtescu, et al.        Expires August 9, 2018                 [Page 9]
+Scurtescu, et al.      Expires September 25, 2018               [Page 9]
 
-                            risc-event-types               February 2018
+                            risc-event-types                  March 2018
 
 
    Phil Hunt
@@ -557,4 +557,4 @@ Scurtescu, et al.        Expires August 9, 2018                 [Page 9]
 
 
 
-Scurtescu, et al.        Expires August 9, 2018                [Page 10]
+Scurtescu, et al.      Expires September 25, 2018              [Page 10]
