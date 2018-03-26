@@ -1,0 +1,336 @@
+
+
+
+
+                                                            M. Scurtescu
+                                                                  Google
+                                                              A. Backman
+                                                                  Amazon
+                                                                 P. Hunt
+                                                                  Oracle
+                                                              J. Bradley
+                                                                  Yubico
+                                                          March 25, 2018
+
+
+                           OAuth Event Types
+                          oauth-event-types-00
+
+Abstract
+
+   This document defines the OAuth Event Types.  Event Types are
+   introduced and defined in Security Event Token (SET) [SET].
+
+Table of Contents
+
+   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   1
+     1.1.  Notational Conventions  . . . . . . . . . . . . . . . . .   1
+   2.  Event Types . . . . . . . . . . . . . . . . . . . . . . . . .   2
+     2.1.  Token Revoked . . . . . . . . . . . . . . . . . . . . . .   2
+     2.2.  Tokens Revoked  . . . . . . . . . . . . . . . . . . . . .   3
+     2.3.  Client Disabled . . . . . . . . . . . . . . . . . . . . .   4
+     2.4.  Client Enabled  . . . . . . . . . . . . . . . . . . . . .   5
+     2.5.  Client Credential Changed . . . . . . . . . . . . . . . .   5
+   3.  Normative References  . . . . . . . . . . . . . . . . . . . .   5
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   6
+
+1.  Introduction
+
+   This specification is based on RISC Profile [RISC-PROFILE] and uses
+   the subject identifiers defined there.
+
+   The "aud" claim identifies the OAuth 2 client and its value SHOULD be
+   the OAuth 2 [RFC6749] client id.
+
+1.1.  Notational Conventions
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in BCP
+   14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
+
+
+
+
+Scurtescu, et al.      Expires September 26, 2018               [Page 1]
+
+                            oauth-event-types                 March 2018
+
+
+2.  Event Types
+
+   The base URI for OAuth Event Types is:
+   http://schemas.openid.net/secevent/oauth/event-type/
+
+2.1.  Token Revoked
+
+   Event Type URI:
+   http://schemas.openid.net/secevent/oauth/event-type/token-revoked
+
+   Token Revoked signals that the token identified by this event was
+   revoked.  The token is identified by the event specific attributes
+   described bellow.  The "subject" nested attribute is optional for
+   this event and it points to the account associated with the token.
+
+   Attributes:
+
+   o  token_type - required, describes the token type.  Possible values:
+
+      *  refresh_token
+
+      *  access_token
+
+      *  authorization_code
+
+   o  token_identifier_type - requierd, describes how is the token
+      identified.  Possible values:
+
+      *  token_string
+
+      *  token_string_prefix
+
+      *  token_string_hash
+
+   o  token - required, the token identifier, as described by
+      "token_identifier_type".
+
+   o  token_string_hash_alg - optional, the token string hash algorithm,
+      required if "token_identifier_type" is "token_string_hash".  TODO:
+      possible values.
+
+
+
+
+
+
+
+
+
+
+
+Scurtescu, et al.      Expires September 26, 2018               [Page 2]
+
+                            oauth-event-types                 March 2018
+
+
+   {
+     "iss": "https://idp.example.com/",
+     "jti": "756E69717565206964656E746966696572",
+     "iat": 1508184845,
+     "aud": "636C69656E745F6964",
+     "events": {
+       "http://schemas.openid.net/secevent/oauth/event-type/\
+       token-revoked": {
+         "token_type": "refresh_token",
+         "token_identifier_type": "token_string",
+         "token": "7265667265736820746F6B656E20737472696E67",
+       }
+     }
+   }
+
+   _(the event type URI is wrapped, the backslash is the continuation
+   character)_
+
+                     Figure 1: Example: Token Revoked
+
+2.2.  Tokens Revoked
+
+   Event Type URI:
+   http://schemas.openid.net/secevent/oauth/event-type/tokens-revoked
+
+   Tokens Revoked signals that all tokens issued for the account
+   identified by the subject have been revoked.
+
+   Attributes: none
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Scurtescu, et al.      Expires September 26, 2018               [Page 3]
+
+                            oauth-event-types                 March 2018
+
+
+   {
+     "iss": "https://idp.example.com/",
+     "jti": "756E69717565206964656E746966696572",
+     "iat": 1508184845,
+     "aud": "636C69656E745F6964",
+     "events": {
+       "http://schemas.openid.net/secevent/oauth/event-type/\
+       tokens-revoked": {
+         "subject": {
+           "subject_type": "iss-sub",
+           "iss": "https://idp.example.com/",
+           "sub": "7375626A656374",
+         },
+       }
+     }
+   }
+
+   _(the event type URI is wrapped, the backslash is the continuation
+   character)_
+
+                     Figure 2: Example: Tokens Revoked
+
+2.3.  Client Disabled
+
+   Event Type URI:
+   http://schemas.openid.net/secevent/oauth/event-type/client-disabled
+
+   Client Disabled signals that the client identified by the "aud" claim
+   has been disabled.  The client may be enabled (Section 2.4) in the
+   future.
+
+   Attributes: none
+
+   {
+     "iss": "https://idp.example.com/",
+     "jti": "756E69717565206964656E746966696572",
+     "iat": 1508184845,
+     "aud": "636C69656E745F6964",
+     "events": {
+       "http://schemas.openid.net/secevent/oauth/event-type/\
+       client-disabled": {}
+     }
+   }
+
+   _(the event type URI is wrapped, the backslash is the continuation
+   character)_
+
+                    Figure 3: Example: Client Disabled
+
+
+
+Scurtescu, et al.      Expires September 26, 2018               [Page 4]
+
+                            oauth-event-types                 March 2018
+
+
+2.4.  Client Enabled
+
+   Event Type URI:
+   http://schemas.openid.net/secevent/oauth/event-type/client-enabled
+
+   Client Enabled signals that the client identified by the "aud" claim
+   has been enabled.
+
+   Attributes: none
+
+2.5.  Client Credential Changed
+
+   Event Type URI:
+   http://schemas.openid.net/secevent/oauth/event-type/client-
+   credential-changed
+
+   Client Credential Changed signals that one of the credentials of the
+   client identified by the "aud" claim has changed.  For example the
+   client secret has changed.
+
+   Attributes: none
+
+3.  Normative References
+
+   [JSON]     Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
+              Interchange Format", RFC 7159, DOI 10.17487/RFC7159, March
+              2014, <https://www.rfc-editor.org/info/rfc7159>.
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997, <https://www.rfc-
+              editor.org/info/rfc2119>.
+
+   [RFC6749]  Hardt, D., Ed., "The OAuth 2.0 Authorization Framework",
+              RFC 6749, DOI 10.17487/RFC6749, October 2012,
+              <https://www.rfc-editor.org/info/rfc6749>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/info/rfc8174>.
+
+   [RISC-PROFILE]
+              OpenID Foundation, "RISC Profile".
+
+   [SET]      IETF, "Security Event Token (SET)",
+              <https://tools.ietf.org/html/draft-ietf-secevent-token>.
+
+
+
+
+
+Scurtescu, et al.      Expires September 26, 2018               [Page 5]
+
+                            oauth-event-types                 March 2018
+
+
+Authors' Addresses
+
+   Marius Scurtescu
+   Google
+
+   Email: mscurtescu@google.com
+
+
+   Annabelle Backman
+   Amazon
+
+   Email: richanna@amazon.com
+
+
+   Phil Hunt
+   Oracle Corporation
+
+   Email: phil.hunt@yahoo.com
+
+
+   John Bradley
+   Yubico
+
+   Email: secevemt@ve7jtb.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Scurtescu, et al.      Expires September 26, 2018               [Page 6]
