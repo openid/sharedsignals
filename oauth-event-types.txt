@@ -10,7 +10,7 @@
                                                                   Oracle
                                                               J. Bradley
                                                                   Yubico
-                                                          March 25, 2018
+                                                          April 11, 2018
 
 
                            OAuth Event Types
@@ -53,20 +53,20 @@ Table of Contents
 
 
 
-Scurtescu, et al.      Expires September 26, 2018               [Page 1]
+Scurtescu, et al.       Expires October 13, 2018                [Page 1]
 
-                            oauth-event-types                 March 2018
+                            oauth-event-types                 April 2018
 
 
 2.  Event Types
 
    The base URI for OAuth Event Types is:
-   http://schemas.openid.net/secevent/oauth/event-type/
+   https://schemas.openid.net/secevent/oauth/event-type/
 
 2.1.  Token Revoked
 
    Event Type URI:
-   http://schemas.openid.net/secevent/oauth/event-type/token-revoked
+   https://schemas.openid.net/secevent/oauth/event-type/token-revoked
 
    Token Revoked signals that the token identified by this event was
    revoked.  The token is identified by the event specific attributes
@@ -77,20 +77,20 @@ Scurtescu, et al.      Expires September 26, 2018               [Page 1]
 
    o  token_type - required, describes the token type.  Possible values:
 
-      *  refresh_token
-
       *  access_token
 
       *  authorization_code
+
+      *  refresh_token
 
    o  token_identifier_type - requierd, describes how is the token
       identified.  Possible values:
 
       *  token_string
 
-      *  token_string_prefix
-
       *  token_string_hash
+
+      *  token_string_prefix
 
    o  token - required, the token identifier, as described by
       "token_identifier_type".
@@ -109,9 +109,9 @@ Scurtescu, et al.      Expires September 26, 2018               [Page 1]
 
 
 
-Scurtescu, et al.      Expires September 26, 2018               [Page 2]
+Scurtescu, et al.       Expires October 13, 2018                [Page 2]
 
-                            oauth-event-types                 March 2018
+                            oauth-event-types                 April 2018
 
 
    {
@@ -120,7 +120,7 @@ Scurtescu, et al.      Expires September 26, 2018               [Page 2]
      "iat": 1508184845,
      "aud": "636C69656E745F6964",
      "events": {
-       "http://schemas.openid.net/secevent/oauth/event-type/\
+       "https://schemas.openid.net/secevent/oauth/event-type/\
        token-revoked": {
          "token_type": "refresh_token",
          "token_identifier_type": "token_string",
@@ -137,7 +137,7 @@ Scurtescu, et al.      Expires September 26, 2018               [Page 2]
 2.2.  Tokens Revoked
 
    Event Type URI:
-   http://schemas.openid.net/secevent/oauth/event-type/tokens-revoked
+   https://schemas.openid.net/secevent/oauth/event-type/tokens-revoked
 
    Tokens Revoked signals that all tokens issued for the account
    identified by the subject have been revoked.
@@ -165,9 +165,9 @@ Scurtescu, et al.      Expires September 26, 2018               [Page 2]
 
 
 
-Scurtescu, et al.      Expires September 26, 2018               [Page 3]
+Scurtescu, et al.       Expires October 13, 2018                [Page 3]
 
-                            oauth-event-types                 March 2018
+                            oauth-event-types                 April 2018
 
 
    {
@@ -176,7 +176,7 @@ Scurtescu, et al.      Expires September 26, 2018               [Page 3]
      "iat": 1508184845,
      "aud": "636C69656E745F6964",
      "events": {
-       "http://schemas.openid.net/secevent/oauth/event-type/\
+       "https://schemas.openid.net/secevent/oauth/event-type/\
        tokens-revoked": {
          "subject": {
            "subject_type": "iss-sub",
@@ -195,7 +195,7 @@ Scurtescu, et al.      Expires September 26, 2018               [Page 3]
 2.3.  Client Disabled
 
    Event Type URI:
-   http://schemas.openid.net/secevent/oauth/event-type/client-disabled
+   https://schemas.openid.net/secevent/oauth/event-type/client-disabled
 
    Client Disabled signals that the client identified by the "aud" claim
    has been disabled.  The client may be enabled (Section 2.4) in the
@@ -209,7 +209,7 @@ Scurtescu, et al.      Expires September 26, 2018               [Page 3]
      "iat": 1508184845,
      "aud": "636C69656E745F6964",
      "events": {
-       "http://schemas.openid.net/secevent/oauth/event-type/\
+       "https://schemas.openid.net/secevent/oauth/event-type/\
        client-disabled": {}
      }
    }
@@ -221,15 +221,15 @@ Scurtescu, et al.      Expires September 26, 2018               [Page 3]
 
 
 
-Scurtescu, et al.      Expires September 26, 2018               [Page 4]
+Scurtescu, et al.       Expires October 13, 2018                [Page 4]
 
-                            oauth-event-types                 March 2018
+                            oauth-event-types                 April 2018
 
 
 2.4.  Client Enabled
 
    Event Type URI:
-   http://schemas.openid.net/secevent/oauth/event-type/client-enabled
+   https://schemas.openid.net/secevent/oauth/event-type/client-enabled
 
    Client Enabled signals that the client identified by the "aud" claim
    has been enabled.
@@ -239,7 +239,7 @@ Scurtescu, et al.      Expires September 26, 2018               [Page 4]
 2.5.  Client Credential Changed
 
    Event Type URI:
-   http://schemas.openid.net/secevent/oauth/event-type/client-
+   https://schemas.openid.net/secevent/oauth/event-type/client-
    credential-changed
 
    Client Credential Changed signals that one of the credentials of the
@@ -277,9 +277,9 @@ Scurtescu, et al.      Expires September 26, 2018               [Page 4]
 
 
 
-Scurtescu, et al.      Expires September 26, 2018               [Page 5]
+Scurtescu, et al.       Expires October 13, 2018                [Page 5]
 
-                            oauth-event-types                 March 2018
+                            oauth-event-types                 April 2018
 
 
 Authors' Addresses
@@ -333,4 +333,4 @@ Authors' Addresses
 
 
 
-Scurtescu, et al.      Expires September 26, 2018               [Page 6]
+Scurtescu, et al.       Expires October 13, 2018                [Page 6]

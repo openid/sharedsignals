@@ -10,7 +10,7 @@
                                                                   Oracle
                                                               J. Bradley
                                                                   Yubico
-                                                          March 24, 2018
+                                                          April 11, 2018
 
 
                             RISC Event Types
@@ -53,9 +53,9 @@ Table of Contents
 
 
 
-Scurtescu, et al.      Expires September 25, 2018               [Page 1]
+Scurtescu, et al.       Expires October 13, 2018                [Page 1]
 
-                            risc-event-types                  March 2018
+                            risc-event-types                  April 2018
 
 
 1.1.  Notational Conventions
@@ -69,12 +69,12 @@ Scurtescu, et al.      Expires September 25, 2018               [Page 1]
 2.  Event Types
 
    The base URI for RISC event types is:
-   http://schemas.openid.net/secevent/risc/event-type/
+   https://schemas.openid.net/secevent/risc/event-type/
 
 2.1.  Account Credential Change Required
 
    Event Type URI:
-   http://schemas.openid.net/secevent/risc/event-type/account-
+   https://schemas.openid.net/secevent/risc/event-type/account-
    credential-change-required
 
    Account Credential Change Required signals that the account
@@ -89,7 +89,7 @@ Scurtescu, et al.      Expires September 25, 2018               [Page 1]
      "iat": 1508184845,
      "aud": "636C69656E745F6964",
      "events": {
-       "http://schemas.openid.net/secevent/risc/event-type/\
+       "https://schemas.openid.net/secevent/risc/event-type/\
        account-credential-change-required": {
          "subject": {
            "subject_type": "iss-sub",
@@ -109,15 +109,15 @@ Scurtescu, et al.      Expires September 25, 2018               [Page 1]
 
 
 
-Scurtescu, et al.      Expires September 25, 2018               [Page 2]
+Scurtescu, et al.       Expires October 13, 2018                [Page 2]
 
-                            risc-event-types                  March 2018
+                            risc-event-types                  April 2018
 
 
 2.2.  Account Purged
 
    Event Type URI:
-   http://schemas.openid.net/secevent/risc/event-type/account-purged
+   https://schemas.openid.net/secevent/risc/event-type/account-purged
 
    Account Purged signals that the account identified by the subject has
    been permanently deleted.
@@ -127,7 +127,7 @@ Scurtescu, et al.      Expires September 25, 2018               [Page 2]
 2.3.  Account Disabled
 
    Event Type URI:
-   http://schemas.openid.net/secevent/risc/event-type/account-disabled
+   https://schemas.openid.net/secevent/risc/event-type/account-disabled
 
    Account Disabled signals that the account identified by the subject
    has been disabled.  The actual reason why the account was disabled
@@ -165,9 +165,9 @@ Scurtescu, et al.      Expires September 25, 2018               [Page 2]
 
 
 
-Scurtescu, et al.      Expires September 25, 2018               [Page 3]
+Scurtescu, et al.       Expires October 13, 2018                [Page 3]
 
-                            risc-event-types                  March 2018
+                            risc-event-types                  April 2018
 
 
    {
@@ -176,7 +176,7 @@ Scurtescu, et al.      Expires September 25, 2018               [Page 3]
      "iat": 1508184845,
      "aud": "636C69656E745F6964",
      "events": {
-       "http://schemas.openid.net/secevent/risc/event-type/\
+       "https://schemas.openid.net/secevent/risc/event-type/\
        account-disabled": {
          "subject": {
            "subject_type": "iss-sub",
@@ -196,7 +196,7 @@ Scurtescu, et al.      Expires September 25, 2018               [Page 3]
 2.4.  Account Enabled
 
    Event Type URI:
-   http://schemas.openid.net/secevent/risc/event-type/account-enabled
+   https://schemas.openid.net/secevent/risc/event-type/account-enabled
 
    Account Enabled signals that the account identified by the subject
    has been enabled.
@@ -206,7 +206,8 @@ Scurtescu, et al.      Expires September 25, 2018               [Page 3]
 2.5.  Identifier Changed
 
    Event Type URI:
-   http://schemas.openid.net/secevent/risc/event-type/identifier-changed
+   https://schemas.openid.net/secevent/risc/event-type/identifier-
+   changed
 
    Identifier Changed signals that the identifier specified in the
    subject has changed.  The subject's type MUST be either 'email' or
@@ -216,15 +217,17 @@ Scurtescu, et al.      Expires September 25, 2018               [Page 3]
    authoritative over the identifier.  For example, if the person that
    owns "john.doe@example.com" goes through a name change and wants the
    new "john.row@example.com" email then *only* the email provider
+
+
+
+
+Scurtescu, et al.       Expires October 13, 2018                [Page 4]
+
+                            risc-event-types                  April 2018
+
+
    "example.com" SHOULD issue an Identifier Changed event as shown in
    the example below.
-
-
-
-Scurtescu, et al.      Expires September 25, 2018               [Page 4]
-
-                            risc-event-types                  March 2018
-
 
    If an identifier used as a username or recovery option is changed, at
    a provide that is not authoritative over that identifier, then
@@ -240,7 +243,7 @@ Scurtescu, et al.      Expires September 25, 2018               [Page 4]
      "iat": 1508184845,
      "aud": "636C69656E745F6964",
      "events": {
-       "http://schemas.openid.net/secevent/risc/event-type/\
+       "https://schemas.openid.net/secevent/risc/event-type/\
        identifier-changed": {
          "subject": {
            "subject_type": "email",
@@ -260,7 +263,7 @@ Scurtescu, et al.      Expires September 25, 2018               [Page 4]
 2.6.  Identifier Recycled
 
    Event Type URI:
-   http://schemas.openid.net/secevent/risc/event-type/identifier-
+   https://schemas.openid.net/secevent/risc/event-type/identifier-
    recycled
 
    Identifier Recycled signals that the identifier specified in the
@@ -274,12 +277,9 @@ Scurtescu, et al.      Expires September 25, 2018               [Page 4]
 
 
 
-
-
-
-Scurtescu, et al.      Expires September 25, 2018               [Page 5]
+Scurtescu, et al.       Expires October 13, 2018                [Page 5]
 
-                            risc-event-types                  March 2018
+                            risc-event-types                  April 2018
 
 
    {
@@ -288,7 +288,7 @@ Scurtescu, et al.      Expires September 25, 2018               [Page 5]
      "iat": 1508184845,
      "aud": "636C69656E745F6964",
      "events": {
-       "http://schemas.openid.net/secevent/risc/event-type/\
+       "https://schemas.openid.net/secevent/risc/event-type/\
        identifier-recycled": {
          "subject": {
            "subject_type": "email",
@@ -333,9 +333,9 @@ Scurtescu, et al.      Expires September 25, 2018               [Page 5]
 
 
 
-Scurtescu, et al.      Expires September 25, 2018               [Page 6]
+Scurtescu, et al.       Expires October 13, 2018                [Page 6]
 
-                            risc-event-types                  March 2018
+                            risc-event-types                  April 2018
 
 
    State changes trigger Opt-Out Events as represented bellow:
@@ -364,7 +364,7 @@ Scurtescu, et al.      Expires September 25, 2018               [Page 6]
 2.7.1.  Opt In
 
    Event Type URI:
-   http://schemas.openid.net/secevent/risc/event-type/opt-in
+   https://schemas.openid.net/secevent/risc/event-type/opt-in
 
    Opt In signals that the account identified by the subject opted into
    RISC event exchanges.  The account is in the 'opt-in' state.
@@ -374,7 +374,7 @@ Scurtescu, et al.      Expires September 25, 2018               [Page 6]
 2.7.2.  Opt Out Initiated
 
    Event Type URI:
-   http://schemas.openid.net/secevent/risc/event-type/opt-out-initiated
+   https://schemas.openid.net/secevent/risc/event-type/opt-out-initiated
 
    Opt Out Initiated signals that the account identified by the subject
    initiated to opt out from RISC event exchanges.  The account is in
@@ -389,15 +389,15 @@ Scurtescu, et al.      Expires September 25, 2018               [Page 6]
 
 
 
-Scurtescu, et al.      Expires September 25, 2018               [Page 7]
+Scurtescu, et al.       Expires October 13, 2018                [Page 7]
 
-                            risc-event-types                  March 2018
+                            risc-event-types                  April 2018
 
 
 2.7.3.  Opt Out Cancelled
 
    Event Type URI:
-   http://schemas.openid.net/secevent/risc/event-type/opt-out-cancelled
+   https://schemas.openid.net/secevent/risc/event-type/opt-out-cancelled
 
    Opt Out Cancelled signals that the account identified by the subject
    cancelled the opt out from RISC event exchanges.  The account is in
@@ -408,7 +408,7 @@ Scurtescu, et al.      Expires September 25, 2018               [Page 7]
 2.7.4.  Opt Out Effective
 
    Event Type URI:
-   http://schemas.openid.net/secevent/risc/event-type/opt-out-effective
+   https://schemas.openid.net/secevent/risc/event-type/opt-out-effective
 
    Opt Out Effective signals that the account identified by the subject
    was effectively opted out from RISC event exchanges.  The account is
@@ -419,7 +419,8 @@ Scurtescu, et al.      Expires September 25, 2018               [Page 7]
 2.8.  Recovery Activated
 
    Event Type URI:
-   http://schemas.openid.net/secevent/risc/event-type/recovery-activated
+   https://schemas.openid.net/secevent/risc/event-type/recovery-
+   activated
 
    Recovery Activated signals that the account identified by the subject
    activated a recovery flow.
@@ -429,7 +430,7 @@ Scurtescu, et al.      Expires September 25, 2018               [Page 7]
 2.9.  Recovery Information Changed
 
    Event Type URI:
-   http://schemas.openid.net/secevent/risc/event-type/recovery-
+   https://schemas.openid.net/secevent/risc/event-type/recovery-
    information-changed
 
    Recovery Information Changed signals that the account identified by
@@ -444,16 +445,15 @@ Scurtescu, et al.      Expires September 25, 2018               [Page 7]
 
 
 
-
-Scurtescu, et al.      Expires September 25, 2018               [Page 8]
+Scurtescu, et al.       Expires October 13, 2018                [Page 8]
 
-                            risc-event-types                  March 2018
+                            risc-event-types                  April 2018
 
 
 2.10.  Sessions Revoked
 
    Event Type URI:
-   http://schemas.openid.net/secevent/risc/event-type/sessions-revoked
+   https://schemas.openid.net/secevent/risc/event-type/sessions-revoked
 
    Sessions Revoked signals that all the sessions for the account
    identified by the subject have been revoked.
@@ -501,9 +501,9 @@ Authors' Addresses
 
 
 
-Scurtescu, et al.      Expires September 25, 2018               [Page 9]
+Scurtescu, et al.       Expires October 13, 2018                [Page 9]
 
-                            risc-event-types                  March 2018
+                            risc-event-types                  April 2018
 
 
    Phil Hunt
@@ -557,4 +557,4 @@ Scurtescu, et al.      Expires September 25, 2018               [Page 9]
 
 
 
-Scurtescu, et al.      Expires September 25, 2018              [Page 10]
+Scurtescu, et al.       Expires October 13, 2018               [Page 10]

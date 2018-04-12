@@ -51,7 +51,7 @@
       </address>
     </author>
 
-    <date year="2018" month="March" day="24"/>
+    <date year="2018" month="April" day="11"/>
 
     <workgroup>RISC Working Group</workgroup>
 
@@ -76,11 +76,11 @@
     
     <section anchor="event-types" title="Event Types">
       <t>The base URI for RISC event types is:<vspace />
-        http://schemas.openid.net/secevent/risc/event-type/</t>
+        https://schemas.openid.net/secevent/risc/event-type/</t>
       
       <section anchor="account-credential-change-required" title="Account Credential Change Required">
         <t>Event Type URI:<vspace />
-        http://schemas.openid.net/secevent/risc/event-type/account-credential-change-required</t>
+        https://schemas.openid.net/secevent/risc/event-type/account-credential-change-required</t>
         
         <t>Account Credential Change Required signals that the account identified by the subject was required to
         change a credential. For example the user was required to go through a password change.</t>
@@ -95,7 +95,7 @@
   "iat": 1508184845,
   "aud": "636C69656E745F6964",
   "events": {
-    "http://schemas.openid.net/secevent/risc/event-type/\
+    "https://schemas.openid.net/secevent/risc/event-type/\
     account-credential-change-required": {
       "subject": {
         "subject_type": "iss-sub",
@@ -112,7 +112,7 @@
 
       <section anchor="account-purged" title="Account Purged">
         <t>Event Type URI:<vspace />
-        http://schemas.openid.net/secevent/risc/event-type/account-purged</t>
+        https://schemas.openid.net/secevent/risc/event-type/account-purged</t>
         
         <t>Account Purged signals that the account identified by the subject has been permanently deleted.</t>
         
@@ -121,7 +121,7 @@
 
       <section anchor="account-disabled" title="Account Disabled">
         <t>Event Type URI:<vspace />
-        http://schemas.openid.net/secevent/risc/event-type/account-disabled</t>
+        https://schemas.openid.net/secevent/risc/event-type/account-disabled</t>
         
         <t>Account Disabled signals that the account identified by the subject has been disabled. The actual reason why the
         account was disabled might be specified with the nested 'reason' attribute described below. The account may be
@@ -142,7 +142,7 @@
   "iat": 1508184845,
   "aud": "636C69656E745F6964",
   "events": {
-    "http://schemas.openid.net/secevent/risc/event-type/\
+    "https://schemas.openid.net/secevent/risc/event-type/\
     account-disabled": {
       "subject": {
         "subject_type": "iss-sub",
@@ -160,7 +160,7 @@
 
       <section anchor="account-enabled" title="Account Enabled">
         <t>Event Type URI:<vspace />
-        http://schemas.openid.net/secevent/risc/event-type/account-enabled</t>
+        https://schemas.openid.net/secevent/risc/event-type/account-enabled</t>
         
         <t>Account Enabled signals that the account identified by the subject has been enabled.</t>
         
@@ -169,7 +169,7 @@
 
       <section anchor="identifier-changed" title="Identifier Changed">
         <t>Event Type URI:<vspace />
-        http://schemas.openid.net/secevent/risc/event-type/identifier-changed</t>
+        https://schemas.openid.net/secevent/risc/event-type/identifier-changed</t>
         
         <t>Identifier Changed signals that the identifier specified in the subject has changed. The subject's
         type MUST be either 'email' or 'phone' and it MUST specify the old value.</t>
@@ -196,7 +196,7 @@
   "iat": 1508184845,
   "aud": "636C69656E745F6964",
   "events": {
-    "http://schemas.openid.net/secevent/risc/event-type/\
+    "https://schemas.openid.net/secevent/risc/event-type/\
     identifier-changed": {
       "subject": {
         "subject_type": "email",
@@ -214,7 +214,7 @@
 
       <section anchor="identifier-recycled" title="Identifier Recycled">
         <t>Event Type URI:<vspace />
-        http://schemas.openid.net/secevent/risc/event-type/identifier-recycled</t>
+        https://schemas.openid.net/secevent/risc/event-type/identifier-recycled</t>
         
         <t>Identifier Recycled signals that the identifier specified in the subject was recycled and now it
         belongs to a new user. The subject MUST be either 'email' or 'phone-number'.</t>
@@ -229,7 +229,7 @@
   "iat": 1508184845,
   "aud": "636C69656E745F6964",
   "events": {
-    "http://schemas.openid.net/secevent/risc/event-type/\
+    "https://schemas.openid.net/secevent/risc/event-type/\
     identifier-recycled": {
       "subject": {
         "subject_type": "email",
@@ -279,7 +279,7 @@
         
         <section anchor="opt-in" title="Opt In">
           <t>Event Type URI:<vspace />
-          http://schemas.openid.net/secevent/risc/event-type/opt-in</t>
+          https://schemas.openid.net/secevent/risc/event-type/opt-in</t>
         
           <t>Opt In signals that the account identified by the subject opted into RISC event exchanges.
           The account is in the 'opt-in' state.</t>
@@ -289,7 +289,7 @@
         
         <section anchor="opt-out-initiated" title="Opt Out Initiated">
           <t>Event Type URI:<vspace />
-          http://schemas.openid.net/secevent/risc/event-type/opt-out-initiated</t>
+          https://schemas.openid.net/secevent/risc/event-type/opt-out-initiated</t>
         
           <t>Opt Out Initiated signals that the account identified by the subject initiated to opt out
           from RISC event exchanges. The account is in the 'opt-out-initiated' state.</t>
@@ -299,7 +299,7 @@
         
         <section anchor="opt-out-cancelled" title="Opt Out Cancelled">
           <t>Event Type URI:<vspace />
-          http://schemas.openid.net/secevent/risc/event-type/opt-out-cancelled</t>
+          https://schemas.openid.net/secevent/risc/event-type/opt-out-cancelled</t>
         
           <t>Opt Out Cancelled signals that the account identified by the subject cancelled the opt out from RISC
           event exchanges. The account is in the 'opt-in' state.</t>
@@ -309,7 +309,7 @@
         
         <section anchor="opt-out-effective" title="Opt Out Effective">
           <t>Event Type URI:<vspace />
-          http://schemas.openid.net/secevent/risc/event-type/opt-out-effective</t>
+          https://schemas.openid.net/secevent/risc/event-type/opt-out-effective</t>
         
           <t>Opt Out Effective signals that the account identified by the subject was effectively opted out from
           RISC event exchanges. The account is in the 'opt-out' state.</t>
@@ -320,7 +320,7 @@
       
       <section anchor="recovery-activated" title="Recovery Activated">
         <t>Event Type URI:<vspace />
-        http://schemas.openid.net/secevent/risc/event-type/recovery-activated</t>
+        https://schemas.openid.net/secevent/risc/event-type/recovery-activated</t>
         
         <t>Recovery Activated signals that the account identified by the subject activated a recovery flow.</t>
         
@@ -329,7 +329,7 @@
 
       <section anchor="recovery-information-changed" title="Recovery Information Changed">
         <t>Event Type URI:<vspace />
-        http://schemas.openid.net/secevent/risc/event-type/recovery-information-changed</t>
+        https://schemas.openid.net/secevent/risc/event-type/recovery-information-changed</t>
         
         <t>Recovery Information Changed signals that the account identified by the subject has changed some of
         its recovery information. For example a recovery email address was added or removed.</t>
@@ -339,7 +339,7 @@
 
       <section anchor="sessions-revoked" title="Sessions Revoked">
         <t>Event Type URI:<vspace />
-        http://schemas.openid.net/secevent/risc/event-type/sessions-revoked</t>
+        https://schemas.openid.net/secevent/risc/event-type/sessions-revoked</t>
         
         <t>Sessions Revoked signals that all the sessions for the account identified by the subject have been
         revoked.</t>

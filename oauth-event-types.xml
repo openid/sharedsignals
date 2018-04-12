@@ -51,7 +51,7 @@
       </address>
     </author>
 
-    <date year="2018" month="March" day="25"/>
+    <date year="2018" month="April" day="11"/>
 
     <workgroup>RISC Working Group</workgroup>
 
@@ -79,11 +79,11 @@
     
     <section anchor="event-types" title="Event Types">
       <t>The base URI for OAuth Event Types is:<vspace />
-        http://schemas.openid.net/secevent/oauth/event-type/</t>
+        https://schemas.openid.net/secevent/oauth/event-type/</t>
       
       <section anchor="token-revoked" title="Token Revoked">
         <t>Event Type URI:<vspace />
-        http://schemas.openid.net/secevent/oauth/event-type/token-revoked</t>
+        https://schemas.openid.net/secevent/oauth/event-type/token-revoked</t>
         
         <t>Token Revoked signals that the token identified by this event was revoked. The token is
           identified by the event specific attributes described bellow. The 
@@ -117,7 +117,7 @@
   "iat": 1508184845,
   "aud": "636C69656E745F6964",
   "events": {
-    "http://schemas.openid.net/secevent/oauth/event-type/\
+    "https://schemas.openid.net/secevent/oauth/event-type/\
     token-revoked": {
       "token_type": "refresh_token",
       "token_identifier_type": "token_string",
@@ -132,7 +132,7 @@
 
       <section anchor="tokens-revoked" title="Tokens Revoked">
         <t>Event Type URI:<vspace />
-        http://schemas.openid.net/secevent/oauth/event-type/tokens-revoked</t>
+        https://schemas.openid.net/secevent/oauth/event-type/tokens-revoked</t>
         
         <t>Tokens Revoked signals that all tokens issued for the account identified by the subject have been
           revoked.</t>
@@ -147,7 +147,7 @@
   "iat": 1508184845,
   "aud": "636C69656E745F6964",
   "events": {
-    "http://schemas.openid.net/secevent/oauth/event-type/\
+    "https://schemas.openid.net/secevent/oauth/event-type/\
     tokens-revoked": {
       "subject": {
         "subject_type": "iss-sub",
@@ -164,7 +164,7 @@
 
       <section anchor="client_disabled" title="Client Disabled">
         <t>Event Type URI:<vspace />
-        http://schemas.openid.net/secevent/oauth/event-type/client-disabled</t>
+        https://schemas.openid.net/secevent/oauth/event-type/client-disabled</t>
         
         <t>Client Disabled signals that the client identified by the <spanx style="verb">aud</spanx> 
         claim has been disabled. The client may be
@@ -180,7 +180,7 @@
   "iat": 1508184845,
   "aud": "636C69656E745F6964",
   "events": {
-    "http://schemas.openid.net/secevent/oauth/event-type/\
+    "https://schemas.openid.net/secevent/oauth/event-type/\
     client-disabled": {}
   }
 }
@@ -191,7 +191,7 @@
 
       <section anchor="client-enabled" title="Client Enabled">
         <t>Event Type URI:<vspace />
-        http://schemas.openid.net/secevent/oauth/event-type/client-enabled</t>
+        https://schemas.openid.net/secevent/oauth/event-type/client-enabled</t>
         
         <t>Client Enabled signals that the client identified by the <spanx style="verb">aud</spanx> 
         claim has been enabled.</t>
@@ -201,7 +201,7 @@
 
       <section anchor="client-credential-changed" title="Client Credential Changed">
         <t>Event Type URI:<vspace />
-        http://schemas.openid.net/secevent/oauth/event-type/client-credential-changed</t>
+        https://schemas.openid.net/secevent/oauth/event-type/client-credential-changed</t>
         
         <t>Client Credential Changed signals that one of the credentials of the client identified by 
         the <spanx style="verb">aud</spanx> claim has changed. For example the client secret has 
