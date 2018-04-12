@@ -38,12 +38,6 @@
         <email>richanna@amazon.com</email>
       </address>
     </author>
-    <author initials="P." surname="Hunt" fullname="Phil Hunt">
-      <organization abbrev="Oracle">Oracle Corporation</organization>
-      <address>
-        <email>phil.hunt@yahoo.com</email>
-      </address>
-    </author>
     <author initials="J." surname="Bradley" fullname="John Bradley">
       <organization abbrev="Yubico">Yubico</organization>
       <address>
@@ -51,7 +45,7 @@
       </address>
     </author>
 
-    <date year="2018" month="March" day="5"/>
+    <date year="2018" month="April" day="11"/>
 
     <workgroup>RISC Working Group</workgroup>
 

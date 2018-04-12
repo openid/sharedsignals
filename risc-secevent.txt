@@ -6,11 +6,9 @@
                                                                   Google
                                                               A. Backman
                                                                   Amazon
-                                                                 P. Hunt
-                                                                  Oracle
                                                               J. Bradley
                                                                   Yubico
-                                                           March 5, 2018
+                                                          April 11, 2018
 
 
                   RISC profile of IETF Security Events
@@ -36,7 +34,7 @@ Abstract
 Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
-     1.1.  Notational Conventions  . . . . . . . . . . . . . . . . .   3
+     1.1.  Notational Conventions  . . . . . . . . . . . . . . . . .   2
    2.  Subject Identifiers . . . . . . . . . . . . . . . . . . . . .   3
      2.1.  Subject Identifier Types  . . . . . . . . . . . . . . . .   4
        2.1.1.  Email Subject Identifier Type . . . . . . . . . . . .   4
@@ -50,16 +48,16 @@ Table of Contents
        3.2.2.  Transmitter Configuration Response  . . . . . . . . .   7
        3.2.3.  Transmitter Configuration Validation  . . . . . . . .   8
    4.  Management API for SET Event Streams  . . . . . . . . . . . .   8
-
-
-
-Scurtescu, et al.       Expires September 6, 2018               [Page 1]
-
-                              risc-secevent                   March 2018
-
-
      4.1.  Event Stream Management . . . . . . . . . . . . . . . . .   9
        4.1.1.  Stream Status . . . . . . . . . . . . . . . . . . . .  10
+
+
+
+Scurtescu, et al.       Expires October 13, 2018                [Page 1]
+
+                              risc-secevent                   April 2018
+
+
          4.1.1.1.  Reading a Stream's Status . . . . . . . . . . . .  10
          4.1.1.2.  Updating a Stream's Status  . . . . . . . . . . .  11
        4.1.2.  Stream Configuration  . . . . . . . . . . . . . . . .  12
@@ -103,22 +101,19 @@ Scurtescu, et al.       Expires September 6, 2018               [Page 1]
 
 1.  Introduction
 
-
-
-
-
-
-
-Scurtescu, et al.       Expires September 6, 2018               [Page 2]
-
-                              risc-secevent                   March 2018
-
-
 1.1.  Notational Conventions
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
    "OPTIONAL" in this document are to be interpreted as described in BCP
+
+
+
+Scurtescu, et al.       Expires October 13, 2018                [Page 2]
+
+                              risc-secevent                   April 2018
+
+
    14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
@@ -165,9 +160,14 @@ Scurtescu, et al.       Expires September 6, 2018               [Page 2]
 
 
 
-Scurtescu, et al.       Expires September 6, 2018               [Page 3]
+
+
+
+
+
+Scurtescu, et al.       Expires October 13, 2018                [Page 3]
 
-                              risc-secevent                   March 2018
+                              risc-secevent                   April 2018
 
 
    {
@@ -221,9 +221,9 @@ Scurtescu, et al.       Expires September 6, 2018               [Page 3]
 
 
 
-Scurtescu, et al.       Expires September 6, 2018               [Page 4]
+Scurtescu, et al.       Expires October 13, 2018                [Page 4]
 
-                              risc-secevent                   March 2018
+                              risc-secevent                   April 2018
 
 
 2.1.2.  Phone Number Subject Identifier Type
@@ -277,9 +277,9 @@ Scurtescu, et al.       Expires September 6, 2018               [Page 4]
 
 
 
-Scurtescu, et al.       Expires September 6, 2018               [Page 5]
+Scurtescu, et al.       Expires October 13, 2018                [Page 5]
 
-                              risc-secevent                   March 2018
+                              risc-secevent                   April 2018
 
 
 3.1.  Transmitter Configuration Metadata
@@ -333,9 +333,9 @@ Scurtescu, et al.       Expires September 6, 2018               [Page 5]
 
 
 
-Scurtescu, et al.       Expires September 6, 2018               [Page 6]
+Scurtescu, et al.       Expires October 13, 2018                [Page 6]
 
-                              risc-secevent                   March 2018
+                              risc-secevent                   April 2018
 
 
    The Receiver would make the following request to the Issuer
@@ -389,9 +389,9 @@ Scurtescu, et al.       Expires September 6, 2018               [Page 6]
 
 
 
-Scurtescu, et al.       Expires September 6, 2018               [Page 7]
+Scurtescu, et al.       Expires October 13, 2018                [Page 7]
 
-                              risc-secevent                   March 2018
+                              risc-secevent                   April 2018
 
 
    HTTP/1.1 200 OK
@@ -445,9 +445,9 @@ Scurtescu, et al.       Expires September 6, 2018               [Page 7]
 
 
 
-Scurtescu, et al.       Expires September 6, 2018               [Page 8]
+Scurtescu, et al.       Expires October 13, 2018                [Page 8]
 
-                              risc-secevent                   March 2018
+                              risc-secevent                   April 2018
 
 
    +------------+                +------------+
@@ -501,9 +501,9 @@ Scurtescu, et al.       Expires September 6, 2018               [Page 8]
 
 
 
-Scurtescu, et al.       Expires September 6, 2018               [Page 9]
+Scurtescu, et al.       Expires October 13, 2018                [Page 9]
 
-                              risc-secevent                   March 2018
+                              risc-secevent                   April 2018
 
 
    given request, e.g. from authentication credentials.  The definition
@@ -557,9 +557,9 @@ Scurtescu, et al.       Expires September 6, 2018               [Page 9]
 
 
 
-Scurtescu, et al.       Expires September 6, 2018              [Page 10]
+Scurtescu, et al.       Expires October 13, 2018               [Page 10]
 
-                              risc-secevent                   March 2018
+                              risc-secevent                   April 2018
 
 
    HTTP/1.1 200 OK
@@ -613,9 +613,9 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 10]
 
 
 
-Scurtescu, et al.       Expires September 6, 2018              [Page 11]
+Scurtescu, et al.       Expires October 13, 2018               [Page 11]
 
-                              risc-secevent                   March 2018
+                              risc-secevent                   April 2018
 
 
    +------+------------------------------------------------------------+
@@ -669,9 +669,9 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 11]
 
 
 
-Scurtescu, et al.       Expires September 6, 2018              [Page 12]
+Scurtescu, et al.       Expires October 13, 2018               [Page 12]
 
-                              risc-secevent                   March 2018
+                              risc-secevent                   April 2018
 
 
       An integer indicating the minimum amount of time in seconds that
@@ -725,9 +725,9 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 12]
 
 
 
-Scurtescu, et al.       Expires September 6, 2018              [Page 13]
+Scurtescu, et al.       Expires October 13, 2018               [Page 13]
 
-                              risc-secevent                   March 2018
+                              risc-secevent                   April 2018
 
 
    HTTP/1.1 200 OK
@@ -781,9 +781,9 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 13]
 
 
 
-Scurtescu, et al.       Expires September 6, 2018              [Page 14]
+Scurtescu, et al.       Expires October 13, 2018               [Page 14]
 
-                              risc-secevent                   March 2018
+                              risc-secevent                   April 2018
 
 
 4.1.2.2.  Updating a Stream's Configuration
@@ -837,9 +837,9 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 14]
 
 
 
-Scurtescu, et al.       Expires September 6, 2018              [Page 15]
+Scurtescu, et al.       Expires October 13, 2018               [Page 15]
 
-                              risc-secevent                   March 2018
+                              risc-secevent                   April 2018
 
 
    HTTP/1.1 200 OK
@@ -893,9 +893,9 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 15]
 
 
 
-Scurtescu, et al.       Expires September 6, 2018              [Page 16]
+Scurtescu, et al.       Expires October 13, 2018               [Page 16]
 
-                              risc-secevent                   March 2018
+                              risc-secevent                   April 2018
 
 
 4.1.3.  Subjects
@@ -949,9 +949,9 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 16]
 
 
 
-Scurtescu, et al.       Expires September 6, 2018              [Page 17]
+Scurtescu, et al.       Expires October 13, 2018               [Page 17]
 
-                              risc-secevent                   March 2018
+                              risc-secevent                   April 2018
 
 
    +------+------------------------------------------------------------+
@@ -1005,9 +1005,9 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 17]
 
 
 
-Scurtescu, et al.       Expires September 6, 2018              [Page 18]
+Scurtescu, et al.       Expires October 13, 2018               [Page 18]
 
-                              risc-secevent                   March 2018
+                              risc-secevent                   April 2018
 
 
 4.1.3.2.  Removing a Subject
@@ -1061,9 +1061,9 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 18]
 
 
 
-Scurtescu, et al.       Expires September 6, 2018              [Page 19]
+Scurtescu, et al.       Expires October 13, 2018               [Page 19]
 
-                              risc-secevent                   March 2018
+                              risc-secevent                   April 2018
 
 
    POST /set/subjects:remove HTTP/1.1
@@ -1117,9 +1117,9 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 19]
 
 
 
-Scurtescu, et al.       Expires September 6, 2018              [Page 20]
+Scurtescu, et al.       Expires October 13, 2018               [Page 20]
 
-                              risc-secevent                   March 2018
+                              risc-secevent                   April 2018
 
 
    state
@@ -1173,9 +1173,9 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 20]
 
 
 
-Scurtescu, et al.       Expires September 6, 2018              [Page 21]
+Scurtescu, et al.       Expires October 13, 2018               [Page 21]
 
-                              risc-secevent                   March 2018
+                              risc-secevent                   April 2018
 
 
    +------+------------------------------------------------------------+
@@ -1229,9 +1229,9 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 21]
 
 
 
-Scurtescu, et al.       Expires September 6, 2018              [Page 22]
+Scurtescu, et al.       Expires October 13, 2018               [Page 22]
 
-                              risc-secevent                   March 2018
+                              risc-secevent                   April 2018
 
 
  {
@@ -1285,9 +1285,9 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 22]
 
 
 
-Scurtescu, et al.       Expires September 6, 2018              [Page 23]
+Scurtescu, et al.       Expires October 13, 2018               [Page 23]
 
-                              risc-secevent                   March 2018
+                              risc-secevent                   April 2018
 
 
    are revealing to Event Receivers when transmitting events to them,
@@ -1341,9 +1341,9 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 23]
 
 
 
-Scurtescu, et al.       Expires September 6, 2018              [Page 24]
+Scurtescu, et al.       Expires October 13, 2018               [Page 24]
 
-                              risc-secevent                   March 2018
+                              risc-secevent                   April 2018
 
 
 5.1.1.  Signature Key Resolution
@@ -1397,9 +1397,9 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 24]
 
 
 
-Scurtescu, et al.       Expires September 6, 2018              [Page 25]
+Scurtescu, et al.       Expires October 13, 2018               [Page 25]
 
-                              risc-secevent                   March 2018
+                              risc-secevent                   April 2018
 
 
    parameter, by requiring it for RISC SETs a distinct value is
@@ -1453,9 +1453,9 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 25]
 
 
 
-Scurtescu, et al.       Expires September 6, 2018              [Page 26]
+Scurtescu, et al.       Expires October 13, 2018               [Page 26]
 
-                              risc-secevent                   March 2018
+                              risc-secevent                   April 2018
 
 
 5.2.1.  Stream Configuration Metadata
@@ -1509,9 +1509,9 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 26]
 
 
 
-Scurtescu, et al.       Expires September 6, 2018              [Page 27]
+Scurtescu, et al.       Expires October 13, 2018               [Page 27]
 
-                              risc-secevent                   March 2018
+                              risc-secevent                   April 2018
 
 
    Change Controller:
@@ -1565,9 +1565,9 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 27]
 
 
 
-Scurtescu, et al.       Expires September 6, 2018              [Page 28]
+Scurtescu, et al.       Expires October 13, 2018               [Page 28]
 
-                              risc-secevent                   March 2018
+                              risc-secevent                   April 2018
 
 
    where a request is rejected, the Expert Reviewer should provide the
@@ -1621,9 +1621,9 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 28]
 
 
 
-Scurtescu, et al.       Expires September 6, 2018              [Page 29]
+Scurtescu, et al.       Expires October 13, 2018               [Page 29]
 
-                              risc-secevent                   March 2018
+                              risc-secevent                   April 2018
 
 
    [E164]     International Telecommunication Union, "The international
@@ -1677,9 +1677,9 @@ Scurtescu, et al.       Expires September 6, 2018              [Page 29]
 
 
 
-Scurtescu, et al.       Expires September 6, 2018              [Page 30]
+Scurtescu, et al.       Expires October 13, 2018               [Page 30]
 
-                              risc-secevent                   March 2018
+                              risc-secevent                   April 2018
 
 
    [SECEVENT]
@@ -1713,12 +1713,6 @@ Authors' Addresses
    Email: richanna@amazon.com
 
 
-   Phil Hunt
-   Oracle Corporation
-
-   Email: phil.hunt@yahoo.com
-
-
    John Bradley
    Yubico
 
@@ -1733,4 +1727,10 @@ Authors' Addresses
 
 
 
-Scurtescu, et al.       Expires September 6, 2018              [Page 31]
+
+
+
+
+
+
+Scurtescu, et al.       Expires October 13, 2018               [Page 31]
