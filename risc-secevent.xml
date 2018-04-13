@@ -200,6 +200,9 @@ enabled": {
           <t hangText="remove_subject_endpoint"> OPTIONAL. The URL of the Remove Subject Endpoint.</t>
           <t hangText="verification_endpoint"> OPTIONAL. The URL of the Verification Endpoint.</t>
         </list></t>
+        
+        <t>TODO: consider adding a IANA Registry for metadata, similar to Section 7.1.1 of <xref target="OAUTH-DISCOVERY"/>.
+          This would allow other specs to add to the metadata.</t>
       </section>
       
       <section title="Obtaining Transmitter Configuration Information">
@@ -491,6 +494,9 @@ Pragma: no-cache
               If not set then the Transmitter might decide to use a type that discloses more information
               than necessary.</t>
             </list></t>
+          
+          <t>TODO: consider adding a IANA Registry for stream configuration metadata, similar to Section 7.1.1 of 
+            <xref target="OAUTH-DISCOVERY"/>. This would allow other specs to add to the stream configuration.</t>
           
           <section anchor="reading-a-streams-configuration"
             title="Reading a Stream’s Configuration">
@@ -1131,7 +1137,7 @@ disabled": {
               each document SHOULD be included.</t>
           </list></t>
         </section>
-
+        
         <section anchor="iana-sub-id-types-init" title="Initial Registry Contents">
           <?rfc subcompact="yes"?>
           <t><list style="symbols">
@@ -1140,21 +1146,21 @@ disabled": {
             <t>Change Controller: OIDF RISC Working Group</t>
             <t>Defining Document(s): <xref target="sub-id-email"/> of this document.</t>
           </list></t>
-
+          
           <t><list style="symbols">
             <t>Type Name: <spanx style="verb">id-token-claims</spanx></t>
             <t>Type Description: Subject identifier based on OpenID Connect ID Token claims.</t>
             <t>Change Controller: OIDF RISC Working Group</t>
             <t>Defining Document(s): <xref target="sub-id-id-token-claims"/> of this document.</t>
           </list></t>
-
+          
           <t><list style="symbols">
             <t>Type Name: <spanx style="verb">iss-sub</spanx></t>
             <t>Type Description: Subject identifier based on issuer and subject.</t>
             <t>Change Controller: OIDF RISC Working Group</t>
             <t>Defining Document(s): <xref target="sub-id-iss-sub"/> of this document.</t>
           </list></t>
-
+          
           <t><list style="symbols">
             <t>Type Name: <spanx style="verb">phone</spanx></t>
             <t>Type Description: Subject identifier based on phone number.</t>
@@ -1163,24 +1169,40 @@ disabled": {
           </list></t>
           <?rfc subcompact="no"?>
         </section>
+        
+        <section anchor="iana-sub-id-types-expert" title="Guidance for Expert Reviewers">
+          <t>The Expert Reviewer is expected to review the documentation referenced in a registration
+            request to verify its completeness. The Expert Reviewer must base their decision to accept
+            or reject the request on a fair and impartial assessment of the request. If the Expert
+            Reviewer has a conflict of interest, such as being an author of a defining document
+            referenced by the request, they must recuse themselves from the approval process for that
+            request. In the case where a request is rejected, the Expert Reviewer should provide the
+            requesting party with a written statement expressing the reason for rejection, and be
+            prepared to cite any sources of information that went into that decision.</t>
+          
+          <t>Subject Identifier Types need not be generally applicable and may be highly specific to a
+            particular domain; it is expected that types may be registered for niche or industry-specific
+            use cases. The Expert Reviewer should focus on whether the type is thoroughly documented, and
+            whether its registration will promote or harm interoperability.  In most cases, the Expert
+            Reviewer should not approve a request if the registration would contribute to confusion, or
+            amount to a synonym for an existing type.</t>
+        </section>
       </section>
-
-      <section anchor="iana-sub-id-types-expert" title="Guidance for Expert Reviewers">
-        <t>The Expert Reviewer is expected to review the documentation referenced in a registration
-          request to verify its completeness. The Expert Reviewer must base their decision to accept
-          or reject the request on a fair and impartial assessment of the request. If the Expert
-          Reviewer has a conflict of interest, such as being an author of a defining document
-          referenced by the request, they must recuse themselves from the approval process for that
-          request. In the case where a request is rejected, the Expert Reviewer should provide the
-          requesting party with a written statement expressing the reason for rejection, and be
-          prepared to cite any sources of information that went into that decision.</t>
-
-        <t>Subject Identifier Types need not be generally applicable and may be highly specific to a
-          particular domain; it is expected that types may be registered for niche or industry-specific
-          use cases. The Expert Reviewer should focus on whether the type is thoroughly documented, and
-          whether its registration will promote or harm interoperability.  In most cases, the Expert
-          Reviewer should not approve a request if the registration would contribute to confusion, or
-          amount to a synonym for an existing type.</t>
+      
+      <section anchor="iana-well-known" title="Well-Known URI Registry">
+        <t>TODO: follow steps in Section 5.1 of <xref target="RFC5785"/> to send a registration request.</t>
+        
+        <t>This specification registers the well-known URI defined in <xref target="discovery"/>
+          in the IANA Well-Known URI registry defined in <xref target="RFC5785"/>.</t>
+        
+        <section anchor="iana-well-known-contents" title="Registry Contents">
+          <t><list style="symbols">
+            <t>URI suffix: <spanx style="verb">risc-configuration</spanx></t>
+            <t>Change controller: OpenID Foundation RISC Working Group - openid-specs-risc@lists.openid.net</t>
+            <t>Specification document: <xref target="discovery"/> of this document</t>
+            <t>Related information: (none)</t>
+          </list></t>
+        </section>
       </section>
     </section>
 
