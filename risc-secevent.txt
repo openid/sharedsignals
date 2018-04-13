@@ -137,7 +137,7 @@ Scurtescu, et al.       Expires October 13, 2018                [Page 2]
      "iat": 1520364019,
      "aud": "636C69656E745F6964",
      "events": {
-       "http://schemas.openid.net/secevent/risc/event-type/account-\
+       "https://schemas.openid.net/secevent/risc/event-type/account-\
    enabled": {
          "subject": {
            "subject_type": "email",
@@ -176,7 +176,7 @@ Scurtescu, et al.       Expires October 13, 2018                [Page 3]
      "iat": 1520364019,
      "aud": "636C69656E745F6964",
      "events": {
-       "http://schemas.openid.net/secevent/risc/event-type/account-\
+       "https://schemas.openid.net/secevent/risc/event-type/account-\
    enabled": {
          "subject": {
            "subject_type": "iss-sub",
@@ -403,8 +403,8 @@ Scurtescu, et al.       Expires October 13, 2018                [Page 7]
      "jwks_uri":
        "https://tr.example.com/jwks.json",
      "delivery_methods_supported": [
-       "http://schemas.openid.net/secevent/risc/delivery-method/push",
-       "http://schemas.openid.net/secevent/risc/delivery-method/poll"],
+       "https://schemas.openid.net/secevent/risc/delivery-method/push",
+       "https://schemas.openid.net/secevent/risc/delivery-method/poll"],
      "configuration_endpoint":
        "https://tr.example.com/risc/mgmt/stream",
      "status_endpoint":
@@ -730,34 +730,34 @@ Scurtescu, et al.       Expires October 13, 2018               [Page 13]
                               risc-secevent                   April 2018
 
 
-   HTTP/1.1 200 OK
-   Content-Type: application/json; charset=UTF-8
-   Cache-Control: no-store
-   Pragma: no-cache
+  HTTP/1.1 200 OK
+  Content-Type: application/json; charset=UTF-8
+  Cache-Control: no-store
+  Pragma: no-cache
 
-   {
-     "aud": "http://www.example.com",
-     "delivery": {
-       "delivery_method":
-         "http://schemas.openid.net/secevent/risc/delivery-method/push",
-       "url": "https://receiver.example.com/events",
-     },
-     "events_supported": [
-       "urn:example:secevent:events:type_1",
-       "urn:example:secevent:events:type_2",
-       "urn:example:secevent:events:type_3",
-     ],
-     "events_requested": [
-       "urn:example:secevent:events:type_2",
-       "urn:example:secevent:events:type_3",
-       "urn:example:secevent:events:type_4",
-     ],
-     "events_delivered": [
-       "urn:example:secevent:events:type_2",
-       "urn:example:secevent:events:type_3",
-     ],
-     "min_verification_interval": 60,
-   }
+  {
+    "aud": "http://www.example.com",
+    "delivery": {
+      "delivery_method":
+        "https://schemas.openid.net/secevent/risc/delivery-method/push",
+      "url": "https://receiver.example.com/events",
+    },
+    "events_supported": [
+      "urn:example:secevent:events:type_1",
+      "urn:example:secevent:events:type_2",
+      "urn:example:secevent:events:type_3",
+    ],
+    "events_requested": [
+      "urn:example:secevent:events:type_2",
+      "urn:example:secevent:events:type_3",
+      "urn:example:secevent:events:type_4",
+    ],
+    "events_delivered": [
+      "urn:example:secevent:events:type_2",
+      "urn:example:secevent:events:type_3",
+    ],
+    "min_verification_interval": 60,
+  }
 
           Figure 12: Example: Read Stream Configuration Response
 
@@ -807,23 +807,23 @@ Scurtescu, et al.       Expires October 13, 2018               [Page 14]
    The following is a non-normative example request to update an Event
    Stream's configuration:
 
-   POST /set/stream HTTP/1.1
-   Host: transmitter.example.com
-   Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
+  POST /set/stream HTTP/1.1
+  Host: transmitter.example.com
+  Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
-   {
-     "aud": "http://www.example.com",
-     "delivery": {
-       "delivery_method":
-         "http://schemas.openid.net/secevent/risc/delivery-method/push",
-       "url": "https://receiver.example.com/events",
-     },
-     "events_requested": [
-       "urn:example:secevent:events:type_2",
-       "urn:example:secevent:events:type_3",
-       "urn:example:secevent:events:type_4",
-     ],
-   }
+  {
+    "aud": "http://www.example.com",
+    "delivery": {
+      "delivery_method":
+        "https://schemas.openid.net/secevent/risc/delivery-method/push",
+      "url": "https://receiver.example.com/events",
+    },
+    "events_requested": [
+      "urn:example:secevent:events:type_2",
+      "urn:example:secevent:events:type_3",
+      "urn:example:secevent:events:type_4",
+    ],
+  }
 
           Figure 13: Example: Update Stream Configuration Request
 
@@ -842,33 +842,33 @@ Scurtescu, et al.       Expires October 13, 2018               [Page 15]
                               risc-secevent                   April 2018
 
 
-   HTTP/1.1 200 OK
-   Content-Type: application/json; charset=UTF-8
-   Cache-Control: no-store
-   Pragma: no-cache
+  HTTP/1.1 200 OK
+  Content-Type: application/json; charset=UTF-8
+  Cache-Control: no-store
+  Pragma: no-cache
 
-   {
-     "aud": "http://www.example.com",
-     "delivery": {
-       "delivery_method":
-         "http://schemas.openid.net/secevent/risc/delivery-method/push",
-       "url": "https://receiver.example.com/events",
-     },
-     "events_supported": [
-       "urn:example:secevent:events:type_1",
-       "urn:example:secevent:events:type_2",
-       "urn:example:secevent:events:type_3",
-     ],
-     "events_requested": [
-       "urn:example:secevent:events:type_2",
-       "urn:example:secevent:events:type_3",
-       "urn:example:secevent:events:type_4",
-     ],
-     "events_delivered": [
-       "urn:example:secevent:events:type_2",
-       "urn:example:secevent:events:type_3",
-     ],
-   }
+  {
+    "aud": "http://www.example.com",
+    "delivery": {
+      "delivery_method":
+        "https://schemas.openid.net/secevent/risc/delivery-method/push",
+      "url": "https://receiver.example.com/events",
+    },
+    "events_supported": [
+      "urn:example:secevent:events:type_1",
+      "urn:example:secevent:events:type_2",
+      "urn:example:secevent:events:type_3",
+    ],
+    "events_requested": [
+      "urn:example:secevent:events:type_2",
+      "urn:example:secevent:events:type_3",
+      "urn:example:secevent:events:type_4",
+    ],
+    "events_delivered": [
+      "urn:example:secevent:events:type_2",
+      "urn:example:secevent:events:type_3",
+    ],
+  }
 
          Figure 14: Example: Update Stream Configuration Response
 
@@ -1111,7 +1111,7 @@ Scurtescu, et al.       Expires October 13, 2018               [Page 19]
    attributes:
 
    event type
-      The Event Type URI is: "http://schemas.openid.net/secevent/risc/
+      The Event Type URI is: "https://schemas.openid.net/secevent/risc/
       event-type/verification".
 
 
@@ -1234,17 +1234,17 @@ Scurtescu, et al.       Expires October 13, 2018               [Page 22]
                               risc-secevent                   April 2018
 
 
- {
-   "jti": "123456",
-   "iss": "https://transmitter.example.com",
-   "aud": "receiver.example.com",
-   "iat": "1493856000",
-   "events": [
-     "http://schemas.openid.net/secevent/risc/event-type/verification":{
-       "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo=",
-     },
-   ],
- }
+{
+  "jti": "123456",
+  "iss": "https://transmitter.example.com",
+  "aud": "receiver.example.com",
+  "iat": "1493856000",
+  "events": [
+    "https://schemas.openid.net/secevent/risc/event-type/verification":{
+      "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo=",
+    },
+  ],
+}
 
                    Figure 21: Example: Verification SET
 
@@ -1363,7 +1363,7 @@ Scurtescu, et al.       Expires October 13, 2018               [Page 24]
      "iat": 1520364019,
      "aud": "636C69656E745F6964",
      "events": {
-       "http://schemas.openid.net/secevent/risc/event-type/account-\
+       "https://schemas.openid.net/secevent/risc/event-type/account-\
    disabled": {
          "subject": {
            "subject_type": "phone",
@@ -1465,7 +1465,7 @@ Scurtescu, et al.       Expires October 13, 2018               [Page 26]
 
 5.2.1.1.  Push Delivery using HTTP
 
-   method  "http://schemas.openid.net/secevent/risc/delivery-method/
+   method  "https://schemas.openid.net/secevent/risc/delivery-method/
       push"
 
    endpoint_url  The URL where events are pushed through HTTP POST.
@@ -1478,7 +1478,7 @@ Scurtescu, et al.       Expires October 13, 2018               [Page 26]
 
 5.2.1.2.  Polling Delivery using HTTP
 
-   method  "http://schemas.openid.net/secevent/risc/delivery-method/
+   method  "https://schemas.openid.net/secevent/risc/delivery-method/
       poll"
 
    endpoint_url  The URL where events can be retrieved from.  This is

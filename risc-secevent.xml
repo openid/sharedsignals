@@ -94,7 +94,7 @@
   "iat": 1520364019,
   "aud": "636C69656E745F6964",
   "events": {
-    "http://schemas.openid.net/secevent/risc/event-type/account-\
+    "https://schemas.openid.net/secevent/risc/event-type/account-\
 enabled": {
       "subject": {
         "subject_type": "email",
@@ -115,7 +115,7 @@ enabled": {
   "iat": 1520364019,
   "aud": "636C69656E745F6964",
   "events": {
-    "http://schemas.openid.net/secevent/risc/event-type/account-\
+    "https://schemas.openid.net/secevent/risc/event-type/account-\
 enabled": {
       "subject": {
         "subject_type": "iss-sub",
@@ -273,8 +273,8 @@ Content-Type: application/json
   "jwks_uri":
     "https://tr.example.com/jwks.json",
   "delivery_methods_supported": [
-    "http://schemas.openid.net/secevent/risc/delivery-method/push", 
-    "http://schemas.openid.net/secevent/risc/delivery-method/poll"],
+    "https://schemas.openid.net/secevent/risc/delivery-method/push", 
+    "https://schemas.openid.net/secevent/risc/delivery-method/poll"],
   "configuration_endpoint":
     "https://tr.example.com/risc/mgmt/stream",
   "status_endpoint":
@@ -523,7 +523,7 @@ Pragma: no-cache
   "aud": "http://www.example.com",
   "delivery": {
     "delivery_method": 
-      "http://schemas.openid.net/secevent/risc/delivery-method/push",
+      "https://schemas.openid.net/secevent/risc/delivery-method/push",
     "url": "https://receiver.example.com/events",
   },
   "events_supported": [
@@ -590,7 +590,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
   "aud": "http://www.example.com",
   "delivery": {
     "delivery_method":
-      "http://schemas.openid.net/secevent/risc/delivery-method/push",
+      "https://schemas.openid.net/secevent/risc/delivery-method/push",
     "url": "https://receiver.example.com/events",
   },
   "events_requested": [
@@ -616,7 +616,7 @@ Pragma: no-cache
   "aud": "http://www.example.com",
   "delivery": {
     "delivery_method": 
-      "http://schemas.openid.net/secevent/risc/delivery-method/push",
+      "https://schemas.openid.net/secevent/risc/delivery-method/push",
     "url": "https://receiver.example.com/events",
   },
   "events_supported": [
@@ -804,7 +804,7 @@ Pragma: no-cache
 
             <t><list style="hanging">
                 <t hangText="event type"><vspace blankLines="0"/> The Event Type URI is:
-                  <spanx style="verb">http://schemas.openid.net/secevent/risc/event-type/verification</spanx>.</t>
+                  <spanx style="verb">https://schemas.openid.net/secevent/risc/event-type/verification</spanx>.</t>
                 <t hangText="state"><vspace blankLines="0"/> OPTIONAL An opaque value provided by
                   the Event Receiver when the event is triggered. This is a nested attribute in
                   the event payload.</t>
@@ -898,7 +898,7 @@ Pragma: no-cache
   "aud": "receiver.example.com",
   "iat": "1493856000",
   "events": [
-    "http://schemas.openid.net/secevent/risc/event-type/verification":{
+    "https://schemas.openid.net/secevent/risc/event-type/verification":{
       "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo=",
     },
   ],
@@ -1002,7 +1002,7 @@ Pragma: no-cache
   "iat": 1520364019,
   "aud": "636C69656E745F6964",
   "events": {
-    "http://schemas.openid.net/secevent/risc/event-type/account-\
+    "https://schemas.openid.net/secevent/risc/event-type/account-\
 disabled": {
       "subject": {
         "subject_type": "phone",
@@ -1080,7 +1080,7 @@ disabled": {
           
           <section title="Push Delivery using HTTP">
             <t><list style="hanging">
-              <t hangText="method"> <spanx style="verb">http://schemas.openid.net/secevent/risc/delivery-method/push</spanx></t>
+              <t hangText="method"> <spanx style="verb">https://schemas.openid.net/secevent/risc/delivery-method/push</spanx></t>
               <t hangText="endpoint_url"> The URL where events are pushed through HTTP POST.
               This is set by the Receiver.</t>
               <t hangText="authorization_header">The HTTP Authorization header that the Transmitter MUST
@@ -1090,7 +1090,7 @@ disabled": {
           
           <section title="Polling Delivery using HTTP">
             <t><list style="hanging">
-              <t hangText="method"> <spanx style="verb">http://schemas.openid.net/secevent/risc/delivery-method/poll</spanx></t>
+              <t hangText="method"> <spanx style="verb">https://schemas.openid.net/secevent/risc/delivery-method/poll</spanx></t>
               <t hangText="endpoint_url"> The URL where events can be retrieved from. This is
               specified by the Transmitter.</t>
             </list></t>
