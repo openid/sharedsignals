@@ -207,11 +207,12 @@ enabled": {
         Information can be retrieved.</t>
         
         <t>Transmitters supporting Discovery MUST make a JSON document available at the path formed 
-          by concatenating the string <spanx style="verb">/.well-known/risc-configuration</spanx> to the Issuer. The syntax and 
-          semantics of <spanx style="verb">.well-known</spanx> are defined in <xref target="RFC5785"/> and apply to the Issuer value 
-          when it contains no path component. <spanx style="verb">risc-configuration</spanx> MUST point to a JSON document 
-          compliant with this specification and MUST be returned using the <spanx style="verb">application/json</spanx> content 
-          type.</t>
+          by inserting the string <spanx style="verb">/.well-known/risc-configuration</spanx> into the
+          Issuer between the host component and the path component, if any. The syntax and 
+          semantics of <spanx style="verb">.well-known</spanx> are defined in <xref target="RFC5785"/>.
+          <spanx style="verb">risc-configuration</spanx> MUST point to a JSON document 
+          compliant with this specification and MUST be returned using the 
+          <spanx style="verb">application/json</spanx> content type.</t>
         
         <section title="Transmitter Configuration Request">
           <t>A Transmitter Configuration Document MUST be queried using an HTTP
@@ -229,12 +230,13 @@ Host: tr.example.com
           
           <t>
             If the  Issuer value contains a path component, any terminating <spanx style="verb">/</spanx> MUST be
-            removed before appending <spanx style="verb">/.well-known/risc-configuration</spanx>.
-            The Receiver would make the following request to the Issuer <spanx style="verb">https://tr.example.com/issuer1</spanx>
-            to obtain its Configuration information, since the Issuer contains a path component:
+            removed before inserting <spanx style="verb">/.well-known/risc-configuration</spanx> between 
+            the host component and the path component. The Receiver would make the following request to the Issuer 
+            <spanx style="verb">https://tr.example.com/issuer1</spanx> to obtain its Configuration information, 
+            since the Issuer contains a path component:
             <figure title="Example: Transmitter Configuration Request (with path)" anchor="figdiscoveryrequestpath">
               <artwork><![CDATA[
-GET /issuer1/.well-known/risc-configuration HTTP/1.1
+GET /.well-known/risc-configuration/issuer1 HTTP/1.1
 Host: tr.example.com
 ]]></artwork>
             </figure>
@@ -1443,6 +1445,22 @@ disabled": {
         </front>
       </reference>
 
+      <reference anchor="OAUTH-DISCOVERY" target="https://tools.ietf.org/html/draft-ietf-oauth-discovery-10">
+        <front>
+          <title>OAuth 2.0 Authorization Server Metadata - Version 10</title>
+          <author fullname="Michael B. Jones" initials="M.B." surname="Jones">
+            <organization abbrev="Microsoft">Microsoft</organization>
+          </author>
+          <author fullname="Nat Sakimura" initials="N." surname="Sakimura">
+            <organization abbrev="NRI">Nomura Research Institute, Ltd.</organization>
+          </author>
+          <author fullname="John Bradley" initials="J." surname="Bradley">
+            <organization abbrev="Ping Identity">Ping Identity</organization>
+          </author>
+          <date year="2018" month="March" day="4"/>
+        </front>
+      </reference>
+      
       <reference anchor="BCP26" target="https://tools.ietf.org/html/rfc8126">
         <front>
           <title>Guidelines for Writing an IANA Considerations Section in RFCs</title>
@@ -1465,7 +1483,8 @@ disabled": {
     
     <section title="Acknowledgements" anchor="ack">
       <t><xref target="discovery">Transmitter Configuration Discovery</xref> is based on 
-        <xref target="OIDC-DISCOVERY">OpenID Connect Discovery 1.0</xref>.</t>
+        both <xref target="OIDC-DISCOVERY">OpenID Connect Discovery 1.0</xref> and 
+        <xref target="OAUTH-DISCOVERY">OAuth 2.0 Authorization Server Metadata</xref>.</t>
     </section>
   </back>
 </rfc>
