@@ -45,7 +45,7 @@
       </address>
     </author>
 
-    <date year="2018" month="April" day="11"/>
+    <date year="2018" month="April" day="13"/>
 
     <workgroup>RISC Working Group</workgroup>
 
@@ -478,7 +478,7 @@ Pragma: no-cache
               that it understands and it can act on. This is configurabel by the Receuver.</t>
             <t hangText="events_delivered"><vspace blankLines="0"/> OPTIONAL. An array of URIs 
               which is the intersection of <spanx style="verb">events_supported</spanx> and
-              <spanx style="verb">events_requested</spanx>. These evebts MAY be delivered over 
+              <spanx style="verb">events_requested</spanx>. These events MAY be delivered over 
               the Event Stream.</t>
             <t hangText="delivery"><vspace blankLines="0"/> A JSON object containing a set of
               name/value pairs specifying configuration parameters for the SET delivery method.
