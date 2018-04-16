@@ -466,9 +466,10 @@ Pragma: no-cache
             the following properties:</t>
 
           <t><list style="hanging">
-              <t hangText="aud"><vspace blankLines="0"/> A string containing an audience claim as
+            <t hangText="aud"><vspace blankLines="0"/> A string or an array of strings containing an audience claim as
                 defined in <xref target="RFC7519">JSON Web Token (JWT)</xref> that identifies the
-                Event Receiver for the Event Stream. This property cannot be updated.</t>
+                Event Receiver(s) for the Event Stream. This property cannot be updated. If multiple Receivers are
+                specified then the Transmitter SHOULD know that these Receivers are the same entity.</t>
               <t hangText="events_supported"><vspace blankLines="0"/> OPTIONAL. An array of URIs identifying
                 the set of events supported by the Transmitter for this Receiver. If omitted, 
                 Event Transmitters SHOULD make this set available to the Event Receiver via some 
@@ -526,27 +527,29 @@ Cache-Control: no-store
 Pragma: no-cache
 
 {
-  "aud": "http://www.example.com",
+  "aud": [
+      "http://receiver.example.com/web", 
+      "http://receiver.example.com/mobile"
+    ],
   "delivery": {
     "delivery_method": 
       "https://schemas.openid.net/secevent/risc/delivery-method/push",
-    "url": "https://receiver.example.com/events",
+    "url": "https://receiver.example.com/events"
   },
   "events_supported": [
     "urn:example:secevent:events:type_1",
     "urn:example:secevent:events:type_2",
-    "urn:example:secevent:events:type_3",
+    "urn:example:secevent:events:type_3"
   ],
   "events_requested": [
     "urn:example:secevent:events:type_2",
     "urn:example:secevent:events:type_3",
-    "urn:example:secevent:events:type_4",
+    "urn:example:secevent:events:type_4"
   ],
   "events_delivered": [
     "urn:example:secevent:events:type_2",
-    "urn:example:secevent:events:type_3",
-  ],
-  "min_verification_interval": 60,
+    "urn:example:secevent:events:type_3"
+  ]
 }
 ]]></artwork>
             </figure>
@@ -593,17 +596,20 @@ Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
 {
-  "aud": "http://www.example.com",
+  "aud": [
+    "http://receiver.example.com/web", 
+    "http://receiver.example.com/mobile"
+  ],
   "delivery": {
     "delivery_method":
       "https://schemas.openid.net/secevent/risc/delivery-method/push",
-    "url": "https://receiver.example.com/events",
+    "url": "https://receiver.example.com/events"
   },
   "events_requested": [
     "urn:example:secevent:events:type_2",
     "urn:example:secevent:events:type_3",
-    "urn:example:secevent:events:type_4",
-  ],
+    "urn:example:secevent:events:type_4"
+  ]
 }
 ]]></artwork>
             </figure>
@@ -619,26 +625,29 @@ Cache-Control: no-store
 Pragma: no-cache
 
 {
-  "aud": "http://www.example.com",
+  "aud": [
+    "http://receiver.example.com/web", 
+    "http://receiver.example.com/mobile"
+  ],
   "delivery": {
     "delivery_method": 
       "https://schemas.openid.net/secevent/risc/delivery-method/push",
-    "url": "https://receiver.example.com/events",
+    "url": "https://receiver.example.com/events"
   },
   "events_supported": [
     "urn:example:secevent:events:type_1",
     "urn:example:secevent:events:type_2",
-    "urn:example:secevent:events:type_3",
+    "urn:example:secevent:events:type_3"
   ],
   "events_requested": [
     "urn:example:secevent:events:type_2",
     "urn:example:secevent:events:type_3",
-    "urn:example:secevent:events:type_4",
+    "urn:example:secevent:events:type_4"
   ],
   "events_delivered": [
     "urn:example:secevent:events:type_2",
-    "urn:example:secevent:events:type_3",
-  ],
+    "urn:example:secevent:events:type_3"
+  ]
 }
 ]]></artwork>
             </figure>
@@ -1049,9 +1058,34 @@ disabled": {
         </section>
 
         <section anchor="aud-claim" title='The "aud" Claim'>
-          <t>The <spanx style="verb">aud</spanx> claim MUST be a single value. It MAY be the client id if the 
+          <t>The <spanx style="verb">aud</spanx> claim can be a single value or an array. Each value MAY be the client id if the 
             receiver is an OAuth 2.0 client, or any other value that uniquely identifies the Receiver to the 
             Transmitter.</t>
+          
+          <t>More than one values can be present if the corresponding Receivers are known to the Transmitter to be the same entity,
+          for example a web client and I mobile client of the same application. All the Receivers in this case MUST use the exact
+          same delivery method.</t>
+          
+          <t>If multiple Receivers have the exact same delivery configuration but the Transmitter does not know if they belong to
+          the same entity then the Transmitter SHOULD issue distinct SETs for each Receiver and deliver them separately. In this case
+          the multiple Receivers might use the same service to process SETs, and this service might reroute SETs to respective Receivers,
+          an <spanx style="verb">aud</spanx> claim with multiple Receivers would lead to unintended data disclosure.</t>
+          
+          <figure title="Example: SET with array 'aud' claim" anchor="figarrayaud">
+            <artwork><![CDATA[
+{
+  "jti": "123456",
+  "iss": "https://transmitter.example.com",
+  "aud": ["receiver.example.com/web", "receiver.example.com/mobile"],
+  "iat": "1493856000",
+  "events": [
+    "https://schemas.openid.net/secevent/risc/event-type/verification":{
+      "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo=",
+    },
+  ],
+}
+]]></artwork>
+          </figure>
         </section>
         
         <section anchor="events-claim" title='The "events" claim'>

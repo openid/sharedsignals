@@ -82,23 +82,23 @@ Scurtescu, et al.       Expires October 15, 2018                [Page 1]
        5.1.4.  The "exp" Claim . . . . . . . . . . . . . . . . . . .  26
        5.1.5.  The "aud" Claim . . . . . . . . . . . . . . . . . . .  26
        5.1.6.  The "events" claim  . . . . . . . . . . . . . . . . .  26
-       5.1.7.  Security Considerations . . . . . . . . . . . . . . .  26
-         5.1.7.1.  Distingushing SETs from other Kinds of JWTs . . .  26
-     5.2.  SET Token Delivery Using HTTP Profile . . . . . . . . . .  26
+       5.1.7.  Security Considerations . . . . . . . . . . . . . . .  27
+         5.1.7.1.  Distingushing SETs from other Kinds of JWTs . . .  27
+     5.2.  SET Token Delivery Using HTTP Profile . . . . . . . . . .  27
        5.2.1.  Stream Configuration Metadata . . . . . . . . . . . .  27
          5.2.1.1.  Push Delivery using HTTP  . . . . . . . . . . . .  27
          5.2.1.2.  Polling Delivery using HTTP . . . . . . . . . . .  27
-   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  27
-     6.1.  Security Event Subject Identifier Types Registry  . . . .  27
-       6.1.1.  Registration Template . . . . . . . . . . . . . . . .  27
+   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  28
+     6.1.  Security Event Subject Identifier Types Registry  . . . .  28
+       6.1.1.  Registration Template . . . . . . . . . . . . . . . .  28
        6.1.2.  Initial Registry Contents . . . . . . . . . . . . . .  28
-       6.1.3.  Guidance for Expert Reviewers . . . . . . . . . . . .  28
+       6.1.3.  Guidance for Expert Reviewers . . . . . . . . . . . .  29
      6.2.  Well-Known URI Registry . . . . . . . . . . . . . . . . .  29
-       6.2.1.  Registry Contents . . . . . . . . . . . . . . . . . .  29
-   7.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .  29
-     7.1.  Subject Information Leakage . . . . . . . . . . . . . . .  29
+       6.2.1.  Registry Contents . . . . . . . . . . . . . . . . . .  30
+   7.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .  30
+     7.1.  Subject Information Leakage . . . . . . . . . . . . . . .  30
    8.  Normative References  . . . . . . . . . . . . . . . . . . . .  30
-   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  31
+   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  32
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  32
 
 1.  Introduction
@@ -638,9 +638,11 @@ Scurtescu, et al.       Expires October 15, 2018               [Page 11]
    object with the following properties:
 
    aud
-      A string containing an audience claim as defined in JSON Web Token
-      (JWT) [RFC7519] that identifies the Event Receiver for the Event
-      Stream.  This property cannot be updated.
+      A string or an array of strings containing an audience claim as
+      defined in JSON Web Token (JWT) [RFC7519] that identifies the
+      Event Receiver(s) for the Event Stream.  This property cannot be
+      updated.  If multiple Receivers are specified then the Transmitter
+      SHOULD know that these Receivers are the same entity.
 
    events_supported
       OPTIONAL.  An array of URIs identifying the set of events
@@ -665,8 +667,6 @@ Scurtescu, et al.       Expires October 15, 2018               [Page 11]
       delivery method is identified by the special key "method" with the
       value being a URI as defined in Section 5.2.1.
 
-   min_verification_interval
-
 
 
 Scurtescu, et al.       Expires October 15, 2018               [Page 12]
@@ -674,6 +674,7 @@ Scurtescu, et al.       Expires October 15, 2018               [Page 12]
                               risc-secevent                   April 2018
 
 
+   min_verification_interval
       An integer indicating the minimum amount of time in seconds that
       must pass in between verification requests.  If an Event Receiver
       submits verification requests more frequently than this, the Event
@@ -724,7 +725,6 @@ Scurtescu, et al.       Expires October 15, 2018               [Page 12]
 
 
 
-
 Scurtescu, et al.       Expires October 15, 2018               [Page 13]
 
                               risc-secevent                   April 2018
@@ -736,27 +736,29 @@ Scurtescu, et al.       Expires October 15, 2018               [Page 13]
   Pragma: no-cache
 
   {
-    "aud": "http://www.example.com",
+    "aud": [
+        "http://receiver.example.com/web",
+        "http://receiver.example.com/mobile"
+      ],
     "delivery": {
       "delivery_method":
         "https://schemas.openid.net/secevent/risc/delivery-method/push",
-      "url": "https://receiver.example.com/events",
+      "url": "https://receiver.example.com/events"
     },
     "events_supported": [
       "urn:example:secevent:events:type_1",
       "urn:example:secevent:events:type_2",
-      "urn:example:secevent:events:type_3",
+      "urn:example:secevent:events:type_3"
     ],
     "events_requested": [
       "urn:example:secevent:events:type_2",
       "urn:example:secevent:events:type_3",
-      "urn:example:secevent:events:type_4",
+      "urn:example:secevent:events:type_4"
     ],
     "events_delivered": [
       "urn:example:secevent:events:type_2",
-      "urn:example:secevent:events:type_3",
-    ],
-    "min_verification_interval": 60,
+      "urn:example:secevent:events:type_3"
+    ]
   }
 
           Figure 12: Example: Read Stream Configuration Response
@@ -776,8 +778,6 @@ Scurtescu, et al.       Expires October 15, 2018               [Page 13]
    +------+------------------------------------------------------------+
 
                  Table 2: Read Stream Configuration Errors
-
-
 
 
 
@@ -812,25 +812,25 @@ Scurtescu, et al.       Expires October 15, 2018               [Page 14]
   Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
   {
-    "aud": "http://www.example.com",
+    "aud": [
+      "http://receiver.example.com/web",
+      "http://receiver.example.com/mobile"
+    ],
     "delivery": {
       "delivery_method":
         "https://schemas.openid.net/secevent/risc/delivery-method/push",
-      "url": "https://receiver.example.com/events",
+      "url": "https://receiver.example.com/events"
     },
     "events_requested": [
       "urn:example:secevent:events:type_2",
       "urn:example:secevent:events:type_3",
-      "urn:example:secevent:events:type_4",
-    ],
+      "urn:example:secevent:events:type_4"
+    ]
   }
 
           Figure 13: Example: Update Stream Configuration Request
 
    The following is a non-normative example response:
-
-
-
 
 
 
@@ -848,26 +848,29 @@ Scurtescu, et al.       Expires October 15, 2018               [Page 15]
   Pragma: no-cache
 
   {
-    "aud": "http://www.example.com",
+    "aud": [
+      "http://receiver.example.com/web",
+      "http://receiver.example.com/mobile"
+    ],
     "delivery": {
       "delivery_method":
         "https://schemas.openid.net/secevent/risc/delivery-method/push",
-      "url": "https://receiver.example.com/events",
+      "url": "https://receiver.example.com/events"
     },
     "events_supported": [
       "urn:example:secevent:events:type_1",
       "urn:example:secevent:events:type_2",
-      "urn:example:secevent:events:type_3",
+      "urn:example:secevent:events:type_3"
     ],
     "events_requested": [
       "urn:example:secevent:events:type_2",
       "urn:example:secevent:events:type_3",
-      "urn:example:secevent:events:type_4",
+      "urn:example:secevent:events:type_4"
     ],
     "events_delivered": [
       "urn:example:secevent:events:type_2",
-      "urn:example:secevent:events:type_3",
-    ],
+      "urn:example:secevent:events:type_3"
+    ]
   }
 
          Figure 14: Example: Update Stream Configuration Response
@@ -887,9 +890,6 @@ Scurtescu, et al.       Expires October 15, 2018               [Page 15]
    +------+------------------------------------------------------------+
 
                 Table 3: Update Stream Configuration Errors
-
-
-
 
 
 
@@ -1414,15 +1414,49 @@ Scurtescu, et al.       Expires October 15, 2018               [Page 25]
 
 5.1.5.  The "aud" Claim
 
-   The "aud" claim MUST be a single value.  It MAY be the client id if
-   the receiver is an OAuth 2.0 client, or any other value that uniquely
-   identifies the Receiver to the Transmitter.
+   The "aud" claim can be a single value or an array.  Each value MAY be
+   the client id if the receiver is an OAuth 2.0 client, or any other
+   value that uniquely identifies the Receiver to the Transmitter.
+
+   More than one values can be present if the corresponding Receivers
+   are known to the Transmitter to be the same entity, for example a web
+   client and I mobile client of the same application.  All the
+   Receivers in this case MUST use the exact same delivery method.
+
+   If multiple Receivers have the exact same delivery configuration but
+   the Transmitter does not know if they belong to the same entity then
+   the Transmitter SHOULD issue distinct SETs for each Receiver and
+   deliver them separately.  In this case the multiple Receivers might
+   use the same service to process SETs, and this service might reroute
+   SETs to respective Receivers, an "aud" claim with multiple Receivers
+   would lead to unintended data disclosure.
+
+{
+  "jti": "123456",
+  "iss": "https://transmitter.example.com",
+  "aud": ["receiver.example.com/web", "receiver.example.com/mobile"],
+  "iat": "1493856000",
+  "events": [
+    "https://schemas.openid.net/secevent/risc/event-type/verification":{
+      "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo=",
+    },
+  ],
+}
+
+              Figure 24: Example: SET with array 'aud' claim
 
 5.1.6.  The "events" claim
 
    The "events" claim SHOULD contain only one event.  Multiple event
    type URIs are permitted only if they are alternative URIs defining
    the exact same event type.
+
+
+
+Scurtescu, et al.       Expires October 15, 2018               [Page 26]
+
+                              risc-secevent                   April 2018
+
 
 5.1.7.  Security Considerations
 
@@ -1445,18 +1479,6 @@ Scurtescu, et al.       Expires October 15, 2018               [Page 25]
 
    This section provides RISC profiling specifications for the "SET
    Token Delivery Using HTTP" [DELIVERY] spec.
-
-
-
-
-
-
-
-
-Scurtescu, et al.       Expires October 15, 2018               [Page 26]
-
-                              risc-secevent                   April 2018
-
 
 5.2.1.  Stream Configuration Metadata
 
@@ -1484,6 +1506,14 @@ Scurtescu, et al.       Expires October 15, 2018               [Page 26]
    endpoint_url  The URL where events can be retrieved from.  This is
       specified by the Transmitter.
 
+
+
+
+Scurtescu, et al.       Expires October 15, 2018               [Page 27]
+
+                              risc-secevent                   April 2018
+
+
 6.  IANA Considerations
 
 6.1.  Security Event Subject Identifier Types Registry
@@ -1506,13 +1536,6 @@ Scurtescu, et al.       Expires October 15, 2018               [Page 26]
 
    Type Description:
       A brief description of the Subject Identifier Type.
-
-
-
-Scurtescu, et al.       Expires October 15, 2018               [Page 27]
-
-                              risc-secevent                   April 2018
-
 
    Change Controller:
       For types defined in documents published by the OpenID Foundation
@@ -1538,6 +1561,15 @@ Scurtescu, et al.       Expires October 15, 2018               [Page 27]
    o  Defining Document(s): Section 2.1.1 of this document.
 
    o  Type Name: "id-token-claims"
+
+
+
+
+Scurtescu, et al.       Expires October 15, 2018               [Page 28]
+
+                              risc-secevent                   April 2018
+
+
    o  Type Description: Subject identifier based on OpenID Connect ID
       Token claims.
    o  Change Controller: OIDF RISC Working Group
@@ -1562,14 +1594,6 @@ Scurtescu, et al.       Expires October 15, 2018               [Page 27]
    Expert Reviewer has a conflict of interest, such as being an author
    of a defining document referenced by the request, they must recuse
    themselves from the approval process for that request.  In the case
-
-
-
-Scurtescu, et al.       Expires October 15, 2018               [Page 28]
-
-                              risc-secevent                   April 2018
-
-
    where a request is rejected, the Expert Reviewer should provide the
    requesting party with a written statement expressing the reason for
    rejection, and be prepared to cite any sources of information that
@@ -1591,6 +1615,16 @@ Scurtescu, et al.       Expires October 15, 2018               [Page 28]
 
    This specification registers the well-known URI defined in Section 3
    in the IANA Well-Known URI registry defined in [RFC5785].
+
+
+
+
+
+
+Scurtescu, et al.       Expires October 15, 2018               [Page 29]
+
+                              risc-secevent                   April 2018
+
 
 6.2.1.  Registry Contents
 
@@ -1618,14 +1652,6 @@ Scurtescu, et al.       Expires October 15, 2018               [Page 28]
    when communicating with a given party in order to reduce the
    possibility of information leakage.
 
-
-
-
-Scurtescu, et al.       Expires October 15, 2018               [Page 29]
-
-                              risc-secevent                   April 2018
-
-
 8.  Normative References
 
    [BCP26]    Cotton, M., Leiba, B., and T. Narten, "Guidelines for
@@ -1646,6 +1672,15 @@ Scurtescu, et al.       Expires October 15, 2018               [Page 29]
    [E164]     International Telecommunication Union, "The international
               public telecommunication numbering plan", 2010,
               <http://www.itu.int/rec/T-REC-E.164-201011-I/en>.
+
+
+
+
+
+Scurtescu, et al.       Expires October 15, 2018               [Page 30]
+
+                              risc-secevent                   April 2018
+
 
    [IDTOKEN]  OpenID Foundation, "OpenID Connect Core 1.0 - ID Token",
               <http://openid.net/specs/
@@ -1672,16 +1707,6 @@ Scurtescu, et al.       Expires October 15, 2018               [Page 29]
               DOI 10.17487/RFC2119, March 1997, <https://www.rfc-
               editor.org/info/rfc2119>.
 
-
-
-
-
-
-Scurtescu, et al.       Expires October 15, 2018               [Page 30]
-
-                              risc-secevent                   April 2018
-
-
    [RFC5785]  Nottingham, M. and E. Hammer-Lahav, "Defining Well-Known
               Uniform Resource Identifiers (URIs)", RFC 5785,
               DOI 10.17487/RFC5785, April 2010, <https://www.rfc-
@@ -1703,6 +1728,15 @@ Scurtescu, et al.       Expires October 15, 2018               [Page 30]
    [RFC7519]  Jones, M., Bradley, J., and N. Sakimura, "JSON Web Token
               (JWT)", RFC 7519, DOI 10.17487/RFC7519, May 2015,
               <https://www.rfc-editor.org/info/rfc7519>.
+
+
+
+
+
+Scurtescu, et al.       Expires October 15, 2018               [Page 31]
+
+                              risc-secevent                   April 2018
+
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
@@ -1726,18 +1760,6 @@ Appendix A.  Acknowledgements
    OpenID Connect Discovery 1.0 [OIDC-DISCOVERY] and OAuth 2.0
    Authorization Server Metadata [OAUTH-DISCOVERY].
 
-
-
-
-
-
-
-
-Scurtescu, et al.       Expires October 15, 2018               [Page 31]
-
-                              risc-secevent                   April 2018
-
-
 Authors' Addresses
 
    Marius Scurtescu
@@ -1756,28 +1778,6 @@ Authors' Addresses
    Yubico
 
    Email: secevemt@ve7jtb.com
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
