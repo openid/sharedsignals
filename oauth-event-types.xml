@@ -144,28 +144,13 @@
         <t>Event Type URI:<vspace />
         https://schemas.openid.net/secevent/oauth/event-type/token-revoked</t>
         
-        <t>Token Revoked signals that the token identified by this event was revoked. The token is
-          identified by the event specific attributes described bellow. The 
-          <spanx style="verb">subject</spanx> nested attribute is optional for this event and
-          it points to the account associated with the token.</t>
+        <t>Token Revoked signals that the token identified by this event was revoked.</t>
         
         <t>Attributes:<list style="symbols">
-          <t>token_type - required, describes the token type. Possible values:<list style="symbols">
-            <t>access_token</t>
-            <t>authorization_code</t>
-            <t>refresh_token</t>
-          </list></t>
-          <t>token_identifier_type - requierd, describes how is the token identified.
-          Possible values:<list style="symbols">
-            <t>token_string</t>
-            <t>token_string_hash</t>
-            <t>token_string_prefix</t>
-          </list></t>
-          <t>token - required, the token identifier, as described by 
-            <spanx style="verb">token_identifier_type</spanx>.</t>
-          <t>token_string_hash_alg - optional, the token string hash algorithm, required if 
-            <spanx style="verb">token_identifier_type</spanx> is 
-            <spanx style="verb">token_string_hash</spanx>. TODO: possible values.</t>
+          <t>subject - required, a Subjectect Identifier as defined by <xref target="subject-identifier-token"/> 
+            that identifies the token.</t>
+          <t>token_subject - optional, a Subject Identifier as defined by Section 2.1 of <xref target="RISC-PROFILE"/> 
+            that identifies the account associated with the token.</t>
         </list></t>
         
         <figure anchor="token-revoked-example" title="Example: Token Revoked">
@@ -178,9 +163,17 @@
   "events": {
     "https://schemas.openid.net/secevent/oauth/event-type/\
     token-revoked": {
-      "token_type": "refresh_token",
-      "token_identifier_type": "token_string",
-      "token": "7265667265736820746F6B656E20737472696E67",
+      "subject": {
+        "subject_type": "oauth-token",
+        "token_type": "refresh_token",
+        "token_identifier_type": "token_string",
+        "token": "7265667265736820746F6B656E20737472696E67"
+      },
+      "token_subject" {
+        "subject_type": "iss-sub",
+        "iss": "https://idp.example.com/",
+        "sub": "75736572206964"
+      }
     }
   }
 }
@@ -229,7 +222,7 @@
         claim has been disabled. The client may be
         <xref target="client-enabled">enabled</xref> in the future.</t>
         
-        <t>Attributes: none</t>
+        <t>Attributes: TODO use client subject identifier</t>
         
         <figure anchor="client-disabled" title="Example: Client Disabled">
           <artwork><![CDATA[
@@ -255,7 +248,7 @@
         <t>Client Enabled signals that the client identified by the <spanx style="verb">aud</spanx> 
         claim has been enabled.</t>
         
-        <t>Attributes: none</t>
+        <t>Attributes: TODO use client subject identifier</t>
       </section>
 
       <section anchor="client-credential-changed" title="Client Credential Changed">
@@ -266,7 +259,7 @@
         the <spanx style="verb">aud</spanx> claim has changed. For example the client secret has 
         changed.</t>
         
-        <t>Attributes: none</t>
+        <t>Attributes: TODO use client subject identifier</t>
       </section>
 
     </section>

@@ -150,17 +150,17 @@ Scurtescu, et al.       Expires October 13, 2018                [Page 2]
    https://schemas.openid.net/secevent/oauth/event-type/token-revoked
 
    Token Revoked signals that the token identified by this event was
-   revoked.  The token is identified by the event specific attributes
-   described bellow.  The "subject" nested attribute is optional for
-   this event and it points to the account associated with the token.
+   revoked.
 
    Attributes:
 
-   o  token_type - required, describes the token type.  Possible values:
+   o  subject - required, a Subjectect Identifier as defined by
+      Section 2.1 that identifies the token.
 
-      *  access_token
+   o  token_subject - optional, a Subject Identifier as defined by
+      Section 2.1 of [RISC-PROFILE] that identifies the account
+      associated with the token.
 
-      *  authorization_code
 
 
 
@@ -170,24 +170,6 @@ Scurtescu, et al.       Expires October 13, 2018                [Page 3]
                             oauth-event-types                 April 2018
 
 
-      *  refresh_token
-
-   o  token_identifier_type - requierd, describes how is the token
-      identified.  Possible values:
-
-      *  token_string
-
-      *  token_string_hash
-
-      *  token_string_prefix
-
-   o  token - required, the token identifier, as described by
-      "token_identifier_type".
-
-   o  token_string_hash_alg - optional, the token string hash algorithm,
-      required if "token_identifier_type" is "token_string_hash".  TODO:
-      possible values.
-
    {
      "iss": "https://idp.example.com/",
      "jti": "756E69717565206964656E746966696572",
@@ -196,9 +178,17 @@ Scurtescu, et al.       Expires October 13, 2018                [Page 3]
      "events": {
        "https://schemas.openid.net/secevent/oauth/event-type/\
        token-revoked": {
-         "token_type": "refresh_token",
-         "token_identifier_type": "token_string",
-         "token": "7265667265736820746F6B656E20737472696E67",
+         "subject": {
+           "subject_type": "oauth-token",
+           "token_type": "refresh_token",
+           "token_identifier_type": "token_string",
+           "token": "7265667265736820746F6B656E20737472696E67"
+         },
+         "token_subject" {
+           "subject_type": "iss-sub",
+           "iss": "https://idp.example.com/",
+           "sub": "75736572206964"
+         }
        }
      }
    }
@@ -217,6 +207,16 @@ Scurtescu, et al.       Expires October 13, 2018                [Page 3]
    identified by the subject have been revoked.
 
    Attributes: none
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -257,7 +257,7 @@ Scurtescu, et al.       Expires October 13, 2018                [Page 4]
    has been disabled.  The client may be enabled (Section 3.4) in the
    future.
 
-   Attributes: none
+   Attributes: TODO use client subject iodentifier
 
    {
      "iss": "https://idp.example.com/",
@@ -290,7 +290,7 @@ Scurtescu, et al.       Expires October 13, 2018                [Page 5]
    Client Enabled signals that the client identified by the "aud" claim
    has been enabled.
 
-   Attributes: none
+   Attributes: TODO use client subject iodentifier
 
 3.5.  Client Credential Changed
 
@@ -302,7 +302,7 @@ Scurtescu, et al.       Expires October 13, 2018                [Page 5]
    client identified by the "aud" claim has changed.  For example the
    client secret has changed.
 
-   Attributes: none
+   Attributes: TODO use client subject iodentifier
 
 4.  IANA Considerations
 
