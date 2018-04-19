@@ -77,6 +77,65 @@
       </section>
     </section>
     
+    <section anchor="subject-identifier-types" title="OAuth Specific Subject Identifier Types">
+      
+      <t>This section defines OAuth specific Subject Identifier Types. Subject identifiers are defined in 
+      Section 2 of <xref target="RISC-PROFILE"/>.</t>
+      
+      <section anchor="subject-identifier-token" title="Token Subject Identifier Type">
+        <t>A Token Subject Identifier Type describes an OAuth 2 token subject and it is identified by
+          the name <spanx style="verb">oauth-token</spanx>.</t>
+        
+        <t>Subject Identifiers of this type MUST contain the following claims:<list style="symbols">
+          <t>token_type - required, describes the OAuth 2 token type. Possible values:<list style="symbols">
+            <t>access_token</t>
+            <t>authorization_code</t>
+            <t>refresh_token</t>
+          </list></t>
+          <t>token_identifier_type - required, describes how is the token identified.
+            Possible values:<list style="symbols">
+              <t>token_string</t>
+              <t>token_string_hash</t>
+              <t>token_string_prefix</t>
+            </list></t>
+          <t>token - required, the token identifier, as described by 
+            <spanx style="verb">token_identifier_type</spanx>.</t>
+          <t>token_string_hash_alg - optional, the token string hash algorithm, required if 
+            <spanx style="verb">token_identifier_type</spanx> is 
+            <spanx style="verb">token_string_hash</spanx>. TODO: possible values.</t>
+        </list></t>
+        
+        <figure anchor="subject-identifier-token-example" title="Example: Token Subject Identifier Type">
+          <artwork><![CDATA[
+"subject": {
+  "subject_type": "oauth-token",
+  "token_type": "refresh_token",
+  "token_identifier_type": "token_string",
+  "token": "7265667265736820746F6B656E20737472696E67"
+}
+            ]]></artwork>
+        </figure>
+      </section>
+      
+      <section anchor="subject-identifier-client" title="Client Subject Identifier Type">
+        <t>A Client Subject Identifier Type describes an OAuth 2 client subject and it is identified by
+          the name <spanx style="verb">oauth-client</spanx>.</t>
+        
+        <t>Subjects identifiers of this type MUST contain the following claim:<list style="symbols">
+          <t>client_id - required, the OAuth 2 client id.</t>
+        </list></t>
+        
+        <figure anchor="subject-identifier-client-example" title="Example: Client Subject Identifier Type">
+          <artwork><![CDATA[
+"subject": {
+  "subject_type": "oauth-client",
+  "client_id": "636C69656E74206964"
+}
+            ]]></artwork>
+        </figure>
+      </section>
+    </section>
+    
     <section anchor="event-types" title="Event Types">
       <t>The base URI for OAuth Event Types is:<vspace />
         https://schemas.openid.net/secevent/oauth/event-type/</t>
@@ -210,6 +269,13 @@
         <t>Attributes: none</t>
       </section>
 
+    </section>
+    
+    <section anchor="iana" title="IANA Considerations">
+      <section anchor="iana-subject-identifier-type-registry" title="Subject Identifier Type Registry">
+        <t>TODO: register <spanx style="verb">oauth-token</spanx> and <spanx style="verb">oauth-client</spanx> 
+          subject identifier types.</t>
+      </section>
     </section>
   </middle>
 
