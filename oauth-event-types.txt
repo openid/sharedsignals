@@ -215,8 +215,8 @@ Scurtescu, et al.       Expires October 20, 2018                [Page 3]
       Section 2.1 of [RISC-PROFILE] that identifies the account
       associated with the token.
 
-
-
+   o  reason - optional, TODO: possible values ("inactive", "too_many",
+      "api")?
 
 
 

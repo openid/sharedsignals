@@ -194,6 +194,7 @@
             that identifies the token.</t>
           <t>token_subject - optional, a Subject Identifier as defined by Section 2.1 of <xref target="RISC-PROFILE"/> 
             that identifies the account associated with the token.</t>
+          <t>reason - optional, TODO: possible values ("inactive", "too_many", "api")?</t>
         </list></t>
         
         <figure anchor="token-revoked-example" title="Example: Token Revoked">
