@@ -140,6 +140,49 @@
       <t>The base URI for OAuth Event Types is:<vspace />
         https://schemas.openid.net/secevent/oauth/event-type/</t>
       
+      <section anchor="token-issued" title="Token Issued">
+        <t>Event Type URI:<vspace />
+          https://schemas.openid.net/secevent/oauth/event-type/token-issued</t>
+        
+        <t>Token Issued signals that a new token was issued.</t>
+        
+        <t>Attributes:<list style="symbols">
+          <t>subject - required, a Subjectect Identifier as defined by <xref target="subject-identifier-token"/> 
+            that identifies the token.</t>
+          <t>token_subject - optional, a Subject Identifier as defined by Section 2.1 of <xref target="RISC-PROFILE"/> 
+            that identifies the account associated with the token.</t>
+          <t>TODO: OAuth flow and endpoints involved in the process? For example: redirect_uri, response_type, origin?</t>
+        </list></t>
+        
+        <figure anchor="token-issued-example" title="Example: Token Issued">
+          <artwork><![CDATA[
+{
+  "iss": "https://idp.example.com/",
+  "jti": "756E69717565206964656E746966696572",
+  "iat": 1508184845,
+  "aud": "636C69656E745F6964",
+  "events": {
+    "https://schemas.openid.net/secevent/oauth/event-type/\
+    token-issued": {
+      "subject": {
+        "subject_type": "oauth-token",
+        "token_type": "refresh_token",
+        "token_identifier_type": "token_string",
+        "token": "7265667265736820746F6B656E20737472696E67"
+      },
+      "token_subject" {
+        "subject_type": "iss-sub",
+        "iss": "https://idp.example.com/",
+        "sub": "75736572206964"
+      }
+    }
+  }
+}
+            ]]></artwork>
+          <postamble><spanx style="emph">(the event type URI is wrapped, the backslash is the continuation character)</spanx></postamble>
+        </figure>
+      </section>
+      
       <section anchor="token-revoked" title="Token Revoked">
         <t>Event Type URI:<vspace />
         https://schemas.openid.net/secevent/oauth/event-type/token-revoked</t>
