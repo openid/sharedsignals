@@ -37,7 +37,7 @@ Table of Contents
      3.6.  Client Credential Changed . . . . . . . . . . . . . . . .   7
    4.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   7
      4.1.  Subject Identifier Type Registry  . . . . . . . . . . . .   7
-   5.  Normative References  . . . . . . . . . . . . . . . . . . . .   7
+   5.  Normative References  . . . . . . . . . . . . . . . . . . . .   8
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   8
 
 1.  Introduction
@@ -170,6 +170,12 @@ Scurtescu, et al.       Expires October 20, 2018                [Page 3]
                             oauth-event-types                 April 2018
 
 
+   The token SHOULD be uniquely identified by the provided attributes,
+   either by "subject" alone or by "subject" in combination with
+   "token_subject".  The token is unique in the context of a given
+   Transmitter and not globally unique.  TODO: do we need a "iss"
+   attribute for the "oauth-token" Subject Type?
+
    {
      "iss": "https://idp.example.com/",
      "jti": "756E69717565206964656E746966696572",
@@ -211,12 +217,6 @@ Scurtescu, et al.       Expires October 20, 2018                [Page 3]
    o  subject - required, a Subjectect Identifier as defined by
       Section 2.1 that identifies the token.
 
-   o  token_subject - optional, a Subject Identifier as defined by
-      Section 2.1 of [RISC-PROFILE] that identifies the account
-      associated with the token.
-
-   o  reason - optional, TODO: possible values ("inactive", "too_many",
-      "api")?
 
 
 
@@ -225,6 +225,19 @@ Scurtescu, et al.       Expires October 20, 2018                [Page 4]
 
                             oauth-event-types                 April 2018
 
+
+   o  token_subject - optional, a Subject Identifier as defined by
+      Section 2.1 of [RISC-PROFILE] that identifies the account
+      associated with the token.
+
+   o  reason - optional, TODO: possible values ("inactive", "too_many",
+      "api")?
+
+   The token SHOULD be uniquely identified by the provided attributes,
+   either by "subject" alone or by "subject" in combination with
+   "token_subject".  The token is unique in the context of a given
+   Transmitter and not globally unique.  TODO: do we need a "iss"
+   attribute for the "oauth-token" Subject Type?
 
    {
      "iss": "https://idp.example.com/",
@@ -262,25 +275,14 @@ Scurtescu, et al.       Expires October 20, 2018                [Page 4]
    Tokens Revoked signals that all tokens issued for the account
    identified by the subject have been revoked.
 
-   Attributes: none
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 Scurtescu, et al.       Expires October 20, 2018                [Page 5]
 
                             oauth-event-types                 April 2018
 
+
+   Attributes: none
 
    {
      "iss": "https://idp.example.com/",
@@ -315,6 +317,27 @@ Scurtescu, et al.       Expires October 20, 2018                [Page 5]
 
    Attributes: TODO use client subject identifier
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Scurtescu, et al.       Expires October 20, 2018                [Page 6]
+
+                            oauth-event-types                 April 2018
+
+
    {
      "iss": "https://idp.example.com/",
      "jti": "756E69717565206964656E746966696572",
@@ -330,13 +353,6 @@ Scurtescu, et al.       Expires October 20, 2018                [Page 5]
    character)_
 
                     Figure 6: Example: Client Disabled
-
-
-
-Scurtescu, et al.       Expires October 20, 2018                [Page 6]
-
-                            oauth-event-types                 April 2018
-
 
 3.5.  Client Enabled
 
@@ -367,6 +383,17 @@ Scurtescu, et al.       Expires October 20, 2018                [Page 6]
    TODO: register "oauth-token" and "oauth-client" subject identifier
    types.
 
+
+
+
+
+
+
+Scurtescu, et al.       Expires October 20, 2018                [Page 7]
+
+                            oauth-event-types                 April 2018
+
+
 5.  Normative References
 
    [JSON]     Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
@@ -385,14 +412,6 @@ Scurtescu, et al.       Expires October 20, 2018                [Page 6]
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
-
-
-
-
-Scurtescu, et al.       Expires October 20, 2018                [Page 7]
-
-                            oauth-event-types                 April 2018
-
 
    [RISC-PROFILE]
               OpenID Foundation, "RISC Profile".
@@ -420,6 +439,17 @@ Authors' Addresses
    Email: phil.hunt@yahoo.com
 
 
+
+
+
+
+
+
+Scurtescu, et al.       Expires October 20, 2018                [Page 8]
+
+                            oauth-event-types                 April 2018
+
+
    John Bradley
    Yubico
 
@@ -445,4 +475,30 @@ Authors' Addresses
 
 
 
-Scurtescu, et al.       Expires October 20, 2018                [Page 8]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Scurtescu, et al.       Expires October 20, 2018                [Page 9]

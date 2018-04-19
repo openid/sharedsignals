@@ -154,6 +154,13 @@
           <t>TODO: OAuth flow and endpoints involved in the process? For example: redirect_uri, response_type, origin?</t>
         </list></t>
         
+        <t>The token SHOULD be uniquely identified by the provided attributes, either by 
+          <spanx style="verb">subject</spanx> alone or by <spanx style="verb">subject</spanx>
+          in combination with <spanx style="verb">token_subject</spanx>. The token is unique
+          in the context of a given Transmitter and not globally unique. TODO: do we need a
+          <spanx style="verb">iss</spanx> attribute for the <spanx style="verb">oauth-token</spanx>
+          Subject Type?</t>
+        
         <figure anchor="token-issued-example" title="Example: Token Issued">
           <artwork><![CDATA[
 {
@@ -196,6 +203,13 @@
             that identifies the account associated with the token.</t>
           <t>reason - optional, TODO: possible values ("inactive", "too_many", "api")?</t>
         </list></t>
+        
+        <t>The token SHOULD be uniquely identified by the provided attributes, either by 
+        <spanx style="verb">subject</spanx> alone or by <spanx style="verb">subject</spanx>
+        in combination with <spanx style="verb">token_subject</spanx>. The token is unique
+        in the context of a given Transmitter and not globally unique. TODO: do we need a
+        <spanx style="verb">iss</spanx> attribute for the <spanx style="verb">oauth-token</spanx>
+        Subject Type?</t>
         
         <figure anchor="token-revoked-example" title="Example: Token Revoked">
           <artwork><![CDATA[
