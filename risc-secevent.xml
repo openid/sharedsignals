@@ -45,7 +45,7 @@
       </address>
     </author>
 
-    <date year="2018" month="April" day="16"/>
+    <date year="2018" month="April" day="19"/>
 
     <workgroup>RISC Working Group</workgroup>
 
@@ -405,6 +405,19 @@ Pragma: no-cache
 }
 ]]></artwork>
             </figure>
+            
+            <t>Errors are signaled with HTTP status codes as follows:</t>
+            
+            <texttable title="Read Stream Status Errors" anchor="tabreadstatus">
+              <ttcol align="left">Code</ttcol>
+              <ttcol align="left">Description</ttcol>
+              <c>401</c>
+              <c>if authorization failed or it is missing</c>
+              <c>403</c>
+              <c>if the Event Receiver is not allowed to read the stream status</c>
+              <c>404</c>
+              <c>if there is no Event Stream configured for this Event Receiver</c>
+            </texttable>
           </section>
           
           <section anchor="updating-a-streams-status" title="Updating a Stream's Status">
@@ -446,9 +459,9 @@ Pragma: no-cache
 ]]></artwork>
             </figure>
             
-            <t>Errors are signaled with HTTP staus codes as follows:</t>
+            <t>Errors are signaled with HTTP status codes as follows:</t>
             
-            <texttable title="Update Stream Configuration Errors" anchor="tabupdatestatus">
+            <texttable title="Update Stream Status Errors" anchor="tabupdatestatus">
               <ttcol align="left">Code</ttcol>
               <ttcol align="left">Description</ttcol>
               <c>400</c>
@@ -457,6 +470,8 @@ Pragma: no-cache
               <c>if authorization failed or it is missing</c>
               <c>403</c>
               <c>if the Event Receiver is not allowed to update the stream status</c>
+              <c>404</c>
+              <c>if there is no Event Stream configured for this Event Receiver</c>
             </texttable>
           </section>
         </section>
@@ -554,7 +569,7 @@ Pragma: no-cache
 ]]></artwork>
             </figure>
 
-            <t>Errors are signaled with HTTP staus codes as follows:</t>
+            <t>Errors are signaled with HTTP status codes as follows:</t>
 
             <texttable title="Read Stream Configuration Errors" anchor="tabreadconfig">
               <ttcol align="left">Code</ttcol>
@@ -652,7 +667,7 @@ Pragma: no-cache
 ]]></artwork>
             </figure>
 
-            <t>Errors are signaled with HTTP staus codes as follows:</t>
+            <t>Errors are signaled with HTTP status codes as follows:</t>
 
             <texttable title="Update Stream Configuration Errors" anchor="tabupdateconfig">
               <ttcol align="left">Code</ttcol>
@@ -663,6 +678,8 @@ Pragma: no-cache
               <c>if authorization failed or it is missing</c>
               <c>403</c>
               <c>if the Event Receiver is not allowed to update the stream configuration</c>
+              <c>404</c>
+              <c>if there is no Event Stream configured for this Event Receiver</c>
             </texttable>
 
           </section>
@@ -702,7 +719,8 @@ Pragma: no-cache
               <c>401</c>
               <c>if authorization failed or it is missing</c>
               <c>403</c>
-              <c>if the Event Receiver is not allowed to add this particular subject</c>
+              <c>if the Event Receiver is not allowed to add this particular subject, or not
+              allowed to add in general</c>
               <c>404</c>
               <c>if the subject is not recognized by the Event Transmitter, the Event Transmitter
                 may chose to stay silent in this case and respond with <spanx style="verb">200</spanx></c>
@@ -752,7 +770,7 @@ Pragma: no-cache
             <t>On a successful response, the Event Transmitter responds with a
               <spanx style="verb">204 No Content</spanx> response.</t>
 
-            <t>Errors are signaled with HTTP staus codes as follows:</t>
+            <t>Errors are signaled with HTTP status codes as follows:</t>
 
             <texttable title="Remove Subject Errors" anchor="tabremoveerr">
               <ttcol align="left">Code</ttcol>
@@ -762,7 +780,8 @@ Pragma: no-cache
               <c>401</c>
               <c>if authorization failed or it is missing</c>
               <c>403</c>
-              <c>if the Event Receiver is not allowed to remove this particular subject</c>
+              <c>if the Event Receiver is not allowed to remove this particular subject, or not
+              allowed to remove in general</c>
               <c>404</c>
               <c>if the subject is not recognized by the Event Transmitter, the Event Transmitter
                 may chose to stay silent in this case and respond with <spanx style="verb">204</spanx></c>
@@ -861,7 +880,7 @@ Pragma: no-cache
               depend on the verification event being transmitted synchronously or in any
               particular order relative to the current queue of events.</t>
 
-            <t>Errors are signaled with HTTP staus codes as follows:</t>
+            <t>Errors are signaled with HTTP status codes as follows:</t>
 
             <texttable title="Verification Errors" anchor="taberifyerr">
               <ttcol align="left">Code</ttcol>

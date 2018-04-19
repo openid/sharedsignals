@@ -8,7 +8,7 @@
                                                                   Amazon
                                                               J. Bradley
                                                                   Yubico
-                                                          April 16, 2018
+                                                          April 19, 2018
 
 
                   RISC profile of IETF Security Events
@@ -53,7 +53,7 @@ Table of Contents
 
 
 
-Scurtescu, et al.       Expires October 18, 2018                [Page 1]
+Scurtescu, et al.       Expires October 21, 2018                [Page 1]
 
                               risc-secevent                   April 2018
 
@@ -63,43 +63,43 @@ Scurtescu, et al.       Expires October 18, 2018                [Page 1]
        4.1.2.  Stream Configuration  . . . . . . . . . . . . . . . .  12
          4.1.2.1.  Reading a Stream's Configuration  . . . . . . . .  13
          4.1.2.2.  Updating a Stream's Configuration . . . . . . . .  15
-       4.1.3.  Subjects  . . . . . . . . . . . . . . . . . . . . . .  17
-         4.1.3.1.  Adding a Subject to a Stream  . . . . . . . . . .  17
-         4.1.3.2.  Removing a Subject  . . . . . . . . . . . . . . .  19
-       4.1.4.  Verification  . . . . . . . . . . . . . . . . . . . .  20
-         4.1.4.1.  Verification Event  . . . . . . . . . . . . . . .  20
-         4.1.4.2.  Triggering a Verification Event.  . . . . . . . .  21
-     4.2.  Authorization . . . . . . . . . . . . . . . . . . . . . .  23
-     4.3.  Security Considerations . . . . . . . . . . . . . . . . .  23
-       4.3.1.  Subject Probing . . . . . . . . . . . . . . . . . . .  23
-       4.3.2.  Information Harvesting  . . . . . . . . . . . . . . .  23
-       4.3.3.  Malicious Subject Removal . . . . . . . . . . . . . .  24
-   5.  Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .  24
-     5.1.  Security Event Token Profle . . . . . . . . . . . . . . .  24
-       5.1.1.  Signature Key Resolution  . . . . . . . . . . . . . .  25
-       5.1.2.  RISC Event Subject  . . . . . . . . . . . . . . . . .  25
-       5.1.3.  Explicit Typing of SETs . . . . . . . . . . . . . . .  25
-       5.1.4.  The "exp" Claim . . . . . . . . . . . . . . . . . . .  26
-       5.1.5.  The "aud" Claim . . . . . . . . . . . . . . . . . . .  26
-       5.1.6.  The "events" claim  . . . . . . . . . . . . . . . . .  26
-       5.1.7.  Security Considerations . . . . . . . . . . . . . . .  27
-         5.1.7.1.  Distingushing SETs from other Kinds of JWTs . . .  27
-     5.2.  SET Token Delivery Using HTTP Profile . . . . . . . . . .  27
-       5.2.1.  Stream Configuration Metadata . . . . . . . . . . . .  27
-         5.2.1.1.  Push Delivery using HTTP  . . . . . . . . . . . .  27
-         5.2.1.2.  Polling Delivery using HTTP . . . . . . . . . . .  27
-   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  28
-     6.1.  Security Event Subject Identifier Types Registry  . . . .  28
-       6.1.1.  Registration Template . . . . . . . . . . . . . . . .  28
-       6.1.2.  Initial Registry Contents . . . . . . . . . . . . . .  28
-       6.1.3.  Guidance for Expert Reviewers . . . . . . . . . . . .  29
-     6.2.  Well-Known URI Registry . . . . . . . . . . . . . . . . .  29
-       6.2.1.  Registry Contents . . . . . . . . . . . . . . . . . .  30
-   7.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .  30
-     7.1.  Subject Information Leakage . . . . . . . . . . . . . . .  30
-   8.  Normative References  . . . . . . . . . . . . . . . . . . . .  30
-   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  32
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  32
+       4.1.3.  Subjects  . . . . . . . . . . . . . . . . . . . . . .  18
+         4.1.3.1.  Adding a Subject to a Stream  . . . . . . . . . .  18
+         4.1.3.2.  Removing a Subject  . . . . . . . . . . . . . . .  20
+       4.1.4.  Verification  . . . . . . . . . . . . . . . . . . . .  21
+         4.1.4.1.  Verification Event  . . . . . . . . . . . . . . .  21
+         4.1.4.2.  Triggering a Verification Event.  . . . . . . . .  22
+     4.2.  Authorization . . . . . . . . . . . . . . . . . . . . . .  24
+     4.3.  Security Considerations . . . . . . . . . . . . . . . . .  24
+       4.3.1.  Subject Probing . . . . . . . . . . . . . . . . . . .  24
+       4.3.2.  Information Harvesting  . . . . . . . . . . . . . . .  24
+       4.3.3.  Malicious Subject Removal . . . . . . . . . . . . . .  25
+   5.  Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .  25
+     5.1.  Security Event Token Profle . . . . . . . . . . . . . . .  25
+       5.1.1.  Signature Key Resolution  . . . . . . . . . . . . . .  26
+       5.1.2.  RISC Event Subject  . . . . . . . . . . . . . . . . .  26
+       5.1.3.  Explicit Typing of SETs . . . . . . . . . . . . . . .  26
+       5.1.4.  The "exp" Claim . . . . . . . . . . . . . . . . . . .  27
+       5.1.5.  The "aud" Claim . . . . . . . . . . . . . . . . . . .  27
+       5.1.6.  The "events" claim  . . . . . . . . . . . . . . . . .  27
+       5.1.7.  Security Considerations . . . . . . . . . . . . . . .  28
+         5.1.7.1.  Distingushing SETs from other Kinds of JWTs . . .  28
+     5.2.  SET Token Delivery Using HTTP Profile . . . . . . . . . .  28
+       5.2.1.  Stream Configuration Metadata . . . . . . . . . . . .  28
+         5.2.1.1.  Push Delivery using HTTP  . . . . . . . . . . . .  28
+         5.2.1.2.  Polling Delivery using HTTP . . . . . . . . . . .  28
+   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  29
+     6.1.  Security Event Subject Identifier Types Registry  . . . .  29
+       6.1.1.  Registration Template . . . . . . . . . . . . . . . .  29
+       6.1.2.  Initial Registry Contents . . . . . . . . . . . . . .  29
+       6.1.3.  Guidance for Expert Reviewers . . . . . . . . . . . .  30
+     6.2.  Well-Known URI Registry . . . . . . . . . . . . . . . . .  30
+       6.2.1.  Registry Contents . . . . . . . . . . . . . . . . . .  31
+   7.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .  31
+     7.1.  Subject Information Leakage . . . . . . . . . . . . . . .  31
+   8.  Normative References  . . . . . . . . . . . . . . . . . . . .  31
+   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  33
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  33
 
 1.  Introduction
 
@@ -109,7 +109,7 @@ Scurtescu, et al.       Expires October 18, 2018                [Page 1]
 
 
 
-Scurtescu, et al.       Expires October 18, 2018                [Page 2]
+Scurtescu, et al.       Expires October 21, 2018                [Page 2]
 
                               risc-secevent                   April 2018
 
@@ -165,7 +165,7 @@ Scurtescu, et al.       Expires October 18, 2018                [Page 2]
 
 
 
-Scurtescu, et al.       Expires October 18, 2018                [Page 3]
+Scurtescu, et al.       Expires October 21, 2018                [Page 3]
 
                               risc-secevent                   April 2018
 
@@ -221,7 +221,7 @@ Scurtescu, et al.       Expires October 18, 2018                [Page 3]
 
 
 
-Scurtescu, et al.       Expires October 18, 2018                [Page 4]
+Scurtescu, et al.       Expires October 21, 2018                [Page 4]
 
                               risc-secevent                   April 2018
 
@@ -277,7 +277,7 @@ Scurtescu, et al.       Expires October 18, 2018                [Page 4]
 
 
 
-Scurtescu, et al.       Expires October 18, 2018                [Page 5]
+Scurtescu, et al.       Expires October 21, 2018                [Page 5]
 
                               risc-secevent                   April 2018
 
@@ -333,7 +333,7 @@ Scurtescu, et al.       Expires October 18, 2018                [Page 5]
 
 
 
-Scurtescu, et al.       Expires October 18, 2018                [Page 6]
+Scurtescu, et al.       Expires October 21, 2018                [Page 6]
 
                               risc-secevent                   April 2018
 
@@ -389,7 +389,7 @@ Scurtescu, et al.       Expires October 18, 2018                [Page 6]
 
 
 
-Scurtescu, et al.       Expires October 18, 2018                [Page 7]
+Scurtescu, et al.       Expires October 21, 2018                [Page 7]
 
                               risc-secevent                   April 2018
 
@@ -445,7 +445,7 @@ Scurtescu, et al.       Expires October 18, 2018                [Page 7]
 
 
 
-Scurtescu, et al.       Expires October 18, 2018                [Page 8]
+Scurtescu, et al.       Expires October 21, 2018                [Page 8]
 
                               risc-secevent                   April 2018
 
@@ -501,7 +501,7 @@ Scurtescu, et al.       Expires October 18, 2018                [Page 8]
 
 
 
-Scurtescu, et al.       Expires October 18, 2018                [Page 9]
+Scurtescu, et al.       Expires October 21, 2018                [Page 9]
 
                               risc-secevent                   April 2018
 
@@ -557,7 +557,7 @@ Scurtescu, et al.       Expires October 18, 2018                [Page 9]
 
 
 
-Scurtescu, et al.       Expires October 18, 2018               [Page 10]
+Scurtescu, et al.       Expires October 21, 2018               [Page 10]
 
                               risc-secevent                   April 2018
 
@@ -572,6 +572,22 @@ Scurtescu, et al.       Expires October 18, 2018               [Page 10]
    }
 
               Figure 8: Example: Check Stream Status Response
+
+   Errors are signaled with HTTP status codes as follows:
+
+   +------+------------------------------------------------------------+
+   | Code | Description                                                |
+   +------+------------------------------------------------------------+
+   | 401  | if authorization failed or it is missing                   |
+   |      |                                                            |
+   | 403  | if the Event Receiver is not allowed to read the stream    |
+   |      | status                                                     |
+   |      |                                                            |
+   | 404  | if there is no Event Stream configured for this Event      |
+   |      | Receiver                                                   |
+   +------+------------------------------------------------------------+
+
+                    Table 1: Read Stream Status Errors
 
 4.1.1.2.  Updating a Stream's Status
 
@@ -595,6 +611,13 @@ Scurtescu, et al.       Expires October 18, 2018               [Page 10]
 
               Figure 9: Example: Update Stream Status Request
 
+
+
+Scurtescu, et al.       Expires October 21, 2018               [Page 11]
+
+                              risc-secevent                   April 2018
+
+
    The following is a non-normative example response:
 
    HTTP/1.1 200 OK
@@ -608,15 +631,7 @@ Scurtescu, et al.       Expires October 18, 2018               [Page 10]
 
              Figure 10: Example: Update Stream Status Response
 
-   Errors are signaled with HTTP staus codes as follows:
-
-
-
-
-Scurtescu, et al.       Expires October 18, 2018               [Page 11]
-
-                              risc-secevent                   April 2018
-
+   Errors are signaled with HTTP status codes as follows:
 
    +------+------------------------------------------------------------+
    | Code | Description                                                |
@@ -628,9 +643,12 @@ Scurtescu, et al.       Expires October 18, 2018               [Page 11]
    |      |                                                            |
    | 403  | if the Event Receiver is not allowed to update the stream  |
    |      | status                                                     |
+   |      |                                                            |
+   | 404  | if there is no Event Stream configured for this Event      |
+   |      | Receiver                                                   |
    +------+------------------------------------------------------------+
 
-                Table 1: Update Stream Configuration Errors
+                   Table 2: Update Stream Status Errors
 
 4.1.2.  Stream Configuration
 
@@ -647,6 +665,15 @@ Scurtescu, et al.       Expires October 18, 2018               [Page 11]
    events_supported
       OPTIONAL.  An array of URIs identifying the set of events
       supported by the Transmitter for this Receiver.  If omitted, Event
+
+
+
+
+Scurtescu, et al.       Expires October 21, 2018               [Page 12]
+
+                              risc-secevent                   April 2018
+
+
       Transmitters SHOULD make this set available to the Event Receiver
       via some other means (e.g. publishing it in online documentation).
 
@@ -666,13 +693,6 @@ Scurtescu, et al.       Expires October 18, 2018               [Page 11]
       configuration parameters for the SET delivery method.  The actual
       delivery method is identified by the special key "method" with the
       value being a URI as defined in Section 5.2.1.
-
-
-
-Scurtescu, et al.       Expires October 18, 2018               [Page 12]
-
-                              risc-secevent                   April 2018
-
 
    min_verification_interval
       An integer indicating the minimum amount of time in seconds that
@@ -701,6 +721,15 @@ Scurtescu, et al.       Expires October 18, 2018               [Page 12]
    The following is a non-normative example request to read an Event
    Stream's configuration:
 
+
+
+
+
+Scurtescu, et al.       Expires October 21, 2018               [Page 13]
+
+                              risc-secevent                   April 2018
+
+
    GET /set/stream HTTP/1.1
    Host: transmitter.example.com
    Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
@@ -708,27 +737,6 @@ Scurtescu, et al.       Expires October 18, 2018               [Page 12]
            Figure 11: Example: Read Stream Configuration Request
 
    The following is a non-normative example response:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Scurtescu, et al.       Expires October 18, 2018               [Page 13]
-
-                              risc-secevent                   April 2018
-
 
   HTTP/1.1 200 OK
   Content-Type: application/json; charset=UTF-8
@@ -763,7 +771,20 @@ Scurtescu, et al.       Expires October 18, 2018               [Page 13]
 
           Figure 12: Example: Read Stream Configuration Response
 
-   Errors are signaled with HTTP staus codes as follows:
+   Errors are signaled with HTTP status codes as follows:
+
+
+
+
+
+
+
+
+
+Scurtescu, et al.       Expires October 21, 2018               [Page 14]
+
+                              risc-secevent                   April 2018
+
 
    +------+------------------------------------------------------------+
    | Code | Description                                                |
@@ -777,14 +798,7 @@ Scurtescu, et al.       Expires October 18, 2018               [Page 13]
    |      | Receiver                                                   |
    +------+------------------------------------------------------------+
 
-                 Table 2: Read Stream Configuration Errors
-
-
-
-Scurtescu, et al.       Expires October 18, 2018               [Page 14]
-
-                              risc-secevent                   April 2018
-
+                 Table 3: Read Stream Configuration Errors
 
 4.1.2.2.  Updating a Stream's Configuration
 
@@ -806,6 +820,27 @@ Scurtescu, et al.       Expires October 18, 2018               [Page 14]
 
    The following is a non-normative example request to update an Event
    Stream's configuration:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Scurtescu, et al.       Expires October 21, 2018               [Page 15]
+
+                              risc-secevent                   April 2018
+
 
   POST /set/stream HTTP/1.1
   Host: transmitter.example.com
@@ -837,7 +872,28 @@ Scurtescu, et al.       Expires October 18, 2018               [Page 14]
 
 
 
-Scurtescu, et al.       Expires October 18, 2018               [Page 15]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Scurtescu, et al.       Expires October 21, 2018               [Page 16]
 
                               risc-secevent                   April 2018
 
@@ -875,7 +931,28 @@ Scurtescu, et al.       Expires October 18, 2018               [Page 15]
 
          Figure 14: Example: Update Stream Configuration Response
 
-   Errors are signaled with HTTP staus codes as follows:
+   Errors are signaled with HTTP status codes as follows:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Scurtescu, et al.       Expires October 21, 2018               [Page 17]
+
+                              risc-secevent                   April 2018
+
 
    +------+------------------------------------------------------------+
    | Code | Description                                                |
@@ -887,16 +964,12 @@ Scurtescu, et al.       Expires October 18, 2018               [Page 15]
    |      |                                                            |
    | 403  | if the Event Receiver is not allowed to update the stream  |
    |      | configuration                                              |
+   |      |                                                            |
+   | 404  | if there is no Event Stream configured for this Event      |
+   |      | Receiver                                                   |
    +------+------------------------------------------------------------+
 
-                Table 3: Update Stream Configuration Errors
-
-
-
-Scurtescu, et al.       Expires October 18, 2018               [Page 16]
-
-                              risc-secevent                   April 2018
-
+                Table 4: Update Stream Configuration Errors
 
 4.1.3.  Subjects
 
@@ -930,29 +1003,14 @@ Scurtescu, et al.       Expires October 18, 2018               [Page 16]
    transmitter MAY return an empty "200 OK" response or an appropriate
    error code.  See Security Considerations (Section 4.3).
 
-   Errors are signaled with HTTP status codes as follows:
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Scurtescu, et al.       Expires October 18, 2018               [Page 17]
+Scurtescu, et al.       Expires October 21, 2018               [Page 18]
 
                               risc-secevent                   April 2018
 
+
+   Errors are signaled with HTTP status codes as follows:
 
    +------+------------------------------------------------------------+
    | Code | Description                                                |
@@ -963,7 +1021,7 @@ Scurtescu, et al.       Expires October 18, 2018               [Page 17]
    | 401  | if authorization failed or it is missing                   |
    |      |                                                            |
    | 403  | if the Event Receiver is not allowed to add this           |
-   |      | particular subject                                         |
+   |      | particular subject, or not allowed to add in general       |
    |      |                                                            |
    | 404  | if the subject is not recognized by the Event Transmitter, |
    |      | the Event Transmitter may chose to stay silent in this     |
@@ -973,7 +1031,7 @@ Scurtescu, et al.       Expires October 18, 2018               [Page 17]
    |      | gvien amount of time                                       |
    +------+------------------------------------------------------------+
 
-                        Table 4: Add Subject Errors
+                        Table 5: Add Subject Errors
 
    The following is a non-normative example request to add a subject to
    a stream, where the subject is identified by an Email Subject
@@ -996,19 +1054,24 @@ Scurtescu, et al.       Expires October 18, 2018               [Page 17]
    The following is a non-normative example response to a successful
    request:
 
+
+
+
+
+
+
+
+Scurtescu, et al.       Expires October 21, 2018               [Page 19]
+
+                              risc-secevent                   April 2018
+
+
    HTTP/1.1 200 OK
    Server: transmitter.example.com
    Cache-Control: no-store
    Pragma: no-cache
 
                  Figure 16: Example: Add Subject Response
-
-
-
-Scurtescu, et al.       Expires October 18, 2018               [Page 18]
-
-                              risc-secevent                   April 2018
-
 
 4.1.3.2.  Removing a Subject
 
@@ -1023,7 +1086,7 @@ Scurtescu, et al.       Expires October 18, 2018               [Page 18]
    On a successful response, the Event Transmitter responds with a "204
    No Content" response.
 
-   Errors are signaled with HTTP staus codes as follows:
+   Errors are signaled with HTTP status codes as follows:
 
    +------+------------------------------------------------------------+
    | Code | Description                                                |
@@ -1034,7 +1097,7 @@ Scurtescu, et al.       Expires October 18, 2018               [Page 18]
    | 401  | if authorization failed or it is missing                   |
    |      |                                                            |
    | 403  | if the Event Receiver is not allowed to remove this        |
-   |      | particular subject                                         |
+   |      | particular subject, or not allowed to remove in general    |
    |      |                                                            |
    | 404  | if the subject is not recognized by the Event Transmitter, |
    |      | the Event Transmitter may chose to stay silent in this     |
@@ -1044,7 +1107,7 @@ Scurtescu, et al.       Expires October 18, 2018               [Page 18]
    |      | gvien amount of time                                       |
    +------+------------------------------------------------------------+
 
-                      Table 5: Remove Subject Errors
+                      Table 6: Remove Subject Errors
 
    The following is a non-normative example request where the subject is
    identified by a Phone Number Subject Identifier:
@@ -1054,14 +1117,7 @@ Scurtescu, et al.       Expires October 18, 2018               [Page 18]
 
 
 
-
-
-
-
-
-
-
-Scurtescu, et al.       Expires October 18, 2018               [Page 19]
+Scurtescu, et al.       Expires October 21, 2018               [Page 20]
 
                               risc-secevent                   April 2018
 
@@ -1117,7 +1173,7 @@ Scurtescu, et al.       Expires October 18, 2018               [Page 19]
 
 
 
-Scurtescu, et al.       Expires October 18, 2018               [Page 20]
+Scurtescu, et al.       Expires October 21, 2018               [Page 21]
 
                               risc-secevent                   April 2018
 
@@ -1165,7 +1221,7 @@ Scurtescu, et al.       Expires October 18, 2018               [Page 20]
    synchronously or in any particular order relative to the current
    queue of events.
 
-   Errors are signaled with HTTP staus codes as follows:
+   Errors are signaled with HTTP status codes as follows:
 
 
 
@@ -1173,7 +1229,7 @@ Scurtescu, et al.       Expires October 18, 2018               [Page 20]
 
 
 
-Scurtescu, et al.       Expires October 18, 2018               [Page 21]
+Scurtescu, et al.       Expires October 21, 2018               [Page 22]
 
                               risc-secevent                   April 2018
 
@@ -1191,7 +1247,7 @@ Scurtescu, et al.       Expires October 18, 2018               [Page 21]
    |      | "min_verification_interval" in Section 4.1.2               |
    +------+------------------------------------------------------------+
 
-                       Table 6: Verification Errors
+                       Table 7: Verification Errors
 
    The following is a non-normative example request to trigger a
    verification event:
@@ -1229,7 +1285,7 @@ Scurtescu, et al.       Expires October 18, 2018               [Page 21]
 
 
 
-Scurtescu, et al.       Expires October 18, 2018               [Page 22]
+Scurtescu, et al.       Expires October 21, 2018               [Page 23]
 
                               risc-secevent                   April 2018
 
@@ -1285,7 +1341,7 @@ Scurtescu, et al.       Expires October 18, 2018               [Page 22]
 
 
 
-Scurtescu, et al.       Expires October 18, 2018               [Page 23]
+Scurtescu, et al.       Expires October 21, 2018               [Page 24]
 
                               risc-secevent                   April 2018
 
@@ -1341,7 +1397,7 @@ Scurtescu, et al.       Expires October 18, 2018               [Page 23]
 
 
 
-Scurtescu, et al.       Expires October 18, 2018               [Page 24]
+Scurtescu, et al.       Expires October 21, 2018               [Page 25]
 
                               risc-secevent                   April 2018
 
@@ -1397,7 +1453,7 @@ Scurtescu, et al.       Expires October 18, 2018               [Page 24]
 
 
 
-Scurtescu, et al.       Expires October 18, 2018               [Page 25]
+Scurtescu, et al.       Expires October 21, 2018               [Page 26]
 
                               risc-secevent                   April 2018
 
@@ -1453,7 +1509,7 @@ Scurtescu, et al.       Expires October 18, 2018               [Page 25]
 
 
 
-Scurtescu, et al.       Expires October 18, 2018               [Page 26]
+Scurtescu, et al.       Expires October 21, 2018               [Page 27]
 
                               risc-secevent                   April 2018
 
@@ -1509,7 +1565,7 @@ Scurtescu, et al.       Expires October 18, 2018               [Page 26]
 
 
 
-Scurtescu, et al.       Expires October 18, 2018               [Page 27]
+Scurtescu, et al.       Expires October 21, 2018               [Page 28]
 
                               risc-secevent                   April 2018
 
@@ -1565,7 +1621,7 @@ Scurtescu, et al.       Expires October 18, 2018               [Page 27]
 
 
 
-Scurtescu, et al.       Expires October 18, 2018               [Page 28]
+Scurtescu, et al.       Expires October 21, 2018               [Page 29]
 
                               risc-secevent                   April 2018
 
@@ -1621,7 +1677,7 @@ Scurtescu, et al.       Expires October 18, 2018               [Page 28]
 
 
 
-Scurtescu, et al.       Expires October 18, 2018               [Page 29]
+Scurtescu, et al.       Expires October 21, 2018               [Page 30]
 
                               risc-secevent                   April 2018
 
@@ -1677,7 +1733,7 @@ Scurtescu, et al.       Expires October 18, 2018               [Page 29]
 
 
 
-Scurtescu, et al.       Expires October 18, 2018               [Page 30]
+Scurtescu, et al.       Expires October 21, 2018               [Page 31]
 
                               risc-secevent                   April 2018
 
@@ -1733,7 +1789,7 @@ Scurtescu, et al.       Expires October 18, 2018               [Page 30]
 
 
 
-Scurtescu, et al.       Expires October 18, 2018               [Page 31]
+Scurtescu, et al.       Expires October 21, 2018               [Page 32]
 
                               risc-secevent                   April 2018
 
@@ -1789,4 +1845,4 @@ Authors' Addresses
 
 
 
-Scurtescu, et al.       Expires October 18, 2018               [Page 32]
+Scurtescu, et al.       Expires October 21, 2018               [Page 33]
