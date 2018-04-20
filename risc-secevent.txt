@@ -146,7 +146,7 @@ Scurtescu, et al.       Expires October 21, 2018                [Page 2]
    enabled": {
          "subject": {
            "subject_type": "email",
-           "email": "foo@example.com",
+           "email": "foo@example.com"
          }
        }
      }
@@ -181,7 +181,7 @@ Scurtescu, et al.       Expires October 21, 2018                [Page 3]
          "subject": {
            "subject_type": "iss-sub",
            "iss": "https://issuer.example.com/",
-           "sub": "abc1234",
+           "sub": "abc1234"
          }
        }
      }
@@ -414,7 +414,7 @@ Scurtescu, et al.       Expires October 21, 2018                [Page 7]
      "remove_subject_endpoint":
        "https://tr.example.com/risc/mgmt/subject:remove",
      "verification_endpoint":
-       "https://tr.example.com/risc/mgmt/verification",
+       "https://tr.example.com/risc/mgmt/verification"
    }
 
            Figure 5: Example: Transmitter Configuration Response
@@ -626,7 +626,7 @@ Scurtescu, et al.       Expires October 21, 2018               [Page 11]
    Pragma: no-cache
 
    {
-     "status": "paused",
+     "status": "paused"
    }
 
              Figure 10: Example: Update Stream Status Response
@@ -655,17 +655,17 @@ Scurtescu, et al.       Expires October 21, 2018               [Page 11]
    An Event Stream's configuration is represented as a JSON [RFC7159]
    object with the following properties:
 
+   iss
+      *Read-Only*, a URL using the https scheme with no query or
+      fragment component that the Transmitter asserts as its Issuer
+      Identifier.  This MUST be identical to the "iss" Claim value in
+      Security Event Tokens issued from this Transmitter.
+
    aud
-      A string or an array of strings containing an audience claim as
-      defined in JSON Web Token (JWT) [RFC7519] that identifies the
-      Event Receiver(s) for the Event Stream.  This property cannot be
-      updated.  If multiple Receivers are specified then the Transmitter
-      SHOULD know that these Receivers are the same entity.
-
-   events_supported
-      OPTIONAL.  An array of URIs identifying the set of events
-      supported by the Transmitter for this Receiver.  If omitted, Event
-
+      *Read-Only*, A string or an array of strings containing an
+      audience claim as defined in JSON Web Token (JWT) [RFC7519] that
+      identifies the Event Receiver(s) for the Event Stream.  This
+      property cannot be updated.  If multiple Receivers are specified
 
 
 
@@ -674,37 +674,36 @@ Scurtescu, et al.       Expires October 21, 2018               [Page 12]
                               risc-secevent                   April 2018
 
 
+      then the Transmitter SHOULD know that these Receivers are the same
+      entity.
+
+   events_supported
+      *Read-Only*, An array of URIs identifying the set of events
+      supported by the Transmitter for this Receiver.  If omitted, Event
       Transmitters SHOULD make this set available to the Event Receiver
       via some other means (e.g. publishing it in online documentation).
 
    events_requested
-      OPTIONAL.  An array of URIs identifying the set of events that the
-      Receiver requested.  A Receiver should request only the events
+      *Read-Write*, An array of URIs identifying the set of events that
+      the Receiver requested.  A Receiver should request only the events
       that it understands and it can act on.  This is configurabel by
       the Receuver.
 
    events_delivered
-      OPTIONAL.  An array of URIs which is the intersection of
+      *Read-Only*, An array of URIs which is the intersection of
       "events_supported" and "events_requested".  These events MAY be
       delivered over the Event Stream.
 
    delivery
-      A JSON object containing a set of name/value pairs specifying
-      configuration parameters for the SET delivery method.  The actual
-      delivery method is identified by the special key "method" with the
-      value being a URI as defined in Section 5.2.1.
+      *Read-Write*, A JSON object containing a set of name/value pairs
+      specifying configuration parameters for the SET delivery method.
+      The actual delivery method is identified by the special key
+      "method" with the value being a URI as defined in Section 5.2.1.
 
-   min_verification_interval
-      An integer indicating the minimum amount of time in seconds that
-      must pass in between verification requests.  If an Event Receiver
-      submits verification requests more frequently than this, the Event
-      Transmitter MAY respond with a 429 status code.  An Event
-      Transmitter SHOULD NOT respond with a 429 status code if an Event
-      Receiver is not exceeding this frequency.
-
-   subject_type  The Subject Identifier Type that the Receiver wants for
-      the events.  If not set then the Transmitter might decide to use a
-      type that discloses more information than necessary.
+   subject_type
+      *Read-Write*, The Subject Identifier Type that the Receiver wants
+      for the events.  If not set then the Transmitter might decide to
+      use a type that discloses more information than necessary.
 
    TODO: consider adding a IANA Registry for stream configuration
    metadata, similar to Section 7.1.1 of [OAUTH-DISCOVERY].  This would
@@ -720,6 +719,7 @@ Scurtescu, et al.       Expires October 21, 2018               [Page 12]
 
    The following is a non-normative example request to read an Event
    Stream's configuration:
+
 
 
 
@@ -744,6 +744,7 @@ Scurtescu, et al.       Expires October 21, 2018               [Page 13]
   Pragma: no-cache
 
   {
+    "iss": "https://tr.example.com",
     "aud": [
         "http://receiver.example.com/web",
         "http://receiver.example.com/mobile"
@@ -772,7 +773,6 @@ Scurtescu, et al.       Expires October 21, 2018               [Page 13]
           Figure 12: Example: Read Stream Configuration Response
 
    Errors are signaled with HTTP status codes as follows:
-
 
 
 
@@ -847,6 +847,7 @@ Scurtescu, et al.       Expires October 21, 2018               [Page 15]
   Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
   {
+    "iss": "https://tr.example.com",
     "aud": [
       "http://receiver.example.com/web",
       "http://receiver.example.com/mobile"
@@ -892,7 +893,6 @@ Scurtescu, et al.       Expires October 21, 2018               [Page 15]
 
 
 
-
 Scurtescu, et al.       Expires October 21, 2018               [Page 16]
 
                               risc-secevent                   April 2018
@@ -904,6 +904,7 @@ Scurtescu, et al.       Expires October 21, 2018               [Page 16]
   Pragma: no-cache
 
   {
+    "iss": "https://tr.example.com",
     "aud": [
       "http://receiver.example.com/web",
       "http://receiver.example.com/mobile"
@@ -932,7 +933,6 @@ Scurtescu, et al.       Expires October 21, 2018               [Page 16]
          Figure 14: Example: Update Stream Configuration Response
 
    Errors are signaled with HTTP status codes as follows:
-
 
 
 
@@ -1046,7 +1046,7 @@ Scurtescu, et al.       Expires October 21, 2018               [Page 18]
        "subject_type": "email",
        "email": "example.user@example.com"
      },
-     "verified": true,
+     "verified": true
    }
 
                   Figure 15: Example: Add Subject Request
@@ -1297,9 +1297,9 @@ Scurtescu, et al.       Expires October 21, 2018               [Page 23]
   "iat": "1493856000",
   "events": [
     "https://schemas.openid.net/secevent/risc/event-type/verification":{
-      "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo=",
-    },
-  ],
+      "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
+    }
+  ]
 }
 
                    Figure 21: Example: Verification SET
@@ -1426,7 +1426,7 @@ Scurtescu, et al.       Expires October 21, 2018               [Page 25]
            "phone_number": "+1 206 555 0123"
          },
          "reason": "hijacking",
-         "cause-time": 1508012752,
+         "cause-time": 1508012752
        }
      }
    }
@@ -1494,9 +1494,9 @@ Scurtescu, et al.       Expires October 21, 2018               [Page 26]
   "iat": "1493856000",
   "events": [
     "https://schemas.openid.net/secevent/risc/event-type/verification":{
-      "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo=",
-    },
-  ],
+      "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
+    }
+  ]
 }
 
               Figure 24: Example: SET with array 'aud' claim
