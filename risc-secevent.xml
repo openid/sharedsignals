@@ -688,7 +688,38 @@ Pragma: no-cache
             </texttable>
 
           </section>
+          
+          <section anchor="removing-a-stream-configuration" title="Removing a Stream Configuration">
+            <t>An Event Receiver removes the configuration of a stream by making an HTTP
+              DELETE request to the Configuration Endpoint. On receiving a request the Event
+              Transmitter responds with a <spanx style="verb">200 OK</spanx> response if the
+              configuration was successfully removed.</t>
+            
+            <t>The following is a non-normative example request to remove an Event Stream’s
+              configuration:</t>
+            
+            <figure title="Example: Remove Stream Configuration Request"
+              anchor="figremoveconfigreq">
+              <artwork><![CDATA[
+DELETE /set/stream HTTP/1.1
+Host: transmitter.example.com
+Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
+]]></artwork>
+            </figure>
+            
+            <t>Errors are signaled with HTTP status codes as follows:</t>
+            
+            <texttable title="Update Stream Configuration Errors" anchor="tabremoveconfig">
+              <ttcol align="left">Code</ttcol>
+              <ttcol align="left">Description</ttcol>
+              <c>401</c>
+              <c>if authorization failed or it is missing</c>
+              <c>403</c>
+              <c>if the Event Receiver is not allowed to update the stream configuration</c>
+            </texttable>
+          </section>
         </section>
+        
         <section anchor="subjects" title="Subjects">
           <t>An Event Receiver can indicate to an Event Transmitter whether or not the receiver
             wants to receive events about a particular subject by “adding” or “removing” that

@@ -33,7 +33,7 @@ Abstract
 
 Table of Contents
 
-   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
+   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
      1.1.  Notational Conventions  . . . . . . . . . . . . . . . . .   3
    2.  Subject Identifiers . . . . . . . . . . . . . . . . . . . . .   3
      2.1.  Subject Identifier Types  . . . . . . . . . . . . . . . .   4
@@ -63,45 +63,45 @@ Scurtescu, et al.       Expires October 22, 2018                [Page 1]
        4.1.2.  Stream Configuration  . . . . . . . . . . . . . . . .  12
          4.1.2.1.  Reading a Stream's Configuration  . . . . . . . .  13
          4.1.2.2.  Updating a Stream's Configuration . . . . . . . .  15
-       4.1.3.  Subjects  . . . . . . . . . . . . . . . . . . . . . .  18
-         4.1.3.1.  Adding a Subject to a Stream  . . . . . . . . . .  18
-         4.1.3.2.  Removing a Subject  . . . . . . . . . . . . . . .  20
-       4.1.4.  Verification  . . . . . . . . . . . . . . . . . . . .  21
-         4.1.4.1.  Verification Event  . . . . . . . . . . . . . . .  21
-         4.1.4.2.  Triggering a Verification Event.  . . . . . . . .  22
-     4.2.  Authorization . . . . . . . . . . . . . . . . . . . . . .  24
-     4.3.  Security Considerations . . . . . . . . . . . . . . . . .  24
-       4.3.1.  Subject Probing . . . . . . . . . . . . . . . . . . .  24
-       4.3.2.  Information Harvesting  . . . . . . . . . . . . . . .  25
-       4.3.3.  Malicious Subject Removal . . . . . . . . . . . . . .  25
-   5.  Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .  25
-     5.1.  Security Event Token Profle . . . . . . . . . . . . . . .  26
-       5.1.1.  Signature Key Resolution  . . . . . . . . . . . . . .  26
-       5.1.2.  RISC Event Subject  . . . . . . . . . . . . . . . . .  26
-       5.1.3.  Explicit Typing of SETs . . . . . . . . . . . . . . .  26
-       5.1.4.  The "exp" Claim . . . . . . . . . . . . . . . . . . .  27
-       5.1.5.  The "aud" Claim . . . . . . . . . . . . . . . . . . .  27
-       5.1.6.  The "events" claim  . . . . . . . . . . . . . . . . .  28
-       5.1.7.  Security Considerations . . . . . . . . . . . . . . .  28
-         5.1.7.1.  Distingushing SETs from other Kinds of JWTs . . .  28
-     5.2.  SET Token Delivery Using HTTP Profile . . . . . . . . . .  28
-       5.2.1.  Stream Configuration Metadata . . . . . . . . . . . .  28
-         5.2.1.1.  Push Delivery using HTTP  . . . . . . . . . . . .  28
-         5.2.1.2.  Polling Delivery using HTTP . . . . . . . . . . .  29
-   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  29
-     6.1.  Security Event Subject Identifier Types Registry  . . . .  29
-       6.1.1.  Registration Template . . . . . . . . . . . . . . . .  29
-       6.1.2.  Initial Registry Contents . . . . . . . . . . . . . .  30
-       6.1.3.  Guidance for Expert Reviewers . . . . . . . . . . . .  30
-     6.2.  Well-Known URI Registry . . . . . . . . . . . . . . . . .  31
-       6.2.1.  Registry Contents . . . . . . . . . . . . . . . . . .  31
-   7.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .  31
-     7.1.  Subject Information Leakage . . . . . . . . . . . . . . .  31
-   8.  Normative References  . . . . . . . . . . . . . . . . . . . .  31
-   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  33
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  33
+         4.1.2.3.  Removing a Stream Configuration . . . . . . . . .  18
+       4.1.3.  Subjects  . . . . . . . . . . . . . . . . . . . . . .  19
+         4.1.3.1.  Adding a Subject to a Stream  . . . . . . . . . .  19
+         4.1.3.2.  Removing a Subject  . . . . . . . . . . . . . . .  21
+       4.1.4.  Verification  . . . . . . . . . . . . . . . . . . . .  22
+         4.1.4.1.  Verification Event  . . . . . . . . . . . . . . .  22
+         4.1.4.2.  Triggering a Verification Event.  . . . . . . . .  23
+     4.2.  Authorization . . . . . . . . . . . . . . . . . . . . . .  25
+     4.3.  Security Considerations . . . . . . . . . . . . . . . . .  25
+       4.3.1.  Subject Probing . . . . . . . . . . . . . . . . . . .  25
+       4.3.2.  Information Harvesting  . . . . . . . . . . . . . . .  26
+       4.3.3.  Malicious Subject Removal . . . . . . . . . . . . . .  26
+   5.  Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .  26
+     5.1.  Security Event Token Profle . . . . . . . . . . . . . . .  27
+       5.1.1.  Signature Key Resolution  . . . . . . . . . . . . . .  27
+       5.1.2.  RISC Event Subject  . . . . . . . . . . . . . . . . .  27
+       5.1.3.  Explicit Typing of SETs . . . . . . . . . . . . . . .  27
+       5.1.4.  The "exp" Claim . . . . . . . . . . . . . . . . . . .  28
+       5.1.5.  The "aud" Claim . . . . . . . . . . . . . . . . . . .  28
+       5.1.6.  The "events" claim  . . . . . . . . . . . . . . . . .  29
+       5.1.7.  Security Considerations . . . . . . . . . . . . . . .  29
+         5.1.7.1.  Distingushing SETs from other Kinds of JWTs . . .  29
+     5.2.  SET Token Delivery Using HTTP Profile . . . . . . . . . .  29
+       5.2.1.  Stream Configuration Metadata . . . . . . . . . . . .  29
+         5.2.1.1.  Push Delivery using HTTP  . . . . . . . . . . . .  29
+         5.2.1.2.  Polling Delivery using HTTP . . . . . . . . . . .  30
+   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  30
+     6.1.  Security Event Subject Identifier Types Registry  . . . .  30
+       6.1.1.  Registration Template . . . . . . . . . . . . . . . .  30
+       6.1.2.  Initial Registry Contents . . . . . . . . . . . . . .  31
+       6.1.3.  Guidance for Expert Reviewers . . . . . . . . . . . .  31
+     6.2.  Well-Known URI Registry . . . . . . . . . . . . . . . . .  32
+       6.2.1.  Registry Contents . . . . . . . . . . . . . . . . . .  32
+   7.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .  32
+     7.1.  Subject Information Leakage . . . . . . . . . . . . . . .  32
+   8.  Normative References  . . . . . . . . . . . . . . . . . . . .  32
+   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  34
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  34
 
-1.  Introduction
 
 
 
@@ -113,6 +113,8 @@ Scurtescu, et al.       Expires October 22, 2018                [Page 2]
 
                               risc-secevent                   April 2018
 
+
+1.  Introduction
 
 1.1.  Notational Conventions
 
@@ -156,8 +158,6 @@ Scurtescu, et al.       Expires October 22, 2018                [Page 2]
 
    Figure 1: Example: SET Containing a RISC Event with an Email Subject
                                 Identifier
-
-
 
 
 
@@ -971,6 +971,45 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 17]
 
                 Table 4: Update Stream Configuration Errors
 
+4.1.2.3.  Removing a Stream Configuration
+
+   An Event Receiver removes the configuration of a stream by making an
+   HTTP DELETE request to the Configuration Endpoint.  On receiving a
+   request the Event Transmitter responds with a "200 OK" response if
+   the configuration was successfully removed.
+
+   The following is a non-normative example request to remove an Event
+   Stream's configuration:
+
+   DELETE /set/stream HTTP/1.1
+   Host: transmitter.example.com
+   Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
+
+          Figure 15: Example: Remove Stream Configuration Request
+
+   Errors are signaled with HTTP status codes as follows:
+
+   +------+------------------------------------------------------------+
+   | Code | Description                                                |
+   +------+------------------------------------------------------------+
+   | 401  | if authorization failed or it is missing                   |
+   |      |                                                            |
+   | 403  | if the Event Receiver is not allowed to update the stream  |
+   |      | configuration                                              |
+   +------+------------------------------------------------------------+
+
+                Table 5: Update Stream Configuration Errors
+
+
+
+
+
+
+Scurtescu, et al.       Expires October 22, 2018               [Page 18]
+
+                              risc-secevent                   April 2018
+
+
 4.1.3.  Subjects
 
    An Event Receiver can indicate to an Event Transmitter whether or not
@@ -1003,14 +1042,29 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 17]
    transmitter MAY return an empty "200 OK" response or an appropriate
    error code.  See Security Considerations (Section 4.3).
 
+   Errors are signaled with HTTP status codes as follows:
 
 
-Scurtescu, et al.       Expires October 22, 2018               [Page 18]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Scurtescu, et al.       Expires October 22, 2018               [Page 19]
 
                               risc-secevent                   April 2018
 
-
-   Errors are signaled with HTTP status codes as follows:
 
    +------+------------------------------------------------------------+
    | Code | Description                                                |
@@ -1031,7 +1085,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 18]
    |      | gvien amount of time                                       |
    +------+------------------------------------------------------------+
 
-                        Table 5: Add Subject Errors
+                        Table 6: Add Subject Errors
 
    The following is a non-normative example request to add a subject to
    a stream, where the subject is identified by an Email Subject
@@ -1049,29 +1103,24 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 18]
      "verified": true
    }
 
-                  Figure 15: Example: Add Subject Request
+                  Figure 16: Example: Add Subject Request
 
    The following is a non-normative example response to a successful
    request:
-
-
-
-
-
-
-
-
-Scurtescu, et al.       Expires October 22, 2018               [Page 19]
-
-                              risc-secevent                   April 2018
-
 
    HTTP/1.1 200 OK
    Server: transmitter.example.com
    Cache-Control: no-store
    Pragma: no-cache
 
-                 Figure 16: Example: Add Subject Response
+                 Figure 17: Example: Add Subject Response
+
+
+
+Scurtescu, et al.       Expires October 22, 2018               [Page 20]
+
+                              risc-secevent                   April 2018
+
 
 4.1.3.2.  Removing a Subject
 
@@ -1107,7 +1156,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 19]
    |      | gvien amount of time                                       |
    +------+------------------------------------------------------------+
 
-                      Table 6: Remove Subject Errors
+                      Table 7: Remove Subject Errors
 
    The following is a non-normative example request where the subject is
    identified by a Phone Number Subject Identifier:
@@ -1117,7 +1166,14 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 19]
 
 
 
-Scurtescu, et al.       Expires October 22, 2018               [Page 20]
+
+
+
+
+
+
+
+Scurtescu, et al.       Expires October 22, 2018               [Page 21]
 
                               risc-secevent                   April 2018
 
@@ -1133,7 +1189,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 20]
      }
    }
 
-                Figure 17: Example: Remove Subject Request
+                Figure 18: Example: Remove Subject Request
 
    The following is a non-normative example response to a successful
    request:
@@ -1143,7 +1199,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 20]
    Cache-Control: no-store
    Pragma: no-cache
 
-                Figure 18: Example: Remove Subject Response
+                Figure 19: Example: Remove Subject Response
 
 4.1.4.  Verification
 
@@ -1173,7 +1229,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 20]
 
 
 
-Scurtescu, et al.       Expires October 22, 2018               [Page 21]
+Scurtescu, et al.       Expires October 22, 2018               [Page 22]
 
                               risc-secevent                   April 2018
 
@@ -1229,7 +1285,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 21]
 
 
 
-Scurtescu, et al.       Expires October 22, 2018               [Page 22]
+Scurtescu, et al.       Expires October 22, 2018               [Page 23]
 
                               risc-secevent                   April 2018
 
@@ -1247,7 +1303,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 22]
    |      | "min_verification_interval" in Section 4.1.2               |
    +------+------------------------------------------------------------+
 
-                       Table 7: Verification Errors
+                       Table 8: Verification Errors
 
    The following is a non-normative example request to trigger a
    verification event:
@@ -1261,7 +1317,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 22]
      "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
    }
 
-             Figure 19: Example: Trigger Verification Request
+             Figure 20: Example: Trigger Verification Request
 
    The following is a non-normative example response to a successful
    request:
@@ -1271,7 +1327,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 22]
    Cache-Control: no-store
    Pragma: no-cache
 
-             Figure 20: Example: Trigger Verification Response
+             Figure 21: Example: Trigger Verification Response
 
    And the following is a non-normative example of a verification event
    sent to the Event Receiver as a result of the above request:
@@ -1285,7 +1341,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 22]
 
 
 
-Scurtescu, et al.       Expires October 22, 2018               [Page 23]
+Scurtescu, et al.       Expires October 22, 2018               [Page 24]
 
                               risc-secevent                   April 2018
 
@@ -1302,7 +1358,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 23]
   ]
 }
 
-                   Figure 21: Example: Verification SET
+                   Figure 22: Example: Verification SET
 
 4.2.  Authorization
 
@@ -1341,7 +1397,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 23]
 
 
 
-Scurtescu, et al.       Expires October 22, 2018               [Page 24]
+Scurtescu, et al.       Expires October 22, 2018               [Page 25]
 
                               risc-secevent                   April 2018
 
@@ -1397,7 +1453,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 24]
 
 
 
-Scurtescu, et al.       Expires October 22, 2018               [Page 25]
+Scurtescu, et al.       Expires October 22, 2018               [Page 26]
 
                               risc-secevent                   April 2018
 
@@ -1436,7 +1492,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 25]
      }
    }
 
-    Figure 22: Example: SET Containing a RISC Event with a Phone Number
+    Figure 23: Example: SET Containing a RISC Event with a Phone Number
                                   Subject
 
 5.1.3.  Explicit Typing of SETs
@@ -1449,11 +1505,11 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 25]
      "alg":"HS256"
    }
 
-                  Figure 23: Explicitly Typed JOSE Header
+                  Figure 24: Explicitly Typed JOSE Header
 
 
 
-Scurtescu, et al.       Expires October 22, 2018               [Page 26]
+Scurtescu, et al.       Expires October 22, 2018               [Page 27]
 
                               risc-secevent                   April 2018
 
@@ -1503,13 +1559,13 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 26]
   ]
 }
 
-              Figure 24: Example: SET with array 'aud' claim
+              Figure 25: Example: SET with array 'aud' claim
 
 
 
 
 
-Scurtescu, et al.       Expires October 22, 2018               [Page 27]
+Scurtescu, et al.       Expires October 22, 2018               [Page 28]
 
                               risc-secevent                   April 2018
 
@@ -1565,7 +1621,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 27]
 
 
 
-Scurtescu, et al.       Expires October 22, 2018               [Page 28]
+Scurtescu, et al.       Expires October 22, 2018               [Page 29]
 
                               risc-secevent                   April 2018
 
@@ -1621,7 +1677,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 28]
 
 
 
-Scurtescu, et al.       Expires October 22, 2018               [Page 29]
+Scurtescu, et al.       Expires October 22, 2018               [Page 30]
 
                               risc-secevent                   April 2018
 
@@ -1677,7 +1733,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 29]
 
 
 
-Scurtescu, et al.       Expires October 22, 2018               [Page 30]
+Scurtescu, et al.       Expires October 22, 2018               [Page 31]
 
                               risc-secevent                   April 2018
 
@@ -1733,7 +1789,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 30]
 
 
 
-Scurtescu, et al.       Expires October 22, 2018               [Page 31]
+Scurtescu, et al.       Expires October 22, 2018               [Page 32]
 
                               risc-secevent                   April 2018
 
@@ -1789,7 +1845,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 31]
 
 
 
-Scurtescu, et al.       Expires October 22, 2018               [Page 32]
+Scurtescu, et al.       Expires October 22, 2018               [Page 33]
 
                               risc-secevent                   April 2018
 
@@ -1845,4 +1901,4 @@ Authors' Addresses
 
 
 
-Scurtescu, et al.       Expires October 22, 2018               [Page 33]
+Scurtescu, et al.       Expires October 22, 2018               [Page 34]
