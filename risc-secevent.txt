@@ -179,7 +179,7 @@ Scurtescu, et al.       Expires October 22, 2018                [Page 3]
        "https://schemas.openid.net/secevent/risc/event-type/account-\
    enabled": {
          "subject": {
-           "subject_type": "iss-sub",
+           "subject_type": "iss_sub",
            "iss": "https://issuer.example.com/",
            "sub": "abc1234"
          }
@@ -245,7 +245,7 @@ Scurtescu, et al.       Expires October 22, 2018                [Page 4]
    These claims MUST follow the formats of the "iss" claim and "sub"
    claim defined by [RFC7519], respectively.  Both the "iss" claim and
    the "sub" claim MUST NOT be null or empty.  The Issuer and Subject
-   Subject Identifier Type is identified by the name "iss-sub".
+   Subject Identifier Type is identified by the name "iss_sub".
 
 2.1.4.  ID Token Claims Subject Identifier Type
 
@@ -264,7 +264,7 @@ Scurtescu, et al.       Expires October 22, 2018                [Page 4]
 
    If the Subject Identifier contains a "sub" claim, it MUST also
    contain an "iss" claim, as defined in [RFC7519].  The ID Token Claims
-   Subject Identifier Type is identified by the name "id-token-claims".
+   Subject Identifier Type is identified by the name "id_token_claims".
 
 3.  Transmitter Configuration Discovery
 
@@ -1616,7 +1616,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 28]
    o  Change Controller: OIDF RISC Working Group
    o  Defining Document(s): Section 2.1.1 of this document.
 
-   o  Type Name: "id-token-claims"
+   o  Type Name: "id_token_claims"
 
 
 
@@ -1631,7 +1631,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 29]
    o  Change Controller: OIDF RISC Working Group
    o  Defining Document(s): Section 2.1.4 of this document.
 
-   o  Type Name: "iss-sub"
+   o  Type Name: "iss_sub"
    o  Type Description: Subject identifier based on issuer and subject.
    o  Change Controller: OIDF RISC Working Group
    o  Defining Document(s): Section 2.1.3 of this document.
