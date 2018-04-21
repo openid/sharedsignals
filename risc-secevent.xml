@@ -951,12 +951,14 @@ Pragma: no-cache
 
       <section anchor="management-api-auth" title="Authorization">
         <t>HTTP API calls from a Receiver to a Transmitter SHOULD be authorized
-          by providing an access token in the <spanx style="verb">Authorization</spanx> HTTP 
-          header value per Section 2.1 of <xref target="RFC6750"></xref>.</t>
+          by providing an OAuth 2 Access Token as defined by <xref target="RFC6750"/>.</t>
         
         <t>The receiver may obtain an access token using the <xref target="CLIENTCRED">Client 
           Credential Grant</xref>, or any other method suitable for the Receiver and the 
           Transmitter.</t>
+        
+        <t>Other authorization methods MAY be used if the Transmitter and the Receiver have
+        agreement on the method.</t>
       </section>
       
       <section anchor="management-sec" title="Security Considerations">
@@ -1082,9 +1084,9 @@ disabled": {
         </section>
 
         <section anchor="aud-claim" title='The "aud" Claim'>
-          <t>The <spanx style="verb">aud</spanx> claim can be a single value or an array. Each value MAY be the client id if the 
-            receiver is an OAuth 2.0 client, or any other value that uniquely identifies the Receiver to the 
-            Transmitter.</t>
+          <t>The <spanx style="verb">aud</spanx> claim can be a single value or an array. Each value SHOULD be the OAuth 2 client id.
+            Other values that uniquely identifies the Receiver to the 
+            Transmitter MAY be used, if the two parties have agreement on the format.</t>
           
           <t>More than one values can be present if the corresponding Receivers are known to the Transmitter to be the same entity,
           for example a web client and I mobile client of the same application. All the Receivers in this case MUST use the exact
