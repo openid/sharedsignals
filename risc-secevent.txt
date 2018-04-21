@@ -434,9 +434,9 @@ Scurtescu, et al.       Expires October 22, 2018                [Page 7]
 4.  Management API for SET Event Streams
 
    This section defines an HTTP API to be implemented by Event
-   Transmitters and that can be used by Event Receivers to query the
-   Event Stream status, to add and remove subjects and to trigger
-   verification.
+   Transmitters and that can be used by Event Receivers to query and
+   update the Event Stream configuration and status, to add and remove
+   subjects and to trigger verification.
 
    This section is based on Management API for SET Event Streams
    [MGMTAPI].
@@ -470,6 +470,10 @@ Scurtescu, et al.       Expires October 22, 2018                [Page 8]
 
                    Figure 6: Event Stream Management API
 
+   It is OPTIONAL for Transmitters to implement a Management API, but it
+   is RECOMMENDED that they implement it, especially the endpoints for
+   querying the Stream Status and for triggering Verification.
+
 4.1.  Event Stream Management
 
    Event Receivers manage how they receive events, and the subjects
@@ -495,10 +499,6 @@ Scurtescu, et al.       Expires October 22, 2018                [Page 8]
       An endpoint used to request the Event Transmitter transmit a
       Verification Event over the Event Stream.
 
-   An Event Transmitter MAY use the same URLs as endpoints for multiple
-   streams, provided that the Event Transmitter has some mechanism
-   through which they can identify the applicable Event Stream for any
-
 
 
 Scurtescu, et al.       Expires October 22, 2018                [Page 9]
@@ -506,6 +506,9 @@ Scurtescu, et al.       Expires October 22, 2018                [Page 9]
                               risc-secevent                   April 2018
 
 
+   An Event Transmitter MAY use the same URLs as endpoints for multiple
+   streams, provided that the Event Transmitter has some mechanism
+   through which they can identify the applicable Event Stream for any
    given request, e.g. from authentication credentials.  The definition
    of such mechanisms is outside the scope of this specification.
 
@@ -544,9 +547,6 @@ Scurtescu, et al.       Expires October 22, 2018                [Page 9]
               Figure 7: Example: Check Stream Status Request
 
    The following is a non-normative example response:
-
-
-
 
 
 

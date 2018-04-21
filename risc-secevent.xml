@@ -309,8 +309,8 @@ Content-Type: application/json
     
     <section anchor="management" title="Management API for SET Event Streams">
       <t>This section defines an HTTP API to be implemented by Event Transmitters
-        and that can be used by Event Receivers to query the Event Stream status, to
-        add and remove subjects and to trigger verification.</t>
+        and that can be used by Event Receivers to query and update the Event Stream 
+        configuration and status, to add and remove subjects and to trigger verification.</t>
       
       <t>This section is based on <xref target="MGMTAPI">Management API for SET Event Streams</xref>.</t>
       
@@ -333,6 +333,10 @@ Content-Type: application/json
 |            |                |            |
 +------------+                +------------+
 ]]></artwork></figure>
+      
+      <t>It is OPTIONAL for Transmitters to implement a Management API, but it is
+      RECOMMENDED that they implement it, especially the endpoints for querying the 
+      Stream Status and for triggering Verification.</t>
       
       <section anchor="management-api" title="Event Stream Management">
         <t>Event Receivers manage how they receive events, and the subjects about which they want
