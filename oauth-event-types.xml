@@ -51,7 +51,7 @@
       </address>
     </author>
 
-    <date year="2018" month="April" day="19"/>
+    <date year="2018" month="April" day="22"/>
 
     <workgroup>RISC Working Group</workgroup>
 
@@ -84,7 +84,7 @@
       
       <section anchor="subject-identifier-token" title="Token Subject Identifier Type">
         <t>A Token Subject Identifier Type describes an OAuth 2 token subject and it is identified by
-          the name <spanx style="verb">oauth-token</spanx>.</t>
+          the name <spanx style="verb">oauth_token</spanx>.</t>
         
         <t>Subject Identifiers of this type MUST contain the following claims:<list style="symbols">
           <t>token_type - required, describes the OAuth 2 token type. Possible values:<list style="symbols">
@@ -108,7 +108,7 @@
         <figure anchor="subject-identifier-token-example" title="Example: Token Subject Identifier Type">
           <artwork><![CDATA[
 "subject": {
-  "subject_type": "oauth-token",
+  "subject_type": "oauth_token",
   "token_type": "refresh_token",
   "token_identifier_type": "token_string",
   "token": "7265667265736820746F6B656E20737472696E67"
@@ -119,7 +119,7 @@
       
       <section anchor="subject-identifier-client" title="Client Subject Identifier Type">
         <t>A Client Subject Identifier Type describes an OAuth 2 client subject and it is identified by
-          the name <spanx style="verb">oauth-client</spanx>.</t>
+          the name <spanx style="verb">oauth_client</spanx>.</t>
         
         <t>Subjects identifiers of this type MUST contain the following claim:<list style="symbols">
           <t>client_id - required, the OAuth 2 client id.</t>
@@ -128,7 +128,7 @@
         <figure anchor="subject-identifier-client-example" title="Example: Client Subject Identifier Type">
           <artwork><![CDATA[
 "subject": {
-  "subject_type": "oauth-client",
+  "subject_type": "oauth_client",
   "client_id": "636C69656E74206964"
 }
             ]]></artwork>
@@ -158,7 +158,7 @@
           <spanx style="verb">subject</spanx> alone or by <spanx style="verb">subject</spanx>
           in combination with <spanx style="verb">token_subject</spanx>. The token is unique
           in the context of a given Transmitter and not globally unique. TODO: do we need a
-          <spanx style="verb">iss</spanx> attribute for the <spanx style="verb">oauth-token</spanx>
+          <spanx style="verb">iss</spanx> attribute for the <spanx style="verb">oauth_token</spanx>
           Subject Type?</t>
         
         <figure anchor="token-issued-example" title="Example: Token Issued">
@@ -172,7 +172,7 @@
     "https://schemas.openid.net/secevent/oauth/event-type/\
     token-issued": {
       "subject": {
-        "subject_type": "oauth-token",
+        "subject_type": "oauth_token",
         "token_type": "refresh_token",
         "token_identifier_type": "token_string",
         "token": "7265667265736820746F6B656E20737472696E67"
@@ -208,7 +208,7 @@
         <spanx style="verb">subject</spanx> alone or by <spanx style="verb">subject</spanx>
         in combination with <spanx style="verb">token_subject</spanx>. The token is unique
         in the context of a given Transmitter and not globally unique. TODO: do we need a
-        <spanx style="verb">iss</spanx> attribute for the <spanx style="verb">oauth-token</spanx>
+        <spanx style="verb">iss</spanx> attribute for the <spanx style="verb">oauth_token</spanx>
         Subject Type?</t>
         
         <figure anchor="token-revoked-example" title="Example: Token Revoked">
@@ -222,7 +222,7 @@
     "https://schemas.openid.net/secevent/oauth/event-type/\
     token-revoked": {
       "subject": {
-        "subject_type": "oauth-token",
+        "subject_type": "oauth_token",
         "token_type": "refresh_token",
         "token_identifier_type": "token_string",
         "token": "7265667265736820746F6B656E20737472696E67"
@@ -324,7 +324,7 @@
     
     <section anchor="iana" title="IANA Considerations">
       <section anchor="iana-subject-identifier-type-registry" title="Subject Identifier Type Registry">
-        <t>TODO: register <spanx style="verb">oauth-token</spanx> and <spanx style="verb">oauth-client</spanx> 
+        <t>TODO: register <spanx style="verb">oauth_token</spanx> and <spanx style="verb">oauth_client</spanx> 
           subject identifier types.</t>
       </section>
     </section>

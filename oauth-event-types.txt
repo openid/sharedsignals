@@ -10,7 +10,7 @@
                                                                   Oracle
                                                               J. Bradley
                                                                   Yubico
-                                                          April 19, 2018
+                                                          April 22, 2018
 
 
                            OAuth Event Types
@@ -53,7 +53,7 @@ Table of Contents
 
 
 
-Scurtescu, et al.       Expires October 21, 2018                [Page 1]
+Scurtescu, et al.       Expires October 24, 2018                [Page 1]
 
                             oauth-event-types                 April 2018
 
@@ -74,7 +74,7 @@ Scurtescu, et al.       Expires October 21, 2018                [Page 1]
 2.1.  Token Subject Identifier Type
 
    A Token Subject Identifier Type describes an OAuth 2 token subject
-   and it is identified by the name "oauth-token".
+   and it is identified by the name "oauth_token".
 
    Subject Identifiers of this type MUST contain the following claims:
 
@@ -109,13 +109,13 @@ Scurtescu, et al.       Expires October 21, 2018                [Page 1]
 
 
 
-Scurtescu, et al.       Expires October 21, 2018                [Page 2]
+Scurtescu, et al.       Expires October 24, 2018                [Page 2]
 
                             oauth-event-types                 April 2018
 
 
    "subject": {
-     "subject_type": "oauth-token",
+     "subject_type": "oauth_token",
      "token_type": "refresh_token",
      "token_identifier_type": "token_string",
      "token": "7265667265736820746F6B656E20737472696E67"
@@ -126,14 +126,14 @@ Scurtescu, et al.       Expires October 21, 2018                [Page 2]
 2.2.  Client Subject Identifier Type
 
    A Client Subject Identifier Type describes an OAuth 2 client subject
-   and it is identified by the name "oauth-client".
+   and it is identified by the name "oauth_client".
 
    Subjects identifiers of this type MUST contain the following claim:
 
    o  client_id - required, the OAuth 2 client id.
 
    "subject": {
-     "subject_type": "oauth-client",
+     "subject_type": "oauth_client",
      "client_id": "636C69656E74206964"
    }
 
@@ -165,7 +165,7 @@ Scurtescu, et al.       Expires October 21, 2018                [Page 2]
 
 
 
-Scurtescu, et al.       Expires October 21, 2018                [Page 3]
+Scurtescu, et al.       Expires October 24, 2018                [Page 3]
 
                             oauth-event-types                 April 2018
 
@@ -174,7 +174,7 @@ Scurtescu, et al.       Expires October 21, 2018                [Page 3]
    either by "subject" alone or by "subject" in combination with
    "token_subject".  The token is unique in the context of a given
    Transmitter and not globally unique.  TODO: do we need a "iss"
-   attribute for the "oauth-token" Subject Type?
+   attribute for the "oauth_token" Subject Type?
 
    {
      "iss": "https://idp.example.com/",
@@ -185,7 +185,7 @@ Scurtescu, et al.       Expires October 21, 2018                [Page 3]
        "https://schemas.openid.net/secevent/oauth/event-type/\
        token-issued": {
          "subject": {
-           "subject_type": "oauth-token",
+           "subject_type": "oauth_token",
            "token_type": "refresh_token",
            "token_identifier_type": "token_string",
            "token": "7265667265736820746F6B656E20737472696E67"
@@ -221,7 +221,7 @@ Scurtescu, et al.       Expires October 21, 2018                [Page 3]
 
 
 
-Scurtescu, et al.       Expires October 21, 2018                [Page 4]
+Scurtescu, et al.       Expires October 24, 2018                [Page 4]
 
                             oauth-event-types                 April 2018
 
@@ -237,7 +237,7 @@ Scurtescu, et al.       Expires October 21, 2018                [Page 4]
    either by "subject" alone or by "subject" in combination with
    "token_subject".  The token is unique in the context of a given
    Transmitter and not globally unique.  TODO: do we need a "iss"
-   attribute for the "oauth-token" Subject Type?
+   attribute for the "oauth_token" Subject Type?
 
    {
      "iss": "https://idp.example.com/",
@@ -248,7 +248,7 @@ Scurtescu, et al.       Expires October 21, 2018                [Page 4]
        "https://schemas.openid.net/secevent/oauth/event-type/\
        token-revoked": {
          "subject": {
-           "subject_type": "oauth-token",
+           "subject_type": "oauth_token",
            "token_type": "refresh_token",
            "token_identifier_type": "token_string",
            "token": "7265667265736820746F6B656E20737472696E67"
@@ -277,7 +277,7 @@ Scurtescu, et al.       Expires October 21, 2018                [Page 4]
 
 
 
-Scurtescu, et al.       Expires October 21, 2018                [Page 5]
+Scurtescu, et al.       Expires October 24, 2018                [Page 5]
 
                             oauth-event-types                 April 2018
 
@@ -333,7 +333,7 @@ Scurtescu, et al.       Expires October 21, 2018                [Page 5]
 
 
 
-Scurtescu, et al.       Expires October 21, 2018                [Page 6]
+Scurtescu, et al.       Expires October 24, 2018                [Page 6]
 
                             oauth-event-types                 April 2018
 
@@ -380,7 +380,7 @@ Scurtescu, et al.       Expires October 21, 2018                [Page 6]
 
 4.1.  Subject Identifier Type Registry
 
-   TODO: register "oauth-token" and "oauth-client" subject identifier
+   TODO: register "oauth_token" and "oauth_client" subject identifier
    types.
 
 
@@ -389,7 +389,7 @@ Scurtescu, et al.       Expires October 21, 2018                [Page 6]
 
 
 
-Scurtescu, et al.       Expires October 21, 2018                [Page 7]
+Scurtescu, et al.       Expires October 24, 2018                [Page 7]
 
                             oauth-event-types                 April 2018
 
@@ -445,7 +445,7 @@ Authors' Addresses
 
 
 
-Scurtescu, et al.       Expires October 21, 2018                [Page 8]
+Scurtescu, et al.       Expires October 24, 2018                [Page 8]
 
                             oauth-event-types                 April 2018
 
@@ -501,4 +501,4 @@ Scurtescu, et al.       Expires October 21, 2018                [Page 8]
 
 
 
-Scurtescu, et al.       Expires October 21, 2018                [Page 9]
+Scurtescu, et al.       Expires October 24, 2018                [Page 9]
