@@ -31,14 +31,14 @@ Table of Contents
    3.  Event Types . . . . . . . . . . . . . . . . . . . . . . . . .   3
      3.1.  Token Issued  . . . . . . . . . . . . . . . . . . . . . .   3
      3.2.  Token Revoked . . . . . . . . . . . . . . . . . . . . . .   4
-     3.3.  Tokens Revoked  . . . . . . . . . . . . . . . . . . . . .   5
-     3.4.  Client Disabled . . . . . . . . . . . . . . . . . . . . .   6
-     3.5.  Client Enabled  . . . . . . . . . . . . . . . . . . . . .   7
-     3.6.  Client Credential Changed . . . . . . . . . . . . . . . .   7
-   4.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   7
-     4.1.  Subject Identifier Type Registry  . . . . . . . . . . . .   7
+     3.3.  Tokens Revoked  . . . . . . . . . . . . . . . . . . . . .   6
+     3.4.  Client Disabled . . . . . . . . . . . . . . . . . . . . .   7
+     3.5.  Client Enabled  . . . . . . . . . . . . . . . . . . . . .   8
+     3.6.  Client Credential Changed . . . . . . . . . . . . . . . .   8
+   4.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   8
+     4.1.  Subject Identifier Type Registry  . . . . . . . . . . . .   8
    5.  Normative References  . . . . . . . . . . . . . . . . . . . .   8
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   8
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   9
 
 1.  Introduction
 
@@ -230,14 +230,57 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 4]
       Section 2.1 of [RISC-PROFILE] that identifies the account
       associated with the token.
 
-   o  reason - optional, TODO: possible values ("inactive", "too_many",
-      "api")?
+   o  reason - optional, the reason why the token was revoked.  Possible
+      values:
+
+      *  inactive - token was revoked by the issuer because of
+         inactivity
+
+      *  too_many - token was revoked by the issuer because an internal
+         limit was reached
+
+      *  api - token was revoked through an API call like [RFC7009]
+
+      *  TODO: add extension mechanism (either through URIs or IANA
+         registry)
 
    The token SHOULD be uniquely identified by the provided attributes,
    either by "subject" alone or by "subject" in combination with
    "token_subject".  The token is unique in the context of a given
    Transmitter and not globally unique.  TODO: do we need a "iss"
    attribute for the "oauth_token" Subject Type?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Scurtescu, et al.       Expires October 26, 2018                [Page 5]
+
+                            oauth-event-types                 April 2018
+
 
    {
      "iss": "https://idp.example.com/",
@@ -275,14 +318,25 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 4]
    Tokens Revoked signals that all tokens issued for the account
    identified by the subject have been revoked.
 
+   Attributes: none
 
 
-Scurtescu, et al.       Expires October 26, 2018                [Page 5]
+
+
+
+
+
+
+
+
+
+
+
+
+Scurtescu, et al.       Expires October 26, 2018                [Page 6]
 
                             oauth-event-types                 April 2018
 
-
-   Attributes: none
 
    {
      "iss": "https://idp.example.com/",
@@ -317,27 +371,6 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 5]
 
    Attributes: TODO use client subject identifier
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Scurtescu, et al.       Expires October 26, 2018                [Page 6]
-
-                            oauth-event-types                 April 2018
-
-
    {
      "iss": "https://idp.example.com/",
      "jti": "756E69717565206964656E746966696572",
@@ -353,6 +386,13 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 6]
    character)_
 
                     Figure 6: Example: Client Disabled
+
+
+
+Scurtescu, et al.       Expires October 26, 2018                [Page 7]
+
+                            oauth-event-types                 April 2018
+
 
 3.5.  Client Enabled
 
@@ -383,17 +423,6 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 6]
    TODO: register "oauth_token" and "oauth_client" subject identifier
    types.
 
-
-
-
-
-
-
-Scurtescu, et al.       Expires October 26, 2018                [Page 7]
-
-                            oauth-event-types                 April 2018
-
-
 5.  Normative References
 
    [JSON]     Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
@@ -408,6 +437,18 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 7]
    [RFC6749]  Hardt, D., Ed., "The OAuth 2.0 Authorization Framework",
               RFC 6749, DOI 10.17487/RFC6749, October 2012,
               <https://www.rfc-editor.org/info/rfc6749>.
+
+   [RFC7009]  Lodderstedt, T., Ed., Dronia, S., and M. Scurtescu, "OAuth
+              2.0 Token Revocation", RFC 7009, DOI 10.17487/RFC7009,
+              August 2013, <https://www.rfc-editor.org/info/rfc7009>.
+
+
+
+
+Scurtescu, et al.       Expires October 26, 2018                [Page 8]
+
+                            oauth-event-types                 April 2018
+
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
@@ -439,51 +480,10 @@ Authors' Addresses
    Email: phil.hunt@yahoo.com
 
 
-
-
-
-
-
-
-Scurtescu, et al.       Expires October 26, 2018                [Page 8]
-
-                            oauth-event-types                 April 2018
-
-
    John Bradley
    Yubico
 
    Email: secevemt@ve7jtb.com
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

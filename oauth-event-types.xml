@@ -200,7 +200,13 @@
             that identifies the token.</t>
           <t>token_subject - optional, a Subject Identifier as defined by Section 2.1 of <xref target="RISC-PROFILE"/> 
             that identifies the account associated with the token.</t>
-          <t>reason - optional, TODO: possible values ("inactive", "too_many", "api")?</t>
+          <t>reason - optional, the reason why the token was revoked.
+            Possible values: <list style="symbols">
+              <t>inactive - token was revoked by the issuer because of inactivity</t>
+              <t>too_many - token was revoked by the issuer because an internal limit was reached</t>
+              <t>api - token was revoked through an API call like <xref target="RFC7009"/></t>
+              <t>TODO: add extension mechanism (either through URIs or IANA registry)</t>
+            </list></t>
         </list></t>
         
         <t>The token SHOULD be uniquely identified by the provided attributes, either by 
@@ -408,6 +414,29 @@
           </author>
           <date/>
         </front>
+      </reference>
+      
+      <reference anchor="RFC7009" target="https://www.rfc-editor.org/info/rfc7009">
+        <front>
+          <title>OAuth 2.0 Token Revocation</title>
+          <author initials="T." surname="Lodderstedt" fullname="T. Lodderstedt" role="editor">
+            <organization/>
+          </author>
+          <author initials="S." surname="Dronia" fullname="S. Dronia">
+            <organization/>
+          </author>
+          <author initials="M." surname="Scurtescu" fullname="M. Scurtescu">
+            <organization/>
+          </author>
+          <date year="2013" month="August"/>
+          <abstract>
+            <t>
+              This document proposes an additional endpoint for OAuth authorization servers, which allows clients to notify the authorization server that a previously obtained refresh or access token is no longer needed. This allows the authorization server to clean up security credentials. A revocation request will invalidate the actual token and, if applicable, other tokens based on the same authorization grant.
+            </t>
+          </abstract>
+        </front>
+        <seriesInfo name="RFC" value="7009"/>
+        <seriesInfo name="DOI" value="10.17487/RFC7009"/>
       </reference>
     </references>
   </back>
