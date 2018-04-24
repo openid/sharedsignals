@@ -37,7 +37,7 @@ Table of Contents
      3.6.  Client Credential Changed . . . . . . . . . . . . . . . .   8
    4.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   8
      4.1.  Subject Identifier Type Registry  . . . . . . . . . . . .   8
-   5.  Normative References  . . . . . . . . . . . . . . . . . . . .   8
+   5.  Normative References  . . . . . . . . . . . . . . . . . . . .   9
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   9
 
 1.  Introduction
@@ -241,6 +241,10 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 4]
 
       *  api - token was revoked through an API call like [RFC7009]
 
+      *  user - token was revoked explicitly by the user
+
+      *  issuer - token was revoked by the issuer for some other reason
+
       *  TODO: add extension mechanism (either through URIs or IANA
          registry)
 
@@ -249,10 +253,6 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 4]
    "token_subject".  The token is unique in the context of a given
    Transmitter and not globally unique.  TODO: do we need a "iss"
    attribute for the "oauth_token" Subject Type?
-
-
-
-
 
 
 
@@ -300,7 +300,8 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 5]
            "subject_type": "iss-sub",
            "iss": "https://idp.example.com/",
            "sub": "75736572206964"
-         }
+         },
+         "reason": "inactive"
        }
      }
    }
@@ -318,17 +319,16 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 5]
    Tokens Revoked signals that all tokens issued for the account
    identified by the subject have been revoked.
 
-   Attributes: none
+   Attributes:
 
+   o  subject - optional, a Subject Identifier as defined by Section 2.1
+      of [RISC-PROFILE] that identifies the account associated with the
+      token.
 
+   o  reason - optional, the reason why all the tokens were revoked.
+      Possible values:
 
-
-
-
-
-
-
-
+      *  user - all tokens were revoked explicitly by the user
 
 
 
@@ -337,6 +337,11 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 6]
 
                             oauth-event-types                 April 2018
 
+
+      *  issuer - all tokens were revoked by the issuer
+
+      *  TODO: add extension mechanism (either through URIs or IANA
+         registry)
 
    {
      "iss": "https://idp.example.com/",
@@ -371,6 +376,24 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 6]
 
    Attributes: TODO use client subject identifier
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+Scurtescu, et al.       Expires October 26, 2018                [Page 7]
+
+                            oauth-event-types                 April 2018
+
+
    {
      "iss": "https://idp.example.com/",
      "jti": "756E69717565206964656E746966696572",
@@ -386,13 +409,6 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 6]
    character)_
 
                     Figure 6: Example: Client Disabled
-
-
-
-Scurtescu, et al.       Expires October 26, 2018                [Page 7]
-
-                            oauth-event-types                 April 2018
-
 
 3.5.  Client Enabled
 
@@ -423,11 +439,18 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 7]
    TODO: register "oauth_token" and "oauth_client" subject identifier
    types.
 
-5.  Normative References
 
-   [JSON]     Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
-              Interchange Format", RFC 7159, DOI 10.17487/RFC7159, March
-              2014, <https://www.rfc-editor.org/info/rfc7159>.
+
+
+
+
+
+Scurtescu, et al.       Expires October 26, 2018                [Page 8]
+
+                            oauth-event-types                 April 2018
+
+
+5.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -441,14 +464,6 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 7]
    [RFC7009]  Lodderstedt, T., Ed., Dronia, S., and M. Scurtescu, "OAuth
               2.0 Token Revocation", RFC 7009, DOI 10.17487/RFC7009,
               August 2013, <https://www.rfc-editor.org/info/rfc7009>.
-
-
-
-
-Scurtescu, et al.       Expires October 26, 2018                [Page 8]
-
-                            oauth-event-types                 April 2018
-
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
@@ -480,6 +495,17 @@ Authors' Addresses
    Email: phil.hunt@yahoo.com
 
 
+
+
+
+
+
+
+Scurtescu, et al.       Expires October 26, 2018                [Page 9]
+
+                            oauth-event-types                 April 2018
+
+
    John Bradley
    Yubico
 
@@ -501,4 +527,34 @@ Authors' Addresses
 
 
 
-Scurtescu, et al.       Expires October 26, 2018                [Page 9]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Scurtescu, et al.       Expires October 26, 2018               [Page 10]

@@ -205,6 +205,8 @@
               <t>inactive - token was revoked by the issuer because of inactivity</t>
               <t>too_many - token was revoked by the issuer because an internal limit was reached</t>
               <t>api - token was revoked through an API call like <xref target="RFC7009"/></t>
+              <t>user - token was revoked explicitly by the user</t>
+              <t>issuer - token was revoked by the issuer for some other reason</t>
               <t>TODO: add extension mechanism (either through URIs or IANA registry)</t>
             </list></t>
         </list></t>
@@ -236,7 +238,8 @@
         "subject_type": "iss-sub",
         "iss": "https://idp.example.com/",
         "sub": "75736572206964"
-      }
+      },
+      "reason": "inactive"
     }
   }
 }
@@ -252,7 +255,16 @@
         <t>Tokens Revoked signals that all tokens issued for the account identified by the subject have been
           revoked.</t>
         
-        <t>Attributes: none</t>
+        <t>Attributes:<list style="symbols">
+          <t>subject - optional, a Subject Identifier as defined by Section 2.1 of <xref target="RISC-PROFILE"/> 
+            that identifies the account associated with the token.</t>
+          <t>reason - optional, the reason why all the tokens were revoked.
+            Possible values: <list style="symbols">
+              <t>user - all tokens were revoked explicitly by the user</t>
+              <t>issuer - all tokens were revoked by the issuer</t>
+              <t>TODO: add extension mechanism (either through URIs or IANA registry)</t>
+            </list></t>
+        </list></t>
         
         <figure anchor="tokens-revoked-example" title="Example: Tokens Revoked">
           <artwork><![CDATA[
@@ -337,17 +349,6 @@
 
   <back>
     <references title='Normative References'>
-
-      <reference anchor="JSON" target='https://www.rfc-editor.org/info/rfc7159'>
-        <front>
-          <title>The JavaScript Object Notation (JSON) Data Interchange Format</title>
-            <author initials='T.' surname='Bray' fullname='T. Bray' role='editor'><organization /></author>
-            <date year='2014' month='March' />
-            <abstract><t>JavaScript Object Notation (JSON) is a lightweight, text-based, language-independent data interchange format.  It was derived from the ECMAScript Programming Language Standard.  JSON defines a small set of formatting rules for the portable representation of structured data.</t><t>This document removes inconsistencies with other specifications of JSON, repairs specification errors, and offers experience-based interoperability guidance.</t></abstract>
-        </front>
-        <seriesInfo name='RFC' value='7159'/>
-        <seriesInfo name='DOI' value='10.17487/RFC7159'/>
-      </reference>
 
       <reference anchor="SET" target="https://tools.ietf.org/html/draft-ietf-secevent-token">
         <front>
