@@ -8,7 +8,7 @@
                                                                   Amazon
                                                               J. Bradley
                                                                   Yubico
-                                                          April 20, 2018
+                                                          April 24, 2018
 
 
                   RISC profile of IETF Security Events
@@ -53,7 +53,7 @@ Table of Contents
 
 
 
-Scurtescu, et al.       Expires October 22, 2018                [Page 1]
+Scurtescu, et al.       Expires October 26, 2018                [Page 1]
 
                               risc-secevent                   April 2018
 
@@ -109,7 +109,7 @@ Scurtescu, et al.       Expires October 22, 2018                [Page 1]
 
 
 
-Scurtescu, et al.       Expires October 22, 2018                [Page 2]
+Scurtescu, et al.       Expires October 26, 2018                [Page 2]
 
                               risc-secevent                   April 2018
 
@@ -165,7 +165,7 @@ Scurtescu, et al.       Expires October 22, 2018                [Page 2]
 
 
 
-Scurtescu, et al.       Expires October 22, 2018                [Page 3]
+Scurtescu, et al.       Expires October 26, 2018                [Page 3]
 
                               risc-secevent                   April 2018
 
@@ -221,7 +221,7 @@ Scurtescu, et al.       Expires October 22, 2018                [Page 3]
 
 
 
-Scurtescu, et al.       Expires October 22, 2018                [Page 4]
+Scurtescu, et al.       Expires October 26, 2018                [Page 4]
 
                               risc-secevent                   April 2018
 
@@ -277,7 +277,7 @@ Scurtescu, et al.       Expires October 22, 2018                [Page 4]
 
 
 
-Scurtescu, et al.       Expires October 22, 2018                [Page 5]
+Scurtescu, et al.       Expires October 26, 2018                [Page 5]
 
                               risc-secevent                   April 2018
 
@@ -333,7 +333,7 @@ Scurtescu, et al.       Expires October 22, 2018                [Page 5]
 
 
 
-Scurtescu, et al.       Expires October 22, 2018                [Page 6]
+Scurtescu, et al.       Expires October 26, 2018                [Page 6]
 
                               risc-secevent                   April 2018
 
@@ -389,7 +389,7 @@ Scurtescu, et al.       Expires October 22, 2018                [Page 6]
 
 
 
-Scurtescu, et al.       Expires October 22, 2018                [Page 7]
+Scurtescu, et al.       Expires October 26, 2018                [Page 7]
 
                               risc-secevent                   April 2018
 
@@ -445,7 +445,7 @@ Scurtescu, et al.       Expires October 22, 2018                [Page 7]
 
 
 
-Scurtescu, et al.       Expires October 22, 2018                [Page 8]
+Scurtescu, et al.       Expires October 26, 2018                [Page 8]
 
                               risc-secevent                   April 2018
 
@@ -501,7 +501,7 @@ Scurtescu, et al.       Expires October 22, 2018                [Page 8]
 
 
 
-Scurtescu, et al.       Expires October 22, 2018                [Page 9]
+Scurtescu, et al.       Expires October 26, 2018                [Page 9]
 
                               risc-secevent                   April 2018
 
@@ -557,7 +557,7 @@ Scurtescu, et al.       Expires October 22, 2018                [Page 9]
 
 
 
-Scurtescu, et al.       Expires October 22, 2018               [Page 10]
+Scurtescu, et al.       Expires October 26, 2018               [Page 10]
 
                               risc-secevent                   April 2018
 
@@ -613,7 +613,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 10]
 
 
 
-Scurtescu, et al.       Expires October 22, 2018               [Page 11]
+Scurtescu, et al.       Expires October 26, 2018               [Page 11]
 
                               risc-secevent                   April 2018
 
@@ -656,7 +656,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 11]
    object with the following properties:
 
    iss
-      *Read-Only*, a URL using the https scheme with no query or
+      *Read-Only*, A URL using the https scheme with no query or
       fragment component that the Transmitter asserts as its Issuer
       Identifier.  This MUST be identical to the "iss" Claim value in
       Security Event Tokens issued from this Transmitter.
@@ -669,7 +669,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 11]
 
 
 
-Scurtescu, et al.       Expires October 22, 2018               [Page 12]
+Scurtescu, et al.       Expires October 26, 2018               [Page 12]
 
                               risc-secevent                   April 2018
 
@@ -700,6 +700,14 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 12]
       The actual delivery method is identified by the special key
       "method" with the value being a URI as defined in Section 5.2.1.
 
+   min_verification_interval
+      *Read-Only*, An integer indicating the minimum amount of time in
+      seconds that must pass in between verification requests.  If an
+      Event Receiver submits verification requests more frequently than
+      this, the Event Transmitter MAY respond with a 429 status code.
+      An Event Transmitter SHOULD NOT respond with a 429 status code if
+      an Event Receiver is not exceeding this frequency.
+
    subject_type
       *Read-Write*, The Subject Identifier Type that the Receiver wants
       for the events.  If not set then the Transmitter might decide to
@@ -714,21 +722,19 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 12]
    An Event Receiver gets the current configuration of a stream by
    making an HTTP GET request to the Configuration Endpoint.  On
    receiving a valid request the Event Transmitter responds with a "200
+
+
+
+Scurtescu, et al.       Expires October 26, 2018               [Page 13]
+
+                              risc-secevent                   April 2018
+
+
    OK" response containing a JSON [RFC7159] representation of the
    stream's configuration in the body.
 
    The following is a non-normative example request to read an Event
    Stream's configuration:
-
-
-
-
-
-
-Scurtescu, et al.       Expires October 22, 2018               [Page 13]
-
-                              risc-secevent                   April 2018
-
 
    GET /set/stream HTTP/1.1
    Host: transmitter.example.com
@@ -772,19 +778,15 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 13]
 
           Figure 12: Example: Read Stream Configuration Response
 
-   Errors are signaled with HTTP status codes as follows:
 
 
 
-
-
-
-
-
-Scurtescu, et al.       Expires October 22, 2018               [Page 14]
+Scurtescu, et al.       Expires October 26, 2018               [Page 14]
 
                               risc-secevent                   April 2018
 
+
+   Errors are signaled with HTTP status codes as follows:
 
    +------+------------------------------------------------------------+
    | Code | Description                                                |
@@ -835,9 +837,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 14]
 
 
 
-
-
-Scurtescu, et al.       Expires October 22, 2018               [Page 15]
+Scurtescu, et al.       Expires October 26, 2018               [Page 15]
 
                               risc-secevent                   April 2018
 
@@ -893,7 +893,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 15]
 
 
 
-Scurtescu, et al.       Expires October 22, 2018               [Page 16]
+Scurtescu, et al.       Expires October 26, 2018               [Page 16]
 
                               risc-secevent                   April 2018
 
@@ -949,7 +949,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 16]
 
 
 
-Scurtescu, et al.       Expires October 22, 2018               [Page 17]
+Scurtescu, et al.       Expires October 26, 2018               [Page 17]
 
                               risc-secevent                   April 2018
 
@@ -1005,7 +1005,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 17]
 
 
 
-Scurtescu, et al.       Expires October 22, 2018               [Page 18]
+Scurtescu, et al.       Expires October 26, 2018               [Page 18]
 
                               risc-secevent                   April 2018
 
@@ -1061,7 +1061,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 18]
 
 
 
-Scurtescu, et al.       Expires October 22, 2018               [Page 19]
+Scurtescu, et al.       Expires October 26, 2018               [Page 19]
 
                               risc-secevent                   April 2018
 
@@ -1117,7 +1117,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 19]
 
 
 
-Scurtescu, et al.       Expires October 22, 2018               [Page 20]
+Scurtescu, et al.       Expires October 26, 2018               [Page 20]
 
                               risc-secevent                   April 2018
 
@@ -1173,7 +1173,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 20]
 
 
 
-Scurtescu, et al.       Expires October 22, 2018               [Page 21]
+Scurtescu, et al.       Expires October 26, 2018               [Page 21]
 
                               risc-secevent                   April 2018
 
@@ -1229,7 +1229,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 21]
 
 
 
-Scurtescu, et al.       Expires October 22, 2018               [Page 22]
+Scurtescu, et al.       Expires October 26, 2018               [Page 22]
 
                               risc-secevent                   April 2018
 
@@ -1285,7 +1285,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 22]
 
 
 
-Scurtescu, et al.       Expires October 22, 2018               [Page 23]
+Scurtescu, et al.       Expires October 26, 2018               [Page 23]
 
                               risc-secevent                   April 2018
 
@@ -1341,7 +1341,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 23]
 
 
 
-Scurtescu, et al.       Expires October 22, 2018               [Page 24]
+Scurtescu, et al.       Expires October 26, 2018               [Page 24]
 
                               risc-secevent                   April 2018
 
@@ -1397,7 +1397,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 24]
 
 
 
-Scurtescu, et al.       Expires October 22, 2018               [Page 25]
+Scurtescu, et al.       Expires October 26, 2018               [Page 25]
 
                               risc-secevent                   April 2018
 
@@ -1453,7 +1453,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 25]
 
 
 
-Scurtescu, et al.       Expires October 22, 2018               [Page 26]
+Scurtescu, et al.       Expires October 26, 2018               [Page 26]
 
                               risc-secevent                   April 2018
 
@@ -1509,7 +1509,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 26]
 
 
 
-Scurtescu, et al.       Expires October 22, 2018               [Page 27]
+Scurtescu, et al.       Expires October 26, 2018               [Page 27]
 
                               risc-secevent                   April 2018
 
@@ -1565,7 +1565,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 27]
 
 
 
-Scurtescu, et al.       Expires October 22, 2018               [Page 28]
+Scurtescu, et al.       Expires October 26, 2018               [Page 28]
 
                               risc-secevent                   April 2018
 
@@ -1621,7 +1621,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 28]
 
 
 
-Scurtescu, et al.       Expires October 22, 2018               [Page 29]
+Scurtescu, et al.       Expires October 26, 2018               [Page 29]
 
                               risc-secevent                   April 2018
 
@@ -1677,7 +1677,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 29]
 
 
 
-Scurtescu, et al.       Expires October 22, 2018               [Page 30]
+Scurtescu, et al.       Expires October 26, 2018               [Page 30]
 
                               risc-secevent                   April 2018
 
@@ -1733,7 +1733,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 30]
 
 
 
-Scurtescu, et al.       Expires October 22, 2018               [Page 31]
+Scurtescu, et al.       Expires October 26, 2018               [Page 31]
 
                               risc-secevent                   April 2018
 
@@ -1789,7 +1789,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 31]
 
 
 
-Scurtescu, et al.       Expires October 22, 2018               [Page 32]
+Scurtescu, et al.       Expires October 26, 2018               [Page 32]
 
                               risc-secevent                   April 2018
 
@@ -1845,7 +1845,7 @@ Scurtescu, et al.       Expires October 22, 2018               [Page 32]
 
 
 
-Scurtescu, et al.       Expires October 22, 2018               [Page 33]
+Scurtescu, et al.       Expires October 26, 2018               [Page 33]
 
                               risc-secevent                   April 2018
 
@@ -1901,4 +1901,4 @@ Authors' Addresses
 
 
 
-Scurtescu, et al.       Expires October 22, 2018               [Page 34]
+Scurtescu, et al.       Expires October 26, 2018               [Page 34]

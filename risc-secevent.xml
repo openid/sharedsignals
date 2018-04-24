@@ -45,7 +45,7 @@
       </address>
     </author>
 
-    <date year="2018" month="April" day="20"/>
+    <date year="2018" month="April" day="24"/>
 
     <workgroup>RISC Working Group</workgroup>
 
@@ -485,33 +485,46 @@ Pragma: no-cache
             the following properties:</t>
 
           <t><list style="hanging">
-            <t hangText="iss"><vspace blankLines="0"/> <spanx style="strong">Read-Only</spanx>, a URL
-              using the https scheme with no query or fragment component that the Transmitter asserts as its Issuer
+            <t hangText="iss"><vspace blankLines="0"/> <spanx style="strong">Read-Only</spanx>, 
+              A URL using the https scheme with no query or fragment component that the Transmitter asserts as its Issuer
               Identifier. This MUST be identical to the <spanx style="verb">iss</spanx> Claim value in
               Security Event Tokens issued from this Transmitter.</t>
-            <t hangText="aud"><vspace blankLines="0"/> <spanx style="strong">Read-Only</spanx>, A string or an array of strings containing an audience claim as
+            <t hangText="aud"><vspace blankLines="0"/> <spanx style="strong">Read-Only</spanx>, 
+              A string or an array of strings containing an audience claim as
               defined in <xref target="RFC7519">JSON Web Token (JWT)</xref> that identifies the
               Event Receiver(s) for the Event Stream. This property cannot be updated. If multiple Receivers are
               specified then the Transmitter SHOULD know that these Receivers are the same entity.</t>
-            <t hangText="events_supported"><vspace blankLines="0"/>  <spanx style="strong">Read-Only</spanx>, An array of URIs identifying
+            <t hangText="events_supported"><vspace blankLines="0"/>  <spanx style="strong">Read-Only</spanx>, 
+              An array of URIs identifying
               the set of events supported by the Transmitter for this Receiver. If omitted, 
               Event Transmitters SHOULD make this set available to the Event Receiver via some 
               other means (e.g. publishing it in online documentation).</t>
-            <t hangText="events_requested"><vspace blankLines="0"/>  <spanx style="strong">Read-Write</spanx>, An array of URIs identifying
+            <t hangText="events_requested"><vspace blankLines="0"/>  <spanx style="strong">Read-Write</spanx>, 
+              An array of URIs identifying
               the set of events that the Receiver requested. A Receiver should request only the events
               that it understands and it can act on. This is configurabel by the Receuver.</t>
-            <t hangText="events_delivered"><vspace blankLines="0"/> <spanx style="strong">Read-Only</spanx>, An array of URIs 
+            <t hangText="events_delivered"><vspace blankLines="0"/> <spanx style="strong">Read-Only</spanx>, 
+              An array of URIs 
               which is the intersection of <spanx style="verb">events_supported</spanx> and
               <spanx style="verb">events_requested</spanx>. These events MAY be delivered over 
               the Event Stream.</t>
-            <t hangText="delivery"><vspace blankLines="0"/> <spanx style="strong">Read-Write</spanx>, A JSON object containing a set of
+            <t hangText="delivery"><vspace blankLines="0"/> <spanx style="strong">Read-Write</spanx>, 
+              A JSON object containing a set of
               name/value pairs specifying configuration parameters for the SET delivery method.
               The actual delivery method is identified by the special key <spanx style="verb">method</spanx> with
               the value being a URI as defined in <xref target="delivery-meta"/>.</t>
-            <t hangText="subject_type"><vspace blankLines="0"/> <spanx style="strong">Read-Write</spanx>, The Subject Identifier Type that the Receiver wants for the events.
+            <t hangText="min_verification_interval"><vspace blankLines="0"/> <spanx style="strong">Read-Only</spanx>, 
+              An integer indicating the minimum amount of time in seconds that
+              must pass in between verification requests. If an Event Receiver
+              submits verification requests more frequently than this, the Event
+              Transmitter MAY respond with a 429 status code. An Event
+              Transmitter SHOULD NOT respond with a 429 status code if an Event
+              Receiver is not exceeding this frequency.</t>
+            <t hangText="subject_type"><vspace blankLines="0"/> <spanx style="strong">Read-Write</spanx>, 
+              The Subject Identifier Type that the Receiver wants for the events.
               If not set then the Transmitter might decide to use a type that discloses more information
               than necessary.</t>
-            </list></t>
+          </list></t>
           
           <t>TODO: consider adding a IANA Registry for stream configuration metadata, similar to Section 7.1.1 of 
             <xref target="OAUTH-DISCOVERY"/>. This would allow other specs to add to the stream configuration.</t>
