@@ -10,7 +10,7 @@
                                                                   Oracle
                                                               J. Bradley
                                                                   Yubico
-                                                          April 22, 2018
+                                                          April 24, 2018
 
 
                            OAuth Event Types
@@ -53,7 +53,7 @@ Table of Contents
 
 
 
-Scurtescu, et al.       Expires October 24, 2018                [Page 1]
+Scurtescu, et al.       Expires October 26, 2018                [Page 1]
 
                             oauth-event-types                 April 2018
 
@@ -87,21 +87,19 @@ Scurtescu, et al.       Expires October 24, 2018                [Page 1]
 
       *  refresh_token
 
-   o  token_identifier_type - required, describes how is the token
-      identified.  Possible values:
+   o  token_identifier_alg - required, describes how is the token string
+      in the "token" attribute to be interpreted.  Possible values:
 
-      *  token_string
+      *  plain - plain token string
 
-      *  token_string_hash
+      *  prefix - token string prefix
 
-      *  token_string_prefix
+      *  hash_* - token string hash, actual hash algorithms added as a
+         suffix.  TODO: create individual values for each hash
+         algorithm.
 
    o  token - required, the token identifier, as described by
-      "token_identifier_type".
-
-   o  token_string_hash_alg - optional, the token string hash algorithm,
-      required if "token_identifier_type" is "token_string_hash".  TODO:
-      possible values.
+      "token_identifier_alg".
 
 
 
@@ -109,7 +107,9 @@ Scurtescu, et al.       Expires October 24, 2018                [Page 1]
 
 
 
-Scurtescu, et al.       Expires October 24, 2018                [Page 2]
+
+
+Scurtescu, et al.       Expires October 26, 2018                [Page 2]
 
                             oauth-event-types                 April 2018
 
@@ -117,7 +117,7 @@ Scurtescu, et al.       Expires October 24, 2018                [Page 2]
    "subject": {
      "subject_type": "oauth_token",
      "token_type": "refresh_token",
-     "token_identifier_type": "token_string",
+     "token_identifier_alg": "plain",
      "token": "7265667265736820746F6B656E20737472696E67"
    }
 
@@ -165,7 +165,7 @@ Scurtescu, et al.       Expires October 24, 2018                [Page 2]
 
 
 
-Scurtescu, et al.       Expires October 24, 2018                [Page 3]
+Scurtescu, et al.       Expires October 26, 2018                [Page 3]
 
                             oauth-event-types                 April 2018
 
@@ -187,7 +187,7 @@ Scurtescu, et al.       Expires October 24, 2018                [Page 3]
          "subject": {
            "subject_type": "oauth_token",
            "token_type": "refresh_token",
-           "token_identifier_type": "token_string",
+           "token_identifier_alg": "token_string",
            "token": "7265667265736820746F6B656E20737472696E67"
          },
          "token_subject" {
@@ -221,7 +221,7 @@ Scurtescu, et al.       Expires October 24, 2018                [Page 3]
 
 
 
-Scurtescu, et al.       Expires October 24, 2018                [Page 4]
+Scurtescu, et al.       Expires October 26, 2018                [Page 4]
 
                             oauth-event-types                 April 2018
 
@@ -250,7 +250,7 @@ Scurtescu, et al.       Expires October 24, 2018                [Page 4]
          "subject": {
            "subject_type": "oauth_token",
            "token_type": "refresh_token",
-           "token_identifier_type": "token_string",
+           "token_identifier_alg": "token_string",
            "token": "7265667265736820746F6B656E20737472696E67"
          },
          "token_subject" {
@@ -277,7 +277,7 @@ Scurtescu, et al.       Expires October 24, 2018                [Page 4]
 
 
 
-Scurtescu, et al.       Expires October 24, 2018                [Page 5]
+Scurtescu, et al.       Expires October 26, 2018                [Page 5]
 
                             oauth-event-types                 April 2018
 
@@ -333,7 +333,7 @@ Scurtescu, et al.       Expires October 24, 2018                [Page 5]
 
 
 
-Scurtescu, et al.       Expires October 24, 2018                [Page 6]
+Scurtescu, et al.       Expires October 26, 2018                [Page 6]
 
                             oauth-event-types                 April 2018
 
@@ -389,7 +389,7 @@ Scurtescu, et al.       Expires October 24, 2018                [Page 6]
 
 
 
-Scurtescu, et al.       Expires October 24, 2018                [Page 7]
+Scurtescu, et al.       Expires October 26, 2018                [Page 7]
 
                             oauth-event-types                 April 2018
 
@@ -445,7 +445,7 @@ Authors' Addresses
 
 
 
-Scurtescu, et al.       Expires October 24, 2018                [Page 8]
+Scurtescu, et al.       Expires October 26, 2018                [Page 8]
 
                             oauth-event-types                 April 2018
 
@@ -501,4 +501,4 @@ Scurtescu, et al.       Expires October 24, 2018                [Page 8]
 
 
 
-Scurtescu, et al.       Expires October 24, 2018                [Page 9]
+Scurtescu, et al.       Expires October 26, 2018                [Page 9]

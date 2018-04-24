@@ -51,7 +51,7 @@
       </address>
     </author>
 
-    <date year="2018" month="April" day="22"/>
+    <date year="2018" month="April" day="24"/>
 
     <workgroup>RISC Working Group</workgroup>
 
@@ -92,17 +92,16 @@
             <t>authorization_code</t>
             <t>refresh_token</t>
           </list></t>
-          <t>token_identifier_type - required, describes how is the token identified.
+          <t>token_identifier_alg - required, describes how is the token string in the 
+            <spanx style="verb">token</spanx> attribute to be interpreted.
             Possible values:<list style="symbols">
-              <t>token_string</t>
-              <t>token_string_hash</t>
-              <t>token_string_prefix</t>
+              <t>plain - plain token string</t>
+              <t>prefix - token string prefix</t>
+              <t>hash_* - token string hash, actual hash algorithms added as a suffix.
+              TODO: create individual values for each hash algorithm.</t>
             </list></t>
           <t>token - required, the token identifier, as described by 
-            <spanx style="verb">token_identifier_type</spanx>.</t>
-          <t>token_string_hash_alg - optional, the token string hash algorithm, required if 
-            <spanx style="verb">token_identifier_type</spanx> is 
-            <spanx style="verb">token_string_hash</spanx>. TODO: possible values.</t>
+            <spanx style="verb">token_identifier_alg</spanx>.</t>
         </list></t>
         
         <figure anchor="subject-identifier-token-example" title="Example: Token Subject Identifier Type">
@@ -110,7 +109,7 @@
 "subject": {
   "subject_type": "oauth_token",
   "token_type": "refresh_token",
-  "token_identifier_type": "token_string",
+  "token_identifier_alg": "plain",
   "token": "7265667265736820746F6B656E20737472696E67"
 }
             ]]></artwork>
@@ -174,7 +173,7 @@
       "subject": {
         "subject_type": "oauth_token",
         "token_type": "refresh_token",
-        "token_identifier_type": "token_string",
+        "token_identifier_alg": "token_string",
         "token": "7265667265736820746F6B656E20737472696E67"
       },
       "token_subject" {
@@ -224,7 +223,7 @@
       "subject": {
         "subject_type": "oauth_token",
         "token_type": "refresh_token",
-        "token_identifier_type": "token_string",
+        "token_identifier_alg": "token_string",
         "token": "7265667265736820746F6B656E20737472696E67"
       },
       "token_subject" {
