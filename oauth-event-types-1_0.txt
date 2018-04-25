@@ -474,8 +474,10 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 8]
               Profile of IETF Security Events 1.0", April 2018,
               <http://openid.net/specs/openid-risc-profile-1_0.html>.
 
-   [SET]      IETF, "Security Event Token (SET)",
-              <https://tools.ietf.org/html/draft-ietf-secevent-token>.
+   [SET]      Hunt, P., Ed., Jones, M., Denniss, W., and M. Ansari,
+              "Security Event Token (SET)", April 2018,
+              <https://tools.ietf.org/html/draft-ietf-secevent-token-
+              09>.
 
 Authors' Addresses
 
@@ -495,8 +497,6 @@ Authors' Addresses
    Oracle Corporation
 
    Email: phil.hunt@yahoo.com
-
-
 
 
 

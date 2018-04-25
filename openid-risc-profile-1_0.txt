@@ -1866,8 +1866,10 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 33]
               IETF, "Security Events IETF Working Group",
               <https://datatracker.ietf.org/wg/secevent/about/>.
 
-   [SET]      IETF, "Security Event Token (SET)",
-              <https://tools.ietf.org/html/draft-ietf-secevent-token>.
+   [SET]      Hunt, P., Ed., Jones, M., Denniss, W., and M. Ansari,
+              "Security Event Token (SET)", April 2018,
+              <https://tools.ietf.org/html/draft-ietf-secevent-token-
+              09>.
 
    [USECASES]
               IETF, "Security Events RISC Use Cases",
@@ -1894,6 +1896,16 @@ Authors' Addresses
    Email: richanna@amazon.com
 
 
+
+
+
+
+
+Scurtescu, et al.       Expires October 26, 2018               [Page 34]
+
+                           openid-risc-profile                April 2018
+
+
    John Bradley
    Yubico
 
@@ -1901,4 +1913,48 @@ Authors' Addresses
 
 
 
-Scurtescu, et al.       Expires October 26, 2018               [Page 34]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Scurtescu, et al.       Expires October 26, 2018               [Page 35]

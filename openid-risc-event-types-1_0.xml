@@ -365,16 +365,29 @@
         <seriesInfo name='DOI' value='10.17487/RFC7159'/>
       </reference>
 
-      <reference anchor="SET" target="https://tools.ietf.org/html/draft-ietf-secevent-token">
+      <reference anchor="SET" target="https://tools.ietf.org/html/draft-ietf-secevent-token-09">
         <front>
           <title>Security Event Token (SET)</title>
-          <author >
-            <organization>IETF</organization>
+          <author fullname="Phil Hunt" initials="P." role="editor" surname="Hunt">
+            <organization />
           </author>
-          <date/>
+          
+          <author fullname="Michael B. Jones" initials="M.B." surname="Jones">
+            <organization />
+          </author>
+          
+          <author fullname="William Denniss" initials="W." surname="Denniss">
+            <organization />
+          </author>
+          
+          <author fullname="Morteza Ansari" initials="M.A." surname="Ansari">
+            <organization />
+          </author>
+          
+          <date year="2018" month="April" />
         </front>
       </reference>
-
+      
       <reference anchor="RFC2119" target='https://www.rfc-editor.org/info/rfc2119'>
         <front>
           <title>Key words for use in RFCs to Indicate Requirement Levels</title>
