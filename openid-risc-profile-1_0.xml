@@ -1443,11 +1443,14 @@ disabled": {
         target="https://tools.ietf.org/html/draft-scurtescu-secevent-simple-control-plane">
         <front>
           <title>Management API for SET Event Streams</title>
-          <author>
-            <organization>IETF</organization>
+          <author initials="M." surname="Scurtescu" fullname="Marius Scurtescu">
+            <organization />
           </author>
-          <date/>
-        </front>
+          <author initials="A." surname="Backman" fullname="Annabelle Backman">
+            <organization />
+          </author>
+          
+          <date year="2017" month="June" day="29"/>        </front>
       </reference>
 
       <reference anchor="USECASES"

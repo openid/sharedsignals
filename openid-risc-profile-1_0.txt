@@ -1808,9 +1808,9 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 32]
               2017, <http://openid.net/specs/
               openid-connect-core-1_0.html#IDToken>.
 
-   [MGMTAPI]  IETF, "Management API for SET Event Streams",
-              <https://tools.ietf.org/html/draft-scurtescu-secevent-
-              simple-control-plane>.
+   [MGMTAPI]  Scurtescu, M. and A. Backman, "Management API for SET
+              Event Streams", June 2017, <https://tools.ietf.org/html/
+              draft-scurtescu-secevent-simple-control-plane>.
 
    [OAUTH-DISCOVERY]
               Jones, M., Sakimura, N., and J. Bradley, "OAuth 2.0
