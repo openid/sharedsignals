@@ -1486,10 +1486,27 @@ disabled": {
         target="http://openid.net/specs/openid-connect-core-1_0.html#IDToken">
         <front>
           <title>OpenID Connect Core 1.0 - ID Token</title>
-          <author>
-            <organization>OpenID Foundation</organization>
+          <author fullname="Nat Sakimura" initials="N." surname="Sakimura">
+            <organization />
           </author>
-          <date/>
+          
+          <author fullname="John Bradley" initials="J." surname="Bradley">
+            <organization />
+          </author>
+          
+          <author fullname="Michael B. Jones" initials="M.B." surname="Jones">
+            <organization />
+          </author>
+          
+          <author fullname="Breno de Medeiros" initials="B." surname="de Medeiros">
+            <organization />
+          </author>
+          
+          <author fullname="Chuck Mortimore" initials="C." surname="Mortimore">
+            <organization />
+          </author>
+          
+          <date day="7" month="April" year="2017" />
         </front>
       </reference>
 

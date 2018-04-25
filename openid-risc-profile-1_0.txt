@@ -1803,8 +1803,9 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 32]
               public telecommunication numbering plan", 2010,
               <http://www.itu.int/rec/T-REC-E.164-201011-I/en>.
 
-   [IDTOKEN]  OpenID Foundation, "OpenID Connect Core 1.0 - ID Token",
-              <http://openid.net/specs/
+   [IDTOKEN]  Sakimura, N., Bradley, J., Jones, M., de Medeiros, B., and
+              C. Mortimore, "OpenID Connect Core 1.0 - ID Token", April
+              2017, <http://openid.net/specs/
               openid-connect-core-1_0.html#IDToken>.
 
    [MGMTAPI]  IETF, "Management API for SET Event Streams",
@@ -1841,7 +1842,6 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 32]
    [RFC7159]  Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
               Interchange Format", RFC 7159, DOI 10.17487/RFC7159, March
               2014, <https://www.rfc-editor.org/info/rfc7159>.
-
 
 
 
