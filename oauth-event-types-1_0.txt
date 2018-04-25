@@ -470,7 +470,9 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 8]
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
    [RISC-PROFILE]
-              OpenID Foundation, "RISC Profile".
+              Scurtescu, M., Backman, A., and J. Bradley, "OpenID RISC
+              Profile of IETF Security Events 1.0", April 2018,
+              <http://openid.net/specs/openid-risc-profile-1_0.html>.
 
    [SET]      IETF, "Security Event Token (SET)",
               <https://tools.ietf.org/html/draft-ietf-secevent-token>.
@@ -493,8 +495,6 @@ Authors' Addresses
    Oracle Corporation
 
    Email: phil.hunt@yahoo.com
-
-
 
 
 

@@ -405,13 +405,19 @@
         <seriesInfo name="DOI" value="10.17487/RFC8174"/>
       </reference>
       
-      <reference anchor="RISC-PROFILE">
+      <reference anchor="RISC-PROFILE" target="http://openid.net/specs/openid-risc-profile-1_0.html">
         <front>
-          <title>RISC Profile</title>
-          <author>
-            <organization>OpenID Foundation</organization>
+          <title>OpenID RISC Profile of IETF Security Events 1.0</title>
+          <author initials="M." surname="Scurtescu" fullname="Marius Scurtescu">
+            <organization />
           </author>
-          <date/>
+          <author initials="A." surname="Backman" fullname="Annabelle Backman">
+            <organization />
+          </author>
+          <author initials="J." surname="Bradley" fullname="John Bradley">
+            <organization />
+          </author>
+          <date year="2018" month="April" />
         </front>
       </reference>
     </references>
