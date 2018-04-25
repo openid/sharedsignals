@@ -59,9 +59,10 @@
       </list></t>
 
       <t>This spec also directly profiles several IETF Security Events drafts:<list style="symbols">
-          <t><xref target="SET">Security Event Token (SET)</xref></t>
-          <t><xref target="DELIVERY">SET Token Delivery Using HTTP</xref></t>
-        </list></t>
+        <t><xref target="SET">Security Event Token (SET)</xref></t>
+        <t><xref target="DELIVERYPUSH">Push-Based SET Token Delivery Using HTTP</xref></t>
+        <t><xref target="DELIVERYPOLL">Poll-Based SET Token Delivery Using HTTP</xref></t>
+      </list></t>
     </abstract>
   </front>
 
@@ -897,7 +898,8 @@ Pragma: no-cache
             <t>Upon receiving a Verification Event, the Event Receiver SHALL parse the SET and
               validate its claims. In particular, the Event Receiver SHALL confirm that the value
               for <spanx style="verb">state</spanx> is as expected. If the value of <spanx style="verb">state</spanx> does not match, an error
-              response of <spanx style="verb">setData</spanx> SHOULD be returned (see Section 2.4 of <xref target="DELIVERY"/>).</t>
+              response of <spanx style="verb">setData</spanx> SHOULD be returned (see Section 2.3 
+              of <xref target="DELIVERYPUSH"/> or <xref target="DELIVERYPOLL"/>).</t>
 
             <t>In many cases, Event Transmitters MAY disable or suspend an Event Stream that fails
               to successfully verify based on the acknowledgement or lack of acknowledgement by
@@ -1060,7 +1062,8 @@ Pragma: no-cache
     <section anchor="profiles" title="Profiles">
       <t>This section is a profile of the following IETF SecEvent specifications:<list style="symbols">
         <t><xref target="SET">"Security Event Token (SET)"</xref></t>
-        <t><xref target="DELIVERY">"SET Token Delivery Using HTTP"</xref></t>
+        <t><xref target="DELIVERYPUSH">Push-Based SET Token Delivery Using HTTP</xref></t>
+        <t><xref target="DELIVERYPOLL">Poll-Based SET Token Delivery Using HTTP</xref></t>
       </list></t>
 
       <t>The RISC use cases that set the requirements are described in <xref target="USECASES"
@@ -1182,14 +1185,16 @@ disabled": {
 
       <section anchor="set-token-delivery-using-http-profile"
         title="SET Token Delivery Using HTTP Profile">
-        <t>This section provides RISC profiling specifications for the <xref target="DELIVERY">"SET
-            Token Delivery Using HTTP"</xref> spec.</t>
+        <t>This section provides RISC profiling specifications for the <xref target="DELIVERYPUSH"/> and 
+          <xref target="DELIVERYPOLL"/> specs.</t>
 
         <section anchor="delivery-meta" title="Stream Configuration Metadata">
           <t>Each delivery method is identified by a URI, specified below by the 
             <spanx style="verb">method</spanx> metadata.</t>
           
           <section title="Push Delivery using HTTP">
+            <t>This section provides RISC profiling specifications for the <xref target="DELIVERYPUSH"/> spec.</t>
+            
             <t><list style="hanging">
               <t hangText="method"> <spanx style="verb">https://schemas.openid.net/secevent/risc/delivery-method/push</spanx></t>
               <t hangText="endpoint_url"> The URL where events are pushed through HTTP POST.
@@ -1200,6 +1205,8 @@ disabled": {
           </section>
           
           <section title="Polling Delivery using HTTP">
+            <t>This section provides RISC profiling specifications for the <xref target="DELIVERYPOLL"/> spec.</t>
+            
             <t><list style="hanging">
               <t hangText="method"> <spanx style="verb">https://schemas.openid.net/secevent/risc/delivery-method/poll</spanx></t>
               <t hangText="endpoint_url"> The URL where events can be retrieved from. This is
@@ -1429,16 +1436,68 @@ disabled": {
         </front>
       </reference>
 
-      <reference anchor="DELIVERY" target="https://tools.ietf.org/html/draft-ietf-secevent-delivery">
+      <reference anchor="DELIVERYPUSH" target="https://tools.ietf.org/html/draft-ietf-secevent-http-push-00">
         <front>
-          <title>SET Token Delivery Using HTTP</title>
-          <author>
-            <organization>IETF</organization>
+          <title>Push-Based SET Token Delivery Using HTTP</title>
+          <author fullname="Annabelle Backman" initials="A." surname="Backman" role="editor">
+            <organization />
           </author>
-          <date/>
+          
+          <author fullname="Michael B. Jones" initials="M." surname="Jones" role="editor">
+            <organization />
+          </author>
+          
+          <author fullname="Phil Hunt" initials="P." role="editor" surname="Hunt">
+            <organization />
+          </author>
+          
+          <author fullname="Marius Scurtescu" initials="M.S." surname="Scurtescu">
+            <organization />
+          </author>
+          
+          <author fullname="Morteza Ansari" initials="M." surname="Ansari">
+            <organization />
+          </author>
+          
+          <author fullname="Anthony Nadalin" initials="A." surname="Nadalin">
+            <organization />
+          </author>
+          
+          <date year="2018" month="April" day="16" />
         </front>
       </reference>
 
+      <reference anchor="DELIVERYPOLL" target="https://tools.ietf.org/html/draft-ietf-secevent-http-poll-00">
+        <front>
+          <title>Poll-Based SET Token Delivery Using HTTP</title>
+          <author fullname="Annabelle Backman" initials="A." surname="Backman" role="editor">
+            <organization />
+          </author>
+          
+          <author fullname="Michael B. Jones" initials="M." surname="Jones" role="editor">
+            <organization />
+          </author>
+          
+          <author fullname="Phil Hunt" initials="P." role="editor" surname="Hunt">
+            <organization />
+          </author>
+          
+          <author fullname="Marius Scurtescu" initials="M.S." surname="Scurtescu">
+            <organization />
+          </author>
+          
+          <author fullname="Morteza Ansari" initials="M." surname="Ansari">
+            <organization />
+          </author>
+          
+          <author fullname="Anthony Nadalin" initials="A." surname="Nadalin">
+            <organization />
+          </author>
+          
+          <date year="2018" month="April" day="16" />
+        </front>
+      </reference>
+      
       <reference anchor="MGMTAPI"
         target="https://tools.ietf.org/html/draft-scurtescu-secevent-simple-control-plane">
         <front>
@@ -1450,7 +1509,8 @@ disabled": {
             <organization />
           </author>
           
-          <date year="2017" month="June" day="29"/>        </front>
+          <date year="2017" month="June" day="29"/>
+        </front>
       </reference>
 
       <reference anchor="USECASES"
@@ -1461,7 +1521,8 @@ disabled": {
             <organization />
           </author>
           
-          <date year="2017" month="June" day="29"/>        </front>
+          <date year="2017" month="June" day="29"/>
+        </front>
       </reference>
 
       <reference anchor="CLIENTCRED" target="https://tools.ietf.org/html/rfc6749#section-4.4">

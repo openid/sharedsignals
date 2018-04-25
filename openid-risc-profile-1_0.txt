@@ -29,7 +29,9 @@ Abstract
 
    o  Security Event Token (SET) [SET]
 
-   o  SET Token Delivery Using HTTP [DELIVERY]
+   o  Push-Based SET Token Delivery Using HTTP [DELIVERYPUSH]
+
+   o  Poll-Based SET Token Delivery Using HTTP [DELIVERYPOLL]
 
 Table of Contents
 
@@ -48,8 +50,6 @@ Table of Contents
        3.2.2.  Transmitter Configuration Response  . . . . . . . . .   7
        3.2.3.  Transmitter Configuration Validation  . . . . . . . .   8
    4.  Management API for SET Event Streams  . . . . . . . . . . . .   8
-     4.1.  Event Stream Management . . . . . . . . . . . . . . . . .   9
-       4.1.1.  Stream Status . . . . . . . . . . . . . . . . . . . .  10
 
 
 
@@ -58,6 +58,8 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 1]
                            openid-risc-profile                April 2018
 
 
+     4.1.  Event Stream Management . . . . . . . . . . . . . . . . .   9
+       4.1.1.  Stream Status . . . . . . . . . . . . . . . . . . . .  10
          4.1.1.1.  Reading a Stream's Status . . . . . . . . . . . .  10
          4.1.1.2.  Updating a Stream's Status  . . . . . . . . . . .  11
        4.1.2.  Stream Configuration  . . . . . . . . . . . . . . . .  12
@@ -87,7 +89,7 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 1]
          5.1.7.1.  Distingushing SETs from other Kinds of JWTs . . .  29
      5.2.  SET Token Delivery Using HTTP Profile . . . . . . . . . .  29
        5.2.1.  Stream Configuration Metadata . . . . . . . . . . . .  29
-         5.2.1.1.  Push Delivery using HTTP  . . . . . . . . . . . .  29
+         5.2.1.1.  Push Delivery using HTTP  . . . . . . . . . . . .  30
          5.2.1.2.  Polling Delivery using HTTP . . . . . . . . . . .  30
    6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  30
      6.1.  Security Event Subject Identifier Types Registry  . . . .  30
@@ -98,13 +100,11 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 1]
        6.2.1.  Registry Contents . . . . . . . . . . . . . . . . . .  32
    7.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .  32
      7.1.  Subject Information Leakage . . . . . . . . . . . . . . .  32
-   8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  32
-     8.1.  Normative References  . . . . . . . . . . . . . . . . . .  32
-     8.2.  URIs  . . . . . . . . . . . . . . . . . . . . . . . . . .  34
-   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  34
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  34
-
-
+   8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  33
+     8.1.  Normative References  . . . . . . . . . . . . . . . . . .  33
+     8.2.  URIs  . . . . . . . . . . . . . . . . . . . . . . . . . .  35
+   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  35
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  35
 
 
 
@@ -1243,7 +1243,8 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 22]
    the SET and validate its claims.  In particular, the Event Receiver
    SHALL confirm that the value for "state" is as expected.  If the
    value of "state" does not match, an error response of "setData"
-   SHOULD be returned (see Section 2.4 of [DELIVERY]).
+   SHOULD be returned (see Section 2.3 of [DELIVERYPUSH] or
+   [DELIVERYPOLL]).
 
    In many cases, Event Transmitters MAY disable or suspend an Event
    Stream that fails to successfully verify based on the acknowledgement
@@ -1278,7 +1279,6 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 22]
    queue of events.
 
    Errors are signaled with HTTP status codes as follows:
-
 
 
 
@@ -1445,10 +1445,10 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 25]
 
    o  "Security Event Token (SET)" [SET]
 
-   o  "SET Token Delivery Using HTTP" [DELIVERY]
+   o  Push-Based SET Token Delivery Using HTTP [DELIVERYPUSH]
 
-   The RISC use cases that set the requirements are described in
-   Security Events RISC Use Cases [USECASES].
+   o  Poll-Based SET Token Delivery Using HTTP [DELIVERYPOLL]
+
 
 
 
@@ -1457,6 +1457,9 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 26]
 
                            openid-risc-profile                April 2018
 
+
+   The RISC use cases that set the requirements are described in
+   Security Events RISC Use Cases [USECASES].
 
 5.1.  Security Event Token Profle
 
@@ -1500,12 +1503,9 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 26]
    RISC events MUST use explicit typing as defined in Section 2.3 of
    [SET].
 
-   {
-     "typ":"secevent+jwt",
-     "alg":"HS256"
-   }
 
-                  Figure 24: Explicitly Typed JOSE Header
+
+
 
 
 
@@ -1513,6 +1513,13 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 27]
 
                            openid-risc-profile                April 2018
 
+
+   {
+     "typ":"secevent+jwt",
+     "alg":"HS256"
+   }
+
+                  Figure 24: Explicitly Typed JOSE Header
 
    The purpose is defense against confusion with other JWTs, as
    described in Sections 4.5, 4.6 and 4.7 of [SET].  While current Id
@@ -1547,6 +1554,22 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 27]
    SETs to respective Receivers, an "aud" claim with multiple Receivers
    would lead to unintended data disclosure.
 
+
+
+
+
+
+
+
+
+
+
+
+Scurtescu, et al.       Expires October 26, 2018               [Page 28]
+
+                           openid-risc-profile                April 2018
+
+
 {
   "jti": "123456",
   "iss": "https://transmitter.example.com",
@@ -1560,15 +1583,6 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 27]
 }
 
               Figure 25: Example: SET with array 'aud' claim
-
-
-
-
-
-Scurtescu, et al.       Expires October 26, 2018               [Page 28]
-
-                           openid-risc-profile                April 2018
-
 
 5.1.6.  The "events" claim
 
@@ -1595,15 +1609,27 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 28]
 
 5.2.  SET Token Delivery Using HTTP Profile
 
-   This section provides RISC profiling specifications for the "SET
-   Token Delivery Using HTTP" [DELIVERY] spec.
+   This section provides RISC profiling specifications for the
+   [DELIVERYPUSH] and [DELIVERYPOLL] specs.
 
 5.2.1.  Stream Configuration Metadata
 
    Each delivery method is identified by a URI, specified below by the
    "method" metadata.
 
+
+
+
+
+Scurtescu, et al.       Expires October 26, 2018               [Page 29]
+
+                           openid-risc-profile                April 2018
+
+
 5.2.1.1.  Push Delivery using HTTP
+
+   This section provides RISC profiling specifications for the
+   [DELIVERYPUSH] spec.
 
    method  "https://schemas.openid.net/secevent/risc/delivery-method/
       push"
@@ -1616,17 +1642,10 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 28]
       configuration is present.  The value is optional and it is set by
       the Receiver.
 
-
-
-
-
-
-Scurtescu, et al.       Expires October 26, 2018               [Page 29]
-
-                           openid-risc-profile                April 2018
-
-
 5.2.1.2.  Polling Delivery using HTTP
+
+   This section provides RISC profiling specifications for the
+   [DELIVERYPOLL] spec.
 
    method  "https://schemas.openid.net/secevent/risc/delivery-method/
       poll"
@@ -1655,6 +1674,14 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 29]
       ("-"), and SHOULD NOT exceed 20 characters in length.
 
    Type Description:
+
+
+
+Scurtescu, et al.       Expires October 26, 2018               [Page 30]
+
+                           openid-risc-profile                April 2018
+
+
       A brief description of the Subject Identifier Type.
 
    Change Controller:
@@ -1672,15 +1699,6 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 29]
       optional or required, or the circumstances under which the claim
       is optional or required.  URIs that can be used to retrieve copies
       of each document SHOULD be included.
-
-
-
-
-
-Scurtescu, et al.       Expires October 26, 2018               [Page 30]
-
-                           openid-risc-profile                April 2018
-
 
 6.1.2.  Initial Registry Contents
 
@@ -1712,6 +1730,14 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 30]
    Expert Reviewer must base their decision to accept or reject the
    request on a fair and impartial assessment of the request.  If the
    Expert Reviewer has a conflict of interest, such as being an author
+
+
+
+Scurtescu, et al.       Expires October 26, 2018               [Page 31]
+
+                           openid-risc-profile                April 2018
+
+
    of a defining document referenced by the request, they must recuse
    themselves from the approval process for that request.  In the case
    where a request is rejected, the Expert Reviewer should provide the
@@ -1727,16 +1753,6 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 30]
    In most cases, the Expert Reviewer should not approve a request if
    the registration would contribute to confusion, or amount to a
    synonym for an existing type.
-
-
-
-
-
-
-Scurtescu, et al.       Expires October 26, 2018               [Page 31]
-
-                           openid-risc-profile                April 2018
-
 
 6.2.  Well-Known URI Registry
 
@@ -1769,6 +1785,15 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 31]
    about the subject that they are not known to already have knowledge
    of.  Issuers and recipients SHOULD always use the same Subject
    Identifier Type and the same claim values to identify a given subject
+
+
+
+
+Scurtescu, et al.       Expires October 26, 2018               [Page 32]
+
+                           openid-risc-profile                April 2018
+
+
    when communicating with a given party in order to reduce the
    possibility of information leakage.
 
@@ -1787,17 +1812,19 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 31]
               October 2012, <https://tools.ietf.org/html/
               rfc6749#section-4.4>.
 
+   [DELIVERYPOLL]
+              Backman, A., Ed., Jones, M., Ed., Hunt, P., Ed.,
+              Scurtescu, M., Ansari, M., and A. Nadalin, "Poll-Based SET
+              Token Delivery Using HTTP", April 2018,
+              <https://tools.ietf.org/html/draft-ietf-secevent-http-
+              poll-00>.
 
-
-Scurtescu, et al.       Expires October 26, 2018               [Page 32]
-
-                           openid-risc-profile                April 2018
-
-
-   [DELIVERY]
-              IETF, "SET Token Delivery Using HTTP",
-              <https://tools.ietf.org/html/draft-ietf-secevent-
-              delivery>.
+   [DELIVERYPUSH]
+              Backman, A., Ed., Jones, M., Ed., Hunt, P., Ed.,
+              Scurtescu, M., Ansari, M., and A. Nadalin, "Push-Based SET
+              Token Delivery Using HTTP", April 2018,
+              <https://tools.ietf.org/html/draft-ietf-secevent-http-
+              push-00>.
 
    [E164]     International Telecommunication Union, "The international
               public telecommunication numbering plan", 2010,
@@ -1811,6 +1838,17 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 32]
    [MGMTAPI]  Scurtescu, M. and A. Backman, "Management API for SET
               Event Streams", June 2017, <https://tools.ietf.org/html/
               draft-scurtescu-secevent-simple-control-plane>.
+
+
+
+
+
+
+
+Scurtescu, et al.       Expires October 26, 2018               [Page 33]
+
+                           openid-risc-profile                April 2018
+
 
    [OAUTH-DISCOVERY]
               Jones, M., Sakimura, N., and J. Bradley, "OAuth 2.0
@@ -1843,13 +1881,6 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 32]
               Interchange Format", RFC 7159, DOI 10.17487/RFC7159, March
               2014, <https://www.rfc-editor.org/info/rfc7159>.
 
-
-
-Scurtescu, et al.       Expires October 26, 2018               [Page 33]
-
-                           openid-risc-profile                April 2018
-
-
    [RFC7517]  Jones, M., "JSON Web Key (JWK)", RFC 7517,
               DOI 10.17487/RFC7517, May 2015, <https://www.rfc-
               editor.org/info/rfc7517>.
@@ -1866,6 +1897,14 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 33]
               "Security Event Token (SET)", April 2018,
               <https://tools.ietf.org/html/draft-ietf-secevent-token-
               09>.
+
+
+
+
+Scurtescu, et al.       Expires October 26, 2018               [Page 34]
+
+                           openid-risc-profile                April 2018
+
 
    [USECASES]
               Scurtescu, M., "Security Events RISC Use Cases", June
@@ -1896,49 +1935,10 @@ Authors' Addresses
    Email: richanna@amazon.com
 
 
-
-
-
-
-
-Scurtescu, et al.       Expires October 26, 2018               [Page 34]
-
-                           openid-risc-profile                April 2018
-
-
    John Bradley
    Yubico
 
    Email: secevemt@ve7jtb.com
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
