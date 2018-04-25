@@ -1868,9 +1868,9 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 33]
               09>.
 
    [USECASES]
-              IETF, "Security Events RISC Use Cases",
-              <https://tools.ietf.org/html/draft-scurtescu-secevent-
-              risc-use-cases-00>.
+              Scurtescu, M., "Security Events RISC Use Cases", June
+              2017, <https://tools.ietf.org/html/draft-scurtescu-
+              secevent-risc-use-cases-00>.
 
 8.2.  URIs
 
