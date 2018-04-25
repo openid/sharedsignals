@@ -1782,10 +1782,10 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 31]
               <https://tools.ietf.org/html/rfc8126>.
 
    [CLIENTCRED]
-              Hardt, D., "The OAuth 2.0 Authorization Framework - Client
-              Credentials Grant", RFC 6749,
-              <https://tools.ietf.org/html/rfc6749#section-4.4>.
-
+              Hardt, D., Ed., "The OAuth 2.0 Authorization Framework -
+              Client Credentials Grant", RFC 6749, DOI 10.17487/RFC6749,
+              October 2012, <https://tools.ietf.org/html/
+              rfc6749#section-4.4>.
 
 
 
