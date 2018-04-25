@@ -11,8 +11,8 @@
                                                           April 24, 2018
 
 
-                  RISC profile of IETF Security Events
-                            risc-secevent-00
+            OpenID RISC Profile of IETF Security Events 1.0
+                        openid-risc-profile-1_0
 
 Abstract
 
@@ -55,7 +55,7 @@ Table of Contents
 
 Scurtescu, et al.       Expires October 26, 2018                [Page 1]
 
-                              risc-secevent                   April 2018
+                           openid-risc-profile                April 2018
 
 
          4.1.1.1.  Reading a Stream's Status . . . . . . . . . . . .  10
@@ -111,7 +111,7 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 1]
 
 Scurtescu, et al.       Expires October 26, 2018                [Page 2]
 
-                              risc-secevent                   April 2018
+                           openid-risc-profile                April 2018
 
 
 1.  Introduction
@@ -167,7 +167,7 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 2]
 
 Scurtescu, et al.       Expires October 26, 2018                [Page 3]
 
-                              risc-secevent                   April 2018
+                           openid-risc-profile                April 2018
 
 
    {
@@ -223,7 +223,7 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 3]
 
 Scurtescu, et al.       Expires October 26, 2018                [Page 4]
 
-                              risc-secevent                   April 2018
+                           openid-risc-profile                April 2018
 
 
 2.1.2.  Phone Number Subject Identifier Type
@@ -279,7 +279,7 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 4]
 
 Scurtescu, et al.       Expires October 26, 2018                [Page 5]
 
-                              risc-secevent                   April 2018
+                           openid-risc-profile                April 2018
 
 
 3.1.  Transmitter Configuration Metadata
@@ -335,7 +335,7 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 5]
 
 Scurtescu, et al.       Expires October 26, 2018                [Page 6]
 
-                              risc-secevent                   April 2018
+                           openid-risc-profile                April 2018
 
 
 3.2.1.  Transmitter Configuration Request
@@ -391,7 +391,7 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 6]
 
 Scurtescu, et al.       Expires October 26, 2018                [Page 7]
 
-                              risc-secevent                   April 2018
+                           openid-risc-profile                April 2018
 
 
    HTTP/1.1 200 OK
@@ -447,7 +447,7 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 7]
 
 Scurtescu, et al.       Expires October 26, 2018                [Page 8]
 
-                              risc-secevent                   April 2018
+                           openid-risc-profile                April 2018
 
 
    +------------+                +------------+
@@ -503,7 +503,7 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 8]
 
 Scurtescu, et al.       Expires October 26, 2018                [Page 9]
 
-                              risc-secevent                   April 2018
+                           openid-risc-profile                April 2018
 
 
    An Event Transmitter MAY use the same URLs as endpoints for multiple
@@ -559,7 +559,7 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 9]
 
 Scurtescu, et al.       Expires October 26, 2018               [Page 10]
 
-                              risc-secevent                   April 2018
+                           openid-risc-profile                April 2018
 
 
    HTTP/1.1 200 OK
@@ -615,7 +615,7 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 10]
 
 Scurtescu, et al.       Expires October 26, 2018               [Page 11]
 
-                              risc-secevent                   April 2018
+                           openid-risc-profile                April 2018
 
 
    The following is a non-normative example response:
@@ -671,7 +671,7 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 11]
 
 Scurtescu, et al.       Expires October 26, 2018               [Page 12]
 
-                              risc-secevent                   April 2018
+                           openid-risc-profile                April 2018
 
 
       then the Transmitter SHOULD know that these Receivers are the same
@@ -727,7 +727,7 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 12]
 
 Scurtescu, et al.       Expires October 26, 2018               [Page 13]
 
-                              risc-secevent                   April 2018
+                           openid-risc-profile                April 2018
 
 
    OK" response containing a JSON [RFC7159] representation of the
@@ -783,7 +783,7 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 13]
 
 Scurtescu, et al.       Expires October 26, 2018               [Page 14]
 
-                              risc-secevent                   April 2018
+                           openid-risc-profile                April 2018
 
 
    Errors are signaled with HTTP status codes as follows:
@@ -839,7 +839,7 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 14]
 
 Scurtescu, et al.       Expires October 26, 2018               [Page 15]
 
-                              risc-secevent                   April 2018
+                           openid-risc-profile                April 2018
 
 
   POST /set/stream HTTP/1.1
@@ -895,7 +895,7 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 15]
 
 Scurtescu, et al.       Expires October 26, 2018               [Page 16]
 
-                              risc-secevent                   April 2018
+                           openid-risc-profile                April 2018
 
 
   HTTP/1.1 200 OK
@@ -951,7 +951,7 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 16]
 
 Scurtescu, et al.       Expires October 26, 2018               [Page 17]
 
-                              risc-secevent                   April 2018
+                           openid-risc-profile                April 2018
 
 
    +------+------------------------------------------------------------+
@@ -1007,7 +1007,7 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 17]
 
 Scurtescu, et al.       Expires October 26, 2018               [Page 18]
 
-                              risc-secevent                   April 2018
+                           openid-risc-profile                April 2018
 
 
 4.1.3.  Subjects
@@ -1063,7 +1063,7 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 18]
 
 Scurtescu, et al.       Expires October 26, 2018               [Page 19]
 
-                              risc-secevent                   April 2018
+                           openid-risc-profile                April 2018
 
 
    +------+------------------------------------------------------------+
@@ -1119,7 +1119,7 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 19]
 
 Scurtescu, et al.       Expires October 26, 2018               [Page 20]
 
-                              risc-secevent                   April 2018
+                           openid-risc-profile                April 2018
 
 
 4.1.3.2.  Removing a Subject
@@ -1175,7 +1175,7 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 20]
 
 Scurtescu, et al.       Expires October 26, 2018               [Page 21]
 
-                              risc-secevent                   April 2018
+                           openid-risc-profile                April 2018
 
 
    POST /set/subjects:remove HTTP/1.1
@@ -1231,7 +1231,7 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 21]
 
 Scurtescu, et al.       Expires October 26, 2018               [Page 22]
 
-                              risc-secevent                   April 2018
+                           openid-risc-profile                April 2018
 
 
    state
@@ -1287,7 +1287,7 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 22]
 
 Scurtescu, et al.       Expires October 26, 2018               [Page 23]
 
-                              risc-secevent                   April 2018
+                           openid-risc-profile                April 2018
 
 
    +------+------------------------------------------------------------+
@@ -1343,7 +1343,7 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 23]
 
 Scurtescu, et al.       Expires October 26, 2018               [Page 24]
 
-                              risc-secevent                   April 2018
+                           openid-risc-profile                April 2018
 
 
 {
@@ -1399,7 +1399,7 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 24]
 
 Scurtescu, et al.       Expires October 26, 2018               [Page 25]
 
-                              risc-secevent                   April 2018
+                           openid-risc-profile                April 2018
 
 
 4.3.2.  Information Harvesting
@@ -1455,7 +1455,7 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 25]
 
 Scurtescu, et al.       Expires October 26, 2018               [Page 26]
 
-                              risc-secevent                   April 2018
+                           openid-risc-profile                April 2018
 
 
 5.1.  Security Event Token Profle
@@ -1511,7 +1511,7 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 26]
 
 Scurtescu, et al.       Expires October 26, 2018               [Page 27]
 
-                              risc-secevent                   April 2018
+                           openid-risc-profile                April 2018
 
 
    The purpose is defense against confusion with other JWTs, as
@@ -1567,7 +1567,7 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 27]
 
 Scurtescu, et al.       Expires October 26, 2018               [Page 28]
 
-                              risc-secevent                   April 2018
+                           openid-risc-profile                April 2018
 
 
 5.1.6.  The "events" claim
@@ -1623,7 +1623,7 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 28]
 
 Scurtescu, et al.       Expires October 26, 2018               [Page 29]
 
-                              risc-secevent                   April 2018
+                           openid-risc-profile                April 2018
 
 
 5.2.1.2.  Polling Delivery using HTTP
@@ -1679,7 +1679,7 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 29]
 
 Scurtescu, et al.       Expires October 26, 2018               [Page 30]
 
-                              risc-secevent                   April 2018
+                           openid-risc-profile                April 2018
 
 
 6.1.2.  Initial Registry Contents
@@ -1735,7 +1735,7 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 30]
 
 Scurtescu, et al.       Expires October 26, 2018               [Page 31]
 
-                              risc-secevent                   April 2018
+                           openid-risc-profile                April 2018
 
 
 6.2.  Well-Known URI Registry
@@ -1791,7 +1791,7 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 31]
 
 Scurtescu, et al.       Expires October 26, 2018               [Page 32]
 
-                              risc-secevent                   April 2018
+                           openid-risc-profile                April 2018
 
 
    [DELIVERY]
@@ -1847,7 +1847,7 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 32]
 
 Scurtescu, et al.       Expires October 26, 2018               [Page 33]
 
-                              risc-secevent                   April 2018
+                           openid-risc-profile                April 2018
 
 
    [RFC7517]  Jones, M., "JSON Web Key (JWK)", RFC 7517,

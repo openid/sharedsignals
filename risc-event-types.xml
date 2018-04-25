@@ -12,7 +12,7 @@
   be taken to indicate.
 -->
 
-<rfc docName="risc-event-types-00" category="std" ipr="none">
+<rfc docName="openid-risc-event-types-1_0" category="std" ipr="none">
 
   <?rfc toc="yes" ?>
   <?rfc tocdepth="5" ?>
@@ -24,7 +24,7 @@
   <?rfc comments="yes"?>
 
   <front>
-    <title abbrev="risc-event-types">RISC Event Types</title>
+    <title abbrev="openid-risc-event-types">OpenID RISC Event Types 1.0</title>
 
     <author initials="M." surname="Scurtescu" fullname="Marius Scurtescu">
       <organization abbrev="Google">Google</organization>
@@ -51,12 +51,12 @@
       </address>
     </author>
 
-    <date year="2018" month="April" day="11"/>
+    <date year="2018" month="April" day="24"/>
 
     <workgroup>RISC Working Group</workgroup>
 
     <abstract>
-      <t>This document defines the RTISC Event Types. Event Types are introduced and defined in <xref target="SET">Security Event Token (SET)</xref>.</t>
+      <t>This document defines the RISC Event Types. Event Types are introduced and defined in <xref target="SET">Security Event Token (SET)</xref>.</t>
     </abstract>
   </front>
 
@@ -124,7 +124,7 @@
         https://schemas.openid.net/secevent/risc/event-type/account-disabled</t>
         
         <t>Account Disabled signals that the account identified by the subject has been disabled. The actual reason why the
-        account was disabled might be specified with the nested 'reason' attribute described below. The account may be
+        account was disabled might be specified with the nested <spanx style="verb">reason</spanx> attribute described below. The account may be
         <xref target="account-enabled">enabled</xref> in the future.</t>
         
         <t>Attributes:<list style="symbols">
@@ -169,20 +169,21 @@
 
       <section anchor="identifier-changed" title="Identifier Changed">
         <t>Event Type URI:<vspace />
-        https://schemas.openid.net/secevent/risc/event-type/identifier-changed</t>
+          https://schemas.openid.net/secevent/risc/event-type/identifier-changed</t>
         
-        <t>Identifier Changed signals that the identifier specified in the subject has changed. The subject's
-        type MUST be either 'email' or 'phone' and it MUST specify the old value.</t>
+        <t>Identifier Changed signals that the identifier specified in the subject has changed. The subject
+          type MUST be either <spanx style="verb">email</spanx> or <spanx style="verb">phone</spanx> 
+          and it MUST specify the old value.</t>
         
         <t>This event SHOULD be issued only by the provider that is authoritative over the identifier.
-        For example, if the person that owns <spanx style="verb">john.doe@example.com</spanx> goes 
-        through a name change and wants the new <spanx style="verb">john.row@example.com</spanx> email
-        then <spanx style="strong">only</spanx> the email provider <spanx style="verb">example.com</spanx>
-        SHOULD issue an Identifier Changed event as shown in the example below.</t>
+          For example, if the person that owns <spanx style="verb">john.doe@example.com</spanx> goes 
+          through a name change and wants the new <spanx style="verb">john.row@example.com</spanx> email
+          then <spanx style="strong">only</spanx> the email provider <spanx style="verb">example.com</spanx>
+          SHOULD issue an Identifier Changed event as shown in the example below.</t>
         
-        <t>If an identifier used as a username or recovery option is changed, at a provide that is not
+        <t>If an identifier used as a username or recovery option is changed, at a provider that is not
           authoritative over that identifier, then <xref target="recovery-information-changed">Recovery Information Changed</xref> 
-        SHOULD be used instead.</t>
+          SHOULD be used instead.</t>
         
         <t>Attributes:<list style="symbols">
           <t>new-value - optional, the new value of the identifier.</t>
@@ -207,7 +208,7 @@
   }
 }
             ]]></artwork>
-          <postamble>The 'foo@example.com' email changed to 'bar@example.com'.
+          <postamble>The <spanx style="verb">foo@example.com</spanx> email changed to <spanx style="verb">bar@example.com</spanx>.
             <spanx style="emph">(the event type URI is wrapped, the backslash is the continuation character)</spanx></postamble>
         </figure>
       </section>
@@ -217,7 +218,8 @@
         https://schemas.openid.net/secevent/risc/event-type/identifier-recycled</t>
         
         <t>Identifier Recycled signals that the identifier specified in the subject was recycled and now it
-        belongs to a new user. The subject MUST be either 'email' or 'phone-number'.</t>
+        belongs to a new user. The subject type MUST be either <spanx style="verb">email</spanx> or 
+        <spanx style="verb">phone</spanx>.</t>
         
         <t>Attributes: none</t>
         
@@ -282,7 +284,7 @@
           https://schemas.openid.net/secevent/risc/event-type/opt-in</t>
         
           <t>Opt In signals that the account identified by the subject opted into RISC event exchanges.
-          The account is in the 'opt-in' state.</t>
+          The account is in the <spanx style="verb">opt-in</spanx> state.</t>
         
           <t>Attributes: none</t>
         </section>
@@ -292,7 +294,7 @@
           https://schemas.openid.net/secevent/risc/event-type/opt-out-initiated</t>
         
           <t>Opt Out Initiated signals that the account identified by the subject initiated to opt out
-          from RISC event exchanges. The account is in the 'opt-out-initiated' state.</t>
+          from RISC event exchanges. The account is in the <spanx style="verb">opt-out-initiated</spanx> state.</t>
         
           <t>Attributes: none</t>
         </section>
@@ -302,7 +304,7 @@
           https://schemas.openid.net/secevent/risc/event-type/opt-out-cancelled</t>
         
           <t>Opt Out Cancelled signals that the account identified by the subject cancelled the opt out from RISC
-          event exchanges. The account is in the 'opt-in' state.</t>
+          event exchanges. The account is in the <spanx style="verb">opt-in</spanx> state.</t>
         
           <t>Attributes: none</t>
         </section>
@@ -312,7 +314,7 @@
           https://schemas.openid.net/secevent/risc/event-type/opt-out-effective</t>
         
           <t>Opt Out Effective signals that the account identified by the subject was effectively opted out from
-          RISC event exchanges. The account is in the 'opt-out' state.</t>
+          RISC event exchanges. The account is in the <spanx style="verb">opt-out</spanx> state.</t>
         
           <t>Attributes: none</t>
         </section>

@@ -12,7 +12,7 @@
   be taken to indicate.
 -->
 
-<rfc docName="risc-secevent-00" category="std" ipr="none">
+<rfc docName="openid-risc-profile-1_0" category="std" ipr="none">
 
   <?rfc toc="yes" ?>
   <?rfc tocdepth="5" ?>
@@ -24,7 +24,7 @@
   <?rfc comments="yes"?>
 
   <front>
-    <title abbrev="risc-secevent">RISC profile of IETF Security Events</title>
+    <title abbrev="openid-risc-profile">OpenID RISC Profile of IETF Security Events 1.0</title>
 
     <author initials="M." surname="Scurtescu" fullname="Marius Scurtescu">
       <organization abbrev="Google">Google</organization>

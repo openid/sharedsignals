@@ -12,7 +12,7 @@
   be taken to indicate.
 -->
 
-<rfc docName="oauth-event-types-00" category="std" ipr="none">
+<rfc docName="oauth-event-types-1_0" category="std" ipr="none">
 
   <?rfc toc="yes" ?>
   <?rfc tocdepth="5" ?>
@@ -24,7 +24,7 @@
   <?rfc comments="yes"?>
 
   <front>
-    <title abbrev="oauth-event-types">OAuth Event Types</title>
+    <title abbrev="oauth-event-types">OAuth Event Types 1.0</title>
 
     <author initials="M." surname="Scurtescu" fullname="Marius Scurtescu">
       <organization abbrev="Google">Google</organization>

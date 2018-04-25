@@ -10,15 +10,15 @@
                                                                   Oracle
                                                               J. Bradley
                                                                   Yubico
-                                                          April 11, 2018
+                                                          April 24, 2018
 
 
-                            RISC Event Types
-                          risc-event-types-00
+                      OpenID RISC Event Types 1.0
+                      openid-risc-event-types-1_0
 
 Abstract
 
-   This document defines the RTISC Event Types.  Event Types are
+   This document defines the RISC Event Types.  Event Types are
    introduced and defined in Security Event Token (SET) [SET].
 
 Table of Contents
@@ -53,9 +53,9 @@ Table of Contents
 
 
 
-Scurtescu, et al.       Expires October 13, 2018                [Page 1]
+Scurtescu, et al.       Expires October 26, 2018                [Page 1]
 
-                            risc-event-types                  April 2018
+                         openid-risc-event-types              April 2018
 
 
 1.1.  Notational Conventions
@@ -109,9 +109,9 @@ Scurtescu, et al.       Expires October 13, 2018                [Page 1]
 
 
 
-Scurtescu, et al.       Expires October 13, 2018                [Page 2]
+Scurtescu, et al.       Expires October 26, 2018                [Page 2]
 
-                            risc-event-types                  April 2018
+                         openid-risc-event-types              April 2018
 
 
 2.2.  Account Purged
@@ -131,7 +131,7 @@ Scurtescu, et al.       Expires October 13, 2018                [Page 2]
 
    Account Disabled signals that the account identified by the subject
    has been disabled.  The actual reason why the account was disabled
-   might be specified with the nested 'reason' attribute described
+   might be specified with the nested "reason" attribute described
    below.  The account may be enabled (Section 2.4) in the future.
 
    Attributes:
@@ -165,9 +165,9 @@ Scurtescu, et al.       Expires October 13, 2018                [Page 2]
 
 
 
-Scurtescu, et al.       Expires October 13, 2018                [Page 3]
+Scurtescu, et al.       Expires October 26, 2018                [Page 3]
 
-                            risc-event-types                  April 2018
+                         openid-risc-event-types              April 2018
 
 
    {
@@ -210,8 +210,8 @@ Scurtescu, et al.       Expires October 13, 2018                [Page 3]
    changed
 
    Identifier Changed signals that the identifier specified in the
-   subject has changed.  The subject's type MUST be either 'email' or
-   'phone' and it MUST specify the old value.
+   subject has changed.  The subject type MUST be either "email" or
+   "phone" and it MUST specify the old value.
 
    This event SHOULD be issued only by the provider that is
    authoritative over the identifier.  For example, if the person that
@@ -221,16 +221,16 @@ Scurtescu, et al.       Expires October 13, 2018                [Page 3]
 
 
 
-Scurtescu, et al.       Expires October 13, 2018                [Page 4]
+Scurtescu, et al.       Expires October 26, 2018                [Page 4]
 
-                            risc-event-types                  April 2018
+                         openid-risc-event-types              April 2018
 
 
    "example.com" SHOULD issue an Identifier Changed event as shown in
    the example below.
 
    If an identifier used as a username or recovery option is changed, at
-   a provide that is not authoritative over that identifier, then
+   a provider that is not authoritative over that identifier, then
    Recovery Information Changed (Section 2.9) SHOULD be used instead.
 
    Attributes:
@@ -254,7 +254,7 @@ Scurtescu, et al.       Expires October 13, 2018                [Page 4]
      }
    }
 
-   The 'foo@example.com' email changed to 'bar@example.com'.  _(the
+   The "foo@example.com" email changed to "bar@example.com".  _(the
    event type URI is wrapped, the backslash is the continuation
    character)_
 
@@ -268,7 +268,7 @@ Scurtescu, et al.       Expires October 13, 2018                [Page 4]
 
    Identifier Recycled signals that the identifier specified in the
    subject was recycled and now it belongs to a new user.  The subject
-   MUST be either 'email' or 'phone-number'.
+   type MUST be either "email" or "phone".
 
    Attributes: none
 
@@ -277,9 +277,9 @@ Scurtescu, et al.       Expires October 13, 2018                [Page 4]
 
 
 
-Scurtescu, et al.       Expires October 13, 2018                [Page 5]
+Scurtescu, et al.       Expires October 26, 2018                [Page 5]
 
-                            risc-event-types                  April 2018
+                         openid-risc-event-types              April 2018
 
 
    {
@@ -333,9 +333,9 @@ Scurtescu, et al.       Expires October 13, 2018                [Page 5]
 
 
 
-Scurtescu, et al.       Expires October 13, 2018                [Page 6]
+Scurtescu, et al.       Expires October 26, 2018                [Page 6]
 
-                            risc-event-types                  April 2018
+                         openid-risc-event-types              April 2018
 
 
    State changes trigger Opt-Out Events as represented bellow:
@@ -367,7 +367,7 @@ Scurtescu, et al.       Expires October 13, 2018                [Page 6]
    https://schemas.openid.net/secevent/risc/event-type/opt-in
 
    Opt In signals that the account identified by the subject opted into
-   RISC event exchanges.  The account is in the 'opt-in' state.
+   RISC event exchanges.  The account is in the "opt-in" state.
 
    Attributes: none
 
@@ -378,7 +378,7 @@ Scurtescu, et al.       Expires October 13, 2018                [Page 6]
 
    Opt Out Initiated signals that the account identified by the subject
    initiated to opt out from RISC event exchanges.  The account is in
-   the 'opt-out-initiated' state.
+   the "opt-out-initiated" state.
 
    Attributes: none
 
@@ -389,9 +389,9 @@ Scurtescu, et al.       Expires October 13, 2018                [Page 6]
 
 
 
-Scurtescu, et al.       Expires October 13, 2018                [Page 7]
+Scurtescu, et al.       Expires October 26, 2018                [Page 7]
 
-                            risc-event-types                  April 2018
+                         openid-risc-event-types              April 2018
 
 
 2.7.3.  Opt Out Cancelled
@@ -401,7 +401,7 @@ Scurtescu, et al.       Expires October 13, 2018                [Page 7]
 
    Opt Out Cancelled signals that the account identified by the subject
    cancelled the opt out from RISC event exchanges.  The account is in
-   the 'opt-in' state.
+   the "opt-in" state.
 
    Attributes: none
 
@@ -412,7 +412,7 @@ Scurtescu, et al.       Expires October 13, 2018                [Page 7]
 
    Opt Out Effective signals that the account identified by the subject
    was effectively opted out from RISC event exchanges.  The account is
-   in the 'opt-out' state.
+   in the "opt-out" state.
 
    Attributes: none
 
@@ -445,9 +445,9 @@ Scurtescu, et al.       Expires October 13, 2018                [Page 7]
 
 
 
-Scurtescu, et al.       Expires October 13, 2018                [Page 8]
+Scurtescu, et al.       Expires October 26, 2018                [Page 8]
 
-                            risc-event-types                  April 2018
+                         openid-risc-event-types              April 2018
 
 
 2.10.  Sessions Revoked
@@ -501,9 +501,9 @@ Authors' Addresses
 
 
 
-Scurtescu, et al.       Expires October 13, 2018                [Page 9]
+Scurtescu, et al.       Expires October 26, 2018                [Page 9]
 
-                            risc-event-types                  April 2018
+                         openid-risc-event-types              April 2018
 
 
    Phil Hunt
@@ -557,4 +557,4 @@ Scurtescu, et al.       Expires October 13, 2018                [Page 9]
 
 
 
-Scurtescu, et al.       Expires October 13, 2018               [Page 10]
+Scurtescu, et al.       Expires October 26, 2018               [Page 10]

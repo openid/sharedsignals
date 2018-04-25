@@ -13,8 +13,8 @@
                                                           April 24, 2018
 
 
-                           OAuth Event Types
-                          oauth-event-types-00
+                         OAuth Event Types 1.0
+                         oauth-event-types-1_0
 
 Abstract
 
