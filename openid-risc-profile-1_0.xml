@@ -50,7 +50,8 @@
     <workgroup>RISC Working Group</workgroup>
 
     <abstract>
-      <t>This spec is a general profile for <xref target="SECEVENT">IETF Security Events</xref>
+      <t>This spec is a general profile for 
+        <eref target="https://datatracker.ietf.org/wg/secevent/about/">IETF Security Events</eref>
         and it defines:<list style="symbols">
         <t>Subject Identifiers</t>
         <t>a configuration information discovery method for Transmitters</t>
@@ -1405,16 +1406,6 @@ disabled": {
         <seriesInfo name="DOI" value="10.17487/RFC7519"/>
       </reference>
 
-      <reference anchor="SECEVENT" target="https://datatracker.ietf.org/wg/secevent/about/">
-        <front>
-          <title>Security Events IETF Working Group</title>
-          <author>
-            <organization>IETF</organization>
-          </author>
-          <date/>
-        </front>
-      </reference>
-      
       <reference anchor="SET" target="https://tools.ietf.org/html/draft-ietf-secevent-token-09">
         <front>
           <title>Security Event Token (SET)</title>

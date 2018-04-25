@@ -16,8 +16,8 @@
 
 Abstract
 
-   This spec is a general profile for IETF Security Events [SECEVENT]
-   and it defines:
+   This spec is a general profile for IETF Security Events [1] and it
+   defines:
 
    o  Subject Identifiers
 
@@ -98,11 +98,11 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 1]
        6.2.1.  Registry Contents . . . . . . . . . . . . . . . . . .  32
    7.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .  32
      7.1.  Subject Information Leakage . . . . . . . . . . . . . . .  32
-   8.  Normative References  . . . . . . . . . . . . . . . . . . . .  32
+   8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  32
+     8.1.  Normative References  . . . . . . . . . . . . . . . . . .  32
+     8.2.  URIs  . . . . . . . . . . . . . . . . . . . . . . . . . .  34
    Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  34
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  34
-
-
 
 
 
@@ -1772,7 +1772,9 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 31]
    when communicating with a given party in order to reduce the
    possibility of information leakage.
 
-8.  Normative References
+8.  References
+
+8.1.  Normative References
 
    [BCP26]    Cotton, M., Leiba, B., and T. Narten, "Guidelines for
               Writing an IANA Considerations Section in RFCs", BCP 26,
@@ -1783,8 +1785,6 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 31]
               Hardt, D., "The OAuth 2.0 Authorization Framework - Client
               Credentials Grant", RFC 6749,
               <https://tools.ietf.org/html/rfc6749#section-4.4>.
-
-
 
 
 
@@ -1862,10 +1862,6 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 33]
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
-   [SECEVENT]
-              IETF, "Security Events IETF Working Group",
-              <https://datatracker.ietf.org/wg/secevent/about/>.
-
    [SET]      Hunt, P., Ed., Jones, M., Denniss, W., and M. Ansari,
               "Security Event Token (SET)", April 2018,
               <https://tools.ietf.org/html/draft-ietf-secevent-token-
@@ -1875,6 +1871,10 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 33]
               IETF, "Security Events RISC Use Cases",
               <https://tools.ietf.org/html/draft-scurtescu-secevent-
               risc-use-cases-00>.
+
+8.2.  URIs
+
+   [1] https://datatracker.ietf.org/wg/secevent/about/
 
 Appendix A.  Acknowledgements
 
