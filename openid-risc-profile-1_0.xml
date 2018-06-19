@@ -504,7 +504,7 @@ Pragma: no-cache
             <t hangText="events_requested"><vspace blankLines="0"/>  <spanx style="strong">Read-Write</spanx>, 
               An array of URIs identifying
               the set of events that the Receiver requested. A Receiver should request only the events
-              that it understands and it can act on. This is configurabel by the Receiver.</t>
+              that it understands and it can act on. This is configurable by the Receiver.</t>
             <t hangText="events_delivered"><vspace blankLines="0"/> <spanx style="strong">Read-Only</spanx>, 
               An array of URIs 
               which is the intersection of <spanx style="verb">events_supported</spanx> and
