@@ -686,8 +686,8 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 12]
    events_requested
       *Read-Write*, An array of URIs identifying the set of events that
       the Receiver requested.  A Receiver should request only the events
-      that it understands and it can act on.  This is configurabel by
-      the Receuver.
+      that it understands and it can act on.  This is configurable by
+      the Receiver.
 
    events_delivered
       *Read-Only*, An array of URIs which is the intersection of
@@ -1351,11 +1351,11 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 24]
   "iss": "https://transmitter.example.com",
   "aud": "receiver.example.com",
   "iat": "1493856000",
-  "events": [
+  "events": {
     "https://schemas.openid.net/secevent/risc/event-type/verification":{
       "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
     }
-  ]
+  }
 }
 
                    Figure 22: Example: Verification SET
@@ -1575,11 +1575,11 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 28]
   "iss": "https://transmitter.example.com",
   "aud": ["receiver.example.com/web", "receiver.example.com/mobile"],
   "iat": "1493856000",
-  "events": [
+  "events": {
     "https://schemas.openid.net/secevent/risc/event-type/verification":{
       "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
     }
-  ]
+  }
 }
 
               Figure 25: Example: SET with array 'aud' claim
@@ -1809,22 +1809,22 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 32]
    [CLIENTCRED]
               Hardt, D., Ed., "The OAuth 2.0 Authorization Framework -
               Client Credentials Grant", RFC 6749, DOI 10.17487/RFC6749,
-              October 2012, <https://tools.ietf.org/html/
-              rfc6749#section-4.4>.
+              October 2012,
+              <https://tools.ietf.org/html/rfc6749#section-4.4>.
 
    [DELIVERYPOLL]
               Backman, A., Ed., Jones, M., Ed., Hunt, P., Ed.,
               Scurtescu, M., Ansari, M., and A. Nadalin, "Poll-Based SET
               Token Delivery Using HTTP", April 2018,
-              <https://tools.ietf.org/html/draft-ietf-secevent-http-
-              poll-00>.
+              <https://tools.ietf.org/html/
+              draft-ietf-secevent-http-poll-00>.
 
    [DELIVERYPUSH]
               Backman, A., Ed., Jones, M., Ed., Hunt, P., Ed.,
               Scurtescu, M., Ansari, M., and A. Nadalin, "Push-Based SET
               Token Delivery Using HTTP", April 2018,
-              <https://tools.ietf.org/html/draft-ietf-secevent-http-
-              push-00>.
+              <https://tools.ietf.org/html/
+              draft-ietf-secevent-http-push-00>.
 
    [E164]     International Telecommunication Union, "The international
               public telecommunication numbering plan", 2010,
@@ -1853,37 +1853,37 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 33]
    [OAUTH-DISCOVERY]
               Jones, M., Sakimura, N., and J. Bradley, "OAuth 2.0
               Authorization Server Metadata - Version 10", March 2018,
-              <https://tools.ietf.org/html/draft-ietf-oauth-discovery-
-              10>.
+              <https://tools.ietf.org/html/
+              draft-ietf-oauth-discovery-10>.
 
    [OIDC-DISCOVERY]
               Sakimura, N., Bradley, J., Jones, M., and E. Jay, "OpenID
               Connect Discovery 1.0", November 2014,
-              <https://openid.net/specs/openid-connect-discovery-
-              1_0.html>.
+              <https://openid.net/specs/
+              openid-connect-discovery-1_0.html>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
-              DOI 10.17487/RFC2119, March 1997, <https://www.rfc-
-              editor.org/info/rfc2119>.
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/info/rfc2119>.
 
    [RFC5785]  Nottingham, M. and E. Hammer-Lahav, "Defining Well-Known
               Uniform Resource Identifiers (URIs)", RFC 5785,
-              DOI 10.17487/RFC5785, April 2010, <https://www.rfc-
-              editor.org/info/rfc5785>.
+              DOI 10.17487/RFC5785, April 2010,
+              <https://www.rfc-editor.org/info/rfc5785>.
 
    [RFC6750]  Jones, M. and D. Hardt, "The OAuth 2.0 Authorization
               Framework: Bearer Token Usage", RFC 6750,
-              DOI 10.17487/RFC6750, October 2012, <https://www.rfc-
-              editor.org/info/rfc6750>.
+              DOI 10.17487/RFC6750, October 2012,
+              <https://www.rfc-editor.org/info/rfc6750>.
 
    [RFC7159]  Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
               Interchange Format", RFC 7159, DOI 10.17487/RFC7159, March
               2014, <https://www.rfc-editor.org/info/rfc7159>.
 
    [RFC7517]  Jones, M., "JSON Web Key (JWK)", RFC 7517,
-              DOI 10.17487/RFC7517, May 2015, <https://www.rfc-
-              editor.org/info/rfc7517>.
+              DOI 10.17487/RFC7517, May 2015,
+              <https://www.rfc-editor.org/info/rfc7517>.
 
    [RFC7519]  Jones, M., Bradley, J., and N. Sakimura, "JSON Web Token
               (JWT)", RFC 7519, DOI 10.17487/RFC7519, May 2015,
@@ -1895,8 +1895,8 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 33]
 
    [SET]      Hunt, P., Ed., Jones, M., Denniss, W., and M. Ansari,
               "Security Event Token (SET)", April 2018,
-              <https://tools.ietf.org/html/draft-ietf-secevent-token-
-              09>.
+              <https://tools.ietf.org/html/
+              draft-ietf-secevent-token-09>.
 
 
 
@@ -1908,8 +1908,8 @@ Scurtescu, et al.       Expires October 26, 2018               [Page 34]
 
    [USECASES]
               Scurtescu, M., "Security Events RISC Use Cases", June
-              2017, <https://tools.ietf.org/html/draft-scurtescu-
-              secevent-risc-use-cases-00>.
+              2017, <https://tools.ietf.org/html/
+              draft-scurtescu-secevent-risc-use-cases-00>.
 
 8.2.  URIs
 

@@ -983,11 +983,11 @@ Pragma: no-cache
   "iss": "https://transmitter.example.com",
   "aud": "receiver.example.com",
   "iat": "1493856000",
-  "events": [
+  "events": {
     "https://schemas.openid.net/secevent/risc/event-type/verification":{
       "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
     }
-  ]
+  }
 }
 ]]></artwork>
             </figure>
@@ -1152,11 +1152,11 @@ disabled": {
   "iss": "https://transmitter.example.com",
   "aud": ["receiver.example.com/web", "receiver.example.com/mobile"],
   "iat": "1493856000",
-  "events": [
+  "events": {
     "https://schemas.openid.net/secevent/risc/event-type/verification":{
       "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
     }
-  ]
+  }
 }
 ]]></artwork>
           </figure>
