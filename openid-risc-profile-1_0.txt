@@ -3,7 +3,7 @@
 
 
                                                             M. Scurtescu
-                                                                  Google
+                                                                Coinbase
                                                               A. Backman
                                                                   Amazon
                                                               J. Bradley
@@ -1924,9 +1924,9 @@ Appendix A.  Acknowledgements
 Authors' Addresses
 
    Marius Scurtescu
-   Google
+   Coinbase
 
-   Email: mscurtescu@google.com
+   Email: marius.scurtescu@coinbase.com
 
 
    Annabelle Backman

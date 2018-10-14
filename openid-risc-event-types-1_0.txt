@@ -3,7 +3,7 @@
 
 
                                                             M. Scurtescu
-                                                                  Google
+                                                                Coinbase
                                                               A. Backman
                                                                   Amazon
                                                                  P. Hunt
@@ -468,8 +468,8 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 8]
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
-              DOI 10.17487/RFC2119, March 1997, <https://www.rfc-
-              editor.org/info/rfc2119>.
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/info/rfc2119>.
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
@@ -482,15 +482,15 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 8]
 
    [SET]      Hunt, P., Ed., Jones, M., Denniss, W., and M. Ansari,
               "Security Event Token (SET)", April 2018,
-              <https://tools.ietf.org/html/draft-ietf-secevent-token-
-              09>.
+              <https://tools.ietf.org/html/
+              draft-ietf-secevent-token-09>.
 
 Authors' Addresses
 
    Marius Scurtescu
-   Google
+   Coinbase
 
-   Email: mscurtescu@google.com
+   Email: marius.scurtescu@coinbase.com
 
 
    Annabelle Backman

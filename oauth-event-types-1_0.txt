@@ -3,7 +3,7 @@
 
 
                                                             M. Scurtescu
-                                                                  Google
+                                                                Coinbase
                                                               A. Backman
                                                                   Amazon
                                                                  P. Hunt
@@ -482,9 +482,9 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 8]
 Authors' Addresses
 
    Marius Scurtescu
-   Google
+   Coinbase
 
-   Email: mscurtescu@google.com
+   Email: marius.scurtescu@coinbase.com
 
 
    Annabelle Backman
