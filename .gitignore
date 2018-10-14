@@ -2,3 +2,5 @@
 *.epub
 *.html
 .refcache
+*.xpr
+
