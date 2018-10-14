@@ -173,7 +173,7 @@
       "subject": {
         "subject_type": "oauth_token",
         "token_type": "refresh_token",
-        "token_identifier_alg": "token_string",
+        "token_identifier_alg": "plain",
         "token": "7265667265736820746F6B656E20737472696E67"
       },
       "token_subject" {
@@ -231,7 +231,7 @@
       "subject": {
         "subject_type": "oauth_token",
         "token_type": "refresh_token",
-        "token_identifier_alg": "token_string",
+        "token_identifier_alg": "plain",
         "token": "7265667265736820746F6B656E20737472696E67"
       },
       "token_subject" {

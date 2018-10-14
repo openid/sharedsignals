@@ -187,7 +187,7 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 3]
          "subject": {
            "subject_type": "oauth_token",
            "token_type": "refresh_token",
-           "token_identifier_alg": "token_string",
+           "token_identifier_alg": "plain",
            "token": "7265667265736820746F6B656E20737472696E67"
          },
          "token_subject" {
@@ -293,7 +293,7 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 5]
          "subject": {
            "subject_type": "oauth_token",
            "token_type": "refresh_token",
-           "token_identifier_alg": "token_string",
+           "token_identifier_alg": "plain",
            "token": "7265667265736820746F6B656E20737472696E67"
          },
          "token_subject" {
@@ -454,8 +454,8 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 8]
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
-              DOI 10.17487/RFC2119, March 1997, <https://www.rfc-
-              editor.org/info/rfc2119>.
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/info/rfc2119>.
 
    [RFC6749]  Hardt, D., Ed., "The OAuth 2.0 Authorization Framework",
               RFC 6749, DOI 10.17487/RFC6749, October 2012,
@@ -476,8 +476,8 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 8]
 
    [SET]      Hunt, P., Ed., Jones, M., Denniss, W., and M. Ansari,
               "Security Event Token (SET)", April 2018,
-              <https://tools.ietf.org/html/draft-ietf-secevent-token-
-              09>.
+              <https://tools.ietf.org/html/
+              draft-ietf-secevent-token-09>.
 
 Authors' Addresses
 
