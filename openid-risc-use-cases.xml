@@ -24,25 +24,23 @@
   <?rfc comments="yes"?>
 
   <front>
-    <title>Security Events RISC Use Cases</title>
+    <title>OpenID RISC Use Cases</title>
 
     <author initials="M." surname="Scurtescu" fullname="Marius Scurtescu">
-      <organization>Google</organization>
+      <organization>Coinbase</organization>
       <address>
-        <email>mscurtescu@google.com</email>
+        <email>marius.scurtescu@coinbase.com</email>
       </address>
     </author>
 
-    <date year="2017" month="June" day="29"/>
-
-    <area>Security</area>
-    <workgroup>secevent</workgroup>
-    <keyword>Internet-Draft</keyword>
+    <date year="2020" month="April" day="21"/>
+    
+    <workgroup>SSE Working Group</workgroup>
 
     <abstract>
 
 
-<t>This document describes the RISC use cases for security events and helps with
+<t>This document describes the RISC use cases and helps with
 defining the requirements for token format and event distribution.</t>
 
 
