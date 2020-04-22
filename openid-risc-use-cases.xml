@@ -138,7 +138,7 @@ them?</t>
   <t>Receiver: implicit IdP</t>
 </list></t>
 
-<t>No enrollent call is strictly necessary. The RP can start sending events to IdP
+<t>No enrollment call is strictly necessary. The RP can start sending events to IdP
 as new identifiers show up.</t>
 
 </section>
@@ -169,7 +169,7 @@ of RP)</t>
 </section>
 <section anchor="secaas" title="Security as a Service">
 
-<t>Similar to IdaaS described in previous estion, but the service provider has its
+<t>Similar to IdaaS described in previous section, but the service provider has its
 own set of credentials different from the credentials and RP is using. The SP
 cannot impersonate the RP at IdP. The IdP must define delegation rules and allow
 the SP to make requests on behalf of the RP.</t>
