@@ -1,11 +1,7 @@
-# RISC: Risk and Incident Sharing and Coordination #
+# SSE: Shared Signals and Events #
 
-The goal of [RISC](http://openid.net/wg/risc/) is to provide data sharing schemas,
-privacy recommendations and protocols to:
+The goal of the Shared Signals and Events ([SSE](http://openid.net/wg/sse/)) Working Group is to enable the sharing of security events, state changes, and other signals between related and/or dependent systems in order to:
 
-* Share information about important security events in order to thwart attackers from
-leveraging compromised accounts from one Service Provider to gain access to accounts on
-other Service Providers (mobile or web application developers and owners).
-* Enable users and providers to coordinate in order to securely restore accounts
-following a compromise.
-
+* Manage access to resources and enforce access control restrictions across distributed services operating in a dynamic environment.
+* Prevent malicious actors from leveraging compromises of accounts, devices, services, endpoints, or other principals or resources to gain unauthorized access to additional systems or resources.
+* Enable users, administrators, and service providers to coordinate in order to detect and respond to incidents. 
