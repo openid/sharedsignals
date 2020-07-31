@@ -1469,7 +1469,7 @@ disabled": {
         "email": "user@example.com"
       },
       "properties": {
-        "token": "ya29.a0BfC6SMA8kBiQ90qrydNVMKl6R3eoYG7y73gRnqYP_RGxPff_W_zbmlrQKl1-rl4bzaukQeBLMvxqnV6p7dnxSaohzkXobHFYuP47IFUuSymenultkk4E6Rxx_kQ4Bmg6IsS92AHavHI716y81dOIY5jw_6pYGJqMjD5dTLBxwTR8LGZCqVpIiu6rNrLJsr2hKayH9a0ewF0TMaMV3w"
+        "token": "some-token-value"
       }
       "reason": "hijacking",
       "cause-time": 1508012752
