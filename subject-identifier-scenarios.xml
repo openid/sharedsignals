@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE rfc SYSTEM "rfc2629-xhtml.ent">
+<?xml-stylesheet type="text/xsl" href="rfc2629.xsl" ?>
+<?rfc toc="yes"?>
+<?rfc tocompact="yes"?>
+<?rfc tocindent="yes"?>
+<?rfc comments="yes"?>
+<?rfc inline="yes"?>
+<?rfc compact="yes"?>
+<?rfc subcompact="no"?>
+<?xml-stylesheet type='text/xsl' href='http://xml2rfc.tools.ietf.org/authoring/rfc2629.xslt' ?>
+<!--
+        Note for draft editors and processors – you may see the following warning
+        when processing this document through xml2rfc:
+
+            Warning: Setting consensus="true" for IETF STD document (this is not
+            the schema default, but is the only value permitted for this type of
+            document)
+
+        This appears to be an issue be an issue with a lack of distinction between
+        drafts and RFCs. The guidance is to ignore the warning for now.
+
+        See: https://www.rfc-editor.org/materials/FAQ-xml2rfcv3.html#name-how-do-i-fix-common-errors-
+     -->
+<rfc xmlns:xi="http://www.w3.org/2001/XInclude" category="info" ipr="none" docName="subject-identifier-scenarios-00" obsoletes="" updates="" submissionType="independent" xml:lang="en" tocInclude="true" tocDepth="3" symRefs="true" sortRefs="true" version="3">
+        <!-- xml2rfc v2v3 conversion 2.35.0 -->
+  <front>
+    <title>Subject Identifier Scenarios</title>
+
+    <author initials="A." surname="Backman" fullname="Annabelle Backman">
+      <organization>Amazon</organization>
+      <address>
+        <email>richanna@amazon.com</email>
+      </address>
+    </author>
+
+    <date year="2020" month="September" day="22"/>
+    
+    <workgroup>SSE Working Group</workgroup>
+
+    <abstract>
+
+
+        <t>This document presents different ways subject identifiers could be defined 
+            to support use cases where we need to identify multiple principals related
+            to an event.</t>
+
+
+
+    </abstract>
+
+
+  </front>
+
+  <middle>
+      <section anchor="syntax">
+          <name>Syntax Options</name>
+          <t>This section presents three different syntax options that have been discussed as ways to present multiple subject identifiers.</t>
+          
+          <section anchor="syntax-array">
+              <name>Array of Subject Identifiers</name>
+              <ol>
+                  <li>Redefine the <tt>subject</tt> within the event payload to be an array of subject identifiers, rather than a single subject identifier.</li>
+                  <li>Add a <tt>category</tt> property to each subject identifier that describes the subject identifier's relationship to the event.</li>
+              </ol>
+
+              <figure>
+                  <name>Example partial SET demonstrating Array syntax</name>
+                  <sourcecode><![CDATA[
+{
+  ...
+  "events": {
+    "https://event.example.com/session_revoked": {
+      "subject": [
+        {
+          "subject_type": "email",
+          "category": "user",
+          "email": "user@example.com",
+        },
+        {
+          "subject_type": "mac",
+          "category": "device",
+          "mac_address": "00:11:22:33:44:55:66",
+        },
+      ],
+      ...
+    }
+  }
+}
+]]></sourcecode>
+                </figure>
+            </section>
+
+            <section anchor="syntax-map">
+                <name>Map of Subject Identifiers</name>
+                <ol>
+                    <li>Redefine the <tt>subject</tt> within the event payload to be a JSON object containing key/value pairs where each value is a subject identifier and each key describes the relationship of the subject identifier to the event.</li>
+                </ol>
+
+                <figure>
+                    <name>Example partial SET demonstrating Map syntax</name>
+                    <sourcecode><![CDATA[
+{
+  ...
+  "events": {
+    "https://event.example.com/session_revoked": {
+      "subject": {
+        "user": {
+          "subject_type": "email",
+          "email": "user@example.com",
+        },
+        "device": {
+          "subject_type": "mac",
+          "mac_address": "00:11:22:33:44:55:66",
+        },
+      },
+      ...
+    }
+  }
+}
+]]></sourcecode>
+                </figure>
+            </section>
+
+            <section anchor="syntax-payload-props">
+                <name>Specific Payload Properties</name>
+                <ol>
+                    <li>Leave <tt>subject</tt> defined as is.</li>
+                    <li>When an event calls for specifying multiple principals, define specific properties within the event payload for each principal.</li>
+                </ol>
+
+                <figure>
+                    <name>Example partial SET demonstrating Specific Payload Properties syntax</name>
+                    <sourcecode><![CDATA[
+{
+  ...
+  "events": {
+    "https://event.example.com/session_revoked": {
+      "user": {
+        "subject_type": "email",
+        "email": "user@example.com",
+      },
+      "device": {
+        "subject_type": "mac",
+        "mac_address": "00:11:22:33:44:55:66",
+      },
+      ...
+    }
+  }
+}
+]]></sourcecode>
+                </figure>
+            </section>
+
+            <section anchor="syntax-nested">
+                <name>Nested Subject Identifiers</name>
+                <ol>
+                    <li>Leave <tt>subject</tt> defined as is.</li>
+                    <li>Define additional subject identifier types that describe how to identify a subject using tuples of subject identifiers, e.g., a subject identifier for a user and a subject identifier for a device.</li>
+                </ol>
+            
+                <figure>
+                    <name>Example partial SET demonstrating Nested Subject Identifiers syntax</name>
+                    <sourcecode><![CDATA[
+{
+  ...
+  "events": {
+    "https://event.example.com/session_revoked": {
+      "subject": {
+        "subject_type": "user_device",
+        "user": {
+          "subject_type": "email",
+          "email": "user@example.com",
+        },
+        "device": {
+          "subject_type": "mac",
+          "mac_address": "00:11:22:33:44:55:66",
+        },
+      },
+      ...
+    }
+  }
+}
+]]></sourcecode>
+                </figure>
+            </section>
+        </section>
+
+        <section anchor="test-cases">
+            <name>Test Case Scenarios</name>
+            <section>
+                <name>Multiple Principals of the Same Type</name>
+                <t>Consider the scenario where we also want to indicate the user that revoked the session in our hypothetical <tt>session_revoked</tt> event. How would we encode that for each of the syntaxes above?</t>
+
+                <figure>
+                    <name>Array: Define new category names</name>
+                    <sourcecode><![CDATA[
+{
+  ...
+  "events": {
+    "https://event.example.com/session_revoked": {
+      "subject": [
+        {
+          "subject_type": "email",
+          "category": "user",
+          "email": "user@example.com",
+        },
+        {
+          "subject_type": "mac",
+          "mac_address": "00:11:22:33:44:55:66",
+        },
+        {
+          "subject_type": "email",
+          "category": "revoker",
+          "email": "admin@example.com",
+        },
+      },
+      ...
+    }
+  }
+}
+]]></sourcecode>
+                </figure>
+
+                <figure>
+                    <name>Map: Define new map keys</name>
+                    <sourcecode><![CDATA[
+{
+  ...
+  "events": {
+    "https://event.example.com/session_revoked": {
+      "subject": {
+        "user": {
+          "subject_type": "email",
+          "email": "user@example.com",
+        },
+        "device": {
+          "subject_type": "mac",
+          "mac_address": "00:11:22:33:44:55:66",
+        },
+        "revoker": {
+          "subject_type": "email",
+          "email": "admin@example.com",
+        },
+      },
+      ...
+    }
+  }
+}
+]]></sourcecode>
+                </figure>
+
+                <figure>
+                    <name>Payload Properties: Define new properties</name>
+                    <sourcecode><![CDATA[
+{
+  ...
+  "events": {
+    "https://event.example.com/session_revoked": {
+      "user": {
+        "subject_type": "email",
+        "email": "user@example.com",
+      },
+      "device": {
+        "subject_type": "mac",
+        "mac_address": "00:11:22:33:44:55:66",
+      },
+      "revoker": {
+        "subject_type": "email",
+        "email": "admin@example.com",
+      },
+      ...
+    }
+  }
+}
+]]></sourcecode>
+                </figure>
+
+                <t keepWithNext="true">Nested Subject Identifiers does not address this use case, as it only describes how to identify a single subject by identifying multiple principals. In this case, the subject is the set of sessions for the user and device. The revoker is not part of the subject, but a separate principal related to the event.</t>
+            </section>
+        </section>
+  </middle>
+
+  <back>
+
+  </back>
+</rfc>

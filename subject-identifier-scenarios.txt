@@ -1,0 +1,392 @@
+
+
+
+
+                                                              A. Backman
+                                                                  Amazon
+                                                       22 September 2020
+
+
+                      Subject Identifier Scenarios
+                    subject-identifier-scenarios-00
+
+Abstract
+
+   This document presents different ways subject identifiers could be
+   defined to support use cases where we need to identify multiple
+   principals related to an event.
+
+Table of Contents
+
+   1.  Syntax Options  . . . . . . . . . . . . . . . . . . . . . . .   1
+     1.1.  Array of Subject Identifiers  . . . . . . . . . . . . . .   1
+     1.2.  Map of Subject Identifiers  . . . . . . . . . . . . . . .   2
+     1.3.  Specific Payload Properties . . . . . . . . . . . . . . .   3
+     1.4.  Nested Subject Identifiers  . . . . . . . . . . . . . . .   3
+   2.  Test Case Scenarios . . . . . . . . . . . . . . . . . . . . .   4
+     2.1.  Multiple Principals of the Same Type  . . . . . . . . . .   4
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   7
+
+1.  Syntax Options
+
+   This section presents three different syntax options that have been
+   discussed as ways to present multiple subject identifiers.
+
+1.1.  Array of Subject Identifiers
+
+   1.  Redefine the "subject" within the event payload to be an array of
+       subject identifiers, rather than a single subject identifier.
+
+   2.  Add a "category" property to each subject identifier that
+       describes the subject identifier's relationship to the event.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Backman                       Informational                     [Page 1]
+
+                      Subject Identifier Scenarios        September 2020
+
+
+   {
+     ...
+     "events": {
+       "https://event.example.com/session_revoked": {
+         "subject": [
+           {
+             "subject_type": "email",
+             "category": "user",
+             "email": "user@example.com",
+           },
+           {
+             "subject_type": "mac",
+             "category": "device",
+             "mac_address": "00:11:22:33:44:55:66",
+           },
+         ],
+         ...
+       }
+     }
+   }
+
+          Figure 1: Example partial SET demonstrating Array syntax
+
+1.2.  Map of Subject Identifiers
+
+   1.  Redefine the "subject" within the event payload to be a JSON
+       object containing key/value pairs where each value is a subject
+       identifier and each key describes the relationship of the subject
+       identifier to the event.
+
+   {
+     ...
+     "events": {
+       "https://event.example.com/session_revoked": {
+         "subject": {
+           "user": {
+             "subject_type": "email",
+             "email": "user@example.com",
+           },
+           "device": {
+             "subject_type": "mac",
+             "mac_address": "00:11:22:33:44:55:66",
+           },
+         },
+         ...
+       }
+     }
+   }
+
+
+
+Backman                       Informational                     [Page 2]
+
+                      Subject Identifier Scenarios        September 2020
+
+
+           Figure 2: Example partial SET demonstrating Map syntax
+
+1.3.  Specific Payload Properties
+
+   1.  Leave "subject" defined as is.
+
+   2.  When an event calls for specifying multiple principals, define
+       specific properties within the event payload for each principal.
+
+   {
+     ...
+     "events": {
+       "https://event.example.com/session_revoked": {
+         "user": {
+           "subject_type": "email",
+           "email": "user@example.com",
+         },
+         "device": {
+           "subject_type": "mac",
+           "mac_address": "00:11:22:33:44:55:66",
+         },
+         ...
+       }
+     }
+   }
+
+        Figure 3: Example partial SET demonstrating Specific Payload
+                             Properties syntax
+
+1.4.  Nested Subject Identifiers
+
+   1.  Leave "subject" defined as is.
+
+   2.  Define additional subject identifier types that describe how to
+       identify a subject using tuples of subject identifiers, e.g., a
+       subject identifier for a user and a subject identifier for a
+       device.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Backman                       Informational                     [Page 3]
+
+                      Subject Identifier Scenarios        September 2020
+
+
+   {
+     ...
+     "events": {
+       "https://event.example.com/session_revoked": {
+         "subject": {
+           "subject_type": "user_device",
+           "user": {
+             "subject_type": "email",
+             "email": "user@example.com",
+           },
+           "device": {
+             "subject_type": "mac",
+             "mac_address": "00:11:22:33:44:55:66",
+           },
+         },
+         ...
+       }
+     }
+   }
+
+         Figure 4: Example partial SET demonstrating Nested Subject
+                             Identifiers syntax
+
+2.  Test Case Scenarios
+
+2.1.  Multiple Principals of the Same Type
+
+   Consider the scenario where we also want to indicate the user that
+   revoked the session in our hypothetical "session_revoked" event.  How
+   would we encode that for each of the syntaxes above?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Backman                       Informational                     [Page 4]
+
+                      Subject Identifier Scenarios        September 2020
+
+
+   {
+     ...
+     "events": {
+       "https://event.example.com/session_revoked": {
+         "subject": [
+           {
+             "subject_type": "email",
+             "category": "user",
+             "email": "user@example.com",
+           },
+           {
+             "subject_type": "mac",
+             "mac_address": "00:11:22:33:44:55:66",
+           },
+           {
+             "subject_type": "email",
+             "category": "revoker",
+             "email": "admin@example.com",
+           },
+         },
+         ...
+       }
+     }
+   }
+
+                 Figure 5: Array: Define new category names
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Backman                       Informational                     [Page 5]
+
+                      Subject Identifier Scenarios        September 2020
+
+
+   {
+     ...
+     "events": {
+       "https://event.example.com/session_revoked": {
+         "subject": {
+           "user": {
+             "subject_type": "email",
+             "email": "user@example.com",
+           },
+           "device": {
+             "subject_type": "mac",
+             "mac_address": "00:11:22:33:44:55:66",
+           },
+           "revoker": {
+             "subject_type": "email",
+             "email": "admin@example.com",
+           },
+         },
+         ...
+       }
+     }
+   }
+
+                     Figure 6: Map: Define new map keys
+
+   {
+     ...
+     "events": {
+       "https://event.example.com/session_revoked": {
+         "user": {
+           "subject_type": "email",
+           "email": "user@example.com",
+         },
+         "device": {
+           "subject_type": "mac",
+           "mac_address": "00:11:22:33:44:55:66",
+         },
+         "revoker": {
+           "subject_type": "email",
+           "email": "admin@example.com",
+         },
+         ...
+       }
+     }
+   }
+
+            Figure 7: Payload Properties: Define new properties
+
+
+
+
+Backman                       Informational                     [Page 6]
+
+                      Subject Identifier Scenarios        September 2020
+
+
+   Nested Subject Identifiers does not address this use case, as it only
+   describes how to identify a single subject by identifying multiple
+   principals.  In this case, the subject is the set of sessions for the
+   user and device.  The revoker is not part of the subject, but a
+   separate principal related to the event.
+
+Author's Address
+
+   Annabelle Backman
+   Amazon
+
+   Email: richanna@amazon.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Backman                       Informational                     [Page 7]
