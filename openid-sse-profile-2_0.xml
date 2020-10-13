@@ -33,26 +33,8 @@
       </address>
     </author>
     <!-- TODO: Add other authors from the CAEP group here -->
-    <author initials="M." surname="Scurtescu" fullname="Marius Scurtescu">
-      <organization abbrev="Coinbase">Coinbase</organization>
-      <address>
-        <email>marius.scurtescu@coinbase.com</email>
-      </address>
-    </author>
-    <author initials="A." surname="Backman" fullname="Annabelle Backman">
-      <organization abbrev="Amazon">Amazon</organization>
-      <address>
-        <email>richanna@amazon.com</email>
-      </address>
-    </author>
-    <author initials="J." surname="Bradley" fullname="John Bradley">
-      <organization abbrev="Yubico">Yubico</organization>
-      <address>
-        <email>secevemt@ve7jtb.com</email>
-      </address>
-    </author>
 
-    <date year="2020" month="May" day="11"/>
+    <date year="2020" month="Sep" day="29"/>
 
     <workgroup>Shared Signals and Events Working Group</workgroup>
 
@@ -122,48 +104,58 @@
         <t>A SPAG subject identifier is agreed to offline between a Transmitter and a Receiver.</t>
       </section>
     </section>
+
     <section anchor="subject-ids" title="Subject Identifiers">
-      <t>A Subject is identified by a structure called a Subject Identifier: a <xref target="RFC7159">JSON</xref>
-        object containing a set of claims that collectively uniquely identify a subject, according
-        to a simple schema called a Subject Identifier Type.</t>
+      <t>A Subject is identified by a Subject Identifier as defined in the <xref target="SUBIDS">
+        Subject Identifiers Draft Specification</xref>.</t>
+      <t>In addition to the claims defined in the <xref target="SUBIDS">Subject Identifiers Draft Specification</xref>,
+        subject identifiers in events defined in this specification MAY have the following additional
+        claim.</t>
+      <t><list style="hanging">
+        <t hangText="spag_id">The SPAG identifier of the subject principal described by the Subject
+          Identifier applies.</t>
+        </list></t>
 
-      <t>Every Subject Identifier MUST contain
-        a <spanx style="verb">subject_type</spanx> claim, whose value MUST be a name that uniquely
-        identifies the Subject Identifier Type of the Subject Identifier. Any remaining claims
-        within the Subject Identifier MUST be interpreted according to the common claims or the
-        definition of the Subject Identifier Type.</t>
-
-      <section anchor="subject-common-claims" title="Common Claims in Subject Identifiers">
-        <t>The following claims MAY be present in a subject of any subject type.</t>
-
-        <section anchor="common-claim-spag-id" title="SPAG ID">
-          <t>Subjects MAY be identified uniquely without referring to which SPAG they belong to. A
-            transmitter MAY include a SPAG identifier as a part of the subject of any other subject
-            type. If a SPAG identifier claim is included in a SET, then the name of the claim MUST be:
-            <spanx style="verb">spag_id</spanx>.</t>
-        </section>
-        <section anchor="common-claim-subject-categories" title="Subject Categories">
-          <t>Subjects may be categorized as users, devices or sessions. To specify the category of a
-            subject, a <spanx style="verb">category</spanx> claim MAY be included. If present, the claim
-            MUST have a value that is one of:<list style="hanging">
-            <t hangText="user"> Specifies that the subject category is a user.</t>
-            <t hangText="device"> Specifies that the subject category is a device.</t>
-            <t hangText="session"> Specifies that the subject category is a session.</t>
-            </list></t>
-
-          <t>If the <spanx style="verb">category</spanx> claim is not present, the category is
-            assumed to be <spanx style="verb">user</spanx>, unless a different default interpretation
-            is specified in the subject type description.</t>
-
-          <t>The subject category MUST be used by the Receiver to determine the scope of the event.</t>
-        </section>
+      <section anchor="sse-subject-types" title="Subject Types in SSE Events">
+        <t>A Subject Identifier in a SSE event must have a subject type that is any one of:
+          <list style="symbols">
+            <t>Defined in the <xref target="SUBIDS">Subject Identifiers Draft Specification</xref>.</t>
+            <t>A subject type defined in the <xref target="sub-id-types">Subject Identifier Types</xref>
+              section here, OR</t>
+            <t>A proprietary subject type that is agreed to between parties. To clearly indicate that
+              such subject types are not a part of the standard, the subject type name MUST begin with
+              the prefix "x-". Other claims in the subject identifier that has a proprietary subject
+              type are agreed to between the parties and such agreement is outside the scope of this
+              specification.</t>
+          </list>
+        </t>
       </section>
 
-      <section anchor="subject-conformance" title="Subject Conformance">
-        <t>A Subject Identifier MUST conform to the Subject Identifier Type
-          identified by its <spanx style="verb">subject_type</spanx> claim, and MUST NOT contain any
-          claims other than the <xref target="subject-common-claims">common claims</xref> and those
-          that are defined by its Subject Identifier Type.</t>
+      <section anchor="sub-id-types" title="Subject Identifier Types">
+        <t>The following new subject identifier types are defined:</t>
+        <section anchor="sub-id-spag" title="SPAG Subject Identifier Type">
+          <t>The SPAG Subject Identifier Type describes a Subject Principal Administrative Grouping
+            (<xref target="subject-groups">SPAG</xref>). Subject Identifiers of this type MUST
+            contain a <spanx style="verb">spag_id</spanx> claim, a unique identifier agreed to offline
+            between a Transmitter and a Receiver that identifies a SPAG uniquely within the
+            Transmitter. The <spanx style="verb">spag_id</spanx> claim MUST NOT be null or empty. The
+            SPAG Subject Identifier Type is identified by the name <spanx style="verb">spag</spanx>.</t>
+        </section>
+        <section anchor="sub-id-user-device" title="User-Device Subject Identifier Type">
+          <t>The "User Device" Subject Identifier Type describes a combination of user and device as
+            a subject in an event. Subject Identifiers of this type MUST contain the following claims:
+            <list style="hanging">
+              <t hangText="user"> REQUIRED. A Subject Identifier that identifies a user.</t>
+              <t hangText="device"> REQUIRED. A Subject Identifier that identifies a device.</t>
+            </list></t>
+          <t>The "User Device" Subject Identifier Type is identified by the name <spanx style="verb">
+            user-device</spanx>.</t>
+        </section>
+      </section>
+      <section anchor="sse-subject-matching" title="Best Effort Subject Match">
+        <t>A recipient of an event SHOULD make a best effort of matching the specified subject(s) in
+          the event. This means that it SHOULD try to find the narrowest interpretation of the
+          subject(s) specified in the event.</t>
       </section>
     </section>
 
@@ -172,11 +164,12 @@
         claim. Some of these claims are required and specified as such in the event types spec. (TODO:
         add reference). If a Transmitter determines that it needs to include additional claims that are
         not specified in the event types spec, then the name of such claims MUST be a URI. The
-        discoverability of all additional claims is specified in the <xref target="discovery">Discovery</xref> section.
+        discoverability of all additional claims is specified in the <xref target="discovery">
+        Discovery</xref> section.
       </t>
     </section>
 
-    <section anchor="subject-examples" title="Example SETs that conform to SSE profile">
+    <section anchor="events-examples" title="Example SETs that conform to SSE profile">
       <t>The following are hypothetical examples of SETs that conform to the SSE profile.</t>
       <figure anchor="subject-ids-ex-email" title="Example: SET Containing a SSE Event with an Email Subject Identifier">
         <artwork><![CDATA[
@@ -258,20 +251,27 @@ enabled": {
         ]]></artwork>
       </figure>
 
-      <figure anchor="subject-common-claims-ex" title="Example: SET Containing a SSE Event with Common Claims in the Subject">
+      <figure anchor="subject-common-claims-ex" title="Example: SET Containing a SSE Event with a compound subject_type">
         <artwork><![CDATA[
 {
-  "iss": "https://sp.example2.com/",
+  "iss": "https://idp.example.com/",
   "jti": "756E69717565206964656E746966696572",
   "iat": 1520364019,
   "aud": "636C69656E745F6964",
   "events": {
-    "https://schemas.openid.net/secevent/caep/event-type/ip-address-changed": {
-      "subject": {
-        "subject_type": "id_token_claims",
-        "cateogry": "device",
-        "spag_id" : "https://example.com/v2/Groups/e9e30dba-f08f-4109-8486-d5c6a331660a",
-        "phone_number": "+1 (408) 555-1212",
+    "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
+    "subject": {
+        "subject_type": "user-device",
+        "user": {
+            "subject_type": "iss-sub",
+            "iss": "https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/",
+            "sub": "jane.smith@example.com"
+        },
+        "device": {
+            "subject_type": "iss-sub",
+            "iss": "https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/",
+            "sub": "e9297990-14d2-42ec-a4a9-4036db86509a"
+        }
       }
     }
   }
@@ -279,74 +279,25 @@ enabled": {
         ]]></artwork>
       </figure>
 
-      <section anchor="sub-id-types" title="Subject Identifier Types">
-        <t>A Subject Identifier Type is a light-weight schema that describes a set of claims that
-          uniquely identifies a subject. Every Subject Identifier Type MUST have a unique name
-          registered in the IANA "Security Event Subject Identifier Types" registry established by <xref
-            target="iana-sub-id-types"/>. A Subject Identifier Type MAY contain more claims than are
-          strictly necessary to uniquely identify a subject, however a Subject Identifier MUST
-          contain all of the claims required by its type (See <xref target="privacy" format="title"/>).</t>
 
-        <t> The following Subject Identifier Types are registered in the IANA "Security Event Subject
-          Identifier Types" registry established by <xref target="iana-sub-id-types"/>.</t>
-
-        <section anchor="sub-id-email" title="Email Subject Identifier Type">
-          <t>The Email Subject Identifier Type describes a subject by email address as defined in
-            sections 3.2.3 and 3.2.4 of the <xref target="RFC5322">Internet Message Format</xref>
-            specification. Subject Identifiers of this type MUST contain an <spanx style="verb">
-            email</spanx> claim whose value is a string containing the email address of the subject.
-            The <spanx style="verb">email</spanx> claim MUST NOT be null or empty. The Email Subject
-            Identifier Type is identified by the name <spanx style="verb">email</spanx>.</t>
-        </section>
-
-        <section anchor="sub-id-phone" title="Phone Number Subject Identifier Type">
-          <t>The Phone Number Subject Identifier Type describes a subject by telephone number.
-            Subject Identifiers of this type MUST contain a <spanx style="verb">phone</spanx> claim whose value is a string
-            containing the full telephone number of the subject, including international dialing
-            prefix, formatted according to <xref target="E164">E.164</xref>. The <spanx style="verb">phone</spanx> claim MUST
-            NOT be null or empty. The Phone Number Subject Identifier Type is identified by the name
-            <spanx style="verb">phone</spanx>.</t>
-        </section>
-
-        <section anchor="sub-id-iss_sub" title="Issuer and Subject Subject Identifier Type">
-          <t>The Issuer and Subject Subject Identifier Type describes a subject by an issuer and a
-            subject. Subject Identifiers of this type MUST contain an <spanx style="verb">iss</spanx> claim whose value
-            identifies the issuer, and a <spanx style="verb">sub</spanx> claim whose value identifies the subject with respect
-            to the issuer. These claims MUST follow the formats of the <spanx style="verb">iss</spanx> claim and <spanx style="verb">sub</spanx> claim
-            defined by <xref target="RFC7519"/>, respectively. Both the <spanx style="verb">iss</spanx> claim and the <spanx style="verb">sub</spanx>
-            claim MUST NOT be null or empty. The Issuer and Subject Subject Identifier Type is
-            identified by the name <spanx style="verb">iss_sub</spanx>.</t>
-        </section>
-
-        <section anchor="sub-id-spag" title="SPAG Subject Identifier Type">
-          <t>The SPAG Subject Identifier Type describes a Subject Principal Administrative Grouping
-            (<xref target="subject-groups">SPAG</xref>). Subject Identifiers of this type MUST
-            contain a <spanx style="verb">spag_id</spanx> claim, a unique identifier agreed to offline
-            between a Transmitter and a Receiver that identifies a SPAG uniquely within the
-            Transmitter. The <spanx style="verb">spag_id</spanx> claim MUST NOT be null or empty. The
-            SPAG Subject Identifier Type is identified by the name <spanx style="verb">spag</spanx>.</t>
-        </section>
-
-        <section anchor="sub-id-id_token_claims" title="ID Token Claims Subject Identifier Type">
-          <t>The ID Token Claims Subject Identifier Type describes a subject by a subset of the claims from an ID token. Subject Identifiers of this type MUST contain at least one of the following claims:<list style="hanging">
-            <t hangText="email"><vspace blankLines="0"/>An <spanx style="verb">email</spanx> claim, as defined in <xref target="IDTOKEN"/>.</t>
-            <t hangText="phone_number"><vspace blankLines="0"/>An <spanx style="verb">phone_number</spanx> claim, as defined in <xref target="IDTOKEN"/>.</t>
-            <t hangText="sub"><vspace blankLines="0"/>A <spanx style="verb">sub</spanx> claim, as defined in <xref target="RFC7519"/>.</t>
-          </list></t>
-
-          <t>If the Subject Identifier contains a <spanx style="verb">sub</spanx> claim, it MUST also contain an
-          <spanx style="verb">iss</spanx> claim, as defined in <xref target="RFC7519"/>.  The ID Token Claims Subject Identifier Type is identified by the name <spanx style="verb">id_token_claims</spanx>.</t>
-          <t>If the <xref target="common-claim-subject-categories">category</xref> claim is not
-            specified, then its value MUST be assumed to be <spanx style="verb">session</spanx></t>
-        </section>
-        <section anchor="sub-id-saml" title="SAML Subject Identifier Type">
-          <t>The <xref target="SAML-CORE">SAML</xref>  Subject Identifier Type describes a subject
-            by the assertion identifier in the SAML assertion that was used to convey the subject's
-            information to the Receiver. Subject Identifiers of this type MUST contain an <spanx style="verb">
-            assertion_id</spanx> claim. The value of this claim is a string that is equal to the
-            Assertion Identifier in the SAML assertion.</t>
-        </section>
-      </section>
+      <figure anchor="subject-custom-type-ex" title="Example: SET Containing a SSE Event with a proprietary subject_type">
+        <artwork><![CDATA[
+{
+  "iss": "https://myservice.example3.com/",
+  "jti": "756E69717565206964656E746966696534",
+  "iat": 15203800012,
+  "aud": "636C69656E745F6324",
+  "events": {
+    "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
+    "subject": {
+        "subject_type": "x-device-id",
+        "device_id": "c0384/devices/2354122"
+      }
+    }
+  }
+}
+        ]]></artwork>
+      </figure>
     </section>
 
     <section anchor="discovery" title="Transmitter Configuration Discovery">
@@ -594,7 +545,7 @@ Content-Type: application/json
               <artwork><![CDATA[
 GET /set/status HTTP/1.1
 Host: transmitter.example.com
-Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
+Authorization: Bearer zzzz
 ]]></artwork>
             </figure>
             
@@ -1594,75 +1545,37 @@ disabled": {
     <section anchor="iana" title="IANA Considerations">
       <section anchor="iana-sub-id-types" title="Security Event Subject Identifier Types Registry">
         <t>This document defines Subject Identifier Types, for which IANA is asked to create and
-          maintain a new registry titled "Security Event Subject Identifier Types". Initial values for
-          the Security Event Subject Identifier Types registry are given in
-          <xref target="iana-sub-id-types-init"/>.  Future assignments are to be made through the Expert
-          Review registration policy <xref target="BCP26"/> and shall follow the template presented in
-          <xref target="iana-sub-id-types-template"/>.</t>
+          maintain a new registry titled "Shared Signals and Events Subject Identifier Types".
+          Initial values for the Shared Signals and Events Subject Identifier Types registry are
+          given in <xref target="sub-id-types"/>.  Future assignments are to be made through the
+          Expert Review registration policy <xref target="BCP26"/> and shall follow the template
+          presented in <xref target="iana-sub-id-types-template"/>.</t>
 
         <section anchor="iana-sub-id-types-template" title="Registration Template">
           <t><list style="hanging">
             <t hangText="Type Name:"><vspace blankLines="0"/>The name of the Subject
-              Identifier Type, as described in <xref target="sub-id-types"/>. The name MUST be an ASCII
-              string consisting only of lower-case characters ("a" - "z"), digits ("0" - "9"), and hyphens
-              ("-"), and SHOULD NOT exceed 20 characters in length.</t>
+              Identifier Type, as described in <xref target="SUBIDS"/>. The name MUST be an ASCII
+              string consisting only of lower-case characters ("a" - "z"), digits ("0" - "9"), and
+              hyphens ("-"), and SHOULD NOT exceed 20 characters in length.</t>
 
-            <t hangText="Type Description:"><vspace blankLines="0"/>A brief description of the Subject
-              Identifier Type.</t>
+            <t hangText="Type Description:"><vspace blankLines="0"/>A brief description of the
+              Subject Identifier Type.</t>
 
             <t hangText="Change Controller:"><vspace blankLines="0"/>For types defined in documents
-              published by the OpenID Foundation or its working groups, list "OIDF SSE Working Group".
-              For all other types, list the name of the party responsible for the registration. Contact
-              information such as mailing address, email address, or phone number may also be provided.</t>
+              published by the OpenID Foundation or its working groups, list "OIDF SSE Working
+              Group". For all other types, list the name of the party responsible for the
+              registration. Contact information such as mailing address, email address, or phone
+              number may also be provided.</t>
 
-            <t hangText="Defining Document(s):"><vspace blankLines="0"/>A reference to the document or
-              documents that define the Subject Identifier Type.  The definition MUST specify the name,
-              format, and meaning of each claim that may occur within a Subject Identifier of the
-              defined type, as well as whether each claim is optional or required, or the circumstances
-              under which the claim is optional or required. URIs that can be used to retrieve copies of
-              each document SHOULD be included.</t>
+            <t hangText="Defining Document(s):"><vspace blankLines="0"/>A reference to the document
+              or documents that define the Subject Identifier Type.  The definition MUST specify the
+              name, format, and meaning of each claim that may occur within a Subject Identifier of
+              the defined type, as well as whether each claim is optional or required, or the
+              circumstances under which the claim is optional or required. URIs that can be used to
+              retrieve copies of each document SHOULD be included.</t>
           </list></t>
         </section>
-        
-        <section anchor="iana-sub-id-types-init" title="Initial Registry Contents">
-          <?rfc subcompact="yes"?>
-          <t><list style="symbols">
-            <t>Type Name: <spanx style="verb">email</spanx></t>
-            <t>Type Description: Subject identifier based on email address.</t>
-            <t>Change Controller: OIDF SSE Working Group</t>
-            <t>Defining Document(s): <xref target="sub-id-email"/> of this document.</t>
-          </list></t>
-          
-          <t><list style="symbols">
-            <t>Type Name: <spanx style="verb">id_token_claims</spanx></t>
-            <t>Type Description: Subject identifier based on OpenID Connect ID Token claims.</t>
-            <t>Change Controller: OIDF SSE Working Group</t>
-            <t>Defining Document(s): <xref target="sub-id-id_token_claims"/> of this document.</t>
-          </list></t>
-          
-          <t><list style="symbols">
-            <t>Type Name: <spanx style="verb">iss_sub</spanx></t>
-            <t>Type Description: Subject identifier based on issuer and subject.</t>
-            <t>Change Controller: OIDF SSE Working Group</t>
-            <t>Defining Document(s): <xref target="sub-id-iss_sub"/> of this document.</t>
-          </list></t>
-          
-          <t><list style="symbols">
-            <t>Type Name: <spanx style="verb">phone</spanx></t>
-            <t>Type Description: Subject identifier based on phone number.</t>
-            <t>Change Controller: OIDF SSE Working Group</t>
-            <t>Defining Document(s): <xref target="sub-id-phone"/> of this document.</t>
-          </list></t>
 
-          <t><list style="symbols">
-            <t>Type Name: <spanx style="verb">spag</spanx></t>
-            <t>Type Description: Subject Principal Administrative Grouping.</t>
-            <t>Change Controller: OIDF SSE Working Group</t>
-            <t>Defining Document(s): <xref target="sub-id-spag"/> of this document.</t>
-          </list></t>
-          <?rfc subcompact="no"?>
-        </section>
-        
         <section anchor="iana-sub-id-types-expert" title="Guidance for Expert Reviewers">
           <t>The Expert Reviewer is expected to review the documentation referenced in a registration
             request to verify its completeness. The Expert Reviewer must base their decision to accept
@@ -1993,16 +1906,6 @@ disabled": {
         <seriesInfo name="DOI" value="10.17487/RFC8174"/>
       </reference>
       
-      <reference anchor="E164" target="http://www.itu.int/rec/T-REC-E.164-201011-I/en">
-        <front>
-          <title>The international public telecommunication numbering plan</title>
-          <author>
-            <organization>International Telecommunication Union</organization>
-          </author>
-          <date year="2010"/>
-        </front>
-      </reference>
-      
       <reference anchor="RFC5785" target="https://www.rfc-editor.org/info/rfc5785">
         <front>
           <title>Defining Well-Known Uniform Resource Identifiers (URIs)</title>
@@ -2021,37 +1924,6 @@ disabled": {
         </front>
         <seriesInfo name="RFC" value="5785"/>
         <seriesInfo name="DOI" value="10.17487/RFC5785"/>
-      </reference>
-
-      <reference anchor="OIDC-SPEC" target="https://openid.net/specs/openid-connect-core-1_0.html">
-        <front>
-          <title>OpenID Connect Core 1.0 incorporating errata set 1</title>
-          <author fullname="Nat Sakimura" initials="N." surname="Sakimura">
-            <organization abbrev="NRI">Nomura Research Institute, Ltd.</organization>
-          </author>
-          <author fullname="John Bradley" initials="J." surname="Bradley">
-            <organization abbrev="Ping Identity">Ping Identity</organization>
-          </author>
-          <author fullname="Michael B. Jones" initials="M.B." surname="Jones">
-            <organization abbrev="Microsoft">Microsoft</organization>
-          </author>
-          <author fullname="Breno de Medeiros" initials="B." surname="de Medeiros">
-            <organization abbrev="Google">Google</organization>
-          </author>
-          <author fullname="Chuck Mortimore" initials="C." surname="Mortimore">
-            <organization abbrev="Salesforce">Salesforce</organization>
-          </author>
-          <date year="2014" month="November" day="8"/>
-          <abstract>
-            <t>OpenID Connect 1.0 is a simple identity layer on top of the OAuth 2.0 protocol.
-              It enables Clients to verify the identity of the End-User based on the authentication
-              performed by an Authorization Server, as well as to obtain basic profile information
-              about the End-User in an interoperable and REST-like manner. This specification
-              defines the core OpenID Connect functionality: authentication built on top of OAuth
-              2.0 and the use of Claims to communicate information about the End-User. It also
-              describes the security and privacy considerations for using OpenID Connect.</t>
-          </abstract>
-        </front>
       </reference>
 
       <reference anchor="OIDC-DISCOVERY" target="https://openid.net/specs/openid-connect-discovery-1_0.html">
@@ -2112,6 +1984,7 @@ disabled": {
         <seriesInfo name="RFC" value="8126"/>
         <seriesInfo name="DOI" value="10.17487/RFC8126"/>
       </reference>
+
       <reference anchor="RISC" target="https://openid.net/specs/openid-risc-profile-1_0-ID1.html">
         <front>
           <title>
@@ -2142,33 +2015,19 @@ disabled": {
           </front>
       </reference>
 
-      <reference anchor="SAML-CORE" target="http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf">
+      <reference anchor="SUBIDS"
+        target="https://github.com/richanna/secevent/blob/master/draft-ietf-secevent-subject-identifiers.txt">
         <front>
-          <title>Assertions and Protocols for the OASIS Security Assertion Markup Language (SAML) V2.0</title>
-          <author fullname="Scott Cantor">
-            <organization abbrev="Internet2">Internet2</organization>
+          <title>Subject Identifiers for Security Event Tokens</title>
+          <author fullname="Annabelle Backman" initials="A." surname="Backman" role="editor">
+            <organization />
           </author>
-          <author fullname="John Kemp">
-            <organization abbrev="Nokia">Nokia</organization>
+          <author initials="M." surname="Scurtescu" fullname="Marius Scurtescu">
+            <organization />
           </author>
-          <author fullname="Rob Philpott">
-            <organization abbrev="RSA">RSA Security</organization>
-          </author>
-          <author fullname="Eve Maler">
-            <organization abbrev="Sun">Sun Microsystems</organization>
-          </author>
-          <date year="2005" month="March"/>
+
+          <date year="2020" month="September" day="04"/>
         </front>
-      </reference>
-      <reference anchor="RFC5322" target="https://tools.ietf.org/html/rfc5322">
-        <front>
-          <title>Internet Message Format</title>
-          <author fullname="P Resnick" initials="P." surname="Resnick">
-            <organization abbrev="Qualcomm">Qualcomm Incorporated</organization>
-          </author>
-          <date year="2008" month="October"/>
-        </front>
-        <seriesInfo name="RFC" value="5322"/>
       </reference>
     </references>
 
