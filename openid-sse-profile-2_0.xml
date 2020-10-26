@@ -277,11 +277,13 @@ enabled": {
   "iat": 1520364019,
   "aud": "636C69656E745F6964",
   "events": {
-    "https://schemas.openid.net/secevent/caep/event-type/ip-address-changed": {
+    "https://schemas.openid.net/secevent/caep/event-type/stream-updated": {
       "subject": {
         "subject_type": "spag",
         "spag_id" : "https://example.com/v2/Groups/e9e30dba-f08f-4109-8486-d5c6a331660a",
       }
+      "status": "paused",
+      "reason": "License no longer valid"
     }
   }
 }
@@ -496,7 +498,7 @@ Content-Type: application/json
 ]]></artwork></figure>
       
       <t>It is OPTIONAL for Transmitters to implement a Management API, but it is
-      RECOMMENDED that they implement it, especially the endpoints for querying the 
+      RECOMMENDED that they implement it, especially the endpoints for querying the
       Stream Status and for triggering Verification.</t>
       
       <section anchor="management-api" title="Event Stream Management">
@@ -1300,14 +1302,15 @@ Pragma: no-cache
   "aud": "receiver.example.com",
   "iat": "1493856000",
   "events": {
-    "https://schemas.openid.net/secevent/risc/event-type/stream-updated":{
-      "id": "1234"
+    "https://schemas.openid.net/secevent/caep/event-type/stream-updated":{
+      "subject": {
+        "subject_type": "spag",
+        "spag_id" : "https://example.com/v2/Groups/e9e30dba-f08f-4109-8486-d5c6a331660a",
+      }
     }
   }
-  "properties": {
-    "status": "paused",
-    "reason": "License no longer valid."
-  }
+  "status": "paused",
+  "reason": "License no longer valid."
 }
           ]]></artwork>
           </figure>

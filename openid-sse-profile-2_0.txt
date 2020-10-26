@@ -419,19 +419,19 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                 [Page 7]
   "iat": 1520364019,
   "aud": "636C69656E745F6964",
   "events": {
-    "https://schemas.openid.net/secevent/caep/event-type/ip-address-changed": {
+    "https://schemas.openid.net/secevent/caep/event-type/stream-updated": {
       "subject": {
         "subject_type": "spag",
         "spag_id" : "https://example.com/v2/Groups/e9e30dba-f08f-4109-8486-d5c6a331660a",
       }
+      "status": "paused",
+      "reason": "License no longer valid"
     }
   }
 }
 
      Figure 4: Example: SET Containing a SSE Event with a SPAG Subject
                                    Type
-
-
 
 
 
@@ -1856,14 +1856,15 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 33]
   "aud": "receiver.example.com",
   "iat": "1493856000",
   "events": {
-    "https://schemas.openid.net/secevent/risc/event-type/stream-updated":{
-      "id": "1234"
+    "https://schemas.openid.net/secevent/caep/event-type/stream-updated":{
+      "subject": {
+        "subject_type": "spag",
+        "spag_id" : "https://example.com/v2/Groups/e9e30dba-f08f-4109-8486-d5c6a331660a",
+      }
     }
   }
-  "properties": {
-    "status": "paused",
-    "reason": "License no longer valid."
-  }
+  "status": "paused",
+  "reason": "License no longer valid."
 }
 
                   Figure 30: Example: Stream Updated SET
@@ -1897,7 +1898,6 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 33]
    actually send any events related to the subject, and Event Receivers
    MUST NOT assume that a 204 response means that they will receive
    events related to the subject.
-
 
 
 
