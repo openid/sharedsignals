@@ -32,6 +32,12 @@
         <email>atultulshi@google.com</email>
       </address>
     </author>
+    <author initials="T." surname="Cappalli" fullname="Tim Cappalli">
+      <organization abbrev="Microsoft">Microsoft</organization>
+      <address>
+        <email>tim.cappalli@microsoft.com</email>
+      </address>
+    </author>
     <!-- TODO: Add other authors from the CAEP group here -->
 
     <date year="2020" month="Sep" day="29"/>
@@ -150,6 +156,37 @@
             </list></t>
           <t>The "User Device" Subject Identifier Type is identified by the name <spanx style="verb">
             user-device</spanx>.</t>
+        </section>
+        <section anchor="sub-id-session-id" title="Session ID Subject Identifier Type">
+          <t>The "Session ID" Subject Identifier Type describes a common identifier between both parties that explicitly identifies the session.
+          Subject Identifiers of this type MUST contain the following claim:
+            <list style="hanging">
+              <t hangText="session_id"> <vspace blankLines="0"/>REQUIRED, a session identifier.</t>
+            </list></t>
+          <t>The "Session ID" Subject Identifier Type is identified by the name <spanx style="verb">
+            session-id</spanx>.</t>
+        </section>
+        <section anchor="sub-id-jwt-id" title="JWT ID Subject Identifier Type">
+          <t>The "JWT ID" Subject Identifier Type specifies a JSON Web Token (JWT) identifer, defined in  <xref target="RFC7519"/>. 
+          Subject Identifiers of this type MUST contain the following claims:
+            <list style="hanging">
+              <t hangText="iss"> 
+              <vspace blankLines="0"/>REQUIRED, the "iss" (issuer) claim of the JWT being identified, defined in <xref target="RFC7519"/></t>
+              <t hangText="jti"> 
+              <vspace blankLines="0"/>REQUIRED, the "jti" (JWT token ID) claim of the JWT being identified, defined in <xref target="RFC7519"/></t>
+            </list></t>
+          <t>The "JWT ID" Subject Identifier Type is identified by the name <spanx style="verb">
+            jwt-id</spanx>.</t>
+        </section>
+        <section anchor="sub-id-saml-assertion-id" title="SAML Assertion ID Subject Identifier Type">
+          <t>The "SAML Assertion ID" Subject Identifier Type specifies a SAML 2.0 <xref target="OASIS.saml-core-2.0-os"/> assertion identifier. 
+          Subject Identifiers of this type MUST contain the following claims:
+            <list style="hanging">
+              <t hangText="issuer"> <vspace blankLines="0"/>REQUIRED, the "Issuer" value of the SAML assertion being identified, defined in <xref target="OASIS.saml-core-2.0-os"/></t>
+              <t hangText="assertion_id"> <vspace blankLines="0"/>REQUIRED, the "ID" value of the SAML assertion being identified, defined in <xref target="OASIS.saml-core-2.0-os"/></t>
+            </list></t>
+          <t>The "JWT ID" Subject Identifier Type is identified by the name <spanx style="verb">
+            saml-assertion-id</spanx>.</t>
         </section>
       </section>
       <section anchor="sse-subject-matching" title="Best Effort Subject Match">
@@ -2029,6 +2066,27 @@ disabled": {
           <date year="2020" month="September" day="04"/>
         </front>
       </reference>
+
+      <reference anchor="OASIS.saml-core-2.0-os" target="http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf">
+        <front>
+          <title>Assertions and Protocols for the OASIS Security Assertion
+              Markup Language (SAML) V2.0</title>
+          <author fullname="Scott Cantor" initials="S." surname="Cantor">
+            <organization abbrev="Internet2">Internet2</organization>
+          </author>
+          <author fullname="John Kemp" initials="J." surname="Kemp">
+            <organization abbrev="Nokia">Nokia</organization>
+          </author>
+          <author fullname="Rob Philpott" initials="R." surname="Philpott">
+            <organization abbrev="RSA Security">RSA Security</organization>
+          </author>
+          <author fullname="Eve Maler" initials="E." surname="Maler">
+            <organization abbrev="Sun Microsystems">Sun Microsystems</organization>
+          </author>
+          <date year="2005" month="March" day="15"/>
+        </front>
+      </reference>
+
     </references>
 
 
@@ -2039,3 +2097,4 @@ disabled": {
     </section>
   </back>
 </rfc>
+

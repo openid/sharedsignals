@@ -4,6 +4,8 @@
 
                                                         A. Tulshibagwale
                                                                   Google
+                                                             T. Cappalli
+                                                               Microsoft
                                                             Sep 29, 2020
 
 
@@ -48,84 +50,87 @@ Table of Contents
      3.1.  SPAGs . . . . . . . . . . . . . . . . . . . . . . . . . .   4
    4.  Subject Identifiers . . . . . . . . . . . . . . . . . . . . .   4
      4.1.  Subject Types in SSE Events . . . . . . . . . . . . . . .   4
+
+
+
+Tulshibagwale & Cappalli  Expires April 2, 2021                 [Page 1]
+
+                           openid-sse-profile                   Sep 2020
+
+
      4.2.  Subject Identifier Types  . . . . . . . . . . . . . . . .   5
        4.2.1.  SPAG Subject Identifier Type  . . . . . . . . . . . .   5
-
-
-
-Tulshibagwale             Expires April 2, 2021                 [Page 1]
-
-                           openid-sse-profile                   Sep 2020
-
-
        4.2.2.  User-Device Subject Identifier Type . . . . . . . . .   5
-     4.3.  Best Effort Subject Match . . . . . . . . . . . . . . . .   5
-   5.  Event Properties  . . . . . . . . . . . . . . . . . . . . . .   5
-   6.  Example SETs that conform to SSE profile  . . . . . . . . . .   6
-   7.  Transmitter Configuration Discovery . . . . . . . . . . . . .   9
-     7.1.  Transmitter Configuration Metadata  . . . . . . . . . . .   9
-     7.2.  Obtaining Transmitter Configuration Information . . . . .  10
-       7.2.1.  Transmitter Configuration Request . . . . . . . . . .  10
-       7.2.2.  Transmitter Configuration Response  . . . . . . . . .  11
-       7.2.3.  Transmitter Configuration Validation  . . . . . . . .  11
-   8.  Management API for SET Event Streams  . . . . . . . . . . . .  12
-     8.1.  Event Stream Management . . . . . . . . . . . . . . . . .  12
-       8.1.1.  Stream Status . . . . . . . . . . . . . . . . . . . .  14
-         8.1.1.1.  Reading a Stream's Status . . . . . . . . . . . .  14
-         8.1.1.2.  Updating a Stream's Status  . . . . . . . . . . .  16
-       8.1.2.  Stream Configuration  . . . . . . . . . . . . . . . .  18
-         8.1.2.1.  Reading a Stream's Configuration  . . . . . . . .  20
-         8.1.2.2.  Updating a Stream's Configuration . . . . . . . .  22
-         8.1.2.3.  Removing a Stream Configuration . . . . . . . . .  25
-       8.1.3.  Subjects  . . . . . . . . . . . . . . . . . . . . . .  26
-         8.1.3.1.  Adding a Subject to a Stream  . . . . . . . . . .  26
-         8.1.3.2.  Removing a Subject  . . . . . . . . . . . . . . .  28
-       8.1.4.  Verification  . . . . . . . . . . . . . . . . . . . .  29
-         8.1.4.1.  Verification Event  . . . . . . . . . . . . . . .  29
-         8.1.4.2.  Triggering a Verification Event.  . . . . . . . .  30
-       8.1.5.  Stream Updated Event  . . . . . . . . . . . . . . . .  32
-     8.2.  Authorization . . . . . . . . . . . . . . . . . . . . . .  33
-     8.3.  Security Considerations . . . . . . . . . . . . . . . . .  33
-       8.3.1.  Subject Probing . . . . . . . . . . . . . . . . . . .  33
-       8.3.2.  Information Harvesting  . . . . . . . . . . . . . . .  34
-       8.3.3.  Malicious Subject Removal . . . . . . . . . . . . . .  34
-       8.3.4.  Unauthorized Updates to SPAGs . . . . . . . . . . . .  34
-   9.  Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .  35
-     9.1.  Security Event Token Profle . . . . . . . . . . . . . . .  35
-       9.1.1.  Signature Key Resolution  . . . . . . . . . . . . . .  35
-       9.1.2.  SSE Event Subject . . . . . . . . . . . . . . . . . .  35
-       9.1.3.  SSE Event Properties  . . . . . . . . . . . . . . . .  35
-       9.1.4.  Explicit Typing of SETs . . . . . . . . . . . . . . .  36
-       9.1.5.  The "exp" Claim . . . . . . . . . . . . . . . . . . .  37
-       9.1.6.  The "aud" Claim . . . . . . . . . . . . . . . . . . .  37
-       9.1.7.  The "events" claim  . . . . . . . . . . . . . . . . .  38
-       9.1.8.  Security Considerations . . . . . . . . . . . . . . .  38
-         9.1.8.1.  Distinguishing SETs from other Kinds of JWTs  . .  38
-     9.2.  SET Token Delivery Using HTTP Profile . . . . . . . . . .  38
-       9.2.1.  Stream Configuration Metadata . . . . . . . . . . . .  38
-         9.2.1.1.  Push Delivery using HTTP  . . . . . . . . . . . .  39
-         9.2.1.2.  Polling Delivery using HTTP . . . . . . . . . . .  39
-   10. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  39
+       4.2.3.  Session ID Subject Identifier Type  . . . . . . . . .   5
+       4.2.4.  JWT ID Subject Identifier Type  . . . . . . . . . . .   6
+       4.2.5.  SAML Assertion ID Subject Identifier Type . . . . . .   6
+     4.3.  Best Effort Subject Match . . . . . . . . . . . . . . . .   6
+   5.  Event Properties  . . . . . . . . . . . . . . . . . . . . . .   6
+   6.  Example SETs that conform to SSE profile  . . . . . . . . . .   7
+   7.  Transmitter Configuration Discovery . . . . . . . . . . . . .  10
+     7.1.  Transmitter Configuration Metadata  . . . . . . . . . . .  10
+     7.2.  Obtaining Transmitter Configuration Information . . . . .  11
+       7.2.1.  Transmitter Configuration Request . . . . . . . . . .  11
+       7.2.2.  Transmitter Configuration Response  . . . . . . . . .  12
+       7.2.3.  Transmitter Configuration Validation  . . . . . . . .  12
+   8.  Management API for SET Event Streams  . . . . . . . . . . . .  13
+     8.1.  Event Stream Management . . . . . . . . . . . . . . . . .  13
+       8.1.1.  Stream Status . . . . . . . . . . . . . . . . . . . .  15
+         8.1.1.1.  Reading a Stream's Status . . . . . . . . . . . .  15
+         8.1.1.2.  Updating a Stream's Status  . . . . . . . . . . .  17
+       8.1.2.  Stream Configuration  . . . . . . . . . . . . . . . .  19
+         8.1.2.1.  Reading a Stream's Configuration  . . . . . . . .  21
+         8.1.2.2.  Updating a Stream's Configuration . . . . . . . .  23
+         8.1.2.3.  Removing a Stream Configuration . . . . . . . . .  26
+       8.1.3.  Subjects  . . . . . . . . . . . . . . . . . . . . . .  27
+         8.1.3.1.  Adding a Subject to a Stream  . . . . . . . . . .  27
+         8.1.3.2.  Removing a Subject  . . . . . . . . . . . . . . .  29
+       8.1.4.  Verification  . . . . . . . . . . . . . . . . . . . .  30
+         8.1.4.1.  Verification Event  . . . . . . . . . . . . . . .  30
+         8.1.4.2.  Triggering a Verification Event.  . . . . . . . .  31
+       8.1.5.  Stream Updated Event  . . . . . . . . . . . . . . . .  33
+     8.2.  Authorization . . . . . . . . . . . . . . . . . . . . . .  34
+     8.3.  Security Considerations . . . . . . . . . . . . . . . . .  34
+       8.3.1.  Subject Probing . . . . . . . . . . . . . . . . . . .  34
+       8.3.2.  Information Harvesting  . . . . . . . . . . . . . . .  35
+       8.3.3.  Malicious Subject Removal . . . . . . . . . . . . . .  35
+       8.3.4.  Unauthorized Updates to SPAGs . . . . . . . . . . . .  35
+   9.  Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .  36
+     9.1.  Security Event Token Profle . . . . . . . . . . . . . . .  36
+       9.1.1.  Signature Key Resolution  . . . . . . . . . . . . . .  36
+       9.1.2.  SSE Event Subject . . . . . . . . . . . . . . . . . .  36
+       9.1.3.  SSE Event Properties  . . . . . . . . . . . . . . . .  36
+       9.1.4.  Explicit Typing of SETs . . . . . . . . . . . . . . .  37
+       9.1.5.  The "exp" Claim . . . . . . . . . . . . . . . . . . .  38
+       9.1.6.  The "aud" Claim . . . . . . . . . . . . . . . . . . .  38
+       9.1.7.  The "events" claim  . . . . . . . . . . . . . . . . .  39
+       9.1.8.  Security Considerations . . . . . . . . . . . . . . .  39
+         9.1.8.1.  Distinguishing SETs from other Kinds of JWTs  . .  39
 
 
 
-Tulshibagwale             Expires April 2, 2021                 [Page 2]
+Tulshibagwale & Cappalli  Expires April 2, 2021                 [Page 2]
 
                            openid-sse-profile                   Sep 2020
 
 
-     10.1.  Security Event Subject Identifier Types Registry . . . .  39
-       10.1.1.  Registration Template  . . . . . . . . . . . . . . .  39
-       10.1.2.  Guidance for Expert Reviewers  . . . . . . . . . . .  40
-     10.2.  Well-Known URI Registry  . . . . . . . . . . . . . . . .  40
-       10.2.1.  Registry Contents  . . . . . . . . . . . . . . . . .  41
-   11. Privacy Considerations  . . . . . . . . . . . . . . . . . . .  41
-     11.1.  Subject Information Leakage  . . . . . . . . . . . . . .  41
-   12. References  . . . . . . . . . . . . . . . . . . . . . . . . .  41
-     12.1.  Normative References . . . . . . . . . . . . . . . . . .  41
-     12.2.  URIs . . . . . . . . . . . . . . . . . . . . . . . . . .  43
-   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  44
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  44
+     9.2.  SET Token Delivery Using HTTP Profile . . . . . . . . . .  39
+       9.2.1.  Stream Configuration Metadata . . . . . . . . . . . .  39
+         9.2.1.1.  Push Delivery using HTTP  . . . . . . . . . . . .  40
+         9.2.1.2.  Polling Delivery using HTTP . . . . . . . . . . .  40
+   10. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  40
+     10.1.  Security Event Subject Identifier Types Registry . . . .  40
+       10.1.1.  Registration Template  . . . . . . . . . . . . . . .  40
+       10.1.2.  Guidance for Expert Reviewers  . . . . . . . . . . .  41
+     10.2.  Well-Known URI Registry  . . . . . . . . . . . . . . . .  41
+       10.2.1.  Registry Contents  . . . . . . . . . . . . . . . . .  42
+   11. Privacy Considerations  . . . . . . . . . . . . . . . . . . .  42
+     11.1.  Subject Information Leakage  . . . . . . . . . . . . . .  42
+   12. References  . . . . . . . . . . . . . . . . . . . . . . . . .  42
+     12.1.  Normative References . . . . . . . . . . . . . . . . . .  42
+     12.2.  URIs . . . . . . . . . . . . . . . . . . . . . . . . . .  45
+   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  45
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  45
 
 1.  Introduction
 
@@ -157,18 +162,19 @@ Tulshibagwale             Expires April 2, 2021                 [Page 2]
    Subjects.  These may be human or robotic principals or devices or
    other entities that are managed by Transmitters and Receivers.  For
    example, the same Subject Principal may be referred to by an email
+
+
+
+Tulshibagwale & Cappalli  Expires April 2, 2021                 [Page 3]
+
+                           openid-sse-profile                   Sep 2020
+
+
    address or a phone number.  A transmitter or receiver will typically
    manage subject principals and organize them into sub-groupings such
    as tenants, groups, organizational units, etc.
 
    Subjects are identified by Subject Identifiers defined below.
-
-
-
-Tulshibagwale             Expires April 2, 2021                 [Page 3]
-
-                           openid-sse-profile                   Sep 2020
-
 
 3.1.  SPAGs
 
@@ -212,19 +218,18 @@ Tulshibagwale             Expires April 2, 2021                 [Page 3]
 
    o  A proprietary subject type that is agreed to between parties.  To
       clearly indicate that such subject types are not a part of the
+
+
+
+Tulshibagwale & Cappalli  Expires April 2, 2021                 [Page 4]
+
+                           openid-sse-profile                   Sep 2020
+
+
       standard, the subject type name MUST begin with the prefix "x-".
       Other claims in the subject identifier that has a proprietary
       subject type are agreed to between the parties and such agreement
       is outside the scope of this specification.
-
-
-
-
-
-Tulshibagwale             Expires April 2, 2021                 [Page 4]
-
-                           openid-sse-profile                   Sep 2020
-
 
 4.2.  Subject Identifier Types
 
@@ -253,6 +258,64 @@ Tulshibagwale             Expires April 2, 2021                 [Page 4]
    The "User Device" Subject Identifier Type is identified by the name
    "user-device".
 
+4.2.3.  Session ID Subject Identifier Type
+
+   The "Session ID" Subject Identifier Type describes a common
+   identifier between both parties that explicitly identifies the
+   session.  Subject Identifiers of this type MUST contain the following
+   claim:
+
+   session_id
+      REQUIRED, a session identifier.
+
+   The "Session ID" Subject Identifier Type is identified by the name
+   "session-id".
+
+
+
+
+
+
+
+Tulshibagwale & Cappalli  Expires April 2, 2021                 [Page 5]
+
+                           openid-sse-profile                   Sep 2020
+
+
+4.2.4.  JWT ID Subject Identifier Type
+
+   The "JWT ID" Subject Identifier Type specifies a JSON Web Token (JWT)
+   identifer, defined in [RFC7519].  Subject Identifiers of this type
+   MUST contain the following claims:
+
+   iss
+      REQUIRED, the "iss" (issuer) claim of the JWT being identified,
+      defined in [RFC7519]
+
+   jti
+      REQUIRED, the "jti" (JWT token ID) claim of the JWT being
+      identified, defined in [RFC7519]
+
+   The "JWT ID" Subject Identifier Type is identified by the name "jwt-
+   id".
+
+4.2.5.  SAML Assertion ID Subject Identifier Type
+
+   The "SAML Assertion ID" Subject Identifier Type specifies a SAML 2.0
+   [OASIS.saml-core-2.0-os] assertion identifier.  Subject Identifiers
+   of this type MUST contain the following claims:
+
+   issuer
+      REQUIRED, the "Issuer" value of the SAML assertion being
+      identified, defined in [OASIS.saml-core-2.0-os]
+
+   assertion_id
+      REQUIRED, the "ID" value of the SAML assertion being identified,
+      defined in [OASIS.saml-core-2.0-os]
+
+   The "JWT ID" Subject Identifier Type is identified by the name "saml-
+   assertion-id".
+
 4.3.  Best Effort Subject Match
 
    A recipient of an event SHOULD make a best effort of matching the
@@ -267,20 +330,16 @@ Tulshibagwale             Expires April 2, 2021                 [Page 4]
    the event types spec.  (TODO: add reference).  If a Transmitter
    determines that it needs to include additional claims that are not
    specified in the event types spec, then the name of such claims MUST
-   be a URI.  The discoverability of all additional claims is specified
-   in the Discovery (Section 7) section.
 
 
 
-
-
-
-
-
-Tulshibagwale             Expires April 2, 2021                 [Page 5]
+Tulshibagwale & Cappalli  Expires April 2, 2021                 [Page 6]
 
                            openid-sse-profile                   Sep 2020
 
+
+   be a URI.  The discoverability of all additional claims is specified
+   in the Discovery (Section 7) section.
 
 6.  Example SETs that conform to SSE profile
 
@@ -330,10 +389,7 @@ Tulshibagwale             Expires April 2, 2021                 [Page 5]
 
 
 
-
-
-
-Tulshibagwale             Expires April 2, 2021                 [Page 6]
+Tulshibagwale & Cappalli  Expires April 2, 2021                 [Page 7]
 
                            openid-sse-profile                   Sep 2020
 
@@ -389,7 +445,7 @@ Tulshibagwale             Expires April 2, 2021                 [Page 6]
 
 
 
-Tulshibagwale             Expires April 2, 2021                 [Page 7]
+Tulshibagwale & Cappalli  Expires April 2, 2021                 [Page 8]
 
                            openid-sse-profile                   Sep 2020
 
@@ -445,7 +501,7 @@ Tulshibagwale             Expires April 2, 2021                 [Page 7]
 
 
 
-Tulshibagwale             Expires April 2, 2021                 [Page 8]
+Tulshibagwale & Cappalli  Expires April 2, 2021                 [Page 9]
 
                            openid-sse-profile                   Sep 2020
 
@@ -501,7 +557,7 @@ Tulshibagwale             Expires April 2, 2021                 [Page 8]
 
 
 
-Tulshibagwale             Expires April 2, 2021                 [Page 9]
+Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 10]
 
                            openid-sse-profile                   Sep 2020
 
@@ -557,7 +613,7 @@ Tulshibagwale             Expires April 2, 2021                 [Page 9]
 
 
 
-Tulshibagwale             Expires April 2, 2021                [Page 10]
+Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 11]
 
                            openid-sse-profile                   Sep 2020
 
@@ -613,7 +669,7 @@ Tulshibagwale             Expires April 2, 2021                [Page 10]
 
 
 
-Tulshibagwale             Expires April 2, 2021                [Page 11]
+Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 12]
 
                            openid-sse-profile                   Sep 2020
 
@@ -669,7 +725,7 @@ Tulshibagwale             Expires April 2, 2021                [Page 11]
 
 
 
-Tulshibagwale             Expires April 2, 2021                [Page 12]
+Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 13]
 
                            openid-sse-profile                   Sep 2020
 
@@ -725,7 +781,7 @@ Tulshibagwale             Expires April 2, 2021                [Page 12]
 
 
 
-Tulshibagwale             Expires April 2, 2021                [Page 13]
+Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 14]
 
                            openid-sse-profile                   Sep 2020
 
@@ -781,7 +837,7 @@ Tulshibagwale             Expires April 2, 2021                [Page 13]
 
 
 
-Tulshibagwale             Expires April 2, 2021                [Page 14]
+Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 15]
 
                            openid-sse-profile                   Sep 2020
 
@@ -837,7 +893,7 @@ Tulshibagwale             Expires April 2, 2021                [Page 14]
 
 
 
-Tulshibagwale             Expires April 2, 2021                [Page 15]
+Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 16]
 
                            openid-sse-profile                   Sep 2020
 
@@ -893,7 +949,7 @@ Tulshibagwale             Expires April 2, 2021                [Page 15]
 
 
 
-Tulshibagwale             Expires April 2, 2021                [Page 16]
+Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 17]
 
                            openid-sse-profile                   Sep 2020
 
@@ -949,7 +1005,7 @@ Tulshibagwale             Expires April 2, 2021                [Page 16]
 
 
 
-Tulshibagwale             Expires April 2, 2021                [Page 17]
+Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 18]
 
                            openid-sse-profile                   Sep 2020
 
@@ -1005,7 +1061,7 @@ Tulshibagwale             Expires April 2, 2021                [Page 17]
 
 
 
-Tulshibagwale             Expires April 2, 2021                [Page 18]
+Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 19]
 
                            openid-sse-profile                   Sep 2020
 
@@ -1061,7 +1117,7 @@ Tulshibagwale             Expires April 2, 2021                [Page 18]
 
 
 
-Tulshibagwale             Expires April 2, 2021                [Page 19]
+Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 20]
 
                            openid-sse-profile                   Sep 2020
 
@@ -1117,7 +1173,7 @@ Tulshibagwale             Expires April 2, 2021                [Page 19]
 
 
 
-Tulshibagwale             Expires April 2, 2021                [Page 20]
+Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 21]
 
                            openid-sse-profile                   Sep 2020
 
@@ -1173,7 +1229,7 @@ Tulshibagwale             Expires April 2, 2021                [Page 20]
 
 
 
-Tulshibagwale             Expires April 2, 2021                [Page 21]
+Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 22]
 
                            openid-sse-profile                   Sep 2020
 
@@ -1229,7 +1285,7 @@ Tulshibagwale             Expires April 2, 2021                [Page 21]
 
 
 
-Tulshibagwale             Expires April 2, 2021                [Page 22]
+Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 23]
 
                            openid-sse-profile                   Sep 2020
 
@@ -1285,7 +1341,7 @@ Tulshibagwale             Expires April 2, 2021                [Page 22]
 
 
 
-Tulshibagwale             Expires April 2, 2021                [Page 23]
+Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 24]
 
                            openid-sse-profile                   Sep 2020
 
@@ -1341,7 +1397,7 @@ Tulshibagwale             Expires April 2, 2021                [Page 23]
 
 
 
-Tulshibagwale             Expires April 2, 2021                [Page 24]
+Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 25]
 
                            openid-sse-profile                   Sep 2020
 
@@ -1397,7 +1453,7 @@ Tulshibagwale             Expires April 2, 2021                [Page 24]
 
 
 
-Tulshibagwale             Expires April 2, 2021                [Page 25]
+Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 26]
 
                            openid-sse-profile                   Sep 2020
 
@@ -1453,7 +1509,7 @@ Tulshibagwale             Expires April 2, 2021                [Page 25]
 
 
 
-Tulshibagwale             Expires April 2, 2021                [Page 26]
+Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 27]
 
                            openid-sse-profile                   Sep 2020
 
@@ -1509,7 +1565,7 @@ Tulshibagwale             Expires April 2, 2021                [Page 26]
 
 
 
-Tulshibagwale             Expires April 2, 2021                [Page 27]
+Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 28]
 
                            openid-sse-profile                   Sep 2020
 
@@ -1565,7 +1621,7 @@ Tulshibagwale             Expires April 2, 2021                [Page 27]
 
 
 
-Tulshibagwale             Expires April 2, 2021                [Page 28]
+Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 29]
 
                            openid-sse-profile                   Sep 2020
 
@@ -1621,7 +1677,7 @@ Tulshibagwale             Expires April 2, 2021                [Page 28]
 
 
 
-Tulshibagwale             Expires April 2, 2021                [Page 29]
+Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 30]
 
                            openid-sse-profile                   Sep 2020
 
@@ -1677,7 +1733,7 @@ Tulshibagwale             Expires April 2, 2021                [Page 29]
 
 
 
-Tulshibagwale             Expires April 2, 2021                [Page 30]
+Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 31]
 
                            openid-sse-profile                   Sep 2020
 
@@ -1733,7 +1789,7 @@ Tulshibagwale             Expires April 2, 2021                [Page 30]
 
 
 
-Tulshibagwale             Expires April 2, 2021                [Page 31]
+Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 32]
 
                            openid-sse-profile                   Sep 2020
 
@@ -1789,7 +1845,7 @@ Tulshibagwale             Expires April 2, 2021                [Page 31]
 
 
 
-Tulshibagwale             Expires April 2, 2021                [Page 32]
+Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 33]
 
                            openid-sse-profile                   Sep 2020
 
@@ -1845,7 +1901,7 @@ Tulshibagwale             Expires April 2, 2021                [Page 32]
 
 
 
-Tulshibagwale             Expires April 2, 2021                [Page 33]
+Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 34]
 
                            openid-sse-profile                   Sep 2020
 
@@ -1901,7 +1957,7 @@ Tulshibagwale             Expires April 2, 2021                [Page 33]
 
 
 
-Tulshibagwale             Expires April 2, 2021                [Page 34]
+Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 35]
 
                            openid-sse-profile                   Sep 2020
 
@@ -1957,7 +2013,7 @@ Tulshibagwale             Expires April 2, 2021                [Page 34]
 
 
 
-Tulshibagwale             Expires April 2, 2021                [Page 35]
+Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 36]
 
                            openid-sse-profile                   Sep 2020
 
@@ -2013,7 +2069,7 @@ Tulshibagwale             Expires April 2, 2021                [Page 35]
 
 
 
-Tulshibagwale             Expires April 2, 2021                [Page 36]
+Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 37]
 
                            openid-sse-profile                   Sep 2020
 
@@ -2069,7 +2125,7 @@ Tulshibagwale             Expires April 2, 2021                [Page 36]
 
 
 
-Tulshibagwale             Expires April 2, 2021                [Page 37]
+Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 38]
 
                            openid-sse-profile                   Sep 2020
 
@@ -2125,7 +2181,7 @@ Tulshibagwale             Expires April 2, 2021                [Page 37]
 
 
 
-Tulshibagwale             Expires April 2, 2021                [Page 38]
+Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 39]
 
                            openid-sse-profile                   Sep 2020
 
@@ -2181,7 +2237,7 @@ Tulshibagwale             Expires April 2, 2021                [Page 38]
 
 
 
-Tulshibagwale             Expires April 2, 2021                [Page 39]
+Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 40]
 
                            openid-sse-profile                   Sep 2020
 
@@ -2237,7 +2293,7 @@ Tulshibagwale             Expires April 2, 2021                [Page 39]
 
 
 
-Tulshibagwale             Expires April 2, 2021                [Page 40]
+Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 41]
 
                            openid-sse-profile                   Sep 2020
 
@@ -2293,7 +2349,7 @@ Tulshibagwale             Expires April 2, 2021                [Page 40]
 
 
 
-Tulshibagwale             Expires April 2, 2021                [Page 41]
+Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 42]
 
                            openid-sse-profile                   Sep 2020
 
@@ -2321,6 +2377,13 @@ Tulshibagwale             Expires April 2, 2021                [Page 41]
               Event Streams", June 2017, <https://tools.ietf.org/html/
               draft-scurtescu-secevent-simple-control-plane>.
 
+   [OASIS.saml-core-2.0-os]
+              Cantor, S., Kemp, J., Philpott, R., and E. Maler,
+              "Assertions and Protocols for the OASIS Security Assertion
+              Markup Language (SAML) V2.0", March 2005,
+              <http://docs.oasis-open.org/security/saml/v2.0/saml-core-
+              2.0-os.pdf>.
+
    [OAUTH-DISCOVERY]
               Jones, M., Sakimura, N., and J. Bradley, "OAuth 2.0
               Authorization Server Metadata - Version 10", March 2018,
@@ -2338,21 +2401,19 @@ Tulshibagwale             Expires April 2, 2021                [Page 41]
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
 
+
+
+
+
+Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 43]
+
+                           openid-sse-profile                   Sep 2020
+
+
    [RFC5785]  Nottingham, M. and E. Hammer-Lahav, "Defining Well-Known
               Uniform Resource Identifiers (URIs)", RFC 5785,
               DOI 10.17487/RFC5785, April 2010,
               <https://www.rfc-editor.org/info/rfc5785>.
-
-
-
-
-
-
-
-Tulshibagwale             Expires April 2, 2021                [Page 42]
-
-                           openid-sse-profile                   Sep 2020
-
 
    [RFC6750]  Jones, M. and D. Hardt, "The OAuth 2.0 Authorization
               Framework: Bearer Token Usage", RFC 6750,
@@ -2395,20 +2456,19 @@ Tulshibagwale             Expires April 2, 2021                [Page 42]
               2017, <https://tools.ietf.org/html/draft-scurtescu-
               secevent-risc-use-cases-00>.
 
-12.2.  URIs
-
-   [1] https://datatracker.ietf.org/wg/secevent/about/
 
 
 
 
 
-
-
-Tulshibagwale             Expires April 2, 2021                [Page 43]
+Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 44]
 
                            openid-sse-profile                   Sep 2020
 
+
+12.2.  URIs
+
+   [1] https://datatracker.ietf.org/wg/secevent/about/
 
 Appendix A.  Acknowledgements
 
@@ -2416,7 +2476,7 @@ Appendix A.  Acknowledgements
    OpenID Connect Discovery 1.0 [OIDC-DISCOVERY] and OAuth 2.0
    Authorization Server Metadata [OAUTH-DISCOVERY].
 
-Author's Address
+Authors' Addresses
 
    Atul Tulshibagwale
    Google
@@ -2424,6 +2484,10 @@ Author's Address
    Email: atultulshi@google.com
 
 
+   Tim Cappalli
+   Microsoft
+
+   Email: tim.cappalli@microsoft.com
 
 
 
@@ -2453,12 +2517,4 @@ Author's Address
 
 
 
-
-
-
-
-
-
-
-
-Tulshibagwale             Expires April 2, 2021                [Page 44]
+Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 45]
