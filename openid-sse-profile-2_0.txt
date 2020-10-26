@@ -6,7 +6,7 @@
                                                                   Google
                                                              T. Cappalli
                                                                Microsoft
-                                                            Sep 29, 2020
+                                                            Oct 26, 2020
 
 
   OpenID Shared Signals and Events Profile of IETF Security Events 2.0
@@ -53,9 +53,9 @@ Table of Contents
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                 [Page 1]
+Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 1]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
      4.2.  Subject Identifier Types  . . . . . . . . . . . . . . . .   5
@@ -109,9 +109,9 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                 [Page 1]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                 [Page 2]
+Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 2]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
      9.2.  SET Token Delivery Using HTTP Profile . . . . . . . . . .  39
@@ -165,9 +165,9 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                 [Page 2]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                 [Page 3]
+Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 3]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
    address or a phone number.  A transmitter or receiver will typically
@@ -221,9 +221,9 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                 [Page 3]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                 [Page 4]
+Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 4]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
       standard, the subject type name MUST begin with the prefix "x-".
@@ -277,9 +277,9 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                 [Page 4]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                 [Page 5]
+Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 5]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
 4.2.4.  JWT ID Subject Identifier Type
@@ -333,9 +333,9 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                 [Page 5]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                 [Page 6]
+Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 6]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
    be a URI.  The discoverability of all additional claims is specified
@@ -389,9 +389,9 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                 [Page 6]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                 [Page 7]
+Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 7]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
 {
@@ -419,13 +419,11 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                 [Page 7]
   "iat": 1520364019,
   "aud": "636C69656E745F6964",
   "events": {
-    "https://schemas.openid.net/secevent/caep/event-type/stream-updated": {
+    "https://schemas.openid.net/secevent/caep/event-type/ip-address-changed": {
       "subject": {
         "subject_type": "spag",
         "spag_id" : "https://example.com/v2/Groups/e9e30dba-f08f-4109-8486-d5c6a331660a",
       }
-      "status": "paused",
-      "reason": "License no longer valid"
     }
   }
 }
@@ -445,9 +443,11 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                 [Page 7]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                 [Page 8]
 
-                           openid-sse-profile                   Sep 2020
+
+Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 8]
+
+                           openid-sse-profile                   Oct 2020
 
 
 {
@@ -501,9 +501,9 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                 [Page 8]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                 [Page 9]
+Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 9]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
 7.  Transmitter Configuration Discovery
@@ -557,9 +557,9 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                 [Page 9]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 10]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 10]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
 7.2.  Obtaining Transmitter Configuration Information
@@ -613,9 +613,9 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 10]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 11]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 11]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
 7.2.2.  Transmitter Configuration Response
@@ -669,9 +669,9 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 11]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 12]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 12]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
    The "issuer" value returned MUST be identical to the Issuer URL that
@@ -725,9 +725,9 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 12]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 13]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 13]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
    MAY be queried and managed independently for each SPAG by
@@ -781,9 +781,9 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 13]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 14]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 14]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
    Disabled  the Transmitter MAY send SPAG stream updated
@@ -837,9 +837,9 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 14]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 15]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 15]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
    HTTP/1.1 200 OK
@@ -893,9 +893,9 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 15]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 16]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 16]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
    +------+------------------------------------------------------------+
@@ -949,9 +949,9 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 16]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 17]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 17]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
       OPTIONAL.  An authorization token specific to this request.  The
@@ -1005,9 +1005,9 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 17]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 18]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 18]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
    HTTP/1.1 200 OK
@@ -1061,9 +1061,9 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 18]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 19]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 19]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
       *Read-Only*, A URL using the https scheme with no query or
@@ -1117,9 +1117,9 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 19]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 20]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 20]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
    TODO: consider adding a IANA Registry for stream configuration
@@ -1173,9 +1173,9 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 20]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 21]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 21]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
   HTTP/1.1 200 OK
@@ -1229,9 +1229,9 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 21]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 22]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 22]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
    +------+------------------------------------------------------------+
@@ -1285,9 +1285,9 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 22]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 23]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 23]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
   POST /set/stream HTTP/1.1
@@ -1341,9 +1341,9 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 23]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 24]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 24]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
   HTTP/1.1 200 OK
@@ -1397,9 +1397,9 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 24]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 25]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 25]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
    +------+------------------------------------------------------------+
@@ -1453,9 +1453,9 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 25]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 26]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 26]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
    +------+------------------------------------------------------------+
@@ -1509,9 +1509,9 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 26]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 27]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 27]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
    +------+------------------------------------------------------------+
@@ -1565,9 +1565,9 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 27]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 28]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 28]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
 8.1.3.2.  Removing a Subject
@@ -1621,9 +1621,9 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 28]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 29]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 29]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
    POST /set/subjects:remove HTTP/1.1
@@ -1677,9 +1677,9 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 29]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 30]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 30]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
    state
@@ -1733,9 +1733,9 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 30]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 31]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 31]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
    +------+------------------------------------------------------------+
@@ -1789,9 +1789,9 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 31]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 32]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 32]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
 {
@@ -1845,9 +1845,9 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 32]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 33]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 33]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
 {
@@ -1856,15 +1856,14 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 33]
   "aud": "receiver.example.com",
   "iat": "1493856000",
   "events": {
-    "https://schemas.openid.net/secevent/caep/event-type/stream-updated":{
-      "subject": {
-        "subject_type": "spag",
-        "spag_id" : "https://example.com/v2/Groups/e9e30dba-f08f-4109-8486-d5c6a331660a",
-      }
+    "https://schemas.openid.net/secevent/risc/event-type/stream-updated":{
+      "id": "1234"
     }
   }
-  "status": "paused",
-  "reason": "License no longer valid."
+  "properties": {
+    "status": "paused",
+    "reason": "License no longer valid."
+  }
 }
 
                   Figure 30: Example: Stream Updated SET
@@ -1901,9 +1900,10 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 33]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 34]
 
-                           openid-sse-profile                   Sep 2020
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 34]
+
+                           openid-sse-profile                   Oct 2020
 
 
 8.3.2.  Information Harvesting
@@ -1957,9 +1957,9 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 34]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 35]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 35]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
 9.  Profiles
@@ -2013,9 +2013,9 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 35]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 36]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 36]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
    {
@@ -2069,9 +2069,9 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 36]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 37]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 37]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
    {
@@ -2125,9 +2125,9 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 37]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 38]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 38]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
 {
@@ -2181,9 +2181,9 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 38]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 39]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 39]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
 9.2.1.1.  Push Delivery using HTTP
@@ -2237,9 +2237,9 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 39]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 40]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 40]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
       A brief description of the Subject Identifier Type.
@@ -2293,9 +2293,9 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 40]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 41]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 41]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
 10.2.1.  Registry Contents
@@ -2349,9 +2349,9 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 41]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 42]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 42]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
    [DELIVERYPOLL]
@@ -2405,9 +2405,9 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 42]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 43]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 43]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
    [RFC5785]  Nottingham, M. and E. Hammer-Lahav, "Defining Well-Known
@@ -2461,9 +2461,9 @@ Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 43]
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 44]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 44]
 
-                           openid-sse-profile                   Sep 2020
+                           openid-sse-profile                   Oct 2020
 
 
 12.2.  URIs
@@ -2517,4 +2517,4 @@ Authors' Addresses
 
 
 
-Tulshibagwale & Cappalli  Expires April 2, 2021                [Page 45]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 45]
