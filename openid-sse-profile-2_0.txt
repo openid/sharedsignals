@@ -184,12 +184,14 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 3]
    may be in one SPAG.  Alternatively, an Organizational Unit or a group
    of Subjects within a customer of a Transmitter (whether multi-
    tenanted or not) may be one SPAG.  SPAGs may have overlapping sets of
-   Subjects.
+   Subject Principals.
 
    A SPAG MAY be the Subject of certain stream update events defined
    later in this spec, hence is defined as a Subject Type of its own
    below.  A SPAG identifier MAY be included in other subject types to
-   disambiguate the subject.
+   disambiguate the subject of an event.
+
+   Some events MAY use SPAGs as their subjects, e.g.
 
    A SPAG subject identifier is agreed to offline between a Transmitter
    and a Receiver.
@@ -216,8 +218,6 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 3]
    o  A subject type defined in the Subject Identifier Types
       (Section 4.2) section here, OR
 
-   o  A proprietary subject type that is agreed to between parties.  To
-      clearly indicate that such subject types are not a part of the
 
 
 
@@ -226,6 +226,8 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 4]
                            openid-sse-profile                   Oct 2020
 
 
+   o  A proprietary subject type that is agreed to between parties.  To
+      clearly indicate that such subject types are not a part of the
       standard, the subject type name MUST begin with the prefix "x-".
       Other claims in the subject identifier that has a proprietary
       subject type are agreed to between the parties and such agreement
@@ -270,8 +272,6 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 4]
 
    The "Session ID" Subject Identifier Type is identified by the name
    "session-id".
-
-
 
 
 
@@ -419,19 +419,19 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 7]
   "iat": 1520364019,
   "aud": "636C69656E745F6964",
   "events": {
-    "https://schemas.openid.net/secevent/caep/event-type/ip-address-changed": {
+    "https://schemas.openid.net/secevent/caep/event-type/stream-updated": {
       "subject": {
         "subject_type": "spag",
         "spag_id" : "https://example.com/v2/Groups/e9e30dba-f08f-4109-8486-d5c6a331660a",
-      }
+      },
+      "status": "paused",
+      "reason": "License is not valid",
     }
   }
 }
 
      Figure 4: Example: SET Containing a SSE Event with a SPAG Subject
                                    Type
-
-
 
 
 
@@ -1856,13 +1856,14 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 33]
   "aud": "receiver.example.com",
   "iat": "1493856000",
   "events": {
-    "https://schemas.openid.net/secevent/risc/event-type/stream-updated":{
-      "id": "1234"
-    }
-  }
-  "properties": {
-    "status": "paused",
-    "reason": "License no longer valid."
+    "https://schemas.openid.net/secevent/caep/event-type/stream-updated": {
+      "subject": {
+        "subject_type": "spag",
+        "spag_id" : "https://example.com/v2/Groups/e9e30dba-f08f-4109-8486-d5c6a331660a",
+      }
+      "status": "paused",
+      "reason": "License is not valid",
+    },
   }
 }
 
@@ -1897,7 +1898,6 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 33]
    actually send any events related to the subject, and Event Receivers
    MUST NOT assume that a 204 response means that they will receive
    events related to the subject.
-
 
 
 
