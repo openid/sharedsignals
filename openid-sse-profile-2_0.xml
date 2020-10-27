@@ -107,9 +107,11 @@
           hence is defined as a Subject Type of its own below. A SPAG identifier MAY be
           included in other subject types to disambiguate the subject of an event.</t>
 
-        <t>Some events MAY use SPAGs as their subjects, e.g. </t>
+        <t>Some events MAY use SPAGs as their subjects, e.g. the <xref target="stream-updated-event">
+          "Stream Updated"</xref> event.</t>
 
-        <t>A SPAG subject identifier is agreed to offline between a Transmitter and a Receiver.</t>
+        <t>A SPAG subject identifier is agreed to offline between a Transmitter and a Receiver, and
+          is outside the scope of this specification.</t>
       </section>
     </section>
 
@@ -125,7 +127,7 @@
         </list></t>
 
       <section anchor="sse-subject-types" title="Subject Types in SSE Events">
-        <t>A Subject Identifier in a SSE event must have a subject type that is any one of:
+        <t>A Subject Identifier in a SSE event MUST have a subject type that is any one of:
           <list style="symbols">
             <t>Defined in the <xref target="SUBIDS">Subject Identifiers Draft Specification</xref>.</t>
             <t>A subject type defined in the <xref target="sub-id-types">Subject Identifier Types</xref>
@@ -208,7 +210,7 @@
       </t>
     </section>
 
-    <section anchor="events-examples" title="Example SETs that conform to SSE profile">
+    <section anchor="events-examples" title="Example SETs that conform to the SSE profile">
       <t>The following are hypothetical examples of SETs that conform to the SSE profile.</t>
       <figure anchor="subject-ids-ex-email" title="Example: SET Containing a SSE Event with an Email Subject Identifier">
         <artwork><![CDATA[

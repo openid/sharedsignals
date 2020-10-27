@@ -66,7 +66,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 1]
        4.2.5.  SAML Assertion ID Subject Identifier Type . . . . . .   6
      4.3.  Best Effort Subject Match . . . . . . . . . . . . . . . .   6
    5.  Event Properties  . . . . . . . . . . . . . . . . . . . . . .   6
-   6.  Example SETs that conform to SSE profile  . . . . . . . . . .   7
+   6.  Example SETs that conform to the SSE profile  . . . . . . . .   7
    7.  Transmitter Configuration Discovery . . . . . . . . . . . . .  10
      7.1.  Transmitter Configuration Metadata  . . . . . . . . . . .  10
      7.2.  Obtaining Transmitter Configuration Information . . . . .  11
@@ -191,10 +191,11 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 3]
    below.  A SPAG identifier MAY be included in other subject types to
    disambiguate the subject of an event.
 
-   Some events MAY use SPAGs as their subjects, e.g.
+   Some events MAY use SPAGs as their subjects, e.g. the "Stream
+   Updated" (Section 8.1.5)event.
 
    A SPAG subject identifier is agreed to offline between a Transmitter
-   and a Receiver.
+   and a Receiver, and is outside the scope of this specification.
 
 4.  Subject Identifiers
 
@@ -210,14 +211,13 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 3]
 
 4.1.  Subject Types in SSE Events
 
-   A Subject Identifier in a SSE event must have a subject type that is
+   A Subject Identifier in a SSE event MUST have a subject type that is
    any one of:
 
    o  Defined in the Subject Identifiers Draft Specification [SUBIDS].
 
    o  A subject type defined in the Subject Identifier Types
       (Section 4.2) section here, OR
-
 
 
 
@@ -341,7 +341,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 6]
    be a URI.  The discoverability of all additional claims is specified
    in the Discovery (Section 7) section.
 
-6.  Example SETs that conform to SSE profile
+6.  Example SETs that conform to the SSE profile
 
    The following are hypothetical examples of SETs that conform to the
    SSE profile.
