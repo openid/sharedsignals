@@ -1,0 +1,776 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type='text/xsl' href='http://xml2rfc.tools.ietf.org/authoring/rfc2629.xslt' ?>
+<!DOCTYPE rfc PUBLIC "-//IETF//DTD RFC 2629//EN" "http://xml2rfc.tools.ietf.org/authoring/rfc2629.dtd">
+<!--
+  NOTE:  This XML file is input used to produce the authoritative copy of an
+  OpenID Foundation specification.  The authoritative copy is the HTML output.
+  This XML source file is not authoritative.  The statement ipr="none" is
+  present only to satisfy the document compilation tool and is not indicative
+  of the IPR status of this specification.  The IPR for this specification is
+  described in the "Notices" section.  This is a public OpenID Foundation
+  document and not a private document, as the private="..." declaration could
+  be taken to indicate.
+-->
+
+<rfc docName="openid-caep-event-types-1_0" category="std" ipr="none">
+
+  <?rfc toc="yes" ?>
+  <?rfc tocdepth="5" ?>
+  <?rfc symrefs="yes" ?>
+  <?rfc sortrefs="yes"?>
+  <?rfc strict="yes" ?>
+  <?rfc iprnotified="no" ?>
+  <?rfc private="Draft" ?>
+  <?rfc comments="yes"?>
+
+  <front>
+    <title abbrev="openid-caep-event-types">OpenID CAEP Event Types 1.0</title>
+
+    <author initials="T." surname="Cappalli" fullname="Tim Cappalli">
+      <organization abbrev="Microsoft">Microsoft</organization>
+      <address>
+        <email>tim.cappalli@microsoft.com</email>
+      </address>
+    </author>
+    <author initials="A." surname="Tulshibagwale" fullname="Atul Tulshibagwale">
+      <organization abbrev="Google">Google</organization>
+      <address>
+        <email>atultulshi@google.com</email>
+      </address>
+    </author>
+
+    <date year="2020" month="October" day="31"/>
+
+    <workgroup>Shared Signals and Events Working Group</workgroup>
+
+    <abstract>
+      <t>This document defines the CAEP Event Types. Event Types are introduced and defined in <xref target="SET">Security Event Token (SET)</xref>.
+      </t>
+    </abstract>
+  </front>
+
+  <middle>
+    <section anchor="intro" title="Introduction">
+      <t>This specification is based on <xref target="SSE-PROFILE">SSE Profile</xref> and uses
+      the subject identifiers defined there.</t>
+
+      <section anchor="conv" title="Notational Conventions">
+        <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
+          NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED",
+          "MAY", and "OPTIONAL" in this document are to be interpreted as
+          described in BCP 14 <xref target="RFC2119"/>
+        <xref target="RFC8174"/>
+ 
+          when, and only when, they appear in all capitals, as shown here.</t>
+    </section>
+  </section>
+
+  <section anchor="event-types" title="Event Types">
+    <t>The base URI for CAEP event types is:<vspace />
+        https://schemas.openid.net/secevent/caep/event-type/</t>
+
+    <section anchor="session-revoked" title="Session Revoked">
+      <t>Event Type URI:<vspace />
+        https://schemas.openid.net/secevent/caep/event-type/session-revoked</t>
+
+      <t>Session Revoked signals that the session identified by the subject has 
+      been revoked. The actual reason why the session was revoked might be specified 
+      with the nested <spanx style="verb">reason_admin</spanx> and/or 
+      <spanx style="verb">reason_user</spanx> attributes described below.</t>
+
+      <t>Attributes: </t>
+      <t>
+        <list style="hanging">
+          <t hangText="event_timestamp">
+            <vspace blankLines="0"/>
+              REQUIRED, the time at which the session revocation occured. Its value is a JSON number representing 
+              the number of seconds from 1970-01-01T0:0:0Z as measured in UTC until the date/time. This 
+              value must be less than or equal to the “iat” claim in the parent Security Event Token (SET).	</t>
+          <t hangText="initiating_entity">
+            <vspace blankLines="0"/>
+              OPTIONAL, describes the entity that invoked the session revocation. Potential options:
+            <list style="hanging">
+              <t hangText="admin">
+                <vspace blankLines="0"/>
+                  an administrator revoked the session</t>
+              <t hangText="user">
+                <vspace blankLines="0"/>
+                  the end-user revoked the session</t>
+              <t hangText="policy">
+                <vspace blankLines="0"/>
+                  a policy evaluation resulted in the session revocation</t>
+              <t hangText="system">
+                <vspace blankLines="0"/>
+                  a system or platform assertion resulted in the session revocation</t>
+            </list>
+          </t>
+          <t hangText="reason_admin">
+            <vspace blankLines="0"/>
+              OPTIONAL, an administrative message for logging and auditing</t>
+          <t hangText="reason_user">
+            <vspace blankLines="0"/>
+              OPTIONAL, a user-friendly message for display to an end-user</t>
+          <t hangText="tenant_id">
+            <vspace blankLines="0"/>
+              OPTIONAL, tenant</t>
+        </list>
+      </t>
+
+      <figure anchor="session-revoked-session-id-example" title="Example: Session Revoked for Session ID">
+        <artwork><![CDATA[
+{
+    "iss": "https://idp.example.com/123456789/",
+    "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
+    "iat": 1600976590,
+    "aud": "https://sp.example.com/caep",
+    "events": {
+        "https://schemas.openid.net/secevent/caep/event-type/\
+        session-revoked": {
+            "subject": {
+                "subject_type": "session-id",
+                "session_id": "dMTlD|1600802906337.16|16008.16"
+            },
+            "initiating_entity": "policy",
+            "reason_admin": "Policy Violation: C076E82F",
+            "reason_user": "Landspeed violation.",
+            "tenant_id": "123456789",
+            "event_timestamp": 1600975810
+        }
+    }
+}
+            ]]>        </artwork>
+        <postamble>
+          <spanx style="emph">(the event type URI is wrapped, the backslash is the continuation character)</spanx>
+        </postamble>
+      </figure>
+      <figure anchor="session-revoked-session-user-device" title="Example: Session Revoked for User + Device">
+        <artwork><![CDATA[
+{
+    "iss": "https://idp.example.com/123456789/",
+    "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
+    "iat": 1600976590,
+    "aud": "https://sp.example.com/caep",
+    "events": {
+         "https://schemas.openid.net/secevent/caep/event-type/\
+         session-revoked": {
+            "subject_type": "user-device",
+            "user": {
+                "subject_type": "iss-sub",
+                "iss": "https://idp.example.com/123456789/",
+                "sub": "jane.smith@example.com"
+            },
+            "device": {
+                "subject_type": "iss-sub",
+                "iss": "https://idp.example.com/123456789/",
+                "sub": "e9297990-14d2-42ec-a4a9-4036db86509a"
+            }
+        },
+        "initiating_entity": "policy",
+        "reason_admin": "Policy Violation: C076E82F",
+        "reason_user": "Your device is no longer compliant.",
+        "tenant_id": "123456789",
+        "event_timestamp": 1600975810
+    }
+}
+            ]]>        </artwork>
+        <postamble>
+          <spanx style="emph">(the event type URI is wrapped, the backslash is the continuation character)</spanx>
+        </postamble>
+      </figure>
+    </section>
+
+    <section anchor="token-claims-change" title="Token Claims Change">
+      <t>Event Type URI:<vspace />
+        https://schemas.openid.net/secevent/caep/event-type/token-claims-change</t>
+
+      <t>Token Claims Change signals that a claim in a token specified in the subject has changed. </t>
+
+      <t>Attributes: </t>
+      <t>
+        <list style="hanging">
+          <t hangText="event_timestamp">
+            <vspace blankLines="0"/>
+              REQUIRED, the time at which the token claims change occured. Its value is a JSON number 
+              representing the number of seconds from 1970-01-01T0:0:0Z as measured in UTC until the 
+              date/time. This value must be less than or equal to the “iat” claim in the 
+              parent Security Event Token (SET).	</t>
+          <t hangText="claims">
+            <vspace blankLines="0"/>
+              REQUIRED, JSON object containing new uor updated claims</t>
+          <t hangText="initiating_entity">
+            <vspace blankLines="0"/>
+              OPTIONAL, describes the entity that invoked the token claims change. Potential options:
+            <list style="hanging">
+              <t hangText="admin">
+                <vspace blankLines="0"/>
+                  an administrator revoked the session</t>
+              <t hangText="user">
+                <vspace blankLines="0"/>
+                  the end-user revoked the session</t>
+              <t hangText="policy">
+                <vspace blankLines="0"/>
+                  a policy evaluation resulted in the token claims change</t>
+              <t hangText="system">
+                <vspace blankLines="0"/>
+                  a system or platform assertion resulted in the token claims change</t>
+            </list>
+          </t>
+          <t hangText="reason_admin">
+            <vspace blankLines="0"/>
+              OPTIONAL, an administrative message for logging and auditing</t>
+          <t hangText="reason_user">
+            <vspace blankLines="0"/>
+              OPTIONAL, a user-friendly message for display to an end-user</t>
+          <t hangText="tenant_id">
+            <vspace blankLines="0"/>
+              OPTIONAL, tenant</t>
+        </list>
+      </t>
+
+      <figure anchor="oidc-id-token-claims-change" title="Example: OIDC ID Token Claims Change">
+        <artwork><![CDATA[
+{
+    "iss": "https://idp.example.com/987654321/",
+    "jti": "9afce1e4e642b165fcaacdd0e7aa4903",
+    "iat": 1600976590,
+    "aud": "https://sp.example2.net/caep",
+    "events": {
+        "https://schemas.openid.net/secevent/caep/event-type/\
+        token-claims-change": {
+            "subject": {
+                "subject_type": "jwt-id",
+                "iss": "https://idp.example.com/987654321/",
+                "jti": "f61t6e20zdo3px56gepu8rzlsp4c1dpc0fx7"
+            },
+            "event_timestamp": 1600975810,
+            "claims": {
+                "role": "ro-admin"
+            }
+        }
+    }
+}
+            ]]>        </artwork>
+        <postamble>
+          <spanx style="emph">(the event type URI is wrapped, the backslash is the continuation character)</spanx>
+        </postamble>
+      </figure>
+      <figure anchor="saml-assertion-claims-change" title="Example: SAML Assertion Claims Change">
+        <artwork><![CDATA[
+{
+    "iss": "https://idp.example.com/987654321/",
+    "jti": "dae94fed5f459881efa38b65c6772ddc",
+    "iat": 1600976590,
+    "aud": "https://sp.example2.net/caep",
+    "events": {
+        "https://schemas.openid.net/secevent/caep/event-type/\
+        token-claims-change": {
+            "subject": {
+                "subject_type": "saml-assertion-id",
+                "issuer": "https://idp.example.com/987654321/",
+                "assertion_id": "_a75adf55-01d7-dbd8372ebdfc"
+            },
+            "event_timestamp": 1600975810,
+            "claims": {
+                "http://schemas.xmlsoap.org/ws/2005/05/identity/\
+                claims/role": "ro-admin"
+            }
+        }
+    }
+}
+            ]]>        </artwork>
+        <postamble>
+          <spanx style="emph">(the event type URI is wrapped, the backslash is the continuation character)</spanx>
+        </postamble>
+      </figure>
+    </section>
+
+    <section anchor="credential-change" title="Credential Change">
+      <t>Event Type URI:<vspace />
+        https://schemas.openid.net/secevent/caep/event-type/credential-change</t>
+
+      <t>The Credential Change event signals that a credential was created, 
+      changed, revoked or deleted. This event type can be generated for 
+      events including the following:
+        <list>
+          <t>password/PIN change/reset</t>
+          <t>certificate enrollment, renewal, revocation and deletion</t>
+          <t>second factor / passwordless credential enrollment and deletion (U2F, FIDO2, OTP, app-based)</t>
+        </list>
+      </t>
+
+      <t>Attributes: </t>
+      <t>
+        <list style="hanging">
+          <t hangText="event_timestamp">
+            <vspace blankLines="0"/>
+            REQUIRED, the time at which the credential change occured. 
+            Its value is a JSON number representing the number of seconds 
+            from 1970-01-01T0:0:0Z as measured in UTC until the date/time. 
+            This value must be less than or equal to the “iat” claim in the 
+            parent Security Event Token (SET).	</t>
+          <t hangText="credential_type">
+            <vspace blankLines="0"/>
+            REQUIRED, Potential options:
+            <list>
+              <t>password</t>
+              <t>pin</t>
+              <t>x509</t>
+              <t>fido2-platform</t>
+              <t>fido2-roaming</t>
+              <t>fido-u2f</t>
+              <t>verifiable-credential</t>
+              <t>sms-otp</t>
+              <t>app</t>
+              <t>nist-aal1</t>
+              <t>nist-aal2</t>
+              <t>nist-aal3</t>
+              <t>&lt;other mutually supported credential type&gt;</t>
+            </list>
+          </t>
+          <t hangText="change_type">
+            <vspace blankLines="0"/>
+            REQUIRED, Potential options:
+            <list>
+              <t>create</t>
+              <t>revoke</t>
+              <t>update</t>
+              <t>delete</t>
+            </list>
+          </t>
+          <t hangText="initiating_entity">
+            <vspace blankLines="0"/>
+            OPTIONAL, describes the entity that invoked the credential change. Potential options:
+            <list style="hanging">
+              <t hangText="admin">
+                <vspace blankLines="0"/>
+                an administrator revoked the session</t>
+              <t hangText="user">
+                <vspace blankLines="0"/>
+                the end-user revoked the session</t>
+              <t hangText="policy">
+                <vspace blankLines="0"/>
+                a policy evaluation resulted in the credential change</t>
+              <t hangText="system">
+                <vspace blankLines="0"/>
+                a system or platform assertion resulted in the credential change</t>
+            </list>
+          </t>
+          <t hangText="reason_admin">
+            <vspace blankLines="0"/>
+            OPTIONAL, an administrative message for logging and auditing</t>
+          <t hangText="reason_user">
+            <vspace blankLines="0"/>
+            OPTIONAL, a user-friendly message for display to an end-user</t>
+          <t hangText="tenant_id">
+            <vspace blankLines="0"/>
+            OPTIONAL, tenant</t>
+          <t hangText="friendly_name">
+            <vspace blankLines="0"/>
+            OPTIONAL, credential friendly name</t>
+          <t hangText="x509_issuer">
+            <vspace blankLines="0"/>
+            OPTIONAL, the issuer of the X.509 certificate as defined in <xref target="RFC5280"/></t>
+          <t hangText="x509_serial">
+            <vspace blankLines="0"/>
+            OPTIONAL, the serial number of the X.509 certificate as defined in <xref target="RFC5280"/></t>
+          <t hangText="fido2_aaguid">
+            <vspace blankLines="0"/>
+            OPTIONAL, FIDO2 Authenticator Attestation GUID as defined in <xref target="WebAuthn"/></t>
+        </list>
+      </t>
+
+      <figure anchor="fido2-credential-change-example" title="Example: Credential Change">
+        <artwork><![CDATA[
+{
+    "iss": "https://idp.example.com/3456789/",
+    "jti": "07efd930f0977e4fcc1149a733ce7f78",
+    "iat": 1600976598,
+    "aud": "https://sp.example2.net/caep",
+    "events": {
+        "https://schemas.openid.net/secevent/caep/event-type/\
+        credential-changed": {
+            "subject": {
+                "subject_type": "iss-sub",
+                "iss": "https://idp.example.com/3456789/",
+                "sub": "jane.smith@example.com"
+            },
+            "credential_type": "fido2-roaming",
+            "change_type": "create",
+            "fido2_aaguid": "accced6a-63f5-490a-9eea-e59bc1896cfc",
+            "credential_name": "Jane's USB authenticator",
+            "initiating_entity": "user",
+            "event_timestamp": 1600975811
+        }
+    }
+}
+
+            ]]>        </artwork>
+        <postamble>
+          <spanx style="emph">(the event type URI is wrapped, the backslash is the continuation character)</spanx>
+        </postamble>
+      </figure>
+    </section>
+
+<section anchor="device-compliance-change" title="Device Compliance Change">
+      <t>Event Type URI:<vspace />
+        https://schemas.openid.net/secevent/caep/event-type/device-compliance-change</t>
+
+      <t>Device Compliance Change signals that a device’s compliance status has changed. 
+      The actual reason why the compliance status changed might be specified 
+      with the nested <spanx style="verb">reason_admin</spanx> and/or 
+      <spanx style="verb">reason_user</spanx> attributes described below.</t>
+
+      <t>Attributes: </t>
+      <t>
+        <list style="hanging">
+          <t hangText="event_timestamp">
+            <vspace blankLines="0"/>
+              REQUIRED, the time at which the device compliance change occured. Its value is a JSON number representing 
+              the number of seconds from 1970-01-01T0:0:0Z as measured in UTC until the date/time. This 
+              value must be less than or equal to the “iat” claim in the parent Security Event Token (SET).	</t>
+          <t hangText="compliance_status">
+            <vspace blankLines="0"/>
+              REQUIRED, Options:
+            <list>
+              <t>compliant</t>
+              <t>not-compliant</t>
+            </list>
+          </t>
+          
+          <t hangText="initiating_entity">
+            <vspace blankLines="0"/>
+              OPTIONAL, describes the entity that invoked the session revocation. Potential options:
+            <list style="hanging">
+              <t hangText="admin">
+                <vspace blankLines="0"/>
+                  an administrative action resulted in a status change</t>
+              <t hangText="user">
+                <vspace blankLines="0"/>
+                  an end-user action resulted in a status change</t>
+              <t hangText="policy">
+                <vspace blankLines="0"/>
+                  a policy evaluation resulted in a status change</t>
+              <t hangText="system">
+                <vspace blankLines="0"/>
+                  a system or platform assertion resulted in a status change</t>
+            </list>
+          </t>
+          <t hangText="reason_admin">
+            <vspace blankLines="0"/>
+              OPTIONAL, an administrative message for logging and auditing</t>
+          <t hangText="reason_user">
+            <vspace blankLines="0"/>
+              OPTIONAL, a user-friendly message for display to an end-user</t>
+          <t hangText="tenant_id">
+            <vspace blankLines="0"/>
+              OPTIONAL, tenant</t>
+        </list>
+      </t>
+
+      <figure anchor="device-compliance-change-example" title="Example: Device Compliance Change">
+        <artwork><![CDATA[
+{
+    "iss": "https://idp.example.com/123456789/",
+    "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
+    "iat": 1600976590,
+    "aud": "https://sp.example.com/caep",
+    "events": {
+         "https://schemas.openid.net/secevent/caep/event-type/\
+         session-revoked": {
+            "subject_type": "user-device",
+            "user": {
+                "subject_type": "iss-sub",
+                "iss": "https://idp.example.com/123456789/",
+                "sub": "jane.smith@example.com"
+            },
+            "device": {
+                "subject_type": "iss-sub",
+                "iss": "https://idp.example.com/123456789/",
+                "sub": "e9297990-14d2-42ec-a4a9-4036db86509a"
+            }
+        },
+        "compliance_status": "not-compliant",
+        "initiating_entity": "policy",
+        "reason_admin": "Location Policy Violation: C076E82F",
+        "reason_user": "Device is no longer in a trusted location.",
+        "tenant_id": "123456789",
+        "event_timestamp": 1600975810
+    }
+}
+            ]]>        </artwork>
+        <postamble>
+          <spanx style="emph">(the event type URI is wrapped, the backslash is the continuation character)</spanx>
+        </postamble>
+      </figure>
+    </section>
+
+<section anchor="assurance-level-change" title="Assurance Level Change">
+      <t>Event Type URI:<vspace />
+        https://schemas.openid.net/secevent/caep/event-type/assurance-level-change</t>
+
+      <t>Assurance Level Change signals that the level of assurance has changed for the subject. 
+      The actual reason for the assurance level changed might be specified 
+      with the nested <spanx style="verb">reason_admin</spanx> and/or 
+      <spanx style="verb">reason_user</spanx> attributes described below.</t>
+
+      <t>Attributes: </t>
+      <t>
+        <list style="hanging">
+          <t hangText="event_timestamp">
+            <vspace blankLines="0"/>
+              REQUIRED, the time at which the assurance level change occured. Its value is a JSON number representing 
+              the number of seconds from 1970-01-01T0:0:0Z as measured in UTC until the date/time. This 
+              value must be less than or equal to the “iat” claim in the parent Security Event Token (SET).	</t>
+          <t hangText="current_level">
+            <vspace blankLines="0"/>
+            REQUIRED, the current NIST Authenticator Assurance Level (AAL) as defined in <xref target="SP800-800-63r3"/>. Options:
+            <list>
+              <t>nist-aal1</t>
+              <t>nist-aal2</t>
+              <t>nist-aal3</t>
+            </list>
+          </t>
+          <t hangText="previous_level">
+            <vspace blankLines="0"/>
+            REQUIRED, the current NIST Authenticator Assurance Level (AAL) as defined in <xref target="SP800-800-63r3"/>. Options:
+            <list>
+              <t>nist-aal1</t>
+              <t>nist-aal2</t>
+              <t>nist-aal3</t>
+            </list>
+          </t>
+          <t hangText="change_direction">
+            <vspace blankLines="0"/>
+              REQUIRED, Options:
+            <list>
+              <t>increase</t>
+              <t>decrease</t>
+            </list>
+          </t>
+          <t hangText="credential_type">
+            <vspace blankLines="0"/>
+            OPTIONAL, Potential options:
+            <list>
+              <t>password</t>
+              <t>pin</t>
+              <t>x509</t>
+              <t>fido2-platform</t>
+              <t>fido2-roaming</t>
+              <t>fido-u2f</t>
+              <t>verifiable-credential</t>
+              <t>sms-otp</t>
+              <t>app</t>
+              <t>&lt;other mutually supported credential type&gt;</t>
+            </list>
+          </t>
+          <t hangText="initiating_entity">
+            <vspace blankLines="0"/>
+              OPTIONAL, describes the entity that invoked the assurance level change. Potential options:
+            <list style="hanging">
+              <t hangText="admin">
+                <vspace blankLines="0"/>
+                  an administrative action resulted in the assurance level change</t>
+              <t hangText="user">
+                <vspace blankLines="0"/>
+                  an end-user action resulted in the assurance level change</t>
+              <t hangText="policy">
+                <vspace blankLines="0"/>
+                  a policy evaluation resulted in the assurance level change</t>
+              <t hangText="system">
+                <vspace blankLines="0"/>
+                  a system or platform assertion resulted in the assurance level change</t>
+            </list>
+          </t>
+          <t hangText="reason_admin">
+            <vspace blankLines="0"/>
+              OPTIONAL, an administrative message for logging and auditing</t>
+          <t hangText="reason_user">
+            <vspace blankLines="0"/>
+              OPTIONAL, a user-friendly message for display to an end-user</t>
+          <t hangText="tenant_id">
+            <vspace blankLines="0"/>
+              OPTIONAL, tenant</t>
+        </list>
+      </t>
+
+      <figure anchor="assurance-level-change-example" title="Example: Assurance Level Change">
+        <artwork><![CDATA[
+{
+    "iss": "https://idp.example.com/123456789/",
+    "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
+    "iat": 1600976590,
+    "aud": "https://sp.example.com/caep",
+    "events": {
+         "https://schemas.openid.net/secevent/caep/event-type/\
+         assurance-level-change": {
+            "subject": {
+                "subject_type": "iss-sub",
+                "iss": "https://idp.example.com/123456789/",
+                "sub": "john.smith@example.com"
+              }
+        },
+        "current_level": "nist-aal2",
+        "previous_level": "nist-aal1",
+        "change_direction": "increase",
+        "credential_type": "fido2-roaming",
+        "reason_admin": "fido2-roaming used for session e7ca5a35",
+        "reason_user": "Strong credential recently used.",
+        "tenant_id": "123456789",
+        "event_timestamp": 1600975810
+    }
+}
+            ]]>        </artwork>
+        <postamble>
+          <spanx style="emph">(the event type URI is wrapped, the backslash is the continuation character)</spanx>
+        </postamble>
+      </figure>
+    </section>
+
+
+  </section>
+</middle>
+
+<back>
+  <references title='Normative References'>
+
+    <reference anchor="JSON" target='https://www.rfc-editor.org/info/rfc7159'>
+      <front>
+        <title>The JavaScript Object Notation (JSON) Data Interchange Format</title>
+        <author initials='T.' surname='Bray' fullname='T. Bray' role='editor'>
+          <organization />
+        </author>
+        <date year='2014' month='March' />
+        <abstract>
+          <t>JavaScript Object Notation (JSON) is a lightweight, text-based, language-independent data interchange format.  It was derived from the ECMAScript Programming Language Standard.  JSON defines a small set of formatting rules for the portable representation of structured data.</t>
+          <t>This document removes inconsistencies with other specifications of JSON, repairs specification errors, and offers experience-based interoperability guidance.</t>
+        </abstract>
+      </front>
+      <seriesInfo name='RFC' value='7159'/>
+      <seriesInfo name='DOI' value='10.17487/RFC7159'/>
+    </reference>
+
+    <reference anchor="SET" target="https://tools.ietf.org/html/draft-ietf-secevent-token-09">
+      <front>
+        <title>Security Event Token (SET)</title>
+        <author fullname="Phil Hunt" initials="P." role="editor" surname="Hunt">
+          <organization />
+        </author>
+
+        <author fullname="Michael B. Jones" initials="M.B." surname="Jones">
+          <organization />
+        </author>
+
+        <author fullname="William Denniss" initials="W." surname="Denniss">
+          <organization />
+        </author>
+
+        <author fullname="Morteza Ansari" initials="M.A." surname="Ansari">
+          <organization />
+        </author>
+
+        <date year="2018" month="April" />
+      </front>
+    </reference>
+
+    <reference anchor="RFC2119" target='https://www.rfc-editor.org/info/rfc2119'>
+      <front>
+        <title>Key words for use in RFCs to Indicate Requirement Levels</title>
+        <author initials='S.' surname='Bradner' fullname='S. Bradner'>
+          <organization />
+        </author>
+        <date year='1997' month='March' />
+        <abstract>
+          <t>In many standards track documents several words are used to signify the requirements in the specification.  These words are often capitalized. This document defines these words as they should be interpreted in IETF documents.  This document specifies an Internet Best Current Practices for the Internet Community, and requests discussion and suggestions for improvements.</t>
+        </abstract>
+      </front>
+      <seriesInfo name='BCP' value='14'/>
+      <seriesInfo name='RFC' value='2119'/>
+      <seriesInfo name='DOI' value='10.17487/RFC2119'/>
+    </reference>
+
+    <reference anchor="RFC8174" target="https://www.rfc-editor.org/info/rfc8174">
+      <front>
+        <title>Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words</title>
+        <author initials="B." surname="Leiba" fullname="B. Leiba">
+          <organization/>
+        </author>
+        <date year="2017" month="May"/>
+        <abstract>
+          <t>RFC 2119 specifies common key words that may be used in protocol specifications. This 
+              document aims to reduce the ambiguity by clarifying that only UPPERCASE usage of the 
+              key words have the defined special meanings.</t>
+        </abstract>
+      </front>
+      <seriesInfo name="BCP" value="14"/>
+      <seriesInfo name="RFC" value="8174"/>
+      <seriesInfo name="DOI" value="10.17487/RFC8174"/>
+    </reference>
+
+    <reference anchor="SSE-PROFILE" target="http://openid.net/specs/openid-risc-profile-1_0.html">
+      <front>
+        <title>OpenID Shared Signals and Events Profile of IETF Security Events 2.0</title>
+        <author initials="A." surname="Tulshibagwale" fullname="Atul Tulshibagwale">
+          <organization abbrev="Google">Google</organization>
+        </author>
+        <author initials="T." surname="Cappalli" fullname="Tim Cappalli">
+          <organization abbrev="Microsoft">Microsoft</organization>
+        </author>
+        <date year="2018" month="April" />
+      </front>
+    </reference>
+
+    <reference anchor="WebAuthn" target="https://www.w3.org/TR/webauthn/">
+      <front>
+        <title>Web Authentication: An API for accessing Public Key Credentials Level 1</title>
+        <author initials="D." surname="Balfanz" fullname="Dirk Balfanz">
+          <organization abbrev="Google">Google</organization>
+        </author>
+        <date year="2018" month="March" />
+      </front>
+    </reference>
+    
+    <reference anchor="RFC5280" target='https://tools.ietf.org/html/rfc5280'>
+      <front>
+        <title>Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile</title>
+        <author initials='D.' surname='Cooper' fullname='D. Cooper'>
+          <organization abbrev="NIST">NIST</organization>
+        </author>
+        <author initials='S.' surname='Santesson' fullname='S. Santesson'>
+          <organization abbrev="Microsoft">Microsoft</organization>
+        </author>
+        <author initials='S.' surname='Farrell' fullname='S. Farrell'>
+          <organization abbrev="Trinity College Dublin">Trinity College Dublin</organization>
+        </author>
+        <author initials='S.' surname='Boeyen' fullname='S. Boeyen'>
+          <organization abbrev="Entrust">Entrust</organization>
+        </author>
+        <author initials='R.' surname='Housley' fullname='R. Housley'>
+          <organization abbrev="Vigil Security">Vigil Security</organization>
+        </author>
+        <author initials='W.' surname='Polk' fullname='W. Polk'>
+          <organization abbrev="NIST">NIST</organization>
+        </author>
+        <date year='2008' month='May' />
+      </front>
+    </reference>
+
+    <reference anchor="SP800-800-63r3" target="https://pages.nist.gov/800-63-3/sp800-63-3.html">
+      <front>
+        <title>NIST Special Publication 800-63: Digital Identity Guidelines</title>
+        <author initials="P." surname="Grassi" fullname="Paul Grassi">
+          <organization />
+        </author>
+        <author initials="M." surname="Garcia" fullname="Michael Garcia">
+          <organization />
+        </author>
+        <author initials="J." surname="Fenton" fullname="James Fenton">
+          <organization />
+        </author>
+        <date year="2017" month="June" />
+      </front>
+    </reference>
+
+
+  </references>
+</back>
+</rfc>
