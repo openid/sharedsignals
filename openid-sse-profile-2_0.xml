@@ -103,14 +103,13 @@
           a group of Subjects within a customer of a Transmitter (whether multi-tenanted or not) may
           be one SPAG. SPAGs may have overlapping sets of Subject Principals.</t>
 
-        <t>A SPAG MAY be the Subject of certain stream update events defined later in this spec,
-          hence is defined as a Subject Type of its own below. A SPAG identifier MAY be
-          included in other subject types to disambiguate the subject of an event.</t>
+        <t>A SPAG identifier MAY be included as a claim in other subject types to disambiguate the
+          subject of an event.</t>
 
-        <t>Some events MAY use SPAGs as their subjects, e.g. the <xref target="stream-updated-event">
+        <t>Some events MAY have SPAGs as their subjects, e.g. the <xref target="stream-updated-event">
           "Stream Updated"</xref> event.</t>
 
-        <t>A SPAG subject identifier is agreed to offline between a Transmitter and a Receiver, and
+        <t>A SPAG identifier is agreed to offline between a Transmitter and a Receiver, and
           is outside the scope of this specification.</t>
       </section>
     </section>
@@ -118,9 +117,9 @@
     <section anchor="subject-ids" title="Subject Identifiers">
       <t>A Subject is identified by a Subject Identifier as defined in the <xref target="SUBIDS">
         Subject Identifiers Draft Specification</xref>.</t>
-      <t>In addition to the claims defined in the <xref target="SUBIDS">Subject Identifiers Draft Specification</xref>,
-        subject identifiers in events defined in this specification MAY have the following additional
-        claim.</t>
+      <t>In addition to the claims defined in the <xref target="SUBIDS">Subject Identifiers Draft
+        Specification</xref>, subject identifiers in events defined in this specification MAY have
+        the following additional claim.</t>
       <t><list style="hanging">
         <t hangText="spag_id">The SPAG identifier of the subject principal described by the Subject
           Identifier applies.</t>
@@ -162,40 +161,48 @@
             user-device</spanx>.</t>
         </section>
         <section anchor="sub-id-session-id" title="Session ID Subject Identifier Type">
-          <t>The "Session ID" Subject Identifier Type describes a common identifier between both parties that explicitly identifies the session.
-          Subject Identifiers of this type MUST contain the following claim:
+          <t>The "Session ID" Subject Identifier Type describes a common identifier between both
+            parties that explicitly identifies the session. Subject Identifiers of this type MUST
+            contain the following claim:
             <list style="hanging">
-              <t hangText="session_id"> <vspace blankLines="0"/>REQUIRED, a session identifier.</t>
+              <t hangText="session_id"> <vspace blankLines="0"/>REQUIRED. A Subject Identifier that
+                identifies the session.</t>
             </list></t>
           <t>The "Session ID" Subject Identifier Type is identified by the name <spanx style="verb">
             session-id</spanx>.</t>
         </section>
         <section anchor="sub-id-jwt-id" title="JWT ID Subject Identifier Type">
-          <t>The "JWT ID" Subject Identifier Type specifies a JSON Web Token (JWT) identifer, defined in  <xref target="RFC7519"/>. 
-          Subject Identifiers of this type MUST contain the following claims:
+          <t>The "JWT ID" Subject Identifier Type specifies a JSON Web Token (JWT) identifer,
+            defined in  <xref target="RFC7519"/>. Subject Identifiers of this type MUST contain the
+            following claims:
             <list style="hanging">
               <t hangText="iss"> 
-              <vspace blankLines="0"/>REQUIRED, the "iss" (issuer) claim of the JWT being identified, defined in <xref target="RFC7519"/></t>
+              <vspace blankLines="0"/>REQUIRED. The "iss" (issuer) claim of the JWT being
+                identified, defined in <xref target="RFC7519"/></t>
               <t hangText="jti"> 
-              <vspace blankLines="0"/>REQUIRED, the "jti" (JWT token ID) claim of the JWT being identified, defined in <xref target="RFC7519"/></t>
+              <vspace blankLines="0"/>REQUIRED. The "jti" (JWT token ID) claim of the JWT being
+                identified, defined in <xref target="RFC7519"/></t>
             </list></t>
           <t>The "JWT ID" Subject Identifier Type is identified by the name <spanx style="verb">
             jwt-id</spanx>.</t>
         </section>
         <section anchor="sub-id-saml-assertion-id" title="SAML Assertion ID Subject Identifier Type">
-          <t>The "SAML Assertion ID" Subject Identifier Type specifies a SAML 2.0 <xref target="OASIS.saml-core-2.0-os"/> assertion identifier. 
-          Subject Identifiers of this type MUST contain the following claims:
+          <t>The "SAML Assertion ID" Subject Identifier Type specifies a SAML 2.0 <xref target="OASIS.saml-core-2.0-os"/>
+            assertion identifier. Subject Identifiers of this type MUST contain the following claims:
             <list style="hanging">
-              <t hangText="issuer"> <vspace blankLines="0"/>REQUIRED, the "Issuer" value of the SAML assertion being identified, defined in <xref target="OASIS.saml-core-2.0-os"/></t>
-              <t hangText="assertion_id"> <vspace blankLines="0"/>REQUIRED, the "ID" value of the SAML assertion being identified, defined in <xref target="OASIS.saml-core-2.0-os"/></t>
+              <t hangText="issuer"> <vspace blankLines="0"/>REQUIRED. The "Issuer" value of the SAML
+                assertion being identified, defined in <xref target="OASIS.saml-core-2.0-os"/></t>
+              <t hangText="assertion_id"> <vspace blankLines="0"/>REQUIRED. The "ID" value of the
+                SAML assertion being identified, defined in <xref target="OASIS.saml-core-2.0-os"/>
+              </t>
             </list></t>
-          <t>The "JWT ID" Subject Identifier Type is identified by the name <spanx style="verb">
-            saml-assertion-id</spanx>.</t>
+          <t>The "SAML Assertion ID" Subject Identifier Type is identified by the name
+            <spanx style="verb">saml-assertion-id</spanx>.</t>
         </section>
       </section>
       <section anchor="sse-subject-matching" title="Best Effort Subject Match">
-        <t>A recipient of an event SHOULD make a best effort of matching the specified subject(s) in
-          the event. This means that it SHOULD try to find the narrowest interpretation of the
+        <t>A recipient of an event SHOULD make the best effort of matching the specified subject(s)
+          in the event. This means that it SHOULD try to find the narrowest interpretation of the
           subject(s) specified in the event.</t>
       </section>
     </section>
@@ -203,8 +210,8 @@
     <section anchor="properties" title="Event Properties">
       <t>Additional claims about an event may be included in the <spanx style="verb">events</spanx>
         claim. Some of these claims are required and specified as such in the event types spec. (TODO:
-        add reference). If a Transmitter determines that it needs to include additional claims that are
-        not specified in the event types spec, then the name of such claims MUST be a URI. The
+        add reference). If a Transmitter determines that it needs to include additional claims that
+        are not specified in the event types spec, then the name of such claims MUST be a URI. The
         discoverability of all additional claims is specified in the <xref target="discovery">
         Discovery</xref> section.
       </t>
@@ -220,11 +227,30 @@
   "iat": 1520364019,
   "aud": "636C69656E745F6964",
   "events": {
-    "https://schemas.openid.net/secevent/risc/event-type/account-\
-enabled": {
+    "https://schemas.openid.net/secevent/risc/event-type/account-enabled": {
       "subject": {
         "subject_type": "email",
         "email": "foo@example.com",
+      }
+    }
+  }
+}
+        ]]></artwork>
+      </figure>
+
+      <figure anchor="subject-ids-ex-email-with-spag" title="Example: SET Containing a SSE Event with a Subject That Has an Additional SPAG identifier Claim">
+        <artwork><![CDATA[
+{
+  "iss": "https://idp.example.com/",
+  "jti": "756E69717565206964656E746966696572",
+  "iat": 1520364019,
+  "aud": "636C69656E745F6964",
+  "events": {
+    "https://schemas.openid.net/secevent/risc/event-type/account-enabled": {
+      "subject": {
+        "subject_type": "email",
+        "email": "foo@example.com",
+        "spag_id": "https://example.com/v2/Groups/e9e30dba-f08f-4109-8486-d5c6a331660a",
       }
     }
   }
@@ -240,8 +266,7 @@ enabled": {
   "iat": 1520364019,
   "aud": "636C69656E745F6964",
   "events": {
-    "https://schemas.openid.net/secevent/risc/event-type/account-\
-enabled": {
+    "https://schemas.openid.net/secevent/risc/event-type/account-enabled": {
       "subject": {
         "subject_type": "iss_sub",
         "iss": "https://issuer.example.com/",
@@ -253,7 +278,7 @@ enabled": {
         ]]></artwork>
       </figure>
 
-      <figure anchor="subject-properties-ex" title="Example: SET Containing a SSE Event with a Subject and a Property claim">
+      <figure anchor="subject-properties-ex" title="Example: SET Containing a SSE Event with a Subject and a Property Claim">
         <artwork><![CDATA[
 {
   "iss": "https://sp.example2.com/",
@@ -294,7 +319,7 @@ enabled": {
         ]]></artwork>
       </figure>
 
-      <figure anchor="subject-common-claims-ex" title="Example: SET Containing a SSE Event with a compound subject_type">
+      <figure anchor="subject-common-claims-ex" title="Example: SET Containing a SSE Event with a Compound subject_type">
         <artwork><![CDATA[
 {
   "iss": "https://idp.example.com/",
@@ -323,7 +348,7 @@ enabled": {
       </figure>
 
 
-      <figure anchor="subject-custom-type-ex" title="Example: SET Containing a SSE Event with a proprietary subject_type">
+      <figure anchor="subject-custom-type-ex" title="Example: SET Containing a SSE Event with a Proprietary subject_type">
         <artwork><![CDATA[
 {
   "iss": "https://myservice.example3.com/",
@@ -495,6 +520,9 @@ Content-Type: application/json
 |            | Remove Subject |            |
 |            <----------------+            |
 |            |                |            |
+|            | Stream Updated |            |
+|            +---------------->            |
+|            |                |            |
 |            | Verification   |            |
 |            <----------------+            |
 |            |                |            |
@@ -541,21 +569,23 @@ Content-Type: application/json
           SPAG to be added to or removed from a stream by <xref target="updating-a-streams-status">
           Updating the Stream Status</xref> and specifying the SPAG identifier in the request.</t>
 
-        <t>A Transmitter MAY decide to enable, pause or disable updates about a SPAG independently of
-          an update request from a Receiver. If a Transmitter decides to start or stop events for a
-          SPAG then the Transmitter MUST do the following according to the status of the stream</t>
+        <t>A Transmitter MAY decide to enable, pause or disable updates about a Subject
+          independently of an update request from a Receiver. If a Transmitter decides to start or
+          stop events for a Subject then the Transmitter MUST do the following according to the
+          status of the stream</t>
         <t> If the stream is:
           <list style="hanging">
             <t hangText="Enabled"> the Transmitter MUST send a <xref target="stream-updated-event">
-              SPAG stream updated</xref> event respectively to the Receiver within the Event Stream.</t>
+              stream updated</xref> event respectively to the Receiver within the Event Stream.</t>
             <t hangText="Paused"> the Transmitter SHOULD send <xref target="stream-updated-event">
-              SPAG stream updated</xref> after the Event Stream is re-started.</t>
+              stream updated</xref> after the Event Stream is re-started.</t>
             <t hangText="Disabled"> the Transmitter MAY send <xref target="stream-updated-event">
-              SPAG stream updated</xref> after the Event Stream is re-enabled.</t>
+              stream updated</xref> after the Event Stream is re-enabled.</t>
           </list></t>
-        <t>If a Subject Principal belongs to more than one SPAG, but the Event Stream status for
-          those SPAGs differ, then the Transmitter MAY decide whether or not to include
-          updates about that Subject Principal within the Event Stream.</t>
+        <t>The Subject in a <xref target="stream-updated-event">stream updated</xref> event MAY be
+          a SPAG. If a Subject Principal belongs to more than one SPAG, but the Event Stream status
+          for those SPAGs differ, then the Transmitter MAY decide whether or not to include updates
+          about that Subject Principal within the Event Stream.</t>
 
         <section anchor="status" title="Stream Status">
           <section anchor="reading-a-streams-status" title="Reading a Stream’s Status">
@@ -650,11 +680,11 @@ Pragma: no-cache
                 <t>If a Receiver makes a request with an invalid OAuth token, then the Transmitter
                   MUST respond with a 401 error status.</t>
                 <t>If the Receiver presents a valid OAuth token, but the Transmitter policy does not
-                  permit the Receiver from obtaining the status, then the Transmitter MAY respond with
-                  a 403 error status.</t>
-                <t>If the Receiver requests the status for a SPAG ID, but the Transmitter policy does
-                  not permit the Receiver to read the status, then the Transmitter MAY respond with
-                  a 404 error status in order to not reveal the policy decision.</t>
+                  permit the Receiver from obtaining the status, then the Transmitter MAY respond
+                  with a 403 error status.</t>
+                <t>If the Receiver requests the status for a SPAG ID, but the Transmitter policy
+                  does not permit the Receiver to read the status, then the Transmitter MAY respond
+                  with a 404 error status in order to not reveal the policy decision.</t>
                 <t>If the specified SPAG ID is invalid then the Transmitter MUST respond with a 404
                   error status.</t>
               </list></t>
@@ -662,8 +692,8 @@ Pragma: no-cache
 
           <section anchor="updating-a-streams-status" title="Updating a Stream's Status">
             <t>An Event Receiver updates the current status of a stream by making an HTTP
-              POST request to the Status Endpoint. The POST body contains a <xref target="RFC7159">JSON</xref>
-              object with the following fields:
+              POST request to the Status Endpoint. The POST body contains a <xref target="RFC7159">
+              JSON</xref> object with the following fields:
               <list style="hanging">
                 <t hangText="status"><vspace blankLines="0"/>REQUIRED. The new status of the Event
                   Stream.</t>
@@ -1019,12 +1049,13 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
             <t>To add a subject to an Event Stream, the Event Receiver makes an HTTP POST request
               to the Add Subject Endpoint, containing in the body a JSON object the following
               claims:<list style="hanging">
-                <t hangText="subject"><vspace blankLines="0"/>REQUIRED.  A Subject Identifier identifying
-              the subject to be added.</t>
-                <t hangText="verified"><vspace blankLines="0"/>OPTIONAL.  A boolean value; when true, it
-              indicates that the Event Receiver has verified the Subject Identifier. When false,
-              it indicates that the Event Receiver has not verified the Subject Identifier. If
-              omitted, Event Transmitters SHOULD NOT assume that verification has not occurred.</t>
+                <t hangText="subject"><vspace blankLines="0"/>REQUIRED.  A Subject Identifier
+                  identifying the subject to be added.</t>
+                <t hangText="verified"><vspace blankLines="0"/>OPTIONAL.  A boolean value; when
+                  true, it indicates that the Event Receiver has verified the Subject Identifier.
+                  When false, it indicates that the Event Receiver has not verified the Subject
+                  Identifier. If omitted, Event Transmitters SHOULD NOT assume that verification has
+                  not occurred.</t>
               </list></t>
 
             <t>On a successful response, the Event Transmitter responds with an empty
@@ -1271,20 +1302,21 @@ Pragma: no-cache
         </section>
 
         <section anchor="stream-updated-event" title="Stream Updated Event">
-          <t>A Transmitter MAY change the stream status in reference to one or more SPAGs without a
-            request from a Receiver. The Transmitter sends an event of type <spanx style="verb">
-            https://schemas.openid.net/secevent/risc/event-type/stream-updated</spanx> to indicate
+          <t>A Transmitter MAY change the stream status in reference to one or more Subjects without
+            a request from a Receiver. The Transmitter sends an event of type <spanx style="verb">
+            https://schemas.openid.net/secevent/caep/event-type/stream-updated</spanx> to indicate
             that it has changed the status of the Event Stream for a specific SPAG.</t>
 
           <t>If a Transmitter decides to change the status of an Event Stream from <spanx style="verb">
             enabled</spanx> to either <spanx style="verb">paused</spanx> or <spanx style="verb">
             disabled</spanx>, then the Transmitter MUST send this event to any Receiver that is
-            currently <spanx style="verb">enabled</spanx> to receive events for the specified SPAG.</t>
+            currently <spanx style="verb">enabled</spanx> to receive events for the specified
+            Subject.</t>
 
           <t>If the Transmitter changes the status of the stream for a specific SPAG from either
             <spanx style="verb">paused</spanx> or <spanx style="verb">disabled</spanx> to <spanx style="verb">
             enabled</spanx>, then it MAY send this event to any Receiver that has previously been
-            enabled to receive events for the specified SPAG.</t>
+            enabled to receive events for the specified Subject.</t>
 
           <t>The <spanx style="verb">stream-updated</spanx> event contains a <spanx style="verb">
             subject</spanx> claim of the subject type <spanx style="verb">spag</spanx>. It also
@@ -1292,7 +1324,7 @@ Pragma: no-cache
             the following fields:
             <list style="hanging">
               <t hangText="status"><vspace blankLines="0"/>REQUIRED. Defines the new status of the
-                stream for the SPAG ID specified in the Subject Type.</t>
+                stream for the Subject Identifier specified in the Subject.</t>
               <t hangText="reason"><vspace blankLines="0"/>OPTIONAL. Provides a short description of
                 why the Transmitter has updated the status.</t>
             </list>
