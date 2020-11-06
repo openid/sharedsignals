@@ -91,7 +91,7 @@
       <t>Subject Principals are the management entities associated with Subjects. These may be human
         or robotic principals or devices or other entities that are managed by Transmitters and
         Receivers. For example, the same Subject Principal may be referred to by an email address
-        or a phone number. A transmitter or receiver will typically manage subject principals and
+        or a phone number. A Transmitter or Receiver will typically manage subject principals and
         organize them into sub-groupings such as tenants, groups, organizational units, etc.</t>
 
       <t>Subjects are identified by Subject Identifiers defined below.</t>
@@ -172,7 +172,7 @@
             session-id</spanx>.</t>
         </section>
         <section anchor="sub-id-jwt-id" title="JWT ID Subject Identifier Type">
-          <t>The "JWT ID" Subject Identifier Type specifies a JSON Web Token (JWT) identifer,
+          <t>The "JWT ID" Subject Identifier Type specifies a JSON Web Token (JWT) identifier,
             defined in  <xref target="RFC7519"/>. Subject Identifiers of this type MUST contain the
             following claims:
             <list style="hanging">
@@ -578,7 +578,8 @@ Content-Type: application/json
             <t hangText="Enabled"> the Transmitter MUST send a <xref target="stream-updated-event">
               stream updated</xref> event respectively to the Receiver within the Event Stream.</t>
             <t hangText="Paused"> the Transmitter SHOULD send <xref target="stream-updated-event">
-              stream updated</xref> after the Event Stream is re-started.</t>
+              stream updated</xref> after the Event Stream is re-started. A Receiver MUST assume
+              that events may have been lost during the time when the event stream was paused.</t>
             <t hangText="Disabled"> the Transmitter MAY send <xref target="stream-updated-event">
               stream updated</xref> after the Event Stream is re-enabled.</t>
           </list></t>
@@ -605,7 +606,13 @@ Content-Type: application/json
                 <t hangText="paused"><vspace blankLines="0"/> The Transmitter MUST NOT transmit
                   events over the stream. The transmitter will hold any events it would have
                   transmitted while paused, and SHOULD transmit them when the stream’s status
-                  becomes <spanx style="verb">enabled</spanx>.</t>
+                  becomes <spanx style="verb">enabled</spanx>. If a Transmitter holds successive
+                  events that affect the same Subject Principals, then the Transmitter MUST make
+                  sure that those events are transmitted in the order of time that they were
+                  generated OR the Transmitter MUST send only the last events that do not require
+                  the previous events affecting the same Subject Principals to be processed by the
+                  Receiver, because the effects of the previous events are either cancelled by the
+                  last events or the previous events are outdated.</t>
                 <t hangText="disabled"><vspace blankLines="0"/> The Transmitter MUST NOT
                   transmit events over the stream, and will not hold any events for later
                   transmission.</t>
@@ -1054,8 +1061,8 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
                 <t hangText="verified"><vspace blankLines="0"/>OPTIONAL.  A boolean value; when
                   true, it indicates that the Event Receiver has verified the Subject Identifier.
                   When false, it indicates that the Event Receiver has not verified the Subject
-                  Identifier. If omitted, Event Transmitters SHOULD NOT assume that verification has
-                  not occurred.</t>
+                  Identifier. If omitted, Event Transmitters SHOULD assume that the subject has
+                  been verified.</t>
               </list></t>
 
             <t>On a successful response, the Event Transmitter responds with an empty
@@ -1082,7 +1089,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
               <c>if the subject is not recognized by the Event Transmitter, the Event Transmitter
                 may chose to stay silent in this case and respond with <spanx style="verb">200</spanx></c>
               <c>429</c>
-              <c>if the Event Receiver is sending too many requests in a gvien amount of time</c>
+              <c>if the Event Receiver is sending too many requests in a given amount of time</c>
             </texttable>
 
             <t>The following is a non-normative example request to add a subject to a stream,
@@ -1143,7 +1150,7 @@ Pragma: no-cache
               <c>if the subject is not recognized by the Event Transmitter, the Event Transmitter
                 may chose to stay silent in this case and respond with <spanx style="verb">204</spanx></c>
               <c>429</c>
-              <c>if the Event Receiver is sending too many requests in a gvien amount of time</c>
+              <c>if the Event Receiver is sending too many requests in a given amount of time</c>
             </texttable>
 
             <t>The following is a non-normative example request where the subject is identified by
@@ -1248,7 +1255,7 @@ Pragma: no-cache
               <c>401</c>
               <c>if authorization failed or it is missing</c>
               <c>429</c>
-              <c>if the Event Receiver is sending too many requests in a gvien amount of time;
+              <c>if the Event Receiver is sending too many requests in a given amount of time;
                 see related <spanx style="verb">min_verification_interval</spanx> in <xref target="stream"/></c>
             </texttable>
 
@@ -1313,10 +1320,10 @@ Pragma: no-cache
             currently <spanx style="verb">enabled</spanx> to receive events for the specified
             Subject.</t>
 
-          <t>If the Transmitter changes the status of the stream for a specific SPAG from either
-            <spanx style="verb">paused</spanx> or <spanx style="verb">disabled</spanx> to <spanx style="verb">
-            enabled</spanx>, then it MAY send this event to any Receiver that has previously been
-            enabled to receive events for the specified Subject.</t>
+          <t>If the Transmitter changes the status of the stream for a Subject from either
+            <spanx style="verb">paused</spanx> or <spanx style="verb">disabled</spanx> to
+            <spanx style="verb"> enabled</spanx>, then it MUST send this event to any Receiver that
+            has previously been enabled to receive events for the specified Subject.</t>
 
           <t>The <spanx style="verb">stream-updated</spanx> event contains a <spanx style="verb">
             subject</spanx> claim of the subject type <spanx style="verb">spag</spanx>. It also
@@ -1439,7 +1446,7 @@ Pragma: no-cache
       <t>The CAEP use cases that set the requirements are described in CAEP Use Cases (TODO: Add
         reference when file is added to repository.)</t>
 
-      <section anchor="set-profle" title="Security Event Token Profle">
+      <section anchor="set-profle" title="Security Event Token Profile">
         <t>This section provides SSE profiling specifications for the <xref target="SET">"Security
             Event Token (SET)"</xref> spec.</t>
 
@@ -1572,8 +1579,8 @@ disabled": {
         <section title="Security Considerations">
           <section title="Distinguishing SETs from other Kinds of JWTs">
             <t>Of particular concern is the possibility that SETs are confused for other kinds
-            of JWTs. The Security Considerations sesction of <xref target="SET"/> has several
-            sub-sections on this subject. The SSE Profile is asking for further restrioctons:<list style="symbols">
+            of JWTs. The Security Considerations section of <xref target="SET"/> has several
+            sub-sections on this subject. The SSE Profile is asking for further restrictions:<list style="symbols">
               <t>The <spanx style="verb">sub</spanx> claim MUST NOT be present, as described
                 in <xref target="event-subjects"/>.</t>
               <t>SSE SETs MUST use explicit typing, as described in <xref target="explicit-typing"/>.</t>

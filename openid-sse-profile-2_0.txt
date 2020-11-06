@@ -96,7 +96,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 1]
        8.3.3.  Malicious Subject Removal . . . . . . . . . . . . . .  36
        8.3.4.  Unauthorized Updates to SPAGs . . . . . . . . . . . .  36
    9.  Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .  37
-     9.1.  Security Event Token Profle . . . . . . . . . . . . . . .  37
+     9.1.  Security Event Token Profile  . . . . . . . . . . . . . .  37
        9.1.1.  Signature Key Resolution  . . . . . . . . . . . . . .  37
        9.1.2.  SSE Event Subject . . . . . . . . . . . . . . . . . .  37
        9.1.3.  SSE Event Properties  . . . . . . . . . . . . . . . .  37
@@ -170,7 +170,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 3]
                            openid-sse-profile                   Oct 2020
 
 
-   address or a phone number.  A transmitter or receiver will typically
+   address or a phone number.  A Transmitter or Receiver will typically
    manage subject principals and organize them into sub-groupings such
    as tenants, groups, organizational units, etc.
 
@@ -285,7 +285,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 5]
 4.2.4.  JWT ID Subject Identifier Type
 
    The "JWT ID" Subject Identifier Type specifies a JSON Web Token (JWT)
-   identifer, defined in [RFC7519].  Subject Identifiers of this type
+   identifier, defined in [RFC7519].  Subject Identifiers of this type
    MUST contain the following claims:
 
    iss
@@ -819,7 +819,9 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 14]
       event respectively to the Receiver within the Event Stream.
 
    Paused  the Transmitter SHOULD send stream updated (Section 8.1.5)
-      after the Event Stream is re-started.
+      after the Event Stream is re-started.  A Receiver MUST assume that
+      events may have been lost during the time when the event stream
+      was paused.
 
    Disabled  the Transmitter MAY send stream updated (Section 8.1.5)
       after the Event Stream is re-enabled.
@@ -829,8 +831,6 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 14]
    Stream status for those SPAGs differ, then the Transmitter MAY decide
    whether or not to include updates about that Subject Principal within
    the Event Stream.
-
-
 
 
 
@@ -864,7 +864,14 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 15]
       The Transmitter MUST NOT transmit events over the stream.  The
       transmitter will hold any events it would have transmitted while
       paused, and SHOULD transmit them when the stream's status becomes
-      "enabled".
+      "enabled".  If a Transmitter holds successive events that affect
+      the same Subject Principals, then the Transmitter MUST make sure
+      that those events are transmitted in the order of time that they
+      were generated OR the Transmitter MUST send only the last events
+      that do not require the previous events affecting the same Subject
+      Principals to be processed by the Receiver, because the effects of
+      the previous events are either cancelled by the last events or the
+      previous events are outdated.
 
    disabled
       The Transmitter MUST NOT transmit events over the stream, and will
@@ -880,13 +887,6 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 15]
               Figure 12: Example: Check Stream Status Request
 
    The following is a non-normative example response:
-
-
-
-
-
-
-
 
 
 
@@ -1546,8 +1546,8 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 27]
       OPTIONAL.  A boolean value; when true, it indicates that the Event
       Receiver has verified the Subject Identifier.  When false, it
       indicates that the Event Receiver has not verified the Subject
-      Identifier.  If omitted, Event Transmitters SHOULD NOT assume that
-      verification has not occurred.
+      Identifier.  If omitted, Event Transmitters SHOULD assume that the
+      subject has been verified.
 
    On a successful response, the Event Transmitter responds with an
    empty "200 OK" response.  The Event Transmitter MAY choose to
@@ -1586,7 +1586,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 28]
    |      | case and respond with "200"                                |
    |      |                                                            |
    | 429  | if the Event Receiver is sending too many requests in a    |
-   |      | gvien amount of time                                       |
+   |      | given amount of time                                       |
    +------+------------------------------------------------------------+
 
                         Table 6: Add Subject Errors
@@ -1657,7 +1657,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 29]
    |      | case and respond with "204"                                |
    |      |                                                            |
    | 429  | if the Event Receiver is sending too many requests in a    |
-   |      | gvien amount of time                                       |
+   |      | given amount of time                                       |
    +------+------------------------------------------------------------+
 
                       Table 7: Remove Subject Errors
@@ -1803,7 +1803,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 32]
    | 401  | if authorization failed or it is missing                   |
    |      |                                                            |
    | 429  | if the Event Receiver is sending too many requests in a    |
-   |      | gvien amount of time; see related                          |
+   |      | given amount of time; see related                          |
    |      | "min_verification_interval" in Section 8.1.2               |
    +------+------------------------------------------------------------+
 
@@ -1877,9 +1877,9 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 33]
    send this event to any Receiver that is currently "enabled" to
    receive events for the specified Subject.
 
-   If the Transmitter changes the status of the stream for a specific
-   SPAG from either "paused" or "disabled" to "enabled", then it MAY
-   send this event to any Receiver that has previously been enabled to
+   If the Transmitter changes the status of the stream for a Subject
+   from either "paused" or "disabled" to "enabled", then it MUST send
+   this event to any Receiver that has previously been enabled to
    receive events for the specified Subject.
 
    The "stream-updated" event contains a "subject" claim of the subject
@@ -2035,7 +2035,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 36]
    The CAEP use cases that set the requirements are described in CAEP
    Use Cases (TODO: Add reference when file is added to repository.)
 
-9.1.  Security Event Token Profle
+9.1.  Security Event Token Profile
 
    This section provides SSE profiling specifications for the "Security
    Event Token (SET)" [SET] spec.
@@ -2211,9 +2211,9 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 39]
 9.1.8.1.  Distinguishing SETs from other Kinds of JWTs
 
    Of particular concern is the possibility that SETs are confused for
-   other kinds of JWTs.  The Security Considerations sesction of [SET]
+   other kinds of JWTs.  The Security Considerations section of [SET]
    has several sub-sections on this subject.  The SSE Profile is asking
-   for further restrioctons:
+   for further restrictions:
 
    o  The "sub" claim MUST NOT be present, as described in
       Section 9.1.2.
