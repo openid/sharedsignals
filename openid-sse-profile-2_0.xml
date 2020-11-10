@@ -122,7 +122,8 @@
         the following additional claim.</t>
       <t><list style="hanging">
         <t hangText="spag_id">The SPAG identifier of the subject principal described by the Subject
-          Identifier applies.</t>
+          Identifier. This value MUST be interpreted only to disambiguate the subject specified in
+          the Subject Identifier.</t>
         </list></t>
 
       <section anchor="sse-subject-types" title="Subject Types in SSE Events">
@@ -1359,77 +1360,110 @@ Pragma: no-cache
           </figure>
         </section>
       </section>
+    </section>
 
-      <section anchor="management-api-auth" title="Authorization">
-        <t>HTTP API calls from a Receiver to a Transmitter SHOULD be authorized
-          by providing an OAuth 2.0 Access Token as defined by <xref target="RFC6750"/>.</t>
-        
-        <t>The receiver may obtain an access token using the <xref target="CLIENTCRED">Client 
-          Credential Grant</xref>, or any other method suitable for the Receiver and the 
-          Transmitter.</t>
+    <section anchor="management-api-auth" title="Authorization">
+      <t>HTTP API calls from a Receiver to a Transmitter SHOULD be authorized
+        by providing an OAuth 2.0 Access Token as defined by <xref target="RFC6750"/>.</t>
 
-        <t>Event Stream updates for specific SPAGs are authorized using the <spanx style="verb">
-          authorization</spanx> field in the update request.</t>
+      <t>The receiver may obtain an access token using the <xref target="CLIENTCRED">Client
+        Credential Grant</xref>, or any other method suitable for the Receiver and the
+        Transmitter.</t>
+
+      <t>Event Stream updates for specific SPAGs are authorized using the <spanx style="verb">
+        authorization</spanx> field in the update request.</t>
+    </section>
+
+    <section anchor="management-sec" title="Security Considerations">
+      <section anchor="management-sec-subject-probing" title="Subject Probing">
+        <t>It may be possible for an Event Transmitter to leak information about subjects
+          through their responses to add subject requests. A <spanx style="verb">404</spanx> response may indicate to the
+          Event Receiver that the subject does not exist, which may inadvertently reveal
+          information about the subject (e.g. that a particular individual does or does not use
+          the Event Transmitter’s service).</t>
+
+        <t>Event Transmitters SHOULD carefully evaluate the conditions under which they will
+          return error responses to add subject requests. Event Transmitters MAY return a <spanx style="verb">204</spanx>
+          response even if they will not actually send any events related to the subject, and
+          Event Receivers MUST NOT assume that a 204 response means that they will receive
+          events related to the subject.</t>
+
       </section>
-      
-      <section anchor="management-sec" title="Security Considerations">
-        <section anchor="management-sec-subject-probing" title="Subject Probing">
-          <t>It may be possible for an Event Transmitter to leak information about subjects
-            through their responses to add subject requests. A <spanx style="verb">404</spanx> response may indicate to the
-            Event Receiver that the subject does not exist, which may inadvertently reveal
-            information about the subject (e.g. that a particular individual does or does not use
-            the Event Transmitter’s service).</t>
 
-          <t>Event Transmitters SHOULD carefully evaluate the conditions under which they will
-            return error responses to add subject requests. Event Transmitters MAY return a <spanx style="verb">204</spanx>
-            response even if they will not actually send any events related to the subject, and
-            Event Receivers MUST NOT assume that a 204 response means that they will receive
-            events related to the subject.</t>
+      <section anchor="management-sec-information-harvesting" title="Information Harvesting">
+        <t>SETs may contain personally identifiable information (PII) or other non-public
+          information about the event transmitter, the subject (of an event in the SET), or the
+          relationship between the two. It is important for Event Transmitters to understand
+          what information they are revealing to Event Receivers when transmitting events to
+          them, lest the event stream become a vector for unauthorized access to private
+          information.</t>
 
+        <t>Event Transmitters SHOULD interpret add subject requests as statements of interest in
+          a subject by an Event Receiver, and ARE NOT obligated to transmit events related to
+          every subject an Event Receiver adds to the stream. Event Transmitters MAY choose to
+          transmit some, all, or no events related to any given subject and SHOULD validate that
+          they are permitted to share the information contained within an event with the Event
+          Receiver before transmitting the event. The mechanisms by which such validation is
+          performed are outside the scope of this specification.</t>
+
+      </section>
+
+      <section anchor="management-sec-malicious-subject-removal" title="Malicious Subject Removal">
+        <t>A malicious party may find it advantageous to remove a particular subject from a
+          stream, in order to reduce the Event Receiver’s ability to detect malicious activity
+          related to the subject, inconvenience the subject, or for other reasons. Consequently
+          it may be in the best interests of the subject for the Event Transmitter to continue
+          to send events related to the subject for some time after the subject has been removed
+          from a stream.</t>
+
+        <t>Event Transmitters MAY continue sending events related to a subject for some amount
+          of time after that subject has been removed from the stream. Event Receivers MUST
+          tolerate receiving events for subjects that have been removed from the stream, and
+          MUST NOT report these events as errors to the Event Transmitter.</t>
+
+      </section>
+
+      <section anchor="management-sec-unauthorized-spag-update" title="Unauthorized Updates to SPAGs">
+        <t>A SPAG could represent a specific customer in a multi-tenanted environment or an
+          organizational unit within a customer. A malicious administrator could benefit from
+          receiving updates about a SPAG over which they do not have administrative control.
+          Transmitters MUST send updates only about Subject Principals that belong to SPAGs for
+          whom the Receiver is authorized. Transmitters SHOULD use the <spanx style="verb">
+          authorization</spanx> field in the <xref target="updating-a-streams-configuration">
+          Update Status Request</xref> to verify that the Receiver has permission to get updates
+          for a specific SPAG.</t>
+      </section>
+    </section>
+    <section anchor="privacy-considerations" title="Privacy Considerations">
+      <section anchor="sub-info-leakage" title="Subject Information Leakage">
+        <t>Event issuers and recipients SHOULD take precautions to ensure that they do not leak
+          information about subjects via Subject Identifiers, and choose appropriate Subject
+          Identifier Types accordingly. Parties SHOULD NOT identify a subject using a given Subject
+          Identifier Type if doing so will allow the recipient to correlate different claims about
+          the subject that they are not known to already have knowledge of. Transmitters and Receivers
+          SHOULD always use the same Subject Identifier Type and the same claim values to identify a
+          given subject when communicating with a given party in order to reduce the possibility of
+          information leakage.</t>
+      </section>
+      <section anchor="previously-consented-data" title="Previously Consented Data">
+        <t>If SSE events contain new values for attributes of Subject Principals that were
+          previously exchanged between the Transmitter and Receiver, then there are no additional
+          privacy considerations introduced by providing the updated values in the SSE events,
+          unless the attribute was exchanged under a one-time consent obtained from the user.</t>
+      </section>
+      <section anchor="new-data" title="New Data">
+        <t>Data that was not previously exchanged between the Transmitter and the Receiver, or
+          data whose consent to exchange has expired has the following considerations:</t>
+        <section anchor="organizational-data" title="Organizational Data">
+          <t>If a user has previously agreed with a Transmitter that they agree to release
+            certain data to third-parties, then the Transmitter MAY send such data in SSE events
+            without additional consent of the user. Such data MAY include organizational data
+            about the Subject Principal that was generated by the Transmitter.</t>
         </section>
-        
-        <section anchor="management-sec-information-harvesting" title="Information Harvesting">
-          <t>SETs may contain personally identifiable information (PII) or other non-public
-            information about the event transmitter, the subject (of an event in the SET), or the
-            relationship between the two. It is important for Event Transmitters to understand
-            what information they are revealing to Event Receivers when transmitting events to
-            them, lest the event stream become a vector for unauthorized access to private
-            information.</t>
-
-          <t>Event Transmitters SHOULD interpret add subject requests as statements of interest in
-            a subject by an Event Receiver, and ARE NOT obligated to transmit events related to
-            every subject an Event Receiver adds to the stream. Event Transmitters MAY choose to
-            transmit some, all, or no events related to any given subject and SHOULD validate that
-            they are permitted to share the information contained within an event with the Event
-            Receiver before transmitting the event. The mechanisms by which such validation is
-            performed are outside the scope of this specification.</t>
-
-        </section>
-        
-        <section anchor="management-sec-malicious-subject-removal" title="Malicious Subject Removal">
-          <t>A malicious party may find it advantageous to remove a particular subject from a
-            stream, in order to reduce the Event Receiver’s ability to detect malicious activity
-            related to the subject, inconvenience the subject, or for other reasons. Consequently
-            it may be in the best interests of the subject for the Event Transmitter to continue
-            to send events related to the subject for some time after the subject has been removed
-            from a stream.</t>
-
-          <t>Event Transmitters MAY continue sending events related to a subject for some amount
-            of time after that subject has been removed from the stream. Event Receivers MUST
-            tolerate receiving events for subjects that have been removed from the stream, and
-            MUST NOT report these events as errors to the Event Transmitter.</t>
-
-        </section>
-
-        <section anchor="management-sec-unauthorized-spag-update" title="Unauthorized Updates to SPAGs">
-          <t>A SPAG could represent a specific customer in a multi-tenanted environment or an
-            organizational unit within a customer. A malicious administrator could benefit from
-            receiving updates about a SPAG over which they do not have administrative control.
-            Transmitters MUST send updates only about Subject Principals that belong to SPAGs for
-            whom the Receiver is authorized. Transmitters SHOULD use the <spanx style="verb">
-            authorization</spanx> field in the <xref target="updating-a-streams-configuration">
-            Update Status Request</xref> to verify that the Receiver has permission to get updates
-            for a specific SPAG.</t>
+        <section anchor="consentable-data" title="Consentable Data">
+          <t>If a Transmitter intends to include data in SSE events that is not previously
+            consented to be released by the user, then the Transmitter MUST obtain consent to
+            release such data from the user in accordance with the Transmitter's privacy policy.</t>
         </section>
       </section>
     </section>
@@ -1695,18 +1729,6 @@ disabled": {
       </section>
     </section>
 
-    <section anchor="privacy" title="Privacy Considerations">
-      <section anchor="sub-info-leakage" title="Subject Information Leakage">
-        <t>Event issuers and recipients SHOULD take precautions to ensure that they do not leak
-          information about subjects via Subject Identifiers, and choose appropriate Subject
-          Identifier Types accordingly. Parties SHOULD NOT identify a subject using a given Subject
-          Identifier Type if doing so will allow the recipient to correlate different claims about
-          the subject that they are not known to already have knowledge of. Issuers and recipients
-          SHOULD always use the same Subject Identifier Type and the same claim values to identify a
-          given subject when communicating with a given party in order to reduce the possibility of
-          information leakage.</t>
-      </section>
-    </section>
   </middle>
 
   <back>

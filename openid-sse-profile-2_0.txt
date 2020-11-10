@@ -65,15 +65,15 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 1]
        4.2.4.  JWT ID Subject Identifier Type  . . . . . . . . . . .   6
        4.2.5.  SAML Assertion ID Subject Identifier Type . . . . . .   6
      4.3.  Best Effort Subject Match . . . . . . . . . . . . . . . .   6
-   5.  Event Properties  . . . . . . . . . . . . . . . . . . . . . .   6
+   5.  Event Properties  . . . . . . . . . . . . . . . . . . . . . .   7
    6.  Example SETs that conform to the SSE profile  . . . . . . . .   7
-   7.  Transmitter Configuration Discovery . . . . . . . . . . . . .  10
-     7.1.  Transmitter Configuration Metadata  . . . . . . . . . . .  10
-     7.2.  Obtaining Transmitter Configuration Information . . . . .  11
-       7.2.1.  Transmitter Configuration Request . . . . . . . . . .  11
-       7.2.2.  Transmitter Configuration Response  . . . . . . . . .  12
+   7.  Transmitter Configuration Discovery . . . . . . . . . . . . .  11
+     7.1.  Transmitter Configuration Metadata  . . . . . . . . . . .  11
+     7.2.  Obtaining Transmitter Configuration Information . . . . .  12
+       7.2.1.  Transmitter Configuration Request . . . . . . . . . .  12
+       7.2.2.  Transmitter Configuration Response  . . . . . . . . .  13
        7.2.3.  Transmitter Configuration Validation  . . . . . . . .  13
-   8.  Management API for SET Event Streams  . . . . . . . . . . . .  13
+   8.  Management API for SET Event Streams  . . . . . . . . . . . .  14
      8.1.  Event Stream Management . . . . . . . . . . . . . . . . .  14
        8.1.1.  Stream Status . . . . . . . . . . . . . . . . . . . .  16
          8.1.1.1.  Reading a Stream's Status . . . . . . . . . . . .  16
@@ -89,23 +89,23 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 1]
          8.1.4.1.  Verification Event  . . . . . . . . . . . . . . .  31
          8.1.4.2.  Triggering a Verification Event.  . . . . . . . .  32
        8.1.5.  Stream Updated Event  . . . . . . . . . . . . . . . .  34
-     8.2.  Authorization . . . . . . . . . . . . . . . . . . . . . .  35
-     8.3.  Security Considerations . . . . . . . . . . . . . . . . .  35
-       8.3.1.  Subject Probing . . . . . . . . . . . . . . . . . . .  35
-       8.3.2.  Information Harvesting  . . . . . . . . . . . . . . .  36
-       8.3.3.  Malicious Subject Removal . . . . . . . . . . . . . .  36
-       8.3.4.  Unauthorized Updates to SPAGs . . . . . . . . . . . .  36
-   9.  Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .  37
-     9.1.  Security Event Token Profile  . . . . . . . . . . . . . .  37
-       9.1.1.  Signature Key Resolution  . . . . . . . . . . . . . .  37
-       9.1.2.  SSE Event Subject . . . . . . . . . . . . . . . . . .  37
-       9.1.3.  SSE Event Properties  . . . . . . . . . . . . . . . .  37
-       9.1.4.  Explicit Typing of SETs . . . . . . . . . . . . . . .  38
-       9.1.5.  The "exp" Claim . . . . . . . . . . . . . . . . . . .  39
-       9.1.6.  The "aud" Claim . . . . . . . . . . . . . . . . . . .  39
-       9.1.7.  The "events" claim  . . . . . . . . . . . . . . . . .  40
-       9.1.8.  Security Considerations . . . . . . . . . . . . . . .  40
-         9.1.8.1.  Distinguishing SETs from other Kinds of JWTs  . .  40
+   9.  Authorization . . . . . . . . . . . . . . . . . . . . . . . .  35
+   10. Security Considerations . . . . . . . . . . . . . . . . . . .  35
+     10.1.  Subject Probing  . . . . . . . . . . . . . . . . . . . .  35
+     10.2.  Information Harvesting . . . . . . . . . . . . . . . . .  36
+     10.3.  Malicious Subject Removal  . . . . . . . . . . . . . . .  36
+     10.4.  Unauthorized Updates to SPAGs  . . . . . . . . . . . . .  36
+   11. Privacy Considerations  . . . . . . . . . . . . . . . . . . .  37
+     11.1.  Subject Information Leakage  . . . . . . . . . . . . . .  37
+     11.2.  Previously Consented Data  . . . . . . . . . . . . . . .  37
+     11.3.  New Data . . . . . . . . . . . . . . . . . . . . . . . .  37
+       11.3.1.  Organizational Data  . . . . . . . . . . . . . . . .  37
+       11.3.2.  Consentable Data . . . . . . . . . . . . . . . . . .  37
+   12. Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .  38
+     12.1.  Security Event Token Profile . . . . . . . . . . . . . .  38
+       12.1.1.  Signature Key Resolution . . . . . . . . . . . . . .  38
+       12.1.2.  SSE Event Subject  . . . . . . . . . . . . . . . . .  38
+       12.1.3.  SSE Event Properties . . . . . . . . . . . . . . . .  38
 
 
 
@@ -114,21 +114,25 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 2]
                            openid-sse-profile                   Oct 2020
 
 
-     9.2.  SET Token Delivery Using HTTP Profile . . . . . . . . . .  40
-       9.2.1.  Stream Configuration Metadata . . . . . . . . . . . .  40
-         9.2.1.1.  Push Delivery using HTTP  . . . . . . . . . . . .  41
-         9.2.1.2.  Polling Delivery using HTTP . . . . . . . . . . .  41
-   10. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  41
-     10.1.  Security Event Subject Identifier Types Registry . . . .  41
-       10.1.1.  Registration Template  . . . . . . . . . . . . . . .  41
-       10.1.2.  Guidance for Expert Reviewers  . . . . . . . . . . .  42
-     10.2.  Well-Known URI Registry  . . . . . . . . . . . . . . . .  42
-       10.2.1.  Registry Contents  . . . . . . . . . . . . . . . . .  43
-   11. Privacy Considerations  . . . . . . . . . . . . . . . . . . .  43
-     11.1.  Subject Information Leakage  . . . . . . . . . . . . . .  43
-   12. References  . . . . . . . . . . . . . . . . . . . . . . . . .  43
-     12.1.  Normative References . . . . . . . . . . . . . . . . . .  43
-     12.2.  URIs . . . . . . . . . . . . . . . . . . . . . . . . . .  46
+       12.1.4.  Explicit Typing of SETs  . . . . . . . . . . . . . .  39
+       12.1.5.  The "exp" Claim  . . . . . . . . . . . . . . . . . .  40
+       12.1.6.  The "aud" Claim  . . . . . . . . . . . . . . . . . .  40
+       12.1.7.  The "events" claim . . . . . . . . . . . . . . . . .  41
+       12.1.8.  Security Considerations  . . . . . . . . . . . . . .  41
+         12.1.8.1.  Distinguishing SETs from other Kinds of JWTs . .  41
+     12.2.  SET Token Delivery Using HTTP Profile  . . . . . . . . .  41
+       12.2.1.  Stream Configuration Metadata  . . . . . . . . . . .  41
+         12.2.1.1.  Push Delivery using HTTP . . . . . . . . . . . .  42
+         12.2.1.2.  Polling Delivery using HTTP  . . . . . . . . . .  42
+   13. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  42
+     13.1.  Security Event Subject Identifier Types Registry . . . .  42
+       13.1.1.  Registration Template  . . . . . . . . . . . . . . .  42
+       13.1.2.  Guidance for Expert Reviewers  . . . . . . . . . . .  43
+     13.2.  Well-Known URI Registry  . . . . . . . . . . . . . . . .  43
+       13.2.1.  Registry Contents  . . . . . . . . . . . . . . . . .  44
+   14. References  . . . . . . . . . . . . . . . . . . . . . . . . .  44
+     14.1.  Normative References . . . . . . . . . . . . . . . . . .  44
+     14.2.  URIs . . . . . . . . . . . . . . . . . . . . . . . . . .  46
    Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  46
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  46
 
@@ -158,10 +162,6 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 2]
    event can be sent by Transmitters and received by Receivers using the
    SSE profile.
 
-   Subject Principals are the management entities associated with
-   Subjects.  These may be human or robotic principals or devices or
-   other entities that are managed by Transmitters and Receivers.  For
-   example, the same Subject Principal may be referred to by an email
 
 
 
@@ -170,6 +170,10 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 3]
                            openid-sse-profile                   Oct 2020
 
 
+   Subject Principals are the management entities associated with
+   Subjects.  These may be human or robotic principals or devices or
+   other entities that are managed by Transmitters and Receivers.  For
+   example, the same Subject Principal may be referred to by an email
    address or a phone number.  A Transmitter or Receiver will typically
    manage subject principals and organize them into sub-groupings such
    as tenants, groups, organizational units, etc.
@@ -205,7 +209,8 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 3]
    specification MAY have the following additional claim.
 
    spag_id  The SPAG identifier of the subject principal described by
-      the Subject Identifier applies.
+      the Subject Identifier.  This value MUST be interpreted only to
+      disambiguate the subject specified in the Subject Identifier.
 
 4.1.  Subject Types in SSE Events
 
@@ -214,17 +219,15 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 3]
 
    o  Defined in the Subject Identifiers Draft Specification [SUBIDS].
 
-   o  A subject type defined in the Subject Identifier Types
-      (Section 4.2) section here, OR
-
-
-
 
 
 Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 4]
 
                            openid-sse-profile                   Oct 2020
 
+
+   o  A subject type defined in the Subject Identifier Types
+      (Section 4.2) section here, OR
 
    o  A proprietary subject type that is agreed to between parties.  To
       clearly indicate that such subject types are not a part of the
@@ -270,9 +273,6 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 4]
    session_id
       REQUIRED.  A Subject Identifier that identifies the session.
 
-   The "Session ID" Subject Identifier Type is identified by the name
-   "session-id".
-
 
 
 
@@ -281,6 +281,9 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 5]
 
                            openid-sse-profile                   Oct 2020
 
+
+   The "Session ID" Subject Identifier Type is identified by the name
+   "session-id".
 
 4.2.4.  JWT ID Subject Identifier Type
 
@@ -323,13 +326,10 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 5]
    find the narrowest interpretation of the subject(s) specified in the
    event.
 
-5.  Event Properties
 
-   Additional claims about an event may be included in the "events"
-   claim.  Some of these claims are required and specified as such in
-   the event types spec.  (TODO: add reference).  If a Transmitter
-   determines that it needs to include additional claims that are not
-   specified in the event types spec, then the name of such claims MUST
+
+
+
 
 
 
@@ -338,6 +338,13 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 6]
                            openid-sse-profile                   Oct 2020
 
 
+5.  Event Properties
+
+   Additional claims about an event may be included in the "events"
+   claim.  Some of these claims are required and specified as such in
+   the event types spec.  (TODO: add reference).  If a Transmitter
+   determines that it needs to include additional claims that are not
+   specified in the event types spec, then the name of such claims MUST
    be a URI.  The discoverability of all additional claims is specified
    in the Discovery (Section 7) section.
 
@@ -364,24 +371,17 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 6]
     Figure 1: Example: SET Containing a SSE Event with an Email Subject
                                 Identifier
 
-{
-  "iss": "https://idp.example.com/",
-  "jti": "756E69717565206964656E746966696572",
-  "iat": 1520364019,
-  "aud": "636C69656E745F6964",
-  "events": {
-    "https://schemas.openid.net/secevent/risc/event-type/account-enabled": {
-      "subject": {
-        "subject_type": "email",
-        "email": "foo@example.com",
-        "spag_id": "https://example.com/v2/Groups/e9e30dba-f08f-4109-8486-d5c6a331660a",
-      }
-    }
-  }
-}
 
-   Figure 2: Example: SET Containing a SSE Event with a Subject That Has
-                    an Additional SPAG identifier Claim
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -402,6 +402,25 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 7]
   "events": {
     "https://schemas.openid.net/secevent/risc/event-type/account-enabled": {
       "subject": {
+        "subject_type": "email",
+        "email": "foo@example.com",
+        "spag_id": "https://example.com/v2/Groups/e9e30dba-f08f-4109-8486-d5c6a331660a",
+      }
+    }
+  }
+}
+
+   Figure 2: Example: SET Containing a SSE Event with a Subject That Has
+                    an Additional SPAG identifier Claim
+
+{
+  "iss": "https://idp.example.com/",
+  "jti": "756E69717565206964656E746966696572",
+  "iat": 1520364019,
+  "aud": "636C69656E745F6964",
+  "events": {
+    "https://schemas.openid.net/secevent/risc/event-type/account-enabled": {
+      "subject": {
         "subject_type": "iss_sub",
         "iss": "https://issuer.example.com/",
         "sub": "abc1234"
@@ -412,25 +431,6 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 7]
 
      Figure 3: Example: SET Containing a SSE Event with an Issuer and
                             Subject Identifier
-
-{
-  "iss": "https://sp.example2.com/",
-  "jti": "756E69717565206964656E746966696572",
-  "iat": 1520364019,
-  "aud": "636C69656E745F6964",
-  "events": {
-    "https://schemas.openid.net/secevent/caep/event-type/ip-address-changed": {
-      "subject": {
-        "subject_type": "email",
-        "email": "foo@example.com",
-      }
-      "ip_address" : "123.45.67.89"
-    }
-  }
-}
-
-    Figure 4: Example: SET Containing a SSE Event with a Subject and a
-                              Property Claim
 
 
 
@@ -456,6 +456,25 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 8]
   "iat": 1520364019,
   "aud": "636C69656E745F6964",
   "events": {
+    "https://schemas.openid.net/secevent/caep/event-type/ip-address-changed": {
+      "subject": {
+        "subject_type": "email",
+        "email": "foo@example.com",
+      }
+      "ip_address" : "123.45.67.89"
+    }
+  }
+}
+
+    Figure 4: Example: SET Containing a SSE Event with a Subject and a
+                              Property Claim
+
+{
+  "iss": "https://sp.example2.com/",
+  "jti": "756E69717565206964656E746966696572",
+  "iat": 1520364019,
+  "aud": "636C69656E745F6964",
+  "events": {
     "https://schemas.openid.net/secevent/caep/event-type/stream-updated": {
       "subject": {
         "subject_type": "spag",
@@ -469,6 +488,23 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 8]
 
      Figure 5: Example: SET Containing a SSE Event with a SPAG Subject
                                    Type
+
+
+
+
+
+
+
+
+
+
+
+
+
+Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 9]
+
+                           openid-sse-profile                   Oct 2020
+
 
 {
   "iss": "https://idp.example.com/",
@@ -497,15 +533,6 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 8]
        Figure 6: Example: SET Containing a SSE Event with a Compound
                                subject_type
 
-
-
-
-
-Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 9]
-
-                           openid-sse-profile                   Oct 2020
-
-
 {
   "iss": "https://myservice.example3.com/",
   "jti": "756E69717565206964656E746966696534",
@@ -523,6 +550,17 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 9]
 
      Figure 7: Example: SET Containing a SSE Event with a Proprietary
                                subject_type
+
+
+
+
+
+
+
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 10]
+
+                           openid-sse-profile                   Oct 2020
+
 
 7.  Transmitter Configuration Discovery
 
@@ -554,14 +592,6 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 9]
    configuration_endpoint  OPTIONAL.  The URL of the Configuration
       Endpoint.
 
-
-
-
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 10]
-
-                           openid-sse-profile                   Oct 2020
-
-
    status_endpoint  OPTIONAL.  The URL of the Status Endpoint.
 
    add_subject_endpoint  OPTIONAL.  The URL of the Add Subject Endpoint.
@@ -575,6 +605,18 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 10]
    TODO: consider adding a IANA Registry for metadata, similar to
    Section 7.1.1 of [OAUTH-DISCOVERY].  This would allow other specs to
    add to the metadata.
+
+
+
+
+
+
+
+
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 11]
+
+                           openid-sse-profile                   Oct 2020
+
 
 7.2.  Obtaining Transmitter Configuration Information
 
@@ -610,14 +652,6 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 10]
    "https://tr.example.com/issuer1" to obtain its Configuration
    information, since the Issuer contains a path component:
 
-
-
-
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 11]
-
-                           openid-sse-profile                   Oct 2020
-
-
    GET /.well-known/sse-configuration/issuer1 HTTP/1.1
    Host: tr.example.com
 
@@ -628,6 +662,17 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 11]
    use of ".well-known" is for supporting multiple issuers per host;
    unlike its use in [RFC5785], it does not provide general information
    about the host.
+
+
+
+
+
+
+
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 12]
+
+                           openid-sse-profile                   Oct 2020
+
 
 7.2.2.  Transmitter Configuration Response
 
@@ -643,36 +688,6 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 11]
    Claims with zero elements MUST be omitted from the response.
 
    An error response uses the applicable HTTP status code value.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 12]
-
-                           openid-sse-profile                   Oct 2020
-
 
    HTTP/1.1 200 OK
    Content-Type: application/json
@@ -706,6 +721,15 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 12]
    correctly validate MUST be aborted and the information that failed to
    validate MUST NOT be used.
 
+
+
+
+
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 13]
+
+                           openid-sse-profile                   Oct 2020
+
+
    The "issuer" value returned MUST be identical to the Issuer URL that
    was directly used to retrieve the configuration information.  This
    MUST also be identical to the "iss" Claim value in Security Event
@@ -720,15 +744,6 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 12]
 
    This section is based on Management API for SET Event Streams
    [MGMTAPI].
-
-
-
-
-
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 13]
-
-                           openid-sse-profile                   Oct 2020
-
 
    +------------+                +------------+
    |            | Stream Config  |            |
@@ -763,6 +778,14 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 13]
    about which they want to receive events over an Event Stream by
    making HTTP requests to endpoints in the Event Stream Management API.
 
+
+
+
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 14]
+
+                           openid-sse-profile                   Oct 2020
+
+
    A Transmitter and Receiver MAY use the same Event Stream for updates
    about multiple SPAGs (Section 3.1).  The status of the Event Stream
    MAY be queried and managed independently for each SPAG by
@@ -778,14 +801,6 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 13]
       An endpoint used to read the Event Stream's current status.
 
    Add Subject Endpoint
-
-
-
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 14]
-
-                           openid-sse-profile                   Oct 2020
-
-
       An endpoint used to add subjects to an Event Stream.
 
    Remove Subject Endpoint
@@ -818,6 +833,15 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 14]
    Enabled  the Transmitter MUST send a stream updated (Section 8.1.5)
       event respectively to the Receiver within the Event Stream.
 
+
+
+
+
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 15]
+
+                           openid-sse-profile                   Oct 2020
+
+
    Paused  the Transmitter SHOULD send stream updated (Section 8.1.5)
       after the Event Stream is re-started.  A Receiver MUST assume that
       events may have been lost during the time when the event stream
@@ -831,16 +855,6 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 14]
    Stream status for those SPAGs differ, then the Transmitter MAY decide
    whether or not to include updates about that Subject Principal within
    the Event Stream.
-
-
-
-
-
-
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 15]
-
-                           openid-sse-profile                   Oct 2020
-
 
 8.1.1.  Stream Status
 
@@ -877,6 +891,13 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 15]
       The Transmitter MUST NOT transmit events over the stream, and will
       not hold any events for later transmission.
 
+
+
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 16]
+
+                           openid-sse-profile                   Oct 2020
+
+
    The following is a non-normative example request to check an event
    stream's status:
 
@@ -887,16 +908,6 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 15]
               Figure 12: Example: Check Stream Status Request
 
    The following is a non-normative example response:
-
-
-
-
-
-
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 16]
-
-                           openid-sse-profile                   Oct 2020
-
 
    HTTP/1.1 200 OK
    Content-Type: application/json; charset=UTF-8
@@ -931,17 +942,6 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 16]
              Figure 15: Example: Check Stream Status Response
 
    Errors are signaled with HTTP status codes as follows:
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1156,7 +1156,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 20]
       *Read-Write*, A JSON object containing a set of name/value pairs
       specifying configuration parameters for the SET delivery method.
       The actual delivery method is identified by the special key
-      "method" with the value being a URI as defined in Section 9.2.1.
+      "method" with the value being a URI as defined in Section 12.2.1.
 
    min_verification_interval
       *Read-Only*, An integer indicating the minimum amount of time in
@@ -1555,7 +1555,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 27]
    previously indicated to the transmitter that they do not want events
    to be transmitted to the Event Receiver.  In this case, the
    transmitter MAY return an empty "200 OK" response or an appropriate
-   error code.  See Security Considerations (Section 8.3).
+   error code.  See Security Considerations (Section 10).
 
    Errors are signaled with HTTP status codes as follows:
 
@@ -1925,7 +1925,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 34]
 
                   Figure 31: Example: Stream Updated SET
 
-8.2.  Authorization
+9.  Authorization
 
    HTTP API calls from a Receiver to a Transmitter SHOULD be authorized
    by providing an OAuth 2.0 Access Token as defined by [RFC6750].
@@ -1937,9 +1937,9 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 34]
    Event Stream updates for specific SPAGs are authorized using the
    "authorization" field in the update request.
 
-8.3.  Security Considerations
+10.  Security Considerations
 
-8.3.1.  Subject Probing
+10.1.  Subject Probing
 
    It may be possible for an Event Transmitter to leak information about
    subjects through their responses to add subject requests.  A "404"
@@ -1962,7 +1962,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 35]
                            openid-sse-profile                   Oct 2020
 
 
-8.3.2.  Information Harvesting
+10.2.  Information Harvesting
 
    SETs may contain personally identifiable information (PII) or other
    non-public information about the event transmitter, the subject (of
@@ -1982,7 +1982,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 35]
    the event.  The mechanisms by which such validation is performed are
    outside the scope of this specification.
 
-8.3.3.  Malicious Subject Removal
+10.3.  Malicious Subject Removal
 
    A malicious party may find it advantageous to remove a particular
    subject from a stream, in order to reduce the Event Receiver's
@@ -1998,7 +1998,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 35]
    that have been removed from the stream, and MUST NOT report these
    events as errors to the Event Transmitter.
 
-8.3.4.  Unauthorized Updates to SPAGs
+10.4.  Unauthorized Updates to SPAGs
 
    A SPAG could represent a specific customer in a multi-tenanted
    environment or an organizational unit within a customer.  A malicious
@@ -2018,7 +2018,63 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 36]
                            openid-sse-profile                   Oct 2020
 
 
-9.  Profiles
+11.  Privacy Considerations
+
+11.1.  Subject Information Leakage
+
+   Event issuers and recipients SHOULD take precautions to ensure that
+   they do not leak information about subjects via Subject Identifiers,
+   and choose appropriate Subject Identifier Types accordingly.  Parties
+   SHOULD NOT identify a subject using a given Subject Identifier Type
+   if doing so will allow the recipient to correlate different claims
+   about the subject that they are not known to already have knowledge
+   of.  Transmitters and Receivers SHOULD always use the same Subject
+   Identifier Type and the same claim values to identify a given subject
+   when communicating with a given party in order to reduce the
+   possibility of information leakage.
+
+11.2.  Previously Consented Data
+
+   If SSE events contain new values for attributes of Subject Principals
+   that were previously exchanged between the Transmitter and Receiver,
+   then there are no additional privacy considerations introduced by
+   providing the updated values in the SSE events, unless the attribute
+   was exchanged under a one-time consent obtained from the user.
+
+11.3.  New Data
+
+   Data that was not previously exchanged between the Transmitter and
+   the Receiver, or data whose consent to exchange has expired has the
+   following considerations:
+
+11.3.1.  Organizational Data
+
+   If a user has previously agreed with a Transmitter that they agree to
+   release certain data to third-parties, then the Transmitter MAY send
+   such data in SSE events without additional consent of the user.  Such
+   data MAY include organizational data about the Subject Principal that
+   was generated by the Transmitter.
+
+11.3.2.  Consentable Data
+
+   If a Transmitter intends to include data in SSE events that is not
+   previously consented to be released by the user, then the Transmitter
+   MUST obtain consent to release such data from the user in accordance
+   with the Transmitter's privacy policy.
+
+
+
+
+
+
+
+
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 37]
+
+                           openid-sse-profile                   Oct 2020
+
+
+12.  Profiles
 
    This section is a profile of the following IETF SecEvent
    specifications:
@@ -2035,23 +2091,23 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 36]
    The CAEP use cases that set the requirements are described in CAEP
    Use Cases (TODO: Add reference when file is added to repository.)
 
-9.1.  Security Event Token Profile
+12.1.  Security Event Token Profile
 
    This section provides SSE profiling specifications for the "Security
    Event Token (SET)" [SET] spec.
 
-9.1.1.  Signature Key Resolution
+12.1.1.  Signature Key Resolution
 
    The signature key can be obtained through "jwks_uri", see Section 7.
 
-9.1.2.  SSE Event Subject
+12.1.2.  SSE Event Subject
 
    The subject of a SSE event is identified by the "subject" claim
    within the event payload, whose value is a Subject Identifier.  The
    "subject" claim is REQUIRED for all SSE events.  The JWT "sub" claim
    MUST NOT be present in any SET containing a SSE event.
 
-9.1.3.  SSE Event Properties
+12.1.3.  SSE Event Properties
 
    The SSE event MAY contain a "properties" claim within the event
    payload, whose value is a JSON object.  The fields in the JSON object
@@ -2069,7 +2125,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 36]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 37]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 38]
 
                            openid-sse-profile                   Oct 2020
 
@@ -2117,7 +2173,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 37]
 
       Figure 33: Example: SET Containing a CAEP Event with Properties
 
-9.1.4.  Explicit Typing of SETs
+12.1.4.  Explicit Typing of SETs
 
    SSE events MUST use explicit typing as defined in Section 2.3 of
    [SET].
@@ -2125,7 +2181,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 37]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 38]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 39]
 
                            openid-sse-profile                   Oct 2020
 
@@ -2143,14 +2199,14 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 38]
    parameter, by requiring it for SSE SETs a distinct value is
    guaranteed for future validators.
 
-9.1.5.  The "exp" Claim
+12.1.5.  The "exp" Claim
 
    The "exp" claim MUST NOT be used in SSE SETs.
 
    The purpose is defense in depth against confusion with other JWTs, as
    described in Sections 4.5 and 4.6 of [SET].
 
-9.1.6.  The "aud" Claim
+12.1.6.  The "aud" Claim
 
    The "aud" claim can be a single value or an array.  Each value SHOULD
    be the OAuth 2.0 client ID.  Other values that uniquely identifies
@@ -2181,7 +2237,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 38]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 39]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 40]
 
                            openid-sse-profile                   Oct 2020
 
@@ -2200,15 +2256,15 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 39]
 
               Figure 35: Example: SET with array 'aud' claim
 
-9.1.7.  The "events" claim
+12.1.7.  The "events" claim
 
    The "events" claim SHOULD contain only one event.  Multiple event
    type URIs are permitted only if they are alternative URIs defining
    the exact same event type.
 
-9.1.8.  Security Considerations
+12.1.8.  Security Considerations
 
-9.1.8.1.  Distinguishing SETs from other Kinds of JWTs
+12.1.8.1.  Distinguishing SETs from other Kinds of JWTs
 
    Of particular concern is the possibility that SETs are confused for
    other kinds of JWTs.  The Security Considerations section of [SET]
@@ -2216,19 +2272,19 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 39]
    for further restrictions:
 
    o  The "sub" claim MUST NOT be present, as described in
-      Section 9.1.2.
+      Section 12.1.2.
 
-   o  SSE SETs MUST use explicit typing, as described in Section 9.1.4.
+   o  SSE SETs MUST use explicit typing, as described in Section 12.1.4.
 
    o  The "exp" claim MUST NOT be present, as described in
-      Section 9.1.5.
+      Section 12.1.5.
 
-9.2.  SET Token Delivery Using HTTP Profile
+12.2.  SET Token Delivery Using HTTP Profile
 
    This section provides SSE profiling specifications for the
    [DELIVERYPUSH] and [DELIVERYPOLL] specs.
 
-9.2.1.  Stream Configuration Metadata
+12.2.1.  Stream Configuration Metadata
 
    Each delivery method is identified by a URI, specified below by the
    "method" metadata.
@@ -2237,12 +2293,12 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 39]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 40]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 41]
 
                            openid-sse-profile                   Oct 2020
 
 
-9.2.1.1.  Push Delivery using HTTP
+12.2.1.1.  Push Delivery using HTTP
 
    This section provides SSE profiling specifications for the
    [DELIVERYPUSH] spec.
@@ -2258,7 +2314,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 40]
       configuration is present.  The value is optional and it is set by
       the Receiver.
 
-9.2.1.2.  Polling Delivery using HTTP
+12.2.1.2.  Polling Delivery using HTTP
 
    This section provides SSE profiling specifications for the
    [DELIVERYPOLL] spec.
@@ -2269,9 +2325,9 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 40]
    endpoint_url  The URL where events can be retrieved from.  This is
       specified by the Transmitter.
 
-10.  IANA Considerations
+13.  IANA Considerations
 
-10.1.  Security Event Subject Identifier Types Registry
+13.1.  Security Event Subject Identifier Types Registry
 
    This document defines Subject Identifier Types, for which IANA is
    asked to create and maintain a new registry titled "Shared Signals
@@ -2279,9 +2335,9 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 40]
    Signals and Events Subject Identifier Types registry are given in
    Section 4.2.  Future assignments are to be made through the Expert
    Review registration policy [BCP26] and shall follow the template
-   presented in Section 10.1.1.
+   presented in Section 13.1.1.
 
-10.1.1.  Registration Template
+13.1.1.  Registration Template
 
    Type Name:
       The name of the Subject Identifier Type, as described in [SUBIDS].
@@ -2293,7 +2349,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 40]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 41]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 42]
 
                            openid-sse-profile                   Oct 2020
 
@@ -2316,7 +2372,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 41]
       is optional or required.  URIs that can be used to retrieve copies
       of each document SHOULD be included.
 
-10.1.2.  Guidance for Expert Reviewers
+13.1.2.  Guidance for Expert Reviewers
 
    The Expert Reviewer is expected to review the documentation
    referenced in a registration request to verify its completeness.  The
@@ -2339,7 +2395,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 41]
    the registration would contribute to confusion, or amount to a
    synonym for an existing type.
 
-10.2.  Well-Known URI Registry
+13.2.  Well-Known URI Registry
 
    TODO: follow steps in Section 5.1 of [RFC5785] to send a registration
    request.
@@ -2349,12 +2405,12 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 41]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 42]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 43]
 
                            openid-sse-profile                   Oct 2020
 
 
-10.2.1.  Registry Contents
+13.2.1.  Registry Contents
 
    o  URI suffix: "sse-configuration"
 
@@ -2365,24 +2421,9 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 42]
 
    o  Related information: (none)
 
-11.  Privacy Considerations
+14.  References
 
-11.1.  Subject Information Leakage
-
-   Event issuers and recipients SHOULD take precautions to ensure that
-   they do not leak information about subjects via Subject Identifiers,
-   and choose appropriate Subject Identifier Types accordingly.  Parties
-   SHOULD NOT identify a subject using a given Subject Identifier Type
-   if doing so will allow the recipient to correlate different claims
-   about the subject that they are not known to already have knowledge
-   of.  Issuers and recipients SHOULD always use the same Subject
-   Identifier Type and the same claim values to identify a given subject
-   when communicating with a given party in order to reduce the
-   possibility of information leakage.
-
-12.  References
-
-12.1.  Normative References
+14.1.  Normative References
 
    [BCP26]    Cotton, M., Leiba, B., and T. Narten, "Guidelines for
               Writing an IANA Considerations Section in RFCs", BCP 26,
@@ -2401,15 +2442,6 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 42]
               October 2012,
               <https://tools.ietf.org/html/rfc6749#section-4.4>.
 
-
-
-
-
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 43]
-
-                           openid-sse-profile                   Oct 2020
-
-
    [DELIVERYPOLL]
               Backman, A., Ed., Jones, M., Ed., Hunt, P., Ed.,
               Scurtescu, M., Ansari, M., and A. Nadalin, "Poll-Based SET
@@ -2423,6 +2455,16 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 43]
               Token Delivery Using HTTP", April 2018,
               <https://tools.ietf.org/html/draft-ietf-secevent-http-
               push-00>.
+
+
+
+
+
+
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 44]
+
+                           openid-sse-profile                   Oct 2020
+
 
    [IDTOKEN]  Sakimura, N., Bradley, J., Jones, M., de Medeiros, B., and
               C. Mortimore, "OpenID Connect Core 1.0 - ID Token", April
@@ -2457,15 +2499,6 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 43]
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
 
-
-
-
-
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 44]
-
-                           openid-sse-profile                   Oct 2020
-
-
    [RFC5785]  Nottingham, M. and E. Hammer-Lahav, "Defining Well-Known
               Uniform Resource Identifiers (URIs)", RFC 5785,
               DOI 10.17487/RFC5785, April 2010,
@@ -2479,6 +2512,15 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 44]
    [RFC7159]  Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
               Interchange Format", RFC 7159, DOI 10.17487/RFC7159, March
               2014, <https://www.rfc-editor.org/info/rfc7159>.
+
+
+
+
+
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 45]
+
+                           openid-sse-profile                   Oct 2020
+
 
    [RFC7517]  Jones, M., "JSON Web Key (JWK)", RFC 7517,
               DOI 10.17487/RFC7517, May 2015,
@@ -2512,17 +2554,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 44]
               2017, <https://tools.ietf.org/html/draft-scurtescu-
               secevent-risc-use-cases-00>.
 
-
-
-
-
-
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 45]
-
-                           openid-sse-profile                   Oct 2020
-
-
-12.2.  URIs
+14.2.  URIs
 
    [1] https://datatracker.ietf.org/wg/secevent/about/
 
@@ -2538,6 +2570,12 @@ Authors' Addresses
    Google
 
    Email: atultulshi@google.com
+
+
+
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 46]
+
+                           openid-sse-profile                   Oct 2020
 
 
    Tim Cappalli
@@ -2573,4 +2611,22 @@ Authors' Addresses
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 46]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 47]
