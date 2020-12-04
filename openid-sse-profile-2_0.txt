@@ -61,51 +61,51 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 1]
      4.2.  Subject Identifier Types  . . . . . . . . . . . . . . . .   5
        4.2.1.  SPAG Subject Identifier Type  . . . . . . . . . . . .   5
        4.2.2.  User-Device-Session Subject Identifier Type . . . . .   5
-       4.2.3.  JWT ID Subject Identifier Type  . . . . . . . . . . .   6
-       4.2.4.  SAML Assertion ID Subject Identifier Type . . . . . .   6
-     4.3.  Best Effort Subject Match . . . . . . . . . . . . . . . .   6
-   5.  Event Properties  . . . . . . . . . . . . . . . . . . . . . .   7
-   6.  Example SETs that conform to the SSE profile  . . . . . . . .   7
-   7.  Transmitter Configuration Discovery . . . . . . . . . . . . .  11
-     7.1.  Transmitter Configuration Metadata  . . . . . . . . . . .  11
-     7.2.  Obtaining Transmitter Configuration Information . . . . .  12
-       7.2.1.  Transmitter Configuration Request . . . . . . . . . .  12
-       7.2.2.  Transmitter Configuration Response  . . . . . . . . .  13
-       7.2.3.  Transmitter Configuration Validation  . . . . . . . .  13
-   8.  Management API for SET Event Streams  . . . . . . . . . . . .  14
-     8.1.  Event Stream Management . . . . . . . . . . . . . . . . .  14
-       8.1.1.  Stream Status . . . . . . . . . . . . . . . . . . . .  16
-         8.1.1.1.  Reading a Stream's Status . . . . . . . . . . . .  16
-         8.1.1.2.  Updating a Stream's Status  . . . . . . . . . . .  18
-       8.1.2.  Stream Configuration  . . . . . . . . . . . . . . . .  20
-         8.1.2.1.  Reading a Stream's Configuration  . . . . . . . .  22
-         8.1.2.2.  Updating a Stream's Configuration . . . . . . . .  24
-         8.1.2.3.  Removing a Stream Configuration . . . . . . . . .  27
-       8.1.3.  Subjects  . . . . . . . . . . . . . . . . . . . . . .  28
-         8.1.3.1.  Adding a Subject to a Stream  . . . . . . . . . .  28
-         8.1.3.2.  Removing a Subject  . . . . . . . . . . . . . . .  30
-       8.1.4.  Verification  . . . . . . . . . . . . . . . . . . . .  31
-         8.1.4.1.  Verification Event  . . . . . . . . . . . . . . .  31
-         8.1.4.2.  Triggering a Verification Event.  . . . . . . . .  32
-       8.1.5.  Stream Updated Event  . . . . . . . . . . . . . . . .  34
-   9.  Authorization . . . . . . . . . . . . . . . . . . . . . . . .  35
-   10. Security Considerations . . . . . . . . . . . . . . . . . . .  35
-     10.1.  Subject Probing  . . . . . . . . . . . . . . . . . . . .  35
-     10.2.  Information Harvesting . . . . . . . . . . . . . . . . .  36
-     10.3.  Malicious Subject Removal  . . . . . . . . . . . . . . .  36
-     10.4.  Unauthorized Updates to SPAGs  . . . . . . . . . . . . .  36
-   11. Privacy Considerations  . . . . . . . . . . . . . . . . . . .  37
-     11.1.  Subject Information Leakage  . . . . . . . . . . . . . .  37
-     11.2.  Previously Consented Data  . . . . . . . . . . . . . . .  37
-     11.3.  New Data . . . . . . . . . . . . . . . . . . . . . . . .  37
-       11.3.1.  Organizational Data  . . . . . . . . . . . . . . . .  37
-       11.3.2.  Consentable Data . . . . . . . . . . . . . . . . . .  37
-   12. Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .  38
-     12.1.  Security Event Token Profile . . . . . . . . . . . . . .  38
-       12.1.1.  Signature Key Resolution . . . . . . . . . . . . . .  38
-       12.1.2.  SSE Event Subject  . . . . . . . . . . . . . . . . .  38
-       12.1.3.  SSE Event Properties . . . . . . . . . . . . . . . .  38
-       12.1.4.  Explicit Typing of SETs  . . . . . . . . . . . . . .  39
+       4.2.3.  JWT ID Subject Identifier Type  . . . . . . . . . . .   7
+       4.2.4.  SAML Assertion ID Subject Identifier Type . . . . . .   7
+     4.3.  Best Effort Subject Match . . . . . . . . . . . . . . . .   8
+   5.  Event Properties  . . . . . . . . . . . . . . . . . . . . . .   8
+   6.  Example SETs that conform to the SSE profile  . . . . . . . .   8
+   7.  Transmitter Configuration Discovery . . . . . . . . . . . . .  12
+     7.1.  Transmitter Configuration Metadata  . . . . . . . . . . .  12
+     7.2.  Obtaining Transmitter Configuration Information . . . . .  13
+       7.2.1.  Transmitter Configuration Request . . . . . . . . . .  13
+       7.2.2.  Transmitter Configuration Response  . . . . . . . . .  14
+       7.2.3.  Transmitter Configuration Validation  . . . . . . . .  14
+   8.  Management API for SET Event Streams  . . . . . . . . . . . .  15
+     8.1.  Event Stream Management . . . . . . . . . . . . . . . . .  15
+       8.1.1.  Stream Status . . . . . . . . . . . . . . . . . . . .  17
+         8.1.1.1.  Reading a Stream's Status . . . . . . . . . . . .  17
+         8.1.1.2.  Updating a Stream's Status  . . . . . . . . . . .  19
+       8.1.2.  Stream Configuration  . . . . . . . . . . . . . . . .  21
+         8.1.2.1.  Reading a Stream's Configuration  . . . . . . . .  23
+         8.1.2.2.  Updating a Stream's Configuration . . . . . . . .  25
+         8.1.2.3.  Removing a Stream Configuration . . . . . . . . .  28
+       8.1.3.  Subjects  . . . . . . . . . . . . . . . . . . . . . .  29
+         8.1.3.1.  Adding a Subject to a Stream  . . . . . . . . . .  29
+         8.1.3.2.  Removing a Subject  . . . . . . . . . . . . . . .  31
+       8.1.4.  Verification  . . . . . . . . . . . . . . . . . . . .  32
+         8.1.4.1.  Verification Event  . . . . . . . . . . . . . . .  32
+         8.1.4.2.  Triggering a Verification Event.  . . . . . . . .  33
+       8.1.5.  Stream Updated Event  . . . . . . . . . . . . . . . .  35
+   9.  Authorization . . . . . . . . . . . . . . . . . . . . . . . .  36
+   10. Security Considerations . . . . . . . . . . . . . . . . . . .  36
+     10.1.  Subject Probing  . . . . . . . . . . . . . . . . . . . .  36
+     10.2.  Information Harvesting . . . . . . . . . . . . . . . . .  37
+     10.3.  Malicious Subject Removal  . . . . . . . . . . . . . . .  37
+     10.4.  Unauthorized Updates to SPAGs  . . . . . . . . . . . . .  37
+   11. Privacy Considerations  . . . . . . . . . . . . . . . . . . .  38
+     11.1.  Subject Information Leakage  . . . . . . . . . . . . . .  38
+     11.2.  Previously Consented Data  . . . . . . . . . . . . . . .  38
+     11.3.  New Data . . . . . . . . . . . . . . . . . . . . . . . .  38
+       11.3.1.  Organizational Data  . . . . . . . . . . . . . . . .  38
+       11.3.2.  Consentable Data . . . . . . . . . . . . . . . . . .  38
+   12. Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .  39
+     12.1.  Security Event Token Profile . . . . . . . . . . . . . .  39
+       12.1.1.  Signature Key Resolution . . . . . . . . . . . . . .  39
+       12.1.2.  SSE Event Subject  . . . . . . . . . . . . . . . . .  39
+       12.1.3.  SSE Event Properties . . . . . . . . . . . . . . . .  39
+       12.1.4.  Explicit Typing of SETs  . . . . . . . . . . . . . .  40
 
 
 
@@ -114,26 +114,26 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 2]
                            openid-sse-profile                   Oct 2020
 
 
-       12.1.5.  The "exp" Claim  . . . . . . . . . . . . . . . . . .  40
-       12.1.6.  The "aud" Claim  . . . . . . . . . . . . . . . . . .  40
-       12.1.7.  The "events" claim . . . . . . . . . . . . . . . . .  41
-       12.1.8.  Security Considerations  . . . . . . . . . . . . . .  41
-         12.1.8.1.  Distinguishing SETs from other Kinds of JWTs . .  41
-     12.2.  SET Token Delivery Using HTTP Profile  . . . . . . . . .  41
-       12.2.1.  Stream Configuration Metadata  . . . . . . . . . . .  41
-         12.2.1.1.  Push Delivery using HTTP . . . . . . . . . . . .  42
-         12.2.1.2.  Polling Delivery using HTTP  . . . . . . . . . .  42
-   13. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  42
-     13.1.  Security Event Subject Identifier Types Registry . . . .  42
-       13.1.1.  Registration Template  . . . . . . . . . . . . . . .  42
-       13.1.2.  Guidance for Expert Reviewers  . . . . . . . . . . .  43
-     13.2.  Well-Known URI Registry  . . . . . . . . . . . . . . . .  43
-       13.2.1.  Registry Contents  . . . . . . . . . . . . . . . . .  44
-   14. References  . . . . . . . . . . . . . . . . . . . . . . . . .  44
-     14.1.  Normative References . . . . . . . . . . . . . . . . . .  44
-     14.2.  URIs . . . . . . . . . . . . . . . . . . . . . . . . . .  46
-   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  46
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  46
+       12.1.5.  The "exp" Claim  . . . . . . . . . . . . . . . . . .  41
+       12.1.6.  The "aud" Claim  . . . . . . . . . . . . . . . . . .  41
+       12.1.7.  The "events" claim . . . . . . . . . . . . . . . . .  42
+       12.1.8.  Security Considerations  . . . . . . . . . . . . . .  42
+         12.1.8.1.  Distinguishing SETs from other Kinds of JWTs . .  42
+     12.2.  SET Token Delivery Using HTTP Profile  . . . . . . . . .  42
+       12.2.1.  Stream Configuration Metadata  . . . . . . . . . . .  42
+         12.2.1.1.  Push Delivery using HTTP . . . . . . . . . . . .  43
+         12.2.1.2.  Polling Delivery using HTTP  . . . . . . . . . .  43
+   13. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  43
+     13.1.  Security Event Subject Identifier Types Registry . . . .  43
+       13.1.1.  Registration Template  . . . . . . . . . . . . . . .  43
+       13.1.2.  Guidance for Expert Reviewers  . . . . . . . . . . .  44
+     13.2.  Well-Known URI Registry  . . . . . . . . . . . . . . . .  44
+       13.2.1.  Registry Contents  . . . . . . . . . . . . . . . . .  45
+   14. References  . . . . . . . . . . . . . . . . . . . . . . . . .  45
+     14.1.  Normative References . . . . . . . . . . . . . . . . . .  45
+     14.2.  URIs . . . . . . . . . . . . . . . . . . . . . . . . . .  47
+   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  47
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  47
 
 1.  Introduction
 
@@ -252,8 +252,8 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 4]
 
 4.2.2.  User-Device-Session Subject Identifier Type
 
-   The "User Device Session" Subject Identifier Type describes a
-   combination of user, device and/or session as a subject in an event.
+   The "User Device Session" Subject Identifier Type describes a tuple
+   of user, device and/or session attributes as a subject in an event.
    Subject Identifiers of this type MUST contain at least one of the
    following claims:
 
@@ -263,17 +263,17 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 4]
 
    session  OPTIONAL.  A Subject Identifier that identifies a session.
 
-   Acceptable combinations include:
+   Below are non-normative examples of Subject Identifiers for the
+   "user-device-session" Subject Identifier type.
 
-   user
 
-   device
 
-   session
 
-   user, session
 
-   user, device
+
+
+
+
 
 
 
@@ -282,12 +282,61 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 5]
                            openid-sse-profile                   Oct 2020
 
 
-   device, session
+   {
+       "subject_type": "user-device-session",
+       "user": {
+           "subject_type": "iss-sub",
+           "iss": "https://idp.example.com/123456789/",
+           "sub": "alice@example.com"
+       }
+   }
 
-   user, device, session
+   Figure 1: Example: 'user-device-session' Subject Identifier with user
+                                   only
 
-   The "User Device Session" Subject Identifier Type is identified by
-   the name "user-device-session".
+   {
+       "subject_type": "user-device-session",
+       "user": {
+           "subject_type": "iss-sub",
+           "iss": "https://idp.example.com/123456789/",
+           "sub": "alice@example.com"
+       },
+       "device": {
+           "subject_type": "iss-sub",
+           "iss": "https://idp.example.com/123456789/",
+           "sub": "e9297990-14d2-42ec-a4a9-4036db86509a"
+       }
+   }
+
+   Figure 2: Example: 'user-device-session' Subject Identifier with user
+                                and device
+
+   {
+       "subject_type": "user-device-session",
+       "user": {
+           "subject_type": "iss-sub",
+           "iss": "https://idp.example.com/123456789/",
+           "sub": "alice@example.com"
+       },
+       "session": {
+           "iss": "https://idp.example.com/123456789/",
+           "sub": "dMTlD|1600802906337.16|16008.16"
+       }
+   }
+
+   Figure 3: Example: 'user-device-session' Subject Identifier with user
+                                and session
+
+
+
+
+
+
+
+Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 6]
+
+                           openid-sse-profile                   Oct 2020
+
 
 4.2.3.  JWT ID Subject Identifier Type
 
@@ -306,6 +355,17 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 5]
    The "JWT ID" Subject Identifier Type is identified by the name "jwt-
    id".
 
+   Below is a non-normative example of Subject Identifier for the "jwt-
+   id" Subject Identifier type.
+
+   {
+       "subject_type": "jwt-id",
+       "jti": "B70BA622-9515-4353-A866-823539EECBC8"
+
+   }
+
+              Figure 4: Example: 'jwt-id' Subject Identifier
+
 4.2.4.  SAML Assertion ID Subject Identifier Type
 
    The "SAML Assertion ID" Subject Identifier Type specifies a SAML 2.0
@@ -323,20 +383,31 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 5]
    The "SAML Assertion ID" Subject Identifier Type is identified by the
    name "saml-assertion-id".
 
+   Below is a non-normative example Subject Identifier for the "saml-
+   assertion-id" Subject Identifier type.
+
+
+
+
+Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 7]
+
+                           openid-sse-profile                   Oct 2020
+
+
+   {
+       "subject_type": "saml-assertion-id",
+       "assertion_id": "_8e8dc5f69a98cc4c1ff3427e5ce34606fd672f91e6"
+
+   }
+
+         Figure 5: Example: 'saml-assertion-id' Subject Identifier
+
 4.3.  Best Effort Subject Match
 
    A recipient of an event SHOULD make the best effort of matching the
    specified subject(s) in the event.  This means that it SHOULD try to
    find the narrowest interpretation of the subject(s) specified in the
    event.
-
-
-
-
-Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 6]
-
-                           openid-sse-profile                   Oct 2020
-
 
 5.  Event Properties
 
@@ -368,28 +439,13 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 6]
   }
 }
 
-    Figure 1: Example: SET Containing a SSE Event with an Email Subject
+    Figure 6: Example: SET Containing a SSE Event with an Email Subject
                                 Identifier
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 7]
+Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 8]
 
                            openid-sse-profile                   Oct 2020
 
@@ -410,7 +466,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 7]
   }
 }
 
-   Figure 2: Example: SET Containing a SSE Event with a Subject That Has
+   Figure 7: Example: SET Containing a SSE Event with a Subject That Has
                     an Additional SPAG identifier Claim
 
 {
@@ -429,7 +485,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 7]
   }
 }
 
-     Figure 3: Example: SET Containing a SSE Event with an Issuer and
+     Figure 8: Example: SET Containing a SSE Event with an Issuer and
                             Subject Identifier
 
 
@@ -445,7 +501,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 7]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 8]
+Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 9]
 
                            openid-sse-profile                   Oct 2020
 
@@ -466,7 +522,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 8]
   }
 }
 
-    Figure 4: Example: SET Containing a SSE Event with a Subject and a
+    Figure 9: Example: SET Containing a SSE Event with a Subject and a
                               Property Claim
 
 {
@@ -486,7 +542,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 8]
   }
 }
 
-     Figure 5: Example: SET Containing a SSE Event with a SPAG Subject
+    Figure 10: Example: SET Containing a SSE Event with a SPAG Subject
                                    Type
 
 
@@ -501,7 +557,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 8]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 9]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 10]
 
                            openid-sse-profile                   Oct 2020
 
@@ -530,7 +586,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 9]
   }
 }
 
-       Figure 6: Example: SET Containing a SSE Event with a Compound
+      Figure 11: Example: SET Containing a SSE Event with a Compound
                                subject_type
 
 {
@@ -548,7 +604,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 9]
   }
 }
 
-     Figure 7: Example: SET Containing a SSE Event with a Proprietary
+     Figure 12: Example: SET Containing a SSE Event with a Proprietary
                                subject_type
 
 
@@ -557,7 +613,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 9]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 10]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 11]
 
                            openid-sse-profile                   Oct 2020
 
@@ -613,7 +669,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 10]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 11]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 12]
 
                            openid-sse-profile                   Oct 2020
 
@@ -643,7 +699,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 11]
    GET /.well-known/sse-configuration HTTP/1.1
    Host: tr.example.com
 
-    Figure 8: Example: Transmitter Configuration Request (without path)
+   Figure 13: Example: Transmitter Configuration Request (without path)
 
    If the Issuer value contains a path component, any terminating "/"
    MUST be removed before inserting "/.well-known/sse-configuration"
@@ -655,7 +711,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 11]
    GET /.well-known/sse-configuration/issuer1 HTTP/1.1
    Host: tr.example.com
 
-     Figure 9: Example: Transmitter Configuration Request (with path)
+     Figure 14: Example: Transmitter Configuration Request (with path)
 
    Using path components enables supporting multiple issuers per host.
    This is required in some multi-tenant hosting configurations.  This
@@ -669,7 +725,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 11]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 12]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 13]
 
                            openid-sse-profile                   Oct 2020
 
@@ -712,7 +768,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 12]
        "https://tr.example.com/risc/mgmt/verification"
    }
 
-          Figure 10: Example: Transmitter Configuration Response
+          Figure 15: Example: Transmitter Configuration Response
 
 7.2.3.  Transmitter Configuration Validation
 
@@ -725,7 +781,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 12]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 13]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 14]
 
                            openid-sse-profile                   Oct 2020
 
@@ -766,7 +822,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 13]
    |            |                |            |
    +------------+                +------------+
 
-                  Figure 11: Event Stream Management API
+                  Figure 16: Event Stream Management API
 
    It is OPTIONAL for Transmitters to implement a Management API, but it
    is RECOMMENDED that they implement it, especially the endpoints for
@@ -781,7 +837,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 13]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 14]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 15]
 
                            openid-sse-profile                   Oct 2020
 
@@ -837,7 +893,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 14]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 15]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 16]
 
                            openid-sse-profile                   Oct 2020
 
@@ -893,7 +949,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 15]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 16]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 17]
 
                            openid-sse-profile                   Oct 2020
 
@@ -905,7 +961,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 16]
    Host: transmitter.example.com
    Authorization: Bearer zzzz
 
-              Figure 12: Example: Check Stream Status Request
+              Figure 17: Example: Check Stream Status Request
 
    The following is a non-normative example response:
 
@@ -918,13 +974,13 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 16]
      "status": "enabled"
    }
 
-             Figure 13: Example: Check Stream Status Response
+             Figure 18: Example: Check Stream Status Response
 
    GET /set/status/1234 HTTP/1.1
    Host: transmitter.example.com
    Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
-       Figure 14: Example: Check Stream Status Request with SPAG ID
+       Figure 19: Example: Check Stream Status Request with SPAG ID
 
    The following is a non-normative example response with a SPAG
    identifier:
@@ -939,7 +995,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 16]
      "spag_id": "1234"
    }
 
-             Figure 15: Example: Check Stream Status Response
+             Figure 20: Example: Check Stream Status Response
 
    Errors are signaled with HTTP status codes as follows:
 
@@ -949,7 +1005,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 16]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 17]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 18]
 
                            openid-sse-profile                   Oct 2020
 
@@ -1005,7 +1061,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 17]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 18]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 19]
 
                            openid-sse-profile                   Oct 2020
 
@@ -1033,7 +1089,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 18]
      "status": "paused"
    }
 
-     Figure 16: Example: Update Stream Status Request Without Optional
+     Figure 21: Example: Update Stream Status Request Without Optional
                                   Fields
 
    POST /set/status HTTP/1.1
@@ -1047,7 +1103,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 18]
      "reason": "Disabled by administrator action."
    }
 
-   Figure 17: Example: Update Stream Status Request With Optional Fields
+   Figure 22: Example: Update Stream Status Request With Optional Fields
 
    The following is a non-normative example response:
 
@@ -1061,7 +1117,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 18]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 19]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 20]
 
                            openid-sse-profile                   Oct 2020
 
@@ -1075,7 +1131,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 19]
      "status": "paused"
    }
 
-             Figure 18: Example: Update Stream Status Response
+             Figure 23: Example: Update Stream Status Response
 
    Errors are signaled with HTTP status codes as follows:
 
@@ -1117,7 +1173,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 19]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 20]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 21]
 
                            openid-sse-profile                   Oct 2020
 
@@ -1173,7 +1229,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 20]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 21]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 22]
 
                            openid-sse-profile                   Oct 2020
 
@@ -1197,7 +1253,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 21]
    Host: transmitter.example.com
    Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
-           Figure 19: Example: Read Stream Configuration Request
+           Figure 24: Example: Read Stream Configuration Request
 
    The following is a non-normative example response:
 
@@ -1229,7 +1285,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 21]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 22]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 23]
 
                            openid-sse-profile                   Oct 2020
 
@@ -1266,7 +1322,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 22]
     ]
   }
 
-          Figure 20: Example: Read Stream Configuration Response
+          Figure 25: Example: Read Stream Configuration Response
 
    Errors are signaled with HTTP status codes as follows:
 
@@ -1285,7 +1341,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 22]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 23]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 24]
 
                            openid-sse-profile                   Oct 2020
 
@@ -1341,7 +1397,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 23]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 24]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 25]
 
                            openid-sse-profile                   Oct 2020
 
@@ -1368,7 +1424,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 24]
     ]
   }
 
-          Figure 21: Example: Update Stream Configuration Request
+          Figure 26: Example: Update Stream Configuration Request
 
    The following is a non-normative example response:
 
@@ -1397,7 +1453,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 24]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 25]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 26]
 
                            openid-sse-profile                   Oct 2020
 
@@ -1434,7 +1490,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 25]
     ]
   }
 
-         Figure 22: Example: Update Stream Configuration Response
+         Figure 27: Example: Update Stream Configuration Response
 
    Pending conditions or errors are signaled with HTTP status codes as
    follows:
@@ -1453,7 +1509,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 25]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 26]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 27]
 
                            openid-sse-profile                   Oct 2020
 
@@ -1493,7 +1549,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 26]
    Host: transmitter.example.com
    Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
-          Figure 23: Example: Remove Stream Configuration Request
+          Figure 28: Example: Remove Stream Configuration Request
 
    Errors are signaled with HTTP status codes as follows:
 
@@ -1509,7 +1565,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 26]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 27]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 28]
 
                            openid-sse-profile                   Oct 2020
 
@@ -1565,7 +1621,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 27]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 28]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 29]
 
                            openid-sse-profile                   Oct 2020
 
@@ -1607,7 +1663,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 28]
      "verified": true
    }
 
-                  Figure 24: Example: Add Subject Request
+                  Figure 29: Example: Add Subject Request
 
    The following is a non-normative example response to a successful
    request:
@@ -1617,11 +1673,11 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 28]
    Cache-Control: no-store
    Pragma: no-cache
 
-                 Figure 25: Example: Add Subject Response
+                 Figure 30: Example: Add Subject Response
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 29]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 30]
 
                            openid-sse-profile                   Oct 2020
 
@@ -1677,7 +1733,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 29]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 30]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 31]
 
                            openid-sse-profile                   Oct 2020
 
@@ -1693,7 +1749,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 30]
      }
    }
 
-                Figure 26: Example: Remove Subject Request
+                Figure 31: Example: Remove Subject Request
 
    The following is a non-normative example response to a successful
    request:
@@ -1703,7 +1759,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 30]
    Cache-Control: no-store
    Pragma: no-cache
 
-                Figure 27: Example: Remove Subject Response
+                Figure 32: Example: Remove Subject Response
 
 8.1.4.  Verification
 
@@ -1733,7 +1789,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 30]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 31]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 32]
 
                            openid-sse-profile                   Oct 2020
 
@@ -1789,7 +1845,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 31]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 32]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 33]
 
                            openid-sse-profile                   Oct 2020
 
@@ -1821,7 +1877,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 32]
      "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
    }
 
-             Figure 28: Example: Trigger Verification Request
+             Figure 33: Example: Trigger Verification Request
 
    The following is a non-normative example response to a successful
    request:
@@ -1831,7 +1887,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 32]
    Cache-Control: no-store
    Pragma: no-cache
 
-             Figure 29: Example: Trigger Verification Response
+             Figure 34: Example: Trigger Verification Response
 
    And the following is a non-normative example of a verification event
    sent to the Event Receiver as a result of the above request:
@@ -1845,7 +1901,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 32]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 33]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 34]
 
                            openid-sse-profile                   Oct 2020
 
@@ -1862,7 +1918,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 33]
   }
 }
 
-                   Figure 30: Example: Verification SET
+                   Figure 35: Example: Verification SET
 
 8.1.5.  Stream Updated Event
 
@@ -1901,7 +1957,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 33]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 34]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 35]
 
                            openid-sse-profile                   Oct 2020
 
@@ -1923,7 +1979,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 34]
   }
 }
 
-                  Figure 31: Example: Stream Updated SET
+                  Figure 36: Example: Stream Updated SET
 
 9.  Authorization
 
@@ -1957,7 +2013,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 34]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 35]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 36]
 
                            openid-sse-profile                   Oct 2020
 
@@ -2013,7 +2069,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 35]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 36]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 37]
 
                            openid-sse-profile                   Oct 2020
 
@@ -2069,7 +2125,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 36]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 37]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 38]
 
                            openid-sse-profile                   Oct 2020
 
@@ -2125,7 +2181,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 37]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 38]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 39]
 
                            openid-sse-profile                   Oct 2020
 
@@ -2148,7 +2204,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 38]
      }
    }
 
-    Figure 32: Example: SET Containing a RISC Event with a Phone Number
+    Figure 37: Example: SET Containing a RISC Event with a Phone Number
                                   Subject
 
 {
@@ -2171,7 +2227,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 38]
   }
 }
 
-      Figure 33: Example: SET Containing a CAEP Event with Properties
+      Figure 38: Example: SET Containing a CAEP Event with Properties
 
 12.1.4.  Explicit Typing of SETs
 
@@ -2181,7 +2237,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 38]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 39]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 40]
 
                            openid-sse-profile                   Oct 2020
 
@@ -2191,7 +2247,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 39]
      "alg":"HS256"
    }
 
-                  Figure 34: Explicitly Typed JOSE Header
+                  Figure 39: Explicitly Typed JOSE Header
 
    The purpose is defense against confusion with other JWTs, as
    described in Sections 4.5, 4.6 and 4.7 of [SET].  While current Id
@@ -2237,7 +2293,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 39]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 40]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 41]
 
                            openid-sse-profile                   Oct 2020
 
@@ -2254,7 +2310,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 40]
   }
 }
 
-              Figure 35: Example: SET with array 'aud' claim
+              Figure 40: Example: SET with array 'aud' claim
 
 12.1.7.  The "events" claim
 
@@ -2293,7 +2349,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 40]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 41]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 42]
 
                            openid-sse-profile                   Oct 2020
 
@@ -2349,7 +2405,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 41]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 42]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 43]
 
                            openid-sse-profile                   Oct 2020
 
@@ -2405,7 +2461,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 42]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 43]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 44]
 
                            openid-sse-profile                   Oct 2020
 
@@ -2461,7 +2517,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 43]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 44]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 45]
 
                            openid-sse-profile                   Oct 2020
 
@@ -2517,7 +2573,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 44]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 45]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 46]
 
                            openid-sse-profile                   Oct 2020
 
@@ -2573,7 +2629,7 @@ Authors' Addresses
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 46]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 47]
 
                            openid-sse-profile                   Oct 2020
 
@@ -2629,4 +2685,4 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 46]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 47]
+Tulshibagwale & Cappalli Expires April 29, 2021                [Page 48]

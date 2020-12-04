@@ -7,7 +7,7 @@ workgroup = "Shared Signals and Events Working Group"
 submissiontype = "independent"
 category = "info"
 keyword = [""]
-date = 2020-11-20T12:00:00Z
+date = 2020-12-04T12:00:00Z
 
 [seriesInfo]
 name = "Internet-Draft"
@@ -62,7 +62,14 @@ Event Type URI:
 `https://schemas.openid.net/secevent/caep/event-type/session-revoked`
 
 Session Revoked signals that the session identified by the subject has been 
-revoked. 
+revoked. The explicit session identifier may be directly referenced in the 
+subject or other properties of the session may be included to allow the
+receiver to identify applicable sessions.
+
+When multiple session properties are included in the subject, 
+the revocation event applies to any session derived from matching those 
+combined properties.
+
 
 The actual reason why the session was revoked might be specified with the 
 nested `reason_admin` and/or `reason_user` attributes described below.
@@ -199,14 +206,14 @@ be less than or equal to the "iat" claim in the parent
 Security Event Token (SET).
 
 `initiating_entity`
-: OPTIONAL, JSON string: describes the entity that invoked the session revocation.
+: OPTIONAL, JSON string: describes the entity that invoked the token claims change.
 
     Potential options:
 
-    * `admin`:    an administrator revoked the session
-    * `user`:     the end-user revoked the session
-    * `policy`:   a policy evaluation resulted in the session revocation
-    * `system`:   a system or platform assertion resulted in the session revocation
+    * `admin`:    an administrator invoked a token claims change
+    * `user`:     the end-user invoked a token claims change
+    * `policy`:   a policy evaluation resulted in the token claims change
+    * `system`:   a system or platform assertion resulted in the the token claims change
 
 `reason_admin`
 : OPTIONAL, JSON string: an administrative message for logging and auditing
@@ -275,7 +282,7 @@ Event Type URI:
 `https://schemas.openid.net/secevent/caep/event-type/credential-change`
 
 The Credential Change event signals that a credential was created, changed, 
-revoked or deleted. Credential change scenarios include:
+revoked or deleted. Credential Change scenarios include:
 
   * password/PIN change/reset
   * certificate enrollment, renewal, revocation and deletion
@@ -287,39 +294,14 @@ nested `reason_admin` and/or `reason_user` attributes described below.
 ### Attributes {#credential-change-attributes}
 
 `event_timestamp`
-: REQUIRED, JSON number: the time at which the claims change occured.
+: REQUIRED, JSON number: the time at which the credential change occured.
 Its value is a JSON number representing the number of seconds from 
 1970-01-01T0:0:0Z as measured in UTC until the date/time. This value must 
 be less than or equal to the "iat" claim in the parent 
 Security Event Token (SET).
 
-`current_level`
-: REQUIRED, JSON string: the current NIST Authenticator Assurance Level (AAL) as defined in [@SP800-63R3]
-
-  Options:
-
-  * nist-aal1
-  * nist-aal2
-  * nist-aal3
-
-`previous_level`
-: REQUIRED, JSON string: the previous NIST Authenticator Assurance Level (AAL) as defined in [@SP800-63R3]
-
-  Options:
-
-  * nist-aal1
-  * nist-aal2
-  * nist-aal3
-
-`change_direction`
-: REQUIRED, JSON string: the Authenticator Assurance Level increased or decreased
-
-  Options:
-  * increase
-  * decrease
-
 `credential_type`
-: OPTIONAL, JSON string: potential options:
+: REQUIRED, JSON string: potential options:
   * password
   * pin
   * x509
@@ -330,7 +312,7 @@ Security Event Token (SET).
   * phone-voice
   * phone-sms
   * app
-  * &lt;other mutually supported credential type&gt;
+  * other mutually supported credential type
 
 `change_type`
 : REQUIRED, JSON string: potential options:
@@ -340,14 +322,14 @@ Security Event Token (SET).
   * delete
 
 `initiating_entity`
-: OPTIONAL, JSON string: describes the entity that invoked the session revocation.
+: OPTIONAL, JSON string: describes the entity that invoked the credential change.
 
     Potential options:
 
-    * `admin`:    an administrator revoked the session
-    * `user`:     the end-user revoked the session
-    * `policy`:   a policy evaluation resulted in the session revocation
-    * `system`:   a system or platform assertion resulted in the session revocation
+    * `admin`:    an administrator changed the credential
+    * `user`:     the end-user changed the credential
+    * `policy`:   a policy evaluation resulted in the credential change
+    * `system`:   a system or platform assertion resulted in credential change
 
 `reason_admin`
 : OPTIONAL, JSON string: an administrative message for logging and auditing
@@ -382,7 +364,7 @@ Security Event Token (SET).
     "aud": "https://sp.example2.net/caep",
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/\
-        credential-changed": {
+        credential-change": {
             "subject": {
                 "subject_type": "iss-sub",
                 "iss": "https://idp.example.com/3456789/",
@@ -403,6 +385,108 @@ Security Event Token (SET).
 ~~~
 Figure: Example: Provisioning a new FIDO2 authenticator
 
+## Assurance Level Change {#assurance-level-change}
+Event Type URI:
+<br />
+`https://schemas.openid.net/secevent/caep/event-type/assurance-level-change`
+
+The Assurance Level Change event signals that there has been a change in 
+authentication method since the initial user login. This change can be from 
+a weak authentication method to a strong authentication method, or vice versa. 
+
+In the first scenario, Assurance Level Change will an increase, while in the 
+second scenario it will be  a decrease. For example, a user can start a session 
+with Service Provider A using single factor authentication (such as a password). 
+The user can then open another session with Service Provider B using 
+two-factor authentication (such as OTP). In this scenario an increase 
+Assurance Level Change event will signal to Service Provider A that user has 
+authenticated with a stronger authentication method.
+
+The actual reason why the assurance level changed might be specified with the 
+nested `reason_admin` and/or `reason_user` attributes described below.
+
+### Attributes {#credential-change-attributes}
+
+`event_timestamp`
+: REQUIRED, JSON number: the time at which the assurance level change occured.
+Its value is a JSON number representing the number of seconds from 
+1970-01-01T0:0:0Z as measured in UTC until the date/time. This value must 
+be less than or equal to the "iat" claim in the parent 
+Security Event Token (SET).
+
+`current_level`
+: REQUIRED, JSON string: the current NIST Authenticator Assurance Level (AAL) as defined in [@SP800-63R3]
+
+  Options:
+
+  * nist-aal1
+  * nist-aal2
+  * nist-aal3
+
+`previous_level`
+: REQUIRED, JSON string: the previous NIST Authenticator Assurance Level (AAL) as defined in [@SP800-63R3]
+
+  Options:
+
+  * nist-aal1
+  * nist-aal2
+  * nist-aal3
+
+`change_direction`
+: REQUIRED, JSON string: the Authenticator Assurance Level increased or decreased
+
+  Options:
+  * increase
+  * decrease
+
+`initiating_entity`
+: OPTIONAL, JSON string: describes the entity that invoked the assurance level change
+
+    Potential options:
+
+    * `admin`:    an administrative action resulted in an assurance level change
+    * `user`:     an end-user action resulted in an assurance level change
+    * `policy`:   a policy evaluation resulted in an assurance level change
+    * `system`:   a system or platform assertion resulted in an assurance level change
+
+`reason_admin`
+: OPTIONAL, JSON string: an administrative message for logging and auditing
+
+`reason_user`
+: OPTIONAL, JSON string: a user-friendly message for display to an end-user
+
+`tenant_id`
+: OPTIONAL, JSON string: tenant identifier
+            
+### Examples  {#assurance-level-change-examples}
+
+
+~~~json
+{
+    "iss": "https://idp.example.com/3456789/",
+    "jti": "07efd930f0977e4fcc1149a733ce7f78",
+    "iat": 1600976598,
+    "aud": "https://sp.example2.net/caep",
+    "events": {
+        "https://schemas.openid.net/secevent/caep/event-type/\
+        assurance-level-change": {
+            "subject": {
+                "subject_type": "iss-sub",
+                "iss": "https://idp.example.com/3456789/",
+                "sub": "jane.smith@example.com"
+            },
+            "current_level": "nist-aal2",
+            "previous_level": "nist-aal1",
+            "change_direction": "increase",
+            "initiating_entity": "user",
+            "event_timestamp": 1600975811
+        }
+    }
+}
+~~~
+Figure: Example: Assurance Level Increase 
+
+
 ## Device Compliance Change {#device-compliance-change}
 Event Type URI:
 <br />
@@ -417,8 +501,8 @@ nested `reason_admin` and/or `reason_user` attributes described below.
 ### Attributes {#session-revoked-attributes}
 
 `event_timestamp`
-: REQUIRED, JSON number: the time at which the claims change occured.
-Its value is a JSON number representing the number of seconds from 
+: REQUIRED, JSON number: the time at which the device compliance change 
+occured. Its value is a JSON number representing the number of seconds from 
 1970-01-01T0:0:0Z as measured in UTC until the date/time. This value must 
 be less than or equal to the "iat" claim in the parent 
 Security Event Token (SET).
@@ -440,14 +524,14 @@ Security Event Token (SET).
     * not-compliant
 
 `initiating_entity`
-: OPTIONAL, JSON string: describes the entity that invoked the session revocation
+: OPTIONAL, JSON string: describes the entity that invoked the device compliance change
 
     Potential options:
 
-    * `admin`:    an administrator revoked the session
-    * `user`:     the end-user revoked the session
-    * `policy`:   a policy evaluation resulted in the session revocation
-    * `system`:   a system or platform assertion resulted in the session revocation
+    * `admin`:    an administrative action invoked the device compliance change
+    * `user`:     the end-user action invoked the device compliance change
+    * `policy`:   a policy evaluation resulted in the device compliance change
+    * `system`:   a system or platform assertion resulted in the device compliance change
 
 `reason_admin`
 : OPTIONAL, JSON string: an administrative message for logging and auditing
@@ -487,13 +571,6 @@ Security Event Token (SET).
 }
 ~~~
 Figure: Example: Device has gone out of compliance
-
-
-# Additional Examples
-
-to do 
-
-
 
 {backmatter}
 

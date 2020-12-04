@@ -152,25 +152,64 @@
             SPAG Subject Identifier Type is identified by the name <spanx style="verb">spag</spanx>.</t>
         </section>
         <section anchor="sub-id-user-device-session" title="User-Device-Session Subject Identifier Type">
-          <t>The "User Device Session" Subject Identifier Type describes a combination of user, device and/or session as
-            a subject in an event. Subject Identifiers of this type MUST contain at least one of the following claims:
+          <t>The "User Device Session" Subject Identifier Type describes a tuple of user, device and/or 
+            session attributes as a subject in an event. Subject Identifiers of this type MUST contain 
+            at least one of the following claims:
             <list style="hanging">
               <t hangText="user"> OPTIONAL. A Subject Identifier that identifies a user.</t>
               <t hangText="device"> OPTIONAL. A Subject Identifier that identifies a device.</t>
               <t hangText="session"> OPTIONAL. A Subject Identifier that identifies a session.</t>
             </list></t>
-          <t>Acceptable combinations include:
-          <list style="hanging">
-              <t hangText="user"></t>
-              <t hangText="device"></t>
-              <t hangText="session"></t>
-              <t hangText="user, session"></t>
-              <t hangText="user, device"></t>
-              <t hangText="device, session"></t>
-              <t hangText="user, device, session"></t>
-          </list></t>
-          <t>The "User Device Session" Subject Identifier Type is identified by the name <spanx style="verb">
-            user-device-session</spanx>.</t>
+          <t>Below are non-normative examples of Subject Identifiers for the <spanx style="verb">
+            user-device-session</spanx> Subject Identifier type. 
+          <figure anchor="sub-id-user-device-session-useronly" title="Example: 'user-device-session' Subject Identifier with user only">
+        <artwork><![CDATA[
+{
+    "subject_type": "user-device-session",
+    "user": {
+        "subject_type": "iss-sub",
+        "iss": "https://idp.example.com/123456789/",
+        "sub": "alice@example.com"
+    }
+}
+        ]]></artwork>
+      </figure>
+
+          <figure anchor="sub-id-user-device-session-userdevice" title="Example: 'user-device-session' Subject Identifier with user and device">
+        <artwork><![CDATA[
+{
+    "subject_type": "user-device-session",
+    "user": {
+        "subject_type": "iss-sub",
+        "iss": "https://idp.example.com/123456789/",
+        "sub": "alice@example.com"
+    },
+    "device": {
+        "subject_type": "iss-sub",
+        "iss": "https://idp.example.com/123456789/",
+        "sub": "e9297990-14d2-42ec-a4a9-4036db86509a"
+    }
+}
+        ]]></artwork>
+      </figure>
+
+          <figure anchor="sub-id-user-device-session-usersession" title="Example: 'user-device-session' Subject Identifier with user and session">
+        <artwork><![CDATA[
+{
+    "subject_type": "user-device-session",
+    "user": {
+        "subject_type": "iss-sub",
+        "iss": "https://idp.example.com/123456789/",
+        "sub": "alice@example.com"
+    },
+    "session": {
+        "iss": "https://idp.example.com/123456789/",
+        "sub": "dMTlD|1600802906337.16|16008.16"
+    }
+}
+        ]]></artwork>
+      </figure></t>
+
         </section>
         <section anchor="sub-id-jwt-id" title="JWT ID Subject Identifier Type">
           <t>The "JWT ID" Subject Identifier Type specifies a JSON Web Token (JWT) identifier,
@@ -186,6 +225,17 @@
             </list></t>
           <t>The "JWT ID" Subject Identifier Type is identified by the name <spanx style="verb">
             jwt-id</spanx>.</t>
+          <t>Below is a non-normative example of Subject Identifier for the <spanx style="verb">
+            jwt-id</spanx> Subject Identifier type. 
+          <figure anchor="sub-id-jwtid" title="Example: 'jwt-id' Subject Identifier">
+        <artwork><![CDATA[
+{
+    "subject_type": "jwt-id",
+    "jti": "B70BA622-9515-4353-A866-823539EECBC8"
+
+}
+        ]]></artwork>
+      </figure></t>
         </section>
         <section anchor="sub-id-saml-assertion-id" title="SAML Assertion ID Subject Identifier Type">
           <t>The "SAML Assertion ID" Subject Identifier Type specifies a SAML 2.0 <xref target="OASIS.saml-core-2.0-os"/>
@@ -199,6 +249,17 @@
             </list></t>
           <t>The "SAML Assertion ID" Subject Identifier Type is identified by the name
             <spanx style="verb">saml-assertion-id</spanx>.</t>
+          <t>Below is a non-normative example Subject Identifier for the <spanx style="verb">
+            saml-assertion-id</spanx> Subject Identifier type. 
+          <figure anchor="sub-id-samlassertionid" title="Example: 'saml-assertion-id' Subject Identifier">
+        <artwork><![CDATA[
+{
+    "subject_type": "saml-assertion-id",
+    "assertion_id": "_8e8dc5f69a98cc4c1ff3427e5ce34606fd672f91e6"
+
+}
+        ]]></artwork>
+      </figure></t>
         </section>
       </section>
       <section anchor="sse-subject-matching" title="Best Effort Subject Match">
