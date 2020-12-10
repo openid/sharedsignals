@@ -12,7 +12,7 @@
   be taken to indicate.
 -->
 
-<rfc docName="openid-sse-profile-2_0" category="std" ipr="none">
+<rfc docName="openid-sse-profile-1_0" category="std" ipr="none">
 
   <?rfc toc="yes" ?>
   <?rfc tocdepth="5" ?>
@@ -24,7 +24,7 @@
   <?rfc comments="yes"?>
 
   <front>
-    <title abbrev="openid-sse-profile">OpenID Shared Signals and Events Profile of IETF Security Events 2.0</title>
+    <title abbrev="openid-sse-profile">OpenID Shared Signals and Events Profile of IETF Security Events 1.0</title>
 
     <author initials="A." surname="Tulshibagwale" fullname="Atul Tulshibagwale">
       <organization abbrev="Google">Google</organization>
@@ -98,8 +98,9 @@
 
     <section anchor="profile-version" title="Profile Version">
       <t>The following profile versions are recognized in this spec:<list style="hanging">
-        <t hangText="2.0"><vspace blankLines="0"/> The profile defined in this spec</t>
-        <t hangText="1.0"><vspace blankLines="0"/> The <xref target="RISC"/> profile of Security Events</t>
+        <t hangText="sse-1_0"><vspace blankLines="0"/> The profile defined in this document</t>
+        <t hangText="risc-1_0"><vspace blankLines="0"/> The <xref target="RISC"/> profile of
+          Security Events</t>
       </list></t>
     </section>
 

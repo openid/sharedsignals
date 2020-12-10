@@ -15,8 +15,8 @@
                                                             Oct 26, 2020
 
 
-  OpenID Shared Signals and Events Profile of IETF Security Events 2.0
-                         openid-sse-profile-2_0
+  OpenID Shared Signals and Events Profile of IETF Security Events 1.0
+                         openid-sse-profile-1_0
 
 Abstract
 
@@ -158,10 +158,10 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 2]
 
    The following profile versions are recognized in this spec:
 
-   2.0
-      The profile defined in this spec
+   sse-1_0
+      The profile defined in this document
 
-   1.0
+   risc-1_0
 
 
 
