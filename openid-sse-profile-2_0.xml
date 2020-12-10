@@ -38,15 +38,34 @@
         <email>tim.cappalli@microsoft.com</email>
       </address>
     </author>
-    <!-- TODO: Add other authors from the CAEP group here -->
 
+    <author initials="M." surname="Scurtescu" fullname="Marius Scurtescu">
+      <organization abbrev="Coinbase">Coinbase</organization>
+      <address>
+        <email>marius.scurtescu@coinbase.com</email>
+      </address>
+    </author>
+    <author initials="A." surname="Backman" fullname="Annabelle Backman">
+      <organization abbrev="Amazon">Amazon</organization>
+      <address>
+        <email>richanna@amazon.com</email>
+      </address>
+    </author>
+    <author initials="J." surname="Bradley" fullname="John Bradley">
+      <organization abbrev="Yubico">Yubico</organization>
+      <address>
+        <email>secevemt@ve7jtb.com</email>
+      </address>
+    </author>
     <date year="2020" month="Oct" day="26"/>
 
     <workgroup>Shared Signals and Events Working Group</workgroup>
 
     <abstract>
-      <t>This Shared Signals and Events (SSE) profile spec combines the <xref target="RISC">Open-ID
-        RISC Profile </xref> with the Continuous Access Evaluation Protocol (<xref target="CAEP"/>)</t>
+      <t>This Shared Signals and Events (SSE) profile enables sharing of signals and events between
+        cooperating peers. It enables multiple applications such as Risk Incident Sharing and
+        Coordination (RISC) and the Continuous Access Evaluation Protocol (<xref target="CAEP"/>)
+      </t>
       <t>It is a general profile for
         <eref target="https://datatracker.ietf.org/wg/secevent/about/">IETF Security Events</eref>
         and it defines:<list style="symbols">

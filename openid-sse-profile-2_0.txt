@@ -6,6 +6,12 @@
                                                                   Google
                                                              T. Cappalli
                                                                Microsoft
+                                                            M. Scurtescu
+                                                                Coinbase
+                                                              A. Backman
+                                                                  Amazon
+                                                              J. Bradley
+                                                                  Yubico
                                                             Oct 26, 2020
 
 
@@ -14,9 +20,10 @@
 
 Abstract
 
-   This Shared Signals and Events (SSE) profile spec combines the Open-
-   ID RISC Profile [RISC] with the Continuous Access Evaluation Protocol
-   ([CAEP])
+   This Shared Signals and Events (SSE) profile enables sharing of
+   signals and events between cooperating peers.  It enables multiple
+   applications such as Risk Incident Sharing and Coordination (RISC)
+   and the Continuous Access Evaluation Protocol ([CAEP])
 
    It is a general profile for IETF Security Events [1] and it defines:
 
@@ -41,30 +48,32 @@ Abstract
 
    o  Poll-Based SET Token Delivery Using HTTP [DELIVERYPOLL]
 
+
+
+
+
+
+Tulshibagwale, et al.    Expires April 29, 2021                 [Page 1]
+
+                           openid-sse-profile                   Oct 2020
+
+
 Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
      1.1.  Notational Conventions  . . . . . . . . . . . . . . . . .   3
    2.  Profile Version . . . . . . . . . . . . . . . . . . . . . . .   3
-   3.  Subject Principals  . . . . . . . . . . . . . . . . . . . . .   3
+   3.  Subject Principals  . . . . . . . . . . . . . . . . . . . . .   4
      3.1.  SPAGs . . . . . . . . . . . . . . . . . . . . . . . . . .   4
    4.  Subject Identifiers . . . . . . . . . . . . . . . . . . . . .   4
-     4.1.  Subject Types in SSE Events . . . . . . . . . . . . . . .   4
-
-
-
-Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 1]
-
-                           openid-sse-profile                   Oct 2020
-
-
+     4.1.  Subject Types in SSE Events . . . . . . . . . . . . . . .   5
      4.2.  Subject Identifier Types  . . . . . . . . . . . . . . . .   5
        4.2.1.  SPAG Subject Identifier Type  . . . . . . . . . . . .   5
        4.2.2.  User-Device Subject Identifier Type . . . . . . . . .   5
-       4.2.3.  Session ID Subject Identifier Type  . . . . . . . . .   5
+       4.2.3.  Session ID Subject Identifier Type  . . . . . . . . .   6
        4.2.4.  JWT ID Subject Identifier Type  . . . . . . . . . . .   6
        4.2.5.  SAML Assertion ID Subject Identifier Type . . . . . .   6
-     4.3.  Best Effort Subject Match . . . . . . . . . . . . . . . .   6
+     4.3.  Best Effort Subject Match . . . . . . . . . . . . . . . .   7
    5.  Event Properties  . . . . . . . . . . . . . . . . . . . . . .   7
    6.  Example SETs that conform to the SSE profile  . . . . . . . .   7
    7.  Transmitter Configuration Discovery . . . . . . . . . . . . .  11
@@ -97,6 +106,14 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 1]
      10.4.  Unauthorized Updates to SPAGs  . . . . . . . . . . . . .  36
    11. Privacy Considerations  . . . . . . . . . . . . . . . . . . .  37
      11.1.  Subject Information Leakage  . . . . . . . . . . . . . .  37
+
+
+
+Tulshibagwale, et al.    Expires April 29, 2021                 [Page 2]
+
+                           openid-sse-profile                   Oct 2020
+
+
      11.2.  Previously Consented Data  . . . . . . . . . . . . . . .  37
      11.3.  New Data . . . . . . . . . . . . . . . . . . . . . . . .  37
        11.3.1.  Organizational Data  . . . . . . . . . . . . . . . .  37
@@ -106,14 +123,6 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 1]
        12.1.1.  Signature Key Resolution . . . . . . . . . . . . . .  38
        12.1.2.  SSE Event Subject  . . . . . . . . . . . . . . . . .  38
        12.1.3.  SSE Event Properties . . . . . . . . . . . . . . . .  38
-
-
-
-Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 2]
-
-                           openid-sse-profile                   Oct 2020
-
-
        12.1.4.  Explicit Typing of SETs  . . . . . . . . . . . . . .  39
        12.1.5.  The "exp" Claim  . . . . . . . . . . . . . . . . . .  40
        12.1.6.  The "aud" Claim  . . . . . . . . . . . . . . . . . .  40
@@ -153,6 +162,14 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 2]
    2.0
       The profile defined in this spec
 
+
+
+
+Tulshibagwale, et al.    Expires April 29, 2021                 [Page 3]
+
+                           openid-sse-profile                   Oct 2020
+
+
    1.0
       The [RISC] profile of Security Events
 
@@ -161,14 +178,6 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 2]
    This SSE profile defines a Subject to be the entity about which an
    event can be sent by Transmitters and received by Receivers using the
    SSE profile.
-
-
-
-
-Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 3]
-
-                           openid-sse-profile                   Oct 2020
-
 
    Subject Principals are the management entities associated with
    Subjects.  These may be human or robotic principals or devices or
@@ -208,6 +217,15 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 3]
    Specification [SUBIDS], subject identifiers in events defined in this
    specification MAY have the following additional claim.
 
+
+
+
+
+Tulshibagwale, et al.    Expires April 29, 2021                 [Page 4]
+
+                           openid-sse-profile                   Oct 2020
+
+
    spag_id  The SPAG identifier of the subject principal described by
       the Subject Identifier.  This value MUST be interpreted only to
       disambiguate the subject specified in the Subject Identifier.
@@ -218,13 +236,6 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 3]
    any one of:
 
    o  Defined in the Subject Identifiers Draft Specification [SUBIDS].
-
-
-
-Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 4]
-
-                           openid-sse-profile                   Oct 2020
-
 
    o  A subject type defined in the Subject Identifier Types
       (Section 4.2) section here, OR
@@ -263,6 +274,14 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 4]
    The "User Device" Subject Identifier Type is identified by the name
    "user-device".
 
+
+
+
+Tulshibagwale, et al.    Expires April 29, 2021                 [Page 5]
+
+                           openid-sse-profile                   Oct 2020
+
+
 4.2.3.  Session ID Subject Identifier Type
 
    The "Session ID" Subject Identifier Type describes a common
@@ -272,15 +291,6 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 4]
 
    session_id
       REQUIRED.  A Subject Identifier that identifies the session.
-
-
-
-
-
-Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 5]
-
-                           openid-sse-profile                   Oct 2020
-
 
    The "Session ID" Subject Identifier Type is identified by the name
    "session-id".
@@ -319,24 +329,21 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 5]
    The "SAML Assertion ID" Subject Identifier Type is identified by the
    name "saml-assertion-id".
 
+
+
+
+
+Tulshibagwale, et al.    Expires April 29, 2021                 [Page 6]
+
+                           openid-sse-profile                   Oct 2020
+
+
 4.3.  Best Effort Subject Match
 
    A recipient of an event SHOULD make the best effort of matching the
    specified subject(s) in the event.  This means that it SHOULD try to
    find the narrowest interpretation of the subject(s) specified in the
    event.
-
-
-
-
-
-
-
-
-Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 6]
-
-                           openid-sse-profile                   Oct 2020
-
 
 5.  Event Properties
 
@@ -382,14 +389,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 6]
 
 
 
-
-
-
-
-
-
-
-Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 7]
+Tulshibagwale, et al.    Expires April 29, 2021                 [Page 7]
 
                            openid-sse-profile                   Oct 2020
 
@@ -445,7 +445,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 7]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 8]
+Tulshibagwale, et al.    Expires April 29, 2021                 [Page 8]
 
                            openid-sse-profile                   Oct 2020
 
@@ -501,7 +501,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 8]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 9]
+Tulshibagwale, et al.    Expires April 29, 2021                 [Page 9]
 
                            openid-sse-profile                   Oct 2020
 
@@ -557,7 +557,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                 [Page 9]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 10]
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 10]
 
                            openid-sse-profile                   Oct 2020
 
@@ -613,7 +613,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 10]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 11]
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 11]
 
                            openid-sse-profile                   Oct 2020
 
@@ -669,7 +669,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 11]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 12]
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 12]
 
                            openid-sse-profile                   Oct 2020
 
@@ -725,7 +725,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 12]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 13]
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 13]
 
                            openid-sse-profile                   Oct 2020
 
@@ -781,7 +781,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 13]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 14]
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 14]
 
                            openid-sse-profile                   Oct 2020
 
@@ -837,7 +837,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 14]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 15]
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 15]
 
                            openid-sse-profile                   Oct 2020
 
@@ -893,7 +893,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 15]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 16]
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 16]
 
                            openid-sse-profile                   Oct 2020
 
@@ -949,7 +949,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 16]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 17]
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 17]
 
                            openid-sse-profile                   Oct 2020
 
@@ -1005,7 +1005,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 17]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 18]
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 18]
 
                            openid-sse-profile                   Oct 2020
 
@@ -1061,7 +1061,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 18]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 19]
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 19]
 
                            openid-sse-profile                   Oct 2020
 
@@ -1117,7 +1117,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 19]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 20]
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 20]
 
                            openid-sse-profile                   Oct 2020
 
@@ -1173,7 +1173,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 20]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 21]
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 21]
 
                            openid-sse-profile                   Oct 2020
 
@@ -1229,7 +1229,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 21]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 22]
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 22]
 
                            openid-sse-profile                   Oct 2020
 
@@ -1285,7 +1285,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 22]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 23]
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 23]
 
                            openid-sse-profile                   Oct 2020
 
@@ -1341,7 +1341,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 23]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 24]
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 24]
 
                            openid-sse-profile                   Oct 2020
 
@@ -1397,7 +1397,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 24]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 25]
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 25]
 
                            openid-sse-profile                   Oct 2020
 
@@ -1453,7 +1453,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 25]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 26]
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 26]
 
                            openid-sse-profile                   Oct 2020
 
@@ -1509,7 +1509,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 26]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 27]
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 27]
 
                            openid-sse-profile                   Oct 2020
 
@@ -1565,7 +1565,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 27]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 28]
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 28]
 
                            openid-sse-profile                   Oct 2020
 
@@ -1621,7 +1621,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 28]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 29]
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 29]
 
                            openid-sse-profile                   Oct 2020
 
@@ -1677,7 +1677,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 29]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 30]
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 30]
 
                            openid-sse-profile                   Oct 2020
 
@@ -1733,7 +1733,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 30]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 31]
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 31]
 
                            openid-sse-profile                   Oct 2020
 
@@ -1789,7 +1789,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 31]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 32]
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 32]
 
                            openid-sse-profile                   Oct 2020
 
@@ -1845,7 +1845,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 32]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 33]
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 33]
 
                            openid-sse-profile                   Oct 2020
 
@@ -1901,7 +1901,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 33]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 34]
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 34]
 
                            openid-sse-profile                   Oct 2020
 
@@ -1957,7 +1957,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 34]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 35]
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 35]
 
                            openid-sse-profile                   Oct 2020
 
@@ -2013,7 +2013,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 35]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 36]
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 36]
 
                            openid-sse-profile                   Oct 2020
 
@@ -2069,7 +2069,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 36]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 37]
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 37]
 
                            openid-sse-profile                   Oct 2020
 
@@ -2125,7 +2125,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 37]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 38]
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 38]
 
                            openid-sse-profile                   Oct 2020
 
@@ -2181,7 +2181,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 38]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 39]
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 39]
 
                            openid-sse-profile                   Oct 2020
 
@@ -2237,7 +2237,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 39]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 40]
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 40]
 
                            openid-sse-profile                   Oct 2020
 
@@ -2293,7 +2293,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 40]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 41]
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 41]
 
                            openid-sse-profile                   Oct 2020
 
@@ -2349,7 +2349,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 41]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 42]
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 42]
 
                            openid-sse-profile                   Oct 2020
 
@@ -2405,7 +2405,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 42]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 43]
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 43]
 
                            openid-sse-profile                   Oct 2020
 
@@ -2461,7 +2461,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 43]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 44]
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 44]
 
                            openid-sse-profile                   Oct 2020
 
@@ -2517,7 +2517,7 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 44]
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 45]
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 45]
 
                            openid-sse-profile                   Oct 2020
 
@@ -2573,7 +2573,7 @@ Authors' Addresses
 
 
 
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 46]
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 46]
 
                            openid-sse-profile                   Oct 2020
 
@@ -2584,6 +2584,22 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 46]
    Email: tim.cappalli@microsoft.com
 
 
+   Marius Scurtescu
+   Coinbase
+
+   Email: marius.scurtescu@coinbase.com
+
+
+   Annabelle Backman
+   Amazon
+
+   Email: richanna@amazon.com
+
+
+   John Bradley
+   Yubico
+
+   Email: secevemt@ve7jtb.com
 
 
 
@@ -2613,20 +2629,4 @@ Tulshibagwale & Cappalli Expires April 29, 2021                [Page 46]
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Tulshibagwale & Cappalli Expires April 29, 2021                [Page 47]
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 47]
