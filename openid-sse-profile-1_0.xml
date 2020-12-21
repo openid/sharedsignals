@@ -96,14 +96,6 @@
       </section>
     </section>
 
-    <section anchor="profile-version" title="Profile Version">
-      <t>The following profile versions are recognized in this spec:<list style="hanging">
-        <t hangText="sse-1_0"><vspace blankLines="0"/> The profile defined in this document</t>
-        <t hangText="risc-1_0"><vspace blankLines="0"/> The <xref target="RISC"/> profile of
-          Security Events</t>
-      </list></t>
-    </section>
-
     <section anchor="subject-principals" title="Subject Principals">
       <t>This SSE profile defines a Subject to be the entity about which an event can be sent by
         Transmitters and received by Receivers using the SSE profile.</t>
@@ -462,10 +454,6 @@
           <t hangText="jwks_uri"> REQUIRED. URL of the Transmitter's <xref target="RFC7517">JSON Web Key Set</xref>
             document. This contains the signing key(s) the Receiver uses to validate signatures from the 
             Transmitter.</t>
-          <t hangText="supported_versions"> OPTIONAL. List of string representations of the numerical
-            profile versions defined in <xref target="profile-version"/> supported by this
-            transmitter. If this element is missing in the Transmitter Configuration Metadata, then
-            a single-valued list containing the value "1.0" MUST be assumed.</t>
           <t hangText="delivery_methods_supported"> RECOMMENDED. List of supported delivery method
             URIs.</t>
           <t hangText="configuration_endpoint"> OPTIONAL. The URL of the Configuration Endpoint.</t>
@@ -2169,24 +2157,6 @@ disabled": {
         <seriesInfo name="BCP" value="26"/>
         <seriesInfo name="RFC" value="8126"/>
         <seriesInfo name="DOI" value="10.17487/RFC8126"/>
-      </reference>
-
-      <reference anchor="RISC" target="https://openid.net/specs/openid-risc-profile-1_0-ID1.html">
-        <front>
-          <title>
-            OpenID RISC Profile of IETF Security Events 1.0
-          </title>
-          <author initials="M." surname="Scurtescu" fullname="Marius Scurtescu">
-            <organization abbrev="Coinbase">Coinbase</organization>
-          </author>
-          <author initials="A." surname="Backman" fullname="Annabelle Backman">
-            <organization abbrev="Amazon">Amazon</organization>
-          </author>
-          <author initials="J." surname="Bradley" fullname="John Bradley">
-            <organization abbrev="Yubico">Yubico</organization>
-          </author>
-          <date year="2018" month="April"/>
-        </front>
       </reference>
 
       <reference anchor="CAEP" target="https://cloud.google.com/blog/products/identity-security/re-thinking-federated-identity-with-the-continuous-access-evaluation-protocol">

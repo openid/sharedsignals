@@ -62,50 +62,50 @@ Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
      1.1.  Notational Conventions  . . . . . . . . . . . . . . . . .   3
-   2.  Profile Version . . . . . . . . . . . . . . . . . . . . . . .   3
-   3.  Subject Principals  . . . . . . . . . . . . . . . . . . . . .   4
-     3.1.  SPAGs . . . . . . . . . . . . . . . . . . . . . . . . . .   4
-   4.  Subject Identifiers . . . . . . . . . . . . . . . . . . . . .   4
-     4.1.  Subject Types in SSE Events . . . . . . . . . . . . . . .   5
-     4.2.  Subject Identifier Types  . . . . . . . . . . . . . . . .   5
-       4.2.1.  SPAG Subject Identifier Type  . . . . . . . . . . . .   5
-       4.2.2.  User-Device-Session Subject Identifier Type . . . . .   5
-       4.2.3.  JWT ID Subject Identifier Type  . . . . . . . . . . .   7
-       4.2.4.  SAML Assertion ID Subject Identifier Type . . . . . .   7
-     4.3.  Best Effort Subject Match . . . . . . . . . . . . . . . .   8
-   5.  Event Properties  . . . . . . . . . . . . . . . . . . . . . .   8
-   6.  Example SETs that conform to the SSE profile  . . . . . . . .   8
-   7.  Transmitter Configuration Discovery . . . . . . . . . . . . .  12
-     7.1.  Transmitter Configuration Metadata  . . . . . . . . . . .  12
-     7.2.  Obtaining Transmitter Configuration Information . . . . .  13
-       7.2.1.  Transmitter Configuration Request . . . . . . . . . .  13
-       7.2.2.  Transmitter Configuration Response  . . . . . . . . .  14
-       7.2.3.  Transmitter Configuration Validation  . . . . . . . .  14
-   8.  Management API for SET Event Streams  . . . . . . . . . . . .  15
-     8.1.  Event Stream Management . . . . . . . . . . . . . . . . .  15
-       8.1.1.  Stream Status . . . . . . . . . . . . . . . . . . . .  17
-         8.1.1.1.  Reading a Stream's Status . . . . . . . . . . . .  17
-         8.1.1.2.  Updating a Stream's Status  . . . . . . . . . . .  19
-       8.1.2.  Stream Configuration  . . . . . . . . . . . . . . . .  21
-         8.1.2.1.  Reading a Stream's Configuration  . . . . . . . .  23
-         8.1.2.2.  Updating a Stream's Configuration . . . . . . . .  25
-         8.1.2.3.  Removing a Stream Configuration . . . . . . . . .  28
-       8.1.3.  Subjects  . . . . . . . . . . . . . . . . . . . . . .  29
-         8.1.3.1.  Adding a Subject to a Stream  . . . . . . . . . .  29
-         8.1.3.2.  Removing a Subject  . . . . . . . . . . . . . . .  31
-       8.1.4.  Verification  . . . . . . . . . . . . . . . . . . . .  32
-         8.1.4.1.  Verification Event  . . . . . . . . . . . . . . .  32
-         8.1.4.2.  Triggering a Verification Event.  . . . . . . . .  33
-       8.1.5.  Stream Updated Event  . . . . . . . . . . . . . . . .  35
-   9.  Authorization . . . . . . . . . . . . . . . . . . . . . . . .  36
-   10. Security Considerations . . . . . . . . . . . . . . . . . . .  36
-     10.1.  Subject Probing  . . . . . . . . . . . . . . . . . . . .  36
-     10.2.  Information Harvesting . . . . . . . . . . . . . . . . .  37
-     10.3.  Malicious Subject Removal  . . . . . . . . . . . . . . .  37
-     10.4.  Unauthorized Updates to SPAGs  . . . . . . . . . . . . .  37
-   11. Privacy Considerations  . . . . . . . . . . . . . . . . . . .  38
-     11.1.  Subject Information Leakage  . . . . . . . . . . . . . .  38
-     11.2.  Previously Consented Data  . . . . . . . . . . . . . . .  38
+   2.  Subject Principals  . . . . . . . . . . . . . . . . . . . . .   3
+     2.1.  SPAGs . . . . . . . . . . . . . . . . . . . . . . . . . .   4
+   3.  Subject Identifiers . . . . . . . . . . . . . . . . . . . . .   4
+     3.1.  Subject Types in SSE Events . . . . . . . . . . . . . . .   4
+     3.2.  Subject Identifier Types  . . . . . . . . . . . . . . . .   5
+       3.2.1.  SPAG Subject Identifier Type  . . . . . . . . . . . .   5
+       3.2.2.  User-Device-Session Subject Identifier Type . . . . .   5
+       3.2.3.  JWT ID Subject Identifier Type  . . . . . . . . . . .   6
+       3.2.4.  SAML Assertion ID Subject Identifier Type . . . . . .   7
+     3.3.  Best Effort Subject Match . . . . . . . . . . . . . . . .   7
+   4.  Event Properties  . . . . . . . . . . . . . . . . . . . . . .   8
+   5.  Example SETs that conform to the SSE profile  . . . . . . . .   8
+   6.  Transmitter Configuration Discovery . . . . . . . . . . . . .  12
+     6.1.  Transmitter Configuration Metadata  . . . . . . . . . . .  12
+     6.2.  Obtaining Transmitter Configuration Information . . . . .  12
+       6.2.1.  Transmitter Configuration Request . . . . . . . . . .  13
+       6.2.2.  Transmitter Configuration Response  . . . . . . . . .  13
+       6.2.3.  Transmitter Configuration Validation  . . . . . . . .  14
+   7.  Management API for SET Event Streams  . . . . . . . . . . . .  14
+     7.1.  Event Stream Management . . . . . . . . . . . . . . . . .  15
+       7.1.1.  Stream Status . . . . . . . . . . . . . . . . . . . .  17
+         7.1.1.1.  Reading a Stream's Status . . . . . . . . . . . .  17
+         7.1.1.2.  Updating a Stream's Status  . . . . . . . . . . .  19
+       7.1.2.  Stream Configuration  . . . . . . . . . . . . . . . .  21
+         7.1.2.1.  Reading a Stream's Configuration  . . . . . . . .  23
+         7.1.2.2.  Updating a Stream's Configuration . . . . . . . .  25
+         7.1.2.3.  Removing a Stream Configuration . . . . . . . . .  28
+       7.1.3.  Subjects  . . . . . . . . . . . . . . . . . . . . . .  29
+         7.1.3.1.  Adding a Subject to a Stream  . . . . . . . . . .  29
+         7.1.3.2.  Removing a Subject  . . . . . . . . . . . . . . .  31
+       7.1.4.  Verification  . . . . . . . . . . . . . . . . . . . .  32
+         7.1.4.1.  Verification Event  . . . . . . . . . . . . . . .  32
+         7.1.4.2.  Triggering a Verification Event.  . . . . . . . .  33
+       7.1.5.  Stream Updated Event  . . . . . . . . . . . . . . . .  35
+   8.  Authorization . . . . . . . . . . . . . . . . . . . . . . . .  36
+   9.  Security Considerations . . . . . . . . . . . . . . . . . . .  36
+     9.1.  Subject Probing . . . . . . . . . . . . . . . . . . . . .  36
+     9.2.  Information Harvesting  . . . . . . . . . . . . . . . . .  37
+     9.3.  Malicious Subject Removal . . . . . . . . . . . . . . . .  37
+     9.4.  Unauthorized Updates to SPAGs . . . . . . . . . . . . . .  37
+   10. Privacy Considerations  . . . . . . . . . . . . . . . . . . .  38
+     10.1.  Subject Information Leakage  . . . . . . . . . . . . . .  38
+     10.2.  Previously Consented Data  . . . . . . . . . . . . . . .  38
+     10.3.  New Data . . . . . . . . . . . . . . . . . . . . . . . .  38
 
 
 
@@ -114,33 +114,32 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 2]
                            openid-sse-profile                   Oct 2020
 
 
-     11.3.  New Data . . . . . . . . . . . . . . . . . . . . . . . .  38
-       11.3.1.  Organizational Data  . . . . . . . . . . . . . . . .  38
-       11.3.2.  Consentable Data . . . . . . . . . . . . . . . . . .  38
-   12. Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .  39
-     12.1.  Security Event Token Profile . . . . . . . . . . . . . .  39
-       12.1.1.  Signature Key Resolution . . . . . . . . . . . . . .  39
-       12.1.2.  SSE Event Subject  . . . . . . . . . . . . . . . . .  39
-       12.1.3.  SSE Event Properties . . . . . . . . . . . . . . . .  39
-       12.1.4.  Explicit Typing of SETs  . . . . . . . . . . . . . .  40
-       12.1.5.  The "exp" Claim  . . . . . . . . . . . . . . . . . .  41
-       12.1.6.  The "aud" Claim  . . . . . . . . . . . . . . . . . .  41
-       12.1.7.  The "events" claim . . . . . . . . . . . . . . . . .  42
-       12.1.8.  Security Considerations  . . . . . . . . . . . . . .  42
-         12.1.8.1.  Distinguishing SETs from other Kinds of JWTs . .  42
-     12.2.  SET Token Delivery Using HTTP Profile  . . . . . . . . .  42
-       12.2.1.  Stream Configuration Metadata  . . . . . . . . . . .  42
-         12.2.1.1.  Push Delivery using HTTP . . . . . . . . . . . .  43
-         12.2.1.2.  Polling Delivery using HTTP  . . . . . . . . . .  43
-   13. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  43
-     13.1.  Security Event Subject Identifier Types Registry . . . .  43
-       13.1.1.  Registration Template  . . . . . . . . . . . . . . .  43
-       13.1.2.  Guidance for Expert Reviewers  . . . . . . . . . . .  44
-     13.2.  Well-Known URI Registry  . . . . . . . . . . . . . . . .  44
-       13.2.1.  Registry Contents  . . . . . . . . . . . . . . . . .  45
-   14. References  . . . . . . . . . . . . . . . . . . . . . . . . .  45
-     14.1.  Normative References . . . . . . . . . . . . . . . . . .  45
-     14.2.  URIs . . . . . . . . . . . . . . . . . . . . . . . . . .  47
+       10.3.1.  Organizational Data  . . . . . . . . . . . . . . . .  38
+       10.3.2.  Consentable Data . . . . . . . . . . . . . . . . . .  38
+   11. Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .  39
+     11.1.  Security Event Token Profile . . . . . . . . . . . . . .  39
+       11.1.1.  Signature Key Resolution . . . . . . . . . . . . . .  39
+       11.1.2.  SSE Event Subject  . . . . . . . . . . . . . . . . .  39
+       11.1.3.  SSE Event Properties . . . . . . . . . . . . . . . .  39
+       11.1.4.  Explicit Typing of SETs  . . . . . . . . . . . . . .  40
+       11.1.5.  The "exp" Claim  . . . . . . . . . . . . . . . . . .  41
+       11.1.6.  The "aud" Claim  . . . . . . . . . . . . . . . . . .  41
+       11.1.7.  The "events" claim . . . . . . . . . . . . . . . . .  42
+       11.1.8.  Security Considerations  . . . . . . . . . . . . . .  42
+         11.1.8.1.  Distinguishing SETs from other Kinds of JWTs . .  42
+     11.2.  SET Token Delivery Using HTTP Profile  . . . . . . . . .  42
+       11.2.1.  Stream Configuration Metadata  . . . . . . . . . . .  42
+         11.2.1.1.  Push Delivery using HTTP . . . . . . . . . . . .  43
+         11.2.1.2.  Polling Delivery using HTTP  . . . . . . . . . .  43
+   12. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  43
+     12.1.  Security Event Subject Identifier Types Registry . . . .  43
+       12.1.1.  Registration Template  . . . . . . . . . . . . . . .  43
+       12.1.2.  Guidance for Expert Reviewers  . . . . . . . . . . .  44
+     12.2.  Well-Known URI Registry  . . . . . . . . . . . . . . . .  44
+       12.2.1.  Registry Contents  . . . . . . . . . . . . . . . . .  45
+   13. References  . . . . . . . . . . . . . . . . . . . . . . . . .  45
+     13.1.  Normative References . . . . . . . . . . . . . . . . . .  45
+     13.2.  URIs . . . . . . . . . . . . . . . . . . . . . . . . . .  47
    Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  47
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  47
 
@@ -154,25 +153,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 2]
    14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-2.  Profile Version
-
-   The following profile versions are recognized in this spec:
-
-   sse-1_0
-      The profile defined in this document
-
-   risc-1_0
-
-
-
-Tulshibagwale, et al.    Expires April 29, 2021                 [Page 3]
-
-                           openid-sse-profile                   Oct 2020
-
-
-      The [RISC] profile of Security Events
-
-3.  Subject Principals
+2.  Subject Principals
 
    This SSE profile defines a Subject to be the entity about which an
    event can be sent by Transmitters and received by Receivers using the
@@ -181,6 +162,14 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 3]
    Subject Principals are the management entities associated with
    Subjects.  These may be human or robotic principals or devices or
    other entities that are managed by Transmitters and Receivers.  For
+
+
+
+Tulshibagwale, et al.    Expires April 29, 2021                 [Page 3]
+
+                           openid-sse-profile                   Oct 2020
+
+
    example, the same Subject Principal may be referred to by an email
    address or a phone number.  A Transmitter or Receiver will typically
    manage subject principals and organize them into sub-groupings such
@@ -188,7 +177,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 3]
 
    Subjects are identified by Subject Identifiers defined below.
 
-3.1.  SPAGs
+2.1.  SPAGs
 
    Subject Principals MAY be grouped for administrative purposes into
    "Subject Principal Administrative Groupings" or SPAGs.  For example,
@@ -202,12 +191,12 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 3]
    to disambiguate the subject of an event.
 
    Some events MAY have SPAGs as their subjects, e.g. the "Stream
-   Updated" (Section 8.1.5) event.
+   Updated" (Section 7.1.5) event.
 
    A SPAG identifier is agreed to offline between a Transmitter and a
    Receiver, and is outside the scope of this specification.
 
-4.  Subject Identifiers
+3.  Subject Identifiers
 
    A Subject is identified by a Subject Identifier as defined in the
    Subject Identifiers Draft Specification [SUBIDS].
@@ -216,8 +205,19 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 3]
    Specification [SUBIDS], subject identifiers in events defined in this
    specification MAY have the following additional claim.
 
+   spag_id  The SPAG identifier of the subject principal described by
+      the Subject Identifier.  This value MUST be interpreted only to
+      disambiguate the subject specified in the Subject Identifier.
 
+3.1.  Subject Types in SSE Events
 
+   A Subject Identifier in a SSE event MUST have a subject type that is
+   any one of:
+
+   o  Defined in the Subject Identifiers Draft Specification [SUBIDS].
+
+   o  A subject type defined in the Subject Identifier Types
+      (Section 3.2) section here, OR
 
 
 
@@ -226,20 +226,6 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 4]
                            openid-sse-profile                   Oct 2020
 
 
-   spag_id  The SPAG identifier of the subject principal described by
-      the Subject Identifier.  This value MUST be interpreted only to
-      disambiguate the subject specified in the Subject Identifier.
-
-4.1.  Subject Types in SSE Events
-
-   A Subject Identifier in a SSE event MUST have a subject type that is
-   any one of:
-
-   o  Defined in the Subject Identifiers Draft Specification [SUBIDS].
-
-   o  A subject type defined in the Subject Identifier Types
-      (Section 4.2) section here, OR
-
    o  A proprietary subject type that is agreed to between parties.  To
       clearly indicate that such subject types are not a part of the
       standard, the subject type name MUST begin with the prefix "x-".
@@ -247,21 +233,21 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 4]
       subject type are agreed to between the parties and such agreement
       is outside the scope of this specification.
 
-4.2.  Subject Identifier Types
+3.2.  Subject Identifier Types
 
    The following new subject identifier types are defined:
 
-4.2.1.  SPAG Subject Identifier Type
+3.2.1.  SPAG Subject Identifier Type
 
    The SPAG Subject Identifier Type describes a Subject Principal
-   Administrative Grouping (SPAG (Section 3.1)).  Subject Identifiers of
+   Administrative Grouping (SPAG (Section 2.1)).  Subject Identifiers of
    this type MUST contain a "spag_id" claim, a unique identifier agreed
    to offline between a Transmitter and a Receiver that identifies a
    SPAG uniquely within the Transmitter.  The "spag_id" claim MUST NOT
    be null or empty.  The SPAG Subject Identifier Type is identified by
    the name "spag".
 
-4.2.2.  User-Device-Session Subject Identifier Type
+3.2.2.  User-Device-Session Subject Identifier Type
 
    The "User Device Session" Subject Identifier Type describes a tuple
    of user, device and/or session attributes as a subject in an event.
@@ -273,14 +259,6 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 4]
    device  OPTIONAL.  A Subject Identifier that identifies a device.
 
    session  OPTIONAL.  A Subject Identifier that identifies a session.
-
-
-
-
-Tulshibagwale, et al.    Expires April 29, 2021                 [Page 5]
-
-                           openid-sse-profile                   Oct 2020
-
 
    Below are non-normative examples of Subject Identifiers for the
    "user-device-session" Subject Identifier type.
@@ -296,6 +274,13 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 5]
 
    Figure 1: Example: 'user-device-session' Subject Identifier with user
                                    only
+
+
+
+Tulshibagwale, et al.    Expires April 29, 2021                 [Page 5]
+
+                           openid-sse-profile                   Oct 2020
+
 
    {
        "subject_type": "user-device-session",
@@ -330,15 +315,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 5]
    Figure 3: Example: 'user-device-session' Subject Identifier with user
                                 and session
 
-
-
-
-Tulshibagwale, et al.    Expires April 29, 2021                 [Page 6]
-
-                           openid-sse-profile                   Oct 2020
-
-
-4.2.3.  JWT ID Subject Identifier Type
+3.2.3.  JWT ID Subject Identifier Type
 
    The "JWT ID" Subject Identifier Type specifies a JSON Web Token (JWT)
    identifier, defined in [RFC7519].  Subject Identifiers of this type
@@ -351,6 +328,15 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 6]
    jti
       REQUIRED.  The "jti" (JWT token ID) claim of the JWT being
       identified, defined in [RFC7519]
+
+
+
+
+
+Tulshibagwale, et al.    Expires April 29, 2021                 [Page 6]
+
+                           openid-sse-profile                   Oct 2020
+
 
    The "JWT ID" Subject Identifier Type is identified by the name "jwt-
    id".
@@ -366,7 +352,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 6]
 
               Figure 4: Example: 'jwt-id' Subject Identifier
 
-4.2.4.  SAML Assertion ID Subject Identifier Type
+3.2.4.  SAML Assertion ID Subject Identifier Type
 
    The "SAML Assertion ID" Subject Identifier Type specifies a SAML 2.0
    [OASIS.saml-core-2.0-os] assertion identifier.  Subject Identifiers
@@ -386,14 +372,6 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 6]
    Below is a non-normative example Subject Identifier for the "saml-
    assertion-id" Subject Identifier type.
 
-
-
-
-Tulshibagwale, et al.    Expires April 29, 2021                 [Page 7]
-
-                           openid-sse-profile                   Oct 2020
-
-
    {
        "subject_type": "saml-assertion-id",
        "assertion_id": "_8e8dc5f69a98cc4c1ff3427e5ce34606fd672f91e6"
@@ -402,14 +380,21 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 7]
 
          Figure 5: Example: 'saml-assertion-id' Subject Identifier
 
-4.3.  Best Effort Subject Match
+3.3.  Best Effort Subject Match
 
    A recipient of an event SHOULD make the best effort of matching the
    specified subject(s) in the event.  This means that it SHOULD try to
    find the narrowest interpretation of the subject(s) specified in the
    event.
 
-5.  Event Properties
+
+
+Tulshibagwale, et al.    Expires April 29, 2021                 [Page 7]
+
+                           openid-sse-profile                   Oct 2020
+
+
+4.  Event Properties
 
    Additional claims about an event may be included in the "events"
    claim.  Some of these claims are required and specified as such in
@@ -417,9 +402,9 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 7]
    determines that it needs to include additional claims that are not
    specified in the event types spec, then the name of such claims MUST
    be a URI.  The discoverability of all additional claims is specified
-   in the Discovery (Section 7) section.
+   in the Discovery (Section 6) section.
 
-6.  Example SETs that conform to the SSE profile
+5.  Example SETs that conform to the SSE profile
 
    The following are hypothetical examples of SETs that conform to the
    SSE profile.
@@ -441,6 +426,21 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 7]
 
     Figure 6: Example: SET Containing a SSE Event with an Email Subject
                                 Identifier
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -618,12 +618,12 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 11]
                            openid-sse-profile                   Oct 2020
 
 
-7.  Transmitter Configuration Discovery
+6.  Transmitter Configuration Discovery
 
    This section defines a mechanism for Receivers to obtain Transmitter
    configuration information.
 
-7.1.  Transmitter Configuration Metadata
+6.1.  Transmitter Configuration Metadata
 
    Transmitters have metadata describing their configuration:
 
@@ -635,12 +635,6 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 11]
    jwks_uri  REQUIRED.  URL of the Transmitter's JSON Web Key Set
       [RFC7517] document.  This contains the signing key(s) the Receiver
       uses to validate signatures from the Transmitter.
-
-   supported_versions  OPTIONAL.  List of string representations of the
-      numerical profile versions defined in Section 2 supported by this
-      transmitter.  If this element is missing in the Transmitter
-      Configuration Metadata, then a single-valued list containing the
-      value "1.0" MUST be assumed.
 
    delivery_methods_supported  RECOMMENDED.  List of supported delivery
       method URIs.
@@ -662,19 +656,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 11]
    Section 7.1.1 of [OAUTH-DISCOVERY].  This would allow other specs to
    add to the metadata.
 
-
-
-
-
-
-
-
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 12]
-
-                           openid-sse-profile                   Oct 2020
-
-
-7.2.  Obtaining Transmitter Configuration Information
+6.2.  Obtaining Transmitter Configuration Information
 
    Using the Issuer as documented by the Transmitter, the Transmitter
    Configuration Information can be retrieved.
@@ -684,10 +666,18 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 12]
    configuration" into the Issuer between the host component and the
    path component, if any.  The syntax and semantics of ".well-known"
    are defined in [RFC5785].  "sse-configuration" MUST point to a JSON
+
+
+
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 12]
+
+                           openid-sse-profile                   Oct 2020
+
+
    document compliant with this specification and MUST be returned using
    the "application/json" content type.
 
-7.2.1.  Transmitter Configuration Request
+6.2.1.  Transmitter Configuration Request
 
    A Transmitter Configuration Document MUST be queried using an HTTP
    "GET" request at the previously specified path.
@@ -719,8 +709,18 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 12]
    unlike its use in [RFC5785], it does not provide general information
    about the host.
 
+6.2.2.  Transmitter Configuration Response
 
+   The response is a set of Claims about the Transmitter's
+   configuration, including all necessary endpoints and public key
+   location information.  A successful response MUST use the 200 OK HTTP
+   status code and return a JSON object using the "application/json"
+   content type that contains a set of Claims as its members that are a
+   subset of the Metadata values defined in Section 6.1.  Other Claims
+   MAY also be returned.
 
+   Claims that return multiple values are represented as JSON arrays.
+   Claims with zero elements MUST be omitted from the response.
 
 
 
@@ -729,19 +729,6 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 13]
 
                            openid-sse-profile                   Oct 2020
 
-
-7.2.2.  Transmitter Configuration Response
-
-   The response is a set of Claims about the Transmitter's
-   configuration, including all necessary endpoints and public key
-   location information.  A successful response MUST use the 200 OK HTTP
-   status code and return a JSON object using the "application/json"
-   content type that contains a set of Claims as its members that are a
-   subset of the Metadata values defined in Section 7.1.  Other Claims
-   MAY also be returned.
-
-   Claims that return multiple values are represented as JSON arrays.
-   Claims with zero elements MUST be omitted from the response.
 
    An error response uses the applicable HTTP status code value.
 
@@ -770,28 +757,19 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 13]
 
           Figure 15: Example: Transmitter Configuration Response
 
-7.2.3.  Transmitter Configuration Validation
+6.2.3.  Transmitter Configuration Validation
 
    If any of the validation procedures defined in this specification
    fail, any operations requiring the information that failed to
    correctly validate MUST be aborted and the information that failed to
    validate MUST NOT be used.
 
-
-
-
-
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 14]
-
-                           openid-sse-profile                   Oct 2020
-
-
    The "issuer" value returned MUST be identical to the Issuer URL that
    was directly used to retrieve the configuration information.  This
    MUST also be identical to the "iss" Claim value in Security Event
    Tokens issued from this Transmitter.
 
-8.  Management API for SET Event Streams
+7.  Management API for SET Event Streams
 
    This section defines an HTTP API to be implemented by Event
    Transmitters and that can be used by Event Receivers to query and
@@ -800,6 +778,13 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 14]
 
    This section is based on Management API for SET Event Streams
    [MGMTAPI].
+
+
+
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 14]
+
+                           openid-sse-profile                   Oct 2020
+
 
    +------------+                +------------+
    |            | Stream Config  |            |
@@ -828,22 +813,14 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 14]
    is RECOMMENDED that they implement it, especially the endpoints for
    querying the Stream Status and for triggering Verification.
 
-8.1.  Event Stream Management
+7.1.  Event Stream Management
 
    Event Receivers manage how they receive events, and the subjects
    about which they want to receive events over an Event Stream by
    making HTTP requests to endpoints in the Event Stream Management API.
 
-
-
-
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 15]
-
-                           openid-sse-profile                   Oct 2020
-
-
    A Transmitter and Receiver MAY use the same Event Stream for updates
-   about multiple SPAGs (Section 3.1).  The status of the Event Stream
+   about multiple SPAGs (Section 2.1).  The status of the Event Stream
    MAY be queried and managed independently for each SPAG by
    Transmitters and Receivers.
 
@@ -857,6 +834,14 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 15]
       An endpoint used to read the Event Stream's current status.
 
    Add Subject Endpoint
+
+
+
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 15]
+
+                           openid-sse-profile                   Oct 2020
+
+
       An endpoint used to add subjects to an Event Stream.
 
    Remove Subject Endpoint
@@ -876,7 +861,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 15]
    belonging to different SPAGs MAY be managed independently.  A
    Receiver MAY request all subject principals within a SPAG to be added
    to or removed from a stream by Updating the Stream Status
-   (Section 8.1.1.2) and specifying the SPAG identifier in the request.
+   (Section 7.1.1.2) and specifying the SPAG identifier in the request.
 
    A Transmitter MAY decide to enable, pause or disable updates about a
    Subject independently of an update request from a Receiver.  If a
@@ -886,8 +871,23 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 15]
 
    If the stream is:
 
-   Enabled  the Transmitter MUST send a stream updated (Section 8.1.5)
+   Enabled  the Transmitter MUST send a stream updated (Section 7.1.5)
       event respectively to the Receiver within the Event Stream.
+
+   Paused  the Transmitter SHOULD send stream updated (Section 7.1.5)
+      after the Event Stream is re-started.  A Receiver MUST assume that
+      events may have been lost during the time when the event stream
+      was paused.
+
+   Disabled  the Transmitter MAY send stream updated (Section 7.1.5)
+      after the Event Stream is re-enabled.
+
+   The Subject in a stream updated (Section 7.1.5) event MAY be a SPAG.
+   If a Subject Principal belongs to more than one SPAG, but the Event
+   Stream status for those SPAGs differ, then the Transmitter MAY decide
+   whether or not to include updates about that Subject Principal within
+   the Event Stream.
+
 
 
 
@@ -898,23 +898,9 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 16]
                            openid-sse-profile                   Oct 2020
 
 
-   Paused  the Transmitter SHOULD send stream updated (Section 8.1.5)
-      after the Event Stream is re-started.  A Receiver MUST assume that
-      events may have been lost during the time when the event stream
-      was paused.
+7.1.1.  Stream Status
 
-   Disabled  the Transmitter MAY send stream updated (Section 8.1.5)
-      after the Event Stream is re-enabled.
-
-   The Subject in a stream updated (Section 8.1.5) event MAY be a SPAG.
-   If a Subject Principal belongs to more than one SPAG, but the Event
-   Stream status for those SPAGs differ, then the Transmitter MAY decide
-   whether or not to include updates about that Subject Principal within
-   the Event Stream.
-
-8.1.1.  Stream Status
-
-8.1.1.1.  Reading a Stream's Status
+7.1.1.1.  Reading a Stream's Status
 
    An Event Receiver checks the current status of an event stream by
    making an HTTP GET request to the stream's Status Endpoint.
@@ -947,13 +933,6 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 16]
       The Transmitter MUST NOT transmit events over the stream, and will
       not hold any events for later transmission.
 
-
-
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 17]
-
-                           openid-sse-profile                   Oct 2020
-
-
    The following is a non-normative example request to check an event
    stream's status:
 
@@ -964,6 +943,16 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 17]
               Figure 17: Example: Check Stream Status Request
 
    The following is a non-normative example response:
+
+
+
+
+
+
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 17]
+
+                           openid-sse-profile                   Oct 2020
+
 
    HTTP/1.1 200 OK
    Content-Type: application/json; charset=UTF-8
@@ -998,6 +987,17 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 17]
              Figure 20: Example: Check Stream Status Response
 
    Errors are signaled with HTTP status codes as follows:
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1043,7 +1043,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 18]
    4.  If the specified SPAG ID is invalid then the Transmitter MUST
        respond with a 404 error status.
 
-8.1.1.2.  Updating a Stream's Status
+7.1.1.2.  Updating a Stream's Status
 
    An Event Receiver updates the current status of a stream by making an
    HTTP POST request to the Status Endpoint.  The POST body contains a
@@ -1163,7 +1163,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 20]
        whether or not to complete the request, then the Transmitter MUST
        respond with a 202 status code.
 
-8.1.2.  Stream Configuration
+7.1.2.  Stream Configuration
 
    An Event Stream's configuration is represented as a JSON [RFC7159]
    object with the following properties:
@@ -1212,7 +1212,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 21]
       *Read-Write*, A JSON object containing a set of name/value pairs
       specifying configuration parameters for the SET delivery method.
       The actual delivery method is identified by the special key
-      "method" with the value being a URI as defined in Section 12.2.1.
+      "method" with the value being a URI as defined in Section 11.2.1.
 
    min_verification_interval
       *Read-Only*, An integer indicating the minimum amount of time in
@@ -1238,7 +1238,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 22]
    metadata, similar to Section 7.1.1 of [OAUTH-DISCOVERY].  This would
    allow other specs to add to the stream configuration.
 
-8.1.2.1.  Reading a Stream's Configuration
+7.1.2.1.  Reading a Stream's Configuration
 
    An Event Receiver gets the current configuration of a stream by
    making an HTTP GET request to the Configuration Endpoint.  On
@@ -1360,7 +1360,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 24]
 
                  Table 3: Read Stream Configuration Errors
 
-8.1.2.2.  Updating a Stream's Configuration
+7.1.2.2.  Updating a Stream's Configuration
 
    An Event Receiver updates the current configuration of a stream by
    making an HTTP POST request to the Configuration Endpoint.  The POST
@@ -1535,7 +1535,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 27]
 
                 Table 4: Update Stream Configuration Errors
 
-8.1.2.3.  Removing a Stream Configuration
+7.1.2.3.  Removing a Stream Configuration
 
    An Event Receiver removes the configuration of a stream by making an
    HTTP DELETE request to the Configuration Endpoint.  On receiving a
@@ -1581,14 +1581,14 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 28]
 
                 Table 5: Update Stream Configuration Errors
 
-8.1.3.  Subjects
+7.1.3.  Subjects
 
    An Event Receiver can indicate to an Event Transmitter whether or not
    the receiver wants to receive events about a particular subject by
    "adding" or "removing" that subject to the Event Stream,
    respectively.
 
-8.1.3.1.  Adding a Subject to a Stream
+7.1.3.1.  Adding a Subject to a Stream
 
    To add a subject to an Event Stream, the Event Receiver makes an HTTP
    POST request to the Add Subject Endpoint, containing in the body a
@@ -1611,7 +1611,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 28]
    previously indicated to the transmitter that they do not want events
    to be transmitted to the Event Receiver.  In this case, the
    transmitter MAY return an empty "200 OK" response or an appropriate
-   error code.  See Security Considerations (Section 10).
+   error code.  See Security Considerations (Section 9).
 
    Errors are signaled with HTTP status codes as follows:
 
@@ -1682,7 +1682,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 30]
                            openid-sse-profile                   Oct 2020
 
 
-8.1.3.2.  Removing a Subject
+7.1.3.2.  Removing a Subject
 
    To remove a subject from an Event Stream, the Event Receiver makes an
    HTTP POST request to the Remove Subject Endpoint, containing in the
@@ -1761,7 +1761,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 31]
 
                 Figure 32: Example: Remove Subject Response
 
-8.1.4.  Verification
+7.1.4.  Verification
 
    In some cases, the frequency of event transmission on an Event Stream
    will be very low, making it difficult for an Event Receiver to tell
@@ -1777,7 +1777,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 31]
    An Event Transmitter MAY send a Verification Event at any time, even
    if one was not requested by the Event Receiver.
 
-8.1.4.1.  Verification Event
+7.1.4.1.  Verification Event
 
    The Verification Event is a standard SET with the following
    attributes:
@@ -1810,7 +1810,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 32]
    Stream that fails to successfully verify based on the acknowledgement
    or lack of acknowledgement by the Event Receiver.
 
-8.1.4.2.  Triggering a Verification Event.
+7.1.4.2.  Triggering a Verification Event.
 
    To request that a verification event be sent over an Event Stream,
    the Event Receiver makes an HTTP POST request to the Verification
@@ -1860,7 +1860,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 33]
    |      |                                                            |
    | 429  | if the Event Receiver is sending too many requests in a    |
    |      | given amount of time; see related                          |
-   |      | "min_verification_interval" in Section 8.1.2               |
+   |      | "min_verification_interval" in Section 7.1.2               |
    +------+------------------------------------------------------------+
 
                        Table 8: Verification Errors
@@ -1920,7 +1920,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 34]
 
                    Figure 35: Example: Verification SET
 
-8.1.5.  Stream Updated Event
+7.1.5.  Stream Updated Event
 
    A Transmitter MAY change the stream status in reference to one or
    more Subjects without a request from a Receiver.  The Transmitter
@@ -1981,7 +1981,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 35]
 
                   Figure 36: Example: Stream Updated SET
 
-9.  Authorization
+8.  Authorization
 
    HTTP API calls from a Receiver to a Transmitter SHOULD be authorized
    by providing an OAuth 2.0 Access Token as defined by [RFC6750].
@@ -1993,9 +1993,9 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 35]
    Event Stream updates for specific SPAGs are authorized using the
    "authorization" field in the update request.
 
-10.  Security Considerations
+9.  Security Considerations
 
-10.1.  Subject Probing
+9.1.  Subject Probing
 
    It may be possible for an Event Transmitter to leak information about
    subjects through their responses to add subject requests.  A "404"
@@ -2018,7 +2018,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 36]
                            openid-sse-profile                   Oct 2020
 
 
-10.2.  Information Harvesting
+9.2.  Information Harvesting
 
    SETs may contain personally identifiable information (PII) or other
    non-public information about the event transmitter, the subject (of
@@ -2038,7 +2038,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 36]
    the event.  The mechanisms by which such validation is performed are
    outside the scope of this specification.
 
-10.3.  Malicious Subject Removal
+9.3.  Malicious Subject Removal
 
    A malicious party may find it advantageous to remove a particular
    subject from a stream, in order to reduce the Event Receiver's
@@ -2054,7 +2054,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 36]
    that have been removed from the stream, and MUST NOT report these
    events as errors to the Event Transmitter.
 
-10.4.  Unauthorized Updates to SPAGs
+9.4.  Unauthorized Updates to SPAGs
 
    A SPAG could represent a specific customer in a multi-tenanted
    environment or an organizational unit within a customer.  A malicious
@@ -2062,7 +2062,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 36]
    which they do not have administrative control.  Transmitters MUST
    send updates only about Subject Principals that belong to SPAGs for
    whom the Receiver is authorized.  Transmitters SHOULD use the
-   "authorization" field in the Update Status Request (Section 8.1.2.2)
+   "authorization" field in the Update Status Request (Section 7.1.2.2)
    to verify that the Receiver has permission to get updates for a
    specific SPAG.
 
@@ -2074,9 +2074,9 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 37]
                            openid-sse-profile                   Oct 2020
 
 
-11.  Privacy Considerations
+10.  Privacy Considerations
 
-11.1.  Subject Information Leakage
+10.1.  Subject Information Leakage
 
    Event issuers and recipients SHOULD take precautions to ensure that
    they do not leak information about subjects via Subject Identifiers,
@@ -2089,7 +2089,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 37]
    when communicating with a given party in order to reduce the
    possibility of information leakage.
 
-11.2.  Previously Consented Data
+10.2.  Previously Consented Data
 
    If SSE events contain new values for attributes of Subject Principals
    that were previously exchanged between the Transmitter and Receiver,
@@ -2097,13 +2097,13 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 37]
    providing the updated values in the SSE events, unless the attribute
    was exchanged under a one-time consent obtained from the user.
 
-11.3.  New Data
+10.3.  New Data
 
    Data that was not previously exchanged between the Transmitter and
    the Receiver, or data whose consent to exchange has expired has the
    following considerations:
 
-11.3.1.  Organizational Data
+10.3.1.  Organizational Data
 
    If a user has previously agreed with a Transmitter that they agree to
    release certain data to third-parties, then the Transmitter MAY send
@@ -2111,7 +2111,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 37]
    data MAY include organizational data about the Subject Principal that
    was generated by the Transmitter.
 
-11.3.2.  Consentable Data
+10.3.2.  Consentable Data
 
    If a Transmitter intends to include data in SSE events that is not
    previously consented to be released by the user, then the Transmitter
@@ -2130,7 +2130,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 38]
                            openid-sse-profile                   Oct 2020
 
 
-12.  Profiles
+11.  Profiles
 
    This section is a profile of the following IETF SecEvent
    specifications:
@@ -2147,23 +2147,23 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 38]
    The CAEP use cases that set the requirements are described in CAEP
    Use Cases (TODO: Add reference when file is added to repository.)
 
-12.1.  Security Event Token Profile
+11.1.  Security Event Token Profile
 
    This section provides SSE profiling specifications for the "Security
    Event Token (SET)" [SET] spec.
 
-12.1.1.  Signature Key Resolution
+11.1.1.  Signature Key Resolution
 
-   The signature key can be obtained through "jwks_uri", see Section 7.
+   The signature key can be obtained through "jwks_uri", see Section 6.
 
-12.1.2.  SSE Event Subject
+11.1.2.  SSE Event Subject
 
    The subject of a SSE event is identified by the "subject" claim
    within the event payload, whose value is a Subject Identifier.  The
    "subject" claim is REQUIRED for all SSE events.  The JWT "sub" claim
    MUST NOT be present in any SET containing a SSE event.
 
-12.1.3.  SSE Event Properties
+11.1.3.  SSE Event Properties
 
    The SSE event MAY contain a "properties" claim within the event
    payload, whose value is a JSON object.  The fields in the JSON object
@@ -2229,7 +2229,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 39]
 
       Figure 38: Example: SET Containing a CAEP Event with Properties
 
-12.1.4.  Explicit Typing of SETs
+11.1.4.  Explicit Typing of SETs
 
    SSE events MUST use explicit typing as defined in Section 2.3 of
    [SET].
@@ -2255,14 +2255,14 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 40]
    parameter, by requiring it for SSE SETs a distinct value is
    guaranteed for future validators.
 
-12.1.5.  The "exp" Claim
+11.1.5.  The "exp" Claim
 
    The "exp" claim MUST NOT be used in SSE SETs.
 
    The purpose is defense in depth against confusion with other JWTs, as
    described in Sections 4.5 and 4.6 of [SET].
 
-12.1.6.  The "aud" Claim
+11.1.6.  The "aud" Claim
 
    The "aud" claim can be a single value or an array.  Each value SHOULD
    be the OAuth 2.0 client ID.  Other values that uniquely identifies
@@ -2312,15 +2312,15 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 41]
 
               Figure 40: Example: SET with array 'aud' claim
 
-12.1.7.  The "events" claim
+11.1.7.  The "events" claim
 
    The "events" claim SHOULD contain only one event.  Multiple event
    type URIs are permitted only if they are alternative URIs defining
    the exact same event type.
 
-12.1.8.  Security Considerations
+11.1.8.  Security Considerations
 
-12.1.8.1.  Distinguishing SETs from other Kinds of JWTs
+11.1.8.1.  Distinguishing SETs from other Kinds of JWTs
 
    Of particular concern is the possibility that SETs are confused for
    other kinds of JWTs.  The Security Considerations section of [SET]
@@ -2328,19 +2328,19 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 41]
    for further restrictions:
 
    o  The "sub" claim MUST NOT be present, as described in
-      Section 12.1.2.
+      Section 11.1.2.
 
-   o  SSE SETs MUST use explicit typing, as described in Section 12.1.4.
+   o  SSE SETs MUST use explicit typing, as described in Section 11.1.4.
 
    o  The "exp" claim MUST NOT be present, as described in
-      Section 12.1.5.
+      Section 11.1.5.
 
-12.2.  SET Token Delivery Using HTTP Profile
+11.2.  SET Token Delivery Using HTTP Profile
 
    This section provides SSE profiling specifications for the
    [DELIVERYPUSH] and [DELIVERYPOLL] specs.
 
-12.2.1.  Stream Configuration Metadata
+11.2.1.  Stream Configuration Metadata
 
    Each delivery method is identified by a URI, specified below by the
    "method" metadata.
@@ -2354,7 +2354,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 42]
                            openid-sse-profile                   Oct 2020
 
 
-12.2.1.1.  Push Delivery using HTTP
+11.2.1.1.  Push Delivery using HTTP
 
    This section provides SSE profiling specifications for the
    [DELIVERYPUSH] spec.
@@ -2370,7 +2370,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 42]
       configuration is present.  The value is optional and it is set by
       the Receiver.
 
-12.2.1.2.  Polling Delivery using HTTP
+11.2.1.2.  Polling Delivery using HTTP
 
    This section provides SSE profiling specifications for the
    [DELIVERYPOLL] spec.
@@ -2381,19 +2381,19 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 42]
    endpoint_url  The URL where events can be retrieved from.  This is
       specified by the Transmitter.
 
-13.  IANA Considerations
+12.  IANA Considerations
 
-13.1.  Security Event Subject Identifier Types Registry
+12.1.  Security Event Subject Identifier Types Registry
 
    This document defines Subject Identifier Types, for which IANA is
    asked to create and maintain a new registry titled "Shared Signals
    and Events Subject Identifier Types".  Initial values for the Shared
    Signals and Events Subject Identifier Types registry are given in
-   Section 4.2.  Future assignments are to be made through the Expert
+   Section 3.2.  Future assignments are to be made through the Expert
    Review registration policy [BCP26] and shall follow the template
-   presented in Section 13.1.1.
+   presented in Section 12.1.1.
 
-13.1.1.  Registration Template
+12.1.1.  Registration Template
 
    Type Name:
       The name of the Subject Identifier Type, as described in [SUBIDS].
@@ -2428,7 +2428,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 43]
       is optional or required.  URIs that can be used to retrieve copies
       of each document SHOULD be included.
 
-13.1.2.  Guidance for Expert Reviewers
+12.1.2.  Guidance for Expert Reviewers
 
    The Expert Reviewer is expected to review the documentation
    referenced in a registration request to verify its completeness.  The
@@ -2451,12 +2451,12 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 43]
    the registration would contribute to confusion, or amount to a
    synonym for an existing type.
 
-13.2.  Well-Known URI Registry
+12.2.  Well-Known URI Registry
 
    TODO: follow steps in Section 5.1 of [RFC5785] to send a registration
    request.
 
-   This specification registers the well-known URI defined in Section 7
+   This specification registers the well-known URI defined in Section 6
    in the IANA Well-Known URI registry defined in [RFC5785].
 
 
@@ -2466,20 +2466,20 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 44]
                            openid-sse-profile                   Oct 2020
 
 
-13.2.1.  Registry Contents
+12.2.1.  Registry Contents
 
    o  URI suffix: "sse-configuration"
 
    o  Change controller: OpenID Foundation SSE Working Group - openid-
       specs-risc@lists.openid.net
 
-   o  Specification document: Section 7 of this document
+   o  Specification document: Section 6 of this document
 
    o  Related information: (none)
 
-14.  References
+13.  References
 
-14.1.  Normative References
+13.1.  Normative References
 
    [BCP26]    Cotton, M., Leiba, B., and T. Narten, "Guidelines for
               Writing an IANA Considerations Section in RFCs", BCP 26,
@@ -2590,11 +2590,6 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 46]
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
-   [RISC]     Scurtescu, M., Backman, A., and J. Bradley, "OpenID RISC
-              Profile of IETF Security Events 1.0", April 2018,
-              <https://openid.net/specs/openid-risc-profile-
-              1_0-ID1.html>.
-
    [SET]      Hunt, P., Ed., Jones, M., Denniss, W., and M. Ansari,
               "Security Event Token (SET)", April 2018,
               <https://tools.ietf.org/html/draft-ietf-secevent-token-
@@ -2610,13 +2605,13 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 46]
               2017, <https://tools.ietf.org/html/draft-scurtescu-
               secevent-risc-use-cases-00>.
 
-14.2.  URIs
+13.2.  URIs
 
    [1] https://datatracker.ietf.org/wg/secevent/about/
 
 Appendix A.  Acknowledgements
 
-   Transmitter Configuration Discovery (Section 7) is based on both
+   Transmitter Configuration Discovery (Section 6) is based on both
    OpenID Connect Discovery 1.0 [OIDC-DISCOVERY] and OAuth 2.0
    Authorization Server Metadata [OAUTH-DISCOVERY].
 
@@ -2626,6 +2621,11 @@ Authors' Addresses
    Google
 
    Email: atultulshi@google.com
+
+
+
+
+
 
 
 
