@@ -538,18 +538,18 @@ Content-Type: application/json
   "jwks_uri":
     "https://tr.example.com/jwks.json",
   "delivery_methods_supported": [
-    "https://schemas.openid.net/secevent/risc/delivery-method/push",
-    "https://schemas.openid.net/secevent/risc/delivery-method/poll"],
+    "https://schemas.openid.net/secevent/sse/delivery-method/push",
+    "https://schemas.openid.net/secevent/sse/delivery-method/poll"],
   "configuration_endpoint":
-    "https://tr.example.com/risc/mgmt/stream",
+    "https://tr.example.com/sse/mgmt/stream",
   "status_endpoint":
-    "https://tr.example.com/risc/mgmt/status",
+    "https://tr.example.com/sse/mgmt/status",
   "add_subject_endpoint":
-    "https://tr.example.com/risc/mgmt/subject:add",
+    "https://tr.example.com/sse/mgmt/subject:add",
   "remove_subject_endpoint":
-    "https://tr.example.com/risc/mgmt/subject:remove",
+    "https://tr.example.com/sse/mgmt/subject:remove",
   "verification_endpoint":
-    "https://tr.example.com/risc/mgmt/verification"
+    "https://tr.example.com/sse/mgmt/verification"
 }
 ]]></artwork>
             </figure>
@@ -945,7 +945,7 @@ Pragma: no-cache
     ],
   "delivery": {
     "delivery_method": 
-      "https://schemas.openid.net/secevent/risc/delivery-method/push",
+      "https://schemas.openid.net/secevent/sse/delivery-method/push",
     "url": "https://receiver.example.com/events"
   },
   "events_supported": [
@@ -1015,7 +1015,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
   ],
   "delivery": {
     "delivery_method":
-      "https://schemas.openid.net/secevent/risc/delivery-method/push",
+      "https://schemas.openid.net/secevent/sse/delivery-method/push",
     "url": "https://receiver.example.com/events"
   },
   "events_requested": [
@@ -1045,7 +1045,7 @@ Pragma: no-cache
   ],
   "delivery": {
     "delivery_method": 
-      "https://schemas.openid.net/secevent/risc/delivery-method/push",
+      "https://schemas.openid.net/secevent/sse/delivery-method/push",
     "url": "https://receiver.example.com/events"
   },
   "events_supported": [
@@ -1272,7 +1272,7 @@ Pragma: no-cache
 
             <t><list style="hanging">
                 <t hangText="event type"><vspace blankLines="0"/> The Event Type URI is:
-                  <spanx style="verb">https://schemas.openid.net/secevent/risc/event-type/verification</spanx>.</t>
+                  <spanx style="verb">https://schemas.openid.net/secevent/sse/event-type/verification</spanx>.</t>
                 <t hangText="state"><vspace blankLines="0"/> OPTIONAL An opaque value provided by
                   the Event Receiver when the event is triggered. This is a nested attribute in
                   the event payload.</t>
@@ -1367,7 +1367,7 @@ Pragma: no-cache
   "aud": "receiver.example.com",
   "iat": "1493856000",
   "events": {
-    "https://schemas.openid.net/secevent/risc/event-type/verification":{
+    "https://schemas.openid.net/secevent/sse/event-type/verification":{
       "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
     }
   }
@@ -1381,7 +1381,7 @@ Pragma: no-cache
         <section anchor="stream-updated-event" title="Stream Updated Event">
           <t>A Transmitter MAY change the stream status in reference to one or more Subjects without
             a request from a Receiver. The Transmitter sends an event of type <spanx style="verb">
-            https://schemas.openid.net/secevent/caep/event-type/stream-updated</spanx> to indicate
+            https://schemas.openid.net/secevent/sse/event-type/stream-updated</spanx> to indicate
             that it has changed the status of the Event Stream for a specific SPAG.</t>
 
           <t>If a Transmitter decides to change the status of an Event Stream from <spanx style="verb">
@@ -1415,7 +1415,7 @@ Pragma: no-cache
   "aud": "receiver.example.com",
   "iat": "1493856000",
   "events": {
-    "https://schemas.openid.net/secevent/caep/event-type/stream-updated": {
+    "https://schemas.openid.net/secevent/sse/event-type/stream-updated": {
       "subject": {
         "subject_type": "spag",
         "spag_id" : "https://example.com/v2/Groups/e9e30dba-f08f-4109-8486-d5c6a331660a",
@@ -1664,7 +1664,7 @@ disabled": {
   "aud": ["receiver.example.com/web", "receiver.example.com/mobile"],
   "iat": "1493856000",
   "events": {
-    "https://schemas.openid.net/secevent/risc/event-type/verification":{
+    "https://schemas.openid.net/secevent/sse/event-type/verification":{
       "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
     }
   }
@@ -1707,7 +1707,7 @@ disabled": {
             <t>This section provides SSE profiling specifications for the <xref target="DELIVERYPUSH"/> spec.</t>
             
             <t><list style="hanging">
-              <t hangText="method"> <spanx style="verb">https://schemas.openid.net/secevent/risc/delivery-method/push</spanx></t>
+              <t hangText="method"> <spanx style="verb">https://schemas.openid.net/secevent/sse/delivery-method/push</spanx></t>
               <t hangText="endpoint_url"> The URL where events are pushed through HTTP POST.
               This is set by the Receiver.</t>
               <t hangText="authorization_header">The HTTP Authorization header that the Transmitter MUST
@@ -1719,7 +1719,7 @@ disabled": {
             <t>This section provides SSE profiling specifications for the <xref target="DELIVERYPOLL"/> spec.</t>
             
             <t><list style="hanging">
-              <t hangText="method"> <spanx style="verb">https://schemas.openid.net/secevent/risc/delivery-method/poll</spanx></t>
+              <t hangText="method"> <spanx style="verb">https://schemas.openid.net/secevent/sse/delivery-method/poll</spanx></t>
               <t hangText="endpoint_url"> The URL where events can be retrieved from. This is
               specified by the Transmitter.</t>
             </list></t>
@@ -1729,73 +1729,9 @@ disabled": {
     </section>
 
     <section anchor="iana" title="IANA Considerations">
-      <section anchor="iana-sub-id-types" title="Security Event Subject Identifier Types Registry">
-        <t>This document defines Subject Identifier Types, for which IANA is asked to create and
-          maintain a new registry titled "Shared Signals and Events Subject Identifier Types".
-          Initial values for the Shared Signals and Events Subject Identifier Types registry are
-          given in <xref target="sub-id-types"/>.  Future assignments are to be made through the
-          Expert Review registration policy <xref target="BCP26"/> and shall follow the template
-          presented in <xref target="iana-sub-id-types-template"/>.</t>
-
-        <section anchor="iana-sub-id-types-template" title="Registration Template">
-          <t><list style="hanging">
-            <t hangText="Type Name:"><vspace blankLines="0"/>The name of the Subject
-              Identifier Type, as described in <xref target="SUBIDS"/>. The name MUST be an ASCII
-              string consisting only of lower-case characters ("a" - "z"), digits ("0" - "9"), and
-              hyphens ("-"), and SHOULD NOT exceed 20 characters in length.</t>
-
-            <t hangText="Type Description:"><vspace blankLines="0"/>A brief description of the
-              Subject Identifier Type.</t>
-
-            <t hangText="Change Controller:"><vspace blankLines="0"/>For types defined in documents
-              published by the OpenID Foundation or its working groups, list "OIDF SSE Working
-              Group". For all other types, list the name of the party responsible for the
-              registration. Contact information such as mailing address, email address, or phone
-              number may also be provided.</t>
-
-            <t hangText="Defining Document(s):"><vspace blankLines="0"/>A reference to the document
-              or documents that define the Subject Identifier Type.  The definition MUST specify the
-              name, format, and meaning of each claim that may occur within a Subject Identifier of
-              the defined type, as well as whether each claim is optional or required, or the
-              circumstances under which the claim is optional or required. URIs that can be used to
-              retrieve copies of each document SHOULD be included.</t>
-          </list></t>
-        </section>
-
-        <section anchor="iana-sub-id-types-expert" title="Guidance for Expert Reviewers">
-          <t>The Expert Reviewer is expected to review the documentation referenced in a registration
-            request to verify its completeness. The Expert Reviewer must base their decision to accept
-            or reject the request on a fair and impartial assessment of the request. If the Expert
-            Reviewer has a conflict of interest, such as being an author of a defining document
-            referenced by the request, they must recuse themselves from the approval process for that
-            request. In the case where a request is rejected, the Expert Reviewer should provide the
-            requesting party with a written statement expressing the reason for rejection, and be
-            prepared to cite any sources of information that went into that decision.</t>
-          
-          <t>Subject Identifier Types need not be generally applicable and may be highly specific to a
-            particular domain; it is expected that types may be registered for niche or industry-specific
-            use cases. The Expert Reviewer should focus on whether the type is thoroughly documented, and
-            whether its registration will promote or harm interoperability.  In most cases, the Expert
-            Reviewer should not approve a request if the registration would contribute to confusion, or
-            amount to a synonym for an existing type.</t>
-        </section>
-      </section>
-      
-      <section anchor="iana-well-known" title="Well-Known URI Registry">
-        <t>TODO: follow steps in Section 5.1 of <xref target="RFC5785"/> to send a registration request.</t>
-        
-        <t>This specification registers the well-known URI defined in <xref target="discovery"/>
-          in the IANA Well-Known URI registry defined in <xref target="RFC5785"/>.</t>
-        
-        <section anchor="iana-well-known-contents" title="Registry Contents">
-          <t><list style="symbols">
-            <t>URI suffix: <spanx style="verb">sse-configuration</spanx></t>
-            <t>Change controller: OpenID Foundation SSE Working Group - openid-specs-risc@lists.openid.net</t>
-            <t>Specification document: <xref target="discovery"/> of this document</t>
-            <t>Related information: (none)</t>
-          </list></t>
-        </section>
-      </section>
+      <t>Subject Identifiers defined in this document will be added to the "Security Events Subject
+        Identifier Types" registry. This registry is defined in the <xref target="SUBIDS">Subject
+        Identifiers for Security Event Tokens</xref> specification.</t>
     </section>
 
   </middle>
