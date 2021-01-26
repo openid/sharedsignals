@@ -243,8 +243,8 @@
         <artwork><![CDATA[
 {
     "subject_type": "jwt-id",
+    "iss": "https://idp.example.com/123456789/",
     "jti": "B70BA622-9515-4353-A866-823539EECBC8"
-
 }
         ]]></artwork>
       </figure></t>
@@ -267,8 +267,8 @@
         <artwork><![CDATA[
 {
     "subject_type": "saml-assertion-id",
+    "issuer": "https://idp.example.com/123456789/",
     "assertion_id": "_8e8dc5f69a98cc4c1ff3427e5ce34606fd672f91e6"
-
 }
         ]]></artwork>
       </figure></t>
