@@ -516,7 +516,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 9]
       "subject": {
         "subject_type": "email",
         "email": "foo@example2.com"
-      }
+      },
       "ip_address" : "123.45.67.89"
     }
   }
