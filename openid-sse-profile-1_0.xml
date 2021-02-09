@@ -305,7 +305,7 @@
     "https://schemas.openid.net/secevent/risc/event-type/account-enabled": {
       "subject": {
         "subject_type": "email",
-        "email": "foo@example.com",
+        "email": "foo@example.com"
       }
     }
   }
@@ -325,7 +325,7 @@
       "subject": {
         "subject_type": "email",
         "email": "foo@example.com",
-        "spag_id": "https://example.com/v2/Groups/e9e30dba-f08f-4109-8486-d5c6a331660a",
+        "spag_id": "https://example.com/v2/Groups/e9e30dba-f08f-4109-8486-d5c6a331660a"
       }
     }
   }
@@ -343,7 +343,7 @@
   "events": {
     "https://schemas.openid.net/secevent/risc/event-type/account-enabled": {
       "subject": {
-        "subject_type": "iss_sub",
+        "subject_type": "iss-sub",
         "iss": "https://issuer.example.com/",
         "sub": "abc1234"
       }
@@ -364,7 +364,7 @@
     "https://schemas.openid.net/secevent/caep/event-type/ip-address-changed": {
       "subject": {
         "subject_type": "email",
-        "email": "foo@example.com",
+        "email": "foo@example2.com"
       }
       "ip_address" : "123.45.67.89"
     }
@@ -384,10 +384,10 @@
     "https://schemas.openid.net/secevent/caep/event-type/stream-updated": {
       "subject": {
         "subject_type": "spag",
-        "spag_id" : "https://example.com/v2/Groups/e9e30dba-f08f-4109-8486-d5c6a331660a",
+        "spag_id" : "https://example2.com/v2/Groups/e9e30dba-f08f-4109-8486-d5c6a331660a"
       },
       "status": "paused",
-      "reason": "License is not valid",
+      "reason": "License is not valid"
     }
   }
 }
@@ -945,9 +945,9 @@ Pragma: no-cache
       "http://receiver.example.com/mobile"
     ],
   "delivery": {
-    "delivery_method": 
+    "delivery_method":
       "https://schemas.openid.net/secevent/risc/delivery-method/push",
-    "url": "https://receiver.example.com/events"
+      "url": "https://receiver.example.com/events"
   },
   "events_supported": [
     "urn:example:secevent:events:type_1",
@@ -1017,7 +1017,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
   "delivery": {
     "delivery_method":
       "https://schemas.openid.net/secevent/risc/delivery-method/push",
-    "url": "https://receiver.example.com/events"
+      "url": "https://receiver.example.com/events"
   },
   "events_requested": [
     "urn:example:secevent:events:type_2",
@@ -1045,9 +1045,9 @@ Pragma: no-cache
     "http://receiver.example.com/mobile"
   ],
   "delivery": {
-    "delivery_method": 
+    "delivery_method":
       "https://schemas.openid.net/secevent/risc/delivery-method/push",
-    "url": "https://receiver.example.com/events"
+      "url": "https://receiver.example.com/events"
   },
   "events_supported": [
     "urn:example:secevent:events:type_1",
@@ -1419,10 +1419,10 @@ Pragma: no-cache
     "https://schemas.openid.net/secevent/caep/event-type/stream-updated": {
       "subject": {
         "subject_type": "spag",
-        "spag_id" : "https://example.com/v2/Groups/e9e30dba-f08f-4109-8486-d5c6a331660a",
+        "spag_id" : "https://example.com/v2/Groups/e9e30dba-f08f-4109-8486-d5c6a331660a"
       }
       "status": "paused",
-      "reason": "License is not valid",
+      "reason": "License is not valid"
     },
   }
 }
@@ -1665,7 +1665,7 @@ disabled": {
   "aud": ["receiver.example.com/web", "receiver.example.com/mobile"],
   "iat": "1493856000",
   "events": {
-    "https://schemas.openid.net/secevent/risc/event-type/verification":{
+    "https://schemas.openid.net/secevent/risc/event-type/verification": {
       "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
     }
   }
