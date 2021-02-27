@@ -2,11 +2,11 @@
 
 
 
-                                                             T. Cappalli
-                                                               Microsoft
-                                                        A. Tulshibagwale
-                                                                  Google
-                                                         4 December 2020
+Shared Signals and Events                                    T. Cappalli
+Internet-Draft                                                 Microsoft
+Intended status: Standards Track                        A. Tulshibagwale
+Expires: August 30, 2021                                          Google
+                                                       February 26, 2021
 
 
                       OpenID CAEP Event Types 1.0
@@ -15,48 +15,77 @@
 Abstract
 
    This document defines the Continous Access Evaluation Protocol (CAEP)
-   Event Types.  Event Types are introduced and defined in Security
-   Event Token [SET]
+   Event Types for the Shared Signals and Events Profile of IETF
+   Security Events 1.0 [SSE-PROFILE].
+
+   Event Types are introduced and defined in Security Event Token (SET)
+   [RFC8417].
+
+Status of This Memo
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at https://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on August 30, 2021.
+
+Copyright Notice
+
+   Copyright (c) 2021 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (https://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.
+
+
+
+
+
+
+
+Cappalli & Tulshibagwale Expires August 30, 2021                [Page 1]
+
+Internet-Draft              CAEP-Event-Types               February 2021
+
 
 Table of Contents
 
-   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   1
+   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
      1.1.  Notational Considerations . . . . . . . . . . . . . . . .   2
    2.  Event Types . . . . . . . . . . . . . . . . . . . . . . . . .   2
      2.1.  Session Revoked . . . . . . . . . . . . . . . . . . . . .   2
-       2.1.1.  Attributes  . . . . . . . . . . . . . . . . . . . . .   2
+       2.1.1.  Attributes  . . . . . . . . . . . . . . . . . . . . .   3
        2.1.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .   3
      2.2.  Token Claims Change . . . . . . . . . . . . . . . . . . .   5
-       2.2.1.  Attributes  . . . . . . . . . . . . . . . . . . . . .   5
-       2.2.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .   5
-     2.3.  Credential Change . . . . . . . . . . . . . . . . . . . .   7
-       2.3.1.  Attributes  . . . . . . . . . . . . . . . . . . . . .   7
+       2.2.1.  Attributes  . . . . . . . . . . . . . . . . . . . . .   6
+       2.2.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .   6
+     2.3.  Credential Change . . . . . . . . . . . . . . . . . . . .   8
+       2.3.1.  Attributes  . . . . . . . . . . . . . . . . . . . . .   8
        2.3.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .   9
-     2.4.  Assurance Level Change  . . . . . . . . . . . . . . . . .   9
-       2.4.1.  Attributes  . . . . . . . . . . . . . . . . . . . . .  10
-       2.4.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  11
-     2.5.  Device Compliance Change  . . . . . . . . . . . . . . . .  12
-       2.5.1.  Attributes  . . . . . . . . . . . . . . . . . . . . .  12
-       2.5.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  13
-   3.  Informative References  . . . . . . . . . . . . . . . . . . .  13
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  14
+     2.4.  Assurance Level Change  . . . . . . . . . . . . . . . . .  10
+       2.4.1.  Attributes  . . . . . . . . . . . . . . . . . . . . .  11
+       2.4.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  12
+     2.5.  Device Compliance Change  . . . . . . . . . . . . . . . .  13
+       2.5.1.  Attributes  . . . . . . . . . . . . . . . . . . . . .  13
+       2.5.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  14
+   3.  Normative References  . . . . . . . . . . . . . . . . . . . .  15
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  15
 
 1.  Introduction
 
-   This specification is based on SSE Profile [SSE-PROFILE] and uses the
-   subject identifiers defined there.
-
-
-
-
-
-
-
-
-Cappalli & Tulshibagwale      Informational                     [Page 1]
-
-                       OpenID CAEP Event Types 1.0         December 2020
-
+   This specification is based on the Shared Signals and Events Profile
+   of IETF Security Events 1.0 [SSE-PROFILE] and uses the subject
+   identifiers defined there.
 
 1.1.  Notational Considerations
 
@@ -73,8 +102,17 @@ Cappalli & Tulshibagwale      Informational                     [Page 1]
 
 2.1.  Session Revoked
 
-   Event Type URI:
-   "https://schemas.openid.net/secevent/caep/event-type/session-revoked"
+   Event Type URI: "https://schemas.openid.net/secevent/caep/event-type/
+   session-revoked"
+
+
+
+
+
+Cappalli & Tulshibagwale Expires August 30, 2021                [Page 2]
+
+Internet-Draft              CAEP-Event-Types               February 2021
+
 
    Session Revoked signals that the session identified by the subject
    has been revoked.  The explicit session identifier may be directly
@@ -91,44 +129,46 @@ Cappalli & Tulshibagwale      Informational                     [Page 1]
 
 2.1.1.  Attributes
 
-   "event_timestamp"  REQUIRED, JSON number: the time at which the
-      session revocation occured.  Its value is a JSON number
-      representing the number of seconds from 1970-01-01T0:0:0Z as
-      measured in UTC until the date/time.  This value must be less than
-      or equal to the "iat" claim in the parent Security Event Token
-      (SET).
+   event_timestamp  REQUIRED, JSON number: the time at which the session
+      revocation occured.  Its value is a JSON number representing the
+      number of seconds from 1970-01-01T0:0:0Z as measured in UTC until
+      the date/time.  This value must be less than or equal to the "iat"
+      claim in the parent Security Event Token (SET).
 
-   "initiating_entity"  OPTIONAL, JSON string: describes the entity that
+   initiating_entity  OPTIONAL, JSON string: describes the entity that
       invoked the session revocation.
 
-      Potential options:
+      Potential options: - "admin": an administrator revoked the session
+      - "user": the end-user revoked the session - "policy": a policy
+      evaluation resulted in the session revocation - "system": a system
+      or platform assertion resulted in the session revocation
 
-      *  "admin": an administrator revoked the session
-
-      *  "user": the end-user revoked the session
-
-
-
-Cappalli & Tulshibagwale      Informational                     [Page 2]
-
-                       OpenID CAEP Event Types 1.0         December 2020
-
-
-      *  "policy": a policy evaluation resulted in the session
-         revocation
-
-      *  "system": a system or platform assertion resulted in the
-         session revocation
-
-   "reason_admin"  OPTIONAL, JSON string: an administrative message for
+   reason_admin  OPTIONAL, JSON string: an administrative message for
       logging and auditing
 
-   "reason_user"  OPTIONAL, JSON string: a user-friendly message for
+   reason_user  OPTIONAL, JSON string: a user-friendly message for
       display to an end-user
 
-   "tenant_id"  OPTIONAL, JSON string: tenant identifier
+   tenant_id  OPTIONAL, JSON string: tenant identifier
 
 2.1.2.  Examples
+
+   NOTE: The event type URI is wrapped, the backslash is the
+   continuation character.
+
+
+
+
+
+
+
+
+
+
+Cappalli & Tulshibagwale Expires August 30, 2021                [Page 3]
+
+Internet-Draft              CAEP-Event-Types               February 2021
+
 
    {
        "iss": "https://idp.example.com/123456789/",
@@ -156,20 +196,6 @@ Cappalli & Tulshibagwale      Informational                     [Page 2]
 
              Figure 1: Example: Session Revoked for Session ID
 
-
-
-
-
-
-
-
-
-
-Cappalli & Tulshibagwale      Informational                     [Page 3]
-
-                       OpenID CAEP Event Types 1.0         December 2020
-
-
    {
        "iss": "https://idp.example.com/123456789/",
        "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
@@ -190,13 +216,24 @@ Cappalli & Tulshibagwale      Informational                     [Page 3]
 
         Figure 2: Example: Session Revoked for User using sub claim
 
+
+
+
+
+
+Cappalli & Tulshibagwale Expires August 30, 2021                [Page 4]
+
+Internet-Draft              CAEP-Event-Types               February 2021
+
+
    {
        "iss": "https://idp.example.com/123456789/",
        "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
        "iat": 1600976590,
        "aud": "https://sp.example.com/caep",
        "events": {
-           "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
+           "https://schemas.openid.net/secevent/caep/event-type/\
+           session-revoked": {
                "subject": {
                    "subject_type": "user-device-session",
                    "user": {
@@ -219,20 +256,12 @@ Cappalli & Tulshibagwale      Informational                     [Page 3]
        }
    }
 
-
-
-Cappalli & Tulshibagwale      Informational                     [Page 4]
-
-                       OpenID CAEP Event Types 1.0         December 2020
-
-
-            Figure 3: Example: Session Revoked for User + Device
+           Figure 3: Example: Session Revoked for User + Device
 
 2.2.  Token Claims Change
 
-   Event Type URI:
-   "https://schemas.openid.net/secevent/caep/event-type/token-claims-
-   change"
+   Event Type URI: "https://schemas.openid.net/secevent/caep/event-type/
+   token-claims-change"
 
    Token Claims Change signals that a claim in a token specified in the
    subject has changed.
@@ -241,45 +270,72 @@ Cappalli & Tulshibagwale      Informational                     [Page 4]
    with the nested "reason_admin" and/or "reason_user" attributes
    described below.
 
+
+
+
+
+
+
+
+Cappalli & Tulshibagwale Expires August 30, 2021                [Page 5]
+
+Internet-Draft              CAEP-Event-Types               February 2021
+
+
 2.2.1.  Attributes
 
-   "event_timestamp"  REQUIRED JSON number: the time at which the claims
+   event_timestamp  REQUIRED JSON number: the time at which the claims
       change occured.  Its value is a JSON number representing the
       number of seconds from 1970-01-01T0:0:0Z as measured in UTC until
       the date/time.  This value must be less than or equal to the "iat"
       claim in the parent Security Event Token (SET).
 
-   "initiating_entity"  OPTIONAL, JSON string: describes the entity that
+   initiating_entity  OPTIONAL, JSON string: describes the entity that
       invoked the token claims change.
 
-      Potential options:
+      Potential options: - "admin": an administrator invoked a token
+      claims change - "user": the end-user invoked a token claims change
+      - "policy": a policy evaluation resulted in the token claims
+      change - "system": a system or platform assertion resulted in the
+      the token claims change
 
-      *  "admin": an administrator invoked a token claims change
-
-      *  "user": the end-user invoked a token claims change
-
-      *  "policy": a policy evaluation resulted in the token claims
-         change
-
-      *  "system": a system or platform assertion resulted in the the
-         token claims change
-
-   "reason_admin"  OPTIONAL, JSON string: an administrative message for
+   reason_admin  OPTIONAL, JSON string: an administrative message for
       logging and auditing
 
-   "reason_user"  OPTIONAL, JSON string: a user-friendly message for
+   reason_user  OPTIONAL, JSON string: a user-friendly message for
       display to an end-user
 
-   "tenant_id"  OPTIONAL, JSON string: tenant identifier
+   tenant_id  OPTIONAL, JSON string: tenant identifier
 
 2.2.2.  Examples
 
+   NOTE: The event type URI is wrapped, the backslash is the
+   continuation character.
 
 
 
-Cappalli & Tulshibagwale      Informational                     [Page 5]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Cappalli & Tulshibagwale Expires August 30, 2021                [Page 6]
 
-                       OpenID CAEP Event Types 1.0         December 2020
+Internet-Draft              CAEP-Event-Types               February 2021
 
 
    {
@@ -303,7 +359,7 @@ Cappalli & Tulshibagwale      Informational                     [Page 5]
        }
    }
 
-               Figure 4: Example: OIDC ID Token Claims Change
+              Figure 4: Example: OIDC ID Token Claims Change
 
    {
        "iss": "https://idp.example.com/987654321/",
@@ -333,25 +389,24 @@ Cappalli & Tulshibagwale      Informational                     [Page 5]
 
 
 
-Cappalli & Tulshibagwale      Informational                     [Page 6]
+Cappalli & Tulshibagwale Expires August 30, 2021                [Page 7]
 
-                       OpenID CAEP Event Types 1.0         December 2020
+Internet-Draft              CAEP-Event-Types               February 2021
 
 
 2.3.  Credential Change
 
-   Event Type URI:
-   "https://schemas.openid.net/secevent/caep/event-type/credential-
-   change"
+   Event Type URI: "https://schemas.openid.net/secevent/caep/event-type/
+   credential-change"
 
    The Credential Change event signals that a credential was created,
    changed, revoked or deleted.  Credential Change scenarios include:
 
-   *  password/PIN change/reset
+   o  password/PIN change/reset
 
-   *  certificate enrollment, renewal, revocation and deletion
+   o  certificate enrollment, renewal, revocation and deletion
 
-   *  second factor / passwordless credential enrollment and deletion
+   o  second factor / passwordless credential enrollment and deletion
       (U2F, FIDO2, OTP, app-based)
 
    The actual reason why the credential change occured might be
@@ -360,55 +415,22 @@ Cappalli & Tulshibagwale      Informational                     [Page 6]
 
 2.3.1.  Attributes
 
-   "event_timestamp"  REQUIRED, JSON number: the time at which the
+   event_timestamp  REQUIRED, JSON number: the time at which the
       credential change occured.  Its value is a JSON number
       representing the number of seconds from 1970-01-01T0:0:0Z as
       measured in UTC until the date/time.  This value must be less than
       or equal to the "iat" claim in the parent Security Event Token
       (SET).
 
-   "credential_type"  REQUIRED, JSON string: potential options:
+   credential_type  REQUIRED, JSON string: potential options: - password
+      - pin - x509 - fido2-platform - fido2-roaming - fido-u2f -
+      verifiable-credential - phone-voice - phone-sms - app - other
+      mutually supported credential type
 
-      *  password
+   change_type  REQUIRED, JSON string: potential options: - create -
+      revoke - update - delete
 
-      *  pin
-
-      *  x509
-
-      *  fido2-platform
-
-      *  fido2-roaming
-
-      *  fido-u2f
-
-      *  verifiable-credential
-
-      *  phone-voice
-
-      *  phone-sms
-
-
-
-Cappalli & Tulshibagwale      Informational                     [Page 7]
-
-                       OpenID CAEP Event Types 1.0         December 2020
-
-
-      *  app
-
-      *  other mutually supported credential type
-
-   "change_type"  REQUIRED, JSON string: potential options:
-
-      *  create
-
-      *  revoke
-
-      *  update
-
-      *  delete
-
-   "initiating_entity"  OPTIONAL, JSON string: describes the entity that
+   initiating_entity  OPTIONAL, JSON string: describes the entity that
       invoked the credential change.
 
       Potential options:
@@ -419,38 +441,70 @@ Cappalli & Tulshibagwale      Informational                     [Page 7]
 
       *  "policy": a policy evaluation resulted in the credential change
 
+
+
+
+
+Cappalli & Tulshibagwale Expires August 30, 2021                [Page 8]
+
+Internet-Draft              CAEP-Event-Types               February 2021
+
+
       *  "system": a system or platform assertion resulted in credential
          change
 
-   "reason_admin"  OPTIONAL, JSON string: an administrative message for
+   reason_admin  OPTIONAL, JSON string: an administrative message for
       logging and auditing
 
-   "reason_user"  OPTIONAL, JSON string: a user-friendly message for
+   reason_user  OPTIONAL, JSON string: a user-friendly message for
       display to an end-user
 
-   "tenant_id"  OPTIONAL, JSON string: tenant identifier
+   tenant_id  OPTIONAL, JSON string: tenant identifier
 
-   "friendly_name"  OPTIONAL, JSON string: credential friendly name
+   friendly_name  OPTIONAL, JSON string: credential friendly name
 
-   "x509_issuer"  OPTIONAL, JSON string: issuer of the X.509 certificate
+   x509_issuer  OPTIONAL, JSON string: issuer of the X.509 certificate
       as defined in [RFC5280]
 
-   "x509_serial"  OPTIONAL, JSON string: serial number of the X.509
+   x509_serial  OPTIONAL, JSON string: serial number of the X.509
       certificate as defined in [RFC5280]
 
-   "fido2_aaguid"  OPTIONAL, JSON string: FIDO2 Authenticator
-      Attestation GUID as defined in [WebAuthn]
-
-
-
-
-
-Cappalli & Tulshibagwale      Informational                     [Page 8]
-
-                       OpenID CAEP Event Types 1.0         December 2020
-
+   fido2_aaguid  OPTIONAL, JSON string: FIDO2 Authenticator Attestation
+      GUID as defined in [WebAuthn]
 
 2.3.2.  Examples
+
+   NOTE: The event type URI is wrapped, the backslash is the
+   continuation character.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Cappalli & Tulshibagwale Expires August 30, 2021                [Page 9]
+
+Internet-Draft              CAEP-Event-Types               February 2021
+
 
    {
        "iss": "https://idp.example.com/3456789/",
@@ -482,9 +536,8 @@ Cappalli & Tulshibagwale      Informational                     [Page 8]
 
 2.4.  Assurance Level Change
 
-   Event Type URI:
-   "https://schemas.openid.net/secevent/caep/event-type/assurance-level-
-   change"
+   Event Type URI: "https://schemas.openid.net/secevent/caep/event-type/
+   assurance-level-change"
 
    The Assurance Level Change event signals that there has been a change
    in authentication method since the initial user login.  This change
@@ -492,22 +545,22 @@ Cappalli & Tulshibagwale      Informational                     [Page 8]
    method, or vice versa.
 
    In the first scenario, Assurance Level Change will an increase, while
-   in the second scenario it will be  a decrease.  For example, a user
+   in the second scenario it will be a decrease.  For example, a user
    can start a session with Service Provider A using single factor
    authentication (such as a password).  The user can then open another
    session with Service Provider B using two-factor authentication (such
    as OTP).  In this scenario an increase Assurance Level Change event
-
-
-
-
-Cappalli & Tulshibagwale      Informational                     [Page 9]
-
-                       OpenID CAEP Event Types 1.0         December 2020
-
-
    will signal to Service Provider A that user has authenticated with a
    stronger authentication method.
+
+
+
+
+
+Cappalli & Tulshibagwale Expires August 30, 2021               [Page 10]
+
+Internet-Draft              CAEP-Event-Types               February 2021
+
 
    The actual reason why the assurance level changed might be specified
    with the nested "reason_admin" and/or "reason_user" attributes
@@ -515,55 +568,55 @@ Cappalli & Tulshibagwale      Informational                     [Page 9]
 
 2.4.1.  Attributes
 
-   "event_timestamp"  REQUIRED, JSON number: the time at which the
+   event_timestamp  REQUIRED, JSON number: the time at which the
       assurance level change occured.  Its value is a JSON number
       representing the number of seconds from 1970-01-01T0:0:0Z as
       measured in UTC until the date/time.  This value must be less than
       or equal to the "iat" claim in the parent Security Event Token
       (SET).
 
-   "current_level"  REQUIRED, JSON string: the current NIST
+   current_level  REQUIRED, JSON string: the current NIST Authenticator
+      Assurance Level (AAL) as defined in [SP800-63R3]
+
+      Potential options:
+
+      *  nist-aal1
+
+      *  nist-aal2
+
+      *  nist-aal3
+
+   previous_level  REQUIRED, JSON string: the previous NIST
       Authenticator Assurance Level (AAL) as defined in [SP800-63R3]
 
-   Options:
+      Potential options:
 
-   *  nist-aal1
+      *  nist-aal1
 
-   *  nist-aal2
+      *  nist-aal2
 
-   *  nist-aal3
+      *  nist-aal3
 
-   "previous_level"  REQUIRED, JSON string: the previous NIST
-      Authenticator Assurance Level (AAL) as defined in [SP800-63R3]
+   change_direction  REQUIRED, JSON string: the Authenticator Assurance
+      Level increased or decreased
 
-   Options:
+      Potential options: - increase - decrease
 
-   *  nist-aal1
-
-   *  nist-aal2
-
-   *  nist-aal3
-
-   "change_direction"  REQUIRED, JSON string: the Authenticator
-      Assurance Level increased or decreased
-
-   Options: * increase * decrease
-
-   "initiating_entity"  OPTIONAL, JSON string: describes the entity that
+   initiating_entity  OPTIONAL, JSON string: describes the entity that
       invoked the assurance level change
 
       Potential options:
 
-
-
-
-Cappalli & Tulshibagwale      Informational                    [Page 10]
-
-                       OpenID CAEP Event Types 1.0         December 2020
-
-
       *  "admin": an administrative action resulted in an assurance
          level change
+
+
+
+
+Cappalli & Tulshibagwale Expires August 30, 2021               [Page 11]
+
+Internet-Draft              CAEP-Event-Types               February 2021
+
 
       *  "user": an end-user action resulted in an assurance level
          change
@@ -574,15 +627,18 @@ Cappalli & Tulshibagwale      Informational                    [Page 10]
       *  "system": a system or platform assertion resulted in an
          assurance level change
 
-   "reason_admin"  OPTIONAL, JSON string: an administrative message for
+   reason_admin  OPTIONAL, JSON string: an administrative message for
       logging and auditing
 
-   "reason_user"  OPTIONAL, JSON string: a user-friendly message for
+   reason_user  OPTIONAL, JSON string: a user-friendly message for
       display to an end-user
 
-   "tenant_id"  OPTIONAL, JSON string: tenant identifier
+   tenant_id  OPTIONAL, JSON string: tenant identifier
 
 2.4.2.  Examples
+
+   NOTE: The event type URI is wrapped, the backslash is the
+   continuation character.
 
    {
        "iss": "https://idp.example.com/3456789/",
@@ -613,16 +669,15 @@ Cappalli & Tulshibagwale      Informational                    [Page 10]
 
 
 
-Cappalli & Tulshibagwale      Informational                    [Page 11]
+Cappalli & Tulshibagwale Expires August 30, 2021               [Page 12]
 
-                       OpenID CAEP Event Types 1.0         December 2020
+Internet-Draft              CAEP-Event-Types               February 2021
 
 
 2.5.  Device Compliance Change
 
-   Event Type URI:
-   "https://schemas.openid.net/secevent/caep/event-type/device-
-   compliance-change"
+   Event Type URI: "https://schemas.openid.net/secevent/caep/event-type/
+   device-compliance-change"
 
    Token Claims Change signals that a claim in a token specified in the
    subject has changed.
@@ -633,32 +688,32 @@ Cappalli & Tulshibagwale      Informational                    [Page 11]
 
 2.5.1.  Attributes
 
-   "event_timestamp"  REQUIRED, JSON number: the time at which the
-      device compliance change occured.  Its value is a JSON number
+   event_timestamp  REQUIRED, JSON number: the time at which the device
+      compliance change occured.  Its value is a JSON number
       representing the number of seconds from 1970-01-01T0:0:0Z as
       measured in UTC until the date/time.  This value must be less than
       or equal to the "iat" claim in the parent Security Event Token
       (SET).
 
-   "previous_status"  REQUIRED, JSON string: the compliance status prior
+   previous_status  REQUIRED, JSON string: the compliance status prior
       to the change that triggered the event
 
-      Options:
+      Potential options:
 
       *  compliant
 
       *  not-compliant
 
-   "current_status"  REQUIRED, JSON string: the current status that
+   current_status  REQUIRED, JSON string: the current status that
       triggered the event
 
-      Options:
+      Potential options:
 
       *  compliant
 
       *  not-compliant
 
-   "initiating_entity"  OPTIONAL, JSON string: describes the entity that
+   initiating_entity  OPTIONAL, JSON string: describes the entity that
       invoked the device compliance change
 
       Potential options:
@@ -669,9 +724,10 @@ Cappalli & Tulshibagwale      Informational                    [Page 11]
 
 
 
-Cappalli & Tulshibagwale      Informational                    [Page 12]
+
+Cappalli & Tulshibagwale Expires August 30, 2021               [Page 13]
 
-                       OpenID CAEP Event Types 1.0         December 2020
+Internet-Draft              CAEP-Event-Types               February 2021
 
 
       *  "user": the end-user action invoked the device compliance
@@ -683,15 +739,18 @@ Cappalli & Tulshibagwale      Informational                    [Page 12]
       *  "system": a system or platform assertion resulted in the device
          compliance change
 
-   "reason_admin"  OPTIONAL, JSON string: an administrative message for
+   reason_admin  OPTIONAL, JSON string: an administrative message for
       logging and auditing
 
-   "reason_user"  OPTIONAL, JSON string: a user-friendly message for
+   reason_user  OPTIONAL, JSON string: a user-friendly message for
       display to an end-user
 
-   "tenant_id"  OPTIONAL, JSON string: tenant identifier
+   tenant_id  OPTIONAL, JSON string: tenant identifier
 
 2.5.2.  Examples
+
+   NOTE: The event type URI is wrapped, the backslash is the
+   continuation character.
 
    {
        "iss": "https://idp.example.com/123456789/",
@@ -718,36 +777,42 @@ Cappalli & Tulshibagwale      Informational                    [Page 12]
        }
    }
 
-            Figure 8: Example: Device has gone out of compliance
-
-3.  Informative References
+           Figure 8: Example: Device has gone out of compliance
 
 
 
-
-Cappalli & Tulshibagwale      Informational                    [Page 13]
+Cappalli & Tulshibagwale Expires August 30, 2021               [Page 14]
 
-                       OpenID CAEP Event Types 1.0         December 2020
+Internet-Draft              CAEP-Event-Types               February 2021
 
+
+3.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", DOI 10.17487/RFC2119, March 1997,
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
+
+   [RFC2616]  Fielding, R., Gettys, J., Mogul, J., Frystyk, H.,
+              Masinter, L., Leach, P., and T. Berners-Lee, "Hypertext
+              Transfer Protocol -- HTTP/1.1", RFC 2616,
+              DOI 10.17487/RFC2616, June 1999,
+              <https://www.rfc-editor.org/info/rfc2616>.
 
    [RFC5280]  Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
               Housley, R., and W. Polk, "Internet X.509 Public Key
               Infrastructure Certificate and Certificate Revocation List
-              (CRL) Profile", May 2008,
-              <https://tools.ietf.org/html/rfc5280>.
+              (CRL) Profile", RFC 5280, DOI 10.17487/RFC5280, May 2008,
+              <https://www.rfc-editor.org/info/rfc5280>.
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
-              2119 Key Words", DOI 10.17487/RFC8174, May 2017,
-              <https://www.rfc-editor.org/info/rfc8174>.
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
-   [SET]      Hunt, P., Ed., Jones, M.B., Denniss, W., and M.A. Ansari,
-              "Security Event Token (SET)", April 2018,
-              <https://tools.ietf.org/html/draft-ietf-secevent-token-
-              09>.
+   [RFC8417]  Hunt, P., Ed., Jones, M., Denniss, W., and M. Ansari,
+              "Security Event Token (SET)", RFC 8417,
+              DOI 10.17487/RFC8417, July 2018,
+              <https://www.rfc-editor.org/info/rfc8417>.
 
    [SP800-63R3]
               Grassi, P., Garcia, M., and J. Fenton, "NIST Special
@@ -756,20 +821,31 @@ Cappalli & Tulshibagwale      Informational                    [Page 13]
 
    [SSE-PROFILE]
               Tulshibagwale, A. and T. Cappalli, "OpenID Shared Signals
-              and Events Profile of IETF Security Events 2.0", April
-              2018,
+              and Events Profile of IETF Security Events 1.0", 2021,
               <http://openid.net/specs/openid-risc-profile-1_0.html>.
 
-   [WebAuthn] Balfanz, D., "Web Authentication: An API for accessing
-              Public Key Credentials Level 1", March 2018,
+   [WebAuthn]
+              Balfanz, D., "Web Authentication: An API for accessing
+              Public Key Credentials Level 1", n.d.,
               <https://www.w3.org/TR/webauthn/>.
 
 Authors' Addresses
 
+
+
+
+
+
+
+Cappalli & Tulshibagwale Expires August 30, 2021               [Page 15]
+
+Internet-Draft              CAEP-Event-Types               February 2021
+
+
    Tim Cappalli
    Microsoft
 
-   Email: tim.cappalli+caep@microsoft.com
+   Email: tim.cappalli@microsoft.com
 
 
    Atul Tulshibagwale
@@ -781,4 +857,40 @@ Authors' Addresses
 
 
 
-Cappalli & Tulshibagwale      Informational                    [Page 14]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Cappalli & Tulshibagwale Expires August 30, 2021               [Page 16]
