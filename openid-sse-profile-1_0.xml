@@ -98,41 +98,43 @@
     </section>
 
     <section anchor="subject-principals" title="Subject Principals">
-      <t>This SSE profile defines a Subject Principal to be the entity about which an event can be
+      <t>This SSE profile defines a Subject Principal to be the entities about which an event can be
         sent by Transmitters and received by Receivers using the SSE profile.</t>
 
-      <t>Subject Principals are the managed entities in a SSE Transmitter or Receiver. These may be
+      <t>Subject Principals are the managed entities in a SSE Transmitter or Receiver. These include
         human or robotic principals, devices, customer tenants in a multi-tenanted service,
         organizational units within a tenant, groups of subject principals or other entities that
-        are managed by Transmitters and Receivers.</t>
+        are managed by Transmitters and Receivers. There may be other actors or resources that can
+        be treated as Subject Principals, and event-type definitions SHOULD specify the range of
+        principals addressed by the event.</t>
 
-      <t>Subject Principals are identified by subject claims defined below.</t>
+      <t>Subject Principals are identified by Subject Members defined below.</t>
 
     </section>
 
-    <section anchor="subject-ids" title="Subject Claims in SSE Events">
-      <t>A Subject claim in an SSE event MAY have any claim name. Each Subject claim MUST refer to
-        exactly one Subject Principal.</t>
+    <section anchor="subject-ids" title="Subject Members in SSE Events">
+      <t>A member of type Subject in an SSE event MAY have any claim name. Each Subject Member MUST
+        refer to exactly one Subject Principal.</t>
 
       <t>A Subject may be a <spanx style="verb">simple subject</spanx> or a <spanx style="verb">
-        compound subject.</spanx></t>
-      <section anchor="simple-subjects" title="Simple Subjects">
-        <t>A Simple Subject claim has a claim name and a value that is a <spanx style="verb">
+        complex subject.</spanx></t>
+      <section anchor="simple-subjects" title="Simple Subject Members">
+        <t>A Simple Subject Member has a claim name and a value that is a <spanx style="verb">
           Subject Identifier</spanx> as defined in the <xref target="SUBIDS">Subject Identifiers
           for Security Event Tokens</xref>. Below is a non-normative example of a Simple Subject
-          claim in a SSE event.</t>
+          Member in a SSE event.</t>
         <figure anchor="simple-subject-ex" title="Example: Simple Subject">
           <artwork><![CDATA[
-"transferor": {
-  "subject_type": "email",
+"transferer": {
+  "format": "email",
   "email": "foo@example.com"
 }
         ]]></artwork></figure>
       </section>
-      <section anchor="complex-subjects" title="Complex Subjects">
-        <t>A Complex Subject claim has a claim name and a value that is a <xref target="RFC7159">
-          JSON</xref> object that has one or more Simple Subjects. The claim name of each Simple
-          Subject in this value MUST be one of the following:
+      <section anchor="complex-subjects" title="Complex Subject Members">
+        <t>A Complex Subject Member has a name and a value that is a <xref target="RFC7159">
+          JSON</xref> object that has one or more Simple Subject Members. The name of each Simple
+          Subject Member in this value MAY be one of the following:
           <list style="hanging">
             <t hangText="user"> <vspace blankLines="0"/>OPTIONAL. A Subject Identifier that
               identifies a user.</t>
@@ -148,46 +150,49 @@
               identifies an organizational unit.</t>
             <t hangText="group"> <vspace blankLines="0"/>OPTIONAL. A Subject Identifier that
               identifies a group.</t>
-          </list>
-          Each claim name MAY appear at most once in the Complex Subject value.</t>
+          </list></t>
+        <t>Additional Subject Member names MAY be used in Complex Subjects. Each member name MAY
+          appear at most once in the Complex Subject value.</t>
         <t>Below is a non-normative example of a Complex Subject claim in a SSE event.</t>
         <figure anchor="complex-subject-ex" title="Example: Complex Subject"><artwork><![CDATA[
 "transferee": {
   "user" : {
-    "subject_type": "email",
+    "format": "email",
     "email": "bar@example.com"
   },
   "tenant" : {
-    "subject_type": "iss_sub",
+    "format": "iss_sub",
     "iss" : "http://example.com/idp1",
     "sub" : "1234"
   }
 }
         ]]></artwork></figure>
         <section anchor="complex-subject-interpretation" title="Complex Subject Interpretation">
-          <t>All claims within a Complex Subject MUST represent attributes of the same Subject
+          <t>All members within a Complex Subject MUST represent attributes of the same Subject
             Principal. As a whole, the Complex Subject MUST refer to exactly one Subject
             Principal.</t>
         </section>
       </section>
       <section anchor="subject-ids-in-sse" title="Subject Identifiers in SSE Events">
-        <t>A Subject Identifier in a SSE event MUST have a subject type that is any one of:
+        <t>A Subject Identifier in a SSE event MUST have an identifier format that is any one of:
           <list style="symbols">
-            <t>Defined in the <xref target="SUBIDS">Subject Identifiers for Security Event Tokens
-              </xref>.</t>
-            <t>A subject type defined in the <xref target="additional-subject-id-types">Subject
-              Identifier Types</xref> section below, OR</t>
-            <t>A proprietary subject identifier type that is agreed to between parties. Claims
-              within the subject identifier that has a proprietary subject type are agreed to
-              between the parties and such agreement is outside the scope of this specification.</t>
+            <t>Defined in the IANA Registry defined in <xref target="SUBIDS">Subject Identifiers
+              for Security Event Tokens</xref>, located at <spanx style="verb">
+              "https://www.iana.org/assignments/secevent/".</spanx></t>
+            <t>An identifier format defined in the <xref target="additional-subject-id-formats">
+              Additional Subject Identifier Formats</xref> section below, OR</t>
+            <t>A proprietary subject identifier format that is agreed to between parties. Members
+              within a subject identifier that has a proprietary subject identifier format are
+              agreed to between the parties and such agreement is outside the scope of this
+              specification.</t>
           </list></t>
       </section>
-      <section anchor="additional-subject-id-types" title="Additional Subject Identifier Types">
-        <t>The following new subject identifier types are defined:</t>
-        <section anchor="sub-id-jwt-id" title="JWT ID Subject Identifier Type">
-          <t>The "JWT ID" Subject Identifier Type specifies a JSON Web Token (JWT) identifier,
+      <section anchor="additional-subject-id-formats" title="Additional Subject Identifier Formats">
+        <t>The following new subject identifier formats are defined:</t>
+        <section anchor="sub-id-jwt-id" title="JWT ID Subject Identifier Format">
+          <t>The "JWT ID" Subject Identifier Format specifies a JSON Web Token (JWT) identifier,
             defined in  <xref target="RFC7519"/>. Subject Identifiers of this type MUST contain the
-            following claims:
+            following members:
             <list style="hanging">
               <t hangText="iss"> 
               <vspace blankLines="0"/>REQUIRED. The "iss" (issuer) claim of the JWT being
@@ -196,22 +201,23 @@
               <vspace blankLines="0"/>REQUIRED. The "jti" (JWT token ID) claim of the JWT being
                 identified, defined in <xref target="RFC7519"/></t>
             </list></t>
-          <t>The "JWT ID" Subject Identifier Type is identified by the name <spanx style="verb">
+          <t>The "JWT ID" Subject Identifier Format is identified by the name <spanx style="verb">
             jwt-id</spanx>.</t>
           <t>Below is a non-normative example of Subject Identifier for the <spanx style="verb">
-            jwt-id</spanx> Subject Identifier type.</t>
+            jwt-id</spanx> Subject Identifier Format.</t>
           <figure anchor="sub-id-jwtid" title="Example: 'jwt-id' Subject Identifier"><artwork>
             <![CDATA[
 {
-    "subject_type": "jwt-id",
+    "format": "jwt-id",
     "iss": "https://idp.example.com/123456789/",
     "jti": "B70BA622-9515-4353-A866-823539EECBC8"
 }
         ]]></artwork></figure>
         </section>
-        <section anchor="sub-id-saml-assertion-id" title="SAML Assertion ID Subject Identifier Type">
-          <t>The "SAML Assertion ID" Subject Identifier Type specifies a SAML 2.0 <xref target="OASIS.saml-core-2.0-os"/>
-            assertion identifier. Subject Identifiers of this type MUST contain the following claims:
+        <section anchor="sub-id-saml-assertion-id" title="SAML Assertion ID Subject Identifier Format">
+          <t>The "SAML Assertion ID" Subject Identifier Format specifies a SAML 2.0 <xref target="OASIS.saml-core-2.0-os"/>
+            assertion identifier. Subject Identifiers of this format MUST contain the following
+            members:
             <list style="hanging">
               <t hangText="issuer"> <vspace blankLines="0"/>REQUIRED. The "Issuer" value of the SAML
                 assertion being identified, defined in <xref target="OASIS.saml-core-2.0-os"/></t>
@@ -219,14 +225,14 @@
                 SAML assertion being identified, defined in <xref target="OASIS.saml-core-2.0-os"/>
               </t>
             </list></t>
-          <t>The "SAML Assertion ID" Subject Identifier Type is identified by the name
+          <t>The "SAML Assertion ID" Subject Identifier Format is identified by the name
             <spanx style="verb">saml-assertion-id</spanx>.</t>
           <t>Below is a non-normative example Subject Identifier for the <spanx style="verb">
-            saml-assertion-id</spanx> Subject Identifier type.</t>
+            saml-assertion-id</spanx> Subject Identifier Format.</t>
           <figure anchor="sub-id-samlassertionid" title="Example: 'saml-assertion-id' Subject Identifier">
             <artwork><![CDATA[
 {
-    "subject_type": "saml-assertion-id",
+    "format": "saml-assertion-id",
     "issuer": "https://idp.example.com/123456789/",
     "assertion_id": "_8e8dc5f69a98cc4c1ff3427e5ce34606fd672f91e6"
 }
@@ -234,27 +240,27 @@
         </section>
       </section>
       <section anchor="receiver-subject-processing" title="Receiver Subject Processing">
-        <t>A SSE Receiver MUST make a best effort process all claims from a Subject in an SSE event.
+        <t>A SSE Receiver MUST make a best effort process all members from a Subject in an SSE event.
           The <xref target="discovery-meta">Transmitter Configuration Metadata</xref> defined below
-          MAY define certain claims within a Complex Subject to be Critical. A SSE Receiver MUST
-          discard any event that contains a Subject with a Critical claim that it is unable to
+          MAY define certain members within a Complex Subject to be Critical. A SSE Receiver MUST
+          discard any event that contains a Subject with a Critical member that it is unable to
           process.</t>
       </section>
     </section>
 
     <section anchor="properties" title="Event Properties">
-      <t>Additional claims about an event may be included in the <spanx style="verb">events</spanx>
-        claim. Some of these claims are required and specified as such in the respective event types
-        specs. If a Transmitter determines that it needs to include additional claims that are not
-        specified in the event types spec, then the name of such claims MUST be a URI. The
-        discoverability of all additional claims is specified in the <xref target="discovery">
+      <t>Additional members about an event may be included in the <spanx style="verb">events</spanx>
+        claim. Some of these members are required and specified as such in the respective event
+        types specs. If a Transmitter determines that it needs to include additional members that
+        are not specified in the event types spec, then the name of such members MUST be a URI. The
+        discoverability of all additional members is specified in the <xref target="discovery">
         Discovery</xref> section.
       </t>
     </section>
 
     <section anchor="events-examples" title="Example SETs that conform to the SSE profile">
       <t>The following are hypothetical examples of SETs that conform to the SSE profile.</t>
-      <figure anchor="subject-ids-ex-simple" title="Example: SET Containing a SSE Event with a Simple Subject Claim">
+      <figure anchor="subject-ids-ex-simple" title="Example: SET Containing a SSE Event with a Simple Subject Member">
         <artwork><![CDATA[
 {
   "iss": "https://idp.example.com/",
@@ -264,7 +270,7 @@
   "events": {
     "https://schemas.openid.net/secevent/risc/event-type/account-enabled": {
       "subject": {
-        "subject_type": "email",
+        "format": "email",
         "email": "foo@example.com"
       }
     }
@@ -273,7 +279,7 @@
         ]]></artwork>
       </figure>
 
-      <figure anchor="subject-ids-ex-complex" title="Example: SET Containing a SSE Event with a Complex Subject Claim">
+      <figure anchor="subject-ids-ex-complex" title="Example: SET Containing a SSE Event with a Complex Subject Member">
         <artwork><![CDATA[
 {
   "iss": "https://idp.example.com/",
@@ -284,12 +290,12 @@
     "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
     "subject": {
         "user": {
-            "subject_type": "iss-sub",
+            "format": "iss_sub",
             "iss": "https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/",
             "sub": "jane.smith@example.com"
         },
         "device": {
-            "subject_type": "iss-sub",
+            "format": "iss_sub",
             "iss": "https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/",
             "sub": "e9297990-14d2-42ec-a4a9-4036db86509a"
         }
@@ -300,7 +306,7 @@
         ]]></artwork>
       </figure>
 
-      <figure anchor="subject-properties-ex" title="Example: SET Containing a SSE Event with a Simple Subject and a Property Claim">
+      <figure anchor="subject-properties-ex" title="Example: SET Containing a SSE Event with a Simple Subject and a Property Member">
         <artwork><![CDATA[
 {
   "iss": "https://sp.example2.com/",
@@ -308,9 +314,9 @@
   "iat": 1520364019,
   "aud": "636C69656E745F6964",
   "events": {
-    "https://schemas.openid.net/secevent/caep/event-type/token-claims-changed": {
+    "https://schemas.openid.net/secevent/caep/event-type/token-claims-change": {
       "subject": {
-        "subject_type": "email",
+        "format": "email",
         "email": "foo@example2.com"
       },
       "ip_address" : "123.45.67.89"
@@ -320,7 +326,7 @@
         ]]></artwork>
       </figure>
 
-      <figure anchor="subject-custom-type-ex" title="Example: SET Containing a SSE Event with a Proprietary subject_type">
+      <figure anchor="subject-custom-type-ex" title="Example: SET Containing a SSE Event with a Proprietary Subject Identifier Format">
         <artwork><![CDATA[
 {
   "iss": "https://myservice.example3.com/",
@@ -330,7 +336,7 @@
   "events": {
     "https://schemas.openid.net/secevent/caep/event-type/token-claims-changed": {
     "subject": {
-        "subject_type": "catalog-item",
+        "format": "catalog_item",
         "catalog_id": "c0384/winter/2354122"
       }
     }
@@ -359,8 +365,8 @@
           <t hangText="add_subject_endpoint"> OPTIONAL. The URL of the Add Subject Endpoint.</t>
           <t hangText="remove_subject_endpoint"> OPTIONAL. The URL of the Remove Subject Endpoint.</t>
           <t hangText="verification_endpoint"> OPTIONAL. The URL of the Verification Endpoint.</t>
-          <t hangText="critical_claims">OPTIONAL. List of claim names in a Complex Subject that MUST
-            be interpreted by a Receiver.</t>
+          <t hangText="critical_subject_members">OPTIONAL. List of member names in a Complex Subject
+            which, if present in a Subject Member in an event, MUST be interpreted by a Receiver.</t>
         </list></t>
 
         <t>TODO: consider adding a IANA Registry for metadata, similar to Section 7.1.1 of <xref target="OAUTH-DISCOVERY"/>.
@@ -450,7 +456,7 @@ Content-Type: application/json
     "https://tr.example.com/sse/mgmt/subject:remove",
   "verification_endpoint":
     "https://tr.example.com/sse/mgmt/verification",
-  "critical_claims": [ "tenant", "user" ]
+  "critical_subject_members": [ "tenant", "user" ]
 }
 ]]></artwork>
             </figure>
@@ -637,7 +643,7 @@ Pragma: no-cache
   "status": "enabled",
   "subject": {
     "tenant" : {
-      "subject_type" : "iss_sub",
+      "format" : "iss_sub",
       "iss" : "http://example.com/idp1",
       "sub" : "1234"
     }
@@ -721,7 +727,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
   "status": "paused",
   "subject": {
     "tenant" : {
-      "subject_type" : "iss_sub",
+      "format" : "iss_sub",
       "iss" : "http://example.com/idp1",
       "sub" : "1234"
     }
@@ -814,8 +820,8 @@ Pragma: no-cache
               Transmitter MAY respond with a 429 status code. An Event
               Transmitter SHOULD NOT respond with a 429 status code if an Event
               Receiver is not exceeding this frequency.</t>
-            <t hangText="subject_type"><vspace blankLines="0"/> <spanx style="strong">Read-Write</spanx>,
-              The Subject Identifier Type that the Receiver wants for the events.
+            <t hangText="format"><vspace blankLines="0"/> <spanx style="strong">Read-Write</spanx>,
+              The Subject Identifier Format that the Receiver wants for the events.
               If not set then the Transmitter might decide to use a type that discloses more information
               than necessary.</t>
           </list></t>
@@ -1086,7 +1092,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
 {
   "subject": {
-    "subject_type": "email",
+    "format": "email",
     "email": "example.user@example.com"
   },
   "verified": true
@@ -1147,7 +1153,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
 {
   "subject": {
-    "subject_type": "phone",
+    "format": "phone",
     "phone_number": "+1 206 555 0123"
   }
 }
@@ -1331,7 +1337,7 @@ Pragma: no-cache
     "https://schemas.openid.net/secevent/sse/event-type/stream-updated": {
       "subject": {
         "tenant" : {
-          "subject_type": "iss_sub",
+          "format": "iss_sub",
           "iss" : "http://example.com/idp1",
           "sub" : "1234"
         }
@@ -1482,7 +1488,7 @@ Pragma: no-cache
     "https://schemas.openid.net/secevent/risc/event-type/account-\
 disabled": {
       "subject": {
-        "subject_type": "phone",
+        "format": "phone",
         "phone_number": "+1 206 555 0123"
       },
       "reason": "hijacking",
@@ -1503,7 +1509,7 @@ disabled": {
   "events": {
     "https://schemas.openid.net/secevent/caep/event-type/token-claims-changed": {
       "subject": {
-        "subject_type": "email",
+        "format": "email",
         "email": "user@example.com"
       },
       "token": "some-token-value",
@@ -1973,25 +1979,6 @@ disabled": {
         </front>
       </reference>
       
-      <reference anchor="BCP26" target="https://tools.ietf.org/html/rfc8126">
-        <front>
-          <title>Guidelines for Writing an IANA Considerations Section in RFCs</title>
-          <author fullname="Michelle Cotton" initials="M." surname="Cotton">
-            <organization abbrev="PTI">PTI, an affiliate of ICANN</organization>
-          </author>
-          <author fullname="Barry Leiba" initials="B." surname="Leiba">
-            <organization abbrev="Huawei Technologies">Huawei Technologies</organization>
-          </author>
-          <author fullname="Thomas Narten" initials="T." surname="Narten">
-            <organization abbrev="IBM Corporation">IBM Corporation</organization>
-          </author>
-          <date year="2017" month="June"/>
-        </front>
-        <seriesInfo name="BCP" value="26"/>
-        <seriesInfo name="RFC" value="8126"/>
-        <seriesInfo name="DOI" value="10.17487/RFC8126"/>
-      </reference>
-
       <reference anchor="CAEP" target="https://cloud.google.com/blog/products/identity-security/re-thinking-federated-identity-with-the-continuous-access-evaluation-protocol">
           <front>
             <title>
