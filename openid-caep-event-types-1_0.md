@@ -2,7 +2,7 @@
 title: OpenID CAEP Event Types 1.0
 abbrev: CAEP-Event-Types
 docname: openid-caep-event-types-1_0
-date: 2021-03-09
+date: 2021-03-17
 
 ipr: none
 cat: std
@@ -83,7 +83,7 @@ normative:
 
 --- abstract
 
-This document defines the Continous Access Evaluation Protocol (CAEP) 
+This document defines the Continuous Access Evaluation Protocol (CAEP) 
 Event Types for the Shared Signals and Events Profile of IETF Security 
 Events 1.0 {{SSE-PROFILE}}.
 
@@ -102,6 +102,38 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this 
 document are to be interpreted as described in BCP 14 {{RFC2119}} {{RFC8174}} 
 when, and only when, they appear in all capitals, as shown here.
+
+# Required Event Claims {#required-event-claims}
+The following claims are required in all CAEP events defined in this specification.
+
+event_timestamp
+: REQUIRED, JSON number: the time at which the session revocation occurred.
+  Its value is a JSON number representing the number of milliseconds from 
+  1970-01-01T0:0:0Z as measured in UTC until the date/time. The receiver
+  SHOULD reject events if this claim's value is in the future.
+
+# Optional Event Claims {#optional-event-claims}
+The following claims are optional unless otherwise specified in the event
+definition.
+
+initiating_entity
+: OPTIONAL, JSON string: describes the entity that invoked the event.
+: Potential options:
+
+  - `admin`:    an administrative action resulted in the event
+
+  - `user`:     an end-user action resulted in the event
+
+  - `policy`:   a policy evaluation resulted in the event
+
+  - `system`:   a system or platform assertion resulted in the event
+
+reason_admin
+: OPTIONAL, JSON string: an administrative message for logging and auditing
+
+reason_user
+: OPTIONAL, JSON string: a user-friendly message for display to an end-user
+
 
 # Event Types {#event-types}
 The base URI for CAEP event types is:
@@ -122,35 +154,35 @@ When a Complex Claim is used as the subject, the revocation event applies
 to any session derived from matching those combined claims.
 
 The actual reason why the session was revoked might be specified with the 
-nested `reason_admin` and/or `reason_user` attributes described below.
+nested `reason_admin` and/or `reason_user` claims described in {{optional-event-claims}}.
 
-### Attributes {#session-revoked-attributes}
+### Event-Specific Claims {#session-revoked-claims}
 
-event_timestamp
-: REQUIRED, JSON number: the time at which the session revocation occured.
-  Its value is a JSON number representing the number of milliseconds from 
-  1970-01-01T0:0:0Z as measured in UTC until the date/time. This value must 
-  be less than or equal to the "iat" claim in the parent 
-  Security Event Token (SET).
-
-initiating_entity
-: OPTIONAL, JSON string: describes the entity that invoked the session revocation.
-: Potential options:
-  - `admin`:    an administrator revoked the session
-  - `user`:     the end-user revoked the session
-  - `policy`:   a policy evaluation resulted in the session revocation
-  - `system`:   a system or platform assertion resulted in the session revocation
-
-reason_admin
-: OPTIONAL, JSON string: an administrative message for logging and auditing
-
-reason_user
-: OPTIONAL, JSON string: a user-friendly message for display to an end-user
-
+There are no event-specific claims for this event type.
 
 ### Examples  {#session-revoked-examples}
 
 NOTE: The event type URI is wrapped, the backslash is the continuation character.
+
+~~~ json
+{
+    "iss": "https://idp.example.com/123456789/",
+    "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
+    "iat": 1615305159,
+    "aud": "https://sp.example.com/caep",
+    "events": {
+        "https://schemas.openid.net/secevent/caep/event-type/\
+        session-revoked": {
+            "subject": {
+                "format": "opaque",
+                "sub": "dMTlD|1600802906337.16|16008.16"
+            }
+        },
+        "event_timestamp": 1615304991643
+    }
+}
+~~~
+{: #session-revoked-example-session-id-req title="Example: Session Revoked - Required claims + Simple Subject"}
 
 ~~~ json
 {
@@ -184,7 +216,7 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     }
 }
 ~~~
-{: #session-revoked-example-session-id title="Example: Session Revoked for User + Session ID + Tenant (Complex Subject)"}
+{: #session-revoked-example-session-id title="Example: Session Revoked - Complex Subject describing user + session ID + device (includes optional claims)"}
 
 ~~~ json
 {
@@ -204,7 +236,7 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     }
 }
 ~~~
-{: #session-revoked-example-user-sub title="Example: Session Revoked for User using sub claim"}
+{: #session-revoked-example-user-sub title="Example: Session Revoked - subject as `sub` claim (includes optional claims)"}
 
 ~~~ json
 {
@@ -239,7 +271,7 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     }
 }
 ~~~
-{: #session-revoked-example-user-device title="Example: Session Revoked for User + Device + Tenant (Complex Subject)"}
+{: #session-revoked-example-user-device title="Example: Session Revoked - Complex Subject describing user + device + tenant (includes optional claims)"}
 
 ## Token Claims Change {#token-claims-change}
 Event Type URI:
@@ -249,34 +281,13 @@ Event Type URI:
 Token Claims Change signals that a claim in a token, identified by the 
 subject claim, has changed. 
 
-The actual reason why the claims change occured might be specified with the 
-nested `reason_admin` and/or `reason_user` attributes described below.
+The actual reason why the claims change occurred might be specified with the 
+nested `reason_admin` and/or `reason_user` claims made in {{optional-event-claims}}.
 
-### Attributes {#token-claims-change-attributes}
-
-event_timestamp
-: REQUIRED, JSON number: the time at which the claims change occured.
-  Its value is a JSON number representing the number of milliseconds from 
-  1970-01-01T0:0:0Z as measured in UTC until the date/time. This value must 
-  be less than or equal to the "iat" claim in the parent 
-  Security Event Token (SET).
+### Event-Specific Claims {#token-claims-change-claims}
 
 claims
 : REQUIRED, JSON object: one or more claims with their new value(s)
-
-initiating_entity
-: OPTIONAL, JSON string: describes the entity that invoked the token claims change
-: Potential options:
-  - `admin`:    an administrator invoked a token claims change
-  - `user`:     the end-user invoked a token claims change
-  - `policy`:   a policy evaluation resulted in the token claims change
-  - `system`:   a system or platform assertion resulted in the the token claims change
-
-reason_admin
-: OPTIONAL, JSON string: an administrative message for logging and auditing
-
-reason_user
-: OPTIONAL, JSON string: a user-friendly message for display to an end-user
 
 
 ### Examples  {#token-claims-change-examples}
@@ -305,8 +316,34 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     }
 }
 ~~~
-{: #token-claims-change-example-oidc title="Example: OIDC ID Token Claims Change"}
+{: #token-claims-change-example-oidc title="Example: OIDC ID Token Claims Change - Required claims only"}
 
+~~~ json
+{
+    "iss": "https://idp.example.com/987654321/",
+    "jti": "9afce1e4e642b165fcaacdd0e7aa4903",
+    "iat": 1615305159,
+    "aud": "https://sp.example2.net/caep",
+    "events": {
+        "https://schemas.openid.net/secevent/caep/event-type/\
+        token-claims-change": {
+            "subject": {
+                "format": "jwt_id",
+                "iss": "https://idp.example.com/987654321/",
+                "jti": "f61t6e20zdo3px56gepu8rzlsp4c1dpc0fx7"
+            },
+            "event_timestamp": 1615304991643,
+            "initiating_entity": "policy",
+            "reason_admin": "User left trusted network: CorpNet3",
+            "reason_user": "You're no longer connected to a trusted network.",
+            "claims": {
+                "trusted_network": "false"
+            }
+        }
+    }
+}
+~~~
+{: #token-claims-change-example-oidc-optional title="Example: OIDC ID Token Claims Change - Optional claims"}
 
 ~~~json
 {
@@ -331,7 +368,7 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     }
 }
 ~~~
-{: #token-claims-change-example-saml title="Example: SAML Assertion Claims Change"}
+{: #token-claims-change-example-saml title="Example: SAML Assertion Claims Change - Required claims only"}
 
 
 ## Credential Change {#credential-change}
@@ -346,17 +383,10 @@ revoked or deleted. Credential Change scenarios include:
   - certificate enrollment, renewal, revocation and deletion
   - second factor / passwordless credential enrollment or deletion (U2F, FIDO2, OTP, app-based)
 
-The actual reason why the credential change occured might be specified with the 
-nested `reason_admin` and/or `reason_user` attributes described below.
+The actual reason why the credential change occurred might be specified with the 
+nested `reason_admin` and/or `reason_user` claims made in {{optional-event-claims}}.
 
-### Attributes {#credential-change-attributes}
-
-event_timestamp
-: REQUIRED, JSON number: the time at which the credential change occured.
-  Its value is a JSON number representing the number of milliseconds from 
-  1970-01-01T0:0:0Z as measured in UTC until the date/time. This value must 
-  be less than or equal to the "iat" claim in the parent 
-  Security Event Token (SET).
+### Event-Specific Claims {#credential-change-claims}
 
 credential_type
 : REQUIRED, JSON string: potential options:
@@ -378,21 +408,6 @@ change_type
     - `revoke`
     - `update`
     - `delete`
-
-initiating_entity
-: OPTIONAL, JSON string: describes the entity that invoked the credential change.
-: Potential options:
-
-  - `admin`:    an administrator changed the credential
-  - `user`:     the end-user changed the credential
-  - `policy`:   a policy evaluation resulted in the credential change
-  - `system`:   a system or platform assertion resulted in credential change
-
-reason_admin
-: OPTIONAL, JSON string: an administrative message for logging and auditing
-
-reason_user
-: OPTIONAL, JSON string: a user-friendly message for display to an end-user
 
 friendly_name
 : OPTIONAL, JSON string: credential friendly name
@@ -428,7 +443,7 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
             "credential_type": "fido2-roaming",
             "change_type": "create",
             "fido2_aaguid": "accced6a-63f5-490a-9eea-e59bc1896cfc",
-            "credential_name": "Jane's USB authenticator",
+            "friendly_name": "Jane's USB authenticator",
             "initiating_entity": "user",
             "reason_admin": "User self-enrollment",
             "event_timestamp": 1615304991643
@@ -436,7 +451,7 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     }
 }
 ~~~
-{: #credential-change-example-fido2 title="Example: Provisioning a new FIDO2 authenticator"}
+{: #credential-change-example-fido2 title="Example: Provisioning a new FIDO2 authenticator - Simple Subject + optional claims"}
 
 ## Assurance Level Change {#assurance-level-change}
 Event Type URI:
@@ -456,16 +471,9 @@ Assurance Level Change event will signal to Service Provider A that user has
 authenticated with a stronger authentication method.
 
 The actual reason why the assurance level changed might be specified with the 
-nested `reason_admin` and/or `reason_user` attributes described below.
+nested `reason_admin` and/or `reason_user` claims made in {{optional-event-claims}}.
 
-### Attributes {#assurance-level-change-attributes}
-
-event_timestamp
-: REQUIRED, JSON number: the time at which the assurance level change occured.
-  Its value is a JSON number representing the number of milliseconds from 
-  1970-01-01T0:0:0Z as measured in UTC until the date/time. This value must 
-  be less than or equal to the "iat" claim in the parent 
-  Security Event Token (SET).
+### Event-Specific Claims {#assurance-level-change-claims}
 
 current_level
 : REQUIRED, JSON string: the current NIST Authenticator Assurance Level (AAL) as defined in {{SP800-63R3}}
@@ -489,22 +497,7 @@ change_direction
   - `increase`
   - `decrease`
 
-initiating_entity
-: OPTIONAL, JSON string: describes the entity that invoked the assurance level change
-: Potential options:
 
-  - `admin`:    an administrative action resulted in an assurance level change
-  - `user`:     an end-user action resulted in an assurance level change
-  - `policy`:   a policy evaluation resulted in an assurance level change
-  - `system`:   a system or platform assertion resulted in an assurance level change
-
-reason_admin
-: OPTIONAL, JSON string: an administrative message for logging and auditing
-
-reason_user
-: OPTIONAL, JSON string: a user-friendly message for display to an end-user
-
-            
 ### Examples  {#assurance-level-change-examples}
 
 NOTE: The event type URI is wrapped, the backslash is the continuation character.
@@ -532,7 +525,7 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     }
 }
 ~~~
-{: #assurance-level-change-examples-al-increase title="Example: Assurance Level Increase"}
+{: #assurance-level-change-examples-al-increase title="Example: Assurance Level Increase - Simple Subject + optional claims"}
 
 
 ## Device Compliance Change {#device-compliance-change}
@@ -542,17 +535,10 @@ Event Type URI:
 
 Device Compliance Change signals that a device's compliance status has changed.
 
-The actual reason why the status change occured might be specified with the 
-nested `reason_admin` and/or `reason_user` attributes described below.
+The actual reason why the status change occurred might be specified with the 
+nested `reason_admin` and/or `reason_user` claims made in {{optional-event-claims}}.
 
 ### Attributes {#device-compliance-change-attributes}
-
-event_timestamp
-: REQUIRED, JSON number: the time at which the device compliance change 
-  occured. Its value is a JSON number representing the number of milliseconds from 
-  1970-01-01T0:0:0Z as measured in UTC until the date/time. This value must 
-  be less than or equal to the "iat" claim in the parent 
-  Security Event Token (SET).
 
 previous_status
 : REQUIRED, JSON string: the compliance status prior to the change that triggered the event
@@ -568,22 +554,6 @@ current_status
   - `compliant`
   - `not-compliant`
 
-initiating_entity
-: OPTIONAL, JSON string: describes the entity that invoked the device compliance change
-: Potential options:
-
-  - `admin`:    an administrative action invoked the device compliance change
-  - `user`:     the end-user action invoked the device compliance change
-  - `policy`:   a policy evaluation resulted in the device compliance change
-  - `system`:   a system or platform assertion resulted in the device compliance change
-
-reason_admin
-: OPTIONAL, JSON string: an administrative message for logging and auditing
-
-reason_user
-: OPTIONAL, JSON string: a user-friendly message for display to an end-user
-
-
 ### Examples  {#device-compliance-change-examples}
 
 NOTE: The event type URI is wrapped, the backslash is the continuation character.
@@ -597,25 +567,27 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/\
         device-compliance-change": {
-            "device": {
-                "format": "iss_sub",
-                "iss": "https://idp.example.com/123456789/",
-                "sub": "e9297990-14d2-42ec-a4a9-4036db86509a"
+            "subject": {
+                "device": {
+                    "format": "iss_sub",
+                    "iss": "https://idp.example.com/123456789/",
+                    "sub": "e9297990-14d2-42ec-a4a9-4036db86509a"
+                },
+                "tenant": {
+                    "format": "opaque",
+                    "id": "123456789"
+                }
             },
-            "tenant": {
-                "format": "opaque",
-                "id": "123456789"
-            }
-        },
-        "current_status": "not-compliant",
-        "previous_status": "compliant",
-        "initiating_entity": "policy",
-        "reason_admin": "Location Policy Violation: C076E82F",
-        "reason_user": "Device is no longer in a trusted location.",
-        "event_timestamp": 1615304991643
+            "current_status": "not-compliant",
+            "previous_status": "compliant",
+            "initiating_entity": "policy",
+            "reason_admin": "Location Policy Violation: C076E82F",
+            "reason_user": "Device is no longer in a trusted location.",
+            "event_timestamp": 1615304991643
+        }
     }
 }
 ~~~
-{: #device-compliance-change-examples-out-of-compliance title="Example: Device has gone out of compliance with a Complex Subject"}
+{: #device-compliance-change-examples-out-of-compliance title="Example: Device No Longer Compliant - Complex Subject + optional claims"}
 
 --- back
