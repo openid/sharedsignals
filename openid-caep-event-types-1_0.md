@@ -176,9 +176,9 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
             "subject": {
                 "format": "opaque",
                 "sub": "dMTlD|1600802906337.16|16008.16"
-            }
-        },
-        "event_timestamp": 1615304991643
+            },
+            "event_timestamp": 1615304991643
+        }
     }
 }
 ~~~
