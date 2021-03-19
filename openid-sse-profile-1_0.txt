@@ -74,16 +74,16 @@ Table of Contents
      3.5.  Receiver Subject Processing . . . . . . . . . . . . . . .   7
    4.  Event Properties  . . . . . . . . . . . . . . . . . . . . . .   7
    5.  Example SETs that conform to the SSE profile  . . . . . . . .   7
-   6.  Transmitter Configuration Discovery . . . . . . . . . . . . .   9
-     6.1.  Transmitter Configuration Metadata  . . . . . . . . . . .   9
+   6.  Transmitter Configuration Discovery . . . . . . . . . . . . .  10
+     6.1.  Transmitter Configuration Metadata  . . . . . . . . . . .  10
      6.2.  Obtaining Transmitter Configuration Information . . . . .  10
        6.2.1.  Transmitter Configuration Request . . . . . . . . . .  11
        6.2.2.  Transmitter Configuration Response  . . . . . . . . .  11
        6.2.3.  Transmitter Configuration Validation  . . . . . . . .  12
-   7.  Management API for SET Event Streams  . . . . . . . . . . . .  12
+   7.  Management API for SET Event Streams  . . . . . . . . . . . .  13
      7.1.  Event Stream Management . . . . . . . . . . . . . . . . .  13
-       7.1.1.  Stream Status . . . . . . . . . . . . . . . . . . . .  14
-         7.1.1.1.  Reading a Stream's Status . . . . . . . . . . . .  14
+       7.1.1.  Stream Status . . . . . . . . . . . . . . . . . . . .  15
+         7.1.1.1.  Reading a Stream's Status . . . . . . . . . . . .  15
          7.1.1.2.  Updating a Stream's Status  . . . . . . . . . . .  17
        7.1.2.  Stream Configuration  . . . . . . . . . . . . . . . .  19
          7.1.2.1.  Reading a Stream's Configuration  . . . . . . . .  21
@@ -215,7 +215,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 3]
    tenant
       OPTIONAL.  A Subject Identifier that identifies a tenant.
 
-   org-unit
+   org_unit
       OPTIONAL.  A Subject Identifier that identifies an organizational
       unit.
 
@@ -419,28 +419,28 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 7]
   "aud": "636C69656E745F6964",
   "events": {
     "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
-    "subject": {
-        "user": {
-            "format": "iss_sub",
-            "iss": "https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/",
-            "sub": "jane.smith@example.com"
-        },
-        "device": {
-            "format": "iss_sub",
-            "iss": "https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/",
-            "sub": "e9297990-14d2-42ec-a4a9-4036db86509a"
-        }
+      "subject": {
+          "user": {
+              "format": "iss_sub",
+              "iss": "https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/",
+              "sub": "jane.smith@example.com"
+          },
+          "device": {
+              "format": "iss_sub",
+              "iss": "https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/",
+              "sub": "e9297990-14d2-42ec-a4a9-4036db86509a"
+          }
       }
+      "initiating_entity": "policy",
+      "reason_admin": "Policy Violation: C076E82F",
+      "reason_user": "Landspeed violation.",
+      "event_timestamp": 1600975810
     }
   }
 }
 
    Figure 6: Example: SET Containing a SSE Event with a Complex Subject
                                   Member
-
-
-
-
 
 
 
@@ -461,7 +461,10 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 8]
         "format": "email",
         "email": "foo@example2.com"
       },
-      "ip_address" : "123.45.67.89"
+      "event_timestamp": 1600975810,
+      "claims": {
+         "role": "ro-admin"
+      }
     }
   }
 }
@@ -475,10 +478,14 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 8]
   "iat": 15203800012,
   "aud": "636C69656E745F6324",
   "events": {
-    "https://schemas.openid.net/secevent/caep/event-type/token-claims-changed": {
+    "https://schemas.openid.net/secevent/caep/event-type/token-claims-change": {
     "subject": {
         "format": "catalog_item",
         "catalog_id": "c0384/winter/2354122"
+      }
+      "event_timestamp": 1600975810,
+      "claims": {
+         "role": "ro-admin"
       }
     }
   }
@@ -486,6 +493,18 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 8]
 
      Figure 8: Example: SET Containing a SSE Event with a Proprietary
                          Subject Identifier Format
+
+
+
+
+
+
+
+
+Tulshibagwale, et al.    Expires April 29, 2021                 [Page 9]
+
+                           openid-sse-profile                   Oct 2020
+
 
 6.  Transmitter Configuration Discovery
 
@@ -498,14 +517,6 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 8]
 
    issuer  REQUIRED.  URL using the https scheme with no query or
       fragment component that the Transmitter asserts as its Issuer
-
-
-
-Tulshibagwale, et al.    Expires April 29, 2021                 [Page 9]
-
-                           openid-sse-profile                   Oct 2020
-
-
       Identifier.  This MUST be identical to the iss claim value in
       Security Event Tokens issued from this Transmitter.
 
@@ -542,17 +553,6 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 9]
    Using the Issuer as documented by the Transmitter, the Transmitter
    Configuration Information can be retrieved.
 
-   Transmitters supporting Discovery MUST make a JSON document available
-   at the path formed by inserting the string "/.well-known/sse-
-   configuration" into the Issuer between the host component and the
-   path component, if any.  The syntax and semantics of ".well-known"
-   are defined in [RFC5785].  "sse-configuration" MUST point to a JSON
-   document compliant with this specification and MUST be returned using
-   the "application/json" content type.
-
-
-
-
 
 
 
@@ -561,6 +561,14 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 10]
 
                            openid-sse-profile                   Oct 2020
 
+
+   Transmitters supporting Discovery MUST make a JSON document available
+   at the path formed by inserting the string "/.well-known/sse-
+   configuration" into the Issuer between the host component and the
+   path component, if any.  The syntax and semantics of ".well-known"
+   are defined in [RFC5785].  "sse-configuration" MUST point to a JSON
+   document compliant with this specification and MUST be returned using
+   the "application/json" content type.
 
 6.2.1.  Transmitter Configuration Request
 
@@ -601,14 +609,6 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 10]
    location information.  A successful response MUST use the 200 OK HTTP
    status code and return a JSON object using the "application/json"
    content type that contains a set of Claims as its members that are a
-   subset of the Metadata values defined in Section 6.1.  Other Claims
-   MAY also be returned.
-
-   Claims that return multiple values are represented as JSON arrays.
-   Claims with zero elements MUST be omitted from the response.
-
-   An error response uses the applicable HTTP status code value.
-
 
 
 
@@ -617,6 +617,14 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 11]
 
                            openid-sse-profile                   Oct 2020
 
+
+   subset of the Metadata values defined in Section 6.1.  Other Claims
+   MAY also be returned.
+
+   Claims that return multiple values are represented as JSON arrays.
+   Claims with zero elements MUST be omitted from the response.
+
+   An error response uses the applicable HTTP status code value.
 
    HTTP/1.1 200 OK
    Content-Type: application/json
@@ -656,6 +664,16 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 11]
    MUST also be identical to the "iss" Claim value in Security Event
    Tokens issued from this Transmitter.
 
+
+
+
+
+
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 12]
+
+                           openid-sse-profile                   Oct 2020
+
+
 7.  Management API for SET Event Streams
 
    This section defines an HTTP API to be implemented by Event
@@ -665,14 +683,6 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 11]
 
    This section is based on Management API for SET Event Streams
    [MGMTAPI].
-
-
-
-
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 12]
-
-                           openid-sse-profile                   Oct 2020
-
 
    +------------+                +------------+
    |            | Stream Config  |            |
@@ -712,6 +722,14 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 12]
    MAY be queried and managed independently for each Subject Principal
    by Transmitters and Receivers.
 
+
+
+
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 13]
+
+                           openid-sse-profile                   Oct 2020
+
+
    The Event Stream Management API is implemented by the Event
    Transmitter and consists of the following endpoints:
 
@@ -722,14 +740,6 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 12]
       An endpoint used to read the Event Stream's current status.
 
    Add Subject Endpoint
-
-
-
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 13]
-
-                           openid-sse-profile                   Oct 2020
-
-
       An endpoint used to add subjects to an Event Stream.
 
    Remove Subject Endpoint
@@ -767,6 +777,15 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 13]
       events may have been lost during the time when the event stream
       was paused.
 
+
+
+
+
+Tulshibagwale, et al.    Expires April 29, 2021                [Page 14]
+
+                           openid-sse-profile                   Oct 2020
+
+
    Disabled  the Transmitter MAY send stream updated (Section 7.1.5)
       after the Event Stream is re-enabled.
 
@@ -778,13 +797,6 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 13]
    making an HTTP GET request to the stream's Status Endpoint.
 
    The Stream Status method takes the following parameters:
-
-
-
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 14]
-
-                           openid-sse-profile                   Oct 2020
-
 
    subject  OPTIONAL.  The subject for which the stream status is
       requested.
@@ -823,24 +835,14 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 14]
 
               Figure 13: Example: Check Stream Status Request
 
-   The following is a non-normative example response:
-
-
-
-
-
-
-
-
-
-
-
 
 
 Tulshibagwale, et al.    Expires April 29, 2021                [Page 15]
 
                            openid-sse-profile                   Oct 2020
 
+
+   The following is a non-normative example response:
 
    HTTP/1.1 200 OK
    Content-Type: application/json; charset=UTF-8
@@ -887,8 +889,6 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 15]
              Figure 16: Example: Check Stream Status Response
 
    Errors are signaled with HTTP status codes as follows:
-
-
 
 
 
@@ -2246,11 +2246,6 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 40]
 
 13.1.  Normative References
 
-   [BCP26]    Cotton, M., Leiba, B., and T. Narten, "Guidelines for
-              Writing an IANA Considerations Section in RFCs", BCP 26,
-              RFC 8126, DOI 10.17487/RFC8126, June 2017,
-              <https://tools.ietf.org/html/rfc8126>.
-
    [CAEP]     Tulshibagwale, A., "Re-thinking Federated Identity with
               the Continuous Access Evaluation Protocol", February 2019,
               <https://cloud.google.com/blog/products/identity-security/
@@ -2286,7 +2281,12 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 40]
               Event Streams", June 2017, <https://tools.ietf.org/html/
               draft-scurtescu-secevent-simple-control-plane>.
 
-
+   [OASIS.saml-core-2.0-os]
+              Cantor, S., Kemp, J., Philpott, R., and E. Maler,
+              "Assertions and Protocols for the OASIS Security Assertion
+              Markup Language (SAML) V2.0", March 2005,
+              <http://docs.oasis-open.org/security/saml/v2.0/saml-core-
+              2.0-os.pdf>.
 
 
 
@@ -2297,13 +2297,6 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 41]
 
                            openid-sse-profile                   Oct 2020
 
-
-   [OASIS.saml-core-2.0-os]
-              Cantor, S., Kemp, J., Philpott, R., and E. Maler,
-              "Assertions and Protocols for the OASIS Security Assertion
-              Markup Language (SAML) V2.0", March 2005,
-              <http://docs.oasis-open.org/security/saml/v2.0/saml-core-
-              2.0-os.pdf>.
 
    [OAUTH-DISCOVERY]
               Jones, M., Sakimura, N., and J. Bradley, "OAuth 2.0
@@ -2344,6 +2337,13 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 41]
               (JWT)", RFC 7519, DOI 10.17487/RFC7519, May 2015,
               <https://www.rfc-editor.org/info/rfc7519>.
 
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/info/rfc8174>.
+
+   [SET]      Hunt, P., Ed., Jones, M., Denniss, W., and M. Ansari,
+              "Security Event Token (SET)", April 2018,
+              <https://www.rfc-editor.org/info/rfc8417>.
 
 
 
@@ -2353,14 +2353,6 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 42]
 
                            openid-sse-profile                   Oct 2020
 
-
-   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
-              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
-              May 2017, <https://www.rfc-editor.org/info/rfc8174>.
-
-   [SET]      Hunt, P., Ed., Jones, M., Denniss, W., and M. Ansari,
-              "Security Event Token (SET)", April 2018,
-              <https://www.rfc-editor.org/info/rfc8417>.
 
    [SUBIDS]   Backman, A., Ed. and M. Scurtescu, "Subject Identifiers
               for Security Event Tokens", September 2020,
@@ -2402,6 +2394,14 @@ Authors' Addresses
    Email: marius.scurtescu@coinbase.com
 
 
+   Annabelle Backman
+   Amazon
+
+   Email: richanna@amazon.com
+
+
+
+
 
 
 
@@ -2410,16 +2410,16 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 43]
                            openid-sse-profile                   Oct 2020
 
 
-   Annabelle Backman
-   Amazon
-
-   Email: richanna@amazon.com
-
-
    John Bradley
    Yubico
 
    Email: secevemt@ve7jtb.com
+
+
+
+
+
+
 
 
 

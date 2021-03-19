@@ -146,7 +146,7 @@
               identifies an application.</t>
             <t hangText="tenant"> <vspace blankLines="0"/>OPTIONAL. A Subject Identifier that
               identifies a tenant.</t>
-            <t hangText="org-unit"> <vspace blankLines="0"/>OPTIONAL. A Subject Identifier that
+            <t hangText="org_unit"> <vspace blankLines="0"/>OPTIONAL. A Subject Identifier that
               identifies an organizational unit.</t>
             <t hangText="group"> <vspace blankLines="0"/>OPTIONAL. A Subject Identifier that
               identifies a group.</t>
@@ -288,18 +288,22 @@
   "aud": "636C69656E745F6964",
   "events": {
     "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
-    "subject": {
-        "user": {
-            "format": "iss_sub",
-            "iss": "https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/",
-            "sub": "jane.smith@example.com"
-        },
-        "device": {
-            "format": "iss_sub",
-            "iss": "https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/",
-            "sub": "e9297990-14d2-42ec-a4a9-4036db86509a"
-        }
+      "subject": {
+          "user": {
+              "format": "iss_sub",
+              "iss": "https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/",
+              "sub": "jane.smith@example.com"
+          },
+          "device": {
+              "format": "iss_sub",
+              "iss": "https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/",
+              "sub": "e9297990-14d2-42ec-a4a9-4036db86509a"
+          }
       }
+      "initiating_entity": "policy",
+      "reason_admin": "Policy Violation: C076E82F",
+      "reason_user": "Landspeed violation.",
+      "event_timestamp": 1600975810
     }
   }
 }
@@ -319,7 +323,10 @@
         "format": "email",
         "email": "foo@example2.com"
       },
-      "ip_address" : "123.45.67.89"
+      "event_timestamp": 1600975810,
+      "claims": {
+         "role": "ro-admin"
+      }
     }
   }
 }
@@ -334,10 +341,14 @@
   "iat": 15203800012,
   "aud": "636C69656E745F6324",
   "events": {
-    "https://schemas.openid.net/secevent/caep/event-type/token-claims-changed": {
+    "https://schemas.openid.net/secevent/caep/event-type/token-claims-change": {
     "subject": {
         "format": "catalog_item",
         "catalog_id": "c0384/winter/2354122"
+      }
+      "event_timestamp": 1600975810,
+      "claims": {
+         "role": "ro-admin"
       }
     }
   }
