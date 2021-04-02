@@ -2,7 +2,7 @@
 title: OpenID CAEP Event Types 1.0
 abbrev: CAEP-Event-Types
 docname: openid-caep-event-types-1_0
-date: 2021-03-17
+date: 2021-04-02
 
 ipr: none
 cat: std
@@ -103,30 +103,26 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 document are to be interpreted as described in BCP 14 {{RFC2119}} {{RFC8174}} 
 when, and only when, they appear in all capitals, as shown here.
 
-# Required Event Claims {#required-event-claims}
-The following claims are required in all CAEP events defined in this specification.
-
-event_timestamp
-: REQUIRED, JSON number: the time at which the session revocation occurred.
-  Its value is a JSON number representing the number of milliseconds from 
-  1970-01-01T0:0:0Z as measured in UTC until the date/time. The receiver
-  SHOULD reject events if this claim's value is in the future.
-
 # Optional Event Claims {#optional-event-claims}
 The following claims are optional unless otherwise specified in the event
 definition.
+
+event_timestamp
+: REQUIRED, JSON number: the time at which the event described by this SET
+  occurred. Its value is a JSON number representing the number of seconds 
+  from 1970-01-01T0:0:0Z as measured in UTC until the date/time.
 
 initiating_entity
 : OPTIONAL, JSON string: describes the entity that invoked the event.
 : Potential options:
 
-  - `admin`:    an administrative action resulted in the event
+  - `admin`:    an administrative action triggered the event
 
-  - `user`:     an end-user action resulted in the event
+  - `user`:     an end-user action triggered the event
 
-  - `policy`:   a policy evaluation resulted in the event
+  - `policy`:   a policy evaluation triggered the event
 
-  - `system`:   a system or platform assertion resulted in the event
+  - `system`:   a system or platform assertion triggered the event
 
 reason_admin
 : OPTIONAL, JSON string: an administrative message for logging and auditing
@@ -159,6 +155,9 @@ nested `reason_admin` and/or `reason_user` claims described in {{optional-event-
 ### Event-Specific Claims {#session-revoked-claims}
 
 There are no event-specific claims for this event type.
+
+When `event_timestamp` is included, its value MUST represent the time at which
+the session revocation occurred.
 
 ### Examples  {#session-revoked-examples}
 
@@ -289,6 +288,8 @@ nested `reason_admin` and/or `reason_user` claims made in {{optional-event-claim
 claims
 : REQUIRED, JSON object: one or more claims with their new value(s)
 
+When `event_timestamp` is included, its value MUST represent the time at which
+the claim value(s) changed.
 
 ### Examples  {#token-claims-change-examples}
 
@@ -420,7 +421,9 @@ x509_serial
 
 fido2_aaguid
 : OPTIONAL, JSON string: FIDO2 Authenticator Attestation GUID as defined in {{WebAuthn}}
-            
+
+When `event_timestamp` is included, its value MUST represent the time at which
+the credential change occurred.            
 
 ### Examples  {#credential-change-examples}
 
@@ -497,6 +500,9 @@ change_direction
   - `increase`
   - `decrease`
 
+When `event_timestamp` is included, its value MUST represent the time at which
+the assurance level changed.
+
 
 ### Examples  {#assurance-level-change-examples}
 
@@ -538,7 +544,7 @@ Device Compliance Change signals that a device's compliance status has changed.
 The actual reason why the status change occurred might be specified with the 
 nested `reason_admin` and/or `reason_user` claims made in {{optional-event-claims}}.
 
-### Attributes {#device-compliance-change-attributes}
+### Event-Specific Claims {#device-compliance-change-claims}
 
 previous_status
 : REQUIRED, JSON string: the compliance status prior to the change that triggered the event
@@ -553,6 +559,9 @@ current_status
 
   - `compliant`
   - `not-compliant`
+
+When `event_timestamp` is included, its value MUST represent the time at which
+the device compliance status changed.
 
 ### Examples  {#device-compliance-change-examples}
 

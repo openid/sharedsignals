@@ -5,8 +5,8 @@
 Shared Signals and Events                                    T. Cappalli
 Internet-Draft                                                 Microsoft
 Intended status: Standards Track                        A. Tulshibagwale
-Expires: September 18, 2021                                       Google
-                                                          March 17, 2021
+Expires: October 4, 2021                                          Google
+                                                          April 02, 2021
 
 
                       OpenID CAEP Event Types 1.0
@@ -33,7 +33,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on September 18, 2021.
+   This Internet-Draft will expire on October 4, 2021.
 
 Copyright Notice
 
@@ -53,34 +53,33 @@ Copyright Notice
 
 
 
-Cappalli & TulshibagwalExpires September 18, 2021               [Page 1]
+Cappalli & Tulshibagwale Expires October 4, 2021                [Page 1]
 
-Internet-Draft              CAEP-Event-Types                  March 2021
+Internet-Draft              CAEP-Event-Types                  April 2021
 
 
 Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
      1.1.  Notational Considerations . . . . . . . . . . . . . . . .   2
-   2.  Required Event Claims . . . . . . . . . . . . . . . . . . . .   2
-   3.  Optional Event Claims . . . . . . . . . . . . . . . . . . . .   3
-   4.  Event Types . . . . . . . . . . . . . . . . . . . . . . . . .   3
-     4.1.  Session Revoked . . . . . . . . . . . . . . . . . . . . .   3
-       4.1.1.  Event-Specific Claims . . . . . . . . . . . . . . . .   4
-       4.1.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .   4
-     4.2.  Token Claims Change . . . . . . . . . . . . . . . . . . .   7
-       4.2.1.  Event-Specific Claims . . . . . . . . . . . . . . . .   8
-       4.2.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .   8
-     4.3.  Credential Change . . . . . . . . . . . . . . . . . . . .  10
-       4.3.1.  Event-Specific Claims . . . . . . . . . . . . . . . .  11
-       4.3.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  11
-     4.4.  Assurance Level Change  . . . . . . . . . . . . . . . . .  12
-       4.4.1.  Event-Specific Claims . . . . . . . . . . . . . . . .  13
-       4.4.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  13
-     4.5.  Device Compliance Change  . . . . . . . . . . . . . . . .  14
-       4.5.1.  Attributes  . . . . . . . . . . . . . . . . . . . . .  14
-       4.5.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  15
-   5.  Normative References  . . . . . . . . . . . . . . . . . . . .  16
+   2.  Optional Event Claims . . . . . . . . . . . . . . . . . . . .   2
+   3.  Event Types . . . . . . . . . . . . . . . . . . . . . . . . .   3
+     3.1.  Session Revoked . . . . . . . . . . . . . . . . . . . . .   3
+       3.1.1.  Event-Specific Claims . . . . . . . . . . . . . . . .   3
+       3.1.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .   4
+     3.2.  Token Claims Change . . . . . . . . . . . . . . . . . . .   7
+       3.2.1.  Event-Specific Claims . . . . . . . . . . . . . . . .   8
+       3.2.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .   8
+     3.3.  Credential Change . . . . . . . . . . . . . . . . . . . .  10
+       3.3.1.  Event-Specific Claims . . . . . . . . . . . . . . . .  11
+       3.3.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  11
+     3.4.  Assurance Level Change  . . . . . . . . . . . . . . . . .  12
+       3.4.1.  Event-Specific Claims . . . . . . . . . . . . . . . .  13
+       3.4.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  13
+     3.5.  Device Compliance Change  . . . . . . . . . . . . . . . .  14
+       3.5.1.  Event-Specific Claims . . . . . . . . . . . . . . . .  14
+       3.5.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  15
+   4.  Normative References  . . . . . . . . . . . . . . . . . . . .  16
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  17
 
 1.  Introduction
@@ -97,43 +96,36 @@ Table of Contents
    14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-2.  Required Event Claims
-
-   The following claims are required in all CAEP events defined in this
-   specification.
-
-   event_timestamp  REQUIRED, JSON number: the time at which the session
-      revocation occurred.  Its value is a JSON number representing the
-      number of milliseconds from 1970-01-01T0:0:0Z as measured in UTC
-
-
-
-
-Cappalli & TulshibagwalExpires September 18, 2021               [Page 2]
-
-Internet-Draft              CAEP-Event-Types                  March 2021
-
-
-      until the date/time.  The receiver SHOULD reject events if this
-      claim's value is in the future.
-
-3.  Optional Event Claims
+2.  Optional Event Claims
 
    The following claims are optional unless otherwise specified in the
    event definition.
+
+   event_timestamp  REQUIRED, JSON number: the time at which the event
+      described by this SET occurred.  Its value is a JSON number
+      representing the number of seconds from 1970-01-01T0:0:0Z as
+      measured in UTC until the date/time.
+
+
+
+
+Cappalli & Tulshibagwale Expires October 4, 2021                [Page 2]
+
+Internet-Draft              CAEP-Event-Types                  April 2021
+
 
    initiating_entity  OPTIONAL, JSON string: describes the entity that
       invoked the event.
 
       Potential options:
 
-      *  "admin": an administrative action resulted in the event
+      *  "admin": an administrative action triggered the event
 
-      *  "user": an end-user action resulted in the event
+      *  "user": an end-user action triggered the event
 
-      *  "policy": a policy evaluation resulted in the event
+      *  "policy": a policy evaluation triggered the event
 
-      *  "system": a system or platform assertion resulted in the event
+      *  "system": a system or platform assertion triggered the event
 
    reason_admin  OPTIONAL, JSON string: an administrative message for
       logging and auditing
@@ -141,13 +133,13 @@ Internet-Draft              CAEP-Event-Types                  March 2021
    reason_user  OPTIONAL, JSON string: a user-friendly message for
       display to an end-user
 
-4.  Event Types
+3.  Event Types
 
    The base URI for CAEP event types is:
 
    "https://schemas.openid.net/secevent/caep/event-type/"
 
-4.1.  Session Revoked
+3.1.  Session Revoked
 
    Event Type URI:
 
@@ -161,24 +153,27 @@ Internet-Draft              CAEP-Event-Types                  March 2021
    When a Complex Claim is used as the subject, the revocation event
    applies to any session derived from matching those combined claims.
 
-
-
-
-
-Cappalli & TulshibagwalExpires September 18, 2021               [Page 3]
-
-Internet-Draft              CAEP-Event-Types                  March 2021
-
-
    The actual reason why the session was revoked might be specified with
    the nested "reason_admin" and/or "reason_user" claims described in
-   Section 3.
+   Section 2.
 
-4.1.1.  Event-Specific Claims
+3.1.1.  Event-Specific Claims
 
    There are no event-specific claims for this event type.
 
-4.1.2.  Examples
+
+
+
+
+Cappalli & Tulshibagwale Expires October 4, 2021                [Page 3]
+
+Internet-Draft              CAEP-Event-Types                  April 2021
+
+
+   When "event_timestamp" is included, its value MUST represent the time
+   at which the session revocation occurred.
+
+3.1.2.  Examples
 
    NOTE: The event type URI is wrapped, the backslash is the
    continuation character.
@@ -221,9 +216,14 @@ Internet-Draft              CAEP-Event-Types                  March 2021
 
 
 
-Cappalli & TulshibagwalExpires September 18, 2021               [Page 4]
+
+
+
+
+
+Cappalli & Tulshibagwale Expires October 4, 2021                [Page 4]
 
-Internet-Draft              CAEP-Event-Types                  March 2021
+Internet-Draft              CAEP-Event-Types                  April 2021
 
 
    {
@@ -277,9 +277,9 @@ Internet-Draft              CAEP-Event-Types                  March 2021
 
 
 
-Cappalli & TulshibagwalExpires September 18, 2021               [Page 5]
+Cappalli & Tulshibagwale Expires October 4, 2021                [Page 5]
 
-Internet-Draft              CAEP-Event-Types                  March 2021
+Internet-Draft              CAEP-Event-Types                  April 2021
 
 
    {
@@ -333,9 +333,9 @@ Internet-Draft              CAEP-Event-Types                  March 2021
 
 
 
-Cappalli & TulshibagwalExpires September 18, 2021               [Page 6]
+Cappalli & Tulshibagwale Expires October 4, 2021                [Page 6]
 
-Internet-Draft              CAEP-Event-Types                  March 2021
+Internet-Draft              CAEP-Event-Types                  April 2021
 
 
    {
@@ -373,7 +373,7 @@ Internet-Draft              CAEP-Event-Types                  March 2021
    Figure 4: Example: Session Revoked - Complex Subject describing user
                + device + tenant (includes optional claims)
 
-4.2.  Token Claims Change
+3.2.  Token Claims Change
 
    Event Type URI:
 
@@ -385,21 +385,24 @@ Internet-Draft              CAEP-Event-Types                  March 2021
 
    The actual reason why the claims change occurred might be specified
    with the nested "reason_admin" and/or "reason_user" claims made in
-   Section 3.
+   Section 2.
 
 
 
-Cappalli & TulshibagwalExpires September 18, 2021               [Page 7]
+Cappalli & Tulshibagwale Expires October 4, 2021                [Page 7]
 
-Internet-Draft              CAEP-Event-Types                  March 2021
+Internet-Draft              CAEP-Event-Types                  April 2021
 
 
-4.2.1.  Event-Specific Claims
+3.2.1.  Event-Specific Claims
 
    claims  REQUIRED, JSON object: one or more claims with their new
       value(s)
 
-4.2.2.  Examples
+   When "event_timestamp" is included, its value MUST represent the time
+   at which the claim value(s) changed.
+
+3.2.2.  Examples
 
    NOTE: The event type URI is wrapped, the backslash is the
    continuation character.
@@ -442,12 +445,9 @@ Internet-Draft              CAEP-Event-Types                  March 2021
 
 
 
-
-
-
-Cappalli & TulshibagwalExpires September 18, 2021               [Page 8]
+Cappalli & Tulshibagwale Expires October 4, 2021                [Page 8]
 
-Internet-Draft              CAEP-Event-Types                  March 2021
+Internet-Draft              CAEP-Event-Types                  April 2021
 
 
 {
@@ -501,9 +501,9 @@ Internet-Draft              CAEP-Event-Types                  March 2021
 
 
 
-Cappalli & TulshibagwalExpires September 18, 2021               [Page 9]
+Cappalli & Tulshibagwale Expires October 4, 2021                [Page 9]
 
-Internet-Draft              CAEP-Event-Types                  March 2021
+Internet-Draft              CAEP-Event-Types                  April 2021
 
 
    {
@@ -531,7 +531,7 @@ Internet-Draft              CAEP-Event-Types                  March 2021
      Figure 7: Example: SAML Assertion Claims Change - Required claims
                                    only
 
-4.3.  Credential Change
+3.3.  Credential Change
 
    Event Type URI:
 
@@ -550,19 +550,19 @@ Internet-Draft              CAEP-Event-Types                  March 2021
 
    The actual reason why the credential change occurred might be
    specified with the nested "reason_admin" and/or "reason_user" claims
-   made in Section 3.
+   made in Section 2.
 
 
 
 
 
 
-Cappalli & TulshibagwalExpires September 18, 2021              [Page 10]
+Cappalli & Tulshibagwale Expires October 4, 2021               [Page 10]
 
-Internet-Draft              CAEP-Event-Types                  March 2021
+Internet-Draft              CAEP-Event-Types                  April 2021
 
 
-4.3.1.  Event-Specific Claims
+3.3.1.  Event-Specific Claims
 
    credential_type  REQUIRED, JSON string: potential options: -
       "password" - "pin" - "x509" - "fido2-platform" - "fido2-roaming" -
@@ -583,7 +583,10 @@ Internet-Draft              CAEP-Event-Types                  March 2021
    fido2_aaguid  OPTIONAL, JSON string: FIDO2 Authenticator Attestation
       GUID as defined in [WebAuthn]
 
-4.3.2.  Examples
+   When "event_timestamp" is included, its value MUST represent the time
+   at which the credential change occurred.
+
+3.3.2.  Examples
 
    NOTE: The event type URI is wrapped, the backslash is the
    continuation character.
@@ -610,12 +613,9 @@ Internet-Draft              CAEP-Event-Types                  March 2021
 
 
 
-
-
-
-Cappalli & TulshibagwalExpires September 18, 2021              [Page 11]
+Cappalli & Tulshibagwale Expires October 4, 2021               [Page 11]
 
-Internet-Draft              CAEP-Event-Types                  March 2021
+Internet-Draft              CAEP-Event-Types                  April 2021
 
 
    {
@@ -645,7 +645,7 @@ Internet-Draft              CAEP-Event-Types                  March 2021
     Figure 8: Example: Provisioning a new FIDO2 authenticator - Simple
                          Subject + optional claims
 
-4.4.  Assurance Level Change
+3.4.  Assurance Level Change
 
    Event Type URI:
 
@@ -669,16 +669,16 @@ Internet-Draft              CAEP-Event-Types                  March 2021
 
 
 
-Cappalli & TulshibagwalExpires September 18, 2021              [Page 12]
+Cappalli & Tulshibagwale Expires October 4, 2021               [Page 12]
 
-Internet-Draft              CAEP-Event-Types                  March 2021
+Internet-Draft              CAEP-Event-Types                  April 2021
 
 
    The actual reason why the assurance level changed might be specified
    with the nested "reason_admin" and/or "reason_user" claims made in
-   Section 3.
+   Section 2.
 
-4.4.1.  Event-Specific Claims
+3.4.1.  Event-Specific Claims
 
    current_level  REQUIRED, JSON string: the current NIST Authenticator
       Assurance Level (AAL) as defined in [SP800-63R3]
@@ -707,7 +707,10 @@ Internet-Draft              CAEP-Event-Types                  March 2021
 
       Potential options: - "increase" - "decrease"
 
-4.4.2.  Examples
+   When "event_timestamp" is included, its value MUST represent the time
+   at which the assurance level changed.
+
+3.4.2.  Examples
 
    NOTE: The event type URI is wrapped, the backslash is the
    continuation character.
@@ -722,12 +725,9 @@ Internet-Draft              CAEP-Event-Types                  March 2021
 
 
 
-
-
-
-Cappalli & TulshibagwalExpires September 18, 2021              [Page 13]
+Cappalli & Tulshibagwale Expires October 4, 2021               [Page 13]
 
-Internet-Draft              CAEP-Event-Types                  March 2021
+Internet-Draft              CAEP-Event-Types                  April 2021
 
 
    {
@@ -755,7 +755,7 @@ Internet-Draft              CAEP-Event-Types                  March 2021
       Figure 9: Example: Assurance Level Increase - Simple Subject +
                               optional claims
 
-4.5.  Device Compliance Change
+3.5.  Device Compliance Change
 
    Event Type URI:
 
@@ -767,9 +767,9 @@ Internet-Draft              CAEP-Event-Types                  March 2021
 
    The actual reason why the status change occurred might be specified
    with the nested "reason_admin" and/or "reason_user" claims made in
-   Section 3.
+   Section 2.
 
-4.5.1.  Attributes
+3.5.1.  Event-Specific Claims
 
    previous_status  REQUIRED, JSON string: the compliance status prior
       to the change that triggered the event
@@ -781,9 +781,9 @@ Internet-Draft              CAEP-Event-Types                  March 2021
 
 
 
-Cappalli & TulshibagwalExpires September 18, 2021              [Page 14]
+Cappalli & Tulshibagwale Expires October 4, 2021               [Page 14]
 
-Internet-Draft              CAEP-Event-Types                  March 2021
+Internet-Draft              CAEP-Event-Types                  April 2021
 
 
       *  "not-compliant"
@@ -797,10 +797,50 @@ Internet-Draft              CAEP-Event-Types                  March 2021
 
       *  "not-compliant"
 
-4.5.2.  Examples
+   When "event_timestamp" is included, its value MUST represent the time
+   at which the device compliance status changed.
+
+3.5.2.  Examples
 
    NOTE: The event type URI is wrapped, the backslash is the
    continuation character.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Cappalli & Tulshibagwale Expires October 4, 2021               [Page 15]
+
+Internet-Draft              CAEP-Event-Types                  April 2021
+
 
 {
     "iss": "https://idp.example.com/123456789/",
@@ -834,15 +874,7 @@ Internet-Draft              CAEP-Event-Types                  March 2021
     Figure 10: Example: Device No Longer Compliant - Complex Subject +
                               optional claims
 
-
-
-
-Cappalli & TulshibagwalExpires September 18, 2021              [Page 15]
-
-Internet-Draft              CAEP-Event-Types                  March 2021
-
-
-5.  Normative References
+4.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -854,6 +886,17 @@ Internet-Draft              CAEP-Event-Types                  March 2021
               Transfer Protocol -- HTTP/1.1", RFC 2616,
               DOI 10.17487/RFC2616, June 1999,
               <https://www.rfc-editor.org/info/rfc2616>.
+
+
+
+
+
+
+
+Cappalli & Tulshibagwale Expires October 4, 2021               [Page 16]
+
+Internet-Draft              CAEP-Event-Types                  April 2021
+
 
    [RFC5280]  Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
               Housley, R., and W. Polk, "Internet X.509 Public Key
@@ -886,18 +929,6 @@ Internet-Draft              CAEP-Event-Types                  March 2021
               Public Key Credentials Level 1", n.d.,
               <https://www.w3.org/TR/webauthn/>.
 
-
-
-
-
-
-
-
-Cappalli & TulshibagwalExpires September 18, 2021              [Page 16]
-
-Internet-Draft              CAEP-Event-Types                  March 2021
-
-
 Authors' Addresses
 
    Tim Cappalli
@@ -918,35 +949,4 @@ Authors' Addresses
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Cappalli & TulshibagwalExpires September 18, 2021              [Page 17]
+Cappalli & Tulshibagwale Expires October 4, 2021               [Page 17]
