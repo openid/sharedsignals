@@ -32,7 +32,7 @@
       </address>
     </author>
 
-    <date year="2021" month="February" day="26"/>
+    <date year="2021" month="April" day="02"/>
 
     
     <workgroup>Shared Signals and Events</workgroup>
@@ -41,7 +41,7 @@
     <abstract>
 
 
-<t>This document defines the Continous Access Evaluation Protocol (CAEP) 
+<t>This document defines the Continuous Access Evaluation Protocol (CAEP) 
 Event Types for the Shared Signals and Events Profile of IETF Security 
 Events 1.0 <xref target="SSE-PROFILE"/>.</t>
 
@@ -71,128 +71,166 @@ when, and only when, they appear in all capitals, as shown here.</t>
 
 </section>
 </section>
+<section anchor="optional-event-claims" title="Optional Event Claims">
+<t>The following claims are optional unless otherwise specified in the event
+definition.</t>
+
+<t><list style="hanging">
+  <t hangText="event_timestamp">
+  OPTIONAL, JSON number: the time at which the event described by this SET
+occurred. Its value is a JSON number representing the number of seconds 
+from 1970-01-01T0:0:0Z as measured in UTC until the date/time.</t>
+  <t hangText="initiating_entity">
+  OPTIONAL, JSON string: describes the entity that invoked the event.</t>
+  <t>Potential options:
+
+      <list style="symbols">
+        <t><spanx style="verb">admin</spanx>:    an administrative action triggered the event</t>
+        <t><spanx style="verb">user</spanx>:     an end-user action triggered the event</t>
+        <t><spanx style="verb">policy</spanx>:   a policy evaluation triggered the event</t>
+        <t><spanx style="verb">system</spanx>:   a system or platform assertion triggered the event</t>
+      </list>
+  </t>
+  <t hangText="reason_admin">
+  OPTIONAL, JSON string: an administrative message for logging and auditing</t>
+  <t hangText="reason_user">
+  OPTIONAL, JSON string: a user-friendly message for display to an end-user</t>
+</list></t>
+
+</section>
 <section anchor="event-types" title="Event Types">
-<t>The base URI for CAEP event types is:
-<spanx style="verb">https://schemas.openid.net/secevent/caep/event-type/</spanx></t>
+<t>The base URI for CAEP event types is:</t>
+
+<t><spanx style="verb">https://schemas.openid.net/secevent/caep/event-type/</spanx></t>
 
 <section anchor="session-revoked" title="Session Revoked">
-<t>Event Type URI:
-<spanx style="verb">https://schemas.openid.net/secevent/caep/event-type/session-revoked</spanx></t>
+<t>Event Type URI:</t>
+
+<t><spanx style="verb">https://schemas.openid.net/secevent/caep/event-type/session-revoked</spanx></t>
 
 <t>Session Revoked signals that the session identified by the subject has been 
 revoked. The explicit session identifier may be directly referenced in the 
 subject or other properties of the session may be included to allow the
 receiver to identify applicable sessions.</t>
 
-<t>When multiple session properties are included in the subject, 
-the revocation event applies to any session derived from matching those 
-combined properties.</t>
+<t>When a Complex Claim is used as the subject, the revocation event applies 
+to any session derived from matching those combined claims.</t>
 
 <t>The actual reason why the session was revoked might be specified with the 
-nested <spanx style="verb">reason_admin</spanx> and/or <spanx style="verb">reason_user</spanx> attributes described below.</t>
+nested <spanx style="verb">reason_admin</spanx> and/or <spanx style="verb">reason_user</spanx> claims described in <xref target="optional-event-claims"/>.</t>
 
-<section anchor="session-revoked-attributes" title="Attributes">
+<section anchor="session-revoked-claims" title="Event-Specific Claims">
 
-<t><list style="hanging">
-  <t hangText="event_timestamp">
-  REQUIRED, JSON number: the time at which the session revocation occured.
-Its value is a JSON number representing the number of seconds from 
-1970-01-01T0:0:0Z as measured in UTC until the date/time. This value must 
-be less than or equal to the "iat" claim in the parent 
-Security Event Token (SET).</t>
-  <t hangText="initiating_entity">
-  OPTIONAL, JSON string: describes the entity that invoked the session revocation.</t>
-  <t>Potential options:
-- <spanx style="verb">admin</spanx>:    an administrator revoked the session
-- <spanx style="verb">user</spanx>:     the end-user revoked the session
-- <spanx style="verb">policy</spanx>:   a policy evaluation resulted in the session revocation
-- <spanx style="verb">system</spanx>:   a system or platform assertion resulted in the session revocation</t>
-  <t hangText="reason_admin">
-  OPTIONAL, JSON string: an administrative message for logging and auditing</t>
-  <t hangText="reason_user">
-  OPTIONAL, JSON string: a user-friendly message for display to an end-user</t>
-  <t hangText="tenant_id">
-  OPTIONAL, JSON string: tenant identifier</t>
-</list></t>
+<t>There are no event-specific claims for this event type.</t>
+
+<t>When <spanx style="verb">event_timestamp</spanx> is included, its value MUST represent the time at which
+the session revocation occurred.</t>
 
 </section>
 <section anchor="session-revoked-examples" title="Examples">
 
 <t>NOTE: The event type URI is wrapped, the backslash is the continuation character.</t>
 
-<figure title="Example: Session Revoked for Session ID" anchor="session-revoked-example-session-id"><artwork type="json"><![CDATA[
+<figure title="Example: Session Revoked - Required claims + Simple Subject" anchor="session-revoked-example-session-id-req"><artwork type="json"><![CDATA[
 {
     "iss": "https://idp.example.com/123456789/",
     "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
-    "iat": 1600976590,
+    "iat": 1615305159,
     "aud": "https://sp.example.com/caep",
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/\
         session-revoked": {
             "subject": {
-                "subject_type": "user-device-session",
-                "session": {
-                  "iss": "https://idp.example.com/123456789/",
-                  "sub": "dMTlD|1600802906337.16|16008.16"
-                }
+                "format": "opaque",
+                "sub": "dMTlD|1600802906337.16|16008.16"
             },
-            "initiating_entity": "policy",
-            "reason_admin": "Policy Violation: C076E82F",
-            "reason_user": "Landspeed violation.",
-            "tenant_id": "123456789",
-            "event_timestamp": 1600975810
+            "event_timestamp": 1615304991643
         }
     }
 }
 ]]></artwork></figure>
 
-<figure title="Example: Session Revoked for User using sub claim" anchor="session-revoked-example-user-sub"><artwork type="json"><![CDATA[
+<figure title="Example: Session Revoked - Complex Subject describing user + session ID + device (includes optional claims)" anchor="session-revoked-example-session-id"><artwork type="json"><![CDATA[
 {
     "iss": "https://idp.example.com/123456789/",
     "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
-    "iat": 1600976590,
+    "iat": 1615305159,
+    "aud": "https://sp.example.com/caep",
+    "events": {
+        "https://schemas.openid.net/secevent/caep/event-type/\
+        session-revoked": {
+            "subject": {
+                "session": {
+                  "format": "opaque",
+                  "sub": "dMTlD|1600802906337.16|16008.16"
+                },
+                "user": {
+                  "format": "iss_sub",
+                  "iss": "https://idp.example.com/123456789/",
+                  "sub": "dMTlD|1600802906337.16|16008.16"
+                },
+                "tenant": {
+                  "format": "opaque",
+                  "id": "123456789"
+                }
+            },
+            "initiating_entity": "policy",
+            "reason_admin": "Landspeed Policy Violation: C076E82F",
+            "reason_user": "Access attempt from multiple regions.",
+            "event_timestamp": 1615304991643
+        }
+    }
+}
+]]></artwork></figure>
+
+<figure title="Example: Session Revoked - subject as `sub` claim (includes optional claims)" anchor="session-revoked-example-user-sub"><artwork type="json"><![CDATA[
+{
+    "iss": "https://idp.example.com/123456789/",
+    "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
+    "iat": 1615305159,
     "aud": "https://sp.example.com/caep",
     "sub": "jane.smith@example.com",
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/\
         session-revoked": {
             "initiating_entity": "policy",
-            "reason_admin": "Policy Violation: C076E82F",
-            "reason_user": "Landspeed violation.",
-            "tenant_id": "123456789",
-            "event_timestamp": 1600975810
+            "reason_admin": "Landspeed Policy Violation: C076E82F",
+            "reason_user": "Access attempt from multiple regions.",
+            "event_timestamp": 1615304991643
         }
     }
 }
 ]]></artwork></figure>
 
-<figure title="Example: Session Revoked for User + Device" anchor="session-revoked-example-user-device"><artwork type="json"><![CDATA[
+<figure title="Example: Session Revoked - Complex Subject describing user + device + tenant (includes optional claims)" anchor="session-revoked-example-user-device"><artwork type="json"><![CDATA[
 {
     "iss": "https://idp.example.com/123456789/",
     "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
-    "iat": 1600976590,
+    "iat": 1615305159,
     "aud": "https://sp.example.com/caep",
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/\
         session-revoked": {
             "subject": {
-                "subject_type": "user-device-session",
                 "user": {
-                    "subject_type": "iss-sub",
+                    "format": "iss_sub",
                     "iss": "https://idp.example.com/123456789/",
                     "sub": "jane.smith@example.com"
                 },
                 "device": {
-                    "subject_type": "iss-sub",
+                    "format": "iss_sub",
                     "iss": "https://idp.example.com/123456789/",
                     "sub": "e9297990-14d2-42ec-a4a9-4036db86509a"
+                },
+                "tenant": {
+                  "format": "opaque",
+                  "id": "123456789"
                 }
             },
             "initiating_entity": "policy",
             "reason_admin": "Policy Violation: C076E82F",
-            "reason_user": "Your device is no longer compliant.",
-            "tenant_id": "123456789",
-            "event_timestamp": 1600975810
+            "reason_user": "This device is no longer compliant.",
+            "event_timestamp": 1615304991643
         }
     }
 }
@@ -201,59 +239,46 @@ Security Event Token (SET).</t>
 </section>
 </section>
 <section anchor="token-claims-change" title="Token Claims Change">
-<t>Event Type URI:
-<spanx style="verb">https://schemas.openid.net/secevent/caep/event-type/token-claims-change</spanx></t>
+<t>Event Type URI:</t>
 
-<t>Token Claims Change signals that a claim in a token specified in the subject 
-has changed.</t>
+<t><spanx style="verb">https://schemas.openid.net/secevent/caep/event-type/token-claims-change</spanx></t>
 
-<t>The actual reason why the claims change occured might be specified with the 
-nested <spanx style="verb">reason_admin</spanx> and/or <spanx style="verb">reason_user</spanx> attributes described below.</t>
+<t>Token Claims Change signals that a claim in a token, identified by the 
+subject claim, has changed.</t>
 
-<section anchor="token-claims-change-attributes" title="Attributes">
+<t>The actual reason why the claims change occurred might be specified with the 
+nested <spanx style="verb">reason_admin</spanx> and/or <spanx style="verb">reason_user</spanx> claims made in <xref target="optional-event-claims"/>.</t>
+
+<section anchor="token-claims-change-claims" title="Event-Specific Claims">
 
 <t><list style="hanging">
-  <t hangText="event_timestamp">
-  REQUIRED JSON number: the time at which the claims change occured.
-Its value is a JSON number representing the number of seconds from 
-1970-01-01T0:0:0Z as measured in UTC until the date/time. This value must 
-be less than or equal to the "iat" claim in the parent 
-Security Event Token (SET).</t>
-  <t hangText="initiating_entity">
-  OPTIONAL, JSON string: describes the entity that invoked the token claims change.</t>
-  <t>Potential options:
-- <spanx style="verb">admin</spanx>:    an administrator invoked a token claims change
-- <spanx style="verb">user</spanx>:     the end-user invoked a token claims change
-- <spanx style="verb">policy</spanx>:   a policy evaluation resulted in the token claims change
-- <spanx style="verb">system</spanx>:   a system or platform assertion resulted in the the token claims change</t>
-  <t hangText="reason_admin">
-  OPTIONAL, JSON string: an administrative message for logging and auditing</t>
-  <t hangText="reason_user">
-  OPTIONAL, JSON string: a user-friendly message for display to an end-user</t>
-  <t hangText="tenant_id">
-  OPTIONAL, JSON string: tenant identifier</t>
+  <t hangText="claims">
+  REQUIRED, JSON object: one or more claims with their new value(s)</t>
 </list></t>
+
+<t>When <spanx style="verb">event_timestamp</spanx> is included, its value MUST represent the time at which
+the claim value(s) changed.</t>
 
 </section>
 <section anchor="token-claims-change-examples" title="Examples">
 
 <t>NOTE: The event type URI is wrapped, the backslash is the continuation character.</t>
 
-<figure title="Example: OIDC ID Token Claims Change" anchor="token-claims-change-example-oidc"><artwork type="json"><![CDATA[
+<figure title="Example: OIDC ID Token Claims Change - Required claims only" anchor="token-claims-change-example-oidc"><artwork type="json"><![CDATA[
 {
     "iss": "https://idp.example.com/987654321/",
     "jti": "9afce1e4e642b165fcaacdd0e7aa4903",
-    "iat": 1600976590,
+    "iat": 1615305159,
     "aud": "https://sp.example2.net/caep",
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/\
         token-claims-change": {
             "subject": {
-                "subject_type": "jwt-id",
+                "format": "jwt_id",
                 "iss": "https://idp.example.com/987654321/",
                 "jti": "f61t6e20zdo3px56gepu8rzlsp4c1dpc0fx7"
             },
-            "event_timestamp": 1600975810,
+            "event_timestamp": 1615304991643,
             "claims": {
                 "role": "ro-admin"
             }
@@ -262,21 +287,47 @@ Security Event Token (SET).</t>
 }
 ]]></artwork></figure>
 
-<figure title="Example: SAML Assertion Claims Change" anchor="token-claims-change-example-saml"><artwork type="json"><![CDATA[
+<figure title="Example: OIDC ID Token Claims Change - Optional claims" anchor="token-claims-change-example-oidc-optional"><artwork type="json"><![CDATA[
 {
     "iss": "https://idp.example.com/987654321/",
-    "jti": "dae94fed5f459881efa38b65c6772ddc",
-    "iat": 1600976590,
+    "jti": "9afce1e4e642b165fcaacdd0e7aa4903",
+    "iat": 1615305159,
     "aud": "https://sp.example2.net/caep",
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/\
         token-claims-change": {
             "subject": {
-                "subject_type": "saml-assertion-id",
+                "format": "jwt_id",
+                "iss": "https://idp.example.com/987654321/",
+                "jti": "f61t6e20zdo3px56gepu8rzlsp4c1dpc0fx7"
+            },
+            "event_timestamp": 1615304991643,
+            "initiating_entity": "policy",
+            "reason_admin": "User left trusted network: CorpNet3",
+            "reason_user": "You're no longer connected to a trusted network.",
+            "claims": {
+                "trusted_network": "false"
+            }
+        }
+    }
+}
+]]></artwork></figure>
+
+<figure title="Example: SAML Assertion Claims Change - Required claims only" anchor="token-claims-change-example-saml"><artwork type="json"><![CDATA[
+{
+    "iss": "https://idp.example.com/987654321/",
+    "jti": "dae94fed5f459881efa38b65c6772ddc",
+    "iat": 1615305159,
+    "aud": "https://sp.example2.net/caep",
+    "events": {
+        "https://schemas.openid.net/secevent/caep/event-type/\
+        token-claims-change": {
+            "subject": {
+                "format": "saml_assertion_id",
                 "issuer": "https://idp.example.com/987654321/",
                 "assertion_id": "_a75adf55-01d7-dbd8372ebdfc"
             },
-            "event_timestamp": 1600975810,
+            "event_timestamp": 1615304991643,
             "claims": {
                 "http://schemas.xmlsoap.org/ws/2005/05/identity/\
                 claims/role": "ro-admin"
@@ -289,8 +340,9 @@ Security Event Token (SET).</t>
 </section>
 </section>
 <section anchor="credential-change" title="Credential Change">
-<t>Event Type URI:
-<spanx style="verb">https://schemas.openid.net/secevent/caep/event-type/credential-change</spanx></t>
+<t>Event Type URI:</t>
+
+<t><spanx style="verb">https://schemas.openid.net/secevent/caep/event-type/credential-change</spanx></t>
 
 <t>The Credential Change event signals that a credential was created, changed, 
 revoked or deleted. Credential Change scenarios include:</t>
@@ -298,57 +350,34 @@ revoked or deleted. Credential Change scenarios include:</t>
 <t><list style="symbols">
   <t>password/PIN change/reset</t>
   <t>certificate enrollment, renewal, revocation and deletion</t>
-  <t>second factor / passwordless credential enrollment and deletion (U2F, FIDO2, OTP, app-based)</t>
+  <t>second factor / passwordless credential enrollment or deletion (U2F, FIDO2, OTP, app-based)</t>
 </list></t>
 
-<t>The actual reason why the credential change occured might be specified with the 
-nested <spanx style="verb">reason_admin</spanx> and/or <spanx style="verb">reason_user</spanx> attributes described below.</t>
+<t>The actual reason why the credential change occurred might be specified with the 
+nested <spanx style="verb">reason_admin</spanx> and/or <spanx style="verb">reason_user</spanx> claims made in <xref target="optional-event-claims"/>.</t>
 
-<section anchor="credential-change-attributes" title="Attributes">
+<section anchor="credential-change-claims" title="Event-Specific Claims">
 
 <t><list style="hanging">
-  <t hangText="event_timestamp">
-  REQUIRED, JSON number: the time at which the credential change occured.
-Its value is a JSON number representing the number of seconds from 
-1970-01-01T0:0:0Z as measured in UTC until the date/time. This value must 
-be less than or equal to the "iat" claim in the parent 
-Security Event Token (SET).</t>
   <t hangText="credential_type">
   REQUIRED, JSON string: potential options:
-  - password
-  - pin
-  - x509
-  - fido2-platform
-  - fido2-roaming
-  - fido-u2f
-  - verifiable-credential
-  - phone-voice
-  - phone-sms
-  - app
+  - <spanx style="verb">password</spanx>
+  - <spanx style="verb">pin</spanx>
+  - <spanx style="verb">x509</spanx>
+  - <spanx style="verb">fido2-platform</spanx>
+  - <spanx style="verb">fido2-roaming</spanx>
+  - <spanx style="verb">fido-u2f</spanx>
+  - <spanx style="verb">verifiable-credential</spanx>
+  - <spanx style="verb">phone-voice</spanx>
+  - <spanx style="verb">phone-sms</spanx>
+  - <spanx style="verb">app</spanx>
   - other mutually supported credential type</t>
   <t hangText="change_type">
   REQUIRED, JSON string: potential options:
-  - create
-  - revoke
-  - update
-  - delete</t>
-  <t hangText="initiating_entity">
-  OPTIONAL, JSON string: describes the entity that invoked the credential change.</t>
-  <t>Potential options:
-
-      <list style="symbols">
-        <t><spanx style="verb">admin</spanx>:    an administrator changed the credential</t>
-        <t><spanx style="verb">user</spanx>:     the end-user changed the credential</t>
-        <t><spanx style="verb">policy</spanx>:   a policy evaluation resulted in the credential change</t>
-        <t><spanx style="verb">system</spanx>:   a system or platform assertion resulted in credential change</t>
-      </list>
-  </t>
-  <t hangText="reason_admin">
-  OPTIONAL, JSON string: an administrative message for logging and auditing</t>
-  <t hangText="reason_user">
-  OPTIONAL, JSON string: a user-friendly message for display to an end-user</t>
-  <t hangText="tenant_id">
-  OPTIONAL, JSON string: tenant identifier</t>
+  - <spanx style="verb">create</spanx>
+  - <spanx style="verb">revoke</spanx>
+  - <spanx style="verb">update</spanx>
+  - <spanx style="verb">delete</spanx></t>
   <t hangText="friendly_name">
   OPTIONAL, JSON string: credential friendly name</t>
   <t hangText="x509_issuer">
@@ -359,34 +388,35 @@ Security Event Token (SET).</t>
   OPTIONAL, JSON string: FIDO2 Authenticator Attestation GUID as defined in <xref target="WebAuthn"/></t>
 </list></t>
 
+<t>When <spanx style="verb">event_timestamp</spanx> is included, its value MUST represent the time at which
+the credential change occurred.</t>
+
 </section>
 <section anchor="credential-change-examples" title="Examples">
 
 <t>NOTE: The event type URI is wrapped, the backslash is the continuation character.</t>
 
-<figure title="Example: Provisioning a new FIDO2 authenticator" anchor="credential-change-example-fido2"><artwork type="json"><![CDATA[
+<figure title="Example: Provisioning a new FIDO2 authenticator - Simple Subject + optional claims" anchor="credential-change-example-fido2"><artwork type="json"><![CDATA[
 {
     "iss": "https://idp.example.com/3456789/",
     "jti": "07efd930f0977e4fcc1149a733ce7f78",
-    "iat": 1600976598,
+    "iat": 1615305159,
     "aud": "https://sp.example2.net/caep",
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/\
         credential-change": {
             "subject": {
-                "subject_type": "iss-sub",
+                "format": "iss_sub",
                 "iss": "https://idp.example.com/3456789/",
                 "sub": "jane.smith@example.com"
             },
-            "current_level": "nist-aal2",
-            "previous_level": "nist-aal1",
-            "change_direction": "increase",
             "credential_type": "fido2-roaming",
             "change_type": "create",
             "fido2_aaguid": "accced6a-63f5-490a-9eea-e59bc1896cfc",
-            "credential_name": "Jane's USB authenticator",
+            "friendly_name": "Jane's USB authenticator",
             "initiating_entity": "user",
-            "event_timestamp": 1600975811
+            "reason_admin": "User self-enrollment",
+            "event_timestamp": 1615304991643
         }
     }
 }
@@ -395,8 +425,9 @@ Security Event Token (SET).</t>
 </section>
 </section>
 <section anchor="assurance-level-change" title="Assurance Level Change">
-<t>Event Type URI:
-<spanx style="verb">https://schemas.openid.net/secevent/caep/event-type/assurance-level-change</spanx></t>
+<t>Event Type URI:</t>
+
+<t><spanx style="verb">https://schemas.openid.net/secevent/caep/event-type/assurance-level-change</spanx></t>
 
 <t>The Assurance Level Change event signals that there has been a change in 
 authentication method since the initial user login. This change can be from 
@@ -411,25 +442,19 @@ Assurance Level Change event will signal to Service Provider A that user has
 authenticated with a stronger authentication method.</t>
 
 <t>The actual reason why the assurance level changed might be specified with the 
-nested <spanx style="verb">reason_admin</spanx> and/or <spanx style="verb">reason_user</spanx> attributes described below.</t>
+nested <spanx style="verb">reason_admin</spanx> and/or <spanx style="verb">reason_user</spanx> claims made in <xref target="optional-event-claims"/>.</t>
 
-<section anchor="assurance-level-change-attributes" title="Attributes">
+<section anchor="assurance-level-change-claims" title="Event-Specific Claims">
 
 <t><list style="hanging">
-  <t hangText="event_timestamp">
-  REQUIRED, JSON number: the time at which the assurance level change occured.
-Its value is a JSON number representing the number of seconds from 
-1970-01-01T0:0:0Z as measured in UTC until the date/time. This value must 
-be less than or equal to the "iat" claim in the parent 
-Security Event Token (SET).</t>
   <t hangText="current_level">
   REQUIRED, JSON string: the current NIST Authenticator Assurance Level (AAL) as defined in <xref target="SP800-63R3"/></t>
   <t>Potential options:
 
       <list style="symbols">
-        <t>nist-aal1</t>
-        <t>nist-aal2</t>
-        <t>nist-aal3</t>
+        <t><spanx style="verb">nist-aal1</spanx></t>
+        <t><spanx style="verb">nist-aal2</spanx></t>
+        <t><spanx style="verb">nist-aal3</spanx></t>
       </list>
   </t>
   <t hangText="previous_level">
@@ -437,51 +462,37 @@ Security Event Token (SET).</t>
   <t>Potential options:
 
       <list style="symbols">
-        <t>nist-aal1</t>
-        <t>nist-aal2</t>
-        <t>nist-aal3</t>
+        <t><spanx style="verb">nist-aal1</spanx></t>
+        <t><spanx style="verb">nist-aal2</spanx></t>
+        <t><spanx style="verb">nist-aal3</spanx></t>
       </list>
   </t>
   <t hangText="change_direction">
   REQUIRED, JSON string: the Authenticator Assurance Level increased or decreased</t>
   <t>Potential options:
-- increase
-- decrease</t>
-  <t hangText="initiating_entity">
-  OPTIONAL, JSON string: describes the entity that invoked the assurance level change</t>
-  <t>Potential options:
-
-      <list style="symbols">
-        <t><spanx style="verb">admin</spanx>:    an administrative action resulted in an assurance level change</t>
-        <t><spanx style="verb">user</spanx>:     an end-user action resulted in an assurance level change</t>
-        <t><spanx style="verb">policy</spanx>:   a policy evaluation resulted in an assurance level change</t>
-        <t><spanx style="verb">system</spanx>:   a system or platform assertion resulted in an assurance level change</t>
-      </list>
-  </t>
-  <t hangText="reason_admin">
-  OPTIONAL, JSON string: an administrative message for logging and auditing</t>
-  <t hangText="reason_user">
-  OPTIONAL, JSON string: a user-friendly message for display to an end-user</t>
-  <t hangText="tenant_id">
-  OPTIONAL, JSON string: tenant identifier</t>
+- <spanx style="verb">increase</spanx>
+- <spanx style="verb">decrease</spanx></t>
 </list></t>
+
+<t>When <spanx style="verb">event_timestamp</spanx> is included, its value MUST represent the time at which
+the assurance level changed.</t>
 
 </section>
 <section anchor="assurance-level-change-examples" title="Examples">
 
 <t>NOTE: The event type URI is wrapped, the backslash is the continuation character.</t>
 
-<figure title="Example: Assurance Level Increase" anchor="assurance-level-change-examples-al-increase"><artwork type="json"><![CDATA[
+<figure title="Example: Assurance Level Increase - Simple Subject + optional claims" anchor="assurance-level-change-examples-al-increase"><artwork type="json"><![CDATA[
 {
     "iss": "https://idp.example.com/3456789/",
     "jti": "07efd930f0977e4fcc1149a733ce7f78",
-    "iat": 1600976598,
+    "iat": 1615305159,
     "aud": "https://sp.example2.net/caep",
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/\
         assurance-level-change": {
             "subject": {
-                "subject_type": "iss-sub",
+                "format": "iss_sub",
                 "iss": "https://idp.example.com/3456789/",
                 "sub": "jane.smith@example.com"
             },
@@ -489,7 +500,7 @@ Security Event Token (SET).</t>
             "previous_level": "nist-aal1",
             "change_direction": "increase",
             "initiating_entity": "user",
-            "event_timestamp": 1600975811
+            "event_timestamp": 1615304991643
         }
     }
 }
@@ -498,31 +509,25 @@ Security Event Token (SET).</t>
 </section>
 </section>
 <section anchor="device-compliance-change" title="Device Compliance Change">
-<t>Event Type URI:
-<spanx style="verb">https://schemas.openid.net/secevent/caep/event-type/device-compliance-change</spanx></t>
+<t>Event Type URI:</t>
 
-<t>Token Claims Change signals that a claim in a token specified in the subject 
-has changed.</t>
+<t><spanx style="verb">https://schemas.openid.net/secevent/caep/event-type/device-compliance-change</spanx></t>
 
-<t>The actual reason why the claims change occured might be specified with the 
-nested <spanx style="verb">reason_admin</spanx> and/or <spanx style="verb">reason_user</spanx> attributes described below.</t>
+<t>Device Compliance Change signals that a device's compliance status has changed.</t>
 
-<section anchor="device-compliance-change-attributes" title="Attributes">
+<t>The actual reason why the status change occurred might be specified with the 
+nested <spanx style="verb">reason_admin</spanx> and/or <spanx style="verb">reason_user</spanx> claims made in <xref target="optional-event-claims"/>.</t>
+
+<section anchor="device-compliance-change-claims" title="Event-Specific Claims">
 
 <t><list style="hanging">
-  <t hangText="event_timestamp">
-  REQUIRED, JSON number: the time at which the device compliance change 
-occured. Its value is a JSON number representing the number of seconds from 
-1970-01-01T0:0:0Z as measured in UTC until the date/time. This value must 
-be less than or equal to the "iat" claim in the parent 
-Security Event Token (SET).</t>
   <t hangText="previous_status">
   REQUIRED, JSON string: the compliance status prior to the change that triggered the event</t>
   <t>Potential options:
 
       <list style="symbols">
-        <t>compliant</t>
-        <t>not-compliant</t>
+        <t><spanx style="verb">compliant</spanx></t>
+        <t><spanx style="verb">not-compliant</spanx></t>
       </list>
   </t>
   <t hangText="current_status">
@@ -530,57 +535,47 @@ Security Event Token (SET).</t>
   <t>Potential options:
 
       <list style="symbols">
-        <t>compliant</t>
-        <t>not-compliant</t>
+        <t><spanx style="verb">compliant</spanx></t>
+        <t><spanx style="verb">not-compliant</spanx></t>
       </list>
   </t>
-  <t hangText="initiating_entity">
-  OPTIONAL, JSON string: describes the entity that invoked the device compliance change</t>
-  <t>Potential options:
-
-      <list style="symbols">
-        <t><spanx style="verb">admin</spanx>:    an administrative action invoked the device compliance change</t>
-        <t><spanx style="verb">user</spanx>:     the end-user action invoked the device compliance change</t>
-        <t><spanx style="verb">policy</spanx>:   a policy evaluation resulted in the device compliance change</t>
-        <t><spanx style="verb">system</spanx>:   a system or platform assertion resulted in the device compliance change</t>
-      </list>
-  </t>
-  <t hangText="reason_admin">
-  OPTIONAL, JSON string: an administrative message for logging and auditing</t>
-  <t hangText="reason_user">
-  OPTIONAL, JSON string: a user-friendly message for display to an end-user</t>
-  <t hangText="tenant_id">
-  OPTIONAL, JSON string: tenant identifier</t>
 </list></t>
+
+<t>When <spanx style="verb">event_timestamp</spanx> is included, its value MUST represent the time at which
+the device compliance status changed.</t>
 
 </section>
 <section anchor="device-compliance-change-examples" title="Examples">
 
 <t>NOTE: The event type URI is wrapped, the backslash is the continuation character.</t>
 
-<figure title="Example: Device has gone out of compliance" anchor="device-compliance-change-examples-out-of-compliance"><artwork type="json"><![CDATA[
+<figure title="Example: Device No Longer Compliant - Complex Subject + optional claims" anchor="device-compliance-change-examples-out-of-compliance"><artwork type="json"><![CDATA[
 {
     "iss": "https://idp.example.com/123456789/",
     "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
-    "iat": 1600976590,
+    "iat": 1615305159,
     "aud": "https://sp.example.com/caep",
     "events": {
-         "https://schemas.openid.net/secevent/caep/event-type/\
-         session-revoked": {
-            "subject_type": "user-device-session",
-            "device": {
-                "subject_type": "iss-sub",
-                "iss": "https://idp.example.com/123456789/",
-                "sub": "e9297990-14d2-42ec-a4a9-4036db86509a"
-            }
-        },
-        "current_status": "not-compliant",
-        "previous_status": "compliant",
-        "initiating_entity": "policy",
-        "reason_admin": "Location Policy Violation: C076E82F",
-        "reason_user": "Device is no longer in a trusted location.",
-        "tenant_id": "123456789",
-        "event_timestamp": 1600975810
+        "https://schemas.openid.net/secevent/caep/event-type/\
+        device-compliance-change": {
+            "subject": {
+                "device": {
+                    "format": "iss_sub",
+                    "iss": "https://idp.example.com/123456789/",
+                    "sub": "e9297990-14d2-42ec-a4a9-4036db86509a"
+                },
+                "tenant": {
+                    "format": "opaque",
+                    "id": "123456789"
+                }
+            },
+            "current_status": "not-compliant",
+            "previous_status": "compliant",
+            "initiating_entity": "policy",
+            "reason_admin": "Location Policy Violation: C076E82F",
+            "reason_user": "Device is no longer in a trusted location.",
+            "event_timestamp": 1615304991643
+        }
     }
 }
 ]]></artwork></figure>
@@ -606,6 +601,15 @@ Security Event Token (SET).</t>
     </author>
     <author initials="T." surname="Cappalli" fullname="Tim Cappalli">
       <organization>Microsoft</organization>
+    </author>
+    <author initials="M." surname="Scurtescu" fullname="Marius Scurtescu">
+      <organization>Coinbase</organization>
+    </author>
+    <author initials="A." surname="Backman" fullname="Annabelle Backman">
+      <organization>Amazon</organization>
+    </author>
+    <author initials="." surname="John Bradley" fullname="John Bradley">
+      <organization>Yubico</organization>
     </author>
     <date year="2021"/>
   </front>
@@ -647,96 +651,101 @@ Security Event Token (SET).</t>
   </back>
 
 <!-- ##markdown-source:
-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
-RDibEQil8T+9wXBg/BdLgE3j9E0AAA==
+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
+/wRQMQD7AEsAAA==
 
 -->
 
