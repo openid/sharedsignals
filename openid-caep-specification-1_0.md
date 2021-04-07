@@ -1,8 +1,8 @@
 ---
-title: OpenID CAEP Event Types 1.0
-abbrev: CAEP-Event-Types
-docname: openid-caep-event-types-1_0
-date: 2021-04-02
+title: OpenID Continuous Access Evaluation Protocol 1.0
+abbrev: CAEP-Spec
+docname: openid-caep-spec-1_0
+date: 2021-04-07
 
 ipr: none
 cat: std
@@ -83,19 +83,21 @@ normative:
 
 --- abstract
 
-This document defines the Continuous Access Evaluation Protocol (CAEP) 
-Event Types for the Shared Signals and Events Profile of IETF Security 
-Events 1.0 {{SSE-PROFILE}}.
-
-Event Types are introduced and defined in Security Event Token (SET) {{RFC8417}}.
+This document defines the Continuous Access Evaluation Protocol (CAEP). It
+specifies a set of event types conforming to the Shared Signals and Events
+Profile of IETF Security Events 1.0 {{SSE-PROFILE}}. These event types are
+intended to be used between cooperating Transmitters and Receivers such that
+Transmitters may send continuous updates using which Receivers can attenuate
+access to shared human or robotic users, devices, sessions and applications.
 
 --- middle
 
 # Introduction {#introduction}
-
-This specification is based on the Shared Signals and Events Profile 
-of IETF Security Events 1.0 {{SSE-PROFILE}} and uses the subject identifiers 
-defined there.
+CAEP is the application of the Shared Signals and Events Profile of IETF
+Security Events 1.0 {{SSE-PROFILE}} (SSE Profile) to ensure access security in a
+network of cooperating providers. CAEP specifies a set of event-types that
+conform to the SSE Profile. This document specifies the event-types required to
+achieve this goal.
 
 ## Notational Considerations
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", 
