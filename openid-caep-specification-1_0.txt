@@ -9,14 +9,14 @@ Expires: October 9, 2021                                          Google
                                                           April 07, 2021
 
 
-            OpenID Continuous Access Evaluation Protocol 1.0
+            OpenID Continuous Access Evaluation Profile 1.0
                           openid-caep-spec-1_0
 
 Abstract
 
-   This document defines the Continuous Access Evaluation Protocol
-   (CAEP).  It specifies a set of event types conforming to the Shared
-   Signals and Events Profile of IETF Security Events 1.0 [SSE-PROFILE].
+   This document defines the Continuous Access Evaluation Profile (CAEP)
+   of the Shared Signals and Events Framework [SSE-FRAMEWORK].  It
+   specifies a set of event types conforming to the SSE Framework.
    These event types are intended to be used between cooperating
    Transmitters and Receivers such that Transmitters may send continuous
    updates using which Receivers can attenuate access to shared human or
@@ -85,10 +85,10 @@ Table of Contents
 1.  Introduction
 
    CAEP is the application of the Shared Signals and Events Profile of
-   IETF Security Events 1.0 [SSE-PROFILE] (SSE Profile) to ensure access
-   security in a network of cooperating providers.  CAEP specifies a set
-   of event-types that conform to the SSE Profile.  This document
-   specifies the event-types required to achieve this goal.
+   IETF Security Events 1.0 [SSE-FRAMEWORK] (SSE Profile) to ensure
+   access security in a network of cooperating providers.  CAEP
+   specifies a set of event-types that conform to the SSE Profile.  This
+   document specifies the event-types required to achieve this goal.
 
 1.1.  Notational Considerations
 
@@ -918,11 +918,11 @@ Internet-Draft                  CAEP-Spec                     April 2021
               Publication 800-63: Digital Identity Guidelines", June
               2017, <https://pages.nist.gov/800-63-3/sp800-63-3.html>.
 
-   [SSE-PROFILE]
+   [SSE-FRAMEWORK]
               Tulshibagwale, A., Cappalli, T., Scurtescu, M., Backman,
               A., and . John Bradley, "OpenID Shared Signals and Events
-              Profile of IETF Security Events 1.0", 2021,
-              <http://openid.net/specs/openid-risc-profile-1_0.html>.
+              Framework Specification 1.0", 2021,
+              <http://openid.net/specs/openid-sse-framework-1_0.html>.
 
    [WebAuthn]
               Balfanz, D., "Web Authentication: An API for accessing

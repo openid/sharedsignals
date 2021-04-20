@@ -15,17 +15,19 @@
                                                             Oct 26, 2020
 
 
-  OpenID Shared Signals and Events Profile of IETF Security Events 1.0
-                         openid-sse-profile-1_0
+      OpenID Shared Signals and Events Framework Specification 1.0
+                        openid-sse-framework-1_0
 
 Abstract
 
-   This Shared Signals and Events (SSE) profile enables sharing of
+   This Shared Signals and Events (SSE) Framework enables sharing of
    signals and events between cooperating peers.  It enables multiple
    applications such as Risk Incident Sharing and Coordination (RISC)
-   and the Continuous Access Evaluation Protocol ([CAEP])
+   and the Continuous Access Evaluation Profile ([CAEP])
 
-   It is a general profile for IETF Security Events [1] and it defines:
+   This specification defines:
+
+   o  A profile for IETF Security Events [1]
 
    o  Subject Principals
 
@@ -36,9 +38,8 @@ Abstract
    o  Event Properties
 
    o  Configuration information and discovery method for Transmitters
-      and Receivers
 
-   o  a Management API for Event Streams
+   o  A Management API for Event Streams
 
    This spec also directly profiles several IETF Security Events drafts:
 
@@ -52,10 +53,9 @@ Abstract
 
 
 
-
 Tulshibagwale, et al.    Expires April 29, 2021                 [Page 1]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
 Table of Contents
@@ -73,7 +73,7 @@ Table of Contents
        3.4.2.  SAML Assertion ID Subject Identifier Format . . . . .   6
      3.5.  Receiver Subject Processing . . . . . . . . . . . . . . .   7
    4.  Event Properties  . . . . . . . . . . . . . . . . . . . . . .   7
-   5.  Example SETs that conform to the SSE profile  . . . . . . . .   7
+   5.  Example SETs that conform to the SSE framework  . . . . . . .   7
    6.  Transmitter Configuration Discovery . . . . . . . . . . . . .  10
      6.1.  Transmitter Configuration Metadata  . . . . . . . . . . .  10
      6.2.  Obtaining Transmitter Configuration Information . . . . .  10
@@ -111,7 +111,7 @@ Table of Contents
 
 Tulshibagwale, et al.    Expires April 29, 2021                 [Page 2]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
        10.3.2.  Consentable Data . . . . . . . . . . . . . . . . . .  36
@@ -149,9 +149,9 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 2]
 
 2.  Subject Principals
 
-   This SSE profile defines a Subject Principal to be the entities about
-   which an event can be sent by Transmitters and received by Receivers
-   using the SSE profile.
+   This SSE Framework specification defines a Subject Principal to be
+   the entities about which an event can be sent by Transmitters and
+   received by Receivers using the SSE Framework.
 
    Subject Principals are the managed entities in a SSE Transmitter or
    Receiver.  These include human or robotic principals, devices,
@@ -167,7 +167,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 2]
 
 Tulshibagwale, et al.    Expires April 29, 2021                 [Page 3]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
    Subject Principals are identified by Subject Members defined below.
@@ -223,7 +223,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 3]
 
 Tulshibagwale, et al.    Expires April 29, 2021                 [Page 4]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
    group
@@ -279,7 +279,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 4]
 
 Tulshibagwale, et al.    Expires April 29, 2021                 [Page 5]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
 3.4.  Additional Subject Identifier Formats
@@ -335,7 +335,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 5]
 
 Tulshibagwale, et al.    Expires April 29, 2021                 [Page 6]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
    The "SAML Assertion ID" Subject Identifier Format is identified by
@@ -371,10 +371,10 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 6]
    discoverability of all additional members is specified in the
    Discovery (Section 6) section.
 
-5.  Example SETs that conform to the SSE profile
+5.  Example SETs that conform to the SSE framework
 
    The following are hypothetical examples of SETs that conform to the
-   SSE profile.
+   SSE framework.
 
 
 
@@ -391,7 +391,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 6]
 
 Tulshibagwale, et al.    Expires April 29, 2021                 [Page 7]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
 {
@@ -447,7 +447,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 7]
 
 Tulshibagwale, et al.    Expires April 29, 2021                 [Page 8]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
 {
@@ -503,7 +503,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 8]
 
 Tulshibagwale, et al.    Expires April 29, 2021                 [Page 9]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
 6.  Transmitter Configuration Discovery
@@ -559,7 +559,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 9]
 
 Tulshibagwale, et al.    Expires April 29, 2021                [Page 10]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
    Transmitters supporting Discovery MUST make a JSON document available
@@ -615,7 +615,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 10]
 
 Tulshibagwale, et al.    Expires April 29, 2021                [Page 11]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
    subset of the Metadata values defined in Section 6.1.  Other Claims
@@ -671,7 +671,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 11]
 
 Tulshibagwale, et al.    Expires April 29, 2021                [Page 12]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
 7.  Management API for SET Event Streams
@@ -727,7 +727,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 12]
 
 Tulshibagwale, et al.    Expires April 29, 2021                [Page 13]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
    The Event Stream Management API is implemented by the Event
@@ -783,7 +783,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 13]
 
 Tulshibagwale, et al.    Expires April 29, 2021                [Page 14]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
    Disabled  the Transmitter MAY send stream updated (Section 7.1.5)
@@ -839,7 +839,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 14]
 
 Tulshibagwale, et al.    Expires April 29, 2021                [Page 15]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
    The following is a non-normative example response:
@@ -895,7 +895,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 15]
 
 Tulshibagwale, et al.    Expires April 29, 2021                [Page 16]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
    +------+------------------------------------------------------------+
@@ -951,7 +951,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 16]
 
 Tulshibagwale, et al.    Expires April 29, 2021                [Page 17]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
    On receiving a valid request the Event Transmitter responds with a
@@ -1007,7 +1007,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 17]
 
 Tulshibagwale, et al.    Expires April 29, 2021                [Page 18]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
    HTTP/1.1 200 OK
@@ -1063,7 +1063,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 18]
 
 Tulshibagwale, et al.    Expires April 29, 2021                [Page 19]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
       *Read-Only*, A URL using the https scheme with no query or
@@ -1119,7 +1119,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 19]
 
 Tulshibagwale, et al.    Expires April 29, 2021                [Page 20]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
       decide to use a type that discloses more information than
@@ -1175,7 +1175,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 20]
 
 Tulshibagwale, et al.    Expires April 29, 2021                [Page 21]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
   HTTP/1.1 200 OK
@@ -1231,7 +1231,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 21]
 
 Tulshibagwale, et al.    Expires April 29, 2021                [Page 22]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
    +------+------------------------------------------------------------+
@@ -1287,7 +1287,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 22]
 
 Tulshibagwale, et al.    Expires April 29, 2021                [Page 23]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
   POST /sse/stream HTTP/1.1
@@ -1343,7 +1343,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 23]
 
 Tulshibagwale, et al.    Expires April 29, 2021                [Page 24]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
   HTTP/1.1 200 OK
@@ -1399,7 +1399,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 24]
 
 Tulshibagwale, et al.    Expires April 29, 2021                [Page 25]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
    +------+------------------------------------------------------------+
@@ -1455,7 +1455,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 25]
 
 Tulshibagwale, et al.    Expires April 29, 2021                [Page 26]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
    +------+------------------------------------------------------------+
@@ -1511,7 +1511,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 26]
 
 Tulshibagwale, et al.    Expires April 29, 2021                [Page 27]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
    +------+------------------------------------------------------------+
@@ -1567,7 +1567,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 27]
 
 Tulshibagwale, et al.    Expires April 29, 2021                [Page 28]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
 7.1.3.2.  Removing a Subject
@@ -1623,7 +1623,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 28]
 
 Tulshibagwale, et al.    Expires April 29, 2021                [Page 29]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
    POST /sse/subjects:remove HTTP/1.1
@@ -1679,7 +1679,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 29]
 
 Tulshibagwale, et al.    Expires April 29, 2021                [Page 30]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
    state
@@ -1735,7 +1735,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 30]
 
 Tulshibagwale, et al.    Expires April 29, 2021                [Page 31]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
    +------+------------------------------------------------------------+
@@ -1791,7 +1791,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 31]
 
 Tulshibagwale, et al.    Expires April 29, 2021                [Page 32]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
  {
@@ -1847,7 +1847,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 32]
 
 Tulshibagwale, et al.    Expires April 29, 2021                [Page 33]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
 {
@@ -1903,7 +1903,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 33]
 
 Tulshibagwale, et al.    Expires April 29, 2021                [Page 34]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
 9.2.  Information Harvesting
@@ -1959,7 +1959,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 34]
 
 Tulshibagwale, et al.    Expires April 29, 2021                [Page 35]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
    when communicating with a given party in order to reduce the
@@ -2015,7 +2015,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 35]
 
 Tulshibagwale, et al.    Expires April 29, 2021                [Page 36]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
 11.1.  Security Event Token Profile
@@ -2071,7 +2071,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 36]
 
 Tulshibagwale, et al.    Expires April 29, 2021                [Page 37]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
 {
@@ -2127,7 +2127,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 37]
 
 Tulshibagwale, et al.    Expires April 29, 2021                [Page 38]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
    the Receiver to the Transmitter MAY be used, if the two parties have
@@ -2172,8 +2172,8 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 38]
 
    Of particular concern is the possibility that SETs are confused for
    other kinds of JWTs.  The Security Considerations section of [SET]
-   has several sub-sections on this subject.  The SSE Profile is asking
-   for further restrictions:
+   has several sub-sections on this subject.  The SSE Framework is
+   asking for further restrictions:
 
    o  The "sub" claim MUST NOT be present, as described in
       Section 11.1.2.
@@ -2183,7 +2183,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 38]
 
 Tulshibagwale, et al.    Expires April 29, 2021                [Page 39]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
    o  SSE SETs MUST use explicit typing, as described in Section 11.1.4.
@@ -2239,7 +2239,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 39]
 
 Tulshibagwale, et al.    Expires April 29, 2021                [Page 40]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
 13.  References
@@ -2295,7 +2295,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 40]
 
 Tulshibagwale, et al.    Expires April 29, 2021                [Page 41]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
    [OAUTH-DISCOVERY]
@@ -2351,7 +2351,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 41]
 
 Tulshibagwale, et al.    Expires April 29, 2021                [Page 42]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
    [SUBIDS]   Backman, A., Ed. and M. Scurtescu, "Subject Identifiers
@@ -2407,7 +2407,7 @@ Authors' Addresses
 
 Tulshibagwale, et al.    Expires April 29, 2021                [Page 43]
 
-                           openid-sse-profile                   Oct 2020
+                          openid-sse-framework                  Oct 2020
 
 
    John Bradley
