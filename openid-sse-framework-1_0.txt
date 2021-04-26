@@ -1798,7 +1798,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 32]
    "jti": "123456",
    "iss": "https://transmitter.example.com",
    "aud": "receiver.example.com",
-   "iat": "1493856000",
+   "iat": 1493856000,
    "events": {
      "https://schemas.openid.net/secevent/sse/event-type/verification":{
        "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
@@ -1854,7 +1854,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 33]
   "jti": "123456",
   "iss": "https://transmitter.example.com",
   "aud": "receiver.example.com",
-  "iat": "1493856000",
+  "iat": 1493856000,
   "events": {
     "https://schemas.openid.net/secevent/sse/event-type/stream-updated": {
       "subject": {
@@ -2150,7 +2150,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 38]
   "jti": "123456",
   "iss": "https://transmitter.example.com",
   "aud": ["receiver.example.com/web", "receiver.example.com/mobile"],
-  "iat": "1493856000",
+  "iat": 1493856000,
   "events": {
     "https://schemas.openid.net/secevent/sse/event-type/verification": {
       "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
