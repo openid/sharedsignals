@@ -12,7 +12,7 @@
   be taken to indicate.
 -->
 
-<rfc docName="openid-sse-profile-1_0" category="std" ipr="none">
+<rfc docName="openid-sse-framework-1_0" category="std" ipr="none">
 
   <?rfc toc="yes" ?>
   <?rfc tocdepth="5" ?>
@@ -24,7 +24,7 @@
   <?rfc comments="yes"?>
 
   <front>
-    <title abbrev="openid-sse-profile">OpenID Shared Signals and Events Profile of IETF Security Events 1.0</title>
+    <title abbrev="openid-sse-framework">OpenID Shared Signals and Events Framework Specification 1.0</title>
 
     <author initials="A." surname="Tulshibagwale" fullname="Atul Tulshibagwale">
       <organization abbrev="Google">Google</organization>
@@ -62,20 +62,21 @@
     <workgroup>Shared Signals and Events Working Group</workgroup>
 
     <abstract>
-      <t>This Shared Signals and Events (SSE) profile enables sharing of signals and events between
-        cooperating peers. It enables multiple applications such as Risk Incident Sharing and
-        Coordination (RISC) and the Continuous Access Evaluation Protocol (<xref target="CAEP"/>)
+      <t>This Shared Signals and Events (SSE) Framework enables sharing of signals and events
+        between cooperating peers. It enables multiple applications such as Risk Incident Sharing
+        and Coordination (RISC) and the Continuous Access Evaluation Profile (<xref target="CAEP"/>)
       </t>
-      <t>It is a general profile for
-        <eref target="https://datatracker.ietf.org/wg/secevent/about/">IETF Security Events</eref>
-        and it defines:<list style="symbols">
-        <t>Subject Principals</t>
-        <t>Subject Claims in SSE Events</t>
-        <t>Event Types</t>
-        <t>Event Properties</t>
-        <t>Configuration information and discovery method for Transmitters and Receivers</t>
-        <t>a Management API for Event Streams</t>
-      </list></t>
+      <t>This specification defines:
+        <list style="symbols">
+          <t>A profile for
+          <eref target="https://datatracker.ietf.org/wg/secevent/about/">IETF Security Events</eref></t>
+          <t>Subject Principals</t>
+          <t>Subject Claims in SSE Events</t>
+          <t>Event Types</t>
+          <t>Event Properties</t>
+          <t>Configuration information and discovery method for Transmitters</t>
+          <t>A Management API for Event Streams</t>
+        </list></t>
 
       <t>This spec also directly profiles several IETF Security Events drafts:<list style="symbols">
         <t><xref target="SET">Security Event Token (SET)</xref></t>
@@ -98,8 +99,8 @@
     </section>
 
     <section anchor="subject-principals" title="Subject Principals">
-      <t>This SSE profile defines a Subject Principal to be the entities about which an event can be
-        sent by Transmitters and received by Receivers using the SSE profile.</t>
+      <t>This SSE Framework specification defines a Subject Principal to be the entities about which
+        an event can be sent by Transmitters and received by Receivers using the SSE Framework.</t>
 
       <t>Subject Principals are the managed entities in a SSE Transmitter or Receiver. These include
         human or robotic principals, devices, customer tenants in a multi-tenanted service,
@@ -258,8 +259,8 @@
       </t>
     </section>
 
-    <section anchor="events-examples" title="Example SETs that conform to the SSE profile">
-      <t>The following are hypothetical examples of SETs that conform to the SSE profile.</t>
+    <section anchor="events-examples" title="Example SETs that conform to the SSE framework">
+      <t>The following are hypothetical examples of SETs that conform to the SSE framework.</t>
       <figure anchor="subject-ids-ex-simple" title="Example: SET Containing a SSE Event with a Simple Subject Member">
         <artwork><![CDATA[
 {
@@ -1597,13 +1598,14 @@ disabled": {
           <section title="Distinguishing SETs from other Kinds of JWTs">
             <t>Of particular concern is the possibility that SETs are confused for other kinds
             of JWTs. The Security Considerations section of <xref target="SET"/> has several
-            sub-sections on this subject. The SSE Profile is asking for further restrictions:<list style="symbols">
-              <t>The <spanx style="verb">sub</spanx> claim MUST NOT be present, as described
-                in <xref target="event-subjects"/>.</t>
-              <t>SSE SETs MUST use explicit typing, as described in <xref target="explicit-typing"/>.</t>
-              <t>The <spanx style="verb">exp</spanx> claim MUST NOT be present, as described in 
-              <xref target="exp-claim"/>.</t>
-            </list></t>
+            sub-sections on this subject. The SSE Framework is asking for further restrictions:
+              <list style="symbols">
+                <t>The <spanx style="verb">sub</spanx> claim MUST NOT be present, as described
+                  in <xref target="event-subjects"/>.</t>
+                <t>SSE SETs MUST use explicit typing, as described in <xref target="explicit-typing"/>.</t>
+                <t>The <spanx style="verb">exp</spanx> claim MUST NOT be present, as described in
+                <xref target="exp-claim"/>.</t>
+              </list></t>
           </section>
         </section>
       </section>
