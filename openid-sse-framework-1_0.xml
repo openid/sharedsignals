@@ -12,7 +12,7 @@
   be taken to indicate.
 -->
 
-<rfc docName="openid-risc-profile-1_0" category="std" ipr="none">
+<rfc docName="openid-sse-framework-1_0" category="std" ipr="none">
 
   <?rfc toc="yes" ?>
   <?rfc tocdepth="5" ?>
@@ -24,7 +24,20 @@
   <?rfc comments="yes"?>
 
   <front>
-    <title abbrev="openid-risc-profile">OpenID RISC Profile of IETF Security Events 1.0</title>
+    <title abbrev="openid-sse-framework">OpenID Shared Signals and Events Framework Specification 1.0</title>
+
+    <author initials="A." surname="Tulshibagwale" fullname="Atul Tulshibagwale">
+      <organization abbrev="Google">Google</organization>
+      <address>
+        <email>atultulshi@google.com</email>
+      </address>
+    </author>
+    <author initials="T." surname="Cappalli" fullname="Tim Cappalli">
+      <organization abbrev="Microsoft">Microsoft</organization>
+      <address>
+        <email>tim.cappalli@microsoft.com</email>
+      </address>
+    </author>
 
     <author initials="M." surname="Scurtescu" fullname="Marius Scurtescu">
       <organization abbrev="Coinbase">Coinbase</organization>
@@ -44,22 +57,30 @@
         <email>secevemt@ve7jtb.com</email>
       </address>
     </author>
+    <date year="2020" month="Oct" day="26"/>
 
-    <date year="2018" month="April" day="24"/>
-
-    <workgroup>RISC Working Group</workgroup>
+    <workgroup>Shared Signals and Events Working Group</workgroup>
 
     <abstract>
-      <t>This spec is a general profile for 
-        <eref target="https://datatracker.ietf.org/wg/secevent/about/">IETF Security Events</eref>
-        and it defines:<list style="symbols">
-        <t>Subject Identifiers</t>
-        <t>a configuration information discovery method for Transmitters</t>
-        <t>a Management API for Event Streams</t>
-      </list></t>
+      <t>This Shared Signals and Events (SSE) Framework enables sharing of signals and events
+        between cooperating peers. It enables multiple applications such as Risk Incident Sharing
+        and Coordination (RISC) and the Continuous Access Evaluation Profile (<xref target="CAEP"/>)
+      </t>
+      <t>This specification defines:
+        <list style="symbols">
+          <t>A profile for
+          <eref target="https://datatracker.ietf.org/wg/secevent/about/">IETF Security Events</eref></t>
+          <t>Subject Principals</t>
+          <t>Subject Claims in SSE Events</t>
+          <t>Event Types</t>
+          <t>Event Properties</t>
+          <t>Configuration information and discovery method for Transmitters</t>
+          <t>A Management API for Event Streams</t>
+        </list></t>
 
       <t>This spec also directly profiles several IETF Security Events drafts:<list style="symbols">
         <t><xref target="SET">Security Event Token (SET)</xref></t>
+        <t><xref target="SUBIDS">Subject Identifiers for Security Event Tokens</xref></t>
         <t><xref target="DELIVERYPUSH">Push-Based SET Token Delivery Using HTTP</xref></t>
         <t><xref target="DELIVERYPOLL">Poll-Based SET Token Delivery Using HTTP</xref></t>
       </list></t>
@@ -77,18 +98,170 @@
       </section>
     </section>
 
-    <section anchor="subject-ids" title="Subject Identifiers">
-      <t>The RISC profile defines a structure called a Subject Identifier: a <xref target="RFC7159">JSON</xref>
-        object containing a set of claims that collectively uniquely identify a subject, according 
-        to a simple schema called a Subject Identifier Type. Every Subject Identifier MUST contain 
-        a <spanx style="verb">subject_type</spanx> claim, whose value MUST be a name that uniquely 
-        identifies the Subject Identifier Type of the Subject Identifier. Any remaining claims 
-        within the Subject Identifier MUST be interpreted according to the definition of the 
-        Subject Identifier Type. A Subject Identifier MUST conform to the Subject Identifier Type 
-        identified by its <spanx style="verb">subject_type</spanx> claim, and MUST NOT contain any 
-        claims not defined by its Subject Identifier Type.</t>
+    <section anchor="subject-principals" title="Subject Principals">
+      <t>This SSE Framework specification defines a Subject Principal to be the entities about which
+        an event can be sent by Transmitters and received by Receivers using the SSE Framework.</t>
 
-      <figure anchor="subject-ids-ex-email" title="Example: SET Containing a RISC Event with an Email Subject Identifier">
+      <t>Subject Principals are the managed entities in a SSE Transmitter or Receiver. These include
+        human or robotic principals, devices, customer tenants in a multi-tenanted service,
+        organizational units within a tenant, groups of subject principals or other entities that
+        are managed by Transmitters and Receivers. There may be other actors or resources that can
+        be treated as Subject Principals, and event-type definitions SHOULD specify the range of
+        principals addressed by the event.</t>
+
+      <t>Subject Principals are identified by Subject Members defined below.</t>
+
+    </section>
+
+    <section anchor="subject-ids" title="Subject Members in SSE Events">
+      <t>A member of type Subject in an SSE event MAY have any claim name. Each Subject Member MUST
+        refer to exactly one Subject Principal.</t>
+
+      <t>A Subject may be a <spanx style="verb">simple subject</spanx> or a <spanx style="verb">
+        complex subject.</spanx></t>
+      <section anchor="simple-subjects" title="Simple Subject Members">
+        <t>A Simple Subject Member has a claim name and a value that is a <spanx style="verb">
+          Subject Identifier</spanx> as defined in the <xref target="SUBIDS">Subject Identifiers
+          for Security Event Tokens</xref>. Below is a non-normative example of a Simple Subject
+          Member in a SSE event.</t>
+        <figure anchor="simple-subject-ex" title="Example: Simple Subject">
+          <artwork><![CDATA[
+"transferer": {
+  "format": "email",
+  "email": "foo@example.com"
+}
+        ]]></artwork></figure>
+      </section>
+      <section anchor="complex-subjects" title="Complex Subject Members">
+        <t>A Complex Subject Member has a name and a value that is a <xref target="RFC7159">
+          JSON</xref> object that has one or more Simple Subject Members. The name of each Simple
+          Subject Member in this value MAY be one of the following:
+          <list style="hanging">
+            <t hangText="user"> <vspace blankLines="0"/>OPTIONAL. A Subject Identifier that
+              identifies a user.</t>
+            <t hangText="device"> <vspace blankLines="0"/>OPTIONAL. A Subject Identifier that
+              identifies a device.</t>
+            <t hangText="session"> <vspace blankLines="0"/>OPTIONAL. A Subject Identifier that
+              identifies a session.</t>
+            <t hangText="application"> <vspace blankLines="0"/>OPTIONAL. A Subject Identifier that
+              identifies an application.</t>
+            <t hangText="tenant"> <vspace blankLines="0"/>OPTIONAL. A Subject Identifier that
+              identifies a tenant.</t>
+            <t hangText="org_unit"> <vspace blankLines="0"/>OPTIONAL. A Subject Identifier that
+              identifies an organizational unit.</t>
+            <t hangText="group"> <vspace blankLines="0"/>OPTIONAL. A Subject Identifier that
+              identifies a group.</t>
+          </list></t>
+        <t>Additional Subject Member names MAY be used in Complex Subjects. Each member name MAY
+          appear at most once in the Complex Subject value.</t>
+        <t>Below is a non-normative example of a Complex Subject claim in a SSE event.</t>
+        <figure anchor="complex-subject-ex" title="Example: Complex Subject"><artwork><![CDATA[
+"transferee": {
+  "user" : {
+    "format": "email",
+    "email": "bar@example.com"
+  },
+  "tenant" : {
+    "format": "iss_sub",
+    "iss" : "http://example.com/idp1",
+    "sub" : "1234"
+  }
+}
+        ]]></artwork></figure>
+        <section anchor="complex-subject-interpretation" title="Complex Subject Interpretation">
+          <t>All members within a Complex Subject MUST represent attributes of the same Subject
+            Principal. As a whole, the Complex Subject MUST refer to exactly one Subject
+            Principal.</t>
+        </section>
+      </section>
+      <section anchor="subject-ids-in-sse" title="Subject Identifiers in SSE Events">
+        <t>A Subject Identifier in a SSE event MUST have an identifier format that is any one of:
+          <list style="symbols">
+            <t>Defined in the IANA Registry defined in <xref target="SUBIDS">Subject Identifiers
+              for Security Event Tokens</xref>, located at <spanx style="verb">
+              "https://www.iana.org/assignments/secevent/".</spanx></t>
+            <t>An identifier format defined in the <xref target="additional-subject-id-formats">
+              Additional Subject Identifier Formats</xref> section below, OR</t>
+            <t>A proprietary subject identifier format that is agreed to between parties. Members
+              within a subject identifier that has a proprietary subject identifier format are
+              agreed to between the parties and such agreement is outside the scope of this
+              specification.</t>
+          </list></t>
+      </section>
+      <section anchor="additional-subject-id-formats" title="Additional Subject Identifier Formats">
+        <t>The following new subject identifier formats are defined:</t>
+        <section anchor="sub-id-jwt-id" title="JWT ID Subject Identifier Format">
+          <t>The "JWT ID" Subject Identifier Format specifies a JSON Web Token (JWT) identifier,
+            defined in  <xref target="RFC7519"/>. Subject Identifiers of this type MUST contain the
+            following members:
+            <list style="hanging">
+              <t hangText="iss"> 
+              <vspace blankLines="0"/>REQUIRED. The "iss" (issuer) claim of the JWT being
+                identified, defined in <xref target="RFC7519"/></t>
+              <t hangText="jti"> 
+              <vspace blankLines="0"/>REQUIRED. The "jti" (JWT token ID) claim of the JWT being
+                identified, defined in <xref target="RFC7519"/></t>
+            </list></t>
+          <t>The "JWT ID" Subject Identifier Format is identified by the name <spanx style="verb">
+            jwt-id</spanx>.</t>
+          <t>Below is a non-normative example of Subject Identifier for the <spanx style="verb">
+            jwt-id</spanx> Subject Identifier Format.</t>
+          <figure anchor="sub-id-jwtid" title="Example: 'jwt-id' Subject Identifier"><artwork>
+            <![CDATA[
+{
+    "format": "jwt-id",
+    "iss": "https://idp.example.com/123456789/",
+    "jti": "B70BA622-9515-4353-A866-823539EECBC8"
+}
+        ]]></artwork></figure>
+        </section>
+        <section anchor="sub-id-saml-assertion-id" title="SAML Assertion ID Subject Identifier Format">
+          <t>The "SAML Assertion ID" Subject Identifier Format specifies a SAML 2.0 <xref target="OASIS.saml-core-2.0-os"/>
+            assertion identifier. Subject Identifiers of this format MUST contain the following
+            members:
+            <list style="hanging">
+              <t hangText="issuer"> <vspace blankLines="0"/>REQUIRED. The "Issuer" value of the SAML
+                assertion being identified, defined in <xref target="OASIS.saml-core-2.0-os"/></t>
+              <t hangText="assertion_id"> <vspace blankLines="0"/>REQUIRED. The "ID" value of the
+                SAML assertion being identified, defined in <xref target="OASIS.saml-core-2.0-os"/>
+              </t>
+            </list></t>
+          <t>The "SAML Assertion ID" Subject Identifier Format is identified by the name
+            <spanx style="verb">saml-assertion-id</spanx>.</t>
+          <t>Below is a non-normative example Subject Identifier for the <spanx style="verb">
+            saml-assertion-id</spanx> Subject Identifier Format.</t>
+          <figure anchor="sub-id-samlassertionid" title="Example: 'saml-assertion-id' Subject Identifier">
+            <artwork><![CDATA[
+{
+    "format": "saml-assertion-id",
+    "issuer": "https://idp.example.com/123456789/",
+    "assertion_id": "_8e8dc5f69a98cc4c1ff3427e5ce34606fd672f91e6"
+}
+        ]]></artwork></figure>
+        </section>
+      </section>
+      <section anchor="receiver-subject-processing" title="Receiver Subject Processing">
+        <t>A SSE Receiver MUST make a best effort process all members from a Subject in an SSE event.
+          The <xref target="discovery-meta">Transmitter Configuration Metadata</xref> defined below
+          MAY define certain members within a Complex Subject to be Critical. A SSE Receiver MUST
+          discard any event that contains a Subject with a Critical member that it is unable to
+          process.</t>
+      </section>
+    </section>
+
+    <section anchor="properties" title="Event Properties">
+      <t>Additional members about an event may be included in the <spanx style="verb">events</spanx>
+        claim. Some of these members are required and specified as such in the respective event
+        types specs. If a Transmitter determines that it needs to include additional members that
+        are not specified in the event types spec, then the name of such members MUST be a URI. The
+        discoverability of all additional members is specified in the <xref target="discovery">
+        Discovery</xref> section.
+      </t>
+    </section>
+
+    <section anchor="events-examples" title="Example SETs that conform to the SSE framework">
+      <t>The following are hypothetical examples of SETs that conform to the SSE framework.</t>
+      <figure anchor="subject-ids-ex-simple" title="Example: SET Containing a SSE Event with a Simple Subject Member">
         <artwork><![CDATA[
 {
   "iss": "https://idp.example.com/",
@@ -96,20 +269,18 @@
   "iat": 1520364019,
   "aud": "636C69656E745F6964",
   "events": {
-    "https://schemas.openid.net/secevent/risc/event-type/account-\
-enabled": {
+    "https://schemas.openid.net/secevent/risc/event-type/account-enabled": {
       "subject": {
-        "subject_type": "email",
+        "format": "email",
         "email": "foo@example.com"
       }
     }
   }
 }
         ]]></artwork>
-        <postamble>A Subject Identifier that identifies a subject by email address.</postamble>
       </figure>
 
-      <figure anchor="subject-ids-ex-iss_sub" title="Example: SET Containing a RISC Event with an Issuer and Subject Subject Identifier">
+      <figure anchor="subject-ids-ex-complex" title="Example: SET Containing a SSE Event with a Complex Subject Member">
         <artwork><![CDATA[
 {
   "iss": "https://idp.example.com/",
@@ -117,139 +288,146 @@ enabled": {
   "iat": 1520364019,
   "aud": "636C69656E745F6964",
   "events": {
-    "https://schemas.openid.net/secevent/risc/event-type/account-\
-enabled": {
+    "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
       "subject": {
-        "subject_type": "iss_sub",
-        "iss": "https://issuer.example.com/",
-        "sub": "abc1234"
+          "user": {
+              "format": "iss_sub",
+              "iss": "https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/",
+              "sub": "jane.smith@example.com"
+          },
+          "device": {
+              "format": "iss_sub",
+              "iss": "https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/",
+              "sub": "e9297990-14d2-42ec-a4a9-4036db86509a"
+          }
+      }
+      "initiating_entity": "policy",
+      "reason_admin": "Policy Violation: C076E82F",
+      "reason_user": "Landspeed violation.",
+      "event_timestamp": 1600975810
+    }
+  }
+}
+        ]]></artwork>
+      </figure>
+
+      <figure anchor="subject-properties-ex" title="Example: SET Containing a SSE Event with a Simple Subject and a Property Member">
+        <artwork><![CDATA[
+{
+  "iss": "https://sp.example2.com/",
+  "jti": "756E69717565206964656E746966696572",
+  "iat": 1520364019,
+  "aud": "636C69656E745F6964",
+  "events": {
+    "https://schemas.openid.net/secevent/caep/event-type/token-claims-change": {
+      "subject": {
+        "format": "email",
+        "email": "foo@example2.com"
+      },
+      "event_timestamp": 1600975810,
+      "claims": {
+         "role": "ro-admin"
       }
     }
   }
 }
         ]]></artwork>
-        <postamble>A Subject Identifier that identifies a subject by an identifier provided by an
-          issuer.</postamble>
       </figure>
 
-      <section anchor="sub-id-types" title="Subject Identifier Types">
-        <t>A Subject Identifier Type is a light-weight schema that describes a set of claims that
-          uniquely identifies a subject. Every Subject Identifier Type MUST have a unique name
-          registered in the IANA "Security Event Subject Identifier Types" registry established by <xref
-            target="iana-sub-id-types"/>. A Subject Identifier Type MAY contain more claims than are
-          strictly necessary to uniquely identify a subject, however a Subject Identifier MUST
-          contain all of the claims required by its type (See <xref target="privacy" format="title"/>).</t>
-
-        <t> The following Subject Identifier Types are registered in the IANA "Security Event Subject
-          Identifier Types" registry established by <xref target="iana-sub-id-types"/>.</t>
-
-        <section anchor="sub-id-email" title="Email Subject Identifier Type">
-          <t>The Email Subject Identifier Type describes a subject by email address. Subject
-            Identifiers of this type MUST contain an <spanx style="verb">email</spanx> claim whose value is a string
-            containing the email address of the subject. The <spanx style="verb">email</spanx> claim MUST NOT be null or
-            empty. The Email Subject Identifier Type is identified by the name <spanx style="verb">email</spanx>.</t>
-        </section>
-
-        <section anchor="sub-id-phone" title="Phone Number Subject Identifier Type">
-          <t>The Phone Number Subject Identifier Type describes a subject by telephone number.
-            Subject Identifiers of this type MUST contain a <spanx style="verb">phone</spanx> claim whose value is a string
-            containing the full telephone number of the subject, including international dialing
-            prefix, formatted according to <xref target="E164">E.164</xref>. The <spanx style="verb">phone</spanx> claim MUST
-            NOT be null or empty. The Phone Number Subject Identifier Type is identified by the name
-            <spanx style="verb">phone</spanx>.</t>
-        </section>
-
-        <section anchor="sub-id-iss_sub" title="Issuer and Subject Subject Identifier Type">
-          <t>The Issuer and Subject Subject Identifier Type describes a subject by an issuer and a
-            subject. Subject Identifiers of this type MUST contain an <spanx style="verb">iss</spanx> claim whose value
-            identifies the issuer, and a <spanx style="verb">sub</spanx> claim whose value identifies the subject with respect
-            to the issuer. These claims MUST follow the formats of the <spanx style="verb">iss</spanx> claim and <spanx style="verb">sub</spanx> claim
-            defined by <xref target="RFC7519"/>, respectively. Both the <spanx style="verb">iss</spanx> claim and the <spanx style="verb">sub</spanx>
-            claim MUST NOT be null or empty. The Issuer and Subject Subject Identifier Type is
-            identified by the name <spanx style="verb">iss_sub</spanx>.</t>
-        </section>
-
-	<section anchor="sub-id-id_token_claims" title="ID Token Claims Subject Identifier Type">
-          <t>The ID Token Claims Subject Identifier Type describes a subject by a subset of the claims from an ID token. Subject Identifiers of this type MUST contain at least one of the following claims:<list style="hanging">
-            <t hangText="email"><vspace blankLines="0"/>An <spanx style="verb">email</spanx> claim, as defined in <xref target="IDTOKEN"/>.</t>
-            <t hangText="phone_number"><vspace blankLines="0"/>An <spanx style="verb">phone_number</spanx> claim, as defined in <xref target="IDTOKEN"/>.</t>
-            <t hangText="sub"><vspace blankLines="0"/>A <spanx style="verb">sub</spanx> claim, as defined in <xref target="RFC7519"/>.</t>
-          </list></t>
-
-          <t>If the Subject Identifier contains a <spanx style="verb">sub</spanx> claim, it MUST also contain an
-          <spanx style="verb">iss</spanx> claim, as defined in <xref target="RFC7519"/>.  The ID Token Claims Subject Identifier Type is identified by the name <spanx style="verb">id_token_claims</spanx>.</t>
-        </section>
-      </section>
+      <figure anchor="subject-custom-type-ex" title="Example: SET Containing a SSE Event with a Proprietary Subject Identifier Format">
+        <artwork><![CDATA[
+{
+  "iss": "https://myservice.example3.com/",
+  "jti": "756E69717565206964656E746966696534",
+  "iat": 15203800012,
+  "aud": "636C69656E745F6324",
+  "events": {
+    "https://schemas.openid.net/secevent/caep/event-type/token-claims-change": {
+    "subject": {
+        "format": "catalog_item",
+        "catalog_id": "c0384/winter/2354122"
+      }
+      "event_timestamp": 1600975810,
+      "claims": {
+         "role": "ro-admin"
+      }
+    }
+  }
+}
+        ]]></artwork>
+      </figure>
     </section>
 
     <section anchor="discovery" title="Transmitter Configuration Discovery">
-      <t>This section defines a mechanism for Receivers to obtain Transmitter configuration 
+      <t>This section defines a mechanism for Receivers to obtain Transmitter configuration
       information.</t>
-      
+
       <section anchor="discovery-meta" title="Transmitter Configuration Metadata">
         <t>Transmitters have metadata describing their configuration:<list style="hanging">
           <t hangText="issuer">REQUIRED. URL using the https scheme with no query or fragment component that the
-            Transmitter asserts as its Issuer Identifier. This MUST be identical to the iss Claim value in
+            Transmitter asserts as its Issuer Identifier. This MUST be identical to the iss claim value in
             Security Event Tokens issued from this Transmitter.</t>
           <t hangText="jwks_uri"> REQUIRED. URL of the Transmitter's <xref target="RFC7517">JSON Web Key Set</xref>
             document. This contains the signing key(s) the Receiver uses to validate signatures from the 
             Transmitter.</t>
-          <t hangText="delivery_methods_supported"> RECOMMENDED. List of supported delivery method 
+          <t hangText="delivery_methods_supported"> RECOMMENDED. List of supported delivery method
             URIs.</t>
           <t hangText="configuration_endpoint"> OPTIONAL. The URL of the Configuration Endpoint.</t>
           <t hangText="status_endpoint"> OPTIONAL. The URL of the Status Endpoint.</t>
           <t hangText="add_subject_endpoint"> OPTIONAL. The URL of the Add Subject Endpoint.</t>
           <t hangText="remove_subject_endpoint"> OPTIONAL. The URL of the Remove Subject Endpoint.</t>
           <t hangText="verification_endpoint"> OPTIONAL. The URL of the Verification Endpoint.</t>
+          <t hangText="critical_subject_members">OPTIONAL. List of member names in a Complex Subject
+            which, if present in a Subject Member in an event, MUST be interpreted by a Receiver.</t>
         </list></t>
-        
+
         <t>TODO: consider adding a IANA Registry for metadata, similar to Section 7.1.1 of <xref target="OAUTH-DISCOVERY"/>.
           This would allow other specs to add to the metadata.</t>
       </section>
-      
+
       <section title="Obtaining Transmitter Configuration Information">
         <t>Using the Issuer as documented by the Transmitter, the Transmitter Configuration
         Information can be retrieved.</t>
-        
-        <t>Transmitters supporting Discovery MUST make a JSON document available at the path formed 
-          by inserting the string <spanx style="verb">/.well-known/risc-configuration</spanx> into the
-          Issuer between the host component and the path component, if any. The syntax and 
+
+        <t>Transmitters supporting Discovery MUST make a JSON document available at the path formed
+          by inserting the string <spanx style="verb">/.well-known/sse-configuration</spanx> into the
+          Issuer between the host component and the path component, if any. The syntax and
           semantics of <spanx style="verb">.well-known</spanx> are defined in <xref target="RFC5785"/>.
-          <spanx style="verb">risc-configuration</spanx> MUST point to a JSON document 
-          compliant with this specification and MUST be returned using the 
+          <spanx style="verb">sse-configuration</spanx> MUST point to a JSON document
+          compliant with this specification and MUST be returned using the
           <spanx style="verb">application/json</spanx> content type.</t>
-        
+
         <section title="Transmitter Configuration Request">
           <t>A Transmitter Configuration Document MUST be queried using an HTTP
             <spanx style="verb">GET</spanx> request at the previously specified path.</t>
-          
+
           <t>The Receiver would make the following request to the Issuer <spanx style="verb">https://tr.example.com</spanx>
             to obtain its Configuration information, since the Issuer contains no path component:
             <figure title="Example: Transmitter Configuration Request (without path)" anchor="figdiscoveryrequest">
               <artwork><![CDATA[
-GET /.well-known/risc-configuration HTTP/1.1
+GET /.well-known/sse-configuration HTTP/1.1
 Host: tr.example.com
 ]]></artwork>
             </figure>
           </t>
-          
+
           <t>
             If the  Issuer value contains a path component, any terminating <spanx style="verb">/</spanx> MUST be
-            removed before inserting <spanx style="verb">/.well-known/risc-configuration</spanx> between 
-            the host component and the path component. The Receiver would make the following request to the Issuer 
-            <spanx style="verb">https://tr.example.com/issuer1</spanx> to obtain its Configuration information, 
+            removed before inserting <spanx style="verb">/.well-known/sse-configuration</spanx> between
+            the host component and the path component. The Receiver would make the following request to the Issuer
+            <spanx style="verb">https://tr.example.com/issuer1</spanx> to obtain its Configuration information,
             since the Issuer contains a path component:
             <figure title="Example: Transmitter Configuration Request (with path)" anchor="figdiscoveryrequestpath">
               <artwork><![CDATA[
-GET /.well-known/risc-configuration/issuer1 HTTP/1.1
+GET /.well-known/sse-configuration/issuer1 HTTP/1.1
 Host: tr.example.com
 ]]></artwork>
             </figure>
           </t>
-          
+
           <t>
-            Using path components enables supporting multiple issuers per host. This is required in some multi-tenant hosting 
-            configurations. This use of <spanx style="verb">.well-known</spanx> is for supporting multiple issuers per host; 
+            Using path components enables supporting multiple issuers per host. This is required in some multi-tenant hosting
+            configurations. This use of <spanx style="verb">.well-known</spanx> is for supporting multiple issuers per host;
             unlike its use in <xref target="RFC5785"/>, it does not provide general information about the host.
           </t>
         </section>
@@ -278,18 +456,19 @@ Content-Type: application/json
   "jwks_uri":
     "https://tr.example.com/jwks.json",
   "delivery_methods_supported": [
-    "https://schemas.openid.net/secevent/risc/delivery-method/push", 
+    "https://schemas.openid.net/secevent/risc/delivery-method/push",
     "https://schemas.openid.net/secevent/risc/delivery-method/poll"],
   "configuration_endpoint":
-    "https://tr.example.com/risc/mgmt/stream",
+    "https://tr.example.com/sse/mgmt/stream",
   "status_endpoint":
-    "https://tr.example.com/risc/mgmt/status",
+    "https://tr.example.com/sse/mgmt/status",
   "add_subject_endpoint":
-    "https://tr.example.com/risc/mgmt/subject:add",
+    "https://tr.example.com/sse/mgmt/subject:add",
   "remove_subject_endpoint":
-    "https://tr.example.com/risc/mgmt/subject:remove",
+    "https://tr.example.com/sse/mgmt/subject:remove",
   "verification_endpoint":
-    "https://tr.example.com/risc/mgmt/verification"
+    "https://tr.example.com/sse/mgmt/verification",
+  "critical_subject_members": [ "tenant", "user" ]
 }
 ]]></artwork>
             </figure>
@@ -301,14 +480,14 @@ Content-Type: application/json
             the information that failed to correctly validate MUST be aborted and the information that failed 
             to validate MUST NOT be used.</t>
           
-          <t>The <spanx style="verb">issuer</spanx> value returned MUST be identical to the Issuer URL that 
-            was directly used to retrieve the configuration information. This MUST also be identical to the 
+          <t>The <spanx style="verb">issuer</spanx> value returned MUST be identical to the Issuer URL that
+            was directly used to retrieve the configuration information. This MUST also be identical to the
             <spanx style="verb">iss</spanx> Claim value in Security Event Tokens issued from this Transmitter.
           </t>
         </section>
       </section>
     </section>
-    
+
     <section anchor="management" title="Management API for SET Event Streams">
       <t>This section defines an HTTP API to be implemented by Event Transmitters
         and that can be used by Event Receivers to query and update the Event Stream 
@@ -330,6 +509,9 @@ Content-Type: application/json
 |            | Remove Subject |            |
 |            <----------------+            |
 |            |                |            |
+|            | Stream Updated |            |
+|            +---------------->            |
+|            |                |            |
 |            | Verification   |            |
 |            <----------------+            |
 |            |                |            |
@@ -344,6 +526,10 @@ Content-Type: application/json
         <t>Event Receivers manage how they receive events, and the subjects about which they want
           to receive events over an Event Stream by making HTTP requests to endpoints in the Event
           Stream Management API.</t>
+
+        <t>A Transmitter and Receiver MAY use the same Event Stream for updates about multiple
+          Subject Principals. The status of the Event Stream MAY be queried and managed
+          independently for each Subject Principal by Transmitters and Receivers.</t>
 
         <t>The Event Stream Management API is implemented by the Event Transmitter and consists of
           the following endpoints:</t>
@@ -367,37 +553,72 @@ Content-Type: application/json
           applicable Event Stream for any given request, e.g. from authentication credentials. The
           definition of such mechanisms is outside the scope of this specification.</t>
 
+        <t>Within an Event Stream, events related to different Subject Principals MAY be managed
+          independently. A Receiver MAY request Subject Principals to be added to or removed from a
+          stream by <xref target="updating-a-streams-status">Updating the Stream Status</xref> and
+          specifying the Subject in the request.</t>
+
+        <t>A Transmitter MAY decide to enable, pause or disable updates about a Subject
+          independently of an update request from a Receiver. If a Transmitter decides to start or
+          stop events for a Subject then the Transmitter MUST do the following according to the
+          status of the stream</t>
+        <t> If the stream is:
+          <list style="hanging">
+            <t hangText="Enabled"> the Transmitter MUST send a <xref target="stream-updated-event">
+              stream updated</xref> event respectively to the Receiver within the Event Stream.</t>
+            <t hangText="Paused"> the Transmitter SHOULD send <xref target="stream-updated-event">
+              stream updated</xref> after the Event Stream is re-started. A Receiver MUST assume
+              that events may have been lost during the time when the event stream was paused.</t>
+            <t hangText="Disabled"> the Transmitter MAY send <xref target="stream-updated-event">
+              stream updated</xref> after the Event Stream is re-enabled.</t>
+          </list></t>
+
         <section anchor="status" title="Stream Status">
           <section anchor="reading-a-streams-status" title="Reading a Stream’s Status">
             <t>An Event Receiver checks the current status of an event stream by making an HTTP
-              GET request to the stream’s Status Endpoint. On receiving a valid request the Event
+              GET request to the stream’s Status Endpoint.</t>
+
+            <t>The Stream Status method takes the following parameters:
+              <list style="hanging">
+                <t hangText="subject"> OPTIONAL. The subject for which the stream status is
+                  requested.</t>
+              </list>
+            </t>
+
+            <t>On receiving a valid request the Event
               Transmitter responds with a 200 OK response containing a <xref target="RFC7159">JSON</xref>
-              object with a single attribute <spanx style="verb">status</spanx>, whose string value 
+              object with an attribute <spanx style="verb">status</spanx>, whose string value
               MUST have one of the following values:<list style="hanging">
-                <t hangText="enabled"><vspace blankLines="0"/> The transmitter will transmit
+                <t hangText="enabled"><vspace blankLines="0"/> The Transmitter MUST transmit
                   events over the stream, according to the stream’s configured delivery
                   method.</t>
-                <t hangText="paused"><vspace blankLines="0"/> The transmitter will not transmit
+                <t hangText="paused"><vspace blankLines="0"/> The Transmitter MUST NOT transmit
                   events over the stream. The transmitter will hold any events it would have
-                  transmitted while paused, and will transmit them when the stream’s status
-                  becomes <spanx style="verb">enabled</spanx>.</t>
-                <t hangText="disabled"><vspace blankLines="0"/> The transmitter will not
+                  transmitted while paused, and SHOULD transmit them when the stream’s status
+                  becomes <spanx style="verb">enabled</spanx>. If a Transmitter holds successive
+                  events that affect the same Subject Principal, then the Transmitter MUST make
+                  sure that those events are transmitted in the order of time that they were
+                  generated OR the Transmitter MUST send only the last events that do not require
+                  the previous events affecting the same Subject Principal to be processed by the
+                  Receiver, because the previous events are either cancelled by the later events or
+                  the previous events are outdated.</t>
+                <t hangText="disabled"><vspace blankLines="0"/> The Transmitter MUST NOT
                   transmit events over the stream, and will not hold any events for later
                   transmission.</t>
               </list></t>
-            
+
             <t>The following is a non-normative example request to check an event stream’s
               status:</t>
             
             <figure title="Example: Check Stream Status Request" anchor="figstatusreq">
               <artwork><![CDATA[
-GET /set/status HTTP/1.1
+GET /sse/status HTTP/1.1
 Host: transmitter.example.com
-Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
+Authorization: Bearer zzzz
 ]]></artwork>
             </figure>
             
-            <t>The following is a non-normative example response:</t>
+            <t>The following is a non-normative example response:
             
             <figure title="Example: Check Stream Status Response" anchor="figstatusresp">
               <artwork><![CDATA[
@@ -409,11 +630,42 @@ Pragma: no-cache
 {
   "status": "enabled"
 }
-]]></artwork>
-            </figure>
-            
+]]>
+              </artwork></figure></t>
+            <t>The following is a non-normative example request to check an event stream's status
+              for a specific subject:
+            <figure title="Example: Check Stream Status Request with Subject" anchor="figstatuswithsubjectreq">
+              <artwork><![CDATA[
+GET /sse/status?subject=<url-encoded-subject> HTTP/1.1
+Host: transmitter.example.com
+Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
+]]>
+              </artwork></figure></t>
+
+            <t>The following is a non-normative example response with a Subject claim:
+
+            <figure title="Example: Check Stream Status Response" anchor="figstatuswithsubjectresp">
+              <artwork><![CDATA[
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=UTF-8
+Cache-Control: no-store
+Pragma: no-cache
+
+{
+  "status": "enabled",
+  "subject": {
+    "tenant" : {
+      "format" : "iss_sub",
+      "iss" : "http://example.com/idp1",
+      "sub" : "1234"
+    }
+  }
+}
+]]>
+              </artwork></figure></t>
+
             <t>Errors are signaled with HTTP status codes as follows:</t>
-            
+
             <texttable title="Read Stream Status Errors" anchor="tabreadstatus">
               <ttcol align="left">Code</ttcol>
               <ttcol align="left">Description</ttcol>
@@ -422,38 +674,86 @@ Pragma: no-cache
               <c>403</c>
               <c>if the Event Receiver is not allowed to read the stream status</c>
               <c>404</c>
-              <c>if there is no Event Stream configured for this Event Receiver</c>
+              <c>if there is no Event Stream configured for this Event Receiver, or if the Subject
+                specified is invalid or if the Receiver is not authorized to get status for the
+                specified Subject.</c>
             </texttable>
+            <t>Examples:
+              <list style="numbers">
+                <t>If a Receiver makes a request with an invalid OAuth token, then the Transmitter
+                  MUST respond with a 401 error status.</t>
+                <t>If the Receiver presents a valid OAuth token, but the Transmitter policy does not
+                  permit the Receiver from obtaining the status, then the Transmitter MAY respond
+                  with a 403 error status.</t>
+                <t>If the Receiver requests the status for specific Subject, but the Transmitter
+                  policy does not permit the Receiver to read the status of that Subject, then the
+                  Transmitter MAY respond with a 404 error status in order to not reveal the policy
+                  decision.</t>
+                <t>If the specified Subject is invalid then the Transmitter MUST respond with a 404
+                  error status.</t>
+              </list></t>
           </section>
-          
+
           <section anchor="updating-a-streams-status" title="Updating a Stream's Status">
             <t>An Event Receiver updates the current status of a stream by making an HTTP
-              POST request to the Status Endpoint. The POST body contains a <xref target="RFC7159">JSON</xref>
-              representation of the updated status. On receiving a valid request the Event
-              Transmitter responds with a <spanx style="verb">200 OK</spanx> response containing a <xref target="RFC7159">JSON</xref>
-              representation of the updated stream status in the body.</t>
+              POST request to the Status Endpoint. The POST body contains a <xref target="RFC7159">
+              JSON</xref> object with the following fields:
+              <list style="hanging">
+                <t hangText="status"><vspace blankLines="0"/>REQUIRED. The new status of the Event
+                  Stream.</t>
+                <t hangText="subject"><vspace blankLines="0"/>OPTIONAL. The Subject to which the new
+                  status applies.</t>
+                <t hangText="reason"><vspace blankLines="0"/>OPTIONAL. A short text description
+                  that explains the reason for the change.</t>
+              </list>
+              On receiving a valid request the Event Transmitter responds with a <spanx style="verb">
+              200 OK</spanx> response containing a <xref target="RFC7159">JSON</xref> representation
+              of the updated stream status in the body.</t>
             
             <t>The following is a non-normative example request to update an Event Stream’s
-              status:</t>
-            
-            <figure title="Example: Update Stream Status Request"
-              anchor="figupdatestatusreq">
-              <artwork><![CDATA[
-POST /set/status HTTP/1.1
+              status:
+
+              <figure title="Example: Update Stream Status Request Without Optional Fields"
+                anchor="figupdatestatusreq">
+                <artwork><![CDATA[
+POST /sse/status HTTP/1.1
+Host: transmitter.example.com
+Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
+
+{
+  "status": "paused"
+}
+]]>
+                </artwork></figure></t>
+
+            <t>The following is a non-normative example of an Update Stream Status request with
+              optional fields:
+              <figure title="Example: Update Stream Status Request With Optional Fields"
+                anchor="figupdatestatuswithsubjectreq">
+                <artwork><![CDATA[
+POST /sse/status HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
 {
   "status": "paused",
+  "subject": {
+    "tenant" : {
+      "format" : "iss_sub",
+      "iss" : "http://example.com/idp1",
+      "sub" : "1234"
+    }
+  },
+  "reason": "Disabled by administrator action."
 }
-]]></artwork>
-            </figure>
-            
-            <t>The following is a non-normative example response:</t>
-            
-            <figure title="Example: Update Stream Status Response"
-              anchor="figupdatestatusresp">
-              <artwork><![CDATA[
+]]>
+                </artwork></figure></t>
+
+            <t>The following is a non-normative example response:
+
+              <figure title="Example: Update Stream Status Response"
+                anchor="figupdatestatusresp">
+                <artwork><![CDATA[
 HTTP/1.1 200 OK
 Content-Type: application/json; charset=UTF-8
 Cache-Control: no-store
@@ -462,14 +762,17 @@ Pragma: no-cache
 {
   "status": "paused"
 }
-]]></artwork>
-            </figure>
-            
+]]>
+                </artwork></figure></t>
+
             <t>Errors are signaled with HTTP status codes as follows:</t>
-            
+
             <texttable title="Update Stream Status Errors" anchor="tabupdatestatus">
               <ttcol align="left">Code</ttcol>
               <ttcol align="left">Description</ttcol>
+              <c>202</c>
+              <c> if the update request has been accepted, but not processed. Receiver MAY try the
+                same request later in order to get processing result.</c>
               <c>400</c>
               <c>if the request body cannot be parsed or if the request is otherwise invalid</c>
               <c>401</c>
@@ -477,12 +780,19 @@ Pragma: no-cache
               <c>403</c>
               <c>if the Event Receiver is not allowed to update the stream status</c>
               <c>404</c>
-              <c>if there is no Event Stream configured for this Event Receiver</c>
+              <c>if there is no Event Stream configured for this Event Receiver, or if an invalid
+                Subject is specified.</c>
             </texttable>
-          </section>
+            <t>Example:
+              <list style="numbers">
+                <t>If a Receiver makes a request to update the stream to enable it for a specific
+                  Subject, and the Transmitter is unable to decide whether or not to complete the
+                  request, then the Transmitter MUST respond with a 202 status code.</t>
+              </list></t>
+           </section>
         </section>
         
-        <section anchor="stream" title="Stream Configuration">
+        <section anchor="stream-config" title="Stream Configuration">
           <t>An Event Stream’s configuration is represented as a <xref target="RFC7159">JSON</xref> object with
             the following properties:</t>
 
@@ -491,24 +801,24 @@ Pragma: no-cache
               A URL using the https scheme with no query or fragment component that the Transmitter asserts as its Issuer
               Identifier. This MUST be identical to the <spanx style="verb">iss</spanx> Claim value in
               Security Event Tokens issued from this Transmitter.</t>
-            <t hangText="aud"><vspace blankLines="0"/> <spanx style="strong">Read-Only</spanx>, 
+            <t hangText="aud"><vspace blankLines="0"/> <spanx style="strong">Read-Only</spanx>,
               A string or an array of strings containing an audience claim as
               defined in <xref target="RFC7519">JSON Web Token (JWT)</xref> that identifies the
               Event Receiver(s) for the Event Stream. This property cannot be updated. If multiple Receivers are
               specified then the Transmitter SHOULD know that these Receivers are the same entity.</t>
-            <t hangText="events_supported"><vspace blankLines="0"/>  <spanx style="strong">Read-Only</spanx>, 
+            <t hangText="events_supported"><vspace blankLines="0"/>  <spanx style="strong">Read-Only</spanx>,
               An array of URIs identifying
-              the set of events supported by the Transmitter for this Receiver. If omitted, 
+              the set of events supported by the Transmitter for this Receiver. If omitted,
               Event Transmitters SHOULD make this set available to the Event Receiver via some 
               other means (e.g. publishing it in online documentation).</t>
             <t hangText="events_requested"><vspace blankLines="0"/>  <spanx style="strong">Read-Write</spanx>, 
               An array of URIs identifying
-              the set of events that the Receiver requested. A Receiver should request only the events
+              the set of events that the Receiver requested. A Receiver SHOULD request only the events
               that it understands and it can act on. This is configurable by the Receiver.</t>
             <t hangText="events_delivered"><vspace blankLines="0"/> <spanx style="strong">Read-Only</spanx>, 
               An array of URIs 
               which is the intersection of <spanx style="verb">events_supported</spanx> and
-              <spanx style="verb">events_requested</spanx>. These events MAY be delivered over 
+              <spanx style="verb">events_requested</spanx>. These events MAY be delivered over
               the Event Stream.</t>
             <t hangText="delivery"><vspace blankLines="0"/> <spanx style="strong">Read-Write</spanx>, 
               A JSON object containing a set of
@@ -522,8 +832,8 @@ Pragma: no-cache
               Transmitter MAY respond with a 429 status code. An Event
               Transmitter SHOULD NOT respond with a 429 status code if an Event
               Receiver is not exceeding this frequency.</t>
-            <t hangText="subject_type"><vspace blankLines="0"/> <spanx style="strong">Read-Write</spanx>, 
-              The Subject Identifier Type that the Receiver wants for the events.
+            <t hangText="format"><vspace blankLines="0"/> <spanx style="strong">Read-Write</spanx>,
+              The Subject Identifier Format that the Receiver wants for the events.
               If not set then the Transmitter might decide to use a type that discloses more information
               than necessary.</t>
           </list></t>
@@ -543,7 +853,7 @@ Pragma: no-cache
 
             <figure title="Example: Read Stream Configuration Request" anchor="figreadconfigreq">
               <artwork><![CDATA[
-GET /set/stream HTTP/1.1
+GET /sse/stream HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 ]]></artwork>
@@ -561,13 +871,13 @@ Pragma: no-cache
 {
   "iss": "https://tr.example.com",
   "aud": [
-      "http://receiver.example.com/web", 
+      "http://receiver.example.com/web",
       "http://receiver.example.com/mobile"
     ],
   "delivery": {
-    "delivery_method": 
+    "delivery_method":
       "https://schemas.openid.net/secevent/risc/delivery-method/push",
-    "url": "https://receiver.example.com/events"
+      "url": "https://receiver.example.com/events"
   },
   "events_supported": [
     "urn:example:secevent:events:type_1",
@@ -624,20 +934,20 @@ Pragma: no-cache
             <figure title="Example: Update Stream Configuration Request"
               anchor="figupdateconfigreq">
               <artwork><![CDATA[
-POST /set/stream HTTP/1.1
+POST /sse/stream HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
 {
   "iss": "https://tr.example.com",
   "aud": [
-    "http://receiver.example.com/web", 
+    "http://receiver.example.com/web",
     "http://receiver.example.com/mobile"
   ],
   "delivery": {
     "delivery_method":
       "https://schemas.openid.net/secevent/risc/delivery-method/push",
-    "url": "https://receiver.example.com/events"
+      "url": "https://receiver.example.com/events"
   },
   "events_requested": [
     "urn:example:secevent:events:type_2",
@@ -661,13 +971,13 @@ Pragma: no-cache
 {
   "iss": "https://tr.example.com",
   "aud": [
-    "http://receiver.example.com/web", 
+    "http://receiver.example.com/web",
     "http://receiver.example.com/mobile"
   ],
   "delivery": {
-    "delivery_method": 
+    "delivery_method":
       "https://schemas.openid.net/secevent/risc/delivery-method/push",
-    "url": "https://receiver.example.com/events"
+      "url": "https://receiver.example.com/events"
   },
   "events_supported": [
     "urn:example:secevent:events:type_1",
@@ -687,11 +997,14 @@ Pragma: no-cache
 ]]></artwork>
             </figure>
 
-            <t>Errors are signaled with HTTP status codes as follows:</t>
+            <t>Pending conditions or errors are signaled with HTTP status codes as follows:</t>
 
             <texttable title="Update Stream Configuration Errors" anchor="tabupdateconfig">
               <ttcol align="left">Code</ttcol>
               <ttcol align="left">Description</ttcol>
+              <c>202</c>
+              <c>if the update request has been accepted, but not processed. Receiver MAY try the
+                same request later in order to get processing result.</c>
               <c>400</c>
               <c>if the request body cannot be parsed or if the request is otherwise invalid</c>
               <c>401</c>
@@ -716,7 +1029,7 @@ Pragma: no-cache
             <figure title="Example: Remove Stream Configuration Request"
               anchor="figremoveconfigreq">
               <artwork><![CDATA[
-DELETE /set/stream HTTP/1.1
+DELETE /sse/stream HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 ]]></artwork>
@@ -744,12 +1057,13 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
             <t>To add a subject to an Event Stream, the Event Receiver makes an HTTP POST request
               to the Add Subject Endpoint, containing in the body a JSON object the following
               claims:<list style="hanging">
-                <t hangText="subject"><vspace blankLines="0"/>REQUIRED.  A Subject Identifier identifying
-              the subject to be added.</t>
-                <t hangText="verified"><vspace blankLines="0"/>OPTIONAL.  A boolean value; when true, it
-              indicates that the Event Receiver has verified the Subject Identifier. When false,
-              it indicates that the Event Receiver has not verified the Subject Identifier. If
-              omitted, Event Transmitters SHOULD NOT assume that verification has not occurred.</t>
+                <t hangText="subject"><vspace blankLines="0"/>REQUIRED. A Subject claim
+                  identifying the subject to be added.</t>
+                <t hangText="verified"><vspace blankLines="0"/>OPTIONAL.  A boolean value; when
+                  true, it indicates that the Event Receiver has verified the Subject claim.
+                  When false, it indicates that the Event Receiver has not verified the Subject
+                  claim. If omitted, Event Transmitters SHOULD assume that the subject has
+                  been verified.</t>
               </list></t>
 
             <t>On a successful response, the Event Transmitter responds with an empty
@@ -776,7 +1090,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
               <c>if the subject is not recognized by the Event Transmitter, the Event Transmitter
                 may chose to stay silent in this case and respond with <spanx style="verb">200</spanx></c>
               <c>429</c>
-              <c>if the Event Receiver is sending too many requests in a gvien amount of time</c>
+              <c>if the Event Receiver is sending too many requests in a given amount of time</c>
             </texttable>
 
             <t>The following is a non-normative example request to add a subject to a stream,
@@ -784,13 +1098,13 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
             <figure title="Example: Add Subject Request" anchor="figaddreq">
               <artwork><![CDATA[
-POST /set/subjects:add HTTP/1.1
+POST /sse/subjects:add HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
 {
   "subject": {
-    "subject_type": "email",
+    "format": "email",
     "email": "example.user@example.com"
   },
   "verified": true
@@ -814,8 +1128,8 @@ Pragma: no-cache
             <t>To remove a subject from an Event Stream, the Event Receiver makes an HTTP POST
               request to the Remove Subject Endpoint, containing in the body a JSON object with
               the following claims:<list style="hanging">
-                <t hangText="subject"><vspace blankLines="0"/>A Subject Identifier identifying
-              the subject to be removed.  REQUIRED.</t>
+                <t hangText="subject"><vspace blankLines="0"/> REQUIRED. A Subject claim identifying
+                  the subject to be removed.</t>
               </list></t>
 
             <t>On a successful response, the Event Transmitter responds with a
@@ -837,7 +1151,7 @@ Pragma: no-cache
               <c>if the subject is not recognized by the Event Transmitter, the Event Transmitter
                 may chose to stay silent in this case and respond with <spanx style="verb">204</spanx></c>
               <c>429</c>
-              <c>if the Event Receiver is sending too many requests in a gvien amount of time</c>
+              <c>if the Event Receiver is sending too many requests in a given amount of time</c>
             </texttable>
 
             <t>The following is a non-normative example request where the subject is identified by
@@ -845,13 +1159,13 @@ Pragma: no-cache
 
             <figure title="Example: Remove Subject Request" anchor="figremovereq">
               <artwork><![CDATA[
-POST /set/subjects:remove HTTP/1.1
+POST /sse/subjects:remove HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
 {
   "subject": {
-    "subject_type": "phone",
+    "format": "phone",
     "phone_number": "+1 206 555 0123"
   }
 }
@@ -889,7 +1203,7 @@ Pragma: no-cache
 
             <t><list style="hanging">
                 <t hangText="event type"><vspace blankLines="0"/> The Event Type URI is:
-                  <spanx style="verb">https://schemas.openid.net/secevent/risc/event-type/verification</spanx>.</t>
+                  <spanx style="verb">https://schemas.openid.net/secevent/sse/event-type/verification</spanx>.</t>
                 <t hangText="state"><vspace blankLines="0"/> OPTIONAL An opaque value provided by
                   the Event Receiver when the event is triggered. This is a nested attribute in
                   the event payload.</t>
@@ -942,8 +1256,8 @@ Pragma: no-cache
               <c>401</c>
               <c>if authorization failed or it is missing</c>
               <c>429</c>
-              <c>if the Event Receiver is sending too many requests in a gvien amount of time;
-                see related <spanx style="verb">min_verification_interval</spanx> in <xref target="stream"/></c>
+              <c>if the Event Receiver is sending too many requests in a given amount of time;
+                see related <spanx style="verb">min_verification_interval</spanx> in <xref target="stream-config"/></c>
             </texttable>
 
             <t>The following is a non-normative example request to trigger a verification
@@ -951,7 +1265,7 @@ Pragma: no-cache
 
             <figure title="Example: Trigger Verification Request" anchor="figverifyreq">
               <artwork><![CDATA[
-POST /set/verify HTTP/1.1
+POST /sse/verify HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 Content-Type: application/json; charset=UTF-8
@@ -982,9 +1296,9 @@ Pragma: no-cache
   "jti": "123456",
   "iss": "https://transmitter.example.com",
   "aud": "receiver.example.com",
-  "iat": "1493856000",
+  "iat": 1493856000,
   "events": {
-    "https://schemas.openid.net/secevent/risc/event-type/verification":{
+    "https://schemas.openid.net/secevent/sse/event-type/verification":{
       "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
     }
   }
@@ -994,67 +1308,152 @@ Pragma: no-cache
 
           </section>
         </section>
+
+        <section anchor="stream-updated-event" title="Stream Updated Event">
+          <t>A Transmitter MAY change the stream status in reference to one or more Subjects without
+            a request from a Receiver. The Transmitter sends an event of type <spanx style="verb">
+            https://schemas.openid.net/secevent/sse/event-type/stream-updated</spanx> to indicate
+            that it has changed the status of the Event Stream for a specific Subject.</t>
+
+          <t>If a Transmitter decides to change the status of an Event Stream from <spanx style="verb">
+            enabled</spanx> to either <spanx style="verb">paused</spanx> or <spanx style="verb">
+            disabled</spanx>, then the Transmitter MUST send this event to any Receiver that is
+            currently <spanx style="verb">enabled</spanx> to receive events for the specified
+            Subject.</t>
+
+          <t>If the Transmitter changes the status of the stream for a Subject from either
+            <spanx style="verb">paused</spanx> or <spanx style="verb">disabled</spanx> to
+            <spanx style="verb"> enabled</spanx>, then it MUST send this event to any Receiver that
+            has previously been enabled to receive events for the specified Subject.</t>
+
+          <t>The <spanx style="verb">stream-updated</spanx> event MAY contain the following
+            claims:
+            <list style="hanging">
+              <t hangText="status"><vspace blankLines="0"/>REQUIRED. Defines the new status of the
+                stream for the Subject Identifier specified in the Subject.</t>
+              <t hangText="reason"><vspace blankLines="0"/>OPTIONAL. Provides a short description of
+                why the Transmitter has updated the status.</t>
+              <t hangText="subject"> OPTIONAL. Specifies the Subject Principal for whom the status
+                has been updated.</t>
+            </list>
+          </t>
+
+          <figure title="Example: Stream Updated SET" anchor="figstreamupdatedset">
+            <artwork><![CDATA[
+{
+  "jti": "123456",
+  "iss": "https://transmitter.example.com",
+  "aud": "receiver.example.com",
+  "iat": 1493856000,
+  "events": {
+    "https://schemas.openid.net/secevent/sse/event-type/stream-updated": {
+      "subject": {
+        "tenant" : {
+          "format": "iss_sub",
+          "iss" : "http://example.com/idp1",
+          "sub" : "1234"
+        }
+      },
+      "status": "paused",
+      "reason": "License is not valid"
+    },
+  }
+}
+          ]]></artwork>
+          </figure>
+        </section>
+      </section>
+    </section>
+
+    <section anchor="management-api-auth" title="Authorization">
+      <t>HTTP API calls from a Receiver to a Transmitter SHOULD be authorized
+        by providing an OAuth 2.0 Access Token as defined by <xref target="RFC6750"/>.</t>
+
+      <t>The receiver may obtain an access token using the <xref target="CLIENTCRED">Client
+        Credential Grant</xref>, or any other method suitable for the Receiver and the
+        Transmitter.</t>
+    </section>
+
+    <section anchor="management-sec" title="Security Considerations">
+      <section anchor="management-sec-subject-probing" title="Subject Probing">
+        <t>It may be possible for an Event Transmitter to leak information about subjects
+          through their responses to add subject requests. A <spanx style="verb">404</spanx> response may indicate to the
+          Event Receiver that the subject does not exist, which may inadvertently reveal
+          information about the subject (e.g. that a particular individual does or does not use
+          the Event Transmitter’s service).</t>
+
+        <t>Event Transmitters SHOULD carefully evaluate the conditions under which they will
+          return error responses to add subject requests. Event Transmitters MAY return a <spanx style="verb">204</spanx>
+          response even if they will not actually send any events related to the subject, and
+          Event Receivers MUST NOT assume that a 204 response means that they will receive
+          events related to the subject.</t>
+
       </section>
 
-      <section anchor="management-api-auth" title="Authorization">
-        <t>HTTP API calls from a Receiver to a Transmitter SHOULD be authorized
-          by providing an OAuth 2 Access Token as defined by <xref target="RFC6750"/>.</t>
-        
-        <t>The receiver may obtain an access token using the <xref target="CLIENTCRED">Client 
-          Credential Grant</xref>, or any other method suitable for the Receiver and the 
-          Transmitter.</t>
-        
-        <t>Other authorization methods MAY be used if the Transmitter and the Receiver have
-        agreement on the method.</t>
+      <section anchor="management-sec-information-harvesting" title="Information Harvesting">
+        <t>SETs may contain personally identifiable information (PII) or other non-public
+          information about the event transmitter, the subject (of an event in the SET), or the
+          relationship between the two. It is important for Event Transmitters to understand
+          what information they are revealing to Event Receivers when transmitting events to
+          them, lest the event stream become a vector for unauthorized access to private
+          information.</t>
+
+        <t>Event Transmitters SHOULD interpret add subject requests as statements of interest in
+          a subject by an Event Receiver, and ARE NOT obligated to transmit events related to
+          every subject an Event Receiver adds to the stream. Event Transmitters MAY choose to
+          transmit some, all, or no events related to any given subject and SHOULD validate that
+          they are permitted to share the information contained within an event with the Event
+          Receiver before transmitting the event. The mechanisms by which such validation is
+          performed are outside the scope of this specification.</t>
+
       </section>
-      
-      <section anchor="management-sec" title="Security Considerations">
-        <section anchor="management-sec-subject-probing" title="Subject Probing">
-          <t>It may be possible for an Event Transmitter to leak information about subjects
-            through their responses to add subject requests. A <spanx style="verb">404</spanx> response may indicate to the
-            Event Receiver that the subject does not exist, which may inadvertantly reveal
-            information about the subject (e.g. that a particular individual does or does not use
-            the Event Transmitter’s service).</t>
 
-          <t>Event Transmitters SHOULD carefully evaluate the conditions under which they will
-            return error responses to add subject requests. Event Transmitters MAY return a <spanx style="verb">204</spanx>
-            response even if they will not actually send any events related to the subject, and
-            Event Receivers MUST NOT assume that a 204 response means that they will receive
-            events related to the subject.</t>
+      <section anchor="management-sec-malicious-subject-removal" title="Malicious Subject Removal">
+        <t>A malicious party may find it advantageous to remove a particular subject from a
+          stream, in order to reduce the Event Receiver’s ability to detect malicious activity
+          related to the subject, inconvenience the subject, or for other reasons. Consequently
+          it may be in the best interests of the subject for the Event Transmitter to continue
+          to send events related to the subject for some time after the subject has been removed
+          from a stream.</t>
 
+        <t>Event Transmitters MAY continue sending events related to a subject for some amount
+          of time after that subject has been removed from the stream. Event Receivers MUST
+          tolerate receiving events for subjects that have been removed from the stream, and
+          MUST NOT report these events as errors to the Event Transmitter.</t>
+
+      </section>
+
+    </section>
+    <section anchor="privacy-considerations" title="Privacy Considerations">
+      <section anchor="sub-info-leakage" title="Subject Information Leakage">
+        <t>Event issuers and recipients SHOULD take precautions to ensure that they do not leak
+          information about subjects via Subject Identifiers, and choose appropriate Subject
+          Identifier Types accordingly. Parties SHOULD NOT identify a subject using a given Subject
+          Identifier Type if doing so will allow the recipient to correlate different claims about
+          the subject that they are not known to already have knowledge of. Transmitters and Receivers
+          SHOULD always use the same Subject Identifier Type and the same claim values to identify a
+          given subject when communicating with a given party in order to reduce the possibility of
+          information leakage.</t>
+      </section>
+      <section anchor="previously-consented-data" title="Previously Consented Data">
+        <t>If SSE events contain new values for attributes of Subject Principals that were
+          previously exchanged between the Transmitter and Receiver, then there are no additional
+          privacy considerations introduced by providing the updated values in the SSE events,
+          unless the attribute was exchanged under a one-time consent obtained from the user.</t>
+      </section>
+      <section anchor="new-data" title="New Data">
+        <t>Data that was not previously exchanged between the Transmitter and the Receiver, or
+          data whose consent to exchange has expired has the following considerations:</t>
+        <section anchor="organizational-data" title="Organizational Data">
+          <t>If a user has previously agreed with a Transmitter that they agree to release
+            certain data to third-parties, then the Transmitter MAY send such data in SSE events
+            without additional consent of the user. Such data MAY include organizational data
+            about the Subject Principal that was generated by the Transmitter.</t>
         </section>
-        
-        <section anchor="management-sec-information-harvesting" title="Information Harvesting">
-          <t>SETs may contain personally identifiable information (PII) or other non-public
-            information about the event transmitter, the subject (of an event in the SET), or the
-            relationship between the two. It is important for Event Transmitters to understand
-            what information they are revealing to Event Receivers when transmitting events to
-            them, lest the event stream become a vector for unauthorized access to private
-            information.</t>
-
-          <t>Event Transmitters SHOULD interpret add subject requests as statements of interest in
-            a subject by an Event Receiver, and ARE NOT obligated to transmit events related to
-            every subject an Event Receiver adds to the stream. Event Transmitters MAY choose to
-            transmit some, all, or no events related to any given subject and SHOULD validate that
-            they are permitted to share the information contained within an event with the Event
-            Receiver before transmitting the event. The mechanisms by which such validation is
-            performed are outside the scope of this specification.</t>
-
-        </section>
-        
-        <section anchor="management-sec-malicious-subject-removal" title="Malicious Subject Removal">
-          <t>A malicious party may find it advantageous to remove a particular subject from a
-            stream, in order to reduce the Event Receiver’s ability to detect malicious activity
-            related to the subject, inconvenience the subject, or for other reasons. Consequently
-            it may be in the best interests of the subject for the Event Transmitter to continue
-            to send events related to the subject for some time after the subject has been removed
-            from a stream.</t>
-
-          <t>Event Transmitters MAY continue sending events related to a subject for some amount
-            of time after that subject has been removed from the stream. Event Receivers MUST
-            tolerate receiving events for subjects that have been removed from the stream, and
-            MUST NOT report these events as errors to the Event Transmitter.</t>
-
+        <section anchor="consentable-data" title="Consentable Data">
+          <t>If a Transmitter intends to include data in SSE events that is not previously
+            consented to be released by the user, then the Transmitter MUST obtain consent to
+            release such data from the user in accordance with the Transmitter's privacy policy.</t>
         </section>
       </section>
     </section>
@@ -1068,20 +1467,27 @@ Pragma: no-cache
 
       <t>The RISC use cases that set the requirements are described in <xref target="USECASES"
           >Security Events RISC Use Cases</xref>.</t>
+      <t>The CAEP use cases that set the requirements are described in CAEP Use Cases (TODO: Add
+        reference when file is added to repository.)</t>
 
-      <section anchor="set-profle" title="Security Event Token Profle">
-        <t>This section provides RISC profiling specifications for the <xref target="SET">"Security
+      <section anchor="set-profle" title="Security Event Token Profile">
+        <t>This section provides SSE profiling specifications for the <xref target="SET">"Security
             Event Token (SET)"</xref> spec.</t>
 
         <section anchor="signature-key-resolution" title="Signature Key Resolution">
           <t>The signature key can be obtained through <spanx style="verb">jwks_uri</spanx>, see <xref target="discovery"/>.</t>
         </section>
 
-        <section anchor="event-subjects" title="RISC Event Subject">
-          <t>The subject of a RISC event is identified by the <spanx style="verb">subject</spanx> claim within the event
+        <section anchor="event-subjects" title="SSE Event Subject">
+          <t>The subject of a SSE event is identified by the <spanx style="verb">subject</spanx> claim within the event
             payload, whose value is a Subject Identifier. The <spanx style="verb">subject</spanx> claim is REQUIRED for all
-            RISC events. The JWT <spanx style="verb">sub</spanx> claim MUST NOT be present in any SET containing a RISC
+            SSE events. The JWT <spanx style="verb">sub</spanx> claim MUST NOT be present in any SET containing a SSE
             event.</t>
+        </section>
+
+        <section anchor="event-properties" title="SSE Event Properties">
+          <t>The SSE event MAY contain additional claims within the event payload that are specific
+            to the event type.</t>
 
           <figure anchor="risc-event-subject-example" title="Example: SET Containing a RISC Event with a Phone Number Subject">
             <artwork><![CDATA[
@@ -1094,9 +1500,9 @@ Pragma: no-cache
     "https://schemas.openid.net/secevent/risc/event-type/account-\
 disabled": {
       "subject": {
-        "subject_type": "phone",
+        "format": "phone",
         "phone_number": "+1 206 555 0123"
-      }, 
+      },
       "reason": "hijacking",
       "cause-time": 1508012752
     }
@@ -1104,10 +1510,30 @@ disabled": {
 }
               ]]></artwork>
           </figure>
+
+          <figure anchor="caep-event-properties-example" title="Example: SET Containing a CAEP Event with Properties">
+            <artwork><![CDATA[
+{
+  "iss": "https://idp.example.com/",
+  "jti": "756E69717565206964656E746966696572",
+  "iat": 1520364019,
+  "aud": "636C69656E745F6964",
+  "events": {
+    "https://schemas.openid.net/secevent/caep/event-type/token-claims-changed": {
+      "subject": {
+        "format": "email",
+        "email": "user@example.com"
+      },
+      "token": "some-token-value",
+    }
+  }
+}
+              ]]></artwork>
+          </figure>
         </section>
-        
+
         <section anchor="explicit-typing" title="Explicit Typing of SETs">
-          <t>RISC events MUST use explicit typing as defined in Section 2.3 of <xref target="SET"/>.</t>
+          <t>SSE events MUST use explicit typing as defined in Section 2.3 of <xref target="SET"/>.</t>
           
           <figure title="Explicitly Typed JOSE Header" anchor="explicit-type-header">
             <artwork><![CDATA[
@@ -1120,24 +1546,24 @@ disabled": {
           
           <t>The purpose is defense against confusion with other JWTs, as described in Sections
           4.5, 4.6 and 4.7 of <xref target="SET"/>. While current <xref target="IDTOKEN">Id Token</xref> validators may not
-          be using the <spanx style="verb">typ</spanx> header parameter, by requiring it for RISC
+          be using the <spanx style="verb">typ</spanx> header parameter, by requiring it for SSE
           SETs a distinct value is guaranteed for future validators.</t>
         </section>
         
         <section anchor="exp-claim" title='The "exp" Claim'>
-          <t>The <spanx style="verb">exp</spanx> claim MUST NOT be used in RISC SETs.</t>
+          <t>The <spanx style="verb">exp</spanx> claim MUST NOT be used in SSE SETs.</t>
           
           <t>The purpose is defense in depth against confusion with other JWTs, as described
           in Sections 4.5 and 4.6 of <xref target="SET"/>.</t>
         </section>
 
         <section anchor="aud-claim" title='The "aud" Claim'>
-          <t>The <spanx style="verb">aud</spanx> claim can be a single value or an array. Each value SHOULD be the OAuth 2 client id.
+          <t>The <spanx style="verb">aud</spanx> claim can be a single value or an array. Each value SHOULD be the OAuth 2.0 client ID.
             Other values that uniquely identifies the Receiver to the 
             Transmitter MAY be used, if the two parties have agreement on the format.</t>
           
-          <t>More than one values can be present if the corresponding Receivers are known to the Transmitter to be the same entity,
-          for example a web client and I mobile client of the same application. All the Receivers in this case MUST use the exact
+          <t>More than one value can be present if the corresponding Receivers are known to the Transmitter to be the same entity,
+          for example a web client and a mobile client of the same application. All the Receivers in this case MUST use the exact
           same delivery method.</t>
           
           <t>If multiple Receivers have the exact same delivery configuration but the Transmitter does not know if they belong to
@@ -1151,9 +1577,9 @@ disabled": {
   "jti": "123456",
   "iss": "https://transmitter.example.com",
   "aud": ["receiver.example.com/web", "receiver.example.com/mobile"],
-  "iat": "1493856000",
+  "iat": 1493856000,
   "events": {
-    "https://schemas.openid.net/secevent/risc/event-type/verification":{
+    "https://schemas.openid.net/secevent/sse/event-type/verification": {
       "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
     }
   }
@@ -1169,23 +1595,24 @@ disabled": {
         </section>
 
         <section title="Security Considerations">
-          <section title="Distingushing SETs from other Kinds of JWTs">
+          <section title="Distinguishing SETs from other Kinds of JWTs">
             <t>Of particular concern is the possibility that SETs are confused for other kinds
-            of JWTs. The Security Considerations sesction of <xref target="SET"/> has several
-            sub-sections on this subject. The RISC Profile is asking for further restrioctons:<list style="symbols">
-              <t>The <spanx style="verb">sub</spanx> claim MUST NOT be present, as described
-                in <xref target="event-subjects"/>.</t>
-              <t>RISC SETs MUST use explicit typing, as described in <xref target="explicit-typing"/>.</t>
-              <t>The <spanx style="verb">exp</spanx> claim MUST NOT be present, as described in 
-              <xref target="exp-claim"/>.</t>
-            </list></t>
+            of JWTs. The Security Considerations section of <xref target="SET"/> has several
+            sub-sections on this subject. The SSE Framework is asking for further restrictions:
+              <list style="symbols">
+                <t>The <spanx style="verb">sub</spanx> claim MUST NOT be present, as described
+                  in <xref target="event-subjects"/>.</t>
+                <t>SSE SETs MUST use explicit typing, as described in <xref target="explicit-typing"/>.</t>
+                <t>The <spanx style="verb">exp</spanx> claim MUST NOT be present, as described in
+                <xref target="exp-claim"/>.</t>
+              </list></t>
           </section>
         </section>
       </section>
 
       <section anchor="set-token-delivery-using-http-profile"
         title="SET Token Delivery Using HTTP Profile">
-        <t>This section provides RISC profiling specifications for the <xref target="DELIVERYPUSH"/> and 
+        <t>This section provides SSE profiling specifications for the <xref target="DELIVERYPUSH"/> and
           <xref target="DELIVERYPOLL"/> specs.</t>
 
         <section anchor="delivery-meta" title="Stream Configuration Metadata">
@@ -1193,7 +1620,7 @@ disabled": {
             <spanx style="verb">method</spanx> metadata.</t>
           
           <section title="Push Delivery using HTTP">
-            <t>This section provides RISC profiling specifications for the <xref target="DELIVERYPUSH"/> spec.</t>
+            <t>This section provides SSE profiling specifications for the <xref target="DELIVERYPUSH"/> spec.</t>
             
             <t><list style="hanging">
               <t hangText="method"> <spanx style="verb">https://schemas.openid.net/secevent/risc/delivery-method/push</spanx></t>
@@ -1205,7 +1632,7 @@ disabled": {
           </section>
           
           <section title="Polling Delivery using HTTP">
-            <t>This section provides RISC profiling specifications for the <xref target="DELIVERYPOLL"/> spec.</t>
+            <t>This section provides SSE profiling specifications for the <xref target="DELIVERYPOLL"/> spec.</t>
             
             <t><list style="hanging">
               <t hangText="method"> <spanx style="verb">https://schemas.openid.net/secevent/risc/delivery-method/poll</spanx></t>
@@ -1218,118 +1645,11 @@ disabled": {
     </section>
 
     <section anchor="iana" title="IANA Considerations">
-      <section anchor="iana-sub-id-types" title="Security Event Subject Identifier Types Registry">
-        <t>This document defines Subject Identifier Types, for which IANA is asked to create and
-          maintain a new registry titled "Security Event Subject Identifier Types". Initial values for
-          the Security Event Subject Identifier Types registry are given in
-          <xref target="iana-sub-id-types-init"/>.  Future assignments are to be made through the Expert
-          Review registration policy <xref target="BCP26"/> and shall follow the template presented in
-          <xref target="iana-sub-id-types-template"/>.</t>
-
-        <section anchor="iana-sub-id-types-template" title="Registration Template">
-          <t><list style="hanging">
-            <t hangText="Type Name:"><vspace blankLines="0"/>The name of the Subject
-              Identifier Type, as described in <xref target="sub-id-types"/>. The name MUST be an ASCII
-              string consisting only of lower-case characters ("a" - "z"), digits ("0" - "9"), and hyphens
-              ("-"), and SHOULD NOT exceed 20 characters in length.</t>
-
-            <t hangText="Type Description:"><vspace blankLines="0"/>A brief description of the Subject
-              Identifier Type.</t>
-
-            <t hangText="Change Controller:"><vspace blankLines="0"/>For types defined in documents
-              published by the OpenID Foundation or its working groups, list "OIDF RISC Working Group".
-              For all other types, list the name of the party responsible for the registration. Contact
-              information such as mailing address, email address, or phone number may also be provided.</t>
-
-            <t hangText="Defining Document(s):"><vspace blankLines="0"/>A reference to the document or
-              documents that define the Subject Identifier Type.  The definition MUST specify the name,
-              format, and meaning of each claim that may occur within a Subject Identifier of the
-              defined type, as well as whether each claim is optional or required, or the circumstances
-              under which the claim is optional or required. URIs that can be used to retrieve copies of
-              each document SHOULD be included.</t>
-          </list></t>
-        </section>
-        
-        <section anchor="iana-sub-id-types-init" title="Initial Registry Contents">
-          <?rfc subcompact="yes"?>
-          <t><list style="symbols">
-            <t>Type Name: <spanx style="verb">email</spanx></t>
-            <t>Type Description: Subject identifier based on email address.</t>
-            <t>Change Controller: OIDF RISC Working Group</t>
-            <t>Defining Document(s): <xref target="sub-id-email"/> of this document.</t>
-          </list></t>
-          
-          <t><list style="symbols">
-            <t>Type Name: <spanx style="verb">id_token_claims</spanx></t>
-            <t>Type Description: Subject identifier based on OpenID Connect ID Token claims.</t>
-            <t>Change Controller: OIDF RISC Working Group</t>
-            <t>Defining Document(s): <xref target="sub-id-id_token_claims"/> of this document.</t>
-          </list></t>
-          
-          <t><list style="symbols">
-            <t>Type Name: <spanx style="verb">iss_sub</spanx></t>
-            <t>Type Description: Subject identifier based on issuer and subject.</t>
-            <t>Change Controller: OIDF RISC Working Group</t>
-            <t>Defining Document(s): <xref target="sub-id-iss_sub"/> of this document.</t>
-          </list></t>
-          
-          <t><list style="symbols">
-            <t>Type Name: <spanx style="verb">phone</spanx></t>
-            <t>Type Description: Subject identifier based on phone number.</t>
-            <t>Change Controller: OIDF RISC Working Group</t>
-            <t>Defining Document(s): <xref target="sub-id-phone"/> of this document.</t>
-          </list></t>
-          <?rfc subcompact="no"?>
-        </section>
-        
-        <section anchor="iana-sub-id-types-expert" title="Guidance for Expert Reviewers">
-          <t>The Expert Reviewer is expected to review the documentation referenced in a registration
-            request to verify its completeness. The Expert Reviewer must base their decision to accept
-            or reject the request on a fair and impartial assessment of the request. If the Expert
-            Reviewer has a conflict of interest, such as being an author of a defining document
-            referenced by the request, they must recuse themselves from the approval process for that
-            request. In the case where a request is rejected, the Expert Reviewer should provide the
-            requesting party with a written statement expressing the reason for rejection, and be
-            prepared to cite any sources of information that went into that decision.</t>
-          
-          <t>Subject Identifier Types need not be generally applicable and may be highly specific to a
-            particular domain; it is expected that types may be registered for niche or industry-specific
-            use cases. The Expert Reviewer should focus on whether the type is thoroughly documented, and
-            whether its registration will promote or harm interoperability.  In most cases, the Expert
-            Reviewer should not approve a request if the registration would contribute to confusion, or
-            amount to a synonym for an existing type.</t>
-        </section>
-      </section>
-      
-      <section anchor="iana-well-known" title="Well-Known URI Registry">
-        <t>TODO: follow steps in Section 5.1 of <xref target="RFC5785"/> to send a registration request.</t>
-        
-        <t>This specification registers the well-known URI defined in <xref target="discovery"/>
-          in the IANA Well-Known URI registry defined in <xref target="RFC5785"/>.</t>
-        
-        <section anchor="iana-well-known-contents" title="Registry Contents">
-          <t><list style="symbols">
-            <t>URI suffix: <spanx style="verb">risc-configuration</spanx></t>
-            <t>Change controller: OpenID Foundation RISC Working Group - openid-specs-risc@lists.openid.net</t>
-            <t>Specification document: <xref target="discovery"/> of this document</t>
-            <t>Related information: (none)</t>
-          </list></t>
-        </section>
-      </section>
+      <t>Subject Identifiers defined in this document will be added to the "Security Events Subject
+        Identifier Types" registry. This registry is defined in the <xref target="SUBIDS">Subject
+        Identifiers for Security Event Tokens</xref> specification.</t>
     </section>
 
-    <section anchor="privacy" title="Privacy Considerations">
-      <section anchor="sub-info-leakage" title="Subject Information Leakage">
-        <t>Event issuers and recipients SHOULD take precautions to ensure that they do not leak
-          information about subjects via Subject Identifiers, and choose appropriate Subject
-          Identifier Types accordingly. Parties SHOULD NOT identify a subject using a given Subject
-          Identifier Type if doing so will allow the recipient to correlate different claims about
-          the subject that they are not known to already have knowledge of. Issuers and recipients
-          SHOULD always use the same Subject Identifier Type and the same claim values to identify a
-          given subject when communicating with a given party in order to reduce the possibility of
-          information leakage.</t>
-      </section>
-    </section>
   </middle>
 
   <back>
@@ -1413,7 +1733,7 @@ disabled": {
         <seriesInfo name="DOI" value="10.17487/RFC7519"/>
       </reference>
 
-      <reference anchor="SET" target="https://tools.ietf.org/html/draft-ietf-secevent-token-09">
+      <reference anchor="SET" target="https://www.rfc-editor.org/info/rfc8417">
         <front>
           <title>Security Event Token (SET)</title>
           <author fullname="Phil Hunt" initials="P." role="editor" surname="Hunt">
@@ -1612,16 +1932,6 @@ disabled": {
         <seriesInfo name="DOI" value="10.17487/RFC8174"/>
       </reference>
       
-      <reference anchor="E164" target="http://www.itu.int/rec/T-REC-E.164-201011-I/en">
-        <front>
-          <title>The international public telecommunication numbering plan</title>
-          <author>
-            <organization>International Telecommunication Union</organization>
-          </author>
-          <date year="2010"/>
-        </front>
-      </reference>
-      
       <reference anchor="RFC5785" target="https://www.rfc-editor.org/info/rfc5785">
         <front>
           <title>Defining Well-Known Uniform Resource Identifiers (URIs)</title>
@@ -1641,7 +1951,7 @@ disabled": {
         <seriesInfo name="RFC" value="5785"/>
         <seriesInfo name="DOI" value="10.17487/RFC5785"/>
       </reference>
-      
+
       <reference anchor="OIDC-DISCOVERY" target="https://openid.net/specs/openid-connect-discovery-1_0.html">
         <front>
           <title>OpenID Connect Discovery 1.0</title>
@@ -1682,30 +1992,61 @@ disabled": {
         </front>
       </reference>
       
-      <reference anchor="BCP26" target="https://tools.ietf.org/html/rfc8126">
-        <front>
-          <title>Guidelines for Writing an IANA Considerations Section in RFCs</title>
-          <author fullname="Michelle Cotton" initials="M." surname="Cotton">
-            <organization abbrev="PTI">PTI, an affiliate of ICANN</organization>
-          </author>
-          <author fullname="Barry Leiba" initials="B." surname="Leiba">
-            <organization abbrev="Huawei Technologies">Huawei Technologies</organization>
-          </author>
-          <author fullname="Thomas Narten" initials="T." surname="Narten">
-            <organization abbrev="IBM Corporation">IBM Corporation</organization>
-          </author>
-          <date year="2017" month="June"/>
-        </front>
-        <seriesInfo name="BCP" value="26"/>
-        <seriesInfo name="RFC" value="8126"/>
-        <seriesInfo name="DOI" value="10.17487/RFC8126"/>
+      <reference anchor="CAEP" target="https://cloud.google.com/blog/products/identity-security/re-thinking-federated-identity-with-the-continuous-access-evaluation-protocol">
+          <front>
+            <title>
+              Re-thinking Federated Identity with the Continuous Access Evaluation Protocol
+            </title>
+            <author initials="A." surname="Tulshibagwale" fullname="Atul Tulshibagwale">
+              <organization abbrev="Google">Google</organization>
+            </author>
+            <date year="2019" month="February"/>
+          </front>
       </reference>
+
+      <reference anchor="SUBIDS"
+        target="https://github.com/richanna/secevent/blob/master/draft-ietf-secevent-subject-identifiers.txt">
+        <front>
+          <title>Subject Identifiers for Security Event Tokens</title>
+          <author fullname="Annabelle Backman" initials="A." surname="Backman" role="editor">
+            <organization />
+          </author>
+          <author initials="M." surname="Scurtescu" fullname="Marius Scurtescu">
+            <organization />
+          </author>
+
+          <date year="2020" month="September" day="04"/>
+        </front>
+      </reference>
+
+      <reference anchor="OASIS.saml-core-2.0-os" target="http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf">
+        <front>
+          <title>Assertions and Protocols for the OASIS Security Assertion
+              Markup Language (SAML) V2.0</title>
+          <author fullname="Scott Cantor" initials="S." surname="Cantor">
+            <organization abbrev="Internet2">Internet2</organization>
+          </author>
+          <author fullname="John Kemp" initials="J." surname="Kemp">
+            <organization abbrev="Nokia">Nokia</organization>
+          </author>
+          <author fullname="Rob Philpott" initials="R." surname="Philpott">
+            <organization abbrev="RSA Security">RSA Security</organization>
+          </author>
+          <author fullname="Eve Maler" initials="E." surname="Maler">
+            <organization abbrev="Sun Microsystems">Sun Microsystems</organization>
+          </author>
+          <date year="2005" month="March" day="15"/>
+        </front>
+      </reference>
+
     </references>
-    
+
+
     <section title="Acknowledgements" anchor="ack">
       <t><xref target="discovery">Transmitter Configuration Discovery</xref> is based on 
-        both <xref target="OIDC-DISCOVERY">OpenID Connect Discovery 1.0</xref> and 
+        both <xref target="OIDC-DISCOVERY">OpenID Connect Discovery 1.0</xref> and
         <xref target="OAUTH-DISCOVERY">OAuth 2.0 Authorization Server Metadata</xref>.</t>
     </section>
   </back>
 </rfc>
+
