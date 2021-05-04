@@ -311,7 +311,7 @@ Scurtescu, et al.       Expires November 4, 2021                [Page 5]
    compromise"
 
    Credential Compromised signals that the identifier specified in the
-   subject was found to be compromised.  The subject type MUST be either
+   subject was found to be compromised.  The subject type MUST be
    "email".
 
 
