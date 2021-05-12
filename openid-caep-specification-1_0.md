@@ -57,6 +57,7 @@ normative:
   RFC8417:
   RFC8174:
   RFC5280:
+  RFC5646:
   SP800-63R3:
     target: https://pages.nist.gov/800-63-3/sp800-63-3.html
     title: "NIST Special Publication 800-63: Digital Identity Guidelines"
@@ -127,10 +128,38 @@ initiating_entity
   - `system`:   a system or platform assertion triggered the event
 
 reason_admin
-: OPTIONAL, JSON string: an administrative message for logging and auditing
+: OPTIONAL, JSON object: a localizable administrative message intended for
+logging and auditing. The object MUST contain one or more key/value pairs, 
+with a BCP47 {{RFC5646}} language tag as the key and the locale-specific 
+administrative message the value.
+
+~~~ json
+{
+    "reason_admin": {
+        "en": "Landspeed Policy Violation: C076E82F",
+        "de": "Landspeed-Richtlinienverstoß: C076E82F",
+        "es-410": "Violación de la política de landspeed: C076E82F"
+    }
+}
+~~~
+{: #optional-claims-reason-admin-example title="Example: Administrative reason information with multiple languages"}
 
 reason_user
-: OPTIONAL, JSON string: a user-friendly message for display to an end-user
+: OPTIONAL, JSON object: a localizable user-friendly message for display
+to an end-user. The object MUST contain one or more key/value pairs, with a 
+BCP47 {{RFC5646}} language tag as the key and the locale-specific end-user 
+message as the value.
+
+~~~ json
+{
+    "reason_user": {
+        "en": "Access attempt from multiple regions.",
+        "de": "Zugriffsversuch aus mehreren Regionen.",
+        "es-410": "Intento de acceso desde varias regiones."
+    }
+}
+~~~
+{: #optional-claims-reason-user-example title="Example: End user reason information with multiple languages"}
 
 
 # Event Types {#event-types}
@@ -210,8 +239,13 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
                 }
             },
             "initiating_entity": "policy",
-            "reason_admin": "Landspeed Policy Violation: C076E82F",
-            "reason_user": "Access attempt from multiple regions.",
+            "reason_admin": {
+                "en": "Landspeed Policy Violation: C076E82F"
+            },
+            "reason_user": {
+                "en": "Access attempt from multiple regions.",
+                "es-410": "Intento de acceso desde varias regiones."
+            },
             "event_timestamp": 1615304991643
         }
     }
@@ -230,8 +264,13 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
         "https://schemas.openid.net/secevent/caep/event-type/\
         session-revoked": {
             "initiating_entity": "policy",
-            "reason_admin": "Landspeed Policy Violation: C076E82F",
-            "reason_user": "Access attempt from multiple regions.",
+            "reason_admin": {
+                "en": "Landspeed Policy Violation: C076E82F"
+            },
+            "reason_user": {
+                "en": "Access attempt from multiple regions.",
+                "es-410": "Intento de acceso desde varias regiones."
+            },
             "event_timestamp": 1615304991643
         }
     }
@@ -265,8 +304,13 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
                 }
             },
             "initiating_entity": "policy",
-            "reason_admin": "Policy Violation: C076E82F",
-            "reason_user": "This device is no longer compliant.",
+            "reason_admin": {
+                "en": "Policy Violation: C076E822"
+            },
+            "reason_user": {
+                "en": "This device is no longer compliant.",
+                "it": "Questo dispositivo non è più conforme."
+            },
             "event_timestamp": 1615304991643
         }
     }
@@ -337,8 +381,14 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
             },
             "event_timestamp": 1615304991643,
             "initiating_entity": "policy",
-            "reason_admin": "User left trusted network: CorpNet3",
-            "reason_user": "You're no longer connected to a trusted network.",
+            "reason_admin": {
+                "en": "User left trusted network: CorpNet3"
+            },
+            "reason_user": {
+                "en": "You're no longer connected to a trusted network.",
+                "it": "Non sei più connesso a una rete attendibile."
+            },
+
             "claims": {
                 "trusted_network": "false"
             }
@@ -450,7 +500,9 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
             "fido2_aaguid": "accced6a-63f5-490a-9eea-e59bc1896cfc",
             "friendly_name": "Jane's USB authenticator",
             "initiating_entity": "user",
-            "reason_admin": "User self-enrollment",
+            "reason_admin": {
+                "en": "User self-enrollment"
+            },
             "event_timestamp": 1615304991643
         }
     }
@@ -592,8 +644,12 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
             "current_status": "not-compliant",
             "previous_status": "compliant",
             "initiating_entity": "policy",
-            "reason_admin": "Location Policy Violation: C076E82F",
-            "reason_user": "Device is no longer in a trusted location.",
+            "reason_admin": {
+                "en": "Location Policy Violation: C076E8A3"
+            },
+            "reason_user": {
+                "en": "Device is no longer in a trusted location."
+            },
             "event_timestamp": 1615304991643
         }
     }
