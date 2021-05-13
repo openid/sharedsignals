@@ -5,8 +5,8 @@
 Shared Signals and Events                                    T. Cappalli
 Internet-Draft                                                 Microsoft
 Intended status: Standards Track                        A. Tulshibagwale
-Expires: October 9, 2021                                          Google
-                                                          April 07, 2021
+Expires: November 13, 2021                                        Google
+                                                            May 12, 2021
 
 
             OpenID Continuous Access Evaluation Profile 1.0
@@ -34,7 +34,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on October 9, 2021.
+   This Internet-Draft will expire on November 13, 2021.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Cappalli & Tulshibagwale Expires October 9, 2021                [Page 1]
+Cappalli & TulshibagwaleExpires November 13, 2021               [Page 1]
 
-Internet-Draft                  CAEP-Spec                     April 2021
+Internet-Draft                  CAEP-Spec                       May 2021
 
 
 Table of Contents
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Cappalli & Tulshibagwale Expires October 9, 2021                [Page 2]
+Cappalli & TulshibagwaleExpires November 13, 2021               [Page 2]
 
-Internet-Draft                  CAEP-Spec                     April 2021
+Internet-Draft                  CAEP-Spec                       May 2021
 
 
       representing the number of seconds from 1970-01-01T0:0:0Z as
@@ -134,7 +134,7 @@ Internet-Draft                  CAEP-Spec                     April 2021
       message intended for logging and auditing.  The object MUST
       contain one or more key/value pairs, with a BCP47 [RFC5646]
       language tag as the key and the locale-specific administrative
-      message the value.
+      message as the value.
 
    {
        "reason_admin": {
@@ -165,9 +165,9 @@ Internet-Draft                  CAEP-Spec                     April 2021
 
 
 
-Cappalli & Tulshibagwale Expires October 9, 2021                [Page 3]
+Cappalli & TulshibagwaleExpires November 13, 2021               [Page 3]
 
-Internet-Draft                  CAEP-Spec                     April 2021
+Internet-Draft                  CAEP-Spec                       May 2021
 
 
 3.  Event Types
@@ -221,9 +221,9 @@ Internet-Draft                  CAEP-Spec                     April 2021
 
 
 
-Cappalli & Tulshibagwale Expires October 9, 2021                [Page 4]
+Cappalli & TulshibagwaleExpires November 13, 2021               [Page 4]
 
-Internet-Draft                  CAEP-Spec                     April 2021
+Internet-Draft                  CAEP-Spec                       May 2021
 
 
    {
@@ -277,9 +277,9 @@ Internet-Draft                  CAEP-Spec                     April 2021
 
 
 
-Cappalli & Tulshibagwale Expires October 9, 2021                [Page 5]
+Cappalli & TulshibagwaleExpires November 13, 2021               [Page 5]
 
-Internet-Draft                  CAEP-Spec                     April 2021
+Internet-Draft                  CAEP-Spec                       May 2021
 
 
    {
@@ -333,9 +333,9 @@ Internet-Draft                  CAEP-Spec                     April 2021
 
 
 
-Cappalli & Tulshibagwale Expires October 9, 2021                [Page 6]
+Cappalli & TulshibagwaleExpires November 13, 2021               [Page 6]
 
-Internet-Draft                  CAEP-Spec                     April 2021
+Internet-Draft                  CAEP-Spec                       May 2021
 
 
    {
@@ -389,9 +389,9 @@ Internet-Draft                  CAEP-Spec                     April 2021
 
 
 
-Cappalli & Tulshibagwale Expires October 9, 2021                [Page 7]
+Cappalli & TulshibagwaleExpires November 13, 2021               [Page 7]
 
-Internet-Draft                  CAEP-Spec                     April 2021
+Internet-Draft                  CAEP-Spec                       May 2021
 
 
    {
@@ -445,9 +445,9 @@ Internet-Draft                  CAEP-Spec                     April 2021
 
 
 
-Cappalli & Tulshibagwale Expires October 9, 2021                [Page 8]
+Cappalli & TulshibagwaleExpires November 13, 2021               [Page 8]
 
-Internet-Draft                  CAEP-Spec                     April 2021
+Internet-Draft                  CAEP-Spec                       May 2021
 
 
    Token Claims Change signals that a claim in a token, identified by
@@ -501,9 +501,9 @@ Internet-Draft                  CAEP-Spec                     April 2021
 
 
 
-Cappalli & Tulshibagwale Expires October 9, 2021                [Page 9]
+Cappalli & TulshibagwaleExpires November 13, 2021               [Page 9]
 
-Internet-Draft                  CAEP-Spec                     April 2021
+Internet-Draft                  CAEP-Spec                       May 2021
 
 
 {
@@ -557,9 +557,9 @@ Internet-Draft                  CAEP-Spec                     April 2021
 
 
 
-Cappalli & Tulshibagwale Expires October 9, 2021               [Page 10]
+Cappalli & TulshibagwaleExpires November 13, 2021              [Page 10]
 
-Internet-Draft                  CAEP-Spec                     April 2021
+Internet-Draft                  CAEP-Spec                       May 2021
 
 
    {
@@ -613,9 +613,9 @@ Internet-Draft                  CAEP-Spec                     April 2021
 
 
 
-Cappalli & Tulshibagwale Expires October 9, 2021               [Page 11]
+Cappalli & TulshibagwaleExpires November 13, 2021              [Page 11]
 
-Internet-Draft                  CAEP-Spec                     April 2021
+Internet-Draft                  CAEP-Spec                       May 2021
 
 
 3.3.1.  Event-Specific Claims
@@ -669,9 +669,9 @@ Internet-Draft                  CAEP-Spec                     April 2021
 
 
 
-Cappalli & Tulshibagwale Expires October 9, 2021               [Page 12]
+Cappalli & TulshibagwaleExpires November 13, 2021              [Page 12]
 
-Internet-Draft                  CAEP-Spec                     April 2021
+Internet-Draft                  CAEP-Spec                       May 2021
 
 
    {
@@ -725,9 +725,9 @@ Internet-Draft                  CAEP-Spec                     April 2021
 
 
 
-Cappalli & Tulshibagwale Expires October 9, 2021               [Page 13]
+Cappalli & TulshibagwaleExpires November 13, 2021              [Page 13]
 
-Internet-Draft                  CAEP-Spec                     April 2021
+Internet-Draft                  CAEP-Spec                       May 2021
 
 
    will signal to Service Provider A that user has authenticated with a
@@ -781,9 +781,9 @@ Internet-Draft                  CAEP-Spec                     April 2021
 
 
 
-Cappalli & Tulshibagwale Expires October 9, 2021               [Page 14]
+Cappalli & TulshibagwaleExpires November 13, 2021              [Page 14]
 
-Internet-Draft                  CAEP-Spec                     April 2021
+Internet-Draft                  CAEP-Spec                       May 2021
 
 
    {
@@ -837,9 +837,9 @@ Internet-Draft                  CAEP-Spec                     April 2021
 
 
 
-Cappalli & Tulshibagwale Expires October 9, 2021               [Page 15]
+Cappalli & TulshibagwaleExpires November 13, 2021              [Page 15]
 
-Internet-Draft                  CAEP-Spec                     April 2021
+Internet-Draft                  CAEP-Spec                       May 2021
 
 
       *  "not-compliant"
@@ -893,9 +893,9 @@ Internet-Draft                  CAEP-Spec                     April 2021
 
 
 
-Cappalli & Tulshibagwale Expires October 9, 2021               [Page 16]
+Cappalli & TulshibagwaleExpires November 13, 2021              [Page 16]
 
-Internet-Draft                  CAEP-Spec                     April 2021
+Internet-Draft                  CAEP-Spec                       May 2021
 
 
    {
@@ -949,9 +949,9 @@ Internet-Draft                  CAEP-Spec                     April 2021
 
 
 
-Cappalli & Tulshibagwale Expires October 9, 2021               [Page 17]
+Cappalli & TulshibagwaleExpires November 13, 2021              [Page 17]
 
-Internet-Draft                  CAEP-Spec                     April 2021
+Internet-Draft                  CAEP-Spec                       May 2021
 
 
    [RFC5280]  Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
@@ -1005,4 +1005,4 @@ Authors' Addresses
 
 
 
-Cappalli & Tulshibagwale Expires October 9, 2021               [Page 18]
+Cappalli & TulshibagwaleExpires November 13, 2021              [Page 18]

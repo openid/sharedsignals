@@ -2,7 +2,7 @@
 title: OpenID Continuous Access Evaluation Profile 1.0
 abbrev: CAEP-Spec
 docname: openid-caep-spec-1_0
-date: 2021-04-07
+date: 2021-05-12
 
 ipr: none
 cat: std
@@ -131,7 +131,7 @@ reason_admin
 : OPTIONAL, JSON object: a localizable administrative message intended for
 logging and auditing. The object MUST contain one or more key/value pairs, 
 with a BCP47 {{RFC5646}} language tag as the key and the locale-specific 
-administrative message the value.
+administrative message as the value.
 
 ~~~ json
 {
