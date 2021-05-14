@@ -2,7 +2,7 @@
 title: OpenID Continuous Access Evaluation Profile 1.0
 abbrev: CAEP-Spec
 docname: openid-caep-spec-1_0
-date: 2021-05-12
+date: 2021-05-14
 
 ipr: none
 cat: std
@@ -231,7 +231,7 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
                 "user": {
                   "format": "iss_sub",
                   "iss": "https://idp.example.com/123456789/",
-                  "sub": "dMTlD|1600802906337.16|16008.16"
+                  "sub": "99beb27c-c1c2-4955-882a-e0dc4996fcbc"
                 },
                 "tenant": {
                   "format": "opaque",
