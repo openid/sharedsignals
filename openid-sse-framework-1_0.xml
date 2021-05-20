@@ -346,7 +346,7 @@
     "subject": {
         "format": "catalog_item",
         "catalog_id": "c0384/winter/2354122"
-      }
+      },
       "event_timestamp": 1600975810,
       "claims": {
          "role": "ro-admin"
