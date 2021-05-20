@@ -482,7 +482,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 8]
     "subject": {
         "format": "catalog_item",
         "catalog_id": "c0384/winter/2354122"
-      }
+      },
       "event_timestamp": 1600975810,
       "claims": {
          "role": "ro-admin"
