@@ -54,7 +54,7 @@ Copyright Notice
 
 
 Cappalli & TulshibagwaleExpires November 15, 2021               [Page 1]
-
+
 Internet-Draft                  CAEP-Spec                       May 2021
 
 
@@ -72,12 +72,12 @@ Table of Contents
        3.2.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .   9
      3.3.  Credential Change . . . . . . . . . . . . . . . . . . . .  11
        3.3.1.  Event-Specific Claims . . . . . . . . . . . . . . . .  12
-       3.3.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  12
+       3.3.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  13
      3.4.  Assurance Level Change  . . . . . . . . . . . . . . . . .  13
        3.4.1.  Event-Specific Claims . . . . . . . . . . . . . . . .  14
-       3.4.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  14
+       3.4.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  15
      3.5.  Device Compliance Change  . . . . . . . . . . . . . . . .  15
-       3.5.1.  Event-Specific Claims . . . . . . . . . . . . . . . .  15
+       3.5.1.  Event-Specific Claims . . . . . . . . . . . . . . . .  16
        3.5.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  16
    4.  Normative References  . . . . . . . . . . . . . . . . . . . .  17
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  18
@@ -110,7 +110,7 @@ Table of Contents
 
 
 Cappalli & TulshibagwaleExpires November 15, 2021               [Page 2]
-
+
 Internet-Draft                  CAEP-Spec                       May 2021
 
 
@@ -120,7 +120,7 @@ Internet-Draft                  CAEP-Spec                       May 2021
    initiating_entity  OPTIONAL, JSON string: describes the entity that
       invoked the event.
 
-      Potential options:
+      This MUST be one of the following strings:
 
       *  "admin": an administrative action triggered the event
 
@@ -166,7 +166,7 @@ Internet-Draft                  CAEP-Spec                       May 2021
 
 
 Cappalli & TulshibagwaleExpires November 15, 2021               [Page 3]
-
+
 Internet-Draft                  CAEP-Spec                       May 2021
 
 
@@ -222,7 +222,7 @@ Internet-Draft                  CAEP-Spec                       May 2021
 
 
 Cappalli & TulshibagwaleExpires November 15, 2021               [Page 4]
-
+
 Internet-Draft                  CAEP-Spec                       May 2021
 
 
@@ -236,7 +236,7 @@ Internet-Draft                  CAEP-Spec                       May 2021
            session-revoked": {
                "subject": {
                    "format": "opaque",
-                   "sub": "dMTlD|1600802906337.16|16008.16"
+                   "id": "dMTlD|1600802906337.16|16008.16"
                },
                "event_timestamp": 1615304991643
            }
@@ -278,7 +278,7 @@ Internet-Draft                  CAEP-Spec                       May 2021
 
 
 Cappalli & TulshibagwaleExpires November 15, 2021               [Page 5]
-
+
 Internet-Draft                  CAEP-Spec                       May 2021
 
 
@@ -293,7 +293,7 @@ Internet-Draft                  CAEP-Spec                       May 2021
                "subject": {
                    "session": {
                      "format": "opaque",
-                     "sub": "dMTlD|1600802906337.16|16008.16"
+                     "id": "dMTlD|1600802906337.16|16008.16"
                    },
                    "user": {
                      "format": "iss_sub",
@@ -334,7 +334,7 @@ Internet-Draft                  CAEP-Spec                       May 2021
 
 
 Cappalli & TulshibagwaleExpires November 15, 2021               [Page 6]
-
+
 Internet-Draft                  CAEP-Spec                       May 2021
 
 
@@ -390,7 +390,7 @@ Internet-Draft                  CAEP-Spec                       May 2021
 
 
 Cappalli & TulshibagwaleExpires November 15, 2021               [Page 7]
-
+
 Internet-Draft                  CAEP-Spec                       May 2021
 
 
@@ -446,7 +446,7 @@ Internet-Draft                  CAEP-Spec                       May 2021
 
 
 Cappalli & TulshibagwaleExpires November 15, 2021               [Page 8]
-
+
 Internet-Draft                  CAEP-Spec                       May 2021
 
 
@@ -502,7 +502,7 @@ Internet-Draft                  CAEP-Spec                       May 2021
 
 
 Cappalli & TulshibagwaleExpires November 15, 2021               [Page 9]
-
+
 Internet-Draft                  CAEP-Spec                       May 2021
 
 
@@ -558,7 +558,7 @@ Internet-Draft                  CAEP-Spec                       May 2021
 
 
 Cappalli & TulshibagwaleExpires November 15, 2021              [Page 10]
-
+
 Internet-Draft                  CAEP-Spec                       May 2021
 
 
@@ -614,19 +614,46 @@ Internet-Draft                  CAEP-Spec                       May 2021
 
 
 Cappalli & TulshibagwaleExpires November 15, 2021              [Page 11]
-
+
 Internet-Draft                  CAEP-Spec                       May 2021
 
 
 3.3.1.  Event-Specific Claims
 
-   credential_type  REQUIRED, JSON string: potential options: -
-      "password" - "pin" - "x509" - "fido2-platform" - "fido2-roaming" -
-      "fido-u2f" - "verifiable-credential" - "phone-voice" - "phone-sms"
-      - "app" - other mutually supported credential type
+   credential_type  REQUIRED, JSON string: This MUST be one of the
+      following strings, or any other credential type supported mutually
+      by the Transmitter and the Receiver.
 
-   change_type  REQUIRED, JSON string: potential options: - "create" -
-      "revoke" - "update" - "delete"
+      *  "password"
+
+      *  "pin"
+
+      *  "x509"
+
+      *  "fido2-platform"
+
+      *  "fido2-roaming"
+
+      *  "fido-u2f"
+
+      *  "verifiable-credential"
+
+      *  "phone-voice"
+
+      *  "phone-sms"
+
+      *  "app"
+
+   change_type  REQUIRED, JSON string: This MUST be one of the following
+      strings:
+
+      *  "create"
+
+      *  "revoke"
+
+      *  "update"
+
+      *  "delete"
 
    friendly_name  OPTIONAL, JSON string: credential friendly name
 
@@ -639,6 +666,14 @@ Internet-Draft                  CAEP-Spec                       May 2021
    fido2_aaguid  OPTIONAL, JSON string: FIDO2 Authenticator Attestation
       GUID as defined in [WebAuthn]
 
+
+
+
+Cappalli & TulshibagwaleExpires November 15, 2021              [Page 12]
+
+Internet-Draft                  CAEP-Spec                       May 2021
+
+
    When "event_timestamp" is included, its value MUST represent the time
    at which the credential change occurred.
 
@@ -646,33 +681,6 @@ Internet-Draft                  CAEP-Spec                       May 2021
 
    NOTE: The event type URI is wrapped, the backslash is the
    continuation character.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Cappalli & TulshibagwaleExpires November 15, 2021              [Page 12]
-
-Internet-Draft                  CAEP-Spec                       May 2021
-
 
    {
        "iss": "https://idp.example.com/3456789/",
@@ -715,21 +723,19 @@ Internet-Draft                  CAEP-Spec                       May 2021
    can be from a weak authentication method to a strong authentication
    method, or vice versa.
 
+
+
+Cappalli & TulshibagwaleExpires November 15, 2021              [Page 13]
+
+Internet-Draft                  CAEP-Spec                       May 2021
+
+
    In the first scenario, Assurance Level Change will an increase, while
    in the second scenario it will be a decrease.  For example, a user
    can start a session with Service Provider A using single factor
    authentication (such as a password).  The user can then open another
    session with Service Provider B using two-factor authentication (such
    as OTP).  In this scenario an increase Assurance Level Change event
-
-
-
-
-Cappalli & TulshibagwaleExpires November 15, 2021              [Page 13]
-
-Internet-Draft                  CAEP-Spec                       May 2021
-
-
    will signal to Service Provider A that user has authenticated with a
    stronger authentication method.
 
@@ -742,7 +748,7 @@ Internet-Draft                  CAEP-Spec                       May 2021
    current_level  REQUIRED, JSON string: the current NIST Authenticator
       Assurance Level (AAL) as defined in [SP800-63R3]
 
-      Potential options:
+      This string MUST be one of the following strings:
 
       *  "nist-aal1"
 
@@ -753,7 +759,7 @@ Internet-Draft                  CAEP-Spec                       May 2021
    previous_level  REQUIRED, JSON string: the previous NIST
       Authenticator Assurance Level (AAL) as defined in [SP800-63R3]
 
-      Potential options:
+      This MUST be one of the following strings:
 
       *  "nist-aal1"
 
@@ -764,27 +770,26 @@ Internet-Draft                  CAEP-Spec                       May 2021
    change_direction  REQUIRED, JSON string: the Authenticator Assurance
       Level increased or decreased
 
-      Potential options: - "increase" - "decrease"
+      This MUST be one of the following strings:
+
+      *  "increase"
+
+      *  "decrease"
 
    When "event_timestamp" is included, its value MUST represent the time
    at which the assurance level changed.
+
+
+
+Cappalli & TulshibagwaleExpires November 15, 2021              [Page 14]
+
+Internet-Draft                  CAEP-Spec                       May 2021
+
 
 3.4.2.  Examples
 
    NOTE: The event type URI is wrapped, the backslash is the
    continuation character.
-
-
-
-
-
-
-
-
-Cappalli & TulshibagwaleExpires November 15, 2021              [Page 14]
-
-Internet-Draft                  CAEP-Spec                       May 2021
-
 
    {
        "iss": "https://idp.example.com/3456789/",
@@ -825,29 +830,33 @@ Internet-Draft                  CAEP-Spec                       May 2021
    with the nested "reason_admin" and/or "reason_user" claims made in
    Section 2.
 
-3.5.1.  Event-Specific Claims
 
-   previous_status  REQUIRED, JSON string: the compliance status prior
-      to the change that triggered the event
 
-      Potential options:
 
-      *  "compliant"
 
 
 
 
 Cappalli & TulshibagwaleExpires November 15, 2021              [Page 15]
-
+
 Internet-Draft                  CAEP-Spec                       May 2021
 
+
+3.5.1.  Event-Specific Claims
+
+   previous_status  REQUIRED, JSON string: the compliance status prior
+      to the change that triggered the event
+
+      This MUST be one of the following strings:
+
+      *  "compliant"
 
       *  "not-compliant"
 
    current_status  REQUIRED, JSON string: the current status that
       triggered the event
 
-      Potential options:
+      This MUST be one of the following strings:
 
       *  "compliant"
 
@@ -884,17 +893,8 @@ Internet-Draft                  CAEP-Spec                       May 2021
 
 
 
-
-
-
-
-
-
-
-
-
 Cappalli & TulshibagwaleExpires November 15, 2021              [Page 16]
-
+
 Internet-Draft                  CAEP-Spec                       May 2021
 
 
@@ -950,7 +950,7 @@ Internet-Draft                  CAEP-Spec                       May 2021
 
 
 Cappalli & TulshibagwaleExpires November 15, 2021              [Page 17]
-
+
 Internet-Draft                  CAEP-Spec                       May 2021
 
 

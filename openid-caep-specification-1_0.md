@@ -117,7 +117,7 @@ event_timestamp
 
 initiating_entity
 : OPTIONAL, JSON string: describes the entity that invoked the event.
-: Potential options:
+: This MUST be one of the following strings:
 
   - `admin`:    an administrative action triggered the event
 
@@ -129,8 +129,8 @@ initiating_entity
 
 reason_admin
 : OPTIONAL, JSON object: a localizable administrative message intended for
-logging and auditing. The object MUST contain one or more key/value pairs, 
-with a BCP47 {{RFC5646}} language tag as the key and the locale-specific 
+logging and auditing. The object MUST contain one or more key/value pairs,
+with a BCP47 {{RFC5646}} language tag as the key and the locale-specific
 administrative message as the value.
 
 ~~~ json
@@ -146,8 +146,8 @@ administrative message as the value.
 
 reason_user
 : OPTIONAL, JSON object: a localizable user-friendly message for display
-to an end-user. The object MUST contain one or more key/value pairs, with a 
-BCP47 {{RFC5646}} language tag as the key and the locale-specific end-user 
+to an end-user. The object MUST contain one or more key/value pairs, with a
+BCP47 {{RFC5646}} language tag as the key and the locale-specific end-user
 message as the value.
 
 ~~~ json
@@ -442,7 +442,9 @@ nested `reason_admin` and/or `reason_user` claims made in {{optional-event-claim
 ### Event-Specific Claims {#credential-change-claims}
 
 credential_type
-: REQUIRED, JSON string: potential options:
+: REQUIRED, JSON string: This MUST be one of the following strings, or any other
+credential type supported mutually by the Transmitter and the Receiver.
+
     - `password`
     - `pin`
     - `x509`
@@ -453,10 +455,10 @@ credential_type
     - `phone-voice`
     - `phone-sms`
     - `app`
-    - other mutually supported credential type
 
 change_type
-: REQUIRED, JSON string: potential options:
+: REQUIRED, JSON string: This MUST be one of the following strings:
+
     - `create`
     - `revoke`
     - `update`
@@ -475,7 +477,7 @@ fido2_aaguid
 : OPTIONAL, JSON string: FIDO2 Authenticator Attestation GUID as defined in {{WebAuthn}}
 
 When `event_timestamp` is included, its value MUST represent the time at which
-the credential change occurred.            
+the credential change occurred.
 
 ### Examples  {#credential-change-examples}
 
@@ -534,7 +536,7 @@ nested `reason_admin` and/or `reason_user` claims made in {{optional-event-claim
 
 current_level
 : REQUIRED, JSON string: the current NIST Authenticator Assurance Level (AAL) as defined in {{SP800-63R3}}
-: Potential options:
+: This string MUST be one of the following strings:
 
   - `nist-aal1`
   - `nist-aal2`
@@ -542,7 +544,7 @@ current_level
 
 previous_level
 : REQUIRED, JSON string: the previous NIST Authenticator Assurance Level (AAL) as defined in {{SP800-63R3}}
-: Potential options:
+: This MUST be one of the following strings:
 
   - `nist-aal1`
   - `nist-aal2`
@@ -550,7 +552,8 @@ previous_level
 
 change_direction
 : REQUIRED, JSON string: the Authenticator Assurance Level increased or decreased
-: Potential options:
+: This MUST be one of the following strings:
+
   - `increase`
   - `decrease`
 
@@ -602,14 +605,14 @@ nested `reason_admin` and/or `reason_user` claims made in {{optional-event-claim
 
 previous_status
 : REQUIRED, JSON string: the compliance status prior to the change that triggered the event
-: Potential options:
+: This MUST be one of the following strings:
 
   - `compliant`
   - `not-compliant`
 
 current_status
 : REQUIRED, JSON string: the current status that triggered the event
-: Potential options:
+: This MUST be one of the following strings:
 
   - `compliant`
   - `not-compliant`
