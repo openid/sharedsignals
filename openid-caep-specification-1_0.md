@@ -176,7 +176,7 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
         session-revoked": {
             "subject": {
                 "format": "opaque",
-                "sub": "dMTlD|1600802906337.16|16008.16"
+                "id": "dMTlD|1600802906337.16|16008.16"
             },
             "event_timestamp": 1615304991643
         }
@@ -197,7 +197,7 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
             "subject": {
                 "session": {
                   "format": "opaque",
-                  "sub": "dMTlD|1600802906337.16|16008.16"
+                  "id": "dMTlD|1600802906337.16|16008.16"
                 },
                 "user": {
                   "format": "iss_sub",
