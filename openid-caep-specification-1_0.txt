@@ -5,8 +5,8 @@
 Shared Signals and Events                                    T. Cappalli
 Internet-Draft                                                 Microsoft
 Intended status: Standards Track                        A. Tulshibagwale
-Expires: October 9, 2021                                          Google
-                                                          April 07, 2021
+Expires: November 15, 2021                                        Google
+                                                            May 14, 2021
 
 
             OpenID Continuous Access Evaluation Profile 1.0
@@ -34,7 +34,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on October 9, 2021.
+   This Internet-Draft will expire on November 15, 2021.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Cappalli & Tulshibagwale Expires October 9, 2021                [Page 1]
-
-Internet-Draft                  CAEP-Spec                     April 2021
+Cappalli & TulshibagwaleExpires November 15, 2021               [Page 1]
+
+Internet-Draft                  CAEP-Spec                       May 2021
 
 
 Table of Contents
@@ -63,24 +63,24 @@ Table of Contents
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
      1.1.  Notational Considerations . . . . . . . . . . . . . . . .   2
    2.  Optional Event Claims . . . . . . . . . . . . . . . . . . . .   2
-   3.  Event Types . . . . . . . . . . . . . . . . . . . . . . . . .   3
-     3.1.  Session Revoked . . . . . . . . . . . . . . . . . . . . .   3
+   3.  Event Types . . . . . . . . . . . . . . . . . . . . . . . . .   4
+     3.1.  Session Revoked . . . . . . . . . . . . . . . . . . . . .   4
        3.1.1.  Event-Specific Claims . . . . . . . . . . . . . . . .   4
        3.1.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .   4
-     3.2.  Token Claims Change . . . . . . . . . . . . . . . . . . .   7
-       3.2.1.  Event-Specific Claims . . . . . . . . . . . . . . . .   8
-       3.2.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .   8
-     3.3.  Credential Change . . . . . . . . . . . . . . . . . . . .  10
-       3.3.1.  Event-Specific Claims . . . . . . . . . . . . . . . .  11
-       3.3.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  11
-     3.4.  Assurance Level Change  . . . . . . . . . . . . . . . . .  12
-       3.4.1.  Event-Specific Claims . . . . . . . . . . . . . . . .  13
-       3.4.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  13
-     3.5.  Device Compliance Change  . . . . . . . . . . . . . . . .  14
-       3.5.1.  Event-Specific Claims . . . . . . . . . . . . . . . .  14
-       3.5.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  15
-   4.  Normative References  . . . . . . . . . . . . . . . . . . . .  16
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  17
+     3.2.  Token Claims Change . . . . . . . . . . . . . . . . . . .   8
+       3.2.1.  Event-Specific Claims . . . . . . . . . . . . . . . .   9
+       3.2.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .   9
+     3.3.  Credential Change . . . . . . . . . . . . . . . . . . . .  11
+       3.3.1.  Event-Specific Claims . . . . . . . . . . . . . . . .  12
+       3.3.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  12
+     3.4.  Assurance Level Change  . . . . . . . . . . . . . . . . .  13
+       3.4.1.  Event-Specific Claims . . . . . . . . . . . . . . . .  14
+       3.4.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  14
+     3.5.  Device Compliance Change  . . . . . . . . . . . . . . . .  15
+       3.5.1.  Event-Specific Claims . . . . . . . . . . . . . . . .  15
+       3.5.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  16
+   4.  Normative References  . . . . . . . . . . . . . . . . . . . .  17
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  18
 
 1.  Introduction
 
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Cappalli & Tulshibagwale Expires October 9, 2021                [Page 2]
-
-Internet-Draft                  CAEP-Spec                     April 2021
+Cappalli & TulshibagwaleExpires November 15, 2021               [Page 2]
+
+Internet-Draft                  CAEP-Spec                       May 2021
 
 
       representing the number of seconds from 1970-01-01T0:0:0Z as
@@ -130,11 +130,45 @@ Internet-Draft                  CAEP-Spec                     April 2021
 
       *  "system": a system or platform assertion triggered the event
 
-   reason_admin  OPTIONAL, JSON string: an administrative message for
-      logging and auditing
+   reason_admin  OPTIONAL, JSON object: a localizable administrative
+      message intended for logging and auditing.  The object MUST
+      contain one or more key/value pairs, with a BCP47 [RFC5646]
+      language tag as the key and the locale-specific administrative
+      message as the value.
 
-   reason_user  OPTIONAL, JSON string: a user-friendly message for
-      display to an end-user
+   {
+       "reason_admin": {
+           "en": "Landspeed Policy Violation: C076E82F",
+           "de": "Landspeed-Richtlinienverstoss: C076E82F",
+           "es-410": "Violacion de la politica de landspeed: C076E82F"
+       }
+   }
+
+    Figure 1: Example: Administrative reason information with multiple
+                                 languages
+
+   reason_user  OPTIONAL, JSON object: a localizable user-friendly
+      message for display to an end-user.  The object MUST contain one
+      or more key/value pairs, with a BCP47 [RFC5646] language tag as
+      the key and the locale-specific end-user message as the value.
+
+   {
+       "reason_user": {
+           "en": "Access attempt from multiple regions.",
+           "de": "Zugriffsversuch aus mehreren Regionen.",
+           "es-410": "Intento de acceso desde varias regiones."
+       }
+   }
+
+       Figure 2: Example: End user reason information with multiple
+                                 languages
+
+
+
+Cappalli & TulshibagwaleExpires November 15, 2021               [Page 3]
+
+Internet-Draft                  CAEP-Spec                       May 2021
+
 
 3.  Event Types
 
@@ -160,16 +194,6 @@ Internet-Draft                  CAEP-Spec                     April 2021
    the nested "reason_admin" and/or "reason_user" claims described in
    Section 2.
 
-
-
-
-
-
-Cappalli & Tulshibagwale Expires October 9, 2021                [Page 3]
-
-Internet-Draft                  CAEP-Spec                     April 2021
-
-
 3.1.1.  Event-Specific Claims
 
    There are no event-specific claims for this event type.
@@ -181,6 +205,26 @@ Internet-Draft                  CAEP-Spec                     April 2021
 
    NOTE: The event type URI is wrapped, the backslash is the
    continuation character.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Cappalli & TulshibagwaleExpires November 15, 2021               [Page 4]
+
+Internet-Draft                  CAEP-Spec                       May 2021
+
 
    {
        "iss": "https://idp.example.com/123456789/",
@@ -199,7 +243,7 @@ Internet-Draft                  CAEP-Spec                     April 2021
        }
    }
 
-   Figure 1: Example: Session Revoked - Required claims + Simple Subject
+   Figure 3: Example: Session Revoked - Required claims + Simple Subject
 
 
 
@@ -221,9 +265,21 @@ Internet-Draft                  CAEP-Spec                     April 2021
 
 
 
-Cappalli & Tulshibagwale Expires October 9, 2021                [Page 4]
 
-Internet-Draft                  CAEP-Spec                     April 2021
+
+
+
+
+
+
+
+
+
+
+
+Cappalli & TulshibagwaleExpires November 15, 2021               [Page 5]
+
+Internet-Draft                  CAEP-Spec                       May 2021
 
 
    {
@@ -242,7 +298,7 @@ Internet-Draft                  CAEP-Spec                     April 2021
                    "user": {
                      "format": "iss_sub",
                      "iss": "https://idp.example.com/123456789/",
-                     "sub": "dMTlD|1600802906337.16|16008.16"
+                     "sub": "99beb27c-c1c2-4955-882a-e0dc4996fcbc"
                    },
                    "tenant": {
                      "format": "opaque",
@@ -250,14 +306,19 @@ Internet-Draft                  CAEP-Spec                     April 2021
                    }
                },
                "initiating_entity": "policy",
-               "reason_admin": "Landspeed Policy Violation: C076E82F",
-               "reason_user": "Access attempt from multiple regions.",
+               "reason_admin": {
+                   "en": "Landspeed Policy Violation: C076E82F"
+               },
+               "reason_user": {
+                   "en": "Access attempt from multiple regions.",
+                   "es-410": "Intento de acceso desde varias regiones."
+               },
                "event_timestamp": 1615304991643
            }
        }
    }
 
-   Figure 2: Example: Session Revoked - Complex Subject describing user
+   Figure 4: Example: Session Revoked - Complex Subject describing user
              + session ID + device (includes optional claims)
 
 
@@ -272,14 +333,9 @@ Internet-Draft                  CAEP-Spec                     April 2021
 
 
 
-
-
-
-
-
-Cappalli & Tulshibagwale Expires October 9, 2021                [Page 5]
-
-Internet-Draft                  CAEP-Spec                     April 2021
+Cappalli & TulshibagwaleExpires November 15, 2021               [Page 6]
+
+Internet-Draft                  CAEP-Spec                       May 2021
 
 
    {
@@ -292,14 +348,19 @@ Internet-Draft                  CAEP-Spec                     April 2021
            "https://schemas.openid.net/secevent/caep/event-type/\
            session-revoked": {
                "initiating_entity": "policy",
-               "reason_admin": "Landspeed Policy Violation: C076E82F",
-               "reason_user": "Access attempt from multiple regions.",
+               "reason_admin": {
+                   "en": "Landspeed Policy Violation: C076E82F"
+               },
+               "reason_user": {
+                   "en": "Access attempt from multiple regions.",
+                   "es-410": "Intento de acceso desde varias regiones."
+               },
                "event_timestamp": 1615304991643
            }
        }
    }
 
-   Figure 3: Example: Session Revoked - subject as `sub` claim (includes
+   Figure 5: Example: Session Revoked - subject as `sub` claim (includes
                              optional claims)
 
 
@@ -328,14 +389,9 @@ Internet-Draft                  CAEP-Spec                     April 2021
 
 
 
-
-
-
-
-
-Cappalli & Tulshibagwale Expires October 9, 2021                [Page 6]
-
-Internet-Draft                  CAEP-Spec                     April 2021
+Cappalli & TulshibagwaleExpires November 15, 2021               [Page 7]
+
+Internet-Draft                  CAEP-Spec                       May 2021
 
 
    {
@@ -363,14 +419,19 @@ Internet-Draft                  CAEP-Spec                     April 2021
                    }
                },
                "initiating_entity": "policy",
-               "reason_admin": "Policy Violation: C076E82F",
-               "reason_user": "This device is no longer compliant.",
+               "reason_admin": {
+                   "en": "Policy Violation: C076E822"
+               },
+               "reason_user": {
+                   "en": "This device is no longer compliant.",
+                   "it": "Questo dispositivo non e piu conforme."
+               },
                "event_timestamp": 1615304991643
            }
        }
    }
 
-   Figure 4: Example: Session Revoked - Complex Subject describing user
+   Figure 6: Example: Session Revoked - Complex Subject describing user
                + device + tenant (includes optional claims)
 
 3.2.  Token Claims Change
@@ -380,19 +441,21 @@ Internet-Draft                  CAEP-Spec                     April 2021
    "https://schemas.openid.net/secevent/caep/event-type/token-claims-
    change"
 
+
+
+
+
+Cappalli & TulshibagwaleExpires November 15, 2021               [Page 8]
+
+Internet-Draft                  CAEP-Spec                       May 2021
+
+
    Token Claims Change signals that a claim in a token, identified by
    the subject claim, has changed.
 
    The actual reason why the claims change occurred might be specified
    with the nested "reason_admin" and/or "reason_user" claims made in
    Section 2.
-
-
-
-Cappalli & Tulshibagwale Expires October 9, 2021                [Page 7]
-
-Internet-Draft                  CAEP-Spec                     April 2021
-
 
 3.2.1.  Event-Specific Claims
 
@@ -428,7 +491,7 @@ Internet-Draft                  CAEP-Spec                     April 2021
        }
    }
 
-   Figure 5: Example: OIDC ID Token Claims Change - Required claims only
+   Figure 7: Example: OIDC ID Token Claims Change - Required claims only
 
 
 
@@ -438,16 +501,9 @@ Internet-Draft                  CAEP-Spec                     April 2021
 
 
 
-
-
-
-
-
-
-
-Cappalli & Tulshibagwale Expires October 9, 2021                [Page 8]
-
-Internet-Draft                  CAEP-Spec                     April 2021
+Cappalli & TulshibagwaleExpires November 15, 2021               [Page 9]
+
+Internet-Draft                  CAEP-Spec                       May 2021
 
 
 {
@@ -465,8 +521,14 @@ Internet-Draft                  CAEP-Spec                     April 2021
             },
             "event_timestamp": 1615304991643,
             "initiating_entity": "policy",
-            "reason_admin": "User left trusted network: CorpNet3",
-            "reason_user": "You're no longer connected to a trusted network.",
+            "reason_admin": {
+                "en": "User left trusted network: CorpNet3"
+            },
+            "reason_user": {
+                "en": "You're no longer connected to a trusted network.",
+                "it": "Non sei piu connesso a una rete attendibile."
+            },
+
             "claims": {
                 "trusted_network": "false"
             }
@@ -474,7 +536,7 @@ Internet-Draft                  CAEP-Spec                     April 2021
     }
 }
 
-     Figure 6: Example: OIDC ID Token Claims Change - Optional claims
+     Figure 8: Example: OIDC ID Token Claims Change - Optional claims
 
 
 
@@ -495,15 +557,9 @@ Internet-Draft                  CAEP-Spec                     April 2021
 
 
 
-
-
-
-
-
-
-Cappalli & Tulshibagwale Expires October 9, 2021                [Page 9]
-
-Internet-Draft                  CAEP-Spec                     April 2021
+Cappalli & TulshibagwaleExpires November 15, 2021              [Page 10]
+
+Internet-Draft                  CAEP-Spec                       May 2021
 
 
    {
@@ -528,7 +584,7 @@ Internet-Draft                  CAEP-Spec                     April 2021
        }
    }
 
-     Figure 7: Example: SAML Assertion Claims Change - Required claims
+     Figure 9: Example: SAML Assertion Claims Change - Required claims
                                    only
 
 3.3.  Credential Change
@@ -557,9 +613,9 @@ Internet-Draft                  CAEP-Spec                     April 2021
 
 
 
-Cappalli & Tulshibagwale Expires October 9, 2021               [Page 10]
-
-Internet-Draft                  CAEP-Spec                     April 2021
+Cappalli & TulshibagwaleExpires November 15, 2021              [Page 11]
+
+Internet-Draft                  CAEP-Spec                       May 2021
 
 
 3.3.1.  Event-Specific Claims
@@ -613,9 +669,9 @@ Internet-Draft                  CAEP-Spec                     April 2021
 
 
 
-Cappalli & Tulshibagwale Expires October 9, 2021               [Page 11]
-
-Internet-Draft                  CAEP-Spec                     April 2021
+Cappalli & TulshibagwaleExpires November 15, 2021              [Page 12]
+
+Internet-Draft                  CAEP-Spec                       May 2021
 
 
    {
@@ -636,13 +692,15 @@ Internet-Draft                  CAEP-Spec                     April 2021
                "fido2_aaguid": "accced6a-63f5-490a-9eea-e59bc1896cfc",
                "friendly_name": "Jane's USB authenticator",
                "initiating_entity": "user",
-               "reason_admin": "User self-enrollment",
+               "reason_admin": {
+                   "en": "User self-enrollment"
+               },
                "event_timestamp": 1615304991643
            }
        }
    }
 
-    Figure 8: Example: Provisioning a new FIDO2 authenticator - Simple
+    Figure 10: Example: Provisioning a new FIDO2 authenticator - Simple
                          Subject + optional claims
 
 3.4.  Assurance Level Change
@@ -663,16 +721,17 @@ Internet-Draft                  CAEP-Spec                     April 2021
    authentication (such as a password).  The user can then open another
    session with Service Provider B using two-factor authentication (such
    as OTP).  In this scenario an increase Assurance Level Change event
+
+
+
+
+Cappalli & TulshibagwaleExpires November 15, 2021              [Page 13]
+
+Internet-Draft                  CAEP-Spec                       May 2021
+
+
    will signal to Service Provider A that user has authenticated with a
    stronger authentication method.
-
-
-
-
-Cappalli & Tulshibagwale Expires October 9, 2021               [Page 12]
-
-Internet-Draft                  CAEP-Spec                     April 2021
-
 
    The actual reason why the assurance level changed might be specified
    with the nested "reason_admin" and/or "reason_user" claims made in
@@ -722,12 +781,9 @@ Internet-Draft                  CAEP-Spec                     April 2021
 
 
 
-
-
-
-Cappalli & Tulshibagwale Expires October 9, 2021               [Page 13]
-
-Internet-Draft                  CAEP-Spec                     April 2021
+Cappalli & TulshibagwaleExpires November 15, 2021              [Page 14]
+
+Internet-Draft                  CAEP-Spec                       May 2021
 
 
    {
@@ -752,7 +808,7 @@ Internet-Draft                  CAEP-Spec                     April 2021
        }
    }
 
-      Figure 9: Example: Assurance Level Increase - Simple Subject +
+      Figure 11: Example: Assurance Level Increase - Simple Subject +
                               optional claims
 
 3.5.  Device Compliance Change
@@ -781,9 +837,9 @@ Internet-Draft                  CAEP-Spec                     April 2021
 
 
 
-Cappalli & Tulshibagwale Expires October 9, 2021               [Page 14]
-
-Internet-Draft                  CAEP-Spec                     April 2021
+Cappalli & TulshibagwaleExpires November 15, 2021              [Page 15]
+
+Internet-Draft                  CAEP-Spec                       May 2021
 
 
       *  "not-compliant"
@@ -837,41 +893,45 @@ Internet-Draft                  CAEP-Spec                     April 2021
 
 
 
-Cappalli & Tulshibagwale Expires October 9, 2021               [Page 15]
+Cappalli & TulshibagwaleExpires November 15, 2021              [Page 16]
+
+Internet-Draft                  CAEP-Spec                       May 2021
 
-Internet-Draft                  CAEP-Spec                     April 2021
 
+   {
+       "iss": "https://idp.example.com/123456789/",
+       "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
+       "iat": 1615305159,
+       "aud": "https://sp.example.com/caep",
+       "events": {
+           "https://schemas.openid.net/secevent/caep/event-type/\
+           device-compliance-change": {
+               "subject": {
+                   "device": {
+                       "format": "iss_sub",
+                       "iss": "https://idp.example.com/123456789/",
+                       "sub": "e9297990-14d2-42ec-a4a9-4036db86509a"
+                   },
+                   "tenant": {
+                       "format": "opaque",
+                       "id": "123456789"
+                   }
+               },
+               "current_status": "not-compliant",
+               "previous_status": "compliant",
+               "initiating_entity": "policy",
+               "reason_admin": {
+                   "en": "Location Policy Violation: C076E8A3"
+               },
+               "reason_user": {
+                   "en": "Device is no longer in a trusted location."
+               },
+               "event_timestamp": 1615304991643
+           }
+       }
+   }
 
-{
-    "iss": "https://idp.example.com/123456789/",
-    "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
-    "iat": 1615305159,
-    "aud": "https://sp.example.com/caep",
-    "events": {
-        "https://schemas.openid.net/secevent/caep/event-type/\
-        device-compliance-change": {
-            "subject": {
-                "device": {
-                    "format": "iss_sub",
-                    "iss": "https://idp.example.com/123456789/",
-                    "sub": "e9297990-14d2-42ec-a4a9-4036db86509a"
-                },
-                "tenant": {
-                    "format": "opaque",
-                    "id": "123456789"
-                }
-            },
-            "current_status": "not-compliant",
-            "previous_status": "compliant",
-            "initiating_entity": "policy",
-            "reason_admin": "Location Policy Violation: C076E82F",
-            "reason_user": "Device is no longer in a trusted location.",
-            "event_timestamp": 1615304991643
-        }
-    }
-}
-
-    Figure 10: Example: Device No Longer Compliant - Complex Subject +
+    Figure 12: Example: Device No Longer Compliant - Complex Subject +
                               optional claims
 
 4.  Normative References
@@ -889,13 +949,9 @@ Internet-Draft                  CAEP-Spec                     April 2021
 
 
 
-
-
-
-
-Cappalli & Tulshibagwale Expires October 9, 2021               [Page 16]
-
-Internet-Draft                  CAEP-Spec                     April 2021
+Cappalli & TulshibagwaleExpires November 15, 2021              [Page 17]
+
+Internet-Draft                  CAEP-Spec                       May 2021
 
 
    [RFC5280]  Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
@@ -903,6 +959,10 @@ Internet-Draft                  CAEP-Spec                     April 2021
               Infrastructure Certificate and Certificate Revocation List
               (CRL) Profile", RFC 5280, DOI 10.17487/RFC5280, May 2008,
               <https://www.rfc-editor.org/info/rfc5280>.
+
+   [RFC5646]  Phillips, A., Ed. and M. Davis, Ed., "Tags for Identifying
+              Languages", BCP 47, RFC 5646, DOI 10.17487/RFC5646,
+              September 2009, <https://www.rfc-editor.org/info/rfc5646>.
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
@@ -945,8 +1005,4 @@ Authors' Addresses
 
 
 
-
-
-
-
-Cappalli & Tulshibagwale Expires October 9, 2021               [Page 17]
+Cappalli & TulshibagwaleExpires November 15, 2021              [Page 18]
