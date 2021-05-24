@@ -2,7 +2,7 @@
 title: OpenID Continuous Access Evaluation Profile 1.0
 abbrev: CAEP-Spec
 docname: openid-caep-spec-1_0
-date: 2021-05-14
+date: 2021-05-22
 
 ipr: none
 cat: std
@@ -28,7 +28,6 @@ author:
 
 normative:
   RFC2119:
-  RFC2616:
   SSE-FRAMEWORK:
     target: http://openid.net/specs/openid-sse-framework-1_0.html
     title: OpenID Shared Signals and Events Framework Specification 1.0
@@ -53,8 +52,7 @@ normative:
         ins: John Bradley
         name: John Bradley
         org: Yubico
-    date: 2021
-  RFC8417:
+    date: 2021-05
   RFC8174:
   RFC5280:
   RFC5646:
@@ -80,7 +78,6 @@ normative:
         ins: D. Balfanz
         name: Dirk Balfanz
         org: Google
-
 
 --- abstract
 
