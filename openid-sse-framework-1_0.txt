@@ -2,7 +2,7 @@
 
 
 
-Shared Signals and Events Working Group                 A. Tulshibagwale
+                                                        A. Tulshibagwale
                                                                   Google
                                                              T. Cappalli
                                                                Microsoft
@@ -12,7 +12,7 @@ Shared Signals and Events Working Group                 A. Tulshibagwale
                                                                   Amazon
                                                               J. Bradley
                                                                   Yubico
-                                                             22 May 2021
+                                                            May 22, 2021
 
 
       OpenID Shared Signals and Events Framework Specification 1.0
@@ -27,38 +27,36 @@ Abstract
 
    This specification defines:
 
-   *  A profile for IETF Security Events
-      (https://datatracker.ietf.org/wg/secevent/about/)
+   o  A profile for IETF Security Events [1]
 
-   *  Subject Principals
+   o  Subject Principals
 
-   *  Subject Claims in SSE Events
+   o  Subject Claims in SSE Events
 
-   *  Event Types
+   o  Event Types
 
-   *  Event Properties
+   o  Event Properties
 
-   *  Configuration information and discovery method for Transmitters
+   o  Configuration information and discovery method for Transmitters
 
-   *  A Management API for Event Streams
+   o  A Management API for Event Streams
 
    This spec also directly profiles several IETF Security Events drafts:
 
-   *  Security Event Token (SET) [SET]
+   o  Security Event Token (SET) [SET]
 
-   *  Subject Identifiers for Security Event Tokens [SUBIDS]
+   o  Subject Identifiers for Security Event Tokens [SUBIDS]
 
-   *  Push-Based SET Token Delivery Using HTTP [DELIVERYPUSH]
+   o  Push-Based SET Token Delivery Using HTTP [DELIVERYPUSH]
+
+   o  Poll-Based SET Token Delivery Using HTTP [DELIVERYPOLL]
 
 
 
+Tulshibagwale, et al.   Expires November 23, 2021               [Page 1]
 
-Tulshibagwale, et al.        Standards Track                    [Page 1]
-
                           openid-sse-framework                  May 2021
 
-
-   *  Poll-Based SET Token Delivery Using HTTP [DELIVERYPOLL]
 
 Table of Contents
 
@@ -76,18 +74,18 @@ Table of Contents
      3.5.  Receiver Subject Processing . . . . . . . . . . . . . . .   7
    4.  Event Properties  . . . . . . . . . . . . . . . . . . . . . .   7
    5.  Example SETs that conform to the SSE framework  . . . . . . .   7
-   6.  Transmitter Configuration Discovery . . . . . . . . . . . . .   9
+   6.  Transmitter Configuration Discovery . . . . . . . . . . . . .  10
      6.1.  Transmitter Configuration Metadata  . . . . . . . . . . .  10
      6.2.  Obtaining Transmitter Configuration Information . . . . .  10
        6.2.1.  Transmitter Configuration Request . . . . . . . . . .  11
-       6.2.2.  Transmitter Configuration Response  . . . . . . . . .  12
+       6.2.2.  Transmitter Configuration Response  . . . . . . . . .  11
        6.2.3.  Transmitter Configuration Validation  . . . . . . . .  12
    7.  Management API for SET Event Streams  . . . . . . . . . . . .  13
      7.1.  Event Stream Management . . . . . . . . . . . . . . . . .  13
        7.1.1.  Stream Status . . . . . . . . . . . . . . . . . . . .  15
          7.1.1.1.  Reading a Stream's Status . . . . . . . . . . . .  15
-         7.1.1.2.  Updating a Stream's Status  . . . . . . . . . . .  18
-       7.1.2.  Stream Configuration  . . . . . . . . . . . . . . . .  20
+         7.1.1.2.  Updating a Stream's Status  . . . . . . . . . . .  17
+       7.1.2.  Stream Configuration  . . . . . . . . . . . . . . . .  19
          7.1.2.1.  Reading a Stream's Configuration  . . . . . . . .  21
          7.1.2.2.  Updating a Stream's Configuration . . . . . . . .  23
          7.1.2.3.  Removing a Stream Configuration . . . . . . . . .  26
@@ -97,46 +95,49 @@ Table of Contents
        7.1.4.  Verification  . . . . . . . . . . . . . . . . . . . .  30
          7.1.4.1.  Verification Event  . . . . . . . . . . . . . . .  30
          7.1.4.2.  Triggering a Verification Event.  . . . . . . . .  31
-       7.1.5.  Stream Updated Event  . . . . . . . . . . . . . . . .  32
+       7.1.5.  Stream Updated Event  . . . . . . . . . . . . . . . .  33
    8.  Authorization . . . . . . . . . . . . . . . . . . . . . . . .  34
    9.  Security Considerations . . . . . . . . . . . . . . . . . . .  34
      9.1.  Subject Probing . . . . . . . . . . . . . . . . . . . . .  34
-     9.2.  Information Harvesting  . . . . . . . . . . . . . . . . .  34
+     9.2.  Information Harvesting  . . . . . . . . . . . . . . . . .  35
      9.3.  Malicious Subject Removal . . . . . . . . . . . . . . . .  35
    10. Privacy Considerations  . . . . . . . . . . . . . . . . . . .  35
      10.1.  Subject Information Leakage  . . . . . . . . . . . . . .  35
-     10.2.  Previously Consented Data  . . . . . . . . . . . . . . .  35
+     10.2.  Previously Consented Data  . . . . . . . . . . . . . . .  36
+     10.3.  New Data . . . . . . . . . . . . . . . . . . . . . . . .  36
+       10.3.1.  Organizational Data  . . . . . . . . . . . . . . . .  36
 
 
 
-Tulshibagwale, et al.        Standards Track                    [Page 2]
-
+Tulshibagwale, et al.   Expires November 23, 2021               [Page 2]
+
                           openid-sse-framework                  May 2021
 
 
-     10.3.  New Data . . . . . . . . . . . . . . . . . . . . . . . .  35
-       10.3.1.  Organizational Data  . . . . . . . . . . . . . . . .  36
        10.3.2.  Consentable Data . . . . . . . . . . . . . . . . . .  36
    11. Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .  36
-     11.1.  Security Event Token Profile . . . . . . . . . . . . . .  36
-       11.1.1.  Signature Key Resolution . . . . . . . . . . . . . .  36
-       11.1.2.  SSE Event Subject  . . . . . . . . . . . . . . . . .  36
+     11.1.  Security Event Token Profile . . . . . . . . . . . . . .  37
+       11.1.1.  Signature Key Resolution . . . . . . . . . . . . . .  37
+       11.1.2.  SSE Event Subject  . . . . . . . . . . . . . . . . .  37
        11.1.3.  SSE Event Properties . . . . . . . . . . . . . . . .  37
-       11.1.4.  Explicit Typing of SETs  . . . . . . . . . . . . . .  37
+       11.1.4.  Explicit Typing of SETs  . . . . . . . . . . . . . .  38
        11.1.5.  The "exp" Claim  . . . . . . . . . . . . . . . . . .  38
        11.1.6.  The "aud" Claim  . . . . . . . . . . . . . . . . . .  38
        11.1.7.  The "events" claim . . . . . . . . . . . . . . . . .  39
        11.1.8.  Security Considerations  . . . . . . . . . . . . . .  39
          11.1.8.1.  Distinguishing SETs from other Kinds of JWTs . .  39
-     11.2.  SET Token Delivery Using HTTP Profile  . . . . . . . . .  39
-       11.2.1.  Stream Configuration Metadata  . . . . . . . . . . .  39
+     11.2.  SET Token Delivery Using HTTP Profile  . . . . . . . . .  40
+       11.2.1.  Stream Configuration Metadata  . . . . . . . . . . .  40
          11.2.1.1.  Push Delivery using HTTP . . . . . . . . . . . .  40
          11.2.1.2.  Polling Delivery using HTTP  . . . . . . . . . .  40
    12. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  40
-   13. Normative References  . . . . . . . . . . . . . . . . . . . .  40
-   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  42
+   13. References  . . . . . . . . . . . . . . . . . . . . . . . . .  41
+     13.1.  Normative References . . . . . . . . . . . . . . . . . .  41
+     13.2.  Non-Normative References . . . . . . . . . . . . . . . .  42
+     13.3.  URIs . . . . . . . . . . . . . . . . . . . . . . . . . .  43
+   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  43
    Appendix B.  Notices  . . . . . . . . . . . . . . . . . . . . . .  43
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  43
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  44
 
 1.  Introduction
 
@@ -160,15 +161,17 @@ Tulshibagwale, et al.        Standards Track                    [Page 2]
    within a tenant, groups of subject principals or other entities that
    are managed by Transmitters and Receivers.  There may be other actors
    or resources that can be treated as Subject Principals, and event-
-   type definitions SHOULD specify the range of principals addressed by
-   the event.
 
 
 
-Tulshibagwale, et al.        Standards Track                    [Page 3]
-
+
+Tulshibagwale, et al.   Expires November 23, 2021               [Page 3]
+
                           openid-sse-framework                  May 2021
 
+
+   type definitions SHOULD specify the range of principals addressed by
+   the event.
 
    Subject Principals are identified by Subject Members defined below.
 
@@ -215,16 +218,17 @@ Tulshibagwale, et al.        Standards Track                    [Page 3]
    tenant
       OPTIONAL.  A Subject Identifier that identifies a tenant.
 
+
+
+
+Tulshibagwale, et al.   Expires November 23, 2021               [Page 4]
+
+                          openid-sse-framework                  May 2021
+
+
    org_unit
       OPTIONAL.  A Subject Identifier that identifies an organizational
       unit.
-
-
-
-Tulshibagwale, et al.        Standards Track                    [Page 4]
-
-                          openid-sse-framework                  May 2021
-
 
    group
       OPTIONAL.  A Subject Identifier that identifies a group.
@@ -248,7 +252,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 4]
      }
    }
 
-                     Figure 2: Example: Complex Subject
+                    Figure 2: Example: Complex Subject
 
 3.2.1.  Complex Subject Interpretation
 
@@ -261,26 +265,26 @@ Tulshibagwale, et al.        Standards Track                    [Page 4]
    A Subject Identifier in a SSE event MUST have an identifier format
    that is any one of:
 
-   *  Defined in the IANA Registry defined in Subject Identifiers for
+   o  Defined in the IANA Registry defined in Subject Identifiers for
       Security Event Tokens [SUBIDS], located at
       ""https://www.iana.org/assignments/secevent/"."
 
-   *  An identifier format defined in the Additional Subject Identifier
+   o  An identifier format defined in the Additional Subject Identifier
       Formats (Section 3.4) section below, OR
 
-   *  A proprietary subject identifier format that is agreed to between
+   o  A proprietary subject identifier format that is agreed to between
       parties.  Members within a subject identifier that has a
+
+
+
+Tulshibagwale, et al.   Expires November 23, 2021               [Page 5]
+
+                          openid-sse-framework                  May 2021
+
+
       proprietary subject identifier format are agreed to between the
       parties and such agreement is outside the scope of this
       specification.
-
-
-
-
-Tulshibagwale, et al.        Standards Track                    [Page 5]
-
-                          openid-sse-framework                  May 2021
-
 
 3.4.  Additional Subject Identifier Formats
 
@@ -313,7 +317,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 5]
        "jti": "B70BA622-9515-4353-A866-823539EECBC8"
    }
 
-               Figure 3: Example: 'jwt-id' Subject Identifier
+              Figure 3: Example: 'jwt-id' Subject Identifier
 
 3.4.2.  SAML Assertion ID Subject Identifier Format
 
@@ -326,17 +330,16 @@ Tulshibagwale, et al.        Standards Track                    [Page 5]
       identified, defined in [OASIS.saml-core-2.0-os]
 
    assertion_id
-      REQUIRED.  The "ID" value of the SAML assertion being identified,
-      defined in [OASIS.saml-core-2.0-os]
 
 
 
+Tulshibagwale, et al.   Expires November 23, 2021               [Page 6]
 
-
-Tulshibagwale, et al.        Standards Track                    [Page 6]
-
                           openid-sse-framework                  May 2021
 
+
+      REQUIRED.  The "ID" value of the SAML assertion being identified,
+      defined in [OASIS.saml-core-2.0-os]
 
    The "SAML Assertion ID" Subject Identifier Format is identified by
    the name "saml-assertion-id".
@@ -386,11 +389,8 @@ Tulshibagwale, et al.        Standards Track                    [Page 6]
 
 
 
+Tulshibagwale, et al.   Expires November 23, 2021               [Page 7]
 
-
-
-Tulshibagwale, et al.        Standards Track                    [Page 7]
-
                           openid-sse-framework                  May 2021
 
 
@@ -409,8 +409,8 @@ Tulshibagwale, et al.        Standards Track                    [Page 7]
   }
 }
 
-     Figure 5: Example: SET Containing a SSE Event with a Simple
-                            Subject Member
+    Figure 5: Example: SET Containing a SSE Event with a Simple Subject
+                                  Member
 
 {
   "iss": "https://idp.example.com/",
@@ -439,14 +439,14 @@ Tulshibagwale, et al.        Standards Track                    [Page 7]
   }
 }
 
-     Figure 6: Example: SET Containing a SSE Event with a Complex
-                            Subject Member
+   Figure 6: Example: SET Containing a SSE Event with a Complex Subject
+                                  Member
 
 
 
 
-Tulshibagwale, et al.        Standards Track                    [Page 8]
-
+Tulshibagwale, et al.   Expires November 23, 2021               [Page 8]
+
                           openid-sse-framework                  May 2021
 
 
@@ -469,8 +469,8 @@ Tulshibagwale, et al.        Standards Track                    [Page 8]
   }
 }
 
-     Figure 7: Example: SET Containing a SSE Event with a Simple
-                    Subject and a Property Member
+    Figure 7: Example: SET Containing a SSE Event with a Simple Subject
+                           and a Property Member
 
 {
   "iss": "https://myservice.example3.com/",
@@ -491,20 +491,25 @@ Tulshibagwale, et al.        Standards Track                    [Page 8]
   }
 }
 
-   Figure 8: Example: SET Containing a SSE Event with a Proprietary
-                      Subject Identifier Format
+     Figure 8: Example: SET Containing a SSE Event with a Proprietary
+                         Subject Identifier Format
+
+
+
+
+
+
+
+
+Tulshibagwale, et al.   Expires November 23, 2021               [Page 9]
+
+                          openid-sse-framework                  May 2021
+
 
 6.  Transmitter Configuration Discovery
 
    This section defines a mechanism for Receivers to obtain Transmitter
    configuration information.
-
-
-
-Tulshibagwale, et al.        Standards Track                    [Page 9]
-
-                          openid-sse-framework                  May 2021
-
 
 6.1.  Transmitter Configuration Metadata
 
@@ -552,13 +557,8 @@ Tulshibagwale, et al.        Standards Track                    [Page 9]
 
 
 
+Tulshibagwale, et al.   Expires November 23, 2021              [Page 10]
 
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 10]
-
                           openid-sse-framework                  May 2021
 
 
@@ -602,22 +602,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 10]
    unlike its use in [RFC5785], it does not provide general information
    about the host.
 
-
-
-
-
-
-
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 11]
-
-                          openid-sse-framework                  May 2021
-
-
 6.2.2.  Transmitter Configuration Response
 
    The response is a set of Claims about the Transmitter's
@@ -625,6 +609,15 @@ Tulshibagwale, et al.        Standards Track                   [Page 11]
    location information.  A successful response MUST use the 200 OK HTTP
    status code and return a JSON object using the "application/json"
    content type that contains a set of Claims as its members that are a
+
+
+
+
+Tulshibagwale, et al.   Expires November 23, 2021              [Page 11]
+
+                          openid-sse-framework                  May 2021
+
+
    subset of the Metadata values defined in Section 6.1.  Other Claims
    MAY also be returned.
 
@@ -657,7 +650,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 11]
      "critical_subject_members": [ "tenant", "user" ]
    }
 
-           Figure 11: Example: Transmitter Configuration Response
+          Figure 11: Example: Transmitter Configuration Response
 
 6.2.3.  Transmitter Configuration Validation
 
@@ -666,18 +659,20 @@ Tulshibagwale, et al.        Standards Track                   [Page 11]
    correctly validate MUST be aborted and the information that failed to
    validate MUST NOT be used.
 
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 12]
-
-                          openid-sse-framework                  May 2021
-
-
    The "issuer" value returned MUST be identical to the Issuer URL that
    was directly used to retrieve the configuration information.  This
    MUST also be identical to the "iss" Claim value in Security Event
    Tokens issued from this Transmitter.
+
+
+
+
+
+
+Tulshibagwale, et al.   Expires November 23, 2021              [Page 12]
+
+                          openid-sse-framework                  May 2021
+
 
 7.  Management API for SET Event Streams
 
@@ -710,7 +705,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 12]
    |            |                |            |
    +------------+                +------------+
 
-                   Figure 12: Event Stream Management API
+                  Figure 12: Event Stream Management API
 
    It is OPTIONAL for Transmitters to implement a Management API, but it
    is RECOMMENDED that they implement it, especially the endpoints for
@@ -722,18 +717,18 @@ Tulshibagwale, et al.        Standards Track                   [Page 12]
    about which they want to receive events over an Event Stream by
    making HTTP requests to endpoints in the Event Stream Management API.
 
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 13]
-
-                          openid-sse-framework                  May 2021
-
-
    A Transmitter and Receiver MAY use the same Event Stream for updates
    about multiple Subject Principals.  The status of the Event Stream
    MAY be queried and managed independently for each Subject Principal
    by Transmitters and Receivers.
+
+
+
+
+Tulshibagwale, et al.   Expires November 23, 2021              [Page 13]
+
+                          openid-sse-framework                  May 2021
+
 
    The Event Stream Management API is implemented by the Event
    Transmitter and consists of the following endpoints:
@@ -778,17 +773,18 @@ Tulshibagwale, et al.        Standards Track                   [Page 13]
       event respectively to the Receiver within the Event Stream.
 
    Paused  the Transmitter SHOULD send stream updated (Section 7.1.5)
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 14]
-
-                          openid-sse-framework                  May 2021
-
-
       after the Event Stream is re-started.  A Receiver MUST assume that
       events may have been lost during the time when the event stream
       was paused.
+
+
+
+
+
+Tulshibagwale, et al.   Expires November 23, 2021              [Page 14]
+
+                          openid-sse-framework                  May 2021
+
 
    Disabled  the Transmitter MAY send stream updated (Section 7.1.5)
       after the Event Stream is re-enabled.
@@ -833,20 +829,18 @@ Tulshibagwale, et al.        Standards Track                   [Page 14]
    The following is a non-normative example request to check an event
    stream's status:
 
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 15]
-
-                          openid-sse-framework                  May 2021
-
-
    GET /sse/status HTTP/1.1
    Host: transmitter.example.com
    Authorization: Bearer zzzz
 
               Figure 13: Example: Check Stream Status Request
+
+
+
+Tulshibagwale, et al.   Expires November 23, 2021              [Page 15]
+
+                          openid-sse-framework                  May 2021
+
 
    The following is a non-normative example response:
 
@@ -860,7 +854,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 15]
    }
 
 
-              Figure 14: Example: Check Stream Status Response
+             Figure 14: Example: Check Stream Status Response
 
    The following is a non-normative example request to check an event
    stream's status for a specific subject:
@@ -870,33 +864,10 @@ Tulshibagwale, et al.        Standards Track                   [Page 15]
    Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
 
-        Figure 15: Example: Check Stream Status Request with Subject
+       Figure 15: Example: Check Stream Status Request with Subject
 
    The following is a non-normative example response with a Subject
    claim:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 16]
-
-                          openid-sse-framework                  May 2021
-
 
    HTTP/1.1 200 OK
    Content-Type: application/json; charset=UTF-8
@@ -915,23 +886,31 @@ Tulshibagwale, et al.        Standards Track                   [Page 16]
    }
 
 
-              Figure 16: Example: Check Stream Status Response
+             Figure 16: Example: Check Stream Status Response
 
    Errors are signaled with HTTP status codes as follows:
 
-        +======+=================================================+
-        | Code | Description                                     |
-        +======+=================================================+
-        | 401  | if authorization failed or it is missing        |
-        +------+-------------------------------------------------+
-        | 403  | if the Event Receiver is not allowed to read    |
-        |      | the stream status                               |
-        +------+-------------------------------------------------+
-        | 404  | if there is no Event Stream configured for this |
-        |      | Event Receiver, or if the Subject specified is  |
-        |      | invalid or if the Receiver is not authorized to |
-        |      | get status for the specified Subject.           |
-        +------+-------------------------------------------------+
+
+
+
+Tulshibagwale, et al.   Expires November 23, 2021              [Page 16]
+
+                          openid-sse-framework                  May 2021
+
+
+   +------+------------------------------------------------------------+
+   | Code | Description                                                |
+   +------+------------------------------------------------------------+
+   | 401  | if authorization failed or it is missing                   |
+   |      |                                                            |
+   | 403  | if the Event Receiver is not allowed to read the stream    |
+   |      | status                                                     |
+   |      |                                                            |
+   | 404  | if there is no Event Stream configured for this Event      |
+   |      | Receiver, or if the Subject specified is invalid or if the |
+   |      | Receiver is not authorized to get status for the specified |
+   |      | Subject.                                                   |
+   +------+------------------------------------------------------------+
 
                     Table 1: Read Stream Status Errors
 
@@ -943,16 +922,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 16]
    2.  If the Receiver presents a valid OAuth token, but the Transmitter
        policy does not permit the Receiver from obtaining the status,
        then the Transmitter MAY respond with a 403 error status.
-
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 17]
-
-                          openid-sse-framework                  May 2021
-
 
    3.  If the Receiver requests the status for specific Subject, but the
        Transmitter policy does not permit the Receiver to read the
@@ -978,6 +947,13 @@ Tulshibagwale, et al.        Standards Track                   [Page 17]
       OPTIONAL.  A short text description that explains the reason for
       the change.
 
+
+
+Tulshibagwale, et al.   Expires November 23, 2021              [Page 17]
+
+                          openid-sse-framework                  May 2021
+
+
    On receiving a valid request the Event Transmitter responds with a
    "200 OK" response containing a JSON [RFC7159] representation of the
    updated stream status in the body.
@@ -995,20 +971,10 @@ Tulshibagwale, et al.        Standards Track                   [Page 17]
 
 
      Figure 17: Example: Update Stream Status Request Without Optional
-                                   Fields
+                                  Fields
 
    The following is a non-normative example of an Update Stream Status
    request with optional fields:
-
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 18]
-
-                          openid-sse-framework                  May 2021
-
 
    POST /sse/status HTTP/1.1
    Host: transmitter.example.com
@@ -1031,6 +997,19 @@ Tulshibagwale, et al.        Standards Track                   [Page 18]
 
    The following is a non-normative example response:
 
+
+
+
+
+
+
+
+
+Tulshibagwale, et al.   Expires November 23, 2021              [Page 18]
+
+                          openid-sse-framework                  May 2021
+
+
    HTTP/1.1 200 OK
    Content-Type: application/json; charset=UTF-8
    Cache-Control: no-store
@@ -1045,48 +1024,26 @@ Tulshibagwale, et al.        Standards Track                   [Page 18]
 
    Errors are signaled with HTTP status codes as follows:
 
+   +------+------------------------------------------------------------+
+   | Code | Description                                                |
+   +------+------------------------------------------------------------+
+   | 202  | if the update request has been accepted, but not           |
+   |      | processed. Receiver MAY try the same request later in      |
+   |      | order to get processing result.                            |
+   |      |                                                            |
+   | 400  | if the request body cannot be parsed or if the request is  |
+   |      | otherwise invalid                                          |
+   |      |                                                            |
+   | 401  | if authorization failed or it is missing                   |
+   |      |                                                            |
+   | 403  | if the Event Receiver is not allowed to update the stream  |
+   |      | status                                                     |
+   |      |                                                            |
+   | 404  | if there is no Event Stream configured for this Event      |
+   |      | Receiver, or if an invalid Subject is specified.           |
+   +------+------------------------------------------------------------+
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 19]
-
-                          openid-sse-framework                  May 2021
-
-
-        +======+==================================================+
-        | Code | Description                                      |
-        +======+==================================================+
-        | 202  | if the update request has been accepted, but not |
-        |      | processed.  Receiver MAY try the same request    |
-        |      | later in order to get processing result.         |
-        +------+--------------------------------------------------+
-        | 400  | if the request body cannot be parsed or if the   |
-        |      | request is otherwise invalid                     |
-        +------+--------------------------------------------------+
-        | 401  | if authorization failed or it is missing         |
-        +------+--------------------------------------------------+
-        | 403  | if the Event Receiver is not allowed to update   |
-        |      | the stream status                                |
-        +------+--------------------------------------------------+
-        | 404  | if there is no Event Stream configured for this  |
-        |      | Event Receiver, or if an invalid Subject is      |
-        |      | specified.                                       |
-        +------+--------------------------------------------------+
-
-                    Table 2: Update Stream Status Errors
+                   Table 2: Update Stream Status Errors
 
    Example:
 
@@ -1101,6 +1058,14 @@ Tulshibagwale, et al.        Standards Track                   [Page 19]
    object with the following properties:
 
    iss
+
+
+
+Tulshibagwale, et al.   Expires November 23, 2021              [Page 19]
+
+                          openid-sse-framework                  May 2021
+
+
       *Read-Only*, A URL using the https scheme with no query or
       fragment component that the Transmitter asserts as its Issuer
       Identifier.  This MUST be identical to the "iss" Claim value in
@@ -1113,14 +1078,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 19]
       property cannot be updated.  If multiple Receivers are specified
       then the Transmitter SHOULD know that these Receivers are the same
       entity.
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 20]
-
-                          openid-sse-framework                  May 2021
-
 
    events_supported
       *Read-Only*, An array of URIs identifying the set of events
@@ -1156,6 +1113,15 @@ Tulshibagwale, et al.        Standards Track                   [Page 20]
    format
       *Read-Write*, The Subject Identifier Format that the Receiver
       wants for the events.  If not set then the Transmitter might
+
+
+
+
+Tulshibagwale, et al.   Expires November 23, 2021              [Page 20]
+
+                          openid-sse-framework                  May 2021
+
+
       decide to use a type that discloses more information than
       necessary.
 
@@ -1171,13 +1137,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 20]
    OK" response containing a JSON [RFC7159] representation of the
    stream's configuration in the body.
 
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 21]
-
-                          openid-sse-framework                  May 2021
-
-
    The following is a non-normative example request to read an Event
    Stream's configuration:
 
@@ -1188,6 +1147,36 @@ Tulshibagwale, et al.        Standards Track                   [Page 21]
            Figure 20: Example: Read Stream Configuration Request
 
    The following is a non-normative example response:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Tulshibagwale, et al.   Expires November 23, 2021              [Page 21]
+
+                          openid-sse-framework                  May 2021
+
 
   HTTP/1.1 200 OK
   Content-Type: application/json; charset=UTF-8
@@ -1229,22 +1218,33 @@ Tulshibagwale, et al.        Standards Track                   [Page 21]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 22]
-
+
+
+
+
+
+
+
+
+
+
+
+Tulshibagwale, et al.   Expires November 23, 2021              [Page 22]
+
                           openid-sse-framework                  May 2021
 
 
-            +======+==========================================+
-            | Code | Description                              |
-            +======+==========================================+
-            | 401  | if authorization failed or it is missing |
-            +------+------------------------------------------+
-            | 403  | if the Event Receiver is not allowed to  |
-            |      | read the stream configuration            |
-            +------+------------------------------------------+
-            | 404  | if there is no Event Stream configured   |
-            |      | for this Event Receiver                  |
-            +------+------------------------------------------+
+   +------+------------------------------------------------------------+
+   | Code | Description                                                |
+   +------+------------------------------------------------------------+
+   | 401  | if authorization failed or it is missing                   |
+   |      |                                                            |
+   | 403  | if the Event Receiver is not allowed to read the stream    |
+   |      | configuration                                              |
+   |      |                                                            |
+   | 404  | if there is no Event Stream configured for this Event      |
+   |      | Receiver                                                   |
+   +------+------------------------------------------------------------+
 
                  Table 3: Read Stream Configuration Errors
 
@@ -1285,8 +1285,8 @@ Tulshibagwale, et al.        Standards Track                   [Page 22]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 23]
-
+Tulshibagwale, et al.   Expires November 23, 2021              [Page 23]
+
                           openid-sse-framework                  May 2021
 
 
@@ -1312,7 +1312,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 23]
     ]
   }
 
-         Figure 22: Example: Update Stream Configuration Request
+          Figure 22: Example: Update Stream Configuration Request
 
    The following is a non-normative example response:
 
@@ -1341,8 +1341,8 @@ Tulshibagwale, et al.        Standards Track                   [Page 23]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 24]
-
+Tulshibagwale, et al.   Expires November 23, 2021              [Page 24]
+
                           openid-sse-framework                  May 2021
 
 
@@ -1397,29 +1397,29 @@ Tulshibagwale, et al.        Standards Track                   [Page 24]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 25]
-
+Tulshibagwale, et al.   Expires November 23, 2021              [Page 25]
+
                           openid-sse-framework                  May 2021
 
 
-        +======+==================================================+
-        | Code | Description                                      |
-        +======+==================================================+
-        | 202  | if the update request has been accepted, but not |
-        |      | processed.  Receiver MAY try the same request    |
-        |      | later in order to get processing result.         |
-        +------+--------------------------------------------------+
-        | 400  | if the request body cannot be parsed or if the   |
-        |      | request is otherwise invalid                     |
-        +------+--------------------------------------------------+
-        | 401  | if authorization failed or it is missing         |
-        +------+--------------------------------------------------+
-        | 403  | if the Event Receiver is not allowed to update   |
-        |      | the stream configuration                         |
-        +------+--------------------------------------------------+
-        | 404  | if there is no Event Stream configured for this  |
-        |      | Event Receiver                                   |
-        +------+--------------------------------------------------+
+   +------+------------------------------------------------------------+
+   | Code | Description                                                |
+   +------+------------------------------------------------------------+
+   | 202  | if the update request has been accepted, but not           |
+   |      | processed. Receiver MAY try the same request later in      |
+   |      | order to get processing result.                            |
+   |      |                                                            |
+   | 400  | if the request body cannot be parsed or if the request is  |
+   |      | otherwise invalid                                          |
+   |      |                                                            |
+   | 401  | if authorization failed or it is missing                   |
+   |      |                                                            |
+   | 403  | if the Event Receiver is not allowed to update the stream  |
+   |      | configuration                                              |
+   |      |                                                            |
+   | 404  | if there is no Event Stream configured for this Event      |
+   |      | Receiver                                                   |
+   +------+------------------------------------------------------------+
 
                 Table 4: Update Stream Configuration Errors
 
@@ -1453,19 +1453,19 @@ Tulshibagwale, et al.        Standards Track                   [Page 25]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 26]
-
+Tulshibagwale, et al.   Expires November 23, 2021              [Page 26]
+
                           openid-sse-framework                  May 2021
 
 
-            +======+==========================================+
-            | Code | Description                              |
-            +======+==========================================+
-            | 401  | if authorization failed or it is missing |
-            +------+------------------------------------------+
-            | 403  | if the Event Receiver is not allowed to  |
-            |      | update the stream configuration          |
-            +------+------------------------------------------+
+   +------+------------------------------------------------------------+
+   | Code | Description                                                |
+   +------+------------------------------------------------------------+
+   | 401  | if authorization failed or it is missing                   |
+   |      |                                                            |
+   | 403  | if the Event Receiver is not allowed to update the stream  |
+   |      | configuration                                              |
+   +------+------------------------------------------------------------+
 
                 Table 5: Update Stream Configuration Errors
 
@@ -1509,29 +1509,29 @@ Tulshibagwale, et al.        Standards Track                   [Page 26]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 27]
-
+Tulshibagwale, et al.   Expires November 23, 2021              [Page 27]
+
                           openid-sse-framework                  May 2021
 
 
-      +======+======================================================+
-      | Code | Description                                          |
-      +======+======================================================+
-      | 400  | if the request body cannot be parsed or if the       |
-      |      | request is otherwise invalid                         |
-      +------+------------------------------------------------------+
-      | 401  | if authorization failed or it is missing             |
-      +------+------------------------------------------------------+
-      | 403  | if the Event Receiver is not allowed to add this     |
-      |      | particular subject, or not allowed to add in general |
-      +------+------------------------------------------------------+
-      | 404  | if the subject is not recognized by the Event        |
-      |      | Transmitter, the Event Transmitter may chose to stay |
-      |      | silent in this case and respond with "200"           |
-      +------+------------------------------------------------------+
-      | 429  | if the Event Receiver is sending too many requests   |
-      |      | in a given amount of time                            |
-      +------+------------------------------------------------------+
+   +------+------------------------------------------------------------+
+   | Code | Description                                                |
+   +------+------------------------------------------------------------+
+   | 400  | if the request body cannot be parsed or if the request is  |
+   |      | otherwise invalid                                          |
+   |      |                                                            |
+   | 401  | if authorization failed or it is missing                   |
+   |      |                                                            |
+   | 403  | if the Event Receiver is not allowed to add this           |
+   |      | particular subject, or not allowed to add in general       |
+   |      |                                                            |
+   | 404  | if the subject is not recognized by the Event Transmitter, |
+   |      | the Event Transmitter may chose to stay silent in this     |
+   |      | case and respond with "200"                                |
+   |      |                                                            |
+   | 429  | if the Event Receiver is sending too many requests in a    |
+   |      | given amount of time                                       |
+   +------+------------------------------------------------------------+
 
                         Table 6: Add Subject Errors
 
@@ -1561,12 +1561,12 @@ Tulshibagwale, et al.        Standards Track                   [Page 27]
    Cache-Control: no-store
    Pragma: no-cache
 
-                  Figure 26: Example: Add Subject Response
+                 Figure 26: Example: Add Subject Response
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 28]
-
+Tulshibagwale, et al.   Expires November 23, 2021              [Page 28]
+
                           openid-sse-framework                  May 2021
 
 
@@ -1584,29 +1584,47 @@ Tulshibagwale, et al.        Standards Track                   [Page 28]
 
    Errors are signaled with HTTP status codes as follows:
 
-    +======+=========================================================+
-    | Code | Description                                             |
-    +======+=========================================================+
-    | 400  | if the request body cannot be parsed or if the request  |
-    |      | is otherwise invalid                                    |
-    +------+---------------------------------------------------------+
-    | 401  | if authorization failed or it is missing                |
-    +------+---------------------------------------------------------+
-    | 403  | if the Event Receiver is not allowed to remove this     |
-    |      | particular subject, or not allowed to remove in general |
-    +------+---------------------------------------------------------+
-    | 404  | if the subject is not recognized by the Event           |
-    |      | Transmitter, the Event Transmitter may chose to stay    |
-    |      | silent in this case and respond with "204"              |
-    +------+---------------------------------------------------------+
-    | 429  | if the Event Receiver is sending too many requests in a |
-    |      | given amount of time                                    |
-    +------+---------------------------------------------------------+
+   +------+------------------------------------------------------------+
+   | Code | Description                                                |
+   +------+------------------------------------------------------------+
+   | 400  | if the request body cannot be parsed or if the request is  |
+   |      | otherwise invalid                                          |
+   |      |                                                            |
+   | 401  | if authorization failed or it is missing                   |
+   |      |                                                            |
+   | 403  | if the Event Receiver is not allowed to remove this        |
+   |      | particular subject, or not allowed to remove in general    |
+   |      |                                                            |
+   | 404  | if the subject is not recognized by the Event Transmitter, |
+   |      | the Event Transmitter may chose to stay silent in this     |
+   |      | case and respond with "204"                                |
+   |      |                                                            |
+   | 429  | if the Event Receiver is sending too many requests in a    |
+   |      | given amount of time                                       |
+   +------+------------------------------------------------------------+
 
                       Table 7: Remove Subject Errors
 
    The following is a non-normative example request where the subject is
    identified by a Phone Number Subject Identifier:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Tulshibagwale, et al.   Expires November 23, 2021              [Page 29]
+
+                          openid-sse-framework                  May 2021
+
 
    POST /sse/subjects:remove HTTP/1.1
    Host: transmitter.example.com
@@ -1619,14 +1637,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 28]
      }
    }
 
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 29]
-
-                          openid-sse-framework                  May 2021
-
-
-                 Figure 27: Example: Remove Subject Request
+                Figure 27: Example: Remove Subject Request
 
    The following is a non-normative example response to a successful
    request:
@@ -1663,6 +1674,14 @@ Tulshibagwale, et al.        Standards Track                   [Page 29]
       The Event Type URI is: "https://schemas.openid.net/secevent/sse/
       event-type/verification".
 
+
+
+
+Tulshibagwale, et al.   Expires November 23, 2021              [Page 30]
+
+                          openid-sse-framework                  May 2021
+
+
    state
       OPTIONAL An opaque value provided by the Event Receiver when the
       event is triggered.  This is a nested attribute in the event
@@ -1674,13 +1693,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 29]
    value of "state" does not match, an error response of "setData"
    SHOULD be returned (see Section 2.3 of [DELIVERYPUSH] or
    [DELIVERYPOLL]).
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 30]
-
-                          openid-sse-framework                  May 2021
-
 
    In many cases, Event Transmitters MAY disable or suspend an Event
    Stream that fails to successfully verify based on the acknowledgement
@@ -1716,27 +1728,30 @@ Tulshibagwale, et al.        Standards Track                   [Page 30]
 
    Errors are signaled with HTTP status codes as follows:
 
-        +======+=================================================+
-        | Code | Description                                     |
-        +======+=================================================+
-        | 400  | if the request body cannot be parsed or if the  |
-        |      | request is otherwise invalid                    |
-        +------+-------------------------------------------------+
-        | 401  | if authorization failed or it is missing        |
-        +------+-------------------------------------------------+
-        | 429  | if the Event Receiver is sending too many       |
-        |      | requests in a given amount of time; see related |
-        |      | "min_verification_interval" in Section 7.1.2    |
-        +------+-------------------------------------------------+
-
-                       Table 8: Verification Errors
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 31]
-
+
+
+Tulshibagwale, et al.   Expires November 23, 2021              [Page 31]
+
                           openid-sse-framework                  May 2021
 
+
+   +------+------------------------------------------------------------+
+   | Code | Description                                                |
+   +------+------------------------------------------------------------+
+   | 400  | if the request body cannot be parsed or if the request is  |
+   |      | otherwise invalid                                          |
+   |      |                                                            |
+   | 401  | if authorization failed or it is missing                   |
+   |      |                                                            |
+   | 429  | if the Event Receiver is sending too many requests in a    |
+   |      | given amount of time; see related                          |
+   |      | "min_verification_interval" in Section 7.1.2               |
+   +------+------------------------------------------------------------+
+
+                       Table 8: Verification Errors
 
    The following is a non-normative example request to trigger a
    verification event:
@@ -1750,7 +1765,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 31]
      "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
    }
 
-              Figure 29: Example: Trigger Verification Request
+             Figure 29: Example: Trigger Verification Request
 
    The following is a non-normative example response to a successful
    request:
@@ -1765,6 +1780,20 @@ Tulshibagwale, et al.        Standards Track                   [Page 31]
    And the following is a non-normative example of a verification event
    sent to the Event Receiver as a result of the above request:
 
+
+
+
+
+
+
+
+
+
+Tulshibagwale, et al.   Expires November 23, 2021              [Page 32]
+
+                          openid-sse-framework                  May 2021
+
+
  {
    "jti": "123456",
    "iss": "https://transmitter.example.com",
@@ -1777,7 +1806,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 31]
    }
  }
 
-                  Figure 31: Example: Verification SET
+                   Figure 31: Example: Verification SET
 
 7.1.5.  Stream Updated Event
 
@@ -1786,13 +1815,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 31]
    sends an event of type "https://schemas.openid.net/secevent/sse/
    event-type/stream-updated" to indicate that it has changed the status
    of the Event Stream for a specific Subject.
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 32]
-
-                          openid-sse-framework                  May 2021
-
 
    If a Transmitter decides to change the status of an Event Stream from
    "enabled" to either "paused" or "disabled", then the Transmitter MUST
@@ -1814,9 +1836,19 @@ Tulshibagwale, et al.        Standards Track                   [Page 32]
       OPTIONAL.  Provides a short description of why the Transmitter has
       updated the status.
 
-   subject
-      OPTIONAL.  Specifies the Subject Principal for whom the status has
-      been updated.
+   subject  OPTIONAL.  Specifies the Subject Principal for whom the
+      status has been updated.
+
+
+
+
+
+
+
+Tulshibagwale, et al.   Expires November 23, 2021              [Page 33]
+
+                          openid-sse-framework                  May 2021
+
 
 {
   "jti": "123456",
@@ -1838,17 +1870,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 32]
   }
 }
 
-                Figure 32: Example: Stream Updated SET
-
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 33]
-
-                          openid-sse-framework                  May 2021
-
+                  Figure 32: Example: Stream Updated SET
 
 8.  Authorization
 
@@ -1877,6 +1899,13 @@ Tulshibagwale, et al.        Standards Track                   [Page 33]
    MUST NOT assume that a 204 response means that they will receive
    events related to the subject.
 
+
+
+Tulshibagwale, et al.   Expires November 23, 2021              [Page 34]
+
+                          openid-sse-framework                  May 2021
+
+
 9.2.  Information Harvesting
 
    SETs may contain personally identifiable information (PII) or other
@@ -1896,15 +1925,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 33]
    contained within an event with the Event Receiver before transmitting
    the event.  The mechanisms by which such validation is performed are
    outside the scope of this specification.
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 34]
-
-                          openid-sse-framework                  May 2021
-
 
 9.3.  Malicious Subject Removal
 
@@ -1934,6 +1954,14 @@ Tulshibagwale, et al.        Standards Track                   [Page 34]
    about the subject that they are not known to already have knowledge
    of.  Transmitters and Receivers SHOULD always use the same Subject
    Identifier Type and the same claim values to identify a given subject
+
+
+
+Tulshibagwale, et al.   Expires November 23, 2021              [Page 35]
+
+                          openid-sse-framework                  May 2021
+
+
    when communicating with a given party in order to reduce the
    possibility of information leakage.
 
@@ -1950,17 +1978,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 34]
    Data that was not previously exchanged between the Transmitter and
    the Receiver, or data whose consent to exchange has expired has the
    following considerations:
-
-
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 35]
-
-                          openid-sse-framework                  May 2021
-
 
 10.3.1.  Organizational Data
 
@@ -1982,17 +1999,24 @@ Tulshibagwale, et al.        Standards Track                   [Page 35]
    This section is a profile of the following IETF SecEvent
    specifications:
 
-   *  "Security Event Token (SET)" [SET]
+   o  "Security Event Token (SET)" [SET]
 
-   *  Push-Based SET Token Delivery Using HTTP [DELIVERYPUSH]
+   o  Push-Based SET Token Delivery Using HTTP [DELIVERYPUSH]
 
-   *  Poll-Based SET Token Delivery Using HTTP [DELIVERYPOLL]
+   o  Poll-Based SET Token Delivery Using HTTP [DELIVERYPOLL]
 
    The RISC use cases that set the requirements are described in
    Security Events RISC Use Cases [USECASES].
 
    The CAEP use cases that set the requirements are described in CAEP
    Use Cases (TODO: Add reference when file is added to repository.)
+
+
+
+Tulshibagwale, et al.   Expires November 23, 2021              [Page 36]
+
+                          openid-sse-framework                  May 2021
+
 
 11.1.  Security Event Token Profile
 
@@ -2009,14 +2033,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 35]
    within the event payload, whose value is a Subject Identifier.  The
    "subject" claim is REQUIRED for all SSE events.  The JWT "sub" claim
    MUST NOT be present in any SET containing a SSE event.
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 36]
-
-                          openid-sse-framework                  May 2021
-
 
 11.1.3.  SSE Event Properties
 
@@ -2041,8 +2057,22 @@ Tulshibagwale, et al.        Standards Track                   [Page 36]
      }
    }
 
-        Figure 33: Example: SET Containing a RISC Event with a Phone
-                               Number Subject
+    Figure 33: Example: SET Containing a RISC Event with a Phone Number
+                                  Subject
+
+
+
+
+
+
+
+
+
+
+Tulshibagwale, et al.   Expires November 23, 2021              [Page 37]
+
+                          openid-sse-framework                  May 2021
+
 
 {
   "iss": "https://idp.example.com/",
@@ -2060,19 +2090,12 @@ Tulshibagwale, et al.        Standards Track                   [Page 36]
   }
 }
 
-   Figure 34: Example: SET Containing a CAEP Event with Properties
+      Figure 34: Example: SET Containing a CAEP Event with Properties
 
 11.1.4.  Explicit Typing of SETs
 
    SSE events MUST use explicit typing as defined in Section 2.3 of
    [SET].
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 37]
-
-                          openid-sse-framework                  May 2021
-
 
    {
      "typ":"secevent+jwt",
@@ -2098,6 +2121,15 @@ Tulshibagwale, et al.        Standards Track                   [Page 37]
 
    The "aud" claim can be a single value or an array.  Each value SHOULD
    be the OAuth 2.0 client ID.  Other values that uniquely identifies
+
+
+
+
+Tulshibagwale, et al.   Expires November 23, 2021              [Page 38]
+
+                          openid-sse-framework                  May 2021
+
+
    the Receiver to the Transmitter MAY be used, if the two parties have
    agreement on the format.
 
@@ -2114,22 +2146,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 37]
    SETs to respective Receivers, an "aud" claim with multiple Receivers
    would lead to unintended data disclosure.
 
-
-
-
-
-
-
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 38]
-
-                          openid-sse-framework                  May 2021
-
-
 {
   "jti": "123456",
   "iss": "https://transmitter.example.com",
@@ -2142,7 +2158,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 38]
   }
 }
 
-            Figure 36: Example: SET with array 'aud' claim
+              Figure 36: Example: SET with array 'aud' claim
 
 11.1.7.  The "events" claim
 
@@ -2159,12 +2175,20 @@ Tulshibagwale, et al.        Standards Track                   [Page 38]
    has several sub-sections on this subject.  The SSE Framework is
    asking for further restrictions:
 
-   *  The "sub" claim MUST NOT be present, as described in
+   o  The "sub" claim MUST NOT be present, as described in
       Section 11.1.2.
 
-   *  SSE SETs MUST use explicit typing, as described in Section 11.1.4.
 
-   *  The "exp" claim MUST NOT be present, as described in
+
+
+Tulshibagwale, et al.   Expires November 23, 2021              [Page 39]
+
+                          openid-sse-framework                  May 2021
+
+
+   o  SSE SETs MUST use explicit typing, as described in Section 11.1.4.
+
+   o  The "exp" claim MUST NOT be present, as described in
       Section 11.1.5.
 
 11.2.  SET Token Delivery Using HTTP Profile
@@ -2176,15 +2200,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 38]
 
    Each delivery method is identified by a URI, specified below by the
    "method" metadata.
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 39]
-
-                          openid-sse-framework                  May 2021
-
 
 11.2.1.1.  Push Delivery using HTTP
 
@@ -2220,13 +2235,16 @@ Tulshibagwale, et al.        Standards Track                   [Page 39]
    is defined in the Subject Identifiers for Security Event Tokens
    [SUBIDS] specification.
 
-13.  Normative References
 
-   [CAEP]     Tulshibagwale, A., "Re-thinking Federated Identity with
-              the Continuous Access Evaluation Protocol", February 2019,
-              <https://cloud.google.com/blog/products/identity-security/
-              re-thinking-federated-identity-with-the-continuous-access-
-              evaluation-protocol>.
+
+Tulshibagwale, et al.   Expires November 23, 2021              [Page 40]
+
+                          openid-sse-framework                  May 2021
+
+
+13.  References
+
+13.1.  Normative References
 
    [CLIENTCRED]
               Hardt, D., Ed., "The OAuth 2.0 Authorization Framework -
@@ -2234,69 +2252,56 @@ Tulshibagwale, et al.        Standards Track                   [Page 39]
               October 2012,
               <https://tools.ietf.org/html/rfc6749#section-4.4>.
 
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 40]
-
-                          openid-sse-framework                  May 2021
-
-
    [DELIVERYPOLL]
-              Backman, A., Ed., Jones, M., Ed., Hunt, P., Ed.,
-              Scurtescu, M.S., Ansari, M., and A. Nadalin, "Poll-Based
-              SET Token Delivery Using HTTP", 16 April 2018,
-              <https://tools.ietf.org/html/draft-ietf-secevent-http-
-              poll-00>.
+              Backman, A., Ed., Jones, M., Ed., Scurtescu, M., Ansari,
+              M., and A. Nadalin, "Poll-Based SET Token Delivery Using
+              HTTP", November 2020,
+              <https://www.rfc-editor.org/info/rfc8936>.
 
    [DELIVERYPUSH]
               Backman, A., Ed., Jones, M., Ed., Hunt, P., Ed.,
-              Scurtescu, M.S., Ansari, M., and A. Nadalin, "Push-Based
-              SET Token Delivery Using HTTP", 16 April 2018,
-              <https://tools.ietf.org/html/draft-ietf-secevent-http-
-              push-00>.
+              Scurtescu, M., Ansari, M., and A. Nadalin, "Push-Based SET
+              Token Delivery Using HTTP", November 2020,
+              <https://www.rfc-editor.org/info/rfc8935>.
 
-   [IDTOKEN]  Sakimura, N., Bradley, J., Jones, M.B., de Medeiros, B.,
-              and C. Mortimore, "OpenID Connect Core 1.0 - ID Token", 7
-              April 2017, <http://openid.net/specs/openid-connect-core-
+   [IDTOKEN]  Sakimura, N., Bradley, J., Jones, M., de Medeiros, B., and
+              C. Mortimore, "OpenID Connect Core 1.0 - ID Token", April
+              2017, <http://openid.net/specs/openid-connect-core-
               1_0.html#IDToken>.
-
-   [MGMTAPI]  Scurtescu, M. and A. Backman, "Management API for SET
-              Event Streams", 29 June 2017,
-              <https://tools.ietf.org/html/draft-scurtescu-secevent-
-              simple-control-plane>.
 
    [OASIS.saml-core-2.0-os]
               Cantor, S., Kemp, J., Philpott, R., and E. Maler,
               "Assertions and Protocols for the OASIS Security Assertion
-              Markup Language (SAML) V2.0", 15 March 2005,
+              Markup Language (SAML) V2.0", March 2005,
               <http://docs.oasis-open.org/security/saml/v2.0/saml-core-
               2.0-os.pdf>.
 
    [OAUTH-DISCOVERY]
-              Jones, M.B., Sakimura, N., and J. Bradley, "OAuth 2.0
-              Authorization Server Metadata - Version 10", 4 March 2018,
-              <https://tools.ietf.org/html/draft-ietf-oauth-discovery-
-              10>.
+              Jones, M., Sakimura, N., and J. Bradley, "OAuth 2.0
+              Authorization Server Metadata - Version 10", June 2018,
+              <https://www.rfc-editor.org/info/rfc8414>.
 
-   [OIDC-DISCOVERY]
-              Sakimura, N., Bradley, J., Jones, M.B., and E. Jay,
-              "OpenID Connect Discovery 1.0", 8 November 2014,
+   [OPENID-DISCOVERY]
+              Sakimura, N., Bradley, J., Jones, M., and E. Jay, "OpenID
+              Connect Discovery 1.0", November 2014,
               <https://openid.net/specs/openid-connect-discovery-
               1_0.html>.
+
+
+
+
+
+
+
+Tulshibagwale, et al.   Expires November 23, 2021              [Page 41]
+
+                          openid-sse-framework                  May 2021
+
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 41]
-
-                          openid-sse-framework                  May 2021
-
 
    [RFC5785]  Nottingham, M. and E. Hammer-Lahav, "Defining Well-Known
               Uniform Resource Identifiers (URIs)", RFC 5785,
@@ -2324,39 +2329,57 @@ Tulshibagwale, et al.        Standards Track                   [Page 41]
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
-   [SET]      Hunt, P., Ed., Jones, M.B., Denniss, W., and M.A. Ansari,
+   [SET]      Hunt, P., Ed., Jones, M., Denniss, W., and M. Ansari,
               "Security Event Token (SET)", April 2018,
               <https://www.rfc-editor.org/info/rfc8417>.
 
    [SUBIDS]   Backman, A., Ed. and M. Scurtescu, "Subject Identifiers
-              for Security Event Tokens", 4 September 2020,
-              <https://github.com/richanna/secevent/blob/master/draft-
-              ietf-secevent-subject-identifiers.txt>.
+              for Security Event Tokens", May 2021,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-
+              secevent-subject-identifiers>.
 
-   [USECASES] Scurtescu, M., "Security Events RISC Use Cases", 29 June
-              2017, <https://tools.ietf.org/html/draft-scurtescu-
-              secevent-risc-use-cases-00>.
+13.2.  Non-Normative References
 
-Appendix A.  Acknowledgements
-
-   Transmitter Configuration Discovery (Section 6) is based on both
-   OpenID Connect Discovery 1.0 [OIDC-DISCOVERY] and OAuth 2.0
-   Authorization Server Metadata [OAUTH-DISCOVERY].
+   [CAEP]     Tulshibagwale, A., "Re-thinking Federated Identity with
+              the Continuous Access Evaluation Protocol", February 2019,
+              <https://cloud.google.com/blog/products/identity-security/
+              re-thinking-federated-identity-with-the-continuous-access-
+              evaluation-protocol>.
 
 
 
 
+Tulshibagwale, et al.   Expires November 23, 2021              [Page 42]
 
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 42]
-
                           openid-sse-framework                  May 2021
 
 
+   [MGMTAPI]  Scurtescu, M. and A. Backman, "Management API for SET
+              Event Streams", June 2017, <https://tools.ietf.org/html/
+              draft-scurtescu-secevent-simple-control-plane>.
+
+   [USECASES]
+              Scurtescu, M., "Security Events RISC Use Cases", June
+              2017, <https://tools.ietf.org/html/draft-scurtescu-
+              secevent-risc-use-cases-00>.
+
+13.3.  URIs
+
+   [1] https://datatracker.ietf.org/wg/secevent/about/
+
+Appendix A.  Acknowledgements
+
+   The authors wish to thank all members of the OpenID Foundation Shared
+   Signals and Events Working Group who contributed to the development
+   of this specification.
+
+   Transmitter Configuration Discovery (Section 6) is based on both
+   OpenID Connect Discovery 1.0 [OPENID-DISCOVERY] and OAuth 2.0
+   Authorization Server Metadata [OAUTH-DISCOVERY].
+
 Appendix B.  Notices
 
-   Copyright (c) 2020 The OpenID Foundation.
+   Copyright (c) 2021 The OpenID Foundation.
 
    The OpenID Foundation (OIDF) grants to any Contributor, developer,
    implementer, or other interested party a non-exclusive, royalty free,
@@ -2379,6 +2402,14 @@ Appendix B.  Notices
    rights might or might not be available; neither does it represent
    that it has made any independent effort to identify any such rights.
    The OpenID Foundation and the contributors to this specification make
+
+
+
+Tulshibagwale, et al.   Expires November 23, 2021              [Page 43]
+
+                          openid-sse-framework                  May 2021
+
+
    no (and hereby expressly disclaim any) warranties (express, implied,
    or otherwise), including implied warranties of merchantability, non-
    infringement, fitness for a particular purpose, or title, related to
@@ -2401,14 +2432,6 @@ Authors' Addresses
 
    Tim Cappalli
    Microsoft
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 43]
-
-                          openid-sse-framework                  May 2021
-
 
    Email: tim.cappalli@microsoft.com
 
@@ -2438,27 +2461,4 @@ Tulshibagwale, et al.        Standards Track                   [Page 43]
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 44]
+Tulshibagwale, et al.   Expires November 23, 2021              [Page 44]
