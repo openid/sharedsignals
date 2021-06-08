@@ -1,8 +1,8 @@
 ---
-title: OpenID Continuous Access Evaluation Profile 1.0
+title: OpenID Continuous Access Evaluation Profile 1.0 - draft 01
 abbrev: CAEP-Spec
-docname: openid-caep-spec-1_0
-date: 2021-05-22
+docname: openid-caep-specification-1_0
+date: 2021-06-08
 
 ipr: none
 cat: std

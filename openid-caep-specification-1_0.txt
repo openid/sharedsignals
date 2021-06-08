@@ -5,12 +5,12 @@
 Shared Signals and Events                                    T. Cappalli
 Internet-Draft                                                 Microsoft
 Intended status: Standards Track                        A. Tulshibagwale
-Expires: November 23, 2021                                        Google
-                                                            May 22, 2021
+Expires: December 10, 2021                                        Google
+                                                           June 08, 2021
 
 
-            OpenID Continuous Access Evaluation Profile 1.0
-                          openid-caep-spec-1_0
+       OpenID Continuous Access Evaluation Profile 1.0 - draft 01
+                     openid-caep-specification-1_0
 
 Abstract
 
@@ -34,7 +34,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on November 23, 2021.
+   This Internet-Draft will expire on December 10, 2021.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Cappalli & TulshibagwaleExpires November 23, 2021               [Page 1]
+Cappalli & TulshibagwaleExpires December 10, 2021               [Page 1]
 
-Internet-Draft                  CAEP-Spec                       May 2021
+Internet-Draft                  CAEP-Spec                      June 2021
 
 
 Table of Contents
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Cappalli & TulshibagwaleExpires November 23, 2021               [Page 2]
+Cappalli & TulshibagwaleExpires December 10, 2021               [Page 2]
 
-Internet-Draft                  CAEP-Spec                       May 2021
+Internet-Draft                  CAEP-Spec                      June 2021
 
 
    event_timestamp  OPTIONAL, JSON number: the time at which the event
@@ -165,9 +165,9 @@ Internet-Draft                  CAEP-Spec                       May 2021
 
 
 
-Cappalli & TulshibagwaleExpires November 23, 2021               [Page 3]
+Cappalli & TulshibagwaleExpires December 10, 2021               [Page 3]
 
-Internet-Draft                  CAEP-Spec                       May 2021
+Internet-Draft                  CAEP-Spec                      June 2021
 
 
    {
@@ -221,9 +221,9 @@ Internet-Draft                  CAEP-Spec                       May 2021
 
 
 
-Cappalli & TulshibagwaleExpires November 23, 2021               [Page 4]
+Cappalli & TulshibagwaleExpires December 10, 2021               [Page 4]
 
-Internet-Draft                  CAEP-Spec                       May 2021
+Internet-Draft                  CAEP-Spec                      June 2021
 
 
    {
@@ -277,9 +277,9 @@ Internet-Draft                  CAEP-Spec                       May 2021
 
 
 
-Cappalli & TulshibagwaleExpires November 23, 2021               [Page 5]
+Cappalli & TulshibagwaleExpires December 10, 2021               [Page 5]
 
-Internet-Draft                  CAEP-Spec                       May 2021
+Internet-Draft                  CAEP-Spec                      June 2021
 
 
    {
@@ -333,9 +333,9 @@ Internet-Draft                  CAEP-Spec                       May 2021
 
 
 
-Cappalli & TulshibagwaleExpires November 23, 2021               [Page 6]
+Cappalli & TulshibagwaleExpires December 10, 2021               [Page 6]
 
-Internet-Draft                  CAEP-Spec                       May 2021
+Internet-Draft                  CAEP-Spec                      June 2021
 
 
    {
@@ -389,9 +389,9 @@ Internet-Draft                  CAEP-Spec                       May 2021
 
 
 
-Cappalli & TulshibagwaleExpires November 23, 2021               [Page 7]
+Cappalli & TulshibagwaleExpires December 10, 2021               [Page 7]
 
-Internet-Draft                  CAEP-Spec                       May 2021
+Internet-Draft                  CAEP-Spec                      June 2021
 
 
    {
@@ -445,9 +445,9 @@ Internet-Draft                  CAEP-Spec                       May 2021
 
 
 
-Cappalli & TulshibagwaleExpires November 23, 2021               [Page 8]
+Cappalli & TulshibagwaleExpires December 10, 2021               [Page 8]
 
-Internet-Draft                  CAEP-Spec                       May 2021
+Internet-Draft                  CAEP-Spec                      June 2021
 
 
    Token Claims Change signals that a claim in a token, identified by
@@ -501,9 +501,9 @@ Internet-Draft                  CAEP-Spec                       May 2021
 
 
 
-Cappalli & TulshibagwaleExpires November 23, 2021               [Page 9]
+Cappalli & TulshibagwaleExpires December 10, 2021               [Page 9]
 
-Internet-Draft                  CAEP-Spec                       May 2021
+Internet-Draft                  CAEP-Spec                      June 2021
 
 
 {
@@ -557,9 +557,9 @@ Internet-Draft                  CAEP-Spec                       May 2021
 
 
 
-Cappalli & TulshibagwaleExpires November 23, 2021              [Page 10]
+Cappalli & TulshibagwaleExpires December 10, 2021              [Page 10]
 
-Internet-Draft                  CAEP-Spec                       May 2021
+Internet-Draft                  CAEP-Spec                      June 2021
 
 
    {
@@ -613,9 +613,9 @@ Internet-Draft                  CAEP-Spec                       May 2021
 
 
 
-Cappalli & TulshibagwaleExpires November 23, 2021              [Page 11]
+Cappalli & TulshibagwaleExpires December 10, 2021              [Page 11]
 
-Internet-Draft                  CAEP-Spec                       May 2021
+Internet-Draft                  CAEP-Spec                      June 2021
 
 
 3.3.1.  Event-Specific Claims
@@ -669,9 +669,9 @@ Internet-Draft                  CAEP-Spec                       May 2021
 
 
 
-Cappalli & TulshibagwaleExpires November 23, 2021              [Page 12]
+Cappalli & TulshibagwaleExpires December 10, 2021              [Page 12]
 
-Internet-Draft                  CAEP-Spec                       May 2021
+Internet-Draft                  CAEP-Spec                      June 2021
 
 
    When "event_timestamp" is included, its value MUST represent the time
@@ -725,9 +725,9 @@ Internet-Draft                  CAEP-Spec                       May 2021
 
 
 
-Cappalli & TulshibagwaleExpires November 23, 2021              [Page 13]
+Cappalli & TulshibagwaleExpires December 10, 2021              [Page 13]
 
-Internet-Draft                  CAEP-Spec                       May 2021
+Internet-Draft                  CAEP-Spec                      June 2021
 
 
    In the first scenario, Assurance Level Change will an increase, while
@@ -781,9 +781,9 @@ Internet-Draft                  CAEP-Spec                       May 2021
 
 
 
-Cappalli & TulshibagwaleExpires November 23, 2021              [Page 14]
+Cappalli & TulshibagwaleExpires December 10, 2021              [Page 14]
 
-Internet-Draft                  CAEP-Spec                       May 2021
+Internet-Draft                  CAEP-Spec                      June 2021
 
 
 3.4.2.  Examples
@@ -837,9 +837,9 @@ Internet-Draft                  CAEP-Spec                       May 2021
 
 
 
-Cappalli & TulshibagwaleExpires November 23, 2021              [Page 15]
+Cappalli & TulshibagwaleExpires December 10, 2021              [Page 15]
 
-Internet-Draft                  CAEP-Spec                       May 2021
+Internet-Draft                  CAEP-Spec                      June 2021
 
 
 3.5.1.  Event-Specific Claims
@@ -893,9 +893,9 @@ Internet-Draft                  CAEP-Spec                       May 2021
 
 
 
-Cappalli & TulshibagwaleExpires November 23, 2021              [Page 16]
+Cappalli & TulshibagwaleExpires December 10, 2021              [Page 16]
 
-Internet-Draft                  CAEP-Spec                       May 2021
+Internet-Draft                  CAEP-Spec                      June 2021
 
 
    {
@@ -949,9 +949,9 @@ Internet-Draft                  CAEP-Spec                       May 2021
 
 
 
-Cappalli & TulshibagwaleExpires November 23, 2021              [Page 17]
+Cappalli & TulshibagwaleExpires December 10, 2021              [Page 17]
 
-Internet-Draft                  CAEP-Spec                       May 2021
+Internet-Draft                  CAEP-Spec                      June 2021
 
 
    [RFC5646]  Phillips, A., Ed. and M. Davis, Ed., "Tags for Identifying
@@ -1005,9 +1005,9 @@ Appendix B.  Notices
 
 
 
-Cappalli & TulshibagwaleExpires November 23, 2021              [Page 18]
+Cappalli & TulshibagwaleExpires December 10, 2021              [Page 18]
 
-Internet-Draft                  CAEP-Spec                       May 2021
+Internet-Draft                  CAEP-Spec                      June 2021
 
 
    distribution, it takes no position regarding the validity or scope of
@@ -1061,4 +1061,4 @@ Authors' Addresses
 
 
 
-Cappalli & TulshibagwaleExpires November 23, 2021              [Page 19]
+Cappalli & TulshibagwaleExpires December 10, 2021              [Page 19]
