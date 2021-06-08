@@ -975,7 +975,7 @@ Internet-Draft                  CAEP-Spec                      June 2021
 
    [WebAuthn]
               Balfanz, D., "Web Authentication: An API for accessing
-              Public Key Credentials Level 1", April 2021,
+              Public Key Credentials Level 2", April 2021,
               <https://www.w3.org/TR/webauthn/>.
 
 Appendix A.  Acknowledgements

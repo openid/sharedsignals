@@ -702,7 +702,7 @@ the device compliance status changed.</t>
 </reference>
 <reference anchor="WebAuthn" target="https://www.w3.org/TR/webauthn/">
   <front>
-    <title>Web Authentication: An API for accessing Public Key Credentials Level 1</title>
+    <title>Web Authentication: An API for accessing Public Key Credentials Level 2</title>
     <author initials="D." surname="Balfanz" fullname="Dirk Balfanz">
       <organization>Google</organization>
     </author>
@@ -736,7 +736,7 @@ specification.</t>
   </back>
 
 <!-- ##markdown-source:
-H4sIAJqsv2AAA+1cS3PjOJK+81cgXIe2o0VZb1ne2Ih2+VHjnirbY7u2tyc2
+H4sIAB6uv2AAA+1cS3PjOJK+81cgXIe2o0VZb1ne2Ih2+VHjnirbY7u2tyc2
 woZIUEIXRagJ0iq1x/1X9rqXPe1pzvXHJjMBUhRFuWyXPVPb3f2ookggkcjn
 BzAJ13WdRCah2GWnUxEdH7B9FSUySlWq2Z7nCa3Z4Q0PU55IFbGzWAUyFKxZ
 bzCX+TEPEtZoOnw4jMXNLtvfOzxzL6bCc3zlRXwCVBVQlb7rcTF1NTyRgfSI
@@ -753,7 +753,7 @@ hK5HUif1kbrZNo3dNphjdrliehsnxxeXxqp4yM7SYZjZlumyyw7kSCbw7NgH
 U5TJnL1JpS9CGQm9UTQ+Vi2kszp7E3OtywZyxsHslp6sGsIbHgNbZSuQ3piL
 cPlhWTN1dgTcqrKyv4c/dfFRpoJmH+Iu3PlBDPdgOpGdTVnAs9msPmvXQZHb
 l+fbMzHEuUfbSwIFEgxpoLSMKNHI2N7ZMQtUzDjlEgjUVtjsz2LO9sHvsT26
-/VtxA7NrPkS2B2jUYcCjX0rzPJAQKsqPyt5cNL+OCynHdV3GhzqJuZc4zuVY
+/VtxA7NrPUS2B2jUYcCjX0rzPJAQKsqPyt5cNL+OCynHdV3GhzqJuZc4zuVY
 agbpK50AZ8wXAWqcwbwelhk3MQduMRVgF+choe32dinG3t3V2XHCbK6EoTnT
 IkGCAns6yXwKNz0VgVQnKM9EEXdAZEEUQt9YaGG6MNMFOAHxJSLygSPoNBSQ
 MoXvDEUyEyICkhC4Y5gN0LyMeaQnMklEbLg+F56A5AC/dOqNYUCeLDea8Dnw
@@ -864,7 +864,7 @@ mDAphb8IkXgw3VbRkG2LYnfQzkTEmA0TPpQhGEmNwqiMAlyhCFNEFMgEazjN
 yeLblEJiWFLAcdGszzKzPjeGYs9jswcw6hXVqCAQZpZkfuAVEzzgDw0K8xSV
 sVGJBFq+bZQdETiCezqx3rNEmI5Os48LbK81HBndSDzvM/PSpUyHhyrG9rxS
 XPZROa21t/kivWEUJ/7yi6WzPWvL5/vEUiQ8ni87PUdydILPwn3zJ0NRPMYS
-iODBeJ6o0F3d+QeNOdw5HV0AAA==
+iODBeJ6o0F3d+QePa6FdHV0AAA==
 
 -->
 

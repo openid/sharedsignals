@@ -72,7 +72,7 @@ normative:
     date: 2017-06
   WebAuthn: 
     target: https://www.w3.org/TR/webauthn/
-    title: "Web Authentication: An API for accessing Public Key Credentials Level 1"
+    title: "Web Authentication: An API for accessing Public Key Credentials Level 2"
     author: 
       -
         ins: D. Balfanz
