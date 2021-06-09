@@ -2,10 +2,10 @@
 
 
 
-Shared Signals and Events                                    T. Cappalli
-Internet-Draft                                                 Microsoft
-Intended status: Standards Track                        A. Tulshibagwale
-Expires: December 10, 2021                                        Google
+                                                             T. Cappalli
+                                                               Microsoft
+                                                        A. Tulshibagwale
+                                                                  Google
                                                            June 08, 2021
 
 
@@ -22,31 +22,31 @@ Abstract
    updates using which Receivers can attenuate access to shared human or
    robotic users, devices, sessions and applications.
 
-Status of This Memo
+Table of Contents
 
-   Internet-Drafts are working documents of the Internet Engineering
-   Task Force (IETF).  Note that other groups may also distribute
-   working documents as Internet-Drafts.  The list of current Internet-
-   Drafts is at https://datatracker.ietf.org/drafts/current/.
-
-   Internet-Drafts are draft documents valid for a maximum of six months
-   and may be updated, replaced, or obsoleted by other documents at any
-   time.  It is inappropriate to use Internet-Drafts as reference
-   material or to cite them other than as "work in progress."
-
-   This Internet-Draft will expire on December 10, 2021.
-
-Copyright Notice
-
-   Copyright (c) 2021 IETF Trust and the persons identified as the
-   document authors.  All rights reserved.
-
-   This document is subject to BCP 78 and the IETF Trust's Legal
-   Provisions Relating to IETF Documents
-   (https://trustee.ietf.org/license-info) in effect on the date of
-   publication of this document.  Please review these documents
-   carefully, as they describe your rights and restrictions with respect
-   to this document.
+   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
+     1.1.  Notational Considerations . . . . . . . . . . . . . . . .   2
+   2.  Optional Event Claims . . . . . . . . . . . . . . . . . . . .   2
+   3.  Event Types . . . . . . . . . . . . . . . . . . . . . . . . .   3
+     3.1.  Session Revoked . . . . . . . . . . . . . . . . . . . . .   3
+       3.1.1.  Event-Specific Claims . . . . . . . . . . . . . . . .   4
+       3.1.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .   4
+     3.2.  Token Claims Change . . . . . . . . . . . . . . . . . . .   7
+       3.2.1.  Event-Specific Claims . . . . . . . . . . . . . . . .   8
+       3.2.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .   8
+     3.3.  Credential Change . . . . . . . . . . . . . . . . . . . .  10
+       3.3.1.  Event-Specific Claims . . . . . . . . . . . . . . . .  11
+       3.3.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  12
+     3.4.  Assurance Level Change  . . . . . . . . . . . . . . . . .  12
+       3.4.1.  Event-Specific Claims . . . . . . . . . . . . . . . .  13
+       3.4.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  14
+     3.5.  Device Compliance Change  . . . . . . . . . . . . . . . .  14
+       3.5.1.  Event-Specific Claims . . . . . . . . . . . . . . . .  15
+       3.5.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  15
+   4.  Normative References  . . . . . . . . . . . . . . . . . . . .  16
+   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  17
+   Appendix B.  Notices  . . . . . . . . . . . . . . . . . . . . . .  17
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  18
 
 
 
@@ -55,34 +55,8 @@ Copyright Notice
 
 Cappalli & TulshibagwaleExpires December 10, 2021               [Page 1]
 
-Internet-Draft                  CAEP-Spec                      June 2021
+                                CAEP-Spec                      June 2021
 
-
-Table of Contents
-
-   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
-     1.1.  Notational Considerations . . . . . . . . . . . . . . . .   2
-   2.  Optional Event Claims . . . . . . . . . . . . . . . . . . . .   2
-   3.  Event Types . . . . . . . . . . . . . . . . . . . . . . . . .   4
-     3.1.  Session Revoked . . . . . . . . . . . . . . . . . . . . .   4
-       3.1.1.  Event-Specific Claims . . . . . . . . . . . . . . . .   4
-       3.1.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .   4
-     3.2.  Token Claims Change . . . . . . . . . . . . . . . . . . .   8
-       3.2.1.  Event-Specific Claims . . . . . . . . . . . . . . . .   9
-       3.2.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .   9
-     3.3.  Credential Change . . . . . . . . . . . . . . . . . . . .  11
-       3.3.1.  Event-Specific Claims . . . . . . . . . . . . . . . .  12
-       3.3.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  13
-     3.4.  Assurance Level Change  . . . . . . . . . . . . . . . . .  13
-       3.4.1.  Event-Specific Claims . . . . . . . . . . . . . . . .  14
-       3.4.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  15
-     3.5.  Device Compliance Change  . . . . . . . . . . . . . . . .  15
-       3.5.1.  Event-Specific Claims . . . . . . . . . . . . . . . .  16
-       3.5.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  16
-   4.  Normative References  . . . . . . . . . . . . . . . . . . . .  17
-   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  18
-   Appendix B.  Notices  . . . . . . . . . . . . . . . . . . . . . .  18
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  19
 
 1.  Introduction
 
@@ -104,15 +78,6 @@ Table of Contents
 
    The following claims are optional unless otherwise specified in the
    event definition.
-
-
-
-
-
-Cappalli & TulshibagwaleExpires December 10, 2021               [Page 2]
-
-Internet-Draft                  CAEP-Spec                      June 2021
-
 
    event_timestamp  OPTIONAL, JSON number: the time at which the event
       described by this SET occurred.  Its value is a JSON number
@@ -138,6 +103,17 @@ Internet-Draft                  CAEP-Spec                      June 2021
       language tag as the key and the locale-specific administrative
       message as the value.
 
+
+
+
+
+
+
+Cappalli & TulshibagwaleExpires December 10, 2021               [Page 2]
+
+                                CAEP-Spec                      June 2021
+
+
    {
        "reason_admin": {
            "en": "Landspeed Policy Violation: C076E82F",
@@ -153,22 +129,6 @@ Internet-Draft                  CAEP-Spec                      June 2021
       message for display to an end-user.  The object MUST contain one
       or more key/value pairs, with a BCP47 [RFC5646] language tag as
       the key and the locale-specific end-user message as the value.
-
-
-
-
-
-
-
-
-
-
-
-
-Cappalli & TulshibagwaleExpires December 10, 2021               [Page 3]
-
-Internet-Draft                  CAEP-Spec                      June 2021
-
 
    {
        "reason_user": {
@@ -201,6 +161,15 @@ Internet-Draft                  CAEP-Spec                      June 2021
    When a Complex Claim is used as the subject, the revocation event
    applies to any session derived from matching those combined claims.
 
+
+
+
+
+Cappalli & TulshibagwaleExpires December 10, 2021               [Page 3]
+
+                                CAEP-Spec                      June 2021
+
+
    The actual reason why the session was revoked might be specified with
    the nested "reason_admin" and/or "reason_user" claims described in
    Section 2.
@@ -216,15 +185,6 @@ Internet-Draft                  CAEP-Spec                      June 2021
 
    NOTE: The event type URI is wrapped, the backslash is the
    continuation character.
-
-
-
-
-
-Cappalli & TulshibagwaleExpires December 10, 2021               [Page 4]
-
-Internet-Draft                  CAEP-Spec                      June 2021
-
 
    {
        "iss": "https://idp.example.com/123456789/",
@@ -261,25 +221,9 @@ Internet-Draft                  CAEP-Spec                      June 2021
 
 
 
+Cappalli & TulshibagwaleExpires December 10, 2021               [Page 4]
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Cappalli & TulshibagwaleExpires December 10, 2021               [Page 5]
-
-Internet-Draft                  CAEP-Spec                      June 2021
+                                CAEP-Spec                      June 2021
 
 
    {
@@ -333,9 +277,9 @@ Internet-Draft                  CAEP-Spec                      June 2021
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021               [Page 6]
+Cappalli & TulshibagwaleExpires December 10, 2021               [Page 5]
 
-Internet-Draft                  CAEP-Spec                      June 2021
+                                CAEP-Spec                      June 2021
 
 
    {
@@ -389,9 +333,9 @@ Internet-Draft                  CAEP-Spec                      June 2021
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021               [Page 7]
+Cappalli & TulshibagwaleExpires December 10, 2021               [Page 6]
 
-Internet-Draft                  CAEP-Spec                      June 2021
+                                CAEP-Spec                      June 2021
 
 
    {
@@ -445,9 +389,9 @@ Internet-Draft                  CAEP-Spec                      June 2021
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021               [Page 8]
+Cappalli & TulshibagwaleExpires December 10, 2021               [Page 7]
 
-Internet-Draft                  CAEP-Spec                      June 2021
+                                CAEP-Spec                      June 2021
 
 
    Token Claims Change signals that a claim in a token, identified by
@@ -501,9 +445,9 @@ Internet-Draft                  CAEP-Spec                      June 2021
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021               [Page 9]
+Cappalli & TulshibagwaleExpires December 10, 2021               [Page 8]
 
-Internet-Draft                  CAEP-Spec                      June 2021
+                                CAEP-Spec                      June 2021
 
 
 {
@@ -557,9 +501,9 @@ Internet-Draft                  CAEP-Spec                      June 2021
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021              [Page 10]
+Cappalli & TulshibagwaleExpires December 10, 2021               [Page 9]
 
-Internet-Draft                  CAEP-Spec                      June 2021
+                                CAEP-Spec                      June 2021
 
 
    {
@@ -613,9 +557,9 @@ Internet-Draft                  CAEP-Spec                      June 2021
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021              [Page 11]
+Cappalli & TulshibagwaleExpires December 10, 2021              [Page 10]
 
-Internet-Draft                  CAEP-Spec                      June 2021
+                                CAEP-Spec                      June 2021
 
 
 3.3.1.  Event-Specific Claims
@@ -669,9 +613,9 @@ Internet-Draft                  CAEP-Spec                      June 2021
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021              [Page 12]
+Cappalli & TulshibagwaleExpires December 10, 2021              [Page 11]
 
-Internet-Draft                  CAEP-Spec                      June 2021
+                                CAEP-Spec                      June 2021
 
 
    When "event_timestamp" is included, its value MUST represent the time
@@ -725,9 +669,9 @@ Internet-Draft                  CAEP-Spec                      June 2021
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021              [Page 13]
+Cappalli & TulshibagwaleExpires December 10, 2021              [Page 12]
 
-Internet-Draft                  CAEP-Spec                      June 2021
+                                CAEP-Spec                      June 2021
 
 
    In the first scenario, Assurance Level Change will an increase, while
@@ -781,9 +725,9 @@ Internet-Draft                  CAEP-Spec                      June 2021
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021              [Page 14]
+Cappalli & TulshibagwaleExpires December 10, 2021              [Page 13]
 
-Internet-Draft                  CAEP-Spec                      June 2021
+                                CAEP-Spec                      June 2021
 
 
 3.4.2.  Examples
@@ -837,9 +781,9 @@ Internet-Draft                  CAEP-Spec                      June 2021
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021              [Page 15]
+Cappalli & TulshibagwaleExpires December 10, 2021              [Page 14]
 
-Internet-Draft                  CAEP-Spec                      June 2021
+                                CAEP-Spec                      June 2021
 
 
 3.5.1.  Event-Specific Claims
@@ -893,9 +837,9 @@ Internet-Draft                  CAEP-Spec                      June 2021
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021              [Page 16]
+Cappalli & TulshibagwaleExpires December 10, 2021              [Page 15]
 
-Internet-Draft                  CAEP-Spec                      June 2021
+                                CAEP-Spec                      June 2021
 
 
    {
@@ -949,9 +893,9 @@ Internet-Draft                  CAEP-Spec                      June 2021
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021              [Page 17]
+Cappalli & TulshibagwaleExpires December 10, 2021              [Page 16]
 
-Internet-Draft                  CAEP-Spec                      June 2021
+                                CAEP-Spec                      June 2021
 
 
    [RFC5646]  Phillips, A., Ed. and M. Davis, Ed., "Tags for Identifying
@@ -1005,9 +949,9 @@ Appendix B.  Notices
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021              [Page 18]
+Cappalli & TulshibagwaleExpires December 10, 2021              [Page 17]
 
-Internet-Draft                  CAEP-Spec                      June 2021
+                                CAEP-Spec                      June 2021
 
 
    distribution, it takes no position regarding the validity or scope of
@@ -1061,4 +1005,4 @@ Authors' Addresses
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021              [Page 19]
+Cappalli & TulshibagwaleExpires December 10, 2021              [Page 18]

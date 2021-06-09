@@ -13,6 +13,7 @@ pi:
   toc: yes
   sortrefs: yes
   symrefs: yes
+  private: yes
 
 author:
       -
