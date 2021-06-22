@@ -24,8 +24,8 @@ Abstract
 
    This document defines the Risc Incident Sharing and Coordination
    (RISC) Event Types based on the Shared Signals and Events (SSE)
-   Framework [SSE].  Event Types are introduced and defined in Security
-   Event Token (SET) [SET].
+   Framework [SSE-FRAMEWORK].  Event Types are introduced and defined in
+   Security Event Token (SET) [SET].
 
 Table of Contents
 
@@ -48,7 +48,7 @@ Table of Contents
      2.10. Recovery Information Changed  . . . . . . . . . . . . . .   9
      2.11. Sessions Revoked  . . . . . . . . . . . . . . . . . . . .  10
    3.  Normative References  . . . . . . . . . . . . . . . . . . . .  10
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  11
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  10
 
 
 
@@ -311,9 +311,7 @@ Scurtescu, et al.       Expires December 24, 2021               [Page 5]
    compromise"
 
    A Credential Compromise event signals that the identifier specified
-   in the subject was found to be compromised.  The subject identifier
-   in a Credential Compromise event SHOULD refer to a non-ephemeral
-   subject principal, such as a user or device.
+   in the subject was found to be compromised.
 
    Attributes:
 
@@ -328,6 +326,8 @@ Scurtescu, et al.       Expires December 24, 2021               [Page 5]
 
    o  reason_user - OPTIONAL.  The reason why the credential compromised
       event was generated, indended for end-users
+
+
 
 
 
@@ -542,12 +542,6 @@ Scurtescu, et al.       Expires December 24, 2021               [Page 9]
               <https://tools.ietf.org/html/draft-ietf-secevent-token-
               09>.
 
-   [SSE]      Tulshibagwale, A., Cappalli, T., Scurtescu, M., Backman,
-              A., and J. Bradley, "OpenID Shared Signals and Events
-              Framework Specification 1.0", April 2021,
-              <https://bitbucket.org/openid/risc/src/master/openid-sse-
-              framework-1_0.txt>.
-
    [SSE-FRAMEWORK]
               Tulshibagwale, A., Cappalli, T., Scurtescu, M., Backman,
               A., and J. Bradley, "OpenID Shared Signals and Events
@@ -555,14 +549,18 @@ Scurtescu, et al.       Expires December 24, 2021               [Page 9]
               <https://openid.net/specs/openid-sse-framework-
               1_0-01.html>.
 
+Authors' Addresses
+
+
+
+
+
 
 
 Scurtescu, et al.       Expires December 24, 2021              [Page 10]
 
                     openid-risc-profile-specification          June 2021
 
-
-Authors' Addresses
 
    Marius Scurtescu
    Coinbase
@@ -598,6 +596,8 @@ Authors' Addresses
    Google
 
    Email: atultulshi@google.com
+
+
 
 
 

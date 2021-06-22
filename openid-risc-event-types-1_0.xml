@@ -69,7 +69,7 @@
 
     <abstract>
       <t>This document defines the Risc Incident Sharing and Coordination (RISC) Event
-        Types based on the <xref target="SSE">Shared Signals and Events (SSE)
+        Types based on the <xref target="SSE-FRAMEWORK">Shared Signals and Events (SSE)
         Framework</xref>. Event Types are introduced and defined in <xref target="SET">
         Security Event Token (SET)</xref>.</t>
     </abstract>
@@ -265,8 +265,7 @@
         <t>Event Type URI:</t>
         <t><spanx style="verb">https://schemas.openid.net/secevent/caep/event-type/credential-compromise</spanx></t>
         <t>A Credential Compromise event signals that the identifier specified in the subject was found to
-          be compromised. The subject identifier in a Credential Compromise event SHOULD refer to a non-ephemeral
-          subject principal, such as a user or device.</t>
+          be compromised.</t>
         <t>Attributes:<list style="symbols">
             <t>credential_type - REQUIRED. The type of credential that is compromised. The value of this attribute
               must be one of the values specified for the similarly named field in in the <spanx style="verb">
@@ -421,28 +420,6 @@
         </front>
         <seriesInfo name='RFC' value='7159'/>
         <seriesInfo name='DOI' value='10.17487/RFC7159'/>
-      </reference>
-
-      <reference anchor="SSE" target="https://bitbucket.org/openid/risc/src/master/openid-sse-framework-1_0.txt">
-        <front>
-          <title>OpenID Shared Signals and Events Framework Specification 1.0</title>
-            <author initials="A." surname="Tulshibagwale" fullname="Atul Tulshibagwale">
-              <organization />
-            </author>
-            <author initials="T." surname="Cappalli" fullname="Tim Cappalli">
-              <organization />
-            </author>
-            <author initials="M." surname="Scurtescu" fullname="Marius Scurtescu">
-              <organization />
-            </author>
-            <author initials="A." surname="Backman" fullname="Annabelle Backman">
-              <organization />
-            </author>
-            <author initials="J." surname="Bradley" fullname="John Bradley">
-              <organization />
-            </author>
-          <date year="2021" month="April"/>
-        </front>
       </reference>
 
       <reference anchor="SET" target="https://tools.ietf.org/html/draft-ietf-secevent-token-09">
