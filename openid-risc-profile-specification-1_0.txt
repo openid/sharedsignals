@@ -307,7 +307,7 @@ Scurtescu, et al.       Expires December 24, 2021               [Page 5]
 
    Event Type URI:
 
-   "https://schemas.openid.net/secevent/caep/event-type/credential-
+   "https://schemas.openid.net/secevent/risc/event-type/credential-
    compromise"
 
    A Credential Compromise event signals that the identifier specified

@@ -263,7 +263,7 @@
 
       <section anchor="credential-compromise" title="Credential Compromise">
         <t>Event Type URI:</t>
-        <t><spanx style="verb">https://schemas.openid.net/secevent/caep/event-type/credential-compromise</spanx></t>
+        <t><spanx style="verb">https://schemas.openid.net/secevent/risc/event-type/credential-compromise</spanx></t>
         <t>A Credential Compromise event signals that the identifier specified in the subject was found to
           be compromised.</t>
         <t>Attributes:<list style="symbols">
