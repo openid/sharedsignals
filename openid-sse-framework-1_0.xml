@@ -24,7 +24,7 @@
   <?rfc comments="yes"?>
 
   <front>
-    <title abbrev="openid-sse-framework">OpenID Shared Signals and Events Framework Specification 1.0</title>
+    <title abbrev="openid-sse-framework">OpenID Shared Signals and Events Framework Specification 1.0 - draft 01</title>
 
     <author initials="A." surname="Tulshibagwale" fullname="Atul Tulshibagwale">
       <organization abbrev="Google">Google</organization>
@@ -57,7 +57,7 @@
         <email>secevemt@ve7jtb.com</email>
       </address>
     </author>
-    <date year="2020" month="Oct" day="26"/>
+    <date year="2021" month="June" day="8"/>
 
     <workgroup>Shared Signals and Events Working Group</workgroup>
 
@@ -346,7 +346,7 @@
     "subject": {
         "format": "catalog_item",
         "catalog_id": "c0384/winter/2354122"
-      }
+      },
       "event_timestamp": 1600975810,
       "claims": {
          "role": "ro-admin"
@@ -1756,7 +1756,7 @@ disabled": {
         </front>
       </reference>
 
-      <reference anchor="DELIVERYPUSH" target="https://tools.ietf.org/html/draft-ietf-secevent-http-push-00">
+      <reference anchor="DELIVERYPUSH" target="https://www.rfc-editor.org/info/rfc8935">
         <front>
           <title>Push-Based SET Token Delivery Using HTTP</title>
           <author fullname="Annabelle Backman" initials="A." surname="Backman" role="editor">
@@ -1783,11 +1783,11 @@ disabled": {
             <organization />
           </author>
           
-          <date year="2018" month="April" day="16" />
+          <date year="2020" month="November" />
         </front>
       </reference>
 
-      <reference anchor="DELIVERYPOLL" target="https://tools.ietf.org/html/draft-ietf-secevent-http-poll-00">
+      <reference anchor="DELIVERYPOLL" target="https://www.rfc-editor.org/info/rfc8936">
         <front>
           <title>Poll-Based SET Token Delivery Using HTTP</title>
           <author fullname="Annabelle Backman" initials="A." surname="Backman" role="editor">
@@ -1795,10 +1795,6 @@ disabled": {
           </author>
           
           <author fullname="Michael B. Jones" initials="M." surname="Jones" role="editor">
-            <organization />
-          </author>
-          
-          <author fullname="Phil Hunt" initials="P." role="editor" surname="Hunt">
             <organization />
           </author>
           
@@ -1814,34 +1810,7 @@ disabled": {
             <organization />
           </author>
           
-          <date year="2018" month="April" day="16" />
-        </front>
-      </reference>
-      
-      <reference anchor="MGMTAPI"
-        target="https://tools.ietf.org/html/draft-scurtescu-secevent-simple-control-plane">
-        <front>
-          <title>Management API for SET Event Streams</title>
-          <author initials="M." surname="Scurtescu" fullname="Marius Scurtescu">
-            <organization />
-          </author>
-          <author initials="A." surname="Backman" fullname="Annabelle Backman">
-            <organization />
-          </author>
-          
-          <date year="2017" month="June" day="29"/>
-        </front>
-      </reference>
-
-      <reference anchor="USECASES"
-        target="https://tools.ietf.org/html/draft-scurtescu-secevent-risc-use-cases-00">
-        <front>
-          <title>Security Events RISC Use Cases</title>
-          <author initials="M." surname="Scurtescu" fullname="Marius Scurtescu">
-            <organization />
-          </author>
-          
-          <date year="2017" month="June" day="29"/>
+          <date year="2020" month="November" />
         </front>
       </reference>
 
@@ -1952,7 +1921,7 @@ disabled": {
         <seriesInfo name="DOI" value="10.17487/RFC5785"/>
       </reference>
 
-      <reference anchor="OIDC-DISCOVERY" target="https://openid.net/specs/openid-connect-discovery-1_0.html">
+      <reference anchor="OPENID-DISCOVERY" target="https://openid.net/specs/openid-connect-discovery-1_0.html">
         <front>
           <title>OpenID Connect Discovery 1.0</title>
           <author fullname="Nat Sakimura" initials="N." surname="Sakimura">
@@ -1976,7 +1945,7 @@ disabled": {
         </front>
       </reference>
 
-      <reference anchor="OAUTH-DISCOVERY" target="https://tools.ietf.org/html/draft-ietf-oauth-discovery-10">
+      <reference anchor="OAUTH-DISCOVERY" target="https://www.rfc-editor.org/info/rfc8414">
         <front>
           <title>OAuth 2.0 Authorization Server Metadata - Version 10</title>
           <author fullname="Michael B. Jones" initials="M.B." surname="Jones">
@@ -1988,24 +1957,12 @@ disabled": {
           <author fullname="John Bradley" initials="J." surname="Bradley">
             <organization abbrev="Ping Identity">Ping Identity</organization>
           </author>
-          <date year="2018" month="March" day="4"/>
+          <date year="2018" month="June"/>
         </front>
       </reference>
       
-      <reference anchor="CAEP" target="https://cloud.google.com/blog/products/identity-security/re-thinking-federated-identity-with-the-continuous-access-evaluation-protocol">
-          <front>
-            <title>
-              Re-thinking Federated Identity with the Continuous Access Evaluation Protocol
-            </title>
-            <author initials="A." surname="Tulshibagwale" fullname="Atul Tulshibagwale">
-              <organization abbrev="Google">Google</organization>
-            </author>
-            <date year="2019" month="February"/>
-          </front>
-      </reference>
-
       <reference anchor="SUBIDS"
-        target="https://github.com/richanna/secevent/blob/master/draft-ietf-secevent-subject-identifiers.txt">
+        target="https://datatracker.ietf.org/doc/html/draft-ietf-secevent-subject-identifiers">
         <front>
           <title>Subject Identifiers for Security Event Tokens</title>
           <author fullname="Annabelle Backman" initials="A." surname="Backman" role="editor">
@@ -2015,7 +1972,7 @@ disabled": {
             <organization />
           </author>
 
-          <date year="2020" month="September" day="04"/>
+          <date year="2021" month="May" day="24"/>
         </front>
       </reference>
 
@@ -2040,12 +1997,99 @@ disabled": {
       </reference>
 
     </references>
+    <references title="Non-Normative References">
+
+      <reference anchor="CAEP" target="https://cloud.google.com/blog/products/identity-security/re-thinking-federated-identity-with-the-continuous-access-evaluation-protocol">
+          <front>
+            <title>
+              Re-thinking Federated Identity with the Continuous Access Evaluation Protocol
+            </title>
+            <author initials="A." surname="Tulshibagwale" fullname="Atul Tulshibagwale">
+              <organization abbrev="Google">Google</organization>
+            </author>
+            <date year="2019" month="February"/>
+          </front>
+      </reference>
+      
+      <reference anchor="MGMTAPI"
+        target="https://tools.ietf.org/html/draft-scurtescu-secevent-simple-control-plane">
+        <front>
+          <title>Management API for SET Event Streams</title>
+          <author initials="M." surname="Scurtescu" fullname="Marius Scurtescu">
+            <organization />
+          </author>
+          <author initials="A." surname="Backman" fullname="Annabelle Backman">
+            <organization />
+          </author>
+          
+          <date year="2017" month="June" day="29"/>
+        </front>
+      </reference>
+
+      <reference anchor="USECASES"
+        target="https://tools.ietf.org/html/draft-scurtescu-secevent-risc-use-cases-00">
+        <front>
+          <title>Security Events RISC Use Cases</title>
+          <author initials="M." surname="Scurtescu" fullname="Marius Scurtescu">
+            <organization />
+          </author>
+          
+          <date year="2017" month="June" day="29"/>
+        </front>
+      </reference>
+
+    </references>
 
 
     <section title="Acknowledgements" anchor="ack">
+      <t>The authors wish to thank all members of the OpenID Foundation Shared Signals
+        and Events Working Group who contributed to the development of this
+        specification.</t>
+
       <t><xref target="discovery">Transmitter Configuration Discovery</xref> is based on 
-        both <xref target="OIDC-DISCOVERY">OpenID Connect Discovery 1.0</xref> and
+        both <xref target="OPENID-DISCOVERY">OpenID Connect Discovery 1.0</xref> and
         <xref target="OAUTH-DISCOVERY">OAuth 2.0 Authorization Server Metadata</xref>.</t>
+    </section>
+          <section anchor="Notices" title="Notices">
+      <t>Copyright (c) 2021 The OpenID Foundation.</t>
+      <t>
+	The OpenID Foundation (OIDF) grants to any Contributor, developer,
+	implementer, or other interested party a non-exclusive, royalty free,
+	worldwide copyright license to reproduce, prepare derivative works from,
+	distribute, perform and display, this Implementers Draft or
+	Final Specification solely for the purposes of (i) developing
+	specifications, and (ii) implementing Implementers Drafts and
+	Final Specifications based on such documents, provided that attribution
+	be made to the OIDF as the source of the material, but that such attribution
+	does not indicate an endorsement by the OIDF.
+      </t>
+      <t>
+	The technology described in this specification was
+	made available from contributions from various sources,
+	including members of the OpenID Foundation and others.
+	Although the OpenID Foundation has taken steps to help ensure
+	that the technology is available for distribution, it takes
+	no position regarding the validity or scope of any intellectual
+	property or other rights that might be claimed to pertain to
+	the implementation or use of the technology described in
+	this specification or the extent to which any license under
+	such rights might or might not be available; neither does it
+	represent that it has made any independent effort to identify
+	any such rights.  The OpenID Foundation and the contributors
+	to this specification make no (and hereby expressly disclaim any)
+	warranties (express, implied, or otherwise), including implied
+	warranties of merchantability, non-infringement, fitness for
+	a particular purpose, or title, related to this specification,
+	and the entire risk as to implementing this specification is
+	assumed by the implementer.  The OpenID Intellectual
+	Property Rights policy requires contributors to offer
+	a patent promise not to assert certain patent claims against
+	other contributors and against implementers.  The OpenID Foundation invites
+	any interested party to bring to its attention any copyrights,
+	patents, patent applications, or other proprietary rights
+	that may cover technology that may be required to practice
+	this specification.
+      </t>
     </section>
   </back>
 </rfc>

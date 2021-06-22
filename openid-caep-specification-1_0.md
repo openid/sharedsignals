@@ -1,8 +1,8 @@
 ---
-title: OpenID Continuous Access Evaluation Profile 1.0
+title: OpenID Continuous Access Evaluation Profile 1.0 - draft 01
 abbrev: CAEP-Spec
-docname: openid-caep-spec-1_0
-date: 2021-04-07
+docname: openid-caep-specification-1_0
+date: 2021-06-08
 
 ipr: none
 cat: std
@@ -13,6 +13,7 @@ pi:
   toc: yes
   sortrefs: yes
   symrefs: yes
+  private: yes
 
 author:
       -
@@ -28,7 +29,6 @@ author:
 
 normative:
   RFC2119:
-  RFC2616:
   SSE-FRAMEWORK:
     target: http://openid.net/specs/openid-sse-framework-1_0.html
     title: OpenID Shared Signals and Events Framework Specification 1.0
@@ -53,10 +53,10 @@ normative:
         ins: John Bradley
         name: John Bradley
         org: Yubico
-    date: 2021
-  RFC8417:
+    date: 2021-05
   RFC8174:
   RFC5280:
+  RFC5646:
   SP800-63R3:
     target: https://pages.nist.gov/800-63-3/sp800-63-3.html
     title: "NIST Special Publication 800-63: Digital Identity Guidelines"
@@ -73,13 +73,13 @@ normative:
     date: 2017-06
   WebAuthn: 
     target: https://www.w3.org/TR/webauthn/
-    title: "Web Authentication: An API for accessing Public Key Credentials Level 1"
+    title: "Web Authentication: An API for accessing Public Key Credentials Level 2"
     author: 
       -
         ins: D. Balfanz
         name: Dirk Balfanz
         org: Google
-
+    date: 2021-04-8
 
 --- abstract
 
@@ -116,7 +116,7 @@ event_timestamp
 
 initiating_entity
 : OPTIONAL, JSON string: describes the entity that invoked the event.
-: Potential options:
+: This MUST be one of the following strings:
 
   - `admin`:    an administrative action triggered the event
 
@@ -127,10 +127,38 @@ initiating_entity
   - `system`:   a system or platform assertion triggered the event
 
 reason_admin
-: OPTIONAL, JSON string: an administrative message for logging and auditing
+: OPTIONAL, JSON object: a localizable administrative message intended for
+logging and auditing. The object MUST contain one or more key/value pairs,
+with a BCP47 {{RFC5646}} language tag as the key and the locale-specific
+administrative message as the value.
+
+~~~ json
+{
+    "reason_admin": {
+        "en": "Landspeed Policy Violation: C076E82F",
+        "de": "Landspeed-Richtlinienverstoß: C076E82F",
+        "es-410": "Violación de la política de landspeed: C076E82F"
+    }
+}
+~~~
+{: #optional-claims-reason-admin-example title="Example: Administrative reason information with multiple languages"}
 
 reason_user
-: OPTIONAL, JSON string: a user-friendly message for display to an end-user
+: OPTIONAL, JSON object: a localizable user-friendly message for display
+to an end-user. The object MUST contain one or more key/value pairs, with a
+BCP47 {{RFC5646}} language tag as the key and the locale-specific end-user
+message as the value.
+
+~~~ json
+{
+    "reason_user": {
+        "en": "Access attempt from multiple regions.",
+        "de": "Zugriffsversuch aus mehreren Regionen.",
+        "es-410": "Intento de acceso desde varias regiones."
+    }
+}
+~~~
+{: #optional-claims-reason-user-example title="Example: End user reason information with multiple languages"}
 
 
 # Event Types {#event-types}
@@ -176,7 +204,7 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
         session-revoked": {
             "subject": {
                 "format": "opaque",
-                "sub": "dMTlD|1600802906337.16|16008.16"
+                "id": "dMTlD|1600802906337.16|16008.16"
             },
             "event_timestamp": 1615304991643
         }
@@ -197,12 +225,12 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
             "subject": {
                 "session": {
                   "format": "opaque",
-                  "sub": "dMTlD|1600802906337.16|16008.16"
+                  "id": "dMTlD|1600802906337.16|16008.16"
                 },
                 "user": {
                   "format": "iss_sub",
                   "iss": "https://idp.example.com/123456789/",
-                  "sub": "dMTlD|1600802906337.16|16008.16"
+                  "sub": "99beb27c-c1c2-4955-882a-e0dc4996fcbc"
                 },
                 "tenant": {
                   "format": "opaque",
@@ -210,8 +238,13 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
                 }
             },
             "initiating_entity": "policy",
-            "reason_admin": "Landspeed Policy Violation: C076E82F",
-            "reason_user": "Access attempt from multiple regions.",
+            "reason_admin": {
+                "en": "Landspeed Policy Violation: C076E82F"
+            },
+            "reason_user": {
+                "en": "Access attempt from multiple regions.",
+                "es-410": "Intento de acceso desde varias regiones."
+            },
             "event_timestamp": 1615304991643
         }
     }
@@ -230,8 +263,13 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
         "https://schemas.openid.net/secevent/caep/event-type/\
         session-revoked": {
             "initiating_entity": "policy",
-            "reason_admin": "Landspeed Policy Violation: C076E82F",
-            "reason_user": "Access attempt from multiple regions.",
+            "reason_admin": {
+                "en": "Landspeed Policy Violation: C076E82F"
+            },
+            "reason_user": {
+                "en": "Access attempt from multiple regions.",
+                "es-410": "Intento de acceso desde varias regiones."
+            },
             "event_timestamp": 1615304991643
         }
     }
@@ -265,8 +303,13 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
                 }
             },
             "initiating_entity": "policy",
-            "reason_admin": "Policy Violation: C076E82F",
-            "reason_user": "This device is no longer compliant.",
+            "reason_admin": {
+                "en": "Policy Violation: C076E822"
+            },
+            "reason_user": {
+                "en": "This device is no longer compliant.",
+                "it": "Questo dispositivo non è più conforme."
+            },
             "event_timestamp": 1615304991643
         }
     }
@@ -337,8 +380,14 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
             },
             "event_timestamp": 1615304991643,
             "initiating_entity": "policy",
-            "reason_admin": "User left trusted network: CorpNet3",
-            "reason_user": "You're no longer connected to a trusted network.",
+            "reason_admin": {
+                "en": "User left trusted network: CorpNet3"
+            },
+            "reason_user": {
+                "en": "You're no longer connected to a trusted network.",
+                "it": "Non sei più connesso a una rete attendibile."
+            },
+
             "claims": {
                 "trusted_network": "false"
             }
@@ -392,7 +441,9 @@ nested `reason_admin` and/or `reason_user` claims made in {{optional-event-claim
 ### Event-Specific Claims {#credential-change-claims}
 
 credential_type
-: REQUIRED, JSON string: potential options:
+: REQUIRED, JSON string: This MUST be one of the following strings, or any other
+credential type supported mutually by the Transmitter and the Receiver.
+
     - `password`
     - `pin`
     - `x509`
@@ -403,10 +454,10 @@ credential_type
     - `phone-voice`
     - `phone-sms`
     - `app`
-    - other mutually supported credential type
 
 change_type
-: REQUIRED, JSON string: potential options:
+: REQUIRED, JSON string: This MUST be one of the following strings:
+
     - `create`
     - `revoke`
     - `update`
@@ -425,7 +476,7 @@ fido2_aaguid
 : OPTIONAL, JSON string: FIDO2 Authenticator Attestation GUID as defined in {{WebAuthn}}
 
 When `event_timestamp` is included, its value MUST represent the time at which
-the credential change occurred.            
+the credential change occurred.
 
 ### Examples  {#credential-change-examples}
 
@@ -450,7 +501,9 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
             "fido2_aaguid": "accced6a-63f5-490a-9eea-e59bc1896cfc",
             "friendly_name": "Jane's USB authenticator",
             "initiating_entity": "user",
-            "reason_admin": "User self-enrollment",
+            "reason_admin": {
+                "en": "User self-enrollment"
+            },
             "event_timestamp": 1615304991643
         }
     }
@@ -482,7 +535,7 @@ nested `reason_admin` and/or `reason_user` claims made in {{optional-event-claim
 
 current_level
 : REQUIRED, JSON string: the current NIST Authenticator Assurance Level (AAL) as defined in {{SP800-63R3}}
-: Potential options:
+: This string MUST be one of the following strings:
 
   - `nist-aal1`
   - `nist-aal2`
@@ -490,7 +543,7 @@ current_level
 
 previous_level
 : REQUIRED, JSON string: the previous NIST Authenticator Assurance Level (AAL) as defined in {{SP800-63R3}}
-: Potential options:
+: This MUST be one of the following strings:
 
   - `nist-aal1`
   - `nist-aal2`
@@ -498,7 +551,8 @@ previous_level
 
 change_direction
 : REQUIRED, JSON string: the Authenticator Assurance Level increased or decreased
-: Potential options:
+: This MUST be one of the following strings:
+
   - `increase`
   - `decrease`
 
@@ -550,14 +604,14 @@ nested `reason_admin` and/or `reason_user` claims made in {{optional-event-claim
 
 previous_status
 : REQUIRED, JSON string: the compliance status prior to the change that triggered the event
-: Potential options:
+: This MUST be one of the following strings:
 
   - `compliant`
   - `not-compliant`
 
 current_status
 : REQUIRED, JSON string: the current status that triggered the event
-: Potential options:
+: This MUST be one of the following strings:
 
   - `compliant`
   - `not-compliant`
@@ -592,8 +646,12 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
             "current_status": "not-compliant",
             "previous_status": "compliant",
             "initiating_entity": "policy",
-            "reason_admin": "Location Policy Violation: C076E82F",
-            "reason_user": "Device is no longer in a trusted location.",
+            "reason_admin": {
+                "en": "Location Policy Violation: C076E8A3"
+            },
+            "reason_user": {
+                "en": "Device is no longer in a trusted location."
+            },
             "event_timestamp": 1615304991643
         }
     }
@@ -602,3 +660,16 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
 {: #device-compliance-change-examples-out-of-compliance title="Example: Device No Longer Compliant - Complex Subject + optional claims"}
 
 --- back
+# Acknowledgements
+
+The authors wish to thank all members of the OpenID Foundation Shared Signals
+and Events Working Group who contributed to the development of this
+specification.
+
+# Notices
+
+Copyright (c) 2021 The OpenID Foundation.
+
+The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, or other interested party a non-exclusive, royalty free, worldwide copyright license to reproduce, prepare derivative works from, distribute, perform and display, this Implementers Draft or Final Specification solely for the purposes of (i) developing specifications, and (ii) implementing Implementers Drafts and Final Specifications based on such documents, provided that attribution be made to the OIDF as the source of the material, but that such attribution does not indicate an endorsement by the OIDF.
+
+The technology described in this specification was made available from contributions from various sources, including members of the OpenID Foundation and others. Although the OpenID Foundation has taken steps to help ensure that the technology is available for distribution, it takes no position regarding the validity or scope of any intellectual property or other rights that might be claimed to pertain to the implementation or use of the technology described in this specification or the extent to which any license under such rights might or might not be available; neither does it represent that it has made any independent effort to identify any such rights. The OpenID Foundation and the contributors to this specification make no (and hereby expressly disclaim any) warranties (express, implied, or otherwise), including implied warranties of merchantability, non-infringement, fitness for a particular purpose, or title, related to this specification, and the entire risk as to implementing this specification is assumed by the implementer. The OpenID Intellectual Property Rights policy requires contributors to offer a patent promise not to assert certain patent claims against other contributors and against implementers. The OpenID Foundation invites any interested party to bring to its attention any copyrights, patents, patent applications, or other proprietary rights that may cover technology that may be required to practice this specification.

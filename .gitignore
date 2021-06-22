@@ -1,6 +1,5 @@
 *.pdf
 *.epub
-*.html
 .refcache
 *.xpr
 scratch.md

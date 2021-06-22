@@ -4,20 +4,20 @@
 
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
 <!ENTITY RFC2119 SYSTEM "https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
-<!ENTITY RFC2616 SYSTEM "https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2616.xml">
-<!ENTITY RFC8417 SYSTEM "https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8417.xml">
 <!ENTITY RFC8174 SYSTEM "https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml">
 <!ENTITY RFC5280 SYSTEM "https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5280.xml">
+<!ENTITY RFC5646 SYSTEM "https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5646.xml">
 ]>
 
 <?rfc toc="yes"?>
 <?rfc sortrefs="yes"?>
 <?rfc symrefs="yes"?>
+<?rfc private="yes"?>
 
-<rfc ipr="none" docName="openid-caep-spec-1_0" category="std">
+<rfc ipr="none" docName="openid-caep-specification-1_0" category="std">
 
   <front>
-    <title abbrev="CAEP-Spec">OpenID Continuous Access Evaluation Profile 1.0</title>
+    <title abbrev="CAEP-Spec">OpenID Continuous Access Evaluation Profile 1.0 - draft 01</title>
 
     <author initials="T." surname="Cappalli" fullname="Tim Cappalli">
       <organization>Microsoft</organization>
@@ -32,7 +32,7 @@
       </address>
     </author>
 
-    <date year="2021" month="April" day="07"/>
+    <date year="2021" month="June" day="08"/>
 
     
     <workgroup>Shared Signals and Events</workgroup>
@@ -84,7 +84,7 @@ occurred. Its value is a JSON number representing the number of seconds
 from 1970-01-01T0:0:0Z as measured in UTC until the date/time.</t>
   <t hangText="initiating_entity">
   OPTIONAL, JSON string: describes the entity that invoked the event.</t>
-  <t>Potential options:
+  <t>This MUST be one of the following strings:
 
       <list style="symbols">
         <t><spanx style="verb">admin</spanx>:    an administrative action triggered the event</t>
@@ -94,10 +94,39 @@ from 1970-01-01T0:0:0Z as measured in UTC until the date/time.</t>
       </list>
   </t>
   <t hangText="reason_admin">
-  OPTIONAL, JSON string: an administrative message for logging and auditing</t>
-  <t hangText="reason_user">
-  OPTIONAL, JSON string: a user-friendly message for display to an end-user</t>
+  OPTIONAL, JSON object: a localizable administrative message intended for
+logging and auditing. The object MUST contain one or more key/value pairs,
+with a BCP47 <xref target="RFC5646"/> language tag as the key and the locale-specific
+administrative message as the value.</t>
 </list></t>
+
+<figure title="Example: Administrative reason information with multiple languages" anchor="optional-claims-reason-admin-example"><artwork type="json"><![CDATA[
+{
+    "reason_admin": {
+        "en": "Landspeed Policy Violation: C076E82F",
+        "de": "Landspeed-Richtlinienverstoss: C076E82F",
+        "es-410": "Violacion de la politica de landspeed: C076E82F"
+    }
+}
+]]></artwork></figure>
+
+<t><list style="hanging">
+  <t hangText="reason_user">
+  OPTIONAL, JSON object: a localizable user-friendly message for display
+to an end-user. The object MUST contain one or more key/value pairs, with a
+BCP47 <xref target="RFC5646"/> language tag as the key and the locale-specific end-user
+message as the value.</t>
+</list></t>
+
+<figure title="Example: End user reason information with multiple languages" anchor="optional-claims-reason-user-example"><artwork type="json"><![CDATA[
+{
+    "reason_user": {
+        "en": "Access attempt from multiple regions.",
+        "de": "Zugriffsversuch aus mehreren Regionen.",
+        "es-410": "Intento de acceso desde varias regiones."
+    }
+}
+]]></artwork></figure>
 
 </section>
 <section anchor="event-types" title="Event Types">
@@ -144,7 +173,7 @@ the session revocation occurred.</t>
         session-revoked": {
             "subject": {
                 "format": "opaque",
-                "sub": "dMTlD|1600802906337.16|16008.16"
+                "id": "dMTlD|1600802906337.16|16008.16"
             },
             "event_timestamp": 1615304991643
         }
@@ -164,12 +193,12 @@ the session revocation occurred.</t>
             "subject": {
                 "session": {
                   "format": "opaque",
-                  "sub": "dMTlD|1600802906337.16|16008.16"
+                  "id": "dMTlD|1600802906337.16|16008.16"
                 },
                 "user": {
                   "format": "iss_sub",
                   "iss": "https://idp.example.com/123456789/",
-                  "sub": "dMTlD|1600802906337.16|16008.16"
+                  "sub": "99beb27c-c1c2-4955-882a-e0dc4996fcbc"
                 },
                 "tenant": {
                   "format": "opaque",
@@ -177,8 +206,13 @@ the session revocation occurred.</t>
                 }
             },
             "initiating_entity": "policy",
-            "reason_admin": "Landspeed Policy Violation: C076E82F",
-            "reason_user": "Access attempt from multiple regions.",
+            "reason_admin": {
+                "en": "Landspeed Policy Violation: C076E82F"
+            },
+            "reason_user": {
+                "en": "Access attempt from multiple regions.",
+                "es-410": "Intento de acceso desde varias regiones."
+            },
             "event_timestamp": 1615304991643
         }
     }
@@ -196,8 +230,13 @@ the session revocation occurred.</t>
         "https://schemas.openid.net/secevent/caep/event-type/\
         session-revoked": {
             "initiating_entity": "policy",
-            "reason_admin": "Landspeed Policy Violation: C076E82F",
-            "reason_user": "Access attempt from multiple regions.",
+            "reason_admin": {
+                "en": "Landspeed Policy Violation: C076E82F"
+            },
+            "reason_user": {
+                "en": "Access attempt from multiple regions.",
+                "es-410": "Intento de acceso desde varias regiones."
+            },
             "event_timestamp": 1615304991643
         }
     }
@@ -230,8 +269,13 @@ the session revocation occurred.</t>
                 }
             },
             "initiating_entity": "policy",
-            "reason_admin": "Policy Violation: C076E82F",
-            "reason_user": "This device is no longer compliant.",
+            "reason_admin": {
+                "en": "Policy Violation: C076E822"
+            },
+            "reason_user": {
+                "en": "This device is no longer compliant.",
+                "it": "Questo dispositivo non e piu conforme."
+            },
             "event_timestamp": 1615304991643
         }
     }
@@ -305,8 +349,14 @@ the claim value(s) changed.</t>
             },
             "event_timestamp": 1615304991643,
             "initiating_entity": "policy",
-            "reason_admin": "User left trusted network: CorpNet3",
-            "reason_user": "You're no longer connected to a trusted network.",
+            "reason_admin": {
+                "en": "User left trusted network: CorpNet3"
+            },
+            "reason_user": {
+                "en": "You're no longer connected to a trusted network.",
+                "it": "Non sei piu connesso a una rete attendibile."
+            },
+
             "claims": {
                 "trusted_network": "false"
             }
@@ -362,24 +412,32 @@ nested <spanx style="verb">reason_admin</spanx> and/or <spanx style="verb">reaso
 
 <t><list style="hanging">
   <t hangText="credential_type">
-  REQUIRED, JSON string: potential options:
-  - <spanx style="verb">password</spanx>
-  - <spanx style="verb">pin</spanx>
-  - <spanx style="verb">x509</spanx>
-  - <spanx style="verb">fido2-platform</spanx>
-  - <spanx style="verb">fido2-roaming</spanx>
-  - <spanx style="verb">fido-u2f</spanx>
-  - <spanx style="verb">verifiable-credential</spanx>
-  - <spanx style="verb">phone-voice</spanx>
-  - <spanx style="verb">phone-sms</spanx>
-  - <spanx style="verb">app</spanx>
-  - other mutually supported credential type</t>
+  REQUIRED, JSON string: This MUST be one of the following strings, or any other
+credential type supported mutually by the Transmitter and the Receiver.
+
+      <list style="symbols">
+        <t><spanx style="verb">password</spanx></t>
+        <t><spanx style="verb">pin</spanx></t>
+        <t><spanx style="verb">x509</spanx></t>
+        <t><spanx style="verb">fido2-platform</spanx></t>
+        <t><spanx style="verb">fido2-roaming</spanx></t>
+        <t><spanx style="verb">fido-u2f</spanx></t>
+        <t><spanx style="verb">verifiable-credential</spanx></t>
+        <t><spanx style="verb">phone-voice</spanx></t>
+        <t><spanx style="verb">phone-sms</spanx></t>
+        <t><spanx style="verb">app</spanx></t>
+      </list>
+  </t>
   <t hangText="change_type">
-  REQUIRED, JSON string: potential options:
-  - <spanx style="verb">create</spanx>
-  - <spanx style="verb">revoke</spanx>
-  - <spanx style="verb">update</spanx>
-  - <spanx style="verb">delete</spanx></t>
+  REQUIRED, JSON string: This MUST be one of the following strings:
+
+      <list style="symbols">
+        <t><spanx style="verb">create</spanx></t>
+        <t><spanx style="verb">revoke</spanx></t>
+        <t><spanx style="verb">update</spanx></t>
+        <t><spanx style="verb">delete</spanx></t>
+      </list>
+  </t>
   <t hangText="friendly_name">
   OPTIONAL, JSON string: credential friendly name</t>
   <t hangText="x509_issuer">
@@ -417,7 +475,9 @@ the credential change occurred.</t>
             "fido2_aaguid": "accced6a-63f5-490a-9eea-e59bc1896cfc",
             "friendly_name": "Jane's USB authenticator",
             "initiating_entity": "user",
-            "reason_admin": "User self-enrollment",
+            "reason_admin": {
+                "en": "User self-enrollment"
+            },
             "event_timestamp": 1615304991643
         }
     }
@@ -451,7 +511,7 @@ nested <spanx style="verb">reason_admin</spanx> and/or <spanx style="verb">reaso
 <t><list style="hanging">
   <t hangText="current_level">
   REQUIRED, JSON string: the current NIST Authenticator Assurance Level (AAL) as defined in <xref target="SP800-63R3"/></t>
-  <t>Potential options:
+  <t>This string MUST be one of the following strings:
 
       <list style="symbols">
         <t><spanx style="verb">nist-aal1</spanx></t>
@@ -461,7 +521,7 @@ nested <spanx style="verb">reason_admin</spanx> and/or <spanx style="verb">reaso
   </t>
   <t hangText="previous_level">
   REQUIRED, JSON string: the previous NIST Authenticator Assurance Level (AAL) as defined in <xref target="SP800-63R3"/></t>
-  <t>Potential options:
+  <t>This MUST be one of the following strings:
 
       <list style="symbols">
         <t><spanx style="verb">nist-aal1</spanx></t>
@@ -471,9 +531,13 @@ nested <spanx style="verb">reason_admin</spanx> and/or <spanx style="verb">reaso
   </t>
   <t hangText="change_direction">
   REQUIRED, JSON string: the Authenticator Assurance Level increased or decreased</t>
-  <t>Potential options:
-- <spanx style="verb">increase</spanx>
-- <spanx style="verb">decrease</spanx></t>
+  <t>This MUST be one of the following strings:
+
+      <list style="symbols">
+        <t><spanx style="verb">increase</spanx></t>
+        <t><spanx style="verb">decrease</spanx></t>
+      </list>
+  </t>
 </list></t>
 
 <t>When <spanx style="verb">event_timestamp</spanx> is included, its value MUST represent the time at which
@@ -525,7 +589,7 @@ nested <spanx style="verb">reason_admin</spanx> and/or <spanx style="verb">reaso
 <t><list style="hanging">
   <t hangText="previous_status">
   REQUIRED, JSON string: the compliance status prior to the change that triggered the event</t>
-  <t>Potential options:
+  <t>This MUST be one of the following strings:
 
       <list style="symbols">
         <t><spanx style="verb">compliant</spanx></t>
@@ -534,7 +598,7 @@ nested <spanx style="verb">reason_admin</spanx> and/or <spanx style="verb">reaso
   </t>
   <t hangText="current_status">
   REQUIRED, JSON string: the current status that triggered the event</t>
-  <t>Potential options:
+  <t>This MUST be one of the following strings:
 
       <list style="symbols">
         <t><spanx style="verb">compliant</spanx></t>
@@ -574,8 +638,12 @@ the device compliance status changed.</t>
             "current_status": "not-compliant",
             "previous_status": "compliant",
             "initiating_entity": "policy",
-            "reason_admin": "Location Policy Violation: C076E82F",
-            "reason_user": "Device is no longer in a trusted location.",
+            "reason_admin": {
+                "en": "Location Policy Violation: C076E8A3"
+            },
+            "reason_user": {
+                "en": "Device is no longer in a trusted location."
+            },
             "event_timestamp": 1615304991643
         }
     }
@@ -594,7 +662,6 @@ the device compliance status changed.</t>
     <references title='Normative References'>
 
 &RFC2119;
-&RFC2616;
 <reference anchor="SSE-FRAMEWORK" target="http://openid.net/specs/openid-sse-framework-1_0.html">
   <front>
     <title>OpenID Shared Signals and Events Framework Specification 1.0</title>
@@ -613,12 +680,12 @@ the device compliance status changed.</t>
     <author initials="." surname="John Bradley" fullname="John Bradley">
       <organization>Yubico</organization>
     </author>
-    <date year="2021"/>
+    <date year="2021" month="May"/>
   </front>
 </reference>
-&RFC8417;
 &RFC8174;
 &RFC5280;
+&RFC5646;
 <reference anchor="SP800-63R3" target="https://pages.nist.gov/800-63-3/sp800-63-3.html">
   <front>
     <title>NIST Special Publication 800-63: Digital Identity Guidelines</title>
@@ -636,11 +703,11 @@ the device compliance status changed.</t>
 </reference>
 <reference anchor="WebAuthn" target="https://www.w3.org/TR/webauthn/">
   <front>
-    <title>Web Authentication: An API for accessing Public Key Credentials Level 1</title>
+    <title>Web Authentication: An API for accessing Public Key Credentials Level 2</title>
     <author initials="D." surname="Balfanz" fullname="Dirk Balfanz">
       <organization>Google</organization>
     </author>
-    <date year="n.d."/>
+    <date year="2021" month="April" day="08"/>
   </front>
 </reference>
 
@@ -649,109 +716,156 @@ the device compliance status changed.</t>
 
 
 
+<section anchor="acknowledgements" title="Acknowledgements">
+
+<t>The authors wish to thank all members of the OpenID Foundation Shared Signals
+and Events Working Group who contributed to the development of this
+specification.</t>
+
+</section>
+<section anchor="notices" title="Notices">
+
+<t>Copyright (c) 2021 The OpenID Foundation.</t>
+
+<t>The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, or other interested party a non-exclusive, royalty free, worldwide copyright license to reproduce, prepare derivative works from, distribute, perform and display, this Implementers Draft or Final Specification solely for the purposes of (i) developing specifications, and (ii) implementing Implementers Drafts and Final Specifications based on such documents, provided that attribution be made to the OIDF as the source of the material, but that such attribution does not indicate an endorsement by the OIDF.</t>
+
+<t>The technology described in this specification was made available from contributions from various sources, including members of the OpenID Foundation and others. Although the OpenID Foundation has taken steps to help ensure that the technology is available for distribution, it takes no position regarding the validity or scope of any intellectual property or other rights that might be claimed to pertain to the implementation or use of the technology described in this specification or the extent to which any license under such rights might or might not be available; neither does it represent that it has made any independent effort to identify any such rights. The OpenID Foundation and the contributors to this specification make no (and hereby expressly disclaim any) warranties (express, implied, or otherwise), including implied warranties of merchantability, non-infringement, fitness for a particular purpose, or title, related to this specification, and the entire risk as to implementing this specification is assumed by the implementer. The OpenID Intellectual Property Rights policy requires contributors to offer a patent promise not to assert certain patent claims against other contributors and against implementers. The OpenID Foundation invites any interested party to bring to its attention any copyrights, patents, patent applications, or other proprietary rights that may cover technology that may be required to practice this specification.</t>
+
+</section>
+
 
   </back>
 
 <!-- ##markdown-source:
-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
-q5NtRy9mc6X7ZgcFL336Mqce+56DlwrZrQ5f9IU1JOn7F3N0KpREhkSEDI/b
-5iLKlpuuhUckZEt9uvJefniV8xitvnSKTCvlo5iqRb6p45jBbr/X7bRbTjHP
-D6jvMod1WK/Tmji9ru9S6npek/Up7Qya7efm+ZbyqNdN9BVSf/aZzOdlfA0J
-oSLVfKtk1wYbKfs9J+6xVvN3T7QXX7u9KVsku9HvgVx0XMdbuE3/a/+7TnUK
-vbVMqtcciQDFBL9tnZDW592SELZYuS2455aywfnxwT7utKoiZfmUCN9XPgPC
-/m3afynT/g7YdYV4I2A+BOAoUXnQVDlg0Vq0OGNx+xH89atIftBvCjLcFYag
-AvOKp0i3BMa2+aUZe23GKtkClGAv5592hqe+zVHP12GY8dGXcFGPskHHZ17X
-73QHu7sO82l7d9Lrur1+v+V57l/FRSWdB9fZW+zN3ppoM3yew67RByrXtN+l
-nt/t2k3H69vexNtt91ts4vnuvyoXmYrdVAFf54EUdKFK+5ay0Wo2uw34y03R
-Y0746R9NvPE6OQ21Ut7h7J2ekL2s4OCpSQ33LasCw9Wuxc2evfCepUT4Ru8l
-ykxoTFrcuay64atduKUxolSDgWvZq3XE5x4LsFapXkFcurCpi7jIULgpQVmA
-NWI9VuPi+MwQbSAWj1Wri9JV1dVY5QLaDbBCqgaAHTA/DWr5N6RYkaEY4Kqc
-1DalOcQHqAy8NbKpVAlSbl0rwtkakN77q9ZRjRwdH5y3auR8fFHDd+g2llt4
-H7Zux1aU3/iWrGQauQ1Z1nSNVlTemaVFLYtyaRG6Flb5GHHfZA9gPen1125z
-kN343BMtO63iKTyOBMUa07WndtLyswe3LIJlYcWEveJ6NekM9o72reAuKzyT
-c5k9Ac2m17qkY56gaoM7IpPFQkSomJxelUgsLbNny0e7UsaCdqPsVheuZrfa
-s8B10+qha6wt3lxrlGM2qzdSIyyU/LVOIZuH6/a0muU/6zBmzRdVMaKvakOU
-/Zmy+IcHQx+sFKbeTF+358rovnkaZRzXlE4T7m2eR3lvvgAcXGkvjjFfKR//
-dAVgpzhLWnaO07zGYcLG+FDPJ6vy4ULZXV/9aOEbsN2G9wfNPvO9QbvpNwf9
-Puv4rus4nQHtt9su6/v93beM7EoCfzau23yu/o1iLU7+1FcDRehWiO9qk5EP
-t6UNyyrWYV8du4qd8j6JvajruszrUbvX9rs2bLWpPWCM2qw7mLjO7qDn+m6J
-Rj6+IZGfYXU/SHI1+qi+v8j8uDiwcj+o9mtP2Q1KFvj2Cgi83OH5Rqe1lbRK
-sPICC+vx6FwVmaqjTR3E1hYPKWG9kob8WDwkN2fkgFCTiIYuM5+yZICTpg12
-gA0vjDqrqRvouYGnCvwZq6K8rIyTphET4rRF1z7rIXMWzwRWiSJdjGvaIAL9
-diEQUx6azwwMDfz4A6CYegFsUbJk9Auppqm29JBSBKqkqkcNgaN6eYGflVA8
-rj/WxaI+j2Scgd/apqUveRBg4S8wj+bJapgvArYqOdVQNqUDKUcPAf4pJC89
-qE6OgA1jXjVTbqyWCUYbxerLDP1WxlKoc8QixfOF+ZaD7JnPZPAHTG6Ac2HF
-79XXNxRL5FOE9wEWjHrN5sMB6hNbWJPGU1l5aOXEH83EVrwU9iPTAhKH+Y7N
-VxOZRHLCI9ZWA1OC01aGmq2QgjI9tRi0vLyhpYA9NQdW4lMbxNZS2cw3iPKN
-dCv11nYH1S6c2yIgZoGoqFo3A2AFMXRXoj5vLKCxgqre7+2dfChBstW3lgDK
-tnzPgEX7NqWBc7N+3yrctyESAUq75SKRT1lA2vdtrcAkZV2rjrverWvYznXq
-PGYfb26qOVWMpAMMX+mQm1fBzBtcpm6VUfIGs/0bKr8qVK6W+p8IL+eDHRLJ
-/LIIFdfDSr6rswFUZ/6rVm7c6tnw9vlQ9RHPsSGBZCm2CFuL4eQ47fg0oIpI
-9UCXf+ybCha8TLGqrgyx3azphdHqJvoQzDZyVTgn1SR+kGRFBGFXDDkjX8ix
-9RMa3f2NHxpuktUKGGQeoBf0CDQoiWsBcC5KPxI2wtCbgYpv+rZk0qwUKs2c
-IrZzzzL88iQuDYAxLL4GO6+QNU1BVVnEmwtYNmr3LeXPP2Ox6ibBf2MK/auW
-ej612PP7yz3Xw4bK73lP3ggHVv039v2ewvj0LdizS0oPKqpJdcGiqWUIzBQv
-WFn6aLSxRRLbws/1KCEPw/eZICea6TRVxxVFp5XgA/+lDgxV1v8Cc0rPFGtM
-AAA=
+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
+b/FkJMrHWAIRPBjPEzW6azr/AG64A2EsXQAA
 
 -->
 

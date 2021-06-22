@@ -12,10 +12,10 @@
                                                                   Amazon
                                                               J. Bradley
                                                                   Yubico
-                                                            Oct 26, 2020
+                                                            June 8, 2021
 
 
-      OpenID Shared Signals and Events Framework Specification 1.0
+OpenID Shared Signals and Events Framework Specification 1.0 - draft 01
                         openid-sse-framework-1_0
 
 Abstract
@@ -53,9 +53,9 @@ Abstract
 
 
 
-Tulshibagwale, et al.    Expires April 29, 2021                 [Page 1]
+Tulshibagwale, et al.   Expires December 10, 2021               [Page 1]
 
-                          openid-sse-framework                  Oct 2020
+                          openid-sse-framework                 June 2021
 
 
 Table of Contents
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Tulshibagwale, et al.    Expires April 29, 2021                 [Page 2]
+Tulshibagwale, et al.   Expires December 10, 2021               [Page 2]
 
-                          openid-sse-framework                  Oct 2020
+                          openid-sse-framework                 June 2021
 
 
        10.3.2.  Consentable Data . . . . . . . . . . . . . . . . . .  36
@@ -133,9 +133,11 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 2]
    12. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  40
    13. References  . . . . . . . . . . . . . . . . . . . . . . . . .  41
      13.1.  Normative References . . . . . . . . . . . . . . . . . .  41
-     13.2.  URIs . . . . . . . . . . . . . . . . . . . . . . . . . .  43
+     13.2.  Non-Normative References . . . . . . . . . . . . . . . .  42
+     13.3.  URIs . . . . . . . . . . . . . . . . . . . . . . . . . .  43
    Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  43
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  43
+   Appendix B.  Notices  . . . . . . . . . . . . . . . . . . . . . .  43
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  44
 
 1.  Introduction
 
@@ -159,16 +161,17 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 2]
    within a tenant, groups of subject principals or other entities that
    are managed by Transmitters and Receivers.  There may be other actors
    or resources that can be treated as Subject Principals, and event-
+
+
+
+
+Tulshibagwale, et al.   Expires December 10, 2021               [Page 3]
+
+                          openid-sse-framework                 June 2021
+
+
    type definitions SHOULD specify the range of principals addressed by
    the event.
-
-
-
-
-Tulshibagwale, et al.    Expires April 29, 2021                 [Page 3]
-
-                          openid-sse-framework                  Oct 2020
-
 
    Subject Principals are identified by Subject Members defined below.
 
@@ -215,16 +218,17 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 3]
    tenant
       OPTIONAL.  A Subject Identifier that identifies a tenant.
 
+
+
+
+Tulshibagwale, et al.   Expires December 10, 2021               [Page 4]
+
+                          openid-sse-framework                 June 2021
+
+
    org_unit
       OPTIONAL.  A Subject Identifier that identifies an organizational
       unit.
-
-
-
-Tulshibagwale, et al.    Expires April 29, 2021                 [Page 4]
-
-                          openid-sse-framework                  Oct 2020
-
 
    group
       OPTIONAL.  A Subject Identifier that identifies a group.
@@ -270,17 +274,17 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 4]
 
    o  A proprietary subject identifier format that is agreed to between
       parties.  Members within a subject identifier that has a
+
+
+
+Tulshibagwale, et al.   Expires December 10, 2021               [Page 5]
+
+                          openid-sse-framework                 June 2021
+
+
       proprietary subject identifier format are agreed to between the
       parties and such agreement is outside the scope of this
       specification.
-
-
-
-
-Tulshibagwale, et al.    Expires April 29, 2021                 [Page 5]
-
-                          openid-sse-framework                  Oct 2020
-
 
 3.4.  Additional Subject Identifier Formats
 
@@ -326,17 +330,16 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 5]
       identified, defined in [OASIS.saml-core-2.0-os]
 
    assertion_id
+
+
+
+Tulshibagwale, et al.   Expires December 10, 2021               [Page 6]
+
+                          openid-sse-framework                 June 2021
+
+
       REQUIRED.  The "ID" value of the SAML assertion being identified,
       defined in [OASIS.saml-core-2.0-os]
-
-
-
-
-
-Tulshibagwale, et al.    Expires April 29, 2021                 [Page 6]
-
-                          openid-sse-framework                  Oct 2020
-
 
    The "SAML Assertion ID" Subject Identifier Format is identified by
    the name "saml-assertion-id".
@@ -386,12 +389,9 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 6]
 
 
 
+Tulshibagwale, et al.   Expires December 10, 2021               [Page 7]
 
-
-
-Tulshibagwale, et al.    Expires April 29, 2021                 [Page 7]
-
-                          openid-sse-framework                  Oct 2020
+                          openid-sse-framework                 June 2021
 
 
 {
@@ -445,9 +445,9 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 7]
 
 
 
-Tulshibagwale, et al.    Expires April 29, 2021                 [Page 8]
+Tulshibagwale, et al.   Expires December 10, 2021               [Page 8]
 
-                          openid-sse-framework                  Oct 2020
+                          openid-sse-framework                 June 2021
 
 
 {
@@ -482,7 +482,7 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 8]
     "subject": {
         "format": "catalog_item",
         "catalog_id": "c0384/winter/2354122"
-      }
+      },
       "event_timestamp": 1600975810,
       "claims": {
          "role": "ro-admin"
@@ -501,9 +501,9 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 8]
 
 
 
-Tulshibagwale, et al.    Expires April 29, 2021                 [Page 9]
+Tulshibagwale, et al.   Expires December 10, 2021               [Page 9]
 
-                          openid-sse-framework                  Oct 2020
+                          openid-sse-framework                 June 2021
 
 
 6.  Transmitter Configuration Discovery
@@ -557,9 +557,9 @@ Tulshibagwale, et al.    Expires April 29, 2021                 [Page 9]
 
 
 
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 10]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 10]
 
-                          openid-sse-framework                  Oct 2020
+                          openid-sse-framework                 June 2021
 
 
    Transmitters supporting Discovery MUST make a JSON document available
@@ -613,9 +613,9 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 10]
 
 
 
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 11]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 11]
 
-                          openid-sse-framework                  Oct 2020
+                          openid-sse-framework                 June 2021
 
 
    subset of the Metadata values defined in Section 6.1.  Other Claims
@@ -669,9 +669,9 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 11]
 
 
 
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 12]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 12]
 
-                          openid-sse-framework                  Oct 2020
+                          openid-sse-framework                 June 2021
 
 
 7.  Management API for SET Event Streams
@@ -725,9 +725,9 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 12]
 
 
 
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 13]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 13]
 
-                          openid-sse-framework                  Oct 2020
+                          openid-sse-framework                 June 2021
 
 
    The Event Stream Management API is implemented by the Event
@@ -781,9 +781,9 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 13]
 
 
 
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 14]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 14]
 
-                          openid-sse-framework                  Oct 2020
+                          openid-sse-framework                 June 2021
 
 
    Disabled  the Transmitter MAY send stream updated (Section 7.1.5)
@@ -837,9 +837,9 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 14]
 
 
 
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 15]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 15]
 
-                          openid-sse-framework                  Oct 2020
+                          openid-sse-framework                 June 2021
 
 
    The following is a non-normative example response:
@@ -893,9 +893,9 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 15]
 
 
 
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 16]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 16]
 
-                          openid-sse-framework                  Oct 2020
+                          openid-sse-framework                 June 2021
 
 
    +------+------------------------------------------------------------+
@@ -949,9 +949,9 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 16]
 
 
 
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 17]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 17]
 
-                          openid-sse-framework                  Oct 2020
+                          openid-sse-framework                 June 2021
 
 
    On receiving a valid request the Event Transmitter responds with a
@@ -1005,9 +1005,9 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 17]
 
 
 
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 18]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 18]
 
-                          openid-sse-framework                  Oct 2020
+                          openid-sse-framework                 June 2021
 
 
    HTTP/1.1 200 OK
@@ -1061,9 +1061,9 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 18]
 
 
 
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 19]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 19]
 
-                          openid-sse-framework                  Oct 2020
+                          openid-sse-framework                 June 2021
 
 
       *Read-Only*, A URL using the https scheme with no query or
@@ -1117,9 +1117,9 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 19]
 
 
 
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 20]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 20]
 
-                          openid-sse-framework                  Oct 2020
+                          openid-sse-framework                 June 2021
 
 
       decide to use a type that discloses more information than
@@ -1173,9 +1173,9 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 20]
 
 
 
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 21]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 21]
 
-                          openid-sse-framework                  Oct 2020
+                          openid-sse-framework                 June 2021
 
 
   HTTP/1.1 200 OK
@@ -1229,9 +1229,9 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 21]
 
 
 
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 22]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 22]
 
-                          openid-sse-framework                  Oct 2020
+                          openid-sse-framework                 June 2021
 
 
    +------+------------------------------------------------------------+
@@ -1285,9 +1285,9 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 22]
 
 
 
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 23]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 23]
 
-                          openid-sse-framework                  Oct 2020
+                          openid-sse-framework                 June 2021
 
 
   POST /sse/stream HTTP/1.1
@@ -1341,9 +1341,9 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 23]
 
 
 
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 24]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 24]
 
-                          openid-sse-framework                  Oct 2020
+                          openid-sse-framework                 June 2021
 
 
   HTTP/1.1 200 OK
@@ -1397,9 +1397,9 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 24]
 
 
 
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 25]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 25]
 
-                          openid-sse-framework                  Oct 2020
+                          openid-sse-framework                 June 2021
 
 
    +------+------------------------------------------------------------+
@@ -1453,9 +1453,9 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 25]
 
 
 
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 26]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 26]
 
-                          openid-sse-framework                  Oct 2020
+                          openid-sse-framework                 June 2021
 
 
    +------+------------------------------------------------------------+
@@ -1509,9 +1509,9 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 26]
 
 
 
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 27]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 27]
 
-                          openid-sse-framework                  Oct 2020
+                          openid-sse-framework                 June 2021
 
 
    +------+------------------------------------------------------------+
@@ -1565,9 +1565,9 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 27]
 
 
 
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 28]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 28]
 
-                          openid-sse-framework                  Oct 2020
+                          openid-sse-framework                 June 2021
 
 
 7.1.3.2.  Removing a Subject
@@ -1621,9 +1621,9 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 28]
 
 
 
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 29]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 29]
 
-                          openid-sse-framework                  Oct 2020
+                          openid-sse-framework                 June 2021
 
 
    POST /sse/subjects:remove HTTP/1.1
@@ -1677,9 +1677,9 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 29]
 
 
 
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 30]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 30]
 
-                          openid-sse-framework                  Oct 2020
+                          openid-sse-framework                 June 2021
 
 
    state
@@ -1733,9 +1733,9 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 30]
 
 
 
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 31]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 31]
 
-                          openid-sse-framework                  Oct 2020
+                          openid-sse-framework                 June 2021
 
 
    +------+------------------------------------------------------------+
@@ -1789,9 +1789,9 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 31]
 
 
 
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 32]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 32]
 
-                          openid-sse-framework                  Oct 2020
+                          openid-sse-framework                 June 2021
 
 
  {
@@ -1845,9 +1845,9 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 32]
 
 
 
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 33]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 33]
 
-                          openid-sse-framework                  Oct 2020
+                          openid-sse-framework                 June 2021
 
 
 {
@@ -1901,9 +1901,9 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 33]
 
 
 
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 34]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 34]
 
-                          openid-sse-framework                  Oct 2020
+                          openid-sse-framework                 June 2021
 
 
 9.2.  Information Harvesting
@@ -1957,9 +1957,9 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 34]
 
 
 
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 35]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 35]
 
-                          openid-sse-framework                  Oct 2020
+                          openid-sse-framework                 June 2021
 
 
    when communicating with a given party in order to reduce the
@@ -2013,9 +2013,9 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 35]
 
 
 
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 36]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 36]
 
-                          openid-sse-framework                  Oct 2020
+                          openid-sse-framework                 June 2021
 
 
 11.1.  Security Event Token Profile
@@ -2069,9 +2069,9 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 36]
 
 
 
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 37]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 37]
 
-                          openid-sse-framework                  Oct 2020
+                          openid-sse-framework                 June 2021
 
 
 {
@@ -2125,9 +2125,9 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 37]
 
 
 
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 38]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 38]
 
-                          openid-sse-framework                  Oct 2020
+                          openid-sse-framework                 June 2021
 
 
    the Receiver to the Transmitter MAY be used, if the two parties have
@@ -2181,9 +2181,9 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 38]
 
 
 
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 39]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 39]
 
-                          openid-sse-framework                  Oct 2020
+                          openid-sse-framework                 June 2021
 
 
    o  SSE SETs MUST use explicit typing, as described in Section 11.1.4.
@@ -2237,20 +2237,14 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 39]
 
 
 
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 40]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 40]
 
-                          openid-sse-framework                  Oct 2020
+                          openid-sse-framework                 June 2021
 
 
 13.  References
 
 13.1.  Normative References
-
-   [CAEP]     Tulshibagwale, A., "Re-thinking Federated Identity with
-              the Continuous Access Evaluation Protocol", February 2019,
-              <https://cloud.google.com/blog/products/identity-security/
-              re-thinking-federated-identity-with-the-continuous-access-
-              evaluation-protocol>.
 
    [CLIENTCRED]
               Hardt, D., Ed., "The OAuth 2.0 Authorization Framework -
@@ -2259,27 +2253,21 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 40]
               <https://tools.ietf.org/html/rfc6749#section-4.4>.
 
    [DELIVERYPOLL]
-              Backman, A., Ed., Jones, M., Ed., Hunt, P., Ed.,
-              Scurtescu, M., Ansari, M., and A. Nadalin, "Poll-Based SET
-              Token Delivery Using HTTP", April 2018,
-              <https://tools.ietf.org/html/draft-ietf-secevent-http-
-              poll-00>.
+              Backman, A., Ed., Jones, M., Ed., Scurtescu, M., Ansari,
+              M., and A. Nadalin, "Poll-Based SET Token Delivery Using
+              HTTP", November 2020,
+              <https://www.rfc-editor.org/info/rfc8936>.
 
    [DELIVERYPUSH]
               Backman, A., Ed., Jones, M., Ed., Hunt, P., Ed.,
               Scurtescu, M., Ansari, M., and A. Nadalin, "Push-Based SET
-              Token Delivery Using HTTP", April 2018,
-              <https://tools.ietf.org/html/draft-ietf-secevent-http-
-              push-00>.
+              Token Delivery Using HTTP", November 2020,
+              <https://www.rfc-editor.org/info/rfc8935>.
 
    [IDTOKEN]  Sakimura, N., Bradley, J., Jones, M., de Medeiros, B., and
               C. Mortimore, "OpenID Connect Core 1.0 - ID Token", April
               2017, <http://openid.net/specs/openid-connect-core-
               1_0.html#IDToken>.
-
-   [MGMTAPI]  Scurtescu, M. and A. Backman, "Management API for SET
-              Event Streams", June 2017, <https://tools.ietf.org/html/
-              draft-scurtescu-secevent-simple-control-plane>.
 
    [OASIS.saml-core-2.0-os]
               Cantor, S., Kemp, J., Philpott, R., and E. Maler,
@@ -2288,27 +2276,27 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 40]
               <http://docs.oasis-open.org/security/saml/v2.0/saml-core-
               2.0-os.pdf>.
 
-
-
-
-
-
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 41]
-
-                          openid-sse-framework                  Oct 2020
-
-
    [OAUTH-DISCOVERY]
               Jones, M., Sakimura, N., and J. Bradley, "OAuth 2.0
-              Authorization Server Metadata - Version 10", March 2018,
-              <https://tools.ietf.org/html/draft-ietf-oauth-discovery-
-              10>.
+              Authorization Server Metadata - Version 10", June 2018,
+              <https://www.rfc-editor.org/info/rfc8414>.
 
-   [OIDC-DISCOVERY]
+   [OPENID-DISCOVERY]
               Sakimura, N., Bradley, J., Jones, M., and E. Jay, "OpenID
               Connect Discovery 1.0", November 2014,
               <https://openid.net/specs/openid-connect-discovery-
               1_0.html>.
+
+
+
+
+
+
+
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 41]
+
+                          openid-sse-framework                 June 2021
+
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -2345,34 +2333,94 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 41]
               "Security Event Token (SET)", April 2018,
               <https://www.rfc-editor.org/info/rfc8417>.
 
-
-
-
-
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 42]
-
-                          openid-sse-framework                  Oct 2020
-
-
    [SUBIDS]   Backman, A., Ed. and M. Scurtescu, "Subject Identifiers
-              for Security Event Tokens", September 2020,
-              <https://github.com/richanna/secevent/blob/master/draft-
-              ietf-secevent-subject-identifiers.txt>.
+              for Security Event Tokens", May 2021,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-
+              secevent-subject-identifiers>.
+
+13.2.  Non-Normative References
+
+   [CAEP]     Tulshibagwale, A., "Re-thinking Federated Identity with
+              the Continuous Access Evaluation Protocol", February 2019,
+              <https://cloud.google.com/blog/products/identity-security/
+              re-thinking-federated-identity-with-the-continuous-access-
+              evaluation-protocol>.
+
+
+
+
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 42]
+
+                          openid-sse-framework                 June 2021
+
+
+   [MGMTAPI]  Scurtescu, M. and A. Backman, "Management API for SET
+              Event Streams", June 2017, <https://tools.ietf.org/html/
+              draft-scurtescu-secevent-simple-control-plane>.
 
    [USECASES]
               Scurtescu, M., "Security Events RISC Use Cases", June
               2017, <https://tools.ietf.org/html/draft-scurtescu-
               secevent-risc-use-cases-00>.
 
-13.2.  URIs
+13.3.  URIs
 
    [1] https://datatracker.ietf.org/wg/secevent/about/
 
 Appendix A.  Acknowledgements
 
+   The authors wish to thank all members of the OpenID Foundation Shared
+   Signals and Events Working Group who contributed to the development
+   of this specification.
+
    Transmitter Configuration Discovery (Section 6) is based on both
-   OpenID Connect Discovery 1.0 [OIDC-DISCOVERY] and OAuth 2.0
+   OpenID Connect Discovery 1.0 [OPENID-DISCOVERY] and OAuth 2.0
    Authorization Server Metadata [OAUTH-DISCOVERY].
+
+Appendix B.  Notices
+
+   Copyright (c) 2021 The OpenID Foundation.
+
+   The OpenID Foundation (OIDF) grants to any Contributor, developer,
+   implementer, or other interested party a non-exclusive, royalty free,
+   worldwide copyright license to reproduce, prepare derivative works
+   from, distribute, perform and display, this Implementers Draft or
+   Final Specification solely for the purposes of (i) developing
+   specifications, and (ii) implementing Implementers Drafts and Final
+   Specifications based on such documents, provided that attribution be
+   made to the OIDF as the source of the material, but that such
+   attribution does not indicate an endorsement by the OIDF.
+
+   The technology described in this specification was made available
+   from contributions from various sources, including members of the
+   OpenID Foundation and others.  Although the OpenID Foundation has
+   taken steps to help ensure that the technology is available for
+   distribution, it takes no position regarding the validity or scope of
+   any intellectual property or other rights that might be claimed to
+   pertain to the implementation or use of the technology described in
+   this specification or the extent to which any license under such
+   rights might or might not be available; neither does it represent
+   that it has made any independent effort to identify any such rights.
+   The OpenID Foundation and the contributors to this specification make
+
+
+
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 43]
+
+                          openid-sse-framework                 June 2021
+
+
+   no (and hereby expressly disclaim any) warranties (express, implied,
+   or otherwise), including implied warranties of merchantability, non-
+   infringement, fitness for a particular purpose, or title, related to
+   this specification, and the entire risk as to implementing this
+   specification is assumed by the implementer.  The OpenID Intellectual
+   Property Rights policy requires contributors to offer a patent
+   promise not to assert certain patent claims against other
+   contributors and against implementers.  The OpenID Foundation invites
+   any interested party to bring to its attention any copyrights,
+   patents, patent applications, or other proprietary rights that may
+   cover technology that may be required to practice this specification.
 
 Authors' Addresses
 
@@ -2400,16 +2448,6 @@ Authors' Addresses
    Email: richanna@amazon.com
 
 
-
-
-
-
-
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 43]
-
-                          openid-sse-framework                  Oct 2020
-
-
    John Bradley
    Yubico
 
@@ -2423,42 +2461,4 @@ Tulshibagwale, et al.    Expires April 29, 2021                [Page 43]
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Tulshibagwale, et al.    Expires April 29, 2021                [Page 44]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 44]

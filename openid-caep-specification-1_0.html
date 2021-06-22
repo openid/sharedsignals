@@ -1,0 +1,1164 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head profile="http://www.w3.org/2006/03/hcard http://dublincore.org/documents/2008/08/04/dc-html/">
+  <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
+
+  <title>OpenID Continuous Access Evaluation Profile 1.0 - draft 01</title>
+
+  <style type="text/css" title="Xml2Rfc (sans serif)">
+  /*<![CDATA[*/
+	  a {
+	  text-decoration: none;
+	  }
+      /* info code from SantaKlauss at http://www.madaboutstyle.com/tooltip2.html */
+      a.info {
+          /* This is the key. */
+          position: relative;
+          z-index: 24;
+          text-decoration: none;
+      }
+      a.info:hover {
+          z-index: 25;
+          color: #FFF; background-color: #900;
+      }
+      a.info span { display: none; }
+      a.info:hover span.info {
+          /* The span will display just on :hover state. */
+          display: block;
+          position: absolute;
+          font-size: smaller;
+          top: 2em; left: -5em; width: 15em;
+          padding: 2px; border: 1px solid #333;
+          color: #900; background-color: #EEE;
+          text-align: left;
+      }
+	  a.smpl {
+	  color: black;
+	  }
+	  a:hover {
+	  text-decoration: underline;
+	  }
+	  a:active {
+	  text-decoration: underline;
+	  }
+	  address {
+	  margin-top: 1em;
+	  margin-left: 2em;
+	  font-style: normal;
+	  }
+	  body {
+	  color: black;
+	  font-family: verdana, helvetica, arial, sans-serif;
+	  font-size: 10pt;
+	  max-width: 55em;
+	  
+	  }
+	  cite {
+	  font-style: normal;
+	  }
+	  dd {
+	  margin-right: 2em;
+	  }
+	  dl {
+	  margin-left: 2em;
+	  }
+	
+	  ul.empty {
+	  list-style-type: none;
+	  }
+	  ul.empty li {
+	  margin-top: .5em;
+	  }
+	  dl p {
+	  margin-left: 0em;
+	  }
+	  dt {
+	  margin-top: .5em;
+	  }
+	  h1 {
+	  font-size: 14pt;
+	  line-height: 21pt;
+	  page-break-after: avoid;
+	  }
+	  h1.np {
+	  page-break-before: always;
+	  }
+	  h1 a {
+	  color: #333333;
+	  }
+	  h2 {
+	  font-size: 12pt;
+	  line-height: 15pt;
+	  page-break-after: avoid;
+	  }
+	  h3, h4, h5, h6 {
+	  font-size: 10pt;
+	  page-break-after: avoid;
+	  }
+	  h2 a, h3 a, h4 a, h5 a, h6 a {
+	  color: black;
+	  }
+	  img {
+	  margin-left: 3em;
+	  }
+	  li {
+	  margin-left: 2em;
+	  margin-right: 2em;
+	  }
+	  ol {
+	  margin-left: 2em;
+	  margin-right: 2em;
+	  }
+	  ol p {
+	  margin-left: 0em;
+	  }
+	  p {
+	  margin-left: 2em;
+	  margin-right: 2em;
+	  }
+	  pre {
+	  margin-left: 3em;
+	  background-color: lightyellow;
+	  padding: .25em;
+	  }
+	  pre.text2 {
+	  border-style: dotted;
+	  border-width: 1px;
+	  background-color: #f0f0f0;
+	  width: 69em;
+	  }
+	  pre.inline {
+	  background-color: white;
+	  padding: 0em;
+	  }
+	  pre.text {
+	  border-style: dotted;
+	  border-width: 1px;
+	  background-color: #f8f8f8;
+	  width: 69em;
+	  }
+	  pre.drawing {
+	  border-style: solid;
+	  border-width: 1px;
+	  background-color: #f8f8f8;
+	  padding: 2em;
+	  }
+	  table {
+	  margin-left: 2em;
+	  }
+	  table.tt {
+	  vertical-align: top;
+	  }
+	  table.full {
+	  border-style: outset;
+	  border-width: 1px;
+	  }
+	  table.headers {
+	  border-style: outset;
+	  border-width: 1px;
+	  }
+	  table.tt td {
+	  vertical-align: top;
+	  }
+	  table.full td {
+	  border-style: inset;
+	  border-width: 1px;
+	  }
+	  table.tt th {
+	  vertical-align: top;
+	  }
+	  table.full th {
+	  border-style: inset;
+	  border-width: 1px;
+	  }
+	  table.headers th {
+	  border-style: none none inset none;
+	  border-width: 1px;
+	  }
+	  table.left {
+	  margin-right: auto;
+	  }
+	  table.right {
+	  margin-left: auto;
+	  }
+	  table.center {
+	  margin-left: auto;
+	  margin-right: auto;
+	  }
+	  caption {
+	  caption-side: bottom;
+	  font-weight: bold;
+	  font-size: 9pt;
+	  margin-top: .5em;
+	  }
+	
+	  table.header {
+	  border-spacing: 1px;
+	  width: 95%;
+	  font-size: 10pt;
+	  color: white;
+	  }
+	  td.top {
+	  vertical-align: top;
+	  }
+	  td.topnowrap {
+	  vertical-align: top;
+	  white-space: nowrap; 
+	  }
+	  table.header td {
+	  background-color: gray;
+	  width: 50%;
+	  }
+	  table.header a {
+	  color: white;
+	  }
+	  td.reference {
+	  vertical-align: top;
+	  white-space: nowrap;
+	  padding-right: 1em;
+	  }
+	  thead {
+	  display:table-header-group;
+	  }
+	  ul.toc, ul.toc ul {
+	  list-style: none;
+	  margin-left: 1.5em;
+	  margin-right: 0em;
+	  padding-left: 0em;
+	  }
+	  ul.toc li {
+	  line-height: 150%;
+	  font-weight: bold;
+	  font-size: 10pt;
+	  margin-left: 0em;
+	  margin-right: 0em;
+	  }
+	  ul.toc li li {
+	  line-height: normal;
+	  font-weight: normal;
+	  font-size: 9pt;
+	  margin-left: 0em;
+	  margin-right: 0em;
+	  }
+	  li.excluded {
+	  font-size: 0pt;
+	  }
+	  ul p {
+	  margin-left: 0em;
+	  }
+	
+	  .comment {
+	  background-color: yellow;
+	  }
+	  .center {
+	  text-align: center;
+	  }
+	  .error {
+	  color: red;
+	  font-style: italic;
+	  font-weight: bold;
+	  }
+	  .figure {
+	  font-weight: bold;
+	  text-align: center;
+	  font-size: 9pt;
+	  }
+	  .filename {
+	  color: #333333;
+	  font-weight: bold;
+	  font-size: 12pt;
+	  line-height: 21pt;
+	  text-align: center;
+	  }
+	  .fn {
+	  font-weight: bold;
+	  }
+	  .hidden {
+	  display: none;
+	  }
+	  .left {
+	  text-align: left;
+	  }
+	  .right {
+	  text-align: right;
+	  }
+	  .title {
+	  color: #990000;
+	  font-size: 18pt;
+	  line-height: 18pt;
+	  font-weight: bold;
+	  text-align: center;
+	  margin-top: 36pt;
+	  }
+	  .vcardline {
+	  display: block;
+	  }
+	  .warning {
+	  font-size: 14pt;
+	  background-color: yellow;
+	  }
+	
+	
+	  @media print {
+	  .noprint {
+		display: none;
+	  }
+	
+	  a {
+		color: black;
+		text-decoration: none;
+	  }
+	
+	  table.header {
+		width: 90%;
+	  }
+	
+	  td.header {
+		width: 50%;
+		color: black;
+		background-color: white;
+		vertical-align: top;
+		font-size: 12pt;
+	  }
+	
+	  ul.toc a::after {
+		content: leader('.') target-counter(attr(href), page);
+	  }
+	
+	  ul.ind li li a {
+		content: target-counter(attr(href), page);
+	  }
+	
+	  .print2col {
+		column-count: 2;
+		-moz-column-count: 2;
+		column-fill: auto;
+	  }
+	  }
+	
+	  @page {
+	  @top-left {
+		   content: "Internet-Draft"; 
+	  } 
+	  @top-right {
+		   content: "December 2010"; 
+	  } 
+	  @top-center {
+		   content: "Abbreviated Title";
+	  } 
+	  @bottom-left {
+		   content: "Doe"; 
+	  } 
+	  @bottom-center {
+		   content: "Expires June 2011"; 
+	  } 
+	  @bottom-right {
+		   content: "[Page " counter(page) "]"; 
+	  } 
+	  }
+	
+	  @page:first { 
+		@top-left {
+		  content: normal;
+		}
+		@top-right {
+		  content: normal;
+		}
+		@top-center {
+		  content: normal;
+		}
+	  }
+  /*]]>*/
+  </style>
+
+  <link href="#rfc.toc" rel="Contents">
+<link href="#rfc.section.1" rel="Chapter" title="1 Introduction">
+<link href="#rfc.section.1.1" rel="Chapter" title="1.1 Notational Considerations">
+<link href="#rfc.section.2" rel="Chapter" title="2 Optional Event Claims">
+<link href="#rfc.section.3" rel="Chapter" title="3 Event Types">
+<link href="#rfc.section.3.1" rel="Chapter" title="3.1 Session Revoked">
+<link href="#rfc.section.3.1.1" rel="Chapter" title="3.1.1 Event-Specific Claims">
+<link href="#rfc.section.3.1.2" rel="Chapter" title="3.1.2 Examples">
+<link href="#rfc.section.3.2" rel="Chapter" title="3.2 Token Claims Change">
+<link href="#rfc.section.3.2.1" rel="Chapter" title="3.2.1 Event-Specific Claims">
+<link href="#rfc.section.3.2.2" rel="Chapter" title="3.2.2 Examples">
+<link href="#rfc.section.3.3" rel="Chapter" title="3.3 Credential Change">
+<link href="#rfc.section.3.3.1" rel="Chapter" title="3.3.1 Event-Specific Claims">
+<link href="#rfc.section.3.3.2" rel="Chapter" title="3.3.2 Examples">
+<link href="#rfc.section.3.4" rel="Chapter" title="3.4 Assurance Level Change">
+<link href="#rfc.section.3.4.1" rel="Chapter" title="3.4.1 Event-Specific Claims">
+<link href="#rfc.section.3.4.2" rel="Chapter" title="3.4.2 Examples">
+<link href="#rfc.section.3.5" rel="Chapter" title="3.5 Device Compliance Change">
+<link href="#rfc.section.3.5.1" rel="Chapter" title="3.5.1 Event-Specific Claims">
+<link href="#rfc.section.3.5.2" rel="Chapter" title="3.5.2 Examples">
+<link href="#rfc.references" rel="Chapter" title="4 Normative References">
+<link href="#rfc.appendix.A" rel="Chapter" title="A Acknowledgements">
+<link href="#rfc.appendix.B" rel="Chapter" title="B Notices">
+<link href="#rfc.authors" rel="Chapter">
+
+
+  <meta name="generator" content="xml2rfc version 3.8.0 - https://tools.ietf.org/tools/xml2rfc" />
+  <link rel="schema.dct" href="http://purl.org/dc/terms/" />
+
+  <meta name="dct.creator" content="Cappalli, T. and A. Tulshibagwale" />
+  <meta name="dct.identifier" content="urn:ietf:id:openid-caep-specification-1_0" />
+  <meta name="dct.issued" scheme="ISO8601" content="2021-06-08" />
+  <meta name="dct.abstract" content="This document defines the Continuous Access Evaluation Profile (CAEP) of the Shared Signals and Events Framework . It specifies a set of event types conforming to the SSE Framework. These event types are intended to be used between cooperating Transmitters and Receivers such that Transmitters may send continuous updates using which Receivers can attenuate access to shared human or robotic users, devices, sessions and applications. " />
+  <meta name="description" content="This document defines the Continuous Access Evaluation Profile (CAEP) of the Shared Signals and Events Framework . It specifies a set of event types conforming to the SSE Framework. These event types are intended to be used between cooperating Transmitters and Receivers such that Transmitters may send continuous updates using which Receivers can attenuate access to shared human or robotic users, devices, sessions and applications. " />
+
+</head>
+
+<body>
+
+  <table class="header">
+    <tbody>
+    
+    	<tr>
+<td class="left"></td>
+<td class="right">T. Cappalli</td>
+</tr>
+<tr>
+<td class="left"></td>
+<td class="right">Microsoft</td>
+</tr>
+<tr>
+<td class="left"></td>
+<td class="right">A. Tulshibagwale</td>
+</tr>
+<tr>
+<td class="left"></td>
+<td class="right">Google</td>
+</tr>
+<tr>
+<td class="left"></td>
+<td class="right">June 08, 2021</td>
+</tr>
+
+    	
+    </tbody>
+  </table>
+
+  <p class="title">OpenID Continuous Access Evaluation Profile 1.0 - draft 01<br />
+  <span class="filename">openid-caep-specification-1_0</span></p>
+  
+  <h1 id="rfc.abstract"><a href="#rfc.abstract">Abstract</a></h1>
+<p>This document defines the Continuous Access Evaluation Profile (CAEP) of the Shared Signals and Events Framework <a href="#SSE-FRAMEWORK" class="xref">[SSE-FRAMEWORK]</a>. It specifies a set of event types conforming to the SSE Framework. These event types are intended to be used between cooperating Transmitters and Receivers such that Transmitters may send continuous updates using which Receivers can attenuate access to shared human or robotic users, devices, sessions and applications.</p>
+
+  
+  <hr class="noprint" />
+  <h1 class="np" id="rfc.toc"><a href="#rfc.toc">Table of Contents</a></h1>
+  <ul class="toc">
+
+  	<li>1.   <a href="#rfc.section.1">Introduction</a>
+</li>
+<ul><li>1.1.   <a href="#rfc.section.1.1">Notational Considerations</a>
+</li>
+</ul><li>2.   <a href="#rfc.section.2">Optional Event Claims</a>
+</li>
+<li>3.   <a href="#rfc.section.3">Event Types</a>
+</li>
+<ul><li>3.1.   <a href="#rfc.section.3.1">Session Revoked</a>
+</li>
+<ul><li>3.1.1.   <a href="#rfc.section.3.1.1">Event-Specific Claims</a>
+</li>
+<li>3.1.2.   <a href="#rfc.section.3.1.2">Examples</a>
+</li>
+</ul><li>3.2.   <a href="#rfc.section.3.2">Token Claims Change</a>
+</li>
+<ul><li>3.2.1.   <a href="#rfc.section.3.2.1">Event-Specific Claims</a>
+</li>
+<li>3.2.2.   <a href="#rfc.section.3.2.2">Examples</a>
+</li>
+</ul><li>3.3.   <a href="#rfc.section.3.3">Credential Change</a>
+</li>
+<ul><li>3.3.1.   <a href="#rfc.section.3.3.1">Event-Specific Claims</a>
+</li>
+<li>3.3.2.   <a href="#rfc.section.3.3.2">Examples</a>
+</li>
+</ul><li>3.4.   <a href="#rfc.section.3.4">Assurance Level Change</a>
+</li>
+<ul><li>3.4.1.   <a href="#rfc.section.3.4.1">Event-Specific Claims</a>
+</li>
+<li>3.4.2.   <a href="#rfc.section.3.4.2">Examples</a>
+</li>
+</ul><li>3.5.   <a href="#rfc.section.3.5">Device Compliance Change</a>
+</li>
+<ul><li>3.5.1.   <a href="#rfc.section.3.5.1">Event-Specific Claims</a>
+</li>
+<li>3.5.2.   <a href="#rfc.section.3.5.2">Examples</a>
+</li>
+</ul></ul><li>4.   <a href="#rfc.references">Normative References</a>
+</li>
+<li>Appendix A.   <a href="#rfc.appendix.A">Acknowledgements</a>
+</li>
+<li>Appendix B.   <a href="#rfc.appendix.B">Notices</a>
+</li>
+<li><a href="#rfc.authors">Authors' Addresses</a>
+</li>
+
+
+  </ul>
+
+  <h1 id="rfc.section.1">
+<a href="#rfc.section.1">1.</a> <a href="#introduction" id="introduction">Introduction</a>
+</h1>
+<p id="rfc.section.1.p.1">CAEP is the application of the Shared Signals and Events Profile of IETF Security Events 1.0 <a href="#SSE-FRAMEWORK" class="xref">[SSE-FRAMEWORK]</a> (SSE Profile) to ensure access security in a network of cooperating providers. CAEP specifies a set of event-types that conform to the SSE Profile. This document specifies the event-types required to achieve this goal.</p>
+<h1 id="rfc.section.1.1">
+<a href="#rfc.section.1.1">1.1.</a> <a href="#notational-considerations" id="notational-considerations">Notational Considerations</a>
+</h1>
+<p id="rfc.section.1.1.p.1">The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in BCP 14 <a href="#RFC2119" class="xref">[RFC2119]</a> <a href="#RFC8174" class="xref">[RFC8174]</a> when, and only when, they appear in all capitals, as shown here.</p>
+<h1 id="rfc.section.2">
+<a href="#rfc.section.2">2.</a> <a href="#optional-event-claims" id="optional-event-claims">Optional Event Claims</a>
+</h1>
+<p id="rfc.section.2.p.1">The following claims are optional unless otherwise specified in the event definition.</p>
+<p></p>
+
+<dl>
+<dt>event_timestamp</dt>
+<dd style="margin-left: 8">OPTIONAL, JSON number: the time at which the event described by this SET occurred. Its value is a JSON number representing the number of seconds from 1970-01-01T0:0:0Z as measured in UTC until the date/time.</dd>
+<dt>initiating_entity</dt>
+<dd style="margin-left: 8">OPTIONAL, JSON string: describes the entity that invoked the event.</dd>
+<dt></dt>
+<dd style="margin-left: 8">This MUST be one of the following strings: <ul>
+<li>
+<samp>admin</samp>:    an administrative action triggered the event</li>
+<li>
+<samp>user</samp>:     an end-user action triggered the event</li>
+<li>
+<samp>policy</samp>:   a policy evaluation triggered the event</li>
+<li>
+<samp>system</samp>:   a system or platform assertion triggered the event</li>
+</ul>
+<p> </p>
+</dd>
+<dt>reason_admin</dt>
+<dd style="margin-left: 8">OPTIONAL, JSON object: a localizable administrative message intended for logging and auditing. The object MUST contain one or more key/value pairs, with a BCP47 <a href="#RFC5646" class="xref">[RFC5646]</a> language tag as the key and the locale-specific administrative message as the value.</dd>
+</dl>
+<div id="rfc.figure.1"></div>
+<div id="optional-claims-reason-admin-example"></div>
+<pre>
+{
+    "reason_admin": {
+        "en": "Landspeed Policy Violation: C076E82F",
+        "de": "Landspeed-Richtlinienverstoss: C076E82F",
+        "es-410": "Violacion de la politica de landspeed: C076E82F"
+    }
+}
+</pre>
+<p class="figure">Figure 1: Example: Administrative reason information with multiple languages</p>
+<p></p>
+
+<dl>
+<dt>reason_user</dt>
+<dd style="margin-left: 8">OPTIONAL, JSON object: a localizable user-friendly message for display to an end-user. The object MUST contain one or more key/value pairs, with a BCP47 <a href="#RFC5646" class="xref">[RFC5646]</a> language tag as the key and the locale-specific end-user message as the value.</dd>
+</dl>
+<div id="rfc.figure.2"></div>
+<div id="optional-claims-reason-user-example"></div>
+<pre>
+{
+    "reason_user": {
+        "en": "Access attempt from multiple regions.",
+        "de": "Zugriffsversuch aus mehreren Regionen.",
+        "es-410": "Intento de acceso desde varias regiones."
+    }
+}
+</pre>
+<p class="figure">Figure 2: Example: End user reason information with multiple languages</p>
+<h1 id="rfc.section.3">
+<a href="#rfc.section.3">3.</a> <a href="#event-types" id="event-types">Event Types</a>
+</h1>
+<p id="rfc.section.3.p.1">The base URI for CAEP event types is:</p>
+<p><samp>https://schemas.openid.net/secevent/caep/event-type/</samp></p>
+<h1 id="rfc.section.3.1">
+<a href="#rfc.section.3.1">3.1.</a> <a href="#session-revoked" id="session-revoked">Session Revoked</a>
+</h1>
+<p id="rfc.section.3.1.p.1">Event Type URI:</p>
+<p><samp>https://schemas.openid.net/secevent/caep/event-type/session-revoked</samp></p>
+<p id="rfc.section.3.1.p.3">Session Revoked signals that the session identified by the subject has been revoked. The explicit session identifier may be directly referenced in the subject or other properties of the session may be included to allow the receiver to identify applicable sessions.</p>
+<p id="rfc.section.3.1.p.4">When a Complex Claim is used as the subject, the revocation event applies to any session derived from matching those combined claims.</p>
+<p id="rfc.section.3.1.p.5">The actual reason why the session was revoked might be specified with the nested <samp>reason_admin</samp> and/or <samp>reason_user</samp> claims described in <a href="#optional-event-claims" class="xref">Section 2</a>.</p>
+<h1 id="rfc.section.3.1.1">
+<a href="#rfc.section.3.1.1">3.1.1.</a> <a href="#session-revoked-claims" id="session-revoked-claims">Event-Specific Claims</a>
+</h1>
+<p id="rfc.section.3.1.1.p.1">There are no event-specific claims for this event type.</p>
+<p id="rfc.section.3.1.1.p.2">When <samp>event_timestamp</samp> is included, its value MUST represent the time at which the session revocation occurred.</p>
+<h1 id="rfc.section.3.1.2">
+<a href="#rfc.section.3.1.2">3.1.2.</a> <a href="#session-revoked-examples" id="session-revoked-examples">Examples</a>
+</h1>
+<p id="rfc.section.3.1.2.p.1">NOTE: The event type URI is wrapped, the backslash is the continuation character.</p>
+<div id="rfc.figure.3"></div>
+<div id="session-revoked-example-session-id-req"></div>
+<pre>
+{
+    "iss": "https://idp.example.com/123456789/",
+    "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
+    "iat": 1615305159,
+    "aud": "https://sp.example.com/caep",
+    "events": {
+        "https://schemas.openid.net/secevent/caep/event-type/\
+        session-revoked": {
+            "subject": {
+                "format": "opaque",
+                "id": "dMTlD|1600802906337.16|16008.16"
+            },
+            "event_timestamp": 1615304991643
+        }
+    }
+}
+</pre>
+<p class="figure">Figure 3: Example: Session Revoked - Required claims + Simple Subject</p>
+<div id="rfc.figure.4"></div>
+<div id="session-revoked-example-session-id"></div>
+<pre>
+{
+    "iss": "https://idp.example.com/123456789/",
+    "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
+    "iat": 1615305159,
+    "aud": "https://sp.example.com/caep",
+    "events": {
+        "https://schemas.openid.net/secevent/caep/event-type/\
+        session-revoked": {
+            "subject": {
+                "session": {
+                  "format": "opaque",
+                  "id": "dMTlD|1600802906337.16|16008.16"
+                },
+                "user": {
+                  "format": "iss_sub",
+                  "iss": "https://idp.example.com/123456789/",
+                  "sub": "99beb27c-c1c2-4955-882a-e0dc4996fcbc"
+                },
+                "tenant": {
+                  "format": "opaque",
+                  "id": "123456789"
+                }
+            },
+            "initiating_entity": "policy",
+            "reason_admin": {
+                "en": "Landspeed Policy Violation: C076E82F"
+            },
+            "reason_user": {
+                "en": "Access attempt from multiple regions.",
+                "es-410": "Intento de acceso desde varias regiones."
+            },
+            "event_timestamp": 1615304991643
+        }
+    }
+}
+</pre>
+<p class="figure">Figure 4: Example: Session Revoked - Complex Subject describing user + session ID + device (includes optional claims)</p>
+<div id="rfc.figure.5"></div>
+<div id="session-revoked-example-user-sub"></div>
+<pre>
+{
+    "iss": "https://idp.example.com/123456789/",
+    "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
+    "iat": 1615305159,
+    "aud": "https://sp.example.com/caep",
+    "sub": "jane.smith@example.com",
+    "events": {
+        "https://schemas.openid.net/secevent/caep/event-type/\
+        session-revoked": {
+            "initiating_entity": "policy",
+            "reason_admin": {
+                "en": "Landspeed Policy Violation: C076E82F"
+            },
+            "reason_user": {
+                "en": "Access attempt from multiple regions.",
+                "es-410": "Intento de acceso desde varias regiones."
+            },
+            "event_timestamp": 1615304991643
+        }
+    }
+}
+</pre>
+<p class="figure">Figure 5: Example: Session Revoked - subject as `sub` claim (includes optional claims)</p>
+<div id="rfc.figure.6"></div>
+<div id="session-revoked-example-user-device"></div>
+<pre>
+{
+    "iss": "https://idp.example.com/123456789/",
+    "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
+    "iat": 1615305159,
+    "aud": "https://sp.example.com/caep",
+    "events": {
+        "https://schemas.openid.net/secevent/caep/event-type/\
+        session-revoked": {
+            "subject": {
+                "user": {
+                    "format": "iss_sub",
+                    "iss": "https://idp.example.com/123456789/",
+                    "sub": "jane.smith@example.com"
+                },
+                "device": {
+                    "format": "iss_sub",
+                    "iss": "https://idp.example.com/123456789/",
+                    "sub": "e9297990-14d2-42ec-a4a9-4036db86509a"
+                },
+                "tenant": {
+                  "format": "opaque",
+                  "id": "123456789"
+                }
+            },
+            "initiating_entity": "policy",
+            "reason_admin": {
+                "en": "Policy Violation: C076E822"
+            },
+            "reason_user": {
+                "en": "This device is no longer compliant.",
+                "it": "Questo dispositivo non e piu conforme."
+            },
+            "event_timestamp": 1615304991643
+        }
+    }
+}
+</pre>
+<p class="figure">Figure 6: Example: Session Revoked - Complex Subject describing user + device + tenant (includes optional claims)</p>
+<h1 id="rfc.section.3.2">
+<a href="#rfc.section.3.2">3.2.</a> <a href="#token-claims-change" id="token-claims-change">Token Claims Change</a>
+</h1>
+<p id="rfc.section.3.2.p.1">Event Type URI:</p>
+<p><samp>https://schemas.openid.net/secevent/caep/event-type/token-claims-change</samp></p>
+<p id="rfc.section.3.2.p.3">Token Claims Change signals that a claim in a token, identified by the subject claim, has changed.</p>
+<p id="rfc.section.3.2.p.4">The actual reason why the claims change occurred might be specified with the nested <samp>reason_admin</samp> and/or <samp>reason_user</samp> claims made in <a href="#optional-event-claims" class="xref">Section 2</a>.</p>
+<h1 id="rfc.section.3.2.1">
+<a href="#rfc.section.3.2.1">3.2.1.</a> <a href="#token-claims-change-claims" id="token-claims-change-claims">Event-Specific Claims</a>
+</h1>
+<p></p>
+
+<dl>
+<dt>claims</dt>
+<dd style="margin-left: 8">REQUIRED, JSON object: one or more claims with their new value(s)</dd>
+</dl>
+<p id="rfc.section.3.2.1.p.2">When <samp>event_timestamp</samp> is included, its value MUST represent the time at which the claim value(s) changed.</p>
+<h1 id="rfc.section.3.2.2">
+<a href="#rfc.section.3.2.2">3.2.2.</a> <a href="#token-claims-change-examples" id="token-claims-change-examples">Examples</a>
+</h1>
+<p id="rfc.section.3.2.2.p.1">NOTE: The event type URI is wrapped, the backslash is the continuation character.</p>
+<div id="rfc.figure.7"></div>
+<div id="token-claims-change-example-oidc"></div>
+<pre>
+{
+    "iss": "https://idp.example.com/987654321/",
+    "jti": "9afce1e4e642b165fcaacdd0e7aa4903",
+    "iat": 1615305159,
+    "aud": "https://sp.example2.net/caep",
+    "events": {
+        "https://schemas.openid.net/secevent/caep/event-type/\
+        token-claims-change": {
+            "subject": {
+                "format": "jwt_id",
+                "iss": "https://idp.example.com/987654321/",
+                "jti": "f61t6e20zdo3px56gepu8rzlsp4c1dpc0fx7"
+            },
+            "event_timestamp": 1615304991643,
+            "claims": {
+                "role": "ro-admin"
+            }
+        }
+    }
+}
+</pre>
+<p class="figure">Figure 7: Example: OIDC ID Token Claims Change - Required claims only</p>
+<div id="rfc.figure.8"></div>
+<div id="token-claims-change-example-oidc-optional"></div>
+<pre>
+{
+    "iss": "https://idp.example.com/987654321/",
+    "jti": "9afce1e4e642b165fcaacdd0e7aa4903",
+    "iat": 1615305159,
+    "aud": "https://sp.example2.net/caep",
+    "events": {
+        "https://schemas.openid.net/secevent/caep/event-type/\
+        token-claims-change": {
+            "subject": {
+                "format": "jwt_id",
+                "iss": "https://idp.example.com/987654321/",
+                "jti": "f61t6e20zdo3px56gepu8rzlsp4c1dpc0fx7"
+            },
+            "event_timestamp": 1615304991643,
+            "initiating_entity": "policy",
+            "reason_admin": {
+                "en": "User left trusted network: CorpNet3"
+            },
+            "reason_user": {
+                "en": "You're no longer connected to a trusted network.",
+                "it": "Non sei piu connesso a una rete attendibile."
+            },
+
+            "claims": {
+                "trusted_network": "false"
+            }
+        }
+    }
+}
+</pre>
+<p class="figure">Figure 8: Example: OIDC ID Token Claims Change - Optional claims</p>
+<div id="rfc.figure.9"></div>
+<div id="token-claims-change-example-saml"></div>
+<pre>
+{
+    "iss": "https://idp.example.com/987654321/",
+    "jti": "dae94fed5f459881efa38b65c6772ddc",
+    "iat": 1615305159,
+    "aud": "https://sp.example2.net/caep",
+    "events": {
+        "https://schemas.openid.net/secevent/caep/event-type/\
+        token-claims-change": {
+            "subject": {
+                "format": "saml_assertion_id",
+                "issuer": "https://idp.example.com/987654321/",
+                "assertion_id": "_a75adf55-01d7-dbd8372ebdfc"
+            },
+            "event_timestamp": 1615304991643,
+            "claims": {
+                "http://schemas.xmlsoap.org/ws/2005/05/identity/\
+                claims/role": "ro-admin"
+            }
+        }
+    }
+}
+</pre>
+<p class="figure">Figure 9: Example: SAML Assertion Claims Change - Required claims only</p>
+<h1 id="rfc.section.3.3">
+<a href="#rfc.section.3.3">3.3.</a> <a href="#credential-change" id="credential-change">Credential Change</a>
+</h1>
+<p id="rfc.section.3.3.p.1">Event Type URI:</p>
+<p><samp>https://schemas.openid.net/secevent/caep/event-type/credential-change</samp></p>
+<p id="rfc.section.3.3.p.3">The Credential Change event signals that a credential was created, changed, revoked or deleted. Credential Change scenarios include:</p>
+<p></p>
+
+<ul>
+<li>password/PIN change/reset</li>
+<li>certificate enrollment, renewal, revocation and deletion</li>
+<li>second factor / passwordless credential enrollment or deletion (U2F, FIDO2, OTP, app-based)</li>
+</ul>
+<p id="rfc.section.3.3.p.5">The actual reason why the credential change occurred might be specified with the nested <samp>reason_admin</samp> and/or <samp>reason_user</samp> claims made in <a href="#optional-event-claims" class="xref">Section 2</a>.</p>
+<h1 id="rfc.section.3.3.1">
+<a href="#rfc.section.3.3.1">3.3.1.</a> <a href="#credential-change-claims" id="credential-change-claims">Event-Specific Claims</a>
+</h1>
+<p></p>
+
+<dl>
+<dt>credential_type</dt>
+<dd style="margin-left: 8">REQUIRED, JSON string: This MUST be one of the following strings, or any other credential type supported mutually by the Transmitter and the Receiver.  <ul>
+<li><samp>password</samp></li>
+<li><samp>pin</samp></li>
+<li><samp>x509</samp></li>
+<li><samp>fido2-platform</samp></li>
+<li><samp>fido2-roaming</samp></li>
+<li><samp>fido-u2f</samp></li>
+<li><samp>verifiable-credential</samp></li>
+<li><samp>phone-voice</samp></li>
+<li><samp>phone-sms</samp></li>
+<li><samp>app</samp></li>
+</ul>
+<p> </p>
+</dd>
+<dt>change_type</dt>
+<dd style="margin-left: 8">REQUIRED, JSON string: This MUST be one of the following strings: <ul>
+<li><samp>create</samp></li>
+<li><samp>revoke</samp></li>
+<li><samp>update</samp></li>
+<li><samp>delete</samp></li>
+</ul>
+<p> </p>
+</dd>
+<dt>friendly_name</dt>
+<dd style="margin-left: 8">OPTIONAL, JSON string: credential friendly name</dd>
+<dt>x509_issuer</dt>
+<dd style="margin-left: 8">OPTIONAL, JSON string: issuer of the X.509 certificate as defined in <a href="#RFC5280" class="xref">[RFC5280]</a>
+</dd>
+<dt>x509_serial</dt>
+<dd style="margin-left: 8">OPTIONAL, JSON string: serial number of the X.509 certificate as defined in <a href="#RFC5280" class="xref">[RFC5280]</a>
+</dd>
+<dt>fido2_aaguid</dt>
+<dd style="margin-left: 8">OPTIONAL, JSON string: FIDO2 Authenticator Attestation GUID as defined in <a href="#WebAuthn" class="xref">[WebAuthn]</a>
+</dd>
+</dl>
+<p id="rfc.section.3.3.1.p.2">When <samp>event_timestamp</samp> is included, its value MUST represent the time at which the credential change occurred.</p>
+<h1 id="rfc.section.3.3.2">
+<a href="#rfc.section.3.3.2">3.3.2.</a> <a href="#credential-change-examples" id="credential-change-examples">Examples</a>
+</h1>
+<p id="rfc.section.3.3.2.p.1">NOTE: The event type URI is wrapped, the backslash is the continuation character.</p>
+<div id="rfc.figure.10"></div>
+<div id="credential-change-example-fido2"></div>
+<pre>
+{
+    "iss": "https://idp.example.com/3456789/",
+    "jti": "07efd930f0977e4fcc1149a733ce7f78",
+    "iat": 1615305159,
+    "aud": "https://sp.example2.net/caep",
+    "events": {
+        "https://schemas.openid.net/secevent/caep/event-type/\
+        credential-change": {
+            "subject": {
+                "format": "iss_sub",
+                "iss": "https://idp.example.com/3456789/",
+                "sub": "jane.smith@example.com"
+            },
+            "credential_type": "fido2-roaming",
+            "change_type": "create",
+            "fido2_aaguid": "accced6a-63f5-490a-9eea-e59bc1896cfc",
+            "friendly_name": "Jane's USB authenticator",
+            "initiating_entity": "user",
+            "reason_admin": {
+                "en": "User self-enrollment"
+            },
+            "event_timestamp": 1615304991643
+        }
+    }
+}
+</pre>
+<p class="figure">Figure 10: Example: Provisioning a new FIDO2 authenticator - Simple Subject + optional claims</p>
+<h1 id="rfc.section.3.4">
+<a href="#rfc.section.3.4">3.4.</a> <a href="#assurance-level-change" id="assurance-level-change">Assurance Level Change</a>
+</h1>
+<p id="rfc.section.3.4.p.1">Event Type URI:</p>
+<p><samp>https://schemas.openid.net/secevent/caep/event-type/assurance-level-change</samp></p>
+<p id="rfc.section.3.4.p.3">The Assurance Level Change event signals that there has been a change in authentication method since the initial user login. This change can be from a weak authentication method to a strong authentication method, or vice versa.</p>
+<p id="rfc.section.3.4.p.4">In the first scenario, Assurance Level Change will an increase, while in the second scenario it will be a decrease. For example, a user can start a session with Service Provider A using single factor authentication (such as a password).  The user can then open another session with Service Provider B using two-factor authentication (such as OTP). In this scenario an increase Assurance Level Change event will signal to Service Provider A that user has authenticated with a stronger authentication method.</p>
+<p id="rfc.section.3.4.p.5">The actual reason why the assurance level changed might be specified with the nested <samp>reason_admin</samp> and/or <samp>reason_user</samp> claims made in <a href="#optional-event-claims" class="xref">Section 2</a>.</p>
+<h1 id="rfc.section.3.4.1">
+<a href="#rfc.section.3.4.1">3.4.1.</a> <a href="#assurance-level-change-claims" id="assurance-level-change-claims">Event-Specific Claims</a>
+</h1>
+<p></p>
+
+<dl>
+<dt>current_level</dt>
+<dd style="margin-left: 8">REQUIRED, JSON string: the current NIST Authenticator Assurance Level (AAL) as defined in <a href="#SP800-63R3" class="xref">[SP800-63R3]</a>
+</dd>
+<dt></dt>
+<dd style="margin-left: 8">This string MUST be one of the following strings: <ul>
+<li><samp>nist-aal1</samp></li>
+<li><samp>nist-aal2</samp></li>
+<li><samp>nist-aal3</samp></li>
+</ul>
+<p> </p>
+</dd>
+<dt>previous_level</dt>
+<dd style="margin-left: 8">REQUIRED, JSON string: the previous NIST Authenticator Assurance Level (AAL) as defined in <a href="#SP800-63R3" class="xref">[SP800-63R3]</a>
+</dd>
+<dt></dt>
+<dd style="margin-left: 8">This MUST be one of the following strings: <ul>
+<li><samp>nist-aal1</samp></li>
+<li><samp>nist-aal2</samp></li>
+<li><samp>nist-aal3</samp></li>
+</ul>
+<p> </p>
+</dd>
+<dt>change_direction</dt>
+<dd style="margin-left: 8">REQUIRED, JSON string: the Authenticator Assurance Level increased or decreased</dd>
+<dt></dt>
+<dd style="margin-left: 8">This MUST be one of the following strings: <ul>
+<li><samp>increase</samp></li>
+<li><samp>decrease</samp></li>
+</ul>
+<p> </p>
+</dd>
+</dl>
+<p id="rfc.section.3.4.1.p.2">When <samp>event_timestamp</samp> is included, its value MUST represent the time at which the assurance level changed.</p>
+<h1 id="rfc.section.3.4.2">
+<a href="#rfc.section.3.4.2">3.4.2.</a> <a href="#assurance-level-change-examples" id="assurance-level-change-examples">Examples</a>
+</h1>
+<p id="rfc.section.3.4.2.p.1">NOTE: The event type URI is wrapped, the backslash is the continuation character.</p>
+<div id="rfc.figure.11"></div>
+<div id="assurance-level-change-examples-al-increase"></div>
+<pre>
+{
+    "iss": "https://idp.example.com/3456789/",
+    "jti": "07efd930f0977e4fcc1149a733ce7f78",
+    "iat": 1615305159,
+    "aud": "https://sp.example2.net/caep",
+    "events": {
+        "https://schemas.openid.net/secevent/caep/event-type/\
+        assurance-level-change": {
+            "subject": {
+                "format": "iss_sub",
+                "iss": "https://idp.example.com/3456789/",
+                "sub": "jane.smith@example.com"
+            },
+            "current_level": "nist-aal2",
+            "previous_level": "nist-aal1",
+            "change_direction": "increase",
+            "initiating_entity": "user",
+            "event_timestamp": 1615304991643
+        }
+    }
+}
+</pre>
+<p class="figure">Figure 11: Example: Assurance Level Increase - Simple Subject + optional claims</p>
+<h1 id="rfc.section.3.5">
+<a href="#rfc.section.3.5">3.5.</a> <a href="#device-compliance-change" id="device-compliance-change">Device Compliance Change</a>
+</h1>
+<p id="rfc.section.3.5.p.1">Event Type URI:</p>
+<p><samp>https://schemas.openid.net/secevent/caep/event-type/device-compliance-change</samp></p>
+<p id="rfc.section.3.5.p.3">Device Compliance Change signals that a device's compliance status has changed.</p>
+<p id="rfc.section.3.5.p.4">The actual reason why the status change occurred might be specified with the nested <samp>reason_admin</samp> and/or <samp>reason_user</samp> claims made in <a href="#optional-event-claims" class="xref">Section 2</a>.</p>
+<h1 id="rfc.section.3.5.1">
+<a href="#rfc.section.3.5.1">3.5.1.</a> <a href="#device-compliance-change-claims" id="device-compliance-change-claims">Event-Specific Claims</a>
+</h1>
+<p></p>
+
+<dl>
+<dt>previous_status</dt>
+<dd style="margin-left: 8">REQUIRED, JSON string: the compliance status prior to the change that triggered the event</dd>
+<dt></dt>
+<dd style="margin-left: 8">This MUST be one of the following strings: <ul>
+<li><samp>compliant</samp></li>
+<li><samp>not-compliant</samp></li>
+</ul>
+<p> </p>
+</dd>
+<dt>current_status</dt>
+<dd style="margin-left: 8">REQUIRED, JSON string: the current status that triggered the event</dd>
+<dt></dt>
+<dd style="margin-left: 8">This MUST be one of the following strings: <ul>
+<li><samp>compliant</samp></li>
+<li><samp>not-compliant</samp></li>
+</ul>
+<p> </p>
+</dd>
+</dl>
+<p id="rfc.section.3.5.1.p.2">When <samp>event_timestamp</samp> is included, its value MUST represent the time at which the device compliance status changed.</p>
+<h1 id="rfc.section.3.5.2">
+<a href="#rfc.section.3.5.2">3.5.2.</a> <a href="#device-compliance-change-examples" id="device-compliance-change-examples">Examples</a>
+</h1>
+<p id="rfc.section.3.5.2.p.1">NOTE: The event type URI is wrapped, the backslash is the continuation character.</p>
+<div id="rfc.figure.12"></div>
+<div id="device-compliance-change-examples-out-of-compliance"></div>
+<pre>
+{
+    "iss": "https://idp.example.com/123456789/",
+    "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
+    "iat": 1615305159,
+    "aud": "https://sp.example.com/caep",
+    "events": {
+        "https://schemas.openid.net/secevent/caep/event-type/\
+        device-compliance-change": {
+            "subject": {
+                "device": {
+                    "format": "iss_sub",
+                    "iss": "https://idp.example.com/123456789/",
+                    "sub": "e9297990-14d2-42ec-a4a9-4036db86509a"
+                },
+                "tenant": {
+                    "format": "opaque",
+                    "id": "123456789"
+                }
+            },
+            "current_status": "not-compliant",
+            "previous_status": "compliant",
+            "initiating_entity": "policy",
+            "reason_admin": {
+                "en": "Location Policy Violation: C076E8A3"
+            },
+            "reason_user": {
+                "en": "Device is no longer in a trusted location."
+            },
+            "event_timestamp": 1615304991643
+        }
+    }
+}
+</pre>
+<p class="figure">Figure 12: Example: Device No Longer Compliant - Complex Subject + optional claims</p>
+<h1 id="rfc.references">
+<a href="#rfc.references">4.</a> Normative References</h1>
+<table><tbody>
+<tr>
+<td class="reference"><b id="RFC2119">[RFC2119]</b></td>
+<td class="top">
+<a>Bradner, S.</a>, "<a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>", BCP 14, RFC 2119, DOI 10.17487/RFC2119, March 1997.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC5280">[RFC5280]</b></td>
+<td class="top">
+<a>Cooper, D.</a>, <a>Santesson, S.</a>, <a>Farrell, S.</a>, <a>Boeyen, S.</a>, <a>Housley, R.</a> and <a>W. Polk</a>, "<a href="https://tools.ietf.org/html/rfc5280">Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile</a>", RFC 5280, DOI 10.17487/RFC5280, May 2008.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC5646">[RFC5646]</b></td>
+<td class="top">
+<a>Phillips, A.</a> and <a>M. Davis</a>, "<a href="https://tools.ietf.org/html/rfc5646">Tags for Identifying Languages</a>", BCP 47, RFC 5646, DOI 10.17487/RFC5646, September 2009.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC8174">[RFC8174]</b></td>
+<td class="top">
+<a>Leiba, B.</a>, "<a href="https://tools.ietf.org/html/rfc8174">Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words</a>", BCP 14, RFC 8174, DOI 10.17487/RFC8174, May 2017.</td>
+</tr>
+<tr>
+<td class="reference"><b id="SP800-63R3">[SP800-63R3]</b></td>
+<td class="top">
+<a>Grassi, P.</a>, <a>Garcia, M.</a> and <a>J. Fenton</a>, "<a href="https://pages.nist.gov/800-63-3/sp800-63-3.html">NIST Special Publication 800-63: Digital Identity Guidelines</a>", June 2017.</td>
+</tr>
+<tr>
+<td class="reference"><b id="SSE-FRAMEWORK">[SSE-FRAMEWORK]</b></td>
+<td class="top">
+<a title="Google">Tulshibagwale, A.</a>, <a title="Microsoft">Cappalli, T.</a>, <a title="Coinbase">Scurtescu, M.</a>, <a title="Amazon">Backman, A.</a> and <a title="Yubico">. John Bradley</a>, "<a href="http://openid.net/specs/openid-sse-framework-1_0.html">OpenID Shared Signals and Events Framework Specification 1.0</a>", May 2021.</td>
+</tr>
+<tr>
+<td class="reference"><b id="WebAuthn">[WebAuthn]</b></td>
+<td class="top">
+<a title="Google">Balfanz, D.</a>, "<a href="https://www.w3.org/TR/webauthn/">Web Authentication: An API for accessing Public Key Credentials Level 2</a>", April 2021.</td>
+</tr>
+</tbody></table>
+<h1 id="rfc.appendix.A">
+<a href="#rfc.appendix.A">Appendix A.</a> <a href="#acknowledgements" id="acknowledgements">Acknowledgements</a>
+</h1>
+<p id="rfc.section.A.p.1">The authors wish to thank all members of the OpenID Foundation Shared Signals and Events Working Group who contributed to the development of this specification.</p>
+<h1 id="rfc.appendix.B">
+<a href="#rfc.appendix.B">Appendix B.</a> <a href="#notices" id="notices">Notices</a>
+</h1>
+<p id="rfc.section.B.p.1">Copyright (c) 2021 The OpenID Foundation.</p>
+<p id="rfc.section.B.p.2">The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, or other interested party a non-exclusive, royalty free, worldwide copyright license to reproduce, prepare derivative works from, distribute, perform and display, this Implementers Draft or Final Specification solely for the purposes of (i) developing specifications, and (ii) implementing Implementers Drafts and Final Specifications based on such documents, provided that attribution be made to the OIDF as the source of the material, but that such attribution does not indicate an endorsement by the OIDF.</p>
+<p id="rfc.section.B.p.3">The technology described in this specification was made available from contributions from various sources, including members of the OpenID Foundation and others. Although the OpenID Foundation has taken steps to help ensure that the technology is available for distribution, it takes no position regarding the validity or scope of any intellectual property or other rights that might be claimed to pertain to the implementation or use of the technology described in this specification or the extent to which any license under such rights might or might not be available; neither does it represent that it has made any independent effort to identify any such rights. The OpenID Foundation and the contributors to this specification make no (and hereby expressly disclaim any) warranties (express, implied, or otherwise), including implied warranties of merchantability, non-infringement, fitness for a particular purpose, or title, related to this specification, and the entire risk as to implementing this specification is assumed by the implementer. The OpenID Intellectual Property Rights policy requires contributors to offer a patent promise not to assert certain patent claims against other contributors and against implementers. The OpenID Foundation invites any interested party to bring to its attention any copyrights, patents, patent applications, or other proprietary rights that may cover technology that may be required to practice this specification.</p>
+<h1 id="rfc.authors"><a href="#rfc.authors">Authors' Addresses</a></h1>
+<div class="avoidbreak">
+  <address class="vcard">
+	<span class="vcardline">
+	  <span class="fn">Tim Cappalli</span> 
+	  <span class="n hidden">
+		<span class="family-name">Cappalli</span>
+	  </span>
+	</span>
+	<span class="org vcardline">Microsoft</span>
+	<span class="adr">
+	  
+	  <span class="vcardline">
+		<span class="locality"></span> 
+		<span class="region"></span>
+		<span class="code"></span>
+	  </span>
+	  <span class="country-name vcardline"></span>
+	</span>
+	<span class="vcardline">EMail: <a href="mailto:tim.cappalli@microsoft.com">tim.cappalli@microsoft.com</a></span>
+
+  </address>
+</div><div class="avoidbreak">
+  <address class="vcard">
+	<span class="vcardline">
+	  <span class="fn">Atul Tulshibagwale</span> 
+	  <span class="n hidden">
+		<span class="family-name">Tulshibagwale</span>
+	  </span>
+	</span>
+	<span class="org vcardline">Google</span>
+	<span class="adr">
+	  
+	  <span class="vcardline">
+		<span class="locality"></span> 
+		<span class="region"></span>
+		<span class="code"></span>
+	  </span>
+	  <span class="country-name vcardline"></span>
+	</span>
+	<span class="vcardline">EMail: <a href="mailto:atultulshi@google.com">atultulshi@google.com</a></span>
+
+  </address>
+</div>
+
+</body>
+</html>
+
