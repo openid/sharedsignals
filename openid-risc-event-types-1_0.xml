@@ -12,7 +12,7 @@
   be taken to indicate.
 -->
 
-<rfc docName="openid-risc-event-types-1_0" category="std" ipr="none">
+<rfc docName="openid-risc-profile-specification-1_0" category="std" ipr="none">
 
   <?rfc toc="yes" ?>
   <?rfc tocdepth="5" ?>
@@ -24,7 +24,7 @@
   <?rfc comments="yes"?>
 
   <front>
-    <title abbrev="openid-risc-event-types">OpenID RISC Event Types 1.0</title>
+    <title abbrev="openid-risc-profile-specification">OpenID RISC Profile Specification</title>
 
     <author initials="M." surname="Scurtescu" fullname="Marius Scurtescu">
       <organization abbrev="Coinbase">Coinbase</organization>
@@ -56,20 +56,28 @@
         <email>stanb@vericlouds.com</email>
       </address>
     </author>
+    <author initials="A." surname="Tulshibagwale" fullname="Atul Tulshibagwale">
+      <organization abbrev="Google">Google</organization>
+      <address>
+        <email>atultulshi@google.com</email>
+      </address>
+    </author>
 
-    <date year="2021" month="May" day="03"/>
+    <date year="2021" month="June" day="22"/>
 
     <workgroup>SSE Working Group</workgroup>
 
     <abstract>
-      <t>This document defines the RISC Event Types based on the <xref target="SSE">Shared Signals and Events (SSE)
-        Framework</xref>. Event Types are introduced and defined in <xref target="SET">Security Event Token (SET)</xref>.</t>
+      <t>This document defines the Risc Incident Sharing and Coordination (RISC) Event
+        Types based on the <xref target="SSE">Shared Signals and Events (SSE)
+        Framework</xref>. Event Types are introduced and defined in <xref target="SET">
+        Security Event Token (SET)</xref>.</t>
     </abstract>
   </front>
 
   <middle>
     <section anchor="intro" title="Introduction">
-      <t>This specification is based on <xref target="RISC-PROFILE">RISC Profile</xref> and uses
+      <t>This specification is based on <xref target="SSE-FRAMEWORK">SSE Framework</xref> and uses
       the subject identifiers defined there.</t>
       
       <section anchor="conv" title="Notational Conventions">
@@ -256,8 +264,20 @@
       <section anchor="credential-compromise" title="Credential Compromise">
         <t>Event Type URI:</t>
         <t><spanx style="verb">https://schemas.openid.net/secevent/caep/event-type/credential-compromise</spanx></t>
-        <t>Credential Compromised signals that the identifier specified in the subject was found to
-          be compromised. The subject type MUST be <spanx style="verb">email</spanx>.</t>
+        <t>A Credential Compromise event signals that the identifier specified in the subject was found to
+          be compromised. The subject identifier in a Credential Compromise event SHOULD refer to a non-ephemeral
+          subject principal, such as a user or device.</t>
+        <t>Attributes:<list style="symbols">
+            <t>credential_type - REQUIRED. The type of credential that is compromised. The value of this attribute
+              must be one of the values specified for the similarly named field in in the <spanx style="verb">
+              Credential Change</spanx> event defined in the <xref target="CAEP-SPECIFICATION">CAEP Specification</xref>. 
+          </t>
+            <t>reason_admin - OPTIONAL. The reason why the credential compromised event was generated, intended
+              for administrators</t>
+            <t>reason_user - OPTIONAL. The reason why the credential compromised event was generated, indended
+              for end-users</t>
+          </list>
+        </t>
         <figure title="Example: Compromised credential found" anchor="credential-compromise-example">
           <artwork type="json"><![CDATA[
 
@@ -269,18 +289,11 @@
      "events": {
        "https://schemas.openid.net/secevent/risc/event-type/credential-compromise": {
          "subject": {
-           "subject_type": "iss-sub",
+           "format": "iss-sub",
            "iss": "https://idp.example.com/3456790/",
            "sub": "joe.smith@example.com"
          },
-         "credential-compromise-id": "email"
-
-	"reason_admin OPTIONAL, JSON string": an administrative message for
-	logging and auditing
-
-	"reason_user OPTIONAL, JSON string": a user-friendly message for
-	display to an end-user
-
+        "credential_type": "password"
        }
      }
    }
@@ -485,19 +498,60 @@
         <seriesInfo name="DOI" value="10.17487/RFC8174"/>
       </reference>
       
-      <reference anchor="RISC-PROFILE" target="http://openid.net/specs/openid-risc-profile-1_0.html">
+      <reference anchor="SSE-FRAMEWORK" target="https://openid.net/specs/openid-sse-framework-1_0-01.html">
         <front>
-          <title>OpenID RISC Profile of IETF Security Events 1.0</title>
+          <title>OpenID Shared Signals and Events Framework Specification 1.0</title>
+          <author initials="A." surname="Tulshibagwale" fullname="Atul Tulshibagwale">
+            <organization abbrev="Google">Google</organization>
+            <address>
+              <email>atultulshi@google.com</email>
+            </address>
+          </author>
+          <author initials="T." surname="Cappalli" fullname="Tim Cappalli">
+            <organization abbrev="Microsoft">Microsoft</organization>
+            <address>
+              <email>tim.cappalli@microsoft.com</email>
+            </address>
+          </author>
+
           <author initials="M." surname="Scurtescu" fullname="Marius Scurtescu">
-            <organization />
+            <organization abbrev="Coinbase">Coinbase</organization>
+            <address>
+              <email>marius.scurtescu@coinbase.com</email>
+            </address>
           </author>
           <author initials="A." surname="Backman" fullname="Annabelle Backman">
-            <organization />
+            <organization abbrev="Amazon">Amazon</organization>
+            <address>
+              <email>richanna@amazon.com</email>
+            </address>
           </author>
           <author initials="J." surname="Bradley" fullname="John Bradley">
-            <organization />
+            <organization abbrev="Yubico">Yubico</organization>
+            <address>
+              <email>secevemt@ve7jtb.com</email>
+            </address>
           </author>
-          <date year="2018" month="April" />
+          <date year="2021" month="June" day="8"/>
+        </front>
+      </reference>
+
+      <reference anchor="CAEP-SPECIFICATION" target="https://openid.net/specs/openid-caep-specification-1_0-01.html">
+        <front>
+          <title abbrev="CAEP-Spec">OpenID Continuous Access Evaluation Profile 1.0 - draft 01</title>
+          <author initials="T." surname="Cappalli" fullname="Tim Cappalli">
+            <organization>Microsoft</organization>
+            <address>
+              <email>tim.cappalli@microsoft.com</email>
+            </address>
+          </author>
+          <author initials="A." surname="Tulshibagwale" fullname="Atul Tulshibagwale">
+            <organization>Google</organization>
+            <address>
+              <email>atultulshi@google.com</email>
+            </address>
+          </author>
+          <date year="2021" month="June" day="08"/>
         </front>
       </reference>
     </references>

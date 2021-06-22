@@ -12,17 +12,20 @@
                                                                   Yubico
                                                                S. Bounev
                                                               VeriClouds
-                                                            May 03, 2021
+                                                        A. Tulshibagwale
+                                                                  Google
+                                                           June 22, 2021
 
 
-                      OpenID RISC Event Types 1.0
-                      openid-risc-event-types-1_0
+                   OpenID RISC Profile Specification
+                 openid-risc-profile-specification-1_0
 
 Abstract
 
-   This document defines the RISC Event Types based on the Shared
-   Signals and Events (SSE) Framework [SSE].  Event Types are introduced
-   and defined in Security Event Token (SET) [SET].
+   This document defines the Risc Incident Sharing and Coordination
+   (RISC) Event Types based on the Shared Signals and Events (SSE)
+   Framework [SSE].  Event Types are introduced and defined in Security
+   Event Token (SET) [SET].
 
 Table of Contents
 
@@ -45,22 +48,19 @@ Table of Contents
      2.10. Recovery Information Changed  . . . . . . . . . . . . . .   9
      2.11. Sessions Revoked  . . . . . . . . . . . . . . . . . . . .  10
    3.  Normative References  . . . . . . . . . . . . . . . . . . . .  10
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  10
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  11
 
 
 
 
+Scurtescu, et al.       Expires December 24, 2021               [Page 1]
 
-
-
-Scurtescu, et al.       Expires November 4, 2021                [Page 1]
-
-                         openid-risc-event-types                May 2021
+                    openid-risc-profile-specification          June 2021
 
 
 1.  Introduction
 
-   This specification is based on RISC Profile [RISC-PROFILE] and uses
+   This specification is based on SSE Framework [SSE-FRAMEWORK] and uses
    the subject identifiers defined there.
 
 1.1.  Notational Conventions
@@ -109,9 +109,9 @@ Scurtescu, et al.       Expires November 4, 2021                [Page 1]
 
 
 
-Scurtescu, et al.       Expires November 4, 2021                [Page 2]
+Scurtescu, et al.       Expires December 24, 2021               [Page 2]
 
-                         openid-risc-event-types                May 2021
+                    openid-risc-profile-specification          June 2021
 
 
    {
@@ -165,9 +165,9 @@ Scurtescu, et al.       Expires November 4, 2021                [Page 2]
 
 
 
-Scurtescu, et al.       Expires November 4, 2021                [Page 3]
+Scurtescu, et al.       Expires December 24, 2021               [Page 3]
 
-                         openid-risc-event-types                May 2021
+                    openid-risc-profile-specification          June 2021
 
 
       *  bulk-account
@@ -221,9 +221,9 @@ Scurtescu, et al.       Expires November 4, 2021                [Page 3]
 
 
 
-Scurtescu, et al.       Expires November 4, 2021                [Page 4]
+Scurtescu, et al.       Expires December 24, 2021               [Page 4]
 
-                         openid-risc-event-types                May 2021
+                    openid-risc-profile-specification          June 2021
 
 
    new "john.row@example.com" email then *only* the email provider
@@ -277,9 +277,9 @@ Scurtescu, et al.       Expires November 4, 2021                [Page 4]
 
 
 
-Scurtescu, et al.       Expires November 4, 2021                [Page 5]
+Scurtescu, et al.       Expires December 24, 2021               [Page 5]
 
-                         openid-risc-event-types                May 2021
+                    openid-risc-profile-specification          June 2021
 
 
    {
@@ -310,32 +310,32 @@ Scurtescu, et al.       Expires November 4, 2021                [Page 5]
    "https://schemas.openid.net/secevent/caep/event-type/credential-
    compromise"
 
-   Credential Compromised signals that the identifier specified in the
-   subject was found to be compromised.  The subject type MUST be
-   "email".
+   A Credential Compromise event signals that the identifier specified
+   in the subject was found to be compromised.  The subject identifier
+   in a Credential Compromise event SHOULD refer to a non-ephemeral
+   subject principal, such as a user or device.
+
+   Attributes:
+
+   o  credential_type - REQUIRED.  The type of credential that is
+      compromised.  The value of this attribute must be one of the
+      values specified for the similarly named field in in the
+      "Credential Change" event defined in the CAEP Specification
+      [CAEP-SPECIFICATION].
+
+   o  reason_admin - OPTIONAL.  The reason why the credential
+      compromised event was generated, intended for administrators
+
+   o  reason_user - OPTIONAL.  The reason why the credential compromised
+      event was generated, indended for end-users
 
 
 
 
 
+Scurtescu, et al.       Expires December 24, 2021               [Page 6]
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Scurtescu, et al.       Expires November 4, 2021                [Page 6]
-
-                         openid-risc-event-types                May 2021
+                    openid-risc-profile-specification          June 2021
 
 
    {
@@ -346,18 +346,11 @@ Scurtescu, et al.       Expires November 4, 2021                [Page 6]
      "events": {
        "https://schemas.openid.net/secevent/risc/event-type/credential-compromise": {
          "subject": {
-           "subject_type": "iss-sub",
+           "format": "iss-sub",
            "iss": "https://idp.example.com/3456790/",
            "sub": "joe.smith@example.com"
          },
-         "credential-compromise-id": "email"
-
-        "reason_admin OPTIONAL, JSON string": an administrative message for
-        logging and auditing
-
-        "reason_user OPTIONAL, JSON string": a user-friendly message for
-        display to an end-user
-
+        "credential_type": "password"
        }
      }
    }
@@ -389,9 +382,16 @@ Scurtescu, et al.       Expires November 4, 2021                [Page 6]
 
 
 
-Scurtescu, et al.       Expires November 4, 2021                [Page 7]
 
-                         openid-risc-event-types                May 2021
+
+
+
+
+
+
+Scurtescu, et al.       Expires December 24, 2021               [Page 7]
+
+                    openid-risc-profile-specification          June 2021
 
 
    State changes trigger Opt-Out Events as represented bellow:
@@ -445,9 +445,9 @@ Scurtescu, et al.       Expires November 4, 2021                [Page 7]
 
 
 
-Scurtescu, et al.       Expires November 4, 2021                [Page 8]
+Scurtescu, et al.       Expires December 24, 2021               [Page 8]
 
-                         openid-risc-event-types                May 2021
+                    openid-risc-profile-specification          June 2021
 
 
 2.8.3.  Opt Out Cancelled
@@ -501,9 +501,9 @@ Scurtescu, et al.       Expires November 4, 2021                [Page 8]
 
 
 
-Scurtescu, et al.       Expires November 4, 2021                [Page 9]
+Scurtescu, et al.       Expires December 24, 2021               [Page 9]
 
-                         openid-risc-event-types                May 2021
+                    openid-risc-profile-specification          June 2021
 
 
 2.11.  Sessions Revoked
@@ -518,6 +518,12 @@ Scurtescu, et al.       Expires November 4, 2021                [Page 9]
 
 3.  Normative References
 
+   [CAEP-SPECIFICATION]
+              Cappalli, T. and A. Tulshibagwale, "OpenID Continuous
+              Access Evaluation Profile 1.0 - draft 01", June 2021,
+              <https://openid.net/specs/openid-caep-specification-
+              1_0-01.html>.
+
    [JSON]     Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
               Interchange Format", RFC 7159, DOI 10.17487/RFC7159, March
               2014, <https://www.rfc-editor.org/info/rfc7159>.
@@ -531,11 +537,6 @@ Scurtescu, et al.       Expires November 4, 2021                [Page 9]
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
-   [RISC-PROFILE]
-              Scurtescu, M., Backman, A., and J. Bradley, "OpenID RISC
-              Profile of IETF Security Events 1.0", April 2018,
-              <http://openid.net/specs/openid-risc-profile-1_0.html>.
-
    [SET]      Hunt, P., Ed., Jones, M., Denniss, W., and M. Ansari,
               "Security Event Token (SET)", April 2018,
               <https://tools.ietf.org/html/draft-ietf-secevent-token-
@@ -547,19 +548,26 @@ Scurtescu, et al.       Expires November 4, 2021                [Page 9]
               <https://bitbucket.org/openid/risc/src/master/openid-sse-
               framework-1_0.txt>.
 
+   [SSE-FRAMEWORK]
+              Tulshibagwale, A., Cappalli, T., Scurtescu, M., Backman,
+              A., and J. Bradley, "OpenID Shared Signals and Events
+              Framework Specification 1.0", June 2021,
+              <https://openid.net/specs/openid-sse-framework-
+              1_0-01.html>.
+
+
+
+Scurtescu, et al.       Expires December 24, 2021              [Page 10]
+
+                    openid-risc-profile-specification          June 2021
+
+
 Authors' Addresses
 
    Marius Scurtescu
    Coinbase
 
    Email: marius.scurtescu@coinbase.com
-
-
-
-
-Scurtescu, et al.       Expires November 4, 2021               [Page 10]
-
-                         openid-risc-event-types                May 2021
 
 
    Annabelle Backman
@@ -586,6 +594,10 @@ Scurtescu, et al.       Expires November 4, 2021               [Page 10]
    Email: stanb@vericlouds.com
 
 
+   Atul Tulshibagwale
+   Google
+
+   Email: atultulshi@google.com
 
 
 
@@ -601,16 +613,4 @@ Scurtescu, et al.       Expires November 4, 2021               [Page 10]
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-Scurtescu, et al.       Expires November 4, 2021               [Page 11]
+Scurtescu, et al.       Expires December 24, 2021              [Page 11]
