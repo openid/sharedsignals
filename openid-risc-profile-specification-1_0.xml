@@ -24,7 +24,7 @@
   <?rfc comments="yes"?>
 
   <front>
-    <title abbrev="openid-risc-profile-specification">OpenID RISC Profile Specification</title>
+    <title abbrev="openid-risc-profile-specification">OpenID RISC Profile Specification 1.0 - draft 01</title>
 
     <author initials="M." surname="Scurtescu" fullname="Marius Scurtescu">
       <organization abbrev="Coinbase">Coinbase</organization>
@@ -63,7 +63,7 @@
       </address>
     </author>
 
-    <date year="2021" month="June" day="22"/>
+    <date year="2021" month="June" day="29"/>
 
     <workgroup>SSE Working Group</workgroup>
 
@@ -410,17 +410,6 @@
 
   <back>
     <references title='Normative References'>
-
-      <reference anchor="JSON" target='https://www.rfc-editor.org/info/rfc7159'>
-        <front>
-          <title>The JavaScript Object Notation (JSON) Data Interchange Format</title>
-            <author initials='T.' surname='Bray' fullname='T. Bray' role='editor'><organization /></author>
-            <date year='2014' month='March' />
-            <abstract><t>JavaScript Object Notation (JSON) is a lightweight, text-based, language-independent data interchange format.  It was derived from the ECMAScript Programming Language Standard.  JSON defines a small set of formatting rules for the portable representation of structured data.</t><t>This document removes inconsistencies with other specifications of JSON, repairs specification errors, and offers experience-based interoperability guidance.</t></abstract>
-        </front>
-        <seriesInfo name='RFC' value='7159'/>
-        <seriesInfo name='DOI' value='10.17487/RFC7159'/>
-      </reference>
 
       <reference anchor="SET" target="https://tools.ietf.org/html/draft-ietf-secevent-token-09">
         <front>

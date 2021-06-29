@@ -14,10 +14,10 @@
                                                               VeriClouds
                                                         A. Tulshibagwale
                                                                   Google
-                                                           June 22, 2021
+                                                           June 29, 2021
 
 
-                   OpenID RISC Profile Specification
+            OpenID RISC Profile Specification 1.0 - draft 01
                  openid-risc-profile-specification-1_0
 
 Abstract
@@ -53,7 +53,7 @@ Table of Contents
 
 
 
-Scurtescu, et al.       Expires December 24, 2021               [Page 1]
+Scurtescu, et al.       Expires December 31, 2021               [Page 1]
 
                     openid-risc-profile-specification          June 2021
 
@@ -109,7 +109,7 @@ Scurtescu, et al.       Expires December 24, 2021               [Page 1]
 
 
 
-Scurtescu, et al.       Expires December 24, 2021               [Page 2]
+Scurtescu, et al.       Expires December 31, 2021               [Page 2]
 
                     openid-risc-profile-specification          June 2021
 
@@ -165,7 +165,7 @@ Scurtescu, et al.       Expires December 24, 2021               [Page 2]
 
 
 
-Scurtescu, et al.       Expires December 24, 2021               [Page 3]
+Scurtescu, et al.       Expires December 31, 2021               [Page 3]
 
                     openid-risc-profile-specification          June 2021
 
@@ -221,7 +221,7 @@ Scurtescu, et al.       Expires December 24, 2021               [Page 3]
 
 
 
-Scurtescu, et al.       Expires December 24, 2021               [Page 4]
+Scurtescu, et al.       Expires December 31, 2021               [Page 4]
 
                     openid-risc-profile-specification          June 2021
 
@@ -277,7 +277,7 @@ Scurtescu, et al.       Expires December 24, 2021               [Page 4]
 
 
 
-Scurtescu, et al.       Expires December 24, 2021               [Page 5]
+Scurtescu, et al.       Expires December 31, 2021               [Page 5]
 
                     openid-risc-profile-specification          June 2021
 
@@ -333,7 +333,7 @@ Scurtescu, et al.       Expires December 24, 2021               [Page 5]
 
 
 
-Scurtescu, et al.       Expires December 24, 2021               [Page 6]
+Scurtescu, et al.       Expires December 31, 2021               [Page 6]
 
                     openid-risc-profile-specification          June 2021
 
@@ -389,7 +389,7 @@ Scurtescu, et al.       Expires December 24, 2021               [Page 6]
 
 
 
-Scurtescu, et al.       Expires December 24, 2021               [Page 7]
+Scurtescu, et al.       Expires December 31, 2021               [Page 7]
 
                     openid-risc-profile-specification          June 2021
 
@@ -445,7 +445,7 @@ Scurtescu, et al.       Expires December 24, 2021               [Page 7]
 
 
 
-Scurtescu, et al.       Expires December 24, 2021               [Page 8]
+Scurtescu, et al.       Expires December 31, 2021               [Page 8]
 
                     openid-risc-profile-specification          June 2021
 
@@ -501,7 +501,7 @@ Scurtescu, et al.       Expires December 24, 2021               [Page 8]
 
 
 
-Scurtescu, et al.       Expires December 24, 2021               [Page 9]
+Scurtescu, et al.       Expires December 31, 2021               [Page 9]
 
                     openid-risc-profile-specification          June 2021
 
@@ -523,10 +523,6 @@ Scurtescu, et al.       Expires December 24, 2021               [Page 9]
               Access Evaluation Profile 1.0 - draft 01", June 2021,
               <https://openid.net/specs/openid-caep-specification-
               1_0-01.html>.
-
-   [JSON]     Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
-              Interchange Format", RFC 7159, DOI 10.17487/RFC7159, March
-              2014, <https://www.rfc-editor.org/info/rfc7159>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -551,21 +547,19 @@ Scurtescu, et al.       Expires December 24, 2021               [Page 9]
 
 Authors' Addresses
 
-
-
-
-
-
-
-Scurtescu, et al.       Expires December 24, 2021              [Page 10]
-
-                    openid-risc-profile-specification          June 2021
-
-
    Marius Scurtescu
    Coinbase
 
    Email: marius.scurtescu@coinbase.com
+
+
+
+
+
+
+Scurtescu, et al.       Expires December 31, 2021              [Page 10]
+
+                    openid-risc-profile-specification          June 2021
 
 
    Annabelle Backman
@@ -613,4 +607,10 @@ Scurtescu, et al.       Expires December 24, 2021              [Page 10]
 
 
 
-Scurtescu, et al.       Expires December 24, 2021              [Page 11]
+
+
+
+
+
+
+Scurtescu, et al.       Expires December 31, 2021              [Page 11]
