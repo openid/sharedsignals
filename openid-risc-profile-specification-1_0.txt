@@ -10,20 +10,26 @@
                                                                   Oracle
                                                               J. Bradley
                                                                   Yubico
-                                                          April 24, 2018
+                                                               S. Bounev
+                                                              VeriClouds
+                                                        A. Tulshibagwale
+                                                                  Google
+                                                           June 22, 2021
 
 
-                      OpenID RISC Event Types 1.0
-                      openid-risc-event-types-1_0
+                   OpenID RISC Profile Specification
+                 openid-risc-profile-specification-1_0
 
 Abstract
 
-   This document defines the RISC Event Types.  Event Types are
-   introduced and defined in Security Event Token (SET) [SET].
+   This document defines the Risc Incident Sharing and Coordination
+   (RISC) Event Types based on the Shared Signals and Events (SSE)
+   Framework [SSE-FRAMEWORK].  Event Types are introduced and defined in
+   Security Event Token (SET) [SET].
 
 Table of Contents
 
-   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   1
+   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
      1.1.  Notational Conventions  . . . . . . . . . . . . . . . . .   2
    2.  Event Types . . . . . . . . . . . . . . . . . . . . . . . . .   2
      2.1.  Account Credential Change Required  . . . . . . . . . . .   2
@@ -32,31 +38,30 @@ Table of Contents
      2.4.  Account Enabled . . . . . . . . . . . . . . . . . . . . .   4
      2.5.  Identifier Changed  . . . . . . . . . . . . . . . . . . .   4
      2.6.  Identifier Recycled . . . . . . . . . . . . . . . . . . .   5
-     2.7.  Opt Out . . . . . . . . . . . . . . . . . . . . . . . . .   6
-       2.7.1.  Opt In  . . . . . . . . . . . . . . . . . . . . . . .   7
-       2.7.2.  Opt Out Initiated . . . . . . . . . . . . . . . . . .   7
-       2.7.3.  Opt Out Cancelled . . . . . . . . . . . . . . . . . .   8
-       2.7.4.  Opt Out Effective . . . . . . . . . . . . . . . . . .   8
-     2.8.  Recovery Activated  . . . . . . . . . . . . . . . . . . .   8
-     2.9.  Recovery Information Changed  . . . . . . . . . . . . . .   8
-     2.10. Sessions Revoked  . . . . . . . . . . . . . . . . . . . .   9
-   3.  Normative References  . . . . . . . . . . . . . . . . . . . .   9
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   9
+     2.7.  Credential Compromise . . . . . . . . . . . . . . . . . .   6
+     2.8.  Opt Out . . . . . . . . . . . . . . . . . . . . . . . . .   7
+       2.8.1.  Opt In  . . . . . . . . . . . . . . . . . . . . . . .   8
+       2.8.2.  Opt Out Initiated . . . . . . . . . . . . . . . . . .   8
+       2.8.3.  Opt Out Cancelled . . . . . . . . . . . . . . . . . .   9
+       2.8.4.  Opt Out Effective . . . . . . . . . . . . . . . . . .   9
+     2.9.  Recovery Activated  . . . . . . . . . . . . . . . . . . .   9
+     2.10. Recovery Information Changed  . . . . . . . . . . . . . .   9
+     2.11. Sessions Revoked  . . . . . . . . . . . . . . . . . . . .  10
+   3.  Normative References  . . . . . . . . . . . . . . . . . . . .  10
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  10
+
+
+
+
+Scurtescu, et al.       Expires December 24, 2021               [Page 1]
+
+                    openid-risc-profile-specification          June 2021
+
 
 1.  Introduction
 
-   This specification is based on RISC Profile [RISC-PROFILE] and uses
+   This specification is based on SSE Framework [SSE-FRAMEWORK] and uses
    the subject identifiers defined there.
-
-
-
-
-
-
-Scurtescu, et al.       Expires October 26, 2018                [Page 1]
-
-                         openid-risc-event-types              April 2018
-
 
 1.1.  Notational Conventions
 
@@ -83,6 +88,32 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 1]
 
    Attributes: none
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Scurtescu, et al.       Expires December 24, 2021               [Page 2]
+
+                    openid-risc-profile-specification          June 2021
+
+
    {
      "iss": "https://idp.example.com/",
      "jti": "756E69717565206964656E746966696572",
@@ -104,15 +135,6 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 1]
    character)_
 
            Figure 1: Example: Account Credential Change Required
-
-
-
-
-
-Scurtescu, et al.       Expires October 26, 2018                [Page 2]
-
-                         openid-risc-event-types              April 2018
-
 
 2.2.  Account Purged
 
@@ -141,34 +163,14 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 2]
 
       *  hijacking
 
+
+
+Scurtescu, et al.       Expires December 24, 2021               [Page 3]
+
+                    openid-risc-profile-specification          June 2021
+
+
       *  bulk-account
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Scurtescu, et al.       Expires October 26, 2018                [Page 3]
-
-                         openid-risc-event-types              April 2018
-
 
    {
      "iss": "https://idp.example.com/",
@@ -216,22 +218,21 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 3]
    This event SHOULD be issued only by the provider that is
    authoritative over the identifier.  For example, if the person that
    owns "john.doe@example.com" goes through a name change and wants the
+
+
+
+Scurtescu, et al.       Expires December 24, 2021               [Page 4]
+
+                    openid-risc-profile-specification          June 2021
+
+
    new "john.row@example.com" email then *only* the email provider
-
-
-
-
-Scurtescu, et al.       Expires October 26, 2018                [Page 4]
-
-                         openid-risc-event-types              April 2018
-
-
    "example.com" SHOULD issue an Identifier Changed event as shown in
    the example below.
 
    If an identifier used as a username or recovery option is changed, at
    a provider that is not authoritative over that identifier, then
-   Recovery Information Changed (Section 2.9) SHOULD be used instead.
+   Recovery Information Changed (Section 2.10) SHOULD be used instead.
 
    Attributes:
 
@@ -276,10 +277,9 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 4]
 
 
 
+Scurtescu, et al.       Expires December 24, 2021               [Page 5]
 
-Scurtescu, et al.       Expires October 26, 2018                [Page 5]
-
-                         openid-risc-event-types              April 2018
+                    openid-risc-profile-specification          June 2021
 
 
    {
@@ -303,7 +303,65 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 5]
 
                   Figure 4: Example: Identifier Recycled
 
-2.7.  Opt Out
+2.7.  Credential Compromise
+
+   Event Type URI:
+
+   "https://schemas.openid.net/secevent/risc/event-type/credential-
+   compromise"
+
+   A Credential Compromise event signals that the identifier specified
+   in the subject was found to be compromised.
+
+   Attributes:
+
+   o  credential_type - REQUIRED.  The type of credential that is
+      compromised.  The value of this attribute must be one of the
+      values specified for the similarly named field in in the
+      "Credential Change" event defined in the CAEP Specification
+      [CAEP-SPECIFICATION].
+
+   o  reason_admin - OPTIONAL.  The reason why the credential
+      compromised event was generated, intended for administrators
+
+   o  reason_user - OPTIONAL.  The reason why the credential compromised
+      event was generated, indended for end-users
+
+
+
+
+
+
+
+Scurtescu, et al.       Expires December 24, 2021               [Page 6]
+
+                    openid-risc-profile-specification          June 2021
+
+
+   {
+     "iss": "https://idp.example.com/3456790/",
+     "jti": "756E69717565206964656E746966696572",
+     "iat": 1508184845,
+     "aud": "https://sp.example2.net/caep",
+     "events": {
+       "https://schemas.openid.net/secevent/risc/event-type/credential-compromise": {
+         "subject": {
+           "format": "iss-sub",
+           "iss": "https://idp.example.com/3456790/",
+           "sub": "joe.smith@example.com"
+         },
+        "credential_type": "password"
+       }
+     }
+   }
+
+
+   _(the event type URI is wrapped, the backslash is the continuation
+   character)_
+
+              Figure 5: Example: Compromised credential found
+
+2.8.  Opt Out
 
    Users SHOULD be allowed to opt-in and out of RISC events being sent
    for their accounts.  With regards to opt-out an account can be in one
@@ -331,11 +389,9 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 5]
 
 
 
+Scurtescu, et al.       Expires December 24, 2021               [Page 7]
 
-
-Scurtescu, et al.       Expires October 26, 2018                [Page 6]
-
-                         openid-risc-event-types              April 2018
+                    openid-risc-profile-specification          June 2021
 
 
    State changes trigger Opt-Out Events as represented bellow:
@@ -355,13 +411,13 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 6]
                                   |                   |
                                   +-------------------+
 
-                Figure 5: Opt-Out States and Opt-Out Events
+                Figure 6: Opt-Out States and Opt-Out Events
 
    Both Transmitters and Receivers SHOULD manage Opt-Out state for
    users.  Transmitters should send the events defined in this section
    when the Opt-Out state changes.
 
-2.7.1.  Opt In
+2.8.1.  Opt In
 
    Event Type URI:
    https://schemas.openid.net/secevent/risc/event-type/opt-in
@@ -371,7 +427,7 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 6]
 
    Attributes: none
 
-2.7.2.  Opt Out Initiated
+2.8.2.  Opt Out Initiated
 
    Event Type URI:
    https://schemas.openid.net/secevent/risc/event-type/opt-out-initiated
@@ -389,12 +445,12 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 6]
 
 
 
-Scurtescu, et al.       Expires October 26, 2018                [Page 7]
-
-                         openid-risc-event-types              April 2018
+Scurtescu, et al.       Expires December 24, 2021               [Page 8]
+
+                    openid-risc-profile-specification          June 2021
 
 
-2.7.3.  Opt Out Cancelled
+2.8.3.  Opt Out Cancelled
 
    Event Type URI:
    https://schemas.openid.net/secevent/risc/event-type/opt-out-cancelled
@@ -405,7 +461,7 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 7]
 
    Attributes: none
 
-2.7.4.  Opt Out Effective
+2.8.4.  Opt Out Effective
 
    Event Type URI:
    https://schemas.openid.net/secevent/risc/event-type/opt-out-effective
@@ -416,7 +472,7 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 7]
 
    Attributes: none
 
-2.8.  Recovery Activated
+2.9.  Recovery Activated
 
    Event Type URI:
    https://schemas.openid.net/secevent/risc/event-type/recovery-
@@ -427,7 +483,7 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 7]
 
    Attributes: none
 
-2.9.  Recovery Information Changed
+2.10.  Recovery Information Changed
 
    Event Type URI:
    https://schemas.openid.net/secevent/risc/event-type/recovery-
@@ -445,12 +501,12 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 7]
 
 
 
-Scurtescu, et al.       Expires October 26, 2018                [Page 8]
-
-                         openid-risc-event-types              April 2018
+Scurtescu, et al.       Expires December 24, 2021               [Page 9]
+
+                    openid-risc-profile-specification          June 2021
 
 
-2.10.  Sessions Revoked
+2.11.  Sessions Revoked
 
    Event Type URI:
    https://schemas.openid.net/secevent/risc/event-type/sessions-revoked
@@ -461,6 +517,12 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 8]
    Attributes: none
 
 3.  Normative References
+
+   [CAEP-SPECIFICATION]
+              Cappalli, T. and A. Tulshibagwale, "OpenID Continuous
+              Access Evaluation Profile 1.0 - draft 01", June 2021,
+              <https://openid.net/specs/openid-caep-specification-
+              1_0-01.html>.
 
    [JSON]     Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
               Interchange Format", RFC 7159, DOI 10.17487/RFC7159, March
@@ -475,17 +537,30 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 8]
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
-   [RISC-PROFILE]
-              Scurtescu, M., Backman, A., and J. Bradley, "OpenID RISC
-              Profile of IETF Security Events 1.0", April 2018,
-              <http://openid.net/specs/openid-risc-profile-1_0.html>.
-
    [SET]      Hunt, P., Ed., Jones, M., Denniss, W., and M. Ansari,
               "Security Event Token (SET)", April 2018,
-              <https://tools.ietf.org/html/
-              draft-ietf-secevent-token-09>.
+              <https://tools.ietf.org/html/draft-ietf-secevent-token-
+              09>.
+
+   [SSE-FRAMEWORK]
+              Tulshibagwale, A., Cappalli, T., Scurtescu, M., Backman,
+              A., and J. Bradley, "OpenID Shared Signals and Events
+              Framework Specification 1.0", June 2021,
+              <https://openid.net/specs/openid-sse-framework-
+              1_0-01.html>.
 
 Authors' Addresses
+
+
+
+
+
+
+
+Scurtescu, et al.       Expires December 24, 2021              [Page 10]
+
+                    openid-risc-profile-specification          June 2021
+
 
    Marius Scurtescu
    Coinbase
@@ -497,13 +572,6 @@ Authors' Addresses
    Amazon
 
    Email: richanna@amazon.com
-
-
-
-
-Scurtescu, et al.       Expires October 26, 2018                [Page 9]
-
-                         openid-risc-event-types              April 2018
 
 
    Phil Hunt
@@ -518,6 +586,16 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 9]
    Email: secevemt@ve7jtb.com
 
 
+   Stan Bounev
+   VeriClouds
+
+   Email: stanb@vericlouds.com
+
+
+   Atul Tulshibagwale
+   Google
+
+   Email: atultulshi@google.com
 
 
 
@@ -535,26 +613,4 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 9]
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Scurtescu, et al.       Expires October 26, 2018               [Page 10]
+Scurtescu, et al.       Expires December 24, 2021              [Page 11]
