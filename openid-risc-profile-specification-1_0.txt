@@ -14,7 +14,7 @@
                                                               VeriClouds
                                                         A. Tulshibagwale
                                                                   Google
-                                                           June 29, 2021
+                                                           July 02, 2021
 
 
             OpenID RISC Profile Specification 1.0 - draft 01
@@ -48,15 +48,17 @@ Table of Contents
      2.10. Recovery Information Changed  . . . . . . . . . . . . . .   9
      2.11. Sessions Revoked  . . . . . . . . . . . . . . . . . . . .  10
    3.  Normative References  . . . . . . . . . . . . . . . . . . . .  10
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  10
+   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  10
+   Appendix B.  Notices  . . . . . . . . . . . . . . . . . . . . . .  11
 
 
 
+Scurtescu, et al.        Expires January 3, 2022                [Page 1]
 
-Scurtescu, et al.       Expires December 31, 2021               [Page 1]
+                    openid-risc-profile-specification          July 2021
 
-                    openid-risc-profile-specification          June 2021
 
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  11
 
 1.  Introduction
 
@@ -107,11 +109,9 @@ Scurtescu, et al.       Expires December 31, 2021               [Page 1]
 
 
 
+Scurtescu, et al.        Expires January 3, 2022                [Page 2]
 
-
-Scurtescu, et al.       Expires December 31, 2021               [Page 2]
-
-                    openid-risc-profile-specification          June 2021
+                    openid-risc-profile-specification          July 2021
 
 
    {
@@ -165,9 +165,9 @@ Scurtescu, et al.       Expires December 31, 2021               [Page 2]
 
 
 
-Scurtescu, et al.       Expires December 31, 2021               [Page 3]
+Scurtescu, et al.        Expires January 3, 2022                [Page 3]
 
-                    openid-risc-profile-specification          June 2021
+                    openid-risc-profile-specification          July 2021
 
 
       *  bulk-account
@@ -221,9 +221,9 @@ Scurtescu, et al.       Expires December 31, 2021               [Page 3]
 
 
 
-Scurtescu, et al.       Expires December 31, 2021               [Page 4]
+Scurtescu, et al.        Expires January 3, 2022                [Page 4]
 
-                    openid-risc-profile-specification          June 2021
+                    openid-risc-profile-specification          July 2021
 
 
    new "john.row@example.com" email then *only* the email provider
@@ -277,9 +277,9 @@ Scurtescu, et al.       Expires December 31, 2021               [Page 4]
 
 
 
-Scurtescu, et al.       Expires December 31, 2021               [Page 5]
+Scurtescu, et al.        Expires January 3, 2022                [Page 5]
 
-                    openid-risc-profile-specification          June 2021
+                    openid-risc-profile-specification          July 2021
 
 
    {
@@ -333,9 +333,9 @@ Scurtescu, et al.       Expires December 31, 2021               [Page 5]
 
 
 
-Scurtescu, et al.       Expires December 31, 2021               [Page 6]
+Scurtescu, et al.        Expires January 3, 2022                [Page 6]
 
-                    openid-risc-profile-specification          June 2021
+                    openid-risc-profile-specification          July 2021
 
 
    {
@@ -389,9 +389,9 @@ Scurtescu, et al.       Expires December 31, 2021               [Page 6]
 
 
 
-Scurtescu, et al.       Expires December 31, 2021               [Page 7]
+Scurtescu, et al.        Expires January 3, 2022                [Page 7]
 
-                    openid-risc-profile-specification          June 2021
+                    openid-risc-profile-specification          July 2021
 
 
    State changes trigger Opt-Out Events as represented bellow:
@@ -445,9 +445,9 @@ Scurtescu, et al.       Expires December 31, 2021               [Page 7]
 
 
 
-Scurtescu, et al.       Expires December 31, 2021               [Page 8]
+Scurtescu, et al.        Expires January 3, 2022                [Page 8]
 
-                    openid-risc-profile-specification          June 2021
+                    openid-risc-profile-specification          July 2021
 
 
 2.8.3.  Opt Out Cancelled
@@ -501,9 +501,9 @@ Scurtescu, et al.       Expires December 31, 2021               [Page 8]
 
 
 
-Scurtescu, et al.       Expires December 31, 2021               [Page 9]
+Scurtescu, et al.        Expires January 3, 2022                [Page 9]
 
-                    openid-risc-profile-specification          June 2021
+                    openid-risc-profile-specification          July 2021
 
 
 2.11.  Sessions Revoked
@@ -545,6 +545,60 @@ Scurtescu, et al.       Expires December 31, 2021               [Page 9]
               <https://openid.net/specs/openid-sse-framework-
               1_0-01.html>.
 
+Appendix A.  Acknowledgements
+
+   The authors wish to thank all members of the OpenID Foundation Shared
+   Signals and Events Working Group who contributed to the development
+   of this specification.
+
+
+
+
+
+
+
+Scurtescu, et al.        Expires January 3, 2022               [Page 10]
+
+                    openid-risc-profile-specification          July 2021
+
+
+Appendix B.  Notices
+
+   Copyright (c) 2021 The OpenID Foundation.
+
+   The OpenID Foundation (OIDF) grants to any Contributor, developer,
+   implementer, or other interested party a non-exclusive, royalty free,
+   worldwide copyright license to reproduce, prepare derivative works
+   from, distribute, perform and display, this Implementers Draft or
+   Final Specification solely for the purposes of (i) developing
+   specifications, and (ii) implementing Implementers Drafts and Final
+   Specifications based on such documents, provided that attribution be
+   made to the OIDF as the source of the material, but that such
+   attribution does not indicate an endorsement by the OIDF.
+
+   The technology described in this specification was made available
+   from contributions from various sources, including members of the
+   OpenID Foundation and others.  Although the OpenID Foundation has
+   taken steps to help ensure that the technology is available for
+   distribution, it takes no position regarding the validity or scope of
+   any intellectual property or other rights that might be claimed to
+   pertain to the implementation or use of the technology described in
+   this specification or the extent to which any license under such
+   rights might or might not be available; neither does it represent
+   that it has made any independent effort to identify any such rights.
+   The OpenID Foundation and the contributors to this specification make
+   no (and hereby expressly disclaim any) warranties (express, implied,
+   or otherwise), including implied warranties of merchantability, non-
+   infringement, fitness for a particular purpose, or title, related to
+   this specification, and the entire risk as to implementing this
+   specification is assumed by the implementer.  The OpenID Intellectual
+   Property Rights policy requires contributors to offer a patent
+   promise not to assert certain patent claims against other
+   contributors and against implementers.  The OpenID Foundation invites
+   any interested party to bring to its attention any copyrights,
+   patents, patent applications, or other proprietary rights that may
+   cover technology that may be required to practice this specification.
+
 Authors' Addresses
 
    Marius Scurtescu
@@ -557,9 +611,11 @@ Authors' Addresses
 
 
 
-Scurtescu, et al.       Expires December 31, 2021              [Page 10]
 
-                    openid-risc-profile-specification          June 2021
+
+Scurtescu, et al.        Expires January 3, 2022               [Page 11]
+
+                    openid-risc-profile-specification          July 2021
 
 
    Annabelle Backman
@@ -613,4 +669,4 @@ Scurtescu, et al.       Expires December 31, 2021              [Page 10]
 
 
 
-Scurtescu, et al.       Expires December 31, 2021              [Page 11]
+Scurtescu, et al.        Expires January 3, 2022               [Page 12]
