@@ -6,10 +6,10 @@
                                                                Microsoft
                                                         A. Tulshibagwale
                                                                   Google
-                                                           June 08, 2021
+                                                         August 09, 2021
 
 
-       OpenID Continuous Access Evaluation Profile 1.0 - draft 01
+       OpenID Continuous Access Evaluation Profile 1.0 - draft 02
                      openid-caep-specification-1_0
 
 Abstract
@@ -53,9 +53,9 @@ Table of Contents
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021               [Page 1]
+Cappalli & TulshibagwaleExpires February 10, 2022               [Page 1]
 
-                                CAEP-Spec                      June 2021
+                                CAEP-Spec                    August 2021
 
 
 1.  Introduction
@@ -109,9 +109,9 @@ Cappalli & TulshibagwaleExpires December 10, 2021               [Page 1]
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021               [Page 2]
+Cappalli & TulshibagwaleExpires February 10, 2022               [Page 2]
 
-                                CAEP-Spec                      June 2021
+                                CAEP-Spec                    August 2021
 
 
    {
@@ -165,9 +165,9 @@ Cappalli & TulshibagwaleExpires December 10, 2021               [Page 2]
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021               [Page 3]
+Cappalli & TulshibagwaleExpires February 10, 2022               [Page 3]
 
-                                CAEP-Spec                      June 2021
+                                CAEP-Spec                    August 2021
 
 
    The actual reason why the session was revoked might be specified with
@@ -221,9 +221,9 @@ Cappalli & TulshibagwaleExpires December 10, 2021               [Page 3]
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021               [Page 4]
+Cappalli & TulshibagwaleExpires February 10, 2022               [Page 4]
 
-                                CAEP-Spec                      June 2021
+                                CAEP-Spec                    August 2021
 
 
    {
@@ -277,9 +277,9 @@ Cappalli & TulshibagwaleExpires December 10, 2021               [Page 4]
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021               [Page 5]
+Cappalli & TulshibagwaleExpires February 10, 2022               [Page 5]
 
-                                CAEP-Spec                      June 2021
+                                CAEP-Spec                    August 2021
 
 
    {
@@ -333,9 +333,9 @@ Cappalli & TulshibagwaleExpires December 10, 2021               [Page 5]
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021               [Page 6]
+Cappalli & TulshibagwaleExpires February 10, 2022               [Page 6]
 
-                                CAEP-Spec                      June 2021
+                                CAEP-Spec                    August 2021
 
 
    Token Claims Change signals that a claim in a token, identified by
@@ -389,9 +389,9 @@ Cappalli & TulshibagwaleExpires December 10, 2021               [Page 6]
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021               [Page 7]
+Cappalli & TulshibagwaleExpires February 10, 2022               [Page 7]
 
-                                CAEP-Spec                      June 2021
+                                CAEP-Spec                    August 2021
 
 
 {
@@ -445,9 +445,9 @@ Cappalli & TulshibagwaleExpires December 10, 2021               [Page 7]
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021               [Page 8]
+Cappalli & TulshibagwaleExpires February 10, 2022               [Page 8]
 
-                                CAEP-Spec                      June 2021
+                                CAEP-Spec                    August 2021
 
 
    {
@@ -501,9 +501,9 @@ Cappalli & TulshibagwaleExpires December 10, 2021               [Page 8]
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021               [Page 9]
+Cappalli & TulshibagwaleExpires February 10, 2022               [Page 9]
 
-                                CAEP-Spec                      June 2021
+                                CAEP-Spec                    August 2021
 
 
 3.3.1.  Event-Specific Claims
@@ -557,9 +557,9 @@ Cappalli & TulshibagwaleExpires December 10, 2021               [Page 9]
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021              [Page 10]
+Cappalli & TulshibagwaleExpires February 10, 2022              [Page 10]
 
-                                CAEP-Spec                      June 2021
+                                CAEP-Spec                    August 2021
 
 
    When "event_timestamp" is included, its value MUST represent the time
@@ -613,9 +613,9 @@ Cappalli & TulshibagwaleExpires December 10, 2021              [Page 10]
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021              [Page 11]
+Cappalli & TulshibagwaleExpires February 10, 2022              [Page 11]
 
-                                CAEP-Spec                      June 2021
+                                CAEP-Spec                    August 2021
 
 
    In the first scenario, Assurance Level Change will an increase, while
@@ -669,9 +669,9 @@ Cappalli & TulshibagwaleExpires December 10, 2021              [Page 11]
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021              [Page 12]
+Cappalli & TulshibagwaleExpires February 10, 2022              [Page 12]
 
-                                CAEP-Spec                      June 2021
+                                CAEP-Spec                    August 2021
 
 
 3.4.2.  Examples
@@ -725,9 +725,9 @@ Cappalli & TulshibagwaleExpires December 10, 2021              [Page 12]
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021              [Page 13]
+Cappalli & TulshibagwaleExpires February 10, 2022              [Page 13]
 
-                                CAEP-Spec                      June 2021
+                                CAEP-Spec                    August 2021
 
 
 3.5.1.  Event-Specific Claims
@@ -781,9 +781,9 @@ Cappalli & TulshibagwaleExpires December 10, 2021              [Page 13]
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021              [Page 14]
+Cappalli & TulshibagwaleExpires February 10, 2022              [Page 14]
 
-                                CAEP-Spec                      June 2021
+                                CAEP-Spec                    August 2021
 
 
    {
@@ -837,9 +837,9 @@ Cappalli & TulshibagwaleExpires December 10, 2021              [Page 14]
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021              [Page 15]
+Cappalli & TulshibagwaleExpires February 10, 2022              [Page 15]
 
-                                CAEP-Spec                      June 2021
+                                CAEP-Spec                    August 2021
 
 
    [RFC5646]  Phillips, A., Ed. and M. Davis, Ed., "Tags for Identifying
@@ -893,9 +893,9 @@ Appendix B.  Notices
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021              [Page 16]
+Cappalli & TulshibagwaleExpires February 10, 2022              [Page 16]
 
-                                CAEP-Spec                      June 2021
+                                CAEP-Spec                    August 2021
 
 
    distribution, it takes no position regarding the validity or scope of
@@ -949,4 +949,4 @@ Authors' Addresses
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021              [Page 17]
+Cappalli & TulshibagwaleExpires February 10, 2022              [Page 17]

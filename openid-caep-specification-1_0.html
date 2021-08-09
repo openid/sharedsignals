@@ -6,7 +6,7 @@
 <head profile="http://www.w3.org/2006/03/hcard http://dublincore.org/documents/2008/08/04/dc-html/">
   <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
 
-  <title>OpenID Continuous Access Evaluation Profile 1.0 - draft 01</title>
+  <title>OpenID Continuous Access Evaluation Profile 1.0 - draft 02</title>
 
   <style type="text/css" title="Xml2Rfc (sans serif)">
   /*<![CDATA[*/
@@ -400,12 +400,12 @@
 <link href="#rfc.authors" rel="Chapter">
 
 
-  <meta name="generator" content="xml2rfc version 3.8.0 - https://tools.ietf.org/tools/xml2rfc" />
+  <meta name="generator" content="xml2rfc version 3.9.0 - https://tools.ietf.org/tools/xml2rfc" />
   <link rel="schema.dct" href="http://purl.org/dc/terms/" />
 
   <meta name="dct.creator" content="Cappalli, T. and A. Tulshibagwale" />
   <meta name="dct.identifier" content="urn:ietf:id:openid-caep-specification-1_0" />
-  <meta name="dct.issued" scheme="ISO8601" content="2021-06-08" />
+  <meta name="dct.issued" scheme="ISO8601" content="2021-08-09" />
   <meta name="dct.abstract" content="This document defines the Continuous Access Evaluation Profile (CAEP) of the Shared Signals and Events Framework . It specifies a set of event types conforming to the SSE Framework. These event types are intended to be used between cooperating Transmitters and Receivers such that Transmitters may send continuous updates using which Receivers can attenuate access to shared human or robotic users, devices, sessions and applications. " />
   <meta name="description" content="This document defines the Continuous Access Evaluation Profile (CAEP) of the Shared Signals and Events Framework . It specifies a set of event types conforming to the SSE Framework. These event types are intended to be used between cooperating Transmitters and Receivers such that Transmitters may send continuous updates using which Receivers can attenuate access to shared human or robotic users, devices, sessions and applications. " />
 
@@ -434,14 +434,14 @@
 </tr>
 <tr>
 <td class="left"></td>
-<td class="right">June 08, 2021</td>
+<td class="right">August 09, 2021</td>
 </tr>
 
     	
     </tbody>
   </table>
 
-  <p class="title">OpenID Continuous Access Evaluation Profile 1.0 - draft 01<br />
+  <p class="title">OpenID Continuous Access Evaluation Profile 1.0 - draft 02<br />
   <span class="filename">openid-caep-specification-1_0</span></p>
   
   <h1 id="rfc.abstract"><a href="#rfc.abstract">Abstract</a></h1>
@@ -611,7 +611,7 @@
 </pre>
 <p class="figure">Figure 3: Example: Session Revoked - Required claims + Simple Subject</p>
 <div id="rfc.figure.4"></div>
-<div id="session-revoked-example-session-id"></div>
+<div id="session-revoked-example-user-sub"></div>
 <pre>
 {
     "iss": "https://idp.example.com/123456789/",
@@ -649,34 +649,8 @@
     }
 }
 </pre>
-<p class="figure">Figure 4: Example: Session Revoked - Complex Subject describing user + session ID + device (includes optional claims)</p>
+<p class="figure">Figure 4: Example: Session Revoked - subject as `sub` claim (includes optional claims)</p>
 <div id="rfc.figure.5"></div>
-<div id="session-revoked-example-user-sub"></div>
-<pre>
-{
-    "iss": "https://idp.example.com/123456789/",
-    "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
-    "iat": 1615305159,
-    "aud": "https://sp.example.com/caep",
-    "sub": "jane.smith@example.com",
-    "events": {
-        "https://schemas.openid.net/secevent/caep/event-type/\
-        session-revoked": {
-            "initiating_entity": "policy",
-            "reason_admin": {
-                "en": "Landspeed Policy Violation: C076E82F"
-            },
-            "reason_user": {
-                "en": "Access attempt from multiple regions.",
-                "es-410": "Intento de acceso desde varias regiones."
-            },
-            "event_timestamp": 1615304991643
-        }
-    }
-}
-</pre>
-<p class="figure">Figure 5: Example: Session Revoked - subject as `sub` claim (includes optional claims)</p>
-<div id="rfc.figure.6"></div>
 <div id="session-revoked-example-user-device"></div>
 <pre>
 {
@@ -716,7 +690,7 @@
     }
 }
 </pre>
-<p class="figure">Figure 6: Example: Session Revoked - Complex Subject describing user + device + tenant (includes optional claims)</p>
+<p class="figure">Figure 5: Example: Session Revoked - Complex Subject describing user + device + tenant (includes optional claims)</p>
 <h1 id="rfc.section.3.2">
 <a href="#rfc.section.3.2">3.2.</a> <a href="#token-claims-change" id="token-claims-change">Token Claims Change</a>
 </h1>
@@ -738,7 +712,7 @@
 <a href="#rfc.section.3.2.2">3.2.2.</a> <a href="#token-claims-change-examples" id="token-claims-change-examples">Examples</a>
 </h1>
 <p id="rfc.section.3.2.2.p.1">NOTE: The event type URI is wrapped, the backslash is the continuation character.</p>
-<div id="rfc.figure.7"></div>
+<div id="rfc.figure.6"></div>
 <div id="token-claims-change-example-oidc"></div>
 <pre>
 {
@@ -762,8 +736,8 @@
     }
 }
 </pre>
-<p class="figure">Figure 7: Example: OIDC ID Token Claims Change - Required claims only</p>
-<div id="rfc.figure.8"></div>
+<p class="figure">Figure 6: Example: OIDC ID Token Claims Change - Required claims only</p>
+<div id="rfc.figure.7"></div>
 <div id="token-claims-change-example-oidc-optional"></div>
 <pre>
 {
@@ -796,8 +770,8 @@
     }
 }
 </pre>
-<p class="figure">Figure 8: Example: OIDC ID Token Claims Change - Optional claims</p>
-<div id="rfc.figure.9"></div>
+<p class="figure">Figure 7: Example: OIDC ID Token Claims Change - Optional claims</p>
+<div id="rfc.figure.8"></div>
 <div id="token-claims-change-example-saml"></div>
 <pre>
 {
@@ -822,7 +796,7 @@
     }
 }
 </pre>
-<p class="figure">Figure 9: Example: SAML Assertion Claims Change - Required claims only</p>
+<p class="figure">Figure 8: Example: SAML Assertion Claims Change - Required claims only</p>
 <h1 id="rfc.section.3.3">
 <a href="#rfc.section.3.3">3.3.</a> <a href="#credential-change" id="credential-change">Credential Change</a>
 </h1>
@@ -884,7 +858,7 @@
 <a href="#rfc.section.3.3.2">3.3.2.</a> <a href="#credential-change-examples" id="credential-change-examples">Examples</a>
 </h1>
 <p id="rfc.section.3.3.2.p.1">NOTE: The event type URI is wrapped, the backslash is the continuation character.</p>
-<div id="rfc.figure.10"></div>
+<div id="rfc.figure.9"></div>
 <div id="credential-change-example-fido2"></div>
 <pre>
 {
@@ -913,7 +887,7 @@
     }
 }
 </pre>
-<p class="figure">Figure 10: Example: Provisioning a new FIDO2 authenticator - Simple Subject + optional claims</p>
+<p class="figure">Figure 9: Example: Provisioning a new FIDO2 authenticator - Simple Subject + optional claims</p>
 <h1 id="rfc.section.3.4">
 <a href="#rfc.section.3.4">3.4.</a> <a href="#assurance-level-change" id="assurance-level-change">Assurance Level Change</a>
 </h1>
@@ -965,7 +939,7 @@
 <a href="#rfc.section.3.4.2">3.4.2.</a> <a href="#assurance-level-change-examples" id="assurance-level-change-examples">Examples</a>
 </h1>
 <p id="rfc.section.3.4.2.p.1">NOTE: The event type URI is wrapped, the backslash is the continuation character.</p>
-<div id="rfc.figure.11"></div>
+<div id="rfc.figure.10"></div>
 <div id="assurance-level-change-examples-al-increase"></div>
 <pre>
 {
@@ -990,7 +964,7 @@
     }
 }
 </pre>
-<p class="figure">Figure 11: Example: Assurance Level Increase - Simple Subject + optional claims</p>
+<p class="figure">Figure 10: Example: Assurance Level Increase - Simple Subject + optional claims</p>
 <h1 id="rfc.section.3.5">
 <a href="#rfc.section.3.5">3.5.</a> <a href="#device-compliance-change" id="device-compliance-change">Device Compliance Change</a>
 </h1>
@@ -1028,7 +1002,7 @@
 <a href="#rfc.section.3.5.2">3.5.2.</a> <a href="#device-compliance-change-examples" id="device-compliance-change-examples">Examples</a>
 </h1>
 <p id="rfc.section.3.5.2.p.1">NOTE: The event type URI is wrapped, the backslash is the continuation character.</p>
-<div id="rfc.figure.12"></div>
+<div id="rfc.figure.11"></div>
 <div id="device-compliance-change-examples-out-of-compliance"></div>
 <pre>
 {
@@ -1064,7 +1038,7 @@
     }
 }
 </pre>
-<p class="figure">Figure 12: Example: Device No Longer Compliant - Complex Subject + optional claims</p>
+<p class="figure">Figure 11: Example: Device No Longer Compliant - Complex Subject + optional claims</p>
 <h1 id="rfc.references">
 <a href="#rfc.references">4.</a> Normative References</h1>
 <table><tbody>
