@@ -31,22 +31,22 @@ Table of Contents
      3.1.  Session Revoked . . . . . . . . . . . . . . . . . . . . .   3
        3.1.1.  Event-Specific Claims . . . . . . . . . . . . . . . .   4
        3.1.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .   4
-     3.2.  Token Claims Change . . . . . . . . . . . . . . . . . . .   7
-       3.2.1.  Event-Specific Claims . . . . . . . . . . . . . . . .   8
-       3.2.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .   8
-     3.3.  Credential Change . . . . . . . . . . . . . . . . . . . .  10
-       3.3.1.  Event-Specific Claims . . . . . . . . . . . . . . . .  11
-       3.3.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  12
-     3.4.  Assurance Level Change  . . . . . . . . . . . . . . . . .  12
-       3.4.1.  Event-Specific Claims . . . . . . . . . . . . . . . .  13
-       3.4.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  14
-     3.5.  Device Compliance Change  . . . . . . . . . . . . . . . .  14
-       3.5.1.  Event-Specific Claims . . . . . . . . . . . . . . . .  15
-       3.5.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  15
-   4.  Normative References  . . . . . . . . . . . . . . . . . . . .  16
-   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  17
-   Appendix B.  Notices  . . . . . . . . . . . . . . . . . . . . . .  17
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  18
+     3.2.  Token Claims Change . . . . . . . . . . . . . . . . . . .   6
+       3.2.1.  Event-Specific Claims . . . . . . . . . . . . . . . .   7
+       3.2.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .   7
+     3.3.  Credential Change . . . . . . . . . . . . . . . . . . . .   9
+       3.3.1.  Event-Specific Claims . . . . . . . . . . . . . . . .  10
+       3.3.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  11
+     3.4.  Assurance Level Change  . . . . . . . . . . . . . . . . .  11
+       3.4.1.  Event-Specific Claims . . . . . . . . . . . . . . . .  12
+       3.4.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  13
+     3.5.  Device Compliance Change  . . . . . . . . . . . . . . . .  13
+       3.5.1.  Event-Specific Claims . . . . . . . . . . . . . . . .  14
+       3.5.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  14
+   4.  Normative References  . . . . . . . . . . . . . . . . . . . .  15
+   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  16
+   Appendix B.  Notices  . . . . . . . . . . . . . . . . . . . . . .  16
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  17
 
 
 
@@ -262,49 +262,7 @@ Cappalli & TulshibagwaleExpires December 10, 2021               [Page 4]
        }
    }
 
-   Figure 4: Example: Session Revoked - Complex Subject describing user
-             + session ID + device (includes optional claims)
-
-
-
-
-
-
-
-
-
-
-
-
-
-Cappalli & TulshibagwaleExpires December 10, 2021               [Page 5]
-
-                                CAEP-Spec                      June 2021
-
-
-   {
-       "iss": "https://idp.example.com/123456789/",
-       "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
-       "iat": 1615305159,
-       "aud": "https://sp.example.com/caep",
-       "sub": "jane.smith@example.com",
-       "events": {
-           "https://schemas.openid.net/secevent/caep/event-type/\
-           session-revoked": {
-               "initiating_entity": "policy",
-               "reason_admin": {
-                   "en": "Landspeed Policy Violation: C076E82F"
-               },
-               "reason_user": {
-                   "en": "Access attempt from multiple regions.",
-                   "es-410": "Intento de acceso desde varias regiones."
-               },
-               "event_timestamp": 1615304991643
-           }
-       }
-   }
-
-   Figure 5: Example: Session Revoked - subject as `sub` claim (includes
+   Figure 4: Example: Session Revoked - subject as `sub` claim (includes
                              optional claims)
 
 
@@ -319,21 +277,7 @@ Cappalli & TulshibagwaleExpires December 10, 2021               [Page 5]
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Cappalli & TulshibagwaleExpires December 10, 2021               [Page 6]
+Cappalli & TulshibagwaleExpires December 10, 2021               [Page 5]
 
                                 CAEP-Spec                      June 2021
 
@@ -375,7 +319,7 @@ Cappalli & TulshibagwaleExpires December 10, 2021               [Page 6]
        }
    }
 
-   Figure 6: Example: Session Revoked - Complex Subject describing user
+   Figure 5: Example: Session Revoked - Complex Subject describing user
                + device + tenant (includes optional claims)
 
 3.2.  Token Claims Change
@@ -389,7 +333,7 @@ Cappalli & TulshibagwaleExpires December 10, 2021               [Page 6]
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021               [Page 7]
+Cappalli & TulshibagwaleExpires December 10, 2021               [Page 6]
 
                                 CAEP-Spec                      June 2021
 
@@ -435,7 +379,7 @@ Cappalli & TulshibagwaleExpires December 10, 2021               [Page 7]
        }
    }
 
-   Figure 7: Example: OIDC ID Token Claims Change - Required claims only
+   Figure 6: Example: OIDC ID Token Claims Change - Required claims only
 
 
 
@@ -445,7 +389,7 @@ Cappalli & TulshibagwaleExpires December 10, 2021               [Page 7]
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021               [Page 8]
+Cappalli & TulshibagwaleExpires December 10, 2021               [Page 7]
 
                                 CAEP-Spec                      June 2021
 
@@ -480,7 +424,7 @@ Cappalli & TulshibagwaleExpires December 10, 2021               [Page 8]
     }
 }
 
-     Figure 8: Example: OIDC ID Token Claims Change - Optional claims
+     Figure 7: Example: OIDC ID Token Claims Change - Optional claims
 
 
 
@@ -501,7 +445,7 @@ Cappalli & TulshibagwaleExpires December 10, 2021               [Page 8]
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021               [Page 9]
+Cappalli & TulshibagwaleExpires December 10, 2021               [Page 8]
 
                                 CAEP-Spec                      June 2021
 
@@ -528,7 +472,7 @@ Cappalli & TulshibagwaleExpires December 10, 2021               [Page 9]
        }
    }
 
-     Figure 9: Example: SAML Assertion Claims Change - Required claims
+     Figure 8: Example: SAML Assertion Claims Change - Required claims
                                    only
 
 3.3.  Credential Change
@@ -557,7 +501,7 @@ Cappalli & TulshibagwaleExpires December 10, 2021               [Page 9]
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021              [Page 10]
+Cappalli & TulshibagwaleExpires December 10, 2021               [Page 9]
 
                                 CAEP-Spec                      June 2021
 
@@ -613,7 +557,7 @@ Cappalli & TulshibagwaleExpires December 10, 2021              [Page 10]
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021              [Page 11]
+Cappalli & TulshibagwaleExpires December 10, 2021              [Page 10]
 
                                 CAEP-Spec                      June 2021
 
@@ -652,7 +596,7 @@ Cappalli & TulshibagwaleExpires December 10, 2021              [Page 11]
        }
    }
 
-    Figure 10: Example: Provisioning a new FIDO2 authenticator - Simple
+    Figure 9: Example: Provisioning a new FIDO2 authenticator - Simple
                          Subject + optional claims
 
 3.4.  Assurance Level Change
@@ -669,7 +613,7 @@ Cappalli & TulshibagwaleExpires December 10, 2021              [Page 11]
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021              [Page 12]
+Cappalli & TulshibagwaleExpires December 10, 2021              [Page 11]
 
                                 CAEP-Spec                      June 2021
 
@@ -725,7 +669,7 @@ Cappalli & TulshibagwaleExpires December 10, 2021              [Page 12]
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021              [Page 13]
+Cappalli & TulshibagwaleExpires December 10, 2021              [Page 12]
 
                                 CAEP-Spec                      June 2021
 
@@ -757,7 +701,7 @@ Cappalli & TulshibagwaleExpires December 10, 2021              [Page 13]
        }
    }
 
-      Figure 11: Example: Assurance Level Increase - Simple Subject +
+      Figure 10: Example: Assurance Level Increase - Simple Subject +
                               optional claims
 
 3.5.  Device Compliance Change
@@ -781,7 +725,7 @@ Cappalli & TulshibagwaleExpires December 10, 2021              [Page 13]
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021              [Page 14]
+Cappalli & TulshibagwaleExpires December 10, 2021              [Page 13]
 
                                 CAEP-Spec                      June 2021
 
@@ -837,7 +781,7 @@ Cappalli & TulshibagwaleExpires December 10, 2021              [Page 14]
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021              [Page 15]
+Cappalli & TulshibagwaleExpires December 10, 2021              [Page 14]
 
                                 CAEP-Spec                      June 2021
 
@@ -875,7 +819,7 @@ Cappalli & TulshibagwaleExpires December 10, 2021              [Page 15]
        }
    }
 
-    Figure 12: Example: Device No Longer Compliant - Complex Subject +
+    Figure 11: Example: Device No Longer Compliant - Complex Subject +
                               optional claims
 
 4.  Normative References
@@ -893,7 +837,7 @@ Cappalli & TulshibagwaleExpires December 10, 2021              [Page 15]
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021              [Page 16]
+Cappalli & TulshibagwaleExpires December 10, 2021              [Page 15]
 
                                 CAEP-Spec                      June 2021
 
@@ -949,7 +893,7 @@ Appendix B.  Notices
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021              [Page 17]
+Cappalli & TulshibagwaleExpires December 10, 2021              [Page 16]
 
                                 CAEP-Spec                      June 2021
 
@@ -1005,4 +949,4 @@ Authors' Addresses
 
 
 
-Cappalli & TulshibagwaleExpires December 10, 2021              [Page 18]
+Cappalli & TulshibagwaleExpires December 10, 2021              [Page 17]
