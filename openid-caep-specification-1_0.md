@@ -250,31 +250,6 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     }
 }
 ~~~
-{: #session-revoked-example-session-id title="Example: Session Revoked - Complex Subject describing user + session ID + device (includes optional claims)"}
-
-~~~ json
-{
-    "iss": "https://idp.example.com/123456789/",
-    "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
-    "iat": 1615305159,
-    "aud": "https://sp.example.com/caep",
-    "sub": "jane.smith@example.com",
-    "events": {
-        "https://schemas.openid.net/secevent/caep/event-type/\
-        session-revoked": {
-            "initiating_entity": "policy",
-            "reason_admin": {
-                "en": "Landspeed Policy Violation: C076E82F"
-            },
-            "reason_user": {
-                "en": "Access attempt from multiple regions.",
-                "es-410": "Intento de acceso desde varias regiones."
-            },
-            "event_timestamp": 1615304991643
-        }
-    }
-}
-~~~
 {: #session-revoked-example-user-sub title="Example: Session Revoked - subject as `sub` claim (includes optional claims)"}
 
 ~~~ json
