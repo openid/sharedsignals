@@ -399,7 +399,7 @@
 <link href="#rfc.authors" rel="Chapter">
 
 
-  <meta name="generator" content="xml2rfc version 3.9.0 - https://tools.ietf.org/tools/xml2rfc" />
+  <meta name="generator" content="xml2rfc version 3.10.0 - https://tools.ietf.org/tools/xml2rfc" />
   <link rel="schema.dct" href="http://purl.org/dc/terms/" />
 
   <meta name="dct.creator" content="Scurtescu, M., Backman, A., Hunt, P., Bradley, J., Bounev, S., and A. Tulshibagwale" />
@@ -687,6 +687,7 @@
 
 <ul>
 <li>credential_type - REQUIRED. The type of credential that is compromised. The value of this attribute must be one of the values specified for the similarly named field in in the <samp>Credential Change</samp> event defined in the <a href="#CAEP-SPECIFICATION" class="xref">CAEP Specification</a>.  </li>
+<li>event_timestamp - OPTIONAL. JSON number: the time at which the event described by this SET was discovered by the Transmitter. Its value is a JSON number representing the number of seconds from 1970-01-01T0:0:0Z as measured in UTC until the date/time.</li>
 <li>reason_admin - OPTIONAL. The reason why the credential compromised event was generated, intended for administrators</li>
 <li>reason_user - OPTIONAL. The reason why the credential compromised event was generated, indended for end-users</li>
 </ul>
@@ -786,9 +787,10 @@
 <h1 id="rfc.section.2.11">
 <a href="#rfc.section.2.11">2.11.</a> <a href="#sessions-revoked" id="sessions-revoked">Sessions Revoked</a>
 </h1>
-<p id="rfc.section.2.11.p.1">Event Type URI:<br> https://schemas.openid.net/secevent/risc/event-type/sessions-revoked</p>
-<p id="rfc.section.2.11.p.2">Sessions Revoked signals that all the sessions for the account identified by the subject have been revoked.</p>
-<p id="rfc.section.2.11.p.3">Attributes: none</p>
+<p id="rfc.section.2.11.p.1">Note: This event type is now deprecated. New implementations MUST use the <samp>session-revoked</samp> event defined in the <a href="#CAEP-SPECIFICATION" class="xref">CAEP Specification</a>.</p>
+<p id="rfc.section.2.11.p.2">Event Type URI:<br> https://schemas.openid.net/secevent/risc/event-type/sessions-revoked</p>
+<p id="rfc.section.2.11.p.3">Sessions Revoked signals that all the sessions for the account identified by the subject have been revoked.</p>
+<p id="rfc.section.2.11.p.4">Attributes: none</p>
 <h1 id="rfc.references">
 <a href="#rfc.references">3.</a> Normative References</h1>
 <table><tbody>
