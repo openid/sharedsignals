@@ -431,7 +431,21 @@ Host: tr.example.com
             unlike its use in <xref target="RFC5785"/>, it does not provide general information about the host.
           </t>
         </section>
-        
+
+        <section title="Backward Compatibility for RISC Transmitters">
+          <t>Existing RISC Transmitters MAY continue to use the path component <spanx style="verb">/risc-configuration</spanx>
+            instead of the path component <spanx style="verb">/sse-configuration</spanx> in the path for the Transmitter
+            Configuration Metadata. New services supporting the SSE Framework SHOULD NOT use this location for publishing the
+            Transmitter Configuration Metadata. For example, the Transmitter Configuration Metadata for the Transmitter
+            <spanx style="verb">https://risc-tr.example.com</spanx> MAY be obtained by making the following request:
+            <figure title="Example: Transmitter Configuration Request for RISC Transmitters" anchor="figolddiscoveryrequest">
+              <artwork><![CDATA[
+GET /.well-known/risc-configuration HTTP/1.1
+Host: risc-tr.example.com
+]]></artwork>
+            </figure></t>
+        </section>
+
         <section title="Transmitter Configuration Response">
           <t>The response is a set of Claims about the Transmitter's configuration, including all necessary endpoints and
             public key location information. A successful response MUST use the 200 OK HTTP status code and return

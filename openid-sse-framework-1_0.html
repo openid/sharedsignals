@@ -393,8 +393,9 @@
 <link href="#rfc.section.6.1" rel="Chapter" title="6.1 Transmitter Configuration Metadata">
 <link href="#rfc.section.6.2" rel="Chapter" title="6.2 Obtaining Transmitter Configuration Information">
 <link href="#rfc.section.6.2.1" rel="Chapter" title="6.2.1 Transmitter Configuration Request">
-<link href="#rfc.section.6.2.2" rel="Chapter" title="6.2.2 Transmitter Configuration Response">
-<link href="#rfc.section.6.2.3" rel="Chapter" title="6.2.3 Transmitter Configuration Validation">
+<link href="#rfc.section.6.2.2" rel="Chapter" title="6.2.2 Backward Compatibility for RISC Transmitters">
+<link href="#rfc.section.6.2.3" rel="Chapter" title="6.2.3 Transmitter Configuration Response">
+<link href="#rfc.section.6.2.4" rel="Chapter" title="6.2.4 Transmitter Configuration Validation">
 <link href="#rfc.section.7" rel="Chapter" title="7 Management API for SET Event Streams">
 <link href="#rfc.section.7.1" rel="Chapter" title="7.1 Event Stream Management">
 <link href="#rfc.section.7.1.1" rel="Chapter" title="7.1.1 Stream Status">
@@ -446,7 +447,7 @@
 <link href="#rfc.authors" rel="Chapter">
 
 
-  <meta name="generator" content="xml2rfc version 3.8.0 - https://tools.ietf.org/tools/xml2rfc" />
+  <meta name="generator" content="xml2rfc version 3.10.0 - https://tools.ietf.org/tools/xml2rfc" />
   <link rel="schema.dct" href="http://purl.org/dc/terms/" />
 
   <meta name="dct.creator" content="Tulshibagwale, A., Cappalli, T., Scurtescu, M., Backman, A., and J. Bradley" />
@@ -578,9 +579,11 @@
 </li>
 <ul><li>6.2.1.   <a href="#rfc.section.6.2.1">Transmitter Configuration Request</a>
 </li>
-<li>6.2.2.   <a href="#rfc.section.6.2.2">Transmitter Configuration Response</a>
+<li>6.2.2.   <a href="#rfc.section.6.2.2">Backward Compatibility for RISC Transmitters</a>
 </li>
-<li>6.2.3.   <a href="#rfc.section.6.2.3">Transmitter Configuration Validation</a>
+<li>6.2.3.   <a href="#rfc.section.6.2.3">Transmitter Configuration Response</a>
+</li>
+<li>6.2.4.   <a href="#rfc.section.6.2.4">Transmitter Configuration Validation</a>
 </li>
 </ul></ul><li>7.   <a href="#rfc.section.7">Management API for SET Event Streams</a>
 </li>
@@ -997,11 +1000,21 @@ Host: tr.example.com
 <p id="rfc.section.6.2.1.p.3">If the  Issuer value contains a path component, any terminating <samp>/</samp> MUST be removed before inserting <samp>/.well-known/sse-configuration</samp> between the host component and the path component. The Receiver would make the following request to the Issuer <samp>https://tr.example.com/issuer1</samp> to obtain its Configuration information, since the Issuer contains a path component: </p>
 <p id="rfc.section.6.2.1.p.4">Using path components enables supporting multiple issuers per host. This is required in some multi-tenant hosting configurations. This use of <samp>.well-known</samp> is for supporting multiple issuers per host; unlike its use in <a href="#RFC5785" class="xref">[RFC5785]</a>, it does not provide general information about the host.  </p>
 <h1 id="rfc.section.6.2.2">
-<a href="#rfc.section.6.2.2">6.2.2.</a> Transmitter Configuration Response</h1>
-<p id="rfc.section.6.2.2.p.1">The response is a set of Claims about the Transmitter's configuration, including all necessary endpoints and public key location information. A successful response MUST use the 200 OK HTTP status code and return a JSON object using the <samp>application/json</samp> content type that contains a set of Claims as its members that are a subset of the Metadata values defined in <a href="#discovery-meta" class="xref">Section 6.1</a>.  Other Claims MAY also be returned.</p>
-<p id="rfc.section.6.2.2.p.2">Claims that return multiple values are represented as JSON arrays. Claims with zero elements MUST be omitted from the response.</p>
-<p id="rfc.section.6.2.2.p.3">An error response uses the applicable HTTP status code value.</p>
+<a href="#rfc.section.6.2.2">6.2.2.</a> Backward Compatibility for RISC Transmitters</h1>
 <div id="rfc.figure.11"></div>
+<div id="figolddiscoveryrequest"></div>
+<pre>
+GET /.well-known/risc-configuration HTTP/1.1
+Host: risc-tr.example.com
+</pre>
+<p class="figure">Figure 11: Example: Transmitter Configuration Request for RISC Transmitters</p>
+<p id="rfc.section.6.2.2.p.1">Existing RISC Transmitters MAY continue to use the path component <samp>/risc-configuration</samp> instead of the path component <samp>/sse-configuration</samp> in the path for the Transmitter Configuration Metadata. New services supporting the SSE Framework SHOULD NOT use this location for publishing the Transmitter Configuration Metadata. For example, the Transmitter Configuration Metadata for the Transmitter <samp>https://risc-tr.example.com</samp> MAY be obtained by making the following request: </p>
+<h1 id="rfc.section.6.2.3">
+<a href="#rfc.section.6.2.3">6.2.3.</a> Transmitter Configuration Response</h1>
+<p id="rfc.section.6.2.3.p.1">The response is a set of Claims about the Transmitter's configuration, including all necessary endpoints and public key location information. A successful response MUST use the 200 OK HTTP status code and return a JSON object using the <samp>application/json</samp> content type that contains a set of Claims as its members that are a subset of the Metadata values defined in <a href="#discovery-meta" class="xref">Section 6.1</a>.  Other Claims MAY also be returned.</p>
+<p id="rfc.section.6.2.3.p.2">Claims that return multiple values are represented as JSON arrays. Claims with zero elements MUST be omitted from the response.</p>
+<p id="rfc.section.6.2.3.p.3">An error response uses the applicable HTTP status code value.</p>
+<div id="rfc.figure.12"></div>
 <div id="figdiscoveryresponse"></div>
 <pre>
 HTTP/1.1 200 OK
@@ -1028,18 +1041,18 @@ Content-Type: application/json
   "critical_subject_members": [ "tenant", "user" ]
 }
 </pre>
-<p class="figure">Figure 11: Example: Transmitter Configuration Response</p>
+<p class="figure">Figure 12: Example: Transmitter Configuration Response</p>
 <p></p>
-<h1 id="rfc.section.6.2.3">
-<a href="#rfc.section.6.2.3">6.2.3.</a> Transmitter Configuration Validation</h1>
-<p id="rfc.section.6.2.3.p.1">If any of the validation procedures defined in this specification fail, any operations requiring the information that failed to correctly validate MUST be aborted and the information that failed to validate MUST NOT be used.</p>
-<p id="rfc.section.6.2.3.p.2">The <samp>issuer</samp> value returned MUST be identical to the Issuer URL that was directly used to retrieve the configuration information. This MUST also be identical to the <samp>iss</samp> Claim value in Security Event Tokens issued from this Transmitter.  </p>
+<h1 id="rfc.section.6.2.4">
+<a href="#rfc.section.6.2.4">6.2.4.</a> Transmitter Configuration Validation</h1>
+<p id="rfc.section.6.2.4.p.1">If any of the validation procedures defined in this specification fail, any operations requiring the information that failed to correctly validate MUST be aborted and the information that failed to validate MUST NOT be used.</p>
+<p id="rfc.section.6.2.4.p.2">The <samp>issuer</samp> value returned MUST be identical to the Issuer URL that was directly used to retrieve the configuration information. This MUST also be identical to the <samp>iss</samp> Claim value in Security Event Tokens issued from this Transmitter.  </p>
 <h1 id="rfc.section.7">
 <a href="#rfc.section.7">7.</a> <a href="#management" id="management">Management API for SET Event Streams</a>
 </h1>
 <p id="rfc.section.7.p.1">This section defines an HTTP API to be implemented by Event Transmitters and that can be used by Event Receivers to query and update the Event Stream configuration and status, to add and remove subjects and to trigger verification.</p>
 <p id="rfc.section.7.p.2">This section is based on <a href="#MGMTAPI" class="xref">Management API for SET Event Streams</a>.</p>
-<div id="rfc.figure.12"></div>
+<div id="rfc.figure.13"></div>
 <div id="figintro"></div>
 <pre>
 +------------+                +------------+
@@ -1063,7 +1076,7 @@ Content-Type: application/json
 |            |                |            |
 +------------+                +------------+
 </pre>
-<p class="figure">Figure 12: Event Stream Management API</p>
+<p class="figure">Figure 13: Event Stream Management API</p>
 <p id="rfc.section.7.p.3">It is OPTIONAL for Transmitters to implement a Management API, but it is RECOMMENDED that they implement it, especially the endpoints for querying the Stream Status and for triggering Verification.</p>
 <h1 id="rfc.section.7.1">
 <a href="#rfc.section.7.1">7.1.</a> <a href="#management-api" id="management-api">Event Stream Management</a>
@@ -1132,15 +1145,15 @@ Content-Type: application/json
 <br> The Transmitter MUST NOT transmit events over the stream, and will not hold any events for later transmission.</dd>
 </dl>
 <p id="rfc.section.7.1.1.1.p.4">The following is a non-normative example request to check an event stream&#8217;s status:</p>
-<div id="rfc.figure.13"></div>
+<div id="rfc.figure.14"></div>
 <div id="figstatusreq"></div>
 <pre>
 GET /sse/status HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer zzzz
 </pre>
-<p class="figure">Figure 13: Example: Check Stream Status Request</p>
-<div id="rfc.figure.14"></div>
+<p class="figure">Figure 14: Example: Check Stream Status Request</p>
+<div id="rfc.figure.15"></div>
 <div id="figstatusresp"></div>
 <pre>
 HTTP/1.1 200 OK
@@ -1153,9 +1166,9 @@ Pragma: no-cache
 }
 
               </pre>
-<p class="figure">Figure 14: Example: Check Stream Status Response</p>
+<p class="figure">Figure 15: Example: Check Stream Status Response</p>
 <p id="rfc.section.7.1.1.1.p.5">The following is a non-normative example response: </p>
-<div id="rfc.figure.15"></div>
+<div id="rfc.figure.16"></div>
 <div id="figstatuswithsubjectreq"></div>
 <pre>
 GET /sse/status?subject=&lt;url-encoded-subject&gt; HTTP/1.1
@@ -1163,9 +1176,9 @@ Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
               </pre>
-<p class="figure">Figure 15: Example: Check Stream Status Request with Subject</p>
+<p class="figure">Figure 16: Example: Check Stream Status Request with Subject</p>
 <p id="rfc.section.7.1.1.1.p.6">The following is a non-normative example request to check an event stream's status for a specific subject: </p>
-<div id="rfc.figure.16"></div>
+<div id="rfc.figure.17"></div>
 <div id="figstatuswithsubjectresp"></div>
 <pre>
 HTTP/1.1 200 OK
@@ -1185,7 +1198,7 @@ Pragma: no-cache
 }
 
               </pre>
-<p class="figure">Figure 16: Example: Check Stream Status Response</p>
+<p class="figure">Figure 17: Example: Check Stream Status Response</p>
 <p id="rfc.section.7.1.1.1.p.7">The following is a non-normative example response with a Subject claim: </p>
 <p id="rfc.section.7.1.1.1.p.8">Errors are signaled with HTTP status codes as follows:</p>
 <div id="rfc.table.1"></div>
@@ -1237,7 +1250,7 @@ Pragma: no-cache
 </dl>
 
 <p> On receiving a valid request the Event Transmitter responds with a </p>
-<div id="rfc.figure.17"></div>
+<div id="rfc.figure.18"></div>
 <div id="figupdatestatusreq"></div>
 <pre>
 POST /sse/status HTTP/1.1
@@ -1249,9 +1262,9 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 }
 
                 </pre>
-<p class="figure">Figure 17: Example: Update Stream Status Request Without Optional Fields</p>
+<p class="figure">Figure 18: Example: Update Stream Status Request Without Optional Fields</p>
 <p id="rfc.section.7.1.1.2.p.2">The following is a non-normative example request to update an Event Stream&#8217;s status: </p>
-<div id="rfc.figure.18"></div>
+<div id="rfc.figure.19"></div>
 <div id="figupdatestatuswithsubjectreq"></div>
 <pre>
 POST /sse/status HTTP/1.1
@@ -1271,9 +1284,9 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 }
 
                 </pre>
-<p class="figure">Figure 18: Example: Update Stream Status Request With Optional Fields</p>
+<p class="figure">Figure 19: Example: Update Stream Status Request With Optional Fields</p>
 <p id="rfc.section.7.1.1.2.p.3">The following is a non-normative example of an Update Stream Status request with optional fields: </p>
-<div id="rfc.figure.19"></div>
+<div id="rfc.figure.20"></div>
 <div id="figupdatestatusresp"></div>
 <pre>
 HTTP/1.1 200 OK
@@ -1286,7 +1299,7 @@ Pragma: no-cache
 }
 
                 </pre>
-<p class="figure">Figure 19: Example: Update Stream Status Response</p>
+<p class="figure">Figure 20: Example: Update Stream Status Response</p>
 <p id="rfc.section.7.1.1.2.p.4">The following is a non-normative example response: </p>
 <p id="rfc.section.7.1.1.2.p.5">Errors are signaled with HTTP status codes as follows:</p>
 <div id="rfc.table.2"></div>
@@ -1361,16 +1374,16 @@ Pragma: no-cache
 </h1>
 <p id="rfc.section.7.1.2.1.p.1">An Event Receiver gets the current configuration of a stream by making an HTTP GET request to the Configuration Endpoint. On receiving a valid request the Event Transmitter responds with a <samp>200 OK</samp> response containing a <a href="#RFC7159" class="xref">JSON</a> representation of the stream&#8217;s configuration in the body.</p>
 <p id="rfc.section.7.1.2.1.p.2">The following is a non-normative example request to read an Event Stream&#8217;s configuration:</p>
-<div id="rfc.figure.20"></div>
+<div id="rfc.figure.21"></div>
 <div id="figreadconfigreq"></div>
 <pre>
 GET /sse/stream HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 </pre>
-<p class="figure">Figure 20: Example: Read Stream Configuration Request</p>
+<p class="figure">Figure 21: Example: Read Stream Configuration Request</p>
 <p id="rfc.section.7.1.2.1.p.3">The following is a non-normative example response:</p>
-<div id="rfc.figure.21"></div>
+<div id="rfc.figure.22"></div>
 <div id="figreadconfigresp"></div>
 <pre>
 HTTP/1.1 200 OK
@@ -1405,7 +1418,7 @@ Pragma: no-cache
   ]
 }
 </pre>
-<p class="figure">Figure 21: Example: Read Stream Configuration Response</p>
+<p class="figure">Figure 22: Example: Read Stream Configuration Response</p>
 <p id="rfc.section.7.1.2.1.p.4">Errors are signaled with HTTP status codes as follows:</p>
 <div id="rfc.table.3"></div>
 <div id="tabreadconfig"></div>
@@ -1437,7 +1450,7 @@ Pragma: no-cache
 <p id="rfc.section.7.1.2.2.p.2">The full set of editable properties must be present in the POST body, not only the ones that are specifically intended to be changed. Missing properties SHOULD be interpreted as requested to be deleted. Event Receivers should read the configuration first, modify the <a href="#RFC7159" class="xref">JSON</a> representation, then make an update request.</p>
 <p id="rfc.section.7.1.2.2.p.3">Properties that cannot be updated MAY be present, but they MUST match the expected value.</p>
 <p id="rfc.section.7.1.2.2.p.4">The following is a non-normative example request to update an Event Stream&#8217;s configuration:</p>
-<div id="rfc.figure.22"></div>
+<div id="rfc.figure.23"></div>
 <div id="figupdateconfigreq"></div>
 <pre>
 POST /sse/stream HTTP/1.1
@@ -1462,9 +1475,9 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
   ]
 }
 </pre>
-<p class="figure">Figure 22: Example: Update Stream Configuration Request</p>
+<p class="figure">Figure 23: Example: Update Stream Configuration Request</p>
 <p id="rfc.section.7.1.2.2.p.5">The following is a non-normative example response:</p>
-<div id="rfc.figure.23"></div>
+<div id="rfc.figure.24"></div>
 <div id="figupdateconfigresp"></div>
 <pre>
 HTTP/1.1 200 OK
@@ -1499,7 +1512,7 @@ Pragma: no-cache
   ]
 }
 </pre>
-<p class="figure">Figure 23: Example: Update Stream Configuration Response</p>
+<p class="figure">Figure 24: Example: Update Stream Configuration Response</p>
 <p id="rfc.section.7.1.2.2.p.6">Pending conditions or errors are signaled with HTTP status codes as follows:</p>
 <div id="rfc.table.4"></div>
 <div id="tabupdateconfig"></div>
@@ -1537,14 +1550,14 @@ Pragma: no-cache
 </h1>
 <p id="rfc.section.7.1.2.3.p.1">An Event Receiver removes the configuration of a stream by making an HTTP DELETE request to the Configuration Endpoint. On receiving a request the Event Transmitter responds with a <samp>200 OK</samp> response if the configuration was successfully removed.</p>
 <p id="rfc.section.7.1.2.3.p.2">The following is a non-normative example request to remove an Event Stream&#8217;s configuration:</p>
-<div id="rfc.figure.24"></div>
+<div id="rfc.figure.25"></div>
 <div id="figremoveconfigreq"></div>
 <pre>
 DELETE /sse/stream HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 </pre>
-<p class="figure">Figure 24: Example: Remove Stream Configuration Request</p>
+<p class="figure">Figure 25: Example: Remove Stream Configuration Request</p>
 <p id="rfc.section.7.1.2.3.p.3">Errors are signaled with HTTP status codes as follows:</p>
 <div id="rfc.table.5"></div>
 <div id="tabremoveconfig"></div>
@@ -1617,7 +1630,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 </tbody>
 </table>
 <p id="rfc.section.7.1.3.1.p.4">The following is a non-normative example request to add a subject to a stream, where the subject is identified by an Email Subject Identifier.</p>
-<div id="rfc.figure.25"></div>
+<div id="rfc.figure.26"></div>
 <div id="figaddreq"></div>
 <pre>
 POST /sse/subjects:add HTTP/1.1
@@ -1632,9 +1645,9 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
   "verified": true
 }
 </pre>
-<p class="figure">Figure 25: Example: Add Subject Request</p>
+<p class="figure">Figure 26: Example: Add Subject Request</p>
 <p id="rfc.section.7.1.3.1.p.5">The following is a non-normative example response to a successful request:</p>
-<div id="rfc.figure.26"></div>
+<div id="rfc.figure.27"></div>
 <div id="figaddresp"></div>
 <pre>
 HTTP/1.1 200 OK
@@ -1642,7 +1655,7 @@ Server: transmitter.example.com
 Cache-Control: no-store
 Pragma: no-cache
 </pre>
-<p class="figure">Figure 26: Example: Add Subject Response</p>
+<p class="figure">Figure 27: Example: Add Subject Response</p>
 <h1 id="rfc.section.7.1.3.2">
 <a href="#rfc.section.7.1.3.2">7.1.3.2.</a> <a href="#removing-a-subject" id="removing-a-subject">Removing a Subject</a>
 </h1>
@@ -1688,7 +1701,7 @@ Pragma: no-cache
 </tbody>
 </table>
 <p id="rfc.section.7.1.3.2.p.4">The following is a non-normative example request where the subject is identified by a Phone Number Subject Identifier:</p>
-<div id="rfc.figure.27"></div>
+<div id="rfc.figure.28"></div>
 <div id="figremovereq"></div>
 <pre>
 POST /sse/subjects:remove HTTP/1.1
@@ -1702,9 +1715,9 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
   }
 }
 </pre>
-<p class="figure">Figure 27: Example: Remove Subject Request</p>
+<p class="figure">Figure 28: Example: Remove Subject Request</p>
 <p id="rfc.section.7.1.3.2.p.5">The following is a non-normative example response to a successful request:</p>
-<div id="rfc.figure.28"></div>
+<div id="rfc.figure.29"></div>
 <div id="figremoveresp"></div>
 <pre>
 HTTP/1.1 204 No Content
@@ -1712,7 +1725,7 @@ Server: transmitter.example.com
 Cache-Control: no-store
 Pragma: no-cache
 </pre>
-<p class="figure">Figure 28: Example: Remove Subject Response</p>
+<p class="figure">Figure 29: Example: Remove Subject Response</p>
 <h1 id="rfc.section.7.1.4">
 <a href="#rfc.section.7.1.4">7.1.4.</a> <a href="#verification" id="verification">Verification</a>
 </h1>
@@ -1773,7 +1786,7 @@ Pragma: no-cache
 </tbody>
 </table>
 <p id="rfc.section.7.1.4.2.p.6">The following is a non-normative example request to trigger a verification event:</p>
-<div id="rfc.figure.29"></div>
+<div id="rfc.figure.30"></div>
 <div id="figverifyreq"></div>
 <pre>
 POST /sse/verify HTTP/1.1
@@ -1785,9 +1798,9 @@ Content-Type: application/json; charset=UTF-8
   "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
 }
 </pre>
-<p class="figure">Figure 29: Example: Trigger Verification Request</p>
+<p class="figure">Figure 30: Example: Trigger Verification Request</p>
 <p id="rfc.section.7.1.4.2.p.7">The following is a non-normative example response to a successful request:</p>
-<div id="rfc.figure.30"></div>
+<div id="rfc.figure.31"></div>
 <div id="figverifyresp"></div>
 <pre>
 HTTP/1.1 204 No Content
@@ -1795,9 +1808,9 @@ Server: transmitter.example.com
 Cache-Control: no-store
 Pragma: no-cache
 </pre>
-<p class="figure">Figure 30: Example: Trigger Verification Response</p>
+<p class="figure">Figure 31: Example: Trigger Verification Response</p>
 <p id="rfc.section.7.1.4.2.p.8">And the following is a non-normative example of a verification event sent to the Event Receiver as a result of the above request:</p>
-<div id="rfc.figure.31"></div>
+<div id="rfc.figure.32"></div>
 <div id="figverifyset"></div>
 <pre>
 {
@@ -1812,7 +1825,7 @@ Pragma: no-cache
   }
 }
 </pre>
-<p class="figure">Figure 31: Example: Verification SET</p>
+<p class="figure">Figure 32: Example: Verification SET</p>
 <h1 id="rfc.section.7.1.5">
 <a href="#rfc.section.7.1.5">7.1.5.</a> <a href="#stream-updated-event" id="stream-updated-event">Stream Updated Event</a>
 </h1>
@@ -1833,7 +1846,7 @@ Pragma: no-cache
 </dl>
 
 <p> </p>
-<div id="rfc.figure.32"></div>
+<div id="rfc.figure.33"></div>
 <div id="figstreamupdatedset"></div>
 <pre>
 {
@@ -1856,7 +1869,7 @@ Pragma: no-cache
   }
 }
           </pre>
-<p class="figure">Figure 32: Example: Stream Updated SET</p>
+<p class="figure">Figure 33: Example: Stream Updated SET</p>
 <h1 id="rfc.section.8">
 <a href="#rfc.section.8">8.</a> <a href="#management-api-auth" id="management-api-auth">Authorization</a>
 </h1>
@@ -1931,7 +1944,7 @@ Pragma: no-cache
 <a href="#rfc.section.11.1.3">11.1.3.</a> <a href="#event-properties" id="event-properties">SSE Event Properties</a>
 </h1>
 <p id="rfc.section.11.1.3.p.1">The SSE event MAY contain additional claims within the event payload that are specific to the event type.</p>
-<div id="rfc.figure.33"></div>
+<div id="rfc.figure.34"></div>
 <div id="risc-event-subject-example"></div>
 <pre>
 {
@@ -1952,8 +1965,8 @@ disabled": {
   }
 }
               </pre>
-<p class="figure">Figure 33: Example: SET Containing a RISC Event with a Phone Number Subject</p>
-<div id="rfc.figure.34"></div>
+<p class="figure">Figure 34: Example: SET Containing a RISC Event with a Phone Number Subject</p>
+<div id="rfc.figure.35"></div>
 <div id="caep-event-properties-example"></div>
 <pre>
 {
@@ -1972,12 +1985,12 @@ disabled": {
   }
 }
               </pre>
-<p class="figure">Figure 34: Example: SET Containing a CAEP Event with Properties</p>
+<p class="figure">Figure 35: Example: SET Containing a CAEP Event with Properties</p>
 <h1 id="rfc.section.11.1.4">
 <a href="#rfc.section.11.1.4">11.1.4.</a> <a href="#explicit-typing" id="explicit-typing">Explicit Typing of SETs</a>
 </h1>
 <p id="rfc.section.11.1.4.p.1">SSE events MUST use explicit typing as defined in Section 2.3 of <a href="#SET" class="xref">[SET]</a>.</p>
-<div id="rfc.figure.35"></div>
+<div id="rfc.figure.36"></div>
 <div id="explicit-type-header"></div>
 <pre>
 {
@@ -1985,7 +1998,7 @@ disabled": {
   "alg":"HS256"
 }
 </pre>
-<p class="figure">Figure 35: Explicitly Typed JOSE Header</p>
+<p class="figure">Figure 36: Explicitly Typed JOSE Header</p>
 <p id="rfc.section.11.1.4.p.2">The purpose is defense against confusion with other JWTs, as described in Sections 4.5, 4.6 and 4.7 of <a href="#SET" class="xref">[SET]</a>. While current <a href="#IDTOKEN" class="xref">Id Token</a> validators may not be using the <samp>typ</samp> header parameter, by requiring it for SSE SETs a distinct value is guaranteed for future validators.</p>
 <h1 id="rfc.section.11.1.5">
 <a href="#rfc.section.11.1.5">11.1.5.</a> <a href="#exp-claim" id="exp-claim">The "exp" Claim</a>
@@ -1998,7 +2011,7 @@ disabled": {
 <p id="rfc.section.11.1.6.p.1">The <samp>aud</samp> claim can be a single value or an array. Each value SHOULD be the OAuth 2.0 client ID.  Other values that uniquely identifies the Receiver to the Transmitter MAY be used, if the two parties have agreement on the format.</p>
 <p id="rfc.section.11.1.6.p.2">More than one value can be present if the corresponding Receivers are known to the Transmitter to be the same entity, for example a web client and a mobile client of the same application. All the Receivers in this case MUST use the exact same delivery method.</p>
 <p id="rfc.section.11.1.6.p.3">If multiple Receivers have the exact same delivery configuration but the Transmitter does not know if they belong to the same entity then the Transmitter SHOULD issue distinct SETs for each Receiver and deliver them separately. In this case the multiple Receivers might use the same service to process SETs, and this service might reroute SETs to respective Receivers, an <samp>aud</samp> claim with multiple Receivers would lead to unintended data disclosure.</p>
-<div id="rfc.figure.36"></div>
+<div id="rfc.figure.37"></div>
 <div id="figarrayaud"></div>
 <pre>
 {
@@ -2013,7 +2026,7 @@ disabled": {
   }
 }
 </pre>
-<p class="figure">Figure 36: Example: SET with array 'aud' claim</p>
+<p class="figure">Figure 37: Example: SET with array 'aud' claim</p>
 <h1 id="rfc.section.11.1.7">
 <a href="#rfc.section.11.1.7">11.1.7.</a> <a href="#events-claim" id="events-claim">The "events" claim</a>
 </h1>
