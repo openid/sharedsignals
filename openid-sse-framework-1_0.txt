@@ -78,34 +78,34 @@ Table of Contents
      6.1.  Transmitter Configuration Metadata  . . . . . . . . . . .  10
      6.2.  Obtaining Transmitter Configuration Information . . . . .  10
        6.2.1.  Transmitter Configuration Request . . . . . . . . . .  11
-       6.2.2.  Transmitter Configuration Response  . . . . . . . . .  11
-       6.2.3.  Transmitter Configuration Validation  . . . . . . . .  12
+       6.2.2.  Backward Compatibility for RISC Transmitters  . . . .  11
+       6.2.3.  Transmitter Configuration Response  . . . . . . . . .  12
+       6.2.4.  Transmitter Configuration Validation  . . . . . . . .  13
    7.  Management API for SET Event Streams  . . . . . . . . . . . .  13
-     7.1.  Event Stream Management . . . . . . . . . . . . . . . . .  13
+     7.1.  Event Stream Management . . . . . . . . . . . . . . . . .  14
        7.1.1.  Stream Status . . . . . . . . . . . . . . . . . . . .  15
          7.1.1.1.  Reading a Stream's Status . . . . . . . . . . . .  15
-         7.1.1.2.  Updating a Stream's Status  . . . . . . . . . . .  17
-       7.1.2.  Stream Configuration  . . . . . . . . . . . . . . . .  19
-         7.1.2.1.  Reading a Stream's Configuration  . . . . . . . .  21
-         7.1.2.2.  Updating a Stream's Configuration . . . . . . . .  23
-         7.1.2.3.  Removing a Stream Configuration . . . . . . . . .  26
-       7.1.3.  Subjects  . . . . . . . . . . . . . . . . . . . . . .  27
-         7.1.3.1.  Adding a Subject to a Stream  . . . . . . . . . .  27
-         7.1.3.2.  Removing a Subject  . . . . . . . . . . . . . . .  29
-       7.1.4.  Verification  . . . . . . . . . . . . . . . . . . . .  30
-         7.1.4.1.  Verification Event  . . . . . . . . . . . . . . .  30
-         7.1.4.2.  Triggering a Verification Event.  . . . . . . . .  31
-       7.1.5.  Stream Updated Event  . . . . . . . . . . . . . . . .  33
-   8.  Authorization . . . . . . . . . . . . . . . . . . . . . . . .  34
-   9.  Security Considerations . . . . . . . . . . . . . . . . . . .  34
-     9.1.  Subject Probing . . . . . . . . . . . . . . . . . . . . .  34
-     9.2.  Information Harvesting  . . . . . . . . . . . . . . . . .  35
-     9.3.  Malicious Subject Removal . . . . . . . . . . . . . . . .  35
-   10. Privacy Considerations  . . . . . . . . . . . . . . . . . . .  35
-     10.1.  Subject Information Leakage  . . . . . . . . . . . . . .  35
-     10.2.  Previously Consented Data  . . . . . . . . . . . . . . .  36
-     10.3.  New Data . . . . . . . . . . . . . . . . . . . . . . . .  36
-       10.3.1.  Organizational Data  . . . . . . . . . . . . . . . .  36
+         7.1.1.2.  Updating a Stream's Status  . . . . . . . . . . .  18
+       7.1.2.  Stream Configuration  . . . . . . . . . . . . . . . .  20
+         7.1.2.1.  Reading a Stream's Configuration  . . . . . . . .  22
+         7.1.2.2.  Updating a Stream's Configuration . . . . . . . .  24
+         7.1.2.3.  Removing a Stream Configuration . . . . . . . . .  27
+       7.1.3.  Subjects  . . . . . . . . . . . . . . . . . . . . . .  28
+         7.1.3.1.  Adding a Subject to a Stream  . . . . . . . . . .  28
+         7.1.3.2.  Removing a Subject  . . . . . . . . . . . . . . .  30
+       7.1.4.  Verification  . . . . . . . . . . . . . . . . . . . .  31
+         7.1.4.1.  Verification Event  . . . . . . . . . . . . . . .  31
+         7.1.4.2.  Triggering a Verification Event.  . . . . . . . .  32
+       7.1.5.  Stream Updated Event  . . . . . . . . . . . . . . . .  34
+   8.  Authorization . . . . . . . . . . . . . . . . . . . . . . . .  35
+   9.  Security Considerations . . . . . . . . . . . . . . . . . . .  35
+     9.1.  Subject Probing . . . . . . . . . . . . . . . . . . . . .  35
+     9.2.  Information Harvesting  . . . . . . . . . . . . . . . . .  36
+     9.3.  Malicious Subject Removal . . . . . . . . . . . . . . . .  36
+   10. Privacy Considerations  . . . . . . . . . . . . . . . . . . .  36
+     10.1.  Subject Information Leakage  . . . . . . . . . . . . . .  36
+     10.2.  Previously Consented Data  . . . . . . . . . . . . . . .  37
+     10.3.  New Data . . . . . . . . . . . . . . . . . . . . . . . .  37
 
 
 
@@ -114,30 +114,31 @@ Tulshibagwale, et al.   Expires December 10, 2021               [Page 2]
                           openid-sse-framework                 June 2021
 
 
-       10.3.2.  Consentable Data . . . . . . . . . . . . . . . . . .  36
-   11. Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .  36
-     11.1.  Security Event Token Profile . . . . . . . . . . . . . .  37
-       11.1.1.  Signature Key Resolution . . . . . . . . . . . . . .  37
-       11.1.2.  SSE Event Subject  . . . . . . . . . . . . . . . . .  37
-       11.1.3.  SSE Event Properties . . . . . . . . . . . . . . . .  37
-       11.1.4.  Explicit Typing of SETs  . . . . . . . . . . . . . .  38
-       11.1.5.  The "exp" Claim  . . . . . . . . . . . . . . . . . .  38
-       11.1.6.  The "aud" Claim  . . . . . . . . . . . . . . . . . .  38
-       11.1.7.  The "events" claim . . . . . . . . . . . . . . . . .  39
-       11.1.8.  Security Considerations  . . . . . . . . . . . . . .  39
-         11.1.8.1.  Distinguishing SETs from other Kinds of JWTs . .  39
-     11.2.  SET Token Delivery Using HTTP Profile  . . . . . . . . .  40
-       11.2.1.  Stream Configuration Metadata  . . . . . . . . . . .  40
-         11.2.1.1.  Push Delivery using HTTP . . . . . . . . . . . .  40
-         11.2.1.2.  Polling Delivery using HTTP  . . . . . . . . . .  40
-   12. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  40
-   13. References  . . . . . . . . . . . . . . . . . . . . . . . . .  41
-     13.1.  Normative References . . . . . . . . . . . . . . . . . .  41
-     13.2.  Non-Normative References . . . . . . . . . . . . . . . .  42
-     13.3.  URIs . . . . . . . . . . . . . . . . . . . . . . . . . .  43
-   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  43
-   Appendix B.  Notices  . . . . . . . . . . . . . . . . . . . . . .  43
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  44
+       10.3.1.  Organizational Data  . . . . . . . . . . . . . . . .  37
+       10.3.2.  Consentable Data . . . . . . . . . . . . . . . . . .  37
+   11. Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .  37
+     11.1.  Security Event Token Profile . . . . . . . . . . . . . .  38
+       11.1.1.  Signature Key Resolution . . . . . . . . . . . . . .  38
+       11.1.2.  SSE Event Subject  . . . . . . . . . . . . . . . . .  38
+       11.1.3.  SSE Event Properties . . . . . . . . . . . . . . . .  38
+       11.1.4.  Explicit Typing of SETs  . . . . . . . . . . . . . .  39
+       11.1.5.  The "exp" Claim  . . . . . . . . . . . . . . . . . .  39
+       11.1.6.  The "aud" Claim  . . . . . . . . . . . . . . . . . .  39
+       11.1.7.  The "events" claim . . . . . . . . . . . . . . . . .  40
+       11.1.8.  Security Considerations  . . . . . . . . . . . . . .  40
+         11.1.8.1.  Distinguishing SETs from other Kinds of JWTs . .  40
+     11.2.  SET Token Delivery Using HTTP Profile  . . . . . . . . .  41
+       11.2.1.  Stream Configuration Metadata  . . . . . . . . . . .  41
+         11.2.1.1.  Push Delivery using HTTP . . . . . . . . . . . .  41
+         11.2.1.2.  Polling Delivery using HTTP  . . . . . . . . . .  41
+   12. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  41
+   13. References  . . . . . . . . . . . . . . . . . . . . . . . . .  42
+     13.1.  Normative References . . . . . . . . . . . . . . . . . .  42
+     13.2.  Non-Normative References . . . . . . . . . . . . . . . .  43
+     13.3.  URIs . . . . . . . . . . . . . . . . . . . . . . . . . .  44
+   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  44
+   Appendix B.  Notices  . . . . . . . . . . . . . . . . . . . . . .  44
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  45
 
 1.  Introduction
 
@@ -161,7 +162,6 @@ Tulshibagwale, et al.   Expires December 10, 2021               [Page 2]
    within a tenant, groups of subject principals or other entities that
    are managed by Transmitters and Receivers.  There may be other actors
    or resources that can be treated as Subject Principals, and event-
-
 
 
 
@@ -602,14 +602,14 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 10]
    unlike its use in [RFC5785], it does not provide general information
    about the host.
 
-6.2.2.  Transmitter Configuration Response
+6.2.2.  Backward Compatibility for RISC Transmitters
 
-   The response is a set of Claims about the Transmitter's
-   configuration, including all necessary endpoints and public key
-   location information.  A successful response MUST use the 200 OK HTTP
-   status code and return a JSON object using the "application/json"
-   content type that contains a set of Claims as its members that are a
-
+   Existing RISC Transmitters MAY continue to use the path component
+   "/risc-configuration" instead of the path component "/sse-
+   configuration" in the path for the Transmitter Configuration
+   Metadata.  New services supporting the SSE Framework SHOULD NOT use
+   this location for publishing the Transmitter Configuration Metadata.
+   For example, the Transmitter Configuration Metadata for the
 
 
 
@@ -618,6 +618,22 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 11]
                           openid-sse-framework                 June 2021
 
 
+   Transmitter "https://risc-tr.example.com" MAY be obtained by making
+   the following request:
+
+   GET /.well-known/risc-configuration HTTP/1.1
+   Host: risc-tr.example.com
+
+      Figure 11: Example: Transmitter Configuration Request for RISC
+                               Transmitters
+
+6.2.3.  Transmitter Configuration Response
+
+   The response is a set of Claims about the Transmitter's
+   configuration, including all necessary endpoints and public key
+   location information.  A successful response MUST use the 200 OK HTTP
+   status code and return a JSON object using the "application/json"
+   content type that contains a set of Claims as its members that are a
    subset of the Metadata values defined in Section 6.1.  Other Claims
    MAY also be returned.
 
@@ -625,6 +641,38 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 11]
    Claims with zero elements MUST be omitted from the response.
 
    An error response uses the applicable HTTP status code value.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 12]
+
+                          openid-sse-framework                 June 2021
+
 
    HTTP/1.1 200 OK
    Content-Type: application/json
@@ -650,9 +698,9 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 11]
      "critical_subject_members": [ "tenant", "user" ]
    }
 
-          Figure 11: Example: Transmitter Configuration Response
+          Figure 12: Example: Transmitter Configuration Response
 
-6.2.3.  Transmitter Configuration Validation
+6.2.4.  Transmitter Configuration Validation
 
    If any of the validation procedures defined in this specification
    fail, any operations requiring the information that failed to
@@ -664,16 +712,6 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 11]
    MUST also be identical to the "iss" Claim value in Security Event
    Tokens issued from this Transmitter.
 
-
-
-
-
-
-Tulshibagwale, et al.   Expires December 10, 2021              [Page 12]
-
-                          openid-sse-framework                 June 2021
-
-
 7.  Management API for SET Event Streams
 
    This section defines an HTTP API to be implemented by Event
@@ -683,6 +721,14 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 12]
 
    This section is based on Management API for SET Event Streams
    [MGMTAPI].
+
+
+
+
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 13]
+
+                          openid-sse-framework                 June 2021
+
 
    +------------+                +------------+
    |            | Stream Config  |            |
@@ -705,7 +751,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 12]
    |            |                |            |
    +------------+                +------------+
 
-                  Figure 12: Event Stream Management API
+                  Figure 13: Event Stream Management API
 
    It is OPTIONAL for Transmitters to implement a Management API, but it
    is RECOMMENDED that they implement it, especially the endpoints for
@@ -722,14 +768,6 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 12]
    MAY be queried and managed independently for each Subject Principal
    by Transmitters and Receivers.
 
-
-
-
-Tulshibagwale, et al.   Expires December 10, 2021              [Page 13]
-
-                          openid-sse-framework                 June 2021
-
-
    The Event Stream Management API is implemented by the Event
    Transmitter and consists of the following endpoints:
 
@@ -740,6 +778,14 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 13]
       An endpoint used to read the Event Stream's current status.
 
    Add Subject Endpoint
+
+
+
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 14]
+
+                          openid-sse-framework                 June 2021
+
+
       An endpoint used to add subjects to an Event Stream.
 
    Remove Subject Endpoint
@@ -777,15 +823,6 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 13]
       events may have been lost during the time when the event stream
       was paused.
 
-
-
-
-
-Tulshibagwale, et al.   Expires December 10, 2021              [Page 14]
-
-                          openid-sse-framework                 June 2021
-
-
    Disabled  the Transmitter MAY send stream updated (Section 7.1.5)
       after the Event Stream is re-enabled.
 
@@ -797,6 +834,13 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 14]
    making an HTTP GET request to the stream's Status Endpoint.
 
    The Stream Status method takes the following parameters:
+
+
+
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 15]
+
+                          openid-sse-framework                 June 2021
+
 
    subject  OPTIONAL.  The subject for which the stream status is
       requested.
@@ -833,16 +877,26 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 14]
    Host: transmitter.example.com
    Authorization: Bearer zzzz
 
-              Figure 13: Example: Check Stream Status Request
+              Figure 14: Example: Check Stream Status Request
+
+   The following is a non-normative example response:
 
 
 
-Tulshibagwale, et al.   Expires December 10, 2021              [Page 15]
+
+
+
+
+
+
+
+
+
+
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 16]
 
                           openid-sse-framework                 June 2021
 
-
-   The following is a non-normative example response:
 
    HTTP/1.1 200 OK
    Content-Type: application/json; charset=UTF-8
@@ -854,7 +908,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 15]
    }
 
 
-             Figure 14: Example: Check Stream Status Response
+             Figure 15: Example: Check Stream Status Response
 
    The following is a non-normative example request to check an event
    stream's status for a specific subject:
@@ -864,7 +918,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 15]
    Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
 
-       Figure 15: Example: Check Stream Status Request with Subject
+       Figure 16: Example: Check Stream Status Request with Subject
 
    The following is a non-normative example response with a Subject
    claim:
@@ -886,14 +940,16 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 15]
    }
 
 
-             Figure 16: Example: Check Stream Status Response
+             Figure 17: Example: Check Stream Status Response
 
    Errors are signaled with HTTP status codes as follows:
 
 
 
 
-Tulshibagwale, et al.   Expires December 10, 2021              [Page 16]
+
+
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 17]
 
                           openid-sse-framework                 June 2021
 
@@ -949,7 +1005,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 16]
 
 
 
-Tulshibagwale, et al.   Expires December 10, 2021              [Page 17]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 18]
 
                           openid-sse-framework                 June 2021
 
@@ -970,7 +1026,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 17]
    }
 
 
-     Figure 17: Example: Update Stream Status Request Without Optional
+     Figure 18: Example: Update Stream Status Request Without Optional
                                   Fields
 
    The following is a non-normative example of an Update Stream Status
@@ -993,7 +1049,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 17]
    }
 
 
-   Figure 18: Example: Update Stream Status Request With Optional Fields
+   Figure 19: Example: Update Stream Status Request With Optional Fields
 
    The following is a non-normative example response:
 
@@ -1005,7 +1061,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 17]
 
 
 
-Tulshibagwale, et al.   Expires December 10, 2021              [Page 18]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 19]
 
                           openid-sse-framework                 June 2021
 
@@ -1020,7 +1076,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 18]
    }
 
 
-             Figure 19: Example: Update Stream Status Response
+             Figure 20: Example: Update Stream Status Response
 
    Errors are signaled with HTTP status codes as follows:
 
@@ -1061,7 +1117,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 18]
 
 
 
-Tulshibagwale, et al.   Expires December 10, 2021              [Page 19]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 20]
 
                           openid-sse-framework                 June 2021
 
@@ -1117,7 +1173,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 19]
 
 
 
-Tulshibagwale, et al.   Expires December 10, 2021              [Page 20]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 21]
 
                           openid-sse-framework                 June 2021
 
@@ -1144,7 +1200,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 20]
    Host: transmitter.example.com
    Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
-           Figure 20: Example: Read Stream Configuration Request
+           Figure 21: Example: Read Stream Configuration Request
 
    The following is a non-normative example response:
 
@@ -1173,7 +1229,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 20]
 
 
 
-Tulshibagwale, et al.   Expires December 10, 2021              [Page 21]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 22]
 
                           openid-sse-framework                 June 2021
 
@@ -1210,7 +1266,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 21]
     ]
   }
 
-          Figure 21: Example: Read Stream Configuration Response
+          Figure 22: Example: Read Stream Configuration Response
 
    Errors are signaled with HTTP status codes as follows:
 
@@ -1229,7 +1285,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 21]
 
 
 
-Tulshibagwale, et al.   Expires December 10, 2021              [Page 22]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 23]
 
                           openid-sse-framework                 June 2021
 
@@ -1285,7 +1341,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 22]
 
 
 
-Tulshibagwale, et al.   Expires December 10, 2021              [Page 23]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 24]
 
                           openid-sse-framework                 June 2021
 
@@ -1312,7 +1368,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 23]
     ]
   }
 
-          Figure 22: Example: Update Stream Configuration Request
+          Figure 23: Example: Update Stream Configuration Request
 
    The following is a non-normative example response:
 
@@ -1341,7 +1397,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 23]
 
 
 
-Tulshibagwale, et al.   Expires December 10, 2021              [Page 24]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 25]
 
                           openid-sse-framework                 June 2021
 
@@ -1378,7 +1434,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 24]
     ]
   }
 
-         Figure 23: Example: Update Stream Configuration Response
+         Figure 24: Example: Update Stream Configuration Response
 
    Pending conditions or errors are signaled with HTTP status codes as
    follows:
@@ -1397,7 +1453,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 24]
 
 
 
-Tulshibagwale, et al.   Expires December 10, 2021              [Page 25]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 26]
 
                           openid-sse-framework                 June 2021
 
@@ -1437,7 +1493,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 25]
    Host: transmitter.example.com
    Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
-          Figure 24: Example: Remove Stream Configuration Request
+          Figure 25: Example: Remove Stream Configuration Request
 
    Errors are signaled with HTTP status codes as follows:
 
@@ -1453,7 +1509,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 25]
 
 
 
-Tulshibagwale, et al.   Expires December 10, 2021              [Page 26]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 27]
 
                           openid-sse-framework                 June 2021
 
@@ -1509,7 +1565,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 26]
 
 
 
-Tulshibagwale, et al.   Expires December 10, 2021              [Page 27]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 28]
 
                           openid-sse-framework                 June 2021
 
@@ -1551,7 +1607,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 27]
      "verified": true
    }
 
-                  Figure 25: Example: Add Subject Request
+                  Figure 26: Example: Add Subject Request
 
    The following is a non-normative example response to a successful
    request:
@@ -1561,11 +1617,11 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 27]
    Cache-Control: no-store
    Pragma: no-cache
 
-                 Figure 26: Example: Add Subject Response
+                 Figure 27: Example: Add Subject Response
 
 
 
-Tulshibagwale, et al.   Expires December 10, 2021              [Page 28]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 29]
 
                           openid-sse-framework                 June 2021
 
@@ -1621,7 +1677,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 28]
 
 
 
-Tulshibagwale, et al.   Expires December 10, 2021              [Page 29]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 30]
 
                           openid-sse-framework                 June 2021
 
@@ -1637,7 +1693,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 29]
      }
    }
 
-                Figure 27: Example: Remove Subject Request
+                Figure 28: Example: Remove Subject Request
 
    The following is a non-normative example response to a successful
    request:
@@ -1647,7 +1703,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 29]
    Cache-Control: no-store
    Pragma: no-cache
 
-                Figure 28: Example: Remove Subject Response
+                Figure 29: Example: Remove Subject Response
 
 7.1.4.  Verification
 
@@ -1677,7 +1733,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 29]
 
 
 
-Tulshibagwale, et al.   Expires December 10, 2021              [Page 30]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 31]
 
                           openid-sse-framework                 June 2021
 
@@ -1733,7 +1789,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 30]
 
 
 
-Tulshibagwale, et al.   Expires December 10, 2021              [Page 31]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 32]
 
                           openid-sse-framework                 June 2021
 
@@ -1765,7 +1821,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 31]
      "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
    }
 
-             Figure 29: Example: Trigger Verification Request
+             Figure 30: Example: Trigger Verification Request
 
    The following is a non-normative example response to a successful
    request:
@@ -1775,7 +1831,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 31]
    Cache-Control: no-store
    Pragma: no-cache
 
-             Figure 30: Example: Trigger Verification Response
+             Figure 31: Example: Trigger Verification Response
 
    And the following is a non-normative example of a verification event
    sent to the Event Receiver as a result of the above request:
@@ -1789,7 +1845,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 31]
 
 
 
-Tulshibagwale, et al.   Expires December 10, 2021              [Page 32]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 33]
 
                           openid-sse-framework                 June 2021
 
@@ -1806,7 +1862,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 32]
    }
  }
 
-                   Figure 31: Example: Verification SET
+                   Figure 32: Example: Verification SET
 
 7.1.5.  Stream Updated Event
 
@@ -1845,7 +1901,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 32]
 
 
 
-Tulshibagwale, et al.   Expires December 10, 2021              [Page 33]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 34]
 
                           openid-sse-framework                 June 2021
 
@@ -1870,7 +1926,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 33]
   }
 }
 
-                  Figure 32: Example: Stream Updated SET
+                  Figure 33: Example: Stream Updated SET
 
 8.  Authorization
 
@@ -1901,7 +1957,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 33]
 
 
 
-Tulshibagwale, et al.   Expires December 10, 2021              [Page 34]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 35]
 
                           openid-sse-framework                 June 2021
 
@@ -1957,7 +2013,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 34]
 
 
 
-Tulshibagwale, et al.   Expires December 10, 2021              [Page 35]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 36]
 
                           openid-sse-framework                 June 2021
 
@@ -2013,7 +2069,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 35]
 
 
 
-Tulshibagwale, et al.   Expires December 10, 2021              [Page 36]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 37]
 
                           openid-sse-framework                 June 2021
 
@@ -2057,7 +2113,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 36]
      }
    }
 
-    Figure 33: Example: SET Containing a RISC Event with a Phone Number
+    Figure 34: Example: SET Containing a RISC Event with a Phone Number
                                   Subject
 
 
@@ -2069,7 +2125,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 36]
 
 
 
-Tulshibagwale, et al.   Expires December 10, 2021              [Page 37]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 38]
 
                           openid-sse-framework                 June 2021
 
@@ -2090,7 +2146,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 37]
   }
 }
 
-      Figure 34: Example: SET Containing a CAEP Event with Properties
+      Figure 35: Example: SET Containing a CAEP Event with Properties
 
 11.1.4.  Explicit Typing of SETs
 
@@ -2102,7 +2158,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 37]
      "alg":"HS256"
    }
 
-                  Figure 35: Explicitly Typed JOSE Header
+                  Figure 36: Explicitly Typed JOSE Header
 
    The purpose is defense against confusion with other JWTs, as
    described in Sections 4.5, 4.6 and 4.7 of [SET].  While current Id
@@ -2125,7 +2181,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 37]
 
 
 
-Tulshibagwale, et al.   Expires December 10, 2021              [Page 38]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 39]
 
                           openid-sse-framework                 June 2021
 
@@ -2158,7 +2214,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 38]
   }
 }
 
-              Figure 36: Example: SET with array 'aud' claim
+              Figure 37: Example: SET with array 'aud' claim
 
 11.1.7.  The "events" claim
 
@@ -2181,7 +2237,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 38]
 
 
 
-Tulshibagwale, et al.   Expires December 10, 2021              [Page 39]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 40]
 
                           openid-sse-framework                 June 2021
 
@@ -2237,7 +2293,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 39]
 
 
 
-Tulshibagwale, et al.   Expires December 10, 2021              [Page 40]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 41]
 
                           openid-sse-framework                 June 2021
 
@@ -2293,7 +2349,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 40]
 
 
 
-Tulshibagwale, et al.   Expires December 10, 2021              [Page 41]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 42]
 
                           openid-sse-framework                 June 2021
 
@@ -2349,7 +2405,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 41]
 
 
 
-Tulshibagwale, et al.   Expires December 10, 2021              [Page 42]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 43]
 
                           openid-sse-framework                 June 2021
 
@@ -2405,7 +2461,7 @@ Appendix B.  Notices
 
 
 
-Tulshibagwale, et al.   Expires December 10, 2021              [Page 43]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 44]
 
                           openid-sse-framework                 June 2021
 
@@ -2461,4 +2517,4 @@ Authors' Addresses
 
 
 
-Tulshibagwale, et al.   Expires December 10, 2021              [Page 44]
+Tulshibagwale, et al.   Expires December 10, 2021              [Page 45]
