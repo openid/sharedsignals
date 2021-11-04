@@ -317,8 +317,8 @@ Scurtescu, et al.        Expires January 3, 2022                [Page 5]
 
    o  credential_type - REQUIRED.  The type of credential that is
       compromised.  The value of this attribute must be one of the
-      values specified for the similarly named field in in the
-      "Credential Change" event defined in the CAEP Specification
+      values specified for the similarly named field in the "Credential
+      Change" event defined in the CAEP Specification
       [CAEP-SPECIFICATION].
 
    o  event_timestamp - OPTIONAL.  JSON number: the time at which the
@@ -339,7 +339,7 @@ Scurtescu, et al.        Expires January 3, 2022                [Page 6]
 
 
    o  reason_user - OPTIONAL.  The reason why the credential compromised
-      event was generated, indended for end-users
+      event was generated, intended for end-users
 
 
    {

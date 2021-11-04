@@ -268,7 +268,7 @@
           be compromised.</t>
         <t>Attributes:<list style="symbols">
           <t>credential_type - REQUIRED. The type of credential that is compromised. The value of this attribute
-            must be one of the values specified for the similarly named field in in the <spanx style="verb">
+            must be one of the values specified for the similarly named field in the <spanx style="verb">
             Credential Change</spanx> event defined in the <xref target="CAEP-SPECIFICATION">CAEP Specification</xref>. 
           </t>
           <t>event_timestamp - OPTIONAL. JSON number: the time at which the event described by this SET was discovered by the
@@ -277,7 +277,7 @@
 
             <t>reason_admin - OPTIONAL. The reason why the credential compromised event was generated, intended
               for administrators</t>
-            <t>reason_user - OPTIONAL. The reason why the credential compromised event was generated, indended
+            <t>reason_user - OPTIONAL. The reason why the credential compromised event was generated, intended
               for end-users</t>
           </list>
         </t>
