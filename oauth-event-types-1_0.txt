@@ -153,7 +153,7 @@ Scurtescu, et al.       Expires October 26, 2018                [Page 2]
 
    Attributes:
 
-   o  subject - required, a Subjectect Identifier as defined by
+   o  subject - required, a Subject Identifier as defined by
       Section 2.1 that identifies the token.
 
    o  token_subject - optional, a Subject Identifier as defined by

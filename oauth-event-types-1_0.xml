@@ -146,7 +146,7 @@
         <t>Token Issued signals that a new token was issued.</t>
         
         <t>Attributes:<list style="symbols">
-          <t>subject - required, a Subjectect Identifier as defined by <xref target="subject-identifier-token"/> 
+          <t>subject - required, a Subject Identifier as defined by <xref target="subject-identifier-token"/> 
             that identifies the token.</t>
           <t>token_subject - optional, a Subject Identifier as defined by Section 2.1 of <xref target="RISC-PROFILE"/> 
             that identifies the account associated with the token.</t>
