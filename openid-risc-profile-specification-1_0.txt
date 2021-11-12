@@ -14,10 +14,10 @@
                                                               VeriClouds
                                                         A. Tulshibagwale
                                                                   Google
-                                                           July 02, 2021
+                                                       November 12, 2021
 
 
-            OpenID RISC Profile Specification 1.0 - draft 01
+            OpenID RISC Profile Specification 1.0 - draft 02
                  openid-risc-profile-specification-1_0
 
 Abstract
@@ -53,9 +53,9 @@ Table of Contents
 
 
 
-Scurtescu, et al.        Expires January 3, 2022                [Page 1]
+Scurtescu, et al.         Expires May 16, 2022                  [Page 1]
 
-                    openid-risc-profile-specification          July 2021
+                    openid-risc-profile-specification      November 2021
 
 
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  11
@@ -109,9 +109,9 @@ Scurtescu, et al.        Expires January 3, 2022                [Page 1]
 
 
 
-Scurtescu, et al.        Expires January 3, 2022                [Page 2]
+Scurtescu, et al.         Expires May 16, 2022                  [Page 2]
 
-                    openid-risc-profile-specification          July 2021
+                    openid-risc-profile-specification      November 2021
 
 
    {
@@ -165,9 +165,9 @@ Scurtescu, et al.        Expires January 3, 2022                [Page 2]
 
 
 
-Scurtescu, et al.        Expires January 3, 2022                [Page 3]
+Scurtescu, et al.         Expires May 16, 2022                  [Page 3]
 
-                    openid-risc-profile-specification          July 2021
+                    openid-risc-profile-specification      November 2021
 
 
       *  bulk-account
@@ -221,9 +221,9 @@ Scurtescu, et al.        Expires January 3, 2022                [Page 3]
 
 
 
-Scurtescu, et al.        Expires January 3, 2022                [Page 4]
+Scurtescu, et al.         Expires May 16, 2022                  [Page 4]
 
-                    openid-risc-profile-specification          July 2021
+                    openid-risc-profile-specification      November 2021
 
 
    new "john.row@example.com" email then *only* the email provider
@@ -277,9 +277,9 @@ Scurtescu, et al.        Expires January 3, 2022                [Page 4]
 
 
 
-Scurtescu, et al.        Expires January 3, 2022                [Page 5]
+Scurtescu, et al.         Expires May 16, 2022                  [Page 5]
 
-                    openid-risc-profile-specification          July 2021
+                    openid-risc-profile-specification      November 2021
 
 
    {
@@ -333,9 +333,9 @@ Scurtescu, et al.        Expires January 3, 2022                [Page 5]
 
 
 
-Scurtescu, et al.        Expires January 3, 2022                [Page 6]
+Scurtescu, et al.         Expires May 16, 2022                  [Page 6]
 
-                    openid-risc-profile-specification          July 2021
+                    openid-risc-profile-specification      November 2021
 
 
    o  reason_user - OPTIONAL.  The reason why the credential compromised
@@ -389,9 +389,9 @@ Scurtescu, et al.        Expires January 3, 2022                [Page 6]
 
 
 
-Scurtescu, et al.        Expires January 3, 2022                [Page 7]
+Scurtescu, et al.         Expires May 16, 2022                  [Page 7]
 
-                    openid-risc-profile-specification          July 2021
+                    openid-risc-profile-specification      November 2021
 
 
    State changes trigger Opt-Out Events as represented bellow:
@@ -445,9 +445,9 @@ Scurtescu, et al.        Expires January 3, 2022                [Page 7]
 
 
 
-Scurtescu, et al.        Expires January 3, 2022                [Page 8]
+Scurtescu, et al.         Expires May 16, 2022                  [Page 8]
 
-                    openid-risc-profile-specification          July 2021
+                    openid-risc-profile-specification      November 2021
 
 
 2.8.3.  Opt Out Cancelled
@@ -501,9 +501,9 @@ Scurtescu, et al.        Expires January 3, 2022                [Page 8]
 
 
 
-Scurtescu, et al.        Expires January 3, 2022                [Page 9]
+Scurtescu, et al.         Expires May 16, 2022                  [Page 9]
 
-                    openid-risc-profile-specification          July 2021
+                    openid-risc-profile-specification      November 2021
 
 
 2.11.  Sessions Revoked
@@ -557,9 +557,9 @@ Appendix A.  Acknowledgements
 
 
 
-Scurtescu, et al.        Expires January 3, 2022               [Page 10]
+Scurtescu, et al.         Expires May 16, 2022                 [Page 10]
 
-                    openid-risc-profile-specification          July 2021
+                    openid-risc-profile-specification      November 2021
 
 
 Appendix B.  Notices
@@ -613,9 +613,9 @@ Authors' Addresses
 
 
 
-Scurtescu, et al.        Expires January 3, 2022               [Page 11]
+Scurtescu, et al.         Expires May 16, 2022                 [Page 11]
 
-                    openid-risc-profile-specification          July 2021
+                    openid-risc-profile-specification      November 2021
 
 
    Annabelle Backman
@@ -669,4 +669,4 @@ Scurtescu, et al.        Expires January 3, 2022               [Page 11]
 
 
 
-Scurtescu, et al.        Expires January 3, 2022               [Page 12]
+Scurtescu, et al.         Expires May 16, 2022                 [Page 12]

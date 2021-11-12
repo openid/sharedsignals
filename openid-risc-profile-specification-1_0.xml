@@ -24,7 +24,7 @@
   <?rfc comments="yes"?>
 
   <front>
-    <title abbrev="openid-risc-profile-specification">OpenID RISC Profile Specification 1.0 - draft 01</title>
+    <title abbrev="openid-risc-profile-specification">OpenID RISC Profile Specification 1.0 - draft 02</title>
 
     <author initials="M." surname="Scurtescu" fullname="Marius Scurtescu">
       <organization abbrev="Coinbase">Coinbase</organization>
@@ -63,7 +63,7 @@
       </address>
     </author>
 
-    <date year="2021" month="July" day="02"/>
+    <date year="2021" month="November" day="12"/>
 
     <workgroup>SSE Working Group</workgroup>
 
