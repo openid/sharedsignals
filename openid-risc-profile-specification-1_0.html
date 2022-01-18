@@ -377,6 +377,7 @@
   <link href="#rfc.toc" rel="Contents">
 <link href="#rfc.section.1" rel="Chapter" title="1 Introduction">
 <link href="#rfc.section.1.1" rel="Chapter" title="1.1 Notational Conventions">
+<link href="#rfc.section.1.2" rel="Chapter" title="1.2 Subject Types">
 <link href="#rfc.section.2" rel="Chapter" title="2 Event Types">
 <link href="#rfc.section.2.1" rel="Chapter" title="2.1 Account Credential Change Required">
 <link href="#rfc.section.2.2" rel="Chapter" title="2.2 Account Purged">
@@ -487,6 +488,8 @@
 </li>
 <ul><li>1.1.   <a href="#rfc.section.1.1">Notational Conventions</a>
 </li>
+<li>1.2.   <a href="#rfc.section.1.2">Subject Types</a>
+</li>
 </ul><li>2.   <a href="#rfc.section.2">Event Types</a>
 </li>
 <ul><li>2.1.   <a href="#rfc.section.2.1">Account Credential Change Required</a>
@@ -534,11 +537,15 @@
   <h1 id="rfc.section.1">
 <a href="#rfc.section.1">1.</a> <a href="#intro" id="intro">Introduction</a>
 </h1>
-<p id="rfc.section.1.p.1">This specification is based on <a href="#SSE-FRAMEWORK" class="xref">SSE Framework</a> and uses the subject identifiers defined there.</p>
+<p id="rfc.section.1.p.1">This specification defines event types and their contents based on the <a href="#SSE-FRAMEWORK" class="xref">SSE Framework</a> that are required to implement Risc Incident Sharing and Coordination.</p>
 <h1 id="rfc.section.1.1">
 <a href="#rfc.section.1.1">1.1.</a> <a href="#conv" id="conv">Notational Conventions</a>
 </h1>
 <p id="rfc.section.1.1.p.1">The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in BCP 14 <a href="#RFC2119" class="xref">[RFC2119]</a> <a href="#RFC8174" class="xref">[RFC8174]</a> when, and only when, they appear in all capitals, as shown here.</p>
+<h1 id="rfc.section.1.2">
+<a href="#rfc.section.1.2">1.2.</a> <a href="#subject-types" id="subject-types">Subject Types</a>
+</h1>
+<p id="rfc.section.1.2.p.1">This specification uses the subject identifiers as defined in the <a href="#SSE-FRAMEWORK" class="xref">SSE Framework</a> specification. However for compatibility purposes, the field name <samp>subject_type</samp> MAY be used by existing services instead of the field name <samp>format</samp> to indicate the format of the subject identifier. The usage of the field name <samp>subject_type</samp> is deprecated and new services MUST NOT use this field name.</p>
 <h1 id="rfc.section.2">
 <a href="#rfc.section.2">2.</a> <a href="#event-types" id="event-types">Event Types</a>
 </h1>
@@ -561,7 +568,7 @@
     "https://schemas.openid.net/secevent/risc/event-type/\
     account-credential-change-required": {
       "subject": {
-        "subject_type": "iss-sub",
+        "format": "iss_sub",
         "iss": "https://idp.example.com/",
         "sub": "7375626A656374",
       }
@@ -601,7 +608,7 @@
     "https://schemas.openid.net/secevent/risc/event-type/\
     account-disabled": {
       "subject": {
-        "subject_type": "iss-sub",
+        "format": "iss_sub",
         "iss": "https://idp.example.com/",
         "sub": "7375626A656374",
       },
@@ -640,7 +647,7 @@
     "https://schemas.openid.net/secevent/risc/event-type/\
     identifier-changed": {
       "subject": {
-        "subject_type": "email",
+        "format": "email",
         "email": "john.doe@example.com",
       },
       "new-value": "john.roe@example.com",
@@ -668,7 +675,7 @@
     "https://schemas.openid.net/secevent/risc/event-type/\
     identifier-recycled": {
       "subject": {
-        "subject_type": "email",
+        "format": "email",
         "email": "foo@example.com",
       }
     }
@@ -705,7 +712,7 @@
      "events": {
        "https://schemas.openid.net/secevent/risc/event-type/credential-compromise": {
          "subject": {
-           "format": "iss-sub",
+           "format": "iss_sub",
            "iss": "https://idp.example.com/3456790/",
            "sub": "joe.smith@example.com"
          },

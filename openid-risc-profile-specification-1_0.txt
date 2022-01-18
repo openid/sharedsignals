@@ -31,6 +31,7 @@ Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
      1.1.  Notational Conventions  . . . . . . . . . . . . . . . . .   2
+     1.2.  Subject Types . . . . . . . . . . . . . . . . . . . . . .   2
    2.  Event Types . . . . . . . . . . . . . . . . . . . . . . . . .   2
      2.1.  Account Credential Change Required  . . . . . . . . . . .   2
      2.2.  Account Purged  . . . . . . . . . . . . . . . . . . . . .   3
@@ -49,21 +50,22 @@ Table of Contents
      2.11. Sessions Revoked  . . . . . . . . . . . . . . . . . . . .  10
    3.  Normative References  . . . . . . . . . . . . . . . . . . . .  10
    Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  10
-   Appendix B.  Notices  . . . . . . . . . . . . . . . . . . . . . .  11
 
 
 
 Scurtescu, et al.         Expires May 16, 2022                  [Page 1]
-
+
                     openid-risc-profile-specification      November 2021
 
 
+   Appendix B.  Notices  . . . . . . . . . . . . . . . . . . . . . .  11
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  11
 
 1.  Introduction
 
-   This specification is based on SSE Framework [SSE-FRAMEWORK] and uses
-   the subject identifiers defined there.
+   This specification defines event types and their contents based on
+   the SSE Framework [SSE-FRAMEWORK] that are required to implement Risc
+   Incident Sharing and Coordination.
 
 1.1.  Notational Conventions
 
@@ -72,6 +74,15 @@ Scurtescu, et al.         Expires May 16, 2022                  [Page 1]
    "OPTIONAL" in this document are to be interpreted as described in BCP
    14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
+
+1.2.  Subject Types
+
+   This specification uses the subject identifiers as defined in the SSE
+   Framework [SSE-FRAMEWORK] specification.  However for compatibility
+   purposes, the field name "subject_type" MAY be used by existing
+   services instead of the field name "format" to indicate the format of
+   the subject identifier.  The usage of the field name "subject_type"
+   is deprecated and new services MUST NOT use this field name.
 
 2.  Event Types
 
@@ -98,19 +109,8 @@ Scurtescu, et al.         Expires May 16, 2022                  [Page 1]
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 Scurtescu, et al.         Expires May 16, 2022                  [Page 2]
-
+
                     openid-risc-profile-specification      November 2021
 
 
@@ -123,7 +123,7 @@ Scurtescu, et al.         Expires May 16, 2022                  [Page 2]
        "https://schemas.openid.net/secevent/risc/event-type/\
        account-credential-change-required": {
          "subject": {
-           "subject_type": "iss-sub",
+           "format": "iss_sub",
            "iss": "https://idp.example.com/",
            "sub": "7375626A656374",
          }
@@ -166,7 +166,7 @@ Scurtescu, et al.         Expires May 16, 2022                  [Page 2]
 
 
 Scurtescu, et al.         Expires May 16, 2022                  [Page 3]
-
+
                     openid-risc-profile-specification      November 2021
 
 
@@ -181,7 +181,7 @@ Scurtescu, et al.         Expires May 16, 2022                  [Page 3]
        "https://schemas.openid.net/secevent/risc/event-type/\
        account-disabled": {
          "subject": {
-           "subject_type": "iss-sub",
+           "format": "iss_sub",
            "iss": "https://idp.example.com/",
            "sub": "7375626A656374",
          },
@@ -222,7 +222,7 @@ Scurtescu, et al.         Expires May 16, 2022                  [Page 3]
 
 
 Scurtescu, et al.         Expires May 16, 2022                  [Page 4]
-
+
                     openid-risc-profile-specification      November 2021
 
 
@@ -247,7 +247,7 @@ Scurtescu, et al.         Expires May 16, 2022                  [Page 4]
        "https://schemas.openid.net/secevent/risc/event-type/\
        identifier-changed": {
          "subject": {
-           "subject_type": "email",
+           "format": "email",
            "email": "john.doe@example.com",
          },
          "new-value": "john.roe@example.com",
@@ -278,7 +278,7 @@ Scurtescu, et al.         Expires May 16, 2022                  [Page 4]
 
 
 Scurtescu, et al.         Expires May 16, 2022                  [Page 5]
-
+
                     openid-risc-profile-specification      November 2021
 
 
@@ -291,7 +291,7 @@ Scurtescu, et al.         Expires May 16, 2022                  [Page 5]
        "https://schemas.openid.net/secevent/risc/event-type/\
        identifier-recycled": {
          "subject": {
-           "subject_type": "email",
+           "format": "email",
            "email": "foo@example.com",
          }
        }
@@ -334,7 +334,7 @@ Scurtescu, et al.         Expires May 16, 2022                  [Page 5]
 
 
 Scurtescu, et al.         Expires May 16, 2022                  [Page 6]
-
+
                     openid-risc-profile-specification      November 2021
 
 
@@ -350,7 +350,7 @@ Scurtescu, et al.         Expires May 16, 2022                  [Page 6]
      "events": {
        "https://schemas.openid.net/secevent/risc/event-type/credential-compromise": {
          "subject": {
-           "format": "iss-sub",
+           "format": "iss_sub",
            "iss": "https://idp.example.com/3456790/",
            "sub": "joe.smith@example.com"
          },
@@ -390,7 +390,7 @@ Scurtescu, et al.         Expires May 16, 2022                  [Page 6]
 
 
 Scurtescu, et al.         Expires May 16, 2022                  [Page 7]
-
+
                     openid-risc-profile-specification      November 2021
 
 
@@ -446,7 +446,7 @@ Scurtescu, et al.         Expires May 16, 2022                  [Page 7]
 
 
 Scurtescu, et al.         Expires May 16, 2022                  [Page 8]
-
+
                     openid-risc-profile-specification      November 2021
 
 
@@ -502,7 +502,7 @@ Scurtescu, et al.         Expires May 16, 2022                  [Page 8]
 
 
 Scurtescu, et al.         Expires May 16, 2022                  [Page 9]
-
+
                     openid-risc-profile-specification      November 2021
 
 
@@ -558,7 +558,7 @@ Appendix A.  Acknowledgements
 
 
 Scurtescu, et al.         Expires May 16, 2022                 [Page 10]
-
+
                     openid-risc-profile-specification      November 2021
 
 
@@ -614,7 +614,7 @@ Authors' Addresses
 
 
 Scurtescu, et al.         Expires May 16, 2022                 [Page 11]
-
+
                     openid-risc-profile-specification      November 2021
 
 

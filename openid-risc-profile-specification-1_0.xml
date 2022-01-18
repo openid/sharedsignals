@@ -77,8 +77,9 @@
 
   <middle>
     <section anchor="intro" title="Introduction">
-      <t>This specification is based on <xref target="SSE-FRAMEWORK">SSE Framework</xref> and uses
-      the subject identifiers defined there.</t>
+      <t>This specification defines event types and their contents based on the
+      <xref target="SSE-FRAMEWORK">SSE Framework</xref> that are required to
+      implement Risc Incident Sharing and Coordination.</t>
       
       <section anchor="conv" title="Notational Conventions">
         <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
@@ -87,8 +88,19 @@
           described in BCP 14 <xref target="RFC2119"/> <xref target="RFC8174"/> 
           when, and only when, they appear in all capitals, as shown here.</t>
       </section>
-    </section>
     
+      <section anchor="subject-types" title="Subject Types">
+        <t>This specification uses the subject identifiers as defined in the
+        <xref target="SSE-FRAMEWORK">SSE Framework</xref> specification. However
+        for compatibility purposes, the field name <spanx style="verb">
+        subject_type</spanx> MAY be used by existing services instead of the
+        field name <spanx style="verb">format</spanx> to indicate the format of
+        the subject identifier. The usage of the field name
+        <spanx style="verb">subject_type</spanx> is deprecated and new services
+        MUST NOT use this field name.</t>
+      </section>
+    </section>
+
     <section anchor="event-types" title="Event Types">
       <t>The base URI for RISC event types is:<vspace />
         https://schemas.openid.net/secevent/risc/event-type/</t>
@@ -113,7 +125,7 @@
     "https://schemas.openid.net/secevent/risc/event-type/\
     account-credential-change-required": {
       "subject": {
-        "subject_type": "iss-sub",
+        "format": "iss_sub",
         "iss": "https://idp.example.com/",
         "sub": "7375626A656374",
       }
@@ -160,7 +172,7 @@
     "https://schemas.openid.net/secevent/risc/event-type/\
     account-disabled": {
       "subject": {
-        "subject_type": "iss-sub",
+        "format": "iss_sub",
         "iss": "https://idp.example.com/",
         "sub": "7375626A656374",
       },
@@ -215,7 +227,7 @@
     "https://schemas.openid.net/secevent/risc/event-type/\
     identifier-changed": {
       "subject": {
-        "subject_type": "email",
+        "format": "email",
         "email": "john.doe@example.com",
       },
       "new-value": "john.roe@example.com",
@@ -249,7 +261,7 @@
     "https://schemas.openid.net/secevent/risc/event-type/\
     identifier-recycled": {
       "subject": {
-        "subject_type": "email",
+        "format": "email",
         "email": "foo@example.com",
       }
     }
@@ -292,7 +304,7 @@
      "events": {
        "https://schemas.openid.net/secevent/risc/event-type/credential-compromise": {
          "subject": {
-           "format": "iss-sub",
+           "format": "iss_sub",
            "iss": "https://idp.example.com/3456790/",
            "sub": "joe.smith@example.com"
          },
