@@ -88,17 +88,6 @@
           described in BCP 14 <xref target="RFC2119"/> <xref target="RFC8174"/> 
           when, and only when, they appear in all capitals, as shown here.</t>
       </section>
-    
-      <section anchor="subject-types" title="Subject Types">
-        <t>This specification uses the subject identifiers as defined in the
-        <xref target="SSE-FRAMEWORK">SSE Framework</xref> specification. However
-        for compatibility purposes, the field name <spanx style="verb">
-        subject_type</spanx> MAY be used by existing services instead of the
-        field name <spanx style="verb">format</spanx> to indicate the format of
-        the subject identifier. The usage of the field name
-        <spanx style="verb">subject_type</spanx> is deprecated and new services
-        MUST NOT use this field name.</t>
-      </section>
     </section>
 
     <section anchor="event-types" title="Event Types">
@@ -424,6 +413,23 @@
         <t>Attributes: none</t>
       </section>
     </section>
+    <section anchor="compatibility" title="Compatibility">
+      <section anchor="google-subject-type" title="Google Subject Type Value">
+        <t>
+          Implementers are hereby made aware that the existing RISC implementation
+          by Google uses the field name <spanx style="verb"> subject_type</spanx>
+          instead of the field name <spanx style="verb">format</spanx> to indicate
+          the format of the subject identifier. The usage of the field name
+          <spanx style="verb">subject_type</spanx> is deprecated and new services
+          MUST NOT use this field name.</t>
+        <t>
+          Relying parties wishing to receive events from the Google RISC
+          transmitter therefore need to have code to work around this, until such
+          time as their implementation is updated. Any such workaround should be
+          written in a manner that does not break if Google updates their
+          implementation to conform to this specification.</t>
+      </section>
+   </section>
   </middle>
 
   <back>

@@ -31,7 +31,6 @@ Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
      1.1.  Notational Conventions  . . . . . . . . . . . . . . . . .   2
-     1.2.  Subject Types . . . . . . . . . . . . . . . . . . . . . .   2
    2.  Event Types . . . . . . . . . . . . . . . . . . . . . . . . .   2
      2.1.  Account Credential Change Required  . . . . . . . . . . .   2
      2.2.  Account Purged  . . . . . . . . . . . . . . . . . . . . .   3
@@ -48,8 +47,9 @@ Table of Contents
      2.9.  Recovery Activated  . . . . . . . . . . . . . . . . . . .   9
      2.10. Recovery Information Changed  . . . . . . . . . . . . . .   9
      2.11. Sessions Revoked  . . . . . . . . . . . . . . . . . . . .  10
-   3.  Normative References  . . . . . . . . . . . . . . . . . . . .  10
-   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  10
+   3.  Compatibility . . . . . . . . . . . . . . . . . . . . . . . .  10
+     3.1.  Google Subject Type Value . . . . . . . . . . . . . . . .  10
+   4.  Normative References  . . . . . . . . . . . . . . . . . . . .  10
 
 
 
@@ -58,8 +58,9 @@ Scurtescu, et al.         Expires May 16, 2022                  [Page 1]
                     openid-risc-profile-specification      November 2021
 
 
+   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  11
    Appendix B.  Notices  . . . . . . . . . . . . . . . . . . . . . .  11
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  11
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  12
 
 1.  Introduction
 
@@ -74,15 +75,6 @@ Scurtescu, et al.         Expires May 16, 2022                  [Page 1]
    "OPTIONAL" in this document are to be interpreted as described in BCP
    14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
-
-1.2.  Subject Types
-
-   This specification uses the subject identifiers as defined in the SSE
-   Framework [SSE-FRAMEWORK] specification.  However for compatibility
-   purposes, the field name "subject_type" MAY be used by existing
-   services instead of the field name "format" to indicate the format of
-   the subject identifier.  The usage of the field name "subject_type"
-   is deprecated and new services MUST NOT use this field name.
 
 2.  Event Types
 
@@ -100,6 +92,14 @@ Scurtescu, et al.         Expires May 16, 2022                  [Page 1]
    example the user was required to go through a password change.
 
    Attributes: none
+
+
+
+
+
+
+
+
 
 
 
@@ -520,7 +520,23 @@ Scurtescu, et al.         Expires May 16, 2022                  [Page 9]
 
    Attributes: none
 
-3.  Normative References
+3.  Compatibility
+
+3.1.  Google Subject Type Value
+
+   Implementers are hereby made aware that the existing RISC
+   implementation by Google uses the field name "subject_type" instead
+   of the field name "format" to indicate the format of the subject
+   identifier.  The usage of the field name "subject_type" is deprecated
+   and new services MUST NOT use this field name.
+
+   Relying parties wishing to receive events from the Google RISC
+   transmitter therefore need to have code to work around this, until
+   such time as their implementation is updated.  Any such workaround
+   should be written in a manner that does not break if Google updates
+   their implementation to conform to this specification.
+
+4.  Normative References
 
    [CAEP-SPECIFICATION]
               Cappalli, T. and A. Tulshibagwale, "OpenID Continuous
@@ -536,6 +552,15 @@ Scurtescu, et al.         Expires May 16, 2022                  [Page 9]
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
+
+
+
+
+
+Scurtescu, et al.         Expires May 16, 2022                 [Page 10]
+
+                    openid-risc-profile-specification      November 2021
+
 
    [SET]      Hunt, P., Ed., Jones, M., Denniss, W., and M. Ansari,
               "Security Event Token (SET)", April 2018,
@@ -554,13 +579,6 @@ Appendix A.  Acknowledgements
    The authors wish to thank all members of the OpenID Foundation Shared
    Signals and Events Working Group who contributed to the development
    of this specification.
-
-
-
-Scurtescu, et al.         Expires May 16, 2022                 [Page 10]
-
-                    openid-risc-profile-specification      November 2021
-
 
 Appendix B.  Notices
 
@@ -592,6 +610,14 @@ Appendix B.  Notices
    infringement, fitness for a particular purpose, or title, related to
    this specification, and the entire risk as to implementing this
    specification is assumed by the implementer.  The OpenID Intellectual
+
+
+
+Scurtescu, et al.         Expires May 16, 2022                 [Page 11]
+
+                    openid-risc-profile-specification      November 2021
+
+
    Property Rights policy requires contributors to offer a patent
    promise not to assert certain patent claims against other
    contributors and against implementers.  The OpenID Foundation invites
@@ -605,17 +631,6 @@ Authors' Addresses
    Coinbase
 
    Email: marius.scurtescu@coinbase.com
-
-
-
-
-
-
-
-
-Scurtescu, et al.         Expires May 16, 2022                 [Page 11]
-
-                    openid-risc-profile-specification      November 2021
 
 
    Annabelle Backman
@@ -646,21 +661,6 @@ Scurtescu, et al.         Expires May 16, 2022                 [Page 11]
    Google
 
    Email: atultulshi@google.com
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
