@@ -79,7 +79,7 @@
     <section anchor="intro" title="Introduction">
       <t>This specification defines event types and their contents based on the
       <xref target="SSE-FRAMEWORK">SSE Framework</xref> that are required to
-      implement Risc Incident Sharing and Coordination.</t>
+      implement Risk Incident Sharing and Coordination.</t>
       
       <section anchor="conv" title="Notational Conventions">
         <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL

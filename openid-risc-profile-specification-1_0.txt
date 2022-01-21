@@ -65,7 +65,7 @@ Scurtescu, et al.         Expires May 16, 2022                  [Page 1]
 1.  Introduction
 
    This specification defines event types and their contents based on
-   the SSE Framework [SSE-FRAMEWORK] that are required to implement Risc
+   the SSE Framework [SSE-FRAMEWORK] that are required to implement Risk
    Incident Sharing and Coordination.
 
 1.1.  Notational Conventions
