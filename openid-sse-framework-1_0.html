@@ -1,5 +1,5 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
@@ -54,7 +54,7 @@
 	  font-family: verdana, helvetica, arial, sans-serif;
 	  font-size: 10pt;
 	  max-width: 55em;
-	  
+
 	  }
 	  cite {
 	  font-style: normal;
@@ -65,7 +65,7 @@
 	  dl {
 	  margin-left: 2em;
 	  }
-	
+
 	  ul.empty {
 	  list-style-type: none;
 	  }
@@ -194,7 +194,7 @@
 	  font-size: 9pt;
 	  margin-top: .5em;
 	  }
-	
+
 	  table.header {
 	  border-spacing: 1px;
 	  width: 95%;
@@ -206,7 +206,7 @@
 	  }
 	  td.topnowrap {
 	  vertical-align: top;
-	  white-space: nowrap; 
+	  white-space: nowrap;
 	  }
 	  table.header td {
 	  background-color: gray;
@@ -249,7 +249,7 @@
 	  ul p {
 	  margin-left: 0em;
 	  }
-	
+
 	  .comment {
 	  background-color: yellow;
 	  }
@@ -300,22 +300,22 @@
 	  font-size: 14pt;
 	  background-color: yellow;
 	  }
-	
-	
+
+
 	  @media print {
 	  .noprint {
 		display: none;
 	  }
-	
+
 	  a {
 		color: black;
 		text-decoration: none;
 	  }
-	
+
 	  table.header {
 		width: 90%;
 	  }
-	
+
 	  td.header {
 		width: 50%;
 		color: black;
@@ -323,44 +323,44 @@
 		vertical-align: top;
 		font-size: 12pt;
 	  }
-	
+
 	  ul.toc a::after {
 		content: leader('.') target-counter(attr(href), page);
 	  }
-	
+
 	  ul.ind li li a {
 		content: target-counter(attr(href), page);
 	  }
-	
+
 	  .print2col {
 		column-count: 2;
 		-moz-column-count: 2;
 		column-fill: auto;
 	  }
 	  }
-	
+
 	  @page {
 	  @top-left {
-		   content: "Internet-Draft"; 
-	  } 
+		   content: "Internet-Draft";
+	  }
 	  @top-right {
-		   content: "December 2010"; 
-	  } 
+		   content: "December 2010";
+	  }
 	  @top-center {
 		   content: "Abbreviated Title";
-	  } 
-	  @bottom-left {
-		   content: "Doe"; 
-	  } 
-	  @bottom-center {
-		   content: "Expires June 2011"; 
-	  } 
-	  @bottom-right {
-		   content: "[Page " counter(page) "]"; 
-	  } 
 	  }
-	
-	  @page:first { 
+	  @bottom-left {
+		   content: "Doe";
+	  }
+	  @bottom-center {
+		   content: "Expires June 2011";
+	  }
+	  @bottom-right {
+		   content: "[Page " counter(page) "]";
+	  }
+	  }
+
+	  @page:first {
 		@top-left {
 		  content: normal;
 		}
@@ -462,7 +462,7 @@
 
   <table class="header">
     <tbody>
-    
+
     	<tr>
 <td class="left"></td>
 <td class="right">A. Tulshibagwale</td>
@@ -508,13 +508,13 @@
 <td class="right">June 8, 2021</td>
 </tr>
 
-    	
+
     </tbody>
   </table>
 
   <p class="title">OpenID Shared Signals and Events Framework Specification 1.0 - draft 01<br />
   <span class="filename">openid-sse-framework-1_0</span></p>
-  
+
   <h1 id="rfc.abstract"><a href="#rfc.abstract">Abstract</a></h1>
 <p>This Shared Signals and Events (SSE) Framework enables sharing of signals and events between cooperating peers. It enables multiple applications such as Risk Incident Sharing and Coordination (RISC) and the Continuous Access Evaluation Profile (<a href="#CAEP" class="xref">[CAEP]</a>) </p>
 <p>This specification defines: </p>
@@ -538,7 +538,7 @@
 <li><a href="#DELIVERYPOLL" class="xref">Poll-Based SET Token Delivery Using HTTP</a></li>
 </ul>
 
-  
+
   <hr class="noprint" />
   <h1 class="np" id="rfc.toc"><a href="#rfc.toc">Table of Contents</a></h1>
   <ul class="toc">
@@ -803,7 +803,7 @@
 <div id="rfc.figure.3"></div>
 <div id="sub-id-jwtid"></div>
 <pre>
-            
+
 {
     "format": "jwt-id",
     "iss": "https://idp.example.com/123456789/",
@@ -825,18 +825,18 @@
 <dd style="margin-left: 8">
 <br>REQUIRED. The "ID" value of the SAML assertion being identified, defined in <a href="#OASIS.saml-core-2.0-os" class="xref">[OASIS.saml-core-2.0-os]</a> </dd>
 </dl>
-<p id="rfc.section.3.4.2.p.2">The "SAML Assertion ID" Subject Identifier Format is identified by the name <samp>saml-assertion-id</samp>.</p>
-<p id="rfc.section.3.4.2.p.3">Below is a non-normative example Subject Identifier for the <samp>saml-assertion-id</samp> Subject Identifier Format.</p>
+<p id="rfc.section.3.4.2.p.2">The "SAML Assertion ID" Subject Identifier Format is identified by the name <samp>saml_assertion_id</samp>.</p>
+<p id="rfc.section.3.4.2.p.3">Below is a non-normative example Subject Identifier for the <samp>saml_assertion_id</samp> Subject Identifier Format.</p>
 <div id="rfc.figure.4"></div>
 <div id="sub-id-samlassertionid"></div>
 <pre>
 {
-    "format": "saml-assertion-id",
+    "format": "saml_assertion_id",
     "issuer": "https://idp.example.com/123456789/",
     "assertion_id": "_8e8dc5f69a98cc4c1ff3427e5ce34606fd672f91e6"
 }
         </pre>
-<p class="figure">Figure 4: Example: 'saml-assertion-id' Subject Identifier</p>
+<p class="figure">Figure 4: Example: 'saml_assertion_id' Subject Identifier</p>
 <h1 id="rfc.section.3.5">
 <a href="#rfc.section.3.5">3.5.</a> <a href="#receiver-subject-processing" id="receiver-subject-processing">Receiver Subject Processing</a>
 </h1>
@@ -2198,16 +2198,16 @@ disabled": {
 <div class="avoidbreak">
   <address class="vcard">
 	<span class="vcardline">
-	  <span class="fn">Atul Tulshibagwale</span> 
+	  <span class="fn">Atul Tulshibagwale</span>
 	  <span class="n hidden">
 		<span class="family-name">Tulshibagwale</span>
 	  </span>
 	</span>
 	<span class="org vcardline">Google</span>
 	<span class="adr">
-	  
+
 	  <span class="vcardline">
-		<span class="locality"></span> 
+		<span class="locality"></span>
 		<span class="region"></span>
 		<span class="code"></span>
 	  </span>
@@ -2219,16 +2219,16 @@ disabled": {
 </div><div class="avoidbreak">
   <address class="vcard">
 	<span class="vcardline">
-	  <span class="fn">Tim Cappalli</span> 
+	  <span class="fn">Tim Cappalli</span>
 	  <span class="n hidden">
 		<span class="family-name">Cappalli</span>
 	  </span>
 	</span>
 	<span class="org vcardline">Microsoft</span>
 	<span class="adr">
-	  
+
 	  <span class="vcardline">
-		<span class="locality"></span> 
+		<span class="locality"></span>
 		<span class="region"></span>
 		<span class="code"></span>
 	  </span>
@@ -2240,16 +2240,16 @@ disabled": {
 </div><div class="avoidbreak">
   <address class="vcard">
 	<span class="vcardline">
-	  <span class="fn">Marius Scurtescu</span> 
+	  <span class="fn">Marius Scurtescu</span>
 	  <span class="n hidden">
 		<span class="family-name">Scurtescu</span>
 	  </span>
 	</span>
 	<span class="org vcardline">Coinbase</span>
 	<span class="adr">
-	  
+
 	  <span class="vcardline">
-		<span class="locality"></span> 
+		<span class="locality"></span>
 		<span class="region"></span>
 		<span class="code"></span>
 	  </span>
@@ -2261,16 +2261,16 @@ disabled": {
 </div><div class="avoidbreak">
   <address class="vcard">
 	<span class="vcardline">
-	  <span class="fn">Annabelle Backman</span> 
+	  <span class="fn">Annabelle Backman</span>
 	  <span class="n hidden">
 		<span class="family-name">Backman</span>
 	  </span>
 	</span>
 	<span class="org vcardline">Amazon</span>
 	<span class="adr">
-	  
+
 	  <span class="vcardline">
-		<span class="locality"></span> 
+		<span class="locality"></span>
 		<span class="region"></span>
 		<span class="code"></span>
 	  </span>
@@ -2282,16 +2282,16 @@ disabled": {
 </div><div class="avoidbreak">
   <address class="vcard">
 	<span class="vcardline">
-	  <span class="fn">John Bradley</span> 
+	  <span class="fn">John Bradley</span>
 	  <span class="n hidden">
 		<span class="family-name">Bradley</span>
 	  </span>
 	</span>
 	<span class="org vcardline">Yubico</span>
 	<span class="adr">
-	  
+
 	  <span class="vcardline">
-		<span class="locality"></span> 
+		<span class="locality"></span>
 		<span class="region"></span>
 		<span class="code"></span>
 	  </span>
@@ -2304,4 +2304,3 @@ disabled": {
 
 </body>
 </html>
-

@@ -93,7 +93,7 @@
         <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
           NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED",
           "MAY", and "OPTIONAL" in this document are to be interpreted as
-          described in BCP 14 <xref target="RFC2119"/> <xref target="RFC8174"/> 
+          described in BCP 14 <xref target="RFC2119"/> <xref target="RFC8174"/>
           when, and only when, they appear in all capitals, as shown here.</t>
       </section>
     </section>
@@ -195,10 +195,10 @@
             defined in  <xref target="RFC7519"/>. Subject Identifiers of this type MUST contain the
             following members:
             <list style="hanging">
-              <t hangText="iss"> 
+              <t hangText="iss">
               <vspace blankLines="0"/>REQUIRED. The "iss" (issuer) claim of the JWT being
                 identified, defined in <xref target="RFC7519"/></t>
-              <t hangText="jti"> 
+              <t hangText="jti">
               <vspace blankLines="0"/>REQUIRED. The "jti" (JWT token ID) claim of the JWT being
                 identified, defined in <xref target="RFC7519"/></t>
             </list></t>
@@ -227,13 +227,13 @@
               </t>
             </list></t>
           <t>The "SAML Assertion ID" Subject Identifier Format is identified by the name
-            <spanx style="verb">saml-assertion-id</spanx>.</t>
+            <spanx style="verb">saml_assertion_id</spanx>.</t>
           <t>Below is a non-normative example Subject Identifier for the <spanx style="verb">
-            saml-assertion-id</spanx> Subject Identifier Format.</t>
-          <figure anchor="sub-id-samlassertionid" title="Example: 'saml-assertion-id' Subject Identifier">
+            saml_assertion_id</spanx> Subject Identifier Format.</t>
+          <figure anchor="sub-id-samlassertionid" title="Example: 'saml_assertion_id' Subject Identifier">
             <artwork><![CDATA[
 {
-    "format": "saml-assertion-id",
+    "format": "saml_assertion_id",
     "issuer": "https://idp.example.com/123456789/",
     "assertion_id": "_8e8dc5f69a98cc4c1ff3427e5ce34606fd672f91e6"
 }
@@ -368,7 +368,7 @@
             Transmitter asserts as its Issuer Identifier. This MUST be identical to the iss claim value in
             Security Event Tokens issued from this Transmitter.</t>
           <t hangText="jwks_uri"> REQUIRED. URL of the Transmitter's <xref target="RFC7517">JSON Web Key Set</xref>
-            document. This contains the signing key(s) the Receiver uses to validate signatures from the 
+            document. This contains the signing key(s) the Receiver uses to validate signatures from the
             Transmitter.</t>
           <t hangText="delivery_methods_supported"> RECOMMENDED. List of supported delivery method
             URIs.</t>
@@ -449,15 +449,15 @@ Host: risc-tr.example.com
         <section title="Transmitter Configuration Response">
           <t>The response is a set of Claims about the Transmitter's configuration, including all necessary endpoints and
             public key location information. A successful response MUST use the 200 OK HTTP status code and return
-            a JSON object using the <spanx style="verb">application/json</spanx> content type that contains a set of Claims 
+            a JSON object using the <spanx style="verb">application/json</spanx> content type that contains a set of Claims
             as its members that are a subset of the Metadata values defined in <xref target="discovery-meta"/>.
             Other Claims MAY also be returned.</t>
-          
-          <t>Claims that return multiple values are represented as JSON arrays. Claims with zero elements MUST be omitted 
+
+          <t>Claims that return multiple values are represented as JSON arrays. Claims with zero elements MUST be omitted
             from the response.</t>
-          
+
           <t>An error response uses the applicable HTTP status code value.</t>
-          
+
           <t>
             <figure title="Example: Transmitter Configuration Response" anchor="figdiscoveryresponse">
               <artwork><![CDATA[
@@ -488,12 +488,12 @@ Content-Type: application/json
             </figure>
           </t>
         </section>
-        
+
         <section title="Transmitter Configuration Validation">
           <t>If any of the validation procedures defined in this specification fail, any operations requiring
-            the information that failed to correctly validate MUST be aborted and the information that failed 
+            the information that failed to correctly validate MUST be aborted and the information that failed
             to validate MUST NOT be used.</t>
-          
+
           <t>The <spanx style="verb">issuer</spanx> value returned MUST be identical to the Issuer URL that
             was directly used to retrieve the configuration information. This MUST also be identical to the
             <spanx style="verb">iss</spanx> Claim value in Security Event Tokens issued from this Transmitter.
@@ -504,11 +504,11 @@ Content-Type: application/json
 
     <section anchor="management" title="Management API for SET Event Streams">
       <t>This section defines an HTTP API to be implemented by Event Transmitters
-        and that can be used by Event Receivers to query and update the Event Stream 
+        and that can be used by Event Receivers to query and update the Event Stream
         configuration and status, to add and remove subjects and to trigger verification.</t>
-      
+
       <t>This section is based on <xref target="MGMTAPI">Management API for SET Event Streams</xref>.</t>
-      
+
       <figure title="Event Stream Management API" anchor="figintro"><artwork><![CDATA[
 +------------+                +------------+
 |            | Stream Config  |            |
@@ -531,11 +531,11 @@ Content-Type: application/json
 |            |                |            |
 +------------+                +------------+
 ]]></artwork></figure>
-      
+
       <t>It is OPTIONAL for Transmitters to implement a Management API, but it is
-      RECOMMENDED that they implement it, especially the endpoints for querying the 
+      RECOMMENDED that they implement it, especially the endpoints for querying the
       Stream Status and for triggering Verification.</t>
-      
+
       <section anchor="management-api" title="Event Stream Management">
         <t>Event Receivers manage how they receive events, and the subjects about which they want
           to receive events over an Event Stream by making HTTP requests to endpoints in the Event
@@ -623,7 +623,7 @@ Content-Type: application/json
 
             <t>The following is a non-normative example request to check an event stream’s
               status:</t>
-            
+
             <figure title="Example: Check Stream Status Request" anchor="figstatusreq">
               <artwork><![CDATA[
 GET /sse/status HTTP/1.1
@@ -631,9 +631,9 @@ Host: transmitter.example.com
 Authorization: Bearer zzzz
 ]]></artwork>
             </figure>
-            
+
             <t>The following is a non-normative example response:
-            
+
             <figure title="Example: Check Stream Status Response" anchor="figstatusresp">
               <artwork><![CDATA[
 HTTP/1.1 200 OK
@@ -723,7 +723,7 @@ Pragma: no-cache
               On receiving a valid request the Event Transmitter responds with a <spanx style="verb">
               200 OK</spanx> response containing a <xref target="RFC7159">JSON</xref> representation
               of the updated stream status in the body.</t>
-            
+
             <t>The following is a non-normative example request to update an Event Stream’s
               status:
 
@@ -805,13 +805,13 @@ Pragma: no-cache
               </list></t>
            </section>
         </section>
-        
+
         <section anchor="stream-config" title="Stream Configuration">
           <t>An Event Stream’s configuration is represented as a <xref target="RFC7159">JSON</xref> object with
             the following properties:</t>
 
           <t><list style="hanging">
-            <t hangText="iss"><vspace blankLines="0"/> <spanx style="strong">Read-Only</spanx>, 
+            <t hangText="iss"><vspace blankLines="0"/> <spanx style="strong">Read-Only</spanx>,
               A URL using the https scheme with no query or fragment component that the Transmitter asserts as its Issuer
               Identifier. This MUST be identical to the <spanx style="verb">iss</spanx> Claim value in
               Security Event Tokens issued from this Transmitter.</t>
@@ -823,23 +823,23 @@ Pragma: no-cache
             <t hangText="events_supported"><vspace blankLines="0"/>  <spanx style="strong">Read-Only</spanx>,
               An array of URIs identifying
               the set of events supported by the Transmitter for this Receiver. If omitted,
-              Event Transmitters SHOULD make this set available to the Event Receiver via some 
+              Event Transmitters SHOULD make this set available to the Event Receiver via some
               other means (e.g. publishing it in online documentation).</t>
-            <t hangText="events_requested"><vspace blankLines="0"/>  <spanx style="strong">Read-Write</spanx>, 
+            <t hangText="events_requested"><vspace blankLines="0"/>  <spanx style="strong">Read-Write</spanx>,
               An array of URIs identifying
               the set of events that the Receiver requested. A Receiver SHOULD request only the events
               that it understands and it can act on. This is configurable by the Receiver.</t>
-            <t hangText="events_delivered"><vspace blankLines="0"/> <spanx style="strong">Read-Only</spanx>, 
-              An array of URIs 
+            <t hangText="events_delivered"><vspace blankLines="0"/> <spanx style="strong">Read-Only</spanx>,
+              An array of URIs
               which is the intersection of <spanx style="verb">events_supported</spanx> and
               <spanx style="verb">events_requested</spanx>. These events MAY be delivered over
               the Event Stream.</t>
-            <t hangText="delivery"><vspace blankLines="0"/> <spanx style="strong">Read-Write</spanx>, 
+            <t hangText="delivery"><vspace blankLines="0"/> <spanx style="strong">Read-Write</spanx>,
               A JSON object containing a set of
               name/value pairs specifying configuration parameters for the SET delivery method.
               The actual delivery method is identified by the special key <spanx style="verb">method</spanx> with
               the value being a URI as defined in <xref target="delivery-meta"/>.</t>
-            <t hangText="min_verification_interval"><vspace blankLines="0"/> <spanx style="strong">Read-Only</spanx>, 
+            <t hangText="min_verification_interval"><vspace blankLines="0"/> <spanx style="strong">Read-Only</spanx>,
               An integer indicating the minimum amount of time in seconds that
               must pass in between verification requests. If an Event Receiver
               submits verification requests more frequently than this, the Event
@@ -851,10 +851,10 @@ Pragma: no-cache
               If not set then the Transmitter might decide to use a type that discloses more information
               than necessary.</t>
           </list></t>
-          
-          <t>TODO: consider adding a IANA Registry for stream configuration metadata, similar to Section 7.1.1 of 
+
+          <t>TODO: consider adding a IANA Registry for stream configuration metadata, similar to Section 7.1.1 of
             <xref target="OAUTH-DISCOVERY"/>. This would allow other specs to add to the stream configuration.</t>
-          
+
           <section anchor="reading-a-streams-configuration"
             title="Reading a Stream’s Configuration">
             <t>An Event Receiver gets the current configuration of a stream by making an HTTP GET
@@ -1030,16 +1030,16 @@ Pragma: no-cache
             </texttable>
 
           </section>
-          
+
           <section anchor="removing-a-stream-configuration" title="Removing a Stream Configuration">
             <t>An Event Receiver removes the configuration of a stream by making an HTTP
               DELETE request to the Configuration Endpoint. On receiving a request the Event
               Transmitter responds with a <spanx style="verb">200 OK</spanx> response if the
               configuration was successfully removed.</t>
-            
+
             <t>The following is a non-normative example request to remove an Event Stream’s
               configuration:</t>
-            
+
             <figure title="Example: Remove Stream Configuration Request"
               anchor="figremoveconfigreq">
               <artwork><![CDATA[
@@ -1048,9 +1048,9 @@ Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 ]]></artwork>
             </figure>
-            
+
             <t>Errors are signaled with HTTP status codes as follows:</t>
-            
+
             <texttable title="Update Stream Configuration Errors" anchor="tabremoveconfig">
               <ttcol align="left">Code</ttcol>
               <ttcol align="left">Description</ttcol>
@@ -1061,7 +1061,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
             </texttable>
           </section>
         </section>
-        
+
         <section anchor="subjects" title="Subjects">
           <t>An Event Receiver can indicate to an Event Transmitter whether or not the receiver
             wants to receive events about a particular subject by “adding” or “removing” that
@@ -1226,7 +1226,7 @@ Pragma: no-cache
             <t>Upon receiving a Verification Event, the Event Receiver SHALL parse the SET and
               validate its claims. In particular, the Event Receiver SHALL confirm that the value
               for <spanx style="verb">state</spanx> is as expected. If the value of <spanx style="verb">state</spanx> does not match, an error
-              response of <spanx style="verb">setData</spanx> SHOULD be returned (see Section 2.3 
+              response of <spanx style="verb">setData</spanx> SHOULD be returned (see Section 2.3
               of <xref target="DELIVERYPUSH"/> or <xref target="DELIVERYPOLL"/>).</t>
 
             <t>In many cases, Event Transmitters MAY disable or suspend an Event Stream that fails
@@ -1237,9 +1237,9 @@ Pragma: no-cache
           <section anchor="triggering-a-verification-event"
             title="Triggering a Verification Event.">
             <t>To request that a verification event be sent over an Event Stream, the Event
-              Receiver makes an HTTP POST request to the Verification Endpoint, with a 
+              Receiver makes an HTTP POST request to the Verification Endpoint, with a
               <xref target="RFC7159">JSON</xref> object containing the parameters of the verification request,
-              if any. On a successful request, the event transmitter responds with an empty 
+              if any. On a successful request, the event transmitter responds with an empty
               <spanx style="verb">204 No Content</spanx> response.</t>
 
             <t>Verification requests have the following properties:</t>
@@ -1548,7 +1548,7 @@ disabled": {
 
         <section anchor="explicit-typing" title="Explicit Typing of SETs">
           <t>SSE events MUST use explicit typing as defined in Section 2.3 of <xref target="SET"/>.</t>
-          
+
           <figure title="Explicitly Typed JOSE Header" anchor="explicit-type-header">
             <artwork><![CDATA[
 {
@@ -1557,34 +1557,34 @@ disabled": {
 }
 ]]></artwork>
           </figure>
-          
+
           <t>The purpose is defense against confusion with other JWTs, as described in Sections
           4.5, 4.6 and 4.7 of <xref target="SET"/>. While current <xref target="IDTOKEN">Id Token</xref> validators may not
           be using the <spanx style="verb">typ</spanx> header parameter, by requiring it for SSE
           SETs a distinct value is guaranteed for future validators.</t>
         </section>
-        
+
         <section anchor="exp-claim" title='The "exp" Claim'>
           <t>The <spanx style="verb">exp</spanx> claim MUST NOT be used in SSE SETs.</t>
-          
+
           <t>The purpose is defense in depth against confusion with other JWTs, as described
           in Sections 4.5 and 4.6 of <xref target="SET"/>.</t>
         </section>
 
         <section anchor="aud-claim" title='The "aud" Claim'>
           <t>The <spanx style="verb">aud</spanx> claim can be a single value or an array. Each value SHOULD be the OAuth 2.0 client ID.
-            Other values that uniquely identifies the Receiver to the 
+            Other values that uniquely identifies the Receiver to the
             Transmitter MAY be used, if the two parties have agreement on the format.</t>
-          
+
           <t>More than one value can be present if the corresponding Receivers are known to the Transmitter to be the same entity,
           for example a web client and a mobile client of the same application. All the Receivers in this case MUST use the exact
           same delivery method.</t>
-          
+
           <t>If multiple Receivers have the exact same delivery configuration but the Transmitter does not know if they belong to
           the same entity then the Transmitter SHOULD issue distinct SETs for each Receiver and deliver them separately. In this case
           the multiple Receivers might use the same service to process SETs, and this service might reroute SETs to respective Receivers,
           an <spanx style="verb">aud</spanx> claim with multiple Receivers would lead to unintended data disclosure.</t>
-          
+
           <figure title="Example: SET with array 'aud' claim" anchor="figarrayaud">
             <artwork><![CDATA[
 {
@@ -1601,7 +1601,7 @@ disabled": {
 ]]></artwork>
           </figure>
         </section>
-        
+
         <section anchor="events-claim" title='The "events" claim'>
           <t>The <spanx style="verb">events</spanx> claim SHOULD contain only one event. Multiple
           event type URIs are permitted only if they are alternative URIs defining the exact same
@@ -1630,12 +1630,12 @@ disabled": {
           <xref target="DELIVERYPOLL"/> specs.</t>
 
         <section anchor="delivery-meta" title="Stream Configuration Metadata">
-          <t>Each delivery method is identified by a URI, specified below by the 
+          <t>Each delivery method is identified by a URI, specified below by the
             <spanx style="verb">method</spanx> metadata.</t>
-          
+
           <section title="Push Delivery using HTTP">
             <t>This section provides SSE profiling specifications for the <xref target="DELIVERYPUSH"/> spec.</t>
-            
+
             <t><list style="hanging">
               <t hangText="method"> <spanx style="verb">https://schemas.openid.net/secevent/risc/delivery-method/push</spanx></t>
               <t hangText="endpoint_url"> The URL where events are pushed through HTTP POST.
@@ -1644,10 +1644,10 @@ disabled": {
               set with each event delivery, if the configuration is present. The value is optional and it is set by the Receiver.</t>
             </list></t>
           </section>
-          
+
           <section title="Polling Delivery using HTTP">
             <t>This section provides SSE profiling specifications for the <xref target="DELIVERYPOLL"/> spec.</t>
-            
+
             <t><list style="hanging">
               <t hangText="method"> <spanx style="verb">https://schemas.openid.net/secevent/risc/delivery-method/poll</spanx></t>
               <t hangText="endpoint_url"> The URL where events can be retrieved from. This is
@@ -1690,7 +1690,7 @@ disabled": {
         <seriesInfo name="RFC" value="6750"/>
         <seriesInfo name="DOI" value="10.17487/RFC6750"/>
       </reference>
-      
+
       <reference anchor="RFC7159" target="https://www.rfc-editor.org/info/rfc7159">
         <front>
           <title>The JavaScript Object Notation (JSON) Data Interchange Format</title>
@@ -1721,7 +1721,7 @@ disabled": {
         <seriesInfo name='RFC' value='7517'/>
         <seriesInfo name='DOI' value='10.17487/RFC7517'/>
       </reference>
-      
+
       <reference anchor="RFC7519" target="https://www.rfc-editor.org/info/rfc7519">
         <front>
           <title>JSON Web Token (JWT)</title>
@@ -1753,19 +1753,19 @@ disabled": {
           <author fullname="Phil Hunt" initials="P." role="editor" surname="Hunt">
             <organization />
           </author>
-          
+
           <author fullname="Michael B. Jones" initials="M.B." surname="Jones">
             <organization />
           </author>
-          
+
           <author fullname="William Denniss" initials="W." surname="Denniss">
             <organization />
           </author>
-          
+
           <author fullname="Morteza Ansari" initials="M.A." surname="Ansari">
             <organization />
           </author>
-          
+
           <date year="2018" month="April" />
         </front>
       </reference>
@@ -1776,27 +1776,27 @@ disabled": {
           <author fullname="Annabelle Backman" initials="A." surname="Backman" role="editor">
             <organization />
           </author>
-          
+
           <author fullname="Michael B. Jones" initials="M." surname="Jones" role="editor">
             <organization />
           </author>
-          
+
           <author fullname="Phil Hunt" initials="P." role="editor" surname="Hunt">
             <organization />
           </author>
-          
+
           <author fullname="Marius Scurtescu" initials="M.S." surname="Scurtescu">
             <organization />
           </author>
-          
+
           <author fullname="Morteza Ansari" initials="M." surname="Ansari">
             <organization />
           </author>
-          
+
           <author fullname="Anthony Nadalin" initials="A." surname="Nadalin">
             <organization />
           </author>
-          
+
           <date year="2020" month="November" />
         </front>
       </reference>
@@ -1807,23 +1807,23 @@ disabled": {
           <author fullname="Annabelle Backman" initials="A." surname="Backman" role="editor">
             <organization />
           </author>
-          
+
           <author fullname="Michael B. Jones" initials="M." surname="Jones" role="editor">
             <organization />
           </author>
-          
+
           <author fullname="Marius Scurtescu" initials="M.S." surname="Scurtescu">
             <organization />
           </author>
-          
+
           <author fullname="Morteza Ansari" initials="M." surname="Ansari">
             <organization />
           </author>
-          
+
           <author fullname="Anthony Nadalin" initials="A." surname="Nadalin">
             <organization />
           </author>
-          
+
           <date year="2020" month="November" />
         </front>
       </reference>
@@ -1836,11 +1836,11 @@ disabled": {
           </author>
           <date year="2012" month="October"/>
           <abstract>
-            <t>The OAuth 2.0 authorization framework enables a third-party application to 
-              obtain limited access to an HTTP service, either on behalf of a resource owner 
-              by orchestrating an approval interaction between the resource owner and the 
-              HTTP service, or by allowing the third-party application to obtain access on 
-              its own behalf. This specification replaces and obsoletes the OAuth 1.0 protocol 
+            <t>The OAuth 2.0 authorization framework enables a third-party application to
+              obtain limited access to an HTTP service, either on behalf of a resource owner
+              by orchestrating an approval interaction between the resource owner and the
+              HTTP service, or by allowing the third-party application to obtain access on
+              its own behalf. This specification replaces and obsoletes the OAuth 1.0 protocol
               described in RFC 5849. [STANDARDS-TRACK]
             </t>
           </abstract>
@@ -1856,23 +1856,23 @@ disabled": {
           <author fullname="Nat Sakimura" initials="N." surname="Sakimura">
             <organization />
           </author>
-          
+
           <author fullname="John Bradley" initials="J." surname="Bradley">
             <organization />
           </author>
-          
+
           <author fullname="Michael B. Jones" initials="M.B." surname="Jones">
             <organization />
           </author>
-          
+
           <author fullname="Breno de Medeiros" initials="B." surname="de Medeiros">
             <organization />
           </author>
-          
+
           <author fullname="Chuck Mortimore" initials="C." surname="Mortimore">
             <organization />
           </author>
-          
+
           <date day="7" month="April" year="2017" />
         </front>
       </reference>
@@ -1896,7 +1896,7 @@ disabled": {
         <seriesInfo name="RFC" value="2119"/>
         <seriesInfo name="DOI" value="10.17487/RFC2119"/>
       </reference>
-      
+
       <reference anchor="RFC8174" target="https://www.rfc-editor.org/info/rfc8174">
         <front>
           <title>Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words</title>
@@ -1905,8 +1905,8 @@ disabled": {
           </author>
           <date year="2017" month="May"/>
           <abstract>
-            <t>RFC 2119 specifies common key words that may be used in protocol specifications. This 
-              document aims to reduce the ambiguity by clarifying that only UPPERCASE usage of the 
+            <t>RFC 2119 specifies common key words that may be used in protocol specifications. This
+              document aims to reduce the ambiguity by clarifying that only UPPERCASE usage of the
               key words have the defined special meanings.</t>
           </abstract>
         </front>
@@ -1914,7 +1914,7 @@ disabled": {
         <seriesInfo name="RFC" value="8174"/>
         <seriesInfo name="DOI" value="10.17487/RFC8174"/>
       </reference>
-      
+
       <reference anchor="RFC5785" target="https://www.rfc-editor.org/info/rfc5785">
         <front>
           <title>Defining Well-Known Uniform Resource Identifiers (URIs)</title>
@@ -1953,7 +1953,7 @@ disabled": {
           <date year="2014" month="November" day="8"/>
           <abstract>
             <t>This specification defines a mechanism for an OpenID Connect Relying Party to discover the End-User's
-              OpenID Provider and obtain information needed to interact with it, including its OAuth 2.0 endpoint 
+              OpenID Provider and obtain information needed to interact with it, including its OAuth 2.0 endpoint
               locations.</t>
           </abstract>
         </front>
@@ -1974,7 +1974,7 @@ disabled": {
           <date year="2018" month="June"/>
         </front>
       </reference>
-      
+
       <reference anchor="SUBIDS"
         target="https://datatracker.ietf.org/doc/html/draft-ietf-secevent-subject-identifiers">
         <front>
@@ -2024,7 +2024,7 @@ disabled": {
             <date year="2019" month="February"/>
           </front>
       </reference>
-      
+
       <reference anchor="MGMTAPI"
         target="https://tools.ietf.org/html/draft-scurtescu-secevent-simple-control-plane">
         <front>
@@ -2035,7 +2035,7 @@ disabled": {
           <author initials="A." surname="Backman" fullname="Annabelle Backman">
             <organization />
           </author>
-          
+
           <date year="2017" month="June" day="29"/>
         </front>
       </reference>
@@ -2047,7 +2047,7 @@ disabled": {
           <author initials="M." surname="Scurtescu" fullname="Marius Scurtescu">
             <organization />
           </author>
-          
+
           <date year="2017" month="June" day="29"/>
         </front>
       </reference>
@@ -2060,7 +2060,7 @@ disabled": {
         and Events Working Group who contributed to the development of this
         specification.</t>
 
-      <t><xref target="discovery">Transmitter Configuration Discovery</xref> is based on 
+      <t><xref target="discovery">Transmitter Configuration Discovery</xref> is based on
         both <xref target="OPENID-DISCOVERY">OpenID Connect Discovery 1.0</xref> and
         <xref target="OAUTH-DISCOVERY">OAuth 2.0 Authorization Server Metadata</xref>.</t>
     </section>
@@ -2107,4 +2107,3 @@ disabled": {
     </section>
   </back>
 </rfc>
-

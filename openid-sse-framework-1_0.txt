@@ -342,18 +342,18 @@ Tulshibagwale, et al.   Expires December 10, 2021               [Page 6]
       defined in [OASIS.saml-core-2.0-os]
 
    The "SAML Assertion ID" Subject Identifier Format is identified by
-   the name "saml-assertion-id".
+   the name "saml_assertion_id".
 
    Below is a non-normative example Subject Identifier for the "saml-
    assertion-id" Subject Identifier Format.
 
    {
-       "format": "saml-assertion-id",
+       "format": "saml_assertion_id",
        "issuer": "https://idp.example.com/123456789/",
        "assertion_id": "_8e8dc5f69a98cc4c1ff3427e5ce34606fd672f91e6"
    }
 
-         Figure 4: Example: 'saml-assertion-id' Subject Identifier
+         Figure 4: Example: 'saml_assertion_id' Subject Identifier
 
 3.5.  Receiver Subject Processing
 
