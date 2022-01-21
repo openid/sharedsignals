@@ -22,7 +22,7 @@
 
 Abstract
 
-   This document defines the Risc Incident Sharing and Coordination
+   This document defines the Risk Incident Sharing and Coordination
    (RISC) Event Types based on the Shared Signals and Events (SSE)
    Framework [SSE-FRAMEWORK].  Event Types are introduced and defined in
    Security Event Token (SET) [SET].
