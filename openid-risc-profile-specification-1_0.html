@@ -393,20 +393,22 @@
 <link href="#rfc.section.2.9" rel="Chapter" title="2.9 Recovery Activated">
 <link href="#rfc.section.2.10" rel="Chapter" title="2.10 Recovery Information Changed">
 <link href="#rfc.section.2.11" rel="Chapter" title="2.11 Sessions Revoked">
-<link href="#rfc.references" rel="Chapter" title="3 Normative References">
+<link href="#rfc.section.3" rel="Chapter" title="3 Compatibility">
+<link href="#rfc.section.3.1" rel="Chapter" title="3.1 Google Subject Type Value">
+<link href="#rfc.references" rel="Chapter" title="4 Normative References">
 <link href="#rfc.appendix.A" rel="Chapter" title="A Acknowledgements">
 <link href="#rfc.appendix.B" rel="Chapter" title="B Notices">
 <link href="#rfc.authors" rel="Chapter">
 
 
-  <meta name="generator" content="xml2rfc version 3.11.1 - https://tools.ietf.org/tools/xml2rfc" />
+  <meta name="generator" content="xml2rfc version 3.12.0 - https://tools.ietf.org/tools/xml2rfc" />
   <link rel="schema.dct" href="http://purl.org/dc/terms/" />
 
   <meta name="dct.creator" content="Scurtescu, M., Backman, A., Hunt, P., Bradley, J., Bounev, S., and A. Tulshibagwale" />
   <meta name="dct.identifier" content="urn:ietf:id:openid-risc-profile-specification-1_0" />
   <meta name="dct.issued" scheme="ISO8601" content="2021-11-12" />
-  <meta name="dct.abstract" content="This document defines the Risc Incident Sharing and Coordination (RISC) Event Types based on the Shared Signals and Events (SSE) Framework. Event Types are introduced and defined in Security Event Token (SET). " />
-  <meta name="description" content="This document defines the Risc Incident Sharing and Coordination (RISC) Event Types based on the Shared Signals and Events (SSE) Framework. Event Types are introduced and defined in Security Event Token (SET). " />
+  <meta name="dct.abstract" content="This document defines the Risk Incident Sharing and Coordination (RISC) Event Types based on the Shared Signals and Events (SSE) Framework. Event Types are introduced and defined in Security Event Token (SET). " />
+  <meta name="description" content="This document defines the Risk Incident Sharing and Coordination (RISC) Event Types based on the Shared Signals and Events (SSE) Framework. Event Types are introduced and defined in Security Event Token (SET). " />
 
 </head>
 
@@ -476,7 +478,7 @@
   <span class="filename">openid-risc-profile-specification-1_0</span></p>
   
   <h1 id="rfc.abstract"><a href="#rfc.abstract">Abstract</a></h1>
-<p>This document defines the Risc Incident Sharing and Coordination (RISC) Event Types based on the <a href="#SSE-FRAMEWORK" class="xref">Shared Signals and Events (SSE) Framework</a>. Event Types are introduced and defined in <a href="#SET" class="xref">Security Event Token (SET)</a>.</p>
+<p>This document defines the Risk Incident Sharing and Coordination (RISC) Event Types based on the <a href="#SSE-FRAMEWORK" class="xref">Shared Signals and Events (SSE) Framework</a>. Event Types are introduced and defined in <a href="#SET" class="xref">Security Event Token (SET)</a>.</p>
 
   
   <hr class="noprint" />
@@ -519,7 +521,11 @@
 </li>
 <li>2.11.   <a href="#rfc.section.2.11">Sessions Revoked</a>
 </li>
-</ul><li>3.   <a href="#rfc.references">Normative References</a>
+</ul><li>3.   <a href="#rfc.section.3">Compatibility</a>
+</li>
+<ul><li>3.1.   <a href="#rfc.section.3.1">Google Subject Type Value</a>
+</li>
+</ul><li>4.   <a href="#rfc.references">Normative References</a>
 </li>
 <li>Appendix A.   <a href="#rfc.appendix.A">Acknowledgements</a>
 </li>
@@ -534,7 +540,7 @@
   <h1 id="rfc.section.1">
 <a href="#rfc.section.1">1.</a> <a href="#intro" id="intro">Introduction</a>
 </h1>
-<p id="rfc.section.1.p.1">This specification is based on <a href="#SSE-FRAMEWORK" class="xref">SSE Framework</a> and uses the subject identifiers defined there.</p>
+<p id="rfc.section.1.p.1">This specification defines event types and their contents based on the <a href="#SSE-FRAMEWORK" class="xref">SSE Framework</a> that are required to implement Risk Incident Sharing and Coordination.</p>
 <h1 id="rfc.section.1.1">
 <a href="#rfc.section.1.1">1.1.</a> <a href="#conv" id="conv">Notational Conventions</a>
 </h1>
@@ -561,7 +567,7 @@
     "https://schemas.openid.net/secevent/risc/event-type/\
     account-credential-change-required": {
       "subject": {
-        "subject_type": "iss-sub",
+        "format": "iss_sub",
         "iss": "https://idp.example.com/",
         "sub": "7375626A656374",
       }
@@ -601,7 +607,7 @@
     "https://schemas.openid.net/secevent/risc/event-type/\
     account-disabled": {
       "subject": {
-        "subject_type": "iss-sub",
+        "format": "iss_sub",
         "iss": "https://idp.example.com/",
         "sub": "7375626A656374",
       },
@@ -640,7 +646,7 @@
     "https://schemas.openid.net/secevent/risc/event-type/\
     identifier-changed": {
       "subject": {
-        "subject_type": "email",
+        "format": "email",
         "email": "john.doe@example.com",
       },
       "new-value": "john.roe@example.com",
@@ -668,7 +674,7 @@
     "https://schemas.openid.net/secevent/risc/event-type/\
     identifier-recycled": {
       "subject": {
-        "subject_type": "email",
+        "format": "email",
         "email": "foo@example.com",
       }
     }
@@ -705,7 +711,7 @@
      "events": {
        "https://schemas.openid.net/secevent/risc/event-type/credential-compromise": {
          "subject": {
-           "format": "iss-sub",
+           "format": "iss_sub",
            "iss": "https://idp.example.com/3456790/",
            "sub": "joe.smith@example.com"
          },
@@ -791,8 +797,16 @@
 <p id="rfc.section.2.11.p.2">Event Type URI:<br> https://schemas.openid.net/secevent/risc/event-type/sessions-revoked</p>
 <p id="rfc.section.2.11.p.3">Sessions Revoked signals that all the sessions for the account identified by the subject have been revoked.</p>
 <p id="rfc.section.2.11.p.4">Attributes: none</p>
+<h1 id="rfc.section.3">
+<a href="#rfc.section.3">3.</a> <a href="#compatibility" id="compatibility">Compatibility</a>
+</h1>
+<h1 id="rfc.section.3.1">
+<a href="#rfc.section.3.1">3.1.</a> <a href="#google-subject-type" id="google-subject-type">Google Subject Type Value</a>
+</h1>
+<p id="rfc.section.3.1.p.1">Implementers are hereby made aware that the existing RISC implementation by Google uses the field name <samp>subject_type</samp> instead of the field name <samp>format</samp> to indicate the format of the subject identifier. The usage of the field name <samp>subject_type</samp> is deprecated and new services MUST NOT use this field name.</p>
+<p id="rfc.section.3.1.p.2">Relying parties wishing to receive events from the Google RISC transmitter therefore need to have code to work around this, until such time as their implementation is updated. Any such workaround should be written in a manner that does not break if Google updates their implementation to conform to this specification.</p>
 <h1 id="rfc.references">
-<a href="#rfc.references">3.</a> Normative References</h1>
+<a href="#rfc.references">4.</a> Normative References</h1>
 <table><tbody>
 <tr>
 <td class="reference"><b id="CAEP-SPECIFICATION">[CAEP-SPECIFICATION]</b></td>

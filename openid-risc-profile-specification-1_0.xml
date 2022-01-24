@@ -68,7 +68,7 @@
     <workgroup>SSE Working Group</workgroup>
 
     <abstract>
-      <t>This document defines the Risc Incident Sharing and Coordination (RISC) Event
+      <t>This document defines the Risk Incident Sharing and Coordination (RISC) Event
         Types based on the <xref target="SSE-FRAMEWORK">Shared Signals and Events (SSE)
         Framework</xref>. Event Types are introduced and defined in <xref target="SET">
         Security Event Token (SET)</xref>.</t>
@@ -77,8 +77,9 @@
 
   <middle>
     <section anchor="intro" title="Introduction">
-      <t>This specification is based on <xref target="SSE-FRAMEWORK">SSE Framework</xref> and uses
-      the subject identifiers defined there.</t>
+      <t>This specification defines event types and their contents based on the
+      <xref target="SSE-FRAMEWORK">SSE Framework</xref> that are required to
+      implement Risk Incident Sharing and Coordination.</t>
       
       <section anchor="conv" title="Notational Conventions">
         <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
@@ -88,7 +89,7 @@
           when, and only when, they appear in all capitals, as shown here.</t>
       </section>
     </section>
-    
+
     <section anchor="event-types" title="Event Types">
       <t>The base URI for RISC event types is:<vspace />
         https://schemas.openid.net/secevent/risc/event-type/</t>
@@ -113,7 +114,7 @@
     "https://schemas.openid.net/secevent/risc/event-type/\
     account-credential-change-required": {
       "subject": {
-        "subject_type": "iss-sub",
+        "format": "iss_sub",
         "iss": "https://idp.example.com/",
         "sub": "7375626A656374",
       }
@@ -160,7 +161,7 @@
     "https://schemas.openid.net/secevent/risc/event-type/\
     account-disabled": {
       "subject": {
-        "subject_type": "iss-sub",
+        "format": "iss_sub",
         "iss": "https://idp.example.com/",
         "sub": "7375626A656374",
       },
@@ -215,7 +216,7 @@
     "https://schemas.openid.net/secevent/risc/event-type/\
     identifier-changed": {
       "subject": {
-        "subject_type": "email",
+        "format": "email",
         "email": "john.doe@example.com",
       },
       "new-value": "john.roe@example.com",
@@ -249,7 +250,7 @@
     "https://schemas.openid.net/secevent/risc/event-type/\
     identifier-recycled": {
       "subject": {
-        "subject_type": "email",
+        "format": "email",
         "email": "foo@example.com",
       }
     }
@@ -292,7 +293,7 @@
      "events": {
        "https://schemas.openid.net/secevent/risc/event-type/credential-compromise": {
          "subject": {
-           "format": "iss-sub",
+           "format": "iss_sub",
            "iss": "https://idp.example.com/3456790/",
            "sub": "joe.smith@example.com"
          },
@@ -412,6 +413,23 @@
         <t>Attributes: none</t>
       </section>
     </section>
+    <section anchor="compatibility" title="Compatibility">
+      <section anchor="google-subject-type" title="Google Subject Type Value">
+        <t>
+          Implementers are hereby made aware that the existing RISC implementation
+          by Google uses the field name <spanx style="verb"> subject_type</spanx>
+          instead of the field name <spanx style="verb">format</spanx> to indicate
+          the format of the subject identifier. The usage of the field name
+          <spanx style="verb">subject_type</spanx> is deprecated and new services
+          MUST NOT use this field name.</t>
+        <t>
+          Relying parties wishing to receive events from the Google RISC
+          transmitter therefore need to have code to work around this, until such
+          time as their implementation is updated. Any such workaround should be
+          written in a manner that does not break if Google updates their
+          implementation to conform to this specification.</t>
+      </section>
+   </section>
   </middle>
 
   <back>
