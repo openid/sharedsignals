@@ -13,8 +13,8 @@
                                                                S. Bounev
                                                               VeriClouds
                                                         A. Tulshibagwale
-                                                                  Google
-                                                       November 12, 2021
+                                                                    SGNL
+                                                       February 04, 2022
 
 
             OpenID RISC Profile Specification 1.0 - draft 02
@@ -53,9 +53,9 @@ Table of Contents
 
 
 
-Scurtescu, et al.         Expires May 16, 2022                  [Page 1]
+Scurtescu, et al.        Expires August 8, 2022                 [Page 1]
 
-                    openid-risc-profile-specification      November 2021
+                    openid-risc-profile-specification      February 2022
 
 
    Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  11
@@ -109,9 +109,9 @@ Scurtescu, et al.         Expires May 16, 2022                  [Page 1]
 
 
 
-Scurtescu, et al.         Expires May 16, 2022                  [Page 2]
+Scurtescu, et al.        Expires August 8, 2022                 [Page 2]
 
-                    openid-risc-profile-specification      November 2021
+                    openid-risc-profile-specification      February 2022
 
 
    {
@@ -165,9 +165,9 @@ Scurtescu, et al.         Expires May 16, 2022                  [Page 2]
 
 
 
-Scurtescu, et al.         Expires May 16, 2022                  [Page 3]
+Scurtescu, et al.        Expires August 8, 2022                 [Page 3]
 
-                    openid-risc-profile-specification      November 2021
+                    openid-risc-profile-specification      February 2022
 
 
       *  bulk-account
@@ -221,9 +221,9 @@ Scurtescu, et al.         Expires May 16, 2022                  [Page 3]
 
 
 
-Scurtescu, et al.         Expires May 16, 2022                  [Page 4]
+Scurtescu, et al.        Expires August 8, 2022                 [Page 4]
 
-                    openid-risc-profile-specification      November 2021
+                    openid-risc-profile-specification      February 2022
 
 
    new "john.row@example.com" email then *only* the email provider
@@ -277,9 +277,9 @@ Scurtescu, et al.         Expires May 16, 2022                  [Page 4]
 
 
 
-Scurtescu, et al.         Expires May 16, 2022                  [Page 5]
+Scurtescu, et al.        Expires August 8, 2022                 [Page 5]
 
-                    openid-risc-profile-specification      November 2021
+                    openid-risc-profile-specification      February 2022
 
 
    {
@@ -333,9 +333,9 @@ Scurtescu, et al.         Expires May 16, 2022                  [Page 5]
 
 
 
-Scurtescu, et al.         Expires May 16, 2022                  [Page 6]
+Scurtescu, et al.        Expires August 8, 2022                 [Page 6]
 
-                    openid-risc-profile-specification      November 2021
+                    openid-risc-profile-specification      February 2022
 
 
    o  reason_user - OPTIONAL.  The reason why the credential compromised
@@ -389,9 +389,9 @@ Scurtescu, et al.         Expires May 16, 2022                  [Page 6]
 
 
 
-Scurtescu, et al.         Expires May 16, 2022                  [Page 7]
+Scurtescu, et al.        Expires August 8, 2022                 [Page 7]
 
-                    openid-risc-profile-specification      November 2021
+                    openid-risc-profile-specification      February 2022
 
 
    State changes trigger Opt-Out Events as represented bellow:
@@ -445,9 +445,9 @@ Scurtescu, et al.         Expires May 16, 2022                  [Page 7]
 
 
 
-Scurtescu, et al.         Expires May 16, 2022                  [Page 8]
+Scurtescu, et al.        Expires August 8, 2022                 [Page 8]
 
-                    openid-risc-profile-specification      November 2021
+                    openid-risc-profile-specification      February 2022
 
 
 2.8.3.  Opt Out Cancelled
@@ -501,9 +501,9 @@ Scurtescu, et al.         Expires May 16, 2022                  [Page 8]
 
 
 
-Scurtescu, et al.         Expires May 16, 2022                  [Page 9]
+Scurtescu, et al.        Expires August 8, 2022                 [Page 9]
 
-                    openid-risc-profile-specification      November 2021
+                    openid-risc-profile-specification      February 2022
 
 
 2.11.  Sessions Revoked
@@ -557,9 +557,9 @@ Scurtescu, et al.         Expires May 16, 2022                  [Page 9]
 
 
 
-Scurtescu, et al.         Expires May 16, 2022                 [Page 10]
+Scurtescu, et al.        Expires August 8, 2022                [Page 10]
 
-                    openid-risc-profile-specification      November 2021
+                    openid-risc-profile-specification      February 2022
 
 
    [SET]      Hunt, P., Ed., Jones, M., Denniss, W., and M. Ansari,
@@ -582,7 +582,7 @@ Appendix A.  Acknowledgements
 
 Appendix B.  Notices
 
-   Copyright (c) 2021 The OpenID Foundation.
+   Copyright (c) 2022 The OpenID Foundation.
 
    The OpenID Foundation (OIDF) grants to any Contributor, developer,
    implementer, or other interested party a non-exclusive, royalty free,
@@ -613,9 +613,9 @@ Appendix B.  Notices
 
 
 
-Scurtescu, et al.         Expires May 16, 2022                 [Page 11]
+Scurtescu, et al.        Expires August 8, 2022                [Page 11]
 
-                    openid-risc-profile-specification      November 2021
+                    openid-risc-profile-specification      February 2022
 
 
    Property Rights policy requires contributors to offer a patent
@@ -658,15 +658,15 @@ Authors' Addresses
 
 
    Atul Tulshibagwale
-   Google
+   SGNL
 
-   Email: atultulshi@google.com
-
-
+   Email: atul@sgnl.ai
 
 
 
 
 
 
-Scurtescu, et al.         Expires May 16, 2022                 [Page 12]
+
+
+Scurtescu, et al.        Expires August 8, 2022                [Page 12]
