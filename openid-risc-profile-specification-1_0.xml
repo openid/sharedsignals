@@ -57,13 +57,13 @@
       </address>
     </author>
     <author initials="A." surname="Tulshibagwale" fullname="Atul Tulshibagwale">
-      <organization abbrev="Google">Google</organization>
+      <organization abbrev="SGNL">SGNL</organization>
       <address>
-        <email>atultulshi@google.com</email>
+        <email>atul@sgnl.ai</email>
       </address>
     </author>
 
-    <date year="2021" month="November" day="12"/>
+    <date year="2022" month="February" day="04"/>
 
     <workgroup>SSE Working Group</workgroup>
 
@@ -551,7 +551,7 @@
         specification.</t>
     </section>
     <section anchor="Notices" title="Notices">
-      <t>Copyright (c) 2021 The OpenID Foundation.</t>
+      <t>Copyright (c) 2022 The OpenID Foundation.</t>
       <t>
 	The OpenID Foundation (OIDF) grants to any Contributor, developer,
 	implementer, or other interested party a non-exclusive, royalty free,
