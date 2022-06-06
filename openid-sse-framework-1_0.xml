@@ -637,7 +637,7 @@ Authorization: Bearer zzzz
             <figure title="Example: Check Stream Status Response" anchor="figstatusresp">
               <artwork><![CDATA[
 HTTP/1.1 200 OK
-Content-Type: application/json; charset=UTF-8
+Content-Type: application/json
 Cache-Control: no-store
 Pragma: no-cache
 
@@ -661,7 +661,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
             <figure title="Example: Check Stream Status Response" anchor="figstatuswithsubjectresp">
               <artwork><![CDATA[
 HTTP/1.1 200 OK
-Content-Type: application/json; charset=UTF-8
+Content-Type: application/json
 Cache-Control: no-store
 Pragma: no-cache
 
@@ -769,7 +769,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
                 anchor="figupdatestatusresp">
                 <artwork><![CDATA[
 HTTP/1.1 200 OK
-Content-Type: application/json; charset=UTF-8
+Content-Type: application/json
 Cache-Control: no-store
 Pragma: no-cache
 
@@ -878,7 +878,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
             <figure title="Example: Read Stream Configuration Response" anchor="figreadconfigresp">
               <artwork><![CDATA[
 HTTP/1.1 200 OK
-Content-Type: application/json; charset=UTF-8
+Content-Type: application/json
 Cache-Control: no-store
 Pragma: no-cache
 
@@ -978,7 +978,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
               anchor="figupdateconfigresp">
               <artwork><![CDATA[
 HTTP/1.1 200 OK
-Content-Type: application/json; charset=UTF-8
+Content-Type: application/json
 Cache-Control: no-store
 Pragma: no-cache
 
@@ -1282,7 +1282,7 @@ Pragma: no-cache
 POST /sse/verify HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
-Content-Type: application/json; charset=UTF-8
+Content-Type: application/json
 
 {
   "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
