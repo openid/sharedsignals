@@ -1102,7 +1102,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
               allowed to add in general</c>
               <c>404</c>
               <c>if the subject is not recognized by the Event Transmitter, the Event Transmitter
-                may chose to stay silent in this case and respond with <spanx style="verb">200</spanx></c>
+                may choose to stay silent in this case and respond with <spanx style="verb">200</spanx></c>
               <c>429</c>
               <c>if the Event Receiver is sending too many requests in a given amount of time</c>
             </texttable>
@@ -1163,7 +1163,7 @@ Pragma: no-cache
               allowed to remove in general</c>
               <c>404</c>
               <c>if the subject is not recognized by the Event Transmitter, the Event Transmitter
-                may chose to stay silent in this case and respond with <spanx style="verb">204</spanx></c>
+                may choose to stay silent in this case and respond with <spanx style="verb">204</spanx></c>
               <c>429</c>
               <c>if the Event Receiver is sending too many requests in a given amount of time</c>
             </texttable>
