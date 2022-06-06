@@ -639,7 +639,6 @@ Authorization: Bearer zzzz
 HTTP/1.1 200 OK
 Content-Type: application/json; charset=UTF-8
 Cache-Control: no-store
-Pragma: no-cache
 
 {
   "status": "enabled"
@@ -663,7 +662,6 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 HTTP/1.1 200 OK
 Content-Type: application/json; charset=UTF-8
 Cache-Control: no-store
-Pragma: no-cache
 
 {
   "status": "enabled",
@@ -771,7 +769,6 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 HTTP/1.1 200 OK
 Content-Type: application/json; charset=UTF-8
 Cache-Control: no-store
-Pragma: no-cache
 
 {
   "status": "paused"
@@ -880,7 +877,6 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 HTTP/1.1 200 OK
 Content-Type: application/json; charset=UTF-8
 Cache-Control: no-store
-Pragma: no-cache
 
 {
   "iss": "https://tr.example.com",
@@ -980,7 +976,6 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 HTTP/1.1 200 OK
 Content-Type: application/json; charset=UTF-8
 Cache-Control: no-store
-Pragma: no-cache
 
 {
   "iss": "https://tr.example.com",
@@ -1133,7 +1128,6 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 HTTP/1.1 200 OK
 Server: transmitter.example.com
 Cache-Control: no-store
-Pragma: no-cache
 ]]></artwork>
             </figure>
 
@@ -1193,7 +1187,6 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 HTTP/1.1 204 No Content
 Server: transmitter.example.com
 Cache-Control: no-store
-Pragma: no-cache
 ]]></artwork>
             </figure>
 
@@ -1297,7 +1290,6 @@ Content-Type: application/json; charset=UTF-8
 HTTP/1.1 204 No Content
 Server: transmitter.example.com
 Cache-Control: no-store
-Pragma: no-cache
 ]]></artwork>
             </figure>
 
