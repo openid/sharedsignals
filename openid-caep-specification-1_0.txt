@@ -2,11 +2,11 @@
 
 
 
-                                                             T. Cappalli
+Shared Signals and Events                                    T. Cappalli
                                                                Microsoft
                                                         A. Tulshibagwale
-                                                                  Google
-                                                         August 09, 2021
+                                                                    SGNL
+                                                           9 August 2021
 
 
        OpenID Continuous Access Evaluation Profile 1.0 - draft 02
@@ -35,13 +35,13 @@ Table of Contents
        3.2.1.  Event-Specific Claims . . . . . . . . . . . . . . . .   7
        3.2.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .   7
      3.3.  Credential Change . . . . . . . . . . . . . . . . . . . .   9
-       3.3.1.  Event-Specific Claims . . . . . . . . . . . . . . . .  10
+       3.3.1.  Event-Specific Claims . . . . . . . . . . . . . . . .   9
        3.3.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  11
      3.4.  Assurance Level Change  . . . . . . . . . . . . . . . . .  11
        3.4.1.  Event-Specific Claims . . . . . . . . . . . . . . . .  12
        3.4.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  13
      3.5.  Device Compliance Change  . . . . . . . . . . . . . . . .  13
-       3.5.1.  Event-Specific Claims . . . . . . . . . . . . . . . .  14
+       3.5.1.  Event-Specific Claims . . . . . . . . . . . . . . . .  13
        3.5.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  14
    4.  Normative References  . . . . . . . . . . . . . . . . . . . .  15
    Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  16
@@ -53,8 +53,8 @@ Table of Contents
 
 
 
-Cappalli & TulshibagwaleExpires February 10, 2022               [Page 1]
-
+Cappalli & Tulshibagwale     Standards Track                    [Page 1]
+
                                 CAEP-Spec                    August 2021
 
 
@@ -89,13 +89,13 @@ Cappalli & TulshibagwaleExpires February 10, 2022               [Page 1]
 
       This MUST be one of the following strings:
 
-      *  "admin": an administrative action triggered the event
+      *  admin: an administrative action triggered the event
 
-      *  "user": an end-user action triggered the event
+      *  user: an end-user action triggered the event
 
-      *  "policy": a policy evaluation triggered the event
+      *  policy: a policy evaluation triggered the event
 
-      *  "system": a system or platform assertion triggered the event
+      *  system: a system or platform assertion triggered the event
 
    reason_admin  OPTIONAL, JSON object: a localizable administrative
       message intended for logging and auditing.  The object MUST
@@ -109,8 +109,8 @@ Cappalli & TulshibagwaleExpires February 10, 2022               [Page 1]
 
 
 
-Cappalli & TulshibagwaleExpires February 10, 2022               [Page 2]
-
+Cappalli & Tulshibagwale     Standards Track                    [Page 2]
+
                                 CAEP-Spec                    August 2021
 
 
@@ -122,8 +122,8 @@ Cappalli & TulshibagwaleExpires February 10, 2022               [Page 2]
        }
    }
 
-    Figure 1: Example: Administrative reason information with multiple
-                                 languages
+         Figure 1: Example: Administrative reason information with
+                             multiple languages
 
    reason_user  OPTIONAL, JSON object: a localizable user-friendly
       message for display to an end-user.  The object MUST contain one
@@ -138,20 +138,20 @@ Cappalli & TulshibagwaleExpires February 10, 2022               [Page 2]
        }
    }
 
-       Figure 2: Example: End user reason information with multiple
+        Figure 2: Example: End user reason information with multiple
                                  languages
 
 3.  Event Types
 
    The base URI for CAEP event types is:
 
-   "https://schemas.openid.net/secevent/caep/event-type/"
+   https://schemas.openid.net/secevent/caep/event-type/
 
 3.1.  Session Revoked
 
    Event Type URI:
 
-   "https://schemas.openid.net/secevent/caep/event-type/session-revoked"
+   https://schemas.openid.net/secevent/caep/event-type/session-revoked
 
    Session Revoked signals that the session identified by the subject
    has been revoked.  The explicit session identifier may be directly
@@ -165,20 +165,20 @@ Cappalli & TulshibagwaleExpires February 10, 2022               [Page 2]
 
 
 
-Cappalli & TulshibagwaleExpires February 10, 2022               [Page 3]
-
+Cappalli & Tulshibagwale     Standards Track                    [Page 3]
+
                                 CAEP-Spec                    August 2021
 
 
    The actual reason why the session was revoked might be specified with
-   the nested "reason_admin" and/or "reason_user" claims described in
+   the nested reason_admin and/or reason_user claims described in
    Section 2.
 
 3.1.1.  Event-Specific Claims
 
    There are no event-specific claims for this event type.
 
-   When "event_timestamp" is included, its value MUST represent the time
+   When event_timestamp is included, its value MUST represent the time
    at which the session revocation occurred.
 
 3.1.2.  Examples
@@ -192,8 +192,7 @@ Cappalli & TulshibagwaleExpires February 10, 2022               [Page 3]
        "iat": 1615305159,
        "aud": "https://sp.example.com/caep",
        "events": {
-           "https://schemas.openid.net/secevent/caep/event-type/\
-           session-revoked": {
+           "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
                "subject": {
                    "format": "opaque",
                    "id": "dMTlD|1600802906337.16|16008.16"
@@ -221,8 +220,9 @@ Cappalli & TulshibagwaleExpires February 10, 2022               [Page 3]
 
 
 
-Cappalli & TulshibagwaleExpires February 10, 2022               [Page 4]
 
+Cappalli & Tulshibagwale     Standards Track                    [Page 4]
+
                                 CAEP-Spec                    August 2021
 
 
@@ -232,8 +232,7 @@ Cappalli & TulshibagwaleExpires February 10, 2022               [Page 4]
        "iat": 1615305159,
        "aud": "https://sp.example.com/caep",
        "events": {
-           "https://schemas.openid.net/secevent/caep/event-type/\
-           session-revoked": {
+           "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
                "subject": {
                    "session": {
                      "format": "opaque",
@@ -262,8 +261,8 @@ Cappalli & TulshibagwaleExpires February 10, 2022               [Page 4]
        }
    }
 
-   Figure 4: Example: Session Revoked - subject as `sub` claim (includes
-                             optional claims)
+        Figure 4: Example: Session Revoked - subject as `sub` claim
+                         (includes optional claims)
 
 
 
@@ -277,8 +276,9 @@ Cappalli & TulshibagwaleExpires February 10, 2022               [Page 4]
 
 
 
-Cappalli & TulshibagwaleExpires February 10, 2022               [Page 5]
 
+Cappalli & Tulshibagwale     Standards Track                    [Page 5]
+
                                 CAEP-Spec                    August 2021
 
 
@@ -288,8 +288,7 @@ Cappalli & TulshibagwaleExpires February 10, 2022               [Page 5]
        "iat": 1615305159,
        "aud": "https://sp.example.com/caep",
        "events": {
-           "https://schemas.openid.net/secevent/caep/event-type/\
-           session-revoked": {
+           "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
                "subject": {
                    "user": {
                        "format": "iss_sub",
@@ -319,30 +318,28 @@ Cappalli & TulshibagwaleExpires February 10, 2022               [Page 5]
        }
    }
 
-   Figure 5: Example: Session Revoked - Complex Subject describing user
-               + device + tenant (includes optional claims)
+      Figure 5: Example: Session Revoked - Complex Subject describing
+             user + device + tenant (includes optional claims)
 
 3.2.  Token Claims Change
 
    Event Type URI:
 
-   "https://schemas.openid.net/secevent/caep/event-type/token-claims-
-   change"
-
-
-
-
-
-Cappalli & TulshibagwaleExpires February 10, 2022               [Page 6]
-
-                                CAEP-Spec                    August 2021
-
+   https://schemas.openid.net/secevent/caep/event-type/token-claims-
+   change
 
    Token Claims Change signals that a claim in a token, identified by
    the subject claim, has changed.
 
+
+
+Cappalli & Tulshibagwale     Standards Track                    [Page 6]
+
+                                CAEP-Spec                    August 2021
+
+
    The actual reason why the claims change occurred might be specified
-   with the nested "reason_admin" and/or "reason_user" claims made in
+   with the nested reason_admin and/or reason_user claims made in
    Section 2.
 
 3.2.1.  Event-Specific Claims
@@ -350,7 +347,7 @@ Cappalli & TulshibagwaleExpires February 10, 2022               [Page 6]
    claims  REQUIRED, JSON object: one or more claims with their new
       value(s)
 
-   When "event_timestamp" is included, its value MUST represent the time
+   When event_timestamp is included, its value MUST represent the time
    at which the claim value(s) changed.
 
 3.2.2.  Examples
@@ -364,8 +361,7 @@ Cappalli & TulshibagwaleExpires February 10, 2022               [Page 6]
        "iat": 1615305159,
        "aud": "https://sp.example2.net/caep",
        "events": {
-           "https://schemas.openid.net/secevent/caep/event-type/\
-           token-claims-change": {
+           "https://schemas.openid.net/secevent/caep/event-type/token-claims-change": {
                "subject": {
                    "format": "jwt_id",
                    "iss": "https://idp.example.com/987654321/",
@@ -389,43 +385,45 @@ Cappalli & TulshibagwaleExpires February 10, 2022               [Page 6]
 
 
 
-Cappalli & TulshibagwaleExpires February 10, 2022               [Page 7]
 
+
+
+
+Cappalli & Tulshibagwale     Standards Track                    [Page 7]
+
                                 CAEP-Spec                    August 2021
 
 
-{
-    "iss": "https://idp.example.com/987654321/",
-    "jti": "9afce1e4e642b165fcaacdd0e7aa4903",
-    "iat": 1615305159,
-    "aud": "https://sp.example2.net/caep",
-    "events": {
-        "https://schemas.openid.net/secevent/caep/event-type/\
-        token-claims-change": {
-            "subject": {
-                "format": "jwt_id",
-                "iss": "https://idp.example.com/987654321/",
-                "jti": "f61t6e20zdo3px56gepu8rzlsp4c1dpc0fx7"
-            },
-            "event_timestamp": 1615304991643,
-            "initiating_entity": "policy",
-            "reason_admin": {
-                "en": "User left trusted network: CorpNet3"
-            },
-            "reason_user": {
-                "en": "You're no longer connected to a trusted network.",
-                "it": "Non sei piu connesso a una rete attendibile."
-            },
+   {
+       "iss": "https://idp.example.com/987654321/",
+       "jti": "9afce1e4e642b165fcaacdd0e7aa4903",
+       "iat": 1615305159,
+       "aud": "https://sp.example2.net/caep",
+       "events": {
+           "https://schemas.openid.net/secevent/caep/event-type/token-claims-change": {
+               "subject": {
+                   "format": "jwt_id",
+                   "iss": "https://idp.example.com/987654321/",
+                   "jti": "f61t6e20zdo3px56gepu8rzlsp4c1dpc0fx7"
+               },
+               "event_timestamp": 1615304991643,
+               "initiating_entity": "policy",
+               "reason_admin": {
+                   "en": "User left trusted network: CorpNet3"
+               },
+               "reason_user": {
+                   "en": "You're no longer connected to a trusted network.",
+                   "it": "Non sei piu connesso a una rete attendibile."
+               },
 
-            "claims": {
-                "trusted_network": "false"
-            }
-        }
-    }
-}
+               "claims": {
+                   "trusted_network": "false"
+               }
+           }
+       }
+   }
 
-     Figure 7: Example: OIDC ID Token Claims Change - Optional claims
-
+      Figure 7: Example: OIDC ID Token Claims Change - Optional claims
 
 
 
@@ -445,8 +443,10 @@ Cappalli & TulshibagwaleExpires February 10, 2022               [Page 7]
 
 
 
-Cappalli & TulshibagwaleExpires February 10, 2022               [Page 8]
 
+
+Cappalli & Tulshibagwale     Standards Track                    [Page 8]
+
                                 CAEP-Spec                    August 2021
 
 
@@ -456,8 +456,7 @@ Cappalli & TulshibagwaleExpires February 10, 2022               [Page 8]
        "iat": 1615305159,
        "aud": "https://sp.example2.net/caep",
        "events": {
-           "https://schemas.openid.net/secevent/caep/event-type/\
-           token-claims-change": {
+           "https://schemas.openid.net/secevent/caep/event-type/token-claims-change": {
                "subject": {
                    "format": "saml_assertion_id",
                    "issuer": "https://idp.example.com/987654321/",
@@ -465,46 +464,34 @@ Cappalli & TulshibagwaleExpires February 10, 2022               [Page 8]
                },
                "event_timestamp": 1615304991643,
                "claims": {
-                   "http://schemas.xmlsoap.org/ws/2005/05/identity/\
-                   claims/role": "ro-admin"
+                   "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/role": "ro-admin"
                }
            }
        }
    }
 
      Figure 8: Example: SAML Assertion Claims Change - Required claims
-                                   only
+                                    only
 
 3.3.  Credential Change
 
    Event Type URI:
 
-   "https://schemas.openid.net/secevent/caep/event-type/credential-
-   change"
+   https://schemas.openid.net/secevent/caep/event-type/credential-change
 
    The Credential Change event signals that a credential was created,
    changed, revoked or deleted.  Credential Change scenarios include:
 
-   o  password/PIN change/reset
+   *  password/PIN change/reset
 
-   o  certificate enrollment, renewal, revocation and deletion
+   *  certificate enrollment, renewal, revocation and deletion
 
-   o  second factor / passwordless credential enrollment or deletion
+   *  second factor / passwordless credential enrollment or deletion
       (U2F, FIDO2, OTP, app-based)
 
    The actual reason why the credential change occurred might be
-   specified with the nested "reason_admin" and/or "reason_user" claims
-   made in Section 2.
-
-
-
-
-
-
-Cappalli & TulshibagwaleExpires February 10, 2022               [Page 9]
-
-                                CAEP-Spec                    August 2021
-
+   specified with the nested reason_admin and/or reason_user claims made
+   in Section 2.
 
 3.3.1.  Event-Specific Claims
 
@@ -512,36 +499,43 @@ Cappalli & TulshibagwaleExpires February 10, 2022               [Page 9]
       following strings, or any other credential type supported mutually
       by the Transmitter and the Receiver.
 
-      *  "password"
 
-      *  "pin"
 
-      *  "x509"
+Cappalli & Tulshibagwale     Standards Track                    [Page 9]
+
+                                CAEP-Spec                    August 2021
 
-      *  "fido2-platform"
 
-      *  "fido2-roaming"
+      *  password
 
-      *  "fido-u2f"
+      *  pin
 
-      *  "verifiable-credential"
+      *  x509
 
-      *  "phone-voice"
+      *  fido2-platform
 
-      *  "phone-sms"
+      *  fido2-roaming
 
-      *  "app"
+      *  fido-u2f
+
+      *  verifiable-credential
+
+      *  phone-voice
+
+      *  phone-sms
+
+      *  app
 
    change_type  REQUIRED, JSON string: This MUST be one of the following
       strings:
 
-      *  "create"
+      *  create
 
-      *  "revoke"
+      *  revoke
 
-      *  "update"
+      *  update
 
-      *  "delete"
+      *  delete
 
    friendly_name  OPTIONAL, JSON string: credential friendly name
 
@@ -554,16 +548,19 @@ Cappalli & TulshibagwaleExpires February 10, 2022               [Page 9]
    fido2_aaguid  OPTIONAL, JSON string: FIDO2 Authenticator Attestation
       GUID as defined in [WebAuthn]
 
+   When event_timestamp is included, its value MUST represent the time
+   at which the credential change occurred.
 
 
 
-Cappalli & TulshibagwaleExpires February 10, 2022              [Page 10]
 
+
+
+
+Cappalli & Tulshibagwale     Standards Track                   [Page 10]
+
                                 CAEP-Spec                    August 2021
 
-
-   When "event_timestamp" is included, its value MUST represent the time
-   at which the credential change occurred.
 
 3.3.2.  Examples
 
@@ -576,8 +573,7 @@ Cappalli & TulshibagwaleExpires February 10, 2022              [Page 10]
        "iat": 1615305159,
        "aud": "https://sp.example2.net/caep",
        "events": {
-           "https://schemas.openid.net/secevent/caep/event-type/\
-           credential-change": {
+           "https://schemas.openid.net/secevent/caep/event-type/credential-change": {
                "subject": {
                    "format": "iss_sub",
                    "iss": "https://idp.example.com/3456789/",
@@ -596,31 +592,32 @@ Cappalli & TulshibagwaleExpires February 10, 2022              [Page 10]
        }
    }
 
-    Figure 9: Example: Provisioning a new FIDO2 authenticator - Simple
-                         Subject + optional claims
+        Figure 9: Example: Provisioning a new FIDO2 authenticator -
+                      Simple Subject + optional claims
 
 3.4.  Assurance Level Change
 
    Event Type URI:
 
-   "https://schemas.openid.net/secevent/caep/event-type/assurance-level-
-   change"
+   https://schemas.openid.net/secevent/caep/event-type/assurance-level-
+   change
 
    The Assurance Level Change event signals that there has been a change
    in authentication method since the initial user login.  This change
    can be from a weak authentication method to a strong authentication
    method, or vice versa.
 
-
-
-Cappalli & TulshibagwaleExpires February 10, 2022              [Page 11]
-
-                                CAEP-Spec                    August 2021
-
-
    In the first scenario, Assurance Level Change will an increase, while
    in the second scenario it will be a decrease.  For example, a user
    can start a session with Service Provider A using single factor
+
+
+
+Cappalli & Tulshibagwale     Standards Track                   [Page 11]
+
+                                CAEP-Spec                    August 2021
+
+
    authentication (such as a password).  The user can then open another
    session with Service Provider B using two-factor authentication (such
    as OTP).  In this scenario an increase Assurance Level Change event
@@ -628,7 +625,7 @@ Cappalli & TulshibagwaleExpires February 10, 2022              [Page 11]
    stronger authentication method.
 
    The actual reason why the assurance level changed might be specified
-   with the nested "reason_admin" and/or "reason_user" claims made in
+   with the nested reason_admin and/or reason_user claims made in
    Section 2.
 
 3.4.1.  Event-Specific Claims
@@ -638,39 +635,42 @@ Cappalli & TulshibagwaleExpires February 10, 2022              [Page 11]
 
       This string MUST be one of the following strings:
 
-      *  "nist-aal1"
+      *  nist-aal1
 
-      *  "nist-aal2"
+      *  nist-aal2
 
-      *  "nist-aal3"
+      *  nist-aal3
 
    previous_level  REQUIRED, JSON string: the previous NIST
       Authenticator Assurance Level (AAL) as defined in [SP800-63R3]
 
       This MUST be one of the following strings:
 
-      *  "nist-aal1"
+      *  nist-aal1
 
-      *  "nist-aal2"
+      *  nist-aal2
 
-      *  "nist-aal3"
+      *  nist-aal3
 
    change_direction  REQUIRED, JSON string: the Authenticator Assurance
       Level increased or decreased
 
       This MUST be one of the following strings:
 
-      *  "increase"
+      *  increase
 
-      *  "decrease"
+      *  decrease
 
-   When "event_timestamp" is included, its value MUST represent the time
+   When event_timestamp is included, its value MUST represent the time
    at which the assurance level changed.
 
 
 
-Cappalli & TulshibagwaleExpires February 10, 2022              [Page 12]
 
+
+
+Cappalli & Tulshibagwale     Standards Track                   [Page 12]
+
                                 CAEP-Spec                    August 2021
 
 
@@ -685,8 +685,7 @@ Cappalli & TulshibagwaleExpires February 10, 2022              [Page 12]
        "iat": 1615305159,
        "aud": "https://sp.example2.net/caep",
        "events": {
-           "https://schemas.openid.net/secevent/caep/event-type/\
-           assurance-level-change": {
+           "https://schemas.openid.net/secevent/caep/event-type/assurance-level-change": {
                "subject": {
                    "format": "iss_sub",
                    "iss": "https://idp.example.com/3456789/",
@@ -708,49 +707,45 @@ Cappalli & TulshibagwaleExpires February 10, 2022              [Page 12]
 
    Event Type URI:
 
-   "https://schemas.openid.net/secevent/caep/event-type/device-
-   compliance-change"
+   https://schemas.openid.net/secevent/caep/event-type/device-
+   compliance-change
 
    Device Compliance Change signals that a device's compliance status
    has changed.
 
    The actual reason why the status change occurred might be specified
-   with the nested "reason_admin" and/or "reason_user" claims made in
+   with the nested reason_admin and/or reason_user claims made in
    Section 2.
-
-
-
-
-
-
-
-
-Cappalli & TulshibagwaleExpires February 10, 2022              [Page 13]
-
-                                CAEP-Spec                    August 2021
-
 
 3.5.1.  Event-Specific Claims
 
    previous_status  REQUIRED, JSON string: the compliance status prior
       to the change that triggered the event
 
+
+
+
+Cappalli & Tulshibagwale     Standards Track                   [Page 13]
+
+                                CAEP-Spec                    August 2021
+
+
       This MUST be one of the following strings:
 
-      *  "compliant"
+      *  compliant
 
-      *  "not-compliant"
+      *  not-compliant
 
    current_status  REQUIRED, JSON string: the current status that
       triggered the event
 
       This MUST be one of the following strings:
 
-      *  "compliant"
+      *  compliant
 
-      *  "not-compliant"
+      *  not-compliant
 
-   When "event_timestamp" is included, its value MUST represent the time
+   When event_timestamp is included, its value MUST represent the time
    at which the device compliance status changed.
 
 3.5.2.  Examples
@@ -781,8 +776,13 @@ Cappalli & TulshibagwaleExpires February 10, 2022              [Page 13]
 
 
 
-Cappalli & TulshibagwaleExpires February 10, 2022              [Page 14]
 
+
+
+
+
+Cappalli & Tulshibagwale     Standards Track                   [Page 14]
+
                                 CAEP-Spec                    August 2021
 
 
@@ -792,8 +792,7 @@ Cappalli & TulshibagwaleExpires February 10, 2022              [Page 14]
        "iat": 1615305159,
        "aud": "https://sp.example.com/caep",
        "events": {
-           "https://schemas.openid.net/secevent/caep/event-type/\
-           device-compliance-change": {
+           "https://schemas.openid.net/secevent/caep/event-type/device-compliance-change": {
                "subject": {
                    "device": {
                        "format": "iss_sub",
@@ -819,8 +818,8 @@ Cappalli & TulshibagwaleExpires February 10, 2022              [Page 14]
        }
    }
 
-    Figure 11: Example: Device No Longer Compliant - Complex Subject +
-                              optional claims
+      Figure 11: Example: Device No Longer Compliant - Complex Subject
+                             + optional claims
 
 4.  Normative References
 
@@ -837,8 +836,9 @@ Cappalli & TulshibagwaleExpires February 10, 2022              [Page 14]
 
 
 
-Cappalli & TulshibagwaleExpires February 10, 2022              [Page 15]
 
+Cappalli & Tulshibagwale     Standards Track                   [Page 15]
+
                                 CAEP-Spec                    August 2021
 
 
@@ -857,13 +857,12 @@ Cappalli & TulshibagwaleExpires February 10, 2022              [Page 15]
 
    [SSE-FRAMEWORK]
               Tulshibagwale, A., Cappalli, T., Scurtescu, M., Backman,
-              A., and . John Bradley, "OpenID Shared Signals and Events
+              A., and John Bradley, "OpenID Shared Signals and Events
               Framework Specification 1.0", May 2021,
               <http://openid.net/specs/openid-sse-framework-1_0.html>.
 
-   [WebAuthn]
-              Balfanz, D., "Web Authentication: An API for accessing
-              Public Key Credentials Level 2", April 2021,
+   [WebAuthn] Balfanz, D., "Web Authentication: An API for accessing
+              Public Key Credentials Level 2", 8 April 2021,
               <https://www.w3.org/TR/webauthn/>.
 
 Appendix A.  Acknowledgements
@@ -890,15 +889,15 @@ Appendix B.  Notices
    from contributions from various sources, including members of the
    OpenID Foundation and others.  Although the OpenID Foundation has
    taken steps to help ensure that the technology is available for
+   distribution, it takes no position regarding the validity or scope of
 
 
 
-Cappalli & TulshibagwaleExpires February 10, 2022              [Page 16]
-
+Cappalli & Tulshibagwale     Standards Track                   [Page 16]
+
                                 CAEP-Spec                    August 2021
 
 
-   distribution, it takes no position regarding the validity or scope of
    any intellectual property or other rights that might be claimed to
    pertain to the implementation or use of the technology described in
    this specification or the extent to which any license under such
@@ -921,15 +920,12 @@ Authors' Addresses
 
    Tim Cappalli
    Microsoft
-
    Email: tim.cappalli@microsoft.com
 
 
    Atul Tulshibagwale
-   Google
-
-   Email: atultulshi@google.com
-
+   SGNL
+   Email: atul@sgnl.ai
 
 
 
@@ -949,4 +945,8 @@ Authors' Addresses
 
 
 
-Cappalli & TulshibagwaleExpires February 10, 2022              [Page 17]
+
+
+
+
+Cappalli & Tulshibagwale     Standards Track                   [Page 17]
