@@ -1582,7 +1582,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 28]
    |      | particular subject, or not allowed to add in general       |
    |      |                                                            |
    | 404  | if the subject is not recognized by the Event Transmitter, |
-   |      | the Event Transmitter may chose to stay silent in this     |
+   |      | the Event Transmitter may choose to stay silent in this     |
    |      | case and respond with "200"                                |
    |      |                                                            |
    | 429  | if the Event Receiver is sending too many requests in a    |
@@ -1652,7 +1652,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 29]
    |      | particular subject, or not allowed to remove in general    |
    |      |                                                            |
    | 404  | if the subject is not recognized by the Event Transmitter, |
-   |      | the Event Transmitter may chose to stay silent in this     |
+   |      | the Event Transmitter may choose to stay silent in this     |
    |      | case and respond with "204"                                |
    |      |                                                            |
    | 429  | if the Event Receiver is sending too many requests in a    |
