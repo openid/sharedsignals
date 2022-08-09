@@ -901,7 +901,6 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 16]
    HTTP/1.1 200 OK
    Content-Type: application/json; charset=UTF-8
    Cache-Control: no-store
-   Pragma: no-cache
 
    {
      "status": "enabled"
@@ -926,7 +925,6 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 16]
    HTTP/1.1 200 OK
    Content-Type: application/json; charset=UTF-8
    Cache-Control: no-store
-   Pragma: no-cache
 
    {
      "status": "enabled",
@@ -1069,7 +1067,6 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 19]
    HTTP/1.1 200 OK
    Content-Type: application/json; charset=UTF-8
    Cache-Control: no-store
-   Pragma: no-cache
 
    {
      "status": "paused"
@@ -1237,7 +1234,6 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 22]
   HTTP/1.1 200 OK
   Content-Type: application/json; charset=UTF-8
   Cache-Control: no-store
-  Pragma: no-cache
 
   {
     "iss": "https://tr.example.com",
@@ -1405,7 +1401,6 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 25]
   HTTP/1.1 200 OK
   Content-Type: application/json; charset=UTF-8
   Cache-Control: no-store
-  Pragma: no-cache
 
   {
     "iss": "https://tr.example.com",
@@ -1615,7 +1610,6 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 28]
    HTTP/1.1 200 OK
    Server: transmitter.example.com
    Cache-Control: no-store
-   Pragma: no-cache
 
                  Figure 27: Example: Add Subject Response
 
@@ -1701,7 +1695,6 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 30]
    HTTP/1.1 204 No Content
    Server: transmitter.example.com
    Cache-Control: no-store
-   Pragma: no-cache
 
                 Figure 29: Example: Remove Subject Response
 
@@ -1829,7 +1822,6 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 32]
    HTTP/1.1 204 No Content
    Server: transmitter.example.com
    Cache-Control: no-store
-   Pragma: no-cache
 
              Figure 31: Example: Trigger Verification Response
 
