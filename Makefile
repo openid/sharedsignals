@@ -14,3 +14,5 @@ html:   $(HTML)
 	xml2rfc  $< $@
 	$(OPEN) $@
 
+%.xml: %.md
+	kramdown-rfc2629 > $@ $^
