@@ -24,8 +24,8 @@ author:
       -
         ins: A. Tulshibagwale
         name: Atul Tulshibagwale
-        org: Google
-        email: atultulshi@google.com
+        org: SGNL
+        email: atul@sgnl.ai
 
 normative:
   RFC2119:
@@ -200,8 +200,7 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     "iat": 1615305159,
     "aud": "https://sp.example.com/caep",
     "events": {
-        "https://schemas.openid.net/secevent/caep/event-type/\
-        session-revoked": {
+        "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
             "subject": {
                 "format": "opaque",
                 "id": "dMTlD|1600802906337.16|16008.16"
@@ -220,8 +219,7 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     "iat": 1615305159,
     "aud": "https://sp.example.com/caep",
     "events": {
-        "https://schemas.openid.net/secevent/caep/event-type/\
-        session-revoked": {
+        "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
             "subject": {
                 "session": {
                   "format": "opaque",
@@ -259,8 +257,7 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     "iat": 1615305159,
     "aud": "https://sp.example.com/caep",
     "events": {
-        "https://schemas.openid.net/secevent/caep/event-type/\
-        session-revoked": {
+        "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
             "subject": {
                 "user": {
                     "format": "iss_sub",
@@ -322,8 +319,7 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     "iat": 1615305159,
     "aud": "https://sp.example2.net/caep",
     "events": {
-        "https://schemas.openid.net/secevent/caep/event-type/\
-        token-claims-change": {
+        "https://schemas.openid.net/secevent/caep/event-type/token-claims-change": {
             "subject": {
                 "format": "jwt_id",
                 "iss": "https://idp.example.com/987654321/",
@@ -346,8 +342,7 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     "iat": 1615305159,
     "aud": "https://sp.example2.net/caep",
     "events": {
-        "https://schemas.openid.net/secevent/caep/event-type/\
-        token-claims-change": {
+        "https://schemas.openid.net/secevent/caep/event-type/token-claims-change": {
             "subject": {
                 "format": "jwt_id",
                 "iss": "https://idp.example.com/987654321/",
@@ -379,8 +374,7 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     "iat": 1615305159,
     "aud": "https://sp.example2.net/caep",
     "events": {
-        "https://schemas.openid.net/secevent/caep/event-type/\
-        token-claims-change": {
+        "https://schemas.openid.net/secevent/caep/event-type/token-claims-change": {
             "subject": {
                 "format": "saml_assertion_id",
                 "issuer": "https://idp.example.com/987654321/",
@@ -388,8 +382,7 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
             },
             "event_timestamp": 1615304991643,
             "claims": {
-                "http://schemas.xmlsoap.org/ws/2005/05/identity/\
-                claims/role": "ro-admin"
+                "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/role": "ro-admin"
             }
         }
     }
@@ -464,8 +457,7 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     "iat": 1615305159,
     "aud": "https://sp.example2.net/caep",
     "events": {
-        "https://schemas.openid.net/secevent/caep/event-type/\
-        credential-change": {
+        "https://schemas.openid.net/secevent/caep/event-type/credential-change": {
             "subject": {
                 "format": "iss_sub",
                 "iss": "https://idp.example.com/3456789/",
@@ -546,8 +538,7 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     "iat": 1615305159,
     "aud": "https://sp.example2.net/caep",
     "events": {
-        "https://schemas.openid.net/secevent/caep/event-type/\
-        assurance-level-change": {
+        "https://schemas.openid.net/secevent/caep/event-type/assurance-level-change": {
             "subject": {
                 "format": "iss_sub",
                 "iss": "https://idp.example.com/3456789/",
@@ -605,8 +596,7 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     "iat": 1615305159,
     "aud": "https://sp.example.com/caep",
     "events": {
-        "https://schemas.openid.net/secevent/caep/event-type/\
-        device-compliance-change": {
+        "https://schemas.openid.net/secevent/caep/event-type/device-compliance-change": {
             "subject": {
                 "device": {
                     "format": "iss_sub",

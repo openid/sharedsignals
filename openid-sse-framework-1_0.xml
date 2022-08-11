@@ -27,9 +27,9 @@
     <title abbrev="openid-sse-framework">OpenID Shared Signals and Events Framework Specification 1.0 - draft 01</title>
 
     <author initials="A." surname="Tulshibagwale" fullname="Atul Tulshibagwale">
-      <organization abbrev="Google">Google</organization>
+      <organization abbrev="SGNL">SGNL</organization>
       <address>
-        <email>atultulshi@google.com</email>
+        <email>atul@sgnl.ai</email>
       </address>
     </author>
     <author initials="T." surname="Cappalli" fullname="Tim Cappalli">

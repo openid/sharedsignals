@@ -3,7 +3,7 @@
 
 
                                                         A. Tulshibagwale
-                                                                  Google
+                                                                    SGNL
                                                              T. Cappalli
                                                                Microsoft
                                                             M. Scurtescu
@@ -54,7 +54,7 @@ Abstract
 
 
 Tulshibagwale, et al.   Expires December 10, 2021               [Page 1]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -110,7 +110,7 @@ Table of Contents
 
 
 Tulshibagwale, et al.   Expires December 10, 2021               [Page 2]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -166,7 +166,7 @@ Tulshibagwale, et al.   Expires December 10, 2021               [Page 2]
 
 
 Tulshibagwale, et al.   Expires December 10, 2021               [Page 3]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -222,7 +222,7 @@ Tulshibagwale, et al.   Expires December 10, 2021               [Page 3]
 
 
 Tulshibagwale, et al.   Expires December 10, 2021               [Page 4]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -278,7 +278,7 @@ Tulshibagwale, et al.   Expires December 10, 2021               [Page 4]
 
 
 Tulshibagwale, et al.   Expires December 10, 2021               [Page 5]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -334,7 +334,7 @@ Tulshibagwale, et al.   Expires December 10, 2021               [Page 5]
 
 
 Tulshibagwale, et al.   Expires December 10, 2021               [Page 6]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -344,8 +344,8 @@ Tulshibagwale, et al.   Expires December 10, 2021               [Page 6]
    The "SAML Assertion ID" Subject Identifier Format is identified by
    the name "saml_assertion_id".
 
-   Below is a non-normative example Subject Identifier for the "saml-
-   assertion-id" Subject Identifier Format.
+   Below is a non-normative example Subject Identifier for the
+   "saml_assertion_id" Subject Identifier Format.
 
    {
        "format": "saml_assertion_id",
@@ -390,7 +390,7 @@ Tulshibagwale, et al.   Expires December 10, 2021               [Page 6]
 
 
 Tulshibagwale, et al.   Expires December 10, 2021               [Page 7]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -446,7 +446,7 @@ Tulshibagwale, et al.   Expires December 10, 2021               [Page 7]
 
 
 Tulshibagwale, et al.   Expires December 10, 2021               [Page 8]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -502,7 +502,7 @@ Tulshibagwale, et al.   Expires December 10, 2021               [Page 8]
 
 
 Tulshibagwale, et al.   Expires December 10, 2021               [Page 9]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -558,7 +558,7 @@ Tulshibagwale, et al.   Expires December 10, 2021               [Page 9]
 
 
 Tulshibagwale, et al.   Expires December 10, 2021              [Page 10]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -614,7 +614,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 10]
 
 
 Tulshibagwale, et al.   Expires December 10, 2021              [Page 11]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -670,7 +670,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 11]
 
 
 Tulshibagwale, et al.   Expires December 10, 2021              [Page 12]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -726,7 +726,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 12]
 
 
 Tulshibagwale, et al.   Expires December 10, 2021              [Page 13]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -782,7 +782,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 13]
 
 
 Tulshibagwale, et al.   Expires December 10, 2021              [Page 14]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -838,7 +838,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 14]
 
 
 Tulshibagwale, et al.   Expires December 10, 2021              [Page 15]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -894,7 +894,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 15]
 
 
 Tulshibagwale, et al.   Expires December 10, 2021              [Page 16]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -950,7 +950,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 16]
 
 
 Tulshibagwale, et al.   Expires December 10, 2021              [Page 17]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -1006,7 +1006,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 17]
 
 
 Tulshibagwale, et al.   Expires December 10, 2021              [Page 18]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -1062,7 +1062,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 18]
 
 
 Tulshibagwale, et al.   Expires December 10, 2021              [Page 19]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -1118,7 +1118,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 19]
 
 
 Tulshibagwale, et al.   Expires December 10, 2021              [Page 20]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -1174,7 +1174,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 20]
 
 
 Tulshibagwale, et al.   Expires December 10, 2021              [Page 21]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -1230,7 +1230,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 21]
 
 
 Tulshibagwale, et al.   Expires December 10, 2021              [Page 22]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -1286,7 +1286,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 22]
 
 
 Tulshibagwale, et al.   Expires December 10, 2021              [Page 23]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -1342,7 +1342,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 23]
 
 
 Tulshibagwale, et al.   Expires December 10, 2021              [Page 24]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -1398,7 +1398,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 24]
 
 
 Tulshibagwale, et al.   Expires December 10, 2021              [Page 25]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -1454,7 +1454,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 25]
 
 
 Tulshibagwale, et al.   Expires December 10, 2021              [Page 26]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -1510,7 +1510,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 26]
 
 
 Tulshibagwale, et al.   Expires December 10, 2021              [Page 27]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -1566,7 +1566,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 27]
 
 
 Tulshibagwale, et al.   Expires December 10, 2021              [Page 28]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -1622,7 +1622,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 28]
 
 
 Tulshibagwale, et al.   Expires December 10, 2021              [Page 29]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -1678,7 +1678,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 29]
 
 
 Tulshibagwale, et al.   Expires December 10, 2021              [Page 30]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -1734,7 +1734,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 30]
 
 
 Tulshibagwale, et al.   Expires December 10, 2021              [Page 31]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -1790,7 +1790,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 31]
 
 
 Tulshibagwale, et al.   Expires December 10, 2021              [Page 32]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -1846,7 +1846,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 32]
 
 
 Tulshibagwale, et al.   Expires December 10, 2021              [Page 33]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -1902,7 +1902,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 33]
 
 
 Tulshibagwale, et al.   Expires December 10, 2021              [Page 34]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -1958,7 +1958,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 34]
 
 
 Tulshibagwale, et al.   Expires December 10, 2021              [Page 35]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -2014,7 +2014,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 35]
 
 
 Tulshibagwale, et al.   Expires December 10, 2021              [Page 36]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -2070,7 +2070,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 36]
 
 
 Tulshibagwale, et al.   Expires December 10, 2021              [Page 37]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -2126,7 +2126,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 37]
 
 
 Tulshibagwale, et al.   Expires December 10, 2021              [Page 38]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -2182,7 +2182,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 38]
 
 
 Tulshibagwale, et al.   Expires December 10, 2021              [Page 39]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -2238,7 +2238,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 39]
 
 
 Tulshibagwale, et al.   Expires December 10, 2021              [Page 40]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -2294,7 +2294,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 40]
 
 
 Tulshibagwale, et al.   Expires December 10, 2021              [Page 41]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -2350,7 +2350,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 41]
 
 
 Tulshibagwale, et al.   Expires December 10, 2021              [Page 42]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -2406,7 +2406,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 42]
 
 
 Tulshibagwale, et al.   Expires December 10, 2021              [Page 43]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -2462,7 +2462,7 @@ Appendix B.  Notices
 
 
 Tulshibagwale, et al.   Expires December 10, 2021              [Page 44]
-
+
                           openid-sse-framework                 June 2021
 
 
@@ -2481,9 +2481,9 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 44]
 Authors' Addresses
 
    Atul Tulshibagwale
-   Google
+   SGNL
 
-   Email: atultulshi@google.com
+   Email: atul@sgnl.ai
 
 
    Tim Cappalli
