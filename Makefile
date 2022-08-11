@@ -7,12 +7,10 @@ text:	$(TEXT)
 html:   $(HTML)
 
 %.html: %.xml
-	xml2rfc --html $<
-	$(OPEN) $@
+	xml2rfc --html $^
 
 %.txt:	%.xml
-	xml2rfc  $< $@
-	$(OPEN) $@
+	xml2rfc $^ 
 
 %.xml: %.md
 	kramdown-rfc2629 > $@ $^
