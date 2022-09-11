@@ -6,10 +6,10 @@ Shared Signals and Events                                    T. Cappalli
                                                                Microsoft
                                                         A. Tulshibagwale
                                                                     SGNL
-                                                           9 August 2021
+                                                       11 September 2021
 
 
-       OpenID Continuous Access Evaluation Profile 1.0 - draft 02
+       OpenID Continuous Access Evaluation Profile 1.0 - draft 03
                      openid-caep-specification-1_0
 
 Abstract
@@ -39,13 +39,13 @@ Table of Contents
        3.3.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  11
      3.4.  Assurance Level Change  . . . . . . . . . . . . . . . . .  11
        3.4.1.  Event-Specific Claims . . . . . . . . . . . . . . . .  12
-       3.4.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  13
-     3.5.  Device Compliance Change  . . . . . . . . . . . . . . . .  13
-       3.5.1.  Event-Specific Claims . . . . . . . . . . . . . . . .  13
+       3.4.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  12
+     3.5.  Device Compliance Change  . . . . . . . . . . . . . . . .  14
+       3.5.1.  Event-Specific Claims . . . . . . . . . . . . . . . .  14
        3.5.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  14
    4.  Normative References  . . . . . . . . . . . . . . . . . . . .  15
-   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  16
-   Appendix B.  Notices  . . . . . . . . . . . . . . . . . . . . . .  16
+   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  17
+   Appendix B.  Notices  . . . . . . . . . . . . . . . . . . . . . .  17
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  17
 
 
@@ -55,7 +55,7 @@ Table of Contents
 
 Cappalli & Tulshibagwale     Standards Track                    [Page 1]
 
-                                CAEP-Spec                    August 2021
+                                CAEP-Spec                 September 2021
 
 
 1.  Introduction
@@ -111,7 +111,7 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 1]
 
 Cappalli & Tulshibagwale     Standards Track                    [Page 2]
 
-                                CAEP-Spec                    August 2021
+                                CAEP-Spec                 September 2021
 
 
    {
@@ -167,7 +167,7 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 2]
 
 Cappalli & Tulshibagwale     Standards Track                    [Page 3]
 
-                                CAEP-Spec                    August 2021
+                                CAEP-Spec                 September 2021
 
 
    The actual reason why the session was revoked might be specified with
@@ -223,7 +223,7 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 3]
 
 Cappalli & Tulshibagwale     Standards Track                    [Page 4]
 
-                                CAEP-Spec                    August 2021
+                                CAEP-Spec                 September 2021
 
 
    {
@@ -279,7 +279,7 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 4]
 
 Cappalli & Tulshibagwale     Standards Track                    [Page 5]
 
-                                CAEP-Spec                    August 2021
+                                CAEP-Spec                 September 2021
 
 
    {
@@ -335,7 +335,7 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 5]
 
 Cappalli & Tulshibagwale     Standards Track                    [Page 6]
 
-                                CAEP-Spec                    August 2021
+                                CAEP-Spec                 September 2021
 
 
    The actual reason why the claims change occurred might be specified
@@ -391,7 +391,7 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 6]
 
 Cappalli & Tulshibagwale     Standards Track                    [Page 7]
 
-                                CAEP-Spec                    August 2021
+                                CAEP-Spec                 September 2021
 
 
    {
@@ -447,7 +447,7 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 7]
 
 Cappalli & Tulshibagwale     Standards Track                    [Page 8]
 
-                                CAEP-Spec                    August 2021
+                                CAEP-Spec                 September 2021
 
 
    {
@@ -503,7 +503,7 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 8]
 
 Cappalli & Tulshibagwale     Standards Track                    [Page 9]
 
-                                CAEP-Spec                    August 2021
+                                CAEP-Spec                 September 2021
 
 
       *  password
@@ -559,7 +559,7 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 9]
 
 Cappalli & Tulshibagwale     Standards Track                   [Page 10]
 
-                                CAEP-Spec                    August 2021
+                                CAEP-Spec                 September 2021
 
 
 3.3.2.  Examples
@@ -615,7 +615,7 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 10]
 
 Cappalli & Tulshibagwale     Standards Track                   [Page 11]
 
-                                CAEP-Spec                    August 2021
+                                CAEP-Spec                 September 2021
 
 
    authentication (such as a password).  The user can then open another
@@ -630,32 +630,32 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 11]
 
 3.4.1.  Event-Specific Claims
 
-   current_level  REQUIRED, JSON string: the current NIST Authenticator
-      Assurance Level (AAL) as defined in [SP800-63R3]
+   namespace:  REQUIRED, JSON string: the namespace of the values in the
+      current_level and previous_level claims.  This string MAY be one
+      of the following strings: - RFC8176 : The assurance level values
+      are from the [RFC8176] specification - RFC6711 : The assurance
+      level values are from the [RFC6711] specification - ISO-IEC-29115
+      : The assurance level values are from the [ISO-IEC-29115]
+      specification - NIST-IAL : The assurance level values are from the
+      [NIST-IDPROOF] specification - NIST-AAL : The assurance level
+      values are from the [NIST-AUTH] specification - NIST-FAL : The
+      assurance level values are from the [NIST-FED] specification - Any
+      other value that is an aliaas for a custom namespace agreed
+      between the Transmitter and the Receiver
 
-      This string MUST be one of the following strings:
+   current_level  REQUIRED, JSON string: The current assurance level, as
+      defined in the specified namespace
 
-      *  nist-aal1
+   previous_level  OPTIONAL, JSON string: the previous assurance level,
+      as defined in the specified namespace If the Transmitter omits
+      this value, the Receiver MUST assume that the previous assurance
+      level is unknown to the Transmitter
 
-      *  nist-aal2
-
-      *  nist-aal3
-
-   previous_level  REQUIRED, JSON string: the previous NIST
-      Authenticator Assurance Level (AAL) as defined in [SP800-63R3]
-
-      This MUST be one of the following strings:
-
-      *  nist-aal1
-
-      *  nist-aal2
-
-      *  nist-aal3
-
-   change_direction  REQUIRED, JSON string: the Authenticator Assurance
-      Level increased or decreased
-
-      This MUST be one of the following strings:
+   change_direction  OPTIONAL, JSON string: the Authenticator Assurance
+      Level increased or decreased If the Transmitter has specified the
+      previous_level, then the Transmitter SHOULD provide a value for
+      this claim.  If present, this MUST be one of the following
+      strings:
 
       *  increase
 
@@ -664,20 +664,15 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 11]
    When event_timestamp is included, its value MUST represent the time
    at which the assurance level changed.
 
-
+3.4.2.  Examples
 
 
 
 
 Cappalli & Tulshibagwale     Standards Track                   [Page 12]
 
-                                CAEP-Spec                    August 2021
+                                CAEP-Spec                 September 2021
 
-
-3.4.2.  Examples
-
-   NOTE: The event type URI is wrapped, the backslash is the
-   continuation character.
 
    {
        "iss": "https://idp.example.com/3456789/",
@@ -691,6 +686,7 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 12]
                    "iss": "https://idp.example.com/3456789/",
                    "sub": "jane.smith@example.com"
                },
+               "namespace": "NIST-AAL",
                "current_level": "nist-aal2",
                "previous_level": "nist-aal1",
                "change_direction": "increase",
@@ -702,6 +698,37 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 12]
 
       Figure 10: Example: Assurance Level Increase - Simple Subject +
                               optional claims
+
+   {
+       "iss": "https://idp.example.com/3456789/",
+       "jti": "07efd930f0977e4fcc1149a733ce7f78",
+       "iat": 1615305159,
+       "aud": "https://sp.example2.net/caep",
+       "events": {
+           "https://schemas.openid.net/secevent/caep/event-type/assurance-level-change": {
+               "subject": {
+                   "format": "iss_sub",
+                   "iss": "https://idp.example.com/3456789/",
+                   "sub": "jane.smith@example.com"
+               },
+               "namespace": "Retinal Scan",
+               "current_level": "hi-res-scan",
+               "initiating_entity": "user",
+               "event_timestamp": 1615304991643
+           }
+       }
+   }
+
+        Figure 11: Example: Custom Assurance Level - Simple Subject
+
+
+
+
+
+Cappalli & Tulshibagwale     Standards Track                   [Page 13]
+
+                                CAEP-Spec                 September 2021
+
 
 3.5.  Device Compliance Change
 
@@ -721,14 +748,6 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 12]
 
    previous_status  REQUIRED, JSON string: the compliance status prior
       to the change that triggered the event
-
-
-
-
-Cappalli & Tulshibagwale     Standards Track                   [Page 13]
-
-                                CAEP-Spec                    August 2021
-
 
       This MUST be one of the following strings:
 
@@ -762,28 +781,9 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 13]
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Cappalli & Tulshibagwale     Standards Track                   [Page 14]
 
-                                CAEP-Spec                    August 2021
+                                CAEP-Spec                 September 2021
 
 
    {
@@ -818,10 +818,41 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 14]
        }
    }
 
-      Figure 11: Example: Device No Longer Compliant - Complex Subject
+      Figure 12: Example: Device No Longer Compliant - Complex Subject
                              + optional claims
 
 4.  Normative References
+
+   [ISO-IEC-29115]
+              Standardization, I. O. for., "ISO/IEC 29115:2013 --
+              Information technology - Security techniques - Entity
+              authentication assurance framework", March 2013,
+              <http://www.iso.org/iso/iso_catalogue/catalogue_tc/
+              catalogue_detail.htm?csnumber=45138>.
+
+   [NIST-AUTH]
+              Grassi, P., Garcia, M., and J. Fenton, "Digital Identity
+              Guidelines, Authentication and Lifecycle Management", June
+              2017, <https://pages.nist.gov/800-63-3/sp800-63-3.html>.
+
+
+
+Cappalli & Tulshibagwale     Standards Track                   [Page 15]
+
+                                CAEP-Spec                 September 2021
+
+
+   [NIST-FED] Grassi, P. A., Richer, J. P., Squire, S. K., Fenton, J.
+              L., and E. M. Nadeau, "Digital Identity Guidelines,
+              Federation and Assertions", n.d.,
+              <https://nvlpubs.nist.gov/nistpubs/SpecialPublications/
+              NIST.SP.800-63c.pdf>.
+
+   [NIST-IDPROOF]
+              Grassi, P. A. and J. L. Fenton, "Digital Identity
+              Guidelines, Enrollment and Identity Proofing", June 2017,
+              <https://nvlpubs.nist.gov/nistpubs/SpecialPublications/
+              NIST.SP.800-63a.pdf>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -834,26 +865,21 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 14]
               (CRL) Profile", RFC 5280, DOI 10.17487/RFC5280, May 2008,
               <https://www.rfc-editor.org/info/rfc5280>.
 
-
-
-
-Cappalli & Tulshibagwale     Standards Track                   [Page 15]
-
-                                CAEP-Spec                    August 2021
-
-
    [RFC5646]  Phillips, A., Ed. and M. Davis, Ed., "Tags for Identifying
               Languages", BCP 47, RFC 5646, DOI 10.17487/RFC5646,
               September 2009, <https://www.rfc-editor.org/info/rfc5646>.
+
+   [RFC6711]  Johansson, L., "An IANA Registry for Level of Assurance
+              (LoA) Profiles", RFC 6711, DOI 10.17487/RFC6711, August
+              2012, <https://www.rfc-editor.org/info/rfc6711>.
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
-   [SP800-63R3]
-              Grassi, P., Garcia, M., and J. Fenton, "NIST Special
-              Publication 800-63: Digital Identity Guidelines", June
-              2017, <https://pages.nist.gov/800-63-3/sp800-63-3.html>.
+   [RFC8176]  Jones, M., Hunt, P., and A. Nadalin, "Authentication
+              Method Reference Values", RFC 8176, DOI 10.17487/RFC8176,
+              June 2017, <https://www.rfc-editor.org/info/rfc8176>.
 
    [SSE-FRAMEWORK]
               Tulshibagwale, A., Cappalli, T., Scurtescu, M., Backman,
@@ -864,6 +890,13 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 15]
    [WebAuthn] Balfanz, D., "Web Authentication: An API for accessing
               Public Key Credentials Level 2", 8 April 2021,
               <https://www.w3.org/TR/webauthn/>.
+
+
+
+Cappalli & Tulshibagwale     Standards Track                   [Page 16]
+
+                                CAEP-Spec                 September 2021
+
 
 Appendix A.  Acknowledgements
 
@@ -890,14 +923,6 @@ Appendix B.  Notices
    OpenID Foundation and others.  Although the OpenID Foundation has
    taken steps to help ensure that the technology is available for
    distribution, it takes no position regarding the validity or scope of
-
-
-
-Cappalli & Tulshibagwale     Standards Track                   [Page 16]
-
-                                CAEP-Spec                    August 2021
-
-
    any intellectual property or other rights that might be claimed to
    pertain to the implementation or use of the technology described in
    this specification or the extent to which any license under such
@@ -921,6 +946,12 @@ Authors' Addresses
    Tim Cappalli
    Microsoft
    Email: tim.cappalli@microsoft.com
+
+
+
+Cappalli & Tulshibagwale     Standards Track                   [Page 17]
+
+                                CAEP-Spec                 September 2021
 
 
    Atul Tulshibagwale
@@ -949,4 +980,29 @@ Authors' Addresses
 
 
 
-Cappalli & Tulshibagwale     Standards Track                   [Page 17]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Cappalli & Tulshibagwale     Standards Track                   [Page 18]

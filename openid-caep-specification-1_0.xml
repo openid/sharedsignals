@@ -13,13 +13,15 @@
 <!ENTITY RFC8174 SYSTEM "https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml">
 <!ENTITY RFC5280 SYSTEM "https://bib.ietf.org/public/rfc/bibxml/reference.RFC.5280.xml">
 <!ENTITY RFC5646 SYSTEM "https://bib.ietf.org/public/rfc/bibxml/reference.RFC.5646.xml">
+<!ENTITY RFC6711 SYSTEM "https://bib.ietf.org/public/rfc/bibxml/reference.RFC.6711.xml">
+<!ENTITY RFC8176 SYSTEM "https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8176.xml">
 ]>
 
 <?rfc private="yes"?>
 
 <rfc ipr="none" docName="openid-caep-specification-1_0" category="std" consensus="true" tocInclude="true" sortRefs="true" symRefs="true">
   <front>
-    <title abbrev="CAEP-Spec">OpenID Continuous Access Evaluation Profile 1.0 - draft 02</title>
+    <title abbrev="CAEP-Spec">OpenID Continuous Access Evaluation Profile 1.0 - draft 03</title>
 
     <author initials="T." surname="Cappalli" fullname="Tim Cappalli">
       <organization>Microsoft</organization>
@@ -34,7 +36,7 @@
       </address>
     </author>
 
-    <date year="2021" month="August" day="09"/>
+    <date year="2021" month="September" day="11"/>
 
     
     <workgroup>Shared Signals and Events</workgroup>
@@ -505,43 +507,32 @@ nested <spanx style="verb">reason_admin</spanx> and/or <spanx style="verb">reaso
 <section anchor="assurance-level-change-claims"><name>Event-Specific Claims</name>
 
 <dl>
+  <dt>namespace:</dt>
+  <dd>
+    <t>REQUIRED, JSON string: the namespace of the values in the <spanx style="verb">current_level</spanx> and <spanx style="verb">previous_level</spanx> claims.
+This string MAY be one of the following strings:
+- <spanx style="verb">RFC8176</spanx> : The assurance level values are from the <xref target="RFC8176"/> specification
+- <spanx style="verb">RFC6711</spanx> : The assurance level values are from the <xref target="RFC6711"/> specification
+- <spanx style="verb">ISO-IEC-29115</spanx> : The assurance level values are from the <xref target="ISO-IEC-29115"/> specification
+- <spanx style="verb">NIST-IAL</spanx> : The assurance level values are from the <xref target="NIST-IDPROOF"/> specification
+- <spanx style="verb">NIST-AAL</spanx> : The assurance level values are from the <xref target="NIST-AUTH"/> specification
+- <spanx style="verb">NIST-FAL</spanx> : The assurance level values are from the <xref target="NIST-FED"/> specification
+- Any other value that is an aliaas for a custom namespace agreed between the Transmitter and the Receiver</t>
+  </dd>
   <dt>current_level</dt>
   <dd>
-    <t>REQUIRED, JSON string: the current NIST Authenticator Assurance Level (AAL) as defined in <xref target="SP800-63R3"/></t>
-  </dd>
-  <dt/>
-  <dd>
-    <t>This string MUST be one of the following strings:
-</t>
-
-    <t><list style="symbols">
-      <t><spanx style="verb">nist-aal1</spanx></t>
-      <t><spanx style="verb">nist-aal2</spanx></t>
-      <t><spanx style="verb">nist-aal3</spanx></t>
-    </list></t>
+    <t>REQUIRED, JSON string: The current assurance level, as defined in the specified <spanx style="verb">namespace</spanx></t>
   </dd>
   <dt>previous_level</dt>
   <dd>
-    <t>REQUIRED, JSON string: the previous NIST Authenticator Assurance Level (AAL) as defined in <xref target="SP800-63R3"/></t>
-  </dd>
-  <dt/>
-  <dd>
-    <t>This MUST be one of the following strings:
-</t>
-
-    <t><list style="symbols">
-      <t><spanx style="verb">nist-aal1</spanx></t>
-      <t><spanx style="verb">nist-aal2</spanx></t>
-      <t><spanx style="verb">nist-aal3</spanx></t>
-    </list></t>
+    <t>OPTIONAL, JSON string: the previous assurance level, as defined in the specified <spanx style="verb">namespace</spanx>
+If the Transmitter omits this value, the Receiver MUST assume that the previous assurance level is unknown to the Transmitter</t>
   </dd>
   <dt>change_direction</dt>
   <dd>
-    <t>REQUIRED, JSON string: the Authenticator Assurance Level increased or decreased</t>
-  </dd>
-  <dt/>
-  <dd>
-    <t>This MUST be one of the following strings:
+    <t>OPTIONAL, JSON string: the Authenticator Assurance Level increased or decreased
+If the Transmitter has specified the <spanx style="verb">previous_level</spanx>, then the Transmitter SHOULD provide a value for this claim.
+If present, this MUST be one of the following strings:
 </t>
 
     <t><list style="symbols">
@@ -557,8 +548,6 @@ the assurance level changed.</t>
 </section>
 <section anchor="assurance-level-change-examples"><name>Examples</name>
 
-<t>NOTE: The event type URI is wrapped, the backslash is the continuation character.</t>
-
 <figure title="Example: Assurance Level Increase - Simple Subject + optional claims" anchor="assurance-level-change-examples-al-increase"><sourcecode type="json"><![CDATA[
 {
     "iss": "https://idp.example.com/3456789/",
@@ -572,9 +561,32 @@ the assurance level changed.</t>
                 "iss": "https://idp.example.com/3456789/",
                 "sub": "jane.smith@example.com"
             },
+            "namespace": "NIST-AAL",
             "current_level": "nist-aal2",
             "previous_level": "nist-aal1",
             "change_direction": "increase",
+            "initiating_entity": "user",
+            "event_timestamp": 1615304991643
+        }
+    }
+}
+]]></sourcecode></figure>
+
+<figure title="Example: Custom Assurance Level - Simple Subject" anchor="assurance-level-change-examples-custom"><sourcecode type="json"><![CDATA[
+{
+    "iss": "https://idp.example.com/3456789/",
+    "jti": "07efd930f0977e4fcc1149a733ce7f78",
+    "iat": 1615305159,
+    "aud": "https://sp.example2.net/caep",
+    "events": {
+        "https://schemas.openid.net/secevent/caep/event-type/assurance-level-change": {
+            "subject": {
+                "format": "iss_sub",
+                "iss": "https://idp.example.com/3456789/",
+                "sub": "jane.smith@example.com"
+            },
+            "namespace": "Retinal Scan",
+            "current_level": "hi-res-scan",
             "initiating_entity": "user",
             "event_timestamp": 1615304991643
         }
@@ -681,7 +693,69 @@ the device compliance status changed.</t>
 
     <references title='Normative References'>
 
+<reference anchor="ISO-IEC-29115" target="http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=45138">
+  <front>
+    <title>ISO/IEC 29115:2013 -- Information technology - Security techniques - Entity authentication assurance framework</title>
+    <author initials="I. O. for" surname="Standardization" fullname="International Organization for Standardization">
+      <organization></organization>
+    </author>
+    <date year="2013" month="March"/>
+  </front>
+</reference>
+<reference anchor="NIST-AUTH" target="https://pages.nist.gov/800-63-3/sp800-63-3.html">
+  <front>
+    <title>Digital Identity Guidelines, Authentication and Lifecycle Management</title>
+    <author initials="P." surname="Grassi" fullname="Paul Grassi">
+      <organization></organization>
+    </author>
+    <author initials="M." surname="Garcia" fullname="Michael Garcia">
+      <organization></organization>
+    </author>
+    <author initials="J." surname="Fenton" fullname="James Fenton">
+      <organization></organization>
+    </author>
+    <date year="2017" month="June"/>
+  </front>
+</reference>
+<reference anchor="NIST-FED" target="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-63c.pdf">
+  <front>
+    <title>Digital Identity Guidelines, Federation and Assertions</title>
+    <author initials="P. A." surname="Grassi" fullname="Paul A. Grassi">
+      <organization></organization>
+    </author>
+    <author initials="J. P." surname="Richer" fullname="Justin P. Richer">
+      <organization></organization>
+    </author>
+    <author initials="S. K." surname="Squire" fullname="Sarah K. Squire">
+      <organization></organization>
+    </author>
+    <author initials="J. L." surname="Fenton" fullname="James L. Fenton">
+      <organization></organization>
+    </author>
+    <author initials="E. M." surname="Nadeau" fullname="Ellen M. Nadeau">
+      <organization></organization>
+    </author>
+    <date year="n.d."/>
+  </front>
+</reference>
+<reference anchor="NIST-IDPROOF" target="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-63a.pdf">
+  <front>
+    <title>Digital Identity Guidelines, Enrollment and Identity Proofing</title>
+    <author initials="P. A." surname="Grassi" fullname="Paul A. Grassi">
+      <organization></organization>
+    </author>
+    <author initials="J. L." surname="Fenton" fullname="James L. Fenton">
+      <organization></organization>
+    </author>
+    <date year="2017" month="June"/>
+  </front>
+</reference>
 &RFC2119;
+&RFC8174;
+&RFC5280;
+&RFC5646;
+&RFC6711;
+&RFC8176;
 <reference anchor="SSE-FRAMEWORK" target="http://openid.net/specs/openid-sse-framework-1_0.html">
   <front>
     <title>OpenID Shared Signals and Events Framework Specification 1.0</title>
@@ -701,24 +775,6 @@ the device compliance status changed.</t>
       <organization>Yubico</organization>
     </author>
     <date year="2021" month="May"/>
-  </front>
-</reference>
-&RFC8174;
-&RFC5280;
-&RFC5646;
-<reference anchor="SP800-63R3" target="https://pages.nist.gov/800-63-3/sp800-63-3.html">
-  <front>
-    <title>NIST Special Publication 800-63: Digital Identity Guidelines</title>
-    <author initials="P." surname="Grassi" fullname="Paul Grassi">
-      <organization></organization>
-    </author>
-    <author initials="M." surname="Garcia" fullname="Michael Garcia">
-      <organization></organization>
-    </author>
-    <author initials="J." surname="Fenton" fullname="James Fenton">
-      <organization></organization>
-    </author>
-    <date year="2017" month="June"/>
   </front>
 </reference>
 <reference anchor="WebAuthn" target="https://www.w3.org/TR/webauthn/">
@@ -757,134 +813,147 @@ specification.</t>
   </back>
 
 <!-- ##markdown-source:
-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
+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
 
 -->
 

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="Common,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
-<title>OpenID Continuous Access Evaluation Profile 1.0 - draft 02</title>
+<title>OpenID Continuous Access Evaluation Profile 1.0 - draft 03</title>
 <meta content="Tim Cappalli" name="author">
 <meta content="Atul Tulshibagwale" name="author">
 <meta content="
@@ -1189,7 +1189,7 @@ li > p:last-of-type {
 <thead><tr>
 <td class="left"></td>
 <td class="center">CAEP-Spec</td>
-<td class="right">August 2021</td>
+<td class="right">September 2021</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Cappalli &amp; Tulshibagwale</td>
@@ -1215,7 +1215,7 @@ li > p:last-of-type {
 </dd>
 </dl>
 </div>
-<h1 id="title">OpenID Continuous Access Evaluation Profile 1.0 - draft 02</h1>
+<h1 id="title">OpenID Continuous Access Evaluation Profile 1.0 - draft 03</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">This document defines the Continuous Access Evaluation Profile (CAEP) of the
@@ -1900,62 +1900,41 @@ nested <code>reason_admin</code> and/or <code>reason_user</code> claims made in 
 <a href="#section-3.4.1" class="section-number selfRef">3.4.1. </a><a href="#name-event-specific-claims-4" class="section-name selfRef">Event-Specific Claims</a>
           </h4>
 <span class="break"></span><dl class="dlParallel" id="section-3.4.1-1">
-            <dt id="section-3.4.1-1.1">current_level</dt>
+            <dt id="section-3.4.1-1.1">namespace:</dt>
             <dd style="margin-left: 1.5em" id="section-3.4.1-1.2">
-              <p id="section-3.4.1-1.2.1">REQUIRED, JSON string: the current NIST Authenticator Assurance Level (AAL) as defined in <span>[<a href="#SP800-63R3" class="xref">SP800-63R3</a>]</span><a href="#section-3.4.1-1.2.1" class="pilcrow">¶</a></p>
+              <p id="section-3.4.1-1.2.1">REQUIRED, JSON string: the namespace of the values in the <code>current_level</code> and <code>previous_level</code> claims.
+This string MAY be one of the following strings:
+- <code>RFC8176</code> : The assurance level values are from the <span>[<a href="#RFC8176" class="xref">RFC8176</a>]</span> specification
+- <code>RFC6711</code> : The assurance level values are from the <span>[<a href="#RFC6711" class="xref">RFC6711</a>]</span> specification
+- <code>ISO-IEC-29115</code> : The assurance level values are from the <span>[<a href="#ISO-IEC-29115" class="xref">ISO-IEC-29115</a>]</span> specification
+- <code>NIST-IAL</code> : The assurance level values are from the <span>[<a href="#NIST-IDPROOF" class="xref">NIST-IDPROOF</a>]</span> specification
+- <code>NIST-AAL</code> : The assurance level values are from the <span>[<a href="#NIST-AUTH" class="xref">NIST-AUTH</a>]</span> specification
+- <code>NIST-FAL</code> : The assurance level values are from the <span>[<a href="#NIST-FED" class="xref">NIST-FED</a>]</span> specification
+- Any other value that is an aliaas for a custom namespace agreed between the Transmitter and the Receiver<a href="#section-3.4.1-1.2.1" class="pilcrow">¶</a></p>
 </dd>
             <dd class="break"></dd>
-<dt id="section-3.4.1-1.3"></dt>
+<dt id="section-3.4.1-1.3">current_level</dt>
             <dd style="margin-left: 1.5em" id="section-3.4.1-1.4">
-              <p id="section-3.4.1-1.4.1">This string MUST be one of the following strings:<a href="#section-3.4.1-1.4.1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-3.4.1-1.4.2.1">
-                  <code>nist-aal1</code><a href="#section-3.4.1-1.4.2.1" class="pilcrow">¶</a>
-</li>
-                <li class="normal" id="section-3.4.1-1.4.2.2">
-                  <code>nist-aal2</code><a href="#section-3.4.1-1.4.2.2" class="pilcrow">¶</a>
-</li>
-                <li class="normal" id="section-3.4.1-1.4.2.3">
-                  <code>nist-aal3</code><a href="#section-3.4.1-1.4.2.3" class="pilcrow">¶</a>
-</li>
-              </ul>
+              <p id="section-3.4.1-1.4.1">REQUIRED, JSON string: The current assurance level, as defined in the specified <code>namespace</code><a href="#section-3.4.1-1.4.1" class="pilcrow">¶</a></p>
 </dd>
             <dd class="break"></dd>
 <dt id="section-3.4.1-1.5">previous_level</dt>
             <dd style="margin-left: 1.5em" id="section-3.4.1-1.6">
-              <p id="section-3.4.1-1.6.1">REQUIRED, JSON string: the previous NIST Authenticator Assurance Level (AAL) as defined in <span>[<a href="#SP800-63R3" class="xref">SP800-63R3</a>]</span><a href="#section-3.4.1-1.6.1" class="pilcrow">¶</a></p>
+              <p id="section-3.4.1-1.6.1">OPTIONAL, JSON string: the previous assurance level, as defined in the specified <code>namespace</code>
+If the Transmitter omits this value, the Receiver MUST assume that the previous assurance level is unknown to the Transmitter<a href="#section-3.4.1-1.6.1" class="pilcrow">¶</a></p>
 </dd>
             <dd class="break"></dd>
-<dt id="section-3.4.1-1.7"></dt>
+<dt id="section-3.4.1-1.7">change_direction</dt>
             <dd style="margin-left: 1.5em" id="section-3.4.1-1.8">
-              <p id="section-3.4.1-1.8.1">This MUST be one of the following strings:<a href="#section-3.4.1-1.8.1" class="pilcrow">¶</a></p>
+              <p id="section-3.4.1-1.8.1">OPTIONAL, JSON string: the Authenticator Assurance Level increased or decreased
+If the Transmitter has specified the <code>previous_level</code>, then the Transmitter SHOULD provide a value for this claim.
+If present, this MUST be one of the following strings:<a href="#section-3.4.1-1.8.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.4.1-1.8.2.1">
-                  <code>nist-aal1</code><a href="#section-3.4.1-1.8.2.1" class="pilcrow">¶</a>
+                  <code>increase</code><a href="#section-3.4.1-1.8.2.1" class="pilcrow">¶</a>
 </li>
                 <li class="normal" id="section-3.4.1-1.8.2.2">
-                  <code>nist-aal2</code><a href="#section-3.4.1-1.8.2.2" class="pilcrow">¶</a>
-</li>
-                <li class="normal" id="section-3.4.1-1.8.2.3">
-                  <code>nist-aal3</code><a href="#section-3.4.1-1.8.2.3" class="pilcrow">¶</a>
-</li>
-              </ul>
-</dd>
-            <dd class="break"></dd>
-<dt id="section-3.4.1-1.9">change_direction</dt>
-            <dd style="margin-left: 1.5em" id="section-3.4.1-1.10">
-              <p id="section-3.4.1-1.10.1">REQUIRED, JSON string: the Authenticator Assurance Level increased or decreased<a href="#section-3.4.1-1.10.1" class="pilcrow">¶</a></p>
-</dd>
-            <dd class="break"></dd>
-<dt id="section-3.4.1-1.11"></dt>
-            <dd style="margin-left: 1.5em" id="section-3.4.1-1.12">
-              <p id="section-3.4.1-1.12.1">This MUST be one of the following strings:<a href="#section-3.4.1-1.12.1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-3.4.1-1.12.2.1">
-                  <code>increase</code><a href="#section-3.4.1-1.12.2.1" class="pilcrow">¶</a>
-</li>
-                <li class="normal" id="section-3.4.1-1.12.2.2">
-                  <code>decrease</code><a href="#section-3.4.1-1.12.2.2" class="pilcrow">¶</a>
+                  <code>decrease</code><a href="#section-3.4.1-1.8.2.2" class="pilcrow">¶</a>
 </li>
               </ul>
 </dd>
@@ -1970,9 +1949,39 @@ the assurance level changed.<a href="#section-3.4.1-2" class="pilcrow">¶</a></p
           <h4 id="name-examples-4">
 <a href="#section-3.4.2" class="section-number selfRef">3.4.2. </a><a href="#name-examples-4" class="section-name selfRef">Examples</a>
           </h4>
-<p id="section-3.4.2-1">NOTE: The event type URI is wrapped, the backslash is the continuation character.<a href="#section-3.4.2-1" class="pilcrow">¶</a></p>
 <span id="name-example-assurance-level-inc"></span><div id="assurance-level-change-examples-al-increase">
 <figure id="figure-10">
+            <div id="section-3.4.2-1.1">
+<pre class="lang-json sourcecode">
+{
+    "iss": "https://idp.example.com/3456789/",
+    "jti": "07efd930f0977e4fcc1149a733ce7f78",
+    "iat": 1615305159,
+    "aud": "https://sp.example2.net/caep",
+    "events": {
+        "https://schemas.openid.net/secevent/caep/event-type/assurance-level-change": {
+            "subject": {
+                "format": "iss_sub",
+                "iss": "https://idp.example.com/3456789/",
+                "sub": "jane.smith@example.com"
+            },
+            "namespace": "NIST-AAL",
+            "current_level": "nist-aal2",
+            "previous_level": "nist-aal1",
+            "change_direction": "increase",
+            "initiating_entity": "user",
+            "event_timestamp": 1615304991643
+        }
+    }
+}
+</pre>
+</div>
+<figcaption><a href="#figure-10" class="selfRef">Figure 10</a>:
+<a href="#name-example-assurance-level-inc" class="selfRef">Example: Assurance Level Increase - Simple Subject + optional claims</a>
+            </figcaption></figure>
+</div>
+<span id="name-example-custom-assurance-le"></span><div id="assurance-level-change-examples-custom">
+<figure id="figure-11">
             <div id="section-3.4.2-2.1">
 <pre class="lang-json sourcecode">
 {
@@ -1987,9 +1996,8 @@ the assurance level changed.<a href="#section-3.4.1-2" class="pilcrow">¶</a></p
                 "iss": "https://idp.example.com/3456789/",
                 "sub": "jane.smith@example.com"
             },
-            "current_level": "nist-aal2",
-            "previous_level": "nist-aal1",
-            "change_direction": "increase",
+            "namespace": "Retinal Scan",
+            "current_level": "hi-res-scan",
             "initiating_entity": "user",
             "event_timestamp": 1615304991643
         }
@@ -1997,8 +2005,8 @@ the assurance level changed.<a href="#section-3.4.1-2" class="pilcrow">¶</a></p
 }
 </pre>
 </div>
-<figcaption><a href="#figure-10" class="selfRef">Figure 10</a>:
-<a href="#name-example-assurance-level-inc" class="selfRef">Example: Assurance Level Increase - Simple Subject + optional claims</a>
+<figcaption><a href="#figure-11" class="selfRef">Figure 11</a>:
+<a href="#name-example-custom-assurance-le" class="selfRef">Example: Custom Assurance Level - Simple Subject</a>
             </figcaption></figure>
 </div>
 </section>
@@ -2069,7 +2077,7 @@ the device compliance status changed.<a href="#section-3.5.1-2" class="pilcrow">
           </h4>
 <p id="section-3.5.2-1">NOTE: The event type URI is wrapped, the backslash is the continuation character.<a href="#section-3.5.2-1" class="pilcrow">¶</a></p>
 <span id="name-example-device-no-longer-co"></span><div id="device-compliance-change-examples-out-of-compliance">
-<figure id="figure-11">
+<figure id="figure-12">
             <div id="section-3.5.2-2.1">
 <pre class="lang-json sourcecode">
 {
@@ -2105,7 +2113,7 @@ the device compliance status changed.<a href="#section-3.5.1-2" class="pilcrow">
 }
 </pre>
 </div>
-<figcaption><a href="#figure-11" class="selfRef">Figure 11</a>:
+<figcaption><a href="#figure-12" class="selfRef">Figure 12</a>:
 <a href="#name-example-device-no-longer-co" class="selfRef">Example: Device No Longer Compliant - Complex Subject + optional claims</a>
             </figcaption></figure>
 </div>
@@ -2120,6 +2128,22 @@ the device compliance status changed.<a href="#section-3.5.1-2" class="pilcrow">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
       </h2>
 <dl class="references">
+<dt id="ISO-IEC-29115">[ISO-IEC-29115]</dt>
+      <dd>
+<span class="refAuthor">Standardization, I. O. for.</span>, <span class="refTitle">"ISO/IEC 29115:2013 -- Information technology - Security techniques - Entity authentication assurance framework"</span>, <time datetime="2013-03" class="refDate">March 2013</time>, <span>&lt;<a href="http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=45138">http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=45138</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="NIST-AUTH">[NIST-AUTH]</dt>
+      <dd>
+<span class="refAuthor">Grassi, P.</span>, <span class="refAuthor">Garcia, M.</span>, and <span class="refAuthor">J. Fenton</span>, <span class="refTitle">"Digital Identity Guidelines, Authentication and Lifecycle Management"</span>, <time datetime="2017-06" class="refDate">June 2017</time>, <span>&lt;<a href="https://pages.nist.gov/800-63-3/sp800-63-3.html">https://pages.nist.gov/800-63-3/sp800-63-3.html</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="NIST-FED">[NIST-FED]</dt>
+      <dd>
+<span class="refAuthor">Grassi, P. A.</span>, <span class="refAuthor">Richer, J. P.</span>, <span class="refAuthor">Squire, S. K.</span>, <span class="refAuthor">Fenton, J. L.</span>, and <span class="refAuthor">E. M. Nadeau</span>, <span class="refTitle">"Digital Identity Guidelines, Federation and Assertions"</span>, <span>n.d.</span>, <span>&lt;<a href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-63c.pdf">https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-63c.pdf</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="NIST-IDPROOF">[NIST-IDPROOF]</dt>
+      <dd>
+<span class="refAuthor">Grassi, P. A.</span> and <span class="refAuthor">J. L. Fenton</span>, <span class="refTitle">"Digital Identity Guidelines, Enrollment and Identity Proofing"</span>, <time datetime="2017-06" class="refDate">June 2017</time>, <span>&lt;<a href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-63a.pdf">https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-63a.pdf</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
       <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
@@ -2132,13 +2156,17 @@ the device compliance status changed.<a href="#section-3.5.1-2" class="pilcrow">
       <dd>
 <span class="refAuthor">Phillips, A., Ed.</span> and <span class="refAuthor">M. Davis, Ed.</span>, <span class="refTitle">"Tags for Identifying Languages"</span>, <span class="seriesInfo">BCP 47</span>, <span class="seriesInfo">RFC 5646</span>, <span class="seriesInfo">DOI 10.17487/RFC5646</span>, <time datetime="2009-09" class="refDate">September 2009</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5646">https://www.rfc-editor.org/info/rfc5646</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC6711">[RFC6711]</dt>
+      <dd>
+<span class="refAuthor">Johansson, L.</span>, <span class="refTitle">"An IANA Registry for Level of Assurance (LoA) Profiles"</span>, <span class="seriesInfo">RFC 6711</span>, <span class="seriesInfo">DOI 10.17487/RFC6711</span>, <time datetime="2012-08" class="refDate">August 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6711">https://www.rfc-editor.org/info/rfc6711</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC8174">[RFC8174]</dt>
       <dd>
 <span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="SP800-63R3">[SP800-63R3]</dt>
+<dt id="RFC8176">[RFC8176]</dt>
       <dd>
-<span class="refAuthor">Grassi, P.</span>, <span class="refAuthor">Garcia, M.</span>, and <span class="refAuthor">J. Fenton</span>, <span class="refTitle">"NIST Special Publication 800-63: Digital Identity Guidelines"</span>, <time datetime="2017-06" class="refDate">June 2017</time>, <span>&lt;<a href="https://pages.nist.gov/800-63-3/sp800-63-3.html">https://pages.nist.gov/800-63-3/sp800-63-3.html</a>&gt;</span>. </dd>
+<span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Hunt, P.</span>, and <span class="refAuthor">A. Nadalin</span>, <span class="refTitle">"Authentication Method Reference Values"</span>, <span class="seriesInfo">RFC 8176</span>, <span class="seriesInfo">DOI 10.17487/RFC8176</span>, <time datetime="2017-06" class="refDate">June 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8176">https://www.rfc-editor.org/info/rfc8176</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="SSE-FRAMEWORK">[SSE-FRAMEWORK]</dt>
       <dd>
