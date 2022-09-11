@@ -899,7 +899,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 16]
 
 
    HTTP/1.1 200 OK
-   Content-Type: application/json; charset=UTF-8
+   Content-Type: application/json
    Cache-Control: no-store
    Pragma: no-cache
 
@@ -924,7 +924,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 16]
    claim:
 
    HTTP/1.1 200 OK
-   Content-Type: application/json; charset=UTF-8
+   Content-Type: application/json
    Cache-Control: no-store
    Pragma: no-cache
 
@@ -1067,7 +1067,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 19]
 
 
    HTTP/1.1 200 OK
-   Content-Type: application/json; charset=UTF-8
+   Content-Type: application/json
    Cache-Control: no-store
    Pragma: no-cache
 
@@ -1235,7 +1235,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 22]
 
 
   HTTP/1.1 200 OK
-  Content-Type: application/json; charset=UTF-8
+  Content-Type: application/json
   Cache-Control: no-store
   Pragma: no-cache
 
@@ -1403,7 +1403,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 25]
 
 
   HTTP/1.1 200 OK
-  Content-Type: application/json; charset=UTF-8
+  Content-Type: application/json
   Cache-Control: no-store
   Pragma: no-cache
 
@@ -1815,7 +1815,7 @@ Tulshibagwale, et al.   Expires December 10, 2021              [Page 32]
    POST /sse/verify HTTP/1.1
    Host: transmitter.example.com
    Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
-   Content-Type: application/json; charset=UTF-8
+   Content-Type: application/json
 
    {
      "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
