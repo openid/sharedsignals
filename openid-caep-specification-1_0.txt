@@ -39,14 +39,14 @@ Table of Contents
        3.3.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  11
      3.4.  Assurance Level Change  . . . . . . . . . . . . . . . . .  11
        3.4.1.  Event-Specific Claims . . . . . . . . . . . . . . . .  12
-       3.4.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  12
+       3.4.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  13
      3.5.  Device Compliance Change  . . . . . . . . . . . . . . . .  14
        3.5.1.  Event-Specific Claims . . . . . . . . . . . . . . . .  14
-       3.5.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  14
-   4.  Normative References  . . . . . . . . . . . . . . . . . . . .  15
+       3.5.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  15
+   4.  Normative References  . . . . . . . . . . . . . . . . . . . .  16
    Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  17
    Appendix B.  Notices  . . . . . . . . . . . . . . . . . . . . . .  17
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  17
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  18
 
 
 
@@ -632,16 +632,28 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 11]
 
    namespace:  REQUIRED, JSON string: the namespace of the values in the
       current_level and previous_level claims.  This string MAY be one
-      of the following strings: - RFC8176 : The assurance level values
-      are from the [RFC8176] specification - RFC6711 : The assurance
-      level values are from the [RFC6711] specification - ISO-IEC-29115
-      : The assurance level values are from the [ISO-IEC-29115]
-      specification - NIST-IAL : The assurance level values are from the
-      [NIST-IDPROOF] specification - NIST-AAL : The assurance level
-      values are from the [NIST-AUTH] specification - NIST-FAL : The
-      assurance level values are from the [NIST-FED] specification - Any
-      other value that is an aliaas for a custom namespace agreed
-      between the Transmitter and the Receiver
+      of the following strings:
+
+      *  RFC8176: The assurance level values are from the [RFC8176]
+         specification
+
+      *  RFC6711: The assurance level values are from the [RFC6711]
+         specification
+
+      *  ISO-IEC-29115: The assurance level values are from the
+         [ISO-IEC-29115] specification
+
+      *  NIST-IAL: The assurance level values are from the
+         [NIST-IDPROOF] specification
+
+      *  NIST-AAL: The assurance level values are from the [NIST-AUTH]
+         specification
+
+      *  NIST-FAL: The assurance level values are from the [NIST-FED]
+         specification
+
+      *  Any other value that is an aliaas for a custom namespace agreed
+         between the Transmitter and the Receiver
 
    current_level  REQUIRED, JSON string: The current assurance level, as
       defined in the specified namespace
@@ -652,6 +664,16 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 11]
       level is unknown to the Transmitter
 
    change_direction  OPTIONAL, JSON string: the Authenticator Assurance
+
+
+
+
+
+Cappalli & Tulshibagwale     Standards Track                   [Page 12]
+
+                                CAEP-Spec                 September 2021
+
+
       Level increased or decreased If the Transmitter has specified the
       previous_level, then the Transmitter SHOULD provide a value for
       this claim.  If present, this MUST be one of the following
@@ -665,14 +687,6 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 11]
    at which the assurance level changed.
 
 3.4.2.  Examples
-
-
-
-
-Cappalli & Tulshibagwale     Standards Track                   [Page 12]
-
-                                CAEP-Spec                 September 2021
-
 
    {
        "iss": "https://idp.example.com/3456789/",
@@ -699,6 +713,23 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 12]
       Figure 10: Example: Assurance Level Increase - Simple Subject +
                               optional claims
 
+
+
+
+
+
+
+
+
+
+
+
+
+Cappalli & Tulshibagwale     Standards Track                   [Page 13]
+
+                                CAEP-Spec                 September 2021
+
+
    {
        "iss": "https://idp.example.com/3456789/",
        "jti": "07efd930f0977e4fcc1149a733ce7f78",
@@ -720,15 +751,6 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 12]
    }
 
         Figure 11: Example: Custom Assurance Level - Simple Subject
-
-
-
-
-
-Cappalli & Tulshibagwale     Standards Track                   [Page 13]
-
-                                CAEP-Spec                 September 2021
-
 
 3.5.  Device Compliance Change
 
@@ -756,6 +778,14 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 13]
       *  not-compliant
 
    current_status  REQUIRED, JSON string: the current status that
+
+
+
+Cappalli & Tulshibagwale     Standards Track                   [Page 14]
+
+                                CAEP-Spec                 September 2021
+
+
       triggered the event
 
       This MUST be one of the following strings:
@@ -771,20 +801,6 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 13]
 
    NOTE: The event type URI is wrapped, the backslash is the
    continuation character.
-
-
-
-
-
-
-
-
-
-
-Cappalli & Tulshibagwale     Standards Track                   [Page 14]
-
-                                CAEP-Spec                 September 2021
-
 
    {
        "iss": "https://idp.example.com/123456789/",
@@ -818,6 +834,14 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 14]
        }
    }
 
+
+
+
+Cappalli & Tulshibagwale     Standards Track                   [Page 15]
+
+                                CAEP-Spec                 September 2021
+
+
       Figure 12: Example: Device No Longer Compliant - Complex Subject
                              + optional claims
 
@@ -834,13 +858,6 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 14]
               Grassi, P., Garcia, M., and J. Fenton, "Digital Identity
               Guidelines, Authentication and Lifecycle Management", June
               2017, <https://pages.nist.gov/800-63-3/sp800-63-3.html>.
-
-
-
-Cappalli & Tulshibagwale     Standards Track                   [Page 15]
-
-                                CAEP-Spec                 September 2021
-
 
    [NIST-FED] Grassi, P. A., Richer, J. P., Squire, S. K., Fenton, J.
               L., and E. M. Nadeau, "Digital Identity Guidelines,
@@ -873,6 +890,14 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 15]
               (LoA) Profiles", RFC 6711, DOI 10.17487/RFC6711, August
               2012, <https://www.rfc-editor.org/info/rfc6711>.
 
+
+
+
+Cappalli & Tulshibagwale     Standards Track                   [Page 16]
+
+                                CAEP-Spec                 September 2021
+
+
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
@@ -890,13 +915,6 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 15]
    [WebAuthn] Balfanz, D., "Web Authentication: An API for accessing
               Public Key Credentials Level 2", 8 April 2021,
               <https://www.w3.org/TR/webauthn/>.
-
-
-
-Cappalli & Tulshibagwale     Standards Track                   [Page 16]
-
-                                CAEP-Spec                 September 2021
-
 
 Appendix A.  Acknowledgements
 
@@ -928,6 +946,14 @@ Appendix B.  Notices
    this specification or the extent to which any license under such
    rights might or might not be available; neither does it represent
    that it has made any independent effort to identify any such rights.
+
+
+
+Cappalli & Tulshibagwale     Standards Track                   [Page 17]
+
+                                CAEP-Spec                 September 2021
+
+
    The OpenID Foundation and the contributors to this specification make
    no (and hereby expressly disclaim any) warranties (express, implied,
    or otherwise), including implied warranties of merchantability, non-
@@ -948,35 +974,9 @@ Authors' Addresses
    Email: tim.cappalli@microsoft.com
 
 
-
-Cappalli & Tulshibagwale     Standards Track                   [Page 17]
-
-                                CAEP-Spec                 September 2021
-
-
    Atul Tulshibagwale
    SGNL
    Email: atul@sgnl.ai
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

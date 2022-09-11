@@ -542,12 +542,13 @@ nested `reason_admin` and/or `reason_user` claims made in {{optional-event-claim
 namespace:
 : REQUIRED, JSON string: the namespace of the values in the `current_level` and `previous_level` claims.
 This string MAY be one of the following strings:
-  - `RFC8176` : The assurance level values are from the {{RFC8176}} specification
-  - `RFC6711` : The assurance level values are from the {{RFC6711}} specification
-  - `ISO-IEC-29115` : The assurance level values are from the {{ISO-IEC-29115}} specification
-  - `NIST-IAL` : The assurance level values are from the {{NIST-IDPROOF}} specification
-  - `NIST-AAL` : The assurance level values are from the {{NIST-AUTH}} specification
-  - `NIST-FAL` : The assurance level values are from the {{NIST-FED}} specification
+
+  - `RFC8176`: The assurance level values are from the {{RFC8176}} specification
+  - `RFC6711`: The assurance level values are from the {{RFC6711}} specification
+  - `ISO-IEC-29115`: The assurance level values are from the {{ISO-IEC-29115}} specification
+  - `NIST-IAL`: The assurance level values are from the {{NIST-IDPROOF}} specification
+  - `NIST-AAL`: The assurance level values are from the {{NIST-AUTH}} specification
+  - `NIST-FAL`: The assurance level values are from the {{NIST-FED}} specification
   - Any other value that is an aliaas for a custom namespace agreed between the Transmitter and the Receiver
 
 current_level
