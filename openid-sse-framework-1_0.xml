@@ -247,7 +247,7 @@
         </section>
       </section>
       <section anchor="receiver-subject-processing" title="Receiver Subject Processing">
-        <t>A SSE Receiver MUST make a best effort process all members from a Subject in an SSE event.
+        <t>A SSE Receiver MUST make a best effort to process all members from a Subject in an SSE event.
           The <xref target="discovery-meta">Transmitter Configuration Metadata</xref> defined below
           MAY define certain members within a Complex Subject to be Critical. A SSE Receiver MUST
           discard any event that contains a Subject with a Critical member that it is unable to
@@ -891,7 +891,7 @@ Cache-Control: no-store
               <c>401</c>
               <c>if authorization failed or it is missing</c>
               <c>403</c>
-              <c>if the Event Receiver is not allowed to replace the stream configuration</c>
+              <c>if the Event Receiver is not allowed to update the stream configuration</c>
               <c>404</c>
               <c>if there is no Event Stream with the given "stream_id" for this Event Receiver</c>
             </texttable>
@@ -906,7 +906,7 @@ Cache-Control: no-store
               Transmitter responds with a <spanx style="verb">200 OK</spanx> response containing a <xref target="RFC7159">JSON</xref>
               representation of the updated stream configuration in the body.</t>
 
-            <t>The stream_id and the full set of editable properties MUST be present in the PUT body,
+            <t>The stream_id and the full set of read-write properties MUST be present in the PUT body,
               not only the ones that are specifically intended to be changed.
               Missing read-write properties SHOULD be interpreted as requested to be deleted.
               Event Receivers should read the configuration first, modify the <xref target="RFC7159">JSON</xref>
@@ -992,7 +992,7 @@ Cache-Control: no-store
               <ttcol align="left">Code</ttcol>
               <ttcol align="left">Description</ttcol>
               <c>202</c>
-              <c>if the update request has been accepted, but not processed. Receiver MAY try the
+              <c>if the replace request has been accepted, but not processed. Receiver MAY try the
                 same request later in order to get processing result.</c>
               <c>400</c>
               <c>if the request body cannot be parsed, a read-only property is incorrect, or if the request is otherwise invalid</c>
@@ -1050,7 +1050,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
           <t>A Transmitter MAY decide to enable, pause or disable updates about a Subject
             independently of an update request from a Receiver. If a Transmitter decides to start or
             stop events for a Subject then the Transmitter MUST do the following according to the
-            status of the stream</t>
+            status of the stream.</t>
           <t> If the stream is:
             <list style="hanging">
               <t hangText="Enabled"> the Transmitter MUST send a <xref target="stream-updated-event">
@@ -1171,6 +1171,8 @@ Cache-Control: no-store
                 <t>If the Receiver presents a valid OAuth token, but the Transmitter policy does not
                   permit the Receiver from obtaining the status, then the Transmitter MAY respond
                   with a 403 error status.</t>
+                <t>If the Receiver requests the status for a stream that does not exist then the
+                  Transmitter MUST respond with a 404 error status.</t>
                 <t>If the Receiver requests the status for specific Subject, but the Transmitter
                   policy does not permit the Receiver to read the status of that Subject, then the
                   Transmitter MAY respond with a 404 error status in order to not reveal the policy
@@ -1558,8 +1560,7 @@ Cache-Control: no-store
           <t>If a Transmitter decides to change the status of an Event Stream from <spanx style="verb">
             enabled</spanx> to either <spanx style="verb">paused</spanx> or <spanx style="verb">
             disabled</spanx>, then the Transmitter MUST send this event to any Receiver that is
-            currently <spanx style="verb">enabled</spanx> to receive events for the specified
-            Subject.</t>
+            currently <spanx style="verb">enabled</spanx> to receive events from this stream.</t>
 
           <t>If the Transmitter changes the status of the stream for a Subject from either
             <spanx style="verb">paused</spanx> or <spanx style="verb">disabled</spanx> to
@@ -1700,7 +1701,7 @@ Cache-Control: no-store
 
     <section anchor="profiles" title="Profiles">
       <t>This section is a profile of the following IETF SecEvent specifications:<list style="symbols">
-        <t><xref target="SET">"Security Event Token (SET)"</xref></t>
+        <t><xref target="SET">Security Event Token (SET)</xref></t>
         <t><xref target="DELIVERYPUSH">Push-Based SET Token Delivery Using HTTP</xref></t>
         <t><xref target="DELIVERYPOLL">Poll-Based SET Token Delivery Using HTTP</xref></t>
       </list></t>
@@ -1711,8 +1712,8 @@ Cache-Control: no-store
         reference when file is added to repository.)</t>
 
       <section anchor="set-profle" title="Security Event Token Profile">
-        <t>This section provides SSE profiling specifications for the <xref target="SET">"Security
-            Event Token (SET)"</xref> spec.</t>
+        <t>This section provides SSE profiling specifications for the <xref target="SET">Security
+            Event Token (SET)</xref> spec.</t>
 
         <section anchor="signature-key-resolution" title="Signature Key Resolution">
           <t>The signature key can be obtained through <spanx style="verb">jwks_uri</spanx>, see <xref target="discovery"/>.</t>
