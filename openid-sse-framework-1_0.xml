@@ -1866,7 +1866,9 @@ disabled": {
             <t><list style="hanging">
               <t hangText="method"> <spanx style="verb">https://schemas.openid.net/secevent/risc/delivery-method/push</spanx></t>
               <t hangText="endpoint_url"> The URL where events are pushed through HTTP POST.
-              This is set by the Receiver.</t>
+              This is set by the Receiver. If a Reciever is using multiple streams from a
+              single Transmitter and needs to keep the SETs separated,
+              it is RECOMMENDED that the URL for each stream be unique.</t>
               <t hangText="authorization_header">The HTTP Authorization header that the Transmitter MUST
               set with each event delivery, if the configuration is present. The value is optional and it is set by the Receiver.</t>
             </list></t>
@@ -1878,7 +1880,8 @@ disabled": {
             <t><list style="hanging">
               <t hangText="method"> <spanx style="verb">https://schemas.openid.net/secevent/risc/delivery-method/poll</spanx></t>
               <t hangText="endpoint_url"> The URL where events can be retrieved from. This is
-              specified by the Transmitter.</t>
+              specified by the Transmitter. These URLs MAY be reused across Receivers,
+              but MUST be unique per stream for a given Reciever.</t>
             </list></t>
           </section>
         </section>
