@@ -549,7 +549,7 @@ This string MAY be one of the following strings:
   - `NIST-IAL`: The assurance level values are from the {{NIST-IDPROOF}} specification
   - `NIST-AAL`: The assurance level values are from the {{NIST-AUTH}} specification
   - `NIST-FAL`: The assurance level values are from the {{NIST-FED}} specification
-  - Any other value that is an aliaas for a custom namespace agreed between the Transmitter and the Receiver
+  - Any other value that is an alias for a custom namespace agreed between the Transmitter and the Receiver
 
 current_level
 : REQUIRED, JSON string: The current assurance level, as defined in the specified `namespace`
