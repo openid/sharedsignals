@@ -15,11 +15,11 @@ between cooperating Transmitters and Receivers such that Transmitters may send
 continuous updates using which Receivers can attenuate access to shared human or
 robotic users, devices, sessions and applications. 
     " name="description">
-<meta content="xml2rfc 3.14.0" name="generator">
+<meta content="xml2rfc 3.14.2" name="generator">
 <meta content="openid-caep-specification-1_0" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.14.0
-    Python 3.8.9
+  xml2rfc 3.14.2
+    Python 3.9.6
     appdirs 1.4.4
     ConfigArgParse 1.5.3
     google-i18n-address 2.5.2
@@ -32,7 +32,7 @@ robotic users, devices, sessions and applications.
     pycountry 22.3.5
     PyYAML 6.0
     requests 2.28.1
-    setuptools 49.2.1
+    setuptools 58.0.4
     six 1.15.0
 -->
 <link href="openid-caep-specification-1_0.xml" rel="alternate" type="application/rfc+xml">
@@ -175,6 +175,7 @@ svg {
   margin: 1em 0;
 }
 .alignCenter > *:first-child {
+  display: table;
   border: none;
   margin: 0 auto;
 }
@@ -1069,6 +1070,9 @@ table {
 td {
   border-top: 1px solid #ddd;
 }
+tr {
+  break-inside: avoid;
+}
 tr:nth-child(2n+1) > td {
   background-color: #f8f8f8;
 }
@@ -1923,7 +1927,7 @@ This string MAY be one of the following strings:<a href="#section-3.4.1-1.2.1" c
                 <li class="normal" id="section-3.4.1-1.2.2.6">
                   <code>NIST-FAL</code>: The assurance level values are from the <span>[<a href="#NIST-FED" class="xref">NIST-FED</a>]</span> specification<a href="#section-3.4.1-1.2.2.6" class="pilcrow">¶</a>
 </li>
-                <li class="normal" id="section-3.4.1-1.2.2.7">Any other value that is an aliaas for a custom namespace agreed between the Transmitter and the Receiver<a href="#section-3.4.1-1.2.2.7" class="pilcrow">¶</a>
+                <li class="normal" id="section-3.4.1-1.2.2.7">Any other value that is an alias for a custom namespace agreed between the Transmitter and the Receiver<a href="#section-3.4.1-1.2.2.7" class="pilcrow">¶</a>
 </li>
               </ul>
 </dd>

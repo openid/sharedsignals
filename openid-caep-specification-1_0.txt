@@ -652,7 +652,7 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 11]
       *  NIST-FAL: The assurance level values are from the [NIST-FED]
          specification
 
-      *  Any other value that is an aliaas for a custom namespace agreed
+      *  Any other value that is an alias for a custom namespace agreed
          between the Transmitter and the Receiver
 
    current_level  REQUIRED, JSON string: The current assurance level, as
