@@ -144,6 +144,9 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 document are to be interpreted as described in BCP 14 {{RFC2119}} {{RFC8174}} 
 when, and only when, they appear in all capitals, as shown here.
 
+# Case Insensitivity
+All field names and values defined in this specification are case-insensitive.
+
 # Optional Event Claims {#optional-event-claims}
 The following claims are optional unless otherwise specified in the event
 definition.
