@@ -144,9 +144,6 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 document are to be interpreted as described in BCP 14 {{RFC2119}} {{RFC8174}} 
 when, and only when, they appear in all capitals, as shown here.
 
-# Case Insensitivity
-All field names and values defined in this specification are case-insensitive.
-
 # Optional Event Claims {#optional-event-claims}
 The following claims are optional unless otherwise specified in the event
 definition.
@@ -562,7 +559,7 @@ previous_level
 If the Transmitter omits this value, the Receiver MUST assume that the previous assurance level is unknown to the Transmitter
 
 change_direction
-: OPTIONAL, JSON string: the Authenticator Assurance Level increased or decreased
+: OPTIONAL, JSON string: the assurance level increased or decreased
 If the Transmitter has specified the `previous_level`, then the Transmitter SHOULD provide a value for this claim.
 If present, this MUST be one of the following strings:
 

@@ -26,28 +26,28 @@ Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
      1.1.  Notational Considerations . . . . . . . . . . . . . . . .   2
-   2.  Case Insensitivity  . . . . . . . . . . . . . . . . . . . . .   2
-   3.  Optional Event Claims . . . . . . . . . . . . . . . . . . . .   2
-   4.  Event Types . . . . . . . . . . . . . . . . . . . . . . . . .   3
-     4.1.  Session Revoked . . . . . . . . . . . . . . . . . . . . .   3
-       4.1.1.  Event-Specific Claims . . . . . . . . . . . . . . . .   4
-       4.1.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .   4
-     4.2.  Token Claims Change . . . . . . . . . . . . . . . . . . .   6
-       4.2.1.  Event-Specific Claims . . . . . . . . . . . . . . . .   7
-       4.2.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .   7
-     4.3.  Credential Change . . . . . . . . . . . . . . . . . . . .   9
-       4.3.1.  Event-Specific Claims . . . . . . . . . . . . . . . .   9
-       4.3.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  11
-     4.4.  Assurance Level Change  . . . . . . . . . . . . . . . . .  11
-       4.4.1.  Event-Specific Claims . . . . . . . . . . . . . . . .  12
-       4.4.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  13
-     4.5.  Device Compliance Change  . . . . . . . . . . . . . . . .  14
-       4.5.1.  Event-Specific Claims . . . . . . . . . . . . . . . .  14
-       4.5.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  15
-   5.  Normative References  . . . . . . . . . . . . . . . . . . . .  16
+   2.  Optional Event Claims . . . . . . . . . . . . . . . . . . . .   2
+   3.  Event Types . . . . . . . . . . . . . . . . . . . . . . . . .   3
+     3.1.  Session Revoked . . . . . . . . . . . . . . . . . . . . .   3
+       3.1.1.  Event-Specific Claims . . . . . . . . . . . . . . . .   4
+       3.1.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .   4
+     3.2.  Token Claims Change . . . . . . . . . . . . . . . . . . .   6
+       3.2.1.  Event-Specific Claims . . . . . . . . . . . . . . . .   7
+       3.2.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .   7
+     3.3.  Credential Change . . . . . . . . . . . . . . . . . . . .   9
+       3.3.1.  Event-Specific Claims . . . . . . . . . . . . . . . .   9
+       3.3.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  11
+     3.4.  Assurance Level Change  . . . . . . . . . . . . . . . . .  11
+       3.4.1.  Event-Specific Claims . . . . . . . . . . . . . . . .  12
+       3.4.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  13
+     3.5.  Device Compliance Change  . . . . . . . . . . . . . . . .  14
+       3.5.1.  Event-Specific Claims . . . . . . . . . . . . . . . .  14
+       3.5.2.  Examples  . . . . . . . . . . . . . . . . . . . . . .  15
+   4.  Normative References  . . . . . . . . . . . . . . . . . . . .  16
    Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  17
    Appendix B.  Notices  . . . . . . . . . . . . . . . . . . . . . .  17
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  18
+
 
 
 
@@ -74,12 +74,7 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 1]
    14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-2.  Case Insensitivity
-
-   All field names and values defined in this specification are case-
-   insensitive.
-
-3.  Optional Event Claims
+2.  Optional Event Claims
 
    The following claims are optional unless otherwise specified in the
    event definition.
@@ -103,6 +98,11 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 1]
       *  system: a system or platform assertion triggered the event
 
    reason_admin  OPTIONAL, JSON object: a localizable administrative
+      message intended for logging and auditing.  The object MUST
+      contain one or more key/value pairs, with a BCP47 [RFC5646]
+      language tag as the key and the locale-specific administrative
+      message as the value.
+
 
 
 
@@ -113,11 +113,6 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 2]
 
                                 CAEP-Spec                 September 2021
 
-
-      message intended for logging and auditing.  The object MUST
-      contain one or more key/value pairs, with a BCP47 [RFC5646]
-      language tag as the key and the locale-specific administrative
-      message as the value.
 
    {
        "reason_admin": {
@@ -146,13 +141,13 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 2]
         Figure 2: Example: End user reason information with multiple
                                  languages
 
-4.  Event Types
+3.  Event Types
 
    The base URI for CAEP event types is:
 
    https://schemas.openid.net/secevent/caep/event-type/
 
-4.1.  Session Revoked
+3.1.  Session Revoked
 
    Event Type URI:
 
@@ -163,6 +158,11 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 2]
    referenced in the subject or other properties of the session may be
    included to allow the receiver to identify applicable sessions.
 
+   When a Complex Claim is used as the subject, the revocation event
+   applies to any session derived from matching those combined claims.
+
+
+
 
 
 Cappalli & Tulshibagwale     Standards Track                    [Page 3]
@@ -170,21 +170,18 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 3]
                                 CAEP-Spec                 September 2021
 
 
-   When a Complex Claim is used as the subject, the revocation event
-   applies to any session derived from matching those combined claims.
-
    The actual reason why the session was revoked might be specified with
    the nested reason_admin and/or reason_user claims described in
-   Section 3.
+   Section 2.
 
-4.1.1.  Event-Specific Claims
+3.1.1.  Event-Specific Claims
 
    There are no event-specific claims for this event type.
 
    When event_timestamp is included, its value MUST represent the time
    at which the session revocation occurred.
 
-4.1.2.  Examples
+3.1.2.  Examples
 
    NOTE: The event type URI is wrapped, the backslash is the
    continuation character.
@@ -206,6 +203,9 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 3]
    }
 
    Figure 3: Example: Session Revoked - Required claims + Simple Subject
+
+
+
 
 
 
@@ -321,7 +321,7 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 5]
       Figure 5: Example: Session Revoked - Complex Subject describing
              user + device + tenant (includes optional claims)
 
-4.2.  Token Claims Change
+3.2.  Token Claims Change
 
    Event Type URI:
 
@@ -340,9 +340,9 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 6]
 
    The actual reason why the claims change occurred might be specified
    with the nested reason_admin and/or reason_user claims made in
-   Section 3.
+   Section 2.
 
-4.2.1.  Event-Specific Claims
+3.2.1.  Event-Specific Claims
 
    claims  REQUIRED, JSON object: one or more claims with their new
       value(s)
@@ -350,7 +350,7 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 6]
    When event_timestamp is included, its value MUST represent the time
    at which the claim value(s) changed.
 
-4.2.2.  Examples
+3.2.2.  Examples
 
    NOTE: The event type URI is wrapped, the backslash is the
    continuation character.
@@ -473,7 +473,7 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 8]
      Figure 8: Example: SAML Assertion Claims Change - Required claims
                                     only
 
-4.3.  Credential Change
+3.3.  Credential Change
 
    Event Type URI:
 
@@ -491,9 +491,9 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 8]
 
    The actual reason why the credential change occurred might be
    specified with the nested reason_admin and/or reason_user claims made
-   in Section 3.
+   in Section 2.
 
-4.3.1.  Event-Specific Claims
+3.3.1.  Event-Specific Claims
 
    credential_type  REQUIRED, JSON string: This MUST be one of the
       following strings, or any other credential type supported mutually
@@ -562,7 +562,7 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 10]
                                 CAEP-Spec                 September 2021
 
 
-4.3.2.  Examples
+3.3.2.  Examples
 
    NOTE: The event type URI is wrapped, the backslash is the
    continuation character.
@@ -595,7 +595,7 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 10]
         Figure 9: Example: Provisioning a new FIDO2 authenticator -
                       Simple Subject + optional claims
 
-4.4.  Assurance Level Change
+3.4.  Assurance Level Change
 
    Event Type URI:
 
@@ -626,9 +626,9 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 11]
 
    The actual reason why the assurance level changed might be specified
    with the nested reason_admin and/or reason_user claims made in
-   Section 3.
+   Section 2.
 
-4.4.1.  Event-Specific Claims
+3.4.1.  Event-Specific Claims
 
    namespace:  REQUIRED, JSON string: the namespace of the values in the
       current_level and previous_level claims.  This string MAY be one
@@ -663,7 +663,7 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 11]
       this value, the Receiver MUST assume that the previous assurance
       level is unknown to the Transmitter
 
-   change_direction  OPTIONAL, JSON string: the Authenticator Assurance
+   change_direction  OPTIONAL, JSON string: the assurance level
 
 
 
@@ -674,7 +674,7 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 12]
                                 CAEP-Spec                 September 2021
 
 
-      Level increased or decreased If the Transmitter has specified the
+      increased or decreased If the Transmitter has specified the
       previous_level, then the Transmitter SHOULD provide a value for
       this claim.  If present, this MUST be one of the following
       strings:
@@ -686,7 +686,7 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 12]
    When event_timestamp is included, its value MUST represent the time
    at which the assurance level changed.
 
-4.4.2.  Examples
+3.4.2.  Examples
 
    {
        "iss": "https://idp.example.com/3456789/",
@@ -752,7 +752,7 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 13]
 
         Figure 11: Example: Custom Assurance Level - Simple Subject
 
-4.5.  Device Compliance Change
+3.5.  Device Compliance Change
 
    Event Type URI:
 
@@ -764,9 +764,9 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 13]
 
    The actual reason why the status change occurred might be specified
    with the nested reason_admin and/or reason_user claims made in
-   Section 3.
+   Section 2.
 
-4.5.1.  Event-Specific Claims
+3.5.1.  Event-Specific Claims
 
    previous_status  REQUIRED, JSON string: the compliance status prior
       to the change that triggered the event
@@ -797,7 +797,7 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 14]
    When event_timestamp is included, its value MUST represent the time
    at which the device compliance status changed.
 
-4.5.2.  Examples
+3.5.2.  Examples
 
    NOTE: The event type URI is wrapped, the backslash is the
    continuation character.
@@ -845,7 +845,7 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 15]
       Figure 12: Example: Device No Longer Compliant - Complex Subject
                              + optional claims
 
-5.  Normative References
+4.  Normative References
 
    [ISO-IEC-29115]
               Standardization, I. O. for., "ISO/IEC 29115:2013 --
