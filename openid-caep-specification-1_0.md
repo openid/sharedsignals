@@ -1,8 +1,8 @@
 ---
-title: OpenID Continuous Access Evaluation Profile 1.0 - draft 02
+title: OpenID Continuous Access Evaluation Profile 1.0 - draft 03
 abbrev: CAEP-Spec
 docname: openid-caep-specification-1_0
-date: 2021-08-09
+date: 2021-09-11
 
 ipr: none
 cat: std
@@ -28,7 +28,63 @@ author:
         email: atul@sgnl.ai
 
 normative:
+  ISO-IEC-29115:
+    target: http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=45138
+    title: "ISO/IEC 29115:2013 -- Information technology - Security techniques - Entity authentication assurance framework"
+    author:
+      -
+        name: "International Organization for Standardization"
+    date: March 2013
+  NIST-AUTH:
+    target: https://pages.nist.gov/800-63-3/sp800-63-3.html
+    title: "Digital Identity Guidelines, Authentication and Lifecycle Management"
+    author: 
+      -
+        ins: P. Grassi
+        name: Paul Grassi
+      -
+        ins: M. Garcia
+        name: Michael Garcia
+      -
+        ins: J. Fenton
+        name: James Fenton
+    date: 2017-06
+  NIST-FED:
+    target: https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-63c.pdf
+    title: "Digital Identity Guidelines, Federation and Assertions"
+    author: 
+      -
+        ins: P. A. Grassi
+        name: Paul A. Grassi
+      -
+        ins: J. P. Richer
+        name: Justin P. Richer
+      -
+        ins: S. K. Squire
+        name: Sarah K. Squire
+      -
+        ins: J. L. Fenton
+        name: James L. Fenton
+      -
+        ins: E. M. Nadeau
+        name: Ellen M. Nadeau
+  NIST-IDPROOF: 
+    target: https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-63a.pdf
+    title: "Digital Identity Guidelines, Enrollment and Identity Proofing"
+    author:
+      -
+        ins: P. A. Grassi
+        name: Paul A. Grassi
+      -
+        ins: J. L. Fenton
+        name: James L. Fenton
+    date: 2017-06
   RFC2119:
+  RFC8174:
+  RFC5280:
+  RFC5646:
+  RFC6711:
+  RFC8176:
   SSE-FRAMEWORK:
     target: http://openid.net/specs/openid-sse-framework-1_0.html
     title: OpenID Shared Signals and Events Framework Specification 1.0
@@ -54,23 +110,6 @@ normative:
         name: John Bradley
         org: Yubico
     date: 2021-05
-  RFC8174:
-  RFC5280:
-  RFC5646:
-  SP800-63R3:
-    target: https://pages.nist.gov/800-63-3/sp800-63-3.html
-    title: "NIST Special Publication 800-63: Digital Identity Guidelines"
-    author: 
-      -
-        ins: P. Grassi
-        name: Paul Grassi
-      -
-        ins: M. Garcia
-        name: Michael Garcia
-      -
-        ins: J. Fenton
-        name: James Fenton
-    date: 2017-06
   WebAuthn: 
     target: https://www.w3.org/TR/webauthn/
     title: "Web Authentication: An API for accessing Public Key Credentials Level 2"
@@ -500,25 +539,29 @@ nested `reason_admin` and/or `reason_user` claims made in {{optional-event-claim
 
 ### Event-Specific Claims {#assurance-level-change-claims}
 
-current_level
-: REQUIRED, JSON string: the current NIST Authenticator Assurance Level (AAL) as defined in {{SP800-63R3}}
-: This string MUST be one of the following strings:
+namespace:
+: REQUIRED, JSON string: the namespace of the values in the `current_level` and `previous_level` claims.
+This string MAY be one of the following strings:
 
-  - `nist-aal1`
-  - `nist-aal2`
-  - `nist-aal3`
+  - `RFC8176`: The assurance level values are from the {{RFC8176}} specification
+  - `RFC6711`: The assurance level values are from the {{RFC6711}} specification
+  - `ISO-IEC-29115`: The assurance level values are from the {{ISO-IEC-29115}} specification
+  - `NIST-IAL`: The assurance level values are from the {{NIST-IDPROOF}} specification
+  - `NIST-AAL`: The assurance level values are from the {{NIST-AUTH}} specification
+  - `NIST-FAL`: The assurance level values are from the {{NIST-FED}} specification
+  - Any other value that is an alias for a custom namespace agreed between the Transmitter and the Receiver
+
+current_level
+: REQUIRED, JSON string: The current assurance level, as defined in the specified `namespace`
 
 previous_level
-: REQUIRED, JSON string: the previous NIST Authenticator Assurance Level (AAL) as defined in {{SP800-63R3}}
-: This MUST be one of the following strings:
-
-  - `nist-aal1`
-  - `nist-aal2`
-  - `nist-aal3`
+: OPTIONAL, JSON string: the previous assurance level, as defined in the specified `namespace`
+If the Transmitter omits this value, the Receiver MUST assume that the previous assurance level is unknown to the Transmitter
 
 change_direction
-: REQUIRED, JSON string: the Authenticator Assurance Level increased or decreased
-: This MUST be one of the following strings:
+: OPTIONAL, JSON string: the assurance level increased or decreased
+If the Transmitter has specified the `previous_level`, then the Transmitter SHOULD provide a value for this claim.
+If present, this MUST be one of the following strings:
 
   - `increase`
   - `decrease`
@@ -526,10 +569,7 @@ change_direction
 When `event_timestamp` is included, its value MUST represent the time at which
 the assurance level changed.
 
-
 ### Examples  {#assurance-level-change-examples}
-
-NOTE: The event type URI is wrapped, the backslash is the continuation character.
 
 ~~~json
 {
@@ -544,6 +584,7 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
                 "iss": "https://idp.example.com/3456789/",
                 "sub": "jane.smith@example.com"
             },
+            "namespace": "NIST-AAL",
             "current_level": "nist-aal2",
             "previous_level": "nist-aal1",
             "change_direction": "increase",
@@ -554,6 +595,29 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
 }
 ~~~
 {: #assurance-level-change-examples-al-increase title="Example: Assurance Level Increase - Simple Subject + optional claims"}
+
+~~~json
+{
+    "iss": "https://idp.example.com/3456789/",
+    "jti": "07efd930f0977e4fcc1149a733ce7f78",
+    "iat": 1615305159,
+    "aud": "https://sp.example2.net/caep",
+    "events": {
+        "https://schemas.openid.net/secevent/caep/event-type/assurance-level-change": {
+            "subject": {
+                "format": "iss_sub",
+                "iss": "https://idp.example.com/3456789/",
+                "sub": "jane.smith@example.com"
+            },
+            "namespace": "Retinal Scan",
+            "current_level": "hi-res-scan",
+            "initiating_entity": "user",
+            "event_timestamp": 1615304991643
+        }
+    }
+}
+~~~
+{: #assurance-level-change-examples-custom title="Example: Custom Assurance Level - Simple Subject"}
 
 
 ## Device Compliance Change {#device-compliance-change}
