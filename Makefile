@@ -10,7 +10,9 @@ html:   $(HTML)
 	xml2rfc --html $^
 
 %.txt:	%.xml
-	xml2rfc $^ 
+	python spanx_verb_to_quote.py $^ $^.quote
+	xml2rfc -o $(subst .xml,.txt,$^) $^.quote
+	rm $^.quote
 
 %.xml: %.md
 	kramdown-rfc2629 > $@ $^

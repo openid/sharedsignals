@@ -89,13 +89,13 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 1]
 
       This MUST be one of the following strings:
 
-      *  admin: an administrative action triggered the event
+      *  "admin": an administrative action triggered the event
 
-      *  user: an end-user action triggered the event
+      *  "user": an end-user action triggered the event
 
-      *  policy: a policy evaluation triggered the event
+      *  "policy": a policy evaluation triggered the event
 
-      *  system: a system or platform assertion triggered the event
+      *  "system": a system or platform assertion triggered the event
 
    reason_admin  OPTIONAL, JSON object: a localizable administrative
       message intended for logging and auditing.  The object MUST
@@ -145,13 +145,13 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 2]
 
    The base URI for CAEP event types is:
 
-   https://schemas.openid.net/secevent/caep/event-type/
+   "https://schemas.openid.net/secevent/caep/event-type/"
 
 3.1.  Session Revoked
 
    Event Type URI:
 
-   https://schemas.openid.net/secevent/caep/event-type/session-revoked
+   "https://schemas.openid.net/secevent/caep/event-type/session-revoked"
 
    Session Revoked signals that the session identified by the subject
    has been revoked.  The explicit session identifier may be directly
@@ -171,14 +171,14 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 3]
 
 
    The actual reason why the session was revoked might be specified with
-   the nested reason_admin and/or reason_user claims described in
+   the nested "reason_admin" and/or "reason_user" claims described in
    Section 2.
 
 3.1.1.  Event-Specific Claims
 
    There are no event-specific claims for this event type.
 
-   When event_timestamp is included, its value MUST represent the time
+   When "event_timestamp" is included, its value MUST represent the time
    at which the session revocation occurred.
 
 3.1.2.  Examples
@@ -325,8 +325,8 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 5]
 
    Event Type URI:
 
-   https://schemas.openid.net/secevent/caep/event-type/token-claims-
-   change
+   "https://schemas.openid.net/secevent/caep/event-type/token-claims-
+   change"
 
    Token Claims Change signals that a claim in a token, identified by
    the subject claim, has changed.
@@ -339,7 +339,7 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 6]
 
 
    The actual reason why the claims change occurred might be specified
-   with the nested reason_admin and/or reason_user claims made in
+   with the nested "reason_admin" and/or "reason_user" claims made in
    Section 2.
 
 3.2.1.  Event-Specific Claims
@@ -347,7 +347,7 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 6]
    claims  REQUIRED, JSON object: one or more claims with their new
       value(s)
 
-   When event_timestamp is included, its value MUST represent the time
+   When "event_timestamp" is included, its value MUST represent the time
    at which the claim value(s) changed.
 
 3.2.2.  Examples
@@ -477,7 +477,8 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 8]
 
    Event Type URI:
 
-   https://schemas.openid.net/secevent/caep/event-type/credential-change
+   "https://schemas.openid.net/secevent/caep/event-type/credential-
+   change"
 
    The Credential Change event signals that a credential was created,
    changed, revoked or deleted.  Credential Change scenarios include:
@@ -490,14 +491,13 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 8]
       (U2F, FIDO2, OTP, app-based)
 
    The actual reason why the credential change occurred might be
-   specified with the nested reason_admin and/or reason_user claims made
-   in Section 2.
+   specified with the nested "reason_admin" and/or "reason_user" claims
+   made in Section 2.
 
 3.3.1.  Event-Specific Claims
 
    credential_type  REQUIRED, JSON string: This MUST be one of the
-      following strings, or any other credential type supported mutually
-      by the Transmitter and the Receiver.
+
 
 
 
@@ -506,36 +506,39 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 9]
                                 CAEP-Spec                 September 2021
 
 
-      *  password
+      following strings, or any other credential type supported mutually
+      by the Transmitter and the Receiver.
 
-      *  pin
+      *  "password"
 
-      *  x509
+      *  "pin"
 
-      *  fido2-platform
+      *  "x509"
 
-      *  fido2-roaming
+      *  "fido2-platform"
 
-      *  fido-u2f
+      *  "fido2-roaming"
 
-      *  verifiable-credential
+      *  "fido-u2f"
 
-      *  phone-voice
+      *  "verifiable-credential"
 
-      *  phone-sms
+      *  "phone-voice"
 
-      *  app
+      *  "phone-sms"
+
+      *  "app"
 
    change_type  REQUIRED, JSON string: This MUST be one of the following
       strings:
 
-      *  create
+      *  "create"
 
-      *  revoke
+      *  "revoke"
 
-      *  update
+      *  "update"
 
-      *  delete
+      *  "delete"
 
    friendly_name  OPTIONAL, JSON string: credential friendly name
 
@@ -548,11 +551,8 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 9]
    fido2_aaguid  OPTIONAL, JSON string: FIDO2 Authenticator Attestation
       GUID as defined in [WebAuthn]
 
-   When event_timestamp is included, its value MUST represent the time
+   When "event_timestamp" is included, its value MUST represent the time
    at which the credential change occurred.
-
-
-
 
 
 
@@ -599,8 +599,8 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 10]
 
    Event Type URI:
 
-   https://schemas.openid.net/secevent/caep/event-type/assurance-level-
-   change
+   "https://schemas.openid.net/secevent/caep/event-type/assurance-level-
+   change"
 
    The Assurance Level Change event signals that there has been a change
    in authentication method since the initial user login.  This change
@@ -625,41 +625,41 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 11]
    stronger authentication method.
 
    The actual reason why the assurance level changed might be specified
-   with the nested reason_admin and/or reason_user claims made in
+   with the nested "reason_admin" and/or "reason_user" claims made in
    Section 2.
 
 3.4.1.  Event-Specific Claims
 
    namespace:  REQUIRED, JSON string: the namespace of the values in the
-      current_level and previous_level claims.  This string MAY be one
-      of the following strings:
+      "current_level" and "previous_level" claims.  This string MAY be
+      one of the following strings:
 
-      *  RFC8176: The assurance level values are from the [RFC8176]
+      *  "RFC8176": The assurance level values are from the [RFC8176]
          specification
 
-      *  RFC6711: The assurance level values are from the [RFC6711]
+      *  "RFC6711": The assurance level values are from the [RFC6711]
          specification
 
-      *  ISO-IEC-29115: The assurance level values are from the
+      *  "ISO-IEC-29115": The assurance level values are from the
          [ISO-IEC-29115] specification
 
-      *  NIST-IAL: The assurance level values are from the
+      *  "NIST-IAL": The assurance level values are from the
          [NIST-IDPROOF] specification
 
-      *  NIST-AAL: The assurance level values are from the [NIST-AUTH]
+      *  "NIST-AAL": The assurance level values are from the [NIST-AUTH]
          specification
 
-      *  NIST-FAL: The assurance level values are from the [NIST-FED]
+      *  "NIST-FAL": The assurance level values are from the [NIST-FED]
          specification
 
       *  Any other value that is an alias for a custom namespace agreed
          between the Transmitter and the Receiver
 
    current_level  REQUIRED, JSON string: The current assurance level, as
-      defined in the specified namespace
+      defined in the specified "namespace"
 
    previous_level  OPTIONAL, JSON string: the previous assurance level,
-      as defined in the specified namespace If the Transmitter omits
+      as defined in the specified "namespace" If the Transmitter omits
       this value, the Receiver MUST assume that the previous assurance
       level is unknown to the Transmitter
 
@@ -675,15 +675,15 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 12]
 
 
       increased or decreased If the Transmitter has specified the
-      previous_level, then the Transmitter SHOULD provide a value for
+      "previous_level", then the Transmitter SHOULD provide a value for
       this claim.  If present, this MUST be one of the following
       strings:
 
-      *  increase
+      *  "increase"
 
-      *  decrease
+      *  "decrease"
 
-   When event_timestamp is included, its value MUST represent the time
+   When "event_timestamp" is included, its value MUST represent the time
    at which the assurance level changed.
 
 3.4.2.  Examples
@@ -756,14 +756,14 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 13]
 
    Event Type URI:
 
-   https://schemas.openid.net/secevent/caep/event-type/device-
-   compliance-change
+   "https://schemas.openid.net/secevent/caep/event-type/device-
+   compliance-change"
 
    Device Compliance Change signals that a device's compliance status
    has changed.
 
    The actual reason why the status change occurred might be specified
-   with the nested reason_admin and/or reason_user claims made in
+   with the nested "reason_admin" and/or "reason_user" claims made in
    Section 2.
 
 3.5.1.  Event-Specific Claims
@@ -773,9 +773,9 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 13]
 
       This MUST be one of the following strings:
 
-      *  compliant
+      *  "compliant"
 
-      *  not-compliant
+      *  "not-compliant"
 
    current_status  REQUIRED, JSON string: the current status that
 
@@ -790,11 +790,11 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 14]
 
       This MUST be one of the following strings:
 
-      *  compliant
+      *  "compliant"
 
-      *  not-compliant
+      *  "not-compliant"
 
-   When event_timestamp is included, its value MUST represent the time
+   When "event_timestamp" is included, its value MUST represent the time
    at which the device compliance status changed.
 
 3.5.2.  Examples
