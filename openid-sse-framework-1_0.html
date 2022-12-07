@@ -1597,7 +1597,7 @@ li > p:last-of-type {
         an event can be sent by Transmitters and received by Receivers using the SSE Framework.<a href="#section-2-1" class="pilcrow">¶</a></p>
 <p id="section-2-2">Subject Principals are the managed entities in a SSE Transmitter or Receiver. These include
         human or robotic principals, devices, customer tenants in a multi-tenanted service,
-        organizational units within a tenant, groups of subject principals or other entities that
+        organizational units within a tenant, groups of subject principals, or other entities that
         are managed by Transmitters and Receivers. There may be other actors or resources that can
         be treated as Subject Principals, and event-type definitions SHOULD specify the range of
         principals addressed by the event.<a href="#section-2-2" class="pilcrow">¶</a></p>
@@ -2184,13 +2184,20 @@ Content-Type: application/json
       <h2 id="name-management-api-for-set-even">
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-management-api-for-set-even" class="section-name selfRef">Management API for SET Event Streams</a>
       </h2>
-<p id="section-7-1">This section defines an HTTP API to be implemented by Event Transmitters
-        which can be used by Event Receivers to create and delete one or more Event Streams,
-        as well as query and update the configuration and status,
-        add and remove subjects, and trigger verification for those streams.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-1">An Event Stream is an abstraction for how events are communicated from a
+      Transmitter to a Receiver. The Event Stream's configuration, which is jointly
+      managed by the Transmitter and Receiver, holds information about
+      what types of events will be sent from the Transmitter, as well as the mechanism by
+      which the Receiver can expect to receive the events. The Event Stream also keeps
+      track of what Subjects are of interest to the Receiver, and only events with those
+      Subjects are transmitted on the stream.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-2">This section defines an HTTP API to be implemented by Event Transmitters
+        which can be used by Event Receivers to create and delete one or more Event Streams.
+        The API can also be used to query and update the Event Stream's configuration and status,
+        add and remove Subjects, and trigger verification for those streams.<a href="#section-7-2" class="pilcrow">¶</a></p>
 <span id="name-event-stream-management-api"></span><div id="figintro">
 <figure id="figure-13">
-        <div class="alignLeft art-text artwork" id="section-7-2.1">
+        <div class="alignLeft art-text artwork" id="section-7-3.1">
 <pre>
 +------------+                +------------+
 |            | Stream Config  |            |
@@ -2218,9 +2225,9 @@ Content-Type: application/json
 <a href="#name-event-stream-management-api" class="selfRef">Event Stream Management API</a>
         </figcaption></figure>
 </div>
-<p id="section-7-3">It is OPTIONAL for Transmitters to implement a Management API, but it is
+<p id="section-7-4">It is OPTIONAL for Transmitters to implement a Management API, but it is
       RECOMMENDED that they implement it, especially the endpoints for querying the
-      Stream Status and for triggering Verification.<a href="#section-7-3" class="pilcrow">¶</a></p>
+      Stream Status and for triggering Verification.<a href="#section-7-4" class="pilcrow">¶</a></p>
 <div id="management-api">
 <section id="section-7.1">
         <h3 id="name-event-stream-management">
@@ -3312,7 +3319,7 @@ Cache-Control: no-store
 <p id="section-7.1.3.1-3">On a successful response, the Event Transmitter responds with an empty
               <code>200 OK</code> response.  The Event Transmitter MAY choose
               to silently ignore the request, for example if the subject has previously indicated
-              to the transmitter that they do not want events to be transmitted to the Event
+              to the Transmitter that they do not want events to be transmitted to the Event
               Receiver. In this case, the transmitter MAY return an empty
               <code>200 OK</code> response or an appropriate error code. See
               <span><a href="#management-sec" class="xref">Security Considerations</a> (<a href="#management-sec" class="xref">Section 9</a>)</span>.<a href="#section-7.1.3.1-3" class="pilcrow">¶</a></p>
@@ -4150,7 +4157,7 @@ disabled": {
 <dt id="section-11.2.1.2-2.3">endpoint_url</dt>
               <dd style="margin-left: 1.5em" id="section-11.2.1.2-2.4"> The URL where events can be retrieved from. This is
               specified by the Transmitter. These URLs MAY be reused across Receivers,
-              but MUST be unique per stream for a given Reciever.<a href="#section-11.2.1.2-2.4" class="pilcrow">¶</a>
+              but MUST be unique per stream for a given Receiver.<a href="#section-11.2.1.2-2.4" class="pilcrow">¶</a>
 </dd>
             <dd class="break"></dd>
 </dl>
