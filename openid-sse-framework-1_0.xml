@@ -509,10 +509,18 @@ Content-Type: application/json
     </section>
 
     <section anchor="management" title="Management API for SET Event Streams">
+      <t>An Event Stream is an abstraction for how events are communicated from a
+      Transmitter to a Receiver. The Event Stream's configuration, which is jointly
+      managed by the Transmitter and Receiver, holds information about
+      what types of events will be sent from the Transmitter, as well as the mechanism by
+      which the Receiver can expect to receive the events. The Event Stream also keeps
+      track of what Subjects are of interest to the Receiver, and only events with those
+      Subjects are transmitted on the stream.</t>
+
       <t>This section defines an HTTP API to be implemented by Event Transmitters
-        which can be used by Event Receivers to create and delete one or more Event Streams,
-        as well as query and update the configuration and status,
-        add and remove subjects, and trigger verification for those streams.</t>
+        which can be used by Event Receivers to create and delete one or more Event Streams.
+        The API can also be used to query and update the Event Stream's configuration and status,
+        add and remove Subjects, and trigger verification for those streams.</t>
 
       <figure title="Event Stream Management API" anchor="figintro"><artwork><![CDATA[
 +------------+                +------------+
