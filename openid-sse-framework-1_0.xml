@@ -110,7 +110,7 @@
 
       <t>Subject Principals are the managed entities in a SSE Transmitter or Receiver. These include
         human or robotic principals, devices, customer tenants in a multi-tenanted service,
-        organizational units within a tenant, groups of subject principals or other entities that
+        organizational units within a tenant, groups of subject principals, or other entities that
         are managed by Transmitters and Receivers. There may be other actors or resources that can
         be treated as Subject Principals, and event-type definitions SHOULD specify the range of
         principals addressed by the event.</t>
@@ -1307,7 +1307,7 @@ Cache-Control: no-store
             <t>On a successful response, the Event Transmitter responds with an empty
               <spanx style="verb">200 OK</spanx> response.  The Event Transmitter MAY choose
               to silently ignore the request, for example if the subject has previously indicated
-              to the transmitter that they do not want events to be transmitted to the Event
+              to the Transmitter that they do not want events to be transmitted to the Event
               Receiver. In this case, the transmitter MAY return an empty
               <spanx style="verb">200 OK</spanx> response or an appropriate error code. See
               <xref target="management-sec">Security Considerations</xref>.</t>
@@ -1885,7 +1885,7 @@ disabled": {
               <t hangText="method"> <spanx style="verb">https://schemas.openid.net/secevent/risc/delivery-method/poll</spanx></t>
               <t hangText="endpoint_url"> The URL where events can be retrieved from. This is
               specified by the Transmitter. These URLs MAY be reused across Receivers,
-              but MUST be unique per stream for a given Reciever.</t>
+              but MUST be unique per stream for a given Receiver.</t>
             </list></t>
           </section>
         </section>
