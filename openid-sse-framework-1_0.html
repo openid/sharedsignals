@@ -2510,8 +2510,11 @@ Content-Type: application/json
               request to the Configuration Endpoint. On receiving a valid request the Event
               Transmitter responds with a <code>200 OK</code> response containing a <span><a href="#RFC7159" class="xref">JSON</a> [<a href="#RFC7159" class="xref">RFC7159</a>]</span>
               representation of the stream's configuration in the body.<a href="#section-7.1.1.2-1" class="pilcrow">¶</a></p>
-<p id="section-7.1.1.2-2">The GET request MUST include the "stream_id" as a parameter in order to
-              identify the correct Event Stream.<a href="#section-7.1.1.2-2" class="pilcrow">¶</a></p>
+<p id="section-7.1.1.2-2">The GET request MAY include the "stream_id" as a parameter in order to
+              identify the correct Event Stream. If the "stream_id" argument is missing,
+              then the Transmitter MUST return a list of the stream configurations available
+              to this Receiver. In the event that there are no Event Streams created, the
+              Transmitter MUST return an empty list.<a href="#section-7.1.1.2-2" class="pilcrow">¶</a></p>
 <p id="section-7.1.1.2-3">The following is a non-normative example request to read an Event Stream's
               configuration:<a href="#section-7.1.1.2-3" class="pilcrow">¶</a></p>
 <span id="name-example-read-stream-configu"></span><div id="figreadconfigreq">
@@ -2569,7 +2572,155 @@ Cache-Control: no-store
 <a href="#name-example-read-stream-configur" class="selfRef">Example: Read Stream Configuration Response</a>
               </figcaption></figure>
 </div>
-<p id="section-7.1.1.2-7">Errors are signaled with HTTP status codes as follows:<a href="#section-7.1.1.2-7" class="pilcrow">¶</a></p>
+<p id="section-7.1.1.2-7">The following is a non-normative example request to read an Event Stream's
+              configuration, with no "stream_id" indicated:<a href="#section-7.1.1.2-7" class="pilcrow">¶</a></p>
+<span id="name-example-read-stream-configura"></span><div id="figreadconfigreqnostreamid">
+<figure id="figure-18">
+              <div class="alignLeft art-text artwork" id="section-7.1.1.2-8.1">
+<pre>
+GET /sse/stream HTTP/1.1
+Host: transmitter.example.com
+Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
+</pre>
+</div>
+<figcaption><a href="#figure-18" class="selfRef">Figure 18</a>:
+<a href="#name-example-read-stream-configura" class="selfRef">Example: Read Stream Configuration Request</a>
+              </figcaption></figure>
+</div>
+<p id="section-7.1.1.2-9">The following is a non-normative example response to a request with no "stream_id":<a href="#section-7.1.1.2-9" class="pilcrow">¶</a></p>
+<span id="name-example-read-stream-configurat"></span><div id="figreadconfigrespnostreamidmanystreams">
+<figure id="figure-19">
+              <div class="alignLeft art-text artwork" id="section-7.1.1.2-10.1">
+<pre>
+HTTP/1.1 200 OK
+Content-Type: application/json
+Cache-Control: no-store
+
+[
+  {
+    "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
+    "iss": "https://tr.example.com",
+    "aud": [
+        "http://receiver.example.com/web",
+        "http://receiver.example.com/mobile"
+      ],
+    "delivery": {
+      "delivery_method":
+        "https://schemas.openid.net/secevent/risc/delivery-method/push",
+      "url": "https://receiver.example.com/events"
+    },
+    "events_supported": [
+      "urn:example:secevent:events:type_1",
+      "urn:example:secevent:events:type_2",
+      "urn:example:secevent:events:type_3"
+    ],
+    "events_requested": [
+      "urn:example:secevent:events:type_2",
+      "urn:example:secevent:events:type_3",
+      "urn:example:secevent:events:type_4"
+    ],
+    "events_delivered": [
+      "urn:example:secevent:events:type_2",
+      "urn:example:secevent:events:type_3"
+    ]
+  },
+  {
+    "stream_id": "50b2d39934264897902c0581ba7c21a3",
+    "iss": "https://tr.example.com",
+    "aud": [
+        "http://receiver.example.com/web",
+        "http://receiver.example.com/mobile"
+      ],
+    "delivery": {
+      "delivery_method":
+        "https://schemas.openid.net/secevent/risc/delivery-method/push",
+      "url": "https://receiver.example.com/events"
+    },
+    "events_supported": [
+      "urn:example:secevent:events:type_1",
+      "urn:example:secevent:events:type_2",
+      "urn:example:secevent:events:type_3"
+    ],
+    "events_requested": [
+      "urn:example:secevent:events:type_2",
+      "urn:example:secevent:events:type_3",
+      "urn:example:secevent:events:type_4"
+    ],
+    "events_delivered": [
+      "urn:example:secevent:events:type_2",
+      "urn:example:secevent:events:type_3"
+    ]
+  }
+]
+</pre>
+</div>
+<figcaption><a href="#figure-19" class="selfRef">Figure 19</a>:
+<a href="#name-example-read-stream-configurat" class="selfRef">Example: Read Stream Configuration Response</a>
+              </figcaption></figure>
+</div>
+<p id="section-7.1.1.2-11">The following is a non-normative example response to a request with no "stream_id"
+            when there is only one Event Stream configured:<a href="#section-7.1.1.2-11" class="pilcrow">¶</a></p>
+<span id="name-example-read-stream-configurati"></span><div id="figreadconfigrespnostreamidonestream">
+<figure id="figure-20">
+              <div class="alignLeft art-text artwork" id="section-7.1.1.2-12.1">
+<pre>
+HTTP/1.1 200 OK
+Content-Type: application/json
+Cache-Control: no-store
+
+[
+  {
+    "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
+    "iss": "https://tr.example.com",
+    "aud": [
+        "http://receiver.example.com/web",
+        "http://receiver.example.com/mobile"
+      ],
+    "delivery": {
+      "delivery_method":
+        "https://schemas.openid.net/secevent/risc/delivery-method/push",
+      "url": "https://receiver.example.com/events"
+    },
+    "events_supported": [
+      "urn:example:secevent:events:type_1",
+      "urn:example:secevent:events:type_2",
+      "urn:example:secevent:events:type_3"
+    ],
+    "events_requested": [
+      "urn:example:secevent:events:type_2",
+      "urn:example:secevent:events:type_3",
+      "urn:example:secevent:events:type_4"
+    ],
+    "events_delivered": [
+      "urn:example:secevent:events:type_2",
+      "urn:example:secevent:events:type_3"
+    ]
+  }
+]
+</pre>
+</div>
+<figcaption><a href="#figure-20" class="selfRef">Figure 20</a>:
+<a href="#name-example-read-stream-configurati" class="selfRef">Example: Read Stream Configuration Response</a>
+              </figcaption></figure>
+</div>
+<p id="section-7.1.1.2-13">The following is a non-normative example response to a request with no "stream_id"
+            when there are no Event Streams configured:<a href="#section-7.1.1.2-13" class="pilcrow">¶</a></p>
+<span id="name-example-read-stream-configuratio"></span><div id="figreadconfigrespnostreamidnostreams">
+<figure id="figure-21">
+              <div class="alignLeft art-text artwork" id="section-7.1.1.2-14.1">
+<pre>
+HTTP/1.1 200 OK
+Content-Type: application/json
+Cache-Control: no-store
+
+[]
+</pre>
+</div>
+<figcaption><a href="#figure-21" class="selfRef">Figure 21</a>:
+<a href="#name-example-read-stream-configuratio" class="selfRef">Example: Read Stream Configuration Response</a>
+              </figcaption></figure>
+</div>
+<p id="section-7.1.1.2-15">Errors are signaled with HTTP status codes as follows:<a href="#section-7.1.1.2-15" class="pilcrow">¶</a></p>
 <span id="name-read-stream-configuration-e"></span><div id="tabreadconfig">
 <table class="center" id="table-2">
               <caption>
@@ -2620,7 +2771,7 @@ Cache-Control: no-store
 <p id="section-7.1.1.3-4">The following is a non-normative example request to replace an Event Stream's
               configuration:<a href="#section-7.1.1.3-4" class="pilcrow">¶</a></p>
 <span id="name-example-update-stream-confi"></span><div id="figupdateconfigreq">
-<figure id="figure-18">
+<figure id="figure-22">
               <div class="alignLeft art-text artwork" id="section-7.1.1.3-5.1">
 <pre>
 PATCH /sse/stream HTTP/1.1
@@ -2638,13 +2789,13 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 }
 </pre>
 </div>
-<figcaption><a href="#figure-18" class="selfRef">Figure 18</a>:
+<figcaption><a href="#figure-22" class="selfRef">Figure 22</a>:
 <a href="#name-example-update-stream-confi" class="selfRef">Example: Update Stream Configuration Request</a>
               </figcaption></figure>
 </div>
 <p id="section-7.1.1.3-6">The following is a non-normative example response:<a href="#section-7.1.1.3-6" class="pilcrow">¶</a></p>
 <span id="name-example-update-stream-config"></span><div id="figupdateconfigresp">
-<figure id="figure-19">
+<figure id="figure-23">
               <div class="alignLeft art-text artwork" id="section-7.1.1.3-7.1">
 <pre>
 HTTP/1.1 200 OK
@@ -2680,7 +2831,7 @@ Cache-Control: no-store
 }
 </pre>
 </div>
-<figcaption><a href="#figure-19" class="selfRef">Figure 19</a>:
+<figcaption><a href="#figure-23" class="selfRef">Figure 23</a>:
 <a href="#name-example-update-stream-config" class="selfRef">Example: Update Stream Configuration Response</a>
               </figcaption></figure>
 </div>
@@ -2745,7 +2896,7 @@ Cache-Control: no-store
 <p id="section-7.1.1.4-4">The following is a non-normative example request to replace an Event Stream's
               configuration:<a href="#section-7.1.1.4-4" class="pilcrow">¶</a></p>
 <span id="name-example-replace-stream-conf"></span><div id="figreplaceconfigreq">
-<figure id="figure-20">
+<figure id="figure-24">
               <div class="alignLeft art-text artwork" id="section-7.1.1.4-5.1">
 <pre>
 PUT /sse/stream HTTP/1.1
@@ -2772,13 +2923,13 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 }
 </pre>
 </div>
-<figcaption><a href="#figure-20" class="selfRef">Figure 20</a>:
+<figcaption><a href="#figure-24" class="selfRef">Figure 24</a>:
 <a href="#name-example-replace-stream-conf" class="selfRef">Example: Replace Stream Configuration Request</a>
               </figcaption></figure>
 </div>
 <p id="section-7.1.1.4-6">The following is a non-normative example response:<a href="#section-7.1.1.4-6" class="pilcrow">¶</a></p>
 <span id="name-example-replace-stream-confi"></span><div id="figreplaceconfigresp">
-<figure id="figure-21">
+<figure id="figure-25">
               <div class="alignLeft art-text artwork" id="section-7.1.1.4-7.1">
 <pre>
 HTTP/1.1 200 OK
@@ -2814,7 +2965,7 @@ Cache-Control: no-store
 }
 </pre>
 </div>
-<figcaption><a href="#figure-21" class="selfRef">Figure 21</a>:
+<figcaption><a href="#figure-25" class="selfRef">Figure 25</a>:
 <a href="#name-example-replace-stream-confi" class="selfRef">Example: Replace Stream Configuration Response</a>
               </figcaption></figure>
 </div>
@@ -2871,7 +3022,7 @@ Cache-Control: no-store
               identify the correct Event Stream.<a href="#section-7.1.1.5-2" class="pilcrow">¶</a></p>
 <p id="section-7.1.1.5-3">The following is a non-normative example request to delete an Event Stream:<a href="#section-7.1.1.5-3" class="pilcrow">¶</a></p>
 <span id="name-example-delete-stream-reque"></span><div id="figdeletestreamreq">
-<figure id="figure-22">
+<figure id="figure-26">
               <div class="alignLeft art-text artwork" id="section-7.1.1.5-4.1">
 <pre>
 DELETE /sse/stream?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f HTTP/1.1
@@ -2879,7 +3030,7 @@ Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 </pre>
 </div>
-<figcaption><a href="#figure-22" class="selfRef">Figure 22</a>:
+<figcaption><a href="#figure-26" class="selfRef">Figure 26</a>:
 <a href="#name-example-delete-stream-reque" class="selfRef">Example: Delete Stream Request</a>
               </figcaption></figure>
 </div>
@@ -2998,7 +3149,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 <p id="section-7.1.2.1-6">The following is a non-normative example request to check an event stream's
               status:<a href="#section-7.1.2.1-6" class="pilcrow">¶</a></p>
 <span id="name-example-check-stream-status"></span><div id="figstatusreq">
-<figure id="figure-23">
+<figure id="figure-27">
               <div class="alignLeft art-text artwork" id="section-7.1.2.1-7.1">
 <pre>
 GET /sse/status?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f HTTP/1.1
@@ -3006,13 +3157,13 @@ Host: transmitter.example.com
 Authorization: Bearer zzzz
 </pre>
 </div>
-<figcaption><a href="#figure-23" class="selfRef">Figure 23</a>:
+<figcaption><a href="#figure-27" class="selfRef">Figure 27</a>:
 <a href="#name-example-check-stream-status" class="selfRef">Example: Check Stream Status Request</a>
               </figcaption></figure>
 </div>
 <p id="section-7.1.2.1-8">The following is a non-normative example response:<a href="#section-7.1.2.1-8" class="pilcrow">¶</a></p>
 <span id="name-example-check-stream-status-"></span><div id="figstatusresp">
-<figure id="figure-24">
+<figure id="figure-28">
               <div class="alignLeft art-text artwork" id="section-7.1.2.1-9.1">
 <pre>
 HTTP/1.1 200 OK
@@ -3025,14 +3176,14 @@ Cache-Control: no-store
 
 </pre>
 </div>
-<figcaption><a href="#figure-24" class="selfRef">Figure 24</a>:
+<figcaption><a href="#figure-28" class="selfRef">Figure 28</a>:
 <a href="#name-example-check-stream-status-" class="selfRef">Example: Check Stream Status Response</a>
               </figcaption></figure>
 </div>
 <p id="section-7.1.2.1-10">The following is a non-normative example request to check an event stream's status
               for a specific subject:<a href="#section-7.1.2.1-10" class="pilcrow">¶</a></p>
 <span id="name-example-check-stream-status-r"></span><div id="figstatuswithsubjectreq">
-<figure id="figure-25">
+<figure id="figure-29">
               <div class="alignLeft art-text artwork" id="section-7.1.2.1-11.1">
 <pre>
 GET /sse/status?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f&amp;subject=&lt;url-encoded-subject&gt; HTTP/1.1
@@ -3041,13 +3192,13 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
 </pre>
 </div>
-<figcaption><a href="#figure-25" class="selfRef">Figure 25</a>:
+<figcaption><a href="#figure-29" class="selfRef">Figure 29</a>:
 <a href="#name-example-check-stream-status-r" class="selfRef">Example: Check Stream Status Request with Subject</a>
               </figcaption></figure>
 </div>
 <p id="section-7.1.2.1-12">The following is a non-normative example response with a Subject claim:<a href="#section-7.1.2.1-12" class="pilcrow">¶</a></p>
 <span id="name-example-check-stream-status-re"></span><div id="figstatuswithsubjectresp">
-<figure id="figure-26">
+<figure id="figure-30">
               <div class="alignLeft art-text artwork" id="section-7.1.2.1-13.1">
 <pre>
 HTTP/1.1 200 OK
@@ -3067,7 +3218,7 @@ Cache-Control: no-store
 
 </pre>
 </div>
-<figcaption><a href="#figure-26" class="selfRef">Figure 26</a>:
+<figcaption><a href="#figure-30" class="selfRef">Figure 30</a>:
 <a href="#name-example-check-stream-status-re" class="selfRef">Example: Check Stream Status Response</a>
               </figcaption></figure>
 </div>
@@ -3160,7 +3311,7 @@ Cache-Control: no-store
 <p id="section-7.1.2.2-4">The following is a non-normative example request to update an Event Stream's
               status:<a href="#section-7.1.2.2-4" class="pilcrow">¶</a></p>
 <span id="name-example-update-stream-statu"></span><div id="figupdatestatusreq">
-<figure id="figure-27">
+<figure id="figure-31">
               <div class="alignLeft art-text artwork" id="section-7.1.2.2-5.1">
 <pre>
 POST /sse/status HTTP/1.1
@@ -3174,14 +3325,14 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
 </pre>
 </div>
-<figcaption><a href="#figure-27" class="selfRef">Figure 27</a>:
+<figcaption><a href="#figure-31" class="selfRef">Figure 31</a>:
 <a href="#name-example-update-stream-statu" class="selfRef">Example: Update Stream Status Request Without Optional Fields</a>
               </figcaption></figure>
 </div>
 <p id="section-7.1.2.2-6">The following is a non-normative example of an Update Stream Status request with
               optional fields:<a href="#section-7.1.2.2-6" class="pilcrow">¶</a></p>
 <span id="name-example-update-stream-status"></span><div id="figupdatestatuswithsubjectreq">
-<figure id="figure-28">
+<figure id="figure-32">
               <div class="alignLeft art-text artwork" id="section-7.1.2.2-7.1">
 <pre>
 POST /sse/status HTTP/1.1
@@ -3203,13 +3354,13 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
 </pre>
 </div>
-<figcaption><a href="#figure-28" class="selfRef">Figure 28</a>:
+<figcaption><a href="#figure-32" class="selfRef">Figure 32</a>:
 <a href="#name-example-update-stream-status" class="selfRef">Example: Update Stream Status Request With Optional Fields</a>
               </figcaption></figure>
 </div>
 <p id="section-7.1.2.2-8">The following is a non-normative example response:<a href="#section-7.1.2.2-8" class="pilcrow">¶</a></p>
 <span id="name-example-update-stream-status-"></span><div id="figupdatestatusresp">
-<figure id="figure-29">
+<figure id="figure-33">
               <div class="alignLeft art-text artwork" id="section-7.1.2.2-9.1">
 <pre>
 HTTP/1.1 200 OK
@@ -3227,7 +3378,7 @@ Cache-Control: no-store
 
 </pre>
 </div>
-<figcaption><a href="#figure-29" class="selfRef">Figure 29</a>:
+<figcaption><a href="#figure-33" class="selfRef">Figure 33</a>:
 <a href="#name-example-update-stream-status-" class="selfRef">Example: Update Stream Status Response</a>
               </figcaption></figure>
 </div>
@@ -3326,7 +3477,7 @@ Cache-Control: no-store
 <p id="section-7.1.3.1-4">The following is a non-normative example request to add a subject to a stream,
               where the subject is identified by an Email Subject Identifier.<a href="#section-7.1.3.1-4" class="pilcrow">¶</a></p>
 <span id="name-example-add-subject-request"></span><div id="figaddreq">
-<figure id="figure-30">
+<figure id="figure-34">
               <div class="alignLeft art-text artwork" id="section-7.1.3.1-5.1">
 <pre>
 POST /sse/subjects:add HTTP/1.1
@@ -3343,13 +3494,13 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 }
 </pre>
 </div>
-<figcaption><a href="#figure-30" class="selfRef">Figure 30</a>:
+<figcaption><a href="#figure-34" class="selfRef">Figure 34</a>:
 <a href="#name-example-add-subject-request" class="selfRef">Example: Add Subject Request</a>
               </figcaption></figure>
 </div>
 <p id="section-7.1.3.1-6">The following is a non-normative example response to a successful request:<a href="#section-7.1.3.1-6" class="pilcrow">¶</a></p>
 <span id="name-example-add-subject-respons"></span><div id="figaddresp">
-<figure id="figure-31">
+<figure id="figure-35">
               <div class="alignLeft art-text artwork" id="section-7.1.3.1-7.1">
 <pre>
 HTTP/1.1 200 OK
@@ -3357,7 +3508,7 @@ Server: transmitter.example.com
 Cache-Control: no-store
 </pre>
 </div>
-<figcaption><a href="#figure-31" class="selfRef">Figure 31</a>:
+<figcaption><a href="#figure-35" class="selfRef">Figure 35</a>:
 <a href="#name-example-add-subject-respons" class="selfRef">Example: Add Subject Response</a>
               </figcaption></figure>
 </div>
@@ -3428,7 +3579,7 @@ Cache-Control: no-store
 <p id="section-7.1.3.2-4">The following is a non-normative example request where the subject is identified by
               a Phone Number Subject Identifier:<a href="#section-7.1.3.2-4" class="pilcrow">¶</a></p>
 <span id="name-example-remove-subject-requ"></span><div id="figremovereq">
-<figure id="figure-32">
+<figure id="figure-36">
               <div class="alignLeft art-text artwork" id="section-7.1.3.2-5.1">
 <pre>
 POST /sse/subjects:remove HTTP/1.1
@@ -3444,13 +3595,13 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 }
 </pre>
 </div>
-<figcaption><a href="#figure-32" class="selfRef">Figure 32</a>:
+<figcaption><a href="#figure-36" class="selfRef">Figure 36</a>:
 <a href="#name-example-remove-subject-requ" class="selfRef">Example: Remove Subject Request</a>
               </figcaption></figure>
 </div>
 <p id="section-7.1.3.2-6">The following is a non-normative example response to a successful request:<a href="#section-7.1.3.2-6" class="pilcrow">¶</a></p>
 <span id="name-example-remove-subject-resp"></span><div id="figremoveresp">
-<figure id="figure-33">
+<figure id="figure-37">
               <div class="alignLeft art-text artwork" id="section-7.1.3.2-7.1">
 <pre>
 HTTP/1.1 204 No Content
@@ -3458,7 +3609,7 @@ Server: transmitter.example.com
 Cache-Control: no-store
 </pre>
 </div>
-<figcaption><a href="#figure-33" class="selfRef">Figure 33</a>:
+<figcaption><a href="#figure-37" class="selfRef">Figure 37</a>:
 <a href="#name-example-remove-subject-resp" class="selfRef">Example: Remove Subject Response</a>
               </figcaption></figure>
 </div>
@@ -3621,7 +3772,7 @@ Cache-Control: no-store
 <p id="section-7.1.4.2-7">The following is a non-normative example request to trigger a verification
               event:<a href="#section-7.1.4.2-7" class="pilcrow">¶</a></p>
 <span id="name-example-trigger-verificatio"></span><div id="figverifyreq">
-<figure id="figure-34">
+<figure id="figure-38">
               <div class="alignLeft art-text artwork" id="section-7.1.4.2-8.1">
 <pre>
 POST /sse/verify HTTP/1.1
@@ -3635,13 +3786,13 @@ Content-Type: application/json
 }
 </pre>
 </div>
-<figcaption><a href="#figure-34" class="selfRef">Figure 34</a>:
+<figcaption><a href="#figure-38" class="selfRef">Figure 38</a>:
 <a href="#name-example-trigger-verificatio" class="selfRef">Example: Trigger Verification Request</a>
               </figcaption></figure>
 </div>
 <p id="section-7.1.4.2-9">The following is a non-normative example response to a successful request:<a href="#section-7.1.4.2-9" class="pilcrow">¶</a></p>
 <span id="name-example-trigger-verification"></span><div id="figverifyresp">
-<figure id="figure-35">
+<figure id="figure-39">
               <div class="alignLeft art-text artwork" id="section-7.1.4.2-10.1">
 <pre>
 HTTP/1.1 204 No Content
@@ -3649,14 +3800,14 @@ Server: transmitter.example.com
 Cache-Control: no-store
 </pre>
 </div>
-<figcaption><a href="#figure-35" class="selfRef">Figure 35</a>:
+<figcaption><a href="#figure-39" class="selfRef">Figure 39</a>:
 <a href="#name-example-trigger-verification" class="selfRef">Example: Trigger Verification Response</a>
               </figcaption></figure>
 </div>
 <p id="section-7.1.4.2-11">And the following is a non-normative example of a verification event sent to the
               Event Receiver as a result of the above request:<a href="#section-7.1.4.2-11" class="pilcrow">¶</a></p>
 <span id="name-example-verification-set"></span><div id="figverifyset">
-<figure id="figure-36">
+<figure id="figure-40">
               <div class="alignLeft art-text artwork" id="section-7.1.4.2-12.1">
 <pre>
 {
@@ -3672,7 +3823,7 @@ Cache-Control: no-store
 }
 </pre>
 </div>
-<figcaption><a href="#figure-36" class="selfRef">Figure 36</a>:
+<figcaption><a href="#figure-40" class="selfRef">Figure 40</a>:
 <a href="#name-example-verification-set" class="selfRef">Example: Verification SET</a>
               </figcaption></figure>
 </div>
@@ -3718,7 +3869,7 @@ Cache-Control: no-store
           <dd class="break"></dd>
 </dl>
 <span id="name-example-stream-updated-set"></span><div id="figstreamupdatedset">
-<figure id="figure-37">
+<figure id="figure-41">
             <div class="alignLeft art-text artwork" id="section-7.1.5-6.1">
 <pre>
 {
@@ -3742,7 +3893,7 @@ Cache-Control: no-store
 }
 </pre>
 </div>
-<figcaption><a href="#figure-37" class="selfRef">Figure 37</a>:
+<figcaption><a href="#figure-41" class="selfRef">Figure 41</a>:
 <a href="#name-example-stream-updated-set" class="selfRef">Example: Stream Updated SET</a>
             </figcaption></figure>
 </div>
@@ -3942,7 +4093,7 @@ Cache-Control: no-store
 <p id="section-11.1.3-1">The SSE event MAY contain additional claims within the event payload that are specific
             to the event type.<a href="#section-11.1.3-1" class="pilcrow">¶</a></p>
 <span id="name-example-set-containing-a-ri"></span><div id="risc-event-subject-example">
-<figure id="figure-38">
+<figure id="figure-42">
             <div class="alignLeft art-text artwork" id="section-11.1.3-2.1">
 <pre>
 {
@@ -3964,12 +4115,12 @@ disabled": {
 }
 </pre>
 </div>
-<figcaption><a href="#figure-38" class="selfRef">Figure 38</a>:
+<figcaption><a href="#figure-42" class="selfRef">Figure 42</a>:
 <a href="#name-example-set-containing-a-ri" class="selfRef">Example: SET Containing a RISC Event with a Phone Number Subject</a>
             </figcaption></figure>
 </div>
 <span id="name-example-set-containing-a-ca"></span><div id="caep-event-properties-example">
-<figure id="figure-39">
+<figure id="figure-43">
             <div class="alignLeft art-text artwork" id="section-11.1.3-3.1">
 <pre>
 {
@@ -3989,7 +4140,7 @@ disabled": {
 }
 </pre>
 </div>
-<figcaption><a href="#figure-39" class="selfRef">Figure 39</a>:
+<figcaption><a href="#figure-43" class="selfRef">Figure 43</a>:
 <a href="#name-example-set-containing-a-ca" class="selfRef">Example: SET Containing a CAEP Event with Properties</a>
             </figcaption></figure>
 </div>
@@ -4002,7 +4153,7 @@ disabled": {
           </h4>
 <p id="section-11.1.4-1">SSE events MUST use explicit typing as defined in Section 2.3 of <span>[<a href="#SET" class="xref">SET</a>]</span>.<a href="#section-11.1.4-1" class="pilcrow">¶</a></p>
 <span id="name-explicitly-typed-jose-heade"></span><div id="explicit-type-header">
-<figure id="figure-40">
+<figure id="figure-44">
             <div class="alignLeft art-text artwork" id="section-11.1.4-2.1">
 <pre>
 {
@@ -4011,7 +4162,7 @@ disabled": {
 }
 </pre>
 </div>
-<figcaption><a href="#figure-40" class="selfRef">Figure 40</a>:
+<figcaption><a href="#figure-44" class="selfRef">Figure 44</a>:
 <a href="#name-explicitly-typed-jose-heade" class="selfRef">Explicitly Typed JOSE Header</a>
             </figcaption></figure>
 </div>
@@ -4047,7 +4198,7 @@ disabled": {
           the multiple Receivers might use the same service to process SETs, and this service might reroute SETs to respective Receivers,
           an <code>aud</code> claim with multiple Receivers would lead to unintended data disclosure.<a href="#section-11.1.6-3" class="pilcrow">¶</a></p>
 <span id="name-example-set-with-array-aud-"></span><div id="figarrayaud">
-<figure id="figure-41">
+<figure id="figure-45">
             <div class="alignLeft art-text artwork" id="section-11.1.6-4.1">
 <pre>
 {
@@ -4063,7 +4214,7 @@ disabled": {
 }
 </pre>
 </div>
-<figcaption><a href="#figure-41" class="selfRef">Figure 41</a>:
+<figcaption><a href="#figure-45" class="selfRef">Figure 45</a>:
 <a href="#name-example-set-with-array-aud-" class="selfRef">Example: SET with array 'aud' claim</a>
             </figcaption></figure>
 </div>

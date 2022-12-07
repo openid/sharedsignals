@@ -90,22 +90,22 @@ Table of Contents
        7.1.1.  Stream Configuration  . . . . . . . . . . . . . . . .  15
          7.1.1.1.  Creating a Stream . . . . . . . . . . . . . . . .  16
          7.1.1.2.  Reading a Stream's Configuration  . . . . . . . .  19
-         7.1.1.3.  Updating a Stream's Configuration . . . . . . . .  21
-         7.1.1.4.  Replacing a Stream's Configuration  . . . . . . .  24
-         7.1.1.5.  Deleting a Stream . . . . . . . . . . . . . . . .  27
-       7.1.2.  Stream Status . . . . . . . . . . . . . . . . . . . .  28
-         7.1.2.1.  Reading a Stream's Status . . . . . . . . . . . .  28
-         7.1.2.2.  Updating a Stream's Status  . . . . . . . . . . .  31
-       7.1.3.  Subjects  . . . . . . . . . . . . . . . . . . . . . .  34
-         7.1.3.1.  Adding a Subject to a Stream  . . . . . . . . . .  34
-         7.1.3.2.  Removing a Subject  . . . . . . . . . . . . . . .  36
-       7.1.4.  Verification  . . . . . . . . . . . . . . . . . . . .  38
-         7.1.4.1.  Verification Event  . . . . . . . . . . . . . . .  38
-         7.1.4.2.  Triggering a Verification Event.  . . . . . . . .  38
-       7.1.5.  Stream Updated Event  . . . . . . . . . . . . . . . .  40
-   8.  Authorization . . . . . . . . . . . . . . . . . . . . . . . .  42
-   9.  Security Considerations . . . . . . . . . . . . . . . . . . .  42
-     9.1.  Subject Probing . . . . . . . . . . . . . . . . . . . . .  42
+         7.1.1.3.  Updating a Stream's Configuration . . . . . . . .  24
+         7.1.1.4.  Replacing a Stream's Configuration  . . . . . . .  27
+         7.1.1.5.  Deleting a Stream . . . . . . . . . . . . . . . .  30
+       7.1.2.  Stream Status . . . . . . . . . . . . . . . . . . . .  31
+         7.1.2.1.  Reading a Stream's Status . . . . . . . . . . . .  31
+         7.1.2.2.  Updating a Stream's Status  . . . . . . . . . . .  34
+       7.1.3.  Subjects  . . . . . . . . . . . . . . . . . . . . . .  37
+         7.1.3.1.  Adding a Subject to a Stream  . . . . . . . . . .  37
+         7.1.3.2.  Removing a Subject  . . . . . . . . . . . . . . .  39
+       7.1.4.  Verification  . . . . . . . . . . . . . . . . . . . .  41
+         7.1.4.1.  Verification Event  . . . . . . . . . . . . . . .  41
+         7.1.4.2.  Triggering a Verification Event.  . . . . . . . .  41
+       7.1.5.  Stream Updated Event  . . . . . . . . . . . . . . . .  43
+   8.  Authorization . . . . . . . . . . . . . . . . . . . . . . . .  45
+   9.  Security Considerations . . . . . . . . . . . . . . . . . . .  45
+     9.1.  Subject Probing . . . . . . . . . . . . . . . . . . . . .  45
 
 
 
@@ -114,36 +114,36 @@ Tulshibagwale, et al.        Standards Track                    [Page 2]
                           openid-sse-framework                 June 2021
 
 
-     9.2.  Information Harvesting  . . . . . . . . . . . . . . . . .  42
-     9.3.  Malicious Subject Removal . . . . . . . . . . . . . . . .  43
-   10. Privacy Considerations  . . . . . . . . . . . . . . . . . . .  43
-     10.1.  Subject Information Leakage  . . . . . . . . . . . . . .  43
-     10.2.  Previously Consented Data  . . . . . . . . . . . . . . .  43
-     10.3.  New Data . . . . . . . . . . . . . . . . . . . . . . . .  43
-       10.3.1.  Organizational Data  . . . . . . . . . . . . . . . .  44
-       10.3.2.  Consentable Data . . . . . . . . . . . . . . . . . .  44
-   11. Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .  44
-     11.1.  Security Event Token Profile . . . . . . . . . . . . . .  44
-       11.1.1.  Signature Key Resolution . . . . . . . . . . . . . .  44
-       11.1.2.  SSE Event Subject  . . . . . . . . . . . . . . . . .  44
-       11.1.3.  SSE Event Properties . . . . . . . . . . . . . . . .  45
-       11.1.4.  Explicit Typing of SETs  . . . . . . . . . . . . . .  45
-       11.1.5.  The "exp" Claim  . . . . . . . . . . . . . . . . . .  46
-       11.1.6.  The "aud" Claim  . . . . . . . . . . . . . . . . . .  46
-       11.1.7.  The "events" claim . . . . . . . . . . . . . . . . .  47
-       11.1.8.  Security Considerations  . . . . . . . . . . . . . .  47
-         11.1.8.1.  Distinguishing SETs from other Kinds of JWTs . .  47
-     11.2.  SET Token Delivery Using HTTP Profile  . . . . . . . . .  47
-       11.2.1.  Stream Configuration Metadata  . . . . . . . . . . .  47
-         11.2.1.1.  Push Delivery using HTTP . . . . . . . . . . . .  48
-         11.2.1.2.  Polling Delivery using HTTP  . . . . . . . . . .  48
-   12. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  48
-   13. References  . . . . . . . . . . . . . . . . . . . . . . . . .  48
-     13.1.  Normative References . . . . . . . . . . . . . . . . . .  48
-     13.2.  Non-Normative References . . . . . . . . . . . . . . . .  50
-   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  50
-   Appendix B.  Notices  . . . . . . . . . . . . . . . . . . . . . .  51
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  51
+     9.2.  Information Harvesting  . . . . . . . . . . . . . . . . .  45
+     9.3.  Malicious Subject Removal . . . . . . . . . . . . . . . .  46
+   10. Privacy Considerations  . . . . . . . . . . . . . . . . . . .  46
+     10.1.  Subject Information Leakage  . . . . . . . . . . . . . .  46
+     10.2.  Previously Consented Data  . . . . . . . . . . . . . . .  46
+     10.3.  New Data . . . . . . . . . . . . . . . . . . . . . . . .  46
+       10.3.1.  Organizational Data  . . . . . . . . . . . . . . . .  47
+       10.3.2.  Consentable Data . . . . . . . . . . . . . . . . . .  47
+   11. Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .  47
+     11.1.  Security Event Token Profile . . . . . . . . . . . . . .  47
+       11.1.1.  Signature Key Resolution . . . . . . . . . . . . . .  47
+       11.1.2.  SSE Event Subject  . . . . . . . . . . . . . . . . .  47
+       11.1.3.  SSE Event Properties . . . . . . . . . . . . . . . .  48
+       11.1.4.  Explicit Typing of SETs  . . . . . . . . . . . . . .  48
+       11.1.5.  The "exp" Claim  . . . . . . . . . . . . . . . . . .  49
+       11.1.6.  The "aud" Claim  . . . . . . . . . . . . . . . . . .  49
+       11.1.7.  The "events" claim . . . . . . . . . . . . . . . . .  50
+       11.1.8.  Security Considerations  . . . . . . . . . . . . . .  50
+         11.1.8.1.  Distinguishing SETs from other Kinds of JWTs . .  50
+     11.2.  SET Token Delivery Using HTTP Profile  . . . . . . . . .  50
+       11.2.1.  Stream Configuration Metadata  . . . . . . . . . . .  50
+         11.2.1.1.  Push Delivery using HTTP . . . . . . . . . . . .  51
+         11.2.1.2.  Polling Delivery using HTTP  . . . . . . . . . .  51
+   12. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  51
+   13. References  . . . . . . . . . . . . . . . . . . . . . . . . .  51
+     13.1.  Normative References . . . . . . . . . . . . . . . . . .  51
+     13.2.  Non-Normative References . . . . . . . . . . . . . . . .  53
+   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  53
+   Appendix B.  Notices  . . . . . . . . . . . . . . . . . . . . . .  54
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  54
 
 1.  Introduction
 
@@ -1018,8 +1018,12 @@ Tulshibagwale, et al.        Standards Track                   [Page 18]
    OK response containing a JSON [RFC7159] representation of the
    stream's configuration in the body.
 
-   The GET request MUST include the "stream_id" as a parameter in order
-   to identify the correct Event Stream.
+   The GET request MAY include the "stream_id" as a parameter in order
+   to identify the correct Event Stream.  If the "stream_id" argument is
+   missing, then the Transmitter MUST return a list of the stream
+   configurations available to this Receiver.  In the event that there
+   are no Event Streams created, the Transmitter MUST return an empty
+   list.
 
    The following is a non-normative example request to read an Event
    Stream's configuration:
@@ -1031,10 +1035,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 18]
            Figure 16: Example: Read Stream Configuration Request
 
    The following is a non-normative example response:
-
-
-
-
 
 
 
@@ -1100,17 +1100,17 @@ Tulshibagwale, et al.        Standards Track                   [Page 19]
 
           Figure 17: Example: Read Stream Configuration Response
 
-   Errors are signaled with HTTP status codes as follows:
+   The following is a non-normative example request to read an Event
+   Stream's configuration, with no "stream_id" indicated:
 
+   GET /sse/stream HTTP/1.1
+   Host: transmitter.example.com
+   Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
+           Figure 18: Example: Read Stream Configuration Request
 
-
-
-
-
-
-
-
+   The following is a non-normative example response to a request with
+   no "stream_id":
 
 
 
@@ -1118,6 +1118,174 @@ Tulshibagwale, et al.        Standards Track                   [Page 19]
 
 
 Tulshibagwale, et al.        Standards Track                   [Page 20]
+
+                          openid-sse-framework                 June 2021
+
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+Cache-Control: no-store
+
+[
+  {
+    "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
+    "iss": "https://tr.example.com",
+    "aud": [
+        "http://receiver.example.com/web",
+        "http://receiver.example.com/mobile"
+      ],
+    "delivery": {
+      "delivery_method":
+        "https://schemas.openid.net/secevent/risc/delivery-method/push",
+      "url": "https://receiver.example.com/events"
+    },
+    "events_supported": [
+      "urn:example:secevent:events:type_1",
+      "urn:example:secevent:events:type_2",
+      "urn:example:secevent:events:type_3"
+    ],
+    "events_requested": [
+      "urn:example:secevent:events:type_2",
+      "urn:example:secevent:events:type_3",
+      "urn:example:secevent:events:type_4"
+    ],
+    "events_delivered": [
+      "urn:example:secevent:events:type_2",
+      "urn:example:secevent:events:type_3"
+    ]
+  },
+  {
+    "stream_id": "50b2d39934264897902c0581ba7c21a3",
+    "iss": "https://tr.example.com",
+    "aud": [
+        "http://receiver.example.com/web",
+        "http://receiver.example.com/mobile"
+      ],
+    "delivery": {
+      "delivery_method":
+        "https://schemas.openid.net/secevent/risc/delivery-method/push",
+      "url": "https://receiver.example.com/events"
+    },
+    "events_supported": [
+      "urn:example:secevent:events:type_1",
+      "urn:example:secevent:events:type_2",
+      "urn:example:secevent:events:type_3"
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 21]
+
+                          openid-sse-framework                 June 2021
+
+
+    ],
+    "events_requested": [
+      "urn:example:secevent:events:type_2",
+      "urn:example:secevent:events:type_3",
+      "urn:example:secevent:events:type_4"
+    ],
+    "events_delivered": [
+      "urn:example:secevent:events:type_2",
+      "urn:example:secevent:events:type_3"
+    ]
+  }
+]
+
+        Figure 19: Example: Read Stream Configuration Response
+
+   The following is a non-normative example response to a request with
+   no "stream_id" when there is only one Event Stream configured:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 22]
+
+                          openid-sse-framework                 June 2021
+
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+Cache-Control: no-store
+
+[
+  {
+    "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
+    "iss": "https://tr.example.com",
+    "aud": [
+        "http://receiver.example.com/web",
+        "http://receiver.example.com/mobile"
+      ],
+    "delivery": {
+      "delivery_method":
+        "https://schemas.openid.net/secevent/risc/delivery-method/push",
+      "url": "https://receiver.example.com/events"
+    },
+    "events_supported": [
+      "urn:example:secevent:events:type_1",
+      "urn:example:secevent:events:type_2",
+      "urn:example:secevent:events:type_3"
+    ],
+    "events_requested": [
+      "urn:example:secevent:events:type_2",
+      "urn:example:secevent:events:type_3",
+      "urn:example:secevent:events:type_4"
+    ],
+    "events_delivered": [
+      "urn:example:secevent:events:type_2",
+      "urn:example:secevent:events:type_3"
+    ]
+  }
+]
+
+        Figure 20: Example: Read Stream Configuration Response
+
+   The following is a non-normative example response to a request with
+   no "stream_id" when there are no Event Streams configured:
+
+   HTTP/1.1 200 OK
+   Content-Type: application/json
+   Cache-Control: no-store
+
+   []
+
+           Figure 21: Example: Read Stream Configuration Response
+
+   Errors are signaled with HTTP status codes as follows:
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 23]
 
                           openid-sse-framework                 June 2021
 
@@ -1173,7 +1341,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 20]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 21]
+Tulshibagwale, et al.        Standards Track                   [Page 24]
 
                           openid-sse-framework                 June 2021
 
@@ -1192,7 +1360,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 21]
      ],
    }
 
-          Figure 18: Example: Update Stream Configuration Request
+          Figure 22: Example: Update Stream Configuration Request
 
    The following is a non-normative example response:
 
@@ -1204,174 +1372,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 21]
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 22]
-
-                          openid-sse-framework                 June 2021
-
-
-  HTTP/1.1 200 OK
-  Content-Type: application/json
-  Cache-Control: no-store
-
-  {
-    "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
-    "iss": "https://tr.example.com",
-    "aud": [
-      "http://receiver.example.com/web",
-      "http://receiver.example.com/mobile"
-    ],
-    "delivery": {
-      "delivery_method":
-        "https://schemas.openid.net/secevent/risc/delivery-method/push",
-      "url": "https://receiver.example.com/events"
-    },
-    "events_supported": [
-      "urn:example:secevent:events:type_1",
-      "urn:example:secevent:events:type_2",
-      "urn:example:secevent:events:type_3"
-    ],
-    "events_requested": [
-      "urn:example:secevent:events:type_2",
-      "urn:example:secevent:events:type_3",
-      "urn:example:secevent:events:type_4"
-    ],
-    "events_delivered": [
-      "urn:example:secevent:events:type_2",
-      "urn:example:secevent:events:type_3"
-    ]
-  }
-
-         Figure 19: Example: Update Stream Configuration Response
-
-   Pending conditions or errors are signaled with HTTP status codes as
-   follows:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 23]
-
-                          openid-sse-framework                 June 2021
-
-
-        +======+==================================================+
-        | Code | Description                                      |
-        +======+==================================================+
-        | 202  | if the update request has been accepted, but not |
-        |      | processed.  Receiver MAY try the same request    |
-        |      | later in order to get processing result.         |
-        +------+--------------------------------------------------+
-        | 400  | if the request body cannot be parsed, a read-    |
-        |      | only property is incorrect, or if the request is |
-        |      | otherwise invalid                                |
-        +------+--------------------------------------------------+
-        | 401  | if authorization failed or it is missing         |
-        +------+--------------------------------------------------+
-        | 403  | if the Event Receiver is not allowed to update   |
-        |      | the stream configuration                         |
-        +------+--------------------------------------------------+
-        | 404  | if there is no Event Stream with the given       |
-        |      | "stream_id" for this Event Receiver              |
-        +------+--------------------------------------------------+
-
-                Table 3: Update Stream Configuration Errors
-
-7.1.1.4.  Replacing a Stream's Configuration
-
-   An Event Receiver replaces the current configuration of a stream by
-   making an HTTP PUT request to the Configuration Endpoint.  The PUT
-   body contains a JSON [RFC7159] representation of the new
-   configuration.  On receiving a valid request the Event Transmitter
-   responds with a 200 OK response containing a JSON [RFC7159]
-   representation of the updated stream configuration in the body.
-
-   The stream_id and the full set of read-write properties MUST be
-   present in the PUT body, not only the ones that are specifically
-   intended to be changed.  Missing read-write properties MUST be
-   interpreted as requested to be deleted.  Event Receivers MAY read the
-   configuration first, modify the JSON [RFC7159] representation, then
-   make a replacement request.
-
-   Read-only properties besides the stream_id MAY be present, but they
-   MUST match the expected value.  Missing read-only properties will be
-   ignored by the Transmitter.
-
-   The following is a non-normative example request to replace an Event
-   Stream's configuration:
-
-
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 24]
-
-                          openid-sse-framework                 June 2021
-
-
-  PUT /sse/stream HTTP/1.1
-  Host: transmitter.example.com
-  Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
-
-  {
-    "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
-    "iss": "https://tr.example.com",
-    "aud": [
-      "http://receiver.example.com/web",
-      "http://receiver.example.com/mobile"
-    ],
-    "delivery": {
-      "delivery_method":
-        "https://schemas.openid.net/secevent/risc/delivery-method/push",
-      "url": "https://receiver.example.com/events"
-    },
-    "events_requested": [
-      "urn:example:secevent:events:type_2",
-      "urn:example:secevent:events:type_3",
-      "urn:example:secevent:events:type_4"
-    ],
-  }
-
-         Figure 20: Example: Replace Stream Configuration Request
-
-   The following is a non-normative example response:
 
 
 
@@ -1434,7 +1434,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 25]
     ]
   }
 
-        Figure 21: Example: Replace Stream Configuration Response
+         Figure 23: Example: Update Stream Configuration Response
 
    Pending conditions or errors are signaled with HTTP status codes as
    follows:
@@ -1454,6 +1454,174 @@ Tulshibagwale, et al.        Standards Track                   [Page 25]
 
 
 Tulshibagwale, et al.        Standards Track                   [Page 26]
+
+                          openid-sse-framework                 June 2021
+
+
+        +======+==================================================+
+        | Code | Description                                      |
+        +======+==================================================+
+        | 202  | if the update request has been accepted, but not |
+        |      | processed.  Receiver MAY try the same request    |
+        |      | later in order to get processing result.         |
+        +------+--------------------------------------------------+
+        | 400  | if the request body cannot be parsed, a read-    |
+        |      | only property is incorrect, or if the request is |
+        |      | otherwise invalid                                |
+        +------+--------------------------------------------------+
+        | 401  | if authorization failed or it is missing         |
+        +------+--------------------------------------------------+
+        | 403  | if the Event Receiver is not allowed to update   |
+        |      | the stream configuration                         |
+        +------+--------------------------------------------------+
+        | 404  | if there is no Event Stream with the given       |
+        |      | "stream_id" for this Event Receiver              |
+        +------+--------------------------------------------------+
+
+                Table 3: Update Stream Configuration Errors
+
+7.1.1.4.  Replacing a Stream's Configuration
+
+   An Event Receiver replaces the current configuration of a stream by
+   making an HTTP PUT request to the Configuration Endpoint.  The PUT
+   body contains a JSON [RFC7159] representation of the new
+   configuration.  On receiving a valid request the Event Transmitter
+   responds with a 200 OK response containing a JSON [RFC7159]
+   representation of the updated stream configuration in the body.
+
+   The stream_id and the full set of read-write properties MUST be
+   present in the PUT body, not only the ones that are specifically
+   intended to be changed.  Missing read-write properties MUST be
+   interpreted as requested to be deleted.  Event Receivers MAY read the
+   configuration first, modify the JSON [RFC7159] representation, then
+   make a replacement request.
+
+   Read-only properties besides the stream_id MAY be present, but they
+   MUST match the expected value.  Missing read-only properties will be
+   ignored by the Transmitter.
+
+   The following is a non-normative example request to replace an Event
+   Stream's configuration:
+
+
+
+
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 27]
+
+                          openid-sse-framework                 June 2021
+
+
+  PUT /sse/stream HTTP/1.1
+  Host: transmitter.example.com
+  Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
+
+  {
+    "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
+    "iss": "https://tr.example.com",
+    "aud": [
+      "http://receiver.example.com/web",
+      "http://receiver.example.com/mobile"
+    ],
+    "delivery": {
+      "delivery_method":
+        "https://schemas.openid.net/secevent/risc/delivery-method/push",
+      "url": "https://receiver.example.com/events"
+    },
+    "events_requested": [
+      "urn:example:secevent:events:type_2",
+      "urn:example:secevent:events:type_3",
+      "urn:example:secevent:events:type_4"
+    ],
+  }
+
+         Figure 24: Example: Replace Stream Configuration Request
+
+   The following is a non-normative example response:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 28]
+
+                          openid-sse-framework                 June 2021
+
+
+  HTTP/1.1 200 OK
+  Content-Type: application/json
+  Cache-Control: no-store
+
+  {
+    "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
+    "iss": "https://tr.example.com",
+    "aud": [
+      "http://receiver.example.com/web",
+      "http://receiver.example.com/mobile"
+    ],
+    "delivery": {
+      "delivery_method":
+        "https://schemas.openid.net/secevent/risc/delivery-method/push",
+      "url": "https://receiver.example.com/events"
+    },
+    "events_supported": [
+      "urn:example:secevent:events:type_1",
+      "urn:example:secevent:events:type_2",
+      "urn:example:secevent:events:type_3"
+    ],
+    "events_requested": [
+      "urn:example:secevent:events:type_2",
+      "urn:example:secevent:events:type_3",
+      "urn:example:secevent:events:type_4"
+    ],
+    "events_delivered": [
+      "urn:example:secevent:events:type_2",
+      "urn:example:secevent:events:type_3"
+    ]
+  }
+
+        Figure 25: Example: Replace Stream Configuration Response
+
+   Pending conditions or errors are signaled with HTTP status codes as
+   follows:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 29]
 
                           openid-sse-framework                 June 2021
 
@@ -1497,7 +1665,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 26]
   Host: transmitter.example.com
   Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
-                Figure 22: Example: Delete Stream Request
+                Figure 26: Example: Delete Stream Request
 
    Errors are signaled with HTTP status codes as follows:
 
@@ -1509,7 +1677,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 26]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 27]
+Tulshibagwale, et al.        Standards Track                   [Page 30]
 
                           openid-sse-framework                 June 2021
 
@@ -1565,7 +1733,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 27]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 28]
+Tulshibagwale, et al.        Standards Track                   [Page 31]
 
                           openid-sse-framework                 June 2021
 
@@ -1605,7 +1773,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 28]
    Host: transmitter.example.com
    Authorization: Bearer zzzz
 
-              Figure 23: Example: Check Stream Status Request
+              Figure 27: Example: Check Stream Status Request
 
    The following is a non-normative example response:
 
@@ -1621,12 +1789,12 @@ Tulshibagwale, et al.        Standards Track                   [Page 28]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 29]
+Tulshibagwale, et al.        Standards Track                   [Page 32]
 
                           openid-sse-framework                 June 2021
 
 
-              Figure 24: Example: Check Stream Status Response
+              Figure 28: Example: Check Stream Status Response
 
    The following is a non-normative example request to check an event
    stream's status for a specific subject:
@@ -1636,7 +1804,7 @@ Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
 
-     Figure 25: Example: Check Stream Status Request with Subject
+     Figure 29: Example: Check Stream Status Request with Subject
 
    The following is a non-normative example response with a Subject
    claim:
@@ -1657,7 +1825,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
    }
 
 
-              Figure 26: Example: Check Stream Status Response
+              Figure 30: Example: Check Stream Status Response
 
    Errors are signaled with HTTP status codes as follows:
 
@@ -1677,7 +1845,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 30]
+Tulshibagwale, et al.        Standards Track                   [Page 33]
 
                           openid-sse-framework                 June 2021
 
@@ -1733,7 +1901,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 30]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 31]
+Tulshibagwale, et al.        Standards Track                   [Page 34]
 
                           openid-sse-framework                 June 2021
 
@@ -1762,7 +1930,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 31]
    }
 
 
-     Figure 27: Example: Update Stream Status Request Without Optional
+     Figure 31: Example: Update Stream Status Request Without Optional
                                    Fields
 
    The following is a non-normative example of an Update Stream Status
@@ -1789,12 +1957,12 @@ Tulshibagwale, et al.        Standards Track                   [Page 31]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 32]
+Tulshibagwale, et al.        Standards Track                   [Page 35]
 
                           openid-sse-framework                 June 2021
 
 
-   Figure 28: Example: Update Stream Status Request With Optional Fields
+   Figure 32: Example: Update Stream Status Request With Optional Fields
 
    The following is a non-normative example response:
 
@@ -1812,7 +1980,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 32]
    }
 
 
-             Figure 29: Example: Update Stream Status Response
+             Figure 33: Example: Update Stream Status Response
 
    Errors are signaled with HTTP status codes as follows:
 
@@ -1845,7 +2013,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 32]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 33]
+Tulshibagwale, et al.        Standards Track                   [Page 36]
 
                           openid-sse-framework                 June 2021
 
@@ -1901,7 +2069,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 33]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 34]
+Tulshibagwale, et al.        Standards Track                   [Page 37]
 
                           openid-sse-framework                 June 2021
 
@@ -1919,7 +2087,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 34]
      "verified": true
    }
 
-                  Figure 30: Example: Add Subject Request
+                  Figure 34: Example: Add Subject Request
 
    The following is a non-normative example response to a successful
    request:
@@ -1928,7 +2096,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 34]
    Server: transmitter.example.com
    Cache-Control: no-store
 
-                  Figure 31: Example: Add Subject Response
+                  Figure 35: Example: Add Subject Response
 
    Errors are signaled with HTTP status codes as follows:
 
@@ -1957,7 +2125,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 34]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 35]
+Tulshibagwale, et al.        Standards Track                   [Page 38]
 
                           openid-sse-framework                 June 2021
 
@@ -2013,7 +2181,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 35]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 36]
+Tulshibagwale, et al.        Standards Track                   [Page 39]
 
                           openid-sse-framework                 June 2021
 
@@ -2030,7 +2198,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 36]
      }
    }
 
-                 Figure 32: Example: Remove Subject Request
+                 Figure 36: Example: Remove Subject Request
 
    The following is a non-normative example response to a successful
    request:
@@ -2039,7 +2207,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 36]
    Server: transmitter.example.com
    Cache-Control: no-store
 
-                Figure 33: Example: Remove Subject Response
+                Figure 37: Example: Remove Subject Response
 
    Errors are signaled with HTTP status codes as follows:
 
@@ -2069,7 +2237,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 36]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 37]
+Tulshibagwale, et al.        Standards Track                   [Page 40]
 
                           openid-sse-framework                 June 2021
 
@@ -2125,7 +2293,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 37]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 38]
+Tulshibagwale, et al.        Standards Track                   [Page 41]
 
                           openid-sse-framework                 June 2021
 
@@ -2181,7 +2349,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 38]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 39]
+Tulshibagwale, et al.        Standards Track                   [Page 42]
 
                           openid-sse-framework                 June 2021
 
@@ -2196,7 +2364,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 39]
      "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
    }
 
-              Figure 34: Example: Trigger Verification Request
+              Figure 38: Example: Trigger Verification Request
 
    The following is a non-normative example response to a successful
    request:
@@ -2205,7 +2373,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 39]
    Server: transmitter.example.com
    Cache-Control: no-store
 
-             Figure 35: Example: Trigger Verification Response
+             Figure 39: Example: Trigger Verification Response
 
    And the following is a non-normative example of a verification event
    sent to the Event Receiver as a result of the above request:
@@ -2222,7 +2390,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 39]
    }
  }
 
-                  Figure 36: Example: Verification SET
+                  Figure 40: Example: Verification SET
 
 7.1.5.  Stream Updated Event
 
@@ -2237,7 +2405,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 39]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 40]
+Tulshibagwale, et al.        Standards Track                   [Page 43]
 
                           openid-sse-framework                 June 2021
 
@@ -2287,13 +2455,13 @@ Tulshibagwale, et al.        Standards Track                   [Page 40]
   }
 }
 
-                Figure 37: Example: Stream Updated SET
+                Figure 41: Example: Stream Updated SET
 
 
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 41]
+Tulshibagwale, et al.        Standards Track                   [Page 44]
 
                           openid-sse-framework                 June 2021
 
@@ -2349,7 +2517,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 41]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 42]
+Tulshibagwale, et al.        Standards Track                   [Page 45]
 
                           openid-sse-framework                 June 2021
 
@@ -2405,7 +2573,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 42]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 43]
+Tulshibagwale, et al.        Standards Track                   [Page 46]
 
                           openid-sse-framework                 June 2021
 
@@ -2461,7 +2629,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 43]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 44]
+Tulshibagwale, et al.        Standards Track                   [Page 47]
 
                           openid-sse-framework                 June 2021
 
@@ -2489,7 +2657,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 44]
      }
    }
 
-        Figure 38: Example: SET Containing a RISC Event with a Phone
+        Figure 42: Example: SET Containing a RISC Event with a Phone
                                Number Subject
 
 {
@@ -2508,7 +2676,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 44]
   }
 }
 
-   Figure 39: Example: SET Containing a CAEP Event with Properties
+   Figure 43: Example: SET Containing a CAEP Event with Properties
 
 11.1.4.  Explicit Typing of SETs
 
@@ -2517,7 +2685,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 44]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 45]
+Tulshibagwale, et al.        Standards Track                   [Page 48]
 
                           openid-sse-framework                 June 2021
 
@@ -2527,7 +2695,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 45]
      "alg":"HS256"
    }
 
-                  Figure 40: Explicitly Typed JOSE Header
+                  Figure 44: Explicitly Typed JOSE Header
 
    The purpose is defense against confusion with other JWTs, as
    described in Sections 4.5, 4.6 and 4.7 of [SET].  While current Id
@@ -2573,7 +2741,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 45]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 46]
+Tulshibagwale, et al.        Standards Track                   [Page 49]
 
                           openid-sse-framework                 June 2021
 
@@ -2590,7 +2758,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 46]
   }
 }
 
-            Figure 41: Example: SET with array 'aud' claim
+            Figure 45: Example: SET with array 'aud' claim
 
 11.1.7.  The "events" claim
 
@@ -2629,7 +2797,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 46]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 47]
+Tulshibagwale, et al.        Standards Track                   [Page 50]
 
                           openid-sse-framework                 June 2021
 
@@ -2685,7 +2853,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 47]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 48]
+Tulshibagwale, et al.        Standards Track                   [Page 51]
 
                           openid-sse-framework                 June 2021
 
@@ -2741,7 +2909,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 48]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 49]
+Tulshibagwale, et al.        Standards Track                   [Page 52]
 
                           openid-sse-framework                 June 2021
 
@@ -2797,7 +2965,7 @@ Appendix A.  Acknowledgements
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 50]
+Tulshibagwale, et al.        Standards Track                   [Page 53]
 
                           openid-sse-framework                 June 2021
 
@@ -2853,7 +3021,7 @@ Authors' Addresses
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 51]
+Tulshibagwale, et al.        Standards Track                   [Page 54]
 
                           openid-sse-framework                 June 2021
 
@@ -2909,4 +3077,4 @@ Tulshibagwale, et al.        Standards Track                   [Page 51]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 52]
+Tulshibagwale, et al.        Standards Track                   [Page 55]

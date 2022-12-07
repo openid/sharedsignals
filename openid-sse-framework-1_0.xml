@@ -740,8 +740,11 @@ Content-Type: application/json
               Transmitter responds with a <spanx style="verb">200 OK</spanx> response containing a <xref target="RFC7159">JSON</xref>
               representation of the stream’s configuration in the body.</t>
 
-            <t>The GET request MUST include the "stream_id" as a parameter in order to
-              identify the correct Event Stream.</t>
+            <t>The GET request MAY include the "stream_id" as a parameter in order to
+              identify the correct Event Stream. If the "stream_id" argument is missing,
+              then the Transmitter MUST return a list of the stream configurations available
+              to this Receiver. In the event that there are no Event Streams created, the
+              Transmitter MUST return an empty list.</t>
 
             <t>The following is a non-normative example request to read an Event Stream’s
               configuration:</t>
@@ -789,6 +792,141 @@ Cache-Control: no-store
     "urn:example:secevent:events:type_3"
   ]
 }
+]]></artwork>
+            </figure>
+
+
+
+            <t>The following is a non-normative example request to read an Event Stream’s
+              configuration, with no "stream_id" indicated:</t>
+
+            <figure title="Example: Read Stream Configuration Request" anchor="figreadconfigreqnostreamid">
+              <artwork><![CDATA[
+GET /sse/stream HTTP/1.1
+Host: transmitter.example.com
+Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
+]]></artwork>
+            </figure>
+
+            <t>The following is a non-normative example response to a request with no "stream_id":</t>
+
+            <figure title="Example: Read Stream Configuration Response" anchor="figreadconfigrespnostreamidmanystreams">
+              <artwork><![CDATA[
+HTTP/1.1 200 OK
+Content-Type: application/json
+Cache-Control: no-store
+
+[
+  {
+    "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
+    "iss": "https://tr.example.com",
+    "aud": [
+        "http://receiver.example.com/web",
+        "http://receiver.example.com/mobile"
+      ],
+    "delivery": {
+      "delivery_method":
+        "https://schemas.openid.net/secevent/risc/delivery-method/push",
+      "url": "https://receiver.example.com/events"
+    },
+    "events_supported": [
+      "urn:example:secevent:events:type_1",
+      "urn:example:secevent:events:type_2",
+      "urn:example:secevent:events:type_3"
+    ],
+    "events_requested": [
+      "urn:example:secevent:events:type_2",
+      "urn:example:secevent:events:type_3",
+      "urn:example:secevent:events:type_4"
+    ],
+    "events_delivered": [
+      "urn:example:secevent:events:type_2",
+      "urn:example:secevent:events:type_3"
+    ]
+  },
+  {
+    "stream_id": "50b2d39934264897902c0581ba7c21a3",
+    "iss": "https://tr.example.com",
+    "aud": [
+        "http://receiver.example.com/web",
+        "http://receiver.example.com/mobile"
+      ],
+    "delivery": {
+      "delivery_method":
+        "https://schemas.openid.net/secevent/risc/delivery-method/push",
+      "url": "https://receiver.example.com/events"
+    },
+    "events_supported": [
+      "urn:example:secevent:events:type_1",
+      "urn:example:secevent:events:type_2",
+      "urn:example:secevent:events:type_3"
+    ],
+    "events_requested": [
+      "urn:example:secevent:events:type_2",
+      "urn:example:secevent:events:type_3",
+      "urn:example:secevent:events:type_4"
+    ],
+    "events_delivered": [
+      "urn:example:secevent:events:type_2",
+      "urn:example:secevent:events:type_3"
+    ]
+  }
+]
+]]></artwork>
+            </figure>
+
+
+            <t>The following is a non-normative example response to a request with no "stream_id"
+            when there is only one Event Stream configured:</t>
+
+            <figure title="Example: Read Stream Configuration Response" anchor="figreadconfigrespnostreamidonestream">
+              <artwork><![CDATA[
+HTTP/1.1 200 OK
+Content-Type: application/json
+Cache-Control: no-store
+
+[
+  {
+    "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
+    "iss": "https://tr.example.com",
+    "aud": [
+        "http://receiver.example.com/web",
+        "http://receiver.example.com/mobile"
+      ],
+    "delivery": {
+      "delivery_method":
+        "https://schemas.openid.net/secevent/risc/delivery-method/push",
+      "url": "https://receiver.example.com/events"
+    },
+    "events_supported": [
+      "urn:example:secevent:events:type_1",
+      "urn:example:secevent:events:type_2",
+      "urn:example:secevent:events:type_3"
+    ],
+    "events_requested": [
+      "urn:example:secevent:events:type_2",
+      "urn:example:secevent:events:type_3",
+      "urn:example:secevent:events:type_4"
+    ],
+    "events_delivered": [
+      "urn:example:secevent:events:type_2",
+      "urn:example:secevent:events:type_3"
+    ]
+  }
+]
+]]></artwork>
+            </figure>
+
+            <t>The following is a non-normative example response to a request with no "stream_id"
+            when there are no Event Streams configured:</t>
+
+            <figure title="Example: Read Stream Configuration Response" anchor="figreadconfigrespnostreamidnostreams">
+              <artwork><![CDATA[
+HTTP/1.1 200 OK
+Content-Type: application/json
+Cache-Control: no-store
+
+[]
 ]]></artwork>
             </figure>
 
