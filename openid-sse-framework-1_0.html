@@ -2371,7 +2371,7 @@ Content-Type: application/json
 <p id="section-7.1.1.1-1">In order to communicate events from a Transmitter to a Receiver, a Receiver
               MUST first create an Event Stream. An Event Receiver creates a stream by making an HTTP POST
               request to the Configuration Endpoint. On receiving a valid request the Event
-              Transmitter responds with a <code>200 OK</code> response containing a <span><a href="#RFC7159" class="xref">JSON</a> [<a href="#RFC7159" class="xref">RFC7159</a>]</span>
+              Transmitter responds with a <code>201 Created</code> response containing a <span><a href="#RFC7159" class="xref">JSON</a> [<a href="#RFC7159" class="xref">RFC7159</a>]</span>
               representation of the stream's configuration in the body.<a href="#section-7.1.1.1-1" class="pilcrow">¶</a></p>
 <p id="section-7.1.1.1-2">The HTTP POST request MAY contain the read/write values of the <span><a href="#stream-config" class="xref">Stream Configuration</a> (<a href="#stream-config" class="xref">Section 7.1.1</a>)</span>
               object:<a href="#section-7.1.1.1-2" class="pilcrow">¶</a></p>
@@ -2760,7 +2760,7 @@ Cache-Control: no-store
               PATCH request to the Configuration Endpoint. The PATCH body contains a <span><a href="#RFC7159" class="xref">JSON</a> [<a href="#RFC7159" class="xref">RFC7159</a>]</span>
               representation of the stream configuration properties to change. On receiving a valid request the Event
               Transmitter responds with a <code>200 OK</code> response containing a <span><a href="#RFC7159" class="xref">JSON</a> [<a href="#RFC7159" class="xref">RFC7159</a>]</span>
-              representation of the updated stream configuration in the body.<a href="#section-7.1.1.3-1" class="pilcrow">¶</a></p>
+              representation of the entire updated stream configuration in the body.<a href="#section-7.1.1.3-1" class="pilcrow">¶</a></p>
 <p id="section-7.1.1.3-2">The stream_id property MUST be present in the request. Other properties
             MAY be present in the request. Any read-write property present in the request
             MUST be updated by the Transmitter. Any properties missing in the request

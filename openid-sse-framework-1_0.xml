@@ -637,7 +637,7 @@ Content-Type: application/json
             <t>In order to communicate events from a Transmitter to a Receiver, a Receiver
               MUST first create an Event Stream. An Event Receiver creates a stream by making an HTTP POST
               request to the Configuration Endpoint. On receiving a valid request the Event
-              Transmitter responds with a <spanx style="verb">200 OK</spanx> response containing a <xref target="RFC7159">JSON</xref>
+              Transmitter responds with a <spanx style="verb">201 Created</spanx> response containing a <xref target="RFC7159">JSON</xref>
               representation of the stream’s configuration in the body.</t>
 
             <t>The HTTP POST request MAY contain the read/write values of the <xref target="stream-config">Stream Configuration</xref>
@@ -950,7 +950,7 @@ Cache-Control: no-store
               PATCH request to the Configuration Endpoint. The PATCH body contains a <xref target="RFC7159">JSON</xref>
               representation of the stream configuration properties to change. On receiving a valid request the Event
               Transmitter responds with a <spanx style="verb">200 OK</spanx> response containing a <xref target="RFC7159">JSON</xref>
-              representation of the updated stream configuration in the body.</t>
+              representation of the entire updated stream configuration in the body.</t>
 
             <t>The stream_id property MUST be present in the request. Other properties
             MAY be present in the request. Any read-write property present in the request

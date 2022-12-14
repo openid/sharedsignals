@@ -883,7 +883,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 15]
    Receiver MUST first create an Event Stream.  An Event Receiver
    creates a stream by making an HTTP POST request to the Configuration
    Endpoint.  On receiving a valid request the Event Transmitter
-   responds with a 200 OK response containing a JSON [RFC7159]
+   responds with a 201 Created response containing a JSON [RFC7159]
    representation of the stream's configuration in the body.
 
    The HTTP POST request MAY contain the read/write values of the Stream
@@ -1311,8 +1311,8 @@ Tulshibagwale, et al.        Standards Track                   [Page 23]
    PATCH body contains a JSON [RFC7159] representation of the stream
    configuration properties to change.  On receiving a valid request the
    Event Transmitter responds with a 200 OK response containing a JSON
-   [RFC7159] representation of the updated stream configuration in the
-   body.
+   [RFC7159] representation of the entire updated stream configuration
+   in the body.
 
    The stream_id property MUST be present in the request.  Other
    properties MAY be present in the request.  Any read-write property
