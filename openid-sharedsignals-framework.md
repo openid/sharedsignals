@@ -2090,7 +2090,7 @@ Subject Identifiers for Security Event Tokens {{SUBIDS}} specification.
 # Acknowledgements
 
 The authors wish to thank all members of the OpenID Foundation Shared Signals
-and Events Working Group who contributed to the development of this
+Working Group who contributed to the development of this
 specification.
 
 # Notices

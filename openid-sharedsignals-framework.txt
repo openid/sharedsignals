@@ -2899,8 +2899,8 @@ Tulshibagwale, et al.        Standards Track                   [Page 51]
 Appendix A.  Acknowledgements
 
    The authors wish to thank all members of the OpenID Foundation Shared
-   Signals and Events Working Group who contributed to the development
-   of this specification.
+   Signals Working Group who contributed to the development of this
+   specification.
 
 Appendix B.  Notices
 
