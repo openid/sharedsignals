@@ -22,10 +22,10 @@ Shared Signals                                          A. Tulshibagwale
 
 Abstract
 
-   This Shared Signals and Events (SSE) Framework enables sharing of
-   signals and events between cooperating peers.  It enables multiple
-   applications such as Risk Incident Sharing and Coordination (RISC)
-   and the Continuous Access Evaluation Profile ( [CAEP] )
+   This Shared Signals Framework enables sharing of signals and events
+   between cooperating peers.  It enables multiple applications such as
+   Risk Incident Sharing and Coordination (RISC) and the Continuous
+   Access Evaluation Profile ( [CAEP] )
 
    This specification defines:
 
@@ -73,7 +73,7 @@ Table of Contents
        3.4.2.  SAML Assertion ID Subject Identifier Format . . . . .   6
      3.5.  Receiver Subject Processing . . . . . . . . . . . . . . .   7
    4.  Event Properties  . . . . . . . . . . . . . . . . . . . . . .   7
-   5.  Example SETs that conform to the SSE framework  . . . . . . .   7
+   5.  Example SETs that conform to the Shared Signals framework . .   7
    6.  Transmitter Configuration Discovery . . . . . . . . . . . . .   9
      6.1.  Transmitter Configuration Metadata  . . . . . . . . . . .  10
      6.2.  Obtaining Transmitter Configuration Information . . . . .  10
@@ -103,7 +103,7 @@ Table of Contents
    11. Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .  46
      11.1.  Security Event Token Profile . . . . . . . . . . . . . .  46
        11.1.1.  Signature Key Resolution . . . . . . . . . . . . . .  46
-       11.1.2.  SSE Event Subject  . . . . . . . . . . . . . . . . .  46
+       11.1.2.  SSF Event Subject  . . . . . . . . . . . . . . . . .  46
        11.1.3.  SET Token Delivery Using HTTP Profile  . . . . . . .  49
    12. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  50
 
@@ -190,7 +190,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 3]
    A Simple Subject Member has a claim name and a value that is a
    Subject Identifier as defined in the Subject Identifiers for Security
    Event Tokens [SUBIDS].  Below is a non-normative example of a Simple
-   Subject Member in a SSE event.
+   Subject Member in a SSF event.
 
    "transferer": {
      "format": "email",
@@ -234,7 +234,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 4]
    Each member name MAY appear at most once in the Complex Subject
    value.
 
-   Below is a non-normative example of a Complex Subject claim in a SSE
+   Below is a non-normative example of a Complex Subject claim in a SSF
    event.
 
    "transferee": {
@@ -259,7 +259,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 4]
 
 3.3.  Subject Identifiers in SSF Events
 
-   A Subject Identifier in a SSE event MUST have an identifier format
+   A Subject Identifier in a SSF event MUST have an identifier format
    that is any one of:
 
    *  Defined in the IANA Registry defined in Subject Identifiers for
@@ -348,10 +348,10 @@ Tulshibagwale, et al.        Standards Track                    [Page 6]
 
 3.5.  Receiver Subject Processing
 
-   A SSE Receiver MUST make a best effort to process all members from a
-   Subject in an SSE event.  The Transmitter Configuration Metadata
+   A SSF Receiver MUST make a best effort to process all members from a
+   Subject in an SSF event.  The Transmitter Configuration Metadata
    Section 6.1 defined below MAY define certain members within a Complex
-   Subject to be Critical.  A SSE Receiver MUST discard any event that
+   Subject to be Critical.  A SSF Receiver MUST discard any event that
    contains a Subject with a Critical member that it is unable to
    process.
 
@@ -365,10 +365,10 @@ Tulshibagwale, et al.        Standards Track                    [Page 6]
    discoverability of all additional members is specified in the
    Discovery Section 6 section.
 
-5.  Example SETs that conform to the SSE framework
+5.  Example SETs that conform to the Shared Signals framework
 
    The following are hypothetical examples of SETs that conform to the
-   SSE framework.
+   Shared Signals framework.
 
    {
      "iss": "https://idp.example.com/",
@@ -394,7 +394,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 7]
                               SharedSignals                 January 2023
 
 
-        Figure 5: Example: SET Containing a SSE Event with a Simple
+        Figure 5: Example: SET Containing a SSF Event with a Simple
                                Subject Member
 
    {
@@ -424,7 +424,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 7]
      }
    }
 
-        Figure 6: Example: SET Containing a SSE Event with a Complex
+        Figure 6: Example: SET Containing a SSF Event with a Complex
                                Subject Member
 
 
@@ -469,7 +469,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 8]
      }
    }
 
-        Figure 7: Example: SET Containing a SSE Event with a Simple
+        Figure 7: Example: SET Containing a SSF Event with a Simple
                        Subject and a Property Member
 
    {
@@ -491,7 +491,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 8]
      }
    }
 
-      Figure 8: Example: SET Containing a SSE Event with a Proprietary
+      Figure 8: Example: SET Containing a SSF Event with a Proprietary
                          Subject Identifier Format
 
 6.  Transmitter Configuration Discovery
@@ -2499,10 +2499,10 @@ Tulshibagwale, et al.        Standards Track                   [Page 44]
 
 10.2.  Previously Consented Data
 
-   If SSE events contain new values for attributes of Subject Principals
+   If SSF events contain new values for attributes of Subject Principals
    that were previously exchanged between the Transmitter and Receiver,
    then there are no additional privacy considerations introduced by
-   providing the updated values in the SSE events, unless the attribute
+   providing the updated values in the SSF events, unless the attribute
    was exchanged under a one-time consent obtained from the user.
 
 10.3.  New Data
@@ -2526,13 +2526,13 @@ Tulshibagwale, et al.        Standards Track                   [Page 45]
 
    If a user has previously agreed with a Transmitter that they agree to
    release certain data to third-parties, then the Transmitter MAY send
-   such data in SSE events without additional consent of the user.  Such
+   such data in SSF events without additional consent of the user.  Such
    data MAY include organizational data about the Subject Principal that
    was generated by the Transmitter.
 
 10.3.2.  Consentable Data
 
-   If a Transmitter intends to include data in SSE events that is not
+   If a Transmitter intends to include data in SSF events that is not
    previously consented to be released by the user, then the Transmitter
    MUST obtain consent to release such data from the user in accordance
    with the Transmitter's privacy policy.
@@ -2556,19 +2556,19 @@ Tulshibagwale, et al.        Standards Track                   [Page 45]
 
 11.1.  Security Event Token Profile
 
-   This section provides SSE profiling specifications for the Security
+   This section provides SSF profiling specifications for the Security
    Event Token [RFC8417] spec.
 
 11.1.1.  Signature Key Resolution
 
    The signature key can be obtained through jwks_uri, see Section 6.
 
-11.1.2.  SSE Event Subject
+11.1.2.  SSF Event Subject
 
-   The subject of a SSE event is identified by the subject claim within
+   The subject of a SSF event is identified by the subject claim within
    the event payload, whose value is a Subject Identifier.  The subject
-   claim is REQUIRED for all SSE events.  The JWT sub claim MUST NOT be
-   present in any SET containing a SSE event.
+   claim is REQUIRED for all SSF events.  The JWT sub claim MUST NOT be
+   present in any SET containing a SSF event.
 
 
 
@@ -2578,9 +2578,9 @@ Tulshibagwale, et al.        Standards Track                   [Page 46]
                               SharedSignals                 January 2023
 
 
-11.1.2.1.  SSE Event Properties
+11.1.2.1.  SSF Event Properties
 
-   The SSE event MAY contain additional claims within the event payload
+   The SSF event MAY contain additional claims within the event payload
    that are specific to the event type.
 
    {
@@ -2623,7 +2623,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 46]
 
 11.1.2.2.  Explicit Typing of SETs
 
-   SSE events MUST use explicit typing as defined in Section 2.3 of
+   SSF events MUST use explicit typing as defined in Section 2.3 of
    [RFC8417].
 
 
@@ -2644,12 +2644,12 @@ Tulshibagwale, et al.        Standards Track                   [Page 47]
    The purpose is defense against confusion with other JWTs, as
    described in Sections 4.5, 4.6 and 4.7 of [RFC8417].  While current
    Id Token [IDTOKEN] validators may not be using the typ header
-   parameter, by requiring it for SSE SETs a distinct value is
+   parameter, by requiring it for SSF SETs a distinct value is
    guaranteed for future validators.
 
 11.1.2.3.  The "exp" Claim
 
-   The exp claim MUST NOT be used in SSE SETs.
+   The exp claim MUST NOT be used in SSF SETs.
 
    The purpose is defense in depth against confusion with other JWTs, as
    described in Sections 4.5 and 4.6 of [RFC8417].
@@ -2716,12 +2716,12 @@ Tulshibagwale, et al.        Standards Track                   [Page 48]
 
    Of particular concern is the possibility that SETs are confused for
    other kinds of JWTs.  The Security Considerations section of
-   [RFC8417] has several sub-sections on this subject.  The SSE
+   [RFC8417] has several sub-sections on this subject.  The SSF
    Framework is asking for further restrictions:
 
    *  The sub claim MUST NOT be present, as described in Section 11.1.2.
 
-   *  SSE SETs MUST use explicit typing, as described in
+   *  SSF SETs MUST use explicit typing, as described in
       Section 11.1.2.2.
 
    *  The exp claim MUST NOT be present, as described in
@@ -2729,7 +2729,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 48]
 
 11.1.3.  SET Token Delivery Using HTTP Profile
 
-   This section provides SSE profiling specifications for the
+   This section provides SSF profiling specifications for the
    [DELIVERYPUSH] and [DELIVERYPOLL] specs.
 
 11.1.3.1.  Stream Configuration Metadata
@@ -2748,7 +2748,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 49]
 
 11.1.3.1.1.  Push Delivery using HTTP
 
-   This section provides SSE profiling specifications for the
+   This section provides SSF profiling specifications for the
    [DELIVERYPUSH] spec.
 
    method  https://schemas.openid.net/secevent/risc/delivery-method/push
@@ -2766,7 +2766,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 49]
 
 11.1.3.1.2.  Polling Delivery using HTTP
 
-   This section provides SSE profiling specifications for the
+   This section provides SSF profiling specifications for the
    [DELIVERYPOLL] spec.
 
    method  https://schemas.openid.net/secevent/risc/delivery-method/poll

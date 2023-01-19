@@ -179,7 +179,7 @@ informative:
 
 --- abstract
 
-This Shared Signals and Events (SSE) Framework enables sharing of signals and events
+This Shared Signals Framework enables sharing of signals and events
 between cooperating peers. It enables multiple applications such as Risk Incident Sharing
 and Coordination (RISC) and the Continuous Access Evaluation Profile ( {{CAEP}} )
 
@@ -248,7 +248,7 @@ A Subject may be a `simple subject` or a `complex subject`.
 
 A Simple Subject Member has a claim name and a value that is a `Subject
 Identifier` as defined in the Subject Identifiers for Security Event Tokens
-{{SUBIDS}}. Below is a non-normative example of a Simple Subject Member in a SSE
+{{SUBIDS}}. Below is a non-normative example of a Simple Subject Member in a SSF
 event.
 
 ~~~ json
@@ -289,7 +289,7 @@ group
 Additional Subject Member names MAY be used in Complex Subjects. Each member name MAY
 appear at most once in the Complex Subject value.
 
-Below is a non-normative example of a Complex Subject claim in a SSE event.
+Below is a non-normative example of a Complex Subject claim in a SSF event.
 
 ~~~ json
 "transferee": {
@@ -314,7 +314,7 @@ Subject Principal.
 
 ## Subject Identifiers in SSF Events {#subject-ids-in-ssf}
 
-A Subject Identifier in a SSE event MUST have an identifier format that is any
+A Subject Identifier in a SSF event MUST have an identifier format that is any
 one of:
 
 * Defined in the IANA Registry defined in Subject Identifiers for Security
@@ -390,9 +390,9 @@ Subject Identifier Format.
 
 ## Receiver Subject Processing {#receiver-subject-processing}
 
-A SSE Receiver MUST make a best effort to process all members from a Subject in
-an SSE event. The Transmitter Configuration Metadata {{discovery-meta}} defined
-below MAY define certain members within a Complex Subject to be Critical. A SSE
+A SSF Receiver MUST make a best effort to process all members from a Subject in
+an SSF event. The Transmitter Configuration Metadata {{discovery-meta}} defined
+below MAY define certain members within a Complex Subject to be Critical. A SSF
 Receiver MUST discard any event that contains a Subject with a Critical member
 that it is unable to process.
 
@@ -405,9 +405,10 @@ members that are not specified in the event types spec, then the name of such
 members MUST be a URI. The discoverability of all additional members is 
 specified in the Discovery {{discovery}} section.
 
-# Example SETs that conform to the SSE framework {#events-examples}
+# Example SETs that conform to the Shared Signals framework {#events-examples}
 
-The following are hypothetical examples of SETs that conform to the SSE framework.
+The following are hypothetical examples of SETs that conform to the Shared
+Signals framework.
 
 ~~~ json
 {
@@ -425,7 +426,7 @@ The following are hypothetical examples of SETs that conform to the SSE framewor
   }
 }
 ~~~
-{: #subject-ids-ex-simple title="Example: SET Containing a SSE Event with a Simple Subject Member"}
+{: #subject-ids-ex-simple title="Example: SET Containing a SSF Event with a Simple Subject Member"}
 
 ~~~ json
 {
@@ -455,7 +456,7 @@ The following are hypothetical examples of SETs that conform to the SSE framewor
   }
 }
 ~~~
-{: #subject-ids-ex-complex title="Example: SET Containing a SSE Event with a Complex Subject Member"}
+{: #subject-ids-ex-complex title="Example: SET Containing a SSF Event with a Complex Subject Member"}
 
 ~~~ json
 {
@@ -477,7 +478,7 @@ The following are hypothetical examples of SETs that conform to the SSE framewor
   }
 }
 ~~~
-{: #subject-properties-ex title="Example: SET Containing a SSE Event with a Simple Subject and a Property Member"}
+{: #subject-properties-ex title="Example: SET Containing a SSF Event with a Simple Subject and a Property Member"}
 
 ~~~ json
 {
@@ -499,7 +500,7 @@ The following are hypothetical examples of SETs that conform to the SSE framewor
   }
 }
 ~~~
-{: #subject-custom-type-ex title="Example: SET Containing a SSE Event with a Proprietary Subject Identifier Format"}
+{: #subject-custom-type-ex title="Example: SET Containing a SSF Event with a Proprietary Subject Identifier Format"}
 
 # Transmitter Configuration Discovery {#discovery}
 
@@ -1882,10 +1883,10 @@ communicating with a given party in order to reduce the possibility of
 information leakage.
 
 ## Previously Consented Data {#previously-consented-data} 
-If SSE events contain new values for attributes of Subject Principals that were
+If SSF events contain new values for attributes of Subject Principals that were
 previously exchanged between the Transmitter and Receiver, then there are no
 additional privacy considerations introduced by providing the updated values in
-the SSE events, unless the attribute was exchanged under a one-time consent
+the SSF events, unless the attribute was exchanged under a one-time consent
 obtained from the user.
 
 ## New Data {#new-data} 
@@ -1894,13 +1895,13 @@ or data whose consent to exchange has expired has the following considerations:
 
 ### Organizational Data {#organizational-data} 
 If a user has previously agreed with a Transmitter that they agree to release
-certain data to third-parties, then the Transmitter MAY send such data in SSE
+certain data to third-parties, then the Transmitter MAY send such data in SSF
 events without additional consent of the user. Such data MAY include
 organizational data about the Subject Principal that was generated by the
 Transmitter.
 
 ### Consentable Data {#consentable-data} 
-If a Transmitter intends to include data in SSE events that is not previously
+If a Transmitter intends to include data in SSF events that is not previously
 consented to be released by the user, then the Transmitter MUST obtain consent
 to release such data from the user in accordance with the Transmitter's privacy
 policy.
@@ -1919,20 +1920,20 @@ The CAEP use cases that set the requirements are described in CAEP Use Cases (TO
         reference when file is added to repository.)
 
 ## Security Event Token Profile {#set-profle} 
-This section provides SSE profiling specifications for the Security Event Token
+This section provides SSF profiling specifications for the Security Event Token
 {{RFC8417}} spec.
 
 ### Signature Key Resolution {#signature-key-resolution} 
 The signature key can be obtained through `jwks_uri`, see {{discovery}}.
 
-### SSE Event Subject {#event-subjects} 
-The subject of a SSE event is identified by the `subject` claim within the event
+### SSF Event Subject {#event-subjects} 
+The subject of a SSF event is identified by the `subject` claim within the event
 payload, whose value is a Subject Identifier. The `subject` claim is REQUIRED
-for all SSE events. The JWT `sub` claim MUST NOT be present in any SET containing
-a SSE event.
+for all SSF events. The JWT `sub` claim MUST NOT be present in any SET containing
+a SSF event.
 
-#### SSE Event Properties {#event-properties} 
-The SSE event MAY contain additional claims within the event payload that are
+#### SSF Event Properties {#event-properties} 
+The SSF event MAY contain additional claims within the event payload that are
 specific to the event type.
 
 ~~~ json
@@ -1975,7 +1976,7 @@ specific to the event type.
 {: #caep-event-properties-example title="Example: SET Containing a CAEP Event with Properties"}
 
 #### Explicit Typing of SETs {#explicit-typing} 
-SSE events MUST use explicit typing as defined in Section 2.3 of {{RFC8417}}.
+SSF events MUST use explicit typing as defined in Section 2.3 of {{RFC8417}}.
 
 ~~~ json
 {
@@ -1987,11 +1988,11 @@ SSE events MUST use explicit typing as defined in Section 2.3 of {{RFC8417}}.
 
 The purpose is defense against confusion with other JWTs, as described in
 Sections 4.5, 4.6 and 4.7 of {{RFC8417}}. While current Id Token {{IDTOKEN}}
-validators may not be using the `typ` header parameter, by requiring it for SSE
+validators may not be using the `typ` header parameter, by requiring it for SSF
 SETs a distinct value is guaranteed for future validators.
 
 #### The "exp" Claim {#exp-claim} 
-The `exp` claim MUST NOT be used in SSE SETs.
+The `exp` claim MUST NOT be used in SSF SETs.
 
 The purpose is defense in depth against confusion with other JWTs, as described
 in Sections 4.5 and 4.6 of {{RFC8417}}.
@@ -2037,14 +2038,14 @@ permitted only if they are alternative URIs defining the exact same event type.
 ##### Distinguishing SETs from other Kinds of JWTs
 Of particular concern is the possibility that SETs are confused for other kinds
 of JWTs. The Security Considerations section of {{RFC8417}} has several sub-sections
-on this subject. The SSE Framework is asking for further restrictions:
+on this subject. The SSF Framework is asking for further restrictions:
 
 * The `sub` claim MUST NOT be present, as described in {{event-subjects}}.
-* SSE SETs MUST use explicit typing, as described in {{explicit-typing}}.
+* SSF SETs MUST use explicit typing, as described in {{explicit-typing}}.
 * The `exp` claim MUST NOT be present, as described in {{exp-claim}}.
 
 ### SET Token Delivery Using HTTP Profile {#set-token-delivery-using-http-profile}
-This section provides SSE profiling specifications for the {{DELIVERYPUSH}} and
+This section provides SSF profiling specifications for the {{DELIVERYPUSH}} and
 {{DELIVERYPOLL}} specs.
 
 #### Stream Configuration Metadata {#delivery-meta} 
@@ -2052,7 +2053,7 @@ Each delivery method is identified by a URI, specified below by the `method`
 metadata.
 
 ##### Push Delivery using HTTP
-This section provides SSE profiling specifications for the {{DELIVERYPUSH}} spec.
+This section provides SSF profiling specifications for the {{DELIVERYPUSH}} spec.
 
 method
 : `https://schemas.openid.net/secevent/risc/delivery-method/push`
@@ -2069,7 +2070,7 @@ authorization_header
   by the Receiver.
   
 ##### Polling Delivery using HTTP
-This section provides SSE profiling specifications for the {{DELIVERYPOLL}} spec.
+This section provides SSF profiling specifications for the {{DELIVERYPOLL}} spec.
 
 method
 : `https://schemas.openid.net/secevent/risc/delivery-method/poll`
