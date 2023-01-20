@@ -396,10 +396,10 @@ members that are not specified in the event types spec, then the name of such
 members MUST be a URI. The discoverability of all additional members is 
 specified in the Discovery {{discovery}} section.
 
-# Example SETs that conform to the Shared Signals framework {#events-examples}
+# Example SETs that conform to the Shared Signals Framework {#events-examples}
 
 The following are hypothetical examples of SETs that conform to the Shared
-Signals framework.
+Signals Framework.
 
 ~~~ json
 {
@@ -2029,7 +2029,7 @@ permitted only if they are alternative URIs defining the exact same event type.
 ##### Distinguishing SETs from other Kinds of JWTs
 Of particular concern is the possibility that SETs are confused for other kinds
 of JWTs. The Security Considerations section of {{RFC8417}} has several sub-sections
-on this subject. The SSF Framework is asking for further restrictions:
+on this subject. The Shared Signals Framework is asking for further restrictions:
 
 * The `sub` claim MUST NOT be present, as described in {{event-subjects}}.
 * SSF SETs MUST use explicit typing, as described in {{explicit-typing}}.
