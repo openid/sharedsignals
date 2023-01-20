@@ -179,7 +179,7 @@ informative:
 
 --- abstract
 
-This Shared Signals Framework enables sharing of signals and events
+This Shared Signals Framework (SSF) enables sharing of signals and events
 between cooperating peers. It enables multiple applications such as Risk Incident Sharing
 and Coordination (RISC) and the Continuous Access Evaluation Profile ( {{CAEP}} )
 
@@ -187,31 +187,22 @@ This specification defines:
 
 * A profile for {{RFC8417}} (Security Event Tokens)
 * Subject Principals
-* A profile for {{SUBIDS}} (Subject Identifiers for Security Event Tokens)
-* Configuration information and discovery method for Transmitters
-* A Management API for Event Streams
-* A profile for {{DELIVERYPUSH}} (Push-Based SET Token Delivery Using HTTP)
-* A profile for {{DELIVERYPOLL}} (Poll-Based Security Event Token (SET) Delivery Using HTTP)
+* Subject Claims in SSF Events
 * Event Types
 * Event Properties
+* Configuration information and discovery method for Transmitters
+* A Management API for Event Streams
+
+This spec also directly profiles several IETF Security Events drafts:
+
+* Security Event Tokens {{RFC8417}}
+* Subject Identifiers for Security Event Tokens {{SUBIDS}}
+* Push-Based SET Token Delivery Using HTTP {{DELIVERYPUSH}} 
+* Poll-Based Security Event Token (SET) Delivery Using HTTP {{DELIVERYPOLL}} 
 
 --- middle
 
 # Introduction {#introduction}
-
-The OpenID Shared Signals Framework (SSF) defines how independent parties can:
-
-* Create streams of events between a Transmitter and a Receiver
-* Describe the types of supported events and desired events
-* Control the flow within a stream
-* Asynchronously send and receive events
-* Verify the liveness of a stream
-* Describe the subject within an event
-* Describe the format of events
-
-The events in SSF streams are always Security Event Tokens (SETs) {{RFC8417}},
-and are delivered using HTTP PUSH {{DELIVERYPUSH}} or HTTP POLL {{DELIVERYPOLL}}
-mechanisms
 
 ## Notational Considerations
 
