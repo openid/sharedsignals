@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="Common,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
-<title>OpenID Shared Signals and Events Framework - draft 02</title>
+<title>OpenID Shared Signals and Events Framework Specification - draft 02</title>
 <meta content="Atul Tulshibagwale" name="author">
 <meta content="Tim Cappalli" name="author">
 <meta content="Marius Scurtescu" name="author">
@@ -14,7 +14,7 @@
 <meta content="
        This Shared Signals and Events (SSE) Framework enables sharing of signals and events
 between cooperating peers. It enables multiple applications such as Risk Incident Sharing
-and Coordination (RISC) and the Continuous Access Evaluation Profile (   ) 
+and Coordination (RISC) and the Continuous Access Evaluation Profile ( ) 
        This specification defines: 
        
          A profile for   (Security Event Tokens) 
@@ -34,7 +34,7 @@ and Coordination (RISC) and the Continuous Access Evaluation Profile (   )
        
     " name="description">
 <meta content="xml2rfc 3.15.3" name="generator">
-<meta content="openid-sharedsignals-framework-1_0" name="ietf.draft">
+<meta content="openid-sse-framework-1_0" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.15.3
     Python 3.9.6
@@ -1226,7 +1226,7 @@ li > p:last-of-type:only-child {
 <table class="ears">
 <thead><tr>
 <td class="left"></td>
-<td class="center">SharedSignals</td>
+<td class="center">sse</td>
 <td class="right">January 2023</td>
 </tr></thead>
 <tfoot><tr>
@@ -1239,10 +1239,10 @@ li > p:last-of-type:only-child {
 <div id="internal-metadata" class="document-information">
 <dl id="identifiers">
 <dt class="label-workgroup">Workgroup:</dt>
-<dd class="workgroup">Shared Signals</dd>
+<dd class="workgroup">Shared Signals and Events Working Group</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-01-18" class="published">18 January 2023</time>
+<time datetime="2023-01-26" class="published">26 January 2023</time>
     </dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
@@ -1273,15 +1273,15 @@ li > p:last-of-type:only-child {
 </dd>
 </dl>
 </div>
-<h1 id="title">OpenID Shared Signals and Events Framework - draft 02</h1>
+<h1 id="title">OpenID Shared Signals and Events Framework Specification - draft 02</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">This Shared Signals and Events (SSE) Framework enables sharing of signals and events
 between cooperating peers. It enables multiple applications such as Risk Incident Sharing
-and Coordination (RISC) and the Continuous Access Evaluation Profile ( <span>[<a href="#CAEP" class="cite xref">CAEP</a>]</span> )<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+and Coordination (RISC) and the Continuous Access Evaluation Profile (<span>[<a href="#CAEP" class="cite xref">CAEP</a>]</span>)<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 <p id="section-abstract-2">This specification defines:<a href="#section-abstract-2" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-abstract-3.1">A profile for <span>[<a href="#RFC8417" class="cite xref">RFC8417</a>]</span> (Security Event Tokens)<a href="#section-abstract-3.1" class="pilcrow">¶</a>
+<li class="normal" id="section-abstract-3.1">A profile for <span>[<a href="#SET" class="cite xref">SET</a>]</span> (Security Event Tokens)<a href="#section-abstract-3.1" class="pilcrow">¶</a>
 </li>
         <li class="normal" id="section-abstract-3.2">Subject Principals<a href="#section-abstract-3.2" class="pilcrow">¶</a>
 </li>
@@ -1298,7 +1298,7 @@ and Coordination (RISC) and the Continuous Access Evaluation Profile ( <span>[<a
       </ul>
 <p id="section-abstract-4">This spec also directly profiles several IETF Security Events drafts:<a href="#section-abstract-4" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-abstract-5.1">Security Event Tokens <span>[<a href="#RFC8417" class="cite xref">RFC8417</a>]</span><a href="#section-abstract-5.1" class="pilcrow">¶</a>
+<li class="normal" id="section-abstract-5.1">Security Event Tokens <span>[<a href="#SET" class="cite xref">SET</a>]</span><a href="#section-abstract-5.1" class="pilcrow">¶</a>
 </li>
         <li class="normal" id="section-abstract-5.2">Subject Identifiers for Security Event Tokens <span>[<a href="#SUBIDS" class="cite xref">SUBIDS</a>]</span><a href="#section-abstract-5.2" class="pilcrow">¶</a>
 </li>
@@ -3992,7 +3992,7 @@ policy.<a href="#section-10.3.2-1" class="pilcrow">¶</a></p>
 <p id="section-11-1">This section is a profile of the following IETF SecEvent specifications:<a href="#section-11-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-11-2.1">
-          <span>[<a href="#RFC8417" class="cite xref">RFC8417</a>]</span> Security Event Token (SET)<a href="#section-11-2.1" class="pilcrow">¶</a>
+          <span>[<a href="#SET" class="cite xref">SET</a>]</span> Security Event Token (SET)<a href="#section-11-2.1" class="pilcrow">¶</a>
 </li>
         <li class="normal" id="section-11-2.2">
           <span>[<a href="#DELIVERYPUSH" class="cite xref">DELIVERYPUSH</a>]</span> Push-Based SET Token Delivery Using HTTP<a href="#section-11-2.2" class="pilcrow">¶</a>
@@ -4011,7 +4011,7 @@ Security Events RISC Use Cases.<a href="#section-11-3" class="pilcrow">¶</a></p
 <a href="#section-11.1" class="section-number selfRef">11.1. </a><a href="#name-security-event-token-profil" class="section-name selfRef">Security Event Token Profile</a>
         </h3>
 <p id="section-11.1-1">This section provides SSE profiling specifications for the Security Event Token
-<span>[<a href="#RFC8417" class="cite xref">RFC8417</a>]</span> spec.<a href="#section-11.1-1" class="pilcrow">¶</a></p>
+<span>[<a href="#SET" class="cite xref">SET</a>]</span> spec.<a href="#section-11.1-1" class="pilcrow">¶</a></p>
 <div id="signature-key-resolution">
 <section id="section-11.1.1">
           <h4 id="name-signature-key-resolution">
@@ -4094,7 +4094,7 @@ specific to the event type.<a href="#section-11.1.2.1-1" class="pilcrow">¶</a><
             <h5 id="name-explicit-typing-of-sets">
 <a href="#section-11.1.2.2" class="section-number selfRef">11.1.2.2. </a><a href="#name-explicit-typing-of-sets" class="section-name selfRef">Explicit Typing of SETs</a>
             </h5>
-<p id="section-11.1.2.2-1">SSE events MUST use explicit typing as defined in Section 2.3 of <span>[<a href="#RFC8417" class="cite xref">RFC8417</a>]</span>.<a href="#section-11.1.2.2-1" class="pilcrow">¶</a></p>
+<p id="section-11.1.2.2-1">SSE events MUST use explicit typing as defined in Section 2.3 of <span>[<a href="#SET" class="cite xref">SET</a>]</span>.<a href="#section-11.1.2.2-1" class="pilcrow">¶</a></p>
 <span id="name-explicitly-typed-jose-heade"></span><div id="explicit-type-header">
 <figure id="figure-44">
               <div class="lang-json sourcecode" id="section-11.1.2.2-2.1">
@@ -4110,7 +4110,7 @@ specific to the event type.<a href="#section-11.1.2.1-1" class="pilcrow">¶</a><
               </figcaption></figure>
 </div>
 <p id="section-11.1.2.2-3">The purpose is defense against confusion with other JWTs, as described in
-Sections 4.5, 4.6 and 4.7 of <span>[<a href="#RFC8417" class="cite xref">RFC8417</a>]</span>. While current Id Token <span>[<a href="#IDTOKEN" class="cite xref">IDTOKEN</a>]</span>
+Sections 4.5, 4.6 and 4.7 of <span>[<a href="#SET" class="cite xref">SET</a>]</span>. While current Id Token <span>[<a href="#IDTOKEN" class="cite xref">IDTOKEN</a>]</span>
 validators may not be using the <code>typ</code> header parameter, by requiring it for SSE
 SETs a distinct value is guaranteed for future validators.<a href="#section-11.1.2.2-3" class="pilcrow">¶</a></p>
 </section>
@@ -4122,7 +4122,7 @@ SETs a distinct value is guaranteed for future validators.<a href="#section-11.1
             </h5>
 <p id="section-11.1.2.3-1">The <code>exp</code> claim MUST NOT be used in SSE SETs.<a href="#section-11.1.2.3-1" class="pilcrow">¶</a></p>
 <p id="section-11.1.2.3-2">The purpose is defense in depth against confusion with other JWTs, as described
-in Sections 4.5 and 4.6 of <span>[<a href="#RFC8417" class="cite xref">RFC8417</a>]</span>.<a href="#section-11.1.2.3-2" class="pilcrow">¶</a></p>
+in Sections 4.5 and 4.6 of <span>[<a href="#SET" class="cite xref">SET</a>]</span>.<a href="#section-11.1.2.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="aud-claim">
@@ -4186,7 +4186,7 @@ permitted only if they are alternative URIs defining the exact same event type.<
 <a href="#section-11.1.2.6.1" class="section-number selfRef">11.1.2.6.1. </a><a href="#name-distinguishing-sets-from-ot" class="section-name selfRef">Distinguishing SETs from other Kinds of JWTs</a>
               </h6>
 <p id="section-11.1.2.6.1-1">Of particular concern is the possibility that SETs are confused for other kinds
-of JWTs. The Security Considerations section of <span>[<a href="#RFC8417" class="cite xref">RFC8417</a>]</span> has several sub-sections
+of JWTs. The Security Considerations section of <span>[<a href="#SET" class="cite xref">SET</a>]</span> has several sub-sections
 on this subject. The SSE Framework is asking for further restrictions:<a href="#section-11.1.2.6.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-11.1.2.6.1-2.1">The <code>sub</code> claim MUST NOT be present, as described in <a href="#event-subjects" class="auto internal xref">Section 11.1.2</a>.<a href="#section-11.1.2.6.1-2.1" class="pilcrow">¶</a>
@@ -4351,9 +4351,9 @@ Subject Identifiers for Security Event Tokens <span>[<a href="#SUBIDS" class="ci
         <dd>
 <span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="RFC8417">[RFC8417]</dt>
+<dt id="SET">[SET]</dt>
         <dd>
-<span class="refAuthor">Hunt, P., Ed.</span>, <span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Denniss, W.</span>, and <span class="refAuthor">M. Ansari</span>, <span class="refTitle">"Security Event Token (SET)"</span>, <span class="seriesInfo">RFC 8417</span>, <span class="seriesInfo">DOI 10.17487/RFC8417</span>, <time datetime="2018-07" class="refDate">July 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8417">https://www.rfc-editor.org/info/rfc8417</a>&gt;</span>. </dd>
+<span class="refAuthor">Hunt, P.</span>, <span class="refAuthor">Jones, M. B.</span>, <span class="refAuthor">Denniss, W.</span>, and <span class="refAuthor">M. A. Ansari</span>, <span class="refTitle">"Security Event Token (SET)"</span>, <time datetime="2018-04" class="refDate">April 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8417">https://www.rfc-editor.org/info/rfc8417</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="SUBIDS">[SUBIDS]</dt>
       <dd>

@@ -2,7 +2,7 @@
 
 
 
-Shared Signals                                          A. Tulshibagwale
+Shared Signals and Events Working Group                 A. Tulshibagwale
                                                                     SGNL
                                                              T. Cappalli
                                                                Microsoft
@@ -14,22 +14,22 @@ Shared Signals                                          A. Tulshibagwale
                                                                   Yubico
                                                                  S. Miel
                                                                    Cisco
-                                                         18 January 2023
+                                                         26 January 2023
 
 
-         OpenID Shared Signals and Events Framework - draft 02
-                   openid-sharedsignals-framework-1_0
+  OpenID Shared Signals and Events Framework Specification - draft 02
+                        openid-sse-framework-1_0
 
 Abstract
 
    This Shared Signals and Events (SSE) Framework enables sharing of
    signals and events between cooperating peers.  It enables multiple
    applications such as Risk Incident Sharing and Coordination (RISC)
-   and the Continuous Access Evaluation Profile ( [CAEP] )
+   and the Continuous Access Evaluation Profile ([CAEP])
 
    This specification defines:
 
-   *  A profile for [RFC8417] (Security Event Tokens)
+   *  A profile for [SET] (Security Event Tokens)
 
    *  Subject Principals
 
@@ -45,7 +45,7 @@ Abstract
 
    This spec also directly profiles several IETF Security Events drafts:
 
-   *  Security Event Tokens [RFC8417]
+   *  Security Event Tokens [SET]
 
    *  Subject Identifiers for Security Event Tokens [SUBIDS]
 
@@ -55,7 +55,7 @@ Abstract
 
 Tulshibagwale, et al.        Standards Track                    [Page 1]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
    *  Poll-Based Security Event Token (SET) Delivery Using HTTP
@@ -111,7 +111,7 @@ Table of Contents
 
 Tulshibagwale, et al.        Standards Track                    [Page 2]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
        11.1.2.  SSE Event Subject  . . . . . . . . . . . . . . . . .  45
@@ -167,7 +167,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 2]
 
 Tulshibagwale, et al.        Standards Track                    [Page 3]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
 3.1.  Simple Subject Members
@@ -223,7 +223,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 3]
 
 Tulshibagwale, et al.        Standards Track                    [Page 4]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
    "transferee": {
@@ -279,7 +279,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 4]
 
 Tulshibagwale, et al.        Standards Track                    [Page 5]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
       defined in [RFC7519]
@@ -335,7 +335,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 5]
 
 Tulshibagwale, et al.        Standards Track                    [Page 6]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
 3.5.  Receiver Subject Processing
@@ -391,7 +391,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 6]
 
 Tulshibagwale, et al.        Standards Track                    [Page 7]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
    {
@@ -447,7 +447,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 7]
 
 Tulshibagwale, et al.        Standards Track                    [Page 8]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
         Figure 7: Example: SET Containing a SSE Event with a Simple
@@ -503,7 +503,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 8]
 
 Tulshibagwale, et al.        Standards Track                    [Page 9]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
    status_endpoint  OPTIONAL, the URL of the Status Endpoint.
@@ -559,7 +559,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 9]
 
 Tulshibagwale, et al.        Standards Track                   [Page 10]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
    the following request to the Issuer https://tr.example.com/issuer1 to
@@ -615,7 +615,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 10]
 
 Tulshibagwale, et al.        Standards Track                   [Page 11]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
    HTTP/1.1 200 OK
@@ -671,7 +671,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 11]
 
 Tulshibagwale, et al.        Standards Track                   [Page 12]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
    This section defines an HTTP API to be implemented by Event
@@ -727,7 +727,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 12]
 
 Tulshibagwale, et al.        Standards Track                   [Page 13]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
       Streams, as well as read and update an Event Stream's current
@@ -783,7 +783,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 13]
 
 Tulshibagwale, et al.        Standards Track                   [Page 14]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
       identifying the set of events supported by the Transmitter for
@@ -839,7 +839,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 14]
 
 Tulshibagwale, et al.        Standards Track                   [Page 15]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
    events_requested  *Receiver-Supplied*, An array of URIs identifying
@@ -895,7 +895,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 15]
 
 Tulshibagwale, et al.        Standards Track                   [Page 16]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
    HTTP/1.1 200 OK
@@ -951,7 +951,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 16]
 
 Tulshibagwale, et al.        Standards Track                   [Page 17]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
 7.1.1.2.  Reading a Stream's Configuration
@@ -1007,7 +1007,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 17]
 
 Tulshibagwale, et al.        Standards Track                   [Page 18]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
    HTTP/1.1 200 OK
@@ -1063,7 +1063,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 18]
 
 Tulshibagwale, et al.        Standards Track                   [Page 19]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
    HTTP/1.1 200 OK
@@ -1119,7 +1119,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 19]
 
 Tulshibagwale, et al.        Standards Track                   [Page 20]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
        ],
@@ -1175,7 +1175,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 20]
 
 Tulshibagwale, et al.        Standards Track                   [Page 21]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
    HTTP/1.1 200 OK
@@ -1231,7 +1231,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 21]
 
 Tulshibagwale, et al.        Standards Track                   [Page 22]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
            +======+===========================================+
@@ -1287,7 +1287,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 22]
 
 Tulshibagwale, et al.        Standards Track                   [Page 23]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
    PATCH /sse/stream HTTP/1.1
@@ -1343,7 +1343,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 23]
 
 Tulshibagwale, et al.        Standards Track                   [Page 24]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
    HTTP/1.1 200 OK
@@ -1399,7 +1399,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 24]
 
 Tulshibagwale, et al.        Standards Track                   [Page 25]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
           +======+=============================================+
@@ -1455,7 +1455,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 25]
 
 Tulshibagwale, et al.        Standards Track                   [Page 26]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
    PUT /sse/stream HTTP/1.1
@@ -1511,7 +1511,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 26]
 
 Tulshibagwale, et al.        Standards Track                   [Page 27]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
    HTTP/1.1 200 OK
@@ -1567,7 +1567,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 27]
 
 Tulshibagwale, et al.        Standards Track                   [Page 28]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
         +======+==================================================+
@@ -1623,7 +1623,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 28]
 
 Tulshibagwale, et al.        Standards Track                   [Page 29]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
    +======+===========================================================+
@@ -1679,7 +1679,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 29]
 
 Tulshibagwale, et al.        Standards Track                   [Page 30]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
       requested.
@@ -1735,7 +1735,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 30]
 
 Tulshibagwale, et al.        Standards Track                   [Page 31]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
    GET /sse/status?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f&subject=<url-encoded-subject> HTTP/1.1
@@ -1791,7 +1791,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 31]
 
 Tulshibagwale, et al.        Standards Track                   [Page 32]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
    2.  If the Receiver presents a valid OAuth token, but the Transmitter
@@ -1847,7 +1847,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 32]
 
 Tulshibagwale, et al.        Standards Track                   [Page 33]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
    The following is a non-normative example of an Update Stream Status
@@ -1903,7 +1903,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 33]
 
 Tulshibagwale, et al.        Standards Track                   [Page 34]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
         +======+==================================================+
@@ -1959,7 +1959,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 34]
 
 Tulshibagwale, et al.        Standards Track                   [Page 35]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
       the Event Receiver has verified the Subject claim.  When false, it
@@ -2015,7 +2015,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 35]
 
 Tulshibagwale, et al.        Standards Track                   [Page 36]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
       +======+=====================================================+
@@ -2071,7 +2071,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 36]
 
 Tulshibagwale, et al.        Standards Track                   [Page 37]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
    POST /sse/subjects:remove HTTP/1.1
@@ -2127,7 +2127,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 37]
 
 Tulshibagwale, et al.        Standards Track                   [Page 38]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
 7.1.4.  Verification
@@ -2183,7 +2183,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 38]
 
 Tulshibagwale, et al.        Standards Track                   [Page 39]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
    stream_id  REQUIRED.  The stream that the verification event is being
@@ -2239,7 +2239,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 39]
 
 Tulshibagwale, et al.        Standards Track                   [Page 40]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
    POST /sse/verify HTTP/1.1
@@ -2295,7 +2295,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 40]
 
 Tulshibagwale, et al.        Standards Track                   [Page 41]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
    If a Transmitter decides to change the status of an Event Stream from
@@ -2351,7 +2351,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 41]
 
 Tulshibagwale, et al.        Standards Track                   [Page 42]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
    The receiver may obtain an access token using the [CLIENTCRED] Client
@@ -2407,7 +2407,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 42]
 
 Tulshibagwale, et al.        Standards Track                   [Page 43]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
 9.3.  Malicious Subject Removal
@@ -2463,7 +2463,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 43]
 
 Tulshibagwale, et al.        Standards Track                   [Page 44]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
 10.3.1.  Organizational Data
@@ -2486,7 +2486,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 44]
    This section is a profile of the following IETF SecEvent
    specifications:
 
-   *  [RFC8417] Security Event Token (SET)
+   *  [SET] Security Event Token (SET)
 
    *  [DELIVERYPUSH] Push-Based SET Token Delivery Using HTTP
 
@@ -2501,7 +2501,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 44]
 11.1.  Security Event Token Profile
 
    This section provides SSE profiling specifications for the Security
-   Event Token [RFC8417] spec.
+   Event Token [SET] spec.
 
 11.1.1.  Signature Key Resolution
 
@@ -2519,7 +2519,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 44]
 
 Tulshibagwale, et al.        Standards Track                   [Page 45]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
 11.1.2.1.  SSE Event Properties
@@ -2568,14 +2568,14 @@ Tulshibagwale, et al.        Standards Track                   [Page 45]
 11.1.2.2.  Explicit Typing of SETs
 
    SSE events MUST use explicit typing as defined in Section 2.3 of
-   [RFC8417].
+   [SET].
 
 
 
 
 Tulshibagwale, et al.        Standards Track                   [Page 46]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
    {
@@ -2586,17 +2586,17 @@ Tulshibagwale, et al.        Standards Track                   [Page 46]
                   Figure 44: Explicitly Typed JOSE Header
 
    The purpose is defense against confusion with other JWTs, as
-   described in Sections 4.5, 4.6 and 4.7 of [RFC8417].  While current
-   Id Token [IDTOKEN] validators may not be using the typ header
-   parameter, by requiring it for SSE SETs a distinct value is
-   guaranteed for future validators.
+   described in Sections 4.5, 4.6 and 4.7 of [SET].  While current Id
+   Token [IDTOKEN] validators may not be using the typ header parameter,
+   by requiring it for SSE SETs a distinct value is guaranteed for
+   future validators.
 
 11.1.2.3.  The "exp" Claim
 
    The exp claim MUST NOT be used in SSE SETs.
 
    The purpose is defense in depth against confusion with other JWTs, as
-   described in Sections 4.5 and 4.6 of [RFC8417].
+   described in Sections 4.5 and 4.6 of [SET].
 
 11.1.2.4.  The "aud" Claim
 
@@ -2631,7 +2631,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 46]
 
 Tulshibagwale, et al.        Standards Track                   [Page 47]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
    {
@@ -2659,9 +2659,9 @@ Tulshibagwale, et al.        Standards Track                   [Page 47]
 11.1.2.6.1.  Distinguishing SETs from other Kinds of JWTs
 
    Of particular concern is the possibility that SETs are confused for
-   other kinds of JWTs.  The Security Considerations section of
-   [RFC8417] has several sub-sections on this subject.  The SSE
-   Framework is asking for further restrictions:
+   other kinds of JWTs.  The Security Considerations section of [SET]
+   has several sub-sections on this subject.  The SSE Framework is
+   asking for further restrictions:
 
    *  The sub claim MUST NOT be present, as described in Section 11.1.2.
 
@@ -2687,7 +2687,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 47]
 
 Tulshibagwale, et al.        Standards Track                   [Page 48]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
 11.1.3.1.1.  Push Delivery using HTTP
@@ -2743,7 +2743,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 48]
 
 Tulshibagwale, et al.        Standards Track                   [Page 49]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
    [DELIVERYPOLL]
@@ -2799,7 +2799,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 49]
 
 Tulshibagwale, et al.        Standards Track                   [Page 50]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
    [RFC7159]  Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
@@ -2818,9 +2818,8 @@ Tulshibagwale, et al.        Standards Track                   [Page 50]
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
-   [RFC8417]  Hunt, P., Ed., Jones, M., Denniss, W., and M. Ansari,
-              "Security Event Token (SET)", RFC 8417,
-              DOI 10.17487/RFC8417, July 2018,
+   [SET]      Hunt, P., Jones, M. B., Denniss, W., and M. A. Ansari,
+              "Security Event Token (SET)", April 2018,
               <https://www.rfc-editor.org/info/rfc8417>.
 
    [SUBIDS]   Backman, A. and M. Scurtescu, "Subject Identifiers for
@@ -2853,9 +2852,10 @@ Appendix B.  Notices
 
 
 
+
 Tulshibagwale, et al.        Standards Track                   [Page 51]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
    The OpenID Foundation (OIDF) grants to any Contributor, developer,
@@ -2911,7 +2911,7 @@ Authors' Addresses
 
 Tulshibagwale, et al.        Standards Track                   [Page 52]
 
-                              SharedSignals                 January 2023
+                                   sse                      January 2023
 
 
    Annabelle Backman

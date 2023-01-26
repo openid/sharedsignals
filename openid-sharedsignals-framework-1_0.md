@@ -1,12 +1,12 @@
 ---
-title: OpenID Shared Signals and Events Framework - draft 02
-abbrev: SharedSignals
-docname: openid-sharedsignals-framework-1_0
-date: 2023-01-18
+title: OpenID Shared Signals and Events Framework Specification - draft 02
+abbrev: sse
+docname: openid-sse-framework-1_0
+date: 2023-01-26
 
 ipr: none
 cat: std
-wg: Shared Signals
+wg: Shared Signals and Events Working Group
 
 coding: us-ascii
 pi:
@@ -149,7 +149,19 @@ normative:
   RFC7517:
   RFC7519:
   RFC8174:
-  RFC8417:
+  SET:
+    author:
+    - ins: P. Hunt
+      name: Phil Hunt
+    - ins: M.B. Jones
+      name: Michael B. Jones
+    - ins: W. Denniss
+      name: William Denniss
+    - ins: M.A. Ansari
+      name: Morteza Ansari
+    date: April 2018
+    target: https://www.rfc-editor.org/info/rfc8417
+    title: Security Event Token (SET)
   SUBIDS:
     author:
     - ins: A. Backman
@@ -181,11 +193,11 @@ informative:
 
 This Shared Signals and Events (SSE) Framework enables sharing of signals and events
 between cooperating peers. It enables multiple applications such as Risk Incident Sharing
-and Coordination (RISC) and the Continuous Access Evaluation Profile ( {{CAEP}} )
+and Coordination (RISC) and the Continuous Access Evaluation Profile ({{CAEP}})
 
 This specification defines:
 
-* A profile for {{RFC8417}} (Security Event Tokens)
+* A profile for {{SET}} (Security Event Tokens)
 * Subject Principals
 * Subject Claims in SSE Events
 * Event Types
@@ -195,7 +207,7 @@ This specification defines:
 
 This spec also directly profiles several IETF Security Events drafts:
 
-* Security Event Tokens {{RFC8417}}
+* Security Event Tokens {{SET}}
 * Subject Identifiers for Security Event Tokens {{SUBIDS}}
 * Push-Based SET Token Delivery Using HTTP {{DELIVERYPUSH}} 
 * Poll-Based Security Event Token (SET) Delivery Using HTTP {{DELIVERYPOLL}} 
@@ -1899,7 +1911,7 @@ policy.
 # Profiles {#profiles} 
 This section is a profile of the following IETF SecEvent specifications:
 
-* {{RFC8417}} Security Event Token (SET)
+* {{SET}} Security Event Token (SET)
 * {{DELIVERYPUSH}} Push-Based SET Token Delivery Using HTTP
 * {{DELIVERYPOLL}} Poll-Based SET Token Delivery Using HTTP
 
@@ -1911,7 +1923,7 @@ The CAEP use cases that set the requirements are described in CAEP Use Cases (TO
 
 ## Security Event Token Profile {#set-profle} 
 This section provides SSE profiling specifications for the Security Event Token
-{{RFC8417}} spec.
+{{SET}} spec.
 
 ### Signature Key Resolution {#signature-key-resolution} 
 The signature key can be obtained through `jwks_uri`, see {{discovery}}.
@@ -1966,7 +1978,7 @@ specific to the event type.
 {: #caep-event-properties-example title="Example: SET Containing a CAEP Event with Properties"}
 
 #### Explicit Typing of SETs {#explicit-typing} 
-SSE events MUST use explicit typing as defined in Section 2.3 of {{RFC8417}}.
+SSE events MUST use explicit typing as defined in Section 2.3 of {{SET}}.
 
 ~~~ json
 {
@@ -1977,7 +1989,7 @@ SSE events MUST use explicit typing as defined in Section 2.3 of {{RFC8417}}.
 {: title="Explicitly Typed JOSE Header" #explicit-type-header}
 
 The purpose is defense against confusion with other JWTs, as described in
-Sections 4.5, 4.6 and 4.7 of {{RFC8417}}. While current Id Token {{IDTOKEN}}
+Sections 4.5, 4.6 and 4.7 of {{SET}}. While current Id Token {{IDTOKEN}}
 validators may not be using the `typ` header parameter, by requiring it for SSE
 SETs a distinct value is guaranteed for future validators.
 
@@ -1985,7 +1997,7 @@ SETs a distinct value is guaranteed for future validators.
 The `exp` claim MUST NOT be used in SSE SETs.
 
 The purpose is defense in depth against confusion with other JWTs, as described
-in Sections 4.5 and 4.6 of {{RFC8417}}.
+in Sections 4.5 and 4.6 of {{SET}}.
 
 #### The "aud" Claim {#aud-claim} 
 The `aud` claim can be a single value or an array. Each value SHOULD be the
@@ -2027,7 +2039,7 @@ permitted only if they are alternative URIs defining the exact same event type.
 
 ##### Distinguishing SETs from other Kinds of JWTs
 Of particular concern is the possibility that SETs are confused for other kinds
-of JWTs. The Security Considerations section of {{RFC8417}} has several sub-sections
+of JWTs. The Security Considerations section of {{SET}} has several sub-sections
 on this subject. The SSE Framework is asking for further restrictions:
 
 * The `sub` claim MUST NOT be present, as described in {{event-subjects}}.
