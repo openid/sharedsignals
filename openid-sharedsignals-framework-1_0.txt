@@ -17,7 +17,7 @@ Shared Signals and Events Working Group                 A. Tulshibagwale
                                                          26 January 2023
 
 
-  OpenID Shared Signals and Events Framework Specification - draft 02
+OpenID Shared Signals and Events Framework Specification 1.0 - draft 02
                         openid-sse-framework-1_0
 
 Abstract
@@ -45,7 +45,7 @@ Abstract
 
    This spec also directly profiles several IETF Security Events drafts:
 
-   *  Security Event Tokens [SET]
+   *  Security Event Token (SET) [SET]
 
    *  Subject Identifiers for Security Event Tokens [SUBIDS]
 
@@ -55,16 +55,15 @@ Abstract
 
 Tulshibagwale, et al.        Standards Track                    [Page 1]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
-   *  Poll-Based Security Event Token (SET) Delivery Using HTTP
-      [DELIVERYPOLL]
+   *  Poll-Based SET Token Delivery Using HTTP [DELIVERYPOLL]
 
 Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
-     1.1.  Notational Considerations . . . . . . . . . . . . . . . .   3
+     1.1.  Notational Conventions  . . . . . . . . . . . . . . . . .   3
    2.  Subject Principals  . . . . . . . . . . . . . . . . . . . . .   3
    3.  Subject Members in SSE Events . . . . . . . . . . . . . . . .   3
      3.1.  Simple Subject Members  . . . . . . . . . . . . . . . . .   4
@@ -106,15 +105,15 @@ Table of Contents
    11. Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .  45
      11.1.  Security Event Token Profile . . . . . . . . . . . . . .  45
        11.1.1.  Signature Key Resolution . . . . . . . . . . . . . .  45
+       11.1.2.  SSE Event Subject  . . . . . . . . . . . . . . . . .  45
 
 
 
 Tulshibagwale, et al.        Standards Track                    [Page 2]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
-       11.1.2.  SSE Event Subject  . . . . . . . . . . . . . . . . .  45
        11.1.3.  SET Token Delivery Using HTTP Profile  . . . . . . .  48
    12. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  49
    13. References  . . . . . . . . . . . . . . . . . . . . . . . . .  49
@@ -126,7 +125,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 2]
 
 1.  Introduction
 
-1.1.  Notational Considerations
+1.1.  Notational Conventions
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
@@ -137,7 +136,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 2]
 2.  Subject Principals
 
    This SSE Framework specification defines a Subject Principal to be
-   the entities about which event can be sent by Transmitters and
+   the entities about which an event can be sent by Transmitters and
    received by Receivers using the SSE Framework.
 
    Subject Principals are the managed entities in a SSE Transmitter or
@@ -165,9 +164,10 @@ Tulshibagwale, et al.        Standards Track                    [Page 2]
 
 
 
+
 Tulshibagwale, et al.        Standards Track                    [Page 3]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
 3.1.  Simple Subject Members
@@ -223,7 +223,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 3]
 
 Tulshibagwale, et al.        Standards Track                    [Page 4]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
    "transferee": {
@@ -255,7 +255,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 4]
       Security Event Tokens [SUBIDS]
 
    *  An identifier format defined in the Additional Subject Identifier
-      Formats Section 3.4 section below, OR
+      Formats (Section 3.4) section below, OR
 
    *  A proprietary subject identifier format that is agreed to between
       parties.  Members within a subject identifier that has a
@@ -279,7 +279,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 4]
 
 Tulshibagwale, et al.        Standards Track                    [Page 5]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
       defined in [RFC7519]
@@ -288,7 +288,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 5]
       identified, defined in [RFC7519]
 
    The "JWT ID" Subject Identifier Format is identified by the name jwt-
-   id
+   id.
 
    Below is a non-normative example of Subject Identifier for the jwt-id
    Subject Identifier Format.
@@ -314,7 +314,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 5]
       identified, defined in [OASIS.saml-core-2.0-os]
 
    The "SAML Assertion ID" Subject Identifier Format is identified by
-   the name saml_assertion_id
+   the name saml_assertion_id.
 
    Below is a non-normative example Subject Identifier for the
    saml_assertion_id Subject Identifier Format.
@@ -335,17 +335,17 @@ Tulshibagwale, et al.        Standards Track                    [Page 5]
 
 Tulshibagwale, et al.        Standards Track                    [Page 6]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
 3.5.  Receiver Subject Processing
 
    A SSE Receiver MUST make a best effort to process all members from a
    Subject in an SSE event.  The Transmitter Configuration Metadata
-   Section 6.1 defined below MAY define certain members within a Complex
-   Subject to be Critical.  A SSE Receiver MUST discard any event that
-   contains a Subject with a Critical member that it is unable to
-   process.
+   (Section 6.1) defined below MAY define certain members within a
+   Complex Subject to be Critical.  A SSE Receiver MUST discard any
+   event that contains a Subject with a Critical member that it is
+   unable to process.
 
 4.  Event Properties
 
@@ -391,7 +391,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 6]
 
 Tulshibagwale, et al.        Standards Track                    [Page 7]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
    {
@@ -447,7 +447,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 7]
 
 Tulshibagwale, et al.        Standards Track                    [Page 8]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
         Figure 7: Example: SET Containing a SSE Event with a Simple
@@ -484,39 +484,39 @@ Tulshibagwale, et al.        Standards Track                    [Page 8]
 
    Transmitters have metadata describing their configuration:
 
-   issuer  REQUIRED, the URL using the https scheme with no query or
+   issuer  REQUIRED, URL using the https scheme with no query or
       fragment component that the Transmitter asserts as its Issuer
       Identifier.  This MUST be identical to the iss claim value in
       Security Event Tokens issued from this Transmitter.
 
-   jwks_uri  REQUIRED, the URL of the Transmitter's JSON Web Key Set
+   jwks_uri  REQUIRED, URL of the Transmitter's JSON Web Key Set
       [RFC7517] document.  This contains the signing key(s) the Receiver
       uses to validate signatures from the Transmitter.
 
-   delivery_methods_supported  RECOMMENDED, a list of supported delivery
+   delivery_methods_supported  RECOMMENDED, List of supported delivery
       method URIs.
 
-   configuration_endpoint  OPTIONAL, the URL of the Configuration
+   configuration_endpoint  OPTIONAL.  The URL of the Configuration
       Endpoint.
 
 
 
 Tulshibagwale, et al.        Standards Track                    [Page 9]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
-   status_endpoint  OPTIONAL, the URL of the Status Endpoint.
+   status_endpoint  OPTIONAL.  The URL of the Status Endpoint.
 
-   add_subject_endpoint  OPTIONAL, the URL of the Add Subject Endpoint.
+   add_subject_endpoint  OPTIONAL.  The URL of the Add Subject Endpoint.
 
-   remove_subject_endpoint  OPTIONAL, the URL of the Remove Subject
+   remove_subject_endpoint  OPTIONAL.  The URL of the Remove Subject
       Endpoint.
 
-   verification_endpoint  OPTIONAL, the URL of the Verification
+   verification_endpoint  OPTIONAL.  The URL of the Verification
       Endpoint.
 
-   critical_subject_members  OPTIONAL, the list of member names in a
+   critical_subject_members  OPTIONAL.  List of member names in a
       Complex Subject which, if present in a Subject Member in an event,
       MUST be interpreted by a Receiver.
 
@@ -530,10 +530,10 @@ Tulshibagwale, et al.        Standards Track                    [Page 9]
    Configuration Information can be retrieved.
 
    Transmitters supporting Discovery MUST make a JSON document available
-   at the path formed by inserting the string /.well-known/ssf-
+   at the path formed by inserting the string /.well-known/sse-
    configuration into the Issuer between the host component and the path
    component, if any.  The syntax and semantics of .well-known are
-   defined in [RFC5785].  ssf-configuration MUST point to a JSON
+   defined in [RFC5785].  sse-configuration MUST point to a JSON
    document compliant with this specification and MUST be returned using
    the application/json content type.
 
@@ -546,27 +546,27 @@ Tulshibagwale, et al.        Standards Track                    [Page 9]
    https://tr.example.com to obtain its Configuration information, since
    the Issuer contains no path component:
 
-   GET /.well-known/ssf-configuration HTTP/1.1
+   GET /.well-known/sse-configuration HTTP/1.1
    Host: tr.example.com
 
     Figure 9: Example: Transmitter Configuration Request (without path)
 
    If the Issuer value contains a path component, any terminating / MUST
-   be removed before inserting /.well-known/ssf-configuration between
+   be removed before inserting /.well-known/sse-configuration between
    the host component and the path component.  The Receiver would make
 
 
 
 Tulshibagwale, et al.        Standards Track                   [Page 10]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
    the following request to the Issuer https://tr.example.com/issuer1 to
    obtain its Configuration information, since the Issuer contains a
    path component:
 
-   GET /.well-known/ssf-configuration/issuer1 HTTP/1.1
+   GET /.well-known/sse-configuration/issuer1 HTTP/1.1
    Host: tr.example.com
 
      Figure 10: Example: Transmitter Configuration Request (with path)
@@ -615,7 +615,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 10]
 
 Tulshibagwale, et al.        Standards Track                   [Page 11]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
    HTTP/1.1 200 OK
@@ -671,7 +671,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 11]
 
 Tulshibagwale, et al.        Standards Track                   [Page 12]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
    This section defines an HTTP API to be implemented by Event
@@ -727,7 +727,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 12]
 
 Tulshibagwale, et al.        Standards Track                   [Page 13]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
       Streams, as well as read and update an Event Stream's current
@@ -783,7 +783,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 13]
 
 Tulshibagwale, et al.        Standards Track                   [Page 14]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
       identifying the set of events supported by the Transmitter for
@@ -839,7 +839,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 14]
 
 Tulshibagwale, et al.        Standards Track                   [Page 15]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
    events_requested  *Receiver-Supplied*, An array of URIs identifying
@@ -895,7 +895,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 15]
 
 Tulshibagwale, et al.        Standards Track                   [Page 16]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
    HTTP/1.1 200 OK
@@ -951,7 +951,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 16]
 
 Tulshibagwale, et al.        Standards Track                   [Page 17]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
 7.1.1.2.  Reading a Stream's Configuration
@@ -1007,7 +1007,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 17]
 
 Tulshibagwale, et al.        Standards Track                   [Page 18]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
    HTTP/1.1 200 OK
@@ -1063,7 +1063,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 18]
 
 Tulshibagwale, et al.        Standards Track                   [Page 19]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
    HTTP/1.1 200 OK
@@ -1119,7 +1119,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 19]
 
 Tulshibagwale, et al.        Standards Track                   [Page 20]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
        ],
@@ -1175,7 +1175,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 20]
 
 Tulshibagwale, et al.        Standards Track                   [Page 21]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
    HTTP/1.1 200 OK
@@ -1231,7 +1231,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 21]
 
 Tulshibagwale, et al.        Standards Track                   [Page 22]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
            +======+===========================================+
@@ -1287,7 +1287,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 22]
 
 Tulshibagwale, et al.        Standards Track                   [Page 23]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
    PATCH /sse/stream HTTP/1.1
@@ -1343,7 +1343,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 23]
 
 Tulshibagwale, et al.        Standards Track                   [Page 24]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
    HTTP/1.1 200 OK
@@ -1399,7 +1399,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 24]
 
 Tulshibagwale, et al.        Standards Track                   [Page 25]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
           +======+=============================================+
@@ -1455,7 +1455,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 25]
 
 Tulshibagwale, et al.        Standards Track                   [Page 26]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
    PUT /sse/stream HTTP/1.1
@@ -1511,7 +1511,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 26]
 
 Tulshibagwale, et al.        Standards Track                   [Page 27]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
    HTTP/1.1 200 OK
@@ -1567,7 +1567,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 27]
 
 Tulshibagwale, et al.        Standards Track                   [Page 28]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
         +======+==================================================+
@@ -1623,7 +1623,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 28]
 
 Tulshibagwale, et al.        Standards Track                   [Page 29]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
    +======+===========================================================+
@@ -1679,7 +1679,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 29]
 
 Tulshibagwale, et al.        Standards Track                   [Page 30]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
       requested.
@@ -1735,7 +1735,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 30]
 
 Tulshibagwale, et al.        Standards Track                   [Page 31]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
    GET /sse/status?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f&subject=<url-encoded-subject> HTTP/1.1
@@ -1791,7 +1791,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 31]
 
 Tulshibagwale, et al.        Standards Track                   [Page 32]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
    2.  If the Receiver presents a valid OAuth token, but the Transmitter
@@ -1847,7 +1847,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 32]
 
 Tulshibagwale, et al.        Standards Track                   [Page 33]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
    The following is a non-normative example of an Update Stream Status
@@ -1903,7 +1903,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 33]
 
 Tulshibagwale, et al.        Standards Track                   [Page 34]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
         +======+==================================================+
@@ -1959,7 +1959,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 34]
 
 Tulshibagwale, et al.        Standards Track                   [Page 35]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
       the Event Receiver has verified the Subject claim.  When false, it
@@ -2015,7 +2015,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 35]
 
 Tulshibagwale, et al.        Standards Track                   [Page 36]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
       +======+=====================================================+
@@ -2071,7 +2071,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 36]
 
 Tulshibagwale, et al.        Standards Track                   [Page 37]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
    POST /sse/subjects:remove HTTP/1.1
@@ -2127,7 +2127,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 37]
 
 Tulshibagwale, et al.        Standards Track                   [Page 38]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
 7.1.4.  Verification
@@ -2183,7 +2183,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 38]
 
 Tulshibagwale, et al.        Standards Track                   [Page 39]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
    stream_id  REQUIRED.  The stream that the verification event is being
@@ -2239,7 +2239,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 39]
 
 Tulshibagwale, et al.        Standards Track                   [Page 40]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
    POST /sse/verify HTTP/1.1
@@ -2295,7 +2295,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 40]
 
 Tulshibagwale, et al.        Standards Track                   [Page 41]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
    If a Transmitter decides to change the status of an Event Stream from
@@ -2351,7 +2351,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 41]
 
 Tulshibagwale, et al.        Standards Track                   [Page 42]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
    The receiver may obtain an access token using the [CLIENTCRED] Client
@@ -2407,7 +2407,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 42]
 
 Tulshibagwale, et al.        Standards Track                   [Page 43]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
 9.3.  Malicious Subject Removal
@@ -2463,7 +2463,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 43]
 
 Tulshibagwale, et al.        Standards Track                   [Page 44]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
 10.3.1.  Organizational Data
@@ -2519,7 +2519,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 44]
 
 Tulshibagwale, et al.        Standards Track                   [Page 45]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
 11.1.2.1.  SSE Event Properties
@@ -2575,7 +2575,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 45]
 
 Tulshibagwale, et al.        Standards Track                   [Page 46]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
    {
@@ -2631,7 +2631,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 46]
 
 Tulshibagwale, et al.        Standards Track                   [Page 47]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
    {
@@ -2687,7 +2687,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 47]
 
 Tulshibagwale, et al.        Standards Track                   [Page 48]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
 11.1.3.1.1.  Push Delivery using HTTP
@@ -2743,7 +2743,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 48]
 
 Tulshibagwale, et al.        Standards Track                   [Page 49]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
    [DELIVERYPOLL]
@@ -2799,7 +2799,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 49]
 
 Tulshibagwale, et al.        Standards Track                   [Page 50]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
    [RFC7159]  Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
@@ -2855,7 +2855,7 @@ Appendix B.  Notices
 
 Tulshibagwale, et al.        Standards Track                   [Page 51]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
    The OpenID Foundation (OIDF) grants to any Contributor, developer,
@@ -2911,7 +2911,7 @@ Authors' Addresses
 
 Tulshibagwale, et al.        Standards Track                   [Page 52]
 
-                                   sse                      January 2023
+                          openid-sse-framework              January 2023
 
 
    Annabelle Backman

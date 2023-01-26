@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="Common,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
-<title>OpenID Shared Signals and Events Framework Specification - draft 02</title>
+<title>OpenID Shared Signals and Events Framework Specification 1.0 - draft 02</title>
 <meta content="Atul Tulshibagwale" name="author">
 <meta content="Tim Cappalli" name="author">
 <meta content="Marius Scurtescu" name="author">
@@ -27,10 +27,10 @@ and Coordination (RISC) and the Continuous Access Evaluation Profile ( )
        
        This spec also directly profiles several IETF Security Events drafts: 
        
-         Security Event Tokens  
+         Security Event Token (SET)  
          Subject Identifiers for Security Event Tokens  
          Push-Based SET Token Delivery Using HTTP  
-         Poll-Based Security Event Token (SET) Delivery Using HTTP  
+         Poll-Based SET Token Delivery Using HTTP  
        
     " name="description">
 <meta content="xml2rfc 3.15.3" name="generator">
@@ -1226,7 +1226,7 @@ li > p:last-of-type:only-child {
 <table class="ears">
 <thead><tr>
 <td class="left"></td>
-<td class="center">sse</td>
+<td class="center">openid-sse-framework</td>
 <td class="right">January 2023</td>
 </tr></thead>
 <tfoot><tr>
@@ -1273,7 +1273,7 @@ li > p:last-of-type:only-child {
 </dd>
 </dl>
 </div>
-<h1 id="title">OpenID Shared Signals and Events Framework Specification - draft 02</h1>
+<h1 id="title">OpenID Shared Signals and Events Framework Specification 1.0 - draft 02</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">This Shared Signals and Events (SSE) Framework enables sharing of signals and events
@@ -1298,13 +1298,13 @@ and Coordination (RISC) and the Continuous Access Evaluation Profile (<span>[<a 
       </ul>
 <p id="section-abstract-4">This spec also directly profiles several IETF Security Events drafts:<a href="#section-abstract-4" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-abstract-5.1">Security Event Tokens <span>[<a href="#SET" class="cite xref">SET</a>]</span><a href="#section-abstract-5.1" class="pilcrow">¶</a>
+<li class="normal" id="section-abstract-5.1">Security Event Token (SET) <span>[<a href="#SET" class="cite xref">SET</a>]</span><a href="#section-abstract-5.1" class="pilcrow">¶</a>
 </li>
         <li class="normal" id="section-abstract-5.2">Subject Identifiers for Security Event Tokens <span>[<a href="#SUBIDS" class="cite xref">SUBIDS</a>]</span><a href="#section-abstract-5.2" class="pilcrow">¶</a>
 </li>
         <li class="normal" id="section-abstract-5.3">Push-Based SET Token Delivery Using HTTP <span>[<a href="#DELIVERYPUSH" class="cite xref">DELIVERYPUSH</a>]</span><a href="#section-abstract-5.3" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-abstract-5.4">Poll-Based Security Event Token (SET) Delivery Using HTTP <span>[<a href="#DELIVERYPOLL" class="cite xref">DELIVERYPOLL</a>]</span><a href="#section-abstract-5.4" class="pilcrow">¶</a>
+        <li class="normal" id="section-abstract-5.4">Poll-Based SET Token Delivery Using HTTP <span>[<a href="#DELIVERYPOLL" class="cite xref">DELIVERYPOLL</a>]</span><a href="#section-abstract-5.4" class="pilcrow">¶</a>
 </li>
       </ul>
 </section>
@@ -1318,7 +1318,7 @@ and Coordination (RISC) and the Continuous Access Evaluation Profile (<span>[<a 
             <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.1">
-                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.  <a href="#name-notational-considerations" class="internal xref">Notational Considerations</a></p>
+                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.  <a href="#name-notational-conventions" class="internal xref">Notational Conventions</a></p>
 </li>
             </ul>
 </li>
@@ -1507,10 +1507,10 @@ and Coordination (RISC) and the Continuous Access Evaluation Profile (<span>[<a 
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<div id="notational-considerations">
+<div id="notational-conventions">
 <section id="section-1.1">
-        <h3 id="name-notational-considerations">
-<a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-notational-considerations" class="section-name selfRef">Notational Considerations</a>
+        <h3 id="name-notational-conventions">
+<a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-notational-conventions" class="section-name selfRef">Notational Conventions</a>
         </h3>
 <p id="section-1.1-1">The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
 NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED",
@@ -1527,7 +1527,7 @@ they appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcr
 <a href="#section-2" class="section-number selfRef">2. </a><a href="#name-subject-principals" class="section-name selfRef">Subject Principals</a>
       </h2>
 <p id="section-2-1">This SSE Framework specification defines a Subject Principal to be
-the entities about which event can be sent by Transmitters and received by
+the entities about which an event can be sent by Transmitters and received by
 Receivers using the SSE Framework.<a href="#section-2-1" class="pilcrow">¶</a></p>
 <p id="section-2-2">Subject Principals are the managed entities in a SSE Transmitter or Receiver.
 These include human or robotic principals, devices, customer tenants in a
@@ -1665,7 +1665,7 @@ one of:<a href="#section-3.3-1" class="pilcrow">¶</a></p>
 Event Tokens <span>[<a href="#SUBIDS" class="cite xref">SUBIDS</a>]</span><a href="#section-3.3-2.1" class="pilcrow">¶</a>
 </li>
           <li class="normal" id="section-3.3-2.2">An identifier format defined in the Additional Subject Identifier Formats
-<a href="#additional-subject-id-formats" class="auto internal xref">Section 3.4</a> section below, OR<a href="#section-3.3-2.2" class="pilcrow">¶</a>
+(<a href="#additional-subject-id-formats" class="auto internal xref">Section 3.4</a>) section below, OR<a href="#section-3.3-2.2" class="pilcrow">¶</a>
 </li>
           <li class="normal" id="section-3.3-2.3">A proprietary subject identifier format that is agreed to between parties.
 Members within a subject identifier that has a proprietary subject identifier
@@ -1703,7 +1703,7 @@ in <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span><a href="#sect
 </dd>
           <dd class="break"></dd>
 </dl>
-<p id="section-3.4.1-3">The "JWT ID" Subject Identifier Format is identified by the name <code>jwt-id</code><a href="#section-3.4.1-3" class="pilcrow">¶</a></p>
+<p id="section-3.4.1-3">The "JWT ID" Subject Identifier Format is identified by the name <code>jwt-id</code>.<a href="#section-3.4.1-3" class="pilcrow">¶</a></p>
 <p id="section-3.4.1-4">Below is a non-normative example of Subject Identifier for the <code>jwt-id</code> Subject
 Identifier Format.<a href="#section-3.4.1-4" class="pilcrow">¶</a></p>
 <span id="name-example-jwt-id-subject-iden"></span><div id="sub-id-jwtid">
@@ -1746,7 +1746,7 @@ in <span>[<a href="#OASIS.saml-core-2.0-os" class="cite xref">OASIS.saml-core-2.
           <dd class="break"></dd>
 </dl>
 <p id="section-3.4.2-3">The "SAML Assertion ID" Subject Identifier Format is identified by the name
-<code>saml_assertion_id</code><a href="#section-3.4.2-3" class="pilcrow">¶</a></p>
+<code>saml_assertion_id</code>.<a href="#section-3.4.2-3" class="pilcrow">¶</a></p>
 <p id="section-3.4.2-4">Below is a non-normative example Subject Identifier for the <code>saml_assertion_id</code>
 Subject Identifier Format.<a href="#section-3.4.2-4" class="pilcrow">¶</a></p>
 <span id="name-example-saml_assertion_id-s"></span><div id="sub-id-samlassertionid">
@@ -1775,7 +1775,7 @@ Subject Identifier Format.<a href="#section-3.4.2-4" class="pilcrow">¶</a></p>
 <a href="#section-3.5" class="section-number selfRef">3.5. </a><a href="#name-receiver-subject-processing" class="section-name selfRef">Receiver Subject Processing</a>
         </h3>
 <p id="section-3.5-1">A SSE Receiver MUST make a best effort to process all members from a Subject in
-an SSE event. The Transmitter Configuration Metadata <a href="#discovery-meta" class="auto internal xref">Section 6.1</a> defined
+an SSE event. The Transmitter Configuration Metadata (<a href="#discovery-meta" class="auto internal xref">Section 6.1</a>) defined
 below MAY define certain members within a Complex Subject to be Critical. A SSE
 Receiver MUST discard any event that contains a Subject with a Critical member
 that it is unable to process.<a href="#section-3.5-1" class="pilcrow">¶</a></p>
@@ -1936,51 +1936,51 @@ configuration information.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-6.1-2">
           <dt id="section-6.1-2.1">issuer</dt>
           <dd style="margin-left: 1.5em" id="section-6.1-2.2">
-            <p id="section-6.1-2.2.1">REQUIRED, the URL using the https scheme with no query or fragment component
+            <p id="section-6.1-2.2.1">REQUIRED, URL using the https scheme with no query or fragment component
 that the Transmitter asserts as its Issuer Identifier. This MUST be identical
 to the iss claim value in Security Event Tokens issued from this Transmitter.<a href="#section-6.1-2.2.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-6.1-2.3">jwks_uri</dt>
           <dd style="margin-left: 1.5em" id="section-6.1-2.4">
-            <p id="section-6.1-2.4.1">REQUIRED, the URL of the Transmitter's JSON Web Key Set <span>[<a href="#RFC7517" class="cite xref">RFC7517</a>]</span> document.
+            <p id="section-6.1-2.4.1">REQUIRED, URL of the Transmitter's JSON Web Key Set <span>[<a href="#RFC7517" class="cite xref">RFC7517</a>]</span> document.
 This contains the signing key(s) the Receiver uses to validate signatures from
 the Transmitter.<a href="#section-6.1-2.4.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-6.1-2.5">delivery_methods_supported</dt>
           <dd style="margin-left: 1.5em" id="section-6.1-2.6">
-            <p id="section-6.1-2.6.1">RECOMMENDED, a list of supported delivery method URIs.<a href="#section-6.1-2.6.1" class="pilcrow">¶</a></p>
+            <p id="section-6.1-2.6.1">RECOMMENDED, List of supported delivery method URIs.<a href="#section-6.1-2.6.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-6.1-2.7">configuration_endpoint</dt>
           <dd style="margin-left: 1.5em" id="section-6.1-2.8">
-            <p id="section-6.1-2.8.1">OPTIONAL, the URL of the Configuration Endpoint.<a href="#section-6.1-2.8.1" class="pilcrow">¶</a></p>
+            <p id="section-6.1-2.8.1">OPTIONAL. The URL of the Configuration Endpoint.<a href="#section-6.1-2.8.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-6.1-2.9">status_endpoint</dt>
           <dd style="margin-left: 1.5em" id="section-6.1-2.10">
-            <p id="section-6.1-2.10.1">OPTIONAL, the URL of the Status Endpoint.<a href="#section-6.1-2.10.1" class="pilcrow">¶</a></p>
+            <p id="section-6.1-2.10.1">OPTIONAL. The URL of the Status Endpoint.<a href="#section-6.1-2.10.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-6.1-2.11">add_subject_endpoint</dt>
           <dd style="margin-left: 1.5em" id="section-6.1-2.12">
-            <p id="section-6.1-2.12.1">OPTIONAL, the URL of the Add Subject Endpoint.<a href="#section-6.1-2.12.1" class="pilcrow">¶</a></p>
+            <p id="section-6.1-2.12.1">OPTIONAL. The URL of the Add Subject Endpoint.<a href="#section-6.1-2.12.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-6.1-2.13">remove_subject_endpoint</dt>
           <dd style="margin-left: 1.5em" id="section-6.1-2.14">
-            <p id="section-6.1-2.14.1">OPTIONAL, the URL of the Remove Subject Endpoint.<a href="#section-6.1-2.14.1" class="pilcrow">¶</a></p>
+            <p id="section-6.1-2.14.1">OPTIONAL. The URL of the Remove Subject Endpoint.<a href="#section-6.1-2.14.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-6.1-2.15">verification_endpoint</dt>
           <dd style="margin-left: 1.5em" id="section-6.1-2.16">
-            <p id="section-6.1-2.16.1">OPTIONAL, the URL of the Verification Endpoint.<a href="#section-6.1-2.16.1" class="pilcrow">¶</a></p>
+            <p id="section-6.1-2.16.1">OPTIONAL. The URL of the Verification Endpoint.<a href="#section-6.1-2.16.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-6.1-2.17">critical_subject_members</dt>
           <dd style="margin-left: 1.5em" id="section-6.1-2.18">
-            <p id="section-6.1-2.18.1">OPTIONAL, the list of member names in a Complex Subject which, if present in
+            <p id="section-6.1-2.18.1">OPTIONAL. List of member names in a Complex Subject which, if present in
 a Subject Member in an event, MUST be interpreted by a Receiver.<a href="#section-6.1-2.18.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
@@ -1997,9 +1997,9 @@ a Subject Member in an event, MUST be interpreted by a Receiver.<a href="#sectio
 <p id="section-6.2-1">Using the Issuer as documented by the Transmitter, the Transmitter Configuration
 Information can be retrieved.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
 <p id="section-6.2-2">Transmitters supporting Discovery MUST make a JSON document available at the
-path formed by inserting the string <code>/.well-known/ssf-configuration</code> into the
+path formed by inserting the string <code>/.well-known/sse-configuration</code> into the
 Issuer between the host component and the path component, if any. The syntax
-and semantics of <code>.well-known</code> are defined in <span>[<a href="#RFC5785" class="cite xref">RFC5785</a>]</span>.  <code>ssf-configuration</code>
+and semantics of <code>.well-known</code> are defined in <span>[<a href="#RFC5785" class="cite xref">RFC5785</a>]</span>.  <code>sse-configuration</code>
 MUST point to a JSON document compliant with this specification and MUST be
 returned using the <code>application/json</code> content type.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
 <div id="transmitter-configuration-request">
@@ -2016,7 +2016,7 @@ Issuer contains no path component:<a href="#section-6.2.1-2" class="pilcrow">¶<
 <figure id="figure-9">
             <div class="lang-http sourcecode" id="section-6.2.1-3.1">
 <pre>
-GET /.well-known/ssf-configuration HTTP/1.1
+GET /.well-known/sse-configuration HTTP/1.1
 Host: tr.example.com
 </pre>
 </div>
@@ -2025,7 +2025,7 @@ Host: tr.example.com
             </figcaption></figure>
 </div>
 <p id="section-6.2.1-4">If the  Issuer value contains a path component, any terminating <code>/</code> MUST be
-removed before inserting <code>/.well-known/ssf-configuration</code> between the host
+removed before inserting <code>/.well-known/sse-configuration</code> between the host
 component and the path component. The Receiver would make the following request
 to the Issuer <code>https://tr.example.com/issuer1</code> to obtain its Configuration
 information, since the Issuer contains a path component:<a href="#section-6.2.1-4" class="pilcrow">¶</a></p>
@@ -2033,7 +2033,7 @@ information, since the Issuer contains a path component:<a href="#section-6.2.1-
 <figure id="figure-10">
             <div class="lang-http sourcecode" id="section-6.2.1-5.1">
 <pre>
-GET /.well-known/ssf-configuration/issuer1 HTTP/1.1
+GET /.well-known/sse-configuration/issuer1 HTTP/1.1
 Host: tr.example.com
 </pre>
 </div>

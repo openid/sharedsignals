@@ -1,6 +1,6 @@
 ---
-title: OpenID Shared Signals and Events Framework Specification - draft 02
-abbrev: sse
+title: OpenID Shared Signals and Events Framework Specification 1.0 - draft 02
+abbrev: openid-sse-framework
 docname: openid-sse-framework-1_0
 date: 2023-01-26
 
@@ -207,16 +207,16 @@ This specification defines:
 
 This spec also directly profiles several IETF Security Events drafts:
 
-* Security Event Tokens {{SET}}
+* Security Event Token (SET) {{SET}}
 * Subject Identifiers for Security Event Tokens {{SUBIDS}}
 * Push-Based SET Token Delivery Using HTTP {{DELIVERYPUSH}} 
-* Poll-Based Security Event Token (SET) Delivery Using HTTP {{DELIVERYPOLL}} 
+* Poll-Based SET Token Delivery Using HTTP {{DELIVERYPOLL}} 
 
 --- middle
 
 # Introduction {#introduction}
 
-## Notational Considerations
+## Notational Conventions
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
 NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED",
@@ -227,7 +227,7 @@ they appear in all capitals, as shown here.
 # Subject Principals {#subject-principals}
 
 This SSE Framework specification defines a Subject Principal to be
-the entities about which event can be sent by Transmitters and received by
+the entities about which an event can be sent by Transmitters and received by
 Receivers using the SSE Framework.
 
 Subject Principals are the managed entities in a SSE Transmitter or Receiver.
@@ -323,7 +323,7 @@ one of:
 * Defined in the IANA Registry defined in Subject Identifiers for Security
 Event Tokens {{SUBIDS}}
 * An identifier format defined in the Additional Subject Identifier Formats
-{{additional-subject-id-formats}} section below, OR
+({{additional-subject-id-formats}}) section below, OR
 * A proprietary subject identifier format that is agreed to between parties.
 Members within a subject identifier that has a proprietary subject identifier
 format are agreed to between the parties and such agreement is outside the
@@ -347,7 +347,7 @@ jti
 : REQUIRED, the "jti" (JWT token ID) claim of the JWT being identified, defined
   in {{RFC7519}}
 
-The "JWT ID" Subject Identifier Format is identified by the name `jwt-id`
+The "JWT ID" Subject Identifier Format is identified by the name `jwt-id`.
 
 Below is a non-normative example of Subject Identifier for the `jwt-id` Subject
 Identifier Format.
@@ -376,7 +376,7 @@ assertion_id
   {{OASIS.saml-core-2.0-os}}
 
 The "SAML Assertion ID" Subject Identifier Format is identified by the name
-`saml_assertion_id`
+`saml_assertion_id`.
 
 Below is a non-normative example Subject Identifier for the `saml_assertion_id`
 Subject Identifier Format.
@@ -394,7 +394,7 @@ Subject Identifier Format.
 ## Receiver Subject Processing {#receiver-subject-processing}
 
 A SSE Receiver MUST make a best effort to process all members from a Subject in
-an SSE event. The Transmitter Configuration Metadata {{discovery-meta}} defined
+an SSE event. The Transmitter Configuration Metadata ({{discovery-meta}}) defined
 below MAY define certain members within a Complex Subject to be Critical. A SSE
 Receiver MUST discard any event that contains a Subject with a Critical member
 that it is unable to process.
@@ -514,35 +514,35 @@ configuration information.
 Transmitters have metadata describing their configuration:
 
 issuer
-: REQUIRED, the URL using the https scheme with no query or fragment component
+: REQUIRED, URL using the https scheme with no query or fragment component
   that the Transmitter asserts as its Issuer Identifier. This MUST be identical
   to the iss claim value in Security Event Tokens issued from this Transmitter.
 
 jwks_uri
-: REQUIRED, the URL of the Transmitter's JSON Web Key Set {{RFC7517}} document.
+: REQUIRED, URL of the Transmitter's JSON Web Key Set {{RFC7517}} document.
   This contains the signing key(s) the Receiver uses to validate signatures from
   the Transmitter.
 
 delivery_methods_supported
-: RECOMMENDED, a list of supported delivery method URIs.
+: RECOMMENDED, List of supported delivery method URIs.
 
 configuration_endpoint
-: OPTIONAL, the URL of the Configuration Endpoint.
+: OPTIONAL. The URL of the Configuration Endpoint.
 
 status_endpoint
-: OPTIONAL, the URL of the Status Endpoint.
+: OPTIONAL. The URL of the Status Endpoint.
 
 add_subject_endpoint
-: OPTIONAL, the URL of the Add Subject Endpoint.
+: OPTIONAL. The URL of the Add Subject Endpoint.
 
 remove_subject_endpoint
-: OPTIONAL, the URL of the Remove Subject Endpoint.
+: OPTIONAL. The URL of the Remove Subject Endpoint.
 
 verification_endpoint
-: OPTIONAL, the URL of the Verification Endpoint.
+: OPTIONAL. The URL of the Verification Endpoint.
 
 critical_subject_members
-: OPTIONAL, the list of member names in a Complex Subject which, if present in
+: OPTIONAL. List of member names in a Complex Subject which, if present in
   a Subject Member in an event, MUST be interpreted by a Receiver.
 
 TODO: consider adding a IANA Registry for metadata, similar to Section 7.1.1 of
@@ -554,9 +554,9 @@ Using the Issuer as documented by the Transmitter, the Transmitter Configuration
 Information can be retrieved.
 
 Transmitters supporting Discovery MUST make a JSON document available at the
-path formed by inserting the string `/.well-known/ssf-configuration` into the
+path formed by inserting the string `/.well-known/sse-configuration` into the
 Issuer between the host component and the path component, if any. The syntax
-and semantics of `.well-known` are defined in {{RFC5785}}.  `ssf-configuration`
+and semantics of `.well-known` are defined in {{RFC5785}}.  `sse-configuration`
 MUST point to a JSON document compliant with this specification and MUST be
 returned using the `application/json` content type.
 
@@ -570,19 +570,19 @@ The Receiver would make the following request to the Issuer
 Issuer contains no path component:
 
 ~~~ http
-GET /.well-known/ssf-configuration HTTP/1.1
+GET /.well-known/sse-configuration HTTP/1.1
 Host: tr.example.com
 ~~~
 {: #figdiscoveryrequest title="Example: Transmitter Configuration Request (without path)"}
 
 If the  Issuer value contains a path component, any terminating `/` MUST be
-removed before inserting `/.well-known/ssf-configuration` between the host
+removed before inserting `/.well-known/sse-configuration` between the host
 component and the path component. The Receiver would make the following request
 to the Issuer `https://tr.example.com/issuer1` to obtain its Configuration
 information, since the Issuer contains a path component:
 
 ~~~ http
-GET /.well-known/ssf-configuration/issuer1 HTTP/1.1
+GET /.well-known/sse-configuration/issuer1 HTTP/1.1
 Host: tr.example.com
 ~~~
 {: #figdiscoveryrequestpath title="Example: Transmitter Configuration Request (with path)"}
