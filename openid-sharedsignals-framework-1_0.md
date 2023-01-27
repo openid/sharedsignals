@@ -269,25 +269,32 @@ object that has one or more Simple Subject Members. The name of each Simple
 Subject Member in this value MAY be one of the following:
 
 user
-: OPTIONAL, a Subject Identifier that identifies a user.
+
+> OPTIONAL. A Subject Identifier that identifies a user.
 
 device
-: OPTIONAL, a Subject Identifier that identifies a device.
+
+> OPTIONAL. A Subject Identifier that identifies a device.
 
 session
-: OPTIONAL, a Subject Identifier that identifies a session.
+
+> OPTIONAL. A Subject Identifier that identifies a session.
 
 application
-: OPTIONAL, a Subject Identifier that identifies an application.
+
+> OPTIONAL. A Subject Identifier that identifies an application.
 
 tenant
-: OPTIONAL, a Subject Identifier that identifies a tenant.
+
+> OPTIONAL. A Subject Identifier that identifies a tenant.
 
 org_unit
-: OPTIONAL, a Subject Identifier that identifies an organizational unit.
+
+> OPTIONAL. A Subject Identifier that identifies an organizational unit.
 
 group
-: OPTIONAL, a Subject Identifier that identifies a group.
+
+> OPTIONAL. A Subject Identifier that identifies a group.
 
 Additional Subject Member names MAY be used in Complex Subjects. Each member name MAY
 appear at most once in the Complex Subject value.
@@ -340,11 +347,13 @@ identifier, defined in  {{RFC7519}}. Subject Identifiers of this type MUST
 contain the following members:
 
 iss
-: REQUIRED. The "iss" (issuer) claim of the JWT being identified, defined in
+
+> REQUIRED. The "iss" (issuer) claim of the JWT being identified, defined in
   {{RFC7519}}
 
 jti
-: REQUIRED. The "jti" (JWT token ID) claim of the JWT being identified, defined
+
+> REQUIRED. The "jti" (JWT token ID) claim of the JWT being identified, defined
   in {{RFC7519}}
 
 The "JWT ID" Subject Identifier Format is identified by the name `jwt-id`.
@@ -368,11 +377,13 @@ The "SAML Assertion ID" Subject Identifier Format specifies a SAML 2.0
 format MUST contain the following members:
 
 issuer
-: REQUIRED. The "Issuer" value of the SAML assertion being identified, defined
+
+> REQUIRED. The "Issuer" value of the SAML assertion being identified, defined
   in {{OASIS.saml-core-2.0-os}}
 
 assertion_id
-: REQUIRED. The "ID" value of the SAML assertion being identified, defined in
+
+> REQUIRED. The "ID" value of the SAML assertion being identified, defined in
   {{OASIS.saml-core-2.0-os}}
 
 The "SAML Assertion ID" Subject Identifier Format is identified by the name
@@ -514,35 +525,44 @@ configuration information.
 Transmitters have metadata describing their configuration:
 
 issuer
-: REQUIRED. URL using the https scheme with no query or fragment component
+
+> REQUIRED. URL using the https scheme with no query or fragment component
   that the Transmitter asserts as its Issuer Identifier. This MUST be identical
   to the iss claim value in Security Event Tokens issued from this Transmitter.
 
 jwks_uri
-: REQUIRED. URL of the Transmitter's JSON Web Key Set {{RFC7517}} document.
+
+> REQUIRED. URL of the Transmitter's JSON Web Key Set {{RFC7517}} document.
   This contains the signing key(s) the Receiver uses to validate signatures from
   the Transmitter.
 
 delivery_methods_supported
-: RECOMMENDED. List of supported delivery method URIs.
+
+> RECOMMENDED. List of supported delivery method URIs.
 
 configuration_endpoint
-: OPTIONAL. The URL of the Configuration Endpoint.
+
+> OPTIONAL. The URL of the Configuration Endpoint.
 
 status_endpoint
-: OPTIONAL. The URL of the Status Endpoint.
+
+> OPTIONAL. The URL of the Status Endpoint.
 
 add_subject_endpoint
-: OPTIONAL. The URL of the Add Subject Endpoint.
+
+> OPTIONAL. The URL of the Add Subject Endpoint.
 
 remove_subject_endpoint
-: OPTIONAL. The URL of the Remove Subject Endpoint.
+
+> OPTIONAL. The URL of the Remove Subject Endpoint.
 
 verification_endpoint
-: OPTIONAL. The URL of the Verification Endpoint.
+
+> OPTIONAL. The URL of the Verification Endpoint.
 
 critical_subject_members
-: OPTIONAL. List of member names in a Complex Subject which, if present in
+
+> OPTIONAL. List of member names in a Complex Subject which, if present in
   a Subject Member in an event, MUST be interpreted by a Receiver.
 
 TODO: consider adding a IANA Registry for metadata, similar to Section 7.1.1 of
@@ -713,20 +733,25 @@ The Event Stream Management API is implemented by the Event Transmitter and
 consists of the following endpoints:
 
 Configuration Endpoint
-: An endpoint used to create and delete Event Streams, as well as read and
+
+> An endpoint used to create and delete Event Streams, as well as read and
   update an Event Stream’s current configuration.
 
 Status Endpoint
-: An endpoint used to read and update an Event Stream’s current status.
+
+> An endpoint used to read and update an Event Stream’s current status.
 
 Add Subject Endpoint
-: An endpoint used to add subjects to an Event Stream.
+
+> An endpoint used to add subjects to an Event Stream.
 
 Remove Subject Endpoint
-: An endpoint used to remove subjects from an Event Stream.
+
+> An endpoint used to remove subjects from an Event Stream.
 
 Verification Endpoint
-: An endpoint used to request the Event Transmitter transmit a Verification
+
+> An endpoint used to request the Event Transmitter transmit a Verification
   Event over an Event Stream.
 
 An Event Transmitter MAY use the same URLs as endpoints for multiple Event
@@ -742,54 +767,63 @@ the Event Stream. It is represented as a JSON {{RFC7159}} object with the
 following properties:
 
 stream_id
-: **Transmitter-Supplied**, A string that uniquely identifies the stream. Stream
+
+> **Transmitter-Supplied**, A string that uniquely identifies the stream. Stream
   IDs MUST be unique per Reciever.  This value is generated by the Transmitter
   when the stream is created.
 
 iss
-: **Transmitter-Supplied**, A URL using the https scheme with no query or
+
+> **Transmitter-Supplied**, A URL using the https scheme with no query or
   fragment component that the Transmitter asserts as its Issuer Identifier. This
   MUST be identical to the `iss` Claim value in Security Event Tokens issued
   from this Transmitter.
 
 aud
-: **Transmitter-Supplied**, A string or an array of strings containing an
+
+> **Transmitter-Supplied**, A string or an array of strings containing an
   audience claim as defined in JSON Web Token (JWT){{RFC7519}} that identifies
   the Event Receiver(s) for the Event Stream. This property cannot be updated.
   If multiple Receivers are specified then the Transmitter SHOULD know that
   these Receivers are the same entity.
 
 events_supported
-: **Transmitter-Supplied**, An array of URIs identifying the set of events
+
+> **Transmitter-Supplied**, An array of URIs identifying the set of events
   supported by the Transmitter for this Receiver. If omitted, Event Transmitters
   SHOULD make this set available to the Event Receiver via some other means
   (e.g. publishing it in online documentation).
 
 events_requested
-: **Receiver-Supplied**, An array of URIs identifying the set of events that
+
+> **Receiver-Supplied**, An array of URIs identifying the set of events that
   the Receiver requested. A Receiver SHOULD request only the events that it
   understands and it can act on. This is configurable by the Receiver.
 
 events_delivered
-: **Transmitter-Supplied**, An array of URIs which is the intersection of
+
+> **Transmitter-Supplied**, An array of URIs which is the intersection of
   `events_supported` and `events_requested`. These events MAY be delivered over
               the Event Stream.
 
 delivery
-: **Receiver-Supplied**, A JSON object containing a set of name/value pairs
+
+> **Receiver-Supplied**, A JSON object containing a set of name/value pairs
   specifying configuration parameters for the SET delivery method.  The actual
   delivery method is identified by the special key `method` with the value being
   a URI as defined in {{delivery-meta}}.
 
 min_verification_interval
-: **Transmitter-Supplied**, An integer indicating the minimum amount of time in
+
+> **Transmitter-Supplied**, An integer indicating the minimum amount of time in
   seconds that must pass in between verification requests. If an Event Receiver
   submits verification requests more frequently than this, the Event Transmitter
   MAY respond with a 429 status code. An Event Transmitter SHOULD NOT respond
   with a 429 status code if an Event Receiver is not exceeding this frequency.
 
 format
-: **Receiver-Supplied**, The Subject Identifier Format that the Receiver wants
+
+> **Receiver-Supplied**, The Subject Identifier Format that the Receiver wants
   for the events. If not set then the Transmitter might decide to use a type
   that discloses more information than necessary.
 
@@ -809,18 +843,21 @@ The HTTP POST request MAY contain the Receiver-Supplied values of the Stream
 Configuration{{stream-config}} object:
 
 events_requested
-: **Receiver-Supplied**, An array of URIs identifying the set of events that
+
+> **Receiver-Supplied**, An array of URIs identifying the set of events that
   the Receiver requested. A Receiver SHOULD request only the events that it
   understands and it can act on. This is configurable by the Receiver.
 
 delivery
-: **Receiver-Supplied**, A JSON object containing a set of name/value pairs
+
+> **Receiver-Supplied**, A JSON object containing a set of name/value pairs
   specifying configuration parameters for the SET delivery method. The actual
   delivery method is identified by the special key `method` with the value
   being a URI as defined in {{delivery-meta}}.
 
 format
-: **Receiver-Supplied**, The Subject Identifier Format that the Receiver wants
+
+> **Receiver-Supplied**, The Subject Identifier Format that the Receiver wants
   for the events. If not set then the Transmitter might decide to use a type
   that discloses more information than necessary.
 
@@ -887,9 +924,9 @@ Errors are signaled with HTTP status codes as follows:
 
 | Code | Description |
 |------|-------------|
-| 400  | If the request cannot be parsed |
-| 401  | If authorization failed or it is missing |
-| 403  | If the Event Receiver is not allowed to create a stream |
+| 400  | if the request cannot be parsed |
+| 401  | if authorization failed or it is missing |
+| 403  | if the Event Receiver is not allowed to create a stream |
 {: title="Create Stream Errors" #tablecreatestream}
 
 
@@ -1169,6 +1206,7 @@ Pending conditions or errors are signaled with HTTP status codes as follows:
 
 | Code | Description |
 |------|-------------|
+| 200  | if the update request has been accepted, but not processed. Receiver MAY try the same request later to get processing result. |
 | 400  | if the request body cannot be parsed, a Transmitter-Supplied property is incorrect, or if the request is otherwise invalid |
 | 401  | if authorization failed or it is missing |
 | 403  | if the Event Receiver is not allowed to update the stream configuration |
@@ -1309,16 +1347,19 @@ according to the status of the stream.
 If the stream is:
 
 Enabled
-: the Transmitter MUST send a {{stream-updated-event}} event respectively to the
-  Receiver within the Event Stream.
+
+> the Transmitter MUST send a stream updated ({{stream-updated-event}}) event
+  respectively to the Receiver within the Event Stream.
 
 Paused
-: the Transmitter SHOULD send {{stream-updated-event}} after the Event Stream is
+
+> the Transmitter SHOULD send a stream updated ({{stream-updated-event}}) after the Event Stream is
   re-started. A Receiver MUST assume that events may have been lost during the
   time when the event stream was paused.
 
 Disabled
-: the Transmitter MAY send {{stream-updated-event}} after the Event Stream is
+
+> the Transmitter MAY send a stream updated ({{stream-updated-event}}) after the Event Stream is
   re-enabled.
 
 #### Reading a Stream’s Status {#reading-a-streams-status}
@@ -1328,21 +1369,25 @@ GET request to the stream’s Status Endpoint.
 The Stream Status method takes the following parameters:
 
 stream_id
-: REQUIRED. The stream whose status is being queried.
+
+> REQUIRED. The stream whose status is being queried.
 
 subject
-: OPTIONAL. The subject for which the stream status is requested.
+
+> OPTIONAL. The subject for which the stream status is requested.
 
 On receiving a valid request the Event Transmitter responds with a 200 OK
 response containing a [JSON][RFC7159] object with an attribute`status`,
 whose string value MUST have one of the following values:
 
 enabled
-: The Transmitter MUST transmit events over the stream, according to the
+
+> The Transmitter MUST transmit events over the stream, according to the
   stream’s configured delivery method.
 
 paused
-: The Transmitter MUST NOT transmit events over the stream. The transmitter
+
+> The Transmitter MUST NOT transmit events over the stream. The transmitter
   will hold any events it would have transmitted while paused, and SHOULD
   transmit them when the stream’s status becomes `enabled`. If a Transmitter
   holds successive events that affect the same Subject Principal, then the
@@ -1353,7 +1398,8 @@ paused
   by the later events or the previous events are outdated.
 
 disabled
-: The Transmitter MUST NOT transmit events over the stream, and will not hold
+
+> The Transmitter MUST NOT transmit events over the stream, and will not hold
   any events for later transmission.
 
 The following is a non-normative example request to check an event stream’s
@@ -1440,16 +1486,20 @@ request to the Status Endpoint. The POST body contains a [JSON][RFC7159] object
 with the following fields:
 
 stream_id
-: REQUIRED. The stream whose status is being updated.
+
+> REQUIRED. The stream whose status is being updated.
 
 status
-: REQUIRED. The new status of the Event Stream.
+
+> REQUIRED. The new status of the Event Stream.
 
 subject
-: OPTIONAL. The Subject to which the new status applies.
+
+> OPTIONAL. The Subject to which the new status applies.
 
 reason
-: OPTIONAL. A short text description that explains the reason for the change.
+
+> OPTIONAL. A short text description that explains the reason for the change.
 
 On receiving a valid request the Event Transmitter responds with a `200 OK`
 response containing a [JSON][RFC7159] representation of the updated stream
@@ -1540,13 +1590,16 @@ request to the Add Subject Endpoint, containing in the body a JSON object the
 following claims:
 
 stream_id
-: REQUIRED. The stream to which the subject is being added.
+
+> REQUIRED. The stream to which the subject is being added.
 
 subject
-: REQUIRED. A Subject claim identifying the subject to be added.
+
+> REQUIRED. A Subject claim identifying the subject to be added.
 
 verified
-: OPTIONAL.  A boolean value; when true, it indicates that the Event Receiver
+
+> OPTIONAL.  A boolean value; when true, it indicates that the Event Receiver
   has verified the Subject claim. When false, it indicates that the Event
   Receiver has not verified the Subject claim. If omitted, Event Transmitters
   SHOULD assume that the subject has been verified.
@@ -1603,10 +1656,12 @@ request to the Remove Subject Endpoint, containing in the body a JSON object
 with the following claims:
 
 stream_id
-: REQUIRED. The stream from which the subject is being removed.
+
+> REQUIRED. The stream from which the subject is being removed.
 
 subject
-: REQUIRED. A Subject claim identifying the subject to be removed.
+
+> REQUIRED. A Subject claim identifying the subject to be removed.
 
 On a successful response, the Event Transmitter responds with a `204 No Content`
 response.
@@ -1666,10 +1721,12 @@ not requested by the Event Receiver.
 The Verification Event is a standard SET with the following attributes:
 
 event type
-: The Event Type URI is: `https://schemas.openid.net/secevent/sse/event-type/verification`.
+
+> The Event Type URI is: `https://schemas.openid.net/secevent/sse/event-type/verification`.
 
 state
-: OPTIONAL An opaque value provided by the Event Receiver when the event is
+
+> OPTIONAL An opaque value provided by the Event Receiver when the event is
   triggered. This is a nested attribute in the event payload.
 
 Upon receiving a Verification Event, the Event Receiver SHALL parse the SET and
@@ -1692,10 +1749,12 @@ On a successful request, the event transmitter responds with an empty
 Verification requests have the following properties:
 
 stream_id
-: REQUIRED. The stream that the verification event is being requested on.
+
+> REQUIRED. The stream that the verification event is being requested on.
 
 state
-: OPTIONAL. An arbitrary string that the Event Transmitter MUST echo back to the
+
+> OPTIONAL. An arbitrary string that the Event Transmitter MUST echo back to the
   Event Receiver in the verification event’s payload. Event Receivers MAY use
   the value of this parameter to correlate a verification event with a
   verification request. If the verification event is initiated by the transmitter
@@ -1779,15 +1838,18 @@ Subject.
 The `stream-updated` event MAY contain the following claims:
 
 status
-: REQUIRED. Defines the new status of the stream for the Subject Identifier
+
+> REQUIRED. Defines the new status of the stream for the Subject Identifier
   specified in the Subject.
 
 reason
-: OPTIONAL. Provides a short description of why the Transmitter has updated the
+
+> OPTIONAL. Provides a short description of why the Transmitter has updated the
   status.
 
 subject
-: OPTIONAL. Specifies the Subject Principal for whom the status has been updated.
+
+> OPTIONAL. Specifies the Subject Principal for whom the status has been updated.
   If this claim is not included, then the status change was applied to all
   subjects in the stream.
 
@@ -2058,16 +2120,19 @@ metadata.
 This section provides SSE profiling specifications for the {{DELIVERYPUSH}} spec.
 
 method
-: `https://schemas.openid.net/secevent/risc/delivery-method/push`
+
+> `https://schemas.openid.net/secevent/risc/delivery-method/push`
 
 endpoint_url
-: The URL where events are pushed through HTTP POST. This is set by the
+
+> The URL where events are pushed through HTTP POST. This is set by the
   Receiver. If a Reciever is using multiple streams from a single Transmitter
   and needs to keep the SETs separated, it is RECOMMENDED that the URL for each
   stream be unique.
 
 authorization_header
-: The HTTP Authorization header that the Transmitter MUST set with each event
+
+> The HTTP Authorization header that the Transmitter MUST set with each event
   delivery, if the configuration is present. The value is optional and it is set
   by the Receiver.
   
@@ -2075,10 +2140,12 @@ authorization_header
 This section provides SSE profiling specifications for the {{DELIVERYPOLL}} spec.
 
 method
-: `https://schemas.openid.net/secevent/risc/delivery-method/poll`
+
+> `https://schemas.openid.net/secevent/risc/delivery-method/poll`
 
 endpoint_url
-: The URL where events can be retrieved from. This is specified by the
+
+> The URL where events can be retrieved from. This is specified by the
   Transmitter. These URLs MAY be reused across Receivers, but MUST be unique per
   stream for a given Receiver.
 
