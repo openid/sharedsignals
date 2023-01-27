@@ -30,7 +30,7 @@ Abstract
    This specification defines:
 
    *  A profile for IETF Security Events
-      (https://datatracker.ietf.org/wg/secevent/about)
+      (https://datatracker.ietf.org/wg/secevent/about/)
 
    *  Subject Principals
 
@@ -409,7 +409,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 7]
      }
    }
 
-        Figure 5: Example: SET Containing a SSF Event with a Simple
+        Figure 5: Example: SET Containing a SSE Event with a Simple
                                Subject Member
 
    {

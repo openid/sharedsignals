@@ -198,7 +198,7 @@ and Coordination (RISC) and the Continuous Access Evaluation Profile ({{CAEP}})
 
 This specification defines:
 
-* A profile for IETF Security Events (https://datatracker.ietf.org/wg/secevent/about)
+* A profile for IETF Security Events (https://datatracker.ietf.org/wg/secevent/about/)
 * Subject Principals
 * Subject Claims in SSE Events
 * Event Types
@@ -440,7 +440,7 @@ The following are hypothetical examples of SETs that conform to the SSE Framewor
   }
 }
 ~~~
-{: #subject-ids-ex-simple title="Example: SET Containing a SSF Event with a Simple Subject Member"}
+{: #subject-ids-ex-simple title="Example: SET Containing a SSE Event with a Simple Subject Member"}
 
 ~~~ json
 {
