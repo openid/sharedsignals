@@ -917,7 +917,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 16]
    representation of the stream's configuration in the body.
 
    The HTTP POST request MAY contain the Receiver-Supplied values of the
-   Stream ConfigurationSection 7.1.1 object:
+   Stream Configuration (Section 7.1.1) object:
 
    events_requested
 
@@ -1517,7 +1517,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 27]
           +======+==============================================+
           | Code | Description                                  |
           +======+==============================================+
-          | 200  | if the update request has been accepted, but |
+          | 202  | if the update request has been accepted, but |
           |      | not processed.  Receiver MAY try the same    |
           |      | request later to get processing result.      |
           +------+----------------------------------------------+
@@ -2681,7 +2681,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 47]
    This section is a profile of the following IETF SecEvent
    specifications:
 
-   *  [SET] Security Event Token (SET)
+   *  Security Event Token (SET) [SET]
 
 
 
@@ -2690,12 +2690,12 @@ Tulshibagwale, et al.        Standards Track                   [Page 48]
                           openid-sse-framework              January 2023
 
 
-   *  [DELIVERYPUSH] Push-Based SET Token Delivery Using HTTP
+   *  Push-Based SET Token Delivery Using HTTP ([DELIVERYPUSH])
 
-   *  [DELIVERYPOLL] Poll-Based SET Token Delivery Using HTTP
+   *  Poll-Based SET Token Delivery Using HTTP ([DELIVERYPOLL])
 
    The RISC use cases that set the requirements are described in
-   [USECASES] Security Events RISC Use Cases.
+   Security Events RISC Use Cases ([USECASES]).
 
    The CAEP use cases that set the requirements are described in CAEP
    Use Cases (TODO: Add reference when file is added to repository.)
@@ -2703,7 +2703,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 48]
 11.1.  Security Event Token Profile
 
    This section provides SSE profiling specifications for the Security
-   Event Token [SET] spec.
+   Event Token (SET) [SET] spec.
 
 11.1.1.  Signature Key Resolution
 

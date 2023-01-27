@@ -840,7 +840,7 @@ the Event Transmitter responds with a `201 Created` response containing a
 [JSON][RFC7159] representation of the stream’s configuration in the body.
 
 The HTTP POST request MAY contain the Receiver-Supplied values of the Stream
-Configuration{{stream-config}} object:
+Configuration ({{stream-config}}) object:
 
 events_requested
 
@@ -1206,7 +1206,7 @@ Pending conditions or errors are signaled with HTTP status codes as follows:
 
 | Code | Description |
 |------|-------------|
-| 200  | if the update request has been accepted, but not processed. Receiver MAY try the same request later to get processing result. |
+| 202  | if the update request has been accepted, but not processed. Receiver MAY try the same request later to get processing result. |
 | 400  | if the request body cannot be parsed, a Transmitter-Supplied property is incorrect, or if the request is otherwise invalid |
 | 401  | if authorization failed or it is missing |
 | 403  | if the Event Receiver is not allowed to update the stream configuration |
@@ -1973,18 +1973,18 @@ policy.
 # Profiles {#profiles} 
 This section is a profile of the following IETF SecEvent specifications:
 
-* {{SET}} Security Event Token (SET)
-* {{DELIVERYPUSH}} Push-Based SET Token Delivery Using HTTP
-* {{DELIVERYPOLL}} Poll-Based SET Token Delivery Using HTTP
+* Security Event Token (SET) {{SET}} 
+* Push-Based SET Token Delivery Using HTTP ({{DELIVERYPUSH}})
+* Poll-Based SET Token Delivery Using HTTP ({{DELIVERYPOLL}})
 
-The RISC use cases that set the requirements are described in {{USECASES}}
-Security Events RISC Use Cases.
+The RISC use cases that set the requirements are described in Security Events
+RISC Use Cases ({{USECASES}}).
 
 The CAEP use cases that set the requirements are described in CAEP Use Cases (TODO: Add
         reference when file is added to repository.)
 
 ## Security Event Token Profile {#set-profle} 
-This section provides SSE profiling specifications for the Security Event Token
+This section provides SSE profiling specifications for the Security Event Token (SET)
 {{SET}} spec.
 
 ### Signature Key Resolution {#signature-key-resolution} 

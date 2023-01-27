@@ -2374,7 +2374,7 @@ an HTTP POST request to the Configuration Endpoint. On receiving a valid request
 the Event Transmitter responds with a <code>201 Created</code> response containing a
 <span><a href="#RFC7159" class="internal xref">JSON</a> [<a href="#RFC7159" class="cite xref">RFC7159</a>]</span> representation of the stream's configuration in the body.<a href="#section-7.1.1.1-1" class="pilcrow">¶</a></p>
 <p id="section-7.1.1.1-2">The HTTP POST request MAY contain the Receiver-Supplied values of the Stream
-Configuration<a href="#stream-config" class="auto internal xref">Section 7.1.1</a> object:<a href="#section-7.1.1.1-2" class="pilcrow">¶</a></p>
+Configuration (<a href="#stream-config" class="auto internal xref">Section 7.1.1</a>) object:<a href="#section-7.1.1.1-2" class="pilcrow">¶</a></p>
 <p id="section-7.1.1.1-3">events_requested<a href="#section-7.1.1.1-3" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-7.1.1.1-4.1">
@@ -2849,7 +2849,7 @@ Cache-Control: no-store
               </thead>
               <tbody>
                 <tr>
-                  <td class="text-left" rowspan="1" colspan="1">200</td>
+                  <td class="text-left" rowspan="1" colspan="1">202</td>
                   <td class="text-left" rowspan="1" colspan="1">if the update request has been accepted, but not processed. Receiver MAY try the same request later to get processing result.</td>
                 </tr>
                 <tr>
@@ -4044,18 +4044,15 @@ policy.<a href="#section-10.3.2-1" class="pilcrow">¶</a></p>
       </h2>
 <p id="section-11-1">This section is a profile of the following IETF SecEvent specifications:<a href="#section-11-1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-11-2.1">
-          <span>[<a href="#SET" class="cite xref">SET</a>]</span> Security Event Token (SET)<a href="#section-11-2.1" class="pilcrow">¶</a>
+<li class="normal" id="section-11-2.1">Security Event Token (SET) <span>[<a href="#SET" class="cite xref">SET</a>]</span><a href="#section-11-2.1" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-11-2.2">
-          <span>[<a href="#DELIVERYPUSH" class="cite xref">DELIVERYPUSH</a>]</span> Push-Based SET Token Delivery Using HTTP<a href="#section-11-2.2" class="pilcrow">¶</a>
+        <li class="normal" id="section-11-2.2">Push-Based SET Token Delivery Using HTTP (<span>[<a href="#DELIVERYPUSH" class="cite xref">DELIVERYPUSH</a>]</span>)<a href="#section-11-2.2" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-11-2.3">
-          <span>[<a href="#DELIVERYPOLL" class="cite xref">DELIVERYPOLL</a>]</span> Poll-Based SET Token Delivery Using HTTP<a href="#section-11-2.3" class="pilcrow">¶</a>
+        <li class="normal" id="section-11-2.3">Poll-Based SET Token Delivery Using HTTP (<span>[<a href="#DELIVERYPOLL" class="cite xref">DELIVERYPOLL</a>]</span>)<a href="#section-11-2.3" class="pilcrow">¶</a>
 </li>
       </ul>
-<p id="section-11-3">The RISC use cases that set the requirements are described in <span>[<a href="#USECASES" class="cite xref">USECASES</a>]</span>
-Security Events RISC Use Cases.<a href="#section-11-3" class="pilcrow">¶</a></p>
+<p id="section-11-3">The RISC use cases that set the requirements are described in Security Events
+RISC Use Cases (<span>[<a href="#USECASES" class="cite xref">USECASES</a>]</span>).<a href="#section-11-3" class="pilcrow">¶</a></p>
 <p id="section-11-4">The CAEP use cases that set the requirements are described in CAEP Use Cases (TODO: Add
         reference when file is added to repository.)<a href="#section-11-4" class="pilcrow">¶</a></p>
 <div id="set-profle">
@@ -4063,7 +4060,7 @@ Security Events RISC Use Cases.<a href="#section-11-3" class="pilcrow">¶</a></p
         <h3 id="name-security-event-token-profil">
 <a href="#section-11.1" class="section-number selfRef">11.1. </a><a href="#name-security-event-token-profil" class="section-name selfRef">Security Event Token Profile</a>
         </h3>
-<p id="section-11.1-1">This section provides SSE profiling specifications for the Security Event Token
+<p id="section-11.1-1">This section provides SSE profiling specifications for the Security Event Token (SET)
 <span>[<a href="#SET" class="cite xref">SET</a>]</span> spec.<a href="#section-11.1-1" class="pilcrow">¶</a></p>
 <div id="signature-key-resolution">
 <section id="section-11.1.1">
