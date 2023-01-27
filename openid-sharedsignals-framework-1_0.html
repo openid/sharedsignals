@@ -1653,7 +1653,7 @@ Subject Principal.<a href="#section-3.2.1-1" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
-<div id="subject-ids-in-ssf">
+<div id="subject-ids-in-sse">
 <section id="section-3.3">
         <h3 id="name-subject-identifiers-in-sse-">
 <a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-subject-identifiers-in-sse-" class="section-name selfRef">Subject Identifiers in SSE Events</a>
@@ -1692,13 +1692,13 @@ contain the following members:<a href="#section-3.4.1-1" class="pilcrow">¶</a><
 <span class="break"></span><dl class="dlParallel" id="section-3.4.1-2">
             <dt id="section-3.4.1-2.1">iss</dt>
             <dd style="margin-left: 1.5em" id="section-3.4.1-2.2">
-              <p id="section-3.4.1-2.2.1">REQUIRED, the "iss" (issuer) claim of the JWT being identified, defined in
+              <p id="section-3.4.1-2.2.1">REQUIRED. The "iss" (issuer) claim of the JWT being identified, defined in
 <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span><a href="#section-3.4.1-2.2.1" class="pilcrow">¶</a></p>
 </dd>
             <dd class="break"></dd>
 <dt id="section-3.4.1-2.3">jti</dt>
             <dd style="margin-left: 1.5em" id="section-3.4.1-2.4">
-              <p id="section-3.4.1-2.4.1">REQUIRED, the "jti" (JWT token ID) claim of the JWT being identified, defined
+              <p id="section-3.4.1-2.4.1">REQUIRED. The "jti" (JWT token ID) claim of the JWT being identified, defined
 in <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span><a href="#section-3.4.1-2.4.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
@@ -1734,7 +1734,7 @@ format MUST contain the following members:<a href="#section-3.4.2-1" class="pilc
 <span class="break"></span><dl class="dlParallel" id="section-3.4.2-2">
             <dt id="section-3.4.2-2.1">issuer</dt>
             <dd style="margin-left: 1.5em" id="section-3.4.2-2.2">
-              <p id="section-3.4.2-2.2.1">REQUIRED, the "Issuer" value of the SAML assertion being identified, defined
+              <p id="section-3.4.2-2.2.1">REQUIRED. The "Issuer" value of the SAML assertion being identified, defined
 in <span>[<a href="#OASIS.saml-core-2.0-os" class="cite xref">OASIS.saml-core-2.0-os</a>]</span><a href="#section-3.4.2-2.2.1" class="pilcrow">¶</a></p>
 </dd>
             <dd class="break"></dd>
@@ -1936,21 +1936,21 @@ configuration information.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-6.1-2">
           <dt id="section-6.1-2.1">issuer</dt>
           <dd style="margin-left: 1.5em" id="section-6.1-2.2">
-            <p id="section-6.1-2.2.1">REQUIRED, URL using the https scheme with no query or fragment component
+            <p id="section-6.1-2.2.1">REQUIRED. URL using the https scheme with no query or fragment component
 that the Transmitter asserts as its Issuer Identifier. This MUST be identical
 to the iss claim value in Security Event Tokens issued from this Transmitter.<a href="#section-6.1-2.2.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-6.1-2.3">jwks_uri</dt>
           <dd style="margin-left: 1.5em" id="section-6.1-2.4">
-            <p id="section-6.1-2.4.1">REQUIRED, URL of the Transmitter's JSON Web Key Set <span>[<a href="#RFC7517" class="cite xref">RFC7517</a>]</span> document.
+            <p id="section-6.1-2.4.1">REQUIRED. URL of the Transmitter's JSON Web Key Set <span>[<a href="#RFC7517" class="cite xref">RFC7517</a>]</span> document.
 This contains the signing key(s) the Receiver uses to validate signatures from
 the Transmitter.<a href="#section-6.1-2.4.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-6.1-2.5">delivery_methods_supported</dt>
           <dd style="margin-left: 1.5em" id="section-6.1-2.6">
-            <p id="section-6.1-2.6.1">RECOMMENDED, List of supported delivery method URIs.<a href="#section-6.1-2.6.1" class="pilcrow">¶</a></p>
+            <p id="section-6.1-2.6.1">RECOMMENDED. List of supported delivery method URIs.<a href="#section-6.1-2.6.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-6.1-2.7">configuration_endpoint</dt>
@@ -2053,7 +2053,7 @@ does not provide general information about the host.<a href="#section-6.2.1-6" c
 <a href="#section-6.2.2" class="section-number selfRef">6.2.2. </a><a href="#name-backward-compatibility-for-" class="section-name selfRef">Backward Compatibility for RISC Transmitters</a>
           </h4>
 <p id="section-6.2.2-1">Existing RISC Transmitters MAY continue to use the path component
-<code>/risc-configuration</code> instead of the path component <code>/ssf-configuration</code> in the
+<code>/risc-configuration</code> instead of the path component <code>/sse-configuration</code> in the
 path for the Transmitter Configuration Metadata. New services supporting the
 SSE Framework SHOULD NOT use this location for publishing the
 Transmitter Configuration Metadata. For example, the Transmitter Configuration

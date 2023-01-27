@@ -315,7 +315,7 @@ All members within a Complex Subject MUST represent attributes of the same
 Subject Principal. As a whole, the Complex Subject MUST refer to exactly one
 Subject Principal.
 
-## Subject Identifiers in SSE Events {#subject-ids-in-ssf}
+## Subject Identifiers in SSE Events {#subject-ids-in-sse}
 
 A Subject Identifier in a SSE event MUST have an identifier format that is any
 one of:
@@ -340,11 +340,11 @@ identifier, defined in  {{RFC7519}}. Subject Identifiers of this type MUST
 contain the following members:
 
 iss
-: REQUIRED, the "iss" (issuer) claim of the JWT being identified, defined in
+: REQUIRED. The "iss" (issuer) claim of the JWT being identified, defined in
   {{RFC7519}}
 
 jti
-: REQUIRED, the "jti" (JWT token ID) claim of the JWT being identified, defined
+: REQUIRED. The "jti" (JWT token ID) claim of the JWT being identified, defined
   in {{RFC7519}}
 
 The "JWT ID" Subject Identifier Format is identified by the name `jwt-id`.
@@ -368,7 +368,7 @@ The "SAML Assertion ID" Subject Identifier Format specifies a SAML 2.0
 format MUST contain the following members:
 
 issuer
-: REQUIRED, the "Issuer" value of the SAML assertion being identified, defined
+: REQUIRED. The "Issuer" value of the SAML assertion being identified, defined
   in {{OASIS.saml-core-2.0-os}}
 
 assertion_id
@@ -514,17 +514,17 @@ configuration information.
 Transmitters have metadata describing their configuration:
 
 issuer
-: REQUIRED, URL using the https scheme with no query or fragment component
+: REQUIRED. URL using the https scheme with no query or fragment component
   that the Transmitter asserts as its Issuer Identifier. This MUST be identical
   to the iss claim value in Security Event Tokens issued from this Transmitter.
 
 jwks_uri
-: REQUIRED, URL of the Transmitter's JSON Web Key Set {{RFC7517}} document.
+: REQUIRED. URL of the Transmitter's JSON Web Key Set {{RFC7517}} document.
   This contains the signing key(s) the Receiver uses to validate signatures from
   the Transmitter.
 
 delivery_methods_supported
-: RECOMMENDED, List of supported delivery method URIs.
+: RECOMMENDED. List of supported delivery method URIs.
 
 configuration_endpoint
 : OPTIONAL. The URL of the Configuration Endpoint.
@@ -594,7 +594,7 @@ does not provide general information about the host.
 
 ### Backward Compatibility for RISC Transmitters
 Existing RISC Transmitters MAY continue to use the path component
-`/risc-configuration` instead of the path component `/ssf-configuration` in the
+`/risc-configuration` instead of the path component `/sse-configuration` in the
 path for the Transmitter Configuration Metadata. New services supporting the
 SSE Framework SHOULD NOT use this location for publishing the
 Transmitter Configuration Metadata. For example, the Transmitter Configuration
