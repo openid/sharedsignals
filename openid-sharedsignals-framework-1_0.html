@@ -17,7 +17,7 @@ between cooperating peers. It enables multiple applications such as Risk Inciden
 and Coordination (RISC) and the Continuous Access Evaluation Profile ( ) 
        This specification defines: 
        
-         A profile for   (Security Event Tokens) 
+         A profile for IETF Security Events (https://datatracker.ietf.org/wg/secevent/about) 
          Subject Principals 
          Subject Claims in SSE Events 
          Event Types 
@@ -1281,7 +1281,7 @@ between cooperating peers. It enables multiple applications such as Risk Inciden
 and Coordination (RISC) and the Continuous Access Evaluation Profile (<span>[<a href="#CAEP" class="cite xref">CAEP</a>]</span>)<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 <p id="section-abstract-2">This specification defines:<a href="#section-abstract-2" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-abstract-3.1">A profile for <span>[<a href="#SET" class="cite xref">SET</a>]</span> (Security Event Tokens)<a href="#section-abstract-3.1" class="pilcrow">¶</a>
+<li class="normal" id="section-abstract-3.1">A profile for IETF Security Events (https://datatracker.ietf.org/wg/secevent/about)<a href="#section-abstract-3.1" class="pilcrow">¶</a>
 </li>
         <li class="normal" id="section-abstract-3.2">Subject Principals<a href="#section-abstract-3.2" class="pilcrow">¶</a>
 </li>
@@ -3068,35 +3068,34 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
           </h4>
 <p id="section-7.1.2-1">Within an Event Stream, events related to different Subject Principals MAY be
 managed independently. A Receiver MAY request Subject Principals to be added to
-or removed from a stream by <a href="#updating-a-streams-status" class="auto internal xref">Section 7.1.2.2</a> and specifying the
-Subject in the request.<a href="#section-7.1.2-1" class="pilcrow">¶</a></p>
+or removed from a stream by Updating the Stream Status
+(<a href="#updating-a-streams-status" class="auto internal xref">Section 7.1.2.2</a>) and specifying the Subject in the request.<a href="#section-7.1.2-1" class="pilcrow">¶</a></p>
 <p id="section-7.1.2-2">A Transmitter MAY decide to enable, pause or disable updates about a Subject
 independently of an update request from a Receiver. If a Transmitter decides to
 start or stop events for a Subject then the Transmitter MUST do the following
 according to the status of the stream.<a href="#section-7.1.2-2" class="pilcrow">¶</a></p>
 <p id="section-7.1.2-3">If the stream is:<a href="#section-7.1.2-3" class="pilcrow">¶</a></p>
-<p id="section-7.1.2-4">Enabled<a href="#section-7.1.2-4" class="pilcrow">¶</a></p>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.2-5.1">
-              <p id="section-7.1.2-5.1.1">the Transmitter MUST send a stream updated (<a href="#stream-updated-event" class="auto internal xref">Section 7.1.5</a>) event
-  respectively to the Receiver within the Event Stream.<a href="#section-7.1.2-5.1.1" class="pilcrow">¶</a></p>
-</li>
-          </ul>
-<p id="section-7.1.2-6">Paused<a href="#section-7.1.2-6" class="pilcrow">¶</a></p>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.2-7.1">
-              <p id="section-7.1.2-7.1.1">the Transmitter SHOULD send a stream updated (<a href="#stream-updated-event" class="auto internal xref">Section 7.1.5</a>) after the Event Stream is
-  re-started. A Receiver MUST assume that events may have been lost during the
-  time when the event stream was paused.<a href="#section-7.1.2-7.1.1" class="pilcrow">¶</a></p>
-</li>
-          </ul>
-<p id="section-7.1.2-8">Disabled<a href="#section-7.1.2-8" class="pilcrow">¶</a></p>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.2-9.1">
-              <p id="section-7.1.2-9.1.1">the Transmitter MAY send a stream updated (<a href="#stream-updated-event" class="auto internal xref">Section 7.1.5</a>) after the Event Stream is
-  re-enabled.<a href="#section-7.1.2-9.1.1" class="pilcrow">¶</a></p>
-</li>
-          </ul>
+<span class="break"></span><dl class="dlParallel" id="section-7.1.2-4">
+            <dt id="section-7.1.2-4.1">Enabled</dt>
+            <dd style="margin-left: 1.5em" id="section-7.1.2-4.2">
+              <p id="section-7.1.2-4.2.1">the Transmitter MUST send a stream updated (<a href="#stream-updated-event" class="auto internal xref">Section 7.1.5</a>) event
+respectively to the Receiver within the Event Stream.<a href="#section-7.1.2-4.2.1" class="pilcrow">¶</a></p>
+</dd>
+            <dd class="break"></dd>
+<dt id="section-7.1.2-4.3">Paused</dt>
+            <dd style="margin-left: 1.5em" id="section-7.1.2-4.4">
+              <p id="section-7.1.2-4.4.1">the Transmitter SHOULD send a stream updated (<a href="#stream-updated-event" class="auto internal xref">Section 7.1.5</a>) after the Event Stream is
+re-started. A Receiver MUST assume that events may have been lost during the
+time when the event stream was paused.<a href="#section-7.1.2-4.4.1" class="pilcrow">¶</a></p>
+</dd>
+            <dd class="break"></dd>
+<dt id="section-7.1.2-4.5">Disabled</dt>
+            <dd style="margin-left: 1.5em" id="section-7.1.2-4.6">
+              <p id="section-7.1.2-4.6.1">the Transmitter MAY send a stream updated (<a href="#stream-updated-event" class="auto internal xref">Section 7.1.5</a>) after the Event Stream is
+re-enabled.<a href="#section-7.1.2-4.6.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+</dl>
 <div id="reading-a-streams-status">
 <section id="section-7.1.2.1">
             <h5 id="name-reading-a-streams-status">
@@ -3118,7 +3117,7 @@ GET request to the stream's Status Endpoint.<a href="#section-7.1.2.1-1" class="
 </li>
             </ul>
 <p id="section-7.1.2.1-7">On receiving a valid request the Event Transmitter responds with a 200 OK
-response containing a <span><a href="#RFC7159" class="internal xref">JSON</a> [<a href="#RFC7159" class="cite xref">RFC7159</a>]</span> object with an attribute<code>status</code>,
+response containing a <span><a href="#RFC7159" class="internal xref">JSON</a> [<a href="#RFC7159" class="cite xref">RFC7159</a>]</span> object with an attribute <code>status</code>,
 whose string value MUST have one of the following values:<a href="#section-7.1.2.1-7" class="pilcrow">¶</a></p>
 <p id="section-7.1.2.1-8">enabled<a href="#section-7.1.2.1-8" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
@@ -3469,7 +3468,7 @@ response.  The Event Transmitter MAY choose to silently ignore the request, for
 example if the subject has previously indicated to the Transmitter that they do
 not want events to be transmitted to the Event Receiver. In this case, the
 transmitter MAY return an empty <code>200 OK</code> response or an appropriate error code.
-See Security Considerations <a href="#management-sec" class="auto internal xref">Section 9</a>.<a href="#section-7.1.3.1-8" class="pilcrow">¶</a></p>
+See Security Considerations (<a href="#management-sec" class="auto internal xref">Section 9</a>).<a href="#section-7.1.3.1-8" class="pilcrow">¶</a></p>
 <p id="section-7.1.3.1-9">The following is a non-normative example request to add a subject to a stream,
 where the subject is identified by an Email Subject Identifier.<a href="#section-7.1.3.1-9" class="pilcrow">¶</a></p>
 <span id="name-example-add-subject-request"></span><div id="figaddreq">
@@ -3902,8 +3901,8 @@ Subject.<a href="#section-7.1.5-3" class="pilcrow">¶</a></p>
       </h2>
 <p id="section-8-1">HTTP API calls from a Receiver to a Transmitter SHOULD be authorized by
 providing an OAuth 2.0 Access Token as defined by <span>[<a href="#RFC6750" class="cite xref">RFC6750</a>]</span>.<a href="#section-8-1" class="pilcrow">¶</a></p>
-<p id="section-8-2">The receiver may obtain an access token using the <span>[<a href="#CLIENTCRED" class="cite xref">CLIENTCRED</a>]</span> Client
-Credential Grant, or any other method suitable for the Receiver and the
+<p id="section-8-2">The receiver may obtain an access token using the Client
+Credential Grant <span>[<a href="#CLIENTCRED" class="cite xref">CLIENTCRED</a>]</span>, or any other method suitable for the Receiver and the
 Transmitter.<a href="#section-8-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -4046,13 +4045,13 @@ policy.<a href="#section-10.3.2-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-11-2.1">Security Event Token (SET) <span>[<a href="#SET" class="cite xref">SET</a>]</span><a href="#section-11-2.1" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-11-2.2">Push-Based SET Token Delivery Using HTTP (<span>[<a href="#DELIVERYPUSH" class="cite xref">DELIVERYPUSH</a>]</span>)<a href="#section-11-2.2" class="pilcrow">¶</a>
+        <li class="normal" id="section-11-2.2">Push-Based SET Token Delivery Using HTTP <span>[<a href="#DELIVERYPUSH" class="cite xref">DELIVERYPUSH</a>]</span><a href="#section-11-2.2" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-11-2.3">Poll-Based SET Token Delivery Using HTTP (<span>[<a href="#DELIVERYPOLL" class="cite xref">DELIVERYPOLL</a>]</span>)<a href="#section-11-2.3" class="pilcrow">¶</a>
+        <li class="normal" id="section-11-2.3">Poll-Based SET Token Delivery Using HTTP <span>[<a href="#DELIVERYPOLL" class="cite xref">DELIVERYPOLL</a>]</span><a href="#section-11-2.3" class="pilcrow">¶</a>
 </li>
       </ul>
 <p id="section-11-3">The RISC use cases that set the requirements are described in Security Events
-RISC Use Cases (<span>[<a href="#USECASES" class="cite xref">USECASES</a>]</span>).<a href="#section-11-3" class="pilcrow">¶</a></p>
+RISC Use Cases <span>[<a href="#USECASES" class="cite xref">USECASES</a>]</span>.<a href="#section-11-3" class="pilcrow">¶</a></p>
 <p id="section-11-4">The CAEP use cases that set the requirements are described in CAEP Use Cases (TODO: Add
         reference when file is added to repository.)<a href="#section-11-4" class="pilcrow">¶</a></p>
 <div id="set-profle">

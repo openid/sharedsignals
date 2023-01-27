@@ -63,6 +63,7 @@ normative:
       RFC: '6749'
     target: https://tools.ietf.org/html/rfc6749#section-4.4
     title: The OAuth 2.0 Authorization Framework - Client Credentials Grant
+
   DELIVERYPOLL:
     author:
     - ins: A. Backman
@@ -197,7 +198,7 @@ and Coordination (RISC) and the Continuous Access Evaluation Profile ({{CAEP}})
 
 This specification defines:
 
-* A profile for {{SET}} (Security Event Tokens)
+* A profile for IETF Security Events (https://datatracker.ietf.org/wg/secevent/about)
 * Subject Principals
 * Subject Claims in SSE Events
 * Event Types
@@ -1336,8 +1337,8 @@ Errors are signaled with HTTP status codes as follows:
 ### Stream Status {#status}
 Within an Event Stream, events related to different Subject Principals MAY be
 managed independently. A Receiver MAY request Subject Principals to be added to
-or removed from a stream by {{updating-a-streams-status}} and specifying the
-Subject in the request.
+or removed from a stream by Updating the Stream Status
+({{updating-a-streams-status}}) and specifying the Subject in the request.
 
 A Transmitter MAY decide to enable, pause or disable updates about a Subject
 independently of an update request from a Receiver. If a Transmitter decides to
@@ -1347,19 +1348,16 @@ according to the status of the stream.
 If the stream is:
 
 Enabled
-
-> the Transmitter MUST send a stream updated ({{stream-updated-event}}) event
+: the Transmitter MUST send a stream updated ({{stream-updated-event}}) event
   respectively to the Receiver within the Event Stream.
 
 Paused
-
-> the Transmitter SHOULD send a stream updated ({{stream-updated-event}}) after the Event Stream is
+: the Transmitter SHOULD send a stream updated ({{stream-updated-event}}) after the Event Stream is
   re-started. A Receiver MUST assume that events may have been lost during the
   time when the event stream was paused.
 
 Disabled
-
-> the Transmitter MAY send a stream updated ({{stream-updated-event}}) after the Event Stream is
+: the Transmitter MAY send a stream updated ({{stream-updated-event}}) after the Event Stream is
   re-enabled.
 
 #### Reading a Stream’s Status {#reading-a-streams-status}
@@ -1377,7 +1375,7 @@ subject
 > OPTIONAL. The subject for which the stream status is requested.
 
 On receiving a valid request the Event Transmitter responds with a 200 OK
-response containing a [JSON][RFC7159] object with an attribute`status`,
+response containing a [JSON][RFC7159] object with an attribute `status`,
 whose string value MUST have one of the following values:
 
 enabled
@@ -1609,7 +1607,7 @@ response.  The Event Transmitter MAY choose to silently ignore the request, for
 example if the subject has previously indicated to the Transmitter that they do
 not want events to be transmitted to the Event Receiver. In this case, the
 transmitter MAY return an empty `200 OK` response or an appropriate error code.
-See Security Considerations {{management-sec}}.
+See Security Considerations ({{management-sec}}).
 
 The following is a non-normative example request to add a subject to a stream,
 where the subject is identified by an Email Subject Identifier.
@@ -1880,8 +1878,8 @@ subject
 HTTP API calls from a Receiver to a Transmitter SHOULD be authorized by
 providing an OAuth 2.0 Access Token as defined by {{RFC6750}}.
 
-The receiver may obtain an access token using the {{CLIENTCRED}} Client
-Credential Grant, or any other method suitable for the Receiver and the
+The receiver may obtain an access token using the Client
+Credential Grant {{CLIENTCRED}}, or any other method suitable for the Receiver and the
 Transmitter.
 
 # Security Considerations {#management-sec} 
@@ -1974,11 +1972,11 @@ policy.
 This section is a profile of the following IETF SecEvent specifications:
 
 * Security Event Token (SET) {{SET}} 
-* Push-Based SET Token Delivery Using HTTP ({{DELIVERYPUSH}})
-* Poll-Based SET Token Delivery Using HTTP ({{DELIVERYPOLL}})
+* Push-Based SET Token Delivery Using HTTP {{DELIVERYPUSH}}
+* Poll-Based SET Token Delivery Using HTTP {{DELIVERYPOLL}}
 
 The RISC use cases that set the requirements are described in Security Events
-RISC Use Cases ({{USECASES}}).
+RISC Use Cases {{USECASES}}.
 
 The CAEP use cases that set the requirements are described in CAEP Use Cases (TODO: Add
         reference when file is added to repository.)

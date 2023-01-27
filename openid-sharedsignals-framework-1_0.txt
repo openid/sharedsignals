@@ -29,7 +29,8 @@ Abstract
 
    This specification defines:
 
-   *  A profile for [SET] (Security Event Tokens)
+   *  A profile for IETF Security Events
+      (https://datatracker.ietf.org/wg/secevent/about)
 
    *  Subject Principals
 
@@ -49,7 +50,6 @@ Abstract
 
    *  Subject Identifiers for Security Event Tokens [SUBIDS]
 
-   *  Push-Based SET Token Delivery Using HTTP [DELIVERYPUSH]
 
 
 
@@ -57,6 +57,8 @@ Tulshibagwale, et al.        Standards Track                    [Page 1]
 
                           openid-sse-framework              January 2023
 
+
+   *  Push-Based SET Token Delivery Using HTTP [DELIVERYPUSH]
 
    *  Poll-Based SET Token Delivery Using HTTP [DELIVERYPOLL]
 
@@ -104,8 +106,6 @@ Table of Contents
    11. Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .  48
      11.1.  Security Event Token Profile . . . . . . . . . . . . . .  49
        11.1.1.  Signature Key Resolution . . . . . . . . . . . . . .  49
-       11.1.2.  SSE Event Subject  . . . . . . . . . . . . . . . . .  49
-       11.1.3.  SSE Event Properties . . . . . . . . . . . . . . . .  49
 
 
 
@@ -114,6 +114,8 @@ Tulshibagwale, et al.        Standards Track                    [Page 2]
                           openid-sse-framework              January 2023
 
 
+       11.1.2.  SSE Event Subject  . . . . . . . . . . . . . . . . .  49
+       11.1.3.  SSE Event Properties . . . . . . . . . . . . . . . .  49
        11.1.4.  Explicit Typing of SETs  . . . . . . . . . . . . . .  50
        11.1.5.  The "exp" Claim  . . . . . . . . . . . . . . . . . .  50
        11.1.6.  The "aud" Claim  . . . . . . . . . . . . . . . . . .  51
@@ -161,14 +163,14 @@ Tulshibagwale, et al.        Standards Track                    [Page 2]
    A member of type Subject in an SSE event MAY have any claim name.
    Each Subject Member MUST refer to exactly one Subject Principal.
 
-   A Subject may be a simple subject or a complex subject.
-
 
 
 Tulshibagwale, et al.        Standards Track                    [Page 3]
 
                           openid-sse-framework              January 2023
 
+
+   A Subject may be a simple subject or a complex subject.
 
 3.1.  Simple Subject Members
 
@@ -216,8 +218,6 @@ Tulshibagwale, et al.        Standards Track                    [Page 3]
       OPTIONAL.  A Subject Identifier that identifies an organizational
       unit.
 
-   group
-
 
 
 
@@ -225,6 +225,8 @@ Tulshibagwale, et al.        Standards Track                    [Page 4]
 
                           openid-sse-framework              January 2023
 
+
+   group
 
       OPTIONAL.  A Subject Identifier that identifies a group.
 
@@ -271,8 +273,6 @@ Tulshibagwale, et al.        Standards Track                    [Page 4]
       proprietary subject identifier format are agreed to between the
       parties and such agreement is outside the scope of this
       specification.
-
-
 
 
 
@@ -1756,7 +1756,8 @@ Tulshibagwale, et al.        Standards Track                   [Page 31]
    Within an Event Stream, events related to different Subject
    Principals MAY be managed independently.  A Receiver MAY request
    Subject Principals to be added to or removed from a stream by
-   Section 7.1.2.2 and specifying the Subject in the request.
+   Updating the Stream Status (Section 7.1.2.2) and specifying the
+   Subject in the request.
 
    A Transmitter MAY decide to enable, pause or disable updates about a
    Subject independently of an update request from a Receiver.  If a
@@ -1766,33 +1767,16 @@ Tulshibagwale, et al.        Standards Track                   [Page 31]
 
    If the stream is:
 
-   Enabled
+   Enabled  the Transmitter MUST send a stream updated (Section 7.1.5)
+      event respectively to the Receiver within the Event Stream.
 
-      the Transmitter MUST send a stream updated (Section 7.1.5) event
-      respectively to the Receiver within the Event Stream.
-
-   Paused
-
-      the Transmitter SHOULD send a stream updated (Section 7.1.5) after
-      the Event Stream is re-started.  A Receiver MUST assume that
+   Paused  the Transmitter SHOULD send a stream updated (Section 7.1.5)
+      after the Event Stream is re-started.  A Receiver MUST assume that
       events may have been lost during the time when the event stream
       was paused.
 
-   Disabled
-
-      the Transmitter MAY send a stream updated (Section 7.1.5) after
-      the Event Stream is re-enabled.
-
-
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 32]
-
-                          openid-sse-framework              January 2023
-
+   Disabled  the Transmitter MAY send a stream updated (Section 7.1.5)
+      after the Event Stream is re-enabled.
 
 7.1.2.1.  Reading a Stream's Status
 
@@ -1803,6 +1787,13 @@ Tulshibagwale, et al.        Standards Track                   [Page 32]
 
    stream_id
 
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 32]
+
+                          openid-sse-framework              January 2023
+
+
       REQUIRED.  The stream whose status is being queried.
 
    subject
@@ -1810,9 +1801,8 @@ Tulshibagwale, et al.        Standards Track                   [Page 32]
       OPTIONAL.  The subject for which the stream status is requested.
 
    On receiving a valid request the Event Transmitter responds with a
-   200 OK response containing a JSON [RFC7159] object with an
-   attributestatus, whose string value MUST have one of the following
-   values:
+   200 OK response containing a JSON [RFC7159] object with an attribute
+   status, whose string value MUST have one of the following values:
 
    enabled
 
@@ -1841,6 +1831,16 @@ Tulshibagwale, et al.        Standards Track                   [Page 32]
    The following is a non-normative example request to check an event
    stream's status:
 
+   GET /sse/status?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f HTTP/1.1
+   Host: transmitter.example.com
+   Authorization: Bearer zzzz
+
+              Figure 27: Example: Check Stream Status Request
+
+   The following is a non-normative example response:
+
+
+
 
 
 
@@ -1849,14 +1849,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 33]
 
                           openid-sse-framework              January 2023
 
-
-   GET /sse/status?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f HTTP/1.1
-   Host: transmitter.example.com
-   Authorization: Bearer zzzz
-
-              Figure 27: Example: Check Stream Status Request
-
-   The following is a non-normative example response:
 
    HTTP/1.1 200 OK
    Content-Type: application/json
@@ -1898,6 +1890,14 @@ Tulshibagwale, et al.        Standards Track                   [Page 33]
               Figure 30: Example: Check Stream Status Response
 
    Errors are signaled with HTTP status codes as follows:
+
+
+
+
+
+
+
+
 
 
 
@@ -2146,7 +2146,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 38]
    indicated to the Transmitter that they do not want events to be
    transmitted to the Event Receiver.  In this case, the transmitter MAY
    return an empty 200 OK response or an appropriate error code.  See
-   Security Considerations Section 9.
+   Security Considerations (Section 9).
 
    The following is a non-normative example request to add a subject to
    a stream, where the subject is identified by an Email Subject
@@ -2553,8 +2553,8 @@ Tulshibagwale, et al.        Standards Track                   [Page 45]
    HTTP API calls from a Receiver to a Transmitter SHOULD be authorized
    by providing an OAuth 2.0 Access Token as defined by [RFC6750].
 
-   The receiver may obtain an access token using the [CLIENTCRED] Client
-   Credential Grant, or any other method suitable for the Receiver and
+   The receiver may obtain an access token using the Client Credential
+   Grant [CLIENTCRED], or any other method suitable for the Receiver and
    the Transmitter.
 
 9.  Security Considerations
@@ -2690,12 +2690,12 @@ Tulshibagwale, et al.        Standards Track                   [Page 48]
                           openid-sse-framework              January 2023
 
 
-   *  Push-Based SET Token Delivery Using HTTP ([DELIVERYPUSH])
+   *  Push-Based SET Token Delivery Using HTTP [DELIVERYPUSH]
 
-   *  Poll-Based SET Token Delivery Using HTTP ([DELIVERYPOLL])
+   *  Poll-Based SET Token Delivery Using HTTP [DELIVERYPOLL]
 
    The RISC use cases that set the requirements are described in
-   Security Events RISC Use Cases ([USECASES]).
+   Security Events RISC Use Cases [USECASES].
 
    The CAEP use cases that set the requirements are described in CAEP
    Use Cases (TODO: Add reference when file is added to repository.)
