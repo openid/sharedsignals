@@ -2039,7 +2039,7 @@ specific to the event type.
 ~~~
 {: #caep-event-properties-example title="Example: SET Containing a CAEP Event with Properties"}
 
-#### Explicit Typing of SETs {#explicit-typing} 
+### Explicit Typing of SETs {#explicit-typing} 
 SSE events MUST use explicit typing as defined in Section 2.3 of {{SET}}.
 
 ~~~ json
@@ -2055,13 +2055,13 @@ Sections 4.5, 4.6 and 4.7 of {{SET}}. While current Id Token {{IDTOKEN}}
 validators may not be using the `typ` header parameter, by requiring it for SSE
 SETs a distinct value is guaranteed for future validators.
 
-#### The "exp" Claim {#exp-claim} 
+### The "exp" Claim {#exp-claim} 
 The `exp` claim MUST NOT be used in SSE SETs.
 
 The purpose is defense in depth against confusion with other JWTs, as described
 in Sections 4.5 and 4.6 of {{SET}}.
 
-#### The "aud" Claim {#aud-claim} 
+### The "aud" Claim {#aud-claim} 
 The `aud` claim can be a single value or an array. Each value SHOULD be the
 OAuth 2.0 client ID. Other values that uniquely identifies the Receiver to the
 Transmitter MAY be used, if the two parties have agreement on the format.
@@ -2093,13 +2093,13 @@ multiple Receivers would lead to unintended data disclosure.
 ~~~
 {: title="Example: SET with array 'aud' claim" #figarrayaud}
 
-#### The "events" claim {#events-claim} 
+### The "events" claim {#events-claim} 
 The `events` claim SHOULD contain only one event. Multiple event type URIs are
 permitted only if they are alternative URIs defining the exact same event type.
 
-#### Security Considerations
+### Security Considerations
 
-##### Distinguishing SETs from other Kinds of JWTs
+#### Distinguishing SETs from other Kinds of JWTs
 Of particular concern is the possibility that SETs are confused for other kinds
 of JWTs. The Security Considerations section of {{SET}} has several sub-sections
 on this subject. The SSE Framework is asking for further restrictions:
@@ -2108,15 +2108,15 @@ on this subject. The SSE Framework is asking for further restrictions:
 * SSE SETs MUST use explicit typing, as described in {{explicit-typing}}.
 * The `exp` claim MUST NOT be present, as described in {{exp-claim}}.
 
-### SET Token Delivery Using HTTP Profile {#set-token-delivery-using-http-profile}
+## SET Token Delivery Using HTTP Profile {#set-token-delivery-using-http-profile}
 This section provides SSE profiling specifications for the {{DELIVERYPUSH}} and
 {{DELIVERYPOLL}} specs.
 
-#### Stream Configuration Metadata {#delivery-meta} 
+### Stream Configuration Metadata {#delivery-meta} 
 Each delivery method is identified by a URI, specified below by the `method`
 metadata.
 
-##### Push Delivery using HTTP
+#### Push Delivery using HTTP
 This section provides SSE profiling specifications for the {{DELIVERYPUSH}} spec.
 
 method
@@ -2136,7 +2136,7 @@ authorization_header
   delivery, if the configuration is present. The value is optional and it is set
   by the Receiver.
   
-##### Polling Delivery using HTTP
+#### Polling Delivery using HTTP
 This section provides SSE profiling specifications for the {{DELIVERYPOLL}} spec.
 
 method

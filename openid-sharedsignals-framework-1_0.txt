@@ -66,11 +66,11 @@ Table of Contents
      1.1.  Notational Conventions  . . . . . . . . . . . . . . . . .   3
    2.  Subject Principals  . . . . . . . . . . . . . . . . . . . . .   3
    3.  Subject Members in SSE Events . . . . . . . . . . . . . . . .   3
-     3.1.  Simple Subject Members  . . . . . . . . . . . . . . . . .   3
+     3.1.  Simple Subject Members  . . . . . . . . . . . . . . . . .   4
      3.2.  Complex Subject Members . . . . . . . . . . . . . . . . .   4
        3.2.1.  Complex Subject Interpretation  . . . . . . . . . . .   5
      3.3.  Subject Identifiers in SSE Events . . . . . . . . . . . .   5
-     3.4.  Additional Subject Identifier Formats . . . . . . . . . .   5
+     3.4.  Additional Subject Identifier Formats . . . . . . . . . .   6
        3.4.1.  JWT ID Subject Identifier Format  . . . . . . . . . .   6
        3.4.2.  SAML Assertion ID Subject Identifier Format . . . . .   6
      3.5.  Receiver Subject Processing . . . . . . . . . . . . . . .   7
@@ -105,7 +105,7 @@ Table of Contents
      11.1.  Security Event Token Profile . . . . . . . . . . . . . .  49
        11.1.1.  Signature Key Resolution . . . . . . . . . . . . . .  49
        11.1.2.  SSE Event Subject  . . . . . . . . . . . . . . . . .  49
-       11.1.3.  SET Token Delivery Using HTTP Profile  . . . . . . .  52
+       11.1.3.  Explicit Typing of SETs  . . . . . . . . . . . . . .  50
 
 
 
@@ -114,10 +114,16 @@ Tulshibagwale, et al.        Standards Track                    [Page 2]
                           openid-sse-framework              January 2023
 
 
+       11.1.4.  The "exp" Claim  . . . . . . . . . . . . . . . . . .  50
+       11.1.5.  The "aud" Claim  . . . . . . . . . . . . . . . . . .  51
+       11.1.6.  The "events" claim . . . . . . . . . . . . . . . . .  51
+       11.1.7.  Security Considerations  . . . . . . . . . . . . . .  51
+     11.2.  SET Token Delivery Using HTTP Profile  . . . . . . . . .  52
+       11.2.1.  Stream Configuration Metadata  . . . . . . . . . . .  52
    12. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  53
    13. References  . . . . . . . . . . . . . . . . . . . . . . . . .  53
      13.1.  Normative References . . . . . . . . . . . . . . . . . .  53
-     13.2.  Informative References . . . . . . . . . . . . . . . . .  55
+     13.2.  Informative References . . . . . . . . . . . . . . . . .  54
    Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  55
    Appendix B.  Notices  . . . . . . . . . . . . . . . . . . . . . .  55
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  56
@@ -156,12 +162,6 @@ Tulshibagwale, et al.        Standards Track                    [Page 2]
 
    A Subject may be a simple subject or a complex subject.
 
-3.1.  Simple Subject Members
-
-   A Simple Subject Member has a claim name and a value that is a
-   Subject Identifier as defined in the Subject Identifiers for Security
-   Event Tokens [SUBIDS].  Below is a non-normative example of a Simple
-   Subject Member in a SSE event.
 
 
 
@@ -169,6 +169,13 @@ Tulshibagwale, et al.        Standards Track                    [Page 3]
 
                           openid-sse-framework              January 2023
 
+
+3.1.  Simple Subject Members
+
+   A Simple Subject Member has a claim name and a value that is a
+   Subject Identifier as defined in the Subject Identifiers for Security
+   Event Tokens [SUBIDS].  Below is a non-normative example of a Simple
+   Subject Member in a SSE event.
 
    "transferer": {
      "format": "email",
@@ -211,13 +218,6 @@ Tulshibagwale, et al.        Standards Track                    [Page 3]
 
    group
 
-      OPTIONAL.  A Subject Identifier that identifies a group.
-
-   Additional Subject Member names MAY be used in Complex Subjects.
-   Each member name MAY appear at most once in the Complex Subject
-   value.
-
-
 
 
 
@@ -225,6 +225,12 @@ Tulshibagwale, et al.        Standards Track                    [Page 4]
 
                           openid-sse-framework              January 2023
 
+
+      OPTIONAL.  A Subject Identifier that identifies a group.
+
+   Additional Subject Member names MAY be used in Complex Subjects.
+   Each member name MAY appear at most once in the Complex Subject
+   value.
 
    Below is a non-normative example of a Complex Subject claim in a SSE
    event.
@@ -266,12 +272,6 @@ Tulshibagwale, et al.        Standards Track                    [Page 4]
       parties and such agreement is outside the scope of this
       specification.
 
-3.4.  Additional Subject Identifier Formats
-
-   The following new subject identifier formats are defined:
-
-
-
 
 
 
@@ -281,6 +281,10 @@ Tulshibagwale, et al.        Standards Track                    [Page 5]
 
                           openid-sse-framework              January 2023
 
+
+3.4.  Additional Subject Identifier Formats
+
+   The following new subject identifier formats are defined:
 
 3.4.1.  JWT ID Subject Identifier Format
 
@@ -325,11 +329,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 5]
 
    assertion_id
 
-      REQUIRED.  The "ID" value of the SAML assertion being identified,
-      defined in [OASIS.saml-core-2.0-os]
 
-   The "SAML Assertion ID" Subject Identifier Format is identified by
-   the name saml_assertion_id.
 
 
 
@@ -337,6 +337,12 @@ Tulshibagwale, et al.        Standards Track                    [Page 6]
 
                           openid-sse-framework              January 2023
 
+
+      REQUIRED.  The "ID" value of the SAML assertion being identified,
+      defined in [OASIS.saml-core-2.0-os]
+
+   The "SAML Assertion ID" Subject Identifier Format is identified by
+   the name saml_assertion_id.
 
    Below is a non-normative example Subject Identifier for the
    saml_assertion_id Subject Identifier Format.
@@ -372,12 +378,6 @@ Tulshibagwale, et al.        Standards Track                    [Page 6]
 
    The following are hypothetical examples of SETs that conform to the
    SSE Framework.
-
-
-
-
-
-
 
 
 
@@ -878,7 +878,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 15]
       pairs specifying configuration parameters for the SET delivery
       method.  The actual delivery method is identified by the special
       key method with the value being a URI as defined in
-      Section 11.1.3.1.
+      Section 11.2.1.
 
    min_verification_interval
 
@@ -932,7 +932,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 16]
       pairs specifying configuration parameters for the SET delivery
       method.  The actual delivery method is identified by the special
       key method with the value being a URI as defined in
-      Section 11.1.3.1.
+      Section 11.2.1.
 
    format
 
@@ -2767,7 +2767,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 49]
 
       Figure 43: Example: SET Containing a CAEP Event with Properties
 
-11.1.2.2.  Explicit Typing of SETs
+11.1.3.  Explicit Typing of SETs
 
    SSE events MUST use explicit typing as defined in Section 2.3 of
    [SET].
@@ -2785,7 +2785,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 49]
    by requiring it for SSE SETs a distinct value is guaranteed for
    future validators.
 
-11.1.2.3.  The "exp" Claim
+11.1.4.  The "exp" Claim
 
    The exp claim MUST NOT be used in SSE SETs.
 
@@ -2802,7 +2802,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 50]
                           openid-sse-framework              January 2023
 
 
-11.1.2.4.  The "aud" Claim
+11.1.5.  The "aud" Claim
 
    The aud claim can be a single value or an array.  Each value SHOULD
    be the OAuth 2.0 client ID.  Other values that uniquely identifies
@@ -2836,15 +2836,15 @@ Tulshibagwale, et al.        Standards Track                   [Page 50]
 
                Figure 45: Example: SET with array 'aud' claim
 
-11.1.2.5.  The "events" claim
+11.1.6.  The "events" claim
 
    The events claim SHOULD contain only one event.  Multiple event type
    URIs are permitted only if they are alternative URIs defining the
    exact same event type.
 
-11.1.2.6.  Security Considerations
+11.1.7.  Security Considerations
 
-11.1.2.6.1.  Distinguishing SETs from other Kinds of JWTs
+11.1.7.1.  Distinguishing SETs from other Kinds of JWTs
 
    Of particular concern is the possibility that SETs are confused for
    other kinds of JWTs.  The Security Considerations section of [SET]
@@ -2860,23 +2860,21 @@ Tulshibagwale, et al.        Standards Track                   [Page 51]
 
    *  The sub claim MUST NOT be present, as described in Section 11.1.2.
 
-   *  SSE SETs MUST use explicit typing, as described in
-      Section 11.1.2.2.
+   *  SSE SETs MUST use explicit typing, as described in Section 11.1.3.
 
-   *  The exp claim MUST NOT be present, as described in
-      Section 11.1.2.3.
+   *  The exp claim MUST NOT be present, as described in Section 11.1.4.
 
-11.1.3.  SET Token Delivery Using HTTP Profile
+11.2.  SET Token Delivery Using HTTP Profile
 
    This section provides SSE profiling specifications for the
    [DELIVERYPUSH] and [DELIVERYPOLL] specs.
 
-11.1.3.1.  Stream Configuration Metadata
+11.2.1.  Stream Configuration Metadata
 
    Each delivery method is identified by a URI, specified below by the
    method metadata.
 
-11.1.3.1.1.  Push Delivery using HTTP
+11.2.1.1.  Push Delivery using HTTP
 
    This section provides SSE profiling specifications for the
    [DELIVERYPUSH] spec.
@@ -2898,7 +2896,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 51]
       each event delivery, if the configuration is present.  The value
       is optional and it is set by the Receiver.
 
-11.1.3.1.2.  Polling Delivery using HTTP
+11.2.1.2.  Polling Delivery using HTTP
 
    This section provides SSE profiling specifications for the
    [DELIVERYPOLL] spec.
@@ -2907,14 +2905,14 @@ Tulshibagwale, et al.        Standards Track                   [Page 51]
 
       https://schemas.openid.net/secevent/risc/delivery-method/poll
 
+   endpoint_url
+
 
 
 Tulshibagwale, et al.        Standards Track                   [Page 52]
 
                           openid-sse-framework              January 2023
 
-
-   endpoint_url
 
       The URL where events can be retrieved from.  This is specified by
       the Transmitter.  These URLs MAY be reused across Receivers, but
@@ -2959,8 +2957,10 @@ Tulshibagwale, et al.        Standards Track                   [Page 52]
               Markup Language (SAML) V2.0", OASIS Standard saml-core-
               2.0-os, March 2005.
 
-
-
+   [OAUTH-DISCOVERY]
+              Jones, M. B., Sakimura, N., and J. Bradley, "OAuth 2.0
+              Authorization Server Metadata - Version 10", June 2018,
+              <https://www.rfc-editor.org/info/rfc8414>.
 
 
 
@@ -2969,11 +2969,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 53]
 
                           openid-sse-framework              January 2023
 
-
-   [OAUTH-DISCOVERY]
-              Jones, M. B., Sakimura, N., and J. Bradley, "OAuth 2.0
-              Authorization Server Metadata - Version 10", June 2018,
-              <https://www.rfc-editor.org/info/rfc8414>.
 
    [OPENID-DISCOVERY]
               Sakimura, N., Bradley, J., Jones, M. B., and E. Jay,
@@ -3016,7 +3011,12 @@ Tulshibagwale, et al.        Standards Track                   [Page 53]
               "Security Event Token (SET)", April 2018,
               <https://www.rfc-editor.org/info/rfc8417>.
 
+   [SUBIDS]   Backman, A. and M. Scurtescu, "Subject Identifiers for
+              Security Event Tokens", May 2021,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-
+              secevent-subject-identifiers>.
 
+13.2.  Informative References
 
 
 
@@ -3025,13 +3025,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 54]
 
                           openid-sse-framework              January 2023
 
-
-   [SUBIDS]   Backman, A. and M. Scurtescu, "Subject Identifiers for
-              Security Event Tokens", May 2021,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-
-              secevent-subject-identifiers>.
-
-13.2.  Informative References
 
    [CAEP]     Tulshibagwale, A., "Re-thinking Federated Identity with
               the Continuous Access Evaluation Protocol", February 2019,
@@ -3074,6 +3067,13 @@ Appendix B.  Notices
    rights might or might not be available; neither does it represent
    that it has made any independent effort to identify any such rights.
    The OpenID Foundation and the contributors to this specification make
+   no (and hereby expressly disclaim any) warranties (express, implied,
+   or otherwise), including implied warranties of merchantability, non-
+   infringement, fitness for a particular purpose, or title, related to
+   this specification, and the entire risk as to implementing this
+   specification is assumed by the implementer.  The OpenID Intellectual
+   Property Rights policy requires contributors to offer a patent
+   promise not to assert certain patent claims against other
 
 
 
@@ -3082,13 +3082,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 55]
                           openid-sse-framework              January 2023
 
 
-   no (and hereby expressly disclaim any) warranties (express, implied,
-   or otherwise), including implied warranties of merchantability, non-
-   infringement, fitness for a particular purpose, or title, related to
-   this specification, and the entire risk as to implementing this
-   specification is assumed by the implementer.  The OpenID Intellectual
-   Property Rights policy requires contributors to offer a patent
-   promise not to assert certain patent claims against other
    contributors and against implementers.  The OpenID Foundation invites
    any interested party to bring to its attention any copyrights,
    patents, patent applications, or other proprietary rights that may
@@ -3124,6 +3117,13 @@ Authors' Addresses
    Shayne Miel
    Cisco
    Email: smiel@cisco.com
+
+
+
+
+
+
+
 
 
 

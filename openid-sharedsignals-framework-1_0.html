@@ -1466,7 +1466,27 @@ and Coordination (RISC) and the Continuous Access Evaluation Profile (<span>[<a 
                     <p id="section-toc.1-1.11.2.1.2.2.1"><a href="#section-11.1.2" class="auto internal xref">11.1.2</a>.  <a href="#name-sse-event-subject" class="internal xref">SSE Event Subject</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.1.2.3">
-                    <p id="section-toc.1-1.11.2.1.2.3.1"><a href="#section-11.1.3" class="auto internal xref">11.1.3</a>.  <a href="#name-set-token-delivery-using-ht" class="internal xref">SET Token Delivery Using HTTP Profile</a></p>
+                    <p id="section-toc.1-1.11.2.1.2.3.1"><a href="#section-11.1.3" class="auto internal xref">11.1.3</a>.  <a href="#name-explicit-typing-of-sets" class="internal xref">Explicit Typing of SETs</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.1.2.4">
+                    <p id="section-toc.1-1.11.2.1.2.4.1"><a href="#section-11.1.4" class="auto internal xref">11.1.4</a>.  <a href="#name-the-exp-claim" class="internal xref">The "exp" Claim</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.1.2.5">
+                    <p id="section-toc.1-1.11.2.1.2.5.1"><a href="#section-11.1.5" class="auto internal xref">11.1.5</a>.  <a href="#name-the-aud-claim" class="internal xref">The "aud" Claim</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.1.2.6">
+                    <p id="section-toc.1-1.11.2.1.2.6.1"><a href="#section-11.1.6" class="auto internal xref">11.1.6</a>.  <a href="#name-the-events-claim" class="internal xref">The "events" claim</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.1.2.7">
+                    <p id="section-toc.1-1.11.2.1.2.7.1"><a href="#section-11.1.7" class="auto internal xref">11.1.7</a>.  <a href="#name-security-considerations-2" class="internal xref">Security Considerations</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.2">
+                <p id="section-toc.1-1.11.2.2.1"><a href="#section-11.2" class="auto internal xref">11.2</a>.  <a href="#name-set-token-delivery-using-ht" class="internal xref">SET Token Delivery Using HTTP Profile</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.2.2.1">
+                    <p id="section-toc.1-1.11.2.2.2.1.1"><a href="#section-11.2.1" class="auto internal xref">11.2.1</a>.  <a href="#name-stream-configuration-metada" class="internal xref">Stream Configuration Metadata</a></p>
 </li>
                 </ul>
 </li>
@@ -2316,7 +2336,7 @@ following properties:<a href="#section-7.1.1-1" class="pilcrow">¶</a></p>
               <p id="section-7.1.1-15.1.1"><strong>Receiver-Supplied</strong>, A JSON object containing a set of name/value pairs
   specifying configuration parameters for the SET delivery method.  The actual
   delivery method is identified by the special key <code>method</code> with the value being
-  a URI as defined in <a href="#delivery-meta" class="auto internal xref">Section 11.1.3.1</a>.<a href="#section-7.1.1-15.1.1" class="pilcrow">¶</a></p>
+  a URI as defined in <a href="#delivery-meta" class="auto internal xref">Section 11.2.1</a>.<a href="#section-7.1.1-15.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <p id="section-7.1.1-16">min_verification_interval<a href="#section-7.1.1-16" class="pilcrow">¶</a></p>
@@ -2366,7 +2386,7 @@ Configuration<a href="#stream-config" class="auto internal xref">Section 7.1.1</
                 <p id="section-7.1.1.1-6.1.1"><strong>Receiver-Supplied</strong>, A JSON object containing a set of name/value pairs
   specifying configuration parameters for the SET delivery method. The actual
   delivery method is identified by the special key <code>method</code> with the value
-  being a URI as defined in <a href="#delivery-meta" class="auto internal xref">Section 11.1.3.1</a>.<a href="#section-7.1.1.1-6.1.1" class="pilcrow">¶</a></p>
+  being a URI as defined in <a href="#delivery-meta" class="auto internal xref">Section 11.2.1</a>.<a href="#section-7.1.1.1-6.1.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 <p id="section-7.1.1.1-7">format<a href="#section-7.1.1.1-7" class="pilcrow">¶</a></p>
@@ -4119,15 +4139,17 @@ specific to the event type.<a href="#section-11.1.2.1-1" class="pilcrow">¶</a><
 </div>
 </section>
 </div>
+</section>
+</div>
 <div id="explicit-typing">
-<section id="section-11.1.2.2">
-            <h5 id="name-explicit-typing-of-sets">
-<a href="#section-11.1.2.2" class="section-number selfRef">11.1.2.2. </a><a href="#name-explicit-typing-of-sets" class="section-name selfRef">Explicit Typing of SETs</a>
-            </h5>
-<p id="section-11.1.2.2-1">SSE events MUST use explicit typing as defined in Section 2.3 of <span>[<a href="#SET" class="cite xref">SET</a>]</span>.<a href="#section-11.1.2.2-1" class="pilcrow">¶</a></p>
+<section id="section-11.1.3">
+          <h4 id="name-explicit-typing-of-sets">
+<a href="#section-11.1.3" class="section-number selfRef">11.1.3. </a><a href="#name-explicit-typing-of-sets" class="section-name selfRef">Explicit Typing of SETs</a>
+          </h4>
+<p id="section-11.1.3-1">SSE events MUST use explicit typing as defined in Section 2.3 of <span>[<a href="#SET" class="cite xref">SET</a>]</span>.<a href="#section-11.1.3-1" class="pilcrow">¶</a></p>
 <span id="name-explicitly-typed-jose-heade"></span><div id="explicit-type-header">
 <figure id="figure-44">
-              <div class="lang-json sourcecode" id="section-11.1.2.2-2.1">
+            <div class="lang-json sourcecode" id="section-11.1.3-2.1">
 <pre>
 {
   "typ":"secevent+jwt",
@@ -4137,45 +4159,45 @@ specific to the event type.<a href="#section-11.1.2.1-1" class="pilcrow">¶</a><
 </div>
 <figcaption><a href="#figure-44" class="selfRef">Figure 44</a>:
 <a href="#name-explicitly-typed-jose-heade" class="selfRef">Explicitly Typed JOSE Header</a>
-              </figcaption></figure>
+            </figcaption></figure>
 </div>
-<p id="section-11.1.2.2-3">The purpose is defense against confusion with other JWTs, as described in
+<p id="section-11.1.3-3">The purpose is defense against confusion with other JWTs, as described in
 Sections 4.5, 4.6 and 4.7 of <span>[<a href="#SET" class="cite xref">SET</a>]</span>. While current Id Token <span>[<a href="#IDTOKEN" class="cite xref">IDTOKEN</a>]</span>
 validators may not be using the <code>typ</code> header parameter, by requiring it for SSE
-SETs a distinct value is guaranteed for future validators.<a href="#section-11.1.2.2-3" class="pilcrow">¶</a></p>
+SETs a distinct value is guaranteed for future validators.<a href="#section-11.1.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="exp-claim">
-<section id="section-11.1.2.3">
-            <h5 id="name-the-exp-claim">
-<a href="#section-11.1.2.3" class="section-number selfRef">11.1.2.3. </a><a href="#name-the-exp-claim" class="section-name selfRef">The "exp" Claim</a>
-            </h5>
-<p id="section-11.1.2.3-1">The <code>exp</code> claim MUST NOT be used in SSE SETs.<a href="#section-11.1.2.3-1" class="pilcrow">¶</a></p>
-<p id="section-11.1.2.3-2">The purpose is defense in depth against confusion with other JWTs, as described
-in Sections 4.5 and 4.6 of <span>[<a href="#SET" class="cite xref">SET</a>]</span>.<a href="#section-11.1.2.3-2" class="pilcrow">¶</a></p>
+<section id="section-11.1.4">
+          <h4 id="name-the-exp-claim">
+<a href="#section-11.1.4" class="section-number selfRef">11.1.4. </a><a href="#name-the-exp-claim" class="section-name selfRef">The "exp" Claim</a>
+          </h4>
+<p id="section-11.1.4-1">The <code>exp</code> claim MUST NOT be used in SSE SETs.<a href="#section-11.1.4-1" class="pilcrow">¶</a></p>
+<p id="section-11.1.4-2">The purpose is defense in depth against confusion with other JWTs, as described
+in Sections 4.5 and 4.6 of <span>[<a href="#SET" class="cite xref">SET</a>]</span>.<a href="#section-11.1.4-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="aud-claim">
-<section id="section-11.1.2.4">
-            <h5 id="name-the-aud-claim">
-<a href="#section-11.1.2.4" class="section-number selfRef">11.1.2.4. </a><a href="#name-the-aud-claim" class="section-name selfRef">The "aud" Claim</a>
-            </h5>
-<p id="section-11.1.2.4-1">The <code>aud</code> claim can be a single value or an array. Each value SHOULD be the
+<section id="section-11.1.5">
+          <h4 id="name-the-aud-claim">
+<a href="#section-11.1.5" class="section-number selfRef">11.1.5. </a><a href="#name-the-aud-claim" class="section-name selfRef">The "aud" Claim</a>
+          </h4>
+<p id="section-11.1.5-1">The <code>aud</code> claim can be a single value or an array. Each value SHOULD be the
 OAuth 2.0 client ID. Other values that uniquely identifies the Receiver to the
-Transmitter MAY be used, if the two parties have agreement on the format.<a href="#section-11.1.2.4-1" class="pilcrow">¶</a></p>
-<p id="section-11.1.2.4-2">More than one value can be present if the corresponding Receivers are known to
+Transmitter MAY be used, if the two parties have agreement on the format.<a href="#section-11.1.5-1" class="pilcrow">¶</a></p>
+<p id="section-11.1.5-2">More than one value can be present if the corresponding Receivers are known to
 the Transmitter to be the same entity, for example a web client and a mobile
 client of the same application. All the Receivers in this case MUST use the
-exact same delivery method.<a href="#section-11.1.2.4-2" class="pilcrow">¶</a></p>
-<p id="section-11.1.2.4-3">If multiple Receivers have the exact same delivery configuration but the
+exact same delivery method.<a href="#section-11.1.5-2" class="pilcrow">¶</a></p>
+<p id="section-11.1.5-3">If multiple Receivers have the exact same delivery configuration but the
 Transmitter does not know if they belong to the same entity then the Transmitter
 SHOULD issue distinct SETs for each Receiver and deliver them separately. In
 this case the multiple Receivers might use the same service to process SETs, and
 this service might reroute SETs to respective Receivers, an <code>aud</code> claim with
-multiple Receivers would lead to unintended data disclosure.<a href="#section-11.1.2.4-3" class="pilcrow">¶</a></p>
+multiple Receivers would lead to unintended data disclosure.<a href="#section-11.1.5-3" class="pilcrow">¶</a></p>
 <span id="name-example-set-with-array-aud-"></span><div id="figarrayaud">
 <figure id="figure-45">
-              <div class="lang-json sourcecode" id="section-11.1.2.4-4.1">
+            <div class="lang-json sourcecode" id="section-11.1.5-4.1">
 <pre>
 {
   "jti": "123456",
@@ -4192,40 +4214,40 @@ multiple Receivers would lead to unintended data disclosure.<a href="#section-11
 </div>
 <figcaption><a href="#figure-45" class="selfRef">Figure 45</a>:
 <a href="#name-example-set-with-array-aud-" class="selfRef">Example: SET with array 'aud' claim</a>
-              </figcaption></figure>
+            </figcaption></figure>
 </div>
 </section>
 </div>
 <div id="events-claim">
-<section id="section-11.1.2.5">
-            <h5 id="name-the-events-claim">
-<a href="#section-11.1.2.5" class="section-number selfRef">11.1.2.5. </a><a href="#name-the-events-claim" class="section-name selfRef">The "events" claim</a>
-            </h5>
-<p id="section-11.1.2.5-1">The <code>events</code> claim SHOULD contain only one event. Multiple event type URIs are
-permitted only if they are alternative URIs defining the exact same event type.<a href="#section-11.1.2.5-1" class="pilcrow">¶</a></p>
+<section id="section-11.1.6">
+          <h4 id="name-the-events-claim">
+<a href="#section-11.1.6" class="section-number selfRef">11.1.6. </a><a href="#name-the-events-claim" class="section-name selfRef">The "events" claim</a>
+          </h4>
+<p id="section-11.1.6-1">The <code>events</code> claim SHOULD contain only one event. Multiple event type URIs are
+permitted only if they are alternative URIs defining the exact same event type.<a href="#section-11.1.6-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="security-considerations">
-<section id="section-11.1.2.6">
-            <h5 id="name-security-considerations-2">
-<a href="#section-11.1.2.6" class="section-number selfRef">11.1.2.6. </a><a href="#name-security-considerations-2" class="section-name selfRef">Security Considerations</a>
-            </h5>
+<section id="section-11.1.7">
+          <h4 id="name-security-considerations-2">
+<a href="#section-11.1.7" class="section-number selfRef">11.1.7. </a><a href="#name-security-considerations-2" class="section-name selfRef">Security Considerations</a>
+          </h4>
 <div id="distinguishing-sets-from-other-kinds-of-jwts">
-<section id="section-11.1.2.6.1">
-              <h6 id="name-distinguishing-sets-from-ot">
-<a href="#section-11.1.2.6.1" class="section-number selfRef">11.1.2.6.1. </a><a href="#name-distinguishing-sets-from-ot" class="section-name selfRef">Distinguishing SETs from other Kinds of JWTs</a>
-              </h6>
-<p id="section-11.1.2.6.1-1">Of particular concern is the possibility that SETs are confused for other kinds
+<section id="section-11.1.7.1">
+            <h5 id="name-distinguishing-sets-from-ot">
+<a href="#section-11.1.7.1" class="section-number selfRef">11.1.7.1. </a><a href="#name-distinguishing-sets-from-ot" class="section-name selfRef">Distinguishing SETs from other Kinds of JWTs</a>
+            </h5>
+<p id="section-11.1.7.1-1">Of particular concern is the possibility that SETs are confused for other kinds
 of JWTs. The Security Considerations section of <span>[<a href="#SET" class="cite xref">SET</a>]</span> has several sub-sections
-on this subject. The SSE Framework is asking for further restrictions:<a href="#section-11.1.2.6.1-1" class="pilcrow">¶</a></p>
+on this subject. The SSE Framework is asking for further restrictions:<a href="#section-11.1.7.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-11.1.2.6.1-2.1">The <code>sub</code> claim MUST NOT be present, as described in <a href="#event-subjects" class="auto internal xref">Section 11.1.2</a>.<a href="#section-11.1.2.6.1-2.1" class="pilcrow">¶</a>
+<li class="normal" id="section-11.1.7.1-2.1">The <code>sub</code> claim MUST NOT be present, as described in <a href="#event-subjects" class="auto internal xref">Section 11.1.2</a>.<a href="#section-11.1.7.1-2.1" class="pilcrow">¶</a>
 </li>
-                <li class="normal" id="section-11.1.2.6.1-2.2">SSE SETs MUST use explicit typing, as described in <a href="#explicit-typing" class="auto internal xref">Section 11.1.2.2</a>.<a href="#section-11.1.2.6.1-2.2" class="pilcrow">¶</a>
+              <li class="normal" id="section-11.1.7.1-2.2">SSE SETs MUST use explicit typing, as described in <a href="#explicit-typing" class="auto internal xref">Section 11.1.3</a>.<a href="#section-11.1.7.1-2.2" class="pilcrow">¶</a>
 </li>
-                <li class="normal" id="section-11.1.2.6.1-2.3">The <code>exp</code> claim MUST NOT be present, as described in <a href="#exp-claim" class="auto internal xref">Section 11.1.2.3</a>.<a href="#section-11.1.2.6.1-2.3" class="pilcrow">¶</a>
+              <li class="normal" id="section-11.1.7.1-2.3">The <code>exp</code> claim MUST NOT be present, as described in <a href="#exp-claim" class="auto internal xref">Section 11.1.4</a>.<a href="#section-11.1.7.1-2.3" class="pilcrow">¶</a>
 </li>
-              </ul>
+            </ul>
 </section>
 </div>
 </section>
@@ -4233,72 +4255,70 @@ on this subject. The SSE Framework is asking for further restrictions:<a href="#
 </section>
 </div>
 <div id="set-token-delivery-using-http-profile">
-<section id="section-11.1.3">
-          <h4 id="name-set-token-delivery-using-ht">
-<a href="#section-11.1.3" class="section-number selfRef">11.1.3. </a><a href="#name-set-token-delivery-using-ht" class="section-name selfRef">SET Token Delivery Using HTTP Profile</a>
-          </h4>
-<p id="section-11.1.3-1">This section provides SSE profiling specifications for the <span>[<a href="#DELIVERYPUSH" class="cite xref">DELIVERYPUSH</a>]</span> and
-<span>[<a href="#DELIVERYPOLL" class="cite xref">DELIVERYPOLL</a>]</span> specs.<a href="#section-11.1.3-1" class="pilcrow">¶</a></p>
+<section id="section-11.2">
+        <h3 id="name-set-token-delivery-using-ht">
+<a href="#section-11.2" class="section-number selfRef">11.2. </a><a href="#name-set-token-delivery-using-ht" class="section-name selfRef">SET Token Delivery Using HTTP Profile</a>
+        </h3>
+<p id="section-11.2-1">This section provides SSE profiling specifications for the <span>[<a href="#DELIVERYPUSH" class="cite xref">DELIVERYPUSH</a>]</span> and
+<span>[<a href="#DELIVERYPOLL" class="cite xref">DELIVERYPOLL</a>]</span> specs.<a href="#section-11.2-1" class="pilcrow">¶</a></p>
 <div id="delivery-meta">
-<section id="section-11.1.3.1">
-            <h5 id="name-stream-configuration-metada">
-<a href="#section-11.1.3.1" class="section-number selfRef">11.1.3.1. </a><a href="#name-stream-configuration-metada" class="section-name selfRef">Stream Configuration Metadata</a>
-            </h5>
-<p id="section-11.1.3.1-1">Each delivery method is identified by a URI, specified below by the <code>method</code>
-metadata.<a href="#section-11.1.3.1-1" class="pilcrow">¶</a></p>
+<section id="section-11.2.1">
+          <h4 id="name-stream-configuration-metada">
+<a href="#section-11.2.1" class="section-number selfRef">11.2.1. </a><a href="#name-stream-configuration-metada" class="section-name selfRef">Stream Configuration Metadata</a>
+          </h4>
+<p id="section-11.2.1-1">Each delivery method is identified by a URI, specified below by the <code>method</code>
+metadata.<a href="#section-11.2.1-1" class="pilcrow">¶</a></p>
 <div id="push-delivery-using-http">
-<section id="section-11.1.3.1.1">
-              <h6 id="name-push-delivery-using-http">
-<a href="#section-11.1.3.1.1" class="section-number selfRef">11.1.3.1.1. </a><a href="#name-push-delivery-using-http" class="section-name selfRef">Push Delivery using HTTP</a>
-              </h6>
-<p id="section-11.1.3.1.1-1">This section provides SSE profiling specifications for the <span>[<a href="#DELIVERYPUSH" class="cite xref">DELIVERYPUSH</a>]</span> spec.<a href="#section-11.1.3.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-11.1.3.1.1-2">method<a href="#section-11.1.3.1.1-2" class="pilcrow">¶</a></p>
+<section id="section-11.2.1.1">
+            <h5 id="name-push-delivery-using-http">
+<a href="#section-11.2.1.1" class="section-number selfRef">11.2.1.1. </a><a href="#name-push-delivery-using-http" class="section-name selfRef">Push Delivery using HTTP</a>
+            </h5>
+<p id="section-11.2.1.1-1">This section provides SSE profiling specifications for the <span>[<a href="#DELIVERYPUSH" class="cite xref">DELIVERYPUSH</a>]</span> spec.<a href="#section-11.2.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-11.2.1.1-2">method<a href="#section-11.2.1.1-2" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-11.1.3.1.1-3.1">
-                  <p id="section-11.1.3.1.1-3.1.1"><code>https://schemas.openid.net/secevent/risc/delivery-method/push</code><a href="#section-11.1.3.1.1-3.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-11.2.1.1-3.1">
+                <p id="section-11.2.1.1-3.1.1"><code>https://schemas.openid.net/secevent/risc/delivery-method/push</code><a href="#section-11.2.1.1-3.1.1" class="pilcrow">¶</a></p>
 </li>
-              </ul>
-<p id="section-11.1.3.1.1-4">endpoint_url<a href="#section-11.1.3.1.1-4" class="pilcrow">¶</a></p>
+            </ul>
+<p id="section-11.2.1.1-4">endpoint_url<a href="#section-11.2.1.1-4" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-11.1.3.1.1-5.1">
-                  <p id="section-11.1.3.1.1-5.1.1">The URL where events are pushed through HTTP POST. This is set by the
+<li class="normal ulEmpty" id="section-11.2.1.1-5.1">
+                <p id="section-11.2.1.1-5.1.1">The URL where events are pushed through HTTP POST. This is set by the
   Receiver. If a Reciever is using multiple streams from a single Transmitter
   and needs to keep the SETs separated, it is RECOMMENDED that the URL for each
-  stream be unique.<a href="#section-11.1.3.1.1-5.1.1" class="pilcrow">¶</a></p>
+  stream be unique.<a href="#section-11.2.1.1-5.1.1" class="pilcrow">¶</a></p>
 </li>
-              </ul>
-<p id="section-11.1.3.1.1-6">authorization_header<a href="#section-11.1.3.1.1-6" class="pilcrow">¶</a></p>
+            </ul>
+<p id="section-11.2.1.1-6">authorization_header<a href="#section-11.2.1.1-6" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-11.1.3.1.1-7.1">
-                  <p id="section-11.1.3.1.1-7.1.1">The HTTP Authorization header that the Transmitter MUST set with each event
+<li class="normal ulEmpty" id="section-11.2.1.1-7.1">
+                <p id="section-11.2.1.1-7.1.1">The HTTP Authorization header that the Transmitter MUST set with each event
   delivery, if the configuration is present. The value is optional and it is set
-  by the Receiver.<a href="#section-11.1.3.1.1-7.1.1" class="pilcrow">¶</a></p>
+  by the Receiver.<a href="#section-11.2.1.1-7.1.1" class="pilcrow">¶</a></p>
 </li>
-              </ul>
+            </ul>
 </section>
 </div>
 <div id="polling-delivery-using-http">
-<section id="section-11.1.3.1.2">
-              <h6 id="name-polling-delivery-using-http">
-<a href="#section-11.1.3.1.2" class="section-number selfRef">11.1.3.1.2. </a><a href="#name-polling-delivery-using-http" class="section-name selfRef">Polling Delivery using HTTP</a>
-              </h6>
-<p id="section-11.1.3.1.2-1">This section provides SSE profiling specifications for the <span>[<a href="#DELIVERYPOLL" class="cite xref">DELIVERYPOLL</a>]</span> spec.<a href="#section-11.1.3.1.2-1" class="pilcrow">¶</a></p>
-<p id="section-11.1.3.1.2-2">method<a href="#section-11.1.3.1.2-2" class="pilcrow">¶</a></p>
+<section id="section-11.2.1.2">
+            <h5 id="name-polling-delivery-using-http">
+<a href="#section-11.2.1.2" class="section-number selfRef">11.2.1.2. </a><a href="#name-polling-delivery-using-http" class="section-name selfRef">Polling Delivery using HTTP</a>
+            </h5>
+<p id="section-11.2.1.2-1">This section provides SSE profiling specifications for the <span>[<a href="#DELIVERYPOLL" class="cite xref">DELIVERYPOLL</a>]</span> spec.<a href="#section-11.2.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-11.2.1.2-2">method<a href="#section-11.2.1.2-2" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-11.1.3.1.2-3.1">
-                  <p id="section-11.1.3.1.2-3.1.1"><code>https://schemas.openid.net/secevent/risc/delivery-method/poll</code><a href="#section-11.1.3.1.2-3.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-11.2.1.2-3.1">
+                <p id="section-11.2.1.2-3.1.1"><code>https://schemas.openid.net/secevent/risc/delivery-method/poll</code><a href="#section-11.2.1.2-3.1.1" class="pilcrow">¶</a></p>
 </li>
-              </ul>
-<p id="section-11.1.3.1.2-4">endpoint_url<a href="#section-11.1.3.1.2-4" class="pilcrow">¶</a></p>
+            </ul>
+<p id="section-11.2.1.2-4">endpoint_url<a href="#section-11.2.1.2-4" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-11.1.3.1.2-5.1">
-                  <p id="section-11.1.3.1.2-5.1.1">The URL where events can be retrieved from. This is specified by the
+<li class="normal ulEmpty" id="section-11.2.1.2-5.1">
+                <p id="section-11.2.1.2-5.1.1">The URL where events can be retrieved from. This is specified by the
   Transmitter. These URLs MAY be reused across Receivers, but MUST be unique per
-  stream for a given Receiver.<a href="#section-11.1.3.1.2-5.1.1" class="pilcrow">¶</a></p>
+  stream for a given Receiver.<a href="#section-11.2.1.2-5.1.1" class="pilcrow">¶</a></p>
 </li>
-              </ul>
-</section>
-</div>
+            </ul>
 </section>
 </div>
 </section>
