@@ -1466,19 +1466,22 @@ and Coordination (RISC) and the Continuous Access Evaluation Profile (<span>[<a 
                     <p id="section-toc.1-1.11.2.1.2.2.1"><a href="#section-11.1.2" class="auto internal xref">11.1.2</a>.  <a href="#name-sse-event-subject" class="internal xref">SSE Event Subject</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.1.2.3">
-                    <p id="section-toc.1-1.11.2.1.2.3.1"><a href="#section-11.1.3" class="auto internal xref">11.1.3</a>.  <a href="#name-explicit-typing-of-sets" class="internal xref">Explicit Typing of SETs</a></p>
+                    <p id="section-toc.1-1.11.2.1.2.3.1"><a href="#section-11.1.3" class="auto internal xref">11.1.3</a>.  <a href="#name-sse-event-properties" class="internal xref">SSE Event Properties</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.1.2.4">
-                    <p id="section-toc.1-1.11.2.1.2.4.1"><a href="#section-11.1.4" class="auto internal xref">11.1.4</a>.  <a href="#name-the-exp-claim" class="internal xref">The "exp" Claim</a></p>
+                    <p id="section-toc.1-1.11.2.1.2.4.1"><a href="#section-11.1.4" class="auto internal xref">11.1.4</a>.  <a href="#name-explicit-typing-of-sets" class="internal xref">Explicit Typing of SETs</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.1.2.5">
-                    <p id="section-toc.1-1.11.2.1.2.5.1"><a href="#section-11.1.5" class="auto internal xref">11.1.5</a>.  <a href="#name-the-aud-claim" class="internal xref">The "aud" Claim</a></p>
+                    <p id="section-toc.1-1.11.2.1.2.5.1"><a href="#section-11.1.5" class="auto internal xref">11.1.5</a>.  <a href="#name-the-exp-claim" class="internal xref">The "exp" Claim</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.1.2.6">
-                    <p id="section-toc.1-1.11.2.1.2.6.1"><a href="#section-11.1.6" class="auto internal xref">11.1.6</a>.  <a href="#name-the-events-claim" class="internal xref">The "events" claim</a></p>
+                    <p id="section-toc.1-1.11.2.1.2.6.1"><a href="#section-11.1.6" class="auto internal xref">11.1.6</a>.  <a href="#name-the-aud-claim" class="internal xref">The "aud" Claim</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.1.2.7">
-                    <p id="section-toc.1-1.11.2.1.2.7.1"><a href="#section-11.1.7" class="auto internal xref">11.1.7</a>.  <a href="#name-security-considerations-2" class="internal xref">Security Considerations</a></p>
+                    <p id="section-toc.1-1.11.2.1.2.7.1"><a href="#section-11.1.7" class="auto internal xref">11.1.7</a>.  <a href="#name-the-events-claim" class="internal xref">The "events" claim</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.1.2.8">
+                    <p id="section-toc.1-1.11.2.1.2.8.1"><a href="#section-11.1.8" class="auto internal xref">11.1.8</a>.  <a href="#name-security-considerations-2" class="internal xref">Security Considerations</a></p>
 </li>
                 </ul>
 </li>
@@ -4079,16 +4082,18 @@ Security Events RISC Use Cases.<a href="#section-11-3" class="pilcrow">¶</a></p
 payload, whose value is a Subject Identifier. The <code>subject</code> claim is REQUIRED
 for all SSE events. The JWT <code>sub</code> claim MUST NOT be present in any SET containing
 a SSE event.<a href="#section-11.1.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
 <div id="event-properties">
-<section id="section-11.1.2.1">
-            <h5 id="name-sse-event-properties">
-<a href="#section-11.1.2.1" class="section-number selfRef">11.1.2.1. </a><a href="#name-sse-event-properties" class="section-name selfRef">SSE Event Properties</a>
-            </h5>
-<p id="section-11.1.2.1-1">The SSE event MAY contain additional claims within the event payload that are
-specific to the event type.<a href="#section-11.1.2.1-1" class="pilcrow">¶</a></p>
+<section id="section-11.1.3">
+          <h4 id="name-sse-event-properties">
+<a href="#section-11.1.3" class="section-number selfRef">11.1.3. </a><a href="#name-sse-event-properties" class="section-name selfRef">SSE Event Properties</a>
+          </h4>
+<p id="section-11.1.3-1">The SSE event MAY contain additional claims within the event payload that are
+specific to the event type.<a href="#section-11.1.3-1" class="pilcrow">¶</a></p>
 <span id="name-example-set-containing-a-ri"></span><div id="risc-event-subject-example">
 <figure id="figure-42">
-              <div class="lang-json sourcecode" id="section-11.1.2.1-2.1">
+            <div class="lang-json sourcecode" id="section-11.1.3-2.1">
 <pre>
 {
   "iss": "https://idp.example.com/",
@@ -4110,11 +4115,11 @@ specific to the event type.<a href="#section-11.1.2.1-1" class="pilcrow">¶</a><
 </div>
 <figcaption><a href="#figure-42" class="selfRef">Figure 42</a>:
 <a href="#name-example-set-containing-a-ri" class="selfRef">Example: SET Containing a RISC Event with a Phone Number Subject</a>
-              </figcaption></figure>
+            </figcaption></figure>
 </div>
 <span id="name-example-set-containing-a-ca"></span><div id="caep-event-properties-example">
 <figure id="figure-43">
-              <div class="lang-json sourcecode" id="section-11.1.2.1-3.1">
+            <div class="lang-json sourcecode" id="section-11.1.3-3.1">
 <pre>
 {
   "iss": "https://idp.example.com/",
@@ -4135,21 +4140,19 @@ specific to the event type.<a href="#section-11.1.2.1-1" class="pilcrow">¶</a><
 </div>
 <figcaption><a href="#figure-43" class="selfRef">Figure 43</a>:
 <a href="#name-example-set-containing-a-ca" class="selfRef">Example: SET Containing a CAEP Event with Properties</a>
-              </figcaption></figure>
-</div>
-</section>
+            </figcaption></figure>
 </div>
 </section>
 </div>
 <div id="explicit-typing">
-<section id="section-11.1.3">
+<section id="section-11.1.4">
           <h4 id="name-explicit-typing-of-sets">
-<a href="#section-11.1.3" class="section-number selfRef">11.1.3. </a><a href="#name-explicit-typing-of-sets" class="section-name selfRef">Explicit Typing of SETs</a>
+<a href="#section-11.1.4" class="section-number selfRef">11.1.4. </a><a href="#name-explicit-typing-of-sets" class="section-name selfRef">Explicit Typing of SETs</a>
           </h4>
-<p id="section-11.1.3-1">SSE events MUST use explicit typing as defined in Section 2.3 of <span>[<a href="#SET" class="cite xref">SET</a>]</span>.<a href="#section-11.1.3-1" class="pilcrow">¶</a></p>
+<p id="section-11.1.4-1">SSE events MUST use explicit typing as defined in Section 2.3 of <span>[<a href="#SET" class="cite xref">SET</a>]</span>.<a href="#section-11.1.4-1" class="pilcrow">¶</a></p>
 <span id="name-explicitly-typed-jose-heade"></span><div id="explicit-type-header">
 <figure id="figure-44">
-            <div class="lang-json sourcecode" id="section-11.1.3-2.1">
+            <div class="lang-json sourcecode" id="section-11.1.4-2.1">
 <pre>
 {
   "typ":"secevent+jwt",
@@ -4161,43 +4164,43 @@ specific to the event type.<a href="#section-11.1.2.1-1" class="pilcrow">¶</a><
 <a href="#name-explicitly-typed-jose-heade" class="selfRef">Explicitly Typed JOSE Header</a>
             </figcaption></figure>
 </div>
-<p id="section-11.1.3-3">The purpose is defense against confusion with other JWTs, as described in
+<p id="section-11.1.4-3">The purpose is defense against confusion with other JWTs, as described in
 Sections 4.5, 4.6 and 4.7 of <span>[<a href="#SET" class="cite xref">SET</a>]</span>. While current Id Token <span>[<a href="#IDTOKEN" class="cite xref">IDTOKEN</a>]</span>
 validators may not be using the <code>typ</code> header parameter, by requiring it for SSE
-SETs a distinct value is guaranteed for future validators.<a href="#section-11.1.3-3" class="pilcrow">¶</a></p>
+SETs a distinct value is guaranteed for future validators.<a href="#section-11.1.4-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="exp-claim">
-<section id="section-11.1.4">
+<section id="section-11.1.5">
           <h4 id="name-the-exp-claim">
-<a href="#section-11.1.4" class="section-number selfRef">11.1.4. </a><a href="#name-the-exp-claim" class="section-name selfRef">The "exp" Claim</a>
+<a href="#section-11.1.5" class="section-number selfRef">11.1.5. </a><a href="#name-the-exp-claim" class="section-name selfRef">The "exp" Claim</a>
           </h4>
-<p id="section-11.1.4-1">The <code>exp</code> claim MUST NOT be used in SSE SETs.<a href="#section-11.1.4-1" class="pilcrow">¶</a></p>
-<p id="section-11.1.4-2">The purpose is defense in depth against confusion with other JWTs, as described
-in Sections 4.5 and 4.6 of <span>[<a href="#SET" class="cite xref">SET</a>]</span>.<a href="#section-11.1.4-2" class="pilcrow">¶</a></p>
+<p id="section-11.1.5-1">The <code>exp</code> claim MUST NOT be used in SSE SETs.<a href="#section-11.1.5-1" class="pilcrow">¶</a></p>
+<p id="section-11.1.5-2">The purpose is defense in depth against confusion with other JWTs, as described
+in Sections 4.5 and 4.6 of <span>[<a href="#SET" class="cite xref">SET</a>]</span>.<a href="#section-11.1.5-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="aud-claim">
-<section id="section-11.1.5">
+<section id="section-11.1.6">
           <h4 id="name-the-aud-claim">
-<a href="#section-11.1.5" class="section-number selfRef">11.1.5. </a><a href="#name-the-aud-claim" class="section-name selfRef">The "aud" Claim</a>
+<a href="#section-11.1.6" class="section-number selfRef">11.1.6. </a><a href="#name-the-aud-claim" class="section-name selfRef">The "aud" Claim</a>
           </h4>
-<p id="section-11.1.5-1">The <code>aud</code> claim can be a single value or an array. Each value SHOULD be the
+<p id="section-11.1.6-1">The <code>aud</code> claim can be a single value or an array. Each value SHOULD be the
 OAuth 2.0 client ID. Other values that uniquely identifies the Receiver to the
-Transmitter MAY be used, if the two parties have agreement on the format.<a href="#section-11.1.5-1" class="pilcrow">¶</a></p>
-<p id="section-11.1.5-2">More than one value can be present if the corresponding Receivers are known to
+Transmitter MAY be used, if the two parties have agreement on the format.<a href="#section-11.1.6-1" class="pilcrow">¶</a></p>
+<p id="section-11.1.6-2">More than one value can be present if the corresponding Receivers are known to
 the Transmitter to be the same entity, for example a web client and a mobile
 client of the same application. All the Receivers in this case MUST use the
-exact same delivery method.<a href="#section-11.1.5-2" class="pilcrow">¶</a></p>
-<p id="section-11.1.5-3">If multiple Receivers have the exact same delivery configuration but the
+exact same delivery method.<a href="#section-11.1.6-2" class="pilcrow">¶</a></p>
+<p id="section-11.1.6-3">If multiple Receivers have the exact same delivery configuration but the
 Transmitter does not know if they belong to the same entity then the Transmitter
 SHOULD issue distinct SETs for each Receiver and deliver them separately. In
 this case the multiple Receivers might use the same service to process SETs, and
 this service might reroute SETs to respective Receivers, an <code>aud</code> claim with
-multiple Receivers would lead to unintended data disclosure.<a href="#section-11.1.5-3" class="pilcrow">¶</a></p>
+multiple Receivers would lead to unintended data disclosure.<a href="#section-11.1.6-3" class="pilcrow">¶</a></p>
 <span id="name-example-set-with-array-aud-"></span><div id="figarrayaud">
 <figure id="figure-45">
-            <div class="lang-json sourcecode" id="section-11.1.5-4.1">
+            <div class="lang-json sourcecode" id="section-11.1.6-4.1">
 <pre>
 {
   "jti": "123456",
@@ -4219,33 +4222,33 @@ multiple Receivers would lead to unintended data disclosure.<a href="#section-11
 </section>
 </div>
 <div id="events-claim">
-<section id="section-11.1.6">
+<section id="section-11.1.7">
           <h4 id="name-the-events-claim">
-<a href="#section-11.1.6" class="section-number selfRef">11.1.6. </a><a href="#name-the-events-claim" class="section-name selfRef">The "events" claim</a>
+<a href="#section-11.1.7" class="section-number selfRef">11.1.7. </a><a href="#name-the-events-claim" class="section-name selfRef">The "events" claim</a>
           </h4>
-<p id="section-11.1.6-1">The <code>events</code> claim SHOULD contain only one event. Multiple event type URIs are
-permitted only if they are alternative URIs defining the exact same event type.<a href="#section-11.1.6-1" class="pilcrow">¶</a></p>
+<p id="section-11.1.7-1">The <code>events</code> claim SHOULD contain only one event. Multiple event type URIs are
+permitted only if they are alternative URIs defining the exact same event type.<a href="#section-11.1.7-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="security-considerations">
-<section id="section-11.1.7">
+<section id="section-11.1.8">
           <h4 id="name-security-considerations-2">
-<a href="#section-11.1.7" class="section-number selfRef">11.1.7. </a><a href="#name-security-considerations-2" class="section-name selfRef">Security Considerations</a>
+<a href="#section-11.1.8" class="section-number selfRef">11.1.8. </a><a href="#name-security-considerations-2" class="section-name selfRef">Security Considerations</a>
           </h4>
 <div id="distinguishing-sets-from-other-kinds-of-jwts">
-<section id="section-11.1.7.1">
+<section id="section-11.1.8.1">
             <h5 id="name-distinguishing-sets-from-ot">
-<a href="#section-11.1.7.1" class="section-number selfRef">11.1.7.1. </a><a href="#name-distinguishing-sets-from-ot" class="section-name selfRef">Distinguishing SETs from other Kinds of JWTs</a>
+<a href="#section-11.1.8.1" class="section-number selfRef">11.1.8.1. </a><a href="#name-distinguishing-sets-from-ot" class="section-name selfRef">Distinguishing SETs from other Kinds of JWTs</a>
             </h5>
-<p id="section-11.1.7.1-1">Of particular concern is the possibility that SETs are confused for other kinds
+<p id="section-11.1.8.1-1">Of particular concern is the possibility that SETs are confused for other kinds
 of JWTs. The Security Considerations section of <span>[<a href="#SET" class="cite xref">SET</a>]</span> has several sub-sections
-on this subject. The SSE Framework is asking for further restrictions:<a href="#section-11.1.7.1-1" class="pilcrow">¶</a></p>
+on this subject. The SSE Framework is asking for further restrictions:<a href="#section-11.1.8.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-11.1.7.1-2.1">The <code>sub</code> claim MUST NOT be present, as described in <a href="#event-subjects" class="auto internal xref">Section 11.1.2</a>.<a href="#section-11.1.7.1-2.1" class="pilcrow">¶</a>
+<li class="normal" id="section-11.1.8.1-2.1">The <code>sub</code> claim MUST NOT be present, as described in <a href="#event-subjects" class="auto internal xref">Section 11.1.2</a>.<a href="#section-11.1.8.1-2.1" class="pilcrow">¶</a>
 </li>
-              <li class="normal" id="section-11.1.7.1-2.2">SSE SETs MUST use explicit typing, as described in <a href="#explicit-typing" class="auto internal xref">Section 11.1.3</a>.<a href="#section-11.1.7.1-2.2" class="pilcrow">¶</a>
+              <li class="normal" id="section-11.1.8.1-2.2">SSE SETs MUST use explicit typing, as described in <a href="#explicit-typing" class="auto internal xref">Section 11.1.4</a>.<a href="#section-11.1.8.1-2.2" class="pilcrow">¶</a>
 </li>
-              <li class="normal" id="section-11.1.7.1-2.3">The <code>exp</code> claim MUST NOT be present, as described in <a href="#exp-claim" class="auto internal xref">Section 11.1.4</a>.<a href="#section-11.1.7.1-2.3" class="pilcrow">¶</a>
+              <li class="normal" id="section-11.1.8.1-2.3">The <code>exp</code> claim MUST NOT be present, as described in <a href="#exp-claim" class="auto internal xref">Section 11.1.5</a>.<a href="#section-11.1.8.1-2.3" class="pilcrow">¶</a>
 </li>
             </ul>
 </section>

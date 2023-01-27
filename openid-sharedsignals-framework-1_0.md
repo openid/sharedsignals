@@ -1996,7 +1996,7 @@ payload, whose value is a Subject Identifier. The `subject` claim is REQUIRED
 for all SSE events. The JWT `sub` claim MUST NOT be present in any SET containing
 a SSE event.
 
-#### SSE Event Properties {#event-properties} 
+### SSE Event Properties {#event-properties} 
 The SSE event MAY contain additional claims within the event payload that are
 specific to the event type.
 
