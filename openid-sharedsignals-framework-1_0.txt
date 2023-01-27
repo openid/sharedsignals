@@ -66,11 +66,11 @@ Table of Contents
      1.1.  Notational Conventions  . . . . . . . . . . . . . . . . .   3
    2.  Subject Principals  . . . . . . . . . . . . . . . . . . . . .   3
    3.  Subject Members in SSE Events . . . . . . . . . . . . . . . .   3
-     3.1.  Simple Subject Members  . . . . . . . . . . . . . . . . .   4
+     3.1.  Simple Subject Members  . . . . . . . . . . . . . . . . .   3
      3.2.  Complex Subject Members . . . . . . . . . . . . . . . . .   4
        3.2.1.  Complex Subject Interpretation  . . . . . . . . . . .   5
      3.3.  Subject Identifiers in SSE Events . . . . . . . . . . . .   5
-     3.4.  Additional Subject Identifier Formats . . . . . . . . . .   6
+     3.4.  Additional Subject Identifier Formats . . . . . . . . . .   5
        3.4.1.  JWT ID Subject Identifier Format  . . . . . . . . . .   6
        3.4.2.  SAML Assertion ID Subject Identifier Format . . . . .   6
      3.5.  Receiver Subject Processing . . . . . . . . . . . . . . .   7
@@ -89,8 +89,7 @@ Table of Contents
        7.1.2.  Stream Status . . . . . . . . . . . . . . . . . . . .  32
        7.1.3.  Subjects  . . . . . . . . . . . . . . . . . . . . . .  38
        7.1.4.  Verification  . . . . . . . . . . . . . . . . . . . .  42
-       7.1.5.  Verification Event  . . . . . . . . . . . . . . . . .  42
-       7.1.6.  Stream Updated Event  . . . . . . . . . . . . . . . .  45
+       7.1.5.  Stream Updated Event  . . . . . . . . . . . . . . . .  45
    8.  Authorization . . . . . . . . . . . . . . . . . . . . . . . .  46
    9.  Security Considerations . . . . . . . . . . . . . . . . . . .  46
      9.1.  Subject Probing . . . . . . . . . . . . . . . . . . . . .  46
@@ -106,6 +105,7 @@ Table of Contents
      11.1.  Security Event Token Profile . . . . . . . . . . . . . .  49
        11.1.1.  Signature Key Resolution . . . . . . . . . . . . . .  49
        11.1.2.  SSE Event Subject  . . . . . . . . . . . . . . . . .  49
+       11.1.3.  SET Token Delivery Using HTTP Profile  . . . . . . .  52
 
 
 
@@ -114,7 +114,6 @@ Tulshibagwale, et al.        Standards Track                    [Page 2]
                           openid-sse-framework              January 2023
 
 
-       11.1.3.  SET Token Delivery Using HTTP Profile  . . . . . . .  52
    12. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  53
    13. References  . . . . . . . . . . . . . . . . . . . . . . . . .  53
      13.1.  Normative References . . . . . . . . . . . . . . . . . .  53
@@ -157,11 +156,12 @@ Tulshibagwale, et al.        Standards Track                    [Page 2]
 
    A Subject may be a simple subject or a complex subject.
 
+3.1.  Simple Subject Members
 
-
-
-
-
+   A Simple Subject Member has a claim name and a value that is a
+   Subject Identifier as defined in the Subject Identifiers for Security
+   Event Tokens [SUBIDS].  Below is a non-normative example of a Simple
+   Subject Member in a SSE event.
 
 
 
@@ -169,13 +169,6 @@ Tulshibagwale, et al.        Standards Track                    [Page 3]
 
                           openid-sse-framework              January 2023
 
-
-3.1.  Simple Subject Members
-
-   A Simple Subject Member has a claim name and a value that is a
-   Subject Identifier as defined in the Subject Identifiers for Security
-   Event Tokens [SUBIDS].  Below is a non-normative example of a Simple
-   Subject Member in a SSE event.
 
    "transferer": {
      "format": "email",
@@ -218,6 +211,13 @@ Tulshibagwale, et al.        Standards Track                    [Page 3]
 
    group
 
+      OPTIONAL.  A Subject Identifier that identifies a group.
+
+   Additional Subject Member names MAY be used in Complex Subjects.
+   Each member name MAY appear at most once in the Complex Subject
+   value.
+
+
 
 
 
@@ -225,12 +225,6 @@ Tulshibagwale, et al.        Standards Track                    [Page 4]
 
                           openid-sse-framework              January 2023
 
-
-      OPTIONAL.  A Subject Identifier that identifies a group.
-
-   Additional Subject Member names MAY be used in Complex Subjects.
-   Each member name MAY appear at most once in the Complex Subject
-   value.
 
    Below is a non-normative example of a Complex Subject claim in a SSE
    event.
@@ -272,6 +266,12 @@ Tulshibagwale, et al.        Standards Track                    [Page 4]
       parties and such agreement is outside the scope of this
       specification.
 
+3.4.  Additional Subject Identifier Formats
+
+   The following new subject identifier formats are defined:
+
+
+
 
 
 
@@ -281,10 +281,6 @@ Tulshibagwale, et al.        Standards Track                    [Page 5]
 
                           openid-sse-framework              January 2023
 
-
-3.4.  Additional Subject Identifier Formats
-
-   The following new subject identifier formats are defined:
 
 3.4.1.  JWT ID Subject Identifier Format
 
@@ -329,7 +325,11 @@ Tulshibagwale, et al.        Standards Track                    [Page 5]
 
    assertion_id
 
+      REQUIRED.  The "ID" value of the SAML assertion being identified,
+      defined in [OASIS.saml-core-2.0-os]
 
+   The "SAML Assertion ID" Subject Identifier Format is identified by
+   the name saml_assertion_id.
 
 
 
@@ -337,12 +337,6 @@ Tulshibagwale, et al.        Standards Track                    [Page 6]
 
                           openid-sse-framework              January 2023
 
-
-      REQUIRED.  The "ID" value of the SAML assertion being identified,
-      defined in [OASIS.saml-core-2.0-os]
-
-   The "SAML Assertion ID" Subject Identifier Format is identified by
-   the name saml_assertion_id.
 
    Below is a non-normative example Subject Identifier for the
    saml_assertion_id Subject Identifier Format.
@@ -378,6 +372,12 @@ Tulshibagwale, et al.        Standards Track                    [Page 6]
 
    The following are hypothetical examples of SETs that conform to the
    SSE Framework.
+
+
+
+
+
+
 
 
 
@@ -1768,19 +1768,19 @@ Tulshibagwale, et al.        Standards Track                   [Page 31]
 
    Enabled
 
-      the Transmitter MUST send a stream updated (Section 7.1.6) event
+      the Transmitter MUST send a stream updated (Section 7.1.5) event
       respectively to the Receiver within the Event Stream.
 
    Paused
 
-      the Transmitter SHOULD send a stream updated (Section 7.1.6) after
+      the Transmitter SHOULD send a stream updated (Section 7.1.5) after
       the Event Stream is re-started.  A Receiver MUST assume that
       events may have been lost during the time when the event stream
       was paused.
 
    Disabled
 
-      the Transmitter MAY send a stream updated (Section 7.1.6) after
+      the Transmitter MAY send a stream updated (Section 7.1.5) after
       the Event Stream is re-enabled.
 
 
@@ -2314,7 +2314,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 41]
    An Event Transmitter MAY send a Verification Event at any time, even
    if one was not requested by the Event Receiver.
 
-7.1.5.  Verification Event
+7.1.4.1.  Verification Event
 
    The Verification Event is a standard SET with the following
    attributes:
@@ -2354,7 +2354,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 42]
                           openid-sse-framework              January 2023
 
 
-7.1.5.1.  Triggering a Verification Event.
+7.1.4.2.  Triggering a Verification Event.
 
    To request that a verification event be sent over an Event Stream,
    the Event Receiver makes an HTTP POST request to the Verification
@@ -2480,7 +2480,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 44]
 
                     Figure 40: Example: Verification SET
 
-7.1.6.  Stream Updated Event
+7.1.5.  Stream Updated Event
 
    A Transmitter MAY change the stream status in reference to one or
    more Subjects without a request from a Receiver.  The Transmitter

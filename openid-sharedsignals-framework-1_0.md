@@ -1717,7 +1717,7 @@ delivery is working, including signature verification and encryption.
 An Event Transmitter MAY send a Verification Event at any time, even if one was
 not requested by the Event Receiver.
 
-### Verification Event {#verification-event} 
+#### Verification Event {#verification-event} 
 The Verification Event is a standard SET with the following attributes:
 
 event type

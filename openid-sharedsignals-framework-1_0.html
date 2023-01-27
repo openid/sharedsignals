@@ -1408,10 +1408,7 @@ and Coordination (RISC) and the Continuous Access Evaluation Profile (<span>[<a 
                     <p id="section-toc.1-1.7.2.1.2.4.1"><a href="#section-7.1.4" class="auto internal xref">7.1.4</a>.  <a href="#name-verification" class="internal xref">Verification</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1.2.5">
-                    <p id="section-toc.1-1.7.2.1.2.5.1"><a href="#section-7.1.5" class="auto internal xref">7.1.5</a>.  <a href="#name-verification-event" class="internal xref">Verification Event</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1.2.6">
-                    <p id="section-toc.1-1.7.2.1.2.6.1"><a href="#section-7.1.6" class="auto internal xref">7.1.6</a>.  <a href="#name-stream-updated-event" class="internal xref">Stream Updated Event</a></p>
+                    <p id="section-toc.1-1.7.2.1.2.5.1"><a href="#section-7.1.5" class="auto internal xref">7.1.5</a>.  <a href="#name-stream-updated-event" class="internal xref">Stream Updated Event</a></p>
 </li>
                 </ul>
 </li>
@@ -3058,14 +3055,14 @@ according to the status of the stream.<a href="#section-7.1.2-2" class="pilcrow"
 <p id="section-7.1.2-4">Enabled<a href="#section-7.1.2-4" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-7.1.2-5.1">
-              <p id="section-7.1.2-5.1.1">the Transmitter MUST send a stream updated (<a href="#stream-updated-event" class="auto internal xref">Section 7.1.6</a>) event
+              <p id="section-7.1.2-5.1.1">the Transmitter MUST send a stream updated (<a href="#stream-updated-event" class="auto internal xref">Section 7.1.5</a>) event
   respectively to the Receiver within the Event Stream.<a href="#section-7.1.2-5.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <p id="section-7.1.2-6">Paused<a href="#section-7.1.2-6" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-7.1.2-7.1">
-              <p id="section-7.1.2-7.1.1">the Transmitter SHOULD send a stream updated (<a href="#stream-updated-event" class="auto internal xref">Section 7.1.6</a>) after the Event Stream is
+              <p id="section-7.1.2-7.1.1">the Transmitter SHOULD send a stream updated (<a href="#stream-updated-event" class="auto internal xref">Section 7.1.5</a>) after the Event Stream is
   re-started. A Receiver MUST assume that events may have been lost during the
   time when the event stream was paused.<a href="#section-7.1.2-7.1.1" class="pilcrow">¶</a></p>
 </li>
@@ -3073,7 +3070,7 @@ according to the status of the stream.<a href="#section-7.1.2-2" class="pilcrow"
 <p id="section-7.1.2-8">Disabled<a href="#section-7.1.2-8" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-7.1.2-9.1">
-              <p id="section-7.1.2-9.1.1">the Transmitter MAY send a stream updated (<a href="#stream-updated-event" class="auto internal xref">Section 7.1.6</a>) after the Event Stream is
+              <p id="section-7.1.2-9.1.1">the Transmitter MAY send a stream updated (<a href="#stream-updated-event" class="auto internal xref">Section 7.1.5</a>) after the Event Stream is
   re-enabled.<a href="#section-7.1.2-9.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
@@ -3644,69 +3641,69 @@ a Verification Event also confirms to the Event Transmitter that end-to-end
 delivery is working, including signature verification and encryption.<a href="#section-7.1.4-1" class="pilcrow">¶</a></p>
 <p id="section-7.1.4-2">An Event Transmitter MAY send a Verification Event at any time, even if one was
 not requested by the Event Receiver.<a href="#section-7.1.4-2" class="pilcrow">¶</a></p>
-</section>
-</div>
 <div id="verification-event">
-<section id="section-7.1.5">
-          <h4 id="name-verification-event">
-<a href="#section-7.1.5" class="section-number selfRef">7.1.5. </a><a href="#name-verification-event" class="section-name selfRef">Verification Event</a>
-          </h4>
-<p id="section-7.1.5-1">The Verification Event is a standard SET with the following attributes:<a href="#section-7.1.5-1" class="pilcrow">¶</a></p>
-<p id="section-7.1.5-2">event type<a href="#section-7.1.5-2" class="pilcrow">¶</a></p>
+<section id="section-7.1.4.1">
+            <h5 id="name-verification-event">
+<a href="#section-7.1.4.1" class="section-number selfRef">7.1.4.1. </a><a href="#name-verification-event" class="section-name selfRef">Verification Event</a>
+            </h5>
+<p id="section-7.1.4.1-1">The Verification Event is a standard SET with the following attributes:<a href="#section-7.1.4.1-1" class="pilcrow">¶</a></p>
+<p id="section-7.1.4.1-2">event type<a href="#section-7.1.4.1-2" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.5-3.1">
-              <p id="section-7.1.5-3.1.1">The Event Type URI is: <code>https://schemas.openid.net/secevent/sse/event-type/verification</code>.<a href="#section-7.1.5-3.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-7.1.4.1-3.1">
+                <p id="section-7.1.4.1-3.1.1">The Event Type URI is: <code>https://schemas.openid.net/secevent/sse/event-type/verification</code>.<a href="#section-7.1.4.1-3.1.1" class="pilcrow">¶</a></p>
 </li>
-          </ul>
-<p id="section-7.1.5-4">state<a href="#section-7.1.5-4" class="pilcrow">¶</a></p>
+            </ul>
+<p id="section-7.1.4.1-4">state<a href="#section-7.1.4.1-4" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.5-5.1">
-              <p id="section-7.1.5-5.1.1">OPTIONAL An opaque value provided by the Event Receiver when the event is
-  triggered. This is a nested attribute in the event payload.<a href="#section-7.1.5-5.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-7.1.4.1-5.1">
+                <p id="section-7.1.4.1-5.1.1">OPTIONAL An opaque value provided by the Event Receiver when the event is
+  triggered. This is a nested attribute in the event payload.<a href="#section-7.1.4.1-5.1.1" class="pilcrow">¶</a></p>
 </li>
-          </ul>
-<p id="section-7.1.5-6">Upon receiving a Verification Event, the Event Receiver SHALL parse the SET and
+            </ul>
+<p id="section-7.1.4.1-6">Upon receiving a Verification Event, the Event Receiver SHALL parse the SET and
 validate its claims. In particular, the Event Receiver SHALL confirm that the
 value for <code>state</code> is as expected. If the value of <code>state</code> does not match, an
 error response of <code>setData</code> SHOULD be returned (see Section 2.3 of
-<span>[<a href="#DELIVERYPUSH" class="cite xref">DELIVERYPUSH</a>]</span> or <span>[<a href="#DELIVERYPOLL" class="cite xref">DELIVERYPOLL</a>]</span>).<a href="#section-7.1.5-6" class="pilcrow">¶</a></p>
-<p id="section-7.1.5-7">In many cases, Event Transmitters MAY disable or suspend an Event Stream that
+<span>[<a href="#DELIVERYPUSH" class="cite xref">DELIVERYPUSH</a>]</span> or <span>[<a href="#DELIVERYPOLL" class="cite xref">DELIVERYPOLL</a>]</span>).<a href="#section-7.1.4.1-6" class="pilcrow">¶</a></p>
+<p id="section-7.1.4.1-7">In many cases, Event Transmitters MAY disable or suspend an Event Stream that
 fails to successfully verify based on the acknowledgement or lack of
-acknowledgement by the Event Receiver.<a href="#section-7.1.5-7" class="pilcrow">¶</a></p>
+acknowledgement by the Event Receiver.<a href="#section-7.1.4.1-7" class="pilcrow">¶</a></p>
+</section>
+</div>
 <div id="triggering-a-verification-event">
-<section id="section-7.1.5.1">
+<section id="section-7.1.4.2">
             <h5 id="name-triggering-a-verification-e">
-<a href="#section-7.1.5.1" class="section-number selfRef">7.1.5.1. </a><a href="#name-triggering-a-verification-e" class="section-name selfRef">Triggering a Verification Event.</a>
+<a href="#section-7.1.4.2" class="section-number selfRef">7.1.4.2. </a><a href="#name-triggering-a-verification-e" class="section-name selfRef">Triggering a Verification Event.</a>
             </h5>
-<p id="section-7.1.5.1-1">To request that a verification event be sent over an Event Stream, the Event
+<p id="section-7.1.4.2-1">To request that a verification event be sent over an Event Stream, the Event
 Receiver makes an HTTP POST request to the Verification Endpoint, with a <span><a href="#RFC7159" class="internal xref">JSON</a> [<a href="#RFC7159" class="cite xref">RFC7159</a>]</span> object containing the parameters of the verification request, if any.
 On a successful request, the event transmitter responds with an empty
-<code>204 No Content</code> response.<a href="#section-7.1.5.1-1" class="pilcrow">¶</a></p>
-<p id="section-7.1.5.1-2">Verification requests have the following properties:<a href="#section-7.1.5.1-2" class="pilcrow">¶</a></p>
-<p id="section-7.1.5.1-3">stream_id<a href="#section-7.1.5.1-3" class="pilcrow">¶</a></p>
+<code>204 No Content</code> response.<a href="#section-7.1.4.2-1" class="pilcrow">¶</a></p>
+<p id="section-7.1.4.2-2">Verification requests have the following properties:<a href="#section-7.1.4.2-2" class="pilcrow">¶</a></p>
+<p id="section-7.1.4.2-3">stream_id<a href="#section-7.1.4.2-3" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.5.1-4.1">
-                <p id="section-7.1.5.1-4.1.1">REQUIRED. The stream that the verification event is being requested on.<a href="#section-7.1.5.1-4.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-7.1.4.2-4.1">
+                <p id="section-7.1.4.2-4.1.1">REQUIRED. The stream that the verification event is being requested on.<a href="#section-7.1.4.2-4.1.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
-<p id="section-7.1.5.1-5">state<a href="#section-7.1.5.1-5" class="pilcrow">¶</a></p>
+<p id="section-7.1.4.2-5">state<a href="#section-7.1.4.2-5" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.5.1-6.1">
-                <p id="section-7.1.5.1-6.1.1">OPTIONAL. An arbitrary string that the Event Transmitter MUST echo back to the
+<li class="normal ulEmpty" id="section-7.1.4.2-6.1">
+                <p id="section-7.1.4.2-6.1.1">OPTIONAL. An arbitrary string that the Event Transmitter MUST echo back to the
   Event Receiver in the verification event's payload. Event Receivers MAY use
   the value of this parameter to correlate a verification event with a
   verification request. If the verification event is initiated by the transmitter
-  then this parameter MUST not be set.<a href="#section-7.1.5.1-6.1.1" class="pilcrow">¶</a></p>
+  then this parameter MUST not be set.<a href="#section-7.1.4.2-6.1.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
-<p id="section-7.1.5.1-7">A successful response from a POST to the Verification Endpoint does not indicate
+<p id="section-7.1.4.2-7">A successful response from a POST to the Verification Endpoint does not indicate
 that the verification event was transmitted successfully, only that the Event
 Transmitter has transmitted the event or will do so at some point in the future.
 Event Transmitters MAY transmit the event via an asynchronous process, and SHOULD
 publish an SLA for verification event transmission times. Event Receivers MUST NOT
 depend on the verification event being transmitted synchronously or in any
-particular order relative to the current queue of events.<a href="#section-7.1.5.1-7" class="pilcrow">¶</a></p>
-<p id="section-7.1.5.1-8">Errors are signaled with HTTP status codes as follows:<a href="#section-7.1.5.1-8" class="pilcrow">¶</a></p>
+particular order relative to the current queue of events.<a href="#section-7.1.4.2-7" class="pilcrow">¶</a></p>
+<p id="section-7.1.4.2-8">Errors are signaled with HTTP status codes as follows:<a href="#section-7.1.4.2-8" class="pilcrow">¶</a></p>
 <span id="name-verification-errors"></span><div id="taberifyerr">
 <table class="center" id="table-10">
               <caption>
@@ -3740,10 +3737,10 @@ particular order relative to the current queue of events.<a href="#section-7.1.5
               </tbody>
             </table>
 </div>
-<p id="section-7.1.5.1-10">The following is a non-normative example request to trigger a verification event:<a href="#section-7.1.5.1-10" class="pilcrow">¶</a></p>
+<p id="section-7.1.4.2-10">The following is a non-normative example request to trigger a verification event:<a href="#section-7.1.4.2-10" class="pilcrow">¶</a></p>
 <span id="name-example-trigger-verificatio"></span><div id="figverifyreq">
 <figure id="figure-38">
-              <div class="lang-http sourcecode" id="section-7.1.5.1-11.1">
+              <div class="lang-http sourcecode" id="section-7.1.4.2-11.1">
 <pre>
 POST /sse/verify HTTP/1.1
 Host: transmitter.example.com
@@ -3760,10 +3757,10 @@ Content-Type: application/json
 <a href="#name-example-trigger-verificatio" class="selfRef">Example: Trigger Verification Request</a>
               </figcaption></figure>
 </div>
-<p id="section-7.1.5.1-12">The following is a non-normative example response to a successful request:<a href="#section-7.1.5.1-12" class="pilcrow">¶</a></p>
+<p id="section-7.1.4.2-12">The following is a non-normative example response to a successful request:<a href="#section-7.1.4.2-12" class="pilcrow">¶</a></p>
 <span id="name-example-trigger-verification"></span><div id="figverifyresp">
 <figure id="figure-39">
-              <div class="lang-http sourcecode" id="section-7.1.5.1-13.1">
+              <div class="lang-http sourcecode" id="section-7.1.4.2-13.1">
 <pre>
 HTTP/1.1 204 No Content
 Server: transmitter.example.com
@@ -3774,11 +3771,11 @@ Cache-Control: no-store
 <a href="#name-example-trigger-verification" class="selfRef">Example: Trigger Verification Response</a>
               </figcaption></figure>
 </div>
-<p id="section-7.1.5.1-14">And the following is a non-normative example of a verification event sent to the
-Event Receiver as a result of the above request:<a href="#section-7.1.5.1-14" class="pilcrow">¶</a></p>
+<p id="section-7.1.4.2-14">And the following is a non-normative example of a verification event sent to the
+Event Receiver as a result of the above request:<a href="#section-7.1.4.2-14" class="pilcrow">¶</a></p>
 <span id="name-example-verification-set"></span><div id="figverifyset">
 <figure id="figure-40">
-              <div class="lang-json sourcecode" id="section-7.1.5.1-15.1">
+              <div class="lang-json sourcecode" id="section-7.1.4.2-15.1">
 <pre>
 {
   "jti": "123456",
@@ -3802,47 +3799,47 @@ Event Receiver as a result of the above request:<a href="#section-7.1.5.1-14" cl
 </section>
 </div>
 <div id="stream-updated-event">
-<section id="section-7.1.6">
+<section id="section-7.1.5">
           <h4 id="name-stream-updated-event">
-<a href="#section-7.1.6" class="section-number selfRef">7.1.6. </a><a href="#name-stream-updated-event" class="section-name selfRef">Stream Updated Event</a>
+<a href="#section-7.1.5" class="section-number selfRef">7.1.5. </a><a href="#name-stream-updated-event" class="section-name selfRef">Stream Updated Event</a>
           </h4>
-<p id="section-7.1.6-1">A Transmitter MAY change the stream status in reference to one or more Subjects
+<p id="section-7.1.5-1">A Transmitter MAY change the stream status in reference to one or more Subjects
 without a request from a Receiver. The Transmitter sends an event of type
 <code>https://schemas.openid.net/secevent/sse/event-type/stream-updated</code> to indicate
-that it has changed the status of the Event Stream for a specific Subject.<a href="#section-7.1.6-1" class="pilcrow">¶</a></p>
-<p id="section-7.1.6-2">If a Transmitter decides to change the status of an Event Stream from <code>enabled</code>
+that it has changed the status of the Event Stream for a specific Subject.<a href="#section-7.1.5-1" class="pilcrow">¶</a></p>
+<p id="section-7.1.5-2">If a Transmitter decides to change the status of an Event Stream from <code>enabled</code>
 to either <code>paused</code> or <code>disabled</code>, then the Transmitter MUST send this event to
-any Receiver that is currently <code>enabled</code> to receive events from this stream.<a href="#section-7.1.6-2" class="pilcrow">¶</a></p>
-<p id="section-7.1.6-3">If the Transmitter changes the status of the stream for a Subject from either
+any Receiver that is currently <code>enabled</code> to receive events from this stream.<a href="#section-7.1.5-2" class="pilcrow">¶</a></p>
+<p id="section-7.1.5-3">If the Transmitter changes the status of the stream for a Subject from either
 <code>paused</code> or <code>disabled</code> to <code>enabled</code>, then it MUST send this event to any
 Receiver that has previously been enabled to receive events for the specified
-Subject.<a href="#section-7.1.6-3" class="pilcrow">¶</a></p>
-<p id="section-7.1.6-4">The <code>stream-updated</code> event MAY contain the following claims:<a href="#section-7.1.6-4" class="pilcrow">¶</a></p>
-<p id="section-7.1.6-5">status<a href="#section-7.1.6-5" class="pilcrow">¶</a></p>
+Subject.<a href="#section-7.1.5-3" class="pilcrow">¶</a></p>
+<p id="section-7.1.5-4">The <code>stream-updated</code> event MAY contain the following claims:<a href="#section-7.1.5-4" class="pilcrow">¶</a></p>
+<p id="section-7.1.5-5">status<a href="#section-7.1.5-5" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.6-6.1">
-              <p id="section-7.1.6-6.1.1">REQUIRED. Defines the new status of the stream for the Subject Identifier
-  specified in the Subject.<a href="#section-7.1.6-6.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-7.1.5-6.1">
+              <p id="section-7.1.5-6.1.1">REQUIRED. Defines the new status of the stream for the Subject Identifier
+  specified in the Subject.<a href="#section-7.1.5-6.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-7.1.6-7">reason<a href="#section-7.1.6-7" class="pilcrow">¶</a></p>
+<p id="section-7.1.5-7">reason<a href="#section-7.1.5-7" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.6-8.1">
-              <p id="section-7.1.6-8.1.1">OPTIONAL. Provides a short description of why the Transmitter has updated the
-  status.<a href="#section-7.1.6-8.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-7.1.5-8.1">
+              <p id="section-7.1.5-8.1.1">OPTIONAL. Provides a short description of why the Transmitter has updated the
+  status.<a href="#section-7.1.5-8.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-7.1.6-9">subject<a href="#section-7.1.6-9" class="pilcrow">¶</a></p>
+<p id="section-7.1.5-9">subject<a href="#section-7.1.5-9" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.6-10.1">
-              <p id="section-7.1.6-10.1.1">OPTIONAL. Specifies the Subject Principal for whom the status has been updated.
+<li class="normal ulEmpty" id="section-7.1.5-10.1">
+              <p id="section-7.1.5-10.1.1">OPTIONAL. Specifies the Subject Principal for whom the status has been updated.
   If this claim is not included, then the status change was applied to all
-  subjects in the stream.<a href="#section-7.1.6-10.1.1" class="pilcrow">¶</a></p>
+  subjects in the stream.<a href="#section-7.1.5-10.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <span id="name-example-stream-updated-set"></span><div id="figstreamupdatedset">
 <figure id="figure-41">
-            <div class="lang-json sourcecode" id="section-7.1.6-11.1">
+            <div class="lang-json sourcecode" id="section-7.1.5-11.1">
 <pre>
 {
   "jti": "123456",
