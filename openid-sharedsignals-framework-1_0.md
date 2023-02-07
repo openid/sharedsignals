@@ -1348,16 +1348,19 @@ according to the status of the stream.
 If the stream is:
 
 Enabled
-: the Transmitter MUST send a stream updated ({{stream-updated-event}}) event
+
+> the Transmitter MUST send a stream updated ({{stream-updated-event}}) event
   respectively to the Receiver within the Event Stream.
 
 Paused
-: the Transmitter SHOULD send a stream updated ({{stream-updated-event}}) after the Event Stream is
+
+> the Transmitter SHOULD send a stream updated ({{stream-updated-event}}) after the Event Stream is
   re-started. A Receiver MUST assume that events may have been lost during the
   time when the event stream was paused.
 
 Disabled
-: the Transmitter MAY send a stream updated ({{stream-updated-event}}) after the Event Stream is
+
+> the Transmitter MAY send a stream updated ({{stream-updated-event}}) after the Event Stream is
   re-enabled.
 
 #### Reading a Stream’s Status {#reading-a-streams-status}
