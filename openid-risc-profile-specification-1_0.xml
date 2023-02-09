@@ -24,7 +24,7 @@
   <?rfc comments="yes"?>
 
   <front>
-    <title abbrev="openid-risc-profile-specification">OpenID RISC Profile Specification 1.0 - draft 02</title>
+    <title abbrev="openid-risc-profile-specification">OpenID RISC Profile Specification 1.0 - draft 03</title>
 
     <author initials="M." surname="Scurtescu" fullname="Marius Scurtescu">
       <organization abbrev="Coinbase">Coinbase</organization>
@@ -63,14 +63,14 @@
       </address>
     </author>
 
-    <date year="2022" month="April" day="05"/>
+    <date year="2023" month="February" day="09"/>
 
-    <workgroup>SSE Working Group</workgroup>
+    <workgroup>Shared Signals</workgroup>
 
     <abstract>
       <t>This document defines the Risk Incident Sharing and Coordination (RISC) Event
-        Types based on the <xref target="SSE-FRAMEWORK">Shared Signals and Events (SSE)
-        Framework</xref>. Event Types are introduced and defined in <xref target="SET">
+        Types based on the <xref target="SHARED-SIGNALS-FRAMEWORK">Shared Signals
+        Framework (SSF)</xref>. Event Types are introduced and defined in <xref target="SET">
         Security Event Token (SET)</xref>.</t>
     </abstract>
   </front>
@@ -78,7 +78,7 @@
   <middle>
     <section anchor="intro" title="Introduction">
       <t>This specification defines event types and their contents based on the
-      <xref target="SSE-FRAMEWORK">SSE Framework</xref> that are required to
+      <xref target="SHARED-SIGNALS-FRAMEWORK">Shared Signals Framework</xref> that are required to
       implement Risk Incident Sharing and Coordination.</t>
       
       <section anchor="conv" title="Notational Conventions">
@@ -488,7 +488,7 @@
         <seriesInfo name="DOI" value="10.17487/RFC8174"/>
       </reference>
       
-      <reference anchor="SSE-FRAMEWORK" target="https://openid.net/specs/openid-sse-framework-1_0-01.html">
+      <reference anchor="SHARED-SIGNALS-FRAMEWORK" target="https://openid.net/specs/openid-sse-framework-1_0-01.html">
         <front>
           <title>OpenID Shared Signals and Events Framework Specification 1.0</title>
           <author initials="A." surname="Tulshibagwale" fullname="Atul Tulshibagwale">
@@ -547,7 +547,7 @@
     </references>
     <section title="Acknowledgements" anchor="ack">
       <t>The authors wish to thank all members of the OpenID Foundation Shared Signals
-        and Events Working Group who contributed to the development of this
+        Working Group who contributed to the development of this
         specification.</t>
     </section>
     <section anchor="Notices" title="Notices">

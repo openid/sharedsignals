@@ -6,7 +6,7 @@ Shared Signals                                               T. Cappalli
                                                                Microsoft
                                                         A. Tulshibagwale
                                                                     SGNL
-                                                       11 September 2021
+                                                         9 February 2023
 
 
        OpenID Continuous Access Evaluation Profile 1.0 - draft 03
@@ -55,7 +55,7 @@ Table of Contents
 
 Cappalli & Tulshibagwale     Standards Track                    [Page 1]
 
-                                CAEP-Spec                 September 2021
+                                CAEP-Spec                  February 2023
 
 
 1.  Introduction
@@ -111,7 +111,7 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 1]
 
 Cappalli & Tulshibagwale     Standards Track                    [Page 2]
 
-                                CAEP-Spec                 September 2021
+                                CAEP-Spec                  February 2023
 
 
    {
@@ -167,7 +167,7 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 2]
 
 Cappalli & Tulshibagwale     Standards Track                    [Page 3]
 
-                                CAEP-Spec                 September 2021
+                                CAEP-Spec                  February 2023
 
 
    The actual reason why the session was revoked might be specified with
@@ -223,7 +223,7 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 3]
 
 Cappalli & Tulshibagwale     Standards Track                    [Page 4]
 
-                                CAEP-Spec                 September 2021
+                                CAEP-Spec                  February 2023
 
 
    {
@@ -279,7 +279,7 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 4]
 
 Cappalli & Tulshibagwale     Standards Track                    [Page 5]
 
-                                CAEP-Spec                 September 2021
+                                CAEP-Spec                  February 2023
 
 
    {
@@ -335,7 +335,7 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 5]
 
 Cappalli & Tulshibagwale     Standards Track                    [Page 6]
 
-                                CAEP-Spec                 September 2021
+                                CAEP-Spec                  February 2023
 
 
    The actual reason why the claims change occurred might be specified
@@ -391,7 +391,7 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 6]
 
 Cappalli & Tulshibagwale     Standards Track                    [Page 7]
 
-                                CAEP-Spec                 September 2021
+                                CAEP-Spec                  February 2023
 
 
    {
@@ -447,7 +447,7 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 7]
 
 Cappalli & Tulshibagwale     Standards Track                    [Page 8]
 
-                                CAEP-Spec                 September 2021
+                                CAEP-Spec                  February 2023
 
 
    {
@@ -503,7 +503,7 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 8]
 
 Cappalli & Tulshibagwale     Standards Track                    [Page 9]
 
-                                CAEP-Spec                 September 2021
+                                CAEP-Spec                  February 2023
 
 
       *  password
@@ -559,7 +559,7 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 9]
 
 Cappalli & Tulshibagwale     Standards Track                   [Page 10]
 
-                                CAEP-Spec                 September 2021
+                                CAEP-Spec                  February 2023
 
 
 3.3.2.  Examples
@@ -615,7 +615,7 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 10]
 
 Cappalli & Tulshibagwale     Standards Track                   [Page 11]
 
-                                CAEP-Spec                 September 2021
+                                CAEP-Spec                  February 2023
 
 
    authentication (such as a password).  The user can then open another
@@ -671,7 +671,7 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 11]
 
 Cappalli & Tulshibagwale     Standards Track                   [Page 12]
 
-                                CAEP-Spec                 September 2021
+                                CAEP-Spec                  February 2023
 
 
       increased or decreased If the Transmitter has specified the
@@ -727,7 +727,7 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 12]
 
 Cappalli & Tulshibagwale     Standards Track                   [Page 13]
 
-                                CAEP-Spec                 September 2021
+                                CAEP-Spec                  February 2023
 
 
    {
@@ -783,7 +783,7 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 13]
 
 Cappalli & Tulshibagwale     Standards Track                   [Page 14]
 
-                                CAEP-Spec                 September 2021
+                                CAEP-Spec                  February 2023
 
 
       triggered the event
@@ -839,7 +839,7 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 14]
 
 Cappalli & Tulshibagwale     Standards Track                   [Page 15]
 
-                                CAEP-Spec                 September 2021
+                                CAEP-Spec                  February 2023
 
 
       Figure 12: Example: Device No Longer Compliant - Complex Subject
@@ -895,7 +895,7 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 15]
 
 Cappalli & Tulshibagwale     Standards Track                   [Page 16]
 
-                                CAEP-Spec                 September 2021
+                                CAEP-Spec                  February 2023
 
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
@@ -951,7 +951,7 @@ Appendix B.  Notices
 
 Cappalli & Tulshibagwale     Standards Track                   [Page 17]
 
-                                CAEP-Spec                 September 2021
+                                CAEP-Spec                  February 2023
 
 
    no (and hereby expressly disclaim any) warranties (express, implied,
