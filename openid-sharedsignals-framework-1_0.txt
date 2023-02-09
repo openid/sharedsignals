@@ -2,7 +2,7 @@
 
 
 
-Shared Signals and Events Working Group                 A. Tulshibagwale
+Shared Signals                                          A. Tulshibagwale
                                                                     SGNL
                                                              T. Cappalli
                                                                Microsoft
@@ -14,27 +14,26 @@ Shared Signals and Events Working Group                 A. Tulshibagwale
                                                                   Yubico
                                                                  S. Miel
                                                                    Cisco
-                                                         7 February 2023
+                                                         8 February 2023
 
 
-OpenID Shared Signals and Events Framework Specification 1.0 - draft 02
-                        openid-sse-framework-1_0
+      OpenID Shared Signals Framework Specification 1.0 - draft 02
+                   openid-sharedsignals-framework-1_0
 
 Abstract
 
-   This Shared Signals and Events (SSE) Framework enables sharing of
-   signals and events between cooperating peers.  It enables multiple
-   applications such as Risk Incident Sharing and Coordination (RISC)
-   and the Continuous Access Evaluation Profile ([CAEP])
+   This Shared Signals Framework (SSF) enables sharing of signals and
+   events between cooperating peers.  It enables multiple applications
+   such as Risk Incident Sharing and Coordination (RISC) and the
+   Continuous Access Evaluation Profile ([CAEP])
 
    This specification defines:
 
-   *  A profile for IETF Security Events
-      (https://datatracker.ietf.org/wg/secevent/about/)
+   *  A profile for Security Events Tokens [RFC8417]
 
    *  Subject Principals
 
-   *  Subject Claims in SSE Events
+   *  Subject Claims in SSF Events
 
    *  Event Types
 
@@ -46,19 +45,18 @@ Abstract
 
    This spec also directly profiles several IETF Security Events drafts:
 
-   *  Security Event Token (SET) [SET]
+   *  Security Event Token (SET) [RFC8417]
 
    *  Subject Identifiers for Security Event Tokens [SUBIDS]
 
+   *  Push-Based SET Token Delivery Using HTTP [DELIVERYPUSH]
 
 
 
 Tulshibagwale, et al.        Standards Track                    [Page 1]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
-
-   *  Push-Based SET Token Delivery Using HTTP [DELIVERYPUSH]
 
    *  Poll-Based SET Token Delivery Using HTTP [DELIVERYPOLL]
 
@@ -67,17 +65,17 @@ Table of Contents
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
      1.1.  Notational Conventions  . . . . . . . . . . . . . . . . .   3
    2.  Subject Principals  . . . . . . . . . . . . . . . . . . . . .   3
-   3.  Subject Members in SSE Events . . . . . . . . . . . . . . . .   3
+   3.  Subject Members in SSF Events . . . . . . . . . . . . . . . .   3
      3.1.  Simple Subject Members  . . . . . . . . . . . . . . . . .   4
      3.2.  Complex Subject Members . . . . . . . . . . . . . . . . .   4
        3.2.1.  Complex Subject Interpretation  . . . . . . . . . . .   5
-     3.3.  Subject Identifiers in SSE Events . . . . . . . . . . . .   5
+     3.3.  Subject Identifiers in SSF Events . . . . . . . . . . . .   5
      3.4.  Additional Subject Identifier Formats . . . . . . . . . .   6
        3.4.1.  JWT ID Subject Identifier Format  . . . . . . . . . .   6
        3.4.2.  SAML Assertion ID Subject Identifier Format . . . . .   6
      3.5.  Receiver Subject Processing . . . . . . . . . . . . . . .   7
    4.  Event Properties  . . . . . . . . . . . . . . . . . . . . . .   7
-   5.  Example SETs that conform to the SSE Framework  . . . . . . .   7
+   5.  Example SETs that conform to the Shared Signals Framework . .   7
    6.  Transmitter Configuration Discovery . . . . . . . . . . . . .   9
      6.1.  Transmitter Configuration Metadata  . . . . . . . . . . .  10
      6.2.  Obtaining Transmitter Configuration Information . . . . .  11
@@ -106,16 +104,16 @@ Table of Contents
    11. Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .  48
      11.1.  Security Event Token Profile . . . . . . . . . . . . . .  49
        11.1.1.  Signature Key Resolution . . . . . . . . . . . . . .  49
+       11.1.2.  SSF Event Subject  . . . . . . . . . . . . . . . . .  49
+       11.1.3.  SSF Event Properties . . . . . . . . . . . . . . . .  49
 
 
 
 Tulshibagwale, et al.        Standards Track                    [Page 2]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
-       11.1.2.  SSE Event Subject  . . . . . . . . . . . . . . . . .  49
-       11.1.3.  SSE Event Properties . . . . . . . . . . . . . . . .  49
        11.1.4.  Explicit Typing of SETs  . . . . . . . . . . . . . .  50
        11.1.5.  The "exp" Claim  . . . . . . . . . . . . . . . . . .  50
        11.1.6.  The "aud" Claim  . . . . . . . . . . . . . . . . . .  51
@@ -143,11 +141,12 @@ Tulshibagwale, et al.        Standards Track                    [Page 2]
 
 2.  Subject Principals
 
-   This SSE Framework specification defines a Subject Principal to be
-   the entities about which an event can be sent by Transmitters and
-   received by Receivers using the SSE Framework.
+   This Shared Signals Framework specification defines a Subject
+   Principal to be the entities about which an event can be sent by
+   Transmitters and received by Receivers using the Shared Signals
+   Framework.
 
-   Subject Principals are the managed entities in a SSE Transmitter or
+   Subject Principals are the managed entities in a SSF Transmitter or
    Receiver.  These include human or robotic principals, devices,
    customer tenants in a multi-tenanted service, organizational units
    within a tenant, groups of subject principals, or other entities that
@@ -158,16 +157,17 @@ Tulshibagwale, et al.        Standards Track                    [Page 2]
 
    Subject Principals are identified by Subject Members defined below.
 
-3.  Subject Members in SSE Events
+3.  Subject Members in SSF Events
 
-   A member of type Subject in an SSE event MAY have any claim name.
+   A member of type Subject in an SSF event MAY have any claim name.
    Each Subject Member MUST refer to exactly one Subject Principal.
+
 
 
 
 Tulshibagwale, et al.        Standards Track                    [Page 3]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
    A Subject may be a "simple subject" or a "complex subject".
@@ -177,7 +177,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 3]
    A Simple Subject Member has a claim name and a value that is a
    "Subject Identifier" as defined in the Subject Identifiers for
    Security Event Tokens [SUBIDS].  Below is a non-normative example of
-   a Simple Subject Member in a SSE event.
+   a Simple Subject Member in a SSF event.
 
    "transferer": {
      "format": "email",
@@ -223,7 +223,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 3]
 
 Tulshibagwale, et al.        Standards Track                    [Page 4]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
    group
@@ -234,7 +234,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 4]
    Each member name MAY appear at most once in the Complex Subject
    value.
 
-   Below is a non-normative example of a Complex Subject claim in a SSE
+   Below is a non-normative example of a Complex Subject claim in a SSF
    event.
 
    "transferee": {
@@ -257,9 +257,9 @@ Tulshibagwale, et al.        Standards Track                    [Page 4]
    same Subject Principal.  As a whole, the Complex Subject MUST refer
    to exactly one Subject Principal.
 
-3.3.  Subject Identifiers in SSE Events
+3.3.  Subject Identifiers in SSF Events
 
-   A Subject Identifier in a SSE event MUST have an identifier format
+   A Subject Identifier in a SSF event MUST have an identifier format
    that is any one of:
 
    *  Defined in the IANA Registry defined in Subject Identifiers for
@@ -279,7 +279,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 4]
 
 Tulshibagwale, et al.        Standards Track                    [Page 5]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
 3.4.  Additional Subject Identifier Formats
@@ -335,7 +335,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 5]
 
 Tulshibagwale, et al.        Standards Track                    [Page 6]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
       REQUIRED.  The "ID" value of the SAML assertion being identified,
@@ -357,10 +357,10 @@ Tulshibagwale, et al.        Standards Track                    [Page 6]
 
 3.5.  Receiver Subject Processing
 
-   A SSE Receiver MUST make a best effort to process all members from a
-   Subject in an SSE event.  The Transmitter Configuration Metadata
+   A SSF Receiver MUST make a best effort to process all members from a
+   Subject in an SSF event.  The Transmitter Configuration Metadata
    (Section 6.1) defined below MAY define certain members within a
-   Complex Subject to be Critical.  A SSE Receiver MUST discard any
+   Complex Subject to be Critical.  A SSF Receiver MUST discard any
    event that contains a Subject with a Critical member that it is
    unable to process.
 
@@ -374,10 +374,10 @@ Tulshibagwale, et al.        Standards Track                    [Page 6]
    discoverability of all additional members is specified in the
    Discovery Section 6 section.
 
-5.  Example SETs that conform to the SSE Framework
+5.  Example SETs that conform to the Shared Signals Framework
 
    The following are hypothetical examples of SETs that conform to the
-   SSE Framework.
+   Shared Signals Framework.
 
 
 
@@ -391,7 +391,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 6]
 
 Tulshibagwale, et al.        Standards Track                    [Page 7]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
    {
@@ -409,7 +409,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 7]
      }
    }
 
-        Figure 5: Example: SET Containing a SSE Event with a Simple
+        Figure 5: Example: SET Containing a SSF Event with a Simple
                                Subject Member
 
    {
@@ -439,7 +439,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 7]
      }
    }
 
-        Figure 6: Example: SET Containing a SSE Event with a Complex
+        Figure 6: Example: SET Containing a SSF Event with a Complex
                                Subject Member
 
 
@@ -447,7 +447,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 7]
 
 Tulshibagwale, et al.        Standards Track                    [Page 8]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
    {
@@ -469,7 +469,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 8]
      }
    }
 
-        Figure 7: Example: SET Containing a SSE Event with a Simple
+        Figure 7: Example: SET Containing a SSF Event with a Simple
                        Subject and a Property Member
 
    {
@@ -491,7 +491,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 8]
      }
    }
 
-      Figure 8: Example: SET Containing a SSE Event with a Proprietary
+      Figure 8: Example: SET Containing a SSF Event with a Proprietary
                          Subject Identifier Format
 
 6.  Transmitter Configuration Discovery
@@ -503,7 +503,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 8]
 
 Tulshibagwale, et al.        Standards Track                    [Page 9]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
 6.1.  Transmitter Configuration Metadata
@@ -559,7 +559,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 9]
 
 Tulshibagwale, et al.        Standards Track                   [Page 10]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
    TODO: consider adding a IANA Registry for metadata, similar to
@@ -572,10 +572,10 @@ Tulshibagwale, et al.        Standards Track                   [Page 10]
    Configuration Information can be retrieved.
 
    Transmitters supporting Discovery MUST make a JSON document available
-   at the path formed by inserting the string "/.well-known/sse-
+   at the path formed by inserting the string "/.well-known/ssf-
    configuration" into the Issuer between the host component and the
    path component, if any.  The syntax and semantics of ".well-known"
-   are defined in [RFC5785].  "sse-configuration" MUST point to a JSON
+   are defined in [RFC5785].  "ssf-configuration" MUST point to a JSON
    document compliant with this specification and MUST be returned using
    the "application/json" content type.
 
@@ -588,19 +588,19 @@ Tulshibagwale, et al.        Standards Track                   [Page 10]
    "https://tr.example.com" to obtain its Configuration information,
    since the Issuer contains no path component:
 
-   GET /.well-known/sse-configuration HTTP/1.1
+   GET /.well-known/ssf-configuration HTTP/1.1
    Host: tr.example.com
 
     Figure 9: Example: Transmitter Configuration Request (without path)
 
    If the Issuer value contains a path component, any terminating "/"
-   MUST be removed before inserting "/.well-known/sse-configuration"
+   MUST be removed before inserting "/.well-known/ssf-configuration"
    between the host component and the path component.  The Receiver
    would make the following request to the Issuer
    "https://tr.example.com/issuer1" to obtain its Configuration
    information, since the Issuer contains a path component:
 
-   GET /.well-known/sse-configuration/issuer1 HTTP/1.1
+   GET /.well-known/ssf-configuration/issuer1 HTTP/1.1
    Host: tr.example.com
 
      Figure 10: Example: Transmitter Configuration Request (with path)
@@ -615,19 +615,19 @@ Tulshibagwale, et al.        Standards Track                   [Page 10]
 
 Tulshibagwale, et al.        Standards Track                   [Page 11]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
 6.2.2.  Backward Compatibility for RISC Transmitters
 
    Existing RISC Transmitters MAY continue to use the path component
-   "/risc-configuration" instead of the path component "/sse-
+   "/risc-configuration" instead of the path component "/ssf-
    configuration" in the path for the Transmitter Configuration
-   Metadata.  New services supporting the SSE Framework SHOULD NOT use
-   this location for publishing the Transmitter Configuration Metadata.
-   For example, the Transmitter Configuration Metadata for the
-   Transmitter "https://risc-tr.example.com" MAY be obtained by making
-   the following request:
+   Metadata.  New services supporting the Shared Signals Framework
+   SHOULD NOT use this location for publishing the Transmitter
+   Configuration Metadata.  For example, the Transmitter Configuration
+   Metadata for the Transmitter "https://risc-tr.example.com" MAY be
+   obtained by making the following request:
 
    GET /.well-known/risc-configuration HTTP/1.1
    Host: risc-tr.example.com
@@ -671,7 +671,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 11]
 
 Tulshibagwale, et al.        Standards Track                   [Page 12]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
    HTTP/1.1 200 OK
@@ -686,15 +686,15 @@ Tulshibagwale, et al.        Standards Track                   [Page 12]
        "https://schemas.openid.net/secevent/risc/delivery-method/push",
        "https://schemas.openid.net/secevent/risc/delivery-method/poll"],
      "configuration_endpoint":
-       "https://tr.example.com/sse/mgmt/stream",
+       "https://tr.example.com/ssf/mgmt/stream",
      "status_endpoint":
-       "https://tr.example.com/sse/mgmt/status",
+       "https://tr.example.com/ssf/mgmt/status",
      "add_subject_endpoint":
-       "https://tr.example.com/sse/mgmt/subject:add",
+       "https://tr.example.com/ssf/mgmt/subject:add",
      "remove_subject_endpoint":
-       "https://tr.example.com/sse/mgmt/subject:remove",
+       "https://tr.example.com/ssf/mgmt/subject:remove",
      "verification_endpoint":
-       "https://tr.example.com/sse/mgmt/verification",
+       "https://tr.example.com/ssf/mgmt/verification",
      "critical_subject_members": [ "tenant", "user" ]
    }
 
@@ -727,7 +727,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 12]
 
 Tulshibagwale, et al.        Standards Track                   [Page 13]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
    This section defines an HTTP API to be implemented by Event
@@ -783,7 +783,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 13]
 
 Tulshibagwale, et al.        Standards Track                   [Page 14]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
       An endpoint used to create and delete Event Streams, as well as
@@ -839,7 +839,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 14]
 
 Tulshibagwale, et al.        Standards Track                   [Page 15]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
    aud
@@ -895,7 +895,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 15]
 
 Tulshibagwale, et al.        Standards Track                   [Page 16]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
       *Receiver-Supplied*, The Subject Identifier Format that the
@@ -951,10 +951,10 @@ Tulshibagwale, et al.        Standards Track                   [Page 16]
 
 Tulshibagwale, et al.        Standards Track                   [Page 17]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
-   POST /sse/stream HTTP/1.1
+   POST /ssf/stream HTTP/1.1
    Host: transmitter.example.com
    Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
@@ -1007,7 +1007,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 17]
 
 Tulshibagwale, et al.        Standards Track                   [Page 18]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
    HTTP/1.1 200 OK
@@ -1063,7 +1063,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 18]
 
 Tulshibagwale, et al.        Standards Track                   [Page 19]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
 7.1.1.2.  Reading a Stream's Configuration
@@ -1084,7 +1084,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 19]
    The following is a non-normative example request to read an Event
    Stream's configuration:
 
-   GET /sse/stream?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f HTTP/1.1
+   GET /ssf/stream?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f HTTP/1.1
    Host: transmitter.example.com
    Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
@@ -1119,7 +1119,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 19]
 
 Tulshibagwale, et al.        Standards Track                   [Page 20]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
    HTTP/1.1 200 OK
@@ -1159,7 +1159,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 20]
    The following is a non-normative example request to read an Event
    Stream's configuration, with no "stream_id" indicated:
 
-   GET /sse/stream HTTP/1.1
+   GET /ssf/stream HTTP/1.1
    Host: transmitter.example.com
    Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
@@ -1175,7 +1175,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 20]
 
 Tulshibagwale, et al.        Standards Track                   [Page 21]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
    HTTP/1.1 200 OK
@@ -1231,7 +1231,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 21]
 
 Tulshibagwale, et al.        Standards Track                   [Page 22]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
        ],
@@ -1287,7 +1287,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 22]
 
 Tulshibagwale, et al.        Standards Track                   [Page 23]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
    HTTP/1.1 200 OK
@@ -1343,7 +1343,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 23]
 
 Tulshibagwale, et al.        Standards Track                   [Page 24]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
            +======+===========================================+
@@ -1399,10 +1399,10 @@ Tulshibagwale, et al.        Standards Track                   [Page 24]
 
 Tulshibagwale, et al.        Standards Track                   [Page 25]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
-   PATCH /sse/stream HTTP/1.1
+   PATCH /ssf/stream HTTP/1.1
    Host: transmitter.example.com
    Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
@@ -1455,7 +1455,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 25]
 
 Tulshibagwale, et al.        Standards Track                   [Page 26]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
    HTTP/1.1 200 OK
@@ -1511,7 +1511,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 26]
 
 Tulshibagwale, et al.        Standards Track                   [Page 27]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
           +======+==============================================+
@@ -1567,10 +1567,10 @@ Tulshibagwale, et al.        Standards Track                   [Page 27]
 
 Tulshibagwale, et al.        Standards Track                   [Page 28]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
-   PUT /sse/stream HTTP/1.1
+   PUT /ssf/stream HTTP/1.1
    Host: transmitter.example.com
    Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
@@ -1623,7 +1623,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 28]
 
 Tulshibagwale, et al.        Standards Track                   [Page 29]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
    HTTP/1.1 200 OK
@@ -1679,7 +1679,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 29]
 
 Tulshibagwale, et al.        Standards Track                   [Page 30]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
         +======+==================================================+
@@ -1717,7 +1717,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 30]
    The following is a non-normative example request to delete an Event
    Stream:
 
-   DELETE /sse/stream?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f HTTP/1.1
+   DELETE /ssf/stream?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f HTTP/1.1
    Host: transmitter.example.com
    Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
@@ -1735,7 +1735,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 30]
 
 Tulshibagwale, et al.        Standards Track                   [Page 31]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
    +======+===========================================================+
@@ -1791,7 +1791,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 31]
 
 Tulshibagwale, et al.        Standards Track                   [Page 32]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
 7.1.2.1.  Reading a Stream's Status
@@ -1847,10 +1847,10 @@ Tulshibagwale, et al.        Standards Track                   [Page 32]
 
 Tulshibagwale, et al.        Standards Track                   [Page 33]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
-   GET /sse/status?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f HTTP/1.1
+   GET /ssf/status?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f HTTP/1.1
    Host: transmitter.example.com
    Authorization: Bearer zzzz
 
@@ -1871,7 +1871,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 33]
    The following is a non-normative example request to check an event
    stream's status for a specific subject:
 
-   GET /sse/status?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f&subject=<url-encoded-subject> HTTP/1.1
+   GET /ssf/status?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f&subject=<url-encoded-subject> HTTP/1.1
    Host: transmitter.example.com
    Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
@@ -1903,7 +1903,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 33]
 
 Tulshibagwale, et al.        Standards Track                   [Page 34]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
      +======+========================================================+
@@ -1959,7 +1959,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 34]
 
 Tulshibagwale, et al.        Standards Track                   [Page 35]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
       REQUIRED.  The new status of the Event Stream.
@@ -1980,7 +1980,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 35]
    The following is a non-normative example request to update an Event
    Stream's status:
 
-   POST /sse/status HTTP/1.1
+   POST /ssf/status HTTP/1.1
    Host: transmitter.example.com
    Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
@@ -2015,10 +2015,10 @@ Tulshibagwale, et al.        Standards Track                   [Page 35]
 
 Tulshibagwale, et al.        Standards Track                   [Page 36]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
-   POST /sse/status HTTP/1.1
+   POST /ssf/status HTTP/1.1
    Host: transmitter.example.com
    Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
@@ -2071,7 +2071,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 36]
 
 Tulshibagwale, et al.        Standards Track                   [Page 37]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
         +======+==================================================+
@@ -2127,7 +2127,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 37]
 
 Tulshibagwale, et al.        Standards Track                   [Page 38]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
       REQUIRED.  A Subject claim identifying the subject to be added.
@@ -2152,7 +2152,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 38]
    a stream, where the subject is identified by an Email Subject
    Identifier.
 
-   POST /sse/subjects:add HTTP/1.1
+   POST /ssf/subjects:add HTTP/1.1
    Host: transmitter.example.com
    Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
@@ -2183,7 +2183,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 38]
 
 Tulshibagwale, et al.        Standards Track                   [Page 39]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
       +======+=====================================================+
@@ -2239,10 +2239,10 @@ Tulshibagwale, et al.        Standards Track                   [Page 39]
 
 Tulshibagwale, et al.        Standards Track                   [Page 40]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
-   POST /sse/subjects:remove HTTP/1.1
+   POST /ssf/subjects:remove HTTP/1.1
    Host: transmitter.example.com
    Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
@@ -2295,7 +2295,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 40]
 
 Tulshibagwale, et al.        Standards Track                   [Page 41]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
 7.1.4.  Verification
@@ -2321,7 +2321,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 41]
 
    event type
 
-      The Event Type URI is: "https://schemas.openid.net/secevent/sse/
+      The Event Type URI is: "https://schemas.openid.net/secevent/ssf/
       event-type/verification".
 
    state
@@ -2351,7 +2351,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 41]
 
 Tulshibagwale, et al.        Standards Track                   [Page 42]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
 7.1.4.2.  Triggering a Verification Event.
@@ -2407,7 +2407,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 42]
 
 Tulshibagwale, et al.        Standards Track                   [Page 43]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
         +======+=================================================+
@@ -2431,7 +2431,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 43]
    The following is a non-normative example request to trigger a
    verification event:
 
-   POST /sse/verify HTTP/1.1
+   POST /ssf/verify HTTP/1.1
    Host: transmitter.example.com
    Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
    Content-Type: application/json
@@ -2463,7 +2463,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 43]
 
 Tulshibagwale, et al.        Standards Track                   [Page 44]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
    {
@@ -2472,7 +2472,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 44]
      "aud": "receiver.example.com",
      "iat": 1493856000,
      "events": {
-       "https://schemas.openid.net/secevent/sse/event-type/verification":{
+       "https://schemas.openid.net/secevent/ssf/event-type/verification":{
          "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
        }
      }
@@ -2484,7 +2484,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 44]
 
    A Transmitter MAY change the stream status in reference to one or
    more Subjects without a request from a Receiver.  The Transmitter
-   sends an event of type "https://schemas.openid.net/secevent/sse/
+   sends an event of type "https://schemas.openid.net/secevent/ssf/
    event-type/stream-updated" to indicate that it has changed the status
    of the Event Stream for a specific Subject.
 
@@ -2519,7 +2519,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 44]
 
 Tulshibagwale, et al.        Standards Track                   [Page 45]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
       OPTIONAL.  Specifies the Subject Principal for whom the status has
@@ -2532,7 +2532,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 45]
      "aud": "receiver.example.com",
      "iat": 1493856000,
      "events": {
-       "https://schemas.openid.net/secevent/sse/event-type/stream-updated": {
+       "https://schemas.openid.net/secevent/ssf/event-type/stream-updated": {
          "subject": {
            "tenant" : {
              "format": "iss_sub",
@@ -2575,7 +2575,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 45]
 
 Tulshibagwale, et al.        Standards Track                   [Page 46]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
    Event Transmitters SHOULD carefully evaluate the conditions under
@@ -2631,7 +2631,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 46]
 
 Tulshibagwale, et al.        Standards Track                   [Page 47]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
 10.1.  Subject Information Leakage
@@ -2649,10 +2649,10 @@ Tulshibagwale, et al.        Standards Track                   [Page 47]
 
 10.2.  Previously Consented Data
 
-   If SSE events contain new values for attributes of Subject Principals
+   If SSF events contain new values for attributes of Subject Principals
    that were previously exchanged between the Transmitter and Receiver,
    then there are no additional privacy considerations introduced by
-   providing the updated values in the SSE events, unless the attribute
+   providing the updated values in the SSF events, unless the attribute
    was exchanged under a one-time consent obtained from the user.
 
 10.3.  New Data
@@ -2665,13 +2665,13 @@ Tulshibagwale, et al.        Standards Track                   [Page 47]
 
    If a user has previously agreed with a Transmitter that they agree to
    release certain data to third-parties, then the Transmitter MAY send
-   such data in SSE events without additional consent of the user.  Such
+   such data in SSF events without additional consent of the user.  Such
    data MAY include organizational data about the Subject Principal that
    was generated by the Transmitter.
 
 10.3.2.  Consentable Data
 
-   If a Transmitter intends to include data in SSE events that is not
+   If a Transmitter intends to include data in SSF events that is not
    previously consented to be released by the user, then the Transmitter
    MUST obtain consent to release such data from the user in accordance
    with the Transmitter's privacy policy.
@@ -2681,13 +2681,13 @@ Tulshibagwale, et al.        Standards Track                   [Page 47]
    This section is a profile of the following IETF SecEvent
    specifications:
 
-   *  Security Event Token (SET) [SET]
+   *  Security Event Token (SET) [RFC8417]
 
 
 
 Tulshibagwale, et al.        Standards Track                   [Page 48]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
    *  Push-Based SET Token Delivery Using HTTP [DELIVERYPUSH]
@@ -2702,23 +2702,23 @@ Tulshibagwale, et al.        Standards Track                   [Page 48]
 
 11.1.  Security Event Token Profile
 
-   This section provides SSE profiling specifications for the Security
-   Event Token (SET) [SET] spec.
+   This section provides SSF profiling specifications for the Security
+   Event Token (SET) [RFC8417] spec.
 
 11.1.1.  Signature Key Resolution
 
    The signature key can be obtained through "jwks_uri", see Section 6.
 
-11.1.2.  SSE Event Subject
+11.1.2.  SSF Event Subject
 
-   The subject of a SSE event is identified by the "subject" claim
+   The subject of a SSF event is identified by the "subject" claim
    within the event payload, whose value is a Subject Identifier.  The
-   "subject" claim is REQUIRED for all SSE events.  The JWT "sub" claim
-   MUST NOT be present in any SET containing a SSE event.
+   "subject" claim is REQUIRED for all SSF events.  The JWT "sub" claim
+   MUST NOT be present in any SET containing a SSF event.
 
-11.1.3.  SSE Event Properties
+11.1.3.  SSF Event Properties
 
-   The SSE event MAY contain additional claims within the event payload
+   The SSF event MAY contain additional claims within the event payload
    that are specific to the event type.
 
    {
@@ -2743,7 +2743,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 48]
 
 Tulshibagwale, et al.        Standards Track                   [Page 49]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
         Figure 42: Example: SET Containing a RISC Event with a Phone
@@ -2769,8 +2769,8 @@ Tulshibagwale, et al.        Standards Track                   [Page 49]
 
 11.1.4.  Explicit Typing of SETs
 
-   SSE events MUST use explicit typing as defined in Section 2.3 of
-   [SET].
+   SSF events MUST use explicit typing as defined in Section 2.3 of
+   [RFC8417].
 
    {
      "typ":"secevent+jwt",
@@ -2780,17 +2780,17 @@ Tulshibagwale, et al.        Standards Track                   [Page 49]
                   Figure 44: Explicitly Typed JOSE Header
 
    The purpose is defense against confusion with other JWTs, as
-   described in Sections 4.5, 4.6 and 4.7 of [SET].  While current Id
-   Token [IDTOKEN] validators may not be using the "typ" header
-   parameter, by requiring it for SSE SETs a distinct value is
+   described in Sections 4.5, 4.6 and 4.7 of [RFC8417].  While current
+   Id Token [IDTOKEN] validators may not be using the "typ" header
+   parameter, by requiring it for SSF SETs a distinct value is
    guaranteed for future validators.
 
 11.1.5.  The "exp" Claim
 
-   The "exp" claim MUST NOT be used in SSE SETs.
+   The "exp" claim MUST NOT be used in SSF SETs.
 
    The purpose is defense in depth against confusion with other JWTs, as
-   described in Sections 4.5 and 4.6 of [SET].
+   described in Sections 4.5 and 4.6 of [RFC8417].
 
 
 
@@ -2799,7 +2799,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 49]
 
 Tulshibagwale, et al.        Standards Track                   [Page 50]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
 11.1.6.  The "aud" Claim
@@ -2828,7 +2828,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 50]
      "aud": ["receiver.example.com/web", "receiver.example.com/mobile"],
      "iat": 1493856000,
      "events": {
-       "https://schemas.openid.net/secevent/sse/event-type/verification": {
+       "https://schemas.openid.net/secevent/ssf/event-type/verification": {
          "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
        }
      }
@@ -2847,28 +2847,28 @@ Tulshibagwale, et al.        Standards Track                   [Page 50]
 11.1.8.1.  Distinguishing SETs from other Kinds of JWTs
 
    Of particular concern is the possibility that SETs are confused for
-   other kinds of JWTs.  The Security Considerations section of [SET]
-   has several sub-sections on this subject.  The SSE Framework is
-   asking for further restrictions:
+   other kinds of JWTs.  The Security Considerations section of
+   [RFC8417] has several sub-sections on this subject.  The Shared
+   Signals Framework is asking for further restrictions:
 
 
 
 Tulshibagwale, et al.        Standards Track                   [Page 51]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
    *  The "sub" claim MUST NOT be present, as described in
       Section 11.1.2.
 
-   *  SSE SETs MUST use explicit typing, as described in Section 11.1.4.
+   *  SSF SETs MUST use explicit typing, as described in Section 11.1.4.
 
    *  The "exp" claim MUST NOT be present, as described in
       Section 11.1.5.
 
 11.2.  SET Token Delivery Using HTTP Profile
 
-   This section provides SSE profiling specifications for the
+   This section provides SSF profiling specifications for the
    [DELIVERYPUSH] and [DELIVERYPOLL] specs.
 
 11.2.1.  Stream Configuration Metadata
@@ -2878,7 +2878,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 51]
 
 11.2.1.1.  Push Delivery using HTTP
 
-   This section provides SSE profiling specifications for the
+   This section provides SSF profiling specifications for the
    [DELIVERYPUSH] spec.
 
    method
@@ -2900,7 +2900,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 51]
 
 11.2.1.2.  Polling Delivery using HTTP
 
-   This section provides SSE profiling specifications for the
+   This section provides SSF profiling specifications for the
    [DELIVERYPOLL] spec.
 
    method
@@ -2911,7 +2911,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 51]
 
 Tulshibagwale, et al.        Standards Track                   [Page 52]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
    endpoint_url
@@ -2967,7 +2967,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 52]
 
 Tulshibagwale, et al.        Standards Track                   [Page 53]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
    [OAUTH-DISCOVERY]
@@ -3012,10 +3012,10 @@ Tulshibagwale, et al.        Standards Track                   [Page 53]
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
-   [SET]      Hunt, P., Jones, M. B., Denniss, W., and M. A. Ansari,
-              "Security Event Token (SET)", April 2018,
+   [RFC8417]  Hunt, P., Ed., Jones, M., Denniss, W., and M. Ansari,
+              "Security Event Token (SET)", RFC 8417,
+              DOI 10.17487/RFC8417, July 2018,
               <https://www.rfc-editor.org/info/rfc8417>.
-
 
 
 
@@ -3023,7 +3023,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 53]
 
 Tulshibagwale, et al.        Standards Track                   [Page 54]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
    [SUBIDS]   Backman, A. and M. Scurtescu, "Subject Identifiers for
@@ -3045,7 +3045,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 54]
 
 Appendix A.  Acknowledgements
 
-   The authors wish to thank all members of the OpenID Foundation SSE
+   The authors wish to thank all members of the OpenID Foundation SSF
    Working Group who contributed to the development of this
    specification.
 
@@ -3079,7 +3079,7 @@ Appendix B.  Notices
 
 Tulshibagwale, et al.        Standards Track                   [Page 55]
 
-                          openid-sse-framework             February 2023
+                              SharedSignals                February 2023
 
 
    no (and hereby expressly disclaim any) warranties (express, implied,
