@@ -92,7 +92,7 @@ normative:
       -
         ins: A. Tulshibagwale
         name: Atul Tulshibagwale
-        org: SGNL
+        org: Google
       -
         ins: T. Cappalli
         name: Tim Cappalli
