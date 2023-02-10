@@ -2,9 +2,9 @@
 
 
 
-                                                            M. Scurtescu
+Shared Signals Working Group                                M. Scurtescu
                                                                 Coinbase
-                                                          April 21, 2020
+                                                         9 February 2023
 
 
                          OpenID RISC Use Cases
@@ -26,7 +26,7 @@ Table of Contents
      3.4.  Implicit RP to IdP  . . . . . . . . . . . . . . . . . . .   3
      3.5.  Pseudo-implicit . . . . . . . . . . . . . . . . . . . . .   3
      3.6.  Identity as a Service . . . . . . . . . . . . . . . . . .   3
-     3.7.  Security as a Service . . . . . . . . . . . . . . . . . .   3
+     3.7.  Security as a Service . . . . . . . . . . . . . . . . . .   4
      3.8.  On-Premise RP . . . . . . . . . . . . . . . . . . . . . .   4
    Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   4
 
@@ -34,37 +34,37 @@ Table of Contents
 
 2.  Definitions
 
-   o  Transmitter - the entity that sends security events
+   *  Transmitter - the entity that sends security events
 
-   o  Receiver - the entity that receives security events
+   *  Receiver - the entity that receives security events
 
-   o  IdP - Identity Provider, in most cases but not always this is the
+   *  IdP - Identity Provider, in most cases but not always this is the
       transmitter
 
-   o  RP - Relying Party, in most cases but not always this is the
+   *  RP - Relying Party, in most cases but not always this is the
       receiver
 
-   o  RISC - Risk and Incident Sharing and Coordination, see
+   *  RISC - Risk and Incident Sharing and Coordination, see
       http://openid.net/wg/risc/
 
-   o  SCIM - System for Cross-domain Identity Management, see
+   *  SCIM - System for Cross-domain Identity Management, see
       http://www.simplecloud.info/
 
 
 
 
-Scurtescu               Expires October 23, 2020                [Page 1]
+Scurtescu                     Informational                     [Page 1]
 
-                          OpenID RISC Use Cases               April 2020
+                          OpenID RISC Use Cases            February 2023
 
 
 3.  Use Cases
 
 3.1.  Explicit IdP to RP
 
-   o  Transmitter: IdP
+   *  Transmitter: IdP
 
-   o  Receiver: RP
+   *  Receiver: RP
 
    Simplest use case, IdPs send security events to relevant RPs.
 
@@ -73,9 +73,9 @@ Scurtescu               Expires October 23, 2020                [Page 1]
 
 3.2.  Explicit RP to IdP
 
-   o  Transmitter: RP
+   *  Transmitter: RP
 
-   o  Receiver: IdP
+   *  Receiver: IdP
 
    The RP can also send RISC events back to IdP.  We want to make it
    very easy for the RP to do that, no complicated registration steps
@@ -92,9 +92,9 @@ Scurtescu               Expires October 23, 2020                [Page 1]
 
 3.3.  Implicit IdP to RP
 
-   o  Transmitter: implicit IdP
+   *  Transmitter: implicit IdP
 
-   o  Receiver: implicit RP
+   *  Receiver: implicit RP
 
    Example: Google and Amazon, Amazon account can be backed by gmail
    address.  Amazon acts as implicit RP to Google in this case.
@@ -109,9 +109,9 @@ Scurtescu               Expires October 23, 2020                [Page 1]
 
 
 
-Scurtescu               Expires October 23, 2020                [Page 2]
+Scurtescu                     Informational                     [Page 2]
 
-                          OpenID RISC Use Cases               April 2020
+                          OpenID RISC Use Cases            February 2023
 
 
    Assumption: Amazon/RP is registered with Google/IdP as an OAuth 2
@@ -126,9 +126,9 @@ Scurtescu               Expires October 23, 2020                [Page 2]
 
 3.4.  Implicit RP to IdP
 
-   o  Transmitter: implicit RP
+   *  Transmitter: implicit RP
 
-   o  Receiver: implicit IdP
+   *  Receiver: implicit IdP
 
    No enrollment call is strictly necessary.  The RP can start sending
    events to IdP as new identifiers show up.
@@ -157,19 +157,24 @@ Scurtescu               Expires October 23, 2020                [Page 2]
    Assumption: IdaaS can impersonate RP at IdP (can obtain access token
    on behalf of RP)
 
+
+
+
+
+
+
+
+
+Scurtescu                     Informational                     [Page 3]
+
+                          OpenID RISC Use Cases            February 2023
+
+
 3.7.  Security as a Service
 
    Similar to IdaaS described in previous section, but the service
    provider has its own set of credentials different from the
    credentials and RP is using.  The SP cannot impersonate the RP at
-
-
-
-Scurtescu               Expires October 23, 2020                [Page 3]
-
-                          OpenID RISC Use Cases               April 2020
-
-
    IdP.  The IdP must define delegation rules and allow the SP to make
    requests on behalf of the RP.
 
@@ -183,7 +188,6 @@ Author's Address
 
    Marius Scurtescu
    Coinbase
-
    Email: marius.scurtescu@coinbase.com
 
 
@@ -217,8 +221,4 @@ Author's Address
 
 
 
-
-
-
-
-Scurtescu               Expires October 23, 2020                [Page 4]
+Scurtescu                     Informational                     [Page 4]
