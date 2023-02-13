@@ -2,7 +2,7 @@
 
 
 
-                                                            M. Scurtescu
+Shared Signals                                              M. Scurtescu
                                                                 Coinbase
                                                               A. Backman
                                                                   Amazon
@@ -14,18 +14,18 @@
                                                               VeriClouds
                                                         A. Tulshibagwale
                                                                     SGNL
-                                                          April 05, 2022
+                                                         9 February 2023
 
 
-            OpenID RISC Profile Specification 1.0 - draft 02
+            OpenID RISC Profile Specification 1.0 - draft 03
                  openid-risc-profile-specification-1_0
 
 Abstract
 
    This document defines the Risk Incident Sharing and Coordination
-   (RISC) Event Types based on the Shared Signals and Events (SSE)
-   Framework [SSE-FRAMEWORK].  Event Types are introduced and defined in
-   Security Event Token (SET) [SET].
+   (RISC) Event Types based on the Shared Signals Framework (SSF)
+   [SHARED-SIGNALS-FRAMEWORK].  Event Types are introduced and defined
+   in Security Event Token (SET) [SET].
 
 Table of Contents
 
@@ -42,20 +42,20 @@ Table of Contents
      2.8.  Opt Out . . . . . . . . . . . . . . . . . . . . . . . . .   7
        2.8.1.  Opt In  . . . . . . . . . . . . . . . . . . . . . . .   8
        2.8.2.  Opt Out Initiated . . . . . . . . . . . . . . . . . .   8
-       2.8.3.  Opt Out Cancelled . . . . . . . . . . . . . . . . . .   9
+       2.8.3.  Opt Out Cancelled . . . . . . . . . . . . . . . . . .   8
        2.8.4.  Opt Out Effective . . . . . . . . . . . . . . . . . .   9
      2.9.  Recovery Activated  . . . . . . . . . . . . . . . . . . .   9
      2.10. Recovery Information Changed  . . . . . . . . . . . . . .   9
-     2.11. Sessions Revoked  . . . . . . . . . . . . . . . . . . . .  10
+     2.11. Sessions Revoked  . . . . . . . . . . . . . . . . . . . .   9
    3.  Compatibility . . . . . . . . . . . . . . . . . . . . . . . .  10
      3.1.  Google Subject Type Value . . . . . . . . . . . . . . . .  10
    4.  Normative References  . . . . . . . . . . . . . . . . . . . .  10
 
 
 
-Scurtescu, et al.        Expires October 7, 2022                [Page 1]
+Scurtescu, et al.            Standards Track                    [Page 1]
 
-                    openid-risc-profile-specification         April 2022
+                    openid-risc-profile-specification      February 2023
 
 
    Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  11
@@ -65,8 +65,8 @@ Scurtescu, et al.        Expires October 7, 2022                [Page 1]
 1.  Introduction
 
    This specification defines event types and their contents based on
-   the SSE Framework [SSE-FRAMEWORK] that are required to implement Risk
-   Incident Sharing and Coordination.
+   the Shared Signals Framework [SHARED-SIGNALS-FRAMEWORK] that are
+   required to implement Risk Incident Sharing and Coordination.
 
 1.1.  Notational Conventions
 
@@ -83,9 +83,8 @@ Scurtescu, et al.        Expires October 7, 2022                [Page 1]
 
 2.1.  Account Credential Change Required
 
-   Event Type URI:
-   https://schemas.openid.net/secevent/risc/event-type/account-
-   credential-change-required
+   Event Type URI: https://schemas.openid.net/secevent/risc/event-type/
+   account-credential-change-required
 
    Account Credential Change Required signals that the account
    identified by the subject was required to change a credential.  For
@@ -109,9 +108,10 @@ Scurtescu, et al.        Expires October 7, 2022                [Page 1]
 
 
 
-Scurtescu, et al.        Expires October 7, 2022                [Page 2]
+
+Scurtescu, et al.            Standards Track                    [Page 2]
 
-                    openid-risc-profile-specification         April 2022
+                    openid-risc-profile-specification      February 2023
 
 
    {
@@ -131,15 +131,15 @@ Scurtescu, et al.        Expires October 7, 2022                [Page 2]
      }
    }
 
+           Figure 1: Example: Account Credential Change Required
+
    _(the event type URI is wrapped, the backslash is the continuation
    character)_
 
-           Figure 1: Example: Account Credential Change Required
-
 2.2.  Account Purged
 
-   Event Type URI:
-   https://schemas.openid.net/secevent/risc/event-type/account-purged
+   Event Type URI: https://schemas.openid.net/secevent/risc/event-type/
+   account-purged
 
    Account Purged signals that the account identified by the subject has
    been permanently deleted.
@@ -148,29 +148,29 @@ Scurtescu, et al.        Expires October 7, 2022                [Page 2]
 
 2.3.  Account Disabled
 
-   Event Type URI:
-   https://schemas.openid.net/secevent/risc/event-type/account-disabled
+   Event Type URI: https://schemas.openid.net/secevent/risc/event-type/
+   account-disabled
 
    Account Disabled signals that the account identified by the subject
    has been disabled.  The actual reason why the account was disabled
-   might be specified with the nested "reason" attribute described
-   below.  The account may be enabled (Section 2.4) in the future.
+   might be specified with the nested reason attribute described below.
+   The account may be enabled (Section 2.4) in the future.
 
    Attributes:
 
-   o  reason - optional, describes why was the account disabled.
+   *  reason - optional, describes why was the account disabled.
       Possible values:
 
-      *  hijacking
+      -  hijacking
 
 
 
-Scurtescu, et al.        Expires October 7, 2022                [Page 3]
+Scurtescu, et al.            Standards Track                    [Page 3]
 
-                    openid-risc-profile-specification         April 2022
+                    openid-risc-profile-specification      February 2023
 
 
-      *  bulk-account
+      -  bulk-account
 
    {
      "iss": "https://idp.example.com/",
@@ -190,15 +190,15 @@ Scurtescu, et al.        Expires October 7, 2022                [Page 3]
      }
    }
 
+                    Figure 2: Example: Account Disabled
+
    _(the event type URI is wrapped, the backslash is the continuation
    character)_
 
-                    Figure 2: Example: Account Disabled
-
 2.4.  Account Enabled
 
-   Event Type URI:
-   https://schemas.openid.net/secevent/risc/event-type/account-enabled
+   Event Type URI: https://schemas.openid.net/secevent/risc/event-type/
+   account-enabled
 
    Account Enabled signals that the account identified by the subject
    has been enabled.
@@ -207,28 +207,31 @@ Scurtescu, et al.        Expires October 7, 2022                [Page 3]
 
 2.5.  Identifier Changed
 
-   Event Type URI:
-   https://schemas.openid.net/secevent/risc/event-type/identifier-
-   changed
+   Event Type URI: https://schemas.openid.net/secevent/risc/event-type/
+   identifier-changed
 
    Identifier Changed signals that the identifier specified in the
-   subject has changed.  The subject type MUST be either "email" or
-   "phone" and it MUST specify the old value.
+   subject has changed.  The subject type MUST be either email or phone
+   and it MUST specify the old value.
+
+
+
+
+
+
+
+
+Scurtescu, et al.            Standards Track                    [Page 4]
+
+                    openid-risc-profile-specification      February 2023
+
 
    This event SHOULD be issued only by the provider that is
    authoritative over the identifier.  For example, if the person that
-   owns "john.doe@example.com" goes through a name change and wants the
-
-
-
-Scurtescu, et al.        Expires October 7, 2022                [Page 4]
-
-                    openid-risc-profile-specification         April 2022
-
-
-   new "john.row@example.com" email then *only* the email provider
-   "example.com" SHOULD issue an Identifier Changed event as shown in
-   the example below.
+   owns john.doe@example.com goes through a name change and wants the
+   new john.row@example.com email then *only* the email provider
+   example.com SHOULD issue an Identifier Changed event as shown in the
+   example below.
 
    If an identifier used as a username or recovery option is changed, at
    a provider that is not authoritative over that identifier, then
@@ -236,7 +239,7 @@ Scurtescu, et al.        Expires October 7, 2022                [Page 4]
 
    Attributes:
 
-   o  new-value - optional, the new value of the identifier.
+   *  new-value - optional, the new value of the identifier.
 
    {
      "iss": "https://idp.example.com/",
@@ -255,31 +258,28 @@ Scurtescu, et al.        Expires October 7, 2022                [Page 4]
      }
    }
 
-   The "foo@example.com" email changed to "bar@example.com".  _(the
-   event type URI is wrapped, the backslash is the continuation
-   character)_
-
                    Figure 3: Example: Identifier Changed
+
+   The foo@example.com email changed to bar@example.com.  _(the event
+   type URI is wrapped, the backslash is the continuation character)_
 
 2.6.  Identifier Recycled
 
-   Event Type URI:
-   https://schemas.openid.net/secevent/risc/event-type/identifier-
-   recycled
+   Event Type URI: https://schemas.openid.net/secevent/risc/event-type/
+   identifier-recycled
 
    Identifier Recycled signals that the identifier specified in the
    subject was recycled and now it belongs to a new user.  The subject
-   type MUST be either "email" or "phone".
+   type MUST be either email or phone.
 
    Attributes: none
 
 
 
 
-
-Scurtescu, et al.        Expires October 7, 2022                [Page 5]
+Scurtescu, et al.            Standards Track                    [Page 5]
 
-                    openid-risc-profile-specification         April 2022
+                    openid-risc-profile-specification      February 2023
 
 
    {
@@ -298,49 +298,48 @@ Scurtescu, et al.        Expires October 7, 2022                [Page 5]
      }
    }
 
+                   Figure 4: Example: Identifier Recycled
+
    The 'foo@example.com' email address was recycled.  _(the event type
    URI is wrapped, the backslash is the continuation character)_
-
-                  Figure 4: Example: Identifier Recycled
 
 2.7.  Credential Compromise
 
    Event Type URI:
 
-   "https://schemas.openid.net/secevent/risc/event-type/credential-
-   compromise"
+   https://schemas.openid.net/secevent/risc/event-type/credential-
+   compromise
 
    A Credential Compromise event signals that the identifier specified
    in the subject was found to be compromised.
 
    Attributes:
 
-   o  credential_type - REQUIRED.  The type of credential that is
+   *  credential_type - REQUIRED.  The type of credential that is
       compromised.  The value of this attribute must be one of the
-      values specified for the similarly named field in the "Credential
-      Change" event defined in the CAEP Specification
+      values specified for the similarly named field in the Credential
+      Change event defined in the CAEP Specification
       [CAEP-SPECIFICATION].
 
-   o  event_timestamp - OPTIONAL.  JSON number: the time at which the
+   *  event_timestamp - OPTIONAL.  JSON number: the time at which the
       event described by this SET was discovered by the Transmitter.
       Its value is a JSON number representing the number of seconds from
       1970-01-01T0:0:0Z as measured in UTC until the date/time.
 
-   o  reason_admin - OPTIONAL.  The reason why the credential
+   *  reason_admin - OPTIONAL.  The reason why the credential
       compromised event was generated, intended for administrators
 
 
 
 
 
-Scurtescu, et al.        Expires October 7, 2022                [Page 6]
+Scurtescu, et al.            Standards Track                    [Page 6]
 
-                    openid-risc-profile-specification         April 2022
+                    openid-risc-profile-specification      February 2023
 
 
-   o  reason_user - OPTIONAL.  The reason why the credential compromised
+   *  reason_user - OPTIONAL.  The reason why the credential compromised
       event was generated, intended for end-users
-
 
    {
      "iss": "https://idp.example.com/3456790/",
@@ -360,10 +359,10 @@ Scurtescu, et al.        Expires October 7, 2022                [Page 6]
    }
 
 
+           Figure 5: Example: Compromised credential found
+
    _(the event type URI is wrapped, the backslash is the continuation
    character)_
-
-              Figure 5: Example: Compromised credential found
 
 2.8.  Opt Out
 
@@ -382,19 +381,18 @@ Scurtescu, et al.        Expires October 7, 2022                [Page 6]
    3.  opt-out - the account is NOT participating in RISC event
        exchange.
 
-
-
-
-
-
-
-
-Scurtescu, et al.        Expires October 7, 2022                [Page 7]
-
-                    openid-risc-profile-specification         April 2022
-
-
    State changes trigger Opt-Out Events as represented bellow:
+
+
+
+
+
+
+
+Scurtescu, et al.            Standards Track                    [Page 7]
+
+                    openid-risc-profile-specification      February 2023
+
 
    +--------+  opt-out-initiated  +-------------------+
    |        +--------------------->                   |
@@ -419,64 +417,60 @@ Scurtescu, et al.        Expires October 7, 2022                [Page 7]
 
 2.8.1.  Opt In
 
-   Event Type URI:
-   https://schemas.openid.net/secevent/risc/event-type/opt-in
+   Event Type URI: https://schemas.openid.net/secevent/risc/event-type/
+   opt-in
 
    Opt In signals that the account identified by the subject opted into
-   RISC event exchanges.  The account is in the "opt-in" state.
+   RISC event exchanges.  The account is in the opt-in state.
 
    Attributes: none
 
 2.8.2.  Opt Out Initiated
 
-   Event Type URI:
-   https://schemas.openid.net/secevent/risc/event-type/opt-out-initiated
+   Event Type URI: https://schemas.openid.net/secevent/risc/event-type/
+   opt-out-initiated
 
    Opt Out Initiated signals that the account identified by the subject
    initiated to opt out from RISC event exchanges.  The account is in
-   the "opt-out-initiated" state.
+   the opt-out-initiated state.
 
    Attributes: none
 
-
-
-
-
-
-
-
-Scurtescu, et al.        Expires October 7, 2022                [Page 8]
-
-                    openid-risc-profile-specification         April 2022
-
-
 2.8.3.  Opt Out Cancelled
 
-   Event Type URI:
-   https://schemas.openid.net/secevent/risc/event-type/opt-out-cancelled
+   Event Type URI: https://schemas.openid.net/secevent/risc/event-type/
+   opt-out-cancelled
+
+
+
+
+
+Scurtescu, et al.            Standards Track                    [Page 8]
+
+                    openid-risc-profile-specification      February 2023
+
 
    Opt Out Cancelled signals that the account identified by the subject
    cancelled the opt out from RISC event exchanges.  The account is in
-   the "opt-in" state.
+   the opt-in state.
 
    Attributes: none
 
 2.8.4.  Opt Out Effective
 
-   Event Type URI:
-   https://schemas.openid.net/secevent/risc/event-type/opt-out-effective
+   Event Type URI: https://schemas.openid.net/secevent/risc/event-type/
+   opt-out-effective
 
    Opt Out Effective signals that the account identified by the subject
    was effectively opted out from RISC event exchanges.  The account is
-   in the "opt-out" state.
+   in the opt-out state.
 
    Attributes: none
 
 2.9.  Recovery Activated
 
-   Event Type URI:
-   https://schemas.openid.net/secevent/risc/event-type/recovery-
-   activated
+   Event Type URI: https://schemas.openid.net/secevent/risc/event-type/
+   recovery-activated
 
    Recovery Activated signals that the account identified by the subject
    activated a recovery flow.
@@ -485,9 +479,8 @@ Scurtescu, et al.        Expires October 7, 2022                [Page 8]
 
 2.10.  Recovery Information Changed
 
-   Event Type URI:
-   https://schemas.openid.net/secevent/risc/event-type/recovery-
-   information-changed
+   Event Type URI: https://schemas.openid.net/secevent/risc/event-type/
+   recovery-information-changed
 
    Recovery Information Changed signals that the account identified by
    the subject has changed some of its recovery information.  For
@@ -495,25 +488,23 @@ Scurtescu, et al.        Expires October 7, 2022                [Page 8]
 
    Attributes: none
 
-
-
-
-
-
-
-Scurtescu, et al.        Expires October 7, 2022                [Page 9]
-
-                    openid-risc-profile-specification         April 2022
-
-
 2.11.  Sessions Revoked
 
    Note: This event type is now deprecated.  New implementations MUST
-   use the "session-revoked" event defined in the CAEP Specification
+   use the session-revoked event defined in the CAEP Specification
    [CAEP-SPECIFICATION].
 
-   Event Type URI:
-   https://schemas.openid.net/secevent/risc/event-type/sessions-revoked
+   Event Type URI: https://schemas.openid.net/secevent/risc/event-type/
+   sessions-revoked
+
+
+
+
+
+Scurtescu, et al.            Standards Track                    [Page 9]
+
+                    openid-risc-profile-specification      February 2023
+
 
    Sessions Revoked signals that all the sessions for the account
    identified by the subject have been revoked.
@@ -525,9 +516,9 @@ Scurtescu, et al.        Expires October 7, 2022                [Page 9]
 3.1.  Google Subject Type Value
 
    Implementers are hereby made aware that the existing RISC
-   implementation by Google uses the field name "subject_type" instead
-   of the field name "format" to indicate the format of the subject
-   identifier.  The usage of the field name "subject_type" is deprecated
+   implementation by Google uses the field name subject_type instead of
+   the field name format to indicate the format of the subject
+   identifier.  The usage of the field name subject_type is deprecated
    and new services MUST NOT use this field name.
 
    Relying parties wishing to receive events from the Google RISC
@@ -540,7 +531,7 @@ Scurtescu, et al.        Expires October 7, 2022                [Page 9]
 
    [CAEP-SPECIFICATION]
               Cappalli, T. and A. Tulshibagwale, "OpenID Continuous
-              Access Evaluation Profile 1.0 - draft 01", June 2021,
+              Access Evaluation Profile 1.0 - draft 01", 8 June 2021,
               <https://openid.net/specs/openid-caep-specification-
               1_0-01.html>.
 
@@ -553,32 +544,36 @@ Scurtescu, et al.        Expires October 7, 2022                [Page 9]
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
-
-
-
-
-Scurtescu, et al.        Expires October 7, 2022               [Page 10]
-
-                    openid-risc-profile-specification         April 2022
-
-
-   [SET]      Hunt, P., Ed., Jones, M., Denniss, W., and M. Ansari,
+   [SET]      Hunt, P., Ed., Jones, M.B., Denniss, W., and M.A. Ansari,
               "Security Event Token (SET)", April 2018,
               <https://tools.ietf.org/html/draft-ietf-secevent-token-
               09>.
 
-   [SSE-FRAMEWORK]
+
+
+
+
+
+
+
+
+Scurtescu, et al.            Standards Track                   [Page 10]
+
+                    openid-risc-profile-specification      February 2023
+
+
+   [SHARED-SIGNALS-FRAMEWORK]
               Tulshibagwale, A., Cappalli, T., Scurtescu, M., Backman,
               A., and J. Bradley, "OpenID Shared Signals and Events
-              Framework Specification 1.0", June 2021,
+              Framework Specification 1.0", 8 June 2021,
               <https://openid.net/specs/openid-sse-framework-
               1_0-01.html>.
 
 Appendix A.  Acknowledgements
 
    The authors wish to thank all members of the OpenID Foundation Shared
-   Signals and Events Working Group who contributed to the development
-   of this specification.
+   Signals Working Group who contributed to the development of this
+   specification.
 
 Appendix B.  Notices
 
@@ -593,6 +588,35 @@ Appendix B.  Notices
    Specifications based on such documents, provided that attribution be
    made to the OIDF as the source of the material, but that such
    attribution does not indicate an endorsement by the OIDF.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Scurtescu, et al.            Standards Track                   [Page 11]
+
+                    openid-risc-profile-specification      February 2023
+
 
    The technology described in this specification was made available
    from contributions from various sources, including members of the
@@ -610,14 +634,6 @@ Appendix B.  Notices
    infringement, fitness for a particular purpose, or title, related to
    this specification, and the entire risk as to implementing this
    specification is assumed by the implementer.  The OpenID Intellectual
-
-
-
-Scurtescu, et al.        Expires October 7, 2022               [Page 11]
-
-                    openid-risc-profile-specification         April 2022
-
-
    Property Rights policy requires contributors to offer a patent
    promise not to assert certain patent claims against other
    contributors and against implementers.  The OpenID Foundation invites
@@ -629,37 +645,37 @@ Authors' Addresses
 
    Marius Scurtescu
    Coinbase
-
    Email: marius.scurtescu@coinbase.com
 
 
    Annabelle Backman
    Amazon
-
    Email: richanna@amazon.com
 
 
    Phil Hunt
    Oracle Corporation
-
    Email: phil.hunt@yahoo.com
 
 
    John Bradley
    Yubico
-
    Email: secevemt@ve7jtb.com
 
 
    Stan Bounev
    VeriClouds
-
    Email: stanb@vericlouds.com
+
+
+
+Scurtescu, et al.            Standards Track                   [Page 12]
+
+                    openid-risc-profile-specification      February 2023
 
 
    Atul Tulshibagwale
    SGNL
-
    Email: atul@sgnl.ai
 
 
@@ -669,4 +685,44 @@ Authors' Addresses
 
 
 
-Scurtescu, et al.        Expires October 7, 2022               [Page 12]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Scurtescu, et al.            Standards Track                   [Page 13]

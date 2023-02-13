@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="Common,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
-<title>OpenID Shared Signals and Events Framework Specification 1.0 - draft 02</title>
+<title>OpenID Shared Signals Framework Specification 1.0 - draft 02</title>
 <meta content="Atul Tulshibagwale" name="author">
 <meta content="Tim Cappalli" name="author">
 <meta content="Marius Scurtescu" name="author">
@@ -12,14 +12,14 @@
 <meta content="John Bradley" name="author">
 <meta content="Shayne Miel" name="author">
 <meta content="
-       This Shared Signals and Events (SSE) Framework enables sharing of signals and events
+       This Shared Signals Framework (SSF) enables sharing of signals and events
 between cooperating peers. It enables multiple applications such as Risk Incident Sharing
 and Coordination (RISC) and the Continuous Access Evaluation Profile ( ) 
        This specification defines: 
        
-         A profile for IETF Security Events (https://datatracker.ietf.org/wg/secevent/about/) 
+         A profile for Security Events Tokens  
          Subject Principals 
-         Subject Claims in SSE Events 
+         Subject Claims in SSF Events 
          Event Types 
          Event Properties 
          Configuration information and discovery method for Transmitters 
@@ -34,7 +34,7 @@ and Coordination (RISC) and the Continuous Access Evaluation Profile ( )
        
     " name="description">
 <meta content="xml2rfc 3.15.3" name="generator">
-<meta content="openid-sse-framework-1_0" name="ietf.draft">
+<meta content="openid-sharedsignals-framework-1_0" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.15.3
     Python 3.9.6
@@ -1226,7 +1226,7 @@ li > p:last-of-type:only-child {
 <table class="ears">
 <thead><tr>
 <td class="left"></td>
-<td class="center">openid-sse-framework</td>
+<td class="center">SharedSignals</td>
 <td class="right">February 2023</td>
 </tr></thead>
 <tfoot><tr>
@@ -1239,10 +1239,10 @@ li > p:last-of-type:only-child {
 <div id="internal-metadata" class="document-information">
 <dl id="identifiers">
 <dt class="label-workgroup">Workgroup:</dt>
-<dd class="workgroup">Shared Signals and Events Working Group</dd>
+<dd class="workgroup">Shared Signals</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-02-07" class="published">7 February 2023</time>
+<time datetime="2023-02-08" class="published">8 February 2023</time>
     </dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
@@ -1273,19 +1273,19 @@ li > p:last-of-type:only-child {
 </dd>
 </dl>
 </div>
-<h1 id="title">OpenID Shared Signals and Events Framework Specification 1.0 - draft 02</h1>
+<h1 id="title">OpenID Shared Signals Framework Specification 1.0 - draft 02</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This Shared Signals and Events (SSE) Framework enables sharing of signals and events
+<p id="section-abstract-1">This Shared Signals Framework (SSF) enables sharing of signals and events
 between cooperating peers. It enables multiple applications such as Risk Incident Sharing
 and Coordination (RISC) and the Continuous Access Evaluation Profile (<span>[<a href="#CAEP" class="cite xref">CAEP</a>]</span>)<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 <p id="section-abstract-2">This specification defines:<a href="#section-abstract-2" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-abstract-3.1">A profile for IETF Security Events (https://datatracker.ietf.org/wg/secevent/about/)<a href="#section-abstract-3.1" class="pilcrow">¶</a>
+<li class="normal" id="section-abstract-3.1">A profile for Security Events Tokens <span>[<a href="#RFC8417" class="cite xref">RFC8417</a>]</span><a href="#section-abstract-3.1" class="pilcrow">¶</a>
 </li>
         <li class="normal" id="section-abstract-3.2">Subject Principals<a href="#section-abstract-3.2" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-abstract-3.3">Subject Claims in SSE Events<a href="#section-abstract-3.3" class="pilcrow">¶</a>
+        <li class="normal" id="section-abstract-3.3">Subject Claims in SSF Events<a href="#section-abstract-3.3" class="pilcrow">¶</a>
 </li>
         <li class="normal" id="section-abstract-3.4">Event Types<a href="#section-abstract-3.4" class="pilcrow">¶</a>
 </li>
@@ -1298,7 +1298,7 @@ and Coordination (RISC) and the Continuous Access Evaluation Profile (<span>[<a 
       </ul>
 <p id="section-abstract-4">This spec also directly profiles several IETF Security Events drafts:<a href="#section-abstract-4" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-abstract-5.1">Security Event Token (SET) <span>[<a href="#SET" class="cite xref">SET</a>]</span><a href="#section-abstract-5.1" class="pilcrow">¶</a>
+<li class="normal" id="section-abstract-5.1">Security Event Token (SET) <span>[<a href="#RFC8417" class="cite xref">RFC8417</a>]</span><a href="#section-abstract-5.1" class="pilcrow">¶</a>
 </li>
         <li class="normal" id="section-abstract-5.2">Subject Identifiers for Security Event Tokens <span>[<a href="#SUBIDS" class="cite xref">SUBIDS</a>]</span><a href="#section-abstract-5.2" class="pilcrow">¶</a>
 </li>
@@ -1326,7 +1326,7 @@ and Coordination (RISC) and the Continuous Access Evaluation Profile (<span>[<a 
             <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-subject-principals" class="internal xref">Subject Principals</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-subject-members-in-sse-even" class="internal xref">Subject Members in SSE Events</a></p>
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-subject-members-in-ssf-even" class="internal xref">Subject Members in SSF Events</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
                 <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-simple-subject-members" class="internal xref">Simple Subject Members</a></p>
@@ -1340,7 +1340,7 @@ and Coordination (RISC) and the Continuous Access Evaluation Profile (<span>[<a 
                 </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3">
-                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-subject-identifiers-in-sse-" class="internal xref">Subject Identifiers in SSE Events</a></p>
+                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-subject-identifiers-in-ssf-" class="internal xref">Subject Identifiers in SSF Events</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4">
                 <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="auto internal xref">3.4</a>.  <a href="#name-additional-subject-identifi" class="internal xref">Additional Subject Identifier Formats</a></p>
@@ -1362,7 +1362,7 @@ and Coordination (RISC) and the Continuous Access Evaluation Profile (<span>[<a 
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-event-properties" class="internal xref">Event Properties</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-example-sets-that-conform-t" class="internal xref">Example SETs that conform to the SSE Framework</a></p>
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-example-sets-that-conform-t" class="internal xref">Example SETs that conform to the Shared Signals Framework</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
             <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-transmitter-configuration-d" class="internal xref">Transmitter Configuration Discovery</a></p>
@@ -1463,10 +1463,10 @@ and Coordination (RISC) and the Continuous Access Evaluation Profile (<span>[<a 
                     <p id="section-toc.1-1.11.2.1.2.1.1"><a href="#section-11.1.1" class="auto internal xref">11.1.1</a>.  <a href="#name-signature-key-resolution" class="internal xref">Signature Key Resolution</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.1.2.2">
-                    <p id="section-toc.1-1.11.2.1.2.2.1"><a href="#section-11.1.2" class="auto internal xref">11.1.2</a>.  <a href="#name-sse-event-subject" class="internal xref">SSE Event Subject</a></p>
+                    <p id="section-toc.1-1.11.2.1.2.2.1"><a href="#section-11.1.2" class="auto internal xref">11.1.2</a>.  <a href="#name-ssf-event-subject" class="internal xref">SSF Event Subject</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.1.2.3">
-                    <p id="section-toc.1-1.11.2.1.2.3.1"><a href="#section-11.1.3" class="auto internal xref">11.1.3</a>.  <a href="#name-sse-event-properties" class="internal xref">SSE Event Properties</a></p>
+                    <p id="section-toc.1-1.11.2.1.2.3.1"><a href="#section-11.1.3" class="auto internal xref">11.1.3</a>.  <a href="#name-ssf-event-properties" class="internal xref">SSF Event Properties</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.1.2.4">
                     <p id="section-toc.1-1.11.2.1.2.4.1"><a href="#section-11.1.4" class="auto internal xref">11.1.4</a>.  <a href="#name-explicit-typing-of-sets" class="internal xref">Explicit Typing of SETs</a></p>
@@ -1546,10 +1546,10 @@ they appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcr
       <h2 id="name-subject-principals">
 <a href="#section-2" class="section-number selfRef">2. </a><a href="#name-subject-principals" class="section-name selfRef">Subject Principals</a>
       </h2>
-<p id="section-2-1">This SSE Framework specification defines a Subject Principal to be
+<p id="section-2-1">This Shared Signals Framework specification defines a Subject Principal to be
 the entities about which an event can be sent by Transmitters and received by
-Receivers using the SSE Framework.<a href="#section-2-1" class="pilcrow">¶</a></p>
-<p id="section-2-2">Subject Principals are the managed entities in a SSE Transmitter or Receiver.
+Receivers using the Shared Signals Framework.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-2">Subject Principals are the managed entities in a SSF Transmitter or Receiver.
 These include human or robotic principals, devices, customer tenants in a
 multi-tenanted service, organizational units within a tenant, groups of subject
 principals, or other entities that are managed by Transmitters and Receivers.
@@ -1561,10 +1561,10 @@ addressed by the event.<a href="#section-2-2" class="pilcrow">¶</a></p>
 </div>
 <div id="subject-ids">
 <section id="section-3">
-      <h2 id="name-subject-members-in-sse-even">
-<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-subject-members-in-sse-even" class="section-name selfRef">Subject Members in SSE Events</a>
+      <h2 id="name-subject-members-in-ssf-even">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-subject-members-in-ssf-even" class="section-name selfRef">Subject Members in SSF Events</a>
       </h2>
-<p id="section-3-1">A member of type Subject in an SSE event MAY have any claim name. Each Subject Member MUST
+<p id="section-3-1">A member of type Subject in an SSF event MAY have any claim name. Each Subject Member MUST
 refer to exactly one Subject Principal.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">A Subject may be a "simple subject" or a "complex subject".<a href="#section-3-2" class="pilcrow">¶</a></p>
 <div id="simple-subjects">
@@ -1574,7 +1574,7 @@ refer to exactly one Subject Principal.<a href="#section-3-1" class="pilcrow">¶
         </h3>
 <p id="section-3.1-1">A Simple Subject Member has a claim name and a value that is a "Subject
 Identifier" as defined in the Subject Identifiers for Security Event Tokens
-<span>[<a href="#SUBIDS" class="cite xref">SUBIDS</a>]</span>. Below is a non-normative example of a Simple Subject Member in a SSE
+<span>[<a href="#SUBIDS" class="cite xref">SUBIDS</a>]</span>. Below is a non-normative example of a Simple Subject Member in a SSF
 event.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <span id="name-example-simple-subject"></span><div id="simple-subject-ex">
 <figure id="figure-1">
@@ -1644,7 +1644,7 @@ Subject Member in this value MAY be one of the following:<a href="#section-3.2-1
         </ul>
 <p id="section-3.2-16">Additional Subject Member names MAY be used in Complex Subjects. Each member name MAY
 appear at most once in the Complex Subject value.<a href="#section-3.2-16" class="pilcrow">¶</a></p>
-<p id="section-3.2-17">Below is a non-normative example of a Complex Subject claim in a SSE event.<a href="#section-3.2-17" class="pilcrow">¶</a></p>
+<p id="section-3.2-17">Below is a non-normative example of a Complex Subject claim in a SSF event.<a href="#section-3.2-17" class="pilcrow">¶</a></p>
 <span id="name-example-complex-subject"></span><div id="complex-subject-ex">
 <figure id="figure-2">
           <div class="lang-json sourcecode" id="section-3.2-18.1">
@@ -1678,12 +1678,12 @@ Subject Principal.<a href="#section-3.2.1-1" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
-<div id="subject-ids-in-sse">
+<div id="subject-ids-in-ssf">
 <section id="section-3.3">
-        <h3 id="name-subject-identifiers-in-sse-">
-<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-subject-identifiers-in-sse-" class="section-name selfRef">Subject Identifiers in SSE Events</a>
+        <h3 id="name-subject-identifiers-in-ssf-">
+<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-subject-identifiers-in-ssf-" class="section-name selfRef">Subject Identifiers in SSF Events</a>
         </h3>
-<p id="section-3.3-1">A Subject Identifier in a SSE event MUST have an identifier format that is any
+<p id="section-3.3-1">A Subject Identifier in a SSF event MUST have an identifier format that is any
 one of:<a href="#section-3.3-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.3-2.1">Defined in the IANA Registry defined in Subject Identifiers for Security
@@ -1799,9 +1799,9 @@ Subject Identifier Format.<a href="#section-3.4.2-7" class="pilcrow">¶</a></p>
         <h3 id="name-receiver-subject-processing">
 <a href="#section-3.5" class="section-number selfRef">3.5. </a><a href="#name-receiver-subject-processing" class="section-name selfRef">Receiver Subject Processing</a>
         </h3>
-<p id="section-3.5-1">A SSE Receiver MUST make a best effort to process all members from a Subject in
-an SSE event. The Transmitter Configuration Metadata (<a href="#discovery-meta" class="auto internal xref">Section 6.1</a>) defined
-below MAY define certain members within a Complex Subject to be Critical. A SSE
+<p id="section-3.5-1">A SSF Receiver MUST make a best effort to process all members from a Subject in
+an SSF event. The Transmitter Configuration Metadata (<a href="#discovery-meta" class="auto internal xref">Section 6.1</a>) defined
+below MAY define certain members within a Complex Subject to be Critical. A SSF
 Receiver MUST discard any event that contains a Subject with a Critical member
 that it is unable to process.<a href="#section-3.5-1" class="pilcrow">¶</a></p>
 </section>
@@ -1824,9 +1824,9 @@ specified in the Discovery <a href="#discovery" class="auto internal xref">Secti
 <div id="events-examples">
 <section id="section-5">
       <h2 id="name-example-sets-that-conform-t">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-example-sets-that-conform-t" class="section-name selfRef">Example SETs that conform to the SSE Framework</a>
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-example-sets-that-conform-t" class="section-name selfRef">Example SETs that conform to the Shared Signals Framework</a>
       </h2>
-<p id="section-5-1">The following are hypothetical examples of SETs that conform to the SSE Framework.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-1">The following are hypothetical examples of SETs that conform to the Shared Signals Framework.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <span id="name-example-set-containing-a-ss"></span><div id="subject-ids-ex-simple">
 <figure id="figure-5">
         <div class="lang-json sourcecode" id="section-5-2.1">
@@ -1848,10 +1848,10 @@ specified in the Discovery <a href="#discovery" class="auto internal xref">Secti
 </pre>
 </div>
 <figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
-<a href="#name-example-set-containing-a-ss" class="selfRef">Example: SET Containing a SSE Event with a Simple Subject Member</a>
+<a href="#name-example-set-containing-a-ss" class="selfRef">Example: SET Containing a SSF Event with a Simple Subject Member</a>
         </figcaption></figure>
 </div>
-<span id="name-example-set-containing-a-sse"></span><div id="subject-ids-ex-complex">
+<span id="name-example-set-containing-a-ssf"></span><div id="subject-ids-ex-complex">
 <figure id="figure-6">
         <div class="lang-json sourcecode" id="section-5-3.1">
 <pre>
@@ -1884,10 +1884,10 @@ specified in the Discovery <a href="#discovery" class="auto internal xref">Secti
 </pre>
 </div>
 <figcaption><a href="#figure-6" class="selfRef">Figure 6</a>:
-<a href="#name-example-set-containing-a-sse" class="selfRef">Example: SET Containing a SSE Event with a Complex Subject Member</a>
+<a href="#name-example-set-containing-a-ssf" class="selfRef">Example: SET Containing a SSF Event with a Complex Subject Member</a>
         </figcaption></figure>
 </div>
-<span id="name-example-set-containing-a-sse-"></span><div id="subject-properties-ex">
+<span id="name-example-set-containing-a-ssf-"></span><div id="subject-properties-ex">
 <figure id="figure-7">
         <div class="lang-json sourcecode" id="section-5-4.1">
 <pre>
@@ -1912,10 +1912,10 @@ specified in the Discovery <a href="#discovery" class="auto internal xref">Secti
 </pre>
 </div>
 <figcaption><a href="#figure-7" class="selfRef">Figure 7</a>:
-<a href="#name-example-set-containing-a-sse-" class="selfRef">Example: SET Containing a SSE Event with a Simple Subject and a Property Member</a>
+<a href="#name-example-set-containing-a-ssf-" class="selfRef">Example: SET Containing a SSF Event with a Simple Subject and a Property Member</a>
         </figcaption></figure>
 </div>
-<span id="name-example-set-containing-a-sse-e"></span><div id="subject-custom-type-ex">
+<span id="name-example-set-containing-a-ssf-e"></span><div id="subject-custom-type-ex">
 <figure id="figure-8">
         <div class="lang-json sourcecode" id="section-5-5.1">
 <pre>
@@ -1940,7 +1940,7 @@ specified in the Discovery <a href="#discovery" class="auto internal xref">Secti
 </pre>
 </div>
 <figcaption><a href="#figure-8" class="selfRef">Figure 8</a>:
-<a href="#name-example-set-containing-a-sse-e" class="selfRef">Example: SET Containing a SSE Event with a Proprietary Subject Identifier Format</a>
+<a href="#name-example-set-containing-a-ssf-e" class="selfRef">Example: SET Containing a SSF Event with a Proprietary Subject Identifier Format</a>
         </figcaption></figure>
 </div>
 </section>
@@ -2029,9 +2029,9 @@ configuration information.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <p id="section-6.2-1">Using the Issuer as documented by the Transmitter, the Transmitter Configuration
 Information can be retrieved.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
 <p id="section-6.2-2">Transmitters supporting Discovery MUST make a JSON document available at the
-path formed by inserting the string "/.well-known/sse-configuration" into the
+path formed by inserting the string "/.well-known/ssf-configuration" into the
 Issuer between the host component and the path component, if any. The syntax
-and semantics of ".well-known" are defined in <span>[<a href="#RFC5785" class="cite xref">RFC5785</a>]</span>.  "sse-configuration"
+and semantics of ".well-known" are defined in <span>[<a href="#RFC5785" class="cite xref">RFC5785</a>]</span>.  "ssf-configuration"
 MUST point to a JSON document compliant with this specification and MUST be
 returned using the "application/json" content type.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
 <div id="transmitter-configuration-request">
@@ -2048,7 +2048,7 @@ Issuer contains no path component:<a href="#section-6.2.1-2" class="pilcrow">¶<
 <figure id="figure-9">
             <div class="lang-http sourcecode" id="section-6.2.1-3.1">
 <pre>
-GET /.well-known/sse-configuration HTTP/1.1
+GET /.well-known/ssf-configuration HTTP/1.1
 Host: tr.example.com
 </pre>
 </div>
@@ -2057,7 +2057,7 @@ Host: tr.example.com
             </figcaption></figure>
 </div>
 <p id="section-6.2.1-4">If the  Issuer value contains a path component, any terminating "/" MUST be
-removed before inserting "/.well-known/sse-configuration" between the host
+removed before inserting "/.well-known/ssf-configuration" between the host
 component and the path component. The Receiver would make the following request
 to the Issuer "https://tr.example.com/issuer1" to obtain its Configuration
 information, since the Issuer contains a path component:<a href="#section-6.2.1-4" class="pilcrow">¶</a></p>
@@ -2065,7 +2065,7 @@ information, since the Issuer contains a path component:<a href="#section-6.2.1-
 <figure id="figure-10">
             <div class="lang-http sourcecode" id="section-6.2.1-5.1">
 <pre>
-GET /.well-known/sse-configuration/issuer1 HTTP/1.1
+GET /.well-known/ssf-configuration/issuer1 HTTP/1.1
 Host: tr.example.com
 </pre>
 </div>
@@ -2085,9 +2085,9 @@ does not provide general information about the host.<a href="#section-6.2.1-6" c
 <a href="#section-6.2.2" class="section-number selfRef">6.2.2. </a><a href="#name-backward-compatibility-for-" class="section-name selfRef">Backward Compatibility for RISC Transmitters</a>
           </h4>
 <p id="section-6.2.2-1">Existing RISC Transmitters MAY continue to use the path component
-"/risc-configuration" instead of the path component "/sse-configuration" in the
+"/risc-configuration" instead of the path component "/ssf-configuration" in the
 path for the Transmitter Configuration Metadata. New services supporting the
-SSE Framework SHOULD NOT use this location for publishing the
+Shared Signals Framework SHOULD NOT use this location for publishing the
 Transmitter Configuration Metadata. For example, the Transmitter Configuration
 Metadata for the Transmitter "https://risc-tr.example.com" MAY be obtained by
 making the following request:<a href="#section-6.2.2-1" class="pilcrow">¶</a></p>
@@ -2135,15 +2135,15 @@ Content-Type: application/json
     "https://schemas.openid.net/secevent/risc/delivery-method/push",
     "https://schemas.openid.net/secevent/risc/delivery-method/poll"],
   "configuration_endpoint":
-    "https://tr.example.com/sse/mgmt/stream",
+    "https://tr.example.com/ssf/mgmt/stream",
   "status_endpoint":
-    "https://tr.example.com/sse/mgmt/status",
+    "https://tr.example.com/ssf/mgmt/status",
   "add_subject_endpoint":
-    "https://tr.example.com/sse/mgmt/subject:add",
+    "https://tr.example.com/ssf/mgmt/subject:add",
   "remove_subject_endpoint":
-    "https://tr.example.com/sse/mgmt/subject:remove",
+    "https://tr.example.com/ssf/mgmt/subject:remove",
   "verification_endpoint":
-    "https://tr.example.com/sse/mgmt/verification",
+    "https://tr.example.com/ssf/mgmt/verification",
   "critical_subject_members": [ "tenant", "user" ]
 }
 </pre>
@@ -2405,7 +2405,7 @@ Configuration (<a href="#stream-config" class="auto internal xref">Section 7.1.1
 <figure id="figure-14">
               <div class="lang-http sourcecode" id="section-7.1.1.1-10.1">
 <pre>
-POST /sse/stream HTTP/1.1
+POST /ssf/stream HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
@@ -2519,7 +2519,7 @@ configuration:<a href="#section-7.1.1.2-3" class="pilcrow">¶</a></p>
 <figure id="figure-16">
               <div class="lang-http sourcecode" id="section-7.1.1.2-4.1">
 <pre>
-GET /sse/stream?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f HTTP/1.1
+GET /ssf/stream?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 </pre>
@@ -2576,7 +2576,7 @@ configuration, with no "stream_id" indicated:<a href="#section-7.1.1.2-7" class=
 <figure id="figure-18">
               <div class="lang-http sourcecode" id="section-7.1.1.2-8.1">
 <pre>
-GET /sse/stream HTTP/1.1
+GET /ssf/stream HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 </pre>
@@ -2773,7 +2773,7 @@ configuration:<a href="#section-7.1.1.3-4" class="pilcrow">¶</a></p>
 <figure id="figure-22">
               <div class="lang-http sourcecode" id="section-7.1.1.3-5.1">
 <pre>
-PATCH /sse/stream HTTP/1.1
+PATCH /ssf/stream HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
@@ -2897,7 +2897,7 @@ configuration:<a href="#section-7.1.1.4-4" class="pilcrow">¶</a></p>
 <figure id="figure-24">
               <div class="lang-http sourcecode" id="section-7.1.1.4-5.1">
 <pre>
-PUT /sse/stream HTTP/1.1
+PUT /ssf/stream HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
@@ -3021,7 +3021,7 @@ identify the correct Event Stream.<a href="#section-7.1.1.5-2" class="pilcrow">�
 <figure id="figure-26">
               <div class="lang-http sourcecode" id="section-7.1.1.5-4.1">
 <pre>
-DELETE /sse/stream?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f HTTP/1.1
+DELETE /ssf/stream?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 </pre>
@@ -3154,7 +3154,7 @@ status:<a href="#section-7.1.2.1-14" class="pilcrow">¶</a></p>
 <figure id="figure-27">
               <div class="lang-http sourcecode" id="section-7.1.2.1-15.1">
 <pre>
-GET /sse/status?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f HTTP/1.1
+GET /ssf/status?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer zzzz
 </pre>
@@ -3187,7 +3187,7 @@ status for a specific subject:<a href="#section-7.1.2.1-18" class="pilcrow">¶</
 <figure id="figure-29">
               <div class="lang-http sourcecode" id="section-7.1.2.1-19.1">
 <pre>
-GET /sse/status?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f&amp;subject=&lt;url-encoded-subject&gt; HTTP/1.1
+GET /ssf/status?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f&amp;subject=&lt;url-encoded-subject&gt; HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 </pre>
@@ -3314,7 +3314,7 @@ status:<a href="#section-7.1.2.2-11" class="pilcrow">¶</a></p>
 <figure id="figure-31">
               <div class="lang-http sourcecode" id="section-7.1.2.2-12.1">
 <pre>
-POST /sse/status HTTP/1.1
+POST /ssf/status HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
@@ -3334,7 +3334,7 @@ optional fields:<a href="#section-7.1.2.2-13" class="pilcrow">¶</a></p>
 <figure id="figure-32">
               <div class="lang-http sourcecode" id="section-7.1.2.2-14.1">
 <pre>
-POST /sse/status HTTP/1.1
+POST /ssf/status HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
@@ -3476,7 +3476,7 @@ where the subject is identified by an Email Subject Identifier.<a href="#section
 <figure id="figure-34">
               <div class="lang-http sourcecode" id="section-7.1.3.1-10.1">
 <pre>
-POST /sse/subjects:add HTTP/1.1
+POST /ssf/subjects:add HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
@@ -3575,7 +3575,7 @@ identified by a Phone Number Subject Identifier:<a href="#section-7.1.3.2-7" cla
 <figure id="figure-36">
               <div class="lang-http sourcecode" id="section-7.1.3.2-8.1">
 <pre>
-POST /sse/subjects:remove HTTP/1.1
+POST /ssf/subjects:remove HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
@@ -3671,7 +3671,7 @@ not requested by the Event Receiver.<a href="#section-7.1.4-2" class="pilcrow">�
 <p id="section-7.1.4.1-2">event type<a href="#section-7.1.4.1-2" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-7.1.4.1-3.1">
-                <p id="section-7.1.4.1-3.1.1">The Event Type URI is: "https://schemas.openid.net/secevent/sse/event-type/verification".<a href="#section-7.1.4.1-3.1.1" class="pilcrow">¶</a></p>
+                <p id="section-7.1.4.1-3.1.1">The Event Type URI is: "https://schemas.openid.net/secevent/ssf/event-type/verification".<a href="#section-7.1.4.1-3.1.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 <p id="section-7.1.4.1-4">state<a href="#section-7.1.4.1-4" class="pilcrow">¶</a></p>
@@ -3763,7 +3763,7 @@ particular order relative to the current queue of events.<a href="#section-7.1.4
 <figure id="figure-38">
               <div class="lang-http sourcecode" id="section-7.1.4.2-11.1">
 <pre>
-POST /sse/verify HTTP/1.1
+POST /ssf/verify HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 Content-Type: application/json
@@ -3804,7 +3804,7 @@ Event Receiver as a result of the above request:<a href="#section-7.1.4.2-14" cl
   "aud": "receiver.example.com",
   "iat": 1493856000,
   "events": {
-    "https://schemas.openid.net/secevent/sse/event-type/verification":{
+    "https://schemas.openid.net/secevent/ssf/event-type/verification":{
       "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
     }
   }
@@ -3826,7 +3826,7 @@ Event Receiver as a result of the above request:<a href="#section-7.1.4.2-14" cl
           </h4>
 <p id="section-7.1.5-1">A Transmitter MAY change the stream status in reference to one or more Subjects
 without a request from a Receiver. The Transmitter sends an event of type
-"https://schemas.openid.net/secevent/sse/event-type/stream-updated" to indicate
+"https://schemas.openid.net/secevent/ssf/event-type/stream-updated" to indicate
 that it has changed the status of the Event Stream for a specific Subject.<a href="#section-7.1.5-1" class="pilcrow">¶</a></p>
 <p id="section-7.1.5-2">If a Transmitter decides to change the status of an Event Stream from "enabled"
 to either "paused" or "disabled", then the Transmitter MUST send this event to
@@ -3868,7 +3868,7 @@ Subject.<a href="#section-7.1.5-3" class="pilcrow">¶</a></p>
   "aud": "receiver.example.com",
   "iat": 1493856000,
   "events": {
-    "https://schemas.openid.net/secevent/sse/event-type/stream-updated": {
+    "https://schemas.openid.net/secevent/ssf/event-type/stream-updated": {
       "subject": {
         "tenant" : {
           "format": "iss_sub",
@@ -3994,10 +3994,10 @@ information leakage.<a href="#section-10.1-1" class="pilcrow">¶</a></p>
         <h3 id="name-previously-consented-data">
 <a href="#section-10.2" class="section-number selfRef">10.2. </a><a href="#name-previously-consented-data" class="section-name selfRef">Previously Consented Data</a>
         </h3>
-<p id="section-10.2-1">If SSE events contain new values for attributes of Subject Principals that were
+<p id="section-10.2-1">If SSF events contain new values for attributes of Subject Principals that were
 previously exchanged between the Transmitter and Receiver, then there are no
 additional privacy considerations introduced by providing the updated values in
-the SSE events, unless the attribute was exchanged under a one-time consent
+the SSF events, unless the attribute was exchanged under a one-time consent
 obtained from the user.<a href="#section-10.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -4014,7 +4014,7 @@ or data whose consent to exchange has expired has the following considerations:<
 <a href="#section-10.3.1" class="section-number selfRef">10.3.1. </a><a href="#name-organizational-data" class="section-name selfRef">Organizational Data</a>
           </h4>
 <p id="section-10.3.1-1">If a user has previously agreed with a Transmitter that they agree to release
-certain data to third-parties, then the Transmitter MAY send such data in SSE
+certain data to third-parties, then the Transmitter MAY send such data in SSF
 events without additional consent of the user. Such data MAY include
 organizational data about the Subject Principal that was generated by the
 Transmitter.<a href="#section-10.3.1-1" class="pilcrow">¶</a></p>
@@ -4025,7 +4025,7 @@ Transmitter.<a href="#section-10.3.1-1" class="pilcrow">¶</a></p>
           <h4 id="name-consentable-data">
 <a href="#section-10.3.2" class="section-number selfRef">10.3.2. </a><a href="#name-consentable-data" class="section-name selfRef">Consentable Data</a>
           </h4>
-<p id="section-10.3.2-1">If a Transmitter intends to include data in SSE events that is not previously
+<p id="section-10.3.2-1">If a Transmitter intends to include data in SSF events that is not previously
 consented to be released by the user, then the Transmitter MUST obtain consent
 to release such data from the user in accordance with the Transmitter's privacy
 policy.<a href="#section-10.3.2-1" class="pilcrow">¶</a></p>
@@ -4042,7 +4042,7 @@ policy.<a href="#section-10.3.2-1" class="pilcrow">¶</a></p>
       </h2>
 <p id="section-11-1">This section is a profile of the following IETF SecEvent specifications:<a href="#section-11-1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-11-2.1">Security Event Token (SET) <span>[<a href="#SET" class="cite xref">SET</a>]</span><a href="#section-11-2.1" class="pilcrow">¶</a>
+<li class="normal" id="section-11-2.1">Security Event Token (SET) <span>[<a href="#RFC8417" class="cite xref">RFC8417</a>]</span><a href="#section-11-2.1" class="pilcrow">¶</a>
 </li>
         <li class="normal" id="section-11-2.2">Push-Based SET Token Delivery Using HTTP <span>[<a href="#DELIVERYPUSH" class="cite xref">DELIVERYPUSH</a>]</span><a href="#section-11-2.2" class="pilcrow">¶</a>
 </li>
@@ -4058,8 +4058,8 @@ RISC Use Cases <span>[<a href="#USECASES" class="cite xref">USECASES</a>]</span>
         <h3 id="name-security-event-token-profil">
 <a href="#section-11.1" class="section-number selfRef">11.1. </a><a href="#name-security-event-token-profil" class="section-name selfRef">Security Event Token Profile</a>
         </h3>
-<p id="section-11.1-1">This section provides SSE profiling specifications for the Security Event Token (SET)
-<span>[<a href="#SET" class="cite xref">SET</a>]</span> spec.<a href="#section-11.1-1" class="pilcrow">¶</a></p>
+<p id="section-11.1-1">This section provides SSF profiling specifications for the Security Event Token (SET)
+<span>[<a href="#RFC8417" class="cite xref">RFC8417</a>]</span> spec.<a href="#section-11.1-1" class="pilcrow">¶</a></p>
 <div id="signature-key-resolution">
 <section id="section-11.1.1">
           <h4 id="name-signature-key-resolution">
@@ -4070,21 +4070,21 @@ RISC Use Cases <span>[<a href="#USECASES" class="cite xref">USECASES</a>]</span>
 </div>
 <div id="event-subjects">
 <section id="section-11.1.2">
-          <h4 id="name-sse-event-subject">
-<a href="#section-11.1.2" class="section-number selfRef">11.1.2. </a><a href="#name-sse-event-subject" class="section-name selfRef">SSE Event Subject</a>
+          <h4 id="name-ssf-event-subject">
+<a href="#section-11.1.2" class="section-number selfRef">11.1.2. </a><a href="#name-ssf-event-subject" class="section-name selfRef">SSF Event Subject</a>
           </h4>
-<p id="section-11.1.2-1">The subject of a SSE event is identified by the "subject" claim within the event
+<p id="section-11.1.2-1">The subject of a SSF event is identified by the "subject" claim within the event
 payload, whose value is a Subject Identifier. The "subject" claim is REQUIRED
-for all SSE events. The JWT "sub" claim MUST NOT be present in any SET containing
-a SSE event.<a href="#section-11.1.2-1" class="pilcrow">¶</a></p>
+for all SSF events. The JWT "sub" claim MUST NOT be present in any SET containing
+a SSF event.<a href="#section-11.1.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="event-properties">
 <section id="section-11.1.3">
-          <h4 id="name-sse-event-properties">
-<a href="#section-11.1.3" class="section-number selfRef">11.1.3. </a><a href="#name-sse-event-properties" class="section-name selfRef">SSE Event Properties</a>
+          <h4 id="name-ssf-event-properties">
+<a href="#section-11.1.3" class="section-number selfRef">11.1.3. </a><a href="#name-ssf-event-properties" class="section-name selfRef">SSF Event Properties</a>
           </h4>
-<p id="section-11.1.3-1">The SSE event MAY contain additional claims within the event payload that are
+<p id="section-11.1.3-1">The SSF event MAY contain additional claims within the event payload that are
 specific to the event type.<a href="#section-11.1.3-1" class="pilcrow">¶</a></p>
 <span id="name-example-set-containing-a-ri"></span><div id="risc-event-subject-example">
 <figure id="figure-42">
@@ -4144,7 +4144,7 @@ specific to the event type.<a href="#section-11.1.3-1" class="pilcrow">¶</a></p
           <h4 id="name-explicit-typing-of-sets">
 <a href="#section-11.1.4" class="section-number selfRef">11.1.4. </a><a href="#name-explicit-typing-of-sets" class="section-name selfRef">Explicit Typing of SETs</a>
           </h4>
-<p id="section-11.1.4-1">SSE events MUST use explicit typing as defined in Section 2.3 of <span>[<a href="#SET" class="cite xref">SET</a>]</span>.<a href="#section-11.1.4-1" class="pilcrow">¶</a></p>
+<p id="section-11.1.4-1">SSF events MUST use explicit typing as defined in Section 2.3 of <span>[<a href="#RFC8417" class="cite xref">RFC8417</a>]</span>.<a href="#section-11.1.4-1" class="pilcrow">¶</a></p>
 <span id="name-explicitly-typed-jose-heade"></span><div id="explicit-type-header">
 <figure id="figure-44">
             <div class="lang-json sourcecode" id="section-11.1.4-2.1">
@@ -4160,8 +4160,8 @@ specific to the event type.<a href="#section-11.1.3-1" class="pilcrow">¶</a></p
             </figcaption></figure>
 </div>
 <p id="section-11.1.4-3">The purpose is defense against confusion with other JWTs, as described in
-Sections 4.5, 4.6 and 4.7 of <span>[<a href="#SET" class="cite xref">SET</a>]</span>. While current Id Token <span>[<a href="#IDTOKEN" class="cite xref">IDTOKEN</a>]</span>
-validators may not be using the "typ" header parameter, by requiring it for SSE
+Sections 4.5, 4.6 and 4.7 of <span>[<a href="#RFC8417" class="cite xref">RFC8417</a>]</span>. While current Id Token <span>[<a href="#IDTOKEN" class="cite xref">IDTOKEN</a>]</span>
+validators may not be using the "typ" header parameter, by requiring it for SSF
 SETs a distinct value is guaranteed for future validators.<a href="#section-11.1.4-3" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -4170,9 +4170,9 @@ SETs a distinct value is guaranteed for future validators.<a href="#section-11.1
           <h4 id="name-the-exp-claim">
 <a href="#section-11.1.5" class="section-number selfRef">11.1.5. </a><a href="#name-the-exp-claim" class="section-name selfRef">The "exp" Claim</a>
           </h4>
-<p id="section-11.1.5-1">The "exp" claim MUST NOT be used in SSE SETs.<a href="#section-11.1.5-1" class="pilcrow">¶</a></p>
+<p id="section-11.1.5-1">The "exp" claim MUST NOT be used in SSF SETs.<a href="#section-11.1.5-1" class="pilcrow">¶</a></p>
 <p id="section-11.1.5-2">The purpose is defense in depth against confusion with other JWTs, as described
-in Sections 4.5 and 4.6 of <span>[<a href="#SET" class="cite xref">SET</a>]</span>.<a href="#section-11.1.5-2" class="pilcrow">¶</a></p>
+in Sections 4.5 and 4.6 of <span>[<a href="#RFC8417" class="cite xref">RFC8417</a>]</span>.<a href="#section-11.1.5-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="aud-claim">
@@ -4203,7 +4203,7 @@ multiple Receivers would lead to unintended data disclosure.<a href="#section-11
   "aud": ["receiver.example.com/web", "receiver.example.com/mobile"],
   "iat": 1493856000,
   "events": {
-    "https://schemas.openid.net/secevent/sse/event-type/verification": {
+    "https://schemas.openid.net/secevent/ssf/event-type/verification": {
       "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
     }
   }
@@ -4236,12 +4236,12 @@ permitted only if they are alternative URIs defining the exact same event type.<
 <a href="#section-11.1.8.1" class="section-number selfRef">11.1.8.1. </a><a href="#name-distinguishing-sets-from-ot" class="section-name selfRef">Distinguishing SETs from other Kinds of JWTs</a>
             </h5>
 <p id="section-11.1.8.1-1">Of particular concern is the possibility that SETs are confused for other kinds
-of JWTs. The Security Considerations section of <span>[<a href="#SET" class="cite xref">SET</a>]</span> has several sub-sections
-on this subject. The SSE Framework is asking for further restrictions:<a href="#section-11.1.8.1-1" class="pilcrow">¶</a></p>
+of JWTs. The Security Considerations section of <span>[<a href="#RFC8417" class="cite xref">RFC8417</a>]</span> has several sub-sections
+on this subject. The Shared Signals Framework is asking for further restrictions:<a href="#section-11.1.8.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-11.1.8.1-2.1">The "sub" claim MUST NOT be present, as described in <a href="#event-subjects" class="auto internal xref">Section 11.1.2</a>.<a href="#section-11.1.8.1-2.1" class="pilcrow">¶</a>
 </li>
-              <li class="normal" id="section-11.1.8.1-2.2">SSE SETs MUST use explicit typing, as described in <a href="#explicit-typing" class="auto internal xref">Section 11.1.4</a>.<a href="#section-11.1.8.1-2.2" class="pilcrow">¶</a>
+              <li class="normal" id="section-11.1.8.1-2.2">SSF SETs MUST use explicit typing, as described in <a href="#explicit-typing" class="auto internal xref">Section 11.1.4</a>.<a href="#section-11.1.8.1-2.2" class="pilcrow">¶</a>
 </li>
               <li class="normal" id="section-11.1.8.1-2.3">The "exp" claim MUST NOT be present, as described in <a href="#exp-claim" class="auto internal xref">Section 11.1.5</a>.<a href="#section-11.1.8.1-2.3" class="pilcrow">¶</a>
 </li>
@@ -4257,7 +4257,7 @@ on this subject. The SSE Framework is asking for further restrictions:<a href="#
         <h3 id="name-set-token-delivery-using-ht">
 <a href="#section-11.2" class="section-number selfRef">11.2. </a><a href="#name-set-token-delivery-using-ht" class="section-name selfRef">SET Token Delivery Using HTTP Profile</a>
         </h3>
-<p id="section-11.2-1">This section provides SSE profiling specifications for the <span>[<a href="#DELIVERYPUSH" class="cite xref">DELIVERYPUSH</a>]</span> and
+<p id="section-11.2-1">This section provides SSF profiling specifications for the <span>[<a href="#DELIVERYPUSH" class="cite xref">DELIVERYPUSH</a>]</span> and
 <span>[<a href="#DELIVERYPOLL" class="cite xref">DELIVERYPOLL</a>]</span> specs.<a href="#section-11.2-1" class="pilcrow">¶</a></p>
 <div id="delivery-meta">
 <section id="section-11.2.1">
@@ -4271,7 +4271,7 @@ metadata.<a href="#section-11.2.1-1" class="pilcrow">¶</a></p>
             <h5 id="name-push-delivery-using-http">
 <a href="#section-11.2.1.1" class="section-number selfRef">11.2.1.1. </a><a href="#name-push-delivery-using-http" class="section-name selfRef">Push Delivery using HTTP</a>
             </h5>
-<p id="section-11.2.1.1-1">This section provides SSE profiling specifications for the <span>[<a href="#DELIVERYPUSH" class="cite xref">DELIVERYPUSH</a>]</span> spec.<a href="#section-11.2.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-11.2.1.1-1">This section provides SSF profiling specifications for the <span>[<a href="#DELIVERYPUSH" class="cite xref">DELIVERYPUSH</a>]</span> spec.<a href="#section-11.2.1.1-1" class="pilcrow">¶</a></p>
 <p id="section-11.2.1.1-2">method<a href="#section-11.2.1.1-2" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-11.2.1.1-3.1">
@@ -4302,7 +4302,7 @@ metadata.<a href="#section-11.2.1-1" class="pilcrow">¶</a></p>
             <h5 id="name-polling-delivery-using-http">
 <a href="#section-11.2.1.2" class="section-number selfRef">11.2.1.2. </a><a href="#name-polling-delivery-using-http" class="section-name selfRef">Polling Delivery using HTTP</a>
             </h5>
-<p id="section-11.2.1.2-1">This section provides SSE profiling specifications for the <span>[<a href="#DELIVERYPOLL" class="cite xref">DELIVERYPOLL</a>]</span> spec.<a href="#section-11.2.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-11.2.1.2-1">This section provides SSF profiling specifications for the <span>[<a href="#DELIVERYPOLL" class="cite xref">DELIVERYPOLL</a>]</span> spec.<a href="#section-11.2.1.2-1" class="pilcrow">¶</a></p>
 <p id="section-11.2.1.2-2">method<a href="#section-11.2.1.2-2" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-11.2.1.2-3.1">
@@ -4400,9 +4400,9 @@ Subject Identifiers for Security Event Tokens <span>[<a href="#SUBIDS" class="ci
         <dd>
 <span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="SET">[SET]</dt>
+<dt id="RFC8417">[RFC8417]</dt>
         <dd>
-<span class="refAuthor">Hunt, P.</span>, <span class="refAuthor">Jones, M. B.</span>, <span class="refAuthor">Denniss, W.</span>, and <span class="refAuthor">M. A. Ansari</span>, <span class="refTitle">"Security Event Token (SET)"</span>, <time datetime="2018-04" class="refDate">April 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8417">https://www.rfc-editor.org/info/rfc8417</a>&gt;</span>. </dd>
+<span class="refAuthor">Hunt, P., Ed.</span>, <span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Denniss, W.</span>, and <span class="refAuthor">M. Ansari</span>, <span class="refTitle">"Security Event Token (SET)"</span>, <span class="seriesInfo">RFC 8417</span>, <span class="seriesInfo">DOI 10.17487/RFC8417</span>, <time datetime="2018-07" class="refDate">July 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8417">https://www.rfc-editor.org/info/rfc8417</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="SUBIDS">[SUBIDS]</dt>
       <dd>
@@ -4431,7 +4431,7 @@ Subject Identifiers for Security Event Tokens <span>[<a href="#SUBIDS" class="ci
       <h2 id="name-acknowledgements">
 <a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-acknowledgements" class="section-name selfRef">Acknowledgements</a>
       </h2>
-<p id="appendix-A-1">The authors wish to thank all members of the OpenID Foundation SSE
+<p id="appendix-A-1">The authors wish to thank all members of the OpenID Foundation SSF
 Working Group who contributed to the development of this
 specification.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 </section>

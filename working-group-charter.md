@@ -1,9 +1,9 @@
-# Shared Signals and Events Working Group Charter
+# Shared Signals Working Group Charter
 ## 1) Working Group Name
-Shared Signals and Events
+Shared Signals
 
 ## 2) Purpose
-The goal of the Shared Signals and Events Working Group is to enable the sharing of security events, state changes, and other signals between related and/or dependent systems in order to:
+The goal of the Shared Signals Working Group is to enable the sharing of security events, state changes, and other signals between related and/or dependent systems in order to:
 * Manage access to resources and enforce access control restrictions across distributed services operating in a dynamic environment.
 * Prevent malicious actors from leveraging compromises of accounts, devices, services, endpoints, or other principals or resources to gain unauthorized access to additional systems or resources.
 * Enable users, administrators, and service providers to coordinate in order to detect and respond to incidents.
@@ -92,7 +92,7 @@ The group will work to produce the Security Event and Account Lifecycle Schema b
 * [XACML-v3.0-Errata01](https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=xacml) – eXtensible Access Control Markup Language (XACML)
 
 ## Proposers
-### 2019 Re-charter as Shared Signals and Events Working Group
+### 2019 Re-charter as Shared Signals Working Group
 * Asad Ali, Thales
 * Morteza Ansari, Cisco
 * Annabelle Backman, Amazon

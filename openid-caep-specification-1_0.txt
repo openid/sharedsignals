@@ -2,11 +2,11 @@
 
 
 
-Shared Signals and Events                                    T. Cappalli
+Shared Signals                                               T. Cappalli
                                                                Microsoft
                                                         A. Tulshibagwale
                                                                     SGNL
-                                                       11 September 2021
+                                                         9 February 2023
 
 
        OpenID Continuous Access Evaluation Profile 1.0 - draft 03
@@ -15,12 +15,12 @@ Shared Signals and Events                                    T. Cappalli
 Abstract
 
    This document defines the Continuous Access Evaluation Profile (CAEP)
-   of the Shared Signals and Events Framework [SSE-FRAMEWORK].  It
-   specifies a set of event types conforming to the SSE Framework.
-   These event types are intended to be used between cooperating
-   Transmitters and Receivers such that Transmitters may send continuous
-   updates using which Receivers can attenuate access to shared human or
-   robotic users, devices, sessions and applications.
+   of the Shared Signals Framework [SSF].  It specifies a set of event
+   types conforming to the Shared Signals Framework.  These event types
+   are intended to be used between cooperating Transmitters and
+   Receivers such that Transmitters may send continuous updates using
+   which Receivers can attenuate access to shared human or robotic
+   users, devices, sessions and applications.
 
 Table of Contents
 
@@ -55,16 +55,16 @@ Table of Contents
 
 Cappalli & Tulshibagwale     Standards Track                    [Page 1]
 
-                                CAEP-Spec                 September 2021
+                                CAEP-Spec                  February 2023
 
 
 1.  Introduction
 
-   CAEP is the application of the Shared Signals and Events Profile of
-   IETF Security Events 1.0 [SSE-FRAMEWORK] (SSE Profile) to ensure
-   access security in a network of cooperating providers.  CAEP
-   specifies a set of event-types that conform to the SSE Profile.  This
-   document specifies the event-types required to achieve this goal.
+   CAEP is the application of the Shared Signals Profile of IETF
+   Security Events 1.0 [SSF] (SSF Profile) to ensure access security in
+   a network of cooperating providers.  CAEP specifies a set of event-
+   types that conform to the SSF Profile.  This document specifies the
+   event-types required to achieve this goal.
 
 1.1.  Notational Considerations
 
@@ -111,7 +111,7 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 1]
 
 Cappalli & Tulshibagwale     Standards Track                    [Page 2]
 
-                                CAEP-Spec                 September 2021
+                                CAEP-Spec                  February 2023
 
 
    {
@@ -167,7 +167,7 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 2]
 
 Cappalli & Tulshibagwale     Standards Track                    [Page 3]
 
-                                CAEP-Spec                 September 2021
+                                CAEP-Spec                  February 2023
 
 
    The actual reason why the session was revoked might be specified with
@@ -223,7 +223,7 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 3]
 
 Cappalli & Tulshibagwale     Standards Track                    [Page 4]
 
-                                CAEP-Spec                 September 2021
+                                CAEP-Spec                  February 2023
 
 
    {
@@ -279,7 +279,7 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 4]
 
 Cappalli & Tulshibagwale     Standards Track                    [Page 5]
 
-                                CAEP-Spec                 September 2021
+                                CAEP-Spec                  February 2023
 
 
    {
@@ -335,7 +335,7 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 5]
 
 Cappalli & Tulshibagwale     Standards Track                    [Page 6]
 
-                                CAEP-Spec                 September 2021
+                                CAEP-Spec                  February 2023
 
 
    The actual reason why the claims change occurred might be specified
@@ -391,7 +391,7 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 6]
 
 Cappalli & Tulshibagwale     Standards Track                    [Page 7]
 
-                                CAEP-Spec                 September 2021
+                                CAEP-Spec                  February 2023
 
 
    {
@@ -447,7 +447,7 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 7]
 
 Cappalli & Tulshibagwale     Standards Track                    [Page 8]
 
-                                CAEP-Spec                 September 2021
+                                CAEP-Spec                  February 2023
 
 
    {
@@ -503,7 +503,7 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 8]
 
 Cappalli & Tulshibagwale     Standards Track                    [Page 9]
 
-                                CAEP-Spec                 September 2021
+                                CAEP-Spec                  February 2023
 
 
       *  password
@@ -559,7 +559,7 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 9]
 
 Cappalli & Tulshibagwale     Standards Track                   [Page 10]
 
-                                CAEP-Spec                 September 2021
+                                CAEP-Spec                  February 2023
 
 
 3.3.2.  Examples
@@ -615,7 +615,7 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 10]
 
 Cappalli & Tulshibagwale     Standards Track                   [Page 11]
 
-                                CAEP-Spec                 September 2021
+                                CAEP-Spec                  February 2023
 
 
    authentication (such as a password).  The user can then open another
@@ -671,7 +671,7 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 11]
 
 Cappalli & Tulshibagwale     Standards Track                   [Page 12]
 
-                                CAEP-Spec                 September 2021
+                                CAEP-Spec                  February 2023
 
 
       increased or decreased If the Transmitter has specified the
@@ -727,7 +727,7 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 12]
 
 Cappalli & Tulshibagwale     Standards Track                   [Page 13]
 
-                                CAEP-Spec                 September 2021
+                                CAEP-Spec                  February 2023
 
 
    {
@@ -783,7 +783,7 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 13]
 
 Cappalli & Tulshibagwale     Standards Track                   [Page 14]
 
-                                CAEP-Spec                 September 2021
+                                CAEP-Spec                  February 2023
 
 
       triggered the event
@@ -839,7 +839,7 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 14]
 
 Cappalli & Tulshibagwale     Standards Track                   [Page 15]
 
-                                CAEP-Spec                 September 2021
+                                CAEP-Spec                  February 2023
 
 
       Figure 12: Example: Device No Longer Compliant - Complex Subject
@@ -895,7 +895,7 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 15]
 
 Cappalli & Tulshibagwale     Standards Track                   [Page 16]
 
-                                CAEP-Spec                 September 2021
+                                CAEP-Spec                  February 2023
 
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
@@ -906,8 +906,7 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 16]
               Method Reference Values", RFC 8176, DOI 10.17487/RFC8176,
               June 2017, <https://www.rfc-editor.org/info/rfc8176>.
 
-   [SSE-FRAMEWORK]
-              Tulshibagwale, A., Cappalli, T., Scurtescu, M., Backman,
+   [SSF]      Tulshibagwale, A., Cappalli, T., Scurtescu, M., Backman,
               A., and John Bradley, "OpenID Shared Signals and Events
               Framework Specification 1.0", May 2021,
               <http://openid.net/specs/openid-sse-framework-1_0.html>.
@@ -919,8 +918,8 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 16]
 Appendix A.  Acknowledgements
 
    The authors wish to thank all members of the OpenID Foundation Shared
-   Signals and Events Working Group who contributed to the development
-   of this specification.
+   Signals Working Group who contributed to the development of this
+   specification.
 
 Appendix B.  Notices
 
@@ -946,15 +945,15 @@ Appendix B.  Notices
    this specification or the extent to which any license under such
    rights might or might not be available; neither does it represent
    that it has made any independent effort to identify any such rights.
+   The OpenID Foundation and the contributors to this specification make
 
 
 
 Cappalli & Tulshibagwale     Standards Track                   [Page 17]
 
-                                CAEP-Spec                 September 2021
+                                CAEP-Spec                  February 2023
 
 
-   The OpenID Foundation and the contributors to this specification make
    no (and hereby expressly disclaim any) warranties (express, implied,
    or otherwise), including implied warranties of merchantability, non-
    infringement, fitness for a particular purpose, or title, related to
@@ -977,6 +976,7 @@ Authors' Addresses
    Atul Tulshibagwale
    SGNL
    Email: atul@sgnl.ai
+
 
 
 

@@ -2,11 +2,11 @@
 title: OpenID Continuous Access Evaluation Profile 1.0 - draft 03
 abbrev: CAEP-Spec
 docname: openid-caep-specification-1_0
-date: 2021-09-11
+date: 2023-02-09
 
 ipr: none
 cat: std
-wg: Shared Signals and Events
+wg: Shared Signals
 
 coding: us-ascii
 pi:
@@ -85,7 +85,7 @@ normative:
   RFC5646:
   RFC6711:
   RFC8176:
-  SSE-FRAMEWORK:
+  SSF:
     target: http://openid.net/specs/openid-sse-framework-1_0.html
     title: OpenID Shared Signals and Events Framework Specification 1.0
     author:
@@ -123,8 +123,8 @@ normative:
 --- abstract
 
 This document defines the Continuous Access Evaluation Profile (CAEP) of the
-Shared Signals and Events Framework {{SSE-FRAMEWORK}}. It specifies a set of event
-types conforming to the SSE Framework. These event types are intended to be used
+Shared Signals Framework {{SSF}}. It specifies a set of event
+types conforming to the Shared Signals Framework. These event types are intended to be used
 between cooperating Transmitters and Receivers such that Transmitters may send
 continuous updates using which Receivers can attenuate access to shared human or
 robotic users, devices, sessions and applications.
@@ -132,10 +132,10 @@ robotic users, devices, sessions and applications.
 --- middle
 
 # Introduction {#introduction}
-CAEP is the application of the Shared Signals and Events Profile of IETF
-Security Events 1.0 {{SSE-FRAMEWORK}} (SSE Profile) to ensure access security in a
+CAEP is the application of the Shared Signals Profile of IETF
+Security Events 1.0 {{SSF}} (SSF Profile) to ensure access security in a
 network of cooperating providers. CAEP specifies a set of event-types that
-conform to the SSE Profile. This document specifies the event-types required to
+conform to the SSF Profile. This document specifies the event-types required to
 achieve this goal.
 
 ## Notational Considerations
@@ -692,7 +692,7 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
 # Acknowledgements
 
 The authors wish to thank all members of the OpenID Foundation Shared Signals
-and Events Working Group who contributed to the development of this
+Working Group who contributed to the development of this
 specification.
 
 # Notices

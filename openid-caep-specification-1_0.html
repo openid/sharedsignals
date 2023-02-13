@@ -9,16 +9,16 @@
 <meta content="Atul Tulshibagwale" name="author">
 <meta content="
        This document defines the Continuous Access Evaluation Profile (CAEP) of the
-Shared Signals and Events Framework  . It specifies a set of event
-types conforming to the SSE Framework. These event types are intended to be used
+Shared Signals Framework  . It specifies a set of event
+types conforming to the Shared Signals Framework. These event types are intended to be used
 between cooperating Transmitters and Receivers such that Transmitters may send
 continuous updates using which Receivers can attenuate access to shared human or
 robotic users, devices, sessions and applications. 
     " name="description">
-<meta content="xml2rfc 3.14.2" name="generator">
+<meta content="xml2rfc 3.15.3" name="generator">
 <meta content="openid-caep-specification-1_0" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.14.2
+  xml2rfc 3.15.3
     Python 3.9.6
     appdirs 1.4.4
     ConfigArgParse 1.5.3
@@ -26,7 +26,6 @@ robotic users, devices, sessions and applications.
     html5lib 1.1
     intervaltree 3.1.0
     Jinja2 3.1.2
-    kitchen 1.2.6
     lxml 4.9.1
     MarkupSafe 2.1.1
     pycountry 22.3.5
@@ -34,6 +33,7 @@ robotic users, devices, sessions and applications.
     requests 2.28.1
     setuptools 58.0.4
     six 1.15.0
+    wcwidth 0.2.5
 -->
 <link href="openid-caep-specification-1_0.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -45,7 +45,7 @@ robotic users, devices, sessions and applications.
   this can be consolidated so that style settings occur only in one place, but
   for now the contents of this file consists first of the initial CSS work as
   provided to the RFC Formatter (xml2rfc) work, followed by itemized and
-  commented changes found necssary during the development of the v3
+  commented changes found necessary during the development of the v3
   formatters.
 
 */
@@ -54,6 +54,12 @@ robotic users, devices, sessions and applications.
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans'); /* Sans-serif */
 @import url('https://fonts.googleapis.com/css?family=Noto+Serif'); /* Serif (print) */
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono'); /* Monospace */
+
+:root {
+  --font-sans: 'Noto Sans', Arial, Helvetica, sans-serif;
+  --font-serif: 'Noto Serif', 'Times', 'Times New Roman', serif;
+  --font-mono: 'Roboto Mono', Courier, 'Courier New', monospace;
+}
 
 @viewport {
   zoom: 1.0;
@@ -72,7 +78,7 @@ body {
   color: #222;
   background-color: #fff;
   font-size: 14px;
-  font-family: 'Noto Sans', Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
   line-height: 1.6;
   scroll-behavior: smooth;
 }
@@ -160,6 +166,15 @@ div {
 }
 svg {
   display: block;
+}
+svg[font-family~="serif" i], svg [font-family~="serif" i] {
+  font-family: var(--font-serif);
+}
+svg[font-family~="sans-serif" i], svg [font-family~="sans-serif" i] {
+  font-family: var(--font-sans);
+}
+svg[font-family~="monospace" i], svg [font-family~="monospace" i] {
+  font-family: var(--font-mono);
 }
 .alignCenter.art-text {
   background-color: #f9f9f9;
@@ -254,9 +269,9 @@ a.selfRef:hover {
 } */
 
 /* Figures */
-tt, code, pre, code {
+tt, code, pre {
   background-color: #f9f9f9;
-  font-family: 'Roboto Mono', monospace;
+  font-family: var(--font-mono);
 }
 pre {
   border: 1px solid #eee;
@@ -493,7 +508,7 @@ address.vcard .nameRole {
   margin-left: 0;
 }
 address.vcard .label {
-  font-family: "Noto Sans",Arial,Helvetica,sans-serif;
+  font-family: var(--font-sans);
   margin: 0.5em 0;
 }
 address.vcard .type {
@@ -656,7 +671,7 @@ hr.addr {
   figure {
     overflow: scroll;
   }
-  pre.breakable {
+  .breakable pre {
     break-inside: auto;
   }
   h1, h2, h3, h4, h5, h6 {
@@ -726,7 +741,7 @@ hr.addr {
   size: A4;
   margin-bottom: 45mm;
   padding-top: 20px;
-  /* The follwing is commented out here, but set appropriately by in code, as
+  /* The following is commented out here, but set appropriately by in code, as
      the content depends on the document */
   /*
   @top-left {
@@ -826,12 +841,12 @@ section {
 }
 
 /* prevent monospace from becoming overly large */
-tt, code, pre, code {
+tt, code, pre {
   font-size: 95%;
 }
 
 /* Fix the height/width aspect for ascii art*/
-pre.sourcecode,
+.sourcecode pre,
 .art-text pre {
   line-height: 1.12;
 }
@@ -867,7 +882,7 @@ table th.text-right {
   text-align: right;
 }
 
-/* Make the alternative author contact informatio look less like just another
+/* Make the alternative author contact information look less like just another
    author, and group it closer with the primary author contact information */
 .alternative-contact {
   margin: 0.5em 0 0.25em 0;
@@ -1049,6 +1064,7 @@ aside > p {
 /* Sourcecode margin in print, when there's no pilcrow */
 @media print {
   .artwork,
+  .artwork > pre,
   .sourcecode {
     margin-bottom: 1em;
   }
@@ -1063,7 +1079,7 @@ ol.type-A { list-style-type: upper-alpha; }
 ol.type-i { list-style-type: lower-roman; }
 ol.type-I { list-style-type: lower-roman; }
 /* Apply the print table and row borders in general, on request from the RPC,
-and increase the contrast between border and odd row background sligthtly */
+and increase the contrast between border and odd row background slightly */
 table {
   border: 1px solid #ddd;
 }
@@ -1123,7 +1139,7 @@ span.break, dd.break {
     break-before: auto;
   }
 }
-/* Text in compact lists should not get extra bottim margin space,
+/* Text in compact lists should not get extra bottom margin space,
    since that would makes the list not compact */
 ul.compact p, .ulCompact p,
 ol.compact p, .olCompact p {
@@ -1148,7 +1164,7 @@ p tt, p code, li tt, li code {
 pre {
    margin-top: 0.5px;
 }
-/* Tweak the comact list text */
+/* Tweak the compact list text */
 ul.compact, .ulCompact,
 ol.compact, .olCompact,
 dl.compact, .dlCompact {
@@ -1166,7 +1182,7 @@ dd > div.artwork:first-child,
 dd > aside:first-child,
 dd > figure:first-child,
 dd > ol:first-child,
-dd > div:first-child > pre.sourcecode,
+dd > div.sourcecode:first-child,
 dd > table:first-child,
 dd > ul:first-child {
   clear: left;
@@ -1180,20 +1196,20 @@ li > p {
   margin-bottom: 0.5em
 }
 /* Don't let p margin spill out from inside list items */
-li > p:last-of-type {
+li > p:last-of-type:only-child {
   margin-bottom: 0;
 }
 </style>
 <link href="rfc-local.css" rel="stylesheet" type="text/css">
 <script type="application/javascript">async function addMetadata(){try{const e=document.styleSheets[0].cssRules;for(let t=0;t<e.length;t++)if(/#identifiers/.exec(e[t].selectorText)){const a=e[t].cssText.replace("#identifiers","#external-updates");document.styleSheets[0].insertRule(a,document.styleSheets[0].cssRules.length)}}catch(e){console.log(e)}const e=document.getElementById("external-metadata");if(e)try{var t,a="",o=function(e){const t=document.getElementsByTagName("meta");for(let a=0;a<t.length;a++)if(t[a].getAttribute("name")===e)return t[a].getAttribute("content");return""}("rfc.number");if(o){t="https://www.rfc-editor.org/rfc/rfc"+o+".json";try{const e=await fetch(t);a=await e.json()}catch(e){t=document.URL.indexOf("html")>=0?document.URL.replace(/html$/,"json"):document.URL+".json";const o=await fetch(t);a=await o.json()}}if(!a)return;e.style.display="block";const s="",d="https://datatracker.ietf.org/doc",n="https://datatracker.ietf.org/ipr/search",c="https://www.rfc-editor.org/info",l=a.doc_id.toLowerCase(),i=a.doc_id.slice(0,3).toLowerCase(),f=a.doc_id.slice(3).replace(/^0+/,""),u={status:"Status",obsoletes:"Obsoletes",obsoleted_by:"Obsoleted By",updates:"Updates",updated_by:"Updated By",see_also:"See Also",errata_url:"Errata"};let h="<dl style='overflow:hidden' id='external-updates'>";["status","obsoletes","obsoleted_by","updates","updated_by","see_also","errata_url"].forEach(e=>{if("status"==e){a[e]=a[e].toLowerCase();var t=a[e].split(" "),o=t.length,w="",p=1;for(let e=0;e<o;e++)p<o?w=w+r(t[e])+" ":w+=r(t[e]),p++;a[e]=w}else if("obsoletes"==e||"obsoleted_by"==e||"updates"==e||"updated_by"==e){var g,m="",b=1;g=a[e].length;for(let t=0;t<g;t++)a[e][t]&&(a[e][t]=String(a[e][t]).toLowerCase(),m=b<g?m+"<a href='"+s+"/rfc/".concat(a[e][t])+"'>"+a[e][t].slice(3)+"</a>, ":m+"<a href='"+s+"/rfc/".concat(a[e][t])+"'>"+a[e][t].slice(3)+"</a>",b++);a[e]=m}else if("see_also"==e){var y,L="",C=1;y=a[e].length;for(let t=0;t<y;t++)if(a[e][t]){a[e][t]=String(a[e][t]);var _=a[e][t].slice(0,3),v=a[e][t].slice(3).replace(/^0+/,"");L=C<y?"RFC"!=_?L+"<a href='"+s+"/info/"+_.toLowerCase().concat(v.toLowerCase())+"'>"+_+" "+v+"</a>, ":L+"<a href='"+s+"/info/"+_.toLowerCase().concat(v.toLowerCase())+"'>"+v+"</a>, ":"RFC"!=_?L+"<a href='"+s+"/info/"+_.toLowerCase().concat(v.toLowerCase())+"'>"+_+" "+v+"</a>":L+"<a href='"+s+"/info/"+_.toLowerCase().concat(v.toLowerCase())+"'>"+v+"</a>",C++}a[e]=L}else if("errata_url"==e){var R="";R=a[e]?R+"<a href='"+a[e]+"'>Errata exist</a> | <a href='"+d+"/"+l+"'>Datatracker</a>| <a href='"+n+"/?"+i+"="+f+"&submit="+i+"'>IPR</a> | <a href='"+c+"/"+l+"'>Info page</a>":"<a href='"+d+"/"+l+"'>Datatracker</a> | <a href='"+n+"/?"+i+"="+f+"&submit="+i+"'>IPR</a> | <a href='"+c+"/"+l+"'>Info page</a>",a[e]=R}""!=a[e]?"Errata"==u[e]?h+=`<dt>More info:</dt><dd>${a[e]}</dd>`:h+=`<dt>${u[e]}:</dt><dd>${a[e]}</dd>`:"Errata"==u[e]&&(h+=`<dt>More info:</dt><dd>${a[e]}</dd>`)}),h+="</dl>",e.innerHTML=h}catch(e){console.log(e)}else console.log("Could not locate metadata <div> element");function r(e){return e.charAt(0).toUpperCase()+e.slice(1)}}window.removeEventListener("load",addMetadata),window.addEventListener("load",addMetadata);</script>
 </head>
-<body>
+<body class="xml2rfc">
 <script src="metadata.min.js"></script>
 <table class="ears">
 <thead><tr>
 <td class="left"></td>
 <td class="center">CAEP-Spec</td>
-<td class="right">September 2021</td>
+<td class="right">February 2023</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Cappalli &amp; Tulshibagwale</td>
@@ -1205,7 +1221,11 @@ li > p:last-of-type {
 <div id="internal-metadata" class="document-information">
 <dl id="identifiers">
 <dt class="label-workgroup">Workgroup:</dt>
-<dd class="workgroup">Shared Signals and Events</dd>
+<dd class="workgroup">Shared Signals</dd>
+<dt class="label-published">Published:</dt>
+<dd class="published">
+<time datetime="2023-02-09" class="published">9 February 2023</time>
+    </dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1223,8 +1243,8 @@ li > p:last-of-type {
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">This document defines the Continuous Access Evaluation Profile (CAEP) of the
-Shared Signals and Events Framework <span>[<a href="#SSE-FRAMEWORK" class="xref">SSE-FRAMEWORK</a>]</span>. It specifies a set of event
-types conforming to the SSE Framework. These event types are intended to be used
+Shared Signals Framework <span>[<a href="#SSF" class="cite xref">SSF</a>]</span>. It specifies a set of event
+types conforming to the Shared Signals Framework. These event types are intended to be used
 between cooperating Transmitters and Receivers such that Transmitters may send
 continuous updates using which Receivers can attenuate access to shared human or
 robotic users, devices, sessions and applications.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
@@ -1236,87 +1256,87 @@ robotic users, devices, sessions and applications.<a href="#section-abstract-1" 
         </h2>
 <nav class="toc"><ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
-            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="xref">1</a>.  <a href="#name-introduction" class="xref">Introduction</a></p>
+            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.1">
-                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="xref">1.1</a>.  <a href="#name-notational-considerations" class="xref">Notational Considerations</a></p>
+                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.  <a href="#name-notational-considerations" class="internal xref">Notational Considerations</a></p>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
-            <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="xref">2</a>.  <a href="#name-optional-event-claims" class="xref">Optional Event Claims</a></p>
+            <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-optional-event-claims" class="internal xref">Optional Event Claims</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1"><a href="#section-3" class="xref">3</a>.  <a href="#name-event-types" class="xref">Event Types</a></p>
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-event-types" class="internal xref">Event Types</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
-                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="xref">3.1</a>.  <a href="#name-session-revoked" class="xref">Session Revoked</a></p>
+                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-session-revoked" class="internal xref">Session Revoked</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.1">
-                    <p id="section-toc.1-1.3.2.1.2.1.1"><a href="#section-3.1.1" class="xref">3.1.1</a>.  <a href="#name-event-specific-claims" class="xref">Event-Specific Claims</a></p>
+                    <p id="section-toc.1-1.3.2.1.2.1.1"><a href="#section-3.1.1" class="auto internal xref">3.1.1</a>.  <a href="#name-event-specific-claims" class="internal xref">Event-Specific Claims</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.2">
-                    <p id="section-toc.1-1.3.2.1.2.2.1"><a href="#section-3.1.2" class="xref">3.1.2</a>.  <a href="#name-examples" class="xref">Examples</a></p>
+                    <p id="section-toc.1-1.3.2.1.2.2.1"><a href="#section-3.1.2" class="auto internal xref">3.1.2</a>.  <a href="#name-examples" class="internal xref">Examples</a></p>
 </li>
                 </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
-                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="xref">3.2</a>.  <a href="#name-token-claims-change" class="xref">Token Claims Change</a></p>
+                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-token-claims-change" class="internal xref">Token Claims Change</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.1">
-                    <p id="section-toc.1-1.3.2.2.2.1.1"><a href="#section-3.2.1" class="xref">3.2.1</a>.  <a href="#name-event-specific-claims-2" class="xref">Event-Specific Claims</a></p>
+                    <p id="section-toc.1-1.3.2.2.2.1.1"><a href="#section-3.2.1" class="auto internal xref">3.2.1</a>.  <a href="#name-event-specific-claims-2" class="internal xref">Event-Specific Claims</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.2">
-                    <p id="section-toc.1-1.3.2.2.2.2.1"><a href="#section-3.2.2" class="xref">3.2.2</a>.  <a href="#name-examples-2" class="xref">Examples</a></p>
+                    <p id="section-toc.1-1.3.2.2.2.2.1"><a href="#section-3.2.2" class="auto internal xref">3.2.2</a>.  <a href="#name-examples-2" class="internal xref">Examples</a></p>
 </li>
                 </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3">
-                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="xref">3.3</a>.  <a href="#name-credential-change" class="xref">Credential Change</a></p>
+                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-credential-change" class="internal xref">Credential Change</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3.2.1">
-                    <p id="section-toc.1-1.3.2.3.2.1.1"><a href="#section-3.3.1" class="xref">3.3.1</a>.  <a href="#name-event-specific-claims-3" class="xref">Event-Specific Claims</a></p>
+                    <p id="section-toc.1-1.3.2.3.2.1.1"><a href="#section-3.3.1" class="auto internal xref">3.3.1</a>.  <a href="#name-event-specific-claims-3" class="internal xref">Event-Specific Claims</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3.2.2">
-                    <p id="section-toc.1-1.3.2.3.2.2.1"><a href="#section-3.3.2" class="xref">3.3.2</a>.  <a href="#name-examples-3" class="xref">Examples</a></p>
+                    <p id="section-toc.1-1.3.2.3.2.2.1"><a href="#section-3.3.2" class="auto internal xref">3.3.2</a>.  <a href="#name-examples-3" class="internal xref">Examples</a></p>
 </li>
                 </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4">
-                <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="xref">3.4</a>.  <a href="#name-assurance-level-change" class="xref">Assurance Level Change</a></p>
+                <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="auto internal xref">3.4</a>.  <a href="#name-assurance-level-change" class="internal xref">Assurance Level Change</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4.2.1">
-                    <p id="section-toc.1-1.3.2.4.2.1.1"><a href="#section-3.4.1" class="xref">3.4.1</a>.  <a href="#name-event-specific-claims-4" class="xref">Event-Specific Claims</a></p>
+                    <p id="section-toc.1-1.3.2.4.2.1.1"><a href="#section-3.4.1" class="auto internal xref">3.4.1</a>.  <a href="#name-event-specific-claims-4" class="internal xref">Event-Specific Claims</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4.2.2">
-                    <p id="section-toc.1-1.3.2.4.2.2.1"><a href="#section-3.4.2" class="xref">3.4.2</a>.  <a href="#name-examples-4" class="xref">Examples</a></p>
+                    <p id="section-toc.1-1.3.2.4.2.2.1"><a href="#section-3.4.2" class="auto internal xref">3.4.2</a>.  <a href="#name-examples-4" class="internal xref">Examples</a></p>
 </li>
                 </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.5">
-                <p id="section-toc.1-1.3.2.5.1"><a href="#section-3.5" class="xref">3.5</a>.  <a href="#name-device-compliance-change" class="xref">Device Compliance Change</a></p>
+                <p id="section-toc.1-1.3.2.5.1"><a href="#section-3.5" class="auto internal xref">3.5</a>.  <a href="#name-device-compliance-change" class="internal xref">Device Compliance Change</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.5.2.1">
-                    <p id="section-toc.1-1.3.2.5.2.1.1"><a href="#section-3.5.1" class="xref">3.5.1</a>.  <a href="#name-event-specific-claims-5" class="xref">Event-Specific Claims</a></p>
+                    <p id="section-toc.1-1.3.2.5.2.1.1"><a href="#section-3.5.1" class="auto internal xref">3.5.1</a>.  <a href="#name-event-specific-claims-5" class="internal xref">Event-Specific Claims</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.5.2.2">
-                    <p id="section-toc.1-1.3.2.5.2.2.1"><a href="#section-3.5.2" class="xref">3.5.2</a>.  <a href="#name-examples-5" class="xref">Examples</a></p>
+                    <p id="section-toc.1-1.3.2.5.2.2.1"><a href="#section-3.5.2" class="auto internal xref">3.5.2</a>.  <a href="#name-examples-5" class="internal xref">Examples</a></p>
 </li>
                 </ul>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
-            <p id="section-toc.1-1.4.1"><a href="#section-4" class="xref">4</a>.  <a href="#name-normative-references" class="xref">Normative References</a></p>
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#appendix-A" class="xref">Appendix A</a>.  <a href="#name-acknowledgements" class="xref">Acknowledgements</a></p>
+            <p id="section-toc.1-1.5.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-acknowledgements" class="internal xref">Acknowledgements</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#appendix-B" class="xref">Appendix B</a>.  <a href="#name-notices" class="xref">Notices</a></p>
+            <p id="section-toc.1-1.6.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-notices" class="internal xref">Notices</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#appendix-C" class="xref"></a><a href="#name-authors-addresses" class="xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.7.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1327,10 +1347,10 @@ robotic users, devices, sessions and applications.<a href="#section-abstract-1" 
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">CAEP is the application of the Shared Signals and Events Profile of IETF
-Security Events 1.0 <span>[<a href="#SSE-FRAMEWORK" class="xref">SSE-FRAMEWORK</a>]</span> (SSE Profile) to ensure access security in a
+<p id="section-1-1">CAEP is the application of the Shared Signals Profile of IETF
+Security Events 1.0 <span>[<a href="#SSF" class="cite xref">SSF</a>]</span> (SSF Profile) to ensure access security in a
 network of cooperating providers. CAEP specifies a set of event-types that
-conform to the SSE Profile. This document specifies the event-types required to
+conform to the SSF Profile. This document specifies the event-types required to
 achieve this goal.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <div id="notational-considerations">
 <section id="section-1.1">
@@ -1339,7 +1359,7 @@ achieve this goal.<a href="#section-1-1" class="pilcrow">¶</a></p>
         </h3>
 <p id="section-1.1-1">The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", 
 "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this 
-document are to be interpreted as described in BCP 14 <span>[<a href="#RFC2119" class="xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="xref">RFC8174</a>]</span> 
+document are to be interpreted as described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> 
 when, and only when, they appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1388,15 +1408,15 @@ from 1970-01-01T0:0:0Z as measured in UTC until the date/time.<a href="#section-
         <dd style="margin-left: 1.5em" id="section-2-2.8">
           <p id="section-2-2.8.1">OPTIONAL, JSON object: a localizable administrative message intended for
 logging and auditing. The object MUST contain one or more key/value pairs,
-with a BCP47 <span>[<a href="#RFC5646" class="xref">RFC5646</a>]</span> language tag as the key and the locale-specific
+with a BCP47 <span>[<a href="#RFC5646" class="cite xref">RFC5646</a>]</span> language tag as the key and the locale-specific
 administrative message as the value.<a href="#section-2-2.8.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
 <span id="name-example-administrative-reas"></span><div id="optional-claims-reason-admin-example">
 <figure id="figure-1">
-        <div id="section-2-3.1">
-<pre class="lang-json sourcecode">
+        <div class="lang-json sourcecode" id="section-2-3.1">
+<pre>
 {
     "reason_admin": {
         "en": "Landspeed Policy Violation: C076E82F",
@@ -1415,15 +1435,15 @@ administrative message as the value.<a href="#section-2-2.8.1" class="pilcrow">�
         <dd style="margin-left: 1.5em" id="section-2-4.2">
           <p id="section-2-4.2.1">OPTIONAL, JSON object: a localizable user-friendly message for display
 to an end-user. The object MUST contain one or more key/value pairs, with a
-BCP47 <span>[<a href="#RFC5646" class="xref">RFC5646</a>]</span> language tag as the key and the locale-specific end-user
+BCP47 <span>[<a href="#RFC5646" class="cite xref">RFC5646</a>]</span> language tag as the key and the locale-specific end-user
 message as the value.<a href="#section-2-4.2.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
 <span id="name-example-end-user-reason-inf"></span><div id="optional-claims-reason-user-example">
 <figure id="figure-2">
-        <div id="section-2-5.1">
-<pre class="lang-json sourcecode">
+        <div class="lang-json sourcecode" id="section-2-5.1">
+<pre>
 {
     "reason_user": {
         "en": "Access attempt from multiple regions.",
@@ -1460,7 +1480,7 @@ receiver to identify applicable sessions.<a href="#section-3.1-3" class="pilcrow
 <p id="section-3.1-4">When a Complex Claim is used as the subject, the revocation event applies 
 to any session derived from matching those combined claims.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
 <p id="section-3.1-5">The actual reason why the session was revoked might be specified with the 
-nested <code>reason_admin</code> and/or <code>reason_user</code> claims described in <a href="#optional-event-claims" class="xref">Section 2</a>.<a href="#section-3.1-5" class="pilcrow">¶</a></p>
+nested <code>reason_admin</code> and/or <code>reason_user</code> claims described in <a href="#optional-event-claims" class="auto internal xref">Section 2</a>.<a href="#section-3.1-5" class="pilcrow">¶</a></p>
 <div id="session-revoked-claims">
 <section id="section-3.1.1">
           <h4 id="name-event-specific-claims">
@@ -1479,8 +1499,8 @@ the session revocation occurred.<a href="#section-3.1.1-2" class="pilcrow">¶</a
 <p id="section-3.1.2-1">NOTE: The event type URI is wrapped, the backslash is the continuation character.<a href="#section-3.1.2-1" class="pilcrow">¶</a></p>
 <span id="name-example-session-revoked-req"></span><div id="session-revoked-example-session-id-req">
 <figure id="figure-3">
-            <div id="section-3.1.2-2.1">
-<pre class="lang-json sourcecode">
+            <div class="lang-json sourcecode" id="section-3.1.2-2.1">
+<pre>
 {
     "iss": "https://idp.example.com/123456789/",
     "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
@@ -1504,8 +1524,8 @@ the session revocation occurred.<a href="#section-3.1.1-2" class="pilcrow">¶</a
 </div>
 <span id="name-example-session-revoked-sub"></span><div id="session-revoked-example-user-sub">
 <figure id="figure-4">
-            <div id="section-3.1.2-3.1">
-<pre class="lang-json sourcecode">
+            <div class="lang-json sourcecode" id="section-3.1.2-3.1">
+<pre>
 {
     "iss": "https://idp.example.com/123456789/",
     "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
@@ -1548,8 +1568,8 @@ the session revocation occurred.<a href="#section-3.1.1-2" class="pilcrow">¶</a
 </div>
 <span id="name-example-session-revoked-com"></span><div id="session-revoked-example-user-device">
 <figure id="figure-5">
-            <div id="section-3.1.2-4.1">
-<pre class="lang-json sourcecode">
+            <div class="lang-json sourcecode" id="section-3.1.2-4.1">
+<pre>
 {
     "iss": "https://idp.example.com/123456789/",
     "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
@@ -1605,7 +1625,7 @@ the session revocation occurred.<a href="#section-3.1.1-2" class="pilcrow">¶</a
 <p id="section-3.2-3">Token Claims Change signals that a claim in a token, identified by the 
 subject claim, has changed.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
 <p id="section-3.2-4">The actual reason why the claims change occurred might be specified with the 
-nested <code>reason_admin</code> and/or <code>reason_user</code> claims made in <a href="#optional-event-claims" class="xref">Section 2</a>.<a href="#section-3.2-4" class="pilcrow">¶</a></p>
+nested <code>reason_admin</code> and/or <code>reason_user</code> claims made in <a href="#optional-event-claims" class="auto internal xref">Section 2</a>.<a href="#section-3.2-4" class="pilcrow">¶</a></p>
 <div id="token-claims-change-claims">
 <section id="section-3.2.1">
           <h4 id="name-event-specific-claims-2">
@@ -1630,8 +1650,8 @@ the claim value(s) changed.<a href="#section-3.2.1-2" class="pilcrow">¶</a></p>
 <p id="section-3.2.2-1">NOTE: The event type URI is wrapped, the backslash is the continuation character.<a href="#section-3.2.2-1" class="pilcrow">¶</a></p>
 <span id="name-example-oidc-id-token-claim"></span><div id="token-claims-change-example-oidc">
 <figure id="figure-6">
-            <div id="section-3.2.2-2.1">
-<pre class="lang-json sourcecode">
+            <div class="lang-json sourcecode" id="section-3.2.2-2.1">
+<pre>
 {
     "iss": "https://idp.example.com/987654321/",
     "jti": "9afce1e4e642b165fcaacdd0e7aa4903",
@@ -1659,8 +1679,8 @@ the claim value(s) changed.<a href="#section-3.2.1-2" class="pilcrow">¶</a></p>
 </div>
 <span id="name-example-oidc-id-token-claims"></span><div id="token-claims-change-example-oidc-optional">
 <figure id="figure-7">
-            <div id="section-3.2.2-3.1">
-<pre class="lang-json sourcecode">
+            <div class="lang-json sourcecode" id="section-3.2.2-3.1">
+<pre>
 {
     "iss": "https://idp.example.com/987654321/",
     "jti": "9afce1e4e642b165fcaacdd0e7aa4903",
@@ -1697,8 +1717,8 @@ the claim value(s) changed.<a href="#section-3.2.1-2" class="pilcrow">¶</a></p>
 </div>
 <span id="name-example-saml-assertion-clai"></span><div id="token-claims-change-example-saml">
 <figure id="figure-8">
-            <div id="section-3.2.2-4.1">
-<pre class="lang-json sourcecode">
+            <div class="lang-json sourcecode" id="section-3.2.2-4.1">
+<pre>
 {
     "iss": "https://idp.example.com/987654321/",
     "jti": "dae94fed5f459881efa38b65c6772ddc",
@@ -1746,7 +1766,7 @@ revoked or deleted. Credential Change scenarios include:<a href="#section-3.3-3"
 </li>
         </ul>
 <p id="section-3.3-5">The actual reason why the credential change occurred might be specified with the 
-nested <code>reason_admin</code> and/or <code>reason_user</code> claims made in <a href="#optional-event-claims" class="xref">Section 2</a>.<a href="#section-3.3-5" class="pilcrow">¶</a></p>
+nested <code>reason_admin</code> and/or <code>reason_user</code> claims made in <a href="#optional-event-claims" class="auto internal xref">Section 2</a>.<a href="#section-3.3-5" class="pilcrow">¶</a></p>
 <div id="credential-change-claims">
 <section id="section-3.3.1">
           <h4 id="name-event-specific-claims-3">
@@ -1817,17 +1837,17 @@ credential type supported mutually by the Transmitter and the Receiver.<a href="
             <dd class="break"></dd>
 <dt id="section-3.3.1-1.7">x509_issuer</dt>
             <dd style="margin-left: 1.5em" id="section-3.3.1-1.8">
-              <p id="section-3.3.1-1.8.1">OPTIONAL, JSON string: issuer of the X.509 certificate as defined in <span>[<a href="#RFC5280" class="xref">RFC5280</a>]</span><a href="#section-3.3.1-1.8.1" class="pilcrow">¶</a></p>
+              <p id="section-3.3.1-1.8.1">OPTIONAL, JSON string: issuer of the X.509 certificate as defined in <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span><a href="#section-3.3.1-1.8.1" class="pilcrow">¶</a></p>
 </dd>
             <dd class="break"></dd>
 <dt id="section-3.3.1-1.9">x509_serial</dt>
             <dd style="margin-left: 1.5em" id="section-3.3.1-1.10">
-              <p id="section-3.3.1-1.10.1">OPTIONAL, JSON string: serial number of the X.509 certificate as defined in <span>[<a href="#RFC5280" class="xref">RFC5280</a>]</span><a href="#section-3.3.1-1.10.1" class="pilcrow">¶</a></p>
+              <p id="section-3.3.1-1.10.1">OPTIONAL, JSON string: serial number of the X.509 certificate as defined in <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span><a href="#section-3.3.1-1.10.1" class="pilcrow">¶</a></p>
 </dd>
             <dd class="break"></dd>
 <dt id="section-3.3.1-1.11">fido2_aaguid</dt>
             <dd style="margin-left: 1.5em" id="section-3.3.1-1.12">
-              <p id="section-3.3.1-1.12.1">OPTIONAL, JSON string: FIDO2 Authenticator Attestation GUID as defined in <span>[<a href="#WebAuthn" class="xref">WebAuthn</a>]</span><a href="#section-3.3.1-1.12.1" class="pilcrow">¶</a></p>
+              <p id="section-3.3.1-1.12.1">OPTIONAL, JSON string: FIDO2 Authenticator Attestation GUID as defined in <span>[<a href="#WebAuthn" class="cite xref">WebAuthn</a>]</span><a href="#section-3.3.1-1.12.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 </dl>
@@ -1843,8 +1863,8 @@ the credential change occurred.<a href="#section-3.3.1-2" class="pilcrow">¶</a>
 <p id="section-3.3.2-1">NOTE: The event type URI is wrapped, the backslash is the continuation character.<a href="#section-3.3.2-1" class="pilcrow">¶</a></p>
 <span id="name-example-provisioning-a-new-"></span><div id="credential-change-example-fido2">
 <figure id="figure-9">
-            <div id="section-3.3.2-2.1">
-<pre class="lang-json sourcecode">
+            <div class="lang-json sourcecode" id="section-3.3.2-2.1">
+<pre>
 {
     "iss": "https://idp.example.com/3456789/",
     "jti": "07efd930f0977e4fcc1149a733ce7f78",
@@ -1897,7 +1917,7 @@ two-factor authentication (such as OTP). In this scenario an increase
 Assurance Level Change event will signal to Service Provider A that user has 
 authenticated with a stronger authentication method.<a href="#section-3.4-4" class="pilcrow">¶</a></p>
 <p id="section-3.4-5">The actual reason why the assurance level changed might be specified with the 
-nested <code>reason_admin</code> and/or <code>reason_user</code> claims made in <a href="#optional-event-claims" class="xref">Section 2</a>.<a href="#section-3.4-5" class="pilcrow">¶</a></p>
+nested <code>reason_admin</code> and/or <code>reason_user</code> claims made in <a href="#optional-event-claims" class="auto internal xref">Section 2</a>.<a href="#section-3.4-5" class="pilcrow">¶</a></p>
 <div id="assurance-level-change-claims">
 <section id="section-3.4.1">
           <h4 id="name-event-specific-claims-4">
@@ -1910,22 +1930,22 @@ nested <code>reason_admin</code> and/or <code>reason_user</code> claims made in 
 This string MAY be one of the following strings:<a href="#section-3.4.1-1.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.4.1-1.2.2.1">
-                  <code>RFC8176</code>: The assurance level values are from the <span>[<a href="#RFC8176" class="xref">RFC8176</a>]</span> specification<a href="#section-3.4.1-1.2.2.1" class="pilcrow">¶</a>
+                  <code>RFC8176</code>: The assurance level values are from the <span>[<a href="#RFC8176" class="cite xref">RFC8176</a>]</span> specification<a href="#section-3.4.1-1.2.2.1" class="pilcrow">¶</a>
 </li>
                 <li class="normal" id="section-3.4.1-1.2.2.2">
-                  <code>RFC6711</code>: The assurance level values are from the <span>[<a href="#RFC6711" class="xref">RFC6711</a>]</span> specification<a href="#section-3.4.1-1.2.2.2" class="pilcrow">¶</a>
+                  <code>RFC6711</code>: The assurance level values are from the <span>[<a href="#RFC6711" class="cite xref">RFC6711</a>]</span> specification<a href="#section-3.4.1-1.2.2.2" class="pilcrow">¶</a>
 </li>
                 <li class="normal" id="section-3.4.1-1.2.2.3">
-                  <code>ISO-IEC-29115</code>: The assurance level values are from the <span>[<a href="#ISO-IEC-29115" class="xref">ISO-IEC-29115</a>]</span> specification<a href="#section-3.4.1-1.2.2.3" class="pilcrow">¶</a>
+                  <code>ISO-IEC-29115</code>: The assurance level values are from the <span>[<a href="#ISO-IEC-29115" class="cite xref">ISO-IEC-29115</a>]</span> specification<a href="#section-3.4.1-1.2.2.3" class="pilcrow">¶</a>
 </li>
                 <li class="normal" id="section-3.4.1-1.2.2.4">
-                  <code>NIST-IAL</code>: The assurance level values are from the <span>[<a href="#NIST-IDPROOF" class="xref">NIST-IDPROOF</a>]</span> specification<a href="#section-3.4.1-1.2.2.4" class="pilcrow">¶</a>
+                  <code>NIST-IAL</code>: The assurance level values are from the <span>[<a href="#NIST-IDPROOF" class="cite xref">NIST-IDPROOF</a>]</span> specification<a href="#section-3.4.1-1.2.2.4" class="pilcrow">¶</a>
 </li>
                 <li class="normal" id="section-3.4.1-1.2.2.5">
-                  <code>NIST-AAL</code>: The assurance level values are from the <span>[<a href="#NIST-AUTH" class="xref">NIST-AUTH</a>]</span> specification<a href="#section-3.4.1-1.2.2.5" class="pilcrow">¶</a>
+                  <code>NIST-AAL</code>: The assurance level values are from the <span>[<a href="#NIST-AUTH" class="cite xref">NIST-AUTH</a>]</span> specification<a href="#section-3.4.1-1.2.2.5" class="pilcrow">¶</a>
 </li>
                 <li class="normal" id="section-3.4.1-1.2.2.6">
-                  <code>NIST-FAL</code>: The assurance level values are from the <span>[<a href="#NIST-FED" class="xref">NIST-FED</a>]</span> specification<a href="#section-3.4.1-1.2.2.6" class="pilcrow">¶</a>
+                  <code>NIST-FAL</code>: The assurance level values are from the <span>[<a href="#NIST-FED" class="cite xref">NIST-FED</a>]</span> specification<a href="#section-3.4.1-1.2.2.6" class="pilcrow">¶</a>
 </li>
                 <li class="normal" id="section-3.4.1-1.2.2.7">Any other value that is an alias for a custom namespace agreed between the Transmitter and the Receiver<a href="#section-3.4.1-1.2.2.7" class="pilcrow">¶</a>
 </li>
@@ -1970,8 +1990,8 @@ the assurance level changed.<a href="#section-3.4.1-2" class="pilcrow">¶</a></p
           </h4>
 <span id="name-example-assurance-level-inc"></span><div id="assurance-level-change-examples-al-increase">
 <figure id="figure-10">
-            <div id="section-3.4.2-1.1">
-<pre class="lang-json sourcecode">
+            <div class="lang-json sourcecode" id="section-3.4.2-1.1">
+<pre>
 {
     "iss": "https://idp.example.com/3456789/",
     "jti": "07efd930f0977e4fcc1149a733ce7f78",
@@ -2001,8 +2021,8 @@ the assurance level changed.<a href="#section-3.4.1-2" class="pilcrow">¶</a></p
 </div>
 <span id="name-example-custom-assurance-le"></span><div id="assurance-level-change-examples-custom">
 <figure id="figure-11">
-            <div id="section-3.4.2-2.1">
-<pre class="lang-json sourcecode">
+            <div class="lang-json sourcecode" id="section-3.4.2-2.1">
+<pre>
 {
     "iss": "https://idp.example.com/3456789/",
     "jti": "07efd930f0977e4fcc1149a733ce7f78",
@@ -2041,7 +2061,7 @@ the assurance level changed.<a href="#section-3.4.1-2" class="pilcrow">¶</a></p
 <p id="section-3.5-2"><code>https://schemas.openid.net/secevent/caep/event-type/device-compliance-change</code><a href="#section-3.5-2" class="pilcrow">¶</a></p>
 <p id="section-3.5-3">Device Compliance Change signals that a device's compliance status has changed.<a href="#section-3.5-3" class="pilcrow">¶</a></p>
 <p id="section-3.5-4">The actual reason why the status change occurred might be specified with the 
-nested <code>reason_admin</code> and/or <code>reason_user</code> claims made in <a href="#optional-event-claims" class="xref">Section 2</a>.<a href="#section-3.5-4" class="pilcrow">¶</a></p>
+nested <code>reason_admin</code> and/or <code>reason_user</code> claims made in <a href="#optional-event-claims" class="auto internal xref">Section 2</a>.<a href="#section-3.5-4" class="pilcrow">¶</a></p>
 <div id="device-compliance-change-claims">
 <section id="section-3.5.1">
           <h4 id="name-event-specific-claims-5">
@@ -2097,8 +2117,8 @@ the device compliance status changed.<a href="#section-3.5.1-2" class="pilcrow">
 <p id="section-3.5.2-1">NOTE: The event type URI is wrapped, the backslash is the continuation character.<a href="#section-3.5.2-1" class="pilcrow">¶</a></p>
 <span id="name-example-device-no-longer-co"></span><div id="device-compliance-change-examples-out-of-compliance">
 <figure id="figure-12">
-            <div id="section-3.5.2-2.1">
-<pre class="lang-json sourcecode">
+            <div class="lang-json sourcecode" id="section-3.5.2-2.1">
+<pre>
 {
     "iss": "https://idp.example.com/123456789/",
     "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
@@ -2187,7 +2207,7 @@ the device compliance status changed.<a href="#section-3.5.1-2" class="pilcrow">
       <dd>
 <span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Hunt, P.</span>, and <span class="refAuthor">A. Nadalin</span>, <span class="refTitle">"Authentication Method Reference Values"</span>, <span class="seriesInfo">RFC 8176</span>, <span class="seriesInfo">DOI 10.17487/RFC8176</span>, <time datetime="2017-06" class="refDate">June 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8176">https://www.rfc-editor.org/info/rfc8176</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="SSE-FRAMEWORK">[SSE-FRAMEWORK]</dt>
+<dt id="SSF">[SSF]</dt>
       <dd>
 <span class="refAuthor">Tulshibagwale, A.</span>, <span class="refAuthor">Cappalli, T.</span>, <span class="refAuthor">Scurtescu, M.</span>, <span class="refAuthor">Backman, A.</span>, and <span class="refAuthor">John Bradley</span>, <span class="refTitle">"OpenID Shared Signals and Events Framework Specification 1.0"</span>, <time datetime="2021-05" class="refDate">May 2021</time>, <span>&lt;<a href="http://openid.net/specs/openid-sse-framework-1_0.html">http://openid.net/specs/openid-sse-framework-1_0.html</a>&gt;</span>. </dd>
 <dd class="break"></dd>
@@ -2203,7 +2223,7 @@ the device compliance status changed.<a href="#section-3.5.1-2" class="pilcrow">
 <a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-acknowledgements" class="section-name selfRef">Acknowledgements</a>
       </h2>
 <p id="appendix-A-1">The authors wish to thank all members of the OpenID Foundation Shared Signals
-and Events Working Group who contributed to the development of this
+Working Group who contributed to the development of this
 specification.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 </section>
 </div>

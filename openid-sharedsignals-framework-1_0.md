@@ -1,12 +1,12 @@
 ---
-title: OpenID Shared Signals and Events Framework Specification 1.0 - draft 02
-abbrev: openid-sse-framework
-docname: openid-sse-framework-1_0
-date: 2023-02-07
+title: OpenID Shared Signals Framework Specification 1.0 - draft 02
+abbrev: SharedSignals
+docname: openid-sharedsignals-framework-1_0
+date: 2023-02-08
 
 ipr: none
 cat: std
-wg: Shared Signals and Events Working Group
+wg: Shared Signals
 
 coding: us-ascii
 pi:
@@ -150,19 +150,7 @@ normative:
   RFC7517:
   RFC7519:
   RFC8174:
-  SET:
-    author:
-    - ins: P. Hunt
-      name: Phil Hunt
-    - ins: M.B. Jones
-      name: Michael B. Jones
-    - ins: W. Denniss
-      name: William Denniss
-    - ins: M.A. Ansari
-      name: Morteza Ansari
-    date: April 2018
-    target: https://www.rfc-editor.org/info/rfc8417
-    title: Security Event Token (SET)
+  RFC8417:
   SUBIDS:
     author:
     - ins: A. Backman
@@ -192,15 +180,15 @@ informative:
 
 --- abstract
 
-This Shared Signals and Events (SSE) Framework enables sharing of signals and events
+This Shared Signals Framework (SSF) enables sharing of signals and events
 between cooperating peers. It enables multiple applications such as Risk Incident Sharing
 and Coordination (RISC) and the Continuous Access Evaluation Profile ({{CAEP}})
 
 This specification defines:
 
-* A profile for IETF Security Events (https://datatracker.ietf.org/wg/secevent/about/)
+* A profile for Security Events Tokens {{RFC8417}}
 * Subject Principals
-* Subject Claims in SSE Events
+* Subject Claims in SSF Events
 * Event Types
 * Event Properties
 * Configuration information and discovery method for Transmitters
@@ -208,7 +196,7 @@ This specification defines:
 
 This spec also directly profiles several IETF Security Events drafts:
 
-* Security Event Token (SET) {{SET}}
+* Security Event Token (SET) {{RFC8417}}
 * Subject Identifiers for Security Event Tokens {{SUBIDS}}
 * Push-Based SET Token Delivery Using HTTP {{DELIVERYPUSH}} 
 * Poll-Based SET Token Delivery Using HTTP {{DELIVERYPOLL}} 
@@ -227,11 +215,11 @@ they appear in all capitals, as shown here.
 
 # Subject Principals {#subject-principals}
 
-This SSE Framework specification defines a Subject Principal to be
+This Shared Signals Framework specification defines a Subject Principal to be
 the entities about which an event can be sent by Transmitters and received by
-Receivers using the SSE Framework.
+Receivers using the Shared Signals Framework.
 
-Subject Principals are the managed entities in a SSE Transmitter or Receiver.
+Subject Principals are the managed entities in a SSF Transmitter or Receiver.
 These include human or robotic principals, devices, customer tenants in a
 multi-tenanted service, organizational units within a tenant, groups of subject
 principals, or other entities that are managed by Transmitters and Receivers.
@@ -241,9 +229,9 @@ addressed by the event.
 
 Subject Principals are identified by Subject Members defined below.
 
-# Subject Members in SSE Events {#subject-ids}
+# Subject Members in SSF Events {#subject-ids}
 
-A member of type Subject in an SSE event MAY have any claim name. Each Subject Member MUST
+A member of type Subject in an SSF event MAY have any claim name. Each Subject Member MUST
 refer to exactly one Subject Principal.
 
 A Subject may be a "simple subject" or a "complex subject".
@@ -252,7 +240,7 @@ A Subject may be a "simple subject" or a "complex subject".
 
 A Simple Subject Member has a claim name and a value that is a "Subject
 Identifier" as defined in the Subject Identifiers for Security Event Tokens
-{{SUBIDS}}. Below is a non-normative example of a Simple Subject Member in a SSE
+{{SUBIDS}}. Below is a non-normative example of a Simple Subject Member in a SSF
 event.
 
 ~~~ json
@@ -300,7 +288,7 @@ group
 Additional Subject Member names MAY be used in Complex Subjects. Each member name MAY
 appear at most once in the Complex Subject value.
 
-Below is a non-normative example of a Complex Subject claim in a SSE event.
+Below is a non-normative example of a Complex Subject claim in a SSF event.
 
 ~~~ json
 "transferee": {
@@ -323,9 +311,9 @@ All members within a Complex Subject MUST represent attributes of the same
 Subject Principal. As a whole, the Complex Subject MUST refer to exactly one
 Subject Principal.
 
-## Subject Identifiers in SSE Events {#subject-ids-in-sse}
+## Subject Identifiers in SSF Events {#subject-ids-in-ssf}
 
-A Subject Identifier in a SSE event MUST have an identifier format that is any
+A Subject Identifier in a SSF event MUST have an identifier format that is any
 one of:
 
 * Defined in the IANA Registry defined in Subject Identifiers for Security
@@ -405,9 +393,9 @@ Subject Identifier Format.
 
 ## Receiver Subject Processing {#receiver-subject-processing}
 
-A SSE Receiver MUST make a best effort to process all members from a Subject in
-an SSE event. The Transmitter Configuration Metadata ({{discovery-meta}}) defined
-below MAY define certain members within a Complex Subject to be Critical. A SSE
+A SSF Receiver MUST make a best effort to process all members from a Subject in
+an SSF event. The Transmitter Configuration Metadata ({{discovery-meta}}) defined
+below MAY define certain members within a Complex Subject to be Critical. A SSF
 Receiver MUST discard any event that contains a Subject with a Critical member
 that it is unable to process.
 
@@ -420,9 +408,9 @@ members that are not specified in the event types spec, then the name of such
 members MUST be a URI. The discoverability of all additional members is 
 specified in the Discovery {{discovery}} section.
 
-# Example SETs that conform to the SSE Framework {#events-examples}
+# Example SETs that conform to the Shared Signals Framework {#events-examples}
 
-The following are hypothetical examples of SETs that conform to the SSE Framework.
+The following are hypothetical examples of SETs that conform to the Shared Signals Framework.
 
 ~~~ json
 {
@@ -440,7 +428,7 @@ The following are hypothetical examples of SETs that conform to the SSE Framewor
   }
 }
 ~~~
-{: #subject-ids-ex-simple title="Example: SET Containing a SSE Event with a Simple Subject Member"}
+{: #subject-ids-ex-simple title="Example: SET Containing a SSF Event with a Simple Subject Member"}
 
 ~~~ json
 {
@@ -470,7 +458,7 @@ The following are hypothetical examples of SETs that conform to the SSE Framewor
   }
 }
 ~~~
-{: #subject-ids-ex-complex title="Example: SET Containing a SSE Event with a Complex Subject Member"}
+{: #subject-ids-ex-complex title="Example: SET Containing a SSF Event with a Complex Subject Member"}
 
 ~~~ json
 {
@@ -492,7 +480,7 @@ The following are hypothetical examples of SETs that conform to the SSE Framewor
   }
 }
 ~~~
-{: #subject-properties-ex title="Example: SET Containing a SSE Event with a Simple Subject and a Property Member"}
+{: #subject-properties-ex title="Example: SET Containing a SSF Event with a Simple Subject and a Property Member"}
 
 ~~~ json
 {
@@ -514,7 +502,7 @@ The following are hypothetical examples of SETs that conform to the SSE Framewor
   }
 }
 ~~~
-{: #subject-custom-type-ex title="Example: SET Containing a SSE Event with a Proprietary Subject Identifier Format"}
+{: #subject-custom-type-ex title="Example: SET Containing a SSF Event with a Proprietary Subject Identifier Format"}
 
 # Transmitter Configuration Discovery {#discovery}
 
@@ -575,9 +563,9 @@ Using the Issuer as documented by the Transmitter, the Transmitter Configuration
 Information can be retrieved.
 
 Transmitters supporting Discovery MUST make a JSON document available at the
-path formed by inserting the string "/.well-known/sse-configuration" into the
+path formed by inserting the string "/.well-known/ssf-configuration" into the
 Issuer between the host component and the path component, if any. The syntax
-and semantics of ".well-known" are defined in {{RFC5785}}.  "sse-configuration"
+and semantics of ".well-known" are defined in {{RFC5785}}.  "ssf-configuration"
 MUST point to a JSON document compliant with this specification and MUST be
 returned using the "application/json" content type.
 
@@ -591,19 +579,19 @@ The Receiver would make the following request to the Issuer
 Issuer contains no path component:
 
 ~~~ http
-GET /.well-known/sse-configuration HTTP/1.1
+GET /.well-known/ssf-configuration HTTP/1.1
 Host: tr.example.com
 ~~~
 {: #figdiscoveryrequest title="Example: Transmitter Configuration Request (without path)"}
 
 If the  Issuer value contains a path component, any terminating "/" MUST be
-removed before inserting "/.well-known/sse-configuration" between the host
+removed before inserting "/.well-known/ssf-configuration" between the host
 component and the path component. The Receiver would make the following request
 to the Issuer "https://tr.example.com/issuer1" to obtain its Configuration
 information, since the Issuer contains a path component:
 
 ~~~ http
-GET /.well-known/sse-configuration/issuer1 HTTP/1.1
+GET /.well-known/ssf-configuration/issuer1 HTTP/1.1
 Host: tr.example.com
 ~~~
 {: #figdiscoveryrequestpath title="Example: Transmitter Configuration Request (with path)"}
@@ -615,9 +603,9 @@ does not provide general information about the host.
 
 ### Backward Compatibility for RISC Transmitters
 Existing RISC Transmitters MAY continue to use the path component
-"/risc-configuration" instead of the path component "/sse-configuration" in the
+"/risc-configuration" instead of the path component "/ssf-configuration" in the
 path for the Transmitter Configuration Metadata. New services supporting the
-SSE Framework SHOULD NOT use this location for publishing the
+Shared Signals Framework SHOULD NOT use this location for publishing the
 Transmitter Configuration Metadata. For example, the Transmitter Configuration
 Metadata for the Transmitter "https://risc-tr.example.com" MAY be obtained by
 making the following request:
@@ -654,15 +642,15 @@ Content-Type: application/json
     "https://schemas.openid.net/secevent/risc/delivery-method/push",
     "https://schemas.openid.net/secevent/risc/delivery-method/poll"],
   "configuration_endpoint":
-    "https://tr.example.com/sse/mgmt/stream",
+    "https://tr.example.com/ssf/mgmt/stream",
   "status_endpoint":
-    "https://tr.example.com/sse/mgmt/status",
+    "https://tr.example.com/ssf/mgmt/status",
   "add_subject_endpoint":
-    "https://tr.example.com/sse/mgmt/subject:add",
+    "https://tr.example.com/ssf/mgmt/subject:add",
   "remove_subject_endpoint":
-    "https://tr.example.com/sse/mgmt/subject:remove",
+    "https://tr.example.com/ssf/mgmt/subject:remove",
   "verification_endpoint":
-    "https://tr.example.com/sse/mgmt/verification",
+    "https://tr.example.com/ssf/mgmt/verification",
   "critical_subject_members": [ "tenant", "user" ]
 }
 ~~~
@@ -865,7 +853,7 @@ format
 The following is a non-normative example request to create an Event Stream:
 
 ~~~ http
-POST /sse/stream HTTP/1.1
+POST /ssf/stream HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
@@ -947,7 +935,7 @@ The following is a non-normative example request to read an Event Stream’s
 configuration:
 
 ~~~ http
-GET /sse/stream?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f HTTP/1.1
+GET /ssf/stream?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 ~~~
@@ -994,7 +982,7 @@ The following is a non-normative example request to read an Event Stream’s
 configuration, with no "stream_id" indicated:
 
 ~~~ http
-GET /sse/stream HTTP/1.1
+GET /ssf/stream HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 ~~~
@@ -1149,7 +1137,7 @@ The following is a non-normative example request to replace an Event Stream’s
 configuration:
 
 ~~~ http
-PATCH /sse/stream HTTP/1.1
+PATCH /ssf/stream HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
@@ -1235,7 +1223,7 @@ The following is a non-normative example request to replace an Event Stream’s
 configuration:
 
 ~~~ http
-PUT /sse/stream HTTP/1.1
+PUT /ssf/stream HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
@@ -1319,7 +1307,7 @@ identify the correct Event Stream.
 The following is a non-normative example request to delete an Event Stream:
 
 ~~~ http
-DELETE /sse/stream?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f HTTP/1.1
+DELETE /ssf/stream?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 ~~~
@@ -1407,7 +1395,7 @@ The following is a non-normative example request to check an event stream’s
 status:
 
 ~~~ http
-GET /sse/status?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f HTTP/1.1
+GET /ssf/status?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer zzzz
 ~~~
@@ -1430,7 +1418,7 @@ The following is a non-normative example request to check an event stream's
 status for a specific subject:
 
 ~~~ http
-GET /sse/status?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f&subject=<url-encoded-subject> HTTP/1.1
+GET /ssf/status?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f&subject=<url-encoded-subject> HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 ~~~
@@ -1510,7 +1498,7 @@ The following is a non-normative example request to update an Event Stream’s
 status:
 
 ~~~ http
-POST /sse/status HTTP/1.1
+POST /ssf/status HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
@@ -1525,7 +1513,7 @@ The following is a non-normative example of an Update Stream Status request with
 optional fields:
 
 ~~~ http
-POST /sse/status HTTP/1.1
+POST /ssf/status HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
@@ -1616,7 +1604,7 @@ The following is a non-normative example request to add a subject to a stream,
 where the subject is identified by an Email Subject Identifier.
 
 ~~~ http
-POST /sse/subjects:add HTTP/1.1
+POST /ssf/subjects:add HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
@@ -1671,7 +1659,7 @@ The following is a non-normative example request where the subject is
 identified by a Phone Number Subject Identifier:
 
 ~~~ http
-POST /sse/subjects:remove HTTP/1.1
+POST /ssf/subjects:remove HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
             
@@ -1723,7 +1711,7 @@ The Verification Event is a standard SET with the following attributes:
 
 event type
 
-> The Event Type URI is: "https://schemas.openid.net/secevent/sse/event-type/verification".
+> The Event Type URI is: "https://schemas.openid.net/secevent/ssf/event-type/verification".
 
 state
 
@@ -1782,7 +1770,7 @@ Errors are signaled with HTTP status codes as follows:
 The following is a non-normative example request to trigger a verification event:
 
 ~~~ http
-POST /sse/verify HTTP/1.1
+POST /ssf/verify HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 Content-Type: application/json
@@ -1813,7 +1801,7 @@ Event Receiver as a result of the above request:
   "aud": "receiver.example.com",
   "iat": 1493856000,
   "events": {
-    "https://schemas.openid.net/secevent/sse/event-type/verification":{
+    "https://schemas.openid.net/secevent/ssf/event-type/verification":{
       "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
     }
   }
@@ -1824,7 +1812,7 @@ Event Receiver as a result of the above request:
 ### Stream Updated Event {#stream-updated-event}
 A Transmitter MAY change the stream status in reference to one or more Subjects
 without a request from a Receiver. The Transmitter sends an event of type
-"https://schemas.openid.net/secevent/sse/event-type/stream-updated" to indicate
+"https://schemas.openid.net/secevent/ssf/event-type/stream-updated" to indicate
 that it has changed the status of the Event Stream for a specific Subject.
 
 If a Transmitter decides to change the status of an Event Stream from "enabled"
@@ -1861,7 +1849,7 @@ subject
   "aud": "receiver.example.com",
   "iat": 1493856000,
   "events": {
-    "https://schemas.openid.net/secevent/sse/event-type/stream-updated": {
+    "https://schemas.openid.net/secevent/ssf/event-type/stream-updated": {
       "subject": {
         "tenant" : {
           "format": "iss_sub",
@@ -1948,10 +1936,10 @@ communicating with a given party in order to reduce the possibility of
 information leakage.
 
 ## Previously Consented Data {#previously-consented-data} 
-If SSE events contain new values for attributes of Subject Principals that were
+If SSF events contain new values for attributes of Subject Principals that were
 previously exchanged between the Transmitter and Receiver, then there are no
 additional privacy considerations introduced by providing the updated values in
-the SSE events, unless the attribute was exchanged under a one-time consent
+the SSF events, unless the attribute was exchanged under a one-time consent
 obtained from the user.
 
 ## New Data {#new-data} 
@@ -1960,13 +1948,13 @@ or data whose consent to exchange has expired has the following considerations:
 
 ### Organizational Data {#organizational-data} 
 If a user has previously agreed with a Transmitter that they agree to release
-certain data to third-parties, then the Transmitter MAY send such data in SSE
+certain data to third-parties, then the Transmitter MAY send such data in SSF
 events without additional consent of the user. Such data MAY include
 organizational data about the Subject Principal that was generated by the
 Transmitter.
 
 ### Consentable Data {#consentable-data} 
-If a Transmitter intends to include data in SSE events that is not previously
+If a Transmitter intends to include data in SSF events that is not previously
 consented to be released by the user, then the Transmitter MUST obtain consent
 to release such data from the user in accordance with the Transmitter's privacy
 policy.
@@ -1974,7 +1962,7 @@ policy.
 # Profiles {#profiles} 
 This section is a profile of the following IETF SecEvent specifications:
 
-* Security Event Token (SET) {{SET}} 
+* Security Event Token (SET) {{RFC8417}} 
 * Push-Based SET Token Delivery Using HTTP {{DELIVERYPUSH}}
 * Poll-Based SET Token Delivery Using HTTP {{DELIVERYPOLL}}
 
@@ -1985,20 +1973,20 @@ The CAEP use cases that set the requirements are described in CAEP Use Cases (TO
         reference when file is added to repository.)
 
 ## Security Event Token Profile {#set-profle} 
-This section provides SSE profiling specifications for the Security Event Token (SET)
-{{SET}} spec.
+This section provides SSF profiling specifications for the Security Event Token (SET)
+{{RFC8417}} spec.
 
 ### Signature Key Resolution {#signature-key-resolution} 
 The signature key can be obtained through "jwks_uri", see {{discovery}}.
 
-### SSE Event Subject {#event-subjects} 
-The subject of a SSE event is identified by the "subject" claim within the event
+### SSF Event Subject {#event-subjects} 
+The subject of a SSF event is identified by the "subject" claim within the event
 payload, whose value is a Subject Identifier. The "subject" claim is REQUIRED
-for all SSE events. The JWT "sub" claim MUST NOT be present in any SET containing
-a SSE event.
+for all SSF events. The JWT "sub" claim MUST NOT be present in any SET containing
+a SSF event.
 
-### SSE Event Properties {#event-properties} 
-The SSE event MAY contain additional claims within the event payload that are
+### SSF Event Properties {#event-properties} 
+The SSF event MAY contain additional claims within the event payload that are
 specific to the event type.
 
 ~~~ json
@@ -2041,7 +2029,7 @@ specific to the event type.
 {: #caep-event-properties-example title="Example: SET Containing a CAEP Event with Properties"}
 
 ### Explicit Typing of SETs {#explicit-typing} 
-SSE events MUST use explicit typing as defined in Section 2.3 of {{SET}}.
+SSF events MUST use explicit typing as defined in Section 2.3 of {{RFC8417}}.
 
 ~~~ json
 {
@@ -2052,15 +2040,15 @@ SSE events MUST use explicit typing as defined in Section 2.3 of {{SET}}.
 {: title="Explicitly Typed JOSE Header" #explicit-type-header}
 
 The purpose is defense against confusion with other JWTs, as described in
-Sections 4.5, 4.6 and 4.7 of {{SET}}. While current Id Token {{IDTOKEN}}
-validators may not be using the "typ" header parameter, by requiring it for SSE
+Sections 4.5, 4.6 and 4.7 of {{RFC8417}}. While current Id Token {{IDTOKEN}}
+validators may not be using the "typ" header parameter, by requiring it for SSF
 SETs a distinct value is guaranteed for future validators.
 
 ### The "exp" Claim {#exp-claim} 
-The "exp" claim MUST NOT be used in SSE SETs.
+The "exp" claim MUST NOT be used in SSF SETs.
 
 The purpose is defense in depth against confusion with other JWTs, as described
-in Sections 4.5 and 4.6 of {{SET}}.
+in Sections 4.5 and 4.6 of {{RFC8417}}.
 
 ### The "aud" Claim {#aud-claim} 
 The "aud" claim can be a single value or an array. Each value SHOULD be the
@@ -2086,7 +2074,7 @@ multiple Receivers would lead to unintended data disclosure.
   "aud": ["receiver.example.com/web", "receiver.example.com/mobile"],
   "iat": 1493856000,
   "events": {
-    "https://schemas.openid.net/secevent/sse/event-type/verification": {
+    "https://schemas.openid.net/secevent/ssf/event-type/verification": {
       "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
     }
   }
@@ -2102,15 +2090,15 @@ permitted only if they are alternative URIs defining the exact same event type.
 
 #### Distinguishing SETs from other Kinds of JWTs
 Of particular concern is the possibility that SETs are confused for other kinds
-of JWTs. The Security Considerations section of {{SET}} has several sub-sections
-on this subject. The SSE Framework is asking for further restrictions:
+of JWTs. The Security Considerations section of {{RFC8417}} has several sub-sections
+on this subject. The Shared Signals Framework is asking for further restrictions:
 
 * The "sub" claim MUST NOT be present, as described in {{event-subjects}}.
-* SSE SETs MUST use explicit typing, as described in {{explicit-typing}}.
+* SSF SETs MUST use explicit typing, as described in {{explicit-typing}}.
 * The "exp" claim MUST NOT be present, as described in {{exp-claim}}.
 
 ## SET Token Delivery Using HTTP Profile {#set-token-delivery-using-http-profile}
-This section provides SSE profiling specifications for the {{DELIVERYPUSH}} and
+This section provides SSF profiling specifications for the {{DELIVERYPUSH}} and
 {{DELIVERYPOLL}} specs.
 
 ### Stream Configuration Metadata {#delivery-meta} 
@@ -2118,7 +2106,7 @@ Each delivery method is identified by a URI, specified below by the "method"
 metadata.
 
 #### Push Delivery using HTTP
-This section provides SSE profiling specifications for the {{DELIVERYPUSH}} spec.
+This section provides SSF profiling specifications for the {{DELIVERYPUSH}} spec.
 
 method
 
@@ -2138,7 +2126,7 @@ authorization_header
   by the Receiver.
   
 #### Polling Delivery using HTTP
-This section provides SSE profiling specifications for the {{DELIVERYPOLL}} spec.
+This section provides SSF profiling specifications for the {{DELIVERYPOLL}} spec.
 
 method
 
@@ -2159,7 +2147,7 @@ Subject Identifiers for Security Event Tokens {{SUBIDS}} specification.
 
 # Acknowledgements
 
-The authors wish to thank all members of the OpenID Foundation SSE
+The authors wish to thank all members of the OpenID Foundation SSF
 Working Group who contributed to the development of this
 specification.
 
