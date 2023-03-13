@@ -1969,9 +1969,10 @@ configuration information.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <p id="section-6.1-4">jwks_uri<a href="#section-6.1-4" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-6.1-5.1">
-            <p id="section-6.1-5.1.1">REQUIRED. URL of the Transmitter's JSON Web Key Set <span>[<a href="#RFC7517" class="cite xref">RFC7517</a>]</span> document.
+            <p id="section-6.1-5.1.1">OPTIONAL. URL of the Transmitter's JSON Web Key Set <span>[<a href="#RFC7517" class="cite xref">RFC7517</a>]</span> document.
   This contains the signing key(s) the Receiver uses to validate signatures from
-  the Transmitter.<a href="#section-6.1-5.1.1" class="pilcrow">¶</a></p>
+  the Transmitter. This value MUST be specified if the Transmitter intends to
+  generate signed JWTs<a href="#section-6.1-5.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-6.1-6">delivery_methods_supported<a href="#section-6.1-6" class="pilcrow">¶</a></p>

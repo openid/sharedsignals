@@ -519,9 +519,10 @@ Tulshibagwale, et al.        Standards Track                    [Page 9]
 
    jwks_uri
 
-      REQUIRED.  URL of the Transmitter's JSON Web Key Set [RFC7517]
+      OPTIONAL.  URL of the Transmitter's JSON Web Key Set [RFC7517]
       document.  This contains the signing key(s) the Receiver uses to
-      validate signatures from the Transmitter.
+      validate signatures from the Transmitter.  This value MUST be
+      specified if the Transmitter intends to generate signed JWTs
 
    delivery_methods_supported
 
@@ -552,7 +553,6 @@ Tulshibagwale, et al.        Standards Track                    [Page 9]
       OPTIONAL.  List of member names in a Complex Subject which, if
       present in a Subject Member in an event, MUST be interpreted by a
       Receiver.
-
 
 
 
