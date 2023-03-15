@@ -521,9 +521,10 @@ issuer
 
 jwks_uri
 
-> REQUIRED. URL of the Transmitter's JSON Web Key Set {{RFC7517}} document.
+> OPTIONAL. URL of the Transmitter's JSON Web Key Set {{RFC7517}} document.
   This contains the signing key(s) the Receiver uses to validate signatures from
-  the Transmitter.
+  the Transmitter. This value MUST be specified if the Transmitter intends to
+  generate signed JWTs
 
 delivery_methods_supported
 
