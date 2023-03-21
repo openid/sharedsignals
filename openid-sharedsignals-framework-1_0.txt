@@ -14,7 +14,7 @@ Shared Signals                                          A. Tulshibagwale
                                                                   Yubico
                                                                  S. Miel
                                                                    Cisco
-                                                         8 February 2023
+                                                           21 March 2023
 
 
       OpenID Shared Signals Framework Specification 1.0 - draft 02
@@ -55,7 +55,7 @@ Abstract
 
 Tulshibagwale, et al.        Standards Track                    [Page 1]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
    *  Poll-Based SET Token Delivery Using HTTP [DELIVERYPOLL]
@@ -86,48 +86,48 @@ Table of Contents
    7.  Management API for SET Event Streams  . . . . . . . . . . . .  13
      7.1.  Event Stream Management . . . . . . . . . . . . . . . . .  14
        7.1.1.  Stream Configuration  . . . . . . . . . . . . . . . .  15
-       7.1.2.  Stream Status . . . . . . . . . . . . . . . . . . . .  32
-       7.1.3.  Subjects  . . . . . . . . . . . . . . . . . . . . . .  38
-       7.1.4.  Verification  . . . . . . . . . . . . . . . . . . . .  42
-       7.1.5.  Stream Updated Event  . . . . . . . . . . . . . . . .  45
-   8.  Authorization . . . . . . . . . . . . . . . . . . . . . . . .  46
-   9.  Security Considerations . . . . . . . . . . . . . . . . . . .  46
-     9.1.  Subject Probing . . . . . . . . . . . . . . . . . . . . .  46
-     9.2.  Information Harvesting  . . . . . . . . . . . . . . . . .  47
-     9.3.  Malicious Subject Removal . . . . . . . . . . . . . . . .  47
-   10. Privacy Considerations  . . . . . . . . . . . . . . . . . . .  47
-     10.1.  Subject Information Leakage  . . . . . . . . . . . . . .  48
-     10.2.  Previously Consented Data  . . . . . . . . . . . . . . .  48
-     10.3.  New Data . . . . . . . . . . . . . . . . . . . . . . . .  48
-       10.3.1.  Organizational Data  . . . . . . . . . . . . . . . .  48
-       10.3.2.  Consentable Data . . . . . . . . . . . . . . . . . .  48
-   11. Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .  48
-     11.1.  Security Event Token Profile . . . . . . . . . . . . . .  49
-       11.1.1.  Signature Key Resolution . . . . . . . . . . . . . .  49
-       11.1.2.  SSF Event Subject  . . . . . . . . . . . . . . . . .  49
-       11.1.3.  SSF Event Properties . . . . . . . . . . . . . . . .  49
+       7.1.2.  Stream Status . . . . . . . . . . . . . . . . . . . .  31
+       7.1.3.  Subjects  . . . . . . . . . . . . . . . . . . . . . .  37
+       7.1.4.  Verification  . . . . . . . . . . . . . . . . . . . .  41
+       7.1.5.  Stream Updated Event  . . . . . . . . . . . . . . . .  44
+   8.  Authorization . . . . . . . . . . . . . . . . . . . . . . . .  45
+   9.  Security Considerations . . . . . . . . . . . . . . . . . . .  45
+     9.1.  Subject Probing . . . . . . . . . . . . . . . . . . . . .  45
+     9.2.  Information Harvesting  . . . . . . . . . . . . . . . . .  46
+     9.3.  Malicious Subject Removal . . . . . . . . . . . . . . . .  46
+   10. Privacy Considerations  . . . . . . . . . . . . . . . . . . .  46
+     10.1.  Subject Information Leakage  . . . . . . . . . . . . . .  47
+     10.2.  Previously Consented Data  . . . . . . . . . . . . . . .  47
+     10.3.  New Data . . . . . . . . . . . . . . . . . . . . . . . .  47
+       10.3.1.  Organizational Data  . . . . . . . . . . . . . . . .  47
+       10.3.2.  Consentable Data . . . . . . . . . . . . . . . . . .  47
+   11. Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .  47
+     11.1.  Security Event Token Profile . . . . . . . . . . . . . .  48
+       11.1.1.  Signature Key Resolution . . . . . . . . . . . . . .  48
+       11.1.2.  SSF Event Subject  . . . . . . . . . . . . . . . . .  48
+       11.1.3.  SSF Event Properties . . . . . . . . . . . . . . . .  48
 
 
 
 Tulshibagwale, et al.        Standards Track                    [Page 2]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
-       11.1.4.  Explicit Typing of SETs  . . . . . . . . . . . . . .  50
-       11.1.5.  The "exp" Claim  . . . . . . . . . . . . . . . . . .  50
-       11.1.6.  The "aud" Claim  . . . . . . . . . . . . . . . . . .  51
-       11.1.7.  The "events" claim . . . . . . . . . . . . . . . . .  51
-       11.1.8.  Security Considerations  . . . . . . . . . . . . . .  51
-     11.2.  SET Token Delivery Using HTTP Profile  . . . . . . . . .  52
-       11.2.1.  Stream Configuration Metadata  . . . . . . . . . . .  52
-   12. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  53
-   13. References  . . . . . . . . . . . . . . . . . . . . . . . . .  53
-     13.1.  Normative References . . . . . . . . . . . . . . . . . .  53
-     13.2.  Informative References . . . . . . . . . . . . . . . . .  55
-   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  55
-   Appendix B.  Notices  . . . . . . . . . . . . . . . . . . . . . .  55
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  56
+       11.1.4.  Explicit Typing of SETs  . . . . . . . . . . . . . .  49
+       11.1.5.  The "exp" Claim  . . . . . . . . . . . . . . . . . .  49
+       11.1.6.  The "aud" Claim  . . . . . . . . . . . . . . . . . .  50
+       11.1.7.  The "events" claim . . . . . . . . . . . . . . . . .  50
+       11.1.8.  Security Considerations  . . . . . . . . . . . . . .  50
+     11.2.  SET Token Delivery Using HTTP Profile  . . . . . . . . .  51
+       11.2.1.  Stream Configuration Metadata  . . . . . . . . . . .  51
+   12. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  52
+   13. References  . . . . . . . . . . . . . . . . . . . . . . . . .  52
+     13.1.  Normative References . . . . . . . . . . . . . . . . . .  52
+     13.2.  Informative References . . . . . . . . . . . . . . . . .  54
+   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  54
+   Appendix B.  Notices  . . . . . . . . . . . . . . . . . . . . . .  54
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  55
 
 1.  Introduction
 
@@ -167,7 +167,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 2]
 
 Tulshibagwale, et al.        Standards Track                    [Page 3]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
    A Subject may be a "simple subject" or a "complex subject".
@@ -223,7 +223,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 3]
 
 Tulshibagwale, et al.        Standards Track                    [Page 4]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
    group
@@ -279,7 +279,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 4]
 
 Tulshibagwale, et al.        Standards Track                    [Page 5]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
 3.4.  Additional Subject Identifier Formats
@@ -335,7 +335,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 5]
 
 Tulshibagwale, et al.        Standards Track                    [Page 6]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
       REQUIRED.  The "ID" value of the SAML assertion being identified,
@@ -391,108 +391,108 @@ Tulshibagwale, et al.        Standards Track                    [Page 6]
 
 Tulshibagwale, et al.        Standards Track                    [Page 7]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
-   {
-     "iss": "https://idp.example.com/",
-     "jti": "756E69717565206964656E746966696572",
-     "iat": 1520364019,
-     "aud": "636C69656E745F6964",
-     "events": {
-       "https://schemas.openid.net/secevent/risc/event-type/account-enabled": {
-         "subject": {
-           "format": "email",
-           "email": "foo@example.com"
-         }
-       }
-     }
-   }
+{
+  "iss": "https://idp.example.com/",
+  "jti": "756E69717565206964656E746966696572",
+  "iat": 1520364019,
+  "aud": "636C69656E745F6964",
+  "events": {
+    "https://schemas.openid.net/secevent/risc/event-type/account-enabled": {
+      "subject": {
+        "format": "email",
+        "email": "foo@example.com"
+      }
+    }
+  }
+}
 
-        Figure 5: Example: SET Containing a SSF Event with a Simple
-                               Subject Member
+     Figure 5: Example: SET Containing a SSF Event with a Simple
+                            Subject Member
 
-   {
-     "iss": "https://idp.example.com/",
-     "jti": "756E69717565206964656E746966696572",
-     "iat": 1520364019,
-     "aud": "636C69656E745F6964",
-     "events": {
-       "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
-         "subject": {
-             "user": {
-                 "format": "iss_sub",
-                 "iss": "https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/",
-                 "sub": "jane.smith@example.com"
-             },
-             "device": {
-                 "format": "iss_sub",
-                 "iss": "https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/",
-                 "sub": "e9297990-14d2-42ec-a4a9-4036db86509a"
-             }
-         },
-         "initiating_entity": "policy",
-         "reason_admin": "Policy Violation: C076E82F",
-         "reason_user": "Landspeed violation.",
-         "event_timestamp": 1600975810
-       }
-     }
-   }
+{
+  "iss": "https://idp.example.com/",
+  "jti": "756E69717565206964656E746966696572",
+  "iat": 1520364019,
+  "aud": "636C69656E745F6964",
+  "events": {
+    "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
+      "subject": {
+          "user": {
+              "format": "iss_sub",
+              "iss": "https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/",
+              "sub": "jane.smith@example.com"
+          },
+          "device": {
+              "format": "iss_sub",
+              "iss": "https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/",
+              "sub": "e9297990-14d2-42ec-a4a9-4036db86509a"
+          }
+      },
+      "initiating_entity": "policy",
+      "reason_admin": "Policy Violation: C076E82F",
+      "reason_user": "Landspeed violation.",
+      "event_timestamp": 1600975810
+    }
+  }
+}
 
-        Figure 6: Example: SET Containing a SSF Event with a Complex
-                               Subject Member
+     Figure 6: Example: SET Containing a SSF Event with a Complex
+                            Subject Member
 
 
 
 
 Tulshibagwale, et al.        Standards Track                    [Page 8]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
-   {
-     "iss": "https://sp.example2.com/",
-     "jti": "756E69717565206964656E746966696572",
-     "iat": 1520364019,
-     "aud": "636C69656E745F6964",
-     "events": {
-       "https://schemas.openid.net/secevent/caep/event-type/token-claims-change": {
-         "subject": {
-           "format": "email",
-           "email": "foo@example2.com"
-         },
-         "event_timestamp": 1600975810,
-         "claims": {
-            "role": "ro-admin"
-         }
-       }
-     }
-   }
+{
+  "iss": "https://sp.example2.com/",
+  "jti": "756E69717565206964656E746966696572",
+  "iat": 1520364019,
+  "aud": "636C69656E745F6964",
+  "events": {
+    "https://schemas.openid.net/secevent/caep/event-type/token-claims-change": {
+      "subject": {
+        "format": "email",
+        "email": "foo@example2.com"
+      },
+      "event_timestamp": 1600975810,
+      "claims": {
+         "role": "ro-admin"
+      }
+    }
+  }
+}
 
-        Figure 7: Example: SET Containing a SSF Event with a Simple
-                       Subject and a Property Member
+     Figure 7: Example: SET Containing a SSF Event with a Simple
+                    Subject and a Property Member
 
-   {
-     "iss": "https://myservice.example3.com/",
-     "jti": "756E69717565206964656E746966696534",
-     "iat": 15203800012,
-     "aud": "636C69656E745F6324",
-     "events": {
-       "https://schemas.openid.net/secevent/caep/event-type/token-claims-change": {
-       "subject": {
-           "format": "catalog_item",
-           "catalog_id": "c0384/winter/2354122"
-         },
-         "event_timestamp": 1600975810,
-         "claims": {
-            "role": "ro-admin"
-         }
-       }
-     }
-   }
+{
+  "iss": "https://myservice.example3.com/",
+  "jti": "756E69717565206964656E746966696534",
+  "iat": 15203800012,
+  "aud": "636C69656E745F6324",
+  "events": {
+    "https://schemas.openid.net/secevent/caep/event-type/token-claims-change": {
+    "subject": {
+        "format": "catalog_item",
+        "catalog_id": "c0384/winter/2354122"
+      },
+      "event_timestamp": 1600975810,
+      "claims": {
+         "role": "ro-admin"
+      }
+    }
+  }
+}
 
-      Figure 8: Example: SET Containing a SSF Event with a Proprietary
-                         Subject Identifier Format
+   Figure 8: Example: SET Containing a SSF Event with a Proprietary
+                      Subject Identifier Format
 
 6.  Transmitter Configuration Discovery
 
@@ -503,7 +503,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 8]
 
 Tulshibagwale, et al.        Standards Track                    [Page 9]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
 6.1.  Transmitter Configuration Metadata
@@ -559,7 +559,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 9]
 
 Tulshibagwale, et al.        Standards Track                   [Page 10]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
    TODO: consider adding a IANA Registry for metadata, similar to
@@ -615,7 +615,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 10]
 
 Tulshibagwale, et al.        Standards Track                   [Page 11]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
 6.2.2.  Backward Compatibility for RISC Transmitters
@@ -671,7 +671,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 11]
 
 Tulshibagwale, et al.        Standards Track                   [Page 12]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
    HTTP/1.1 200 OK
@@ -683,8 +683,8 @@ Tulshibagwale, et al.        Standards Track                   [Page 12]
      "jwks_uri":
        "https://tr.example.com/jwks.json",
      "delivery_methods_supported": [
-       "https://schemas.openid.net/secevent/risc/delivery-method/push",
-       "https://schemas.openid.net/secevent/risc/delivery-method/poll"],
+       "urn:ietf:rfc:8935",
+       "urn:ietf:rfc:8936"],
      "configuration_endpoint":
        "https://tr.example.com/ssf/mgmt/stream",
      "status_endpoint":
@@ -727,7 +727,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 12]
 
 Tulshibagwale, et al.        Standards Track                   [Page 13]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
    This section defines an HTTP API to be implemented by Event
@@ -783,7 +783,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 13]
 
 Tulshibagwale, et al.        Standards Track                   [Page 14]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
       An endpoint used to create and delete Event Streams, as well as
@@ -839,7 +839,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 14]
 
 Tulshibagwale, et al.        Standards Track                   [Page 15]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
    aud
@@ -895,7 +895,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 15]
 
 Tulshibagwale, et al.        Standards Track                   [Page 16]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
       *Receiver-Supplied*, The Subject Identifier Format that the
@@ -951,7 +951,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 16]
 
 Tulshibagwale, et al.        Standards Track                   [Page 17]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
    POST /ssf/stream HTTP/1.1
@@ -960,9 +960,8 @@ Tulshibagwale, et al.        Standards Track                   [Page 17]
 
    {
      "delivery": {
-       "delivery_method":
-         "https://schemas.openid.net/secevent/risc/delivery-method/push",
-         "url": "https://receiver.example.com/events"
+       "delivery_method": "urn:ietf:rfc:8935",
+       "url": "https://receiver.example.com/events"
      },
      "events_requested": [
        "urn:example:secevent:events:type_2",
@@ -1005,9 +1004,10 @@ Tulshibagwale, et al.        Standards Track                   [Page 17]
 
 
 
+
 Tulshibagwale, et al.        Standards Track                   [Page 18]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
    HTTP/1.1 200 OK
@@ -1021,8 +1021,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 18]
          "http://receiver.example.com/mobile"
        ],
      "delivery": {
-       "delivery_method":
-         "https://schemas.openid.net/secevent/risc/delivery-method/push",
+       "delivery_method": "urn:ietf:rfc:8935",
        "url": "https://receiver.example.com/events"
      },
      "events_supported": [
@@ -1061,9 +1060,10 @@ Tulshibagwale, et al.        Standards Track                   [Page 18]
 
 
 
+
 Tulshibagwale, et al.        Standards Track                   [Page 19]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
 7.1.1.2.  Reading a Stream's Configuration
@@ -1119,7 +1119,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 19]
 
 Tulshibagwale, et al.        Standards Track                   [Page 20]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
    HTTP/1.1 200 OK
@@ -1134,8 +1134,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 20]
          "http://receiver.example.com/mobile"
        ],
      "delivery": {
-       "delivery_method":
-         "https://schemas.openid.net/secevent/risc/delivery-method/push",
+       "delivery_method": "urn:ietf:rfc:8935",
        "url": "https://receiver.example.com/events"
      },
      "events_supported": [
@@ -1173,9 +1172,10 @@ Tulshibagwale, et al.        Standards Track                   [Page 20]
 
 
 
+
 Tulshibagwale, et al.        Standards Track                   [Page 21]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
    HTTP/1.1 200 OK
@@ -1191,8 +1191,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 21]
            "http://receiver.example.com/mobile"
          ],
        "delivery": {
-         "delivery_method":
-           "https://schemas.openid.net/secevent/risc/delivery-method/push",
+         "delivery_method": "urn:ietf:rfc:8935",
          "url": "https://receiver.example.com/events"
        },
        "events_supported": [
@@ -1218,24 +1217,23 @@ Tulshibagwale, et al.        Standards Track                   [Page 21]
            "http://receiver.example.com/mobile"
          ],
        "delivery": {
-         "delivery_method":
-           "https://schemas.openid.net/secevent/risc/delivery-method/push",
+         "delivery_method": "urn:ietf:rfc:8935",
          "url": "https://receiver.example.com/events"
        },
        "events_supported": [
          "urn:example:secevent:events:type_1",
          "urn:example:secevent:events:type_2",
          "urn:example:secevent:events:type_3"
+       ],
+       "events_requested": [
 
 
 
 Tulshibagwale, et al.        Standards Track                   [Page 22]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
-       ],
-       "events_requested": [
          "urn:example:secevent:events:type_2",
          "urn:example:secevent:events:type_3",
          "urn:example:secevent:events:type_4"
@@ -1252,44 +1250,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 22]
    The following is a non-normative example response to a request with
    no "stream_id" when there is only one Event Stream configured:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 23]
-
-                              SharedSignals                February 2023
-
-
    HTTP/1.1 200 OK
    Content-Type: application/json
    Cache-Control: no-store
@@ -1303,8 +1263,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 23]
            "http://receiver.example.com/mobile"
          ],
        "delivery": {
-         "delivery_method":
-           "https://schemas.openid.net/secevent/risc/delivery-method/push",
+         "delivery_method": "urn:ietf:rfc:8935",
          "url": "https://receiver.example.com/events"
        },
        "events_supported": [
@@ -1324,6 +1283,13 @@ Tulshibagwale, et al.        Standards Track                   [Page 23]
      }
    ]
 
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 23]
+
+                              SharedSignals                   March 2023
+
+
            Figure 20: Example: Read Stream Configuration Response
 
    The following is a non-normative example response to a request with
@@ -1338,13 +1304,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 23]
            Figure 21: Example: Read Stream Configuration Response
 
    Errors are signaled with HTTP status codes as follows:
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 24]
-
-                              SharedSignals                February 2023
-
 
            +======+===========================================+
            | Code | Description                               |
@@ -1380,27 +1339,15 @@ Tulshibagwale, et al.        Standards Track                   [Page 24]
    but they MUST match the expected value.  Missing Transmitter-Supplied
    properties will be ignored by the Transmitter.
 
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 24]
+
+                              SharedSignals                   March 2023
+
+
    The following is a non-normative example request to replace an Event
    Stream's configuration:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 25]
-
-                              SharedSignals                February 2023
-
 
    PATCH /ssf/stream HTTP/1.1
    Host: transmitter.example.com
@@ -1450,12 +1397,9 @@ Tulshibagwale, et al.        Standards Track                   [Page 25]
 
 
 
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 26]
+Tulshibagwale, et al.        Standards Track                   [Page 25]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
    HTTP/1.1 200 OK
@@ -1470,8 +1414,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 26]
        "http://receiver.example.com/mobile"
      ],
      "delivery": {
-       "delivery_method":
-         "https://schemas.openid.net/secevent/risc/delivery-method/push",
+       "delivery_method": "urn:ietf:rfc:8935",
        "url": "https://receiver.example.com/events"
      },
      "events_supported": [
@@ -1509,9 +1452,10 @@ Tulshibagwale, et al.        Standards Track                   [Page 26]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 27]
+
+Tulshibagwale, et al.        Standards Track                   [Page 26]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
           +======+==============================================+
@@ -1565,9 +1509,9 @@ Tulshibagwale, et al.        Standards Track                   [Page 27]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 28]
+Tulshibagwale, et al.        Standards Track                   [Page 27]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
    PUT /ssf/stream HTTP/1.1
@@ -1582,8 +1526,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 28]
        "http://receiver.example.com/mobile"
      ],
      "delivery": {
-       "delivery_method":
-         "https://schemas.openid.net/secevent/risc/delivery-method/push",
+       "delivery_method": "urn:ietf:rfc:8935",
        "url": "https://receiver.example.com/events"
      },
      "events_requested": [
@@ -1621,9 +1564,10 @@ Tulshibagwale, et al.        Standards Track                   [Page 28]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 29]
+
+Tulshibagwale, et al.        Standards Track                   [Page 28]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
    HTTP/1.1 200 OK
@@ -1638,8 +1582,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 29]
        "http://receiver.example.com/mobile"
      ],
      "delivery": {
-       "delivery_method":
-         "https://schemas.openid.net/secevent/risc/delivery-method/push",
+       "delivery_method": "urn:ietf:rfc:8935",
        "url": "https://receiver.example.com/events"
      },
      "events_supported": [
@@ -1677,9 +1620,10 @@ Tulshibagwale, et al.        Standards Track                   [Page 29]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 30]
+
+Tulshibagwale, et al.        Standards Track                   [Page 29]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
         +======+==================================================+
@@ -1717,11 +1661,11 @@ Tulshibagwale, et al.        Standards Track                   [Page 30]
    The following is a non-normative example request to delete an Event
    Stream:
 
-   DELETE /ssf/stream?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f HTTP/1.1
-   Host: transmitter.example.com
-   Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
+  DELETE /ssf/stream?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f HTTP/1.1
+  Host: transmitter.example.com
+  Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
-                 Figure 26: Example: Delete Stream Request
+                Figure 26: Example: Delete Stream Request
 
    Errors are signaled with HTTP status codes as follows:
 
@@ -1733,9 +1677,9 @@ Tulshibagwale, et al.        Standards Track                   [Page 30]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 31]
+Tulshibagwale, et al.        Standards Track                   [Page 30]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
    +======+===========================================================+
@@ -1789,9 +1733,9 @@ Tulshibagwale, et al.        Standards Track                   [Page 31]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 32]
+Tulshibagwale, et al.        Standards Track                   [Page 31]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
 7.1.2.1.  Reading a Stream's Status
@@ -1845,9 +1789,9 @@ Tulshibagwale, et al.        Standards Track                   [Page 32]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 33]
+Tulshibagwale, et al.        Standards Track                   [Page 32]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
    GET /ssf/status?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f HTTP/1.1
@@ -1871,11 +1815,11 @@ Tulshibagwale, et al.        Standards Track                   [Page 33]
    The following is a non-normative example request to check an event
    stream's status for a specific subject:
 
-   GET /ssf/status?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f&subject=<url-encoded-subject> HTTP/1.1
-   Host: transmitter.example.com
-   Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
+GET /ssf/status?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f&subject=<url-encoded-subject> HTTP/1.1
+Host: transmitter.example.com
+Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
-        Figure 29: Example: Check Stream Status Request with Subject
+     Figure 29: Example: Check Stream Status Request with Subject
 
    The following is a non-normative example response with a Subject
    claim:
@@ -1901,9 +1845,9 @@ Tulshibagwale, et al.        Standards Track                   [Page 33]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 34]
+Tulshibagwale, et al.        Standards Track                   [Page 33]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
      +======+========================================================+
@@ -1957,9 +1901,9 @@ Tulshibagwale, et al.        Standards Track                   [Page 34]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 35]
+Tulshibagwale, et al.        Standards Track                   [Page 34]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
       REQUIRED.  The new status of the Event Stream.
@@ -2013,9 +1957,9 @@ Tulshibagwale, et al.        Standards Track                   [Page 35]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 36]
+Tulshibagwale, et al.        Standards Track                   [Page 35]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
    POST /ssf/status HTTP/1.1
@@ -2069,9 +2013,9 @@ Tulshibagwale, et al.        Standards Track                   [Page 36]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 37]
+Tulshibagwale, et al.        Standards Track                   [Page 36]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
         +======+==================================================+
@@ -2125,9 +2069,9 @@ Tulshibagwale, et al.        Standards Track                   [Page 37]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 38]
+Tulshibagwale, et al.        Standards Track                   [Page 37]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
       REQUIRED.  A Subject claim identifying the subject to be added.
@@ -2181,9 +2125,9 @@ Tulshibagwale, et al.        Standards Track                   [Page 38]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 39]
+Tulshibagwale, et al.        Standards Track                   [Page 38]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
       +======+=====================================================+
@@ -2237,9 +2181,9 @@ Tulshibagwale, et al.        Standards Track                   [Page 39]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 40]
+Tulshibagwale, et al.        Standards Track                   [Page 39]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
    POST /ssf/subjects:remove HTTP/1.1
@@ -2293,9 +2237,9 @@ Tulshibagwale, et al.        Standards Track                   [Page 40]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 41]
+Tulshibagwale, et al.        Standards Track                   [Page 40]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
 7.1.4.  Verification
@@ -2349,9 +2293,9 @@ Tulshibagwale, et al.        Standards Track                   [Page 41]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 42]
+Tulshibagwale, et al.        Standards Track                   [Page 41]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
 7.1.4.2.  Triggering a Verification Event.
@@ -2405,9 +2349,9 @@ Tulshibagwale, et al.        Standards Track                   [Page 42]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 43]
+Tulshibagwale, et al.        Standards Track                   [Page 42]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
         +======+=================================================+
@@ -2461,24 +2405,24 @@ Tulshibagwale, et al.        Standards Track                   [Page 43]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 44]
+Tulshibagwale, et al.        Standards Track                   [Page 43]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
-   {
-     "jti": "123456",
-     "iss": "https://transmitter.example.com",
-     "aud": "receiver.example.com",
-     "iat": 1493856000,
-     "events": {
-       "https://schemas.openid.net/secevent/ssf/event-type/verification":{
-         "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
-       }
+ {
+   "jti": "123456",
+   "iss": "https://transmitter.example.com",
+   "aud": "receiver.example.com",
+   "iat": 1493856000,
+   "events": {
+     "https://schemas.openid.net/secevent/ssf/event-type/verification":{
+       "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
      }
    }
+ }
 
-                    Figure 40: Example: Verification SET
+                  Figure 40: Example: Verification SET
 
 7.1.5.  Stream Updated Event
 
@@ -2517,36 +2461,36 @@ Tulshibagwale, et al.        Standards Track                   [Page 44]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 45]
+Tulshibagwale, et al.        Standards Track                   [Page 44]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
       OPTIONAL.  Specifies the Subject Principal for whom the status has
       been updated.  If this claim is not included, then the status
       change was applied to all subjects in the stream.
 
-   {
-     "jti": "123456",
-     "iss": "https://transmitter.example.com",
-     "aud": "receiver.example.com",
-     "iat": 1493856000,
-     "events": {
-       "https://schemas.openid.net/secevent/ssf/event-type/stream-updated": {
-         "subject": {
-           "tenant" : {
-             "format": "iss_sub",
-             "iss" : "http://example.com/idp1",
-             "sub" : "1234"
-           }
-         },
-         "status": "paused",
-         "reason": "License is not valid"
-       }
-     }
-   }
+{
+  "jti": "123456",
+  "iss": "https://transmitter.example.com",
+  "aud": "receiver.example.com",
+  "iat": 1493856000,
+  "events": {
+    "https://schemas.openid.net/secevent/ssf/event-type/stream-updated": {
+      "subject": {
+        "tenant" : {
+          "format": "iss_sub",
+          "iss" : "http://example.com/idp1",
+          "sub" : "1234"
+        }
+      },
+      "status": "paused",
+      "reason": "License is not valid"
+    }
+  }
+}
 
-                   Figure 41: Example: Stream Updated SET
+                Figure 41: Example: Stream Updated SET
 
 8.  Authorization
 
@@ -2573,9 +2517,9 @@ Tulshibagwale, et al.        Standards Track                   [Page 45]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 46]
+Tulshibagwale, et al.        Standards Track                   [Page 45]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
    Event Transmitters SHOULD carefully evaluate the conditions under
@@ -2629,9 +2573,9 @@ Tulshibagwale, et al.        Standards Track                   [Page 46]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 47]
+Tulshibagwale, et al.        Standards Track                   [Page 46]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
 10.1.  Subject Information Leakage
@@ -2685,9 +2629,9 @@ Tulshibagwale, et al.        Standards Track                   [Page 47]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 48]
+Tulshibagwale, et al.        Standards Track                   [Page 47]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
    *  Push-Based SET Token Delivery Using HTTP [DELIVERYPUSH]
@@ -2721,51 +2665,51 @@ Tulshibagwale, et al.        Standards Track                   [Page 48]
    The SSF event MAY contain additional claims within the event payload
    that are specific to the event type.
 
-   {
-     "iss": "https://idp.example.com/",
-     "jti": "756E69717565206964656E746966696572",
-     "iat": 1520364019,
-     "aud": "636C69656E745F6964",
-     "events": {
-       "https://schemas.openid.net/secevent/risc/event-type/account-disabled": {
-         "subject": {
-           "format": "phone",
-           "phone_number": "+1 206 555 0123"
-         },
-         "reason": "hijacking",
-         "cause-time": 1508012752
-       }
-     }
-   }
+{
+  "iss": "https://idp.example.com/",
+  "jti": "756E69717565206964656E746966696572",
+  "iat": 1520364019,
+  "aud": "636C69656E745F6964",
+  "events": {
+    "https://schemas.openid.net/secevent/risc/event-type/account-disabled": {
+      "subject": {
+        "format": "phone",
+        "phone_number": "+1 206 555 0123"
+      },
+      "reason": "hijacking",
+      "cause-time": 1508012752
+    }
+  }
+}
 
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 49]
+Tulshibagwale, et al.        Standards Track                   [Page 48]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
-        Figure 42: Example: SET Containing a RISC Event with a Phone
-                               Number Subject
+     Figure 42: Example: SET Containing a RISC Event with a Phone
+                            Number Subject
 
-   {
-     "iss": "https://idp.example.com/",
-     "jti": "756E69717565206964656E746966696572",
-     "iat": 1520364019,
-     "aud": "636C69656E745F6964",
-     "events": {
-       "https://schemas.openid.net/secevent/caep/event-type/token-claims-changed": {
-         "subject": {
-           "format": "email",
-           "email": "user@example.com"
-         },
-         "token": "some-token-value"
-       }
-     }
-   }
+{
+  "iss": "https://idp.example.com/",
+  "jti": "756E69717565206964656E746966696572",
+  "iat": 1520364019,
+  "aud": "636C69656E745F6964",
+  "events": {
+    "https://schemas.openid.net/secevent/caep/event-type/token-claims-changed": {
+      "subject": {
+        "format": "email",
+        "email": "user@example.com"
+      },
+      "token": "some-token-value"
+    }
+  }
+}
 
-      Figure 43: Example: SET Containing a CAEP Event with Properties
+   Figure 43: Example: SET Containing a CAEP Event with Properties
 
 11.1.4.  Explicit Typing of SETs
 
@@ -2797,9 +2741,9 @@ Tulshibagwale, et al.        Standards Track                   [Page 49]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 50]
+Tulshibagwale, et al.        Standards Track                   [Page 49]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
 11.1.6.  The "aud" Claim
@@ -2822,19 +2766,19 @@ Tulshibagwale, et al.        Standards Track                   [Page 50]
    SETs to respective Receivers, an "aud" claim with multiple Receivers
    would lead to unintended data disclosure.
 
-   {
-     "jti": "123456",
-     "iss": "https://transmitter.example.com",
-     "aud": ["receiver.example.com/web", "receiver.example.com/mobile"],
-     "iat": 1493856000,
-     "events": {
-       "https://schemas.openid.net/secevent/ssf/event-type/verification": {
-         "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
-       }
-     }
-   }
+{
+  "jti": "123456",
+  "iss": "https://transmitter.example.com",
+  "aud": ["receiver.example.com/web", "receiver.example.com/mobile"],
+  "iat": 1493856000,
+  "events": {
+    "https://schemas.openid.net/secevent/ssf/event-type/verification": {
+      "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
+    }
+  }
+}
 
-               Figure 45: Example: SET with array 'aud' claim
+            Figure 45: Example: SET with array 'aud' claim
 
 11.1.7.  The "events" claim
 
@@ -2853,9 +2797,9 @@ Tulshibagwale, et al.        Standards Track                   [Page 50]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 51]
+Tulshibagwale, et al.        Standards Track                   [Page 50]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
    *  The "sub" claim MUST NOT be present, as described in
@@ -2883,7 +2827,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 51]
 
    method
 
-      "https://schemas.openid.net/secevent/risc/delivery-method/push"
+      "urn:ietf:rfc:8935"
 
    endpoint_url
 
@@ -2905,13 +2849,13 @@ Tulshibagwale, et al.        Standards Track                   [Page 51]
 
    method
 
-      "https://schemas.openid.net/secevent/risc/delivery-method/poll"
+      "urn:ietf:rfc:8936"
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 52]
+Tulshibagwale, et al.        Standards Track                   [Page 51]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
    endpoint_url
@@ -2938,17 +2882,17 @@ Tulshibagwale, et al.        Standards Track                   [Page 52]
               <https://tools.ietf.org/html/rfc6749#section-4.4>.
 
    [DELIVERYPOLL]
-              Backman, A., Jones, M., Scurtescu, M. S., Ansari, M., and
+              Backman, A., Jones, M., Scurtescu, M.S., Ansari, M., and
               A. Nadalin, "Poll-Based SET Token Delivery Using HTTP",
               November 2020, <https://www.rfc-editor.org/info/rfc8936>.
 
    [DELIVERYPUSH]
-              Backman, A., Jones, M., Hunt, P., Scurtescu, M. S.,
-              Ansari, M., and A. Nadalin, "Push-Based SET Token Delivery
-              Using HTTP", November 2020,
+              Backman, A., Jones, M., Hunt, P., Scurtescu, M.S., Ansari,
+              M., and A. Nadalin, "Push-Based SET Token Delivery Using
+              HTTP", November 2020,
               <https://www.rfc-editor.org/info/rfc8935>.
 
-   [IDTOKEN]  Sakimura, N., Bradley, J., Jones, M. B., de Medeiros, B.,
+   [IDTOKEN]  Sakimura, N., Bradley, J., Jones, M.B., de Medeiros, B.,
               and C. Mortimore, "OpenID Connect Core 1.0 - ID Token",
               April 2017, <http://openid.net/specs/openid-connect-core-
               1_0.html#IDToken>.
@@ -2965,18 +2909,18 @@ Tulshibagwale, et al.        Standards Track                   [Page 52]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 53]
+Tulshibagwale, et al.        Standards Track                   [Page 52]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
    [OAUTH-DISCOVERY]
-              Jones, M. B., Sakimura, N., and J. Bradley, "OAuth 2.0
+              Jones, M.B., Sakimura, N., and J. Bradley, "OAuth 2.0
               Authorization Server Metadata - Version 10", June 2018,
               <https://www.rfc-editor.org/info/rfc8414>.
 
    [OPENID-DISCOVERY]
-              Sakimura, N., Bradley, J., Jones, M. B., and E. Jay,
+              Sakimura, N., Bradley, J., Jones, M.B., and E. Jay,
               "OpenID Connect Discovery 1.0", November 2014,
               <https://openid.net/specs/openid-connect-discovery-
               1_0.html>.
@@ -3021,9 +2965,9 @@ Tulshibagwale, et al.        Standards Track                   [Page 53]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 54]
+Tulshibagwale, et al.        Standards Track                   [Page 53]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
    [SUBIDS]   Backman, A. and M. Scurtescu, "Subject Identifiers for
@@ -3077,9 +3021,9 @@ Appendix B.  Notices
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 55]
+Tulshibagwale, et al.        Standards Track                   [Page 54]
 
-                              SharedSignals                February 2023
+                              SharedSignals                   March 2023
 
 
    no (and hereby expressly disclaim any) warranties (express, implied,
@@ -3133,4 +3077,4 @@ Authors' Addresses
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 56]
+Tulshibagwale, et al.        Standards Track                   [Page 55]
