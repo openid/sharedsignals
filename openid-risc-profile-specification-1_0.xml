@@ -63,7 +63,7 @@
       </address>
     </author>
 
-    <date year="2023" month="February" day="09"/>
+    <date year="2023" month="March" day="21"/>
 
     <workgroup>Shared Signals</workgroup>
 
@@ -310,7 +310,7 @@
 
       <section anchor="opt-out" title="Opt Out">
         <t>Users SHOULD be allowed to opt-in and out of RISC events being sent for their accounts. With regards
-        to opt-out an account can be in one of these three states:<list style="numbers">
+        to opt-out, an account can be in one of these three states:<list style="numbers">
           <t>opt-in - the account is participating in RISC event exchange.</t>
           <t>opt-out-initiated - the user requested to be excluded from RISC event exchanges, but for
           practical security reasons for a period of time RISC events are still exchanged. The main reason
@@ -319,12 +319,12 @@
         </list></t>
         
         <figure anchor="opt-out-states" title="Opt-Out States and Opt-Out Events">
-          <preamble>State changes trigger Opt-Out Events as represented bellow:</preamble>
+          <preamble>State changes trigger Opt-Out Events as represented below:</preamble>
           <artwork><![CDATA[
 +--------+  opt-out-initiated  +-------------------+
 |        +--------------------->                   |
 | opt-in |                     | opt-out-initiated |
-|        |  pt-out-cancelled   |                   |
+|        |  opt-out-cancelled  |                   |
 |        <---------------------+                   |
 +---^----+                     +----------+--------+
     |                                     |
