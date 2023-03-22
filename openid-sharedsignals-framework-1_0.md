@@ -829,6 +829,10 @@ an HTTP POST request to the Configuration Endpoint. On receiving a valid request
 the Event Transmitter responds with a "201 Created" response containing a
 [JSON][RFC7159] representation of the stream’s configuration in the body.
 
+If the stream already exists, the Event Transmitter responds with HTTP status code
+"200 OK" and includes a [JSON][RFC7159] representation of the stream’s configuration
+in the body.
+
 The HTTP POST request MAY contain the Receiver-Supplied values of the Stream
 Configuration ({{stream-config}}) object:
 
