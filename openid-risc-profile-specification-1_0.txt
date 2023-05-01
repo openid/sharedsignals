@@ -14,7 +14,7 @@ Shared Signals                                              M. Scurtescu
                                                               VeriClouds
                                                         A. Tulshibagwale
                                                                     SGNL
-                                                         9 February 2023
+                                                           21 March 2023
 
 
             OpenID RISC Profile Specification 1.0 - draft 03
@@ -55,7 +55,7 @@ Table of Contents
 
 Scurtescu, et al.            Standards Track                    [Page 1]
 
-                    openid-risc-profile-specification      February 2023
+                    openid-risc-profile-specification         March 2023
 
 
    Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  11
@@ -111,7 +111,7 @@ Scurtescu, et al.            Standards Track                    [Page 1]
 
 Scurtescu, et al.            Standards Track                    [Page 2]
 
-                    openid-risc-profile-specification      February 2023
+                    openid-risc-profile-specification         March 2023
 
 
    {
@@ -167,7 +167,7 @@ Scurtescu, et al.            Standards Track                    [Page 2]
 
 Scurtescu, et al.            Standards Track                    [Page 3]
 
-                    openid-risc-profile-specification      February 2023
+                    openid-risc-profile-specification         March 2023
 
 
       -  bulk-account
@@ -223,7 +223,7 @@ Scurtescu, et al.            Standards Track                    [Page 3]
 
 Scurtescu, et al.            Standards Track                    [Page 4]
 
-                    openid-risc-profile-specification      February 2023
+                    openid-risc-profile-specification         March 2023
 
 
    This event SHOULD be issued only by the provider that is
@@ -279,7 +279,7 @@ Scurtescu, et al.            Standards Track                    [Page 4]
 
 Scurtescu, et al.            Standards Track                    [Page 5]
 
-                    openid-risc-profile-specification      February 2023
+                    openid-risc-profile-specification         March 2023
 
 
    {
@@ -335,7 +335,7 @@ Scurtescu, et al.            Standards Track                    [Page 5]
 
 Scurtescu, et al.            Standards Track                    [Page 6]
 
-                    openid-risc-profile-specification      February 2023
+                    openid-risc-profile-specification         March 2023
 
 
    *  reason_user - OPTIONAL.  The reason why the credential compromised
@@ -367,8 +367,8 @@ Scurtescu, et al.            Standards Track                    [Page 6]
 2.8.  Opt Out
 
    Users SHOULD be allowed to opt-in and out of RISC events being sent
-   for their accounts.  With regards to opt-out an account can be in one
-   of these three states:
+   for their accounts.  With regards to opt-out, an account can be in
+   one of these three states:
 
    1.  opt-in - the account is participating in RISC event exchange.
 
@@ -381,7 +381,7 @@ Scurtescu, et al.            Standards Track                    [Page 6]
    3.  opt-out - the account is NOT participating in RISC event
        exchange.
 
-   State changes trigger Opt-Out Events as represented bellow:
+   State changes trigger Opt-Out Events as represented below:
 
 
 
@@ -391,13 +391,13 @@ Scurtescu, et al.            Standards Track                    [Page 6]
 
 Scurtescu, et al.            Standards Track                    [Page 7]
 
-                    openid-risc-profile-specification      February 2023
+                    openid-risc-profile-specification         March 2023
 
 
    +--------+  opt-out-initiated  +-------------------+
    |        +--------------------->                   |
    | opt-in |                     | opt-out-initiated |
-   |        |  pt-out-cancelled   |                   |
+   |        |  opt-out-cancelled  |                   |
    |        <---------------------+                   |
    +---^----+                     +----------+--------+
        |                                     |
@@ -447,7 +447,7 @@ Scurtescu, et al.            Standards Track                    [Page 7]
 
 Scurtescu, et al.            Standards Track                    [Page 8]
 
-                    openid-risc-profile-specification      February 2023
+                    openid-risc-profile-specification         March 2023
 
 
    Opt Out Cancelled signals that the account identified by the subject
@@ -503,7 +503,7 @@ Scurtescu, et al.            Standards Track                    [Page 8]
 
 Scurtescu, et al.            Standards Track                    [Page 9]
 
-                    openid-risc-profile-specification      February 2023
+                    openid-risc-profile-specification         March 2023
 
 
    Sessions Revoked signals that all the sessions for the account
@@ -559,7 +559,7 @@ Scurtescu, et al.            Standards Track                    [Page 9]
 
 Scurtescu, et al.            Standards Track                   [Page 10]
 
-                    openid-risc-profile-specification      February 2023
+                    openid-risc-profile-specification         March 2023
 
 
    [SHARED-SIGNALS-FRAMEWORK]
@@ -615,7 +615,7 @@ Appendix B.  Notices
 
 Scurtescu, et al.            Standards Track                   [Page 11]
 
-                    openid-risc-profile-specification      February 2023
+                    openid-risc-profile-specification         March 2023
 
 
    The technology described in this specification was made available
@@ -671,7 +671,7 @@ Authors' Addresses
 
 Scurtescu, et al.            Standards Track                   [Page 12]
 
-                    openid-risc-profile-specification      February 2023
+                    openid-risc-profile-specification         March 2023
 
 
    Atul Tulshibagwale
