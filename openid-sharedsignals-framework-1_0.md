@@ -2,7 +2,7 @@
 title: OpenID Shared Signals Framework Specification 1.0 - draft 02
 abbrev: SharedSignals
 docname: openid-sharedsignals-framework-1_0
-date: 2023-02-08
+date: 2023-05-08
 
 ipr: none
 cat: std
@@ -198,8 +198,8 @@ This spec also directly profiles several IETF Security Events drafts:
 
 * Security Event Token (SET) {{RFC8417}}
 * Subject Identifiers for Security Event Tokens {{SUBIDS}}
-* Push-Based SET Token Delivery Using HTTP {{DELIVERYPUSH}} 
-* Poll-Based SET Token Delivery Using HTTP {{DELIVERYPOLL}} 
+* Push-Based SET Token Delivery Using HTTP {{DELIVERYPUSH}}
+* Poll-Based SET Token Delivery Using HTTP {{DELIVERYPOLL}}
 
 --- middle
 
@@ -302,7 +302,7 @@ Below is a non-normative example of a Complex Subject claim in a SSF event.
     "sub" : "1234"
   }
 }
-~~~ 
+~~~
 {: #complex-subject-ex title="Example: Complex Subject"}
 
 ### Complex Subject Interpretation {#complex-subject-interpretation}
@@ -327,7 +327,7 @@ scope of this specification.
 
 ## Additional Subject Identifier Formats {#additional-subject-id-formats}
 
-The following new subject identifier formats are defined: 
+The following new subject identifier formats are defined:
 
 ### JWT ID Subject Identifier Format {#sub-id-jwt-id}
 
@@ -359,7 +359,7 @@ Identifier Format.
 ~~~
 {: #sub-id-jwtid title="Example: 'jwt-id' Subject Identifier"}
 
-### SAML Assertion ID Subject Identifier Format {#sub-id-saml-assertion-id} 
+### SAML Assertion ID Subject Identifier Format {#sub-id-saml-assertion-id}
 
 The "SAML Assertion ID" Subject Identifier Format specifies a SAML 2.0
 {{OASIS.saml-core-2.0-os}} assertion identifier. Subject Identifiers of this
@@ -405,7 +405,7 @@ Additional members about an event may be included in the "events" claim. Some
 of these members are required and specified as such in the respective event
 types specs. If a Transmitter determines that it needs to include additional
 members that are not specified in the event types spec, then the name of such
-members MUST be a URI. The discoverability of all additional members is 
+members MUST be a URI. The discoverability of all additional members is
 specified in the Discovery {{discovery}} section.
 
 # Example SETs that conform to the Shared Signals Framework {#events-examples}
@@ -1116,7 +1116,7 @@ Errors are signaled with HTTP status codes as follows:
 | 403  | if the Event Receiver is not allowed to read the stream configuration |
 | 404  | if there is no Event Stream with the given "stream_id" for this Event Receiver |
 {: title="Read Stream Configuration Errors" #tabreadconfig}
- 
+
 #### Updating a Stream’s Configuration {#updating-a-streams-configuration}
 An Event Receiver updates the current configuration of a stream by making an
 HTTP PATCH request to the Configuration Endpoint. The PATCH body contains a
@@ -1132,7 +1132,8 @@ request MUST NOT be changed by the Transmitter.
 
 Transmitter-Supplied properties beside the stream_id MAY be present,
 but they MUST match the expected value. Missing Transmitter-Supplied
-properties will be ignored by the Transmitter.
+properties will be ignored by the Transmitter. The `events_delivered` property,
+if present, MUST match the Transmitter's expected value _before_ any updates are applied.
 
 The following is a non-normative example request to replace an Event Stream’s
 configuration:
@@ -1218,7 +1219,8 @@ deleted. Event Receivers MAY read the configuration first, modify the JSON
 
 Transmitter-Supplied properties besides the stream_id MAY be present,
 but they MUST match the expected value. Missing Transmitter-Supplied
-properties will be ignored by the Transmitter.
+properties will be ignored by the Transmitter. The `events_delivered` property,
+if present, MUST match the Transmitter's expected value _before_ any updates are applied.
 
 The following is a non-normative example request to replace an Event Stream’s
 configuration:
@@ -1574,6 +1576,19 @@ An Event Receiver can indicate to an Event Transmitter whether or not the
 receiver wants to receive events about a particular subject by “adding” or
 “removing” that subject to the Event Stream, respectively.
 
+If a Receiver has added a subject to a stream, the Transmitter SHOULD send any events that
+match the subject to the Reciever, as long as the Receiver has also subscribed to that
+event type, and both the stream and subject are enabled. In the case of Simple Subjects,
+two subjects match if they are exactly identical. For Complex Subjects, two subjects
+match if, for all fields in the Complex Subject (i.e. `user`, `group`, `device`, etc.),
+at least one of the following statements is true:
+
+1. Subject 1's field is not defined
+
+2. Subject 2's field is not defined
+
+3. Subject 1's field is identical to Subject 2's field
+
 #### Adding a Subject to a Stream {#adding-a-subject-to-a-stream}
 To add a subject to an Event Stream, the Event Receiver makes an HTTP POST
 request to the Add Subject Endpoint, containing in the body a JSON object the
@@ -1663,14 +1678,14 @@ identified by a Phone Number Subject Identifier:
 POST /ssf/subjects:remove HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
-            
+
 {
   "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
   "subject": {
     "format": "phone",
     "phone_number": "+12065550123"
   }
-}             
+}
 ~~~
 {: title="Example: Remove Subject Request" #figremovereq}
 
@@ -1694,7 +1709,7 @@ Errors are signaled with HTTP status codes as follows:
 | 429  | if the Event Receiver is sending too many requests in a given amount of time |
 {: title="Remove Subject Errors" #tabremoveerr}
 
-### Verification {#verification} 
+### Verification {#verification}
 In some cases, the frequency of event transmission on an Event Stream will be
 very low, making it difficult for an Event Receiver to tell the difference
 between expected behavior and event transmission failure due to a misconfigured
@@ -1707,7 +1722,7 @@ delivery is working, including signature verification and encryption.
 An Event Transmitter MAY send a Verification Event at any time, even if one was
 not requested by the Event Receiver.
 
-#### Verification Event {#verification-event} 
+#### Verification Event {#verification-event}
 The Verification Event is a standard SET with the following attributes:
 
 event type
@@ -1856,11 +1871,11 @@ subject
           "format": "iss_sub",
           "iss" : "http://example.com/idp1",
           "sub" : "1234"
-        }    
-      },   
+        }
+      },
       "status": "paused",
       "reason": "License is not valid"
-    }   
+    }
   }
 }
 ~~~
@@ -1874,9 +1889,9 @@ The receiver may obtain an access token using the Client
 Credential Grant {{CLIENTCRED}}, or any other method suitable for the Receiver and the
 Transmitter.
 
-# Security Considerations {#management-sec} 
+# Security Considerations {#management-sec}
 
-## Subject Probing {#management-sec-subject-probing} 
+## Subject Probing {#management-sec-subject-probing}
 It may be possible for an Event Transmitter to leak information about subjects
 through their responses to add subject requests. A "404" response may indicate
 to the Event Receiver that the subject does not exist, which may inadvertently
@@ -1890,7 +1905,7 @@ to the subject, and Event Receivers MUST NOT assume that a 204 response means
 that they will receive events related to the subject.
 
 
-## Information Harvesting {#management-sec-information-harvesting} 
+## Information Harvesting {#management-sec-information-harvesting}
 SETs may contain personally identifiable information (PII) or other non-public
 information about the event transmitter, the subject (of an event in the SET),
 or the relationship between the two. It is important for Event Transmitters to
@@ -1908,7 +1923,7 @@ transmitting the event. The mechanisms by which such validation is performed
 are outside the scope of this specification.
 
 
-## Malicious Subject Removal {#management-sec-malicious-subject-removal} 
+## Malicious Subject Removal {#management-sec-malicious-subject-removal}
 A malicious party may find it advantageous to remove a particular subject from a
 stream, in order to reduce the Event Receiver’s ability to detect malicious
 activity related to the subject, inconvenience the subject, or for other reasons.
@@ -1923,9 +1938,9 @@ from the stream, and MUST NOT report these events as errors to the Event
 Transmitter.
 
 
-# Privacy Considerations {#privacy-considerations} 
+# Privacy Considerations {#privacy-considerations}
 
-## Subject Information Leakage {#sub-info-leakage} 
+## Subject Information Leakage {#sub-info-leakage}
 Event issuers and recipients SHOULD take precautions to ensure that they do not
 leak information about subjects via Subject Identifiers, and choose appropriate
 Subject Identifier Types accordingly. Parties SHOULD NOT identify a subject
@@ -1936,34 +1951,34 @@ Identifier Type and the same claim values to identify a given subject when
 communicating with a given party in order to reduce the possibility of
 information leakage.
 
-## Previously Consented Data {#previously-consented-data} 
+## Previously Consented Data {#previously-consented-data}
 If SSF events contain new values for attributes of Subject Principals that were
 previously exchanged between the Transmitter and Receiver, then there are no
 additional privacy considerations introduced by providing the updated values in
 the SSF events, unless the attribute was exchanged under a one-time consent
 obtained from the user.
 
-## New Data {#new-data} 
+## New Data {#new-data}
 Data that was not previously exchanged between the Transmitter and the Receiver,
 or data whose consent to exchange has expired has the following considerations:
 
-### Organizational Data {#organizational-data} 
+### Organizational Data {#organizational-data}
 If a user has previously agreed with a Transmitter that they agree to release
 certain data to third-parties, then the Transmitter MAY send such data in SSF
 events without additional consent of the user. Such data MAY include
 organizational data about the Subject Principal that was generated by the
 Transmitter.
 
-### Consentable Data {#consentable-data} 
+### Consentable Data {#consentable-data}
 If a Transmitter intends to include data in SSF events that is not previously
 consented to be released by the user, then the Transmitter MUST obtain consent
 to release such data from the user in accordance with the Transmitter's privacy
 policy.
 
-# Profiles {#profiles} 
+# Profiles {#profiles}
 This section is a profile of the following IETF SecEvent specifications:
 
-* Security Event Token (SET) {{RFC8417}} 
+* Security Event Token (SET) {{RFC8417}}
 * Push-Based SET Token Delivery Using HTTP {{DELIVERYPUSH}}
 * Poll-Based SET Token Delivery Using HTTP {{DELIVERYPOLL}}
 
@@ -1973,20 +1988,20 @@ RISC Use Cases {{USECASES}}.
 The CAEP use cases that set the requirements are described in CAEP Use Cases (TODO: Add
         reference when file is added to repository.)
 
-## Security Event Token Profile {#set-profle} 
+## Security Event Token Profile {#set-profle}
 This section provides SSF profiling specifications for the Security Event Token (SET)
 {{RFC8417}} spec.
 
-### Signature Key Resolution {#signature-key-resolution} 
+### Signature Key Resolution {#signature-key-resolution}
 The signature key can be obtained through "jwks_uri", see {{discovery}}.
 
-### SSF Event Subject {#event-subjects} 
+### SSF Event Subject {#event-subjects}
 The subject of a SSF event is identified by the "subject" claim within the event
 payload, whose value is a Subject Identifier. The "subject" claim is REQUIRED
 for all SSF events. The JWT "sub" claim MUST NOT be present in any SET containing
 a SSF event.
 
-### SSF Event Properties {#event-properties} 
+### SSF Event Properties {#event-properties}
 The SSF event MAY contain additional claims within the event payload that are
 specific to the event type.
 
@@ -2029,7 +2044,7 @@ specific to the event type.
 ~~~
 {: #caep-event-properties-example title="Example: SET Containing a CAEP Event with Properties"}
 
-### Explicit Typing of SETs {#explicit-typing} 
+### Explicit Typing of SETs {#explicit-typing}
 SSF events MUST use explicit typing as defined in Section 2.3 of {{RFC8417}}.
 
 ~~~ json
@@ -2045,13 +2060,13 @@ Sections 4.5, 4.6 and 4.7 of {{RFC8417}}. While current Id Token {{IDTOKEN}}
 validators may not be using the "typ" header parameter, by requiring it for SSF
 SETs a distinct value is guaranteed for future validators.
 
-### The "exp" Claim {#exp-claim} 
+### The "exp" Claim {#exp-claim}
 The "exp" claim MUST NOT be used in SSF SETs.
 
 The purpose is defense in depth against confusion with other JWTs, as described
 in Sections 4.5 and 4.6 of {{RFC8417}}.
 
-### The "aud" Claim {#aud-claim} 
+### The "aud" Claim {#aud-claim}
 The "aud" claim can be a single value or an array. Each value SHOULD be the
 OAuth 2.0 client ID. Other values that uniquely identifies the Receiver to the
 Transmitter MAY be used, if the two parties have agreement on the format.
@@ -2083,7 +2098,7 @@ multiple Receivers would lead to unintended data disclosure.
 ~~~
 {: title="Example: SET with array 'aud' claim" #figarrayaud}
 
-### The "events" claim {#events-claim} 
+### The "events" claim {#events-claim}
 The "events" claim SHOULD contain only one event. Multiple event type URIs are
 permitted only if they are alternative URIs defining the exact same event type.
 
@@ -2102,7 +2117,7 @@ on this subject. The Shared Signals Framework is asking for further restrictions
 This section provides SSF profiling specifications for the {{DELIVERYPUSH}} and
 {{DELIVERYPOLL}} specs.
 
-### Stream Configuration Metadata {#delivery-meta} 
+### Stream Configuration Metadata {#delivery-meta}
 Each delivery method is identified by a URI, specified below by the "method"
 metadata.
 
@@ -2125,7 +2140,7 @@ authorization_header
 > The HTTP Authorization header that the Transmitter MUST set with each event
   delivery, if the configuration is present. The value is optional and it is set
   by the Receiver.
-  
+
 #### Polling Delivery using HTTP
 This section provides SSF profiling specifications for the {{DELIVERYPOLL}} spec.
 
@@ -2139,7 +2154,7 @@ endpoint_url
   Transmitter. These URLs MAY be reused across Receivers, but MUST be unique per
   stream for a given Receiver.
 
-# IANA Considerations {#iana} 
+# IANA Considerations {#iana}
 Subject Identifiers defined in this document will be added to the "Security
 Events Subject Identifier Types" registry. This registry is defined in the
 Subject Identifiers for Security Event Tokens {{SUBIDS}} specification.

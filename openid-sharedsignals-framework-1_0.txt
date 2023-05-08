@@ -14,7 +14,7 @@ Shared Signals                                          A. Tulshibagwale
                                                                   Yubico
                                                                  S. Miel
                                                                    Cisco
-                                                         8 February 2023
+                                                              8 May 2023
 
 
       OpenID Shared Signals Framework Specification 1.0 - draft 02
@@ -55,7 +55,7 @@ Abstract
 
 Tulshibagwale, et al.        Standards Track                    [Page 1]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
    *  Poll-Based SET Token Delivery Using HTTP [DELIVERYPOLL]
@@ -111,7 +111,7 @@ Table of Contents
 
 Tulshibagwale, et al.        Standards Track                    [Page 2]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
        11.1.4.  Explicit Typing of SETs  . . . . . . . . . . . . . .  50
@@ -167,7 +167,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 2]
 
 Tulshibagwale, et al.        Standards Track                    [Page 3]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
    A Subject may be a "simple subject" or a "complex subject".
@@ -223,7 +223,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 3]
 
 Tulshibagwale, et al.        Standards Track                    [Page 4]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
    group
@@ -279,7 +279,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 4]
 
 Tulshibagwale, et al.        Standards Track                    [Page 5]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
 3.4.  Additional Subject Identifier Formats
@@ -335,7 +335,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 5]
 
 Tulshibagwale, et al.        Standards Track                    [Page 6]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
       REQUIRED.  The "ID" value of the SAML assertion being identified,
@@ -391,7 +391,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 6]
 
 Tulshibagwale, et al.        Standards Track                    [Page 7]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
    {
@@ -447,7 +447,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 7]
 
 Tulshibagwale, et al.        Standards Track                    [Page 8]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
    {
@@ -503,7 +503,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 8]
 
 Tulshibagwale, et al.        Standards Track                    [Page 9]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
 6.1.  Transmitter Configuration Metadata
@@ -559,7 +559,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 9]
 
 Tulshibagwale, et al.        Standards Track                   [Page 10]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
    TODO: consider adding a IANA Registry for metadata, similar to
@@ -615,7 +615,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 10]
 
 Tulshibagwale, et al.        Standards Track                   [Page 11]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
 6.2.2.  Backward Compatibility for RISC Transmitters
@@ -671,7 +671,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 11]
 
 Tulshibagwale, et al.        Standards Track                   [Page 12]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
    HTTP/1.1 200 OK
@@ -727,7 +727,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 12]
 
 Tulshibagwale, et al.        Standards Track                   [Page 13]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
    This section defines an HTTP API to be implemented by Event
@@ -783,7 +783,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 13]
 
 Tulshibagwale, et al.        Standards Track                   [Page 14]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
       An endpoint used to create and delete Event Streams, as well as
@@ -839,7 +839,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 14]
 
 Tulshibagwale, et al.        Standards Track                   [Page 15]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
    aud
@@ -895,7 +895,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 15]
 
 Tulshibagwale, et al.        Standards Track                   [Page 16]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
       *Receiver-Supplied*, The Subject Identifier Format that the
@@ -951,7 +951,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 16]
 
 Tulshibagwale, et al.        Standards Track                   [Page 17]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
    POST /ssf/stream HTTP/1.1
@@ -1007,7 +1007,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 17]
 
 Tulshibagwale, et al.        Standards Track                   [Page 18]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
    HTTP/1.1 200 OK
@@ -1063,7 +1063,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 18]
 
 Tulshibagwale, et al.        Standards Track                   [Page 19]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
 7.1.1.2.  Reading a Stream's Configuration
@@ -1119,7 +1119,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 19]
 
 Tulshibagwale, et al.        Standards Track                   [Page 20]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
    HTTP/1.1 200 OK
@@ -1175,7 +1175,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 20]
 
 Tulshibagwale, et al.        Standards Track                   [Page 21]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
    HTTP/1.1 200 OK
@@ -1231,7 +1231,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 21]
 
 Tulshibagwale, et al.        Standards Track                   [Page 22]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
        ],
@@ -1287,7 +1287,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 22]
 
 Tulshibagwale, et al.        Standards Track                   [Page 23]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
    HTTP/1.1 200 OK
@@ -1343,7 +1343,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 23]
 
 Tulshibagwale, et al.        Standards Track                   [Page 24]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
            +======+===========================================+
@@ -1378,7 +1378,9 @@ Tulshibagwale, et al.        Standards Track                   [Page 24]
 
    Transmitter-Supplied properties beside the stream_id MAY be present,
    but they MUST match the expected value.  Missing Transmitter-Supplied
-   properties will be ignored by the Transmitter.
+   properties will be ignored by the Transmitter.  The events_delivered
+   property, if present, MUST match the Transmitter's expected value
+   _before_ any updates are applied.
 
    The following is a non-normative example request to replace an Event
    Stream's configuration:
@@ -1395,11 +1397,9 @@ Tulshibagwale, et al.        Standards Track                   [Page 24]
 
 
 
-
-
 Tulshibagwale, et al.        Standards Track                   [Page 25]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
    PATCH /ssf/stream HTTP/1.1
@@ -1455,7 +1455,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 25]
 
 Tulshibagwale, et al.        Standards Track                   [Page 26]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
    HTTP/1.1 200 OK
@@ -1511,7 +1511,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 26]
 
 Tulshibagwale, et al.        Standards Track                   [Page 27]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
           +======+==============================================+
@@ -1554,7 +1554,9 @@ Tulshibagwale, et al.        Standards Track                   [Page 27]
 
    Transmitter-Supplied properties besides the stream_id MAY be present,
    but they MUST match the expected value.  Missing Transmitter-Supplied
-   properties will be ignored by the Transmitter.
+   properties will be ignored by the Transmitter.  The events_delivered
+   property, if present, MUST match the Transmitter's expected value
+   _before_ any updates are applied.
 
    The following is a non-normative example request to replace an Event
    Stream's configuration:
@@ -1563,11 +1565,9 @@ Tulshibagwale, et al.        Standards Track                   [Page 27]
 
 
 
-
-
 Tulshibagwale, et al.        Standards Track                   [Page 28]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
    PUT /ssf/stream HTTP/1.1
@@ -1623,7 +1623,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 28]
 
 Tulshibagwale, et al.        Standards Track                   [Page 29]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
    HTTP/1.1 200 OK
@@ -1679,7 +1679,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 29]
 
 Tulshibagwale, et al.        Standards Track                   [Page 30]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
         +======+==================================================+
@@ -1735,7 +1735,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 30]
 
 Tulshibagwale, et al.        Standards Track                   [Page 31]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
    +======+===========================================================+
@@ -1791,7 +1791,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 31]
 
 Tulshibagwale, et al.        Standards Track                   [Page 32]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
 7.1.2.1.  Reading a Stream's Status
@@ -1847,7 +1847,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 32]
 
 Tulshibagwale, et al.        Standards Track                   [Page 33]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
    GET /ssf/status?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f HTTP/1.1
@@ -1903,7 +1903,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 33]
 
 Tulshibagwale, et al.        Standards Track                   [Page 34]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
      +======+========================================================+
@@ -1959,7 +1959,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 34]
 
 Tulshibagwale, et al.        Standards Track                   [Page 35]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
       REQUIRED.  The new status of the Event Stream.
@@ -2015,7 +2015,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 35]
 
 Tulshibagwale, et al.        Standards Track                   [Page 36]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
    POST /ssf/status HTTP/1.1
@@ -2071,7 +2071,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 36]
 
 Tulshibagwale, et al.        Standards Track                   [Page 37]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
         +======+==================================================+
@@ -2110,6 +2110,28 @@ Tulshibagwale, et al.        Standards Track                   [Page 37]
    "adding" or "removing" that subject to the Event Stream,
    respectively.
 
+   If a Receiver has added a subject to a stream, the Transmitter SHOULD
+   send any events that match the subject to the Reciever, as long as
+   the Receiver has also subscribed to that event type, and both the
+   stream and subject are enabled.  In the case of Simple Subjects, two
+   subjects match if they are exactly identical.  For Complex Subjects,
+   two subjects match if, for all fields in the Complex Subject (i.e.
+   user, group, device, etc.), at least one of the following statements
+   is true:
+
+   1.  Subject 1's field is not defined
+
+   2.  Subject 2's field is not defined
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 38]
+
+                              SharedSignals                     May 2023
+
+
+   3.  Subject 1's field is identical to Subject 2's field
+
 7.1.3.1.  Adding a Subject to a Stream
 
    To add a subject to an Event Stream, the Event Receiver makes an HTTP
@@ -2121,14 +2143,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 37]
       REQUIRED.  The stream to which the subject is being added.
 
    subject
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 38]
-
-                              SharedSignals                February 2023
-
 
       REQUIRED.  A Subject claim identifying the subject to be added.
 
@@ -2165,6 +2179,13 @@ Tulshibagwale, et al.        Standards Track                   [Page 38]
      "verified": true
    }
 
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 39]
+
+                              SharedSignals                     May 2023
+
+
                   Figure 34: Example: Add Subject Request
 
    The following is a non-normative example response to a successful
@@ -2177,14 +2198,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 38]
                   Figure 35: Example: Add Subject Response
 
    Errors are signaled with HTTP status codes as follows:
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 39]
-
-                              SharedSignals                February 2023
-
 
       +======+=====================================================+
       | Code | Description                                         |
@@ -2222,6 +2235,13 @@ Tulshibagwale, et al.        Standards Track                   [Page 39]
 
    subject
 
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 40]
+
+                              SharedSignals                     May 2023
+
+
       REQUIRED.  A Subject claim identifying the subject to be removed.
 
    On a successful response, the Event Transmitter responds with a "204
@@ -2229,18 +2249,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 39]
 
    The following is a non-normative example request where the subject is
    identified by a Phone Number Subject Identifier:
-
-
-
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 40]
-
-                              SharedSignals                February 2023
-
 
    POST /ssf/subjects:remove HTTP/1.1
    Host: transmitter.example.com
@@ -2267,6 +2275,29 @@ Tulshibagwale, et al.        Standards Track                   [Page 40]
 
    Errors are signaled with HTTP status codes as follows:
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 41]
+
+                              SharedSignals                     May 2023
+
+
       +======+=====================================================+
       | Code | Description                                         |
       +======+=====================================================+
@@ -2291,13 +2322,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 40]
 
                       Table 9: Remove Subject Errors
 
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 41]
-
-                              SharedSignals                February 2023
-
-
 7.1.4.  Verification
 
    In some cases, the frequency of event transmission on an Event Stream
@@ -2321,6 +2345,15 @@ Tulshibagwale, et al.        Standards Track                   [Page 41]
 
    event type
 
+
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 42]
+
+                              SharedSignals                     May 2023
+
+
       The Event Type URI is: "https://schemas.openid.net/secevent/ssf/
       event-type/verification".
 
@@ -2340,19 +2373,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 41]
    In many cases, Event Transmitters MAY disable or suspend an Event
    Stream that fails to successfully verify based on the acknowledgement
    or lack of acknowledgement by the Event Receiver.
-
-
-
-
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 42]
-
-                              SharedSignals                February 2023
-
 
 7.1.4.2.  Triggering a Verification Event.
 
@@ -2382,6 +2402,14 @@ Tulshibagwale, et al.        Standards Track                   [Page 42]
    not indicate that the verification event was transmitted
    successfully, only that the Event Transmitter has transmitted the
    event or will do so at some point in the future.  Event Transmitters
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 43]
+
+                              SharedSignals                     May 2023
+
+
    MAY transmit the event via an asynchronous process, and SHOULD
    publish an SLA for verification event transmission times.  Event
    Receivers MUST NOT depend on the verification event being transmitted
@@ -2389,26 +2417,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 42]
    queue of events.
 
    Errors are signaled with HTTP status codes as follows:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 43]
-
-                              SharedSignals                February 2023
-
 
         +======+=================================================+
         | Code | Description                                     |
@@ -2450,21 +2458,18 @@ Tulshibagwale, et al.        Standards Track                   [Page 43]
    Server: transmitter.example.com
    Cache-Control: no-store
 
-             Figure 39: Example: Trigger Verification Response
-
-   And the following is a non-normative example of a verification event
-   sent to the Event Receiver as a result of the above request:
-
-
-
-
 
 
 
 Tulshibagwale, et al.        Standards Track                   [Page 44]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
+
+             Figure 39: Example: Trigger Verification Response
+
+   And the following is a non-normative example of a verification event
+   sent to the Event Receiver as a result of the above request:
 
    {
      "jti": "123456",
@@ -2510,17 +2515,14 @@ Tulshibagwale, et al.        Standards Track                   [Page 44]
       OPTIONAL.  Provides a short description of why the Transmitter has
       updated the status.
 
-   subject
-
-
-
-
 
 
 Tulshibagwale, et al.        Standards Track                   [Page 45]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
+
+   subject
 
       OPTIONAL.  Specifies the Subject Principal for whom the status has
       been updated.  If this claim is not included, then the status
@@ -2571,11 +2573,9 @@ Tulshibagwale, et al.        Standards Track                   [Page 45]
 
 
 
-
-
 Tulshibagwale, et al.        Standards Track                   [Page 46]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
    Event Transmitters SHOULD carefully evaluate the conditions under
@@ -2631,7 +2631,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 46]
 
 Tulshibagwale, et al.        Standards Track                   [Page 47]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
 10.1.  Subject Information Leakage
@@ -2687,7 +2687,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 47]
 
 Tulshibagwale, et al.        Standards Track                   [Page 48]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
    *  Push-Based SET Token Delivery Using HTTP [DELIVERYPUSH]
@@ -2743,7 +2743,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 48]
 
 Tulshibagwale, et al.        Standards Track                   [Page 49]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
         Figure 42: Example: SET Containing a RISC Event with a Phone
@@ -2799,7 +2799,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 49]
 
 Tulshibagwale, et al.        Standards Track                   [Page 50]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
 11.1.6.  The "aud" Claim
@@ -2855,7 +2855,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 50]
 
 Tulshibagwale, et al.        Standards Track                   [Page 51]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
    *  The "sub" claim MUST NOT be present, as described in
@@ -2911,7 +2911,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 51]
 
 Tulshibagwale, et al.        Standards Track                   [Page 52]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
    endpoint_url
@@ -2967,7 +2967,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 52]
 
 Tulshibagwale, et al.        Standards Track                   [Page 53]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
    [OAUTH-DISCOVERY]
@@ -3023,7 +3023,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 53]
 
 Tulshibagwale, et al.        Standards Track                   [Page 54]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
    [SUBIDS]   Backman, A. and M. Scurtescu, "Subject Identifiers for
@@ -3079,7 +3079,7 @@ Appendix B.  Notices
 
 Tulshibagwale, et al.        Standards Track                   [Page 55]
 
-                              SharedSignals                February 2023
+                              SharedSignals                     May 2023
 
 
    no (and hereby expressly disclaim any) warranties (express, implied,
