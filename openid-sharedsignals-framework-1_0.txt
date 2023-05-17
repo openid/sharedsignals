@@ -303,18 +303,18 @@ Tulshibagwale, et al.        Standards Track                    [Page 5]
       identified, defined in [RFC7519]
 
    The "JWT ID" Subject Identifier Format is identified by the name
-   "jwt-id".
+   "jwt_id".
 
-   Below is a non-normative example of Subject Identifier for the "jwt-
-   id" Subject Identifier Format.
+   Below is a non-normative example of Subject Identifier for the
+   "jwt_id" Subject Identifier Format.
 
    {
-       "format": "jwt-id",
+       "format": "jwt_id",
        "iss": "https://idp.example.com/123456789/",
        "jti": "B70BA622-9515-4353-A866-823539EECBC8"
    }
 
-               Figure 3: Example: 'jwt-id' Subject Identifier
+               Figure 3: Example: 'jwt_id' Subject Identifier
 
 3.4.2.  SAML Assertion ID Subject Identifier Format
 

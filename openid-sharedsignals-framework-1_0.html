@@ -33,25 +33,23 @@ and Coordination (RISC) and the Continuous Access Evaluation Profile ( )
          Poll-Based SET Token Delivery Using HTTP  
        
     " name="description">
-<meta content="xml2rfc 3.15.3" name="generator">
+<meta content="xml2rfc 3.17.1" name="generator">
 <meta content="openid-sharedsignals-framework-1_0" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.15.3
+  xml2rfc 3.17.1
     Python 3.9.6
     appdirs 1.4.4
     ConfigArgParse 1.5.3
     google-i18n-address 2.5.2
-    html5lib 1.1
     intervaltree 3.1.0
     Jinja2 3.1.2
-    lxml 4.9.1
-    MarkupSafe 2.1.1
+    lxml 4.9.2
     pycountry 22.3.5
     PyYAML 6.0
-    requests 2.28.1
-    setuptools 58.0.4
-    six 1.15.0
-    wcwidth 0.2.5
+    requests 2.30.0
+    setuptools 58.3.0
+    six 1.16.0
+    wcwidth 0.2.6
 -->
 <link href="openid-sharedsignals-framework-1_0.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -81,7 +79,6 @@ and Coordination (RISC) and the Continuous Access Evaluation Profile ( )
 
 @viewport {
   zoom: 1.0;
-  width: extend-to-zoom;
 }
 @-ms-viewport {
   width: extend-to-zoom;
@@ -277,7 +274,8 @@ a[href]:hover {
   background-color: #f2f2f2;
 }
 figcaption a[href],
-a[href].selfRef {
+a[href].selfRef,
+.iref + a[href].internal {
   color: #222;
 }
 /* XXX probably not this:
@@ -1728,22 +1726,22 @@ contain the following members:<a href="#section-3.4.1-1" class="pilcrow">¶</a><
   in <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span><a href="#section-3.4.1-5.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-3.4.1-6">The "JWT ID" Subject Identifier Format is identified by the name "jwt-id".<a href="#section-3.4.1-6" class="pilcrow">¶</a></p>
-<p id="section-3.4.1-7">Below is a non-normative example of Subject Identifier for the "jwt-id" Subject
+<p id="section-3.4.1-6">The "JWT ID" Subject Identifier Format is identified by the name "jwt_id".<a href="#section-3.4.1-6" class="pilcrow">¶</a></p>
+<p id="section-3.4.1-7">Below is a non-normative example of Subject Identifier for the "jwt_id" Subject
 Identifier Format.<a href="#section-3.4.1-7" class="pilcrow">¶</a></p>
-<span id="name-example-jwt-id-subject-iden"></span><div id="sub-id-jwtid">
+<span id="name-example-jwt_id-subject-iden"></span><div id="sub-id-jwtid">
 <figure id="figure-3">
             <div class="lang-json sourcecode" id="section-3.4.1-8.1">
 <pre>
 {
-    "format": "jwt-id",
+    "format": "jwt_id",
     "iss": "https://idp.example.com/123456789/",
     "jti": "B70BA622-9515-4353-A866-823539EECBC8"
 }
 </pre>
 </div>
 <figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
-<a href="#name-example-jwt-id-subject-iden" class="selfRef">Example: 'jwt-id' Subject Identifier</a>
+<a href="#name-example-jwt_id-subject-iden" class="selfRef">Example: 'jwt_id' Subject Identifier</a>
             </figcaption></figure>
 </div>
 </section>
@@ -1817,7 +1815,7 @@ that it is unable to process.<a href="#section-3.5-1" class="pilcrow">¶</a></p>
 of these members are required and specified as such in the respective event
 types specs. If a Transmitter determines that it needs to include additional
 members that are not specified in the event types spec, then the name of such
-members MUST be a URI. The discoverability of all additional members is 
+members MUST be a URI. The discoverability of all additional members is
 specified in the Discovery <a href="#discovery" class="auto internal xref">Section 6</a> section.<a href="#section-4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
