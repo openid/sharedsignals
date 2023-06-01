@@ -33,25 +33,26 @@ and Coordination (RISC) and the Continuous Access Evaluation Profile ( )
          Poll-Based SET Token Delivery Using HTTP  
        
     " name="description">
-<meta content="xml2rfc 3.15.3" name="generator">
+<meta content="xml2rfc 3.17.0" name="generator">
 <meta content="openid-sharedsignals-framework-1_0" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.15.3
-    Python 3.9.6
+  xml2rfc 3.17.0
+    Python 3.8.10
     appdirs 1.4.4
     ConfigArgParse 1.5.3
-    google-i18n-address 2.5.2
+    google-i18n-address 2.3.2
     html5lib 1.1
     intervaltree 3.1.0
     Jinja2 3.1.2
-    lxml 4.9.1
-    MarkupSafe 2.1.1
+    lxml 4.9.2
+    MarkupSafe 2.1.2
     pycountry 22.3.5
-    PyYAML 6.0
-    requests 2.28.1
-    setuptools 58.0.4
-    six 1.15.0
-    wcwidth 0.2.5
+    PyYAML 5.3.1
+    requests 2.24.0
+    setuptools 45.2.0
+    six 1.14.0
+    wcwidth 0.2.6
+    WeasyPrint 51
 -->
 <link href="openid-sharedsignals-framework-1_0.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -277,7 +278,8 @@ a[href]:hover {
   background-color: #f2f2f2;
 }
 figcaption a[href],
-a[href].selfRef {
+a[href].selfRef,
+.iref + a[href].internal {
   color: #222;
 }
 /* XXX probably not this:
@@ -1227,7 +1229,7 @@ li > p:last-of-type:only-child {
 <thead><tr>
 <td class="left"></td>
 <td class="center">SharedSignals</td>
-<td class="right">February 2023</td>
+<td class="right">March 2023</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Tulshibagwale, et al.</td>
@@ -1242,7 +1244,7 @@ li > p:last-of-type:only-child {
 <dd class="workgroup">Shared Signals</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-02-08" class="published">8 February 2023</time>
+<time datetime="2023-03-21" class="published">21 March 2023</time>
     </dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
@@ -1578,7 +1580,7 @@ Identifier" as defined in the Subject Identifiers for Security Event Tokens
 event.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <span id="name-example-simple-subject"></span><div id="simple-subject-ex">
 <figure id="figure-1">
-          <div class="lang-json sourcecode" id="section-3.1-2.1">
+          <div class="alignLeft art-json art-text artwork" id="section-3.1-2.1">
 <pre>
 "transferer": {
   "format": "email",
@@ -1602,44 +1604,37 @@ object that has one or more Simple Subject Members. The name of each Simple
 Subject Member in this value MAY be one of the following:<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.2-2">user<a href="#section-3.2-2" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-3.2-3.1">
-            <p id="section-3.2-3.1.1">OPTIONAL. A Subject Identifier that identifies a user.<a href="#section-3.2-3.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-3.2-3.1">OPTIONAL. A Subject Identifier that identifies a user.<a href="#section-3.2-3.1" class="pilcrow">¶</a>
 </li>
         </ul>
 <p id="section-3.2-4">device<a href="#section-3.2-4" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-3.2-5.1">
-            <p id="section-3.2-5.1.1">OPTIONAL. A Subject Identifier that identifies a device.<a href="#section-3.2-5.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-3.2-5.1">OPTIONAL. A Subject Identifier that identifies a device.<a href="#section-3.2-5.1" class="pilcrow">¶</a>
 </li>
         </ul>
 <p id="section-3.2-6">session<a href="#section-3.2-6" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-3.2-7.1">
-            <p id="section-3.2-7.1.1">OPTIONAL. A Subject Identifier that identifies a session.<a href="#section-3.2-7.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-3.2-7.1">OPTIONAL. A Subject Identifier that identifies a session.<a href="#section-3.2-7.1" class="pilcrow">¶</a>
 </li>
         </ul>
 <p id="section-3.2-8">application<a href="#section-3.2-8" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-3.2-9.1">
-            <p id="section-3.2-9.1.1">OPTIONAL. A Subject Identifier that identifies an application.<a href="#section-3.2-9.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-3.2-9.1">OPTIONAL. A Subject Identifier that identifies an application.<a href="#section-3.2-9.1" class="pilcrow">¶</a>
 </li>
         </ul>
 <p id="section-3.2-10">tenant<a href="#section-3.2-10" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-3.2-11.1">
-            <p id="section-3.2-11.1.1">OPTIONAL. A Subject Identifier that identifies a tenant.<a href="#section-3.2-11.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-3.2-11.1">OPTIONAL. A Subject Identifier that identifies a tenant.<a href="#section-3.2-11.1" class="pilcrow">¶</a>
 </li>
         </ul>
 <p id="section-3.2-12">org_unit<a href="#section-3.2-12" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-3.2-13.1">
-            <p id="section-3.2-13.1.1">OPTIONAL. A Subject Identifier that identifies an organizational unit.<a href="#section-3.2-13.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-3.2-13.1">OPTIONAL. A Subject Identifier that identifies an organizational unit.<a href="#section-3.2-13.1" class="pilcrow">¶</a>
 </li>
         </ul>
 <p id="section-3.2-14">group<a href="#section-3.2-14" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-3.2-15.1">
-            <p id="section-3.2-15.1.1">OPTIONAL. A Subject Identifier that identifies a group.<a href="#section-3.2-15.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-3.2-15.1">OPTIONAL. A Subject Identifier that identifies a group.<a href="#section-3.2-15.1" class="pilcrow">¶</a>
 </li>
         </ul>
 <p id="section-3.2-16">Additional Subject Member names MAY be used in Complex Subjects. Each member name MAY
@@ -1647,7 +1642,7 @@ appear at most once in the Complex Subject value.<a href="#section-3.2-16" class
 <p id="section-3.2-17">Below is a non-normative example of a Complex Subject claim in a SSF event.<a href="#section-3.2-17" class="pilcrow">¶</a></p>
 <span id="name-example-complex-subject"></span><div id="complex-subject-ex">
 <figure id="figure-2">
-          <div class="lang-json sourcecode" id="section-3.2-18.1">
+          <div class="alignLeft art-json art-text artwork" id="section-3.2-18.1">
 <pre>
 "transferee": {
   "user" : {
@@ -1716,16 +1711,14 @@ identifier, defined in  <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]
 contain the following members:<a href="#section-3.4.1-1" class="pilcrow">¶</a></p>
 <p id="section-3.4.1-2">iss<a href="#section-3.4.1-2" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-3.4.1-3.1">
-              <p id="section-3.4.1-3.1.1">REQUIRED. The "iss" (issuer) claim of the JWT being identified, defined in
-  <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span><a href="#section-3.4.1-3.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-3.4.1-3.1">REQUIRED. The "iss" (issuer) claim of the JWT being identified, defined in
+  <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span><a href="#section-3.4.1-3.1" class="pilcrow">¶</a>
 </li>
           </ul>
 <p id="section-3.4.1-4">jti<a href="#section-3.4.1-4" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-3.4.1-5.1">
-              <p id="section-3.4.1-5.1.1">REQUIRED. The "jti" (JWT token ID) claim of the JWT being identified, defined
-  in <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span><a href="#section-3.4.1-5.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-3.4.1-5.1">REQUIRED. The "jti" (JWT token ID) claim of the JWT being identified, defined
+  in <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span><a href="#section-3.4.1-5.1" class="pilcrow">¶</a>
 </li>
           </ul>
 <p id="section-3.4.1-6">The "JWT ID" Subject Identifier Format is identified by the name "jwt-id".<a href="#section-3.4.1-6" class="pilcrow">¶</a></p>
@@ -1733,7 +1726,7 @@ contain the following members:<a href="#section-3.4.1-1" class="pilcrow">¶</a><
 Identifier Format.<a href="#section-3.4.1-7" class="pilcrow">¶</a></p>
 <span id="name-example-jwt-id-subject-iden"></span><div id="sub-id-jwtid">
 <figure id="figure-3">
-            <div class="lang-json sourcecode" id="section-3.4.1-8.1">
+            <div class="alignLeft art-json art-text artwork" id="section-3.4.1-8.1">
 <pre>
 {
     "format": "jwt-id",
@@ -1758,16 +1751,14 @@ Identifier Format.<a href="#section-3.4.1-7" class="pilcrow">¶</a></p>
 format MUST contain the following members:<a href="#section-3.4.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.4.2-2">issuer<a href="#section-3.4.2-2" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-3.4.2-3.1">
-              <p id="section-3.4.2-3.1.1">REQUIRED. The "Issuer" value of the SAML assertion being identified, defined
-  in <span>[<a href="#OASIS.saml-core-2.0-os" class="cite xref">OASIS.saml-core-2.0-os</a>]</span><a href="#section-3.4.2-3.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-3.4.2-3.1">REQUIRED. The "Issuer" value of the SAML assertion being identified, defined
+  in <span>[<a href="#OASIS.saml-core-2.0-os" class="cite xref">OASIS.saml-core-2.0-os</a>]</span><a href="#section-3.4.2-3.1" class="pilcrow">¶</a>
 </li>
           </ul>
 <p id="section-3.4.2-4">assertion_id<a href="#section-3.4.2-4" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-3.4.2-5.1">
-              <p id="section-3.4.2-5.1.1">REQUIRED. The "ID" value of the SAML assertion being identified, defined in
-  <span>[<a href="#OASIS.saml-core-2.0-os" class="cite xref">OASIS.saml-core-2.0-os</a>]</span><a href="#section-3.4.2-5.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-3.4.2-5.1">REQUIRED. The "ID" value of the SAML assertion being identified, defined in
+  <span>[<a href="#OASIS.saml-core-2.0-os" class="cite xref">OASIS.saml-core-2.0-os</a>]</span><a href="#section-3.4.2-5.1" class="pilcrow">¶</a>
 </li>
           </ul>
 <p id="section-3.4.2-6">The "SAML Assertion ID" Subject Identifier Format is identified by the name
@@ -1776,7 +1767,7 @@ format MUST contain the following members:<a href="#section-3.4.2-1" class="pilc
 Subject Identifier Format.<a href="#section-3.4.2-7" class="pilcrow">¶</a></p>
 <span id="name-example-saml_assertion_id-s"></span><div id="sub-id-samlassertionid">
 <figure id="figure-4">
-            <div class="lang-json sourcecode" id="section-3.4.2-8.1">
+            <div class="alignLeft art-json art-text artwork" id="section-3.4.2-8.1">
 <pre>
 {
     "format": "saml_assertion_id",
@@ -1829,7 +1820,7 @@ specified in the Discovery <a href="#discovery" class="auto internal xref">Secti
 <p id="section-5-1">The following are hypothetical examples of SETs that conform to the Shared Signals Framework.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <span id="name-example-set-containing-a-ss"></span><div id="subject-ids-ex-simple">
 <figure id="figure-5">
-        <div class="lang-json sourcecode" id="section-5-2.1">
+        <div class="alignLeft art-json art-text artwork" id="section-5-2.1">
 <pre>
 {
   "iss": "https://idp.example.com/",
@@ -1853,7 +1844,7 @@ specified in the Discovery <a href="#discovery" class="auto internal xref">Secti
 </div>
 <span id="name-example-set-containing-a-ssf"></span><div id="subject-ids-ex-complex">
 <figure id="figure-6">
-        <div class="lang-json sourcecode" id="section-5-3.1">
+        <div class="alignLeft art-json art-text artwork" id="section-5-3.1">
 <pre>
 {
   "iss": "https://idp.example.com/",
@@ -1889,7 +1880,7 @@ specified in the Discovery <a href="#discovery" class="auto internal xref">Secti
 </div>
 <span id="name-example-set-containing-a-ssf-"></span><div id="subject-properties-ex">
 <figure id="figure-7">
-        <div class="lang-json sourcecode" id="section-5-4.1">
+        <div class="alignLeft art-json art-text artwork" id="section-5-4.1">
 <pre>
 {
   "iss": "https://sp.example2.com/",
@@ -1917,7 +1908,7 @@ specified in the Discovery <a href="#discovery" class="auto internal xref">Secti
 </div>
 <span id="name-example-set-containing-a-ssf-e"></span><div id="subject-custom-type-ex">
 <figure id="figure-8">
-        <div class="lang-json sourcecode" id="section-5-5.1">
+        <div class="alignLeft art-json art-text artwork" id="section-5-5.1">
 <pre>
 {
   "iss": "https://myservice.example3.com/",
@@ -1960,62 +1951,53 @@ configuration information.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <p id="section-6.1-1">Transmitters have metadata describing their configuration:<a href="#section-6.1-1" class="pilcrow">¶</a></p>
 <p id="section-6.1-2">issuer<a href="#section-6.1-2" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-6.1-3.1">
-            <p id="section-6.1-3.1.1">REQUIRED. URL using the https scheme with no query or fragment component
+<li class="normal ulEmpty" id="section-6.1-3.1">REQUIRED. URL using the https scheme with no query or fragment component
   that the Transmitter asserts as its Issuer Identifier. This MUST be identical
-  to the iss claim value in Security Event Tokens issued from this Transmitter.<a href="#section-6.1-3.1.1" class="pilcrow">¶</a></p>
+  to the iss claim value in Security Event Tokens issued from this Transmitter.<a href="#section-6.1-3.1" class="pilcrow">¶</a>
 </li>
         </ul>
 <p id="section-6.1-4">jwks_uri<a href="#section-6.1-4" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-6.1-5.1">
-            <p id="section-6.1-5.1.1">OPTIONAL. URL of the Transmitter's JSON Web Key Set <span>[<a href="#RFC7517" class="cite xref">RFC7517</a>]</span> document.
+<li class="normal ulEmpty" id="section-6.1-5.1">OPTIONAL. URL of the Transmitter's JSON Web Key Set <span>[<a href="#RFC7517" class="cite xref">RFC7517</a>]</span> document.
   This contains the signing key(s) the Receiver uses to validate signatures from
   the Transmitter. This value MUST be specified if the Transmitter intends to
-  generate signed JWTs<a href="#section-6.1-5.1.1" class="pilcrow">¶</a></p>
+  generate signed JWTs<a href="#section-6.1-5.1" class="pilcrow">¶</a>
 </li>
         </ul>
 <p id="section-6.1-6">delivery_methods_supported<a href="#section-6.1-6" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-6.1-7.1">
-            <p id="section-6.1-7.1.1">RECOMMENDED. List of supported delivery method URIs.<a href="#section-6.1-7.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-6.1-7.1">RECOMMENDED. List of supported delivery method URIs.<a href="#section-6.1-7.1" class="pilcrow">¶</a>
 </li>
         </ul>
 <p id="section-6.1-8">configuration_endpoint<a href="#section-6.1-8" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-6.1-9.1">
-            <p id="section-6.1-9.1.1">OPTIONAL. The URL of the Configuration Endpoint.<a href="#section-6.1-9.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-6.1-9.1">OPTIONAL. The URL of the Configuration Endpoint.<a href="#section-6.1-9.1" class="pilcrow">¶</a>
 </li>
         </ul>
 <p id="section-6.1-10">status_endpoint<a href="#section-6.1-10" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-6.1-11.1">
-            <p id="section-6.1-11.1.1">OPTIONAL. The URL of the Status Endpoint.<a href="#section-6.1-11.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-6.1-11.1">OPTIONAL. The URL of the Status Endpoint.<a href="#section-6.1-11.1" class="pilcrow">¶</a>
 </li>
         </ul>
 <p id="section-6.1-12">add_subject_endpoint<a href="#section-6.1-12" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-6.1-13.1">
-            <p id="section-6.1-13.1.1">OPTIONAL. The URL of the Add Subject Endpoint.<a href="#section-6.1-13.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-6.1-13.1">OPTIONAL. The URL of the Add Subject Endpoint.<a href="#section-6.1-13.1" class="pilcrow">¶</a>
 </li>
         </ul>
 <p id="section-6.1-14">remove_subject_endpoint<a href="#section-6.1-14" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-6.1-15.1">
-            <p id="section-6.1-15.1.1">OPTIONAL. The URL of the Remove Subject Endpoint.<a href="#section-6.1-15.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-6.1-15.1">OPTIONAL. The URL of the Remove Subject Endpoint.<a href="#section-6.1-15.1" class="pilcrow">¶</a>
 </li>
         </ul>
 <p id="section-6.1-16">verification_endpoint<a href="#section-6.1-16" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-6.1-17.1">
-            <p id="section-6.1-17.1.1">OPTIONAL. The URL of the Verification Endpoint.<a href="#section-6.1-17.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-6.1-17.1">OPTIONAL. The URL of the Verification Endpoint.<a href="#section-6.1-17.1" class="pilcrow">¶</a>
 </li>
         </ul>
 <p id="section-6.1-18">critical_subject_members<a href="#section-6.1-18" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-6.1-19.1">
-            <p id="section-6.1-19.1.1">OPTIONAL. List of member names in a Complex Subject which, if present in
-  a Subject Member in an event, MUST be interpreted by a Receiver.<a href="#section-6.1-19.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-6.1-19.1">OPTIONAL. List of member names in a Complex Subject which, if present in
+  a Subject Member in an event, MUST be interpreted by a Receiver.<a href="#section-6.1-19.1" class="pilcrow">¶</a>
 </li>
         </ul>
 <p id="section-6.1-20">TODO: consider adding a IANA Registry for metadata, similar to Section 7.1.1 of
@@ -2047,7 +2029,7 @@ at the previously specified path.<a href="#section-6.2.1-1" class="pilcrow">¶</
 Issuer contains no path component:<a href="#section-6.2.1-2" class="pilcrow">¶</a></p>
 <span id="name-example-transmitter-configu"></span><div id="figdiscoveryrequest">
 <figure id="figure-9">
-            <div class="lang-http sourcecode" id="section-6.2.1-3.1">
+            <div class="alignLeft art-http art-text artwork" id="section-6.2.1-3.1">
 <pre>
 GET /.well-known/ssf-configuration HTTP/1.1
 Host: tr.example.com
@@ -2064,7 +2046,7 @@ to the Issuer "https://tr.example.com/issuer1" to obtain its Configuration
 information, since the Issuer contains a path component:<a href="#section-6.2.1-4" class="pilcrow">¶</a></p>
 <span id="name-example-transmitter-configur"></span><div id="figdiscoveryrequestpath">
 <figure id="figure-10">
-            <div class="lang-http sourcecode" id="section-6.2.1-5.1">
+            <div class="alignLeft art-http art-text artwork" id="section-6.2.1-5.1">
 <pre>
 GET /.well-known/ssf-configuration/issuer1 HTTP/1.1
 Host: tr.example.com
@@ -2094,7 +2076,7 @@ Metadata for the Transmitter "https://risc-tr.example.com" MAY be obtained by
 making the following request:<a href="#section-6.2.2-1" class="pilcrow">¶</a></p>
 <span id="name-example-transmitter-configura"></span><div id="figolddiscoveryrequest">
 <figure id="figure-11">
-            <div class="lang-http sourcecode" id="section-6.2.2-2.1">
+            <div class="alignLeft art-http art-text artwork" id="section-6.2.2-2.1">
 <pre>
 GET /.well-known/risc-configuration HTTP/1.1
 Host: risc-tr.example.com
@@ -2122,7 +2104,7 @@ zero elements MUST be omitted from the response.<a href="#section-6.2.3-2" class
 <p id="section-6.2.3-3">An error response uses the applicable HTTP status code value.<a href="#section-6.2.3-3" class="pilcrow">¶</a></p>
 <span id="name-example-transmitter-configurat"></span><div id="figdiscoveryresponse">
 <figure id="figure-12">
-            <div class="lang-http sourcecode" id="section-6.2.3-4.1">
+            <div class="alignLeft art-http art-text artwork" id="section-6.2.3-4.1">
 <pre>
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -2133,8 +2115,8 @@ Content-Type: application/json
   "jwks_uri":
     "https://tr.example.com/jwks.json",
   "delivery_methods_supported": [
-    "https://schemas.openid.net/secevent/risc/delivery-method/push",
-    "https://schemas.openid.net/secevent/risc/delivery-method/poll"],
+    "urn:ietf:rfc:8935",
+    "urn:ietf:rfc:8936"],
   "configuration_endpoint":
     "https://tr.example.com/ssf/mgmt/stream",
   "status_endpoint":
@@ -2238,34 +2220,29 @@ Receivers.<a href="#section-7.1-2" class="pilcrow">¶</a></p>
 consists of the following endpoints:<a href="#section-7.1-3" class="pilcrow">¶</a></p>
 <p id="section-7.1-4">Configuration Endpoint<a href="#section-7.1-4" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1-5.1">
-            <p id="section-7.1-5.1.1">An endpoint used to create and delete Event Streams, as well as read and
-  update an Event Stream's current configuration.<a href="#section-7.1-5.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-7.1-5.1">An endpoint used to create and delete Event Streams, as well as read and
+  update an Event Stream's current configuration.<a href="#section-7.1-5.1" class="pilcrow">¶</a>
 </li>
         </ul>
 <p id="section-7.1-6">Status Endpoint<a href="#section-7.1-6" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1-7.1">
-            <p id="section-7.1-7.1.1">An endpoint used to read and update an Event Stream's current status.<a href="#section-7.1-7.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-7.1-7.1">An endpoint used to read and update an Event Stream's current status.<a href="#section-7.1-7.1" class="pilcrow">¶</a>
 </li>
         </ul>
 <p id="section-7.1-8">Add Subject Endpoint<a href="#section-7.1-8" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1-9.1">
-            <p id="section-7.1-9.1.1">An endpoint used to add subjects to an Event Stream.<a href="#section-7.1-9.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-7.1-9.1">An endpoint used to add subjects to an Event Stream.<a href="#section-7.1-9.1" class="pilcrow">¶</a>
 </li>
         </ul>
 <p id="section-7.1-10">Remove Subject Endpoint<a href="#section-7.1-10" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1-11.1">
-            <p id="section-7.1-11.1.1">An endpoint used to remove subjects from an Event Stream.<a href="#section-7.1-11.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-7.1-11.1">An endpoint used to remove subjects from an Event Stream.<a href="#section-7.1-11.1" class="pilcrow">¶</a>
 </li>
         </ul>
 <p id="section-7.1-12">Verification Endpoint<a href="#section-7.1-12" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1-13.1">
-            <p id="section-7.1-13.1.1">An endpoint used to request the Event Transmitter transmit a Verification
-  Event over an Event Stream.<a href="#section-7.1-13.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-7.1-13.1">An endpoint used to request the Event Transmitter transmit a Verification
+  Event over an Event Stream.<a href="#section-7.1-13.1" class="pilcrow">¶</a>
 </li>
         </ul>
 <p id="section-7.1-14">An Event Transmitter MAY use the same URLs as endpoints for multiple Event
@@ -2285,80 +2262,80 @@ following properties:<a href="#section-7.1.1-1" class="pilcrow">¶</a></p>
 <p id="section-7.1.1-2">stream_id<a href="#section-7.1.1-2" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-7.1.1-3.1">
-              <p id="section-7.1.1-3.1.1"><strong>Transmitter-Supplied</strong>, A string that uniquely identifies the stream. Stream
+              <strong>Transmitter-Supplied</strong>, A string that uniquely identifies the stream. Stream
   IDs MUST be unique per Reciever.  This value is generated by the Transmitter
-  when the stream is created.<a href="#section-7.1.1-3.1.1" class="pilcrow">¶</a></p>
+  when the stream is created.<a href="#section-7.1.1-3.1" class="pilcrow">¶</a>
 </li>
           </ul>
 <p id="section-7.1.1-4">iss<a href="#section-7.1.1-4" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-7.1.1-5.1">
-              <p id="section-7.1.1-5.1.1"><strong>Transmitter-Supplied</strong>, A URL using the https scheme with no query or
+              <strong>Transmitter-Supplied</strong>, A URL using the https scheme with no query or
   fragment component that the Transmitter asserts as its Issuer Identifier. This
   MUST be identical to the "iss" Claim value in Security Event Tokens issued
-  from this Transmitter.<a href="#section-7.1.1-5.1.1" class="pilcrow">¶</a></p>
+  from this Transmitter.<a href="#section-7.1.1-5.1" class="pilcrow">¶</a>
 </li>
           </ul>
 <p id="section-7.1.1-6">aud<a href="#section-7.1.1-6" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-7.1.1-7.1">
-              <p id="section-7.1.1-7.1.1"><strong>Transmitter-Supplied</strong>, A string or an array of strings containing an
+              <strong>Transmitter-Supplied</strong>, A string or an array of strings containing an
   audience claim as defined in JSON Web Token (JWT)<span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span> that identifies
   the Event Receiver(s) for the Event Stream. This property cannot be updated.
   If multiple Receivers are specified then the Transmitter SHOULD know that
-  these Receivers are the same entity.<a href="#section-7.1.1-7.1.1" class="pilcrow">¶</a></p>
+  these Receivers are the same entity.<a href="#section-7.1.1-7.1" class="pilcrow">¶</a>
 </li>
           </ul>
 <p id="section-7.1.1-8">events_supported<a href="#section-7.1.1-8" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-7.1.1-9.1">
-              <p id="section-7.1.1-9.1.1"><strong>Transmitter-Supplied</strong>, An array of URIs identifying the set of events
+              <strong>Transmitter-Supplied</strong>, An array of URIs identifying the set of events
   supported by the Transmitter for this Receiver. If omitted, Event Transmitters
   SHOULD make this set available to the Event Receiver via some other means
-  (e.g. publishing it in online documentation).<a href="#section-7.1.1-9.1.1" class="pilcrow">¶</a></p>
+  (e.g. publishing it in online documentation).<a href="#section-7.1.1-9.1" class="pilcrow">¶</a>
 </li>
           </ul>
 <p id="section-7.1.1-10">events_requested<a href="#section-7.1.1-10" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-7.1.1-11.1">
-              <p id="section-7.1.1-11.1.1"><strong>Receiver-Supplied</strong>, An array of URIs identifying the set of events that
+              <strong>Receiver-Supplied</strong>, An array of URIs identifying the set of events that
   the Receiver requested. A Receiver SHOULD request only the events that it
-  understands and it can act on. This is configurable by the Receiver.<a href="#section-7.1.1-11.1.1" class="pilcrow">¶</a></p>
+  understands and it can act on. This is configurable by the Receiver.<a href="#section-7.1.1-11.1" class="pilcrow">¶</a>
 </li>
           </ul>
 <p id="section-7.1.1-12">events_delivered<a href="#section-7.1.1-12" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-7.1.1-13.1">
-              <p id="section-7.1.1-13.1.1"><strong>Transmitter-Supplied</strong>, An array of URIs which is the intersection of
+              <strong>Transmitter-Supplied</strong>, An array of URIs which is the intersection of
   "events_supported" and "events_requested". These events MAY be delivered over
-              the Event Stream.<a href="#section-7.1.1-13.1.1" class="pilcrow">¶</a></p>
+              the Event Stream.<a href="#section-7.1.1-13.1" class="pilcrow">¶</a>
 </li>
           </ul>
 <p id="section-7.1.1-14">delivery<a href="#section-7.1.1-14" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-7.1.1-15.1">
-              <p id="section-7.1.1-15.1.1"><strong>Receiver-Supplied</strong>, A JSON object containing a set of name/value pairs
+              <strong>Receiver-Supplied</strong>, A JSON object containing a set of name/value pairs
   specifying configuration parameters for the SET delivery method.  The actual
   delivery method is identified by the special key "method" with the value being
-  a URI as defined in <a href="#delivery-meta" class="auto internal xref">Section 11.2.1</a>.<a href="#section-7.1.1-15.1.1" class="pilcrow">¶</a></p>
+  a URI as defined in <a href="#delivery-meta" class="auto internal xref">Section 11.2.1</a>.<a href="#section-7.1.1-15.1" class="pilcrow">¶</a>
 </li>
           </ul>
 <p id="section-7.1.1-16">min_verification_interval<a href="#section-7.1.1-16" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-7.1.1-17.1">
-              <p id="section-7.1.1-17.1.1"><strong>Transmitter-Supplied</strong>, An integer indicating the minimum amount of time in
+              <strong>Transmitter-Supplied</strong>, An integer indicating the minimum amount of time in
   seconds that must pass in between verification requests. If an Event Receiver
   submits verification requests more frequently than this, the Event Transmitter
   MAY respond with a 429 status code. An Event Transmitter SHOULD NOT respond
-  with a 429 status code if an Event Receiver is not exceeding this frequency.<a href="#section-7.1.1-17.1.1" class="pilcrow">¶</a></p>
+  with a 429 status code if an Event Receiver is not exceeding this frequency.<a href="#section-7.1.1-17.1" class="pilcrow">¶</a>
 </li>
           </ul>
 <p id="section-7.1.1-18">format<a href="#section-7.1.1-18" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-7.1.1-19.1">
-              <p id="section-7.1.1-19.1.1"><strong>Receiver-Supplied</strong>, The Subject Identifier Format that the Receiver wants
+              <strong>Receiver-Supplied</strong>, The Subject Identifier Format that the Receiver wants
   for the events. If not set then the Transmitter might decide to use a type
-  that discloses more information than necessary.<a href="#section-7.1.1-19.1.1" class="pilcrow">¶</a></p>
+  that discloses more information than necessary.<a href="#section-7.1.1-19.1" class="pilcrow">¶</a>
 </li>
           </ul>
 <p id="section-7.1.1-20">TODO: consider adding a IANA Registry for stream configuration metadata, similar
@@ -2379,32 +2356,32 @@ Configuration (<a href="#stream-config" class="auto internal xref">Section 7.1.1
 <p id="section-7.1.1.1-3">events_requested<a href="#section-7.1.1.1-3" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-7.1.1.1-4.1">
-                <p id="section-7.1.1.1-4.1.1"><strong>Receiver-Supplied</strong>, An array of URIs identifying the set of events that
+                <strong>Receiver-Supplied</strong>, An array of URIs identifying the set of events that
   the Receiver requested. A Receiver SHOULD request only the events that it
-  understands and it can act on. This is configurable by the Receiver.<a href="#section-7.1.1.1-4.1.1" class="pilcrow">¶</a></p>
+  understands and it can act on. This is configurable by the Receiver.<a href="#section-7.1.1.1-4.1" class="pilcrow">¶</a>
 </li>
             </ul>
 <p id="section-7.1.1.1-5">delivery<a href="#section-7.1.1.1-5" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-7.1.1.1-6.1">
-                <p id="section-7.1.1.1-6.1.1"><strong>Receiver-Supplied</strong>, A JSON object containing a set of name/value pairs
+                <strong>Receiver-Supplied</strong>, A JSON object containing a set of name/value pairs
   specifying configuration parameters for the SET delivery method. The actual
   delivery method is identified by the special key "method" with the value
-  being a URI as defined in <a href="#delivery-meta" class="auto internal xref">Section 11.2.1</a>.<a href="#section-7.1.1.1-6.1.1" class="pilcrow">¶</a></p>
+  being a URI as defined in <a href="#delivery-meta" class="auto internal xref">Section 11.2.1</a>.<a href="#section-7.1.1.1-6.1" class="pilcrow">¶</a>
 </li>
             </ul>
 <p id="section-7.1.1.1-7">format<a href="#section-7.1.1.1-7" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-7.1.1.1-8.1">
-                <p id="section-7.1.1.1-8.1.1"><strong>Receiver-Supplied</strong>, The Subject Identifier Format that the Receiver wants
+                <strong>Receiver-Supplied</strong>, The Subject Identifier Format that the Receiver wants
   for the events. If not set then the Transmitter might decide to use a type
-  that discloses more information than necessary.<a href="#section-7.1.1.1-8.1.1" class="pilcrow">¶</a></p>
+  that discloses more information than necessary.<a href="#section-7.1.1.1-8.1" class="pilcrow">¶</a>
 </li>
             </ul>
 <p id="section-7.1.1.1-9">The following is a non-normative example request to create an Event Stream:<a href="#section-7.1.1.1-9" class="pilcrow">¶</a></p>
 <span id="name-example-create-event-stream"></span><div id="figcreatestreamreq">
 <figure id="figure-14">
-              <div class="lang-http sourcecode" id="section-7.1.1.1-10.1">
+              <div class="alignLeft art-http art-text artwork" id="section-7.1.1.1-10.1">
 <pre>
 POST /ssf/stream HTTP/1.1
 Host: transmitter.example.com
@@ -2412,9 +2389,8 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
 {
   "delivery": {
-    "delivery_method":
-      "https://schemas.openid.net/secevent/risc/delivery-method/push",
-      "url": "https://receiver.example.com/events"
+    "delivery_method": "urn:ietf:rfc:8935",
+    "url": "https://receiver.example.com/events"
   },
   "events_requested": [
     "urn:example:secevent:events:type_2",
@@ -2431,7 +2407,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 <p id="section-7.1.1.1-11">The following is a non-normative example response:<a href="#section-7.1.1.1-11" class="pilcrow">¶</a></p>
 <span id="name-example-create-stream-respo"></span><div id="figcreatestreamresp">
 <figure id="figure-15">
-              <div class="lang-http sourcecode" id="section-7.1.1.1-12.1">
+              <div class="alignLeft art-http art-text artwork" id="section-7.1.1.1-12.1">
 <pre>
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -2444,8 +2420,7 @@ Content-Type: application/json
       "http://receiver.example.com/mobile"
     ],
   "delivery": {
-    "delivery_method":
-      "https://schemas.openid.net/secevent/risc/delivery-method/push",
+    "delivery_method": "urn:ietf:rfc:8935",
     "url": "https://receiver.example.com/events"
   },
   "events_supported": [
@@ -2518,7 +2493,7 @@ Transmitter MUST return an empty list.<a href="#section-7.1.1.2-2" class="pilcro
 configuration:<a href="#section-7.1.1.2-3" class="pilcrow">¶</a></p>
 <span id="name-example-read-stream-configu"></span><div id="figreadconfigreq">
 <figure id="figure-16">
-              <div class="lang-http sourcecode" id="section-7.1.1.2-4.1">
+              <div class="alignLeft art-http art-text artwork" id="section-7.1.1.2-4.1">
 <pre>
 GET /ssf/stream?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f HTTP/1.1
 Host: transmitter.example.com
@@ -2532,7 +2507,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 <p id="section-7.1.1.2-5">The following is a non-normative example response:<a href="#section-7.1.1.2-5" class="pilcrow">¶</a></p>
 <span id="name-example-read-stream-configur"></span><div id="figreadconfigresp">
 <figure id="figure-17">
-              <div class="lang-http sourcecode" id="section-7.1.1.2-6.1">
+              <div class="alignLeft art-http art-text artwork" id="section-7.1.1.2-6.1">
 <pre>
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -2546,8 +2521,7 @@ Cache-Control: no-store
       "http://receiver.example.com/mobile"
     ],
   "delivery": {
-    "delivery_method":
-      "https://schemas.openid.net/secevent/risc/delivery-method/push",
+    "delivery_method": "urn:ietf:rfc:8935",
     "url": "https://receiver.example.com/events"
   },
   "events_supported": [
@@ -2575,7 +2549,7 @@ Cache-Control: no-store
 configuration, with no "stream_id" indicated:<a href="#section-7.1.1.2-7" class="pilcrow">¶</a></p>
 <span id="name-example-read-stream-configura"></span><div id="figreadconfigreqnostreamid">
 <figure id="figure-18">
-              <div class="lang-http sourcecode" id="section-7.1.1.2-8.1">
+              <div class="alignLeft art-http art-text artwork" id="section-7.1.1.2-8.1">
 <pre>
 GET /ssf/stream HTTP/1.1
 Host: transmitter.example.com
@@ -2589,7 +2563,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 <p id="section-7.1.1.2-9">The following is a non-normative example response to a request with no "stream_id":<a href="#section-7.1.1.2-9" class="pilcrow">¶</a></p>
 <span id="name-example-read-stream-configurat"></span><div id="figreadconfigrespnostreamidmanystreams">
 <figure id="figure-19">
-              <div class="breakable lang-http sourcecode" id="section-7.1.1.2-10.1">
+              <div class="alignLeft art-http art-text artwork" id="section-7.1.1.2-10.1">
 <pre>
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -2604,8 +2578,7 @@ Cache-Control: no-store
         "http://receiver.example.com/mobile"
       ],
     "delivery": {
-      "delivery_method":
-        "https://schemas.openid.net/secevent/risc/delivery-method/push",
+      "delivery_method": "urn:ietf:rfc:8935",
       "url": "https://receiver.example.com/events"
     },
     "events_supported": [
@@ -2631,8 +2604,7 @@ Cache-Control: no-store
         "http://receiver.example.com/mobile"
       ],
     "delivery": {
-      "delivery_method":
-        "https://schemas.openid.net/secevent/risc/delivery-method/push",
+      "delivery_method": "urn:ietf:rfc:8935",
       "url": "https://receiver.example.com/events"
     },
     "events_supported": [
@@ -2661,7 +2633,7 @@ Cache-Control: no-store
 "stream_id" when there is only one Event Stream configured:<a href="#section-7.1.1.2-11" class="pilcrow">¶</a></p>
 <span id="name-example-read-stream-configurati"></span><div id="figreadconfigrespnostreamidonestream">
 <figure id="figure-20">
-              <div class="lang-http sourcecode" id="section-7.1.1.2-12.1">
+              <div class="alignLeft art-http art-text artwork" id="section-7.1.1.2-12.1">
 <pre>
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -2676,8 +2648,7 @@ Cache-Control: no-store
         "http://receiver.example.com/mobile"
       ],
     "delivery": {
-      "delivery_method":
-        "https://schemas.openid.net/secevent/risc/delivery-method/push",
+      "delivery_method": "urn:ietf:rfc:8935",
       "url": "https://receiver.example.com/events"
     },
     "events_supported": [
@@ -2706,7 +2677,7 @@ Cache-Control: no-store
 when there are no Event Streams configured:<a href="#section-7.1.1.2-13" class="pilcrow">¶</a></p>
 <span id="name-example-read-stream-configuratio"></span><div id="figreadconfigrespnostreamidnostreams">
 <figure id="figure-21">
-              <div class="lang-http sourcecode" id="section-7.1.1.2-14.1">
+              <div class="alignLeft art-http art-text artwork" id="section-7.1.1.2-14.1">
 <pre>
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -2772,7 +2743,7 @@ properties will be ignored by the Transmitter.<a href="#section-7.1.1.3-3" class
 configuration:<a href="#section-7.1.1.3-4" class="pilcrow">¶</a></p>
 <span id="name-example-update-stream-confi"></span><div id="figupdateconfigreq">
 <figure id="figure-22">
-              <div class="lang-http sourcecode" id="section-7.1.1.3-5.1">
+              <div class="alignLeft art-http art-text artwork" id="section-7.1.1.3-5.1">
 <pre>
 PATCH /ssf/stream HTTP/1.1
 Host: transmitter.example.com
@@ -2796,7 +2767,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 <p id="section-7.1.1.3-6">The following is a non-normative example response:<a href="#section-7.1.1.3-6" class="pilcrow">¶</a></p>
 <span id="name-example-update-stream-config"></span><div id="figupdateconfigresp">
 <figure id="figure-23">
-              <div class="lang-http sourcecode" id="section-7.1.1.3-7.1">
+              <div class="alignLeft art-http art-text artwork" id="section-7.1.1.3-7.1">
 <pre>
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -2810,8 +2781,7 @@ Cache-Control: no-store
     "http://receiver.example.com/mobile"
   ],
   "delivery": {
-    "delivery_method":
-      "https://schemas.openid.net/secevent/risc/delivery-method/push",
+    "delivery_method": "urn:ietf:rfc:8935",
     "url": "https://receiver.example.com/events"
   },
   "events_supported": [
@@ -2896,7 +2866,7 @@ properties will be ignored by the Transmitter.<a href="#section-7.1.1.4-3" class
 configuration:<a href="#section-7.1.1.4-4" class="pilcrow">¶</a></p>
 <span id="name-example-replace-stream-conf"></span><div id="figreplaceconfigreq">
 <figure id="figure-24">
-              <div class="lang-http sourcecode" id="section-7.1.1.4-5.1">
+              <div class="alignLeft art-http art-text artwork" id="section-7.1.1.4-5.1">
 <pre>
 PUT /ssf/stream HTTP/1.1
 Host: transmitter.example.com
@@ -2910,8 +2880,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
     "http://receiver.example.com/mobile"
   ],
   "delivery": {
-    "delivery_method":
-      "https://schemas.openid.net/secevent/risc/delivery-method/push",
+    "delivery_method": "urn:ietf:rfc:8935",
     "url": "https://receiver.example.com/events"
   },
   "events_requested": [
@@ -2929,7 +2898,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 <p id="section-7.1.1.4-6">The following is a non-normative example response:<a href="#section-7.1.1.4-6" class="pilcrow">¶</a></p>
 <span id="name-example-replace-stream-confi"></span><div id="figreplaceconfigresp">
 <figure id="figure-25">
-              <div class="lang-http sourcecode" id="section-7.1.1.4-7.1">
+              <div class="alignLeft art-http art-text artwork" id="section-7.1.1.4-7.1">
 <pre>
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -2943,8 +2912,7 @@ Cache-Control: no-store
     "http://receiver.example.com/mobile"
   ],
   "delivery": {
-    "delivery_method":
-      "https://schemas.openid.net/secevent/risc/delivery-method/push",
+    "delivery_method": "urn:ietf:rfc:8935",
     "url": "https://receiver.example.com/events"
   },
   "events_supported": [
@@ -3020,7 +2988,7 @@ identify the correct Event Stream.<a href="#section-7.1.1.5-2" class="pilcrow">�
 <p id="section-7.1.1.5-3">The following is a non-normative example request to delete an Event Stream:<a href="#section-7.1.1.5-3" class="pilcrow">¶</a></p>
 <span id="name-example-delete-stream-reque"></span><div id="figdeletestreamreq">
 <figure id="figure-26">
-              <div class="lang-http sourcecode" id="section-7.1.1.5-4.1">
+              <div class="alignLeft art-http art-text artwork" id="section-7.1.1.5-4.1">
 <pre>
 DELETE /ssf/stream?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f HTTP/1.1
 Host: transmitter.example.com
@@ -3078,24 +3046,21 @@ according to the status of the stream.<a href="#section-7.1.2-2" class="pilcrow"
 <p id="section-7.1.2-3">If the stream is:<a href="#section-7.1.2-3" class="pilcrow">¶</a></p>
 <p id="section-7.1.2-4">Enabled<a href="#section-7.1.2-4" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.2-5.1">
-              <p id="section-7.1.2-5.1.1">the Transmitter MUST send a stream updated (<a href="#stream-updated-event" class="auto internal xref">Section 7.1.5</a>) event
-  respectively to the Receiver within the Event Stream.<a href="#section-7.1.2-5.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-7.1.2-5.1">the Transmitter MUST send a stream updated (<a href="#stream-updated-event" class="auto internal xref">Section 7.1.5</a>) event
+  respectively to the Receiver within the Event Stream.<a href="#section-7.1.2-5.1" class="pilcrow">¶</a>
 </li>
           </ul>
 <p id="section-7.1.2-6">Paused<a href="#section-7.1.2-6" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.2-7.1">
-              <p id="section-7.1.2-7.1.1">the Transmitter SHOULD send a stream updated (<a href="#stream-updated-event" class="auto internal xref">Section 7.1.5</a>) after the Event Stream is
+<li class="normal ulEmpty" id="section-7.1.2-7.1">the Transmitter SHOULD send a stream updated (<a href="#stream-updated-event" class="auto internal xref">Section 7.1.5</a>) after the Event Stream is
   re-started. A Receiver MUST assume that events may have been lost during the
-  time when the event stream was paused.<a href="#section-7.1.2-7.1.1" class="pilcrow">¶</a></p>
+  time when the event stream was paused.<a href="#section-7.1.2-7.1" class="pilcrow">¶</a>
 </li>
           </ul>
 <p id="section-7.1.2-8">Disabled<a href="#section-7.1.2-8" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.2-9.1">
-              <p id="section-7.1.2-9.1.1">the Transmitter MAY send a stream updated (<a href="#stream-updated-event" class="auto internal xref">Section 7.1.5</a>) after the Event Stream is
-  re-enabled.<a href="#section-7.1.2-9.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-7.1.2-9.1">the Transmitter MAY send a stream updated (<a href="#stream-updated-event" class="auto internal xref">Section 7.1.5</a>) after the Event Stream is
+  re-enabled.<a href="#section-7.1.2-9.1" class="pilcrow">¶</a>
 </li>
           </ul>
 <div id="reading-a-streams-status">
@@ -3108,14 +3073,12 @@ GET request to the stream's Status Endpoint.<a href="#section-7.1.2.1-1" class="
 <p id="section-7.1.2.1-2">The Stream Status method takes the following parameters:<a href="#section-7.1.2.1-2" class="pilcrow">¶</a></p>
 <p id="section-7.1.2.1-3">stream_id<a href="#section-7.1.2.1-3" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.2.1-4.1">
-                <p id="section-7.1.2.1-4.1.1">REQUIRED. The stream whose status is being queried.<a href="#section-7.1.2.1-4.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-7.1.2.1-4.1">REQUIRED. The stream whose status is being queried.<a href="#section-7.1.2.1-4.1" class="pilcrow">¶</a>
 </li>
             </ul>
 <p id="section-7.1.2.1-5">subject<a href="#section-7.1.2.1-5" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.2.1-6.1">
-                <p id="section-7.1.2.1-6.1.1">OPTIONAL. The subject for which the stream status is requested.<a href="#section-7.1.2.1-6.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-7.1.2.1-6.1">OPTIONAL. The subject for which the stream status is requested.<a href="#section-7.1.2.1-6.1" class="pilcrow">¶</a>
 </li>
             </ul>
 <p id="section-7.1.2.1-7">On receiving a valid request the Event Transmitter responds with a 200 OK
@@ -3123,15 +3086,13 @@ response containing a <span><a href="#RFC7159" class="internal xref">JSON</a> [<
 whose string value MUST have one of the following values:<a href="#section-7.1.2.1-7" class="pilcrow">¶</a></p>
 <p id="section-7.1.2.1-8">enabled<a href="#section-7.1.2.1-8" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.2.1-9.1">
-                <p id="section-7.1.2.1-9.1.1">The Transmitter MUST transmit events over the stream, according to the
-  stream's configured delivery method.<a href="#section-7.1.2.1-9.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-7.1.2.1-9.1">The Transmitter MUST transmit events over the stream, according to the
+  stream's configured delivery method.<a href="#section-7.1.2.1-9.1" class="pilcrow">¶</a>
 </li>
             </ul>
 <p id="section-7.1.2.1-10">paused<a href="#section-7.1.2.1-10" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.2.1-11.1">
-                <p id="section-7.1.2.1-11.1.1">The Transmitter MUST NOT transmit events over the stream. The transmitter
+<li class="normal ulEmpty" id="section-7.1.2.1-11.1">The Transmitter MUST NOT transmit events over the stream. The transmitter
   will hold any events it would have transmitted while paused, and SHOULD
   transmit them when the stream's status becomes "enabled". If a Transmitter
   holds successive events that affect the same Subject Principal, then the
@@ -3139,21 +3100,20 @@ whose string value MUST have one of the following values:<a href="#section-7.1.2
   time that they were generated OR the Transmitter MUST send only the last events
   that do not require the previous events affecting the same Subject Principal to
   be processed by the Receiver, because the previous events are either cancelled
-  by the later events or the previous events are outdated.<a href="#section-7.1.2.1-11.1.1" class="pilcrow">¶</a></p>
+  by the later events or the previous events are outdated.<a href="#section-7.1.2.1-11.1" class="pilcrow">¶</a>
 </li>
             </ul>
 <p id="section-7.1.2.1-12">disabled<a href="#section-7.1.2.1-12" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.2.1-13.1">
-                <p id="section-7.1.2.1-13.1.1">The Transmitter MUST NOT transmit events over the stream, and will not hold
-  any events for later transmission.<a href="#section-7.1.2.1-13.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-7.1.2.1-13.1">The Transmitter MUST NOT transmit events over the stream, and will not hold
+  any events for later transmission.<a href="#section-7.1.2.1-13.1" class="pilcrow">¶</a>
 </li>
             </ul>
 <p id="section-7.1.2.1-14">The following is a non-normative example request to check an event stream's
 status:<a href="#section-7.1.2.1-14" class="pilcrow">¶</a></p>
 <span id="name-example-check-stream-status"></span><div id="figstatusreq">
 <figure id="figure-27">
-              <div class="lang-http sourcecode" id="section-7.1.2.1-15.1">
+              <div class="alignLeft art-http art-text artwork" id="section-7.1.2.1-15.1">
 <pre>
 GET /ssf/status?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f HTTP/1.1
 Host: transmitter.example.com
@@ -3167,7 +3127,7 @@ Authorization: Bearer zzzz
 <p id="section-7.1.2.1-16">The following is a non-normative example response:<a href="#section-7.1.2.1-16" class="pilcrow">¶</a></p>
 <span id="name-example-check-stream-status-"></span><div id="figstatusresp">
 <figure id="figure-28">
-              <div class="lang-http sourcecode" id="section-7.1.2.1-17.1">
+              <div class="alignLeft art-http art-text artwork" id="section-7.1.2.1-17.1">
 <pre>
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -3186,7 +3146,7 @@ Cache-Control: no-store
 status for a specific subject:<a href="#section-7.1.2.1-18" class="pilcrow">¶</a></p>
 <span id="name-example-check-stream-status-r"></span><div id="figstatuswithsubjectreq">
 <figure id="figure-29">
-              <div class="lang-http sourcecode" id="section-7.1.2.1-19.1">
+              <div class="alignLeft art-http art-text artwork" id="section-7.1.2.1-19.1">
 <pre>
 GET /ssf/status?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f&amp;subject=&lt;url-encoded-subject&gt; HTTP/1.1
 Host: transmitter.example.com
@@ -3284,26 +3244,22 @@ request to the Status Endpoint. The POST body contains a <span><a href="#RFC7159
 with the following fields:<a href="#section-7.1.2.2-1" class="pilcrow">¶</a></p>
 <p id="section-7.1.2.2-2">stream_id<a href="#section-7.1.2.2-2" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.2.2-3.1">
-                <p id="section-7.1.2.2-3.1.1">REQUIRED. The stream whose status is being updated.<a href="#section-7.1.2.2-3.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-7.1.2.2-3.1">REQUIRED. The stream whose status is being updated.<a href="#section-7.1.2.2-3.1" class="pilcrow">¶</a>
 </li>
             </ul>
 <p id="section-7.1.2.2-4">status<a href="#section-7.1.2.2-4" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.2.2-5.1">
-                <p id="section-7.1.2.2-5.1.1">REQUIRED. The new status of the Event Stream.<a href="#section-7.1.2.2-5.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-7.1.2.2-5.1">REQUIRED. The new status of the Event Stream.<a href="#section-7.1.2.2-5.1" class="pilcrow">¶</a>
 </li>
             </ul>
 <p id="section-7.1.2.2-6">subject<a href="#section-7.1.2.2-6" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.2.2-7.1">
-                <p id="section-7.1.2.2-7.1.1">OPTIONAL. The Subject to which the new status applies.<a href="#section-7.1.2.2-7.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-7.1.2.2-7.1">OPTIONAL. The Subject to which the new status applies.<a href="#section-7.1.2.2-7.1" class="pilcrow">¶</a>
 </li>
             </ul>
 <p id="section-7.1.2.2-8">reason<a href="#section-7.1.2.2-8" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.2.2-9.1">
-                <p id="section-7.1.2.2-9.1.1">OPTIONAL. A short text description that explains the reason for the change.<a href="#section-7.1.2.2-9.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-7.1.2.2-9.1">OPTIONAL. A short text description that explains the reason for the change.<a href="#section-7.1.2.2-9.1" class="pilcrow">¶</a>
 </li>
             </ul>
 <p id="section-7.1.2.2-10">On receiving a valid request the Event Transmitter responds with a "200 OK"
@@ -3313,7 +3269,7 @@ status in the body.<a href="#section-7.1.2.2-10" class="pilcrow">¶</a></p>
 status:<a href="#section-7.1.2.2-11" class="pilcrow">¶</a></p>
 <span id="name-example-update-stream-statu"></span><div id="figupdatestatusreq">
 <figure id="figure-31">
-              <div class="lang-http sourcecode" id="section-7.1.2.2-12.1">
+              <div class="alignLeft art-http art-text artwork" id="section-7.1.2.2-12.1">
 <pre>
 POST /ssf/status HTTP/1.1
 Host: transmitter.example.com
@@ -3333,7 +3289,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 optional fields:<a href="#section-7.1.2.2-13" class="pilcrow">¶</a></p>
 <span id="name-example-update-stream-status"></span><div id="figupdatestatuswithsubjectreq">
 <figure id="figure-32">
-              <div class="lang-http sourcecode" id="section-7.1.2.2-14.1">
+              <div class="alignLeft art-http art-text artwork" id="section-7.1.2.2-14.1">
 <pre>
 POST /ssf/status HTTP/1.1
 Host: transmitter.example.com
@@ -3360,7 +3316,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 <p id="section-7.1.2.2-15">The following is a non-normative example response:<a href="#section-7.1.2.2-15" class="pilcrow">¶</a></p>
 <span id="name-example-update-stream-status-"></span><div id="figupdatestatusresp">
 <figure id="figure-33">
-              <div class="lang-http sourcecode" id="section-7.1.2.2-16.1">
+              <div class="alignLeft art-http art-text artwork" id="section-7.1.2.2-16.1">
 <pre>
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -3446,23 +3402,20 @@ request to the Add Subject Endpoint, containing in the body a JSON object the
 following claims:<a href="#section-7.1.3.1-1" class="pilcrow">¶</a></p>
 <p id="section-7.1.3.1-2">stream_id<a href="#section-7.1.3.1-2" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.3.1-3.1">
-                <p id="section-7.1.3.1-3.1.1">REQUIRED. The stream to which the subject is being added.<a href="#section-7.1.3.1-3.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-7.1.3.1-3.1">REQUIRED. The stream to which the subject is being added.<a href="#section-7.1.3.1-3.1" class="pilcrow">¶</a>
 </li>
             </ul>
 <p id="section-7.1.3.1-4">subject<a href="#section-7.1.3.1-4" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.3.1-5.1">
-                <p id="section-7.1.3.1-5.1.1">REQUIRED. A Subject claim identifying the subject to be added.<a href="#section-7.1.3.1-5.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-7.1.3.1-5.1">REQUIRED. A Subject claim identifying the subject to be added.<a href="#section-7.1.3.1-5.1" class="pilcrow">¶</a>
 </li>
             </ul>
 <p id="section-7.1.3.1-6">verified<a href="#section-7.1.3.1-6" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.3.1-7.1">
-                <p id="section-7.1.3.1-7.1.1">OPTIONAL.  A boolean value; when true, it indicates that the Event Receiver
+<li class="normal ulEmpty" id="section-7.1.3.1-7.1">OPTIONAL.  A boolean value; when true, it indicates that the Event Receiver
   has verified the Subject claim. When false, it indicates that the Event
   Receiver has not verified the Subject claim. If omitted, Event Transmitters
-  SHOULD assume that the subject has been verified.<a href="#section-7.1.3.1-7.1.1" class="pilcrow">¶</a></p>
+  SHOULD assume that the subject has been verified.<a href="#section-7.1.3.1-7.1" class="pilcrow">¶</a>
 </li>
             </ul>
 <p id="section-7.1.3.1-8">On a successful response, the Event Transmitter responds with an empty "200 OK"
@@ -3475,7 +3428,7 @@ See Security Considerations (<a href="#management-sec" class="auto internal xref
 where the subject is identified by an Email Subject Identifier.<a href="#section-7.1.3.1-9" class="pilcrow">¶</a></p>
 <span id="name-example-add-subject-request"></span><div id="figaddreq">
 <figure id="figure-34">
-              <div class="lang-http sourcecode" id="section-7.1.3.1-10.1">
+              <div class="alignLeft art-http art-text artwork" id="section-7.1.3.1-10.1">
 <pre>
 POST /ssf/subjects:add HTTP/1.1
 Host: transmitter.example.com
@@ -3498,7 +3451,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 <p id="section-7.1.3.1-11">The following is a non-normative example response to a successful request:<a href="#section-7.1.3.1-11" class="pilcrow">¶</a></p>
 <span id="name-example-add-subject-respons"></span><div id="figaddresp">
 <figure id="figure-35">
-              <div class="lang-http sourcecode" id="section-7.1.3.1-12.1">
+              <div class="alignLeft art-http art-text artwork" id="section-7.1.3.1-12.1">
 <pre>
 HTTP/1.1 200 OK
 Server: transmitter.example.com
@@ -3558,14 +3511,12 @@ request to the Remove Subject Endpoint, containing in the body a JSON object
 with the following claims:<a href="#section-7.1.3.2-1" class="pilcrow">¶</a></p>
 <p id="section-7.1.3.2-2">stream_id<a href="#section-7.1.3.2-2" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.3.2-3.1">
-                <p id="section-7.1.3.2-3.1.1">REQUIRED. The stream from which the subject is being removed.<a href="#section-7.1.3.2-3.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-7.1.3.2-3.1">REQUIRED. The stream from which the subject is being removed.<a href="#section-7.1.3.2-3.1" class="pilcrow">¶</a>
 </li>
             </ul>
 <p id="section-7.1.3.2-4">subject<a href="#section-7.1.3.2-4" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.3.2-5.1">
-                <p id="section-7.1.3.2-5.1.1">REQUIRED. A Subject claim identifying the subject to be removed.<a href="#section-7.1.3.2-5.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-7.1.3.2-5.1">REQUIRED. A Subject claim identifying the subject to be removed.<a href="#section-7.1.3.2-5.1" class="pilcrow">¶</a>
 </li>
             </ul>
 <p id="section-7.1.3.2-6">On a successful response, the Event Transmitter responds with a "204 No Content"
@@ -3574,7 +3525,7 @@ response.<a href="#section-7.1.3.2-6" class="pilcrow">¶</a></p>
 identified by a Phone Number Subject Identifier:<a href="#section-7.1.3.2-7" class="pilcrow">¶</a></p>
 <span id="name-example-remove-subject-requ"></span><div id="figremovereq">
 <figure id="figure-36">
-              <div class="lang-http sourcecode" id="section-7.1.3.2-8.1">
+              <div class="alignLeft art-http art-text artwork" id="section-7.1.3.2-8.1">
 <pre>
 POST /ssf/subjects:remove HTTP/1.1
 Host: transmitter.example.com
@@ -3596,7 +3547,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 <p id="section-7.1.3.2-9">The following is a non-normative example response to a successful request:<a href="#section-7.1.3.2-9" class="pilcrow">¶</a></p>
 <span id="name-example-remove-subject-resp"></span><div id="figremoveresp">
 <figure id="figure-37">
-              <div class="lang-http sourcecode" id="section-7.1.3.2-10.1">
+              <div class="alignLeft art-http art-text artwork" id="section-7.1.3.2-10.1">
 <pre>
 HTTP/1.1 204 No Content
 Server: transmitter.example.com
@@ -3671,15 +3622,13 @@ not requested by the Event Receiver.<a href="#section-7.1.4-2" class="pilcrow">�
 <p id="section-7.1.4.1-1">The Verification Event is a standard SET with the following attributes:<a href="#section-7.1.4.1-1" class="pilcrow">¶</a></p>
 <p id="section-7.1.4.1-2">event type<a href="#section-7.1.4.1-2" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.4.1-3.1">
-                <p id="section-7.1.4.1-3.1.1">The Event Type URI is: "https://schemas.openid.net/secevent/ssf/event-type/verification".<a href="#section-7.1.4.1-3.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-7.1.4.1-3.1">The Event Type URI is: "https://schemas.openid.net/secevent/ssf/event-type/verification".<a href="#section-7.1.4.1-3.1" class="pilcrow">¶</a>
 </li>
             </ul>
 <p id="section-7.1.4.1-4">state<a href="#section-7.1.4.1-4" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.4.1-5.1">
-                <p id="section-7.1.4.1-5.1.1">OPTIONAL An opaque value provided by the Event Receiver when the event is
-  triggered. This is a nested attribute in the event payload.<a href="#section-7.1.4.1-5.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-7.1.4.1-5.1">OPTIONAL An opaque value provided by the Event Receiver when the event is
+  triggered. This is a nested attribute in the event payload.<a href="#section-7.1.4.1-5.1" class="pilcrow">¶</a>
 </li>
             </ul>
 <p id="section-7.1.4.1-6">Upon receiving a Verification Event, the Event Receiver SHALL parse the SET and
@@ -3704,18 +3653,16 @@ On a successful request, the event transmitter responds with an empty
 <p id="section-7.1.4.2-2">Verification requests have the following properties:<a href="#section-7.1.4.2-2" class="pilcrow">¶</a></p>
 <p id="section-7.1.4.2-3">stream_id<a href="#section-7.1.4.2-3" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.4.2-4.1">
-                <p id="section-7.1.4.2-4.1.1">REQUIRED. The stream that the verification event is being requested on.<a href="#section-7.1.4.2-4.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-7.1.4.2-4.1">REQUIRED. The stream that the verification event is being requested on.<a href="#section-7.1.4.2-4.1" class="pilcrow">¶</a>
 </li>
             </ul>
 <p id="section-7.1.4.2-5">state<a href="#section-7.1.4.2-5" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.4.2-6.1">
-                <p id="section-7.1.4.2-6.1.1">OPTIONAL. An arbitrary string that the Event Transmitter MUST echo back to the
+<li class="normal ulEmpty" id="section-7.1.4.2-6.1">OPTIONAL. An arbitrary string that the Event Transmitter MUST echo back to the
   Event Receiver in the verification event's payload. Event Receivers MAY use
   the value of this parameter to correlate a verification event with a
   verification request. If the verification event is initiated by the transmitter
-  then this parameter MUST not be set.<a href="#section-7.1.4.2-6.1.1" class="pilcrow">¶</a></p>
+  then this parameter MUST not be set.<a href="#section-7.1.4.2-6.1" class="pilcrow">¶</a>
 </li>
             </ul>
 <p id="section-7.1.4.2-7">A successful response from a POST to the Verification Endpoint does not indicate
@@ -3762,7 +3709,7 @@ particular order relative to the current queue of events.<a href="#section-7.1.4
 <p id="section-7.1.4.2-10">The following is a non-normative example request to trigger a verification event:<a href="#section-7.1.4.2-10" class="pilcrow">¶</a></p>
 <span id="name-example-trigger-verificatio"></span><div id="figverifyreq">
 <figure id="figure-38">
-              <div class="lang-http sourcecode" id="section-7.1.4.2-11.1">
+              <div class="alignLeft art-http art-text artwork" id="section-7.1.4.2-11.1">
 <pre>
 POST /ssf/verify HTTP/1.1
 Host: transmitter.example.com
@@ -3782,7 +3729,7 @@ Content-Type: application/json
 <p id="section-7.1.4.2-12">The following is a non-normative example response to a successful request:<a href="#section-7.1.4.2-12" class="pilcrow">¶</a></p>
 <span id="name-example-trigger-verification"></span><div id="figverifyresp">
 <figure id="figure-39">
-              <div class="lang-http sourcecode" id="section-7.1.4.2-13.1">
+              <div class="alignLeft art-http art-text artwork" id="section-7.1.4.2-13.1">
 <pre>
 HTTP/1.1 204 No Content
 Server: transmitter.example.com
@@ -3797,7 +3744,7 @@ Cache-Control: no-store
 Event Receiver as a result of the above request:<a href="#section-7.1.4.2-14" class="pilcrow">¶</a></p>
 <span id="name-example-verification-set"></span><div id="figverifyset">
 <figure id="figure-40">
-              <div class="lang-json sourcecode" id="section-7.1.4.2-15.1">
+              <div class="alignLeft art-json art-text artwork" id="section-7.1.4.2-15.1">
 <pre>
 {
   "jti": "123456",
@@ -3839,29 +3786,26 @@ Subject.<a href="#section-7.1.5-3" class="pilcrow">¶</a></p>
 <p id="section-7.1.5-4">The "stream-updated" event MAY contain the following claims:<a href="#section-7.1.5-4" class="pilcrow">¶</a></p>
 <p id="section-7.1.5-5">status<a href="#section-7.1.5-5" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.5-6.1">
-              <p id="section-7.1.5-6.1.1">REQUIRED. Defines the new status of the stream for the Subject Identifier
-  specified in the Subject.<a href="#section-7.1.5-6.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-7.1.5-6.1">REQUIRED. Defines the new status of the stream for the Subject Identifier
+  specified in the Subject.<a href="#section-7.1.5-6.1" class="pilcrow">¶</a>
 </li>
           </ul>
 <p id="section-7.1.5-7">reason<a href="#section-7.1.5-7" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.5-8.1">
-              <p id="section-7.1.5-8.1.1">OPTIONAL. Provides a short description of why the Transmitter has updated the
-  status.<a href="#section-7.1.5-8.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-7.1.5-8.1">OPTIONAL. Provides a short description of why the Transmitter has updated the
+  status.<a href="#section-7.1.5-8.1" class="pilcrow">¶</a>
 </li>
           </ul>
 <p id="section-7.1.5-9">subject<a href="#section-7.1.5-9" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.5-10.1">
-              <p id="section-7.1.5-10.1.1">OPTIONAL. Specifies the Subject Principal for whom the status has been updated.
+<li class="normal ulEmpty" id="section-7.1.5-10.1">OPTIONAL. Specifies the Subject Principal for whom the status has been updated.
   If this claim is not included, then the status change was applied to all
-  subjects in the stream.<a href="#section-7.1.5-10.1.1" class="pilcrow">¶</a></p>
+  subjects in the stream.<a href="#section-7.1.5-10.1" class="pilcrow">¶</a>
 </li>
           </ul>
 <span id="name-example-stream-updated-set"></span><div id="figstreamupdatedset">
 <figure id="figure-41">
-            <div class="lang-json sourcecode" id="section-7.1.5-11.1">
+            <div class="alignLeft art-json art-text artwork" id="section-7.1.5-11.1">
 <pre>
 {
   "jti": "123456",
@@ -4089,7 +4033,7 @@ a SSF event.<a href="#section-11.1.2-1" class="pilcrow">¶</a></p>
 specific to the event type.<a href="#section-11.1.3-1" class="pilcrow">¶</a></p>
 <span id="name-example-set-containing-a-ri"></span><div id="risc-event-subject-example">
 <figure id="figure-42">
-            <div class="lang-json sourcecode" id="section-11.1.3-2.1">
+            <div class="alignLeft art-json art-text artwork" id="section-11.1.3-2.1">
 <pre>
 {
   "iss": "https://idp.example.com/",
@@ -4115,7 +4059,7 @@ specific to the event type.<a href="#section-11.1.3-1" class="pilcrow">¶</a></p
 </div>
 <span id="name-example-set-containing-a-ca"></span><div id="caep-event-properties-example">
 <figure id="figure-43">
-            <div class="lang-json sourcecode" id="section-11.1.3-3.1">
+            <div class="alignLeft art-json art-text artwork" id="section-11.1.3-3.1">
 <pre>
 {
   "iss": "https://idp.example.com/",
@@ -4148,7 +4092,7 @@ specific to the event type.<a href="#section-11.1.3-1" class="pilcrow">¶</a></p
 <p id="section-11.1.4-1">SSF events MUST use explicit typing as defined in Section 2.3 of <span>[<a href="#RFC8417" class="cite xref">RFC8417</a>]</span>.<a href="#section-11.1.4-1" class="pilcrow">¶</a></p>
 <span id="name-explicitly-typed-jose-heade"></span><div id="explicit-type-header">
 <figure id="figure-44">
-            <div class="lang-json sourcecode" id="section-11.1.4-2.1">
+            <div class="alignLeft art-json art-text artwork" id="section-11.1.4-2.1">
 <pre>
 {
   "typ":"secevent+jwt",
@@ -4196,7 +4140,7 @@ this service might reroute SETs to respective Receivers, an "aud" claim with
 multiple Receivers would lead to unintended data disclosure.<a href="#section-11.1.6-3" class="pilcrow">¶</a></p>
 <span id="name-example-set-with-array-aud-"></span><div id="figarrayaud">
 <figure id="figure-45">
-            <div class="lang-json sourcecode" id="section-11.1.6-4.1">
+            <div class="alignLeft art-json art-text artwork" id="section-11.1.6-4.1">
 <pre>
 {
   "jti": "123456",
@@ -4275,25 +4219,22 @@ metadata.<a href="#section-11.2.1-1" class="pilcrow">¶</a></p>
 <p id="section-11.2.1.1-1">This section provides SSF profiling specifications for the <span>[<a href="#DELIVERYPUSH" class="cite xref">DELIVERYPUSH</a>]</span> spec.<a href="#section-11.2.1.1-1" class="pilcrow">¶</a></p>
 <p id="section-11.2.1.1-2">method<a href="#section-11.2.1.1-2" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-11.2.1.1-3.1">
-                <p id="section-11.2.1.1-3.1.1">"https://schemas.openid.net/secevent/risc/delivery-method/push"<a href="#section-11.2.1.1-3.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-11.2.1.1-3.1">"urn:ietf:rfc:8935"<a href="#section-11.2.1.1-3.1" class="pilcrow">¶</a>
 </li>
             </ul>
 <p id="section-11.2.1.1-4">endpoint_url<a href="#section-11.2.1.1-4" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-11.2.1.1-5.1">
-                <p id="section-11.2.1.1-5.1.1">The URL where events are pushed through HTTP POST. This is set by the
+<li class="normal ulEmpty" id="section-11.2.1.1-5.1">The URL where events are pushed through HTTP POST. This is set by the
   Receiver. If a Reciever is using multiple streams from a single Transmitter
   and needs to keep the SETs separated, it is RECOMMENDED that the URL for each
-  stream be unique.<a href="#section-11.2.1.1-5.1.1" class="pilcrow">¶</a></p>
+  stream be unique.<a href="#section-11.2.1.1-5.1" class="pilcrow">¶</a>
 </li>
             </ul>
 <p id="section-11.2.1.1-6">authorization_header<a href="#section-11.2.1.1-6" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-11.2.1.1-7.1">
-                <p id="section-11.2.1.1-7.1.1">The HTTP Authorization header that the Transmitter MUST set with each event
+<li class="normal ulEmpty" id="section-11.2.1.1-7.1">The HTTP Authorization header that the Transmitter MUST set with each event
   delivery, if the configuration is present. The value is optional and it is set
-  by the Receiver.<a href="#section-11.2.1.1-7.1.1" class="pilcrow">¶</a></p>
+  by the Receiver.<a href="#section-11.2.1.1-7.1" class="pilcrow">¶</a>
 </li>
             </ul>
 </section>
@@ -4306,16 +4247,14 @@ metadata.<a href="#section-11.2.1-1" class="pilcrow">¶</a></p>
 <p id="section-11.2.1.2-1">This section provides SSF profiling specifications for the <span>[<a href="#DELIVERYPOLL" class="cite xref">DELIVERYPOLL</a>]</span> spec.<a href="#section-11.2.1.2-1" class="pilcrow">¶</a></p>
 <p id="section-11.2.1.2-2">method<a href="#section-11.2.1.2-2" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-11.2.1.2-3.1">
-                <p id="section-11.2.1.2-3.1.1">"https://schemas.openid.net/secevent/risc/delivery-method/poll"<a href="#section-11.2.1.2-3.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-11.2.1.2-3.1">"urn:ietf:rfc:8936"<a href="#section-11.2.1.2-3.1" class="pilcrow">¶</a>
 </li>
             </ul>
 <p id="section-11.2.1.2-4">endpoint_url<a href="#section-11.2.1.2-4" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-11.2.1.2-5.1">
-                <p id="section-11.2.1.2-5.1.1">The URL where events can be retrieved from. This is specified by the
+<li class="normal ulEmpty" id="section-11.2.1.2-5.1">The URL where events can be retrieved from. This is specified by the
   Transmitter. These URLs MAY be reused across Receivers, but MUST be unique per
-  stream for a given Receiver.<a href="#section-11.2.1.2-5.1.1" class="pilcrow">¶</a></p>
+  stream for a given Receiver.<a href="#section-11.2.1.2-5.1" class="pilcrow">¶</a>
 </li>
             </ul>
 </section>
@@ -4351,15 +4290,15 @@ Subject Identifiers for Security Event Tokens <span>[<a href="#SUBIDS" class="ci
 <dd class="break"></dd>
 <dt id="DELIVERYPOLL">[DELIVERYPOLL]</dt>
         <dd>
-<span class="refAuthor">Backman, A.</span>, <span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Scurtescu, M. S.</span>, <span class="refAuthor">Ansari, M.</span>, and <span class="refAuthor">A. Nadalin</span>, <span class="refTitle">"Poll-Based SET Token Delivery Using HTTP"</span>, <time datetime="2020-11" class="refDate">November 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8936">https://www.rfc-editor.org/info/rfc8936</a>&gt;</span>. </dd>
+<span class="refAuthor">Backman, A.</span>, <span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Scurtescu, M.S.</span>, <span class="refAuthor">Ansari, M.</span>, and <span class="refAuthor">A. Nadalin</span>, <span class="refTitle">"Poll-Based SET Token Delivery Using HTTP"</span>, <time datetime="2020-11" class="refDate">November 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8936">https://www.rfc-editor.org/info/rfc8936</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="DELIVERYPUSH">[DELIVERYPUSH]</dt>
         <dd>
-<span class="refAuthor">Backman, A.</span>, <span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Hunt, P.</span>, <span class="refAuthor">Scurtescu, M. S.</span>, <span class="refAuthor">Ansari, M.</span>, and <span class="refAuthor">A. Nadalin</span>, <span class="refTitle">"Push-Based SET Token Delivery Using HTTP"</span>, <time datetime="2020-11" class="refDate">November 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8935">https://www.rfc-editor.org/info/rfc8935</a>&gt;</span>. </dd>
+<span class="refAuthor">Backman, A.</span>, <span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Hunt, P.</span>, <span class="refAuthor">Scurtescu, M.S.</span>, <span class="refAuthor">Ansari, M.</span>, and <span class="refAuthor">A. Nadalin</span>, <span class="refTitle">"Push-Based SET Token Delivery Using HTTP"</span>, <time datetime="2020-11" class="refDate">November 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8935">https://www.rfc-editor.org/info/rfc8935</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="IDTOKEN">[IDTOKEN]</dt>
         <dd>
-<span class="refAuthor">Sakimura, N.</span>, <span class="refAuthor">Bradley, J.</span>, <span class="refAuthor">Jones, M. B.</span>, <span class="refAuthor">de Medeiros, B.</span>, and <span class="refAuthor">C. Mortimore</span>, <span class="refTitle">"OpenID Connect Core 1.0 - ID Token"</span>, <time datetime="2017-04" class="refDate">April 2017</time>, <span>&lt;<a href="http://openid.net/specs/openid-connect-core-1_0.html#IDToken">http://openid.net/specs/openid-connect-core-1_0.html#IDToken</a>&gt;</span>. </dd>
+<span class="refAuthor">Sakimura, N.</span>, <span class="refAuthor">Bradley, J.</span>, <span class="refAuthor">Jones, M.B.</span>, <span class="refAuthor">de Medeiros, B.</span>, and <span class="refAuthor">C. Mortimore</span>, <span class="refTitle">"OpenID Connect Core 1.0 - ID Token"</span>, <time datetime="2017-04" class="refDate">April 2017</time>, <span>&lt;<a href="http://openid.net/specs/openid-connect-core-1_0.html#IDToken">http://openid.net/specs/openid-connect-core-1_0.html#IDToken</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="OASIS.saml-core-2.0-os">[OASIS.saml-core-2.0-os]</dt>
         <dd>
@@ -4367,11 +4306,11 @@ Subject Identifiers for Security Event Tokens <span>[<a href="#SUBIDS" class="ci
 <dd class="break"></dd>
 <dt id="OAUTH-DISCOVERY">[OAUTH-DISCOVERY]</dt>
         <dd>
-<span class="refAuthor">Jones, M. B.</span>, <span class="refAuthor">Sakimura, N.</span>, and <span class="refAuthor">J. Bradley</span>, <span class="refTitle">"OAuth 2.0 Authorization Server Metadata - Version 10"</span>, <time datetime="2018-06" class="refDate">June 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8414">https://www.rfc-editor.org/info/rfc8414</a>&gt;</span>. </dd>
+<span class="refAuthor">Jones, M.B.</span>, <span class="refAuthor">Sakimura, N.</span>, and <span class="refAuthor">J. Bradley</span>, <span class="refTitle">"OAuth 2.0 Authorization Server Metadata - Version 10"</span>, <time datetime="2018-06" class="refDate">June 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8414">https://www.rfc-editor.org/info/rfc8414</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="OPENID-DISCOVERY">[OPENID-DISCOVERY]</dt>
         <dd>
-<span class="refAuthor">Sakimura, N.</span>, <span class="refAuthor">Bradley, J.</span>, <span class="refAuthor">Jones, M. B.</span>, and <span class="refAuthor">E. Jay</span>, <span class="refTitle">"OpenID Connect Discovery 1.0"</span>, <time datetime="2014-11" class="refDate">November 2014</time>, <span>&lt;<a href="https://openid.net/specs/openid-connect-discovery-1_0.html">https://openid.net/specs/openid-connect-discovery-1_0.html</a>&gt;</span>. </dd>
+<span class="refAuthor">Sakimura, N.</span>, <span class="refAuthor">Bradley, J.</span>, <span class="refAuthor">Jones, M.B.</span>, and <span class="refAuthor">E. Jay</span>, <span class="refTitle">"OpenID Connect Discovery 1.0"</span>, <time datetime="2014-11" class="refDate">November 2014</time>, <span>&lt;<a href="https://openid.net/specs/openid-connect-discovery-1_0.html">https://openid.net/specs/openid-connect-discovery-1_0.html</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>

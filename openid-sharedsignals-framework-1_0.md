@@ -2,7 +2,7 @@
 title: OpenID Shared Signals Framework Specification 1.0 - draft 02
 abbrev: SharedSignals
 docname: openid-sharedsignals-framework-1_0
-date: 2023-02-08
+date: 2023-03-21
 
 ipr: none
 cat: std
@@ -640,8 +640,8 @@ Content-Type: application/json
   "jwks_uri":
     "https://tr.example.com/jwks.json",
   "delivery_methods_supported": [
-    "https://schemas.openid.net/secevent/risc/delivery-method/push",
-    "https://schemas.openid.net/secevent/risc/delivery-method/poll"],
+    "urn:ietf:rfc:8935",
+    "urn:ietf:rfc:8936"],
   "configuration_endpoint":
     "https://tr.example.com/ssf/mgmt/stream",
   "status_endpoint":
@@ -860,9 +860,8 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
 {
   "delivery": {
-    "delivery_method":
-      "https://schemas.openid.net/secevent/risc/delivery-method/push",
-      "url": "https://receiver.example.com/events"
+    "delivery_method": "urn:ietf:rfc:8935",
+    "url": "https://receiver.example.com/events"
   },
   "events_requested": [
     "urn:example:secevent:events:type_2",
@@ -887,8 +886,7 @@ Content-Type: application/json
       "http://receiver.example.com/mobile"
     ],
   "delivery": {
-    "delivery_method":
-      "https://schemas.openid.net/secevent/risc/delivery-method/push",
+    "delivery_method": "urn:ietf:rfc:8935",
     "url": "https://receiver.example.com/events"
   },
   "events_supported": [
@@ -957,8 +955,7 @@ Cache-Control: no-store
       "http://receiver.example.com/mobile"
     ],
   "delivery": {
-    "delivery_method":
-      "https://schemas.openid.net/secevent/risc/delivery-method/push",
+    "delivery_method": "urn:ietf:rfc:8935",
     "url": "https://receiver.example.com/events"
   },
   "events_supported": [
@@ -1005,8 +1002,7 @@ Cache-Control: no-store
         "http://receiver.example.com/mobile"
       ],
     "delivery": {
-      "delivery_method":
-        "https://schemas.openid.net/secevent/risc/delivery-method/push",
+      "delivery_method": "urn:ietf:rfc:8935",
       "url": "https://receiver.example.com/events"
     },
     "events_supported": [
@@ -1032,8 +1028,7 @@ Cache-Control: no-store
         "http://receiver.example.com/mobile"
       ],
     "delivery": {
-      "delivery_method":
-        "https://schemas.openid.net/secevent/risc/delivery-method/push",
+      "delivery_method": "urn:ietf:rfc:8935",
       "url": "https://receiver.example.com/events"
     },
     "events_supported": [
@@ -1072,8 +1067,7 @@ Cache-Control: no-store
         "http://receiver.example.com/mobile"
       ],
     "delivery": {
-      "delivery_method":
-        "https://schemas.openid.net/secevent/risc/delivery-method/push",
+      "delivery_method": "urn:ietf:rfc:8935",
       "url": "https://receiver.example.com/events"
     },
     "events_supported": [
@@ -1169,8 +1163,7 @@ Cache-Control: no-store
     "http://receiver.example.com/mobile"
   ],
   "delivery": {
-    "delivery_method":
-      "https://schemas.openid.net/secevent/risc/delivery-method/push",
+    "delivery_method": "urn:ietf:rfc:8935",
     "url": "https://receiver.example.com/events"
   },
   "events_supported": [
@@ -1236,8 +1229,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
     "http://receiver.example.com/mobile"
   ],
   "delivery": {
-    "delivery_method":
-      "https://schemas.openid.net/secevent/risc/delivery-method/push",
+    "delivery_method": "urn:ietf:rfc:8935",
     "url": "https://receiver.example.com/events"
   },
   "events_requested": [
@@ -1264,8 +1256,7 @@ Cache-Control: no-store
     "http://receiver.example.com/mobile"
   ],
   "delivery": {
-    "delivery_method":
-      "https://schemas.openid.net/secevent/risc/delivery-method/push",
+    "delivery_method": "urn:ietf:rfc:8935",
     "url": "https://receiver.example.com/events"
   },
   "events_supported": [
@@ -2111,7 +2102,7 @@ This section provides SSF profiling specifications for the {{DELIVERYPUSH}} spec
 
 method
 
-> "https://schemas.openid.net/secevent/risc/delivery-method/push"
+> "urn:ietf:rfc:8935"
 
 endpoint_url
 
@@ -2131,7 +2122,7 @@ This section provides SSF profiling specifications for the {{DELIVERYPOLL}} spec
 
 method
 
-> "https://schemas.openid.net/secevent/risc/delivery-method/poll"
+> "urn:ietf:rfc:8936"
 
 endpoint_url
 
