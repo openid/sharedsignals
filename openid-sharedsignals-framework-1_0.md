@@ -840,10 +840,23 @@ events_requested
 
 delivery
 
-> **Receiver-Supplied**, A JSON object containing a set of name/value pairs
-  specifying configuration parameters for the SET delivery method. The actual
-  delivery method is identified by the special key "method" with the value
-  being a URI as defined in {{delivery-meta}}.
+> A JSON object containing a set of name/value pairs specifying configuration
+  parameters for the SET delivery method. The actual delivery method is
+  identified by the special key "method" with the value being a URI as defined
+  in {{delivery-meta}}. The value of the "delivery" field contains two
+  sub-fields: 
+  
+>   delivery_method
+
+> > **Receiver-Supplied**, the specific delivery method to be used. This can be
+    any one of "push" or "poll", but not both.
+
+>   url
+
+> > The location at which the push or poll delivery will take place. If the
+    `delivery_method` value is "push", then this value MUST be supplied by the
+    Receiver.  If the `delivery_method` value is "poll", then this value MUST
+    be supplied by the Transmitter.
 
 format
 
@@ -2094,17 +2107,17 @@ This section provides SSF profiling specifications for the {{DELIVERYPUSH}} and
 {{DELIVERYPOLL}} specs.
 
 ### Stream Configuration Metadata {#delivery-meta} 
-Each delivery method is identified by a URI, specified below by the "method"
+Each delivery method is identified by a URI, specified below by the "delivery_method"
 metadata.
 
 #### Push Delivery using HTTP
 This section provides SSF profiling specifications for the {{DELIVERYPUSH}} spec.
 
-method
+delivery_method
 
 > "urn:ietf:rfc:8935"
 
-endpoint_url
+url
 
 > The URL where events are pushed through HTTP POST. This is set by the
   Receiver. If a Reciever is using multiple streams from a single Transmitter
@@ -2120,11 +2133,11 @@ authorization_header
 #### Polling Delivery using HTTP
 This section provides SSF profiling specifications for the {{DELIVERYPOLL}} spec.
 
-method
+delivery_method
 
 > "urn:ietf:rfc:8936"
 
-endpoint_url
+url
 
 > The URL where events can be retrieved from. This is specified by the
   Transmitter. These URLs MAY be reused across Receivers, but MUST be unique per
