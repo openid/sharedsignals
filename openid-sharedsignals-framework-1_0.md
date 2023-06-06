@@ -788,13 +788,15 @@ events_requested
 
 > **Receiver-Supplied**, An array of URIs identifying the set of events that
   the Receiver requested. A Receiver SHOULD request only the events that it
-  understands and it can act on. This is configurable by the Receiver.
+  understands and it can act on. This is configurable by the Receiver. A
+  Transmitter MUST ignore any array values that it does not understand.
 
 events_delivered
 
 > **Transmitter-Supplied**, An array of URIs which is the intersection of
   "events_supported" and "events_requested". These events MAY be delivered over
-              the Event Stream.
+  the Event Stream. A Receiver MUST rely on the values received in this field
+  to understand which event types it can expect from the Transmitter.
 
 delivery
 
