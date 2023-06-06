@@ -874,11 +874,34 @@ Tulshibagwale, et al.        Standards Track                   [Page 15]
 
    delivery
 
-      *Receiver-Supplied*, A JSON object containing a set of name/value
-      pairs specifying configuration parameters for the SET delivery
-      method.  The actual delivery method is identified by the special
-      key "method" with the value being a URI as defined in
-      Section 11.2.1.
+      A JSON object containing a set of name/value pairs specifying
+      configuration parameters for the SET delivery method.  The actual
+      delivery method is identified by the special key "method" with the
+      value being a URI as defined in Section 11.2.1.  The value of the
+      "delivery" field contains two sub-fields:
+
+      delivery_method
+
+      *Receiver-Supplied*, the specific delivery method to be used.
+         This can be any one of "push" (as defined in Section 11.2.1.1)
+         or "poll" (as defined in Section 11.2.1.2), but not both.
+
+      url
+
+
+
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 16]
+
+                              SharedSignals                   March 2023
+
+
+      The location at which the push or poll delivery will take
+         place.  If the delivery_method value is "push", then this value
+         MUST be supplied by the Receiver.  If the delivery_method value
+         is "poll", then this value MUST be supplied by the Transmitter.
 
    min_verification_interval
 
@@ -890,13 +913,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 15]
       status code if an Event Receiver is not exceeding this frequency.
 
    format
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 16]
-
-                              SharedSignals                   March 2023
-
 
       *Receiver-Supplied*, The Subject Identifier Format that the
       Receiver wants for the events.  If not set then the Transmitter
@@ -919,32 +935,16 @@ Tulshibagwale, et al.        Standards Track                   [Page 16]
    The HTTP POST request MAY contain the Receiver-Supplied values of the
    Stream Configuration (Section 7.1.1) object:
 
-   events_requested
+   *  events_requested
 
-      *Receiver-Supplied*, An array of URIs identifying the set of
-      events that the Receiver requested.  A Receiver SHOULD request
-      only the events that it understands and it can act on.  This is
-      configurable by the Receiver.
+   *  delivery : Note that in the case of the POLL method, the url value
+      is supplied by the Transmitter.
 
-   delivery
+   *  format
 
-      A JSON object containing a set of name/value pairs specifying
-      configuration parameters for the SET delivery method.  The actual
-      delivery method is identified by the special key "method" with the
-      value being a URI as defined in Section 11.2.1.  The value of the
-      "delivery" field contains two sub-fields:
+   The following is a non-normative example request to create an Event
+   Stream:
 
-      delivery_method
-
-      *Receiver-Supplied*, the specific delivery method to be used.
-         This can be any one of "push" or "poll", but not both.
-
-      url
-
-      The location at which the push or poll delivery will take
-         place.  If the delivery_method value is "push", then this value
-         is supplied by the Receiver.  If the delivery_method value is
-         "poll", then this value is supplied by the Transmitter.
 
 
 
@@ -953,16 +953,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 17]
 
                               SharedSignals                   March 2023
 
-
-   format
-
-      *Receiver-Supplied*, The Subject Identifier Format that the
-      Receiver wants for the events.  If not set then the Transmitter
-      might decide to use a type that discloses more information than
-      necessary.
-
-   The following is a non-normative example request to create an Event
-   Stream:
 
    POST /ssf/stream HTTP/1.1
    Host: transmitter.example.com
@@ -983,6 +973,16 @@ Tulshibagwale, et al.        Standards Track                   [Page 17]
               Figure 14: Example: Create Event Stream Request
 
    The following is a non-normative example response:
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2818,18 +2818,18 @@ Tulshibagwale, et al.        Standards Track                   [Page 50]
 11.2.1.  Stream Configuration Metadata
 
    Each delivery method is identified by a URI, specified below by the
-   "method" metadata.
+   "delivery_method" metadata.
 
 11.2.1.1.  Push Delivery using HTTP
 
    This section provides SSF profiling specifications for the
    [DELIVERYPUSH] spec.
 
-   method
+   delivery_method
 
       "urn:ietf:rfc:8935"
 
-   endpoint_url
+   url
 
       The URL where events are pushed through HTTP POST.  This is set by
       the Receiver.  If a Reciever is using multiple streams from a
@@ -2847,7 +2847,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 50]
    This section provides SSF profiling specifications for the
    [DELIVERYPOLL] spec.
 
-   method
+   delivery_method
 
       "urn:ietf:rfc:8936"
 
@@ -2858,7 +2858,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 51]
                               SharedSignals                   March 2023
 
 
-   endpoint_url
+   url
 
       The URL where events can be retrieved from.  This is specified by
       the Transmitter.  These URLs MAY be reused across Receivers, but

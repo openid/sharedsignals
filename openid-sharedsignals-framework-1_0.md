@@ -798,10 +798,24 @@ events_delivered
 
 delivery
 
-> **Receiver-Supplied**, A JSON object containing a set of name/value pairs
-  specifying configuration parameters for the SET delivery method.  The actual
-  delivery method is identified by the special key "method" with the value being
-  a URI as defined in {{delivery-meta}}.
+> A JSON object containing a set of name/value pairs specifying configuration
+  parameters for the SET delivery method. The actual delivery method is
+  identified by the special key "method" with the value being a URI as defined
+  in {{delivery-meta}}. The value of the "delivery" field contains two
+  sub-fields: 
+  
+>   delivery_method
+
+> > **Receiver-Supplied**, the specific delivery method to be used. This can be
+    any one of "push" (as defined in {{delivery-push}}) or "poll" (as defined
+    in {{delivery-poll}}), but not both.
+
+>   url
+
+> > The location at which the push or poll delivery will take place. If the
+    `delivery_method` value is "push", then this value MUST be supplied by the
+    Receiver.  If the `delivery_method` value is "poll", then this value MUST
+    be supplied by the Transmitter.
 
 min_verification_interval
 
@@ -832,37 +846,10 @@ the Event Transmitter responds with a "201 Created" response containing a
 The HTTP POST request MAY contain the Receiver-Supplied values of the Stream
 Configuration ({{stream-config}}) object:
 
-events_requested
-
-> **Receiver-Supplied**, An array of URIs identifying the set of events that
-  the Receiver requested. A Receiver SHOULD request only the events that it
-  understands and it can act on. This is configurable by the Receiver.
-
-delivery
-
-> A JSON object containing a set of name/value pairs specifying configuration
-  parameters for the SET delivery method. The actual delivery method is
-  identified by the special key "method" with the value being a URI as defined
-  in {{delivery-meta}}. The value of the "delivery" field contains two
-  sub-fields: 
-  
->   delivery_method
-
-> > **Receiver-Supplied**, the specific delivery method to be used. This can be
-    any one of "push" or "poll", but not both.
-
->   url
-
-> > The location at which the push or poll delivery will take place. If the
-    `delivery_method` value is "push", then this value MUST be supplied by the
-    Receiver.  If the `delivery_method` value is "poll", then this value MUST
-    be supplied by the Transmitter.
-
-format
-
-> **Receiver-Supplied**, The Subject Identifier Format that the Receiver wants
-  for the events. If not set then the Transmitter might decide to use a type
-  that discloses more information than necessary.
+* `events_requested`
+* `delivery` : Note that in the case of the POLL method, the `url` value is
+  supplied by the Transmitter.
+* `format`
 
 The following is a non-normative example request to create an Event Stream:
 
@@ -2110,7 +2097,7 @@ This section provides SSF profiling specifications for the {{DELIVERYPUSH}} and
 Each delivery method is identified by a URI, specified below by the "delivery_method"
 metadata.
 
-#### Push Delivery using HTTP
+#### Push Delivery using HTTP {#delivery-push}
 This section provides SSF profiling specifications for the {{DELIVERYPUSH}} spec.
 
 delivery_method
@@ -2130,7 +2117,7 @@ authorization_header
   delivery, if the configuration is present. The value is optional and it is set
   by the Receiver.
   
-#### Polling Delivery using HTTP
+#### Polling Delivery using HTTP {#delivery-poll}
 This section provides SSF profiling specifications for the {{DELIVERYPOLL}} spec.
 
 delivery_method
