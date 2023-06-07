@@ -2355,56 +2355,52 @@ following properties:<a href="#section-7.1.1-1" class="pilcrow">¶</a></p>
 <li class="normal ulEmpty" id="section-7.1.1-17.1">
               <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-7.1.1-17.1.1.1">
-                  <p id="section-7.1.1-17.1.1.1.1"><strong>Receiver-Supplied</strong>, the specific delivery method to be used. This can be<a href="#section-7.1.1-17.1.1.1.1" class="pilcrow">¶</a></p>
+                  <p id="section-7.1.1-17.1.1.1.1"><strong>Receiver-Supplied</strong>, the specific delivery method to be used. This can be
+    any one of "urn:ietf:rfc:8935" (push) or "urn:ietf:rfc:8936" (poll), but
+    not both.<a href="#section-7.1.1-17.1.1.1.1" class="pilcrow">¶</a></p>
 </li>
               </ul>
 </li>
           </ul>
-<div class="alignLeft art-text artwork" id="section-7.1.1-18">
-<pre>
-any one of "urn:ietf:rfc:8935" (push) or "urn:ietf:rfc:8936" (poll), but no
-both.
-</pre><a href="#section-7.1.1-18" class="pilcrow">¶</a>
-</div>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.1-19.1">
-              <p id="section-7.1.1-19.1.1">url<a href="#section-7.1.1-19.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-7.1.1-18.1">
+              <p id="section-7.1.1-18.1.1">url<a href="#section-7.1.1-18.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.1-20.1">
+<li class="normal ulEmpty" id="section-7.1.1-19.1">
               <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.1-20.1.1.1">
-                  <p id="section-7.1.1-20.1.1.1.1">The location at which the push or poll delivery will take place. If the
+<li class="normal ulEmpty" id="section-7.1.1-19.1.1.1">
+                  <p id="section-7.1.1-19.1.1.1.1">The location at which the push or poll delivery will take place. If the
     <code>delivery_method</code> value is "urn:ietf:rfc:8935" (push), then this value MUST
     be supplied by the Receiver.  If the <code>delivery_method</code> value is
     "urn:ietf:rfc:8936" (poll), then this value MUST be supplied by the
-    Transmitter.<a href="#section-7.1.1-20.1.1.1.1" class="pilcrow">¶</a></p>
+    Transmitter.<a href="#section-7.1.1-19.1.1.1.1" class="pilcrow">¶</a></p>
 </li>
               </ul>
 </li>
           </ul>
-<p id="section-7.1.1-21">min_verification_interval<a href="#section-7.1.1-21" class="pilcrow">¶</a></p>
+<p id="section-7.1.1-20">min_verification_interval<a href="#section-7.1.1-20" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.1-22.1">
-              <p id="section-7.1.1-22.1.1"><strong>Transmitter-Supplied</strong>, An integer indicating the minimum amount of time in
+<li class="normal ulEmpty" id="section-7.1.1-21.1">
+              <p id="section-7.1.1-21.1.1"><strong>Transmitter-Supplied</strong>, An integer indicating the minimum amount of time in
   seconds that must pass in between verification requests. If an Event Receiver
   submits verification requests more frequently than this, the Event Transmitter
   MAY respond with a 429 status code. An Event Transmitter SHOULD NOT respond
-  with a 429 status code if an Event Receiver is not exceeding this frequency.<a href="#section-7.1.1-22.1.1" class="pilcrow">¶</a></p>
+  with a 429 status code if an Event Receiver is not exceeding this frequency.<a href="#section-7.1.1-21.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-7.1.1-23">format<a href="#section-7.1.1-23" class="pilcrow">¶</a></p>
+<p id="section-7.1.1-22">format<a href="#section-7.1.1-22" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.1-24.1">
-              <p id="section-7.1.1-24.1.1"><strong>Receiver-Supplied</strong>, The Subject Identifier Format that the Receiver wants
+<li class="normal ulEmpty" id="section-7.1.1-23.1">
+              <p id="section-7.1.1-23.1.1"><strong>Receiver-Supplied</strong>, The Subject Identifier Format that the Receiver wants
   for the events. If not set then the Transmitter might decide to use a type
-  that discloses more information than necessary.<a href="#section-7.1.1-24.1.1" class="pilcrow">¶</a></p>
+  that discloses more information than necessary.<a href="#section-7.1.1-23.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-7.1.1-25">TODO: consider adding a IANA Registry for stream configuration metadata, similar
+<p id="section-7.1.1-24">TODO: consider adding a IANA Registry for stream configuration metadata, similar
 to Section 7.1.1 of <span>[<a href="#OAUTH-DISCOVERY" class="cite xref">OAUTH-DISCOVERY</a>]</span>. This would allow other specs to add to
-the stream configuration.<a href="#section-7.1.1-25" class="pilcrow">¶</a></p>
+the stream configuration.<a href="#section-7.1.1-24" class="pilcrow">¶</a></p>
 <div id="creating-a-stream">
 <section id="section-7.1.1.1">
             <h5 id="name-creating-a-stream">
@@ -2429,10 +2425,14 @@ supplied by the Transmitter.<a href="#section-7.1.1.1-3.2" class="pilcrow">¶</a
                 <code>format</code><a href="#section-7.1.1.1-3.3" class="pilcrow">¶</a>
 </li>
             </ul>
-<p id="section-7.1.1.1-4">The following is a non-normative example request to create an Event Stream:<a href="#section-7.1.1.1-4" class="pilcrow">¶</a></p>
+<p id="section-7.1.1.1-4">If the request does not contain the <code>delivery</code> property, then the Transmitter
+MUST assume that the <code>delivery_method</code> is "urn:ietf:rfc:8936" (poll). The
+Transmitter MUST include a <code>delivery</code> property in the response with this
+delivery_method and a <code>url</code> property.<a href="#section-7.1.1.1-4" class="pilcrow">¶</a></p>
+<p id="section-7.1.1.1-5">The following is a non-normative example request to create an Event Stream:<a href="#section-7.1.1.1-5" class="pilcrow">¶</a></p>
 <span id="name-example-create-event-stream"></span><div id="figcreatestreamreq">
 <figure id="figure-14">
-              <div class="lang-http sourcecode" id="section-7.1.1.1-5.1">
+              <div class="lang-http sourcecode" id="section-7.1.1.1-6.1">
 <pre>
 POST /ssf/stream HTTP/1.1
 Host: transmitter.example.com
@@ -2455,10 +2455,10 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 <a href="#name-example-create-event-stream" class="selfRef">Example: Create Event Stream Request</a>
               </figcaption></figure>
 </div>
-<p id="section-7.1.1.1-6">The following is a non-normative example response:<a href="#section-7.1.1.1-6" class="pilcrow">¶</a></p>
+<p id="section-7.1.1.1-7">The following is a non-normative example response:<a href="#section-7.1.1.1-7" class="pilcrow">¶</a></p>
 <span id="name-example-create-stream-respo"></span><div id="figcreatestreamresp">
 <figure id="figure-15">
-              <div class="lang-http sourcecode" id="section-7.1.1.1-7.1">
+              <div class="lang-http sourcecode" id="section-7.1.1.1-8.1">
 <pre>
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -2495,7 +2495,7 @@ Content-Type: application/json
 <a href="#name-example-create-stream-respo" class="selfRef">Example: Create Stream Response</a>
               </figcaption></figure>
 </div>
-<p id="section-7.1.1.1-8">Errors are signaled with HTTP status codes as follows:<a href="#section-7.1.1.1-8" class="pilcrow">¶</a></p>
+<p id="section-7.1.1.1-9">Errors are signaled with HTTP status codes as follows:<a href="#section-7.1.1.1-9" class="pilcrow">¶</a></p>
 <span id="name-create-stream-errors"></span><div id="tablecreatestream">
 <table class="center" id="table-1">
               <caption>
@@ -4284,9 +4284,9 @@ on this subject. The Shared Signals Framework is asking for further restrictions
           <h4 id="name-stream-configuration-metada">
 <a href="#section-11.2.1" class="section-number selfRef">11.2.1. </a><a href="#name-stream-configuration-metada" class="section-name selfRef">Stream Configuration Metadata</a>
           </h4>
-<p id="section-11.2.1-1">Each delivery method is identified by a URI, specified below by the "delivery_method"
+<p id="section-11.2.1-1">Each delivery method is identified by a URI, specified below by the "method"
 metadata.<a href="#section-11.2.1-1" class="pilcrow">¶</a></p>
-<div id="delivery-push">
+<div id="push-delivery-using-http">
 <section id="section-11.2.1.1">
             <h5 id="name-push-delivery-using-http">
 <a href="#section-11.2.1.1" class="section-number selfRef">11.2.1.1. </a><a href="#name-push-delivery-using-http" class="section-name selfRef">Push Delivery using HTTP</a>
@@ -4317,7 +4317,7 @@ metadata.<a href="#section-11.2.1-1" class="pilcrow">¶</a></p>
             </ul>
 </section>
 </div>
-<div id="delivery-poll">
+<div id="polling-delivery-using-http">
 <section id="section-11.2.1.2">
             <h5 id="name-polling-delivery-using-http">
 <a href="#section-11.2.1.2" class="section-number selfRef">11.2.1.2. </a><a href="#name-polling-delivery-using-http" class="section-name selfRef">Polling Delivery using HTTP</a>

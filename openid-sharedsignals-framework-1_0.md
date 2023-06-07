@@ -809,9 +809,8 @@ delivery
 >   delivery_method
 
 > > **Receiver-Supplied**, the specific delivery method to be used. This can be
-
-    any one of "urn:ietf:rfc:8935" (push) or "urn:ietf:rfc:8936" (poll), but no
-    both.
+    any one of "urn:ietf:rfc:8935" (push) or "urn:ietf:rfc:8936" (poll), but
+    not both.
 
 >   url
 
@@ -854,6 +853,11 @@ Configuration ({{stream-config}}) object:
 * `delivery` : Note that in the case of the POLL method, the `url` value is
   supplied by the Transmitter.
 * `format`
+
+If the request does not contain the `delivery` property, then the Transmitter
+MUST assume that the `delivery_method` is "urn:ietf:rfc:8936" (poll). The
+Transmitter MUST include a `delivery` property in the response with this
+delivery_method and a `url` property.
 
 The following is a non-normative example request to create an Event Stream:
 
@@ -2098,10 +2102,10 @@ This section provides SSF profiling specifications for the {{DELIVERYPUSH}} and
 {{DELIVERYPOLL}} specs.
 
 ### Stream Configuration Metadata {#delivery-meta} 
-Each delivery method is identified by a URI, specified below by the "delivery_method"
+Each delivery method is identified by a URI, specified below by the "method"
 metadata.
 
-#### Push Delivery using HTTP {#delivery-push}
+#### Push Delivery using HTTP
 This section provides SSF profiling specifications for the {{DELIVERYPUSH}} spec.
 
 method
@@ -2121,7 +2125,7 @@ authorization_header
   delivery, if the configuration is present. The value is optional and it is set
   by the Receiver.
   
-#### Polling Delivery using HTTP {#delivery-poll}
+#### Polling Delivery using HTTP
 This section provides SSF profiling specifications for the {{DELIVERYPOLL}} spec.
 
 method

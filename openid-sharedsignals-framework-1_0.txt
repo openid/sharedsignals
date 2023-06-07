@@ -886,10 +886,10 @@ Tulshibagwale, et al.        Standards Track                   [Page 15]
       delivery_method
 
       *Receiver-Supplied*, the specific delivery method to be used.
-         This can be
+         This can be any one of "urn:ietf:rfc:8935" (push) or
+         "urn:ietf:rfc:8936" (poll), but not both.
 
-any one of "urn:ietf:rfc:8935" (push) or "urn:ietf:rfc:8936" (poll), but no
-both.
+      url
 
 
 
@@ -897,8 +897,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 16]
 
                               SharedSignals                   March 2023
 
-
-      url
 
       The location at which the push or poll delivery will take
          place.  If the delivery_method value is "urn:ietf:rfc:8935"
@@ -949,10 +947,18 @@ Tulshibagwale, et al.        Standards Track                   [Page 16]
 
 
 
+
+
 Tulshibagwale, et al.        Standards Track                   [Page 17]
 
                               SharedSignals                   March 2023
 
+
+   If the request does not contain the delivery property, then the
+   Transmitter MUST assume that the delivery_method is
+   "urn:ietf:rfc:8936" (poll).  The Transmitter MUST include a delivery
+   property in the response with this delivery_method and a url
+   property.
 
    The following is a non-normative example request to create an Event
    Stream:
@@ -976,12 +982,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 17]
               Figure 14: Example: Create Event Stream Request
 
    The following is a non-normative example response:
-
-
-
-
-
-
 
 
 
@@ -2818,7 +2818,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 50]
 11.2.1.  Stream Configuration Metadata
 
    Each delivery method is identified by a URI, specified below by the
-   "delivery_method" metadata.
+   "method" metadata.
 
 11.2.1.1.  Push Delivery using HTTP
 
