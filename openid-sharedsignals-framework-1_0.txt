@@ -864,13 +864,16 @@ Tulshibagwale, et al.        Standards Track                   [Page 15]
       *Receiver-Supplied*, An array of URIs identifying the set of
       events that the Receiver requested.  A Receiver SHOULD request
       only the events that it understands and it can act on.  This is
-      configurable by the Receiver.
+      configurable by the Receiver.  A Transmitter MUST ignore any array
+      values that it does not understand.
 
    events_delivered
 
       *Transmitter-Supplied*, An array of URIs which is the intersection
       of "events_supported" and "events_requested".  These events MAY be
-      delivered over the Event Stream.
+      delivered over the Event Stream.  A Receiver MUST rely on the
+      values received in this field to understand which event types it
+      can expect from the Transmitter.
 
    delivery
 
@@ -887,9 +890,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 15]
          or "poll" (as defined in Section 11.2.1.2), but not both.
 
       url
-
-
-
 
 
 

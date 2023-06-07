@@ -2323,7 +2323,8 @@ following properties:<a href="#section-7.1.1-1" class="pilcrow">¶</a></p>
 <li class="normal ulEmpty" id="section-7.1.1-11.1">
               <p id="section-7.1.1-11.1.1"><strong>Receiver-Supplied</strong>, An array of URIs identifying the set of events that
   the Receiver requested. A Receiver SHOULD request only the events that it
-  understands and it can act on. This is configurable by the Receiver.<a href="#section-7.1.1-11.1.1" class="pilcrow">¶</a></p>
+  understands and it can act on. This is configurable by the Receiver. A
+  Transmitter MUST ignore any array values that it does not understand.<a href="#section-7.1.1-11.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <p id="section-7.1.1-12">events_delivered<a href="#section-7.1.1-12" class="pilcrow">¶</a></p>
@@ -2331,7 +2332,8 @@ following properties:<a href="#section-7.1.1-1" class="pilcrow">¶</a></p>
 <li class="normal ulEmpty" id="section-7.1.1-13.1">
               <p id="section-7.1.1-13.1.1"><strong>Transmitter-Supplied</strong>, An array of URIs which is the intersection of
   "events_supported" and "events_requested". These events MAY be delivered over
-              the Event Stream.<a href="#section-7.1.1-13.1.1" class="pilcrow">¶</a></p>
+  the Event Stream. A Receiver MUST rely on the values received in this field
+  to understand which event types it can expect from the Transmitter.<a href="#section-7.1.1-13.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <p id="section-7.1.1-14">delivery<a href="#section-7.1.1-14" class="pilcrow">¶</a></p>
