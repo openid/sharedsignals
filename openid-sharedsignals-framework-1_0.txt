@@ -394,53 +394,53 @@ Tulshibagwale, et al.        Standards Track                    [Page 7]
                               SharedSignals                   March 2023
 
 
-{
-  "iss": "https://idp.example.com/",
-  "jti": "756E69717565206964656E746966696572",
-  "iat": 1520364019,
-  "aud": "636C69656E745F6964",
-  "events": {
-    "https://schemas.openid.net/secevent/risc/event-type/account-enabled": {
-      "subject": {
-        "format": "email",
-        "email": "foo@example.com"
-      }
-    }
-  }
-}
+   {
+     "iss": "https://idp.example.com/",
+     "jti": "756E69717565206964656E746966696572",
+     "iat": 1520364019,
+     "aud": "636C69656E745F6964",
+     "events": {
+       "https://schemas.openid.net/secevent/risc/event-type/account-enabled": {
+         "subject": {
+           "format": "email",
+           "email": "foo@example.com"
+         }
+       }
+     }
+   }
 
-     Figure 5: Example: SET Containing a SSF Event with a Simple
-                            Subject Member
+        Figure 5: Example: SET Containing a SSF Event with a Simple
+                               Subject Member
 
-{
-  "iss": "https://idp.example.com/",
-  "jti": "756E69717565206964656E746966696572",
-  "iat": 1520364019,
-  "aud": "636C69656E745F6964",
-  "events": {
-    "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
-      "subject": {
-          "user": {
-              "format": "iss_sub",
-              "iss": "https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/",
-              "sub": "jane.smith@example.com"
-          },
-          "device": {
-              "format": "iss_sub",
-              "iss": "https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/",
-              "sub": "e9297990-14d2-42ec-a4a9-4036db86509a"
-          }
-      },
-      "initiating_entity": "policy",
-      "reason_admin": "Policy Violation: C076E82F",
-      "reason_user": "Landspeed violation.",
-      "event_timestamp": 1600975810
-    }
-  }
-}
+   {
+     "iss": "https://idp.example.com/",
+     "jti": "756E69717565206964656E746966696572",
+     "iat": 1520364019,
+     "aud": "636C69656E745F6964",
+     "events": {
+       "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
+         "subject": {
+             "user": {
+                 "format": "iss_sub",
+                 "iss": "https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/",
+                 "sub": "jane.smith@example.com"
+             },
+             "device": {
+                 "format": "iss_sub",
+                 "iss": "https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/",
+                 "sub": "e9297990-14d2-42ec-a4a9-4036db86509a"
+             }
+         },
+         "initiating_entity": "policy",
+         "reason_admin": "Policy Violation: C076E82F",
+         "reason_user": "Landspeed violation.",
+         "event_timestamp": 1600975810
+       }
+     }
+   }
 
-     Figure 6: Example: SET Containing a SSF Event with a Complex
-                            Subject Member
+        Figure 6: Example: SET Containing a SSF Event with a Complex
+                               Subject Member
 
 
 
@@ -450,49 +450,49 @@ Tulshibagwale, et al.        Standards Track                    [Page 8]
                               SharedSignals                   March 2023
 
 
-{
-  "iss": "https://sp.example2.com/",
-  "jti": "756E69717565206964656E746966696572",
-  "iat": 1520364019,
-  "aud": "636C69656E745F6964",
-  "events": {
-    "https://schemas.openid.net/secevent/caep/event-type/token-claims-change": {
-      "subject": {
-        "format": "email",
-        "email": "foo@example2.com"
-      },
-      "event_timestamp": 1600975810,
-      "claims": {
-         "role": "ro-admin"
-      }
-    }
-  }
-}
+   {
+     "iss": "https://sp.example2.com/",
+     "jti": "756E69717565206964656E746966696572",
+     "iat": 1520364019,
+     "aud": "636C69656E745F6964",
+     "events": {
+       "https://schemas.openid.net/secevent/caep/event-type/token-claims-change": {
+         "subject": {
+           "format": "email",
+           "email": "foo@example2.com"
+         },
+         "event_timestamp": 1600975810,
+         "claims": {
+            "role": "ro-admin"
+         }
+       }
+     }
+   }
 
-     Figure 7: Example: SET Containing a SSF Event with a Simple
-                    Subject and a Property Member
+        Figure 7: Example: SET Containing a SSF Event with a Simple
+                       Subject and a Property Member
 
-{
-  "iss": "https://myservice.example3.com/",
-  "jti": "756E69717565206964656E746966696534",
-  "iat": 15203800012,
-  "aud": "636C69656E745F6324",
-  "events": {
-    "https://schemas.openid.net/secevent/caep/event-type/token-claims-change": {
-    "subject": {
-        "format": "catalog_item",
-        "catalog_id": "c0384/winter/2354122"
-      },
-      "event_timestamp": 1600975810,
-      "claims": {
-         "role": "ro-admin"
-      }
-    }
-  }
-}
+   {
+     "iss": "https://myservice.example3.com/",
+     "jti": "756E69717565206964656E746966696534",
+     "iat": 15203800012,
+     "aud": "636C69656E745F6324",
+     "events": {
+       "https://schemas.openid.net/secevent/caep/event-type/token-claims-change": {
+       "subject": {
+           "format": "catalog_item",
+           "catalog_id": "c0384/winter/2354122"
+         },
+         "event_timestamp": 1600975810,
+         "claims": {
+            "role": "ro-admin"
+         }
+       }
+     }
+   }
 
-   Figure 8: Example: SET Containing a SSF Event with a Proprietary
-                      Subject Identifier Format
+      Figure 8: Example: SET Containing a SSF Event with a Proprietary
+                         Subject Identifier Format
 
 6.  Transmitter Configuration Discovery
 
@@ -864,13 +864,16 @@ Tulshibagwale, et al.        Standards Track                   [Page 15]
       *Receiver-Supplied*, An array of URIs identifying the set of
       events that the Receiver requested.  A Receiver SHOULD request
       only the events that it understands and it can act on.  This is
-      configurable by the Receiver.
+      configurable by the Receiver.  A Transmitter MUST ignore any array
+      values that it does not understand.
 
    events_delivered
 
       *Transmitter-Supplied*, An array of URIs which is the intersection
       of "events_supported" and "events_requested".  These events MAY be
-      delivered over the Event Stream.
+      delivered over the Event Stream.  A Receiver MUST rely on the
+      values received in this field to understand which event types it
+      can expect from the Transmitter.
 
    delivery
 
@@ -882,6 +885,19 @@ Tulshibagwale, et al.        Standards Track                   [Page 15]
 
    min_verification_interval
 
+
+
+
+
+
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 16]
+
+                              SharedSignals                   March 2023
+
+
       *Transmitter-Supplied*, An integer indicating the minimum amount
       of time in seconds that must pass in between verification
       requests.  If an Event Receiver submits verification requests more
@@ -890,13 +906,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 15]
       status code if an Event Receiver is not exceeding this frequency.
 
    format
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 16]
-
-                              SharedSignals                   March 2023
-
 
       *Receiver-Supplied*, The Subject Identifier Format that the
       Receiver wants for the events.  If not set then the Transmitter
@@ -936,15 +945,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 16]
 
    format
 
-      *Receiver-Supplied*, The Subject Identifier Format that the
-      Receiver wants for the events.  If not set then the Transmitter
-      might decide to use a type that discloses more information than
-      necessary.
-
-   The following is a non-normative example request to create an Event
-   Stream:
-
-
 
 
 
@@ -953,6 +953,14 @@ Tulshibagwale, et al.        Standards Track                   [Page 17]
 
                               SharedSignals                   March 2023
 
+
+      *Receiver-Supplied*, The Subject Identifier Format that the
+      Receiver wants for the events.  If not set then the Transmitter
+      might decide to use a type that discloses more information than
+      necessary.
+
+   The following is a non-normative example request to create an Event
+   Stream:
 
    POST /ssf/stream HTTP/1.1
    Host: transmitter.example.com
@@ -973,14 +981,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 17]
               Figure 14: Example: Create Event Stream Request
 
    The following is a non-normative example response:
-
-
-
-
-
-
-
-
 
 
 
@@ -1661,11 +1661,11 @@ Tulshibagwale, et al.        Standards Track                   [Page 29]
    The following is a non-normative example request to delete an Event
    Stream:
 
-  DELETE /ssf/stream?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f HTTP/1.1
-  Host: transmitter.example.com
-  Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
+   DELETE /ssf/stream?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f HTTP/1.1
+   Host: transmitter.example.com
+   Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
-                Figure 26: Example: Delete Stream Request
+                 Figure 26: Example: Delete Stream Request
 
    Errors are signaled with HTTP status codes as follows:
 
@@ -1815,11 +1815,11 @@ Tulshibagwale, et al.        Standards Track                   [Page 32]
    The following is a non-normative example request to check an event
    stream's status for a specific subject:
 
-GET /ssf/status?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f&subject=<url-encoded-subject> HTTP/1.1
-Host: transmitter.example.com
-Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
+   GET /ssf/status?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f&subject=<url-encoded-subject> HTTP/1.1
+   Host: transmitter.example.com
+   Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
-     Figure 29: Example: Check Stream Status Request with Subject
+        Figure 29: Example: Check Stream Status Request with Subject
 
    The following is a non-normative example response with a Subject
    claim:
@@ -2410,19 +2410,19 @@ Tulshibagwale, et al.        Standards Track                   [Page 43]
                               SharedSignals                   March 2023
 
 
- {
-   "jti": "123456",
-   "iss": "https://transmitter.example.com",
-   "aud": "receiver.example.com",
-   "iat": 1493856000,
-   "events": {
-     "https://schemas.openid.net/secevent/ssf/event-type/verification":{
-       "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
+   {
+     "jti": "123456",
+     "iss": "https://transmitter.example.com",
+     "aud": "receiver.example.com",
+     "iat": 1493856000,
+     "events": {
+       "https://schemas.openid.net/secevent/ssf/event-type/verification":{
+         "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
+       }
      }
    }
- }
 
-                  Figure 40: Example: Verification SET
+                    Figure 40: Example: Verification SET
 
 7.1.5.  Stream Updated Event
 
@@ -2470,27 +2470,27 @@ Tulshibagwale, et al.        Standards Track                   [Page 44]
       been updated.  If this claim is not included, then the status
       change was applied to all subjects in the stream.
 
-{
-  "jti": "123456",
-  "iss": "https://transmitter.example.com",
-  "aud": "receiver.example.com",
-  "iat": 1493856000,
-  "events": {
-    "https://schemas.openid.net/secevent/ssf/event-type/stream-updated": {
-      "subject": {
-        "tenant" : {
-          "format": "iss_sub",
-          "iss" : "http://example.com/idp1",
-          "sub" : "1234"
-        }
-      },
-      "status": "paused",
-      "reason": "License is not valid"
-    }
-  }
-}
+   {
+     "jti": "123456",
+     "iss": "https://transmitter.example.com",
+     "aud": "receiver.example.com",
+     "iat": 1493856000,
+     "events": {
+       "https://schemas.openid.net/secevent/ssf/event-type/stream-updated": {
+         "subject": {
+           "tenant" : {
+             "format": "iss_sub",
+             "iss" : "http://example.com/idp1",
+             "sub" : "1234"
+           }
+         },
+         "status": "paused",
+         "reason": "License is not valid"
+       }
+     }
+   }
 
-                Figure 41: Example: Stream Updated SET
+                   Figure 41: Example: Stream Updated SET
 
 8.  Authorization
 
@@ -2665,22 +2665,22 @@ Tulshibagwale, et al.        Standards Track                   [Page 47]
    The SSF event MAY contain additional claims within the event payload
    that are specific to the event type.
 
-{
-  "iss": "https://idp.example.com/",
-  "jti": "756E69717565206964656E746966696572",
-  "iat": 1520364019,
-  "aud": "636C69656E745F6964",
-  "events": {
-    "https://schemas.openid.net/secevent/risc/event-type/account-disabled": {
-      "subject": {
-        "format": "phone",
-        "phone_number": "+1 206 555 0123"
-      },
-      "reason": "hijacking",
-      "cause-time": 1508012752
-    }
-  }
-}
+   {
+     "iss": "https://idp.example.com/",
+     "jti": "756E69717565206964656E746966696572",
+     "iat": 1520364019,
+     "aud": "636C69656E745F6964",
+     "events": {
+       "https://schemas.openid.net/secevent/risc/event-type/account-disabled": {
+         "subject": {
+           "format": "phone",
+           "phone_number": "+1 206 555 0123"
+         },
+         "reason": "hijacking",
+         "cause-time": 1508012752
+       }
+     }
+   }
 
 
 
@@ -2690,26 +2690,26 @@ Tulshibagwale, et al.        Standards Track                   [Page 48]
                               SharedSignals                   March 2023
 
 
-     Figure 42: Example: SET Containing a RISC Event with a Phone
-                            Number Subject
+        Figure 42: Example: SET Containing a RISC Event with a Phone
+                               Number Subject
 
-{
-  "iss": "https://idp.example.com/",
-  "jti": "756E69717565206964656E746966696572",
-  "iat": 1520364019,
-  "aud": "636C69656E745F6964",
-  "events": {
-    "https://schemas.openid.net/secevent/caep/event-type/token-claims-changed": {
-      "subject": {
-        "format": "email",
-        "email": "user@example.com"
-      },
-      "token": "some-token-value"
-    }
-  }
-}
+   {
+     "iss": "https://idp.example.com/",
+     "jti": "756E69717565206964656E746966696572",
+     "iat": 1520364019,
+     "aud": "636C69656E745F6964",
+     "events": {
+       "https://schemas.openid.net/secevent/caep/event-type/token-claims-changed": {
+         "subject": {
+           "format": "email",
+           "email": "user@example.com"
+         },
+         "token": "some-token-value"
+       }
+     }
+   }
 
-   Figure 43: Example: SET Containing a CAEP Event with Properties
+      Figure 43: Example: SET Containing a CAEP Event with Properties
 
 11.1.4.  Explicit Typing of SETs
 
@@ -2766,19 +2766,19 @@ Tulshibagwale, et al.        Standards Track                   [Page 49]
    SETs to respective Receivers, an "aud" claim with multiple Receivers
    would lead to unintended data disclosure.
 
-{
-  "jti": "123456",
-  "iss": "https://transmitter.example.com",
-  "aud": ["receiver.example.com/web", "receiver.example.com/mobile"],
-  "iat": 1493856000,
-  "events": {
-    "https://schemas.openid.net/secevent/ssf/event-type/verification": {
-      "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
-    }
-  }
-}
+   {
+     "jti": "123456",
+     "iss": "https://transmitter.example.com",
+     "aud": ["receiver.example.com/web", "receiver.example.com/mobile"],
+     "iat": 1493856000,
+     "events": {
+       "https://schemas.openid.net/secevent/ssf/event-type/verification": {
+         "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
+       }
+     }
+   }
 
-            Figure 45: Example: SET with array 'aud' claim
+               Figure 45: Example: SET with array 'aud' claim
 
 11.1.7.  The "events" claim
 
@@ -2882,17 +2882,17 @@ Tulshibagwale, et al.        Standards Track                   [Page 51]
               <https://tools.ietf.org/html/rfc6749#section-4.4>.
 
    [DELIVERYPOLL]
-              Backman, A., Jones, M., Scurtescu, M.S., Ansari, M., and
+              Backman, A., Jones, M., Scurtescu, M. S., Ansari, M., and
               A. Nadalin, "Poll-Based SET Token Delivery Using HTTP",
               November 2020, <https://www.rfc-editor.org/info/rfc8936>.
 
    [DELIVERYPUSH]
-              Backman, A., Jones, M., Hunt, P., Scurtescu, M.S., Ansari,
-              M., and A. Nadalin, "Push-Based SET Token Delivery Using
-              HTTP", November 2020,
+              Backman, A., Jones, M., Hunt, P., Scurtescu, M. S.,
+              Ansari, M., and A. Nadalin, "Push-Based SET Token Delivery
+              Using HTTP", November 2020,
               <https://www.rfc-editor.org/info/rfc8935>.
 
-   [IDTOKEN]  Sakimura, N., Bradley, J., Jones, M.B., de Medeiros, B.,
+   [IDTOKEN]  Sakimura, N., Bradley, J., Jones, M. B., de Medeiros, B.,
               and C. Mortimore, "OpenID Connect Core 1.0 - ID Token",
               April 2017, <http://openid.net/specs/openid-connect-core-
               1_0.html#IDToken>.
@@ -2915,12 +2915,12 @@ Tulshibagwale, et al.        Standards Track                   [Page 52]
 
 
    [OAUTH-DISCOVERY]
-              Jones, M.B., Sakimura, N., and J. Bradley, "OAuth 2.0
+              Jones, M. B., Sakimura, N., and J. Bradley, "OAuth 2.0
               Authorization Server Metadata - Version 10", June 2018,
               <https://www.rfc-editor.org/info/rfc8414>.
 
    [OPENID-DISCOVERY]
-              Sakimura, N., Bradley, J., Jones, M.B., and E. Jay,
+              Sakimura, N., Bradley, J., Jones, M. B., and E. Jay,
               "OpenID Connect Discovery 1.0", November 2014,
               <https://openid.net/specs/openid-connect-discovery-
               1_0.html>.
