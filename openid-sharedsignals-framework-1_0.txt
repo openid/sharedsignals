@@ -886,10 +886,10 @@ Tulshibagwale, et al.        Standards Track                   [Page 15]
       delivery_method
 
       *Receiver-Supplied*, the specific delivery method to be used.
-         This can be any one of "push" (as defined in Section 11.2.1.1)
-         or "poll" (as defined in Section 11.2.1.2), but not both.
+         This can be
 
-      url
+any one of "urn:ietf:rfc:8935" (push) or "urn:ietf:rfc:8936" (poll), but no
+both.
 
 
 
@@ -898,10 +898,13 @@ Tulshibagwale, et al.        Standards Track                   [Page 16]
                               SharedSignals                   March 2023
 
 
+      url
+
       The location at which the push or poll delivery will take
-         place.  If the delivery_method value is "push", then this value
-         MUST be supplied by the Receiver.  If the delivery_method value
-         is "poll", then this value MUST be supplied by the Transmitter.
+         place.  If the delivery_method value is "urn:ietf:rfc:8935"
+         (push), then this value MUST be supplied by the Receiver.  If
+         the delivery_method value is "urn:ietf:rfc:8936" (poll), then
+         this value MUST be supplied by the Transmitter.
 
    min_verification_interval
 
@@ -942,9 +945,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 16]
 
    *  format
 
-   The following is a non-normative example request to create an Event
-   Stream:
-
 
 
 
@@ -953,6 +953,9 @@ Tulshibagwale, et al.        Standards Track                   [Page 17]
 
                               SharedSignals                   March 2023
 
+
+   The following is a non-normative example request to create an Event
+   Stream:
 
    POST /ssf/stream HTTP/1.1
    Host: transmitter.example.com
@@ -973,9 +976,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 17]
               Figure 14: Example: Create Event Stream Request
 
    The following is a non-normative example response:
-
-
-
 
 
 
@@ -2825,7 +2825,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 50]
    This section provides SSF profiling specifications for the
    [DELIVERYPUSH] spec.
 
-   delivery_method
+   method
 
       "urn:ietf:rfc:8935"
 
@@ -2847,7 +2847,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 50]
    This section provides SSF profiling specifications for the
    [DELIVERYPOLL] spec.
 
-   delivery_method
+   method
 
       "urn:ietf:rfc:8936"
 

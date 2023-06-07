@@ -809,15 +809,17 @@ delivery
 >   delivery_method
 
 > > **Receiver-Supplied**, the specific delivery method to be used. This can be
-    any one of "push" (as defined in {{delivery-push}}) or "poll" (as defined
-    in {{delivery-poll}}), but not both.
+
+    any one of "urn:ietf:rfc:8935" (push) or "urn:ietf:rfc:8936" (poll), but no
+    both.
 
 >   url
 
 > > The location at which the push or poll delivery will take place. If the
-    `delivery_method` value is "push", then this value MUST be supplied by the
-    Receiver.  If the `delivery_method` value is "poll", then this value MUST
-    be supplied by the Transmitter.
+    `delivery_method` value is "urn:ietf:rfc:8935" (push), then this value MUST
+    be supplied by the Receiver.  If the `delivery_method` value is
+    "urn:ietf:rfc:8936" (poll), then this value MUST be supplied by the
+    Transmitter.
 
 min_verification_interval
 
@@ -2102,7 +2104,7 @@ metadata.
 #### Push Delivery using HTTP {#delivery-push}
 This section provides SSF profiling specifications for the {{DELIVERYPUSH}} spec.
 
-delivery_method
+method
 
 > "urn:ietf:rfc:8935"
 
@@ -2122,7 +2124,7 @@ authorization_header
 #### Polling Delivery using HTTP {#delivery-poll}
 This section provides SSF profiling specifications for the {{DELIVERYPOLL}} spec.
 
-delivery_method
+method
 
 > "urn:ietf:rfc:8936"
 
