@@ -883,7 +883,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 15]
       value being a URI as defined in Section 11.2.1.  The value of the
       "delivery" field contains two sub-fields:
 
-      delivery_method
+      method
 
       *Receiver-Supplied*, the specific delivery method to be used.
          This can be any one of "urn:ietf:rfc:8935" (push) or
@@ -899,10 +899,10 @@ Tulshibagwale, et al.        Standards Track                   [Page 16]
 
 
       The location at which the push or poll delivery will take
-         place.  If the delivery_method value is "urn:ietf:rfc:8935"
-         (push), then this value MUST be supplied by the Receiver.  If
-         the delivery_method value is "urn:ietf:rfc:8936" (poll), then
-         this value MUST be supplied by the Transmitter.
+         place.  If the method value is "urn:ietf:rfc:8935" (push), then
+         this value MUST be supplied by the Receiver.  If the method
+         value is "urn:ietf:rfc:8936" (poll), then this value MUST be
+         supplied by the Transmitter.
 
    min_verification_interval
 
@@ -955,10 +955,9 @@ Tulshibagwale, et al.        Standards Track                   [Page 17]
 
 
    If the request does not contain the delivery property, then the
-   Transmitter MUST assume that the delivery_method is
-   "urn:ietf:rfc:8936" (poll).  The Transmitter MUST include a delivery
-   property in the response with this delivery_method and a url
-   property.
+   Transmitter MUST assume that the method is "urn:ietf:rfc:8936"
+   (poll).  The Transmitter MUST include a delivery property in the
+   response with this method property and a url property.
 
    The following is a non-normative example request to create an Event
    Stream:
@@ -969,7 +968,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 17]
 
    {
      "delivery": {
-       "delivery_method": "urn:ietf:rfc:8935",
+       "method": "urn:ietf:rfc:8935",
        "url": "https://receiver.example.com/events"
      },
      "events_requested": [
@@ -982,6 +981,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 17]
               Figure 14: Example: Create Event Stream Request
 
    The following is a non-normative example response:
+
 
 
 
@@ -1021,7 +1021,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 18]
          "http://receiver.example.com/mobile"
        ],
      "delivery": {
-       "delivery_method": "urn:ietf:rfc:8935",
+       "method": "urn:ietf:rfc:8935",
        "url": "https://receiver.example.com/events"
      },
      "events_supported": [
@@ -1134,7 +1134,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 20]
          "http://receiver.example.com/mobile"
        ],
      "delivery": {
-       "delivery_method": "urn:ietf:rfc:8935",
+       "method": "urn:ietf:rfc:8935",
        "url": "https://receiver.example.com/events"
      },
      "events_supported": [
@@ -1191,7 +1191,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 21]
            "http://receiver.example.com/mobile"
          ],
        "delivery": {
-         "delivery_method": "urn:ietf:rfc:8935",
+         "method": "urn:ietf:rfc:8935",
          "url": "https://receiver.example.com/events"
        },
        "events_supported": [
@@ -1217,7 +1217,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 21]
            "http://receiver.example.com/mobile"
          ],
        "delivery": {
-         "delivery_method": "urn:ietf:rfc:8935",
+         "method": "urn:ietf:rfc:8935",
          "url": "https://receiver.example.com/events"
        },
        "events_supported": [
@@ -1263,7 +1263,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 22]
            "http://receiver.example.com/mobile"
          ],
        "delivery": {
-         "delivery_method": "urn:ietf:rfc:8935",
+         "method": "urn:ietf:rfc:8935",
          "url": "https://receiver.example.com/events"
        },
        "events_supported": [
@@ -1414,7 +1414,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 25]
        "http://receiver.example.com/mobile"
      ],
      "delivery": {
-       "delivery_method": "urn:ietf:rfc:8935",
+       "method": "urn:ietf:rfc:8935",
        "url": "https://receiver.example.com/events"
      },
      "events_supported": [
@@ -1526,7 +1526,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 27]
        "http://receiver.example.com/mobile"
      ],
      "delivery": {
-       "delivery_method": "urn:ietf:rfc:8935",
+       "method": "urn:ietf:rfc:8935",
        "url": "https://receiver.example.com/events"
      },
      "events_requested": [
@@ -1582,7 +1582,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 28]
        "http://receiver.example.com/mobile"
      ],
      "delivery": {
-       "delivery_method": "urn:ietf:rfc:8935",
+       "method": "urn:ietf:rfc:8935",
        "url": "https://receiver.example.com/events"
      },
      "events_supported": [
