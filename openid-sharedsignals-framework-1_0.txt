@@ -916,9 +916,12 @@ Tulshibagwale, et al.        Standards Track                   [Page 16]
    responds with a "201 Created" response containing a JSON [RFC7159]
    representation of the stream's configuration in the body.
 
-   If the stream already exists, the Event Transmitter responds with
-   HTTP status code "200 OK" and includes a JSON [RFC7159]
-   representation of the stream's configuration in the body.
+   If a stream already exists, and the Transmitter allows multiple
+   streams with the same Receiver, the Event Transmitter MUST respond
+   with a new stream ID.  If the Transmitter does not allow multiple
+   streams with the same Receiver, it MUST respond respond with HTTP
+   status code "200 OK" and include a JSON [RFC7159] representation of
+   the existing stream's configuration in the body.
 
    The HTTP POST request MAY contain the Receiver-Supplied values of the
    Stream Configuration (Section 7.1.1) object:
@@ -940,10 +943,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 16]
 
    format
 
-      *Receiver-Supplied*, The Subject Identifier Format that the
-      Receiver wants for the events.  If not set then the Transmitter
-      might decide to use a type that discloses more information than
-      necessary.
+
 
 
 
@@ -953,6 +953,11 @@ Tulshibagwale, et al.        Standards Track                   [Page 17]
 
                               SharedSignals                February 2023
 
+
+      *Receiver-Supplied*, The Subject Identifier Format that the
+      Receiver wants for the events.  If not set then the Transmitter
+      might decide to use a type that discloses more information than
+      necessary.
 
    The following is a non-normative example request to create an Event
    Stream:
@@ -977,11 +982,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 17]
              Figure 14: Example: Create Event Stream Request
 
    The following is a non-normative example response:
-
-
-
-
-
 
 
 

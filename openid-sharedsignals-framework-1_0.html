@@ -44,7 +44,7 @@ and Coordination (RISC) and the Continuous Access Evaluation Profile ( )
     html5lib 1.1
     intervaltree 3.1.0
     Jinja2 3.1.2
-    lxml 4.9.2
+    lxml 4.5.2
     MarkupSafe 2.1.2
     pycountry 22.3.5
     PyYAML 5.3.1
@@ -2351,9 +2351,11 @@ MUST first create an Event Stream. An Event Receiver creates a stream by making
 an HTTP POST request to the Configuration Endpoint. On receiving a valid request
 the Event Transmitter responds with a "201 Created" response containing a
 <span><a href="#RFC7159" class="internal xref">JSON</a> [<a href="#RFC7159" class="cite xref">RFC7159</a>]</span> representation of the stream's configuration in the body.<a href="#section-7.1.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-7.1.1.1-2">If the stream already exists, the Event Transmitter responds with HTTP status code
-"200 OK" and includes a <span><a href="#RFC7159" class="internal xref">JSON</a> [<a href="#RFC7159" class="cite xref">RFC7159</a>]</span> representation of the stream's configuration
-in the body.<a href="#section-7.1.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-7.1.1.1-2">If a stream already exists, and the Transmitter allows multiple streams with the
+same Receiver, the Event Transmitter MUST respond with a new stream ID. If the
+Transmitter does not allow multiple streams with the same Receiver, it MUST respond
+respond with HTTP status code "200 OK" and include a <span><a href="#RFC7159" class="internal xref">JSON</a> [<a href="#RFC7159" class="cite xref">RFC7159</a>]</span> representation
+of the existing stream's configuration in the body.<a href="#section-7.1.1.1-2" class="pilcrow">¶</a></p>
 <p id="section-7.1.1.1-3">The HTTP POST request MAY contain the Receiver-Supplied values of the Stream
 Configuration (<a href="#stream-config" class="auto internal xref">Section 7.1.1</a>) object:<a href="#section-7.1.1.1-3" class="pilcrow">¶</a></p>
 <p id="section-7.1.1.1-4">events_requested<a href="#section-7.1.1.1-4" class="pilcrow">¶</a></p>
