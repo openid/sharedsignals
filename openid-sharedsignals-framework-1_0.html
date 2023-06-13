@@ -2339,33 +2339,68 @@ following properties:<a href="#section-7.1.1-1" class="pilcrow">¶</a></p>
 <p id="section-7.1.1-14">delivery<a href="#section-7.1.1-14" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-7.1.1-15.1">
-              <p id="section-7.1.1-15.1.1"><strong>Receiver-Supplied</strong>, A JSON object containing a set of name/value pairs
-  specifying configuration parameters for the SET delivery method.  The actual
-  delivery method is identified by the special key "method" with the value being
-  a URI as defined in <a href="#delivery-meta" class="auto internal xref">Section 11.2.1</a>.<a href="#section-7.1.1-15.1.1" class="pilcrow">¶</a></p>
+              <p id="section-7.1.1-15.1.1">A JSON object containing a set of name/value pairs specifying configuration
+  parameters for the SET delivery method. The actual delivery method is
+  identified by the special key "method" with the value being a URI as defined
+  in <a href="#delivery-meta" class="auto internal xref">Section 11.2.1</a>. The value of the "delivery" field contains two
+  sub-fields:<a href="#section-7.1.1-15.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-7.1.1-16">min_verification_interval<a href="#section-7.1.1-16" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-7.1.1-16.1">
+              <p id="section-7.1.1-16.1.1">method<a href="#section-7.1.1-16.1.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-7.1.1-17.1">
-              <p id="section-7.1.1-17.1.1"><strong>Transmitter-Supplied</strong>, An integer indicating the minimum amount of time in
+              <ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-7.1.1-17.1.1.1">
+                  <p id="section-7.1.1-17.1.1.1.1"><strong>Receiver-Supplied</strong>, the specific delivery method to be used. This can be
+    any one of "urn:ietf:rfc:8935" (push) or "urn:ietf:rfc:8936" (poll), but
+    not both.<a href="#section-7.1.1-17.1.1.1.1" class="pilcrow">¶</a></p>
+</li>
+              </ul>
+</li>
+          </ul>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-7.1.1-18.1">
+              <p id="section-7.1.1-18.1.1">url<a href="#section-7.1.1-18.1.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-7.1.1-19.1">
+              <ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-7.1.1-19.1.1.1">
+                  <p id="section-7.1.1-19.1.1.1.1">The location at which the push or poll delivery will take place. If the
+    <code>method</code> value is "urn:ietf:rfc:8935" (push), then this value MUST
+    be supplied by the Receiver.  If the <code>method</code> value is
+    "urn:ietf:rfc:8936" (poll), then this value MUST be supplied by the
+    Transmitter.<a href="#section-7.1.1-19.1.1.1.1" class="pilcrow">¶</a></p>
+</li>
+              </ul>
+</li>
+          </ul>
+<p id="section-7.1.1-20">min_verification_interval<a href="#section-7.1.1-20" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-7.1.1-21.1">
+              <p id="section-7.1.1-21.1.1"><strong>Transmitter-Supplied</strong>, An integer indicating the minimum amount of time in
   seconds that must pass in between verification requests. If an Event Receiver
   submits verification requests more frequently than this, the Event Transmitter
   MAY respond with a 429 status code. An Event Transmitter SHOULD NOT respond
-  with a 429 status code if an Event Receiver is not exceeding this frequency.<a href="#section-7.1.1-17.1.1" class="pilcrow">¶</a></p>
+  with a 429 status code if an Event Receiver is not exceeding this frequency.<a href="#section-7.1.1-21.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-7.1.1-18">format<a href="#section-7.1.1-18" class="pilcrow">¶</a></p>
+<p id="section-7.1.1-22">format<a href="#section-7.1.1-22" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.1-19.1">
-              <p id="section-7.1.1-19.1.1"><strong>Receiver-Supplied</strong>, The Subject Identifier Format that the Receiver wants
+<li class="normal ulEmpty" id="section-7.1.1-23.1">
+              <p id="section-7.1.1-23.1.1"><strong>Receiver-Supplied</strong>, The Subject Identifier Format that the Receiver wants
   for the events. If not set then the Transmitter might decide to use a type
-  that discloses more information than necessary.<a href="#section-7.1.1-19.1.1" class="pilcrow">¶</a></p>
+  that discloses more information than necessary.<a href="#section-7.1.1-23.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-7.1.1-20">TODO: consider adding a IANA Registry for stream configuration metadata, similar
+<p id="section-7.1.1-24">TODO: consider adding a IANA Registry for stream configuration metadata, similar
 to Section 7.1.1 of <span>[<a href="#OAUTH-DISCOVERY" class="cite xref">OAUTH-DISCOVERY</a>]</span>. This would allow other specs to add to
-the stream configuration.<a href="#section-7.1.1-20" class="pilcrow">¶</a></p>
+the stream configuration.<a href="#section-7.1.1-24" class="pilcrow">¶</a></p>
 <div id="creating-a-stream">
 <section id="section-7.1.1.1">
             <h5 id="name-creating-a-stream">
@@ -2378,35 +2413,26 @@ the Event Transmitter responds with a "201 Created" response containing a
 <span><a href="#RFC7159" class="internal xref">JSON</a> [<a href="#RFC7159" class="cite xref">RFC7159</a>]</span> representation of the stream's configuration in the body.<a href="#section-7.1.1.1-1" class="pilcrow">¶</a></p>
 <p id="section-7.1.1.1-2">The HTTP POST request MAY contain the Receiver-Supplied values of the Stream
 Configuration (<a href="#stream-config" class="auto internal xref">Section 7.1.1</a>) object:<a href="#section-7.1.1.1-2" class="pilcrow">¶</a></p>
-<p id="section-7.1.1.1-3">events_requested<a href="#section-7.1.1.1-3" class="pilcrow">¶</a></p>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.1.1-4.1">
-                <p id="section-7.1.1.1-4.1.1"><strong>Receiver-Supplied</strong>, An array of URIs identifying the set of events that
-  the Receiver requested. A Receiver SHOULD request only the events that it
-  understands and it can act on. This is configurable by the Receiver.<a href="#section-7.1.1.1-4.1.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-7.1.1.1-3.1">
+                <code>events_requested</code><a href="#section-7.1.1.1-3.1" class="pilcrow">¶</a>
+</li>
+              <li class="normal" id="section-7.1.1.1-3.2">
+                <code>delivery</code> : Note that in the case of the POLL method, the <code>url</code> value is
+supplied by the Transmitter.<a href="#section-7.1.1.1-3.2" class="pilcrow">¶</a>
+</li>
+              <li class="normal" id="section-7.1.1.1-3.3">
+                <code>format</code><a href="#section-7.1.1.1-3.3" class="pilcrow">¶</a>
 </li>
             </ul>
-<p id="section-7.1.1.1-5">delivery<a href="#section-7.1.1.1-5" class="pilcrow">¶</a></p>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.1.1-6.1">
-                <p id="section-7.1.1.1-6.1.1"><strong>Receiver-Supplied</strong>, A JSON object containing a set of name/value pairs
-  specifying configuration parameters for the SET delivery method. The actual
-  delivery method is identified by the special key "method" with the value
-  being a URI as defined in <a href="#delivery-meta" class="auto internal xref">Section 11.2.1</a>.<a href="#section-7.1.1.1-6.1.1" class="pilcrow">¶</a></p>
-</li>
-            </ul>
-<p id="section-7.1.1.1-7">format<a href="#section-7.1.1.1-7" class="pilcrow">¶</a></p>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.1.1-8.1">
-                <p id="section-7.1.1.1-8.1.1"><strong>Receiver-Supplied</strong>, The Subject Identifier Format that the Receiver wants
-  for the events. If not set then the Transmitter might decide to use a type
-  that discloses more information than necessary.<a href="#section-7.1.1.1-8.1.1" class="pilcrow">¶</a></p>
-</li>
-            </ul>
-<p id="section-7.1.1.1-9">The following is a non-normative example request to create an Event Stream:<a href="#section-7.1.1.1-9" class="pilcrow">¶</a></p>
+<p id="section-7.1.1.1-4">If the request does not contain the <code>delivery</code> property, then the Transmitter
+MUST assume that the <code>method</code> is "urn:ietf:rfc:8936" (poll). The
+Transmitter MUST include a <code>delivery</code> property in the response with this
+<code>method</code> property and a <code>url</code> property.<a href="#section-7.1.1.1-4" class="pilcrow">¶</a></p>
+<p id="section-7.1.1.1-5">The following is a non-normative example request to create an Event Stream:<a href="#section-7.1.1.1-5" class="pilcrow">¶</a></p>
 <span id="name-example-create-event-stream"></span><div id="figcreatestreamreq">
 <figure id="figure-14">
-              <div class="lang-http sourcecode" id="section-7.1.1.1-10.1">
+              <div class="lang-http sourcecode" id="section-7.1.1.1-6.1">
 <pre>
 POST /ssf/stream HTTP/1.1
 Host: transmitter.example.com
@@ -2414,7 +2440,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
 {
   "delivery": {
-    "delivery_method": "urn:ietf:rfc:8935",
+    "method": "urn:ietf:rfc:8935",
     "url": "https://receiver.example.com/events"
   },
   "events_requested": [
@@ -2429,10 +2455,10 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 <a href="#name-example-create-event-stream" class="selfRef">Example: Create Event Stream Request</a>
               </figcaption></figure>
 </div>
-<p id="section-7.1.1.1-11">The following is a non-normative example response:<a href="#section-7.1.1.1-11" class="pilcrow">¶</a></p>
+<p id="section-7.1.1.1-7">The following is a non-normative example response:<a href="#section-7.1.1.1-7" class="pilcrow">¶</a></p>
 <span id="name-example-create-stream-respo"></span><div id="figcreatestreamresp">
 <figure id="figure-15">
-              <div class="lang-http sourcecode" id="section-7.1.1.1-12.1">
+              <div class="lang-http sourcecode" id="section-7.1.1.1-8.1">
 <pre>
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -2445,7 +2471,7 @@ Content-Type: application/json
       "http://receiver.example.com/mobile"
     ],
   "delivery": {
-    "delivery_method": "urn:ietf:rfc:8935",
+    "method": "urn:ietf:rfc:8935",
     "url": "https://receiver.example.com/events"
   },
   "events_supported": [
@@ -2469,7 +2495,7 @@ Content-Type: application/json
 <a href="#name-example-create-stream-respo" class="selfRef">Example: Create Stream Response</a>
               </figcaption></figure>
 </div>
-<p id="section-7.1.1.1-13">Errors are signaled with HTTP status codes as follows:<a href="#section-7.1.1.1-13" class="pilcrow">¶</a></p>
+<p id="section-7.1.1.1-9">Errors are signaled with HTTP status codes as follows:<a href="#section-7.1.1.1-9" class="pilcrow">¶</a></p>
 <span id="name-create-stream-errors"></span><div id="tablecreatestream">
 <table class="center" id="table-1">
               <caption>
@@ -2546,7 +2572,7 @@ Cache-Control: no-store
       "http://receiver.example.com/mobile"
     ],
   "delivery": {
-    "delivery_method": "urn:ietf:rfc:8935",
+    "method": "urn:ietf:rfc:8935",
     "url": "https://receiver.example.com/events"
   },
   "events_supported": [
@@ -2603,7 +2629,7 @@ Cache-Control: no-store
         "http://receiver.example.com/mobile"
       ],
     "delivery": {
-      "delivery_method": "urn:ietf:rfc:8935",
+      "method": "urn:ietf:rfc:8935",
       "url": "https://receiver.example.com/events"
     },
     "events_supported": [
@@ -2629,7 +2655,7 @@ Cache-Control: no-store
         "http://receiver.example.com/mobile"
       ],
     "delivery": {
-      "delivery_method": "urn:ietf:rfc:8935",
+      "method": "urn:ietf:rfc:8935",
       "url": "https://receiver.example.com/events"
     },
     "events_supported": [
@@ -2673,7 +2699,7 @@ Cache-Control: no-store
         "http://receiver.example.com/mobile"
       ],
     "delivery": {
-      "delivery_method": "urn:ietf:rfc:8935",
+      "method": "urn:ietf:rfc:8935",
       "url": "https://receiver.example.com/events"
     },
     "events_supported": [
@@ -2806,7 +2832,7 @@ Cache-Control: no-store
     "http://receiver.example.com/mobile"
   ],
   "delivery": {
-    "delivery_method": "urn:ietf:rfc:8935",
+    "method": "urn:ietf:rfc:8935",
     "url": "https://receiver.example.com/events"
   },
   "events_supported": [
@@ -2905,7 +2931,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
     "http://receiver.example.com/mobile"
   ],
   "delivery": {
-    "delivery_method": "urn:ietf:rfc:8935",
+    "method": "urn:ietf:rfc:8935",
     "url": "https://receiver.example.com/events"
   },
   "events_requested": [
@@ -2937,7 +2963,7 @@ Cache-Control: no-store
     "http://receiver.example.com/mobile"
   ],
   "delivery": {
-    "delivery_method": "urn:ietf:rfc:8935",
+    "method": "urn:ietf:rfc:8935",
     "url": "https://receiver.example.com/events"
   },
   "events_supported": [
@@ -4272,7 +4298,7 @@ metadata.<a href="#section-11.2.1-1" class="pilcrow">¶</a></p>
                 <p id="section-11.2.1.1-3.1.1">"urn:ietf:rfc:8935"<a href="#section-11.2.1.1-3.1.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
-<p id="section-11.2.1.1-4">endpoint_url<a href="#section-11.2.1.1-4" class="pilcrow">¶</a></p>
+<p id="section-11.2.1.1-4">url<a href="#section-11.2.1.1-4" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-11.2.1.1-5.1">
                 <p id="section-11.2.1.1-5.1.1">The URL where events are pushed through HTTP POST. This is set by the
@@ -4303,7 +4329,7 @@ metadata.<a href="#section-11.2.1-1" class="pilcrow">¶</a></p>
                 <p id="section-11.2.1.2-3.1.1">"urn:ietf:rfc:8936"<a href="#section-11.2.1.2-3.1.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
-<p id="section-11.2.1.2-4">endpoint_url<a href="#section-11.2.1.2-4" class="pilcrow">¶</a></p>
+<p id="section-11.2.1.2-4">url<a href="#section-11.2.1.2-4" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-11.2.1.2-5.1">
                 <p id="section-11.2.1.2-5.1.1">The URL where events can be retrieved from. This is specified by the

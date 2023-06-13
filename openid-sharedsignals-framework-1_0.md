@@ -800,10 +800,25 @@ events_delivered
 
 delivery
 
-> **Receiver-Supplied**, A JSON object containing a set of name/value pairs
-  specifying configuration parameters for the SET delivery method.  The actual
-  delivery method is identified by the special key "method" with the value being
-  a URI as defined in {{delivery-meta}}.
+> A JSON object containing a set of name/value pairs specifying configuration
+  parameters for the SET delivery method. The actual delivery method is
+  identified by the special key "method" with the value being a URI as defined
+  in {{delivery-meta}}. The value of the "delivery" field contains two
+  sub-fields: 
+  
+>   method
+
+> > **Receiver-Supplied**, the specific delivery method to be used. This can be
+    any one of "urn:ietf:rfc:8935" (push) or "urn:ietf:rfc:8936" (poll), but
+    not both.
+
+>   url
+
+> > The location at which the push or poll delivery will take place. If the
+    `method` value is "urn:ietf:rfc:8935" (push), then this value MUST
+    be supplied by the Receiver.  If the `method` value is
+    "urn:ietf:rfc:8936" (poll), then this value MUST be supplied by the
+    Transmitter.
 
 min_verification_interval
 
@@ -834,24 +849,15 @@ the Event Transmitter responds with a "201 Created" response containing a
 The HTTP POST request MAY contain the Receiver-Supplied values of the Stream
 Configuration ({{stream-config}}) object:
 
-events_requested
+* `events_requested`
+* `delivery` : Note that in the case of the POLL method, the `url` value is
+  supplied by the Transmitter.
+* `format`
 
-> **Receiver-Supplied**, An array of URIs identifying the set of events that
-  the Receiver requested. A Receiver SHOULD request only the events that it
-  understands and it can act on. This is configurable by the Receiver.
-
-delivery
-
-> **Receiver-Supplied**, A JSON object containing a set of name/value pairs
-  specifying configuration parameters for the SET delivery method. The actual
-  delivery method is identified by the special key "method" with the value
-  being a URI as defined in {{delivery-meta}}.
-
-format
-
-> **Receiver-Supplied**, The Subject Identifier Format that the Receiver wants
-  for the events. If not set then the Transmitter might decide to use a type
-  that discloses more information than necessary.
+If the request does not contain the `delivery` property, then the Transmitter
+MUST assume that the `method` is "urn:ietf:rfc:8936" (poll). The
+Transmitter MUST include a `delivery` property in the response with this
+`method` property and a `url` property.
 
 The following is a non-normative example request to create an Event Stream:
 
@@ -862,7 +868,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
 {
   "delivery": {
-    "delivery_method": "urn:ietf:rfc:8935",
+    "method": "urn:ietf:rfc:8935",
     "url": "https://receiver.example.com/events"
   },
   "events_requested": [
@@ -888,7 +894,7 @@ Content-Type: application/json
       "http://receiver.example.com/mobile"
     ],
   "delivery": {
-    "delivery_method": "urn:ietf:rfc:8935",
+    "method": "urn:ietf:rfc:8935",
     "url": "https://receiver.example.com/events"
   },
   "events_supported": [
@@ -957,7 +963,7 @@ Cache-Control: no-store
       "http://receiver.example.com/mobile"
     ],
   "delivery": {
-    "delivery_method": "urn:ietf:rfc:8935",
+    "method": "urn:ietf:rfc:8935",
     "url": "https://receiver.example.com/events"
   },
   "events_supported": [
@@ -1004,7 +1010,7 @@ Cache-Control: no-store
         "http://receiver.example.com/mobile"
       ],
     "delivery": {
-      "delivery_method": "urn:ietf:rfc:8935",
+      "method": "urn:ietf:rfc:8935",
       "url": "https://receiver.example.com/events"
     },
     "events_supported": [
@@ -1030,7 +1036,7 @@ Cache-Control: no-store
         "http://receiver.example.com/mobile"
       ],
     "delivery": {
-      "delivery_method": "urn:ietf:rfc:8935",
+      "method": "urn:ietf:rfc:8935",
       "url": "https://receiver.example.com/events"
     },
     "events_supported": [
@@ -1069,7 +1075,7 @@ Cache-Control: no-store
         "http://receiver.example.com/mobile"
       ],
     "delivery": {
-      "delivery_method": "urn:ietf:rfc:8935",
+      "method": "urn:ietf:rfc:8935",
       "url": "https://receiver.example.com/events"
     },
     "events_supported": [
@@ -1165,7 +1171,7 @@ Cache-Control: no-store
     "http://receiver.example.com/mobile"
   ],
   "delivery": {
-    "delivery_method": "urn:ietf:rfc:8935",
+    "method": "urn:ietf:rfc:8935",
     "url": "https://receiver.example.com/events"
   },
   "events_supported": [
@@ -1231,7 +1237,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
     "http://receiver.example.com/mobile"
   ],
   "delivery": {
-    "delivery_method": "urn:ietf:rfc:8935",
+    "method": "urn:ietf:rfc:8935",
     "url": "https://receiver.example.com/events"
   },
   "events_requested": [
@@ -1258,7 +1264,7 @@ Cache-Control: no-store
     "http://receiver.example.com/mobile"
   ],
   "delivery": {
-    "delivery_method": "urn:ietf:rfc:8935",
+    "method": "urn:ietf:rfc:8935",
     "url": "https://receiver.example.com/events"
   },
   "events_supported": [
@@ -2106,7 +2112,7 @@ method
 
 > "urn:ietf:rfc:8935"
 
-endpoint_url
+url
 
 > The URL where events are pushed through HTTP POST. This is set by the
   Receiver. If a Reciever is using multiple streams from a single Transmitter
@@ -2126,7 +2132,7 @@ method
 
 > "urn:ietf:rfc:8936"
 
-endpoint_url
+url
 
 > The URL where events can be retrieved from. This is specified by the
   Transmitter. These URLs MAY be reused across Receivers, but MUST be unique per
