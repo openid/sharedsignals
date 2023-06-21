@@ -127,6 +127,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 2]
      13.2.  Informative References . . . . . . . . . . . . . . . . .  54
    Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  54
    Appendix B.  Notices  . . . . . . . . . . . . . . . . . . . . . .  54
+   Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  55
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  55
 
 1.  Introduction
@@ -164,7 +165,6 @@ Tulshibagwale, et al.        Standards Track                    [Page 2]
 
 
 
-
 Tulshibagwale, et al.        Standards Track                    [Page 3]
 
                               SharedSignals                   March 2023
@@ -189,9 +189,10 @@ Tulshibagwale, et al.        Standards Track                    [Page 3]
 3.2.  Complex Subject Members
 
    A Complex Subject Member has a name and a value that is a JSON
-   [RFC7159] object that has one or more Simple Subject Members.  The
-   name of each Simple Subject Member in this value MAY be one of the
-   following:
+   [RFC7159] object that has a format field, and one or more Simple
+   Subject Members.  The name of the format field is "format", and its
+   value is "complex".  The name of each Simple Subject Member in this
+   value MAY be one of the following:
 
    user
 
@@ -220,7 +221,6 @@ Tulshibagwale, et al.        Standards Track                    [Page 3]
 
 
 
-
 Tulshibagwale, et al.        Standards Track                    [Page 4]
 
                               SharedSignals                   March 2023
@@ -238,6 +238,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 4]
    event.
 
    "transferee": {
+     "format": "complex",
      "user" : {
        "format": "email",
        "email": "bar@example.com"
@@ -273,7 +274,6 @@ Tulshibagwale, et al.        Standards Track                    [Page 4]
       proprietary subject identifier format are agreed to between the
       parties and such agreement is outside the scope of this
       specification.
-
 
 
 
@@ -420,6 +420,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 7]
      "events": {
        "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
          "subject": {
+             "format": "complex",
              "user": {
                  "format": "iss_sub",
                  "iss": "https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/",
@@ -441,7 +442,6 @@ Tulshibagwale, et al.        Standards Track                    [Page 7]
 
         Figure 6: Example: SET Containing a SSF Event with a Complex
                                Subject Member
-
 
 
 
@@ -1831,6 +1831,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 32]
    {
      "status": "enabled",
      "subject": {
+       "format": "complex",
        "tenant" : {
          "format" : "iss_sub",
          "iss" : "http://example.com/idp1",
@@ -1841,7 +1842,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 32]
 
               Figure 30: Example: Check Stream Status Response
 
-   Errors are signaled with HTTP status codes as follows:
 
 
 
@@ -1849,6 +1849,8 @@ Tulshibagwale, et al.        Standards Track                   [Page 33]
 
                               SharedSignals                   March 2023
 
+
+   Errors are signaled with HTTP status codes as follows:
 
      +======+========================================================+
      | Code | Description                                            |
@@ -1896,8 +1898,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 33]
 
       REQUIRED.  The stream whose status is being updated.
 
-   status
-
 
 
 
@@ -1905,6 +1905,8 @@ Tulshibagwale, et al.        Standards Track                   [Page 34]
 
                               SharedSignals                   March 2023
 
+
+   status
 
       REQUIRED.  The new status of the Event Stream.
 
@@ -1955,8 +1957,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 34]
 
 
 
-
-
 Tulshibagwale, et al.        Standards Track                   [Page 35]
 
                               SharedSignals                   March 2023
@@ -1970,6 +1970,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 35]
      "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
      "status": "paused",
      "subject": {
+       "format": "complex",
        "tenant" : {
          "format" : "iss_sub",
          "iss" : "http://example.com/idp1",
@@ -1999,7 +2000,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 35]
              Figure 33: Example: Update Stream Status Response
 
    Errors are signaled with HTTP status codes as follows:
-
 
 
 
@@ -2478,6 +2478,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 44]
      "events": {
        "https://schemas.openid.net/secevent/ssf/event-type/stream-updated": {
          "subject": {
+           "format" : "complex",
            "tenant" : {
              "format": "iss_sub",
              "iss" : "http://example.com/idp1",
@@ -2511,7 +2512,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 44]
    exist, which may inadvertently reveal information about the subject
    (e.g. that a particular individual does or does not use the Event
    Transmitter's service).
-
 
 
 
@@ -3038,6 +3038,15 @@ Tulshibagwale, et al.        Standards Track                   [Page 54]
    patents, patent applications, or other proprietary rights that may
    cover technology that may be required to practice this specification.
 
+Contributors
+
+   Steve Venema
+   ForgeRock
+   Email: steve.venema@forgerock.com
+
+
+   Steve defined the format field of Complex Subjects
+
 Authors' Addresses
 
    Atul Tulshibagwale
@@ -3065,6 +3074,14 @@ Authors' Addresses
    Email: secevemt@ve7jtb.com
 
 
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 55]
+
+                              SharedSignals                   March 2023
+
+
    Shayne Miel
    Cisco
    Email: smiel@cisco.com
@@ -3077,4 +3094,43 @@ Authors' Addresses
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 55]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 56]
