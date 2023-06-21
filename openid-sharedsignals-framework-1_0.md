@@ -1723,7 +1723,7 @@ subject
 > REQUIRED. The value of the `subject` field in a Verification Event MUST always
   be set to have a simple value of type `opaque`. The `id` of the value MUST be
   the `stream_id` of the stream being verified. If the Transmitter does not
-  support multiple streams, this value MUST be set to "0"
+  support multiple streams, this value MUST be set to "none"
 
 > Note that the subject that identifies a stream itself is always implicitly
   added to the stream and MAY NOT be removed from the stream.
@@ -1814,7 +1814,7 @@ Event Receiver as a result of the above request:
     "https://schemas.openid.net/secevent/ssf/event-type/verification":{
       "subject": {
         "format": "opaque",
-        "id": "1234"
+        "id": "f67e39a0a4d34d56b3aa1bc4cff0069f"
       },
       "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
     }
@@ -1853,11 +1853,10 @@ reason
 subject
 
 > REQUIRED. Specifies the Subject Principal for whom the status has been updated.
-  If this claim is not included, then the status change was applied to all
-  subjects in the stream. If the event applies to the entire stream, the value
-  of the `subject` field MUST be of format `opaque`, and its `id` value MUST be
-  the unique ID of the stream. If the Transmitter does not support multiple
-  streams, then the value of the `id` field MUST be the string "0".
+  If the event applies to the entire stream, the value of the `subject` field
+  MUST be of format `opaque`, and its `id` value MUST be the unique ID of the
+  stream. If the Transmitter does not support multiple streams, then the value
+  of the `id` field MUST be the string "none".
 
 > Note that the subject that identifies a stream itself is always implicitly
   added to the stream and MAY NOT be removed from the stream.
@@ -1901,7 +1900,7 @@ subject
     "https://schemas.openid.net/secevent/ssf/event-type/stream-updated": {
       "subject": {
         "format": "opaque",
-        "id" : "0"
+        "id" : "none"
       },   
       "status": "paused",
       "reason": "Internal error"

@@ -2280,7 +2280,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 40]
       MUST always be set to have a simple value of type opaque.  The id
       of the value MUST be the stream_id of the stream being verified.
       If the Transmitter does not support multiple streams, this value
-      MUST be set to "0"
+      MUST be set to "none"
 
       Note that the subject that identifies a stream itself is always
       implicitly added to the stream and MAY NOT be removed from the
@@ -2419,7 +2419,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 43]
        "https://schemas.openid.net/secevent/ssf/event-type/verification":{
          "subject": {
            "format": "opaque",
-           "id": "1234"
+           "id": "f67e39a0a4d34d56b3aa1bc4cff0069f"
          },
          "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
        }
@@ -2469,12 +2469,11 @@ Tulshibagwale, et al.        Standards Track                   [Page 44]
    subject
 
       REQUIRED.  Specifies the Subject Principal for whom the status has
-      been updated.  If this claim is not included, then the status
-      change was applied to all subjects in the stream.  If the event
-      applies to the entire stream, the value of the subject field MUST
-      be of format opaque, and its id value MUST be the unique ID of the
-      stream.  If the Transmitter does not support multiple streams,
-      then the value of the id field MUST be the string "0".
+      been updated.  If the event applies to the entire stream, the
+      value of the subject field MUST be of format opaque, and its id
+      value MUST be the unique ID of the stream.  If the Transmitter
+      does not support multiple streams, then the value of the id field
+      MUST be the string "none".
 
       Note that the subject that identifies a stream itself is always
       implicitly added to the stream and MAY NOT be removed from the
@@ -2517,6 +2516,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 44]
 
 
 
+
 Tulshibagwale, et al.        Standards Track                   [Page 45]
 
                               SharedSignals                   March 2023
@@ -2531,7 +2531,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 45]
        "https://schemas.openid.net/secevent/ssf/event-type/stream-updated": {
          "subject": {
            "format": "opaque",
-           "id" : "0"
+           "id" : "none"
          },
          "status": "paused",
          "reason": "Internal error"
