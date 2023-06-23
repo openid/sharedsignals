@@ -38,7 +38,7 @@ jobs:
         run: xml2rfc openid-caep-specification-1_0.xml --text -o openid-caep-specification-1_0.txt
       - name: Render risc html
         run: xml2rfc openid-risc-profile-specification-1_0.xml --html -o openid-risc-profile-specification-1_0.html
-      -name: Render risc text
+      - name: Render risc text
         run: xml2rfc openid-risc-profile-specification-1_0.xml --text -o openid-risc-profile-specification-1_0.txt
       - name: Upload artifact
         uses: actions/upload-artifact@v2
