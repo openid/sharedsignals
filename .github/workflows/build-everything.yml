@@ -31,7 +31,7 @@ jobs:
       - name: Render Text
         run: xml2rfc openid-sharedsignals-framework-1_0.xml --text
       - name: Convert caep md to xml
-        run: kramdown-rfc2629 openid-caep-specification-1_0.md > openid-caep-specification-1_0.xml
+        run: kramdown-rfc openid-caep-specification-1_0.md > openid-caep-specification-1_0.xml
       - name: Render caep html
         run: xml2rfc openid-caep-specification-1_0.xml --html -o openid-caep-specification-1_0.html
       - name: Render caep text
