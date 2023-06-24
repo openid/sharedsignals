@@ -2,7 +2,7 @@
 title: OpenID Shared Signals Framework Specification 1.0 - draft 02
 abbrev: SharedSignals
 docname: openid-sharedsignals-framework-1_0
-date: 2023-03-21
+date: 2023-06-23
 
 ipr: none
 cat: std
@@ -804,8 +804,8 @@ delivery
   parameters for the SET delivery method. The actual delivery method is
   identified by the special key "method" with the value being a URI as defined
   in {{delivery-meta}}. The value of the "delivery" field contains two
-  sub-fields: 
-  
+  sub-fields:
+
 >   method
 
 > > **Receiver-Supplied**, the specific delivery method to be used. This can be
@@ -1299,7 +1299,7 @@ Pending conditions or errors are signaled with HTTP status codes as follows:
 #### Deleting a Stream {#deleting-a-stream}
 An Event Receiver deletes a stream by making an HTTP DELETE request to the
 Configuration Endpoint. On receiving a request the Event Transmitter responds
-with an empty "204 OK" response if the configuration was successfully removed.
+with an empty "204 No Content" response if the configuration was successfully removed.
 
 The DELETE request MUST include the "stream_id" as a parameter in order to
 identify the correct Event Stream.
