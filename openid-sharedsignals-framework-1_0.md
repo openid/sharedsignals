@@ -2,7 +2,7 @@
 title: OpenID Shared Signals Framework Specification 1.0 - draft 02
 abbrev: SharedSignals
 docname: openid-sharedsignals-framework-1_0
-date: 2023-05-08
+date: 2023-06-23
 
 ipr: none
 cat: std
@@ -345,19 +345,19 @@ jti
 > REQUIRED. The "jti" (JWT token ID) claim of the JWT being identified, defined
   in {{RFC7519}}
 
-The "JWT ID" Subject Identifier Format is identified by the name "jwt-id".
+The "JWT ID" Subject Identifier Format is identified by the name "jwt_id".
 
-Below is a non-normative example of Subject Identifier for the "jwt-id" Subject
+Below is a non-normative example of Subject Identifier for the "jwt_id" Subject
 Identifier Format.
 
 ~~~ json
 {
-    "format": "jwt-id",
+    "format": "jwt_id",
     "iss": "https://idp.example.com/123456789/",
     "jti": "B70BA622-9515-4353-A866-823539EECBC8"
 }
 ~~~
-{: #sub-id-jwtid title="Example: 'jwt-id' Subject Identifier"}
+{: #sub-id-jwtid title="Example: 'jwt_id' Subject Identifier"}
 
 ### SAML Assertion ID Subject Identifier Format {#sub-id-saml-assertion-id}
 
@@ -640,8 +640,8 @@ Content-Type: application/json
   "jwks_uri":
     "https://tr.example.com/jwks.json",
   "delivery_methods_supported": [
-    "https://schemas.openid.net/secevent/risc/delivery-method/push",
-    "https://schemas.openid.net/secevent/risc/delivery-method/poll"],
+    "urn:ietf:rfc:8935",
+    "urn:ietf:rfc:8936"],
   "configuration_endpoint":
     "https://tr.example.com/ssf/mgmt/stream",
   "status_endpoint":
@@ -788,20 +788,37 @@ events_requested
 
 > **Receiver-Supplied**, An array of URIs identifying the set of events that
   the Receiver requested. A Receiver SHOULD request only the events that it
-  understands and it can act on. This is configurable by the Receiver.
+  understands and it can act on. This is configurable by the Receiver. A
+  Transmitter MUST ignore any array values that it does not understand.
 
 events_delivered
 
 > **Transmitter-Supplied**, An array of URIs which is the intersection of
   "events_supported" and "events_requested". These events MAY be delivered over
-              the Event Stream.
+  the Event Stream. A Receiver MUST rely on the values received in this field
+  to understand which event types it can expect from the Transmitter.
 
 delivery
 
-> **Receiver-Supplied**, A JSON object containing a set of name/value pairs
-  specifying configuration parameters for the SET delivery method.  The actual
-  delivery method is identified by the special key "method" with the value being
-  a URI as defined in {{delivery-meta}}.
+> A JSON object containing a set of name/value pairs specifying configuration
+  parameters for the SET delivery method. The actual delivery method is
+  identified by the special key "method" with the value being a URI as defined
+  in {{delivery-meta}}. The value of the "delivery" field contains two
+  sub-fields:
+
+>   method
+
+> > **Receiver-Supplied**, the specific delivery method to be used. This can be
+    any one of "urn:ietf:rfc:8935" (push) or "urn:ietf:rfc:8936" (poll), but
+    not both.
+
+>   url
+
+> > The location at which the push or poll delivery will take place. If the
+    `method` value is "urn:ietf:rfc:8935" (push), then this value MUST
+    be supplied by the Receiver.  If the `method` value is
+    "urn:ietf:rfc:8936" (poll), then this value MUST be supplied by the
+    Transmitter.
 
 min_verification_interval
 
@@ -832,24 +849,15 @@ the Event Transmitter responds with a "201 Created" response containing a
 The HTTP POST request MAY contain the Receiver-Supplied values of the Stream
 Configuration ({{stream-config}}) object:
 
-events_requested
+* `events_requested`
+* `delivery` : Note that in the case of the POLL method, the `url` value is
+  supplied by the Transmitter.
+* `format`
 
-> **Receiver-Supplied**, An array of URIs identifying the set of events that
-  the Receiver requested. A Receiver SHOULD request only the events that it
-  understands and it can act on. This is configurable by the Receiver.
-
-delivery
-
-> **Receiver-Supplied**, A JSON object containing a set of name/value pairs
-  specifying configuration parameters for the SET delivery method. The actual
-  delivery method is identified by the special key "method" with the value
-  being a URI as defined in {{delivery-meta}}.
-
-format
-
-> **Receiver-Supplied**, The Subject Identifier Format that the Receiver wants
-  for the events. If not set then the Transmitter might decide to use a type
-  that discloses more information than necessary.
+If the request does not contain the `delivery` property, then the Transmitter
+MUST assume that the `method` is "urn:ietf:rfc:8936" (poll). The
+Transmitter MUST include a `delivery` property in the response with this
+`method` property and a `url` property.
 
 The following is a non-normative example request to create an Event Stream:
 
@@ -860,9 +868,8 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
 {
   "delivery": {
-    "delivery_method":
-      "https://schemas.openid.net/secevent/risc/delivery-method/push",
-      "url": "https://receiver.example.com/events"
+    "method": "urn:ietf:rfc:8935",
+    "url": "https://receiver.example.com/events"
   },
   "events_requested": [
     "urn:example:secevent:events:type_2",
@@ -887,8 +894,7 @@ Content-Type: application/json
       "http://receiver.example.com/mobile"
     ],
   "delivery": {
-    "delivery_method":
-      "https://schemas.openid.net/secevent/risc/delivery-method/push",
+    "method": "urn:ietf:rfc:8935",
     "url": "https://receiver.example.com/events"
   },
   "events_supported": [
@@ -957,8 +963,7 @@ Cache-Control: no-store
       "http://receiver.example.com/mobile"
     ],
   "delivery": {
-    "delivery_method":
-      "https://schemas.openid.net/secevent/risc/delivery-method/push",
+    "method": "urn:ietf:rfc:8935",
     "url": "https://receiver.example.com/events"
   },
   "events_supported": [
@@ -1005,8 +1010,7 @@ Cache-Control: no-store
         "http://receiver.example.com/mobile"
       ],
     "delivery": {
-      "delivery_method":
-        "https://schemas.openid.net/secevent/risc/delivery-method/push",
+      "method": "urn:ietf:rfc:8935",
       "url": "https://receiver.example.com/events"
     },
     "events_supported": [
@@ -1032,8 +1036,7 @@ Cache-Control: no-store
         "http://receiver.example.com/mobile"
       ],
     "delivery": {
-      "delivery_method":
-        "https://schemas.openid.net/secevent/risc/delivery-method/push",
+      "method": "urn:ietf:rfc:8935",
       "url": "https://receiver.example.com/events"
     },
     "events_supported": [
@@ -1072,8 +1075,7 @@ Cache-Control: no-store
         "http://receiver.example.com/mobile"
       ],
     "delivery": {
-      "delivery_method":
-        "https://schemas.openid.net/secevent/risc/delivery-method/push",
+      "method": "urn:ietf:rfc:8935",
       "url": "https://receiver.example.com/events"
     },
     "events_supported": [
@@ -1170,8 +1172,7 @@ Cache-Control: no-store
     "http://receiver.example.com/mobile"
   ],
   "delivery": {
-    "delivery_method":
-      "https://schemas.openid.net/secevent/risc/delivery-method/push",
+    "method": "urn:ietf:rfc:8935",
     "url": "https://receiver.example.com/events"
   },
   "events_supported": [
@@ -1238,8 +1239,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
     "http://receiver.example.com/mobile"
   ],
   "delivery": {
-    "delivery_method":
-      "https://schemas.openid.net/secevent/risc/delivery-method/push",
+    "method": "urn:ietf:rfc:8935",
     "url": "https://receiver.example.com/events"
   },
   "events_requested": [
@@ -1266,8 +1266,7 @@ Cache-Control: no-store
     "http://receiver.example.com/mobile"
   ],
   "delivery": {
-    "delivery_method":
-      "https://schemas.openid.net/secevent/risc/delivery-method/push",
+    "method": "urn:ietf:rfc:8935",
     "url": "https://receiver.example.com/events"
   },
   "events_supported": [
@@ -2126,9 +2125,9 @@ This section provides SSF profiling specifications for the {{DELIVERYPUSH}} spec
 
 method
 
-> "https://schemas.openid.net/secevent/risc/delivery-method/push"
+> "urn:ietf:rfc:8935"
 
-endpoint_url
+url
 
 > The URL where events are pushed through HTTP POST. This is set by the
   Receiver. If a Reciever is using multiple streams from a single Transmitter
@@ -2146,9 +2145,9 @@ This section provides SSF profiling specifications for the {{DELIVERYPOLL}} spec
 
 method
 
-> "https://schemas.openid.net/secevent/risc/delivery-method/poll"
+> "urn:ietf:rfc:8936"
 
-endpoint_url
+url
 
 > The URL where events can be retrieved from. This is specified by the
   Transmitter. These URLs MAY be reused across Receivers, but MUST be unique per
