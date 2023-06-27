@@ -1227,7 +1227,7 @@ li > p:last-of-type:only-child {
 <thead><tr>
 <td class="left"></td>
 <td class="center">SharedSignals</td>
-<td class="right">March 2023</td>
+<td class="right">June 2023</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Tulshibagwale, et al.</td>
@@ -1242,7 +1242,7 @@ li > p:last-of-type:only-child {
 <dd class="workgroup">Shared Signals</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-03-21" class="published">21 March 2023</time>
+<time datetime="2023-06-23" class="published">23 June 2023</time>
     </dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
@@ -1733,22 +1733,22 @@ contain the following members:<a href="#section-3.4.1-1" class="pilcrow">¶</a><
   in <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span><a href="#section-3.4.1-5.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-3.4.1-6">The "JWT ID" Subject Identifier Format is identified by the name "jwt-id".<a href="#section-3.4.1-6" class="pilcrow">¶</a></p>
-<p id="section-3.4.1-7">Below is a non-normative example of Subject Identifier for the "jwt-id" Subject
+<p id="section-3.4.1-6">The "JWT ID" Subject Identifier Format is identified by the name "jwt_id".<a href="#section-3.4.1-6" class="pilcrow">¶</a></p>
+<p id="section-3.4.1-7">Below is a non-normative example of Subject Identifier for the "jwt_id" Subject
 Identifier Format.<a href="#section-3.4.1-7" class="pilcrow">¶</a></p>
-<span id="name-example-jwt-id-subject-iden"></span><div id="sub-id-jwtid">
+<span id="name-example-jwt_id-subject-iden"></span><div id="sub-id-jwtid">
 <figure id="figure-3">
             <div class="lang-json sourcecode" id="section-3.4.1-8.1">
 <pre>
 {
-    "format": "jwt-id",
+    "format": "jwt_id",
     "iss": "https://idp.example.com/123456789/",
     "jti": "B70BA622-9515-4353-A866-823539EECBC8"
 }
 </pre>
 </div>
 <figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
-<a href="#name-example-jwt-id-subject-iden" class="selfRef">Example: 'jwt-id' Subject Identifier</a>
+<a href="#name-example-jwt_id-subject-iden" class="selfRef">Example: 'jwt_id' Subject Identifier</a>
             </figcaption></figure>
 </div>
 </section>
@@ -1822,7 +1822,7 @@ that it is unable to process.<a href="#section-3.5-1" class="pilcrow">¶</a></p>
 of these members are required and specified as such in the respective event
 types specs. If a Transmitter determines that it needs to include additional
 members that are not specified in the event types spec, then the name of such
-members MUST be a URI. The discoverability of all additional members is 
+members MUST be a URI. The discoverability of all additional members is
 specified in the Discovery <a href="#discovery" class="auto internal xref">Section 6</a> section.<a href="#section-4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -3039,7 +3039,7 @@ Cache-Control: no-store
             </h5>
 <p id="section-7.1.1.5-1">An Event Receiver deletes a stream by making an HTTP DELETE request to the
 Configuration Endpoint. On receiving a request the Event Transmitter responds
-with an empty "204 OK" response if the configuration was successfully removed.<a href="#section-7.1.1.5-1" class="pilcrow">¶</a></p>
+with an empty "204 No Content" response if the configuration was successfully removed.<a href="#section-7.1.1.5-1" class="pilcrow">¶</a></p>
 <p id="section-7.1.1.5-2">The DELETE request MUST include the "stream_id" as a parameter in order to
 identify the correct Event Stream.<a href="#section-7.1.1.5-2" class="pilcrow">¶</a></p>
 <p id="section-7.1.1.5-3">The following is a non-normative example request to delete an Event Stream:<a href="#section-7.1.1.5-3" class="pilcrow">¶</a></p>
