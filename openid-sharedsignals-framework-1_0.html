@@ -1227,7 +1227,7 @@ li > p:last-of-type:only-child {
 <thead><tr>
 <td class="left"></td>
 <td class="center">SharedSignals</td>
-<td class="right">March 2023</td>
+<td class="right">June 2023</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Tulshibagwale, et al.</td>
@@ -1242,7 +1242,7 @@ li > p:last-of-type:only-child {
 <dd class="workgroup">Shared Signals</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-03-21" class="published">21 March 2023</time>
+<time datetime="2023-06-23" class="published">23 June 2023</time>
     </dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
@@ -1516,7 +1516,10 @@ and Coordination (RISC) and the Continuous Access Evaluation Profile (<span>[<a 
             <p id="section-toc.1-1.15.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-notices" class="internal xref">Notices</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16">
-            <p id="section-toc.1-1.16.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.16.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-contributors" class="internal xref">Contributors</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.17">
+            <p id="section-toc.1-1.17.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1598,8 +1601,9 @@ event.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-complex-subject-members" class="section-name selfRef">Complex Subject Members</a>
         </h3>
 <p id="section-3.2-1">A Complex Subject Member has a name and a value that is a JSON <span>[<a href="#RFC7159" class="cite xref">RFC7159</a>]</span>
-object that has one or more Simple Subject Members. The name of each Simple
-Subject Member in this value MAY be one of the following:<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+object that has a format field, and one or more Simple Subject Members. The name
+of the format field is "format", and its value is "complex". The name of each
+Simple Subject Member in this value MAY be one of the following:<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.2-2">user<a href="#section-3.2-2" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-3.2-3.1">
@@ -1650,6 +1654,7 @@ appear at most once in the Complex Subject value.<a href="#section-3.2-16" class
           <div class="lang-json sourcecode" id="section-3.2-18.1">
 <pre>
 "transferee": {
+  "format": "complex",
   "user" : {
     "format": "email",
     "email": "bar@example.com"
@@ -1728,22 +1733,22 @@ contain the following members:<a href="#section-3.4.1-1" class="pilcrow">¶</a><
   in <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span><a href="#section-3.4.1-5.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-3.4.1-6">The "JWT ID" Subject Identifier Format is identified by the name "jwt-id".<a href="#section-3.4.1-6" class="pilcrow">¶</a></p>
-<p id="section-3.4.1-7">Below is a non-normative example of Subject Identifier for the "jwt-id" Subject
+<p id="section-3.4.1-6">The "JWT ID" Subject Identifier Format is identified by the name "jwt_id".<a href="#section-3.4.1-6" class="pilcrow">¶</a></p>
+<p id="section-3.4.1-7">Below is a non-normative example of Subject Identifier for the "jwt_id" Subject
 Identifier Format.<a href="#section-3.4.1-7" class="pilcrow">¶</a></p>
-<span id="name-example-jwt-id-subject-iden"></span><div id="sub-id-jwtid">
+<span id="name-example-jwt_id-subject-iden"></span><div id="sub-id-jwtid">
 <figure id="figure-3">
             <div class="lang-json sourcecode" id="section-3.4.1-8.1">
 <pre>
 {
-    "format": "jwt-id",
+    "format": "jwt_id",
     "iss": "https://idp.example.com/123456789/",
     "jti": "B70BA622-9515-4353-A866-823539EECBC8"
 }
 </pre>
 </div>
 <figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
-<a href="#name-example-jwt-id-subject-iden" class="selfRef">Example: 'jwt-id' Subject Identifier</a>
+<a href="#name-example-jwt_id-subject-iden" class="selfRef">Example: 'jwt_id' Subject Identifier</a>
             </figcaption></figure>
 </div>
 </section>
@@ -1817,7 +1822,7 @@ that it is unable to process.<a href="#section-3.5-1" class="pilcrow">¶</a></p>
 of these members are required and specified as such in the respective event
 types specs. If a Transmitter determines that it needs to include additional
 members that are not specified in the event types spec, then the name of such
-members MUST be a URI. The discoverability of all additional members is 
+members MUST be a URI. The discoverability of all additional members is
 specified in the Discovery <a href="#discovery" class="auto internal xref">Section 6</a> section.<a href="#section-4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1863,6 +1868,7 @@ specified in the Discovery <a href="#discovery" class="auto internal xref">Secti
   "events": {
     "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
       "subject": {
+          "format": "complex",
           "user": {
               "format": "iss_sub",
               "iss": "https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/",
@@ -3033,7 +3039,7 @@ Cache-Control: no-store
             </h5>
 <p id="section-7.1.1.5-1">An Event Receiver deletes a stream by making an HTTP DELETE request to the
 Configuration Endpoint. On receiving a request the Event Transmitter responds
-with an empty "204 OK" response if the configuration was successfully removed.<a href="#section-7.1.1.5-1" class="pilcrow">¶</a></p>
+with an empty "204 No Content" response if the configuration was successfully removed.<a href="#section-7.1.1.5-1" class="pilcrow">¶</a></p>
 <p id="section-7.1.1.5-2">The DELETE request MUST include the "stream_id" as a parameter in order to
 identify the correct Event Stream.<a href="#section-7.1.1.5-2" class="pilcrow">¶</a></p>
 <p id="section-7.1.1.5-3">The following is a non-normative example request to delete an Event Stream:<a href="#section-7.1.1.5-3" class="pilcrow">¶</a></p>
@@ -3228,6 +3234,7 @@ Cache-Control: no-store
 {
   "status": "enabled",
   "subject": {
+    "format": "complex",
     "tenant" : {
       "format" : "iss_sub",
       "iss" : "http://example.com/idp1",
@@ -3362,6 +3369,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
   "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
   "status": "paused",
   "subject": {
+    "format": "complex",
     "tenant" : {
       "format" : "iss_sub",
       "iss" : "http://example.com/idp1",
@@ -3921,6 +3929,7 @@ Subject.<a href="#section-7.1.5-3" class="pilcrow">¶</a></p>
   "events": {
     "https://schemas.openid.net/secevent/ssf/event-type/stream-updated": {
       "subject": {
+        "format" : "complex",
         "tenant" : {
           "format": "iss_sub",
           "iss" : "http://example.com/idp1",
@@ -4529,8 +4538,24 @@ specification.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <p id="appendix-B-3">The technology described in this specification was made available from contributions from various sources, including members of the OpenID Foundation and others. Although the OpenID Foundation has taken steps to help ensure that the technology is available for distribution, it takes no position regarding the validity or scope of any intellectual property or other rights that might be claimed to pertain to the implementation or use of the technology described in this specification or the extent to which any license under such rights might or might not be available; neither does it represent that it has made any independent effort to identify any such rights. The OpenID Foundation and the contributors to this specification make no (and hereby expressly disclaim any) warranties (express, implied, or otherwise), including implied warranties of merchantability, non-infringement, fitness for a particular purpose, or title, related to this specification, and the entire risk as to implementing this specification is assumed by the implementer. The OpenID Intellectual Property Rights policy requires contributors to offer a patent promise not to assert certain patent claims against other contributors and against implementers. The OpenID Foundation invites any interested party to bring to its attention any copyrights, patents, patent applications, or other proprietary rights that may cover technology that may be required to practice this specification.<a href="#appendix-B-3" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="authors-addresses">
+<div id="contributors">
 <section id="appendix-C">
+      <h2 id="name-contributors">
+<a href="#name-contributors" class="section-name selfRef">Contributors</a>
+      </h2>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Steve Venema</span></div>
+<div dir="auto" class="left"><span class="org">ForgeRock</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:steve.venema@forgerock.com" class="email">steve.venema@forgerock.com</a>
+</div>
+</address>
+<p id="appendix-C-1">Steve defined the format field of Complex Subjects<a href="#appendix-C-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="authors-addresses">
+<section id="appendix-D">
       <h2 id="name-authors-addresses">
 <a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>
