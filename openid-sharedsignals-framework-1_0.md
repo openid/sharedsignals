@@ -52,6 +52,15 @@ author:
         org: Cisco
         email: smiel@cisco.com
 
+contributor:
+      -
+        ins: S. Venema
+        name: Steve Venema
+        org: ForgeRock
+        email: steve.venema@forgerock.com
+        contribution: |
+          Steve defined the format field of Complex Subjects
+
 normative:
   CLIENTCRED:
     author:
@@ -254,8 +263,9 @@ event.
 ## Complex Subject Members {#complex-subjects}
 
 A Complex Subject Member has a name and a value that is a JSON {{RFC7159}}
-object that has one or more Simple Subject Members. The name of each Simple
-Subject Member in this value MAY be one of the following:
+object that has a format field, and one or more Simple Subject Members. The name
+of the format field is "format", and its value is "complex". The name of each
+Simple Subject Member in this value MAY be one of the following:
 
 user
 
@@ -292,6 +302,7 @@ Below is a non-normative example of a Complex Subject claim in a SSF event.
 
 ~~~ json
 "transferee": {
+  "format": "complex",
   "user" : {
     "format": "email",
     "email": "bar@example.com"
@@ -439,6 +450,7 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
   "events": {
     "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
       "subject": {
+          "format": "complex",
           "user": {
               "format": "iss_sub",
               "iss": "https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/",
@@ -1434,6 +1446,7 @@ Cache-Control: no-store
 {
   "status": "enabled",
   "subject": {
+    "format": "complex",
     "tenant" : {
       "format" : "iss_sub",
       "iss" : "http://example.com/idp1",
@@ -1521,6 +1534,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
   "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
   "status": "paused",
   "subject": {
+    "format": "complex",
     "tenant" : {
       "format" : "iss_sub",
       "iss" : "http://example.com/idp1",
@@ -1851,6 +1865,7 @@ subject
   "events": {
     "https://schemas.openid.net/secevent/ssf/event-type/stream-updated": {
       "subject": {
+	"format" : "complex",
         "tenant" : {
           "format": "iss_sub",
           "iss" : "http://example.com/idp1",
