@@ -1732,6 +1732,15 @@ state
 > OPTIONAL An opaque value provided by the Event Receiver when the event is
   triggered. This is a nested attribute in the event payload.
 
+subject
+
+> REQUIRED. The value of the `subject` field in a Verification Event MUST always
+  be set to have a simple value of type `opaque`. The `id` of the value MUST be
+  the `stream_id` of the stream being verified.
+
+> Note that the subject that identifies a stream itself is always implicitly
+  added to the stream and MAY NOT be removed from the stream.
+
 Upon receiving a Verification Event, the Event Receiver SHALL parse the SET and
 validate its claims. In particular, the Event Receiver SHALL confirm that the
 value for "state" is as expected. If the value of "state" does not match, an
@@ -1816,6 +1825,10 @@ Event Receiver as a result of the above request:
   "iat": 1493856000,
   "events": {
     "https://schemas.openid.net/secevent/ssf/event-type/verification":{
+      "subject": {
+        "format": "opaque",
+        "id": "f67e39a0a4d34d56b3aa1bc4cff0069f"
+      },
       "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
     }
   }
@@ -1852,9 +1865,16 @@ reason
 
 subject
 
-> OPTIONAL. Specifies the Subject Principal for whom the status has been updated.
-  If this claim is not included, then the status change was applied to all
-  subjects in the stream.
+> REQUIRED. Specifies the Subject Principal for whom the status has been updated.
+  If the event applies to the entire stream, the value of the `subject` field
+  MUST be of format `opaque`, and its `id` value MUST be the unique ID of the
+  stream. 
+
+> Note that the subject that identifies a stream itself is always implicitly
+  added to the stream and MAY NOT be removed from the stream.
+
+> Below is a non-normative example of a `stream-updated` event with a specific
+  subject.
 
 ~~~ json
 {
@@ -1878,7 +1898,30 @@ subject
   }
 }
 ~~~
-{: title="Example: Stream Updated SET" #figstreamupdatedset}
+{: title="Example: Stream Updated SET with tenant principal" #figstreamupdatedset}
+
+> Below is a non-normative example of a `stream-updated` event with a stream
+  subject.
+
+~~~ json
+{
+  "jti": "123456",
+  "iss": "https://transmitter.example.com",
+  "aud": "receiver.example.com",
+  "iat": 1493856000,
+  "events": {
+    "https://schemas.openid.net/secevent/ssf/event-type/stream-updated": {
+      "subject": {
+        "format": "opaque",
+        "id" : "f67e39a0a4d34d56b3aa1bc4cff0069f"
+      },   
+      "status": "paused",
+      "reason": "Internal error"
+    }
+  }
+}
+~~~
+{: title="Example: Stream Updated SET with stream as the subject of single-stream Transmitter" #figstreamupdatedstreamset}
 
 # Authorization {#management-api-auth}
 HTTP API calls from a Receiver to a Transmitter SHOULD be authorized by
