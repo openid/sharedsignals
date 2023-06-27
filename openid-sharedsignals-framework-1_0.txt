@@ -14,7 +14,7 @@ Shared Signals                                          A. Tulshibagwale
                                                                   Yubico
                                                                  S. Miel
                                                                    Cisco
-                                                           21 March 2023
+                                                            23 June 2023
 
 
       OpenID Shared Signals Framework Specification 1.0 - draft 02
@@ -55,7 +55,7 @@ Abstract
 
 Tulshibagwale, et al.        Standards Track                    [Page 1]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
    *  Poll-Based SET Token Delivery Using HTTP [DELIVERYPOLL]
@@ -111,7 +111,7 @@ Table of Contents
 
 Tulshibagwale, et al.        Standards Track                    [Page 2]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
        11.1.4.  Explicit Typing of SETs  . . . . . . . . . . . . . .  49
@@ -167,7 +167,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 2]
 
 Tulshibagwale, et al.        Standards Track                    [Page 3]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
    A Subject may be a "simple subject" or a "complex subject".
@@ -223,7 +223,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 3]
 
 Tulshibagwale, et al.        Standards Track                    [Page 4]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
    group
@@ -279,7 +279,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 4]
 
 Tulshibagwale, et al.        Standards Track                    [Page 5]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
 3.4.  Additional Subject Identifier Formats
@@ -335,7 +335,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 5]
 
 Tulshibagwale, et al.        Standards Track                    [Page 6]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
       REQUIRED.  The "ID" value of the SAML assertion being identified,
@@ -391,7 +391,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 6]
 
 Tulshibagwale, et al.        Standards Track                    [Page 7]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
    {
@@ -447,7 +447,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 7]
 
 Tulshibagwale, et al.        Standards Track                    [Page 8]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
    {
@@ -503,7 +503,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 8]
 
 Tulshibagwale, et al.        Standards Track                    [Page 9]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
 6.1.  Transmitter Configuration Metadata
@@ -559,7 +559,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 9]
 
 Tulshibagwale, et al.        Standards Track                   [Page 10]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
    TODO: consider adding a IANA Registry for metadata, similar to
@@ -615,7 +615,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 10]
 
 Tulshibagwale, et al.        Standards Track                   [Page 11]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
 6.2.2.  Backward Compatibility for RISC Transmitters
@@ -671,7 +671,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 11]
 
 Tulshibagwale, et al.        Standards Track                   [Page 12]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
    HTTP/1.1 200 OK
@@ -727,7 +727,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 12]
 
 Tulshibagwale, et al.        Standards Track                   [Page 13]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
    This section defines an HTTP API to be implemented by Event
@@ -783,7 +783,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 13]
 
 Tulshibagwale, et al.        Standards Track                   [Page 14]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
       An endpoint used to create and delete Event Streams, as well as
@@ -839,7 +839,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 14]
 
 Tulshibagwale, et al.        Standards Track                   [Page 15]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
    aud
@@ -895,7 +895,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 15]
 
 Tulshibagwale, et al.        Standards Track                   [Page 16]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
       The location at which the push or poll delivery will take
@@ -951,7 +951,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 16]
 
 Tulshibagwale, et al.        Standards Track                   [Page 17]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
    If the request does not contain the delivery property, then the
@@ -1007,7 +1007,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 17]
 
 Tulshibagwale, et al.        Standards Track                   [Page 18]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
    HTTP/1.1 200 OK
@@ -1063,7 +1063,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 18]
 
 Tulshibagwale, et al.        Standards Track                   [Page 19]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
 7.1.1.2.  Reading a Stream's Configuration
@@ -1119,7 +1119,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 19]
 
 Tulshibagwale, et al.        Standards Track                   [Page 20]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
    HTTP/1.1 200 OK
@@ -1175,7 +1175,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 20]
 
 Tulshibagwale, et al.        Standards Track                   [Page 21]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
    HTTP/1.1 200 OK
@@ -1231,7 +1231,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 21]
 
 Tulshibagwale, et al.        Standards Track                   [Page 22]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
          "urn:example:secevent:events:type_2",
@@ -1287,7 +1287,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 22]
 
 Tulshibagwale, et al.        Standards Track                   [Page 23]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
            Figure 20: Example: Read Stream Configuration Response
@@ -1343,7 +1343,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 23]
 
 Tulshibagwale, et al.        Standards Track                   [Page 24]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
    The following is a non-normative example request to replace an Event
@@ -1399,7 +1399,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 24]
 
 Tulshibagwale, et al.        Standards Track                   [Page 25]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
    HTTP/1.1 200 OK
@@ -1455,7 +1455,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 25]
 
 Tulshibagwale, et al.        Standards Track                   [Page 26]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
           +======+==============================================+
@@ -1511,7 +1511,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 26]
 
 Tulshibagwale, et al.        Standards Track                   [Page 27]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
    PUT /ssf/stream HTTP/1.1
@@ -1567,7 +1567,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 27]
 
 Tulshibagwale, et al.        Standards Track                   [Page 28]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
    HTTP/1.1 200 OK
@@ -1623,7 +1623,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 28]
 
 Tulshibagwale, et al.        Standards Track                   [Page 29]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
         +======+==================================================+
@@ -1652,7 +1652,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 29]
 
    An Event Receiver deletes a stream by making an HTTP DELETE request
    to the Configuration Endpoint.  On receiving a request the Event
-   Transmitter responds with an empty "204 OK" response if the
+   Transmitter responds with an empty "204 No Content" response if the
    configuration was successfully removed.
 
    The DELETE request MUST include the "stream_id" as a parameter in
@@ -1679,7 +1679,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 29]
 
 Tulshibagwale, et al.        Standards Track                   [Page 30]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
    +======+===========================================================+
@@ -1735,7 +1735,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 30]
 
 Tulshibagwale, et al.        Standards Track                   [Page 31]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
 7.1.2.1.  Reading a Stream's Status
@@ -1791,7 +1791,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 31]
 
 Tulshibagwale, et al.        Standards Track                   [Page 32]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
    GET /ssf/status?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f HTTP/1.1
@@ -1847,7 +1847,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 32]
 
 Tulshibagwale, et al.        Standards Track                   [Page 33]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
      +======+========================================================+
@@ -1903,7 +1903,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 33]
 
 Tulshibagwale, et al.        Standards Track                   [Page 34]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
       REQUIRED.  The new status of the Event Stream.
@@ -1959,7 +1959,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 34]
 
 Tulshibagwale, et al.        Standards Track                   [Page 35]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
    POST /ssf/status HTTP/1.1
@@ -2015,7 +2015,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 35]
 
 Tulshibagwale, et al.        Standards Track                   [Page 36]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
         +======+==================================================+
@@ -2071,7 +2071,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 36]
 
 Tulshibagwale, et al.        Standards Track                   [Page 37]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
       REQUIRED.  A Subject claim identifying the subject to be added.
@@ -2127,7 +2127,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 37]
 
 Tulshibagwale, et al.        Standards Track                   [Page 38]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
       +======+=====================================================+
@@ -2183,7 +2183,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 38]
 
 Tulshibagwale, et al.        Standards Track                   [Page 39]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
    POST /ssf/subjects:remove HTTP/1.1
@@ -2239,7 +2239,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 39]
 
 Tulshibagwale, et al.        Standards Track                   [Page 40]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
 7.1.4.  Verification
@@ -2295,7 +2295,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 40]
 
 Tulshibagwale, et al.        Standards Track                   [Page 41]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
 7.1.4.2.  Triggering a Verification Event.
@@ -2351,7 +2351,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 41]
 
 Tulshibagwale, et al.        Standards Track                   [Page 42]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
         +======+=================================================+
@@ -2407,7 +2407,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 42]
 
 Tulshibagwale, et al.        Standards Track                   [Page 43]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
    {
@@ -2463,7 +2463,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 43]
 
 Tulshibagwale, et al.        Standards Track                   [Page 44]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
       OPTIONAL.  Specifies the Subject Principal for whom the status has
@@ -2519,7 +2519,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 44]
 
 Tulshibagwale, et al.        Standards Track                   [Page 45]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
    Event Transmitters SHOULD carefully evaluate the conditions under
@@ -2575,7 +2575,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 45]
 
 Tulshibagwale, et al.        Standards Track                   [Page 46]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
 10.1.  Subject Information Leakage
@@ -2631,7 +2631,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 46]
 
 Tulshibagwale, et al.        Standards Track                   [Page 47]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
    *  Push-Based SET Token Delivery Using HTTP [DELIVERYPUSH]
@@ -2687,7 +2687,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 47]
 
 Tulshibagwale, et al.        Standards Track                   [Page 48]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
         Figure 42: Example: SET Containing a RISC Event with a Phone
@@ -2743,7 +2743,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 48]
 
 Tulshibagwale, et al.        Standards Track                   [Page 49]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
 11.1.6.  The "aud" Claim
@@ -2799,7 +2799,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 49]
 
 Tulshibagwale, et al.        Standards Track                   [Page 50]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
    *  The "sub" claim MUST NOT be present, as described in
@@ -2855,7 +2855,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 50]
 
 Tulshibagwale, et al.        Standards Track                   [Page 51]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
    url
@@ -2911,7 +2911,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 51]
 
 Tulshibagwale, et al.        Standards Track                   [Page 52]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
    [OAUTH-DISCOVERY]
@@ -2967,7 +2967,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 52]
 
 Tulshibagwale, et al.        Standards Track                   [Page 53]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
    [SUBIDS]   Backman, A. and M. Scurtescu, "Subject Identifiers for
@@ -3023,7 +3023,7 @@ Appendix B.  Notices
 
 Tulshibagwale, et al.        Standards Track                   [Page 54]
 
-                              SharedSignals                   March 2023
+                              SharedSignals                    June 2023
 
 
    no (and hereby expressly disclaim any) warranties (express, implied,
