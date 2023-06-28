@@ -90,22 +90,22 @@ Table of Contents
        7.1.3.  Subjects  . . . . . . . . . . . . . . . . . . . . . .  37
        7.1.4.  Verification  . . . . . . . . . . . . . . . . . . . .  41
        7.1.5.  Stream Updated Event  . . . . . . . . . . . . . . . .  44
-   8.  Authorization . . . . . . . . . . . . . . . . . . . . . . . .  45
-   9.  Security Considerations . . . . . . . . . . . . . . . . . . .  45
-     9.1.  Subject Probing . . . . . . . . . . . . . . . . . . . . .  45
-     9.2.  Information Harvesting  . . . . . . . . . . . . . . . . .  46
-     9.3.  Malicious Subject Removal . . . . . . . . . . . . . . . .  46
-   10. Privacy Considerations  . . . . . . . . . . . . . . . . . . .  46
+   8.  Authorization . . . . . . . . . . . . . . . . . . . . . . . .  46
+   9.  Security Considerations . . . . . . . . . . . . . . . . . . .  46
+     9.1.  Subject Probing . . . . . . . . . . . . . . . . . . . . .  46
+     9.2.  Information Harvesting  . . . . . . . . . . . . . . . . .  47
+     9.3.  Malicious Subject Removal . . . . . . . . . . . . . . . .  47
+   10. Privacy Considerations  . . . . . . . . . . . . . . . . . . .  47
      10.1.  Subject Information Leakage  . . . . . . . . . . . . . .  47
-     10.2.  Previously Consented Data  . . . . . . . . . . . . . . .  47
-     10.3.  New Data . . . . . . . . . . . . . . . . . . . . . . . .  47
-       10.3.1.  Organizational Data  . . . . . . . . . . . . . . . .  47
-       10.3.2.  Consentable Data . . . . . . . . . . . . . . . . . .  47
-   11. Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .  47
-     11.1.  Security Event Token Profile . . . . . . . . . . . . . .  48
-       11.1.1.  Signature Key Resolution . . . . . . . . . . . . . .  48
-       11.1.2.  SSF Event Subject  . . . . . . . . . . . . . . . . .  48
-       11.1.3.  SSF Event Properties . . . . . . . . . . . . . . . .  48
+     10.2.  Previously Consented Data  . . . . . . . . . . . . . . .  48
+     10.3.  New Data . . . . . . . . . . . . . . . . . . . . . . . .  48
+       10.3.1.  Organizational Data  . . . . . . . . . . . . . . . .  48
+       10.3.2.  Consentable Data . . . . . . . . . . . . . . . . . .  48
+   11. Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .  48
+     11.1.  Security Event Token Profile . . . . . . . . . . . . . .  49
+       11.1.1.  Signature Key Resolution . . . . . . . . . . . . . .  49
+       11.1.2.  SSF Event Subject  . . . . . . . . . . . . . . . . .  49
+       11.1.3.  SSF Event Properties . . . . . . . . . . . . . . . .  49
 
 
 
@@ -114,21 +114,21 @@ Tulshibagwale, et al.        Standards Track                    [Page 2]
                               SharedSignals                    June 2023
 
 
-       11.1.4.  Explicit Typing of SETs  . . . . . . . . . . . . . .  49
-       11.1.5.  The "exp" Claim  . . . . . . . . . . . . . . . . . .  49
-       11.1.6.  The "aud" Claim  . . . . . . . . . . . . . . . . . .  50
-       11.1.7.  The "events" claim . . . . . . . . . . . . . . . . .  50
-       11.1.8.  Security Considerations  . . . . . . . . . . . . . .  50
-     11.2.  SET Token Delivery Using HTTP Profile  . . . . . . . . .  51
-       11.2.1.  Stream Configuration Metadata  . . . . . . . . . . .  51
-   12. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  52
-   13. References  . . . . . . . . . . . . . . . . . . . . . . . . .  52
-     13.1.  Normative References . . . . . . . . . . . . . . . . . .  52
-     13.2.  Informative References . . . . . . . . . . . . . . . . .  54
-   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  54
-   Appendix B.  Notices  . . . . . . . . . . . . . . . . . . . . . .  54
-   Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  55
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  55
+       11.1.4.  Explicit Typing of SETs  . . . . . . . . . . . . . .  50
+       11.1.5.  The "exp" Claim  . . . . . . . . . . . . . . . . . .  50
+       11.1.6.  The "aud" Claim  . . . . . . . . . . . . . . . . . .  51
+       11.1.7.  The "events" claim . . . . . . . . . . . . . . . . .  51
+       11.1.8.  Security Considerations  . . . . . . . . . . . . . .  51
+     11.2.  SET Token Delivery Using HTTP Profile  . . . . . . . . .  52
+       11.2.1.  Stream Configuration Metadata  . . . . . . . . . . .  52
+   12. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  53
+   13. References  . . . . . . . . . . . . . . . . . . . . . . . . .  53
+     13.1.  Normative References . . . . . . . . . . . . . . . . . .  53
+     13.2.  Informative References . . . . . . . . . . . . . . . . .  55
+   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  55
+   Appendix B.  Notices  . . . . . . . . . . . . . . . . . . . . . .  55
+   Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  56
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  56
 
 1.  Introduction
 
@@ -2274,6 +2274,16 @@ Tulshibagwale, et al.        Standards Track                   [Page 40]
       event is triggered.  This is a nested attribute in the event
       payload.
 
+   subject
+
+      REQUIRED.  The value of the subject field in a Verification Event
+      MUST always be set to have a simple value of type opaque.  The id
+      of the value MUST be the stream_id of the stream being verified.
+
+      Note that the subject that identifies a stream itself is always
+      implicitly added to the stream and MAY NOT be removed from the
+      stream.
+
    Upon receiving a Verification Event, the Event Receiver SHALL parse
    the SET and validate its claims.  In particular, the Event Receiver
    SHALL confirm that the value for "state" is as expected.  If the
@@ -2281,22 +2291,16 @@ Tulshibagwale, et al.        Standards Track                   [Page 40]
    SHOULD be returned (see Section 2.3 of [DELIVERYPUSH] or
    [DELIVERYPOLL]).
 
-   In many cases, Event Transmitters MAY disable or suspend an Event
-   Stream that fails to successfully verify based on the acknowledgement
-   or lack of acknowledgement by the Event Receiver.
-
-
-
-
-
-
-
 
 
 Tulshibagwale, et al.        Standards Track                   [Page 41]
 
                               SharedSignals                    June 2023
 
+
+   In many cases, Event Transmitters MAY disable or suspend an Event
+   Stream that fails to successfully verify based on the acknowledgement
+   or lack of acknowledgement by the Event Receiver.
 
 7.1.4.2.  Triggering a Verification Event.
 
@@ -2333,10 +2337,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 41]
    queue of events.
 
    Errors are signaled with HTTP status codes as follows:
-
-
-
-
 
 
 
@@ -2417,6 +2417,10 @@ Tulshibagwale, et al.        Standards Track                   [Page 43]
      "iat": 1493856000,
      "events": {
        "https://schemas.openid.net/secevent/ssf/event-type/verification":{
+         "subject": {
+           "format": "opaque",
+           "id": "f67e39a0a4d34d56b3aa1bc4cff0069f"
+         },
          "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
        }
      }
@@ -2454,10 +2458,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 43]
       OPTIONAL.  Provides a short description of why the Transmitter has
       updated the status.
 
-   subject
-
-
-
 
 
 
@@ -2466,9 +2466,19 @@ Tulshibagwale, et al.        Standards Track                   [Page 44]
                               SharedSignals                    June 2023
 
 
-      OPTIONAL.  Specifies the Subject Principal for whom the status has
-      been updated.  If this claim is not included, then the status
-      change was applied to all subjects in the stream.
+   subject
+
+      REQUIRED.  Specifies the Subject Principal for whom the status has
+      been updated.  If the event applies to the entire stream, the
+      value of the subject field MUST be of format opaque, and its id
+      value MUST be the unique ID of the stream.
+
+      Note that the subject that identifies a stream itself is always
+      implicitly added to the stream and MAY NOT be removed from the
+      stream.
+
+      Below is a non-normative example of a stream-updated event with a
+      specific subject.
 
    {
      "jti": "123456",
@@ -2491,7 +2501,46 @@ Tulshibagwale, et al.        Standards Track                   [Page 44]
      }
    }
 
-                   Figure 41: Example: Stream Updated SET
+        Figure 41: Example: Stream Updated SET with tenant principal
+
+      Below is a non-normative example of a stream-updated event with a
+      stream subject.
+
+
+
+
+
+
+
+
+
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 45]
+
+                              SharedSignals                    June 2023
+
+
+   {
+     "jti": "123456",
+     "iss": "https://transmitter.example.com",
+     "aud": "receiver.example.com",
+     "iat": 1493856000,
+     "events": {
+       "https://schemas.openid.net/secevent/ssf/event-type/stream-updated": {
+         "subject": {
+           "format": "opaque",
+           "id" : "f67e39a0a4d34d56b3aa1bc4cff0069f"
+         },
+         "status": "paused",
+         "reason": "Internal error"
+       }
+     }
+   }
+
+     Figure 42: Example: Stream Updated SET with stream as the subject
+                       of single- stream Transmitter
 
 8.  Authorization
 
@@ -2513,21 +2562,21 @@ Tulshibagwale, et al.        Standards Track                   [Page 44]
    (e.g. that a particular individual does or does not use the Event
    Transmitter's service).
 
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 45]
-
-                              SharedSignals                    June 2023
-
-
    Event Transmitters SHOULD carefully evaluate the conditions under
    which they will return error responses to add subject requests.
    Event Transmitters MAY return a "204" response even if they will not
    actually send any events related to the subject, and Event Receivers
    MUST NOT assume that a 204 response means that they will receive
    events related to the subject.
+
+
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 46]
+
+                              SharedSignals                    June 2023
+
 
 9.2.  Information Harvesting
 
@@ -2567,17 +2616,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 45]
 
 10.  Privacy Considerations
 
-
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 46]
-
-                              SharedSignals                    June 2023
-
-
 10.1.  Subject Information Leakage
 
    Event issuers and recipients SHOULD take precautions to ensure that
@@ -2588,6 +2626,14 @@ Tulshibagwale, et al.        Standards Track                   [Page 46]
    about the subject that they are not known to already have knowledge
    of.  Transmitters and Receivers SHOULD always use the same Subject
    Identifier Type and the same claim values to identify a given subject
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 47]
+
+                              SharedSignals                    June 2023
+
+
    when communicating with a given party in order to reduce the
    possibility of information leakage.
 
@@ -2627,13 +2673,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 46]
 
    *  Security Event Token (SET) [RFC8417]
 
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 47]
-
-                              SharedSignals                    June 2023
-
-
    *  Push-Based SET Token Delivery Using HTTP [DELIVERYPUSH]
 
    *  Poll-Based SET Token Delivery Using HTTP [DELIVERYPOLL]
@@ -2643,6 +2682,13 @@ Tulshibagwale, et al.        Standards Track                   [Page 47]
 
    The CAEP use cases that set the requirements are described in CAEP
    Use Cases (TODO: Add reference when file is added to repository.)
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 48]
+
+                              SharedSignals                    June 2023
+
 
 11.1.  Security Event Token Profile
 
@@ -2682,16 +2728,23 @@ Tulshibagwale, et al.        Standards Track                   [Page 47]
      }
    }
 
+        Figure 43: Example: SET Containing a RISC Event with a Phone
+                               Number Subject
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 48]
+
+
+
+
+
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 49]
 
                               SharedSignals                    June 2023
 
-
-        Figure 42: Example: SET Containing a RISC Event with a Phone
-                               Number Subject
 
    {
      "iss": "https://idp.example.com/",
@@ -2709,7 +2762,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 48]
      }
    }
 
-      Figure 43: Example: SET Containing a CAEP Event with Properties
+      Figure 44: Example: SET Containing a CAEP Event with Properties
 
 11.1.4.  Explicit Typing of SETs
 
@@ -2721,7 +2774,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 48]
      "alg":"HS256"
    }
 
-                  Figure 44: Explicitly Typed JOSE Header
+                  Figure 45: Explicitly Typed JOSE Header
 
    The purpose is defense against confusion with other JWTs, as
    described in Sections 4.5, 4.6 and 4.7 of [RFC8417].  While current
@@ -2741,7 +2794,10 @@ Tulshibagwale, et al.        Standards Track                   [Page 48]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 49]
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 50]
 
                               SharedSignals                    June 2023
 
@@ -2778,7 +2834,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 49]
      }
    }
 
-               Figure 45: Example: SET with array 'aud' claim
+               Figure 46: Example: SET with array 'aud' claim
 
 11.1.7.  The "events" claim
 
@@ -2797,7 +2853,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 49]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 50]
+Tulshibagwale, et al.        Standards Track                   [Page 51]
 
                               SharedSignals                    June 2023
 
@@ -2853,7 +2909,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 50]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 51]
+Tulshibagwale, et al.        Standards Track                   [Page 52]
 
                               SharedSignals                    June 2023
 
@@ -2909,7 +2965,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 51]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 52]
+Tulshibagwale, et al.        Standards Track                   [Page 53]
 
                               SharedSignals                    June 2023
 
@@ -2965,7 +3021,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 52]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 53]
+Tulshibagwale, et al.        Standards Track                   [Page 54]
 
                               SharedSignals                    June 2023
 
@@ -3021,7 +3077,7 @@ Appendix B.  Notices
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 54]
+Tulshibagwale, et al.        Standards Track                   [Page 55]
 
                               SharedSignals                    June 2023
 
@@ -3077,7 +3133,7 @@ Authors' Addresses
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 55]
+Tulshibagwale, et al.        Standards Track                   [Page 56]
 
                               SharedSignals                    June 2023
 
@@ -3133,4 +3189,4 @@ Tulshibagwale, et al.        Standards Track                   [Page 55]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 56]
+Tulshibagwale, et al.        Standards Track                   [Page 57]
