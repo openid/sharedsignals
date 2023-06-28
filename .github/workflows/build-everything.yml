@@ -2,7 +2,7 @@ name: publish
 
 on:
   push:
-    branches: [ update-workflow ]
+    branches: [ main ]
   pull_request:
     branches: [ main ]
 
@@ -44,7 +44,7 @@ jobs:
             openid-risc-profile-specification-1_0.html
             openid-risc-profile-specification-1_0.txt
   publish-to-pages:
-    if: github.ref == 'refs/heads/update-workflow'
+    if: github.ref == 'refs/heads/main'
     needs: [build-sharedsignals]
     runs-on: ubuntu-latest
     permissions:
