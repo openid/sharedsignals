@@ -2,7 +2,7 @@ name: publish
 
 on:
   push:
-    branches: [ main ]
+    branches: [ update-workflow ]
   pull_request:
     branches: [ main ]
 
@@ -46,7 +46,7 @@ jobs:
             openid-risc-profile-specification-1_0.html
             openid-risc-profile-specification-1_0.txt
   publish-to-pages:
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/update-workflow'
     needs: [build-rfc]
     runs-on: ubuntu-latest
     permissions:
