@@ -45,27 +45,3 @@ jobs:
             openid-caep-specification-1_0.txt
             openid-risc-profile-specification-1_0.html
             openid-risc-profile-specification-1_0.txt
-
-  publish-to-pages:
-    if: github.ref == 'refs/heads/main'
-    needs: [build-sharedsignals]
-    runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: output
-      - name: Upload pages artifact
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: .
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v2
-  
