@@ -36,7 +36,6 @@ jobs:
         run: xml2rfc openid-risc-profile-specification-1_0.xml --text -o openid-risc-profile-specification-1_0.txt
       - name: Convert caep md to xml
         run: kramdown-rfc2629 openid-caep-specification-1_0.md > openid-caep-specification-1_0.xml
-      - name: Render HTML
       - name: Render caep html
         run: xml2rfc openid-caep-specification-1_0.xml --html -o openid-caep-specification-1_0.html
       - name: Render caep text
