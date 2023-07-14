@@ -1256,7 +1256,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
     "urn:example:secevent:events:type_2",
     "urn:example:secevent:events:type_3",
     "urn:example:secevent:events:type_4"
-  ],
+  ]
 }
 ~~~
 {: title="Example: Replace Stream Configuration Request" #figreplaceconfigreq}
