@@ -65,47 +65,47 @@ Table of Contents
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
      1.1.  Notational Conventions  . . . . . . . . . . . . . . . . .   3
    2.  Subject Principals  . . . . . . . . . . . . . . . . . . . . .   3
-   3.  Subject Members in SSF Events . . . . . . . . . . . . . . . .   3
-     3.1.  Simple Subject Members  . . . . . . . . . . . . . . . . .   4
-     3.2.  Complex Subject Members . . . . . . . . . . . . . . . . .   4
-       3.2.1.  Complex Subject Interpretation  . . . . . . . . . . .   5
-     3.3.  Subject Identifiers in SSF Events . . . . . . . . . . . .   5
-     3.4.  Additional Subject Identifier Formats . . . . . . . . . .   6
-       3.4.1.  JWT ID Subject Identifier Format  . . . . . . . . . .   6
-       3.4.2.  SAML Assertion ID Subject Identifier Format . . . . .   6
-     3.5.  Receiver Subject Processing . . . . . . . . . . . . . . .   7
-   4.  Event Properties  . . . . . . . . . . . . . . . . . . . . . .   7
-   5.  Example SETs that conform to the Shared Signals Framework . .   7
-   6.  Transmitter Configuration Discovery . . . . . . . . . . . . .   9
-     6.1.  Transmitter Configuration Metadata  . . . . . . . . . . .  10
-     6.2.  Obtaining Transmitter Configuration Information . . . . .  11
-       6.2.1.  Transmitter Configuration Request . . . . . . . . . .  11
-       6.2.2.  Backward Compatibility for RISC Transmitters  . . . .  12
-       6.2.3.  Transmitter Configuration Response  . . . . . . . . .  12
-       6.2.4.  Transmitter Configuration Validation  . . . . . . . .  13
-   7.  Management API for SET Event Streams  . . . . . . . . . . . .  13
-     7.1.  Event Stream Management . . . . . . . . . . . . . . . . .  14
-       7.1.1.  Stream Configuration  . . . . . . . . . . . . . . . .  15
-       7.1.2.  Stream Status . . . . . . . . . . . . . . . . . . . .  31
-       7.1.3.  Subjects  . . . . . . . . . . . . . . . . . . . . . .  37
-       7.1.4.  Verification  . . . . . . . . . . . . . . . . . . . .  41
-       7.1.5.  Stream Updated Event  . . . . . . . . . . . . . . . .  44
-   8.  Authorization . . . . . . . . . . . . . . . . . . . . . . . .  46
-   9.  Security Considerations . . . . . . . . . . . . . . . . . . .  46
-     9.1.  Subject Probing . . . . . . . . . . . . . . . . . . . . .  46
-     9.2.  Information Harvesting  . . . . . . . . . . . . . . . . .  47
-     9.3.  Malicious Subject Removal . . . . . . . . . . . . . . . .  47
-   10. Privacy Considerations  . . . . . . . . . . . . . . . . . . .  47
-     10.1.  Subject Information Leakage  . . . . . . . . . . . . . .  47
-     10.2.  Previously Consented Data  . . . . . . . . . . . . . . .  48
-     10.3.  New Data . . . . . . . . . . . . . . . . . . . . . . . .  48
-       10.3.1.  Organizational Data  . . . . . . . . . . . . . . . .  48
-       10.3.2.  Consentable Data . . . . . . . . . . . . . . . . . .  48
-   11. Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .  48
-     11.1.  Security Event Token Profile . . . . . . . . . . . . . .  49
-       11.1.1.  Signature Key Resolution . . . . . . . . . . . . . .  49
-       11.1.2.  SSF Event Subject  . . . . . . . . . . . . . . . . .  49
-       11.1.3.  SSF Event Properties . . . . . . . . . . . . . . . .  49
+   3.  Subject Members in SSF Events . . . . . . . . . . . . . . . .   4
+     3.1.  Subject Members . . . . . . . . . . . . . . . . . . . . .   4
+       3.1.1.  Existing CAEP and RISC Events . . . . . . . . . . . .   4
+       3.1.2.  New Event Types . . . . . . . . . . . . . . . . . . .   4
+       3.1.3.  Additional Subject Members  . . . . . . . . . . . . .   4
+       3.1.4.  Subject Member Values . . . . . . . . . . . . . . . .   4
+     3.2.  Simple Subject Members  . . . . . . . . . . . . . . . . .   4
+     3.3.  Complex Subject Members . . . . . . . . . . . . . . . . .   5
+       3.3.1.  Complex Subject Interpretation  . . . . . . . . . . .   6
+     3.4.  Subject Identifiers in SSF Events . . . . . . . . . . . .   6
+     3.5.  Additional Subject Identifier Formats . . . . . . . . . .   6
+       3.5.1.  JWT ID Subject Identifier Format  . . . . . . . . . .   6
+       3.5.2.  SAML Assertion ID Subject Identifier Format . . . . .   7
+     3.6.  Receiver Subject Processing . . . . . . . . . . . . . . .   8
+   4.  Event Properties  . . . . . . . . . . . . . . . . . . . . . .   8
+   5.  Example SETs that conform to the Shared Signals Framework . .   8
+   6.  Transmitter Configuration Discovery . . . . . . . . . . . . .  12
+     6.1.  Transmitter Configuration Metadata  . . . . . . . . . . .  12
+     6.2.  Obtaining Transmitter Configuration Information . . . . .  13
+       6.2.1.  Transmitter Configuration Request . . . . . . . . . .  13
+       6.2.2.  Backward Compatibility for RISC Transmitters  . . . .  14
+       6.2.3.  Transmitter Configuration Response  . . . . . . . . .  14
+       6.2.4.  Transmitter Configuration Validation  . . . . . . . .  15
+   7.  Management API for SET Event Streams  . . . . . . . . . . . .  15
+     7.1.  Event Stream Management . . . . . . . . . . . . . . . . .  16
+       7.1.1.  Stream Configuration  . . . . . . . . . . . . . . . .  17
+       7.1.2.  Stream Status . . . . . . . . . . . . . . . . . . . .  33
+       7.1.3.  Subjects  . . . . . . . . . . . . . . . . . . . . . .  39
+       7.1.4.  Verification  . . . . . . . . . . . . . . . . . . . .  43
+       7.1.5.  Stream Updated Event  . . . . . . . . . . . . . . . .  46
+   8.  Authorization . . . . . . . . . . . . . . . . . . . . . . . .  48
+   9.  Security Considerations . . . . . . . . . . . . . . . . . . .  48
+     9.1.  Subject Probing . . . . . . . . . . . . . . . . . . . . .  48
+     9.2.  Information Harvesting  . . . . . . . . . . . . . . . . .  49
+     9.3.  Malicious Subject Removal . . . . . . . . . . . . . . . .  49
+   10. Privacy Considerations  . . . . . . . . . . . . . . . . . . .  49
+     10.1.  Subject Information Leakage  . . . . . . . . . . . . . .  49
+     10.2.  Previously Consented Data  . . . . . . . . . . . . . . .  50
+     10.3.  New Data . . . . . . . . . . . . . . . . . . . . . . . .  50
+       10.3.1.  Organizational Data  . . . . . . . . . . . . . . . .  50
+       10.3.2.  Consentable Data . . . . . . . . . . . . . . . . . .  50
 
 
 
@@ -114,21 +114,26 @@ Tulshibagwale, et al.        Standards Track                    [Page 2]
                               SharedSignals                    June 2023
 
 
-       11.1.4.  Explicit Typing of SETs  . . . . . . . . . . . . . .  50
-       11.1.5.  The "exp" Claim  . . . . . . . . . . . . . . . . . .  50
-       11.1.6.  The "aud" Claim  . . . . . . . . . . . . . . . . . .  51
-       11.1.7.  The "events" claim . . . . . . . . . . . . . . . . .  51
-       11.1.8.  Security Considerations  . . . . . . . . . . . . . .  51
-     11.2.  SET Token Delivery Using HTTP Profile  . . . . . . . . .  52
-       11.2.1.  Stream Configuration Metadata  . . . . . . . . . . .  52
-   12. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  53
-   13. References  . . . . . . . . . . . . . . . . . . . . . . . . .  53
-     13.1.  Normative References . . . . . . . . . . . . . . . . . .  53
-     13.2.  Informative References . . . . . . . . . . . . . . . . .  55
-   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  55
-   Appendix B.  Notices  . . . . . . . . . . . . . . . . . . . . . .  55
-   Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  56
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  56
+   11. Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .  50
+     11.1.  Security Event Token Profile . . . . . . . . . . . . . .  51
+       11.1.1.  Signature Key Resolution . . . . . . . . . . . . . .  51
+       11.1.2.  SSF Event Subject  . . . . . . . . . . . . . . . . .  51
+       11.1.3.  SSF Event Properties . . . . . . . . . . . . . . . .  51
+       11.1.4.  Explicit Typing of SETs  . . . . . . . . . . . . . .  52
+       11.1.5.  The "exp" Claim  . . . . . . . . . . . . . . . . . .  52
+       11.1.6.  The "aud" Claim  . . . . . . . . . . . . . . . . . .  53
+       11.1.7.  The "events" claim . . . . . . . . . . . . . . . . .  53
+       11.1.8.  Security Considerations  . . . . . . . . . . . . . .  53
+     11.2.  SET Token Delivery Using HTTP Profile  . . . . . . . . .  54
+       11.2.1.  Stream Configuration Metadata  . . . . . . . . . . .  54
+   12. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  55
+   13. References  . . . . . . . . . . . . . . . . . . . . . . . . .  55
+     13.1.  Normative References . . . . . . . . . . . . . . . . . .  55
+     13.2.  Informative References . . . . . . . . . . . . . . . . .  57
+   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  57
+   Appendix B.  Notices  . . . . . . . . . . . . . . . . . . . . . .  57
+   Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  58
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  58
 
 1.  Introduction
 
@@ -158,11 +163,6 @@ Tulshibagwale, et al.        Standards Track                    [Page 2]
 
    Subject Principals are identified by Subject Members defined below.
 
-3.  Subject Members in SSF Events
-
-   A member of type Subject in an SSF event MAY have any claim name.
-   Each Subject Member MUST refer to exactly one Subject Principal.
-
 
 
 Tulshibagwale, et al.        Standards Track                    [Page 3]
@@ -170,23 +170,63 @@ Tulshibagwale, et al.        Standards Track                    [Page 3]
                               SharedSignals                    June 2023
 
 
-   A Subject may be a "simple subject" or a "complex subject".
+3.  Subject Members in SSF Events
 
-3.1.  Simple Subject Members
+3.1.  Subject Members
+
+   A Subject Member of a SSF event describes a subject of the event.  A
+   top-level claim named sub_id SHOULD be used to describe the primary
+   Subject Principal of the event.
+
+3.1.1.  Existing CAEP and RISC Events
+
+   Event types already defiend in the CAEP ([CAEP]) and RISC ([RISC])
+   drafts MAY use a subject field within the events claim of the SSF
+   eent to describe the primary Subject Principal of the event.  SSF
+   Transmitters SHOULD include the top-level sub_id claim even for these
+   existing event types.
+
+3.1.2.  New Event Types
+
+   New event types MUST use the top-level sub_id claim and MUST NOT use
+   the subject field in the events claim to describe the primary Subject
+   Principal.
+
+3.1.3.  Additional Subject Members
+
+   Specific event types MAY define additional Subject Members if
+   required to describe additional subjects of that event type (e.g. a
+   Transferee).  These additional subject fields MAY have any field
+   name.
+
+3.1.4.  Subject Member Values
+
+   Each Subject Member MUST refer to exactly one Subject Principal.  The
+   value of a Subject Member MAY be a "simple subject" or a "complex
+   subject".
+
+3.2.  Simple Subject Members
 
    A Simple Subject Member has a claim name and a value that is a
    "Subject Identifier" as defined in the Subject Identifiers for
    Security Event Tokens [SUBIDS].  Below is a non-normative example of
    a Simple Subject Member in a SSF event.
 
-   "transferer": {
+   "sub_id": {
      "format": "email",
      "email": "foo@example.com"
    }
 
                      Figure 1: Example: Simple Subject
 
-3.2.  Complex Subject Members
+
+
+Tulshibagwale, et al.        Standards Track                    [Page 4]
+
+                              SharedSignals                    June 2023
+
+
+3.3.  Complex Subject Members
 
    A Complex Subject Member has a name and a value that is a JSON
    [RFC7159] object that has a format field, and one or more Simple
@@ -219,13 +259,6 @@ Tulshibagwale, et al.        Standards Track                    [Page 3]
       OPTIONAL.  A Subject Identifier that identifies an organizational
       unit.
 
-
-
-Tulshibagwale, et al.        Standards Track                    [Page 4]
-
-                              SharedSignals                    June 2023
-
-
    group
 
       OPTIONAL.  A Subject Identifier that identifies a group.
@@ -237,7 +270,19 @@ Tulshibagwale, et al.        Standards Track                    [Page 4]
    Below is a non-normative example of a Complex Subject claim in a SSF
    event.
 
-   "transferee": {
+
+
+
+
+
+
+
+Tulshibagwale, et al.        Standards Track                    [Page 5]
+
+                              SharedSignals                    June 2023
+
+
+   "sub_id": {
      "format": "complex",
      "user" : {
        "format": "email",
@@ -252,13 +297,13 @@ Tulshibagwale, et al.        Standards Track                    [Page 4]
 
                      Figure 2: Example: Complex Subject
 
-3.2.1.  Complex Subject Interpretation
+3.3.1.  Complex Subject Interpretation
 
    All members within a Complex Subject MUST represent attributes of the
    same Subject Principal.  As a whole, the Complex Subject MUST refer
    to exactly one Subject Principal.
 
-3.3.  Subject Identifiers in SSF Events
+3.4.  Subject Identifiers in SSF Events
 
    A Subject Identifier in a SSF event MUST have an identifier format
    that is any one of:
@@ -267,7 +312,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 4]
       Security Event Tokens [SUBIDS]
 
    *  An identifier format defined in the Additional Subject Identifier
-      Formats (Section 3.4) section below, OR
+      Formats (Section 3.5) section below, OR
 
    *  A proprietary subject identifier format that is agreed to between
       parties.  Members within a subject identifier that has a
@@ -275,22 +320,23 @@ Tulshibagwale, et al.        Standards Track                    [Page 4]
       parties and such agreement is outside the scope of this
       specification.
 
-
-
-Tulshibagwale, et al.        Standards Track                    [Page 5]
-
-                              SharedSignals                    June 2023
-
-
-3.4.  Additional Subject Identifier Formats
+3.5.  Additional Subject Identifier Formats
 
    The following new subject identifier formats are defined:
 
-3.4.1.  JWT ID Subject Identifier Format
+3.5.1.  JWT ID Subject Identifier Format
 
    The "JWT ID" Subject Identifier Format specifies a JSON Web Token
    (JWT) identifier, defined in [RFC7519].  Subject Identifiers of this
    type MUST contain the following members:
+
+
+
+
+Tulshibagwale, et al.        Standards Track                    [Page 6]
+
+                              SharedSignals                    June 2023
+
 
    iss
 
@@ -316,7 +362,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 5]
 
                Figure 3: Example: 'jwt_id' Subject Identifier
 
-3.4.2.  SAML Assertion ID Subject Identifier Format
+3.5.2.  SAML Assertion ID Subject Identifier Format
 
    The "SAML Assertion ID" Subject Identifier Format specifies a SAML
    2.0 [OASIS.saml-core-2.0-os] assertion identifier.  Subject
@@ -329,15 +375,6 @@ Tulshibagwale, et al.        Standards Track                    [Page 5]
 
    assertion_id
 
-
-
-
-
-Tulshibagwale, et al.        Standards Track                    [Page 6]
-
-                              SharedSignals                    June 2023
-
-
       REQUIRED.  The "ID" value of the SAML assertion being identified,
       defined in [OASIS.saml-core-2.0-os]
 
@@ -347,6 +384,16 @@ Tulshibagwale, et al.        Standards Track                    [Page 6]
    Below is a non-normative example Subject Identifier for the
    "saml_assertion_id" Subject Identifier Format.
 
+
+
+
+
+
+Tulshibagwale, et al.        Standards Track                    [Page 7]
+
+                              SharedSignals                    June 2023
+
+
    {
        "format": "saml_assertion_id",
        "issuer": "https://idp.example.com/123456789/",
@@ -355,7 +402,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 6]
 
          Figure 4: Example: 'saml_assertion_id' Subject Identifier
 
-3.5.  Receiver Subject Processing
+3.6.  Receiver Subject Processing
 
    A SSF Receiver MUST make a best effort to process all members from a
    Subject in an SSF event.  The Transmitter Configuration Metadata
@@ -389,7 +436,16 @@ Tulshibagwale, et al.        Standards Track                    [Page 6]
 
 
 
-Tulshibagwale, et al.        Standards Track                    [Page 7]
+
+
+
+
+
+
+
+
+
+Tulshibagwale, et al.        Standards Track                    [Page 8]
 
                               SharedSignals                    June 2023
 
@@ -399,6 +455,10 @@ Tulshibagwale, et al.        Standards Track                    [Page 7]
      "jti": "756E69717565206964656E746966696572",
      "iat": 1520364019,
      "aud": "636C69656E745F6964",
+     "sub_id": {
+       "format": "email",
+       "email": "foo@example.com"
+     },
      "events": {
        "https://schemas.openid.net/secevent/risc/event-type/account-enabled": {
          "subject": {
@@ -412,11 +472,58 @@ Tulshibagwale, et al.        Standards Track                    [Page 7]
         Figure 5: Example: SET Containing a SSF Event with a Simple
                                Subject Member
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Tulshibagwale, et al.        Standards Track                    [Page 9]
+
+                              SharedSignals                    June 2023
+
+
    {
      "iss": "https://idp.example.com/",
      "jti": "756E69717565206964656E746966696572",
      "iat": 1520364019,
      "aud": "636C69656E745F6964",
+     "sub_id": {
+         "format": "complex",
+         "user": {
+             "format": "iss_sub",
+             "iss": "https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/",
+             "sub": "jane.smith@example.com"
+         },
+         "device": {
+             "format": "iss_sub",
+             "iss": "https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/",
+             "sub": "e9297990-14d2-42ec-a4a9-4036db86509a"
+         }
+     },
      "events": {
        "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
          "subject": {
@@ -445,7 +552,12 @@ Tulshibagwale, et al.        Standards Track                    [Page 7]
 
 
 
-Tulshibagwale, et al.        Standards Track                    [Page 8]
+
+
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 10]
 
                               SharedSignals                    June 2023
 
@@ -455,6 +567,10 @@ Tulshibagwale, et al.        Standards Track                    [Page 8]
      "jti": "756E69717565206964656E746966696572",
      "iat": 1520364019,
      "aud": "636C69656E745F6964",
+     "sub_id": {
+       "format": "email",
+       "email": "foo@example2.com"
+     },
      "events": {
        "https://schemas.openid.net/secevent/caep/event-type/token-claims-change": {
          "subject": {
@@ -477,6 +593,10 @@ Tulshibagwale, et al.        Standards Track                    [Page 8]
      "jti": "756E69717565206964656E746966696534",
      "iat": 15203800012,
      "aud": "636C69656E745F6324",
+     "sub_id": {
+         "format": "catalog_item",
+         "catalog_id": "c0384/winter/2354122"
+     },
      "events": {
        "https://schemas.openid.net/secevent/caep/event-type/token-claims-change": {
        "subject": {
@@ -491,6 +611,13 @@ Tulshibagwale, et al.        Standards Track                    [Page 8]
      }
    }
 
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 11]
+
+                              SharedSignals                    June 2023
+
+
       Figure 8: Example: SET Containing a SSF Event with a Proprietary
                          Subject Identifier Format
 
@@ -498,13 +625,6 @@ Tulshibagwale, et al.        Standards Track                    [Page 8]
 
    This section defines a mechanism for Receivers to obtain Transmitter
    configuration information.
-
-
-
-Tulshibagwale, et al.        Standards Track                    [Page 9]
-
-                              SharedSignals                    June 2023
-
 
 6.1.  Transmitter Configuration Metadata
 
@@ -546,6 +666,14 @@ Tulshibagwale, et al.        Standards Track                    [Page 9]
 
    verification_endpoint
 
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 12]
+
+                              SharedSignals                    June 2023
+
+
       OPTIONAL.  The URL of the Verification Endpoint.
 
    critical_subject_members
@@ -553,14 +681,6 @@ Tulshibagwale, et al.        Standards Track                    [Page 9]
       OPTIONAL.  List of member names in a Complex Subject which, if
       present in a Subject Member in an event, MUST be interpreted by a
       Receiver.
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 10]
-
-                              SharedSignals                    June 2023
-
 
    TODO: consider adding a IANA Registry for metadata, similar to
    Section 7.1.1 of [OAUTH-DISCOVERY].  This would allow other specs to
@@ -603,6 +723,13 @@ Tulshibagwale, et al.        Standards Track                   [Page 10]
    GET /.well-known/ssf-configuration/issuer1 HTTP/1.1
    Host: tr.example.com
 
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 13]
+
+                              SharedSignals                    June 2023
+
+
      Figure 10: Example: Transmitter Configuration Request (with path)
 
    Using path components enables supporting multiple issuers per host.
@@ -610,13 +737,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 10]
    use of ".well-known" is for supporting multiple issuers per host;
    unlike its use in [RFC5785], it does not provide general information
    about the host.
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 11]
-
-                              SharedSignals                    June 2023
-
 
 6.2.2.  Backward Compatibility for RISC Transmitters
 
@@ -661,15 +781,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 11]
 
 
 
-
-
-
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 12]
+Tulshibagwale, et al.        Standards Track                   [Page 14]
 
                               SharedSignals                    June 2023
 
@@ -725,7 +837,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 12]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 13]
+Tulshibagwale, et al.        Standards Track                   [Page 15]
 
                               SharedSignals                    June 2023
 
@@ -781,7 +893,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 13]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 14]
+Tulshibagwale, et al.        Standards Track                   [Page 16]
 
                               SharedSignals                    June 2023
 
@@ -837,7 +949,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 14]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 15]
+Tulshibagwale, et al.        Standards Track                   [Page 17]
 
                               SharedSignals                    June 2023
 
@@ -893,7 +1005,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 15]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 16]
+Tulshibagwale, et al.        Standards Track                   [Page 18]
 
                               SharedSignals                    June 2023
 
@@ -949,7 +1061,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 16]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 17]
+Tulshibagwale, et al.        Standards Track                   [Page 19]
 
                               SharedSignals                    June 2023
 
@@ -1005,7 +1117,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 17]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 18]
+Tulshibagwale, et al.        Standards Track                   [Page 20]
 
                               SharedSignals                    June 2023
 
@@ -1061,7 +1173,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 18]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 19]
+Tulshibagwale, et al.        Standards Track                   [Page 21]
 
                               SharedSignals                    June 2023
 
@@ -1117,7 +1229,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 19]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 20]
+Tulshibagwale, et al.        Standards Track                   [Page 22]
 
                               SharedSignals                    June 2023
 
@@ -1173,7 +1285,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 20]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 21]
+Tulshibagwale, et al.        Standards Track                   [Page 23]
 
                               SharedSignals                    June 2023
 
@@ -1229,7 +1341,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 21]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 22]
+Tulshibagwale, et al.        Standards Track                   [Page 24]
 
                               SharedSignals                    June 2023
 
@@ -1285,7 +1397,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 22]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 23]
+Tulshibagwale, et al.        Standards Track                   [Page 25]
 
                               SharedSignals                    June 2023
 
@@ -1341,7 +1453,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 23]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 24]
+Tulshibagwale, et al.        Standards Track                   [Page 26]
 
                               SharedSignals                    June 2023
 
@@ -1397,7 +1509,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 24]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 25]
+Tulshibagwale, et al.        Standards Track                   [Page 27]
 
                               SharedSignals                    June 2023
 
@@ -1453,7 +1565,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 25]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 26]
+Tulshibagwale, et al.        Standards Track                   [Page 28]
 
                               SharedSignals                    June 2023
 
@@ -1509,7 +1621,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 26]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 27]
+Tulshibagwale, et al.        Standards Track                   [Page 29]
 
                               SharedSignals                    June 2023
 
@@ -1565,7 +1677,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 27]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 28]
+Tulshibagwale, et al.        Standards Track                   [Page 30]
 
                               SharedSignals                    June 2023
 
@@ -1621,7 +1733,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 28]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 29]
+Tulshibagwale, et al.        Standards Track                   [Page 31]
 
                               SharedSignals                    June 2023
 
@@ -1677,7 +1789,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 29]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 30]
+Tulshibagwale, et al.        Standards Track                   [Page 32]
 
                               SharedSignals                    June 2023
 
@@ -1733,7 +1845,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 30]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 31]
+Tulshibagwale, et al.        Standards Track                   [Page 33]
 
                               SharedSignals                    June 2023
 
@@ -1749,7 +1861,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 31]
 
       REQUIRED.  The stream whose status is being queried.
 
-   subject
+   sub_id
 
       OPTIONAL.  The subject for which the stream status is requested.
 
@@ -1789,7 +1901,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 31]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 32]
+Tulshibagwale, et al.        Standards Track                   [Page 34]
 
                               SharedSignals                    June 2023
 
@@ -1830,7 +1942,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 32]
 
    {
      "status": "enabled",
-     "subject": {
+     "sub_id": {
        "format": "complex",
        "tenant" : {
          "format" : "iss_sub",
@@ -1845,7 +1957,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 32]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 33]
+Tulshibagwale, et al.        Standards Track                   [Page 35]
 
                               SharedSignals                    June 2023
 
@@ -1901,7 +2013,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 33]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 34]
+Tulshibagwale, et al.        Standards Track                   [Page 36]
 
                               SharedSignals                    June 2023
 
@@ -1910,7 +2022,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 34]
 
       REQUIRED.  The new status of the Event Stream.
 
-   subject
+   sub_id
 
       OPTIONAL.  The Subject to which the new status applies.
 
@@ -1957,7 +2069,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 34]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 35]
+Tulshibagwale, et al.        Standards Track                   [Page 37]
 
                               SharedSignals                    June 2023
 
@@ -1969,7 +2081,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 35]
    {
      "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
      "status": "paused",
-     "subject": {
+     "sub_id": {
        "format": "complex",
        "tenant" : {
          "format" : "iss_sub",
@@ -1991,7 +2103,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 35]
    {
      "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
      "status": "paused",
-     "subject": {
+     "sub_id": {
        "format" : "email",
        "email" : "user@example.com"
      }
@@ -2013,7 +2125,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 35]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 36]
+Tulshibagwale, et al.        Standards Track                   [Page 38]
 
                               SharedSignals                    June 2023
 
@@ -2064,12 +2176,12 @@ Tulshibagwale, et al.        Standards Track                   [Page 36]
 
       REQUIRED.  The stream to which the subject is being added.
 
-   subject
+   sub_id
 
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 37]
+Tulshibagwale, et al.        Standards Track                   [Page 39]
 
                               SharedSignals                    June 2023
 
@@ -2102,7 +2214,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 37]
 
    {
      "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
-     "subject": {
+     "sub_id": {
        "format": "email",
        "email": "example.user@example.com"
      },
@@ -2125,7 +2237,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 37]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 38]
+Tulshibagwale, et al.        Standards Track                   [Page 40]
 
                               SharedSignals                    June 2023
 
@@ -2164,7 +2276,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 38]
 
       REQUIRED.  The stream from which the subject is being removed.
 
-   subject
+   sub_id
 
       REQUIRED.  A Subject claim identifying the subject to be removed.
 
@@ -2181,7 +2293,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 38]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 39]
+Tulshibagwale, et al.        Standards Track                   [Page 41]
 
                               SharedSignals                    June 2023
 
@@ -2192,7 +2304,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 39]
 
    {
      "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
-     "subject": {
+     "sub_id": {
        "format": "phone",
        "phone_number": "+12065550123"
      }
@@ -2237,7 +2349,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 39]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 40]
+Tulshibagwale, et al.        Standards Track                   [Page 42]
 
                               SharedSignals                    June 2023
 
@@ -2274,15 +2386,29 @@ Tulshibagwale, et al.        Standards Track                   [Page 40]
       event is triggered.  This is a nested attribute in the event
       payload.
 
-   subject
+   sub_id
 
-      REQUIRED.  The value of the subject field in a Verification Event
-      MUST always be set to have a simple value of type opaque.  The id
-      of the value MUST be the stream_id of the stream being verified.
+      REQUIRED.  The value of the top-level sub_id claim in a
+      Verification Event MUST always be set to have a simple value of
+      type opaque.  The id of the value MUST be the stream_id of the
+      stream being verified.
 
       Note that the subject that identifies a stream itself is always
       implicitly added to the stream and MAY NOT be removed from the
       stream.
+
+
+
+
+
+
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 43]
+
+                              SharedSignals                    June 2023
+
 
    Upon receiving a Verification Event, the Event Receiver SHALL parse
    the SET and validate its claims.  In particular, the Event Receiver
@@ -2290,13 +2416,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 40]
    value of "state" does not match, an error response of "setData"
    SHOULD be returned (see Section 2.3 of [DELIVERYPUSH] or
    [DELIVERYPOLL]).
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 41]
-
-                              SharedSignals                    June 2023
-
 
    In many cases, Event Transmitters MAY disable or suspend an Event
    Stream that fails to successfully verify based on the acknowledgement
@@ -2342,14 +2461,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 41]
 
 
 
-
-
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 42]
+Tulshibagwale, et al.        Standards Track                   [Page 44]
 
                               SharedSignals                    June 2023
 
@@ -2405,7 +2517,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 42]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 43]
+Tulshibagwale, et al.        Standards Track                   [Page 45]
 
                               SharedSignals                    June 2023
 
@@ -2415,12 +2527,12 @@ Tulshibagwale, et al.        Standards Track                   [Page 43]
      "iss": "https://transmitter.example.com",
      "aud": "receiver.example.com",
      "iat": 1493856000,
+     "sub_id": {
+       "format": "opaque",
+       "id": "f67e39a0a4d34d56b3aa1bc4cff0069f"
+     },
      "events": {
        "https://schemas.openid.net/secevent/ssf/event-type/verification":{
-         "subject": {
-           "format": "opaque",
-           "id": "f67e39a0a4d34d56b3aa1bc4cff0069f"
-         },
          "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
        }
      }
@@ -2461,17 +2573,18 @@ Tulshibagwale, et al.        Standards Track                   [Page 43]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 44]
+Tulshibagwale, et al.        Standards Track                   [Page 46]
 
                               SharedSignals                    June 2023
 
 
-   subject
+   sub_id
 
-      REQUIRED.  Specifies the Subject Principal for whom the status has
-      been updated.  If the event applies to the entire stream, the
-      value of the subject field MUST be of format opaque, and its id
-      value MUST be the unique ID of the stream.
+      REQUIRED.  The top-level sub_id claim specifies the Subject
+      Principal for whom the status has been updated.  If the event
+      applies to the entire stream, the value of the sub_id field MUST
+      be of format opaque, and its id value MUST be the unique ID of the
+      stream.
 
       Note that the subject that identifies a stream itself is always
       implicitly added to the stream and MAY NOT be removed from the
@@ -2485,16 +2598,16 @@ Tulshibagwale, et al.        Standards Track                   [Page 44]
      "iss": "https://transmitter.example.com",
      "aud": "receiver.example.com",
      "iat": 1493856000,
-     "events": {
-       "https://schemas.openid.net/secevent/ssf/event-type/stream-updated": {
-         "subject": {
-           "format" : "complex",
-           "tenant" : {
+     "sub_id": {
+         "format" : "complex",
+         "tenant" : {
              "format": "iss_sub",
              "iss" : "http://example.com/idp1",
              "sub" : "1234"
-           }
-         },
+         }
+     },
+     "events": {
+       "https://schemas.openid.net/secevent/ssf/event-type/stream-updated": {
          "status": "paused",
          "reason": "License is not valid"
        }
@@ -2516,8 +2629,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 44]
 
 
 
-
-Tulshibagwale, et al.        Standards Track                   [Page 45]
+Tulshibagwale, et al.        Standards Track                   [Page 47]
 
                               SharedSignals                    June 2023
 
@@ -2527,12 +2639,12 @@ Tulshibagwale, et al.        Standards Track                   [Page 45]
      "iss": "https://transmitter.example.com",
      "aud": "receiver.example.com",
      "iat": 1493856000,
+     "sub_id": {
+       "format": "opaque",
+       "id" : "f67e39a0a4d34d56b3aa1bc4cff0069f"
+     },
      "events": {
        "https://schemas.openid.net/secevent/ssf/event-type/stream-updated": {
-         "subject": {
-           "format": "opaque",
-           "id" : "f67e39a0a4d34d56b3aa1bc4cff0069f"
-         },
          "status": "paused",
          "reason": "Internal error"
        }
@@ -2573,7 +2685,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 45]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 46]
+Tulshibagwale, et al.        Standards Track                   [Page 48]
 
                               SharedSignals                    June 2023
 
@@ -2629,7 +2741,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 46]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 47]
+Tulshibagwale, et al.        Standards Track                   [Page 49]
 
                               SharedSignals                    June 2023
 
@@ -2685,7 +2797,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 47]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 48]
+Tulshibagwale, et al.        Standards Track                   [Page 50]
 
                               SharedSignals                    June 2023
 
@@ -2701,10 +2813,9 @@ Tulshibagwale, et al.        Standards Track                   [Page 48]
 
 11.1.2.  SSF Event Subject
 
-   The subject of a SSF event is identified by the "subject" claim
-   within the event payload, whose value is a Subject Identifier.  The
-   "subject" claim is REQUIRED for all SSF events.  The JWT "sub" claim
-   MUST NOT be present in any SET containing a SSF event.
+   The primary Subject Member of SSF events is described in the "Subject
+   Members" section (Section 3).  The JWT "sub" claim MUST NOT be
+   present in any SET containing a SSF event.
 
 11.1.3.  SSF Event Properties
 
@@ -2716,6 +2827,10 @@ Tulshibagwale, et al.        Standards Track                   [Page 48]
      "jti": "756E69717565206964656E746966696572",
      "iat": 1520364019,
      "aud": "636C69656E745F6964",
+     "sub_id": {
+       "format": "phone",
+       "phone_number": "+1 206 555 0123"
+     },
      "events": {
        "https://schemas.openid.net/secevent/risc/event-type/account-disabled": {
          "subject": {
@@ -2738,10 +2853,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 48]
 
 
 
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 49]
+Tulshibagwale, et al.        Standards Track                   [Page 51]
 
                               SharedSignals                    June 2023
 
@@ -2751,6 +2863,10 @@ Tulshibagwale, et al.        Standards Track                   [Page 49]
      "jti": "756E69717565206964656E746966696572",
      "iat": 1520364019,
      "aud": "636C69656E745F6964",
+     "sub_id": {
+       "format": "email",
+       "email": "user@example.com"
+     },
      "events": {
        "https://schemas.openid.net/secevent/caep/event-type/token-claims-changed": {
          "subject": {
@@ -2793,11 +2909,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 49]
 
 
 
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 50]
+Tulshibagwale, et al.        Standards Track                   [Page 52]
 
                               SharedSignals                    June 2023
 
@@ -2853,7 +2965,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 50]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 51]
+Tulshibagwale, et al.        Standards Track                   [Page 53]
 
                               SharedSignals                    June 2023
 
@@ -2909,7 +3021,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 51]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 52]
+Tulshibagwale, et al.        Standards Track                   [Page 54]
 
                               SharedSignals                    June 2023
 
@@ -2930,6 +3042,11 @@ Tulshibagwale, et al.        Standards Track                   [Page 52]
 13.  References
 
 13.1.  Normative References
+
+   [CAEP]     Cappalli, T. and A. Tulshibagwale, "OpenID Continuous
+              Access Evaluation Profile 1.0 - draft 02", August 2021,
+              <https://openid.net/specs/openid-caep-specification-
+              1_0.html>.
 
    [CLIENTCRED]
               Hardt, D., "The OAuth 2.0 Authorization Framework - Client
@@ -2953,22 +3070,23 @@ Tulshibagwale, et al.        Standards Track                   [Page 52]
               April 2017, <http://openid.net/specs/openid-connect-core-
               1_0.html#IDToken>.
 
+
+
+
+
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 55]
+
+                              SharedSignals                    June 2023
+
+
    [OASIS.saml-core-2.0-os]
               Cantor, S., Kemp, J., Philpott, R., and E. Maler,
               "Assertions and Protocol for the OASIS Security Assertion
               Markup Language (SAML) V2.0", OASIS Standard saml-core-
               2.0-os, March 2005.
-
-
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 53]
-
-                              SharedSignals                    June 2023
-
 
    [OAUTH-DISCOVERY]
               Jones, M. B., Sakimura, N., and J. Bradley, "OAuth 2.0
@@ -3012,19 +3130,24 @@ Tulshibagwale, et al.        Standards Track                   [Page 53]
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 56]
+
+                              SharedSignals                    June 2023
+
+
    [RFC8417]  Hunt, P., Ed., Jones, M., Denniss, W., and M. Ansari,
               "Security Event Token (SET)", RFC 8417,
               DOI 10.17487/RFC8417, July 2018,
               <https://www.rfc-editor.org/info/rfc8417>.
 
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 54]
-
-                              SharedSignals                    June 2023
-
+   [RISC]     Scurtescu, M., Backman, A., Hunt, P., Bradley, J., Bounev,
+              S., and A. Tulshibagwale, "OpenID RISC Profile
+              Specification 1.0 - draft 02", April 2022,
+              <https://openid.net/specs/openid-risc-profile-
+              specification-1_0.html>.
 
    [SUBIDS]   Backman, A. and M. Scurtescu, "Subject Identifiers for
               Security Event Tokens", May 2021,
@@ -3032,12 +3155,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 54]
               secevent-subject-identifiers>.
 
 13.2.  Informative References
-
-   [CAEP]     Tulshibagwale, A., "Re-thinking Federated Identity with
-              the Continuous Access Evaluation Protocol", February 2019,
-              <https://cloud.google.com/blog/products/identity-security/
-              re-thinking-federated-identity-with-the-continuous-access-
-              evaluation-protocol>.
 
    [USECASES] Scurtescu, M., "Security Events RISC Use Cases", June
               2017, <https://tools.ietf.org/html/draft-scurtescu-
@@ -3069,19 +3186,19 @@ Appendix B.  Notices
    taken steps to help ensure that the technology is available for
    distribution, it takes no position regarding the validity or scope of
    any intellectual property or other rights that might be claimed to
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 57]
+
+                              SharedSignals                    June 2023
+
+
    pertain to the implementation or use of the technology described in
    this specification or the extent to which any license under such
    rights might or might not be available; neither does it represent
    that it has made any independent effort to identify any such rights.
    The OpenID Foundation and the contributors to this specification make
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 55]
-
-                              SharedSignals                    June 2023
-
-
    no (and hereby expressly disclaim any) warranties (express, implied,
    or otherwise), including implied warranties of merchantability, non-
    infringement, fitness for a particular purpose, or title, related to
@@ -3125,17 +3242,17 @@ Authors' Addresses
    Email: richanna@amazon.com
 
 
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 58]
+
+                              SharedSignals                    June 2023
+
+
    John Bradley
    Yubico
    Email: secevemt@ve7jtb.com
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 56]
-
-                              SharedSignals                    June 2023
 
 
    Shayne Miel
@@ -3184,9 +3301,4 @@ Tulshibagwale, et al.        Standards Track                   [Page 56]
 
 
 
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 57]
+Tulshibagwale, et al.        Standards Track                   [Page 59]

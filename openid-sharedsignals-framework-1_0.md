@@ -169,16 +169,42 @@ normative:
     date: May 2021
     target: https://datatracker.ietf.org/doc/html/draft-ietf-secevent-subject-identifiers
     title: Subject Identifiers for Security Event Tokens
-
-informative:
   CAEP:
     author:
-    - ins: A. Tulshibagwale
+    -
+      ins: T. Cappalli
+      name: Tim Cappalli
+    -
+      ins: A. Tulshibagwale
       name: Atul Tulshibagwale
-      org: Google
-    date: February 2019
-    target: https://cloud.google.com/blog/products/identity-security/re-thinking-federated-identity-with-the-continuous-access-evaluation-protocol
-    title: '               Re-thinking Federated Identity with the Continuous Access Evaluation Protocol             '
+    date: August 2021
+    target: https://openid.net/specs/openid-caep-specification-1_0.html
+    title: OpenID Continuous Access Evaluation Profile 1.0 - draft 02
+  RISC:
+    author:
+    -
+      ins: M. Scurtescu
+      name: Marius Scurtescu
+    -
+      ins: A. Backman
+      name: Annabelle Backman
+    -
+      ins: P. Hunt
+      name: Phil Hunt
+    -
+      ins: J. Bradley
+      name: John Bradley
+    -
+      ins: S. Bounev
+      name: Stan Bounev
+    -
+      ins: A. Tulshibagwale
+      name: Atul Tulshibagwale
+    date: April 2022
+    target: https://openid.net/specs/openid-risc-profile-specification-1_0.html
+    title: OpenID RISC Profile Specification 1.0 - draft 02
+
+informative:
   USECASES:
     author:
     - ins: M. Scurtescu
@@ -240,10 +266,20 @@ Subject Principals are identified by Subject Members defined below.
 
 # Subject Members in SSF Events {#subject-ids}
 
-A member of type Subject in an SSF event MAY have any claim name. Each Subject Member MUST
-refer to exactly one Subject Principal.
+## Subject Members {#subject-members}
+A Subject Member of a SSF event describes a subject of the event. A top-level claim named `sub_id` SHOULD be used to describe the primary Subject Principal of the event.
 
-A Subject may be a "simple subject" or a "complex subject".
+### Existing CAEP and RISC Events
+Event types already defiend in the CAEP ({{CAEP}}) and RISC ({{RISC}}) drafts MAY use a `subject` field within the `events` claim of the SSF eent to describe the primary Subject Principal of the event. SSF Transmitters SHOULD include the top-level `sub_id` claim even for these existing event types.
+
+### New Event Types
+New event types MUST use the top-level `sub_id` claim and MUST NOT use the `subject` field in the `events` claim to describe the primary Subject Principal.
+
+### Additional Subject Members
+Specific event types MAY define additional Subject Members if required to describe additional subjects of that event type (e.g. a Transferee). These additional subject fields MAY have any field name.
+
+### Subject Member Values
+Each Subject Member MUST refer to exactly one Subject Principal. The value of a Subject Member MAY be a "simple subject" or a "complex subject".
 
 ## Simple Subject Members {#simple-subjects}
 
@@ -253,7 +289,7 @@ Identifier" as defined in the Subject Identifiers for Security Event Tokens
 event.
 
 ~~~ json
-"transferer": {
+"sub_id": {
   "format": "email",
   "email": "foo@example.com"
 }
@@ -301,7 +337,7 @@ appear at most once in the Complex Subject value.
 Below is a non-normative example of a Complex Subject claim in a SSF event.
 
 ~~~ json
-"transferee": {
+"sub_id": {
   "format": "complex",
   "user" : {
     "format": "email",
@@ -429,6 +465,10 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
   "jti": "756E69717565206964656E746966696572",
   "iat": 1520364019,
   "aud": "636C69656E745F6964",
+  "sub_id": {
+    "format": "email",
+    "email": "foo@example.com"
+  },
   "events": {
     "https://schemas.openid.net/secevent/risc/event-type/account-enabled": {
       "subject": {
@@ -447,6 +487,19 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
   "jti": "756E69717565206964656E746966696572",
   "iat": 1520364019,
   "aud": "636C69656E745F6964",
+  "sub_id": {
+      "format": "complex",
+      "user": {
+          "format": "iss_sub",
+          "iss": "https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/",
+          "sub": "jane.smith@example.com"
+      },
+      "device": {
+          "format": "iss_sub",
+          "iss": "https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/",
+          "sub": "e9297990-14d2-42ec-a4a9-4036db86509a"
+      }
+  },
   "events": {
     "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
       "subject": {
@@ -478,6 +531,10 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
   "jti": "756E69717565206964656E746966696572",
   "iat": 1520364019,
   "aud": "636C69656E745F6964",
+  "sub_id": {
+    "format": "email",
+    "email": "foo@example2.com"
+  },
   "events": {
     "https://schemas.openid.net/secevent/caep/event-type/token-claims-change": {
       "subject": {
@@ -500,6 +557,10 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
   "jti": "756E69717565206964656E746966696534",
   "iat": 15203800012,
   "aud": "636C69656E745F6324",
+  "sub_id": {
+      "format": "catalog_item",
+      "catalog_id": "c0384/winter/2354122"
+  },
   "events": {
     "https://schemas.openid.net/secevent/caep/event-type/token-claims-change": {
     "subject": {
@@ -1373,7 +1434,7 @@ stream_id
 
 > REQUIRED. The stream whose status is being queried.
 
-subject
+sub_id
 
 > OPTIONAL. The subject for which the stream status is requested.
 
@@ -1445,7 +1506,7 @@ Cache-Control: no-store
 
 {
   "status": "enabled",
-  "subject": {
+  "sub_id": {
     "format": "complex",
     "tenant" : {
       "format" : "iss_sub",
@@ -1495,7 +1556,7 @@ status
 
 > REQUIRED. The new status of the Event Stream.
 
-subject
+sub_id
 
 > OPTIONAL. The Subject to which the new status applies.
 
@@ -1533,7 +1594,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 {
   "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
   "status": "paused",
-  "subject": {
+  "sub_id": {
     "format": "complex",
     "tenant" : {
       "format" : "iss_sub",
@@ -1556,7 +1617,7 @@ Cache-Control: no-store
 {
   "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
   "status": "paused",
-  "subject": {
+  "sub_id": {
     "format" : "email",
     "email" : "user@example.com"
   }
@@ -1596,7 +1657,7 @@ stream_id
 
 > REQUIRED. The stream to which the subject is being added.
 
-subject
+sub_id
 
 > REQUIRED. A Subject claim identifying the subject to be added.
 
@@ -1624,7 +1685,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
 {
   "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
-  "subject": {
+  "sub_id": {
     "format": "email",
     "email": "example.user@example.com"
   },
@@ -1662,7 +1723,7 @@ stream_id
 
 > REQUIRED. The stream from which the subject is being removed.
 
-subject
+sub_id
 
 > REQUIRED. A Subject claim identifying the subject to be removed.
 
@@ -1679,7 +1740,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
 {
   "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
-  "subject": {
+  "sub_id": {
     "format": "phone",
     "phone_number": "+12065550123"
   }
@@ -1732,11 +1793,9 @@ state
 > OPTIONAL An opaque value provided by the Event Receiver when the event is
   triggered. This is a nested attribute in the event payload.
 
-subject
+sub_id
 
-> REQUIRED. The value of the `subject` field in a Verification Event MUST always
-  be set to have a simple value of type `opaque`. The `id` of the value MUST be
-  the `stream_id` of the stream being verified.
+> REQUIRED. The value of the top-level `sub_id` claim in a Verification Event MUST always be set to have a simple value of type `opaque`. The `id` of the value MUST be the `stream_id` of the stream being verified.
 
 > Note that the subject that identifies a stream itself is always implicitly
   added to the stream and MAY NOT be removed from the stream.
@@ -1823,12 +1882,12 @@ Event Receiver as a result of the above request:
   "iss": "https://transmitter.example.com",
   "aud": "receiver.example.com",
   "iat": 1493856000,
+  "sub_id": {
+    "format": "opaque",
+    "id": "f67e39a0a4d34d56b3aa1bc4cff0069f"
+  },
   "events": {
     "https://schemas.openid.net/secevent/ssf/event-type/verification":{
-      "subject": {
-        "format": "opaque",
-        "id": "f67e39a0a4d34d56b3aa1bc4cff0069f"
-      },
       "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
     }
   }
@@ -1863,10 +1922,10 @@ reason
 > OPTIONAL. Provides a short description of why the Transmitter has updated the
   status.
 
-subject
+sub_id
 
-> REQUIRED. Specifies the Subject Principal for whom the status has been updated.
-  If the event applies to the entire stream, the value of the `subject` field
+> REQUIRED. The top-level `sub_id` claim specifies the Subject Principal for whom the status has been updated.
+  If the event applies to the entire stream, the value of the `sub_id` field
   MUST be of format `opaque`, and its `id` value MUST be the unique ID of the
   stream. 
 
@@ -1882,16 +1941,16 @@ subject
   "iss": "https://transmitter.example.com",
   "aud": "receiver.example.com",
   "iat": 1493856000,
-  "events": {
-    "https://schemas.openid.net/secevent/ssf/event-type/stream-updated": {
-      "subject": {
-	"format" : "complex",
-        "tenant" : {
+  "sub_id": {
+      "format" : "complex",
+      "tenant" : {
           "format": "iss_sub",
           "iss" : "http://example.com/idp1",
           "sub" : "1234"
-        }
-      },
+      }
+  },
+  "events": {
+    "https://schemas.openid.net/secevent/ssf/event-type/stream-updated": {
       "status": "paused",
       "reason": "License is not valid"
     }
@@ -1909,12 +1968,12 @@ subject
   "iss": "https://transmitter.example.com",
   "aud": "receiver.example.com",
   "iat": 1493856000,
+  "sub_id": {
+    "format": "opaque",
+    "id" : "f67e39a0a4d34d56b3aa1bc4cff0069f"
+  },   
   "events": {
     "https://schemas.openid.net/secevent/ssf/event-type/stream-updated": {
-      "subject": {
-        "format": "opaque",
-        "id" : "f67e39a0a4d34d56b3aa1bc4cff0069f"
-      },   
       "status": "paused",
       "reason": "Internal error"
     }
@@ -2038,9 +2097,7 @@ This section provides SSF profiling specifications for the Security Event Token 
 The signature key can be obtained through "jwks_uri", see {{discovery}}.
 
 ### SSF Event Subject {#event-subjects}
-The subject of a SSF event is identified by the "subject" claim within the event
-payload, whose value is a Subject Identifier. The "subject" claim is REQUIRED
-for all SSF events. The JWT "sub" claim MUST NOT be present in any SET containing
+The primary Subject Member of SSF events is described in the "Subject Members" section ({{subject-ids}}). The JWT "sub" claim MUST NOT be present in any SET containing
 a SSF event.
 
 ### SSF Event Properties {#event-properties}
@@ -2053,6 +2110,10 @@ specific to the event type.
   "jti": "756E69717565206964656E746966696572",
   "iat": 1520364019,
   "aud": "636C69656E745F6964",
+  "sub_id": {
+    "format": "phone",
+    "phone_number": "+1 206 555 0123"
+  },
   "events": {
     "https://schemas.openid.net/secevent/risc/event-type/account-disabled": {
       "subject": {
@@ -2073,6 +2134,10 @@ specific to the event type.
   "jti": "756E69717565206964656E746966696572",
   "iat": 1520364019,
   "aud": "636C69656E745F6964",
+  "sub_id": {
+    "format": "email",
+    "email": "user@example.com"
+  },
   "events": {
     "https://schemas.openid.net/secevent/caep/event-type/token-claims-changed": {
       "subject": {
@@ -2216,3 +2281,4 @@ Copyright (c) 2021 The OpenID Foundation.
 The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, or other interested party a non-exclusive, royalty free, worldwide copyright license to reproduce, prepare derivative works from, distribute, perform and display, this Implementers Draft or Final Specification solely for the purposes of (i) developing specifications, and (ii) implementing Implementers Drafts and Final Specifications based on such documents, provided that attribution be made to the OIDF as the source of the material, but that such attribution does not indicate an endorsement by the OIDF.
 
 The technology described in this specification was made available from contributions from various sources, including members of the OpenID Foundation and others. Although the OpenID Foundation has taken steps to help ensure that the technology is available for distribution, it takes no position regarding the validity or scope of any intellectual property or other rights that might be claimed to pertain to the implementation or use of the technology described in this specification or the extent to which any license under such rights might or might not be available; neither does it represent that it has made any independent effort to identify any such rights. The OpenID Foundation and the contributors to this specification make no (and hereby expressly disclaim any) warranties (express, implied, or otherwise), including implied warranties of merchantability, non-infringement, fitness for a particular purpose, or title, related to this specification, and the entire risk as to implementing this specification is assumed by the implementer. The OpenID Intellectual Property Rights policy requires contributors to offer a patent promise not to assert certain patent claims against other contributors and against implementers. The OpenID Foundation invites any interested party to bring to its attention any copyrights, patents, patent applications, or other proprietary rights that may cover technology that may be required to practice this specification.
+
