@@ -689,6 +689,7 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
 {: #device-compliance-change-examples-out-of-compliance title="Example: Device No Longer Compliant - Complex Subject + optional claims"}
 
 --- back
+
 # Acknowledgements
 
 The authors wish to thank all members of the OpenID Foundation Shared Signals
