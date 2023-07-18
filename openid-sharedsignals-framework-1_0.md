@@ -52,6 +52,15 @@ author:
         org: Cisco
         email: smiel@cisco.com
 
+contributor:
+      -
+        ins: S. Venema
+        name: Steve Venema
+        org: ForgeRock
+        email: steve.venema@forgerock.com
+        contribution: |
+          Steve defined the format field of Complex Subjects
+
 normative:
   CLIENTCRED:
     author:
@@ -254,8 +263,9 @@ event.
 ## Complex Subject Members {#complex-subjects}
 
 A Complex Subject Member has a name and a value that is a JSON {{RFC7159}}
-object that has one or more Simple Subject Members. The name of each Simple
-Subject Member in this value MAY be one of the following:
+object that has a format field, and one or more Simple Subject Members. The name
+of the format field is "format", and its value is "complex". The name of each
+Simple Subject Member in this value MAY be one of the following:
 
 user
 
@@ -292,6 +302,7 @@ Below is a non-normative example of a Complex Subject claim in a SSF event.
 
 ~~~ json
 "transferee": {
+  "format": "complex",
   "user" : {
     "format": "email",
     "email": "bar@example.com"
@@ -439,6 +450,7 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
   "events": {
     "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
       "subject": {
+          "format": "complex",
           "user": {
               "format": "iss_sub",
               "iss": "https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/",
@@ -1246,7 +1258,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
     "urn:example:secevent:events:type_2",
     "urn:example:secevent:events:type_3",
     "urn:example:secevent:events:type_4"
-  ],
+  ]
 }
 ~~~
 {: title="Example: Replace Stream Configuration Request" #figreplaceconfigreq}
@@ -1301,7 +1313,7 @@ Pending conditions or errors are signaled with HTTP status codes as follows:
 #### Deleting a Stream {#deleting-a-stream}
 An Event Receiver deletes a stream by making an HTTP DELETE request to the
 Configuration Endpoint. On receiving a request the Event Transmitter responds
-with an empty "204 OK" response if the configuration was successfully removed.
+with an empty "204 No Content" response if the configuration was successfully removed.
 
 The DELETE request MUST include the "stream_id" as a parameter in order to
 identify the correct Event Stream.
@@ -1436,6 +1448,7 @@ Cache-Control: no-store
 {
   "status": "enabled",
   "subject": {
+    "format": "complex",
     "tenant" : {
       "format" : "iss_sub",
       "iss" : "http://example.com/idp1",
@@ -1523,6 +1536,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
   "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
   "status": "paused",
   "subject": {
+    "format": "complex",
     "tenant" : {
       "format" : "iss_sub",
       "iss" : "http://example.com/idp1",
@@ -1733,6 +1747,15 @@ state
 > OPTIONAL An opaque value provided by the Event Receiver when the event is
   triggered. This is a nested attribute in the event payload.
 
+subject
+
+> REQUIRED. The value of the `subject` field in a Verification Event MUST always
+  be set to have a simple value of type `opaque`. The `id` of the value MUST be
+  the `stream_id` of the stream being verified.
+
+> Note that the subject that identifies a stream itself is always implicitly
+  added to the stream and MAY NOT be removed from the stream.
+
 Upon receiving a Verification Event, the Event Receiver SHALL parse the SET and
 validate its claims. In particular, the Event Receiver SHALL confirm that the
 value for "state" is as expected. If the value of "state" does not match, an
@@ -1817,6 +1840,10 @@ Event Receiver as a result of the above request:
   "iat": 1493856000,
   "events": {
     "https://schemas.openid.net/secevent/ssf/event-type/verification":{
+      "subject": {
+        "format": "opaque",
+        "id": "f67e39a0a4d34d56b3aa1bc4cff0069f"
+      },
       "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
     }
   }
@@ -1853,9 +1880,16 @@ reason
 
 subject
 
-> OPTIONAL. Specifies the Subject Principal for whom the status has been updated.
-  If this claim is not included, then the status change was applied to all
-  subjects in the stream.
+> REQUIRED. Specifies the Subject Principal for whom the status has been updated.
+  If the event applies to the entire stream, the value of the `subject` field
+  MUST be of format `opaque`, and its `id` value MUST be the unique ID of the
+  stream. 
+
+> Note that the subject that identifies a stream itself is always implicitly
+  added to the stream and MAY NOT be removed from the stream.
+
+> Below is a non-normative example of a `stream-updated` event with a specific
+  subject.
 
 ~~~ json
 {
@@ -1866,6 +1900,7 @@ subject
   "events": {
     "https://schemas.openid.net/secevent/ssf/event-type/stream-updated": {
       "subject": {
+	"format" : "complex",
         "tenant" : {
           "format": "iss_sub",
           "iss" : "http://example.com/idp1",
@@ -1878,7 +1913,30 @@ subject
   }
 }
 ~~~
-{: title="Example: Stream Updated SET" #figstreamupdatedset}
+{: title="Example: Stream Updated SET with tenant principal" #figstreamupdatedset}
+
+> Below is a non-normative example of a `stream-updated` event with a stream
+  subject.
+
+~~~ json
+{
+  "jti": "123456",
+  "iss": "https://transmitter.example.com",
+  "aud": "receiver.example.com",
+  "iat": 1493856000,
+  "events": {
+    "https://schemas.openid.net/secevent/ssf/event-type/stream-updated": {
+      "subject": {
+        "format": "opaque",
+        "id" : "f67e39a0a4d34d56b3aa1bc4cff0069f"
+      },   
+      "status": "paused",
+      "reason": "Internal error"
+    }
+  }
+}
+~~~
+{: title="Example: Stream Updated SET with stream as the subject of single-stream Transmitter" #figstreamupdatedstreamset}
 
 # Authorization {#management-api-auth}
 HTTP API calls from a Receiver to a Transmitter SHOULD be authorized by

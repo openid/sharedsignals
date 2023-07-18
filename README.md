@@ -6,6 +6,17 @@ The goal of the [Shared Signals](http://openid.net/wg/sharedsignals/) Working Gr
 * Prevent malicious actors from leveraging compromises of accounts, devices, services, endpoints, or other principals or resources to gain unauthorized access to additional systems or resources.
 * Enable users, administrators, and service providers to coordinate in order to detect and respond to incidents.
 
+## Current Development Drafts
+The current drafts of the specifications under development are kept here:
+
+| Specification            | HTML    | TXT    |
+|--------------------------|---------|--------|
+| Shared Signals Framework | [HTML](https://openid.github.io/sharedsignals/openid-sharedsignals-framework-1_0.html)| [TXT](https://openid.github.io/sharedsignals/openid-sharedsignals-framework-1_0.txt)|
+| CAEP                     | [HTML](https://openid.github.io/sharedsignals/openid-caep-specification-1_0.html)| [TXT](https://openid.github.io/sharedsignals/openid-caep-specification-1_0.txt)|
+| RISC                     | [HTML](https://openid.github.io/sharedsignals/openid-risc-profile-specification-1_0.html)| [TXT](https://openid.github.io/sharedsignals/openid-risc-profile-specification-1_0.txt)|
+
+
+
 ## Development
 
 To change the spec, update one of the xml files and then run `make` as follows:

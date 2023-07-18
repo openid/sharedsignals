@@ -1497,7 +1497,10 @@ and Coordination (RISC) and the Continuous Access Evaluation Profile (<span>[<a 
             <p id="section-toc.1-1.15.1"><a href="#appendix-B" class="xref">Appendix B</a>.  <a href="#name-notices" class="xref">Notices</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16">
-            <p id="section-toc.1-1.16.1"><a href="#appendix-C" class="xref"></a><a href="#name-authors-addresses" class="xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.16.1"><a href="#appendix-C" class="xref"></a><a href="#name-contributors" class="xref">Contributors</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.17">
+            <p id="section-toc.1-1.17.1"><a href="#appendix-D" class="xref"></a><a href="#name-authors-addresses" class="xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1579,8 +1582,9 @@ event.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-complex-subject-members" class="section-name selfRef">Complex Subject Members</a>
         </h3>
 <p id="section-3.2-1">A Complex Subject Member has a name and a value that is a JSON <span>[<a href="#RFC7159" class="xref">RFC7159</a>]</span>
-object that has one or more Simple Subject Members. The name of each Simple
-Subject Member in this value MAY be one of the following:<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+object that has a format field, and one or more Simple Subject Members. The name
+of the format field is "format", and its value is "complex". The name of each
+Simple Subject Member in this value MAY be one of the following:<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.2-2">user<a href="#section-3.2-2" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-3.2-3.1">
@@ -1631,6 +1635,7 @@ appear at most once in the Complex Subject value.<a href="#section-3.2-16" class
           <div id="section-3.2-18.1">
 <pre class="lang-json sourcecode">
 "transferee": {
+  "format": "complex",
   "user" : {
     "format": "email",
     "email": "bar@example.com"
@@ -1844,6 +1849,7 @@ specified in the Discovery <a href="#discovery" class="xref">Section 6</a> secti
   "events": {
     "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
       "subject": {
+          "format": "complex",
           "user": {
               "format": "iss_sub",
               "iss": "https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/",
@@ -2770,7 +2776,7 @@ request MUST be updated by the Transmitter. Any properties missing in the
 request MUST NOT be changed by the Transmitter.<a href="#section-7.1.1.3-2" class="pilcrow">¶</a></p>
 <p id="section-7.1.1.3-3">Transmitter-Supplied properties beside the stream_id MAY be present,
 but they MUST match the expected value. Missing Transmitter-Supplied
-properties will be ignored by the Transmitter. The <code>events_delivered</code> property,
+properties MUST be ignored by the Transmitter. The <code>events_delivered</code> property,
 if present, MUST match the Transmitter's expected value before any updates are applied.<a href="#section-7.1.1.3-3" class="pilcrow">¶</a></p>
 <p id="section-7.1.1.3-4">The following is a non-normative example request to replace an Event Stream's
 configuration:<a href="#section-7.1.1.3-4" class="pilcrow">¶</a></p>
@@ -2894,7 +2900,7 @@ deleted. Event Receivers MAY read the configuration first, modify the JSON
 <span>[<a href="#RFC7159" class="xref">RFC7159</a>]</span> representation, then make a replacement request.<a href="#section-7.1.1.4-2" class="pilcrow">¶</a></p>
 <p id="section-7.1.1.4-3">Transmitter-Supplied properties besides the stream_id MAY be present,
 but they MUST match the expected value. Missing Transmitter-Supplied
-properties will be ignored by the Transmitter. The <code>events_delivered</code> property,
+properties MUST be ignored by the Transmitter. The <code>events_delivered</code> property,
 if present, MUST match the Transmitter's expected value <em>before</em> any updates are applied.<a href="#section-7.1.1.4-3" class="pilcrow">¶</a></p>
 <p id="section-7.1.1.4-4">The following is a non-normative example request to replace an Event Stream's
 configuration:<a href="#section-7.1.1.4-4" class="pilcrow">¶</a></p>
@@ -2921,7 +2927,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
     "urn:example:secevent:events:type_2",
     "urn:example:secevent:events:type_3",
     "urn:example:secevent:events:type_4"
-  ],
+  ]
 }
 </pre>
 </div>
@@ -3016,7 +3022,7 @@ Cache-Control: no-store
             </h5>
 <p id="section-7.1.1.5-1">An Event Receiver deletes a stream by making an HTTP DELETE request to the
 Configuration Endpoint. On receiving a request the Event Transmitter responds
-with an empty "204 OK" response if the configuration was successfully removed.<a href="#section-7.1.1.5-1" class="pilcrow">¶</a></p>
+with an empty "204 No Content" response if the configuration was successfully removed.<a href="#section-7.1.1.5-1" class="pilcrow">¶</a></p>
 <p id="section-7.1.1.5-2">The DELETE request MUST include the "stream_id" as a parameter in order to
 identify the correct Event Stream.<a href="#section-7.1.1.5-2" class="pilcrow">¶</a></p>
 <p id="section-7.1.1.5-3">The following is a non-normative example request to delete an Event Stream:<a href="#section-7.1.1.5-3" class="pilcrow">¶</a></p>
@@ -3211,6 +3217,7 @@ Cache-Control: no-store
 {
   "status": "enabled",
   "subject": {
+    "format": "complex",
     "tenant" : {
       "format" : "iss_sub",
       "iss" : "http://example.com/idp1",
@@ -3345,6 +3352,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
   "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
   "status": "paused",
   "subject": {
+    "format": "complex",
     "tenant" : {
       "format" : "iss_sub",
       "iss" : "http://example.com/idp1",
@@ -3698,14 +3706,28 @@ not requested by the Event Receiver.<a href="#section-7.1.4-2" class="pilcrow">�
   triggered. This is a nested attribute in the event payload.<a href="#section-7.1.4.1-5.1.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
-<p id="section-7.1.4.1-6">Upon receiving a Verification Event, the Event Receiver SHALL parse the SET and
+<p id="section-7.1.4.1-6">subject<a href="#section-7.1.4.1-6" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-7.1.4.1-7.1">
+                <p id="section-7.1.4.1-7.1.1">REQUIRED. The value of the <code>subject</code> field in a Verification Event MUST always
+  be set to have a simple value of type <code>opaque</code>. The <code>id</code> of the value MUST be
+  the <code>stream_id</code> of the stream being verified.<a href="#section-7.1.4.1-7.1.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-7.1.4.1-8.1">
+                <p id="section-7.1.4.1-8.1.1">Note that the subject that identifies a stream itself is always implicitly
+  added to the stream and MAY NOT be removed from the stream.<a href="#section-7.1.4.1-8.1.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+<p id="section-7.1.4.1-9">Upon receiving a Verification Event, the Event Receiver SHALL parse the SET and
 validate its claims. In particular, the Event Receiver SHALL confirm that the
 value for "state" is as expected. If the value of "state" does not match, an
 error response of "setData" SHOULD be returned (see Section 2.3 of
-<span>[<a href="#DELIVERYPUSH" class="xref">DELIVERYPUSH</a>]</span> or <span>[<a href="#DELIVERYPOLL" class="xref">DELIVERYPOLL</a>]</span>).<a href="#section-7.1.4.1-6" class="pilcrow">¶</a></p>
-<p id="section-7.1.4.1-7">In many cases, Event Transmitters MAY disable or suspend an Event Stream that
+<span>[<a href="#DELIVERYPUSH" class="xref">DELIVERYPUSH</a>]</span> or <span>[<a href="#DELIVERYPOLL" class="xref">DELIVERYPOLL</a>]</span>).<a href="#section-7.1.4.1-9" class="pilcrow">¶</a></p>
+<p id="section-7.1.4.1-10">In many cases, Event Transmitters MAY disable or suspend an Event Stream that
 fails to successfully verify based on the acknowledgement or lack of
-acknowledgement by the Event Receiver.<a href="#section-7.1.4.1-7" class="pilcrow">¶</a></p>
+acknowledgement by the Event Receiver.<a href="#section-7.1.4.1-10" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="triggering-a-verification-event">
@@ -3822,6 +3844,10 @@ Event Receiver as a result of the above request:<a href="#section-7.1.4.2-14" cl
   "iat": 1493856000,
   "events": {
     "https://schemas.openid.net/secevent/ssf/event-type/verification":{
+      "subject": {
+        "format": "opaque",
+        "id": "f67e39a0a4d34d56b3aa1bc4cff0069f"
+      },
       "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
     }
   }
@@ -3870,14 +3896,27 @@ Subject.<a href="#section-7.1.5-3" class="pilcrow">¶</a></p>
 <p id="section-7.1.5-9">subject<a href="#section-7.1.5-9" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-7.1.5-10.1">
-              <p id="section-7.1.5-10.1.1">OPTIONAL. Specifies the Subject Principal for whom the status has been updated.
-  If this claim is not included, then the status change was applied to all
-  subjects in the stream.<a href="#section-7.1.5-10.1.1" class="pilcrow">¶</a></p>
+              <p id="section-7.1.5-10.1.1">REQUIRED. Specifies the Subject Principal for whom the status has been updated.
+  If the event applies to the entire stream, the value of the <code>subject</code> field
+  MUST be of format <code>opaque</code>, and its <code>id</code> value MUST be the unique ID of the
+  stream.<a href="#section-7.1.5-10.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<span id="name-example-stream-updated-set"></span><div id="figstreamupdatedset">
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-7.1.5-11.1">
+              <p id="section-7.1.5-11.1.1">Note that the subject that identifies a stream itself is always implicitly
+  added to the stream and MAY NOT be removed from the stream.<a href="#section-7.1.5-11.1.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-7.1.5-12.1">
+              <p id="section-7.1.5-12.1.1">Below is a non-normative example of a <code>stream-updated</code> event with a specific
+  subject.<a href="#section-7.1.5-12.1.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+<span id="name-example-stream-updated-set-"></span><div id="figstreamupdatedset">
 <figure id="figure-41">
-            <div id="section-7.1.5-11.1">
+            <div id="section-7.1.5-13.1">
 <pre class="lang-json sourcecode">
 {
   "jti": "123456",
@@ -3887,6 +3926,7 @@ Subject.<a href="#section-7.1.5-3" class="pilcrow">¶</a></p>
   "events": {
     "https://schemas.openid.net/secevent/ssf/event-type/stream-updated": {
       "subject": {
+        "format" : "complex",
         "tenant" : {
           "format": "iss_sub",
           "iss" : "http://example.com/idp1",
@@ -3901,7 +3941,39 @@ Subject.<a href="#section-7.1.5-3" class="pilcrow">¶</a></p>
 </pre>
 </div>
 <figcaption><a href="#figure-41" class="selfRef">Figure 41</a>:
-<a href="#name-example-stream-updated-set" class="selfRef">Example: Stream Updated SET</a>
+<a href="#name-example-stream-updated-set-" class="selfRef">Example: Stream Updated SET with tenant principal</a>
+            </figcaption></figure>
+</div>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-7.1.5-14.1">
+              <p id="section-7.1.5-14.1.1">Below is a non-normative example of a <code>stream-updated</code> event with a stream
+  subject.<a href="#section-7.1.5-14.1.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+<span id="name-example-stream-updated-set-w"></span><div id="figstreamupdatedstreamset">
+<figure id="figure-42">
+            <div id="section-7.1.5-15.1">
+<pre class="lang-json sourcecode">
+{
+  "jti": "123456",
+  "iss": "https://transmitter.example.com",
+  "aud": "receiver.example.com",
+  "iat": 1493856000,
+  "events": {
+    "https://schemas.openid.net/secevent/ssf/event-type/stream-updated": {
+      "subject": {
+        "format": "opaque",
+        "id" : "f67e39a0a4d34d56b3aa1bc4cff0069f"
+      },
+      "status": "paused",
+      "reason": "Internal error"
+    }
+  }
+}
+</pre>
+</div>
+<figcaption><a href="#figure-42" class="selfRef">Figure 42</a>:
+<a href="#name-example-stream-updated-set-w" class="selfRef">Example: Stream Updated SET with stream as the subject of single-stream Transmitter</a>
             </figcaption></figure>
 </div>
 </section>
@@ -4104,7 +4176,7 @@ a SSF event.<a href="#section-11.1.2-1" class="pilcrow">¶</a></p>
 <p id="section-11.1.3-1">The SSF event MAY contain additional claims within the event payload that are
 specific to the event type.<a href="#section-11.1.3-1" class="pilcrow">¶</a></p>
 <span id="name-example-set-containing-a-ri"></span><div id="risc-event-subject-example">
-<figure id="figure-42">
+<figure id="figure-43">
             <div id="section-11.1.3-2.1">
 <pre class="lang-json sourcecode">
 {
@@ -4125,12 +4197,12 @@ specific to the event type.<a href="#section-11.1.3-1" class="pilcrow">¶</a></p
 }
 </pre>
 </div>
-<figcaption><a href="#figure-42" class="selfRef">Figure 42</a>:
+<figcaption><a href="#figure-43" class="selfRef">Figure 43</a>:
 <a href="#name-example-set-containing-a-ri" class="selfRef">Example: SET Containing a RISC Event with a Phone Number Subject</a>
             </figcaption></figure>
 </div>
 <span id="name-example-set-containing-a-ca"></span><div id="caep-event-properties-example">
-<figure id="figure-43">
+<figure id="figure-44">
             <div id="section-11.1.3-3.1">
 <pre class="lang-json sourcecode">
 {
@@ -4150,7 +4222,7 @@ specific to the event type.<a href="#section-11.1.3-1" class="pilcrow">¶</a></p
 }
 </pre>
 </div>
-<figcaption><a href="#figure-43" class="selfRef">Figure 43</a>:
+<figcaption><a href="#figure-44" class="selfRef">Figure 44</a>:
 <a href="#name-example-set-containing-a-ca" class="selfRef">Example: SET Containing a CAEP Event with Properties</a>
             </figcaption></figure>
 </div>
@@ -4163,7 +4235,7 @@ specific to the event type.<a href="#section-11.1.3-1" class="pilcrow">¶</a></p
           </h4>
 <p id="section-11.1.4-1">SSF events MUST use explicit typing as defined in Section 2.3 of <span>[<a href="#RFC8417" class="xref">RFC8417</a>]</span>.<a href="#section-11.1.4-1" class="pilcrow">¶</a></p>
 <span id="name-explicitly-typed-jose-heade"></span><div id="explicit-type-header">
-<figure id="figure-44">
+<figure id="figure-45">
             <div id="section-11.1.4-2.1">
 <pre class="lang-json sourcecode">
 {
@@ -4172,7 +4244,7 @@ specific to the event type.<a href="#section-11.1.3-1" class="pilcrow">¶</a></p
 }
 </pre>
 </div>
-<figcaption><a href="#figure-44" class="selfRef">Figure 44</a>:
+<figcaption><a href="#figure-45" class="selfRef">Figure 45</a>:
 <a href="#name-explicitly-typed-jose-heade" class="selfRef">Explicitly Typed JOSE Header</a>
             </figcaption></figure>
 </div>
@@ -4211,7 +4283,7 @@ this case the multiple Receivers might use the same service to process SETs, and
 this service might reroute SETs to respective Receivers, an "aud" claim with
 multiple Receivers would lead to unintended data disclosure.<a href="#section-11.1.6-3" class="pilcrow">¶</a></p>
 <span id="name-example-set-with-array-aud-"></span><div id="figarrayaud">
-<figure id="figure-45">
+<figure id="figure-46">
             <div id="section-11.1.6-4.1">
 <pre class="lang-json sourcecode">
 {
@@ -4227,7 +4299,7 @@ multiple Receivers would lead to unintended data disclosure.<a href="#section-11
 }
 </pre>
 </div>
-<figcaption><a href="#figure-45" class="selfRef">Figure 45</a>:
+<figcaption><a href="#figure-46" class="selfRef">Figure 46</a>:
 <a href="#name-example-set-with-array-aud-" class="selfRef">Example: SET with array 'aud' claim</a>
             </figcaption></figure>
 </div>
@@ -4463,8 +4535,24 @@ specification.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <p id="appendix-B-3">The technology described in this specification was made available from contributions from various sources, including members of the OpenID Foundation and others. Although the OpenID Foundation has taken steps to help ensure that the technology is available for distribution, it takes no position regarding the validity or scope of any intellectual property or other rights that might be claimed to pertain to the implementation or use of the technology described in this specification or the extent to which any license under such rights might or might not be available; neither does it represent that it has made any independent effort to identify any such rights. The OpenID Foundation and the contributors to this specification make no (and hereby expressly disclaim any) warranties (express, implied, or otherwise), including implied warranties of merchantability, non-infringement, fitness for a particular purpose, or title, related to this specification, and the entire risk as to implementing this specification is assumed by the implementer. The OpenID Intellectual Property Rights policy requires contributors to offer a patent promise not to assert certain patent claims against other contributors and against implementers. The OpenID Foundation invites any interested party to bring to its attention any copyrights, patents, patent applications, or other proprietary rights that may cover technology that may be required to practice this specification.<a href="#appendix-B-3" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="authors-addresses">
+<div id="contributors">
 <section id="appendix-C">
+      <h2 id="name-contributors">
+<a href="#name-contributors" class="section-name selfRef">Contributors</a>
+      </h2>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Steve Venema</span></div>
+<div dir="auto" class="left"><span class="org">ForgeRock</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:steve.venema@forgerock.com" class="email">steve.venema@forgerock.com</a>
+</div>
+</address>
+<p id="appendix-C-1">Steve defined the format field of Complex Subjects<a href="#appendix-C-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="authors-addresses">
+<section id="appendix-D">
       <h2 id="name-authors-addresses">
 <a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>

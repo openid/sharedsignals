@@ -116,7 +116,7 @@
       "subject": {
         "format": "iss_sub",
         "iss": "https://idp.example.com/",
-        "sub": "7375626A656374",
+        "sub": "7375626A656374"
       }
     }
   }
@@ -165,7 +165,7 @@
         "iss": "https://idp.example.com/",
         "sub": "7375626A656374",
       },
-      "reason": "hijacking",
+      "reason": "hijacking"
     }
   }
 }
@@ -217,9 +217,9 @@
     identifier-changed": {
       "subject": {
         "format": "email",
-        "email": "john.doe@example.com",
+        "email": "john.doe@example.com"
       },
-      "new-value": "john.roe@example.com",
+      "new-value": "john.roe@example.com"
     }
   }
 }
@@ -251,7 +251,7 @@
     identifier-recycled": {
       "subject": {
         "format": "email",
-        "email": "foo@example.com",
+        "email": "foo@example.com"
       }
     }
   }
