@@ -1146,7 +1146,8 @@ request MUST NOT be changed by the Transmitter.
 
 Transmitter-Supplied properties beside the stream_id MAY be present,
 but they MUST match the expected value. Missing Transmitter-Supplied
-properties will be ignored by the Transmitter.
+properties MUST be ignored by the Transmitter. The `events_delivered` property,
+if present, MUST match the Transmitter's expected value before any updates are applied.
 
 The following is a non-normative example request to replace an Event Stream’s
 configuration:
@@ -1231,7 +1232,8 @@ deleted. Event Receivers MAY read the configuration first, modify the JSON
 
 Transmitter-Supplied properties besides the stream_id MAY be present,
 but they MUST match the expected value. Missing Transmitter-Supplied
-properties will be ignored by the Transmitter.
+properties MUST be ignored by the Transmitter. The `events_delivered` property,
+if present, MUST match the Transmitter's expected value _before_ any updates are applied.
 
 The following is a non-normative example request to replace an Event Stream’s
 configuration:
@@ -1586,6 +1588,19 @@ Example:
 An Event Receiver can indicate to an Event Transmitter whether or not the
 receiver wants to receive events about a particular subject by “adding” or
 “removing” that subject to the Event Stream, respectively.
+
+If a Receiver adds a subject to a stream, the Transmitter SHOULD send any events
+relating to the subject, which have event_types that the Receiver has subscribed to,
+and both the stream and the subject are enabled. In the case of Simple Subjects,
+two subjects match if they are exactly identical. For Complex Subjects, two subjects
+match if, for all fields in the Complex Subject (i.e. `user`, `group`, `device`, etc.),
+at least one of the following statements is true:
+
+1. Subject 1's field is not defined
+
+2. Subject 2's field is not defined
+
+3. Subject 1's field is identical to Subject 2's field
 
 #### Adding a Subject to a Stream {#adding-a-subject-to-a-stream}
 To add a subject to an Event Stream, the Event Receiver makes an HTTP POST

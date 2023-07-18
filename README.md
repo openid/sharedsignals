@@ -27,4 +27,6 @@ Similarly, to update the text file, you would run `make foo.txt`
 
 Pay attention to errors generating the files and warnings about the document date. You should update the date to today's date.
 
-In order to run `make` you need to install `xml2rfc` which can be done via pip: `pip install xml2rfc`
+In order to run `make` you need to:
+1. install `xml2rfc` which can be done via pip: `pip install xml2rfc`
+1. install `kramdown-rfc` which can be done via Ruby gems: `gem install kramdown-rfc`
