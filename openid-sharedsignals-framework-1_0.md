@@ -1134,7 +1134,7 @@ request MUST NOT be changed by the Transmitter.
 
 Transmitter-Supplied properties beside the stream_id MAY be present,
 but they MUST match the expected value. Missing Transmitter-Supplied
-properties will be ignored by the Transmitter. The `events_delivered` property,
+properties MUST be ignored by the Transmitter. The `events_delivered` property,
 if present, MUST match the Transmitter's expected value before any updates are applied.
 
 The following is a non-normative example request to replace an Event Stream’s
@@ -1220,7 +1220,7 @@ deleted. Event Receivers MAY read the configuration first, modify the JSON
 
 Transmitter-Supplied properties besides the stream_id MAY be present,
 but they MUST match the expected value. Missing Transmitter-Supplied
-properties will be ignored by the Transmitter. The `events_delivered` property,
+properties MUST be ignored by the Transmitter. The `events_delivered` property,
 if present, MUST match the Transmitter's expected value _before_ any updates are applied.
 
 The following is a non-normative example request to replace an Event Stream’s
