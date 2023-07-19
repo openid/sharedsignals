@@ -2874,7 +2874,8 @@ request MUST be updated by the Transmitter. Any properties missing in the
 request MUST NOT be changed by the Transmitter.<a href="#section-7.1.1.3-2" class="pilcrow">¶</a></p>
 <p id="section-7.1.1.3-3">Transmitter-Supplied properties beside the stream_id MAY be present,
 but they MUST match the expected value. Missing Transmitter-Supplied
-properties will be ignored by the Transmitter.<a href="#section-7.1.1.3-3" class="pilcrow">¶</a></p>
+properties MUST be ignored by the Transmitter. The <code>events_delivered</code> property,
+if present, MUST match the Transmitter's expected value before any updates are applied.<a href="#section-7.1.1.3-3" class="pilcrow">¶</a></p>
 <p id="section-7.1.1.3-4">The following is a non-normative example request to replace an Event Stream's
 configuration:<a href="#section-7.1.1.3-4" class="pilcrow">¶</a></p>
 <span id="name-example-update-stream-confi"></span><div id="figupdateconfigreq">
@@ -2997,7 +2998,8 @@ deleted. Event Receivers MAY read the configuration first, modify the JSON
 <span>[<a href="#RFC7159" class="cite xref">RFC7159</a>]</span> representation, then make a replacement request.<a href="#section-7.1.1.4-2" class="pilcrow">¶</a></p>
 <p id="section-7.1.1.4-3">Transmitter-Supplied properties besides the stream_id MAY be present,
 but they MUST match the expected value. Missing Transmitter-Supplied
-properties will be ignored by the Transmitter.<a href="#section-7.1.1.4-3" class="pilcrow">¶</a></p>
+properties MUST be ignored by the Transmitter. The <code>events_delivered</code> property,
+if present, MUST match the Transmitter's expected value <em>before</em> any updates are applied.<a href="#section-7.1.1.4-3" class="pilcrow">¶</a></p>
 <p id="section-7.1.1.4-4">The following is a non-normative example request to replace an Event Stream's
 configuration:<a href="#section-7.1.1.4-4" class="pilcrow">¶</a></p>
 <span id="name-example-replace-stream-conf"></span><div id="figreplaceconfigreq">
@@ -3023,7 +3025,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
     "urn:example:secevent:events:type_2",
     "urn:example:secevent:events:type_3",
     "urn:example:secevent:events:type_4"
-  ],
+  ]
 }
 </pre>
 </div>
@@ -3542,6 +3544,20 @@ the request, then the Transmitter MUST respond with a 202 status code.<a href="#
 <p id="section-7.1.3-1">An Event Receiver can indicate to an Event Transmitter whether or not the
 receiver wants to receive events about a particular subject by "adding" or
 "removing" that subject to the Event Stream, respectively.<a href="#section-7.1.3-1" class="pilcrow">¶</a></p>
+<p id="section-7.1.3-2">If a Receiver adds a subject to a stream, the Transmitter SHOULD send any events
+relating to the subject, which have event_types that the Receiver has subscribed to,
+and both the stream and the subject are enabled. In the case of Simple Subjects,
+two subjects match if they are exactly identical. For Complex Subjects, two subjects
+match if, for all fields in the Complex Subject (i.e. <code>user</code>, <code>group</code>, <code>device</code>, etc.),
+at least one of the following statements is true:<a href="#section-7.1.3-2" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-7.1.3-3">
+<li id="section-7.1.3-3.1">Subject 1's field is not defined<a href="#section-7.1.3-3.1" class="pilcrow">¶</a>
+</li>
+            <li id="section-7.1.3-3.2">Subject 2's field is not defined<a href="#section-7.1.3-3.2" class="pilcrow">¶</a>
+</li>
+            <li id="section-7.1.3-3.3">Subject 1's field is identical to Subject 2's field<a href="#section-7.1.3-3.3" class="pilcrow">¶</a>
+</li>
+          </ol>
 <div id="adding-a-subject-to-a-stream">
 <section id="section-7.1.3.1">
             <h5 id="name-adding-a-subject-to-a-strea">
