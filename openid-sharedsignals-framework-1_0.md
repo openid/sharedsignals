@@ -841,7 +841,7 @@ delivery
     any one of "urn:ietf:rfc:8935" (push) or "urn:ietf:rfc:8936" (poll), but
     not both.
 
->   url
+>   endpoint_url
 
 > > The location at which the push or poll delivery will take place. If the
     `method` value is "urn:ietf:rfc:8935" (push), then this value MUST
@@ -879,14 +879,14 @@ The HTTP POST request MAY contain the Receiver-Supplied values of the Stream
 Configuration ({{stream-config}}) object:
 
 * `events_requested`
-* `delivery` : Note that in the case of the POLL method, the `url` value is
+* `delivery` : Note that in the case of the POLL method, the `endpoint_url` value is
   supplied by the Transmitter.
 * `format`
 
 If the request does not contain the `delivery` property, then the Transmitter
 MUST assume that the `method` is "urn:ietf:rfc:8936" (poll). The
 Transmitter MUST include a `delivery` property in the response with this
-`method` property and a `url` property.
+`method` property and a `endpoint_url` property.
 
 The following is a non-normative example request to create an Event Stream:
 
@@ -898,7 +898,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 {
   "delivery": {
     "method": "urn:ietf:rfc:8935",
-    "url": "https://receiver.example.com/events"
+    "endpoint_url": "https://receiver.example.com/events"
   },
   "events_requested": [
     "urn:example:secevent:events:type_2",
@@ -924,7 +924,7 @@ Content-Type: application/json
     ],
   "delivery": {
     "method": "urn:ietf:rfc:8935",
-    "url": "https://receiver.example.com/events"
+    "endpoint_url": "https://receiver.example.com/events"
   },
   "events_supported": [
     "urn:example:secevent:events:type_1",
@@ -993,7 +993,7 @@ Cache-Control: no-store
     ],
   "delivery": {
     "method": "urn:ietf:rfc:8935",
-    "url": "https://receiver.example.com/events"
+    "endpoint_url": "https://receiver.example.com/events"
   },
   "events_supported": [
     "urn:example:secevent:events:type_1",
@@ -1040,7 +1040,7 @@ Cache-Control: no-store
       ],
     "delivery": {
       "method": "urn:ietf:rfc:8935",
-      "url": "https://receiver.example.com/events"
+      "endpoint_url": "https://receiver.example.com/events"
     },
     "events_supported": [
       "urn:example:secevent:events:type_1",
@@ -1066,7 +1066,7 @@ Cache-Control: no-store
       ],
     "delivery": {
       "method": "urn:ietf:rfc:8935",
-      "url": "https://receiver.example.com/events"
+      "endpoint_url": "https://receiver.example.com/events"
     },
     "events_supported": [
       "urn:example:secevent:events:type_1",
@@ -1105,7 +1105,7 @@ Cache-Control: no-store
       ],
     "delivery": {
       "method": "urn:ietf:rfc:8935",
-      "url": "https://receiver.example.com/events"
+      "endpoint_url": "https://receiver.example.com/events"
     },
     "events_supported": [
       "urn:example:secevent:events:type_1",
@@ -1202,7 +1202,7 @@ Cache-Control: no-store
   ],
   "delivery": {
     "method": "urn:ietf:rfc:8935",
-    "url": "https://receiver.example.com/events"
+    "endpoint_url": "https://receiver.example.com/events"
   },
   "events_supported": [
     "urn:example:secevent:events:type_1",
@@ -1269,7 +1269,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
   ],
   "delivery": {
     "method": "urn:ietf:rfc:8935",
-    "url": "https://receiver.example.com/events"
+    "endpoint_url": "https://receiver.example.com/events"
   },
   "events_requested": [
     "urn:example:secevent:events:type_2",
@@ -1296,7 +1296,7 @@ Cache-Control: no-store
   ],
   "delivery": {
     "method": "urn:ietf:rfc:8935",
-    "url": "https://receiver.example.com/events"
+    "endpoint_url": "https://receiver.example.com/events"
   },
   "events_supported": [
     "urn:example:secevent:events:type_1",
@@ -2124,7 +2124,7 @@ method
 
 > "urn:ietf:rfc:8935"
 
-url
+endpoint_url
 
 > The URL where events are pushed through HTTP POST. This is set by the
   Receiver. If a Reciever is using multiple streams from a single Transmitter
@@ -2144,7 +2144,7 @@ method
 
 > "urn:ietf:rfc:8936"
 
-url
+endpoint_url
 
 > The URL where events can be retrieved from. This is specified by the
   Transmitter. These URLs MAY be reused across Receivers, but MUST be unique per
