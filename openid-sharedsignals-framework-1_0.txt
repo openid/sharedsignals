@@ -1861,7 +1861,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 33]
 
       REQUIRED.  The stream whose status is being queried.
 
-   sub_id
+   subject
 
       OPTIONAL.  The subject for which the stream status is requested.
 
@@ -2022,7 +2022,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 36]
 
       REQUIRED.  The new status of the Event Stream.
 
-   sub_id
+   subject
 
       OPTIONAL.  The Subject to which the new status applies.
 
@@ -2176,7 +2176,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 38]
 
       REQUIRED.  The stream to which the subject is being added.
 
-   sub_id
+   subject
 
 
 
@@ -2214,7 +2214,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 39]
 
    {
      "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
-     "sub_id": {
+     "subject": {
        "format": "email",
        "email": "example.user@example.com"
      },
@@ -2276,7 +2276,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 40]
 
       REQUIRED.  The stream from which the subject is being removed.
 
-   sub_id
+   subject
 
       REQUIRED.  A Subject claim identifying the subject to be removed.
 
@@ -2304,7 +2304,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 41]
 
    {
      "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
-     "sub_id": {
+     "subject": {
        "format": "phone",
        "phone_number": "+12065550123"
      }

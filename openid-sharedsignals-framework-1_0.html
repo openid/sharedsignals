@@ -3216,7 +3216,7 @@ GET request to the stream's Status Endpoint.<a href="#section-7.1.2.1-1" class="
                 <p id="section-7.1.2.1-4.1.1">REQUIRED. The stream whose status is being queried.<a href="#section-7.1.2.1-4.1.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
-<p id="section-7.1.2.1-5">sub_id<a href="#section-7.1.2.1-5" class="pilcrow">¶</a></p>
+<p id="section-7.1.2.1-5">subject<a href="#section-7.1.2.1-5" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-7.1.2.1-6.1">
                 <p id="section-7.1.2.1-6.1.1">OPTIONAL. The subject for which the stream status is requested.<a href="#section-7.1.2.1-6.1.1" class="pilcrow">¶</a></p>
@@ -3399,7 +3399,7 @@ with the following fields:<a href="#section-7.1.2.2-1" class="pilcrow">¶</a></p
                 <p id="section-7.1.2.2-5.1.1">REQUIRED. The new status of the Event Stream.<a href="#section-7.1.2.2-5.1.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
-<p id="section-7.1.2.2-6">sub_id<a href="#section-7.1.2.2-6" class="pilcrow">¶</a></p>
+<p id="section-7.1.2.2-6">subject<a href="#section-7.1.2.2-6" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-7.1.2.2-7.1">
                 <p id="section-7.1.2.2-7.1.1">OPTIONAL. The Subject to which the new status applies.<a href="#section-7.1.2.2-7.1.1" class="pilcrow">¶</a></p>
@@ -3556,7 +3556,7 @@ following claims:<a href="#section-7.1.3.1-1" class="pilcrow">¶</a></p>
                 <p id="section-7.1.3.1-3.1.1">REQUIRED. The stream to which the subject is being added.<a href="#section-7.1.3.1-3.1.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
-<p id="section-7.1.3.1-4">sub_id<a href="#section-7.1.3.1-4" class="pilcrow">¶</a></p>
+<p id="section-7.1.3.1-4">subject<a href="#section-7.1.3.1-4" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-7.1.3.1-5.1">
                 <p id="section-7.1.3.1-5.1.1">REQUIRED. A Subject claim identifying the subject to be added.<a href="#section-7.1.3.1-5.1.1" class="pilcrow">¶</a></p>
@@ -3589,7 +3589,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
 {
   "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
-  "sub_id": {
+  "subject": {
     "format": "email",
     "email": "example.user@example.com"
   },
@@ -3668,7 +3668,7 @@ with the following claims:<a href="#section-7.1.3.2-1" class="pilcrow">¶</a></p
                 <p id="section-7.1.3.2-3.1.1">REQUIRED. The stream from which the subject is being removed.<a href="#section-7.1.3.2-3.1.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
-<p id="section-7.1.3.2-4">sub_id<a href="#section-7.1.3.2-4" class="pilcrow">¶</a></p>
+<p id="section-7.1.3.2-4">subject<a href="#section-7.1.3.2-4" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-7.1.3.2-5.1">
                 <p id="section-7.1.3.2-5.1.1">REQUIRED. A Subject claim identifying the subject to be removed.<a href="#section-7.1.3.2-5.1.1" class="pilcrow">¶</a></p>
@@ -3688,7 +3688,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
 {
   "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
-  "sub_id": {
+  "subject": {
     "format": "phone",
     "phone_number": "+12065550123"
   }
