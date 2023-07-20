@@ -182,7 +182,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 3]
 
    Event types already defiend in the CAEP ([CAEP]) and RISC ([RISC])
    drafts MAY use a subject field within the events claim of the SSF
-   eent to describe the primary Subject Principal of the event.  SSF
+   event to describe the primary Subject Principal of the event.  SSF
    Transmitters SHOULD include the top-level sub_id claim even for these
    existing event types.
 

@@ -270,7 +270,7 @@ Subject Principals are identified by Subject Members defined below.
 A Subject Member of a SSF event describes a subject of the event. A top-level claim named `sub_id` SHOULD be used to describe the primary Subject Principal of the event.
 
 ### Existing CAEP and RISC Events
-Event types already defiend in the CAEP ({{CAEP}}) and RISC ({{RISC}}) drafts MAY use a `subject` field within the `events` claim of the SSF eent to describe the primary Subject Principal of the event. SSF Transmitters SHOULD include the top-level `sub_id` claim even for these existing event types.
+Event types already defiend in the CAEP ({{CAEP}}) and RISC ({{RISC}}) drafts MAY use a `subject` field within the `events` claim of the SSF event to describe the primary Subject Principal of the event. SSF Transmitters SHOULD include the top-level `sub_id` claim even for these existing event types.
 
 ### New Event Types
 New event types MUST use the top-level `sub_id` claim and MUST NOT use the `subject` field in the `events` claim to describe the primary Subject Principal.
