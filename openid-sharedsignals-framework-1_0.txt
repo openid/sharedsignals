@@ -94,7 +94,7 @@ Table of Contents
        7.1.2.  Stream Status . . . . . . . . . . . . . . . . . . . .  33
        7.1.3.  Subjects  . . . . . . . . . . . . . . . . . . . . . .  39
        7.1.4.  Verification  . . . . . . . . . . . . . . . . . . . .  43
-       7.1.5.  Stream Updated Event  . . . . . . . . . . . . . . . .  47
+       7.1.5.  Stream Updated Event  . . . . . . . . . . . . . . . .  46
    8.  Authorization . . . . . . . . . . . . . . . . . . . . . . . .  49
    9.  Security Considerations . . . . . . . . . . . . . . . . . . .  49
      9.1.  Subject Probing . . . . . . . . . . . . . . . . . . . . .  49
@@ -2396,11 +2396,11 @@ Tulshibagwale, et al.        Standards Track                   [Page 42]
 
 7.1.4.1.  Verification Event
 
-   The Verification Event is a standard SET with the following
-   attributes:
+   The Verification Event is a SSF Event with the event type:
+   "https://schemas.openid.net/secevent/ssf/event-type/verification".
+   The event contains the following attribute:
 
-   event type
-
+   state
 
 
 
@@ -2410,14 +2410,11 @@ Tulshibagwale, et al.        Standards Track                   [Page 43]
                               SharedSignals                    June 2023
 
 
-      The Event Type URI is: "https://schemas.openid.net/secevent/ssf/
-      event-type/verification".
-
-   state
-
       OPTIONAL An opaque value provided by the Event Receiver when the
-      event is triggered.  This is a nested attribute in the event
-      payload.
+      event is triggered.
+
+   As with any SSF event, the Verification Event has a top-level sub_id
+   claim:
 
    sub_id
 
@@ -2458,6 +2455,9 @@ Tulshibagwale, et al.        Standards Track                   [Page 43]
 
    state
 
+      OPTIONAL.  An arbitrary string that the Event Transmitter MUST
+      echo back to the Event Receiver in the verification event's
+      payload.  Event Receivers MAY use the value of this parameter to
 
 
 
@@ -2466,9 +2466,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 44]
                               SharedSignals                    June 2023
 
 
-      OPTIONAL.  An arbitrary string that the Event Transmitter MUST
-      echo back to the Event Receiver in the verification event's
-      payload.  Event Receivers MAY use the value of this parameter to
       correlate a verification event with a verification request.  If
       the verification event is initiated by the transmitter then this
       parameter MUST not be set.
@@ -2506,22 +2503,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 44]
    The following is a non-normative example request to trigger a
    verification event:
 
-
-
-
-
-
-
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 45]
-
-                              SharedSignals                    June 2023
-
-
    POST /ssf/verify HTTP/1.1
    Host: transmitter.example.com
    Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
@@ -2533,6 +2514,13 @@ Tulshibagwale, et al.        Standards Track                   [Page 45]
    }
 
               Figure 38: Example: Trigger Verification Request
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 45]
+
+                              SharedSignals                    June 2023
+
 
    The following is a non-normative example response to a successful
    request:
@@ -2564,20 +2552,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 45]
 
                     Figure 40: Example: Verification SET
 
-
-
-
-
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 46]
-
-                              SharedSignals                    June 2023
-
-
 7.1.5.  Stream Updated Event
 
    A Transmitter MAY change the stream status in reference to one or
@@ -2596,6 +2570,14 @@ Tulshibagwale, et al.        Standards Track                   [Page 46]
    this event to any Receiver that has previously been enabled to
    receive events for the specified Subject.
 
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 46]
+
+                              SharedSignals                    June 2023
+
+
    The "stream-updated" event MAY contain the following claims:
 
    status
@@ -2607,6 +2589,8 @@ Tulshibagwale, et al.        Standards Track                   [Page 46]
 
       OPTIONAL.  Provides a short description of why the Transmitter has
       updated the status.
+
+   As with any SSF Event, this event has a top-level sub_id claim:
 
    sub_id
 
@@ -2620,8 +2604,24 @@ Tulshibagwale, et al.        Standards Track                   [Page 46]
       implicitly added to the stream and MAY NOT be removed from the
       stream.
 
-      Below is a non-normative example of a stream-updated event with a
-      specific subject.
+   Below is a non-normative example of a stream-updated event with a
+   specific subject.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

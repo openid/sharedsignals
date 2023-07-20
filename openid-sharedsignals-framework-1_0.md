@@ -1797,16 +1797,14 @@ An Event Transmitter MAY send a Verification Event at any time, even if one was
 not requested by the Event Receiver.
 
 #### Verification Event {#verification-event}
-The Verification Event is a standard SET with the following attributes:
-
-event type
-
-> The Event Type URI is: "https://schemas.openid.net/secevent/ssf/event-type/verification".
+The Verification Event is a SSF Event with the event type: "https://schemas.openid.net/secevent/ssf/event-type/verification". The event contains the following attribute:
 
 state
 
 > OPTIONAL An opaque value provided by the Event Receiver when the event is
-  triggered. This is a nested attribute in the event payload.
+  triggered.
+  
+As with any SSF event, the Verification Event has a top-level `sub_id` claim:
 
 sub_id
 
@@ -1936,6 +1934,8 @@ reason
 
 > OPTIONAL. Provides a short description of why the Transmitter has updated the
   status.
+  
+As with any SSF Event, this event has a top-level `sub_id` claim:
 
 sub_id
 
@@ -1947,8 +1947,7 @@ sub_id
 > Note that the subject that identifies a stream itself is always implicitly
   added to the stream and MAY NOT be removed from the stream.
 
-> Below is a non-normative example of a `stream-updated` event with a specific
-  subject.
+Below is a non-normative example of a `stream-updated` event with a specific subject.
 
 ~~~ json
 {
@@ -2296,4 +2295,5 @@ Copyright (c) 2021 The OpenID Foundation.
 The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, or other interested party a non-exclusive, royalty free, worldwide copyright license to reproduce, prepare derivative works from, distribute, perform and display, this Implementers Draft or Final Specification solely for the purposes of (i) developing specifications, and (ii) implementing Implementers Drafts and Final Specifications based on such documents, provided that attribution be made to the OIDF as the source of the material, but that such attribution does not indicate an endorsement by the OIDF.
 
 The technology described in this specification was made available from contributions from various sources, including members of the OpenID Foundation and others. Although the OpenID Foundation has taken steps to help ensure that the technology is available for distribution, it takes no position regarding the validity or scope of any intellectual property or other rights that might be claimed to pertain to the implementation or use of the technology described in this specification or the extent to which any license under such rights might or might not be available; neither does it represent that it has made any independent effort to identify any such rights. The OpenID Foundation and the contributors to this specification make no (and hereby expressly disclaim any) warranties (express, implied, or otherwise), including implied warranties of merchantability, non-infringement, fitness for a particular purpose, or title, related to this specification, and the entire risk as to implementing this specification is assumed by the implementer. The OpenID Intellectual Property Rights policy requires contributors to offer a patent promise not to assert certain patent claims against other contributors and against implementers. The OpenID Foundation invites any interested party to bring to its attention any copyrights, patents, patent applications, or other proprietary rights that may cover technology that may be required to practice this specification.
+
 

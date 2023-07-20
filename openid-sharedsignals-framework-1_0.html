@@ -3790,40 +3790,35 @@ not requested by the Event Receiver.<a href="#section-7.1.4-2" class="pilcrow">�
             <h5 id="name-verification-event">
 <a href="#section-7.1.4.1" class="section-number selfRef">7.1.4.1. </a><a href="#name-verification-event" class="section-name selfRef">Verification Event</a>
             </h5>
-<p id="section-7.1.4.1-1">The Verification Event is a standard SET with the following attributes:<a href="#section-7.1.4.1-1" class="pilcrow">¶</a></p>
-<p id="section-7.1.4.1-2">event type<a href="#section-7.1.4.1-2" class="pilcrow">¶</a></p>
+<p id="section-7.1.4.1-1">The Verification Event is a SSF Event with the event type: "https://schemas.openid.net/secevent/ssf/event-type/verification". The event contains the following attribute:<a href="#section-7.1.4.1-1" class="pilcrow">¶</a></p>
+<p id="section-7.1.4.1-2">state<a href="#section-7.1.4.1-2" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-7.1.4.1-3.1">
-                <p id="section-7.1.4.1-3.1.1">The Event Type URI is: "https://schemas.openid.net/secevent/ssf/event-type/verification".<a href="#section-7.1.4.1-3.1.1" class="pilcrow">¶</a></p>
+                <p id="section-7.1.4.1-3.1.1">OPTIONAL An opaque value provided by the Event Receiver when the event is
+  triggered.<a href="#section-7.1.4.1-3.1.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
-<p id="section-7.1.4.1-4">state<a href="#section-7.1.4.1-4" class="pilcrow">¶</a></p>
+<p id="section-7.1.4.1-4">As with any SSF event, the Verification Event has a top-level <code>sub_id</code> claim:<a href="#section-7.1.4.1-4" class="pilcrow">¶</a></p>
+<p id="section-7.1.4.1-5">sub_id<a href="#section-7.1.4.1-5" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.4.1-5.1">
-                <p id="section-7.1.4.1-5.1.1">OPTIONAL An opaque value provided by the Event Receiver when the event is
-  triggered. This is a nested attribute in the event payload.<a href="#section-7.1.4.1-5.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-7.1.4.1-6.1">
+                <p id="section-7.1.4.1-6.1.1">REQUIRED. The value of the top-level <code>sub_id</code> claim in a Verification Event MUST always be set to have a simple value of type <code>opaque</code>. The <code>id</code> of the value MUST be the <code>stream_id</code> of the stream being verified.<a href="#section-7.1.4.1-6.1.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
-<p id="section-7.1.4.1-6">sub_id<a href="#section-7.1.4.1-6" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-7.1.4.1-7.1">
-                <p id="section-7.1.4.1-7.1.1">REQUIRED. The value of the top-level <code>sub_id</code> claim in a Verification Event MUST always be set to have a simple value of type <code>opaque</code>. The <code>id</code> of the value MUST be the <code>stream_id</code> of the stream being verified.<a href="#section-7.1.4.1-7.1.1" class="pilcrow">¶</a></p>
+                <p id="section-7.1.4.1-7.1.1">Note that the subject that identifies a stream itself is always implicitly
+  added to the stream and MAY NOT be removed from the stream.<a href="#section-7.1.4.1-7.1.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.4.1-8.1">
-                <p id="section-7.1.4.1-8.1.1">Note that the subject that identifies a stream itself is always implicitly
-  added to the stream and MAY NOT be removed from the stream.<a href="#section-7.1.4.1-8.1.1" class="pilcrow">¶</a></p>
-</li>
-            </ul>
-<p id="section-7.1.4.1-9">Upon receiving a Verification Event, the Event Receiver SHALL parse the SET and
+<p id="section-7.1.4.1-8">Upon receiving a Verification Event, the Event Receiver SHALL parse the SET and
 validate its claims. In particular, the Event Receiver SHALL confirm that the
 value for "state" is as expected. If the value of "state" does not match, an
 error response of "setData" SHOULD be returned (see Section 2.3 of
-<span>[<a href="#DELIVERYPUSH" class="cite xref">DELIVERYPUSH</a>]</span> or <span>[<a href="#DELIVERYPOLL" class="cite xref">DELIVERYPOLL</a>]</span>).<a href="#section-7.1.4.1-9" class="pilcrow">¶</a></p>
-<p id="section-7.1.4.1-10">In many cases, Event Transmitters MAY disable or suspend an Event Stream that
+<span>[<a href="#DELIVERYPUSH" class="cite xref">DELIVERYPUSH</a>]</span> or <span>[<a href="#DELIVERYPOLL" class="cite xref">DELIVERYPOLL</a>]</span>).<a href="#section-7.1.4.1-8" class="pilcrow">¶</a></p>
+<p id="section-7.1.4.1-9">In many cases, Event Transmitters MAY disable or suspend an Event Stream that
 fails to successfully verify based on the acknowledgement or lack of
-acknowledgement by the Event Receiver.<a href="#section-7.1.4.1-10" class="pilcrow">¶</a></p>
+acknowledgement by the Event Receiver.<a href="#section-7.1.4.1-9" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="triggering-a-verification-event">
@@ -3989,30 +3984,26 @@ Subject.<a href="#section-7.1.5-3" class="pilcrow">¶</a></p>
   status.<a href="#section-7.1.5-8.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-7.1.5-9">sub_id<a href="#section-7.1.5-9" class="pilcrow">¶</a></p>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.5-10.1">
-              <p id="section-7.1.5-10.1.1">REQUIRED. The top-level <code>sub_id</code> claim specifies the Subject Principal for whom the status has been updated.
-  If the event applies to the entire stream, the value of the <code>sub_id</code> field
-  MUST be of format <code>opaque</code>, and its <code>id</code> value MUST be the unique ID of the
-  stream.<a href="#section-7.1.5-10.1.1" class="pilcrow">¶</a></p>
-</li>
-          </ul>
+<p id="section-7.1.5-9">As with any SSF Event, this event has a top-level <code>sub_id</code> claim:<a href="#section-7.1.5-9" class="pilcrow">¶</a></p>
+<p id="section-7.1.5-10">sub_id<a href="#section-7.1.5-10" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-7.1.5-11.1">
-              <p id="section-7.1.5-11.1.1">Note that the subject that identifies a stream itself is always implicitly
-  added to the stream and MAY NOT be removed from the stream.<a href="#section-7.1.5-11.1.1" class="pilcrow">¶</a></p>
+              <p id="section-7.1.5-11.1.1">REQUIRED. The top-level <code>sub_id</code> claim specifies the Subject Principal for whom the status has been updated.
+  If the event applies to the entire stream, the value of the <code>sub_id</code> field
+  MUST be of format <code>opaque</code>, and its <code>id</code> value MUST be the unique ID of the
+  stream.<a href="#section-7.1.5-11.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-7.1.5-12.1">
-              <p id="section-7.1.5-12.1.1">Below is a non-normative example of a <code>stream-updated</code> event with a specific
-  subject.<a href="#section-7.1.5-12.1.1" class="pilcrow">¶</a></p>
+              <p id="section-7.1.5-12.1.1">Note that the subject that identifies a stream itself is always implicitly
+  added to the stream and MAY NOT be removed from the stream.<a href="#section-7.1.5-12.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
+<p id="section-7.1.5-13">Below is a non-normative example of a <code>stream-updated</code> event with a specific subject.<a href="#section-7.1.5-13" class="pilcrow">¶</a></p>
 <span id="name-example-stream-updated-set-"></span><div id="figstreamupdatedset">
 <figure id="figure-41">
-            <div class="lang-json sourcecode" id="section-7.1.5-13.1">
+            <div class="lang-json sourcecode" id="section-7.1.5-14.1">
 <pre>
 {
   "jti": "123456",
@@ -4041,14 +4032,14 @@ Subject.<a href="#section-7.1.5-3" class="pilcrow">¶</a></p>
             </figcaption></figure>
 </div>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.5-14.1">
-              <p id="section-7.1.5-14.1.1">Below is a non-normative example of a <code>stream-updated</code> event with a stream
-  subject.<a href="#section-7.1.5-14.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-7.1.5-15.1">
+              <p id="section-7.1.5-15.1.1">Below is a non-normative example of a <code>stream-updated</code> event with a stream
+  subject.<a href="#section-7.1.5-15.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <span id="name-example-stream-updated-set-w"></span><div id="figstreamupdatedstreamset">
 <figure id="figure-42">
-            <div class="lang-json sourcecode" id="section-7.1.5-15.1">
+            <div class="lang-json sourcecode" id="section-7.1.5-16.1">
 <pre>
 {
   "jti": "123456",
