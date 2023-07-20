@@ -571,13 +571,18 @@ Tulshibagwale, et al.        Standards Track                   [Page 10]
       tokens obtained using any of the scopes defined here MUST be
       accepted by the specified endpoint.  Any key that is not defined
       as an endpoint in the Transmitter Configuration Metadata MUST be
-      ignored
+      ignored.  If the supported_scopes member is present in the
+      metadata, and if an endpoint is not present as a key in it, then
+      the endpoint MUST NOT require OAuth for authorization.
 
    authorization_servers
 
       OPTIONAL.  An array supported authorization servers and the scopes
       they support.  Each element of the array is a Authorization Server
       Descriptor JSON object defined in the section Section 6.1.1 below.
+      If the supported_scopes member is present in the metadata, then
+      the authorization_servers MUST also be present, and it MUST
+      provide a server location for every supported scope.
 
    TODO: consider adding a IANA Registry for metadata, similar to
    Section 7.1.1 of [RFC8414].  This would allow other specs to add to
@@ -602,6 +607,17 @@ Tulshibagwale, et al.        Standards Track                   [Page 10]
    The following is a non-normative example of an Authorization Server
    Descriptor
 
+
+
+
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 11]
+
+                              SharedSignals                    June 2023
+
+
    {
        "scopes" : ["scope1", "scope2"],
        "servers": [
@@ -610,13 +626,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 10]
            "https://server3.example/base/url"
        ]
    }
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 11]
-
-                              SharedSignals                    June 2023
-
 
              Figure 9: Example Authorization Server Descriptor
 
@@ -657,15 +666,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 11]
    GET /.well-known/ssf-configuration/issuer1 HTTP/1.1
    Host: tr.example.com
 
-     Figure 11: Example: Transmitter Configuration Request (with path)
-
-   Using path components enables supporting multiple issuers per host.
-   This is required in some multi-tenant hosting configurations.  This
-   use of ".well-known" is for supporting multiple issuers per host;
-   unlike its use in [RFC5785], it does not provide general information
-   about the host.
-
-
 
 
 
@@ -673,6 +673,14 @@ Tulshibagwale, et al.        Standards Track                   [Page 12]
 
                               SharedSignals                    June 2023
 
+
+     Figure 11: Example: Transmitter Configuration Request (with path)
+
+   Using path components enables supporting multiple issuers per host.
+   This is required in some multi-tenant hosting configurations.  This
+   use of ".well-known" is for supporting multiple issuers per host;
+   unlike its use in [RFC5785], it does not provide general information
+   about the host.
 
 6.2.2.  Backward Compatibility for RISC Transmitters
 
@@ -708,14 +716,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 12]
 
    The following is a non-normative example of a Transmitter
    Configuration Response
-
-
-
-
-
-
-
-
 
 
 

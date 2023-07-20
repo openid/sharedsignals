@@ -2032,13 +2032,13 @@ configuration information.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <p id="section-6.1-20">supported_scopes<a href="#section-6.1-20" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-6.1-21.1">
-            <p id="section-6.1-21.1.1">OPTIONAL. A list of OAuth <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span> scope names that the Transmitter supports for specific endpoints. The value of this field is a JSON object that has the endpoint names as keys, and arrays of scope name strings they support as their values. OAuth tokens obtained using any of the scopes defined here MUST be accepted by the specified endpoint. Any key that is not defined as an endpoint in the Transmitter Configuration Metadata MUST be ignored<a href="#section-6.1-21.1.1" class="pilcrow">¶</a></p>
+            <p id="section-6.1-21.1.1">OPTIONAL. A list of OAuth <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span> scope names that the Transmitter supports for specific endpoints. The value of this field is a JSON object that has the endpoint names as keys, and arrays of scope name strings they support as their values. OAuth tokens obtained using any of the scopes defined here MUST be accepted by the specified endpoint. Any key that is not defined as an endpoint in the Transmitter Configuration Metadata MUST be ignored. If the <code>supported_scopes</code> member is present in the metadata, and if an endpoint is not present as a key in it, then the endpoint MUST NOT require OAuth for authorization.<a href="#section-6.1-21.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-6.1-22">authorization_servers<a href="#section-6.1-22" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-6.1-23.1">
-            <p id="section-6.1-23.1.1">OPTIONAL. An array supported authorization servers and the scopes they support. Each element of the array is a Authorization Server Descriptor JSON object defined in the section <a href="#authz-server-descriptor" class="auto internal xref">Section 6.1.1</a> below.<a href="#section-6.1-23.1.1" class="pilcrow">¶</a></p>
+            <p id="section-6.1-23.1.1">OPTIONAL. An array supported authorization servers and the scopes they support. Each element of the array is a Authorization Server Descriptor JSON object defined in the section <a href="#authz-server-descriptor" class="auto internal xref">Section 6.1.1</a> below. If the <code>supported_scopes</code> member is present in the metadata, then the <code>authorization_servers</code> MUST also be present, and it MUST provide a server location for every supported scope.<a href="#section-6.1-23.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-6.1-24">TODO: consider adding a IANA Registry for metadata, similar to Section 7.1.1 of

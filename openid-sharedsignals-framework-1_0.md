@@ -540,11 +540,11 @@ critical_subject_members
   
 supported_scopes
 
-> OPTIONAL. A list of OAuth {{RFC6749}} scope names that the Transmitter supports for specific endpoints. The value of this field is a JSON object that has the endpoint names as keys, and arrays of scope name strings they support as their values. OAuth tokens obtained using any of the scopes defined here MUST be accepted by the specified endpoint. Any key that is not defined as an endpoint in the Transmitter Configuration Metadata MUST be ignored
+> OPTIONAL. A list of OAuth {{RFC6749}} scope names that the Transmitter supports for specific endpoints. The value of this field is a JSON object that has the endpoint names as keys, and arrays of scope name strings they support as their values. OAuth tokens obtained using any of the scopes defined here MUST be accepted by the specified endpoint. Any key that is not defined as an endpoint in the Transmitter Configuration Metadata MUST be ignored. If the `supported_scopes` member is present in the metadata, and if an endpoint is not present as a key in it, then the endpoint MUST NOT require OAuth for authorization.
 
 authorization_servers
 
-> OPTIONAL. An array supported authorization servers and the scopes they support. Each element of the array is a Authorization Server Descriptor JSON object defined in the section {{authz-server-descriptor}} below.
+> OPTIONAL. An array supported authorization servers and the scopes they support. Each element of the array is a Authorization Server Descriptor JSON object defined in the section {{authz-server-descriptor}} below. If the `supported_scopes` member is present in the metadata, then the `authorization_servers` MUST also be present, and it MUST provide a server location for every supported scope.
 
 TODO: consider adding a IANA Registry for metadata, similar to Section 7.1.1 of
 {{RFC8414}}. This would allow other specs to add to the metadata.
