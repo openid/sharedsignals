@@ -1380,8 +1380,18 @@ subject
 > OPTIONAL. The subject for which the stream status is requested.
 
 On receiving a valid request the Event Transmitter responds with a 200 OK
-response containing a [JSON][RFC7159] object with an attribute "status",
-whose string value MUST have one of the following values:
+response containing a [JSON][RFC7159] object with the following attributes:
+
+status
+
+> A string whose value MUST be one of the values described below.
+
+reason
+
+> An OPTIONAL string whose value SHOULD express why the stream's status is set to
+the current value.
+
+The allowable "status" values are:
 
 enabled
 
@@ -1423,7 +1433,8 @@ Content-Type: application/json
 Cache-Control: no-store
 
 {
-  "status": "enabled"
+  "status": "paused",
+  "reason": "System down for maintenance"
 }
 ~~~
 {: title="Example: Check Stream Status Response" #figstatusresp}
@@ -1883,7 +1894,7 @@ subject
 > REQUIRED. Specifies the Subject Principal for whom the status has been updated.
   If the event applies to the entire stream, the value of the `subject` field
   MUST be of format `opaque`, and its `id` value MUST be the unique ID of the
-  stream. 
+  stream.
 
 > Note that the subject that identifies a stream itself is always implicitly
   added to the stream and MAY NOT be removed from the stream.
@@ -1929,7 +1940,7 @@ subject
       "subject": {
         "format": "opaque",
         "id" : "f67e39a0a4d34d56b3aa1bc4cff0069f"
-      },   
+      },
       "status": "paused",
       "reason": "Internal error"
     }

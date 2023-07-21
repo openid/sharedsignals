@@ -1754,8 +1754,19 @@ Tulshibagwale, et al.        Standards Track                   [Page 31]
       OPTIONAL.  The subject for which the stream status is requested.
 
    On receiving a valid request the Event Transmitter responds with a
-   200 OK response containing a JSON [RFC7159] object with an attribute
-   "status", whose string value MUST have one of the following values:
+   200 OK response containing a JSON [RFC7159] object with the following
+   attributes:
+
+   status
+
+      A string whose value MUST be one of the values described below.
+
+   reason
+
+      An OPTIONAL string whose value SHOULD express why the stream's
+      status is set to the current value.
+
+   The allowable "status" values are:
 
    enabled
 
@@ -1776,6 +1787,13 @@ Tulshibagwale, et al.        Standards Track                   [Page 31]
       events are either cancelled by the later events or the previous
       events are outdated.
 
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 32]
+
+                              SharedSignals                    June 2023
+
+
    disabled
 
       The Transmitter MUST NOT transmit events over the stream, and will
@@ -1783,16 +1801,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 31]
 
    The following is a non-normative example request to check an event
    stream's status:
-
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 32]
-
-                              SharedSignals                    June 2023
-
 
    GET /ssf/status?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f HTTP/1.1
    Host: transmitter.example.com
@@ -1807,7 +1815,8 @@ Tulshibagwale, et al.        Standards Track                   [Page 32]
    Cache-Control: no-store
 
    {
-     "status": "enabled"
+     "status": "paused",
+     "reason": "System down for maintenance"
    }
 
               Figure 28: Example: Check Stream Status Response
@@ -1823,6 +1832,23 @@ Tulshibagwale, et al.        Standards Track                   [Page 32]
 
    The following is a non-normative example response with a Subject
    claim:
+
+
+
+
+
+
+
+
+
+
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 33]
+
+                              SharedSignals                    June 2023
+
 
    HTTP/1.1 200 OK
    Content-Type: application/json
@@ -1841,14 +1867,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 32]
    }
 
               Figure 30: Example: Check Stream Status Response
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 33]
-
-                              SharedSignals                    June 2023
-
 
    Errors are signaled with HTTP status codes as follows:
 
@@ -1880,6 +1898,14 @@ Tulshibagwale, et al.        Standards Track                   [Page 33]
    3.  If the Receiver requests the status for a stream that does not
        exist then the Transmitter MUST respond with a 404 error status.
 
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 34]
+
+                              SharedSignals                    June 2023
+
+
    4.  If the Receiver requests the status for a specific Subject, but
        the Transmitter policy does not permit the Receiver to read the
        status of that Subject, then the Transmitter MAY respond with a
@@ -1897,14 +1923,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 33]
    stream_id
 
       REQUIRED.  The stream whose status is being updated.
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 34]
-
-                              SharedSignals                    June 2023
-
 
    status
 
@@ -1935,24 +1953,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 34]
      "status": "paused"
    }
 
-     Figure 31: Example: Update Stream Status Request Without Optional
-                                   Fields
-
-   The following is a non-normative example of an Update Stream Status
-   request with optional fields:
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1961,6 +1961,12 @@ Tulshibagwale, et al.        Standards Track                   [Page 35]
 
                               SharedSignals                    June 2023
 
+
+     Figure 31: Example: Update Stream Status Request Without Optional
+                                   Fields
+
+   The following is a non-normative example of an Update Stream Status
+   request with optional fields:
 
    POST /ssf/status HTTP/1.1
    Host: transmitter.example.com
@@ -2000,12 +2006,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 35]
              Figure 33: Example: Update Stream Status Response
 
    Errors are signaled with HTTP status codes as follows:
-
-
-
-
-
-
 
 
 
