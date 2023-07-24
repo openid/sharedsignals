@@ -1816,7 +1816,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 32]
 
    {
      "status": "paused",
-     "reason": "System down for maintenance"
+     "reason": "SYSTEM_DOWN_FOR_MAINTENANCE"
    }
 
               Figure 28: Example: Check Stream Status Response

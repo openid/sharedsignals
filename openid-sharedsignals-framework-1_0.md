@@ -1434,7 +1434,7 @@ Cache-Control: no-store
 
 {
   "status": "paused",
-  "reason": "System down for maintenance"
+  "reason": "SYSTEM_DOWN_FOR_MAINTENANCE"
 }
 ~~~
 {: title="Example: Check Stream Status Response" #figstatusresp}
