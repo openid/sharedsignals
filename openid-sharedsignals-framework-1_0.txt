@@ -87,25 +87,25 @@ Table of Contents
      7.1.  Event Stream Management . . . . . . . . . . . . . . . . .  14
        7.1.1.  Stream Configuration  . . . . . . . . . . . . . . . .  15
        7.1.2.  Stream Status . . . . . . . . . . . . . . . . . . . .  31
-       7.1.3.  Subjects  . . . . . . . . . . . . . . . . . . . . . .  37
-       7.1.4.  Verification  . . . . . . . . . . . . . . . . . . . .  41
-       7.1.5.  Stream Updated Event  . . . . . . . . . . . . . . . .  45
-   8.  Authorization . . . . . . . . . . . . . . . . . . . . . . . .  47
-   9.  Security Considerations . . . . . . . . . . . . . . . . . . .  47
-     9.1.  Subject Probing . . . . . . . . . . . . . . . . . . . . .  47
-     9.2.  Information Harvesting  . . . . . . . . . . . . . . . . .  47
-     9.3.  Malicious Subject Removal . . . . . . . . . . . . . . . .  48
-   10. Privacy Considerations  . . . . . . . . . . . . . . . . . . .  48
-     10.1.  Subject Information Leakage  . . . . . . . . . . . . . .  48
-     10.2.  Previously Consented Data  . . . . . . . . . . . . . . .  48
-     10.3.  New Data . . . . . . . . . . . . . . . . . . . . . . . .  48
-       10.3.1.  Organizational Data  . . . . . . . . . . . . . . . .  49
-       10.3.2.  Consentable Data . . . . . . . . . . . . . . . . . .  49
-   11. Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .  49
-     11.1.  Security Event Token Profile . . . . . . . . . . . . . .  49
-       11.1.1.  Signature Key Resolution . . . . . . . . . . . . . .  49
-       11.1.2.  SSF Event Subject  . . . . . . . . . . . . . . . . .  49
-       11.1.3.  SSF Event Properties . . . . . . . . . . . . . . . .  50
+       7.1.3.  Subjects  . . . . . . . . . . . . . . . . . . . . . .  36
+       7.1.4.  Verification  . . . . . . . . . . . . . . . . . . . .  40
+       7.1.5.  Stream Updated Event  . . . . . . . . . . . . . . . .  43
+   8.  Authorization . . . . . . . . . . . . . . . . . . . . . . . .  44
+   9.  Security Considerations . . . . . . . . . . . . . . . . . . .  44
+     9.1.  Subject Probing . . . . . . . . . . . . . . . . . . . . .  45
+     9.2.  Information Harvesting  . . . . . . . . . . . . . . . . .  45
+     9.3.  Malicious Subject Removal . . . . . . . . . . . . . . . .  45
+   10. Privacy Considerations  . . . . . . . . . . . . . . . . . . .  46
+     10.1.  Subject Information Leakage  . . . . . . . . . . . . . .  46
+     10.2.  Previously Consented Data  . . . . . . . . . . . . . . .  46
+     10.3.  New Data . . . . . . . . . . . . . . . . . . . . . . . .  46
+       10.3.1.  Organizational Data  . . . . . . . . . . . . . . . .  46
+       10.3.2.  Consentable Data . . . . . . . . . . . . . . . . . .  47
+   11. Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .  47
+     11.1.  Security Event Token Profile . . . . . . . . . . . . . .  47
+       11.1.1.  Signature Key Resolution . . . . . . . . . . . . . .  47
+       11.1.2.  SSF Event Subject  . . . . . . . . . . . . . . . . .  47
+       11.1.3.  SSF Event Properties . . . . . . . . . . . . . . . .  47
 
 
 
@@ -114,21 +114,21 @@ Tulshibagwale, et al.        Standards Track                    [Page 2]
                               SharedSignals                    June 2023
 
 
-       11.1.4.  Explicit Typing of SETs  . . . . . . . . . . . . . .  50
-       11.1.5.  The "exp" Claim  . . . . . . . . . . . . . . . . . .  51
-       11.1.6.  The "aud" Claim  . . . . . . . . . . . . . . . . . .  51
-       11.1.7.  The "events" claim . . . . . . . . . . . . . . . . .  52
-       11.1.8.  Security Considerations  . . . . . . . . . . . . . .  52
-     11.2.  SET Token Delivery Using HTTP Profile  . . . . . . . . .  52
-       11.2.1.  Stream Configuration Metadata  . . . . . . . . . . .  52
-   12. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  53
-   13. References  . . . . . . . . . . . . . . . . . . . . . . . . .  53
-     13.1.  Normative References . . . . . . . . . . . . . . . . . .  53
-     13.2.  Informative References . . . . . . . . . . . . . . . . .  55
-   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  55
-   Appendix B.  Notices  . . . . . . . . . . . . . . . . . . . . . .  56
-   Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  56
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  56
+       11.1.4.  Explicit Typing of SETs  . . . . . . . . . . . . . .  48
+       11.1.5.  The "exp" Claim  . . . . . . . . . . . . . . . . . .  49
+       11.1.6.  The "aud" Claim  . . . . . . . . . . . . . . . . . .  49
+       11.1.7.  The "events" claim . . . . . . . . . . . . . . . . .  50
+       11.1.8.  Security Considerations  . . . . . . . . . . . . . .  50
+     11.2.  SET Token Delivery Using HTTP Profile  . . . . . . . . .  50
+       11.2.1.  Stream Configuration Metadata  . . . . . . . . . . .  50
+   12. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  51
+   13. References  . . . . . . . . . . . . . . . . . . . . . . . . .  51
+     13.1.  Normative References . . . . . . . . . . . . . . . . . .  51
+     13.2.  Informative References . . . . . . . . . . . . . . . . .  53
+   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  53
+   Appendix B.  Notices  . . . . . . . . . . . . . . . . . . . . . .  53
+   Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  54
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  54
 
 1.  Introduction
 
@@ -1697,15 +1697,13 @@ Tulshibagwale, et al.        Standards Track                   [Page 30]
 
 7.1.2.  Stream Status
 
-   Within an Event Stream, events related to different Subject
-   Principals MAY be managed independently.  A Receiver MAY request
-   Subject Principals to be added to or removed from a stream by
-   Updating the Stream Status (Section 7.1.2.2) and specifying the
-   Subject in the request.
+   Event Streams are managed independently.  A Receiver MAY request that
+   events from a stream be interrupted by Updating the Stream Status
+   (Section 7.1.2.2).
 
-   A Transmitter MAY decide to enable, pause or disable updates about a
-   Subject independently of an update request from a Receiver.  If a
-   Transmitter decides to start or stop events for a Subject then the
+   A Transmitter MAY decide to enable, pause or disable updates from a
+   stream independently of an update request from a Receiver.  If a
+   Transmitter decides to start or stop events for a stream then the
    Transmitter MUST do the following according to the status of the
    stream.
 
@@ -1728,8 +1726,10 @@ Tulshibagwale, et al.        Standards Track                   [Page 30]
       the Transmitter MAY send a stream updated (Section 7.1.5) after
       the Event Stream is re-enabled.
 
+7.1.2.1.  Reading a Stream's Status
 
-
+   An Event Receiver checks the current status of an event stream by
+   making an HTTP GET request to the stream's Status Endpoint.
 
 
 
@@ -1738,20 +1738,11 @@ Tulshibagwale, et al.        Standards Track                   [Page 31]
                               SharedSignals                    June 2023
 
 
-7.1.2.1.  Reading a Stream's Status
-
-   An Event Receiver checks the current status of an event stream by
-   making an HTTP GET request to the stream's Status Endpoint.
-
    The Stream Status method takes the following parameters:
 
    stream_id
 
       REQUIRED.  The stream whose status is being queried.
-
-   subject
-
-      OPTIONAL.  The subject for which the stream status is requested.
 
    On receiving a valid request the Event Transmitter responds with a
    200 OK response containing a JSON [RFC7159] object with the following
@@ -1787,13 +1778,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 31]
       events are either cancelled by the later events or the previous
       events are outdated.
 
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 32]
-
-                              SharedSignals                    June 2023
-
-
    disabled
 
       The Transmitter MUST NOT transmit events over the stream, and will
@@ -1801,6 +1785,14 @@ Tulshibagwale, et al.        Standards Track                   [Page 32]
 
    The following is a non-normative example request to check an event
    stream's status:
+
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 32]
+
+                              SharedSignals                    June 2023
+
 
    GET /ssf/status?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f HTTP/1.1
    Host: transmitter.example.com
@@ -1821,70 +1813,21 @@ Tulshibagwale, et al.        Standards Track                   [Page 32]
 
               Figure 28: Example: Check Stream Status Response
 
-   The following is a non-normative example request to check an event
-   stream's status for a specific subject:
-
-   GET /ssf/status?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f&subject=<url-encoded-subject> HTTP/1.1
-   Host: transmitter.example.com
-   Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
-
-        Figure 29: Example: Check Stream Status Request with Subject
-
-   The following is a non-normative example response with a Subject
-   claim:
-
-
-
-
-
-
-
-
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 33]
-
-                              SharedSignals                    June 2023
-
-
-   HTTP/1.1 200 OK
-   Content-Type: application/json
-   Cache-Control: no-store
-
-   {
-     "status": "enabled",
-     "subject": {
-       "format": "complex",
-       "tenant" : {
-         "format" : "iss_sub",
-         "iss" : "http://example.com/idp1",
-         "sub" : "1234"
-       }
-     }
-   }
-
-              Figure 30: Example: Check Stream Status Response
-
    Errors are signaled with HTTP status codes as follows:
 
-     +======+========================================================+
-     | Code | Description                                            |
-     +======+========================================================+
-     | 401  | if authorization failed or it is missing               |
-     +------+--------------------------------------------------------+
-     | 403  | if the Event Receiver is not allowed to read the       |
-     |      | stream status                                          |
-     +------+--------------------------------------------------------+
-     | 404  | if there is no Event Stream with the given "stream_id" |
-     |      | for this Event Receiver, or if the Subject specified   |
-     |      | is invalid or if the Receiver is not authorized to get |
-     |      | status for the specified Subject.                      |
-     +------+--------------------------------------------------------+
+           +======+===========================================+
+           | Code | Description                               |
+           +======+===========================================+
+           | 401  | if authorization failed or it is missing  |
+           +------+-------------------------------------------+
+           | 403  | if the Event Receiver is not allowed to   |
+           |      | read the stream status                    |
+           +------+-------------------------------------------+
+           | 404  | if there is no Event Stream with the      |
+           |      | given "stream_id" for this Event Receiver |
+           +------+-------------------------------------------+
 
-                     Table 6: Read Stream Status Errors
+                    Table 6: Read Stream Status Errors
 
    Examples:
 
@@ -1901,18 +1844,11 @@ Tulshibagwale, et al.        Standards Track                   [Page 33]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 34]
+
+Tulshibagwale, et al.        Standards Track                   [Page 33]
 
                               SharedSignals                    June 2023
 
-
-   4.  If the Receiver requests the status for a specific Subject, but
-       the Transmitter policy does not permit the Receiver to read the
-       status of that Subject, then the Transmitter MAY respond with a
-       404 error status in order to not reveal the policy decision.
-
-   5.  If the specified Subject is invalid then the Transmitter MUST
-       respond with a 404 error status.
 
 7.1.2.2.  Updating a Stream's Status
 
@@ -1928,10 +1864,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 34]
 
       REQUIRED.  The new status of the Event Stream.
 
-   subject
-
-      OPTIONAL.  The Subject to which the new status applies.
-
    reason
 
       OPTIONAL.  A short text description that explains the reason for
@@ -1939,7 +1871,8 @@ Tulshibagwale, et al.        Standards Track                   [Page 34]
 
    On receiving a valid request the Event Transmitter responds with a
    "200 OK" response containing a JSON [RFC7159] representation of the
-   updated stream status in the body.
+   updated stream status in the body, using the same fields as described
+   in the request.
 
    The following is a non-normative example request to update an Event
    Stream's status:
@@ -1953,20 +1886,25 @@ Tulshibagwale, et al.        Standards Track                   [Page 34]
      "status": "paused"
    }
 
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 35]
-
-                              SharedSignals                    June 2023
-
-
-     Figure 31: Example: Update Stream Status Request Without Optional
+     Figure 29: Example: Update Stream Status Request Without Optional
                                    Fields
 
    The following is a non-normative example of an Update Stream Status
-   request with optional fields:
+   request with an optional reason:
+
+
+
+
+
+
+
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 34]
+
+                              SharedSignals                    June 2023
+
 
    POST /ssf/status HTTP/1.1
    Host: transmitter.example.com
@@ -1975,18 +1913,10 @@ Tulshibagwale, et al.        Standards Track                   [Page 35]
    {
      "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
      "status": "paused",
-     "subject": {
-       "format": "complex",
-       "tenant" : {
-         "format" : "iss_sub",
-         "iss" : "http://example.com/idp1",
-         "sub" : "1234"
-       }
-     },
-     "reason": "Disabled by administrator action."
+     "reason": "Disabled by administrator action"
    }
 
-   Figure 32: Example: Update Stream Status Request With Optional Fields
+   Figure 30: Example: Update Stream Status Request With Optional Reason
 
    The following is a non-normative example response:
 
@@ -1996,27 +1926,12 @@ Tulshibagwale, et al.        Standards Track                   [Page 35]
 
    {
      "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
-     "status": "paused",
-     "subject": {
-       "format" : "email",
-       "email" : "user@example.com"
-     }
+     "status": "paused"
    }
 
-             Figure 33: Example: Update Stream Status Response
+             Figure 31: Example: Update Stream Status Response
 
    Errors are signaled with HTTP status codes as follows:
-
-
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 36]
-
-                              SharedSignals                    June 2023
-
 
         +======+==================================================+
         | Code | Description                                      |
@@ -2034,18 +1949,25 @@ Tulshibagwale, et al.        Standards Track                   [Page 36]
         |      | the stream status                                |
         +------+--------------------------------------------------+
         | 404  | if there is no Event Stream with the given       |
-        |      | "stream_id" for this Event Receiver, or if an    |
-        |      | invalid Subject is specified.                    |
+        |      | "stream_id" for this Event Receiver              |
         +------+--------------------------------------------------+
 
                     Table 7: Update Stream Status Errors
 
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 35]
+
+                              SharedSignals                    June 2023
+
+
    Example:
 
-   1.  If a Receiver makes a request to update a stream to enable it for
-       a specific Subject, and the Transmitter is unable to decide
-       whether or not to complete the request, then the Transmitter MUST
-       respond with a 202 status code.
+   1.  If a Receiver makes a request to update a stream status, and the
+       Transmitter is unable to decide whether or not to complete the
+       request, then the Transmitter MUST respond with a 202 status
+       code.
 
 7.1.3.  Subjects
 
@@ -2066,14 +1988,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 36]
 
    2.  Subject 2's field is not defined
 
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 37]
-
-                              SharedSignals                    June 2023
-
-
    3.  Subject 1's field is identical to Subject 2's field
 
 7.1.3.1.  Adding a Subject to a Stream
@@ -2091,6 +2005,18 @@ Tulshibagwale, et al.        Standards Track                   [Page 37]
       REQUIRED.  A Subject claim identifying the subject to be added.
 
    verified
+
+
+
+
+
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 36]
+
+                              SharedSignals                    June 2023
+
 
       OPTIONAL.  A boolean value; when true, it indicates that the Event
       Receiver has verified the Subject claim.  When false, it indicates
@@ -2123,14 +2049,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 37]
      "verified": true
    }
 
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 38]
-
-                              SharedSignals                    June 2023
-
-
-                  Figure 34: Example: Add Subject Request
+                  Figure 32: Example: Add Subject Request
 
    The following is a non-normative example response to a successful
    request:
@@ -2139,9 +2058,21 @@ Tulshibagwale, et al.        Standards Track                   [Page 38]
    Server: transmitter.example.com
    Cache-Control: no-store
 
-                  Figure 35: Example: Add Subject Response
+                  Figure 33: Example: Add Subject Response
 
    Errors are signaled with HTTP status codes as follows:
+
+
+
+
+
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 37]
+
+                              SharedSignals                    June 2023
+
 
       +======+=====================================================+
       | Code | Description                                         |
@@ -2179,13 +2110,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 38]
 
    subject
 
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 39]
-
-                              SharedSignals                    June 2023
-
-
       REQUIRED.  A Subject claim identifying the subject to be removed.
 
    On a successful response, the Event Transmitter responds with a "204
@@ -2193,6 +2117,18 @@ Tulshibagwale, et al.        Standards Track                   [Page 39]
 
    The following is a non-normative example request where the subject is
    identified by a Phone Number Subject Identifier:
+
+
+
+
+
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 38]
+
+                              SharedSignals                    June 2023
+
 
    POST /ssf/subjects:remove HTTP/1.1
    Host: transmitter.example.com
@@ -2206,7 +2142,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 39]
      }
    }
 
-                 Figure 36: Example: Remove Subject Request
+                 Figure 34: Example: Remove Subject Request
 
    The following is a non-normative example response to a successful
    request:
@@ -2215,32 +2151,9 @@ Tulshibagwale, et al.        Standards Track                   [Page 39]
    Server: transmitter.example.com
    Cache-Control: no-store
 
-                Figure 37: Example: Remove Subject Response
+                Figure 35: Example: Remove Subject Response
 
    Errors are signaled with HTTP status codes as follows:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 40]
-
-                              SharedSignals                    June 2023
-
 
       +======+=====================================================+
       | Code | Description                                         |
@@ -2266,6 +2179,13 @@ Tulshibagwale, et al.        Standards Track                   [Page 40]
 
                       Table 9: Remove Subject Errors
 
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 39]
+
+                              SharedSignals                    June 2023
+
+
 7.1.4.  Verification
 
    In some cases, the frequency of event transmission on an Event Stream
@@ -2288,15 +2208,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 40]
    attributes:
 
    event type
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 41]
-
-                              SharedSignals                    June 2023
-
 
       The Event Type URI is: "https://schemas.openid.net/secevent/ssf/
       event-type/verification".
@@ -2324,6 +2235,13 @@ Tulshibagwale, et al.        Standards Track                   [Page 41]
    SHOULD be returned (see Section 2.3 of [DELIVERYPUSH] or
    [DELIVERYPOLL]).
 
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 40]
+
+                              SharedSignals                    June 2023
+
+
    In many cases, Event Transmitters MAY disable or suspend an Event
    Stream that fails to successfully verify based on the acknowledgement
    or lack of acknowledgement by the Event Receiver.
@@ -2345,15 +2263,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 41]
 
    state
 
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 42]
-
-                              SharedSignals                    June 2023
-
-
       OPTIONAL.  An arbitrary string that the Event Transmitter MUST
       echo back to the Event Receiver in the verification event's
       payload.  Event Receivers MAY use the value of this parameter to
@@ -2372,6 +2281,22 @@ Tulshibagwale, et al.        Standards Track                   [Page 42]
    queue of events.
 
    Errors are signaled with HTTP status codes as follows:
+
+
+
+
+
+
+
+
+
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 41]
+
+                              SharedSignals                    June 2023
+
 
         +======+=================================================+
         | Code | Description                                     |
@@ -2394,22 +2319,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 42]
    The following is a non-normative example request to trigger a
    verification event:
 
-
-
-
-
-
-
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 43]
-
-                              SharedSignals                    June 2023
-
-
    POST /ssf/verify HTTP/1.1
    Host: transmitter.example.com
    Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
@@ -2420,7 +2329,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 43]
      "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
    }
 
-              Figure 38: Example: Trigger Verification Request
+              Figure 36: Example: Trigger Verification Request
 
    The following is a non-normative example response to a successful
    request:
@@ -2429,10 +2338,21 @@ Tulshibagwale, et al.        Standards Track                   [Page 43]
    Server: transmitter.example.com
    Cache-Control: no-store
 
-             Figure 39: Example: Trigger Verification Response
+             Figure 37: Example: Trigger Verification Response
 
    And the following is a non-normative example of a verification event
    sent to the Event Receiver as a result of the above request:
+
+
+
+
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 42]
+
+                              SharedSignals                    June 2023
+
 
    {
      "jti": "123456",
@@ -2450,46 +2370,30 @@ Tulshibagwale, et al.        Standards Track                   [Page 43]
      }
    }
 
-                    Figure 40: Example: Verification SET
-
-
-
-
-
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 44]
-
-                              SharedSignals                    June 2023
-
+                    Figure 38: Example: Verification SET
 
 7.1.5.  Stream Updated Event
 
-   A Transmitter MAY change the stream status in reference to one or
-   more Subjects without a request from a Receiver.  The Transmitter
-   sends an event of type "https://schemas.openid.net/secevent/ssf/
-   event-type/stream-updated" to indicate that it has changed the status
-   of the Event Stream for a specific Subject.
+   A Transmitter MAY change the stream status without a request from a
+   Receiver.  The Transmitter sends an event of type
+   "https://schemas.openid.net/secevent/ssf/event-type/stream-updated"
+   to indicate that it has changed the status of the Event Stream.
 
    If a Transmitter decides to change the status of an Event Stream from
    "enabled" to either "paused" or "disabled", then the Transmitter MUST
    send this event to any Receiver that is currently "enabled" to
    receive events from this stream.
 
-   If the Transmitter changes the status of the stream for a Subject
-   from either "paused" or "disabled" to "enabled", then it MUST send
-   this event to any Receiver that has previously been enabled to
-   receive events for the specified Subject.
+   If the Transmitter changes the status of the stream from either
+   "paused" or "disabled" to "enabled", then it MUST send this event to
+   any Receiver that has previously been enabled to receive events for
+   the stream.
 
    The "stream-updated" event MAY contain the following claims:
 
    status
 
-      REQUIRED.  Defines the new status of the stream for the Subject
-      Identifier specified in the Subject.
+      REQUIRED.  Defines the new status of the stream.
 
    reason
 
@@ -2498,55 +2402,23 @@ Tulshibagwale, et al.        Standards Track                   [Page 44]
 
    subject
 
-      REQUIRED.  Specifies the Subject Principal for whom the status has
-      been updated.  If the event applies to the entire stream, the
-      value of the subject field MUST be of format opaque, and its id
-      value MUST be the unique ID of the stream.
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 43]
+
+                              SharedSignals                    June 2023
+
+
+      REQUIRED.  Specifies the stream whose status has been updated.
+      The value of the subject field MUST be of format opaque, and its
+      id value MUST be the unique ID of the stream.
 
       Note that the subject that identifies a stream itself is always
       implicitly added to the stream and MAY NOT be removed from the
       stream.
 
-      Below is a non-normative example of a stream-updated event with a
-      specific subject.
-
-
-
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 45]
-
-                              SharedSignals                    June 2023
-
-
-   {
-     "jti": "123456",
-     "iss": "https://transmitter.example.com",
-     "aud": "receiver.example.com",
-     "iat": 1493856000,
-     "events": {
-       "https://schemas.openid.net/secevent/ssf/event-type/stream-updated": {
-         "subject": {
-           "format" : "complex",
-           "tenant" : {
-             "format": "iss_sub",
-             "iss" : "http://example.com/idp1",
-             "sub" : "1234"
-           }
-         },
-         "status": "paused",
-         "reason": "License is not valid"
-       }
-     }
-   }
-
-        Figure 41: Example: Stream Updated SET with tenant principal
-
-      Below is a non-normative example of a stream-updated event with a
-      stream subject.
+      Below is a non-normative example of a stream-updated event.
 
    {
      "jti": "123456",
@@ -2565,18 +2437,8 @@ Tulshibagwale, et al.        Standards Track                   [Page 45]
      }
    }
 
-     Figure 42: Example: Stream Updated SET with stream as the subject
+     Figure 39: Example: Stream Updated SET with stream as the subject
                        of single- stream Transmitter
-
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 46]
-
-                              SharedSignals                    June 2023
-
 
 8.  Authorization
 
@@ -2588,6 +2450,21 @@ Tulshibagwale, et al.        Standards Track                   [Page 46]
    the Transmitter.
 
 9.  Security Considerations
+
+
+
+
+
+
+
+
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 44]
+
+                              SharedSignals                    June 2023
+
 
 9.1.  Subject Probing
 
@@ -2625,15 +2502,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 46]
    the event.  The mechanisms by which such validation is performed are
    outside the scope of this specification.
 
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 47]
-
-                              SharedSignals                    June 2023
-
-
 9.3.  Malicious Subject Removal
 
    A malicious party may find it advantageous to remove a particular
@@ -2643,6 +2511,16 @@ Tulshibagwale, et al.        Standards Track                   [Page 47]
    be in the best interests of the subject for the Event Transmitter to
    continue to send events related to the subject for some time after
    the subject has been removed from a stream.
+
+
+
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 45]
+
+                              SharedSignals                    June 2023
+
 
    Event Transmitters MAY continue sending events related to a subject
    for some amount of time after that subject has been removed from the
@@ -2679,17 +2557,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 47]
    the Receiver, or data whose consent to exchange has expired has the
    following considerations:
 
-
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 48]
-
-                              SharedSignals                    June 2023
-
-
 10.3.1.  Organizational Data
 
    If a user has previously agreed with a Transmitter that they agree to
@@ -2697,6 +2564,19 @@ Tulshibagwale, et al.        Standards Track                   [Page 48]
    such data in SSF events without additional consent of the user.  Such
    data MAY include organizational data about the Subject Principal that
    was generated by the Transmitter.
+
+
+
+
+
+
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 46]
+
+                              SharedSignals                    June 2023
+
 
 10.3.2.  Consentable Data
 
@@ -2738,18 +2618,21 @@ Tulshibagwale, et al.        Standards Track                   [Page 48]
    "subject" claim is REQUIRED for all SSF events.  The JWT "sub" claim
    MUST NOT be present in any SET containing a SSF event.
 
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 49]
-
-                              SharedSignals                    June 2023
-
-
 11.1.3.  SSF Event Properties
 
    The SSF event MAY contain additional claims within the event payload
    that are specific to the event type.
+
+
+
+
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 47]
+
+                              SharedSignals                    June 2023
+
 
    {
      "iss": "https://idp.example.com/",
@@ -2768,7 +2651,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 49]
      }
    }
 
-        Figure 43: Example: SET Containing a RISC Event with a Phone
+        Figure 40: Example: SET Containing a RISC Event with a Phone
                                Number Subject
 
    {
@@ -2787,27 +2670,27 @@ Tulshibagwale, et al.        Standards Track                   [Page 49]
      }
    }
 
-      Figure 44: Example: SET Containing a CAEP Event with Properties
+      Figure 41: Example: SET Containing a CAEP Event with Properties
 
 11.1.4.  Explicit Typing of SETs
 
    SSF events MUST use explicit typing as defined in Section 2.3 of
    [RFC8417].
 
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 50]
-
-                              SharedSignals                    June 2023
-
-
    {
      "typ":"secevent+jwt",
      "alg":"HS256"
    }
 
-                  Figure 45: Explicitly Typed JOSE Header
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 48]
+
+                              SharedSignals                    June 2023
+
+
+                  Figure 42: Explicitly Typed JOSE Header
 
    The purpose is defense against confusion with other JWTs, as
    described in Sections 4.5, 4.6 and 4.7 of [RFC8417].  While current
@@ -2842,22 +2725,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 50]
    SETs to respective Receivers, an "aud" claim with multiple Receivers
    would lead to unintended data disclosure.
 
-
-
-
-
-
-
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 51]
-
-                              SharedSignals                    June 2023
-
-
    {
      "jti": "123456",
      "iss": "https://transmitter.example.com",
@@ -2870,7 +2737,14 @@ Tulshibagwale, et al.        Standards Track                   [Page 51]
      }
    }
 
-               Figure 46: Example: SET with array 'aud' claim
+               Figure 43: Example: SET with array 'aud' claim
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 49]
+
+                              SharedSignals                    June 2023
+
 
 11.1.7.  The "events" claim
 
@@ -2905,15 +2779,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 51]
    Each delivery method is identified by a URI, specified below by the
    "method" metadata.
 
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 52]
-
-                              SharedSignals                    June 2023
-
-
 11.2.1.1.  Push Delivery using HTTP
 
    This section provides SSF profiling specifications for the
@@ -2929,6 +2794,13 @@ Tulshibagwale, et al.        Standards Track                   [Page 52]
       the Receiver.  If a Reciever is using multiple streams from a
       single Transmitter and needs to keep the SETs separated, it is
       RECOMMENDED that the URL for each stream be unique.
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 50]
+
+                              SharedSignals                    June 2023
+
 
    authorization_header
 
@@ -2962,14 +2834,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 52]
 
 13.1.  Normative References
 
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 53]
-
-                              SharedSignals                    June 2023
-
-
    [CLIENTCRED]
               Hardt, D., "The OAuth 2.0 Authorization Framework - Client
               Credentials Grant", DOI 10.17487/RFC6749, RFC 6749,
@@ -2986,6 +2850,13 @@ Tulshibagwale, et al.        Standards Track                   [Page 53]
               Ansari, M., and A. Nadalin, "Push-Based SET Token Delivery
               Using HTTP", November 2020,
               <https://www.rfc-editor.org/info/rfc8935>.
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 51]
+
+                              SharedSignals                    June 2023
+
 
    [IDTOKEN]  Sakimura, N., Bradley, J., Jones, M. B., de Medeiros, B.,
               and C. Mortimore, "OpenID Connect Core 1.0 - ID Token",
@@ -3019,13 +2890,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 53]
               DOI 10.17487/RFC5785, April 2010,
               <https://www.rfc-editor.org/info/rfc5785>.
 
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 54]
-
-                              SharedSignals                    June 2023
-
-
    [RFC6750]  Jones, M. and D. Hardt, "The OAuth 2.0 Authorization
               Framework: Bearer Token Usage", RFC 6750,
               DOI 10.17487/RFC6750, October 2012,
@@ -3042,6 +2906,13 @@ Tulshibagwale, et al.        Standards Track                   [Page 54]
    [RFC7519]  Jones, M., Bradley, J., and N. Sakimura, "JSON Web Token
               (JWT)", RFC 7519, DOI 10.17487/RFC7519, May 2015,
               <https://www.rfc-editor.org/info/rfc7519>.
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 52]
+
+                              SharedSignals                    June 2023
+
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
@@ -3075,13 +2946,6 @@ Appendix A.  Acknowledgements
    Working Group who contributed to the development of this
    specification.
 
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 55]
-
-                              SharedSignals                    June 2023
-
-
 Appendix B.  Notices
 
    Copyright (c) 2021 The OpenID Foundation.
@@ -3095,6 +2959,16 @@ Appendix B.  Notices
    Specifications based on such documents, provided that attribution be
    made to the OIDF as the source of the material, but that such
    attribution does not indicate an endorsement by the OIDF.
+
+
+
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 53]
+
+                              SharedSignals                    June 2023
+
 
    The technology described in this specification was made available
    from contributions from various sources, including members of the
@@ -3130,14 +3004,6 @@ Contributors
 
 Authors' Addresses
 
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 56]
-
-                              SharedSignals                    June 2023
-
-
    Atul Tulshibagwale
    SGNL
    Email: atul@sgnl.ai
@@ -3151,6 +3017,13 @@ Tulshibagwale, et al.        Standards Track                   [Page 56]
    Marius Scurtescu
    Coinbase
    Email: marius.scurtescu@coinbase.com
+
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 54]
+
+                              SharedSignals                    June 2023
 
 
    Annabelle Backman
@@ -3189,4 +3062,19 @@ Tulshibagwale, et al.        Standards Track                   [Page 56]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 57]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 55]
