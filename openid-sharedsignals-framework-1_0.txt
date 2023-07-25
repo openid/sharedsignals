@@ -975,13 +975,13 @@ Tulshibagwale, et al.        Standards Track                   [Page 17]
        "urn:example:secevent:events:type_2",
        "urn:example:secevent:events:type_3",
        "urn:example:secevent:events:type_4"
-     ]
+     ],
+     "format": "email"
    }
 
               Figure 14: Example: Create Event Stream Request
 
    The following is a non-normative example response:
-
 
 
 
@@ -1037,7 +1037,8 @@ Tulshibagwale, et al.        Standards Track                   [Page 18]
      "events_delivered": [
        "urn:example:secevent:events:type_2",
        "urn:example:secevent:events:type_3"
-     ]
+     ],
+     "format": "email"
    }
 
                  Figure 15: Example: Create Stream Response
@@ -1055,7 +1056,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 18]
     +------+---------------------------------------------------------+
 
                       Table 1: Create Stream Errors
-
 
 
 
@@ -1150,7 +1150,8 @@ Tulshibagwale, et al.        Standards Track                   [Page 20]
      "events_delivered": [
        "urn:example:secevent:events:type_2",
        "urn:example:secevent:events:type_3"
-     ]
+     ],
+     "format": "complex"
    }
 
            Figure 17: Example: Read Stream Configuration Response
@@ -1166,7 +1167,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 20]
 
    The following is a non-normative example response to a request with
    no "stream_id":
-
 
 
 
@@ -1207,7 +1207,8 @@ Tulshibagwale, et al.        Standards Track                   [Page 21]
        "events_delivered": [
          "urn:example:secevent:events:type_2",
          "urn:example:secevent:events:type_3"
-       ]
+       ],
+       "format": "iss_sub"
      },
      {
        "stream_id": "50b2d39934264897902c0581ba7c21a3",
@@ -1225,7 +1226,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 21]
          "urn:example:secevent:events:type_2",
          "urn:example:secevent:events:type_3"
        ],
-       "events_requested": [
 
 
 
@@ -1234,6 +1234,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 22]
                               SharedSignals                    June 2023
 
 
+       "events_requested": [
          "urn:example:secevent:events:type_2",
          "urn:example:secevent:events:type_3",
          "urn:example:secevent:events:type_4"
@@ -1241,7 +1242,8 @@ Tulshibagwale, et al.        Standards Track                   [Page 22]
        "events_delivered": [
          "urn:example:secevent:events:type_2",
          "urn:example:secevent:events:type_3"
-       ]
+       ],
+       "format": "opaque"
      }
    ]
 
@@ -1249,6 +1251,44 @@ Tulshibagwale, et al.        Standards Track                   [Page 22]
 
    The following is a non-normative example response to a request with
    no "stream_id" when there is only one Event Stream configured:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 23]
+
+                              SharedSignals                    June 2023
+
 
    HTTP/1.1 200 OK
    Content-Type: application/json
@@ -1283,13 +1323,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 22]
      }
    ]
 
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 23]
-
-                              SharedSignals                    June 2023
-
-
            Figure 20: Example: Read Stream Configuration Response
 
    The following is a non-normative example response to a request with
@@ -1304,6 +1337,14 @@ Tulshibagwale, et al.        Standards Track                   [Page 23]
            Figure 21: Example: Read Stream Configuration Response
 
    Errors are signaled with HTTP status codes as follows:
+
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 24]
+
+                              SharedSignals                    June 2023
+
 
            +======+===========================================+
            | Code | Description                               |
@@ -1335,17 +1376,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 23]
    Any properties missing in the request MUST NOT be changed by the
    Transmitter.
 
-
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 24]
-
-                              SharedSignals                    June 2023
-
-
    Transmitter-Supplied properties beside the stream_id MAY be present,
    but they MUST match the expected value.  Missing Transmitter-Supplied
    properties MUST be ignored by the Transmitter.  The events_delivered
@@ -1354,6 +1384,23 @@ Tulshibagwale, et al.        Standards Track                   [Page 24]
 
    The following is a non-normative example request to replace an Event
    Stream's configuration:
+
+
+
+
+
+
+
+
+
+
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 25]
+
+                              SharedSignals                    June 2023
+
 
    PATCH /ssf/stream HTTP/1.1
    Host: transmitter.example.com
@@ -1372,35 +1419,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 24]
           Figure 22: Example: Update Stream Configuration Request
 
    The following is a non-normative example response:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 25]
-
-                              SharedSignals                    June 2023
-
 
    HTTP/1.1 200 OK
    Content-Type: application/json
@@ -1433,30 +1451,17 @@ Tulshibagwale, et al.        Standards Track                   [Page 25]
      ]
    }
 
-          Figure 23: Example: Update Stream Configuration Response
-
-   Pending conditions or errors are signaled with HTTP status codes as
-   follows:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 Tulshibagwale, et al.        Standards Track                   [Page 26]
 
                               SharedSignals                    June 2023
 
+
+          Figure 23: Example: Update Stream Configuration Response
+
+   Pending conditions or errors are signaled with HTTP status codes as
+   follows:
 
           +======+==============================================+
           | Code | Description                                  |
@@ -1502,17 +1507,15 @@ Tulshibagwale, et al.        Standards Track                   [Page 26]
    property, if present, MUST match the Transmitter's expected value
    _before_ any updates are applied.
 
-   The following is a non-normative example request to replace an Event
-   Stream's configuration:
-
-
-
 
 
 Tulshibagwale, et al.        Standards Track                   [Page 27]
 
                               SharedSignals                    June 2023
 
+
+   The following is a non-normative example request to replace an Event
+   Stream's configuration:
 
    PUT /ssf/stream HTTP/1.1
    Host: transmitter.example.com
@@ -1533,16 +1536,13 @@ Tulshibagwale, et al.        Standards Track                   [Page 27]
        "urn:example:secevent:events:type_2",
        "urn:example:secevent:events:type_3",
        "urn:example:secevent:events:type_4"
-     ]
+     ],
+     "format": "did"
    }
 
           Figure 24: Example: Replace Stream Configuration Request
 
    The following is a non-normative example response:
-
-
-
-
 
 
 
@@ -1598,14 +1598,14 @@ Tulshibagwale, et al.        Standards Track                   [Page 28]
      "events_delivered": [
        "urn:example:secevent:events:type_2",
        "urn:example:secevent:events:type_3"
-     ]
+     ],
+     "format": "did"
    }
 
          Figure 25: Example: Replace Stream Configuration Response
 
    Pending conditions or errors are signaled with HTTP status codes as
    follows:
-
 
 
 

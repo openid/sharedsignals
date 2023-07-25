@@ -234,6 +234,7 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 4]
        "events": {
            "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
                "subject": {
+                   "format": "complex",
                    "session": {
                      "format": "opaque",
                      "id": "dMTlD|1600802906337.16|16008.16"
@@ -276,7 +277,6 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 4]
 
 
 
-
 Cappalli & Tulshibagwale     Standards Track                    [Page 5]
 
                                 CAEP-Spec                  February 2023
@@ -290,6 +290,7 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 5]
        "events": {
            "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
                "subject": {
+                   "format": "complex",
                    "user": {
                        "format": "iss_sub",
                        "iss": "https://idp.example.com/123456789/",
@@ -328,8 +329,7 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 5]
    https://schemas.openid.net/secevent/caep/event-type/token-claims-
    change
 
-   Token Claims Change signals that a claim in a token, identified by
-   the subject claim, has changed.
+
 
 
 
@@ -337,6 +337,9 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 6]
 
                                 CAEP-Spec                  February 2023
 
+
+   Token Claims Change signals that a claim in a token, identified by
+   the subject claim, has changed.
 
    The actual reason why the claims change occurred might be specified
    with the nested reason_admin and/or reason_user claims made in
@@ -376,9 +379,6 @@ Cappalli & Tulshibagwale     Standards Track                    [Page 6]
    }
 
    Figure 6: Example: OIDC ID Token Claims Change - Required claims only
-
-
-
 
 
 
@@ -810,6 +810,7 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 14]
        "events": {
            "https://schemas.openid.net/secevent/caep/event-type/device-compliance-change": {
                "subject": {
+                   "format": "complex",
                    "device": {
                        "format": "iss_sub",
                        "iss": "https://idp.example.com/123456789/",
@@ -833,7 +834,6 @@ Cappalli & Tulshibagwale     Standards Track                   [Page 14]
            }
        }
    }
-
 
 
 

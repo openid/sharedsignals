@@ -887,7 +887,8 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
     "urn:example:secevent:events:type_2",
     "urn:example:secevent:events:type_3",
     "urn:example:secevent:events:type_4"
-  ]
+  ],
+  "format": "email"
 }
 ~~~
 {: #figcreatestreamreq title="Example: Create Event Stream Request"}
@@ -922,7 +923,8 @@ Content-Type: application/json
   "events_delivered": [
     "urn:example:secevent:events:type_2",
     "urn:example:secevent:events:type_3"
-  ]
+  ],
+  "format": "email"
 }
 ~~~
 {: #figcreatestreamresp title="Example: Create Stream Response"}
@@ -991,7 +993,8 @@ Cache-Control: no-store
   "events_delivered": [
     "urn:example:secevent:events:type_2",
     "urn:example:secevent:events:type_3"
-  ]
+  ],
+  "format": "complex"
 }
 ~~~
 {: title="Example: Read Stream Configuration Response" #figreadconfigresp}
@@ -1038,7 +1041,8 @@ Cache-Control: no-store
     "events_delivered": [
       "urn:example:secevent:events:type_2",
       "urn:example:secevent:events:type_3"
-    ]
+    ],
+    "format": "iss_sub"
   },
   {
     "stream_id": "50b2d39934264897902c0581ba7c21a3",
@@ -1064,7 +1068,8 @@ Cache-Control: no-store
     "events_delivered": [
       "urn:example:secevent:events:type_2",
       "urn:example:secevent:events:type_3"
-    ]
+    ],
+    "format": "opaque"
   }
 ]
 ~~~
@@ -1258,7 +1263,8 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
     "urn:example:secevent:events:type_2",
     "urn:example:secevent:events:type_3",
     "urn:example:secevent:events:type_4"
-  ]
+  ],
+  "format": "did"
 }
 ~~~
 {: title="Example: Replace Stream Configuration Request" #figreplaceconfigreq}
@@ -1294,7 +1300,8 @@ Cache-Control: no-store
   "events_delivered": [
     "urn:example:secevent:events:type_2",
     "urn:example:secevent:events:type_3"
-  ]
+  ],
+  "format": "did"
 }
 ~~~
 {: title="Example: Replace Stream Configuration Response" #figreplaceconfigresp}
