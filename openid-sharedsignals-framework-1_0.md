@@ -540,7 +540,7 @@ critical_subject_members
   
 supported_scopes
 
-> OPTIONAL. A list of OAuth {{RFC6749}} scope names that the Transmitter supports for specific endpoints. The value of this field is a JSON object that has the endpoint names as keys, and arrays of scope name strings they support as their values. OAuth tokens obtained using any of the scopes defined here MUST be accepted by the specified endpoint. Any key that is not defined as an endpoint in the Transmitter Configuration Metadata MUST be ignored. If the `supported_scopes` member is present in the metadata, and if an endpoint is not present as a key in it, then the endpoint MUST NOT require OAuth for authorization.
+> OPTIONAL. A list of OAuth {{RFC6749}} scope names that the Transmitter supports for specific endpoints. The value of this field is a JSON object that has the endpoint names as keys, and arrays of scope name strings they support as their values. OAuth tokens obtained using any of the scopes defined here MUST be accepted by the specified endpoint. Any key that is not defined as an endpoint in the Transmitter Configuration Metadata MUST be ignored. If the supported_scopes member is present in the metadata and an endpoint is not listed as a key, then that endpoint MUST not require OAuth for authorization.
 
 authorization_servers
 
@@ -1354,14 +1354,12 @@ Errors are signaled with HTTP status codes as follows:
 {: title="Delete Stream Errors" #tabdeletestream"}
 
 ### Stream Status {#status}
-Within an Event Stream, events related to different Subject Principals MAY be
-managed independently. A Receiver MAY request Subject Principals to be added to
-or removed from a stream by Updating the Stream Status
-({{updating-a-streams-status}}) and specifying the Subject in the request.
+Event Streams are managed independently. A Receiver MAY request that events from a
+stream be interrupted by Updating the Stream Status ({{updating-a-streams-status}}).
 
-A Transmitter MAY decide to enable, pause or disable updates about a Subject
+A Transmitter MAY decide to enable, pause or disable updates from a stream
 independently of an update request from a Receiver. If a Transmitter decides to
-start or stop events for a Subject then the Transmitter MUST do the following
+start or stop events for a stream then the Transmitter MUST do the following
 according to the status of the stream.
 
 If the stream is:
@@ -1392,13 +1390,19 @@ stream_id
 
 > REQUIRED. The stream whose status is being queried.
 
-subject
-
-> OPTIONAL. The subject for which the stream status is requested.
-
 On receiving a valid request the Event Transmitter responds with a 200 OK
-response containing a [JSON][RFC7159] object with an attribute "status",
-whose string value MUST have one of the following values:
+response containing a [JSON][RFC7159] object with the following attributes:
+
+status
+
+> A string whose value MUST be one of the values described below.
+
+reason
+
+> An OPTIONAL string whose value SHOULD express why the stream's status is set to
+the current value.
+
+The allowable "status" values are:
 
 enabled
 
@@ -1440,41 +1444,11 @@ Content-Type: application/json
 Cache-Control: no-store
 
 {
-  "status": "enabled"
+  "status": "paused",
+  "reason": "SYSTEM_DOWN_FOR_MAINTENANCE"
 }
 ~~~
 {: title="Example: Check Stream Status Response" #figstatusresp}
-
-The following is a non-normative example request to check an event stream's
-status for a specific subject:
-
-~~~ http
-GET /ssf/status?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f&subject=<url-encoded-subject> HTTP/1.1
-Host: transmitter.example.com
-Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
-~~~
-{: title="Example: Check Stream Status Request with Subject" #figstatuswithsubjectreq}
-
-The following is a non-normative example response with a Subject claim:
-
-~~~
-HTTP/1.1 200 OK
-Content-Type: application/json
-Cache-Control: no-store
-
-{
-  "status": "enabled",
-  "subject": {
-    "format": "complex",
-    "tenant" : {
-      "format" : "iss_sub",
-      "iss" : "http://example.com/idp1",
-      "sub" : "1234"
-    }
-  }
-}
-~~~
-{: title="Example: Check Stream Status Response" #figstatuswithsubjectresp}
 
 Errors are signaled with HTTP status codes as follows:
 
@@ -1482,7 +1456,7 @@ Errors are signaled with HTTP status codes as follows:
 |------|-------------|
 | 401  | if authorization failed or it is missing |
 | 403  | if the Event Receiver is not allowed to read the stream status |
-| 404  | if there is no Event Stream with the given "stream_id" for this Event Receiver, or if the Subject specified is invalid or if the Receiver is not authorized to get status for the specified Subject. |
+| 404  | if there is no Event Stream with the given "stream_id" for this Event Receiver |
 {: title="Read Stream Status Errors" #tabreadstatus}
 
 Examples:
@@ -1494,12 +1468,6 @@ Examples:
    MAY respond with a 403 error status.
 3. If the Receiver requests the status for a stream that does not exist then the
    Transmitter MUST respond with a 404 error status.
-4. If the Receiver requests the status for a specific Subject, but the
-   Transmitter policy does not permit the Receiver to read the status of that
-   Subject, then the Transmitter MAY respond with a 404 error status in order
-   to not reveal the policy decision.
-5. If the specified Subject is invalid then the Transmitter MUST respond with a
-   404 error status.
 
 #### Updating a Stream's Status {#updating-a-streams-status}
 An Event Receiver updates the current status of a stream by making an HTTP POST
@@ -1514,17 +1482,13 @@ status
 
 > REQUIRED. The new status of the Event Stream.
 
-subject
-
-> OPTIONAL. The Subject to which the new status applies.
-
 reason
 
 > OPTIONAL. A short text description that explains the reason for the change.
 
 On receiving a valid request the Event Transmitter responds with a "200 OK"
 response containing a [JSON][RFC7159] representation of the updated stream
-status in the body.
+status in the body, using the same fields as described in the request.
 
 The following is a non-normative example request to update an Event Stream’s
 status:
@@ -1541,8 +1505,8 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 ~~~
 {: title="Example: Update Stream Status Request Without Optional Fields" #figupdatestatusreq}
 
-The following is a non-normative example of an Update Stream Status request with
-optional fields:
+The following is a non-normative example of an Update Stream Status request with an
+optional reason:
 
 ~~~ http
 POST /ssf/status HTTP/1.1
@@ -1552,18 +1516,10 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 {
   "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
   "status": "paused",
-  "subject": {
-    "format": "complex",
-    "tenant" : {
-      "format" : "iss_sub",
-      "iss" : "http://example.com/idp1",
-      "sub" : "1234"
-    }
-  },
-  "reason": "Disabled by administrator action."
+  "reason": "Disabled by administrator action"
 }
 ~~~
-{: title="Example: Update Stream Status Request With Optional Fields" #figupdatestatuswithsubjectreq}
+{: title="Example: Update Stream Status Request With Optional Reason" #figupdatestatuswithreasonreq}
 
 The following is a non-normative example response:
 
@@ -1574,11 +1530,7 @@ Cache-Control: no-store
 
 {
   "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
-  "status": "paused",
-  "subject": {
-    "format" : "email",
-    "email" : "user@example.com"
-  }
+  "status": "paused"
 }
 ~~~
 {: title="Example: Update Stream Status Response" #figupdatestatusresp}
@@ -1591,15 +1543,15 @@ Errors are signaled with HTTP status codes as follows:
 | 400  | if the request body cannot be parsed or if the request is otherwise invalid |
 | 401  | if authorization failed or it is missing |
 | 403  | if the Event Receiver is not allowed to update the stream status |
-| 404  | if there is no Event Stream with the given "stream_id" for this Event Receiver, or if an invalid Subject is specified. |
+| 404  | if there is no Event Stream with the given "stream_id" for this Event Receiver |
 {: title="Update Stream Status Errors" #tabupdatestatus}
 
 
 Example:
 
-1. If a Receiver makes a request to update a stream to enable it for a specific
-   Subject, and the Transmitter is unable to decide whether or not to complete
-   the request, then the Transmitter MUST respond with a 202 status code.
+1. If a Receiver makes a request to update a stream status, and the Transmitter is
+   unable to decide whether or not to complete the request, then the Transmitter MUST
+   respond with a 202 status code.
 
 ### Subjects {#subjects}
 An Event Receiver can indicate to an Event Transmitter whether or not the
@@ -1869,26 +1821,24 @@ Event Receiver as a result of the above request:
 {: title="Example: Verification SET" #figverifyset}
 
 ### Stream Updated Event {#stream-updated-event}
-A Transmitter MAY change the stream status in reference to one or more Subjects
+A Transmitter MAY change the stream status
 without a request from a Receiver. The Transmitter sends an event of type
 "https://schemas.openid.net/secevent/ssf/event-type/stream-updated" to indicate
-that it has changed the status of the Event Stream for a specific Subject.
+that it has changed the status of the Event Stream.
 
 If a Transmitter decides to change the status of an Event Stream from "enabled"
 to either "paused" or "disabled", then the Transmitter MUST send this event to
 any Receiver that is currently "enabled" to receive events from this stream.
 
-If the Transmitter changes the status of the stream for a Subject from either
+If the Transmitter changes the status of the stream from either
 "paused" or "disabled" to "enabled", then it MUST send this event to any
-Receiver that has previously been enabled to receive events for the specified
-Subject.
+Receiver that has previously been enabled to receive events for the stream.
 
 The "stream-updated" event MAY contain the following claims:
 
 status
 
-> REQUIRED. Defines the new status of the stream for the Subject Identifier
-  specified in the Subject.
+> REQUIRED. Defines the new status of the stream.
 
 reason
 
@@ -1897,43 +1847,15 @@ reason
 
 subject
 
-> REQUIRED. Specifies the Subject Principal for whom the status has been updated.
-  If the event applies to the entire stream, the value of the `subject` field
+> REQUIRED. Specifies the stream whose status has been updated.
+  The value of the `subject` field
   MUST be of format `opaque`, and its `id` value MUST be the unique ID of the
-  stream. 
+  stream.
 
 > Note that the subject that identifies a stream itself is always implicitly
   added to the stream and MAY NOT be removed from the stream.
 
-> Below is a non-normative example of a `stream-updated` event with a specific
-  subject.
-
-~~~ json
-{
-  "jti": "123456",
-  "iss": "https://transmitter.example.com",
-  "aud": "receiver.example.com",
-  "iat": 1493856000,
-  "events": {
-    "https://schemas.openid.net/secevent/ssf/event-type/stream-updated": {
-      "subject": {
-	"format" : "complex",
-        "tenant" : {
-          "format": "iss_sub",
-          "iss" : "http://example.com/idp1",
-          "sub" : "1234"
-        }
-      },
-      "status": "paused",
-      "reason": "License is not valid"
-    }
-  }
-}
-~~~
-{: title="Example: Stream Updated SET with tenant principal" #figstreamupdatedset}
-
-> Below is a non-normative example of a `stream-updated` event with a stream
-  subject.
+> Below is a non-normative example of a `stream-updated` event.
 
 ~~~ json
 {
@@ -1946,7 +1868,7 @@ subject
       "subject": {
         "format": "opaque",
         "id" : "f67e39a0a4d34d56b3aa1bc4cff0069f"
-      },   
+      },
       "status": "paused",
       "reason": "Internal error"
     }

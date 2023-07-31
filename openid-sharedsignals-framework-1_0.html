@@ -2032,7 +2032,7 @@ configuration information.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <p id="section-6.1-20">supported_scopes<a href="#section-6.1-20" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-6.1-21.1">
-            <p id="section-6.1-21.1.1">OPTIONAL. A list of OAuth <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span> scope names that the Transmitter supports for specific endpoints. The value of this field is a JSON object that has the endpoint names as keys, and arrays of scope name strings they support as their values. OAuth tokens obtained using any of the scopes defined here MUST be accepted by the specified endpoint. Any key that is not defined as an endpoint in the Transmitter Configuration Metadata MUST be ignored. If the <code>supported_scopes</code> member is present in the metadata, and if an endpoint is not present as a key in it, then the endpoint MUST NOT require OAuth for authorization.<a href="#section-6.1-21.1.1" class="pilcrow">¶</a></p>
+            <p id="section-6.1-21.1.1">OPTIONAL. A list of OAuth <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span> scope names that the Transmitter supports for specific endpoints. The value of this field is a JSON object that has the endpoint names as keys, and arrays of scope name strings they support as their values. OAuth tokens obtained using any of the scopes defined here MUST be accepted by the specified endpoint. Any key that is not defined as an endpoint in the Transmitter Configuration Metadata MUST be ignored. If the supported_scopes member is present in the metadata and an endpoint is not listed as a key, then that endpoint MUST not require OAuth for authorization.<a href="#section-6.1-21.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-6.1-22">authorization_servers<a href="#section-6.1-22" class="pilcrow">¶</a></p>
@@ -3162,13 +3162,11 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
           <h4 id="name-stream-status">
 <a href="#section-7.1.2" class="section-number selfRef">7.1.2. </a><a href="#name-stream-status" class="section-name selfRef">Stream Status</a>
           </h4>
-<p id="section-7.1.2-1">Within an Event Stream, events related to different Subject Principals MAY be
-managed independently. A Receiver MAY request Subject Principals to be added to
-or removed from a stream by Updating the Stream Status
-(<a href="#updating-a-streams-status" class="auto internal xref">Section 7.1.2.2</a>) and specifying the Subject in the request.<a href="#section-7.1.2-1" class="pilcrow">¶</a></p>
-<p id="section-7.1.2-2">A Transmitter MAY decide to enable, pause or disable updates about a Subject
+<p id="section-7.1.2-1">Event Streams are managed independently. A Receiver MAY request that events from a
+stream be interrupted by Updating the Stream Status (<a href="#updating-a-streams-status" class="auto internal xref">Section 7.1.2.2</a>).<a href="#section-7.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-7.1.2-2">A Transmitter MAY decide to enable, pause or disable updates from a stream
 independently of an update request from a Receiver. If a Transmitter decides to
-start or stop events for a Subject then the Transmitter MUST do the following
+start or stop events for a stream then the Transmitter MUST do the following
 according to the status of the stream.<a href="#section-7.1.2-2" class="pilcrow">¶</a></p>
 <p id="section-7.1.2-3">If the stream is:<a href="#section-7.1.2-3" class="pilcrow">¶</a></p>
 <p id="section-7.1.2-4">Enabled<a href="#section-7.1.2-4" class="pilcrow">¶</a></p>
@@ -3207,26 +3205,33 @@ GET request to the stream's Status Endpoint.<a href="#section-7.1.2.1-1" class="
                 <p id="section-7.1.2.1-4.1.1">REQUIRED. The stream whose status is being queried.<a href="#section-7.1.2.1-4.1.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
-<p id="section-7.1.2.1-5">subject<a href="#section-7.1.2.1-5" class="pilcrow">¶</a></p>
+<p id="section-7.1.2.1-5">On receiving a valid request the Event Transmitter responds with a 200 OK
+response containing a <span><a href="#RFC7159" class="internal xref">JSON</a> [<a href="#RFC7159" class="cite xref">RFC7159</a>]</span> object with the following attributes:<a href="#section-7.1.2.1-5" class="pilcrow">¶</a></p>
+<p id="section-7.1.2.1-6">status<a href="#section-7.1.2.1-6" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.2.1-6.1">
-                <p id="section-7.1.2.1-6.1.1">OPTIONAL. The subject for which the stream status is requested.<a href="#section-7.1.2.1-6.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-7.1.2.1-7.1">
+                <p id="section-7.1.2.1-7.1.1">A string whose value MUST be one of the values described below.<a href="#section-7.1.2.1-7.1.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
-<p id="section-7.1.2.1-7">On receiving a valid request the Event Transmitter responds with a 200 OK
-response containing a <span><a href="#RFC7159" class="internal xref">JSON</a> [<a href="#RFC7159" class="cite xref">RFC7159</a>]</span> object with an attribute "status",
-whose string value MUST have one of the following values:<a href="#section-7.1.2.1-7" class="pilcrow">¶</a></p>
-<p id="section-7.1.2.1-8">enabled<a href="#section-7.1.2.1-8" class="pilcrow">¶</a></p>
+<p id="section-7.1.2.1-8">reason<a href="#section-7.1.2.1-8" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-7.1.2.1-9.1">
-                <p id="section-7.1.2.1-9.1.1">The Transmitter MUST transmit events over the stream, according to the
-  stream's configured delivery method.<a href="#section-7.1.2.1-9.1.1" class="pilcrow">¶</a></p>
+                <p id="section-7.1.2.1-9.1.1">An OPTIONAL string whose value SHOULD express why the stream's status is set to
+the current value.<a href="#section-7.1.2.1-9.1.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
-<p id="section-7.1.2.1-10">paused<a href="#section-7.1.2.1-10" class="pilcrow">¶</a></p>
+<p id="section-7.1.2.1-10">The allowable "status" values are:<a href="#section-7.1.2.1-10" class="pilcrow">¶</a></p>
+<p id="section-7.1.2.1-11">enabled<a href="#section-7.1.2.1-11" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.2.1-11.1">
-                <p id="section-7.1.2.1-11.1.1">The Transmitter MUST NOT transmit events over the stream. The transmitter
+<li class="normal ulEmpty" id="section-7.1.2.1-12.1">
+                <p id="section-7.1.2.1-12.1.1">The Transmitter MUST transmit events over the stream, according to the
+  stream's configured delivery method.<a href="#section-7.1.2.1-12.1.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+<p id="section-7.1.2.1-13">paused<a href="#section-7.1.2.1-13" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-7.1.2.1-14.1">
+                <p id="section-7.1.2.1-14.1.1">The Transmitter MUST NOT transmit events over the stream. The transmitter
   will hold any events it would have transmitted while paused, and SHOULD
   transmit them when the stream's status becomes "enabled". If a Transmitter
   holds successive events that affect the same Subject Principal, then the
@@ -3234,21 +3239,21 @@ whose string value MUST have one of the following values:<a href="#section-7.1.2
   time that they were generated OR the Transmitter MUST send only the last events
   that do not require the previous events affecting the same Subject Principal to
   be processed by the Receiver, because the previous events are either cancelled
-  by the later events or the previous events are outdated.<a href="#section-7.1.2.1-11.1.1" class="pilcrow">¶</a></p>
+  by the later events or the previous events are outdated.<a href="#section-7.1.2.1-14.1.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
-<p id="section-7.1.2.1-12">disabled<a href="#section-7.1.2.1-12" class="pilcrow">¶</a></p>
+<p id="section-7.1.2.1-15">disabled<a href="#section-7.1.2.1-15" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.2.1-13.1">
-                <p id="section-7.1.2.1-13.1.1">The Transmitter MUST NOT transmit events over the stream, and will not hold
-  any events for later transmission.<a href="#section-7.1.2.1-13.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-7.1.2.1-16.1">
+                <p id="section-7.1.2.1-16.1.1">The Transmitter MUST NOT transmit events over the stream, and will not hold
+  any events for later transmission.<a href="#section-7.1.2.1-16.1.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
-<p id="section-7.1.2.1-14">The following is a non-normative example request to check an event stream's
-status:<a href="#section-7.1.2.1-14" class="pilcrow">¶</a></p>
+<p id="section-7.1.2.1-17">The following is a non-normative example request to check an event stream's
+status:<a href="#section-7.1.2.1-17" class="pilcrow">¶</a></p>
 <span id="name-example-check-stream-status"></span><div id="figstatusreq">
 <figure id="figure-28">
-              <div class="lang-http sourcecode" id="section-7.1.2.1-15.1">
+              <div class="lang-http sourcecode" id="section-7.1.2.1-18.1">
 <pre>
 GET /ssf/status?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f HTTP/1.1
 Host: transmitter.example.com
@@ -3259,17 +3264,18 @@ Authorization: Bearer zzzz
 <a href="#name-example-check-stream-status" class="selfRef">Example: Check Stream Status Request</a>
               </figcaption></figure>
 </div>
-<p id="section-7.1.2.1-16">The following is a non-normative example response:<a href="#section-7.1.2.1-16" class="pilcrow">¶</a></p>
+<p id="section-7.1.2.1-19">The following is a non-normative example response:<a href="#section-7.1.2.1-19" class="pilcrow">¶</a></p>
 <span id="name-example-check-stream-status-"></span><div id="figstatusresp">
 <figure id="figure-29">
-              <div class="lang-http sourcecode" id="section-7.1.2.1-17.1">
+              <div class="lang-http sourcecode" id="section-7.1.2.1-20.1">
 <pre>
 HTTP/1.1 200 OK
 Content-Type: application/json
 Cache-Control: no-store
 
 {
-  "status": "enabled"
+  "status": "paused",
+  "reason": "SYSTEM_DOWN_FOR_MAINTENANCE"
 }
 </pre>
 </div>
@@ -3277,48 +3283,7 @@ Cache-Control: no-store
 <a href="#name-example-check-stream-status-" class="selfRef">Example: Check Stream Status Response</a>
               </figcaption></figure>
 </div>
-<p id="section-7.1.2.1-18">The following is a non-normative example request to check an event stream's
-status for a specific subject:<a href="#section-7.1.2.1-18" class="pilcrow">¶</a></p>
-<span id="name-example-check-stream-status-r"></span><div id="figstatuswithsubjectreq">
-<figure id="figure-30">
-              <div class="lang-http sourcecode" id="section-7.1.2.1-19.1">
-<pre>
-GET /ssf/status?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f&amp;subject=&lt;url-encoded-subject&gt; HTTP/1.1
-Host: transmitter.example.com
-Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
-</pre>
-</div>
-<figcaption><a href="#figure-30" class="selfRef">Figure 30</a>:
-<a href="#name-example-check-stream-status-r" class="selfRef">Example: Check Stream Status Request with Subject</a>
-              </figcaption></figure>
-</div>
-<p id="section-7.1.2.1-20">The following is a non-normative example response with a Subject claim:<a href="#section-7.1.2.1-20" class="pilcrow">¶</a></p>
-<span id="name-example-check-stream-status-re"></span><div id="figstatuswithsubjectresp">
-<figure id="figure-31">
-              <div class="alignLeft art-text artwork" id="section-7.1.2.1-21.1">
-<pre>
-HTTP/1.1 200 OK
-Content-Type: application/json
-Cache-Control: no-store
-
-{
-  "status": "enabled",
-  "subject": {
-    "format": "complex",
-    "tenant" : {
-      "format" : "iss_sub",
-      "iss" : "http://example.com/idp1",
-      "sub" : "1234"
-    }
-  }
-}
-</pre>
-</div>
-<figcaption><a href="#figure-31" class="selfRef">Figure 31</a>:
-<a href="#name-example-check-stream-status-re" class="selfRef">Example: Check Stream Status Response</a>
-              </figcaption></figure>
-</div>
-<p id="section-7.1.2.1-22">Errors are signaled with HTTP status codes as follows:<a href="#section-7.1.2.1-22" class="pilcrow">¶</a></p>
+<p id="section-7.1.2.1-21">Errors are signaled with HTTP status codes as follows:<a href="#section-7.1.2.1-21" class="pilcrow">¶</a></p>
 <span id="name-read-stream-status-errors"></span><div id="tabreadstatus">
 <table class="center" id="table-6">
               <caption>
@@ -3342,30 +3307,22 @@ Cache-Control: no-store
                 </tr>
                 <tr>
                   <td class="text-left" rowspan="1" colspan="1">404</td>
-                  <td class="text-left" rowspan="1" colspan="1">if there is no Event Stream with the given "stream_id" for this Event Receiver, or if the Subject specified is invalid or if the Receiver is not authorized to get status for the specified Subject.</td>
+                  <td class="text-left" rowspan="1" colspan="1">if there is no Event Stream with the given "stream_id" for this Event Receiver</td>
                 </tr>
               </tbody>
             </table>
 </div>
-<p id="section-7.1.2.1-24">Examples:<a href="#section-7.1.2.1-24" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-7.1.2.1-25">
-<li id="section-7.1.2.1-25.1">If a Receiver makes a request with an invalid OAuth token, then the
-Transmitter MUST respond with a 401 error status.<a href="#section-7.1.2.1-25.1" class="pilcrow">¶</a>
+<p id="section-7.1.2.1-23">Examples:<a href="#section-7.1.2.1-23" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-7.1.2.1-24">
+<li id="section-7.1.2.1-24.1">If a Receiver makes a request with an invalid OAuth token, then the
+Transmitter MUST respond with a 401 error status.<a href="#section-7.1.2.1-24.1" class="pilcrow">¶</a>
 </li>
-              <li id="section-7.1.2.1-25.2">If the Receiver presents a valid OAuth token, but the Transmitter policy
+              <li id="section-7.1.2.1-24.2">If the Receiver presents a valid OAuth token, but the Transmitter policy
 does not permit the Receiver from obtaining the status, then the Transmitter
-MAY respond with a 403 error status.<a href="#section-7.1.2.1-25.2" class="pilcrow">¶</a>
+MAY respond with a 403 error status.<a href="#section-7.1.2.1-24.2" class="pilcrow">¶</a>
 </li>
-              <li id="section-7.1.2.1-25.3">If the Receiver requests the status for a stream that does not exist then the
-Transmitter MUST respond with a 404 error status.<a href="#section-7.1.2.1-25.3" class="pilcrow">¶</a>
-</li>
-              <li id="section-7.1.2.1-25.4">If the Receiver requests the status for a specific Subject, but the
-Transmitter policy does not permit the Receiver to read the status of that
-Subject, then the Transmitter MAY respond with a 404 error status in order
-to not reveal the policy decision.<a href="#section-7.1.2.1-25.4" class="pilcrow">¶</a>
-</li>
-              <li id="section-7.1.2.1-25.5">If the specified Subject is invalid then the Transmitter MUST respond with a
-404 error status.<a href="#section-7.1.2.1-25.5" class="pilcrow">¶</a>
+              <li id="section-7.1.2.1-24.3">If the Receiver requests the status for a stream that does not exist then the
+Transmitter MUST respond with a 404 error status.<a href="#section-7.1.2.1-24.3" class="pilcrow">¶</a>
 </li>
             </ol>
 </section>
@@ -3390,26 +3347,20 @@ with the following fields:<a href="#section-7.1.2.2-1" class="pilcrow">¶</a></p
                 <p id="section-7.1.2.2-5.1.1">REQUIRED. The new status of the Event Stream.<a href="#section-7.1.2.2-5.1.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
-<p id="section-7.1.2.2-6">subject<a href="#section-7.1.2.2-6" class="pilcrow">¶</a></p>
+<p id="section-7.1.2.2-6">reason<a href="#section-7.1.2.2-6" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-7.1.2.2-7.1">
-                <p id="section-7.1.2.2-7.1.1">OPTIONAL. The Subject to which the new status applies.<a href="#section-7.1.2.2-7.1.1" class="pilcrow">¶</a></p>
+                <p id="section-7.1.2.2-7.1.1">OPTIONAL. A short text description that explains the reason for the change.<a href="#section-7.1.2.2-7.1.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
-<p id="section-7.1.2.2-8">reason<a href="#section-7.1.2.2-8" class="pilcrow">¶</a></p>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.2.2-9.1">
-                <p id="section-7.1.2.2-9.1.1">OPTIONAL. A short text description that explains the reason for the change.<a href="#section-7.1.2.2-9.1.1" class="pilcrow">¶</a></p>
-</li>
-            </ul>
-<p id="section-7.1.2.2-10">On receiving a valid request the Event Transmitter responds with a "200 OK"
+<p id="section-7.1.2.2-8">On receiving a valid request the Event Transmitter responds with a "200 OK"
 response containing a <span><a href="#RFC7159" class="internal xref">JSON</a> [<a href="#RFC7159" class="cite xref">RFC7159</a>]</span> representation of the updated stream
-status in the body.<a href="#section-7.1.2.2-10" class="pilcrow">¶</a></p>
-<p id="section-7.1.2.2-11">The following is a non-normative example request to update an Event Stream's
-status:<a href="#section-7.1.2.2-11" class="pilcrow">¶</a></p>
+status in the body, using the same fields as described in the request.<a href="#section-7.1.2.2-8" class="pilcrow">¶</a></p>
+<p id="section-7.1.2.2-9">The following is a non-normative example request to update an Event Stream's
+status:<a href="#section-7.1.2.2-9" class="pilcrow">¶</a></p>
 <span id="name-example-update-stream-statu"></span><div id="figupdatestatusreq">
-<figure id="figure-32">
-              <div class="lang-http sourcecode" id="section-7.1.2.2-12.1">
+<figure id="figure-30">
+              <div class="lang-http sourcecode" id="section-7.1.2.2-10.1">
 <pre>
 POST /ssf/status HTTP/1.1
 Host: transmitter.example.com
@@ -3421,15 +3372,15 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 }
 </pre>
 </div>
-<figcaption><a href="#figure-32" class="selfRef">Figure 32</a>:
+<figcaption><a href="#figure-30" class="selfRef">Figure 30</a>:
 <a href="#name-example-update-stream-statu" class="selfRef">Example: Update Stream Status Request Without Optional Fields</a>
               </figcaption></figure>
 </div>
-<p id="section-7.1.2.2-13">The following is a non-normative example of an Update Stream Status request with
-optional fields:<a href="#section-7.1.2.2-13" class="pilcrow">¶</a></p>
-<span id="name-example-update-stream-status"></span><div id="figupdatestatuswithsubjectreq">
-<figure id="figure-33">
-              <div class="lang-http sourcecode" id="section-7.1.2.2-14.1">
+<p id="section-7.1.2.2-11">The following is a non-normative example of an Update Stream Status request with an
+optional reason:<a href="#section-7.1.2.2-11" class="pilcrow">¶</a></p>
+<span id="name-example-update-stream-status"></span><div id="figupdatestatuswithreasonreq">
+<figure id="figure-31">
+              <div class="lang-http sourcecode" id="section-7.1.2.2-12.1">
 <pre>
 POST /ssf/status HTTP/1.1
 Host: transmitter.example.com
@@ -3438,26 +3389,18 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 {
   "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
   "status": "paused",
-  "subject": {
-    "format": "complex",
-    "tenant" : {
-      "format" : "iss_sub",
-      "iss" : "http://example.com/idp1",
-      "sub" : "1234"
-    }
-  },
-  "reason": "Disabled by administrator action."
+  "reason": "Disabled by administrator action"
 }
 </pre>
 </div>
-<figcaption><a href="#figure-33" class="selfRef">Figure 33</a>:
-<a href="#name-example-update-stream-status" class="selfRef">Example: Update Stream Status Request With Optional Fields</a>
+<figcaption><a href="#figure-31" class="selfRef">Figure 31</a>:
+<a href="#name-example-update-stream-status" class="selfRef">Example: Update Stream Status Request With Optional Reason</a>
               </figcaption></figure>
 </div>
-<p id="section-7.1.2.2-15">The following is a non-normative example response:<a href="#section-7.1.2.2-15" class="pilcrow">¶</a></p>
+<p id="section-7.1.2.2-13">The following is a non-normative example response:<a href="#section-7.1.2.2-13" class="pilcrow">¶</a></p>
 <span id="name-example-update-stream-status-"></span><div id="figupdatestatusresp">
-<figure id="figure-34">
-              <div class="lang-http sourcecode" id="section-7.1.2.2-16.1">
+<figure id="figure-32">
+              <div class="lang-http sourcecode" id="section-7.1.2.2-14.1">
 <pre>
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -3465,19 +3408,15 @@ Cache-Control: no-store
 
 {
   "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
-  "status": "paused",
-  "subject": {
-    "format" : "email",
-    "email" : "user@example.com"
-  }
+  "status": "paused"
 }
 </pre>
 </div>
-<figcaption><a href="#figure-34" class="selfRef">Figure 34</a>:
+<figcaption><a href="#figure-32" class="selfRef">Figure 32</a>:
 <a href="#name-example-update-stream-status-" class="selfRef">Example: Update Stream Status Response</a>
               </figcaption></figure>
 </div>
-<p id="section-7.1.2.2-17">Errors are signaled with HTTP status codes as follows:<a href="#section-7.1.2.2-17" class="pilcrow">¶</a></p>
+<p id="section-7.1.2.2-15">Errors are signaled with HTTP status codes as follows:<a href="#section-7.1.2.2-15" class="pilcrow">¶</a></p>
 <span id="name-update-stream-status-errors"></span><div id="tabupdatestatus">
 <table class="center" id="table-7">
               <caption>
@@ -3509,16 +3448,16 @@ Cache-Control: no-store
                 </tr>
                 <tr>
                   <td class="text-left" rowspan="1" colspan="1">404</td>
-                  <td class="text-left" rowspan="1" colspan="1">if there is no Event Stream with the given "stream_id" for this Event Receiver, or if an invalid Subject is specified.</td>
+                  <td class="text-left" rowspan="1" colspan="1">if there is no Event Stream with the given "stream_id" for this Event Receiver</td>
                 </tr>
               </tbody>
             </table>
 </div>
-<p id="section-7.1.2.2-19">Example:<a href="#section-7.1.2.2-19" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-7.1.2.2-20">
-<li id="section-7.1.2.2-20.1">If a Receiver makes a request to update a stream to enable it for a specific
-Subject, and the Transmitter is unable to decide whether or not to complete
-the request, then the Transmitter MUST respond with a 202 status code.<a href="#section-7.1.2.2-20.1" class="pilcrow">¶</a>
+<p id="section-7.1.2.2-17">Example:<a href="#section-7.1.2.2-17" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-7.1.2.2-18">
+<li id="section-7.1.2.2-18.1">If a Receiver makes a request to update a stream status, and the Transmitter is
+unable to decide whether or not to complete the request, then the Transmitter MUST
+respond with a 202 status code.<a href="#section-7.1.2.2-18.1" class="pilcrow">¶</a>
 </li>
             </ol>
 </section>
@@ -3585,7 +3524,7 @@ See Security Considerations (<a href="#management-sec" class="auto internal xref
 <p id="section-7.1.3.1-9">The following is a non-normative example request to add a subject to a stream,
 where the subject is identified by an Email Subject Identifier.<a href="#section-7.1.3.1-9" class="pilcrow">¶</a></p>
 <span id="name-example-add-subject-request"></span><div id="figaddreq">
-<figure id="figure-35">
+<figure id="figure-33">
               <div class="lang-http sourcecode" id="section-7.1.3.1-10.1">
 <pre>
 POST /ssf/subjects:add HTTP/1.1
@@ -3602,13 +3541,13 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 }
 </pre>
 </div>
-<figcaption><a href="#figure-35" class="selfRef">Figure 35</a>:
+<figcaption><a href="#figure-33" class="selfRef">Figure 33</a>:
 <a href="#name-example-add-subject-request" class="selfRef">Example: Add Subject Request</a>
               </figcaption></figure>
 </div>
 <p id="section-7.1.3.1-11">The following is a non-normative example response to a successful request:<a href="#section-7.1.3.1-11" class="pilcrow">¶</a></p>
 <span id="name-example-add-subject-respons"></span><div id="figaddresp">
-<figure id="figure-36">
+<figure id="figure-34">
               <div class="lang-http sourcecode" id="section-7.1.3.1-12.1">
 <pre>
 HTTP/1.1 200 OK
@@ -3616,7 +3555,7 @@ Server: transmitter.example.com
 Cache-Control: no-store
 </pre>
 </div>
-<figcaption><a href="#figure-36" class="selfRef">Figure 36</a>:
+<figcaption><a href="#figure-34" class="selfRef">Figure 34</a>:
 <a href="#name-example-add-subject-respons" class="selfRef">Example: Add Subject Response</a>
               </figcaption></figure>
 </div>
@@ -3684,7 +3623,7 @@ response.<a href="#section-7.1.3.2-6" class="pilcrow">¶</a></p>
 <p id="section-7.1.3.2-7">The following is a non-normative example request where the subject is
 identified by a Phone Number Subject Identifier:<a href="#section-7.1.3.2-7" class="pilcrow">¶</a></p>
 <span id="name-example-remove-subject-requ"></span><div id="figremovereq">
-<figure id="figure-37">
+<figure id="figure-35">
               <div class="lang-http sourcecode" id="section-7.1.3.2-8.1">
 <pre>
 POST /ssf/subjects:remove HTTP/1.1
@@ -3700,13 +3639,13 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 }
 </pre>
 </div>
-<figcaption><a href="#figure-37" class="selfRef">Figure 37</a>:
+<figcaption><a href="#figure-35" class="selfRef">Figure 35</a>:
 <a href="#name-example-remove-subject-requ" class="selfRef">Example: Remove Subject Request</a>
               </figcaption></figure>
 </div>
 <p id="section-7.1.3.2-9">The following is a non-normative example response to a successful request:<a href="#section-7.1.3.2-9" class="pilcrow">¶</a></p>
 <span id="name-example-remove-subject-resp"></span><div id="figremoveresp">
-<figure id="figure-38">
+<figure id="figure-36">
               <div class="lang-http sourcecode" id="section-7.1.3.2-10.1">
 <pre>
 HTTP/1.1 204 No Content
@@ -3714,7 +3653,7 @@ Server: transmitter.example.com
 Cache-Control: no-store
 </pre>
 </div>
-<figcaption><a href="#figure-38" class="selfRef">Figure 38</a>:
+<figcaption><a href="#figure-36" class="selfRef">Figure 36</a>:
 <a href="#name-example-remove-subject-resp" class="selfRef">Example: Remove Subject Response</a>
               </figcaption></figure>
 </div>
@@ -3886,7 +3825,7 @@ particular order relative to the current queue of events.<a href="#section-7.1.4
 </div>
 <p id="section-7.1.4.2-10">The following is a non-normative example request to trigger a verification event:<a href="#section-7.1.4.2-10" class="pilcrow">¶</a></p>
 <span id="name-example-trigger-verificatio"></span><div id="figverifyreq">
-<figure id="figure-39">
+<figure id="figure-37">
               <div class="lang-http sourcecode" id="section-7.1.4.2-11.1">
 <pre>
 POST /ssf/verify HTTP/1.1
@@ -3900,13 +3839,13 @@ Content-Type: application/json
 }
 </pre>
 </div>
-<figcaption><a href="#figure-39" class="selfRef">Figure 39</a>:
+<figcaption><a href="#figure-37" class="selfRef">Figure 37</a>:
 <a href="#name-example-trigger-verificatio" class="selfRef">Example: Trigger Verification Request</a>
               </figcaption></figure>
 </div>
 <p id="section-7.1.4.2-12">The following is a non-normative example response to a successful request:<a href="#section-7.1.4.2-12" class="pilcrow">¶</a></p>
 <span id="name-example-trigger-verification"></span><div id="figverifyresp">
-<figure id="figure-40">
+<figure id="figure-38">
               <div class="lang-http sourcecode" id="section-7.1.4.2-13.1">
 <pre>
 HTTP/1.1 204 No Content
@@ -3914,14 +3853,14 @@ Server: transmitter.example.com
 Cache-Control: no-store
 </pre>
 </div>
-<figcaption><a href="#figure-40" class="selfRef">Figure 40</a>:
+<figcaption><a href="#figure-38" class="selfRef">Figure 38</a>:
 <a href="#name-example-trigger-verification" class="selfRef">Example: Trigger Verification Response</a>
               </figcaption></figure>
 </div>
 <p id="section-7.1.4.2-14">And the following is a non-normative example of a verification event sent to the
 Event Receiver as a result of the above request:<a href="#section-7.1.4.2-14" class="pilcrow">¶</a></p>
 <span id="name-example-verification-set"></span><div id="figverifyset">
-<figure id="figure-41">
+<figure id="figure-39">
               <div class="lang-json sourcecode" id="section-7.1.4.2-15.1">
 <pre>
 {
@@ -3941,7 +3880,7 @@ Event Receiver as a result of the above request:<a href="#section-7.1.4.2-14" cl
 }
 </pre>
 </div>
-<figcaption><a href="#figure-41" class="selfRef">Figure 41</a>:
+<figcaption><a href="#figure-39" class="selfRef">Figure 39</a>:
 <a href="#name-example-verification-set" class="selfRef">Example: Verification SET</a>
               </figcaption></figure>
 </div>
@@ -3954,23 +3893,21 @@ Event Receiver as a result of the above request:<a href="#section-7.1.4.2-14" cl
           <h4 id="name-stream-updated-event">
 <a href="#section-7.1.5" class="section-number selfRef">7.1.5. </a><a href="#name-stream-updated-event" class="section-name selfRef">Stream Updated Event</a>
           </h4>
-<p id="section-7.1.5-1">A Transmitter MAY change the stream status in reference to one or more Subjects
+<p id="section-7.1.5-1">A Transmitter MAY change the stream status
 without a request from a Receiver. The Transmitter sends an event of type
 "https://schemas.openid.net/secevent/ssf/event-type/stream-updated" to indicate
-that it has changed the status of the Event Stream for a specific Subject.<a href="#section-7.1.5-1" class="pilcrow">¶</a></p>
+that it has changed the status of the Event Stream.<a href="#section-7.1.5-1" class="pilcrow">¶</a></p>
 <p id="section-7.1.5-2">If a Transmitter decides to change the status of an Event Stream from "enabled"
 to either "paused" or "disabled", then the Transmitter MUST send this event to
 any Receiver that is currently "enabled" to receive events from this stream.<a href="#section-7.1.5-2" class="pilcrow">¶</a></p>
-<p id="section-7.1.5-3">If the Transmitter changes the status of the stream for a Subject from either
+<p id="section-7.1.5-3">If the Transmitter changes the status of the stream from either
 "paused" or "disabled" to "enabled", then it MUST send this event to any
-Receiver that has previously been enabled to receive events for the specified
-Subject.<a href="#section-7.1.5-3" class="pilcrow">¶</a></p>
+Receiver that has previously been enabled to receive events for the stream.<a href="#section-7.1.5-3" class="pilcrow">¶</a></p>
 <p id="section-7.1.5-4">The "stream-updated" event MAY contain the following claims:<a href="#section-7.1.5-4" class="pilcrow">¶</a></p>
 <p id="section-7.1.5-5">status<a href="#section-7.1.5-5" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-7.1.5-6.1">
-              <p id="section-7.1.5-6.1.1">REQUIRED. Defines the new status of the stream for the Subject Identifier
-  specified in the Subject.<a href="#section-7.1.5-6.1.1" class="pilcrow">¶</a></p>
+              <p id="section-7.1.5-6.1.1">REQUIRED. Defines the new status of the stream.<a href="#section-7.1.5-6.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <p id="section-7.1.5-7">reason<a href="#section-7.1.5-7" class="pilcrow">¶</a></p>
@@ -3983,8 +3920,8 @@ Subject.<a href="#section-7.1.5-3" class="pilcrow">¶</a></p>
 <p id="section-7.1.5-9">subject<a href="#section-7.1.5-9" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-7.1.5-10.1">
-              <p id="section-7.1.5-10.1.1">REQUIRED. Specifies the Subject Principal for whom the status has been updated.
-  If the event applies to the entire stream, the value of the <code>subject</code> field
+              <p id="section-7.1.5-10.1.1">REQUIRED. Specifies the stream whose status has been updated.
+  The value of the <code>subject</code> field
   MUST be of format <code>opaque</code>, and its <code>id</code> value MUST be the unique ID of the
   stream.<a href="#section-7.1.5-10.1.1" class="pilcrow">¶</a></p>
 </li>
@@ -3997,49 +3934,12 @@ Subject.<a href="#section-7.1.5-3" class="pilcrow">¶</a></p>
           </ul>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-7.1.5-12.1">
-              <p id="section-7.1.5-12.1.1">Below is a non-normative example of a <code>stream-updated</code> event with a specific
-  subject.<a href="#section-7.1.5-12.1.1" class="pilcrow">¶</a></p>
+              <p id="section-7.1.5-12.1.1">Below is a non-normative example of a <code>stream-updated</code> event.<a href="#section-7.1.5-12.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<span id="name-example-stream-updated-set-"></span><div id="figstreamupdatedset">
-<figure id="figure-42">
+<span id="name-example-stream-updated-set-"></span><div id="figstreamupdatedstreamset">
+<figure id="figure-40">
             <div class="lang-json sourcecode" id="section-7.1.5-13.1">
-<pre>
-{
-  "jti": "123456",
-  "iss": "https://transmitter.example.com",
-  "aud": "receiver.example.com",
-  "iat": 1493856000,
-  "events": {
-    "https://schemas.openid.net/secevent/ssf/event-type/stream-updated": {
-      "subject": {
-        "format" : "complex",
-        "tenant" : {
-          "format": "iss_sub",
-          "iss" : "http://example.com/idp1",
-          "sub" : "1234"
-        }
-      },
-      "status": "paused",
-      "reason": "License is not valid"
-    }
-  }
-}
-</pre>
-</div>
-<figcaption><a href="#figure-42" class="selfRef">Figure 42</a>:
-<a href="#name-example-stream-updated-set-" class="selfRef">Example: Stream Updated SET with tenant principal</a>
-            </figcaption></figure>
-</div>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.5-14.1">
-              <p id="section-7.1.5-14.1.1">Below is a non-normative example of a <code>stream-updated</code> event with a stream
-  subject.<a href="#section-7.1.5-14.1.1" class="pilcrow">¶</a></p>
-</li>
-          </ul>
-<span id="name-example-stream-updated-set-w"></span><div id="figstreamupdatedstreamset">
-<figure id="figure-43">
-            <div class="lang-json sourcecode" id="section-7.1.5-15.1">
 <pre>
 {
   "jti": "123456",
@@ -4059,8 +3959,8 @@ Subject.<a href="#section-7.1.5-3" class="pilcrow">¶</a></p>
 }
 </pre>
 </div>
-<figcaption><a href="#figure-43" class="selfRef">Figure 43</a>:
-<a href="#name-example-stream-updated-set-w" class="selfRef">Example: Stream Updated SET with stream as the subject of single-stream Transmitter</a>
+<figcaption><a href="#figure-40" class="selfRef">Figure 40</a>:
+<a href="#name-example-stream-updated-set-" class="selfRef">Example: Stream Updated SET with stream as the subject of single-stream Transmitter</a>
             </figcaption></figure>
 </div>
 </section>
@@ -4263,7 +4163,7 @@ a SSF event.<a href="#section-11.1.2-1" class="pilcrow">¶</a></p>
 <p id="section-11.1.3-1">The SSF event MAY contain additional claims within the event payload that are
 specific to the event type.<a href="#section-11.1.3-1" class="pilcrow">¶</a></p>
 <span id="name-example-set-containing-a-ri"></span><div id="risc-event-subject-example">
-<figure id="figure-44">
+<figure id="figure-41">
             <div class="lang-json sourcecode" id="section-11.1.3-2.1">
 <pre>
 {
@@ -4284,12 +4184,12 @@ specific to the event type.<a href="#section-11.1.3-1" class="pilcrow">¶</a></p
 }
 </pre>
 </div>
-<figcaption><a href="#figure-44" class="selfRef">Figure 44</a>:
+<figcaption><a href="#figure-41" class="selfRef">Figure 41</a>:
 <a href="#name-example-set-containing-a-ri" class="selfRef">Example: SET Containing a RISC Event with a Phone Number Subject</a>
             </figcaption></figure>
 </div>
 <span id="name-example-set-containing-a-ca"></span><div id="caep-event-properties-example">
-<figure id="figure-45">
+<figure id="figure-42">
             <div class="lang-json sourcecode" id="section-11.1.3-3.1">
 <pre>
 {
@@ -4309,7 +4209,7 @@ specific to the event type.<a href="#section-11.1.3-1" class="pilcrow">¶</a></p
 }
 </pre>
 </div>
-<figcaption><a href="#figure-45" class="selfRef">Figure 45</a>:
+<figcaption><a href="#figure-42" class="selfRef">Figure 42</a>:
 <a href="#name-example-set-containing-a-ca" class="selfRef">Example: SET Containing a CAEP Event with Properties</a>
             </figcaption></figure>
 </div>
@@ -4322,7 +4222,7 @@ specific to the event type.<a href="#section-11.1.3-1" class="pilcrow">¶</a></p
           </h4>
 <p id="section-11.1.4-1">SSF events MUST use explicit typing as defined in Section 2.3 of <span>[<a href="#RFC8417" class="cite xref">RFC8417</a>]</span>.<a href="#section-11.1.4-1" class="pilcrow">¶</a></p>
 <span id="name-explicitly-typed-jose-heade"></span><div id="explicit-type-header">
-<figure id="figure-46">
+<figure id="figure-43">
             <div class="lang-json sourcecode" id="section-11.1.4-2.1">
 <pre>
 {
@@ -4331,7 +4231,7 @@ specific to the event type.<a href="#section-11.1.3-1" class="pilcrow">¶</a></p
 }
 </pre>
 </div>
-<figcaption><a href="#figure-46" class="selfRef">Figure 46</a>:
+<figcaption><a href="#figure-43" class="selfRef">Figure 43</a>:
 <a href="#name-explicitly-typed-jose-heade" class="selfRef">Explicitly Typed JOSE Header</a>
             </figcaption></figure>
 </div>
@@ -4370,7 +4270,7 @@ this case the multiple Receivers might use the same service to process SETs, and
 this service might reroute SETs to respective Receivers, an "aud" claim with
 multiple Receivers would lead to unintended data disclosure.<a href="#section-11.1.6-3" class="pilcrow">¶</a></p>
 <span id="name-example-set-with-array-aud-"></span><div id="figarrayaud">
-<figure id="figure-47">
+<figure id="figure-44">
             <div class="lang-json sourcecode" id="section-11.1.6-4.1">
 <pre>
 {
@@ -4386,7 +4286,7 @@ multiple Receivers would lead to unintended data disclosure.<a href="#section-11
 }
 </pre>
 </div>
-<figcaption><a href="#figure-47" class="selfRef">Figure 47</a>:
+<figcaption><a href="#figure-44" class="selfRef">Figure 44</a>:
 <a href="#name-example-set-with-array-aud-" class="selfRef">Example: SET with array 'aud' claim</a>
             </figcaption></figure>
 </div>
@@ -4542,7 +4442,7 @@ Subject Identifiers for Security Event Tokens <span>[<a href="#SUBIDS" class="ci
 <dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
-<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
+<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="httpss://www.rfc-editor.org/info/rfc2119">httpss://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC5785">[RFC5785]</dt>
         <dd>
@@ -4570,7 +4470,7 @@ Subject Identifiers for Security Event Tokens <span>[<a href="#SUBIDS" class="ci
 <dd class="break"></dd>
 <dt id="RFC8174">[RFC8174]</dt>
         <dd>
-<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </dd>
+<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="httpss://www.rfc-editor.org/info/rfc8174">httpss://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8414">[RFC8414]</dt>
         <dd>
