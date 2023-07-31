@@ -3225,19 +3225,32 @@ GET request to the stream's Status Endpoint.<a href="#section-7.1.2.1-1" class="
 </li>
             </ul>
 <p id="section-7.1.2.1-7">On receiving a valid request the Event Transmitter responds with a 200 OK
-response containing a <span><a href="#RFC7159" class="internal xref">JSON</a> [<a href="#RFC7159" class="cite xref">RFC7159</a>]</span> object with an attribute "status",
-whose string value MUST have one of the following values:<a href="#section-7.1.2.1-7" class="pilcrow">¶</a></p>
-<p id="section-7.1.2.1-8">enabled<a href="#section-7.1.2.1-8" class="pilcrow">¶</a></p>
+response containing a <span><a href="#RFC7159" class="internal xref">JSON</a> [<a href="#RFC7159" class="cite xref">RFC7159</a>]</span> object with the following attributes:<a href="#section-7.1.2.1-7" class="pilcrow">¶</a></p>
+<p id="section-7.1.2.1-8">status<a href="#section-7.1.2.1-8" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-7.1.2.1-9.1">
-                <p id="section-7.1.2.1-9.1.1">The Transmitter MUST transmit events over the stream, according to the
-  stream's configured delivery method.<a href="#section-7.1.2.1-9.1.1" class="pilcrow">¶</a></p>
+                <p id="section-7.1.2.1-9.1.1">A string whose value MUST be one of the values described below.<a href="#section-7.1.2.1-9.1.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
-<p id="section-7.1.2.1-10">paused<a href="#section-7.1.2.1-10" class="pilcrow">¶</a></p>
+<p id="section-7.1.2.1-10">reason<a href="#section-7.1.2.1-10" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-7.1.2.1-11.1">
-                <p id="section-7.1.2.1-11.1.1">The Transmitter MUST NOT transmit events over the stream. The transmitter
+                <p id="section-7.1.2.1-11.1.1">An OPTIONAL string whose value SHOULD express why the stream's status is set to
+the current value.<a href="#section-7.1.2.1-11.1.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+<p id="section-7.1.2.1-12">The allowable "status" values are:<a href="#section-7.1.2.1-12" class="pilcrow">¶</a></p>
+<p id="section-7.1.2.1-13">enabled<a href="#section-7.1.2.1-13" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-7.1.2.1-14.1">
+                <p id="section-7.1.2.1-14.1.1">The Transmitter MUST transmit events over the stream, according to the
+  stream's configured delivery method.<a href="#section-7.1.2.1-14.1.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+<p id="section-7.1.2.1-15">paused<a href="#section-7.1.2.1-15" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-7.1.2.1-16.1">
+                <p id="section-7.1.2.1-16.1.1">The Transmitter MUST NOT transmit events over the stream. The transmitter
   will hold any events it would have transmitted while paused, and SHOULD
   transmit them when the stream's status becomes "enabled". If a Transmitter
   holds successive events that affect the same Subject Principal, then the
@@ -3245,21 +3258,21 @@ whose string value MUST have one of the following values:<a href="#section-7.1.2
   time that they were generated OR the Transmitter MUST send only the last events
   that do not require the previous events affecting the same Subject Principal to
   be processed by the Receiver, because the previous events are either cancelled
-  by the later events or the previous events are outdated.<a href="#section-7.1.2.1-11.1.1" class="pilcrow">¶</a></p>
+  by the later events or the previous events are outdated.<a href="#section-7.1.2.1-16.1.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
-<p id="section-7.1.2.1-12">disabled<a href="#section-7.1.2.1-12" class="pilcrow">¶</a></p>
+<p id="section-7.1.2.1-17">disabled<a href="#section-7.1.2.1-17" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7.1.2.1-13.1">
-                <p id="section-7.1.2.1-13.1.1">The Transmitter MUST NOT transmit events over the stream, and will not hold
-  any events for later transmission.<a href="#section-7.1.2.1-13.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-7.1.2.1-18.1">
+                <p id="section-7.1.2.1-18.1.1">The Transmitter MUST NOT transmit events over the stream, and will not hold
+  any events for later transmission.<a href="#section-7.1.2.1-18.1.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
-<p id="section-7.1.2.1-14">The following is a non-normative example request to check an event stream's
-status:<a href="#section-7.1.2.1-14" class="pilcrow">¶</a></p>
+<p id="section-7.1.2.1-19">The following is a non-normative example request to check an event stream's
+status:<a href="#section-7.1.2.1-19" class="pilcrow">¶</a></p>
 <span id="name-example-check-stream-status"></span><div id="figstatusreq">
 <figure id="figure-27">
-              <div class="lang-http sourcecode" id="section-7.1.2.1-15.1">
+              <div class="lang-http sourcecode" id="section-7.1.2.1-20.1">
 <pre>
 GET /ssf/status?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f HTTP/1.1
 Host: transmitter.example.com
@@ -3270,17 +3283,18 @@ Authorization: Bearer zzzz
 <a href="#name-example-check-stream-status" class="selfRef">Example: Check Stream Status Request</a>
               </figcaption></figure>
 </div>
-<p id="section-7.1.2.1-16">The following is a non-normative example response:<a href="#section-7.1.2.1-16" class="pilcrow">¶</a></p>
+<p id="section-7.1.2.1-21">The following is a non-normative example response:<a href="#section-7.1.2.1-21" class="pilcrow">¶</a></p>
 <span id="name-example-check-stream-status-"></span><div id="figstatusresp">
 <figure id="figure-28">
-              <div class="lang-http sourcecode" id="section-7.1.2.1-17.1">
+              <div class="lang-http sourcecode" id="section-7.1.2.1-22.1">
 <pre>
 HTTP/1.1 200 OK
 Content-Type: application/json
 Cache-Control: no-store
 
 {
-  "status": "enabled"
+  "status": "paused",
+  "reason": "SYSTEM_DOWN_FOR_MAINTENANCE"
 }
 </pre>
 </div>
@@ -3288,11 +3302,11 @@ Cache-Control: no-store
 <a href="#name-example-check-stream-status-" class="selfRef">Example: Check Stream Status Response</a>
               </figcaption></figure>
 </div>
-<p id="section-7.1.2.1-18">The following is a non-normative example request to check an event stream's
-status for a specific subject:<a href="#section-7.1.2.1-18" class="pilcrow">¶</a></p>
+<p id="section-7.1.2.1-23">The following is a non-normative example request to check an event stream's
+status for a specific subject:<a href="#section-7.1.2.1-23" class="pilcrow">¶</a></p>
 <span id="name-example-check-stream-status-r"></span><div id="figstatuswithsubjectreq">
 <figure id="figure-29">
-              <div class="lang-http sourcecode" id="section-7.1.2.1-19.1">
+              <div class="lang-http sourcecode" id="section-7.1.2.1-24.1">
 <pre>
 GET /ssf/status?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f&amp;subject=&lt;url-encoded-subject&gt; HTTP/1.1
 Host: transmitter.example.com
@@ -3303,10 +3317,10 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 <a href="#name-example-check-stream-status-r" class="selfRef">Example: Check Stream Status Request with Subject</a>
               </figcaption></figure>
 </div>
-<p id="section-7.1.2.1-20">The following is a non-normative example response with a Subject claim:<a href="#section-7.1.2.1-20" class="pilcrow">¶</a></p>
+<p id="section-7.1.2.1-25">The following is a non-normative example response with a Subject claim:<a href="#section-7.1.2.1-25" class="pilcrow">¶</a></p>
 <span id="name-example-check-stream-status-re"></span><div id="figstatuswithsubjectresp">
 <figure id="figure-30">
-              <div class="alignLeft art-text artwork" id="section-7.1.2.1-21.1">
+              <div class="alignLeft art-text artwork" id="section-7.1.2.1-26.1">
 <pre>
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -3329,7 +3343,7 @@ Cache-Control: no-store
 <a href="#name-example-check-stream-status-re" class="selfRef">Example: Check Stream Status Response</a>
               </figcaption></figure>
 </div>
-<p id="section-7.1.2.1-22">Errors are signaled with HTTP status codes as follows:<a href="#section-7.1.2.1-22" class="pilcrow">¶</a></p>
+<p id="section-7.1.2.1-27">Errors are signaled with HTTP status codes as follows:<a href="#section-7.1.2.1-27" class="pilcrow">¶</a></p>
 <span id="name-read-stream-status-errors"></span><div id="tabreadstatus">
 <table class="center" id="table-6">
               <caption>
@@ -3358,25 +3372,25 @@ Cache-Control: no-store
               </tbody>
             </table>
 </div>
-<p id="section-7.1.2.1-24">Examples:<a href="#section-7.1.2.1-24" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-7.1.2.1-25">
-<li id="section-7.1.2.1-25.1">If a Receiver makes a request with an invalid OAuth token, then the
-Transmitter MUST respond with a 401 error status.<a href="#section-7.1.2.1-25.1" class="pilcrow">¶</a>
+<p id="section-7.1.2.1-29">Examples:<a href="#section-7.1.2.1-29" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-7.1.2.1-30">
+<li id="section-7.1.2.1-30.1">If a Receiver makes a request with an invalid OAuth token, then the
+Transmitter MUST respond with a 401 error status.<a href="#section-7.1.2.1-30.1" class="pilcrow">¶</a>
 </li>
-              <li id="section-7.1.2.1-25.2">If the Receiver presents a valid OAuth token, but the Transmitter policy
+              <li id="section-7.1.2.1-30.2">If the Receiver presents a valid OAuth token, but the Transmitter policy
 does not permit the Receiver from obtaining the status, then the Transmitter
-MAY respond with a 403 error status.<a href="#section-7.1.2.1-25.2" class="pilcrow">¶</a>
+MAY respond with a 403 error status.<a href="#section-7.1.2.1-30.2" class="pilcrow">¶</a>
 </li>
-              <li id="section-7.1.2.1-25.3">If the Receiver requests the status for a stream that does not exist then the
-Transmitter MUST respond with a 404 error status.<a href="#section-7.1.2.1-25.3" class="pilcrow">¶</a>
+              <li id="section-7.1.2.1-30.3">If the Receiver requests the status for a stream that does not exist then the
+Transmitter MUST respond with a 404 error status.<a href="#section-7.1.2.1-30.3" class="pilcrow">¶</a>
 </li>
-              <li id="section-7.1.2.1-25.4">If the Receiver requests the status for a specific Subject, but the
+              <li id="section-7.1.2.1-30.4">If the Receiver requests the status for a specific Subject, but the
 Transmitter policy does not permit the Receiver to read the status of that
 Subject, then the Transmitter MAY respond with a 404 error status in order
-to not reveal the policy decision.<a href="#section-7.1.2.1-25.4" class="pilcrow">¶</a>
+to not reveal the policy decision.<a href="#section-7.1.2.1-30.4" class="pilcrow">¶</a>
 </li>
-              <li id="section-7.1.2.1-25.5">If the specified Subject is invalid then the Transmitter MUST respond with a
-404 error status.<a href="#section-7.1.2.1-25.5" class="pilcrow">¶</a>
+              <li id="section-7.1.2.1-30.5">If the specified Subject is invalid then the Transmitter MUST respond with a
+404 error status.<a href="#section-7.1.2.1-30.5" class="pilcrow">¶</a>
 </li>
             </ol>
 </section>
@@ -4560,7 +4574,7 @@ Subject Identifiers for Security Event Tokens <span>[<a href="#SUBIDS" class="ci
 <dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
-<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
+<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="httpss://www.rfc-editor.org/info/rfc2119">httpss://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC5785">[RFC5785]</dt>
         <dd>
@@ -4584,7 +4598,7 @@ Subject Identifiers for Security Event Tokens <span>[<a href="#SUBIDS" class="ci
 <dd class="break"></dd>
 <dt id="RFC8174">[RFC8174]</dt>
         <dd>
-<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </dd>
+<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="httpss://www.rfc-editor.org/info/rfc8174">httpss://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8417">[RFC8417]</dt>
         <dd>
