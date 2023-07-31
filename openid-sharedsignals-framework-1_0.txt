@@ -65,7 +65,7 @@ Table of Contents
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
      1.1.  Notational Conventions  . . . . . . . . . . . . . . . . .   3
    2.  Subject Principals  . . . . . . . . . . . . . . . . . . . . .   3
-   3.  Subject Members in SSF Events . . . . . . . . . . . . . . . .   3
+   3.  Subject Members in SSF Events . . . . . . . . . . . . . . . .   4
      3.1.  Simple Subject Members  . . . . . . . . . . . . . . . . .   4
      3.2.  Complex Subject Members . . . . . . . . . . . . . . . . .   4
        3.2.1.  Complex Subject Interpretation  . . . . . . . . . . .   5
@@ -78,34 +78,34 @@ Table of Contents
    5.  Example SETs that conform to the Shared Signals Framework . .   7
    6.  Transmitter Configuration Discovery . . . . . . . . . . . . .   9
      6.1.  Transmitter Configuration Metadata  . . . . . . . . . . .  10
-     6.2.  Obtaining Transmitter Configuration Information . . . . .  11
-       6.2.1.  Transmitter Configuration Request . . . . . . . . . .  11
-       6.2.2.  Backward Compatibility for RISC Transmitters  . . . .  12
-       6.2.3.  Transmitter Configuration Response  . . . . . . . . .  12
-       6.2.4.  Transmitter Configuration Validation  . . . . . . . .  13
-   7.  Management API for SET Event Streams  . . . . . . . . . . . .  13
-     7.1.  Event Stream Management . . . . . . . . . . . . . . . . .  14
-       7.1.1.  Stream Configuration  . . . . . . . . . . . . . . . .  15
-       7.1.2.  Stream Status . . . . . . . . . . . . . . . . . . . .  31
-       7.1.3.  Subjects  . . . . . . . . . . . . . . . . . . . . . .  36
-       7.1.4.  Verification  . . . . . . . . . . . . . . . . . . . .  40
-       7.1.5.  Stream Updated Event  . . . . . . . . . . . . . . . .  43
-   8.  Authorization . . . . . . . . . . . . . . . . . . . . . . . .  44
-   9.  Security Considerations . . . . . . . . . . . . . . . . . . .  44
-     9.1.  Subject Probing . . . . . . . . . . . . . . . . . . . . .  45
-     9.2.  Information Harvesting  . . . . . . . . . . . . . . . . .  45
-     9.3.  Malicious Subject Removal . . . . . . . . . . . . . . . .  45
-   10. Privacy Considerations  . . . . . . . . . . . . . . . . . . .  46
-     10.1.  Subject Information Leakage  . . . . . . . . . . . . . .  46
-     10.2.  Previously Consented Data  . . . . . . . . . . . . . . .  46
-     10.3.  New Data . . . . . . . . . . . . . . . . . . . . . . . .  46
-       10.3.1.  Organizational Data  . . . . . . . . . . . . . . . .  46
-       10.3.2.  Consentable Data . . . . . . . . . . . . . . . . . .  47
-   11. Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .  47
-     11.1.  Security Event Token Profile . . . . . . . . . . . . . .  47
-       11.1.1.  Signature Key Resolution . . . . . . . . . . . . . .  47
-       11.1.2.  SSF Event Subject  . . . . . . . . . . . . . . . . .  47
-       11.1.3.  SSF Event Properties . . . . . . . . . . . . . . . .  47
+       6.1.1.  Authorization Server Descriptor . . . . . . . . . . .  11
+     6.2.  Obtaining Transmitter Configuration Information . . . . .  12
+       6.2.1.  Transmitter Configuration Request . . . . . . . . . .  12
+       6.2.2.  Backward Compatibility for RISC Transmitters  . . . .  13
+       6.2.3.  Transmitter Configuration Response  . . . . . . . . .  13
+       6.2.4.  Transmitter Configuration Validation  . . . . . . . .  14
+   7.  Management API for SET Event Streams  . . . . . . . . . . . .  15
+     7.1.  Event Stream Management . . . . . . . . . . . . . . . . .  16
+       7.1.1.  Stream Configuration  . . . . . . . . . . . . . . . .  17
+       7.1.2.  Stream Status . . . . . . . . . . . . . . . . . . . .  32
+       7.1.3.  Subjects  . . . . . . . . . . . . . . . . . . . . . .  37
+       7.1.4.  Verification  . . . . . . . . . . . . . . . . . . . .  41
+       7.1.5.  Stream Updated Event  . . . . . . . . . . . . . . . .  44
+   8.  Authorization . . . . . . . . . . . . . . . . . . . . . . . .  45
+   9.  Security Considerations . . . . . . . . . . . . . . . . . . .  45
+     9.1.  Subject Probing . . . . . . . . . . . . . . . . . . . . .  46
+     9.2.  Information Harvesting  . . . . . . . . . . . . . . . . .  46
+     9.3.  Malicious Subject Removal . . . . . . . . . . . . . . . .  46
+   10. Privacy Considerations  . . . . . . . . . . . . . . . . . . .  47
+     10.1.  Subject Information Leakage  . . . . . . . . . . . . . .  47
+     10.2.  Previously Consented Data  . . . . . . . . . . . . . . .  47
+     10.3.  New Data . . . . . . . . . . . . . . . . . . . . . . . .  47
+       10.3.1.  Organizational Data  . . . . . . . . . . . . . . . .  47
+       10.3.2.  Consentable Data . . . . . . . . . . . . . . . . . .  48
+   11. Profiles  . . . . . . . . . . . . . . . . . . . . . . . . . .  48
+     11.1.  Security Event Token Profile . . . . . . . . . . . . . .  48
+       11.1.1.  Signature Key Resolution . . . . . . . . . . . . . .  48
+       11.1.2.  SSF Event Subject  . . . . . . . . . . . . . . . . .  48
 
 
 
@@ -114,21 +114,22 @@ Tulshibagwale, et al.        Standards Track                    [Page 2]
                               SharedSignals                    June 2023
 
 
-       11.1.4.  Explicit Typing of SETs  . . . . . . . . . . . . . .  48
-       11.1.5.  The "exp" Claim  . . . . . . . . . . . . . . . . . .  49
-       11.1.6.  The "aud" Claim  . . . . . . . . . . . . . . . . . .  49
-       11.1.7.  The "events" claim . . . . . . . . . . . . . . . . .  50
-       11.1.8.  Security Considerations  . . . . . . . . . . . . . .  50
-     11.2.  SET Token Delivery Using HTTP Profile  . . . . . . . . .  50
-       11.2.1.  Stream Configuration Metadata  . . . . . . . . . . .  50
-   12. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  51
-   13. References  . . . . . . . . . . . . . . . . . . . . . . . . .  51
-     13.1.  Normative References . . . . . . . . . . . . . . . . . .  51
-     13.2.  Informative References . . . . . . . . . . . . . . . . .  53
-   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  53
-   Appendix B.  Notices  . . . . . . . . . . . . . . . . . . . . . .  53
-   Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  54
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  54
+       11.1.3.  SSF Event Properties . . . . . . . . . . . . . . . .  48
+       11.1.4.  Explicit Typing of SETs  . . . . . . . . . . . . . .  49
+       11.1.5.  The "exp" Claim  . . . . . . . . . . . . . . . . . .  50
+       11.1.6.  The "aud" Claim  . . . . . . . . . . . . . . . . . .  50
+       11.1.7.  The "events" claim . . . . . . . . . . . . . . . . .  51
+       11.1.8.  Security Considerations  . . . . . . . . . . . . . .  51
+     11.2.  SET Token Delivery Using HTTP Profile  . . . . . . . . .  51
+       11.2.1.  Stream Configuration Metadata  . . . . . . . . . . .  51
+   12. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  52
+   13. References  . . . . . . . . . . . . . . . . . . . . . . . . .  52
+     13.1.  Normative References . . . . . . . . . . . . . . . . . .  52
+     13.2.  Informative References . . . . . . . . . . . . . . . . .  54
+   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  54
+   Appendix B.  Notices  . . . . . . . . . . . . . . . . . . . . . .  54
+   Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  55
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  55
 
 1.  Introduction
 
@@ -158,10 +159,9 @@ Tulshibagwale, et al.        Standards Track                    [Page 2]
 
    Subject Principals are identified by Subject Members defined below.
 
-3.  Subject Members in SSF Events
 
-   A member of type Subject in an SSF event MAY have any claim name.
-   Each Subject Member MUST refer to exactly one Subject Principal.
+
+
 
 
 
@@ -169,6 +169,11 @@ Tulshibagwale, et al.        Standards Track                    [Page 3]
 
                               SharedSignals                    June 2023
 
+
+3.  Subject Members in SSF Events
+
+   A member of type Subject in an SSF event MAY have any claim name.
+   Each Subject Member MUST refer to exactly one Subject Principal.
 
    A Subject may be a "simple subject" or a "complex subject".
 
@@ -214,17 +219,17 @@ Tulshibagwale, et al.        Standards Track                    [Page 3]
 
       OPTIONAL.  A Subject Identifier that identifies a tenant.
 
-   org_unit
-
-      OPTIONAL.  A Subject Identifier that identifies an organizational
-      unit.
-
 
 
 Tulshibagwale, et al.        Standards Track                    [Page 4]
 
                               SharedSignals                    June 2023
 
+
+   org_unit
+
+      OPTIONAL.  A Subject Identifier that identifies an organizational
+      unit.
 
    group
 
@@ -269,11 +274,6 @@ Tulshibagwale, et al.        Standards Track                    [Page 4]
    *  An identifier format defined in the Additional Subject Identifier
       Formats (Section 3.4) section below, OR
 
-   *  A proprietary subject identifier format that is agreed to between
-      parties.  Members within a subject identifier that has a
-      proprietary subject identifier format are agreed to between the
-      parties and such agreement is outside the scope of this
-      specification.
 
 
 
@@ -281,6 +281,12 @@ Tulshibagwale, et al.        Standards Track                    [Page 5]
 
                               SharedSignals                    June 2023
 
+
+   *  A proprietary subject identifier format that is agreed to between
+      parties.  Members within a subject identifier that has a
+      proprietary subject identifier format are agreed to between the
+      parties and such agreement is outside the scope of this
+      specification.
 
 3.4.  Additional Subject Identifier Formats
 
@@ -324,12 +330,6 @@ Tulshibagwale, et al.        Standards Track                    [Page 5]
 
    issuer
 
-      REQUIRED.  The "Issuer" value of the SAML assertion being
-      identified, defined in [OASIS.saml-core-2.0-os]
-
-   assertion_id
-
-
 
 
 
@@ -337,6 +337,11 @@ Tulshibagwale, et al.        Standards Track                    [Page 6]
 
                               SharedSignals                    June 2023
 
+
+      REQUIRED.  The "Issuer" value of the SAML assertion being
+      identified, defined in [OASIS.saml-core-2.0-os]
+
+   assertion_id
 
       REQUIRED.  The "ID" value of the SAML assertion being identified,
       defined in [OASIS.saml-core-2.0-os]
@@ -378,11 +383,6 @@ Tulshibagwale, et al.        Standards Track                    [Page 6]
 
    The following are hypothetical examples of SETs that conform to the
    Shared Signals Framework.
-
-
-
-
-
 
 
 
@@ -550,7 +550,7 @@ Tulshibagwale, et al.        Standards Track                    [Page 9]
 
    critical_subject_members
 
-      OPTIONAL.  List of member names in a Complex Subject which, if
+      OPTIONAL.  An array of member names in a Complex Subject which, if
       present in a Subject Member in an event, MUST be interpreted by a
       Receiver.
 
@@ -562,9 +562,72 @@ Tulshibagwale, et al.        Standards Track                   [Page 10]
                               SharedSignals                    June 2023
 
 
+   supported_scopes
+
+      OPTIONAL.  A list of OAuth [RFC6749] scope names that the
+      Transmitter supports for specific endpoints.  The value of this
+      field is a JSON object that has the endpoint names as keys, and
+      arrays of scope name strings they support as their values.  OAuth
+      tokens obtained using any of the scopes defined here MUST be
+      accepted by the specified endpoint.  Any key that is not defined
+      as an endpoint in the Transmitter Configuration Metadata MUST be
+      ignored.  If the supported_scopes member is present in the
+      metadata and an endpoint is not listed as a key, then that
+      endpoint MUST not require OAuth for authorization.
+
+   authorization_servers
+
+      OPTIONAL.  An array of supported authorization servers and the
+      scopes they support.  Each element of the array is a Authorization
+      Server Descriptor JSON object defined in the section Section 6.1.1
+      below.  If the supported_scopes member is present in the metadata,
+      then the authorization_servers MUST also be present, and it MUST
+      provide a server location for every supported scope.
+
    TODO: consider adding a IANA Registry for metadata, similar to
-   Section 7.1.1 of [OAUTH-DISCOVERY].  This would allow other specs to
-   add to the metadata.
+   Section 7.1.1 of [RFC8414].  This would allow other specs to add to
+   the metadata.
+
+6.1.1.  Authorization Server Descriptor
+
+   An Authorization Server Descriptor is a JSON object that has two
+   keys:
+
+   scopes
+
+      REQUIRED.  An array of scope names supported by the authorization
+      server
+
+   servers
+
+      REQUIRED.  An array of authorization server URLs.  This is the URL
+      from which the Authorization Server Metadata MAY be obtained by
+      following the process described in Section 3 of RFC8414 [RFC8414]
+
+   The following is a non-normative example of an Authorization Server
+   Descriptor
+
+
+
+
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 11]
+
+                              SharedSignals                    June 2023
+
+
+   {
+       "scopes" : ["scope1", "scope2"],
+       "servers": [
+           "https://server1.example/base/url",
+           "https://server2.example/base/url",
+           "https://server3.example/base/url"
+       ]
+   }
+
+             Figure 9: Example Authorization Server Descriptor
 
 6.2.  Obtaining Transmitter Configuration Information
 
@@ -591,7 +654,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 10]
    GET /.well-known/ssf-configuration HTTP/1.1
    Host: tr.example.com
 
-    Figure 9: Example: Transmitter Configuration Request (without path)
+    Figure 10: Example: Transmitter Configuration Request (without path)
 
    If the Issuer value contains a path component, any terminating "/"
    MUST be removed before inserting "/.well-known/ssf-configuration"
@@ -603,20 +666,21 @@ Tulshibagwale, et al.        Standards Track                   [Page 10]
    GET /.well-known/ssf-configuration/issuer1 HTTP/1.1
    Host: tr.example.com
 
-     Figure 10: Example: Transmitter Configuration Request (with path)
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 12]
+
+                              SharedSignals                    June 2023
+
+
+     Figure 11: Example: Transmitter Configuration Request (with path)
 
    Using path components enables supporting multiple issuers per host.
    This is required in some multi-tenant hosting configurations.  This
    use of ".well-known" is for supporting multiple issuers per host;
    unlike its use in [RFC5785], it does not provide general information
    about the host.
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 11]
-
-                              SharedSignals                    June 2023
-
 
 6.2.2.  Backward Compatibility for RISC Transmitters
 
@@ -632,7 +696,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 11]
    GET /.well-known/risc-configuration HTTP/1.1
    Host: risc-tr.example.com
 
-       Figure 11: Example: Transmitter Configuration Request for RISC
+       Figure 12: Example: Transmitter Configuration Request for RISC
                                 Transmitters
 
 6.2.3.  Transmitter Configuration Response
@@ -650,6 +714,8 @@ Tulshibagwale, et al.        Standards Track                   [Page 11]
 
    An error response uses the applicable HTTP status code value.
 
+   The following is a non-normative example of a Transmitter
+   Configuration Response
 
 
 
@@ -659,17 +725,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 11]
 
 
 
-
-
-
-
-
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 12]
+Tulshibagwale, et al.        Standards Track                   [Page 13]
 
                               SharedSignals                    June 2023
 
@@ -695,10 +751,21 @@ Tulshibagwale, et al.        Standards Track                   [Page 12]
        "https://tr.example.com/ssf/mgmt/subject:remove",
      "verification_endpoint":
        "https://tr.example.com/ssf/mgmt/verification",
-     "critical_subject_members": [ "tenant", "user" ]
+     "critical_subject_members": [ "tenant", "user" ],
+     "supported_scopes":
+         {
+           "status_endpoint": ["status_scope"],
+           "configuration_endpoint": ["admin_scope", "status_scope"]
+         },
+     "authorization_servers": [
+         {
+             "scopes": ["admin_scope", "status_scope"],
+             "servers": ["https://myauthzserver.example"]
+         }
+     ]
    }
 
-           Figure 12: Example: Transmitter Configuration Response
+           Figure 13: Example: Transmitter Configuration Response
 
 6.2.4.  Transmitter Configuration Validation
 
@@ -712,6 +779,13 @@ Tulshibagwale, et al.        Standards Track                   [Page 12]
    MUST also be identical to the "iss" Claim value in Security Event
    Tokens issued from this Transmitter.
 
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 14]
+
+                              SharedSignals                    June 2023
+
+
 7.  Management API for SET Event Streams
 
    An Event Stream is an abstraction for how events are communicated
@@ -722,13 +796,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 12]
    expect to receive the events.  The Event Stream also keeps track of
    what Subjects are of interest to the Receiver, and only events with
    those Subjects are transmitted on the stream.
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 13]
-
-                              SharedSignals                    June 2023
-
 
    This section defines an HTTP API to be implemented by Event
    Transmitters which can be used by Event Receivers to create and
@@ -757,11 +824,23 @@ Tulshibagwale, et al.        Standards Track                   [Page 13]
    |            |                |            |
    +------------+                +------------+
 
-                   Figure 13: Event Stream Management API
+                   Figure 14: Event Stream Management API
 
    It is OPTIONAL for Transmitters to implement a Management API, but it
    is RECOMMENDED that they implement it, especially the endpoints for
    querying the Stream Status and for triggering Verification.
+
+
+
+
+
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 15]
+
+                              SharedSignals                    June 2023
+
 
 7.1.  Event Stream Management
 
@@ -778,13 +857,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 13]
    Transmitter and consists of the following endpoints:
 
    Configuration Endpoint
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 14]
-
-                              SharedSignals                    June 2023
-
 
       An endpoint used to create and delete Event Streams, as well as
       read and update an Event Stream's current configuration.
@@ -814,6 +886,18 @@ Tulshibagwale, et al.        Standards Track                   [Page 14]
    The definition of such mechanisms is outside the scope of this
    specification.
 
+
+
+
+
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 16]
+
+                              SharedSignals                    June 2023
+
+
 7.1.1.  Stream Configuration
 
    An Event Stream's configuration is a collection of data, provided by
@@ -833,14 +917,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 14]
       or fragment component that the Transmitter asserts as its Issuer
       Identifier.  This MUST be identical to the "iss" Claim value in
       Security Event Tokens issued from this Transmitter.
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 15]
-
-                              SharedSignals                    June 2023
-
 
    aud
 
@@ -869,6 +945,15 @@ Tulshibagwale, et al.        Standards Track                   [Page 15]
 
    events_delivered
 
+
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 17]
+
+                              SharedSignals                    June 2023
+
+
       *Transmitter-Supplied*, An array of URIs which is the intersection
       of "events_supported" and "events_requested".  These events MAY be
       delivered over the Event Stream.  A Receiver MUST rely on the
@@ -890,13 +975,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 15]
          "urn:ietf:rfc:8936" (poll), but not both.
 
       url
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 16]
-
-                              SharedSignals                    June 2023
-
 
       The location at which the push or poll delivery will take
          place.  If the method value is "urn:ietf:rfc:8935" (push), then
@@ -921,8 +999,16 @@ Tulshibagwale, et al.        Standards Track                   [Page 16]
       necessary.
 
    TODO: consider adding a IANA Registry for stream configuration
-   metadata, similar to Section 7.1.1 of [OAUTH-DISCOVERY].  This would
-   allow other specs to add to the stream configuration.
+   metadata, similar to Section 7.1.1 of [RFC8414].  This would allow
+   other specs to add to the stream configuration.
+
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 18]
+
+                              SharedSignals                    June 2023
+
 
 7.1.1.1.  Creating a Stream
 
@@ -942,17 +1028,6 @@ Tulshibagwale, et al.        Standards Track                   [Page 16]
       is supplied by the Transmitter.
 
    *  format
-
-
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 17]
-
-                              SharedSignals                    June 2023
-
 
    If the request does not contain the delivery property, then the
    Transmitter MUST assume that the method is "urn:ietf:rfc:8936"
@@ -978,7 +1053,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 17]
      ]
    }
 
-              Figure 14: Example: Create Event Stream Request
+              Figure 15: Example: Create Event Stream Request
 
    The following is a non-normative example response:
 
@@ -986,26 +1061,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 17]
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Tulshibagwale, et al.        Standards Track                   [Page 18]
+Tulshibagwale, et al.        Standards Track                   [Page 19]
 
                               SharedSignals                    June 2023
 
@@ -1040,7 +1096,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 18]
      ]
    }
 
-                 Figure 15: Example: Create Stream Response
+                 Figure 16: Example: Create Stream Response
 
    Errors are signaled with HTTP status codes as follows:
 
@@ -1061,7 +1117,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 18]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 19]
+Tulshibagwale, et al.        Standards Track                   [Page 20]
 
                               SharedSignals                    June 2023
 
@@ -1088,7 +1144,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 19]
    Host: transmitter.example.com
    Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
-           Figure 16: Example: Read Stream Configuration Request
+           Figure 17: Example: Read Stream Configuration Request
 
    The following is a non-normative example response:
 
@@ -1117,7 +1173,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 19]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 20]
+Tulshibagwale, et al.        Standards Track                   [Page 21]
 
                               SharedSignals                    June 2023
 
@@ -1153,7 +1209,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 20]
      ]
    }
 
-           Figure 17: Example: Read Stream Configuration Response
+           Figure 18: Example: Read Stream Configuration Response
 
    The following is a non-normative example request to read an Event
    Stream's configuration, with no "stream_id" indicated:
@@ -1162,7 +1218,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 20]
    Host: transmitter.example.com
    Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
-           Figure 18: Example: Read Stream Configuration Request
+           Figure 19: Example: Read Stream Configuration Request
 
    The following is a non-normative example response to a request with
    no "stream_id":
@@ -1173,7 +1229,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 20]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 21]
+Tulshibagwale, et al.        Standards Track                   [Page 22]
 
                               SharedSignals                    June 2023
 
@@ -1229,7 +1285,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 21]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 22]
+Tulshibagwale, et al.        Standards Track                   [Page 23]
 
                               SharedSignals                    June 2023
 
@@ -1245,7 +1301,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 22]
      }
    ]
 
-           Figure 19: Example: Read Stream Configuration Response
+           Figure 20: Example: Read Stream Configuration Response
 
    The following is a non-normative example response to a request with
    no "stream_id" when there is only one Event Stream configured:
@@ -1285,12 +1341,12 @@ Tulshibagwale, et al.        Standards Track                   [Page 22]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 23]
+Tulshibagwale, et al.        Standards Track                   [Page 24]
 
                               SharedSignals                    June 2023
 
 
-           Figure 20: Example: Read Stream Configuration Response
+           Figure 21: Example: Read Stream Configuration Response
 
    The following is a non-normative example response to a request with
    no "stream_id" when there are no Event Streams configured:
@@ -1301,7 +1357,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 23]
 
    []
 
-           Figure 21: Example: Read Stream Configuration Response
+           Figure 22: Example: Read Stream Configuration Response
 
    Errors are signaled with HTTP status codes as follows:
 
@@ -1341,7 +1397,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 23]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 24]
+Tulshibagwale, et al.        Standards Track                   [Page 25]
 
                               SharedSignals                    June 2023
 
@@ -1369,7 +1425,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 24]
      ],
    }
 
-          Figure 22: Example: Update Stream Configuration Request
+          Figure 23: Example: Update Stream Configuration Request
 
    The following is a non-normative example response:
 
@@ -1397,7 +1453,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 24]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 25]
+Tulshibagwale, et al.        Standards Track                   [Page 26]
 
                               SharedSignals                    June 2023
 
@@ -1433,7 +1489,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 25]
      ]
    }
 
-          Figure 23: Example: Update Stream Configuration Response
+          Figure 24: Example: Update Stream Configuration Response
 
    Pending conditions or errors are signaled with HTTP status codes as
    follows:
@@ -1453,7 +1509,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 25]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 26]
+Tulshibagwale, et al.        Standards Track                   [Page 27]
 
                               SharedSignals                    June 2023
 
@@ -1509,7 +1565,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 26]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 27]
+Tulshibagwale, et al.        Standards Track                   [Page 28]
 
                               SharedSignals                    June 2023
 
@@ -1536,7 +1592,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 27]
      ]
    }
 
-          Figure 24: Example: Replace Stream Configuration Request
+          Figure 25: Example: Replace Stream Configuration Request
 
    The following is a non-normative example response:
 
@@ -1565,7 +1621,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 27]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 28]
+Tulshibagwale, et al.        Standards Track                   [Page 29]
 
                               SharedSignals                    June 2023
 
@@ -1601,7 +1657,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 28]
      ]
    }
 
-         Figure 25: Example: Replace Stream Configuration Response
+         Figure 26: Example: Replace Stream Configuration Response
 
    Pending conditions or errors are signaled with HTTP status codes as
    follows:
@@ -1621,7 +1677,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 28]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 29]
+Tulshibagwale, et al.        Standards Track                   [Page 30]
 
                               SharedSignals                    June 2023
 
@@ -1665,7 +1721,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 29]
    Host: transmitter.example.com
    Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
-                 Figure 26: Example: Delete Stream Request
+                 Figure 27: Example: Delete Stream Request
 
    Errors are signaled with HTTP status codes as follows:
 
@@ -1677,7 +1733,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 29]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 30]
+Tulshibagwale, et al.        Standards Track                   [Page 31]
 
                               SharedSignals                    June 2023
 
@@ -1733,7 +1789,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 30]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 31]
+Tulshibagwale, et al.        Standards Track                   [Page 32]
 
                               SharedSignals                    June 2023
 
@@ -1789,7 +1845,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 31]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 32]
+Tulshibagwale, et al.        Standards Track                   [Page 33]
 
                               SharedSignals                    June 2023
 
@@ -1798,7 +1854,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 32]
    Host: transmitter.example.com
    Authorization: Bearer zzzz
 
-              Figure 27: Example: Check Stream Status Request
+              Figure 28: Example: Check Stream Status Request
 
    The following is a non-normative example response:
 
@@ -1811,7 +1867,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 32]
      "reason": "SYSTEM_DOWN_FOR_MAINTENANCE"
    }
 
-              Figure 28: Example: Check Stream Status Response
+              Figure 29: Example: Check Stream Status Response
 
    Errors are signaled with HTTP status codes as follows:
 
@@ -1845,7 +1901,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 32]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 33]
+Tulshibagwale, et al.        Standards Track                   [Page 34]
 
                               SharedSignals                    June 2023
 
@@ -1886,7 +1942,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 33]
      "status": "paused"
    }
 
-     Figure 29: Example: Update Stream Status Request Without Optional
+     Figure 30: Example: Update Stream Status Request Without Optional
                                    Fields
 
    The following is a non-normative example of an Update Stream Status
@@ -1901,7 +1957,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 33]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 34]
+Tulshibagwale, et al.        Standards Track                   [Page 35]
 
                               SharedSignals                    June 2023
 
@@ -1916,7 +1972,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 34]
      "reason": "Disabled by administrator action"
    }
 
-   Figure 30: Example: Update Stream Status Request With Optional Reason
+   Figure 31: Example: Update Stream Status Request With Optional Reason
 
    The following is a non-normative example response:
 
@@ -1929,7 +1985,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 34]
      "status": "paused"
    }
 
-             Figure 31: Example: Update Stream Status Response
+             Figure 32: Example: Update Stream Status Response
 
    Errors are signaled with HTTP status codes as follows:
 
@@ -1957,7 +2013,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 34]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 35]
+Tulshibagwale, et al.        Standards Track                   [Page 36]
 
                               SharedSignals                    June 2023
 
@@ -2013,7 +2069,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 35]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 36]
+Tulshibagwale, et al.        Standards Track                   [Page 37]
 
                               SharedSignals                    June 2023
 
@@ -2049,7 +2105,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 36]
      "verified": true
    }
 
-                  Figure 32: Example: Add Subject Request
+                  Figure 33: Example: Add Subject Request
 
    The following is a non-normative example response to a successful
    request:
@@ -2058,7 +2114,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 36]
    Server: transmitter.example.com
    Cache-Control: no-store
 
-                  Figure 33: Example: Add Subject Response
+                  Figure 34: Example: Add Subject Response
 
    Errors are signaled with HTTP status codes as follows:
 
@@ -2069,7 +2125,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 36]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 37]
+Tulshibagwale, et al.        Standards Track                   [Page 38]
 
                               SharedSignals                    June 2023
 
@@ -2125,7 +2181,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 37]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 38]
+Tulshibagwale, et al.        Standards Track                   [Page 39]
 
                               SharedSignals                    June 2023
 
@@ -2142,7 +2198,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 38]
      }
    }
 
-                 Figure 34: Example: Remove Subject Request
+                 Figure 35: Example: Remove Subject Request
 
    The following is a non-normative example response to a successful
    request:
@@ -2151,7 +2207,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 38]
    Server: transmitter.example.com
    Cache-Control: no-store
 
-                Figure 35: Example: Remove Subject Response
+                Figure 36: Example: Remove Subject Response
 
    Errors are signaled with HTTP status codes as follows:
 
@@ -2181,7 +2237,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 38]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 39]
+Tulshibagwale, et al.        Standards Track                   [Page 40]
 
                               SharedSignals                    June 2023
 
@@ -2237,7 +2293,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 39]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 40]
+Tulshibagwale, et al.        Standards Track                   [Page 41]
 
                               SharedSignals                    June 2023
 
@@ -2293,7 +2349,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 40]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 41]
+Tulshibagwale, et al.        Standards Track                   [Page 42]
 
                               SharedSignals                    June 2023
 
@@ -2329,7 +2385,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 41]
      "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
    }
 
-              Figure 36: Example: Trigger Verification Request
+              Figure 37: Example: Trigger Verification Request
 
    The following is a non-normative example response to a successful
    request:
@@ -2338,7 +2394,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 41]
    Server: transmitter.example.com
    Cache-Control: no-store
 
-             Figure 37: Example: Trigger Verification Response
+             Figure 38: Example: Trigger Verification Response
 
    And the following is a non-normative example of a verification event
    sent to the Event Receiver as a result of the above request:
@@ -2349,7 +2405,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 41]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 42]
+Tulshibagwale, et al.        Standards Track                   [Page 43]
 
                               SharedSignals                    June 2023
 
@@ -2370,7 +2426,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 42]
      }
    }
 
-                    Figure 38: Example: Verification SET
+                    Figure 39: Example: Verification SET
 
 7.1.5.  Stream Updated Event
 
@@ -2405,7 +2461,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 42]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 43]
+Tulshibagwale, et al.        Standards Track                   [Page 44]
 
                               SharedSignals                    June 2023
 
@@ -2437,7 +2493,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 43]
      }
    }
 
-     Figure 39: Example: Stream Updated SET with stream as the subject
+     Figure 40: Example: Stream Updated SET with stream as the subject
                        of single- stream Transmitter
 
 8.  Authorization
@@ -2461,7 +2517,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 43]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 44]
+Tulshibagwale, et al.        Standards Track                   [Page 45]
 
                               SharedSignals                    June 2023
 
@@ -2517,7 +2573,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 44]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 45]
+Tulshibagwale, et al.        Standards Track                   [Page 46]
 
                               SharedSignals                    June 2023
 
@@ -2573,7 +2629,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 45]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 46]
+Tulshibagwale, et al.        Standards Track                   [Page 47]
 
                               SharedSignals                    June 2023
 
@@ -2629,7 +2685,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 46]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 47]
+Tulshibagwale, et al.        Standards Track                   [Page 48]
 
                               SharedSignals                    June 2023
 
@@ -2651,7 +2707,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 47]
      }
    }
 
-        Figure 40: Example: SET Containing a RISC Event with a Phone
+        Figure 41: Example: SET Containing a RISC Event with a Phone
                                Number Subject
 
    {
@@ -2670,7 +2726,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 47]
      }
    }
 
-      Figure 41: Example: SET Containing a CAEP Event with Properties
+      Figure 42: Example: SET Containing a CAEP Event with Properties
 
 11.1.4.  Explicit Typing of SETs
 
@@ -2685,12 +2741,12 @@ Tulshibagwale, et al.        Standards Track                   [Page 47]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 48]
+Tulshibagwale, et al.        Standards Track                   [Page 49]
 
                               SharedSignals                    June 2023
 
 
-                  Figure 42: Explicitly Typed JOSE Header
+                  Figure 43: Explicitly Typed JOSE Header
 
    The purpose is defense against confusion with other JWTs, as
    described in Sections 4.5, 4.6 and 4.7 of [RFC8417].  While current
@@ -2737,11 +2793,11 @@ Tulshibagwale, et al.        Standards Track                   [Page 48]
      }
    }
 
-               Figure 43: Example: SET with array 'aud' claim
+               Figure 44: Example: SET with array 'aud' claim
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 49]
+Tulshibagwale, et al.        Standards Track                   [Page 50]
 
                               SharedSignals                    June 2023
 
@@ -2797,7 +2853,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 49]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 50]
+Tulshibagwale, et al.        Standards Track                   [Page 51]
 
                               SharedSignals                    June 2023
 
@@ -2853,7 +2909,7 @@ Tulshibagwale, et al.        Standards Track                   [Page 50]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 51]
+Tulshibagwale, et al.        Standards Track                   [Page 52]
 
                               SharedSignals                    June 2023
 
@@ -2869,26 +2925,19 @@ Tulshibagwale, et al.        Standards Track                   [Page 51]
               Markup Language (SAML) V2.0", OASIS Standard saml-core-
               2.0-os, March 2005.
 
-   [OAUTH-DISCOVERY]
-              Jones, M. B., Sakimura, N., and J. Bradley, "OAuth 2.0
-              Authorization Server Metadata - Version 10", June 2018,
-              <https://www.rfc-editor.org/info/rfc8414>.
-
-   [OPENID-DISCOVERY]
-              Sakimura, N., Bradley, J., Jones, M. B., and E. Jay,
-              "OpenID Connect Discovery 1.0", November 2014,
-              <https://openid.net/specs/openid-connect-discovery-
-              1_0.html>.
-
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
-              DOI 10.17487/RFC2119, March 1997,
-              <https://www.rfc-editor.org/info/rfc2119>.
+              DOI 10.17487/RFC2119, March 1997, <httpss://www.rfc-
+              editor.org/info/rfc2119>.
 
    [RFC5785]  Nottingham, M. and E. Hammer-Lahav, "Defining Well-Known
               Uniform Resource Identifiers (URIs)", RFC 5785,
               DOI 10.17487/RFC5785, April 2010,
               <https://www.rfc-editor.org/info/rfc5785>.
+
+   [RFC6749]  Hardt, D., Ed., "The OAuth 2.0 Authorization Framework",
+              RFC 6749, DOI 10.17487/RFC6749, October 2012,
+              <https://www.rfc-editor.org/info/rfc6749>.
 
    [RFC6750]  Jones, M. and D. Hardt, "The OAuth 2.0 Authorization
               Framework: Bearer Token Usage", RFC 6750,
@@ -2907,16 +2956,24 @@ Tulshibagwale, et al.        Standards Track                   [Page 51]
               (JWT)", RFC 7519, DOI 10.17487/RFC7519, May 2015,
               <https://www.rfc-editor.org/info/rfc7519>.
 
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <httpss://www.rfc-editor.org/info/rfc8174>.
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 52]
+
+
+
+
+Tulshibagwale, et al.        Standards Track                   [Page 53]
 
                               SharedSignals                    June 2023
 
 
-   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
-              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
-              May 2017, <https://www.rfc-editor.org/info/rfc8174>.
+   [RFC8414]  Jones, M., Sakimura, N., and J. Bradley, "OAuth 2.0
+              Authorization Server Metadata", RFC 8414,
+              DOI 10.17487/RFC8414, June 2018,
+              <https://www.rfc-editor.org/info/rfc8414>.
 
    [RFC8417]  Hunt, P., Ed., Jones, M., Denniss, W., and M. Ansari,
               "Security Event Token (SET)", RFC 8417,
@@ -2964,8 +3021,7 @@ Appendix B.  Notices
 
 
 
-
-Tulshibagwale, et al.        Standards Track                   [Page 53]
+Tulshibagwale, et al.        Standards Track                   [Page 54]
 
                               SharedSignals                    June 2023
 
@@ -3021,7 +3077,7 @@ Authors' Addresses
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 54]
+Tulshibagwale, et al.        Standards Track                   [Page 55]
 
                               SharedSignals                    June 2023
 
@@ -3077,4 +3133,4 @@ Tulshibagwale, et al.        Standards Track                   [Page 54]
 
 
 
-Tulshibagwale, et al.        Standards Track                   [Page 55]
+Tulshibagwale, et al.        Standards Track                   [Page 56]

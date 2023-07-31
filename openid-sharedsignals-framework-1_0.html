@@ -33,26 +33,25 @@ and Coordination (RISC) and the Continuous Access Evaluation Profile ( )
          Poll-Based SET Token Delivery Using HTTP  
        
     " name="description">
-<meta content="xml2rfc 3.12.5" name="generator">
+<meta content="xml2rfc 3.15.3" name="generator">
 <meta content="openid-sharedsignals-framework-1_0" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.12.5
+  xml2rfc 3.15.3
     Python 3.9.6
     appdirs 1.4.4
     ConfigArgParse 1.5.3
     google-i18n-address 2.5.2
     html5lib 1.1
     intervaltree 3.1.0
-    Jinja2 2.11.3
-    kitchen 1.2.6
+    Jinja2 3.1.2
     lxml 4.9.1
-    MarkupSafe 2.0.1
+    MarkupSafe 2.1.1
     pycountry 22.3.5
-    pyflakes 2.5.0
     PyYAML 6.0
-    requests 2.28.1
-    setuptools 62.0.0
-    six 1.16.0
+    requests 2.31.0
+    setuptools 58.0.4
+    six 1.15.0
+    wcwidth 0.2.5
 -->
 <link href="openid-sharedsignals-framework-1_0.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -64,7 +63,7 @@ and Coordination (RISC) and the Continuous Access Evaluation Profile ( )
   this can be consolidated so that style settings occur only in one place, but
   for now the contents of this file consists first of the initial CSS work as
   provided to the RFC Formatter (xml2rfc) work, followed by itemized and
-  commented changes found necssary during the development of the v3
+  commented changes found necessary during the development of the v3
   formatters.
 
 */
@@ -73,6 +72,12 @@ and Coordination (RISC) and the Continuous Access Evaluation Profile ( )
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans'); /* Sans-serif */
 @import url('https://fonts.googleapis.com/css?family=Noto+Serif'); /* Serif (print) */
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono'); /* Monospace */
+
+:root {
+  --font-sans: 'Noto Sans', Arial, Helvetica, sans-serif;
+  --font-serif: 'Noto Serif', 'Times', 'Times New Roman', serif;
+  --font-mono: 'Roboto Mono', Courier, 'Courier New', monospace;
+}
 
 @viewport {
   zoom: 1.0;
@@ -91,7 +96,7 @@ body {
   color: #222;
   background-color: #fff;
   font-size: 14px;
-  font-family: 'Noto Sans', Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
   line-height: 1.6;
   scroll-behavior: smooth;
 }
@@ -180,6 +185,15 @@ div {
 svg {
   display: block;
 }
+svg[font-family~="serif" i], svg [font-family~="serif" i] {
+  font-family: var(--font-serif);
+}
+svg[font-family~="sans-serif" i], svg [font-family~="sans-serif" i] {
+  font-family: var(--font-sans);
+}
+svg[font-family~="monospace" i], svg [font-family~="monospace" i] {
+  font-family: var(--font-mono);
+}
 .alignCenter.art-text {
   background-color: #f9f9f9;
   border: 1px solid #eee;
@@ -194,11 +208,8 @@ svg {
   margin: 1em 0;
 }
 .alignCenter > *:first-child {
-  border: none;
-  /* this isn't optimal, but it's an existence proof.  PrinceXML doesn't
-     support flexbox yet.
-  */
   display: table;
+  border: none;
   margin: 0 auto;
 }
 
@@ -276,9 +287,9 @@ a.selfRef:hover {
 } */
 
 /* Figures */
-tt, code, pre, code {
+tt, code, pre {
   background-color: #f9f9f9;
-  font-family: 'Roboto Mono', monospace;
+  font-family: var(--font-mono);
 }
 pre {
   border: 1px solid #eee;
@@ -515,7 +526,7 @@ address.vcard .nameRole {
   margin-left: 0;
 }
 address.vcard .label {
-  font-family: "Noto Sans",Arial,Helvetica,sans-serif;
+  font-family: var(--font-sans);
   margin: 0.5em 0;
 }
 address.vcard .type {
@@ -678,7 +689,7 @@ hr.addr {
   figure {
     overflow: scroll;
   }
-  pre.breakable {
+  .breakable pre {
     break-inside: auto;
   }
   h1, h2, h3, h4, h5, h6 {
@@ -748,7 +759,7 @@ hr.addr {
   size: A4;
   margin-bottom: 45mm;
   padding-top: 20px;
-  /* The follwing is commented out here, but set appropriately by in code, as
+  /* The following is commented out here, but set appropriately by in code, as
      the content depends on the document */
   /*
   @top-left {
@@ -848,12 +859,12 @@ section {
 }
 
 /* prevent monospace from becoming overly large */
-tt, code, pre, code {
+tt, code, pre {
   font-size: 95%;
 }
 
 /* Fix the height/width aspect for ascii art*/
-pre.sourcecode,
+.sourcecode pre,
 .art-text pre {
   line-height: 1.12;
 }
@@ -889,7 +900,7 @@ table th.text-right {
   text-align: right;
 }
 
-/* Make the alternative author contact informatio look less like just another
+/* Make the alternative author contact information look less like just another
    author, and group it closer with the primary author contact information */
 .alternative-contact {
   margin: 0.5em 0 0.25em 0;
@@ -1071,6 +1082,7 @@ aside > p {
 /* Sourcecode margin in print, when there's no pilcrow */
 @media print {
   .artwork,
+  .artwork > pre,
   .sourcecode {
     margin-bottom: 1em;
   }
@@ -1085,12 +1097,15 @@ ol.type-A { list-style-type: upper-alpha; }
 ol.type-i { list-style-type: lower-roman; }
 ol.type-I { list-style-type: lower-roman; }
 /* Apply the print table and row borders in general, on request from the RPC,
-and increase the contrast between border and odd row background sligthtly */
+and increase the contrast between border and odd row background slightly */
 table {
   border: 1px solid #ddd;
 }
 td {
   border-top: 1px solid #ddd;
+}
+tr {
+  break-inside: avoid;
 }
 tr:nth-child(2n+1) > td {
   background-color: #f8f8f8;
@@ -1142,7 +1157,7 @@ span.break, dd.break {
     break-before: auto;
   }
 }
-/* Text in compact lists should not get extra bottim margin space,
+/* Text in compact lists should not get extra bottom margin space,
    since that would makes the list not compact */
 ul.compact p, .ulCompact p,
 ol.compact p, .olCompact p {
@@ -1167,7 +1182,7 @@ p tt, p code, li tt, li code {
 pre {
    margin-top: 0.5px;
 }
-/* Tweak the comact list text */
+/* Tweak the compact list text */
 ul.compact, .ulCompact,
 ol.compact, .olCompact,
 dl.compact, .dlCompact {
@@ -1185,7 +1200,7 @@ dd > div.artwork:first-child,
 dd > aside:first-child,
 dd > figure:first-child,
 dd > ol:first-child,
-dd > div:first-child > pre.sourcecode,
+dd > div.sourcecode:first-child,
 dd > table:first-child,
 dd > ul:first-child {
   clear: left;
@@ -1199,14 +1214,14 @@ li > p {
   margin-bottom: 0.5em
 }
 /* Don't let p margin spill out from inside list items */
-li > p:last-of-type {
+li > p:last-of-type:only-child {
   margin-bottom: 0;
 }
 </style>
 <link href="rfc-local.css" rel="stylesheet" type="text/css">
 <script type="application/javascript">async function addMetadata(){try{const e=document.styleSheets[0].cssRules;for(let t=0;t<e.length;t++)if(/#identifiers/.exec(e[t].selectorText)){const a=e[t].cssText.replace("#identifiers","#external-updates");document.styleSheets[0].insertRule(a,document.styleSheets[0].cssRules.length)}}catch(e){console.log(e)}const e=document.getElementById("external-metadata");if(e)try{var t,a="",o=function(e){const t=document.getElementsByTagName("meta");for(let a=0;a<t.length;a++)if(t[a].getAttribute("name")===e)return t[a].getAttribute("content");return""}("rfc.number");if(o){t="https://www.rfc-editor.org/rfc/rfc"+o+".json";try{const e=await fetch(t);a=await e.json()}catch(e){t=document.URL.indexOf("html")>=0?document.URL.replace(/html$/,"json"):document.URL+".json";const o=await fetch(t);a=await o.json()}}if(!a)return;e.style.display="block";const s="",d="https://datatracker.ietf.org/doc",n="https://datatracker.ietf.org/ipr/search",c="https://www.rfc-editor.org/info",l=a.doc_id.toLowerCase(),i=a.doc_id.slice(0,3).toLowerCase(),f=a.doc_id.slice(3).replace(/^0+/,""),u={status:"Status",obsoletes:"Obsoletes",obsoleted_by:"Obsoleted By",updates:"Updates",updated_by:"Updated By",see_also:"See Also",errata_url:"Errata"};let h="<dl style='overflow:hidden' id='external-updates'>";["status","obsoletes","obsoleted_by","updates","updated_by","see_also","errata_url"].forEach(e=>{if("status"==e){a[e]=a[e].toLowerCase();var t=a[e].split(" "),o=t.length,w="",p=1;for(let e=0;e<o;e++)p<o?w=w+r(t[e])+" ":w+=r(t[e]),p++;a[e]=w}else if("obsoletes"==e||"obsoleted_by"==e||"updates"==e||"updated_by"==e){var g,m="",b=1;g=a[e].length;for(let t=0;t<g;t++)a[e][t]&&(a[e][t]=String(a[e][t]).toLowerCase(),m=b<g?m+"<a href='"+s+"/rfc/".concat(a[e][t])+"'>"+a[e][t].slice(3)+"</a>, ":m+"<a href='"+s+"/rfc/".concat(a[e][t])+"'>"+a[e][t].slice(3)+"</a>",b++);a[e]=m}else if("see_also"==e){var y,L="",C=1;y=a[e].length;for(let t=0;t<y;t++)if(a[e][t]){a[e][t]=String(a[e][t]);var _=a[e][t].slice(0,3),v=a[e][t].slice(3).replace(/^0+/,"");L=C<y?"RFC"!=_?L+"<a href='"+s+"/info/"+_.toLowerCase().concat(v.toLowerCase())+"'>"+_+" "+v+"</a>, ":L+"<a href='"+s+"/info/"+_.toLowerCase().concat(v.toLowerCase())+"'>"+v+"</a>, ":"RFC"!=_?L+"<a href='"+s+"/info/"+_.toLowerCase().concat(v.toLowerCase())+"'>"+_+" "+v+"</a>":L+"<a href='"+s+"/info/"+_.toLowerCase().concat(v.toLowerCase())+"'>"+v+"</a>",C++}a[e]=L}else if("errata_url"==e){var R="";R=a[e]?R+"<a href='"+a[e]+"'>Errata exist</a> | <a href='"+d+"/"+l+"'>Datatracker</a>| <a href='"+n+"/?"+i+"="+f+"&submit="+i+"'>IPR</a> | <a href='"+c+"/"+l+"'>Info page</a>":"<a href='"+d+"/"+l+"'>Datatracker</a> | <a href='"+n+"/?"+i+"="+f+"&submit="+i+"'>IPR</a> | <a href='"+c+"/"+l+"'>Info page</a>",a[e]=R}""!=a[e]?"Errata"==u[e]?h+=`<dt>More info:</dt><dd>${a[e]}</dd>`:h+=`<dt>${u[e]}:</dt><dd>${a[e]}</dd>`:"Errata"==u[e]&&(h+=`<dt>More info:</dt><dd>${a[e]}</dd>`)}),h+="</dl>",e.innerHTML=h}catch(e){console.log(e)}else console.log("Could not locate metadata <div> element");function r(e){return e.charAt(0).toUpperCase()+e.slice(1)}}window.removeEventListener("load",addMetadata),window.addEventListener("load",addMetadata);</script>
 </head>
-<body>
+<body class="xml2rfc">
 <script src="metadata.min.js"></script>
 <table class="ears">
 <thead><tr>
@@ -1225,6 +1240,10 @@ li > p:last-of-type {
 <dl id="identifiers">
 <dt class="label-workgroup">Workgroup:</dt>
 <dd class="workgroup">Shared Signals</dd>
+<dt class="label-published">Published:</dt>
+<dd class="published">
+<time datetime="2023-06-23" class="published">23 June 2023</time>
+    </dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1259,10 +1278,10 @@ li > p:last-of-type {
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">This Shared Signals Framework (SSF) enables sharing of signals and events
 between cooperating peers. It enables multiple applications such as Risk Incident Sharing
-and Coordination (RISC) and the Continuous Access Evaluation Profile (<span>[<a href="#CAEP" class="xref">CAEP</a>]</span>)<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+and Coordination (RISC) and the Continuous Access Evaluation Profile (<span>[<a href="#CAEP" class="cite xref">CAEP</a>]</span>)<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 <p id="section-abstract-2">This specification defines:<a href="#section-abstract-2" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-abstract-3.1">A profile for Security Events Tokens <span>[<a href="#RFC8417" class="xref">RFC8417</a>]</span><a href="#section-abstract-3.1" class="pilcrow">¶</a>
+<li class="normal" id="section-abstract-3.1">A profile for Security Events Tokens <span>[<a href="#RFC8417" class="cite xref">RFC8417</a>]</span><a href="#section-abstract-3.1" class="pilcrow">¶</a>
 </li>
         <li class="normal" id="section-abstract-3.2">Subject Principals<a href="#section-abstract-3.2" class="pilcrow">¶</a>
 </li>
@@ -1279,13 +1298,13 @@ and Coordination (RISC) and the Continuous Access Evaluation Profile (<span>[<a 
       </ul>
 <p id="section-abstract-4">This spec also directly profiles several IETF Security Events drafts:<a href="#section-abstract-4" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-abstract-5.1">Security Event Token (SET) <span>[<a href="#RFC8417" class="xref">RFC8417</a>]</span><a href="#section-abstract-5.1" class="pilcrow">¶</a>
+<li class="normal" id="section-abstract-5.1">Security Event Token (SET) <span>[<a href="#RFC8417" class="cite xref">RFC8417</a>]</span><a href="#section-abstract-5.1" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-abstract-5.2">Subject Identifiers for Security Event Tokens <span>[<a href="#SUBIDS" class="xref">SUBIDS</a>]</span><a href="#section-abstract-5.2" class="pilcrow">¶</a>
+        <li class="normal" id="section-abstract-5.2">Subject Identifiers for Security Event Tokens <span>[<a href="#SUBIDS" class="cite xref">SUBIDS</a>]</span><a href="#section-abstract-5.2" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-abstract-5.3">Push-Based SET Token Delivery Using HTTP <span>[<a href="#DELIVERYPUSH" class="xref">DELIVERYPUSH</a>]</span><a href="#section-abstract-5.3" class="pilcrow">¶</a>
+        <li class="normal" id="section-abstract-5.3">Push-Based SET Token Delivery Using HTTP <span>[<a href="#DELIVERYPUSH" class="cite xref">DELIVERYPUSH</a>]</span><a href="#section-abstract-5.3" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-abstract-5.4">Poll-Based SET Token Delivery Using HTTP <span>[<a href="#DELIVERYPOLL" class="xref">DELIVERYPOLL</a>]</span><a href="#section-abstract-5.4" class="pilcrow">¶</a>
+        <li class="normal" id="section-abstract-5.4">Poll-Based SET Token Delivery Using HTTP <span>[<a href="#DELIVERYPOLL" class="cite xref">DELIVERYPOLL</a>]</span><a href="#section-abstract-5.4" class="pilcrow">¶</a>
 </li>
       </ul>
 </section>
@@ -1296,211 +1315,216 @@ and Coordination (RISC) and the Continuous Access Evaluation Profile (<span>[<a 
         </h2>
 <nav class="toc"><ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
-            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="xref">1</a>.  <a href="#name-introduction" class="xref">Introduction</a></p>
+            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.1">
-                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="xref">1.1</a>.  <a href="#name-notational-conventions" class="xref">Notational Conventions</a></p>
+                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.  <a href="#name-notational-conventions" class="internal xref">Notational Conventions</a></p>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
-            <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="xref">2</a>.  <a href="#name-subject-principals" class="xref">Subject Principals</a></p>
+            <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-subject-principals" class="internal xref">Subject Principals</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1"><a href="#section-3" class="xref">3</a>.  <a href="#name-subject-members-in-ssf-even" class="xref">Subject Members in SSF Events</a></p>
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-subject-members-in-ssf-even" class="internal xref">Subject Members in SSF Events</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
-                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="xref">3.1</a>.  <a href="#name-simple-subject-members" class="xref">Simple Subject Members</a></p>
+                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-simple-subject-members" class="internal xref">Simple Subject Members</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
-                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="xref">3.2</a>.  <a href="#name-complex-subject-members" class="xref">Complex Subject Members</a></p>
+                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-complex-subject-members" class="internal xref">Complex Subject Members</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.1">
-                    <p id="section-toc.1-1.3.2.2.2.1.1"><a href="#section-3.2.1" class="xref">3.2.1</a>.  <a href="#name-complex-subject-interpretat" class="xref">Complex Subject Interpretation</a></p>
+                    <p id="section-toc.1-1.3.2.2.2.1.1"><a href="#section-3.2.1" class="auto internal xref">3.2.1</a>.  <a href="#name-complex-subject-interpretat" class="internal xref">Complex Subject Interpretation</a></p>
 </li>
                 </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3">
-                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="xref">3.3</a>.  <a href="#name-subject-identifiers-in-ssf-" class="xref">Subject Identifiers in SSF Events</a></p>
+                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-subject-identifiers-in-ssf-" class="internal xref">Subject Identifiers in SSF Events</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4">
-                <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="xref">3.4</a>.  <a href="#name-additional-subject-identifi" class="xref">Additional Subject Identifier Formats</a></p>
+                <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="auto internal xref">3.4</a>.  <a href="#name-additional-subject-identifi" class="internal xref">Additional Subject Identifier Formats</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4.2.1">
-                    <p id="section-toc.1-1.3.2.4.2.1.1"><a href="#section-3.4.1" class="xref">3.4.1</a>.  <a href="#name-jwt-id-subject-identifier-f" class="xref">JWT ID Subject Identifier Format</a></p>
+                    <p id="section-toc.1-1.3.2.4.2.1.1"><a href="#section-3.4.1" class="auto internal xref">3.4.1</a>.  <a href="#name-jwt-id-subject-identifier-f" class="internal xref">JWT ID Subject Identifier Format</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4.2.2">
-                    <p id="section-toc.1-1.3.2.4.2.2.1"><a href="#section-3.4.2" class="xref">3.4.2</a>.  <a href="#name-saml-assertion-id-subject-i" class="xref">SAML Assertion ID Subject Identifier Format</a></p>
+                    <p id="section-toc.1-1.3.2.4.2.2.1"><a href="#section-3.4.2" class="auto internal xref">3.4.2</a>.  <a href="#name-saml-assertion-id-subject-i" class="internal xref">SAML Assertion ID Subject Identifier Format</a></p>
 </li>
                 </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.5">
-                <p id="section-toc.1-1.3.2.5.1"><a href="#section-3.5" class="xref">3.5</a>.  <a href="#name-receiver-subject-processing" class="xref">Receiver Subject Processing</a></p>
+                <p id="section-toc.1-1.3.2.5.1"><a href="#section-3.5" class="auto internal xref">3.5</a>.  <a href="#name-receiver-subject-processing" class="internal xref">Receiver Subject Processing</a></p>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
-            <p id="section-toc.1-1.4.1"><a href="#section-4" class="xref">4</a>.  <a href="#name-event-properties" class="xref">Event Properties</a></p>
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-event-properties" class="internal xref">Event Properties</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="xref">5</a>.  <a href="#name-example-sets-that-conform-t" class="xref">Example SETs that conform to the Shared Signals Framework</a></p>
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-example-sets-that-conform-t" class="internal xref">Example SETs that conform to the Shared Signals Framework</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="xref">6</a>.  <a href="#name-transmitter-configuration-d" class="xref">Transmitter Configuration Discovery</a></p>
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-transmitter-configuration-d" class="internal xref">Transmitter Configuration Discovery</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
-                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="xref">6.1</a>.  <a href="#name-transmitter-configuration-m" class="xref">Transmitter Configuration Metadata</a></p>
+                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-transmitter-configuration-m" class="internal xref">Transmitter Configuration Metadata</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1.2.1">
+                    <p id="section-toc.1-1.6.2.1.2.1.1"><a href="#section-6.1.1" class="auto internal xref">6.1.1</a>.  <a href="#name-authorization-server-descri" class="internal xref">Authorization Server Descriptor</a></p>
+</li>
+                </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2">
-                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="xref">6.2</a>.  <a href="#name-obtaining-transmitter-confi" class="xref">Obtaining Transmitter Configuration Information</a></p>
+                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-obtaining-transmitter-confi" class="internal xref">Obtaining Transmitter Configuration Information</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2.2.1">
-                    <p id="section-toc.1-1.6.2.2.2.1.1"><a href="#section-6.2.1" class="xref">6.2.1</a>.  <a href="#name-transmitter-configuration-r" class="xref">Transmitter Configuration Request</a></p>
+                    <p id="section-toc.1-1.6.2.2.2.1.1"><a href="#section-6.2.1" class="auto internal xref">6.2.1</a>.  <a href="#name-transmitter-configuration-r" class="internal xref">Transmitter Configuration Request</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2.2.2">
-                    <p id="section-toc.1-1.6.2.2.2.2.1"><a href="#section-6.2.2" class="xref">6.2.2</a>.  <a href="#name-backward-compatibility-for-" class="xref">Backward Compatibility for RISC Transmitters</a></p>
+                    <p id="section-toc.1-1.6.2.2.2.2.1"><a href="#section-6.2.2" class="auto internal xref">6.2.2</a>.  <a href="#name-backward-compatibility-for-" class="internal xref">Backward Compatibility for RISC Transmitters</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2.2.3">
-                    <p id="section-toc.1-1.6.2.2.2.3.1"><a href="#section-6.2.3" class="xref">6.2.3</a>.  <a href="#name-transmitter-configuration-re" class="xref">Transmitter Configuration Response</a></p>
+                    <p id="section-toc.1-1.6.2.2.2.3.1"><a href="#section-6.2.3" class="auto internal xref">6.2.3</a>.  <a href="#name-transmitter-configuration-re" class="internal xref">Transmitter Configuration Response</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2.2.4">
-                    <p id="section-toc.1-1.6.2.2.2.4.1"><a href="#section-6.2.4" class="xref">6.2.4</a>.  <a href="#name-transmitter-configuration-v" class="xref">Transmitter Configuration Validation</a></p>
+                    <p id="section-toc.1-1.6.2.2.2.4.1"><a href="#section-6.2.4" class="auto internal xref">6.2.4</a>.  <a href="#name-transmitter-configuration-v" class="internal xref">Transmitter Configuration Validation</a></p>
 </li>
                 </ul>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#section-7" class="xref">7</a>.  <a href="#name-management-api-for-set-even" class="xref">Management API for SET Event Streams</a></p>
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-management-api-for-set-even" class="internal xref">Management API for SET Event Streams</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1">
-                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="xref">7.1</a>.  <a href="#name-event-stream-management" class="xref">Event Stream Management</a></p>
+                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="auto internal xref">7.1</a>.  <a href="#name-event-stream-management" class="internal xref">Event Stream Management</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1.2.1">
-                    <p id="section-toc.1-1.7.2.1.2.1.1"><a href="#section-7.1.1" class="xref">7.1.1</a>.  <a href="#name-stream-configuration" class="xref">Stream Configuration</a></p>
+                    <p id="section-toc.1-1.7.2.1.2.1.1"><a href="#section-7.1.1" class="auto internal xref">7.1.1</a>.  <a href="#name-stream-configuration" class="internal xref">Stream Configuration</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1.2.2">
-                    <p id="section-toc.1-1.7.2.1.2.2.1"><a href="#section-7.1.2" class="xref">7.1.2</a>.  <a href="#name-stream-status" class="xref">Stream Status</a></p>
+                    <p id="section-toc.1-1.7.2.1.2.2.1"><a href="#section-7.1.2" class="auto internal xref">7.1.2</a>.  <a href="#name-stream-status" class="internal xref">Stream Status</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1.2.3">
-                    <p id="section-toc.1-1.7.2.1.2.3.1"><a href="#section-7.1.3" class="xref">7.1.3</a>.  <a href="#name-subjects" class="xref">Subjects</a></p>
+                    <p id="section-toc.1-1.7.2.1.2.3.1"><a href="#section-7.1.3" class="auto internal xref">7.1.3</a>.  <a href="#name-subjects" class="internal xref">Subjects</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1.2.4">
-                    <p id="section-toc.1-1.7.2.1.2.4.1"><a href="#section-7.1.4" class="xref">7.1.4</a>.  <a href="#name-verification" class="xref">Verification</a></p>
+                    <p id="section-toc.1-1.7.2.1.2.4.1"><a href="#section-7.1.4" class="auto internal xref">7.1.4</a>.  <a href="#name-verification" class="internal xref">Verification</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1.2.5">
-                    <p id="section-toc.1-1.7.2.1.2.5.1"><a href="#section-7.1.5" class="xref">7.1.5</a>.  <a href="#name-stream-updated-event" class="xref">Stream Updated Event</a></p>
+                    <p id="section-toc.1-1.7.2.1.2.5.1"><a href="#section-7.1.5" class="auto internal xref">7.1.5</a>.  <a href="#name-stream-updated-event" class="internal xref">Stream Updated Event</a></p>
 </li>
                 </ul>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#section-8" class="xref">8</a>.  <a href="#name-authorization" class="xref">Authorization</a></p>
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-authorization" class="internal xref">Authorization</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#section-9" class="xref">9</a>.  <a href="#name-security-considerations" class="xref">Security Considerations</a></p>
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.1">
-                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="xref">9.1</a>.  <a href="#name-subject-probing" class="xref">Subject Probing</a></p>
+                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="auto internal xref">9.1</a>.  <a href="#name-subject-probing" class="internal xref">Subject Probing</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.2">
-                <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="xref">9.2</a>.  <a href="#name-information-harvesting" class="xref">Information Harvesting</a></p>
+                <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="auto internal xref">9.2</a>.  <a href="#name-information-harvesting" class="internal xref">Information Harvesting</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.3">
-                <p id="section-toc.1-1.9.2.3.1"><a href="#section-9.3" class="xref">9.3</a>.  <a href="#name-malicious-subject-removal" class="xref">Malicious Subject Removal</a></p>
+                <p id="section-toc.1-1.9.2.3.1"><a href="#section-9.3" class="auto internal xref">9.3</a>.  <a href="#name-malicious-subject-removal" class="internal xref">Malicious Subject Removal</a></p>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#section-10" class="xref">10</a>. <a href="#name-privacy-considerations" class="xref">Privacy Considerations</a></p>
+            <p id="section-toc.1-1.10.1"><a href="#section-10" class="auto internal xref">10</a>. <a href="#name-privacy-considerations" class="internal xref">Privacy Considerations</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1">
-                <p id="section-toc.1-1.10.2.1.1"><a href="#section-10.1" class="xref">10.1</a>.  <a href="#name-subject-information-leakage" class="xref">Subject Information Leakage</a></p>
+                <p id="section-toc.1-1.10.2.1.1"><a href="#section-10.1" class="auto internal xref">10.1</a>.  <a href="#name-subject-information-leakage" class="internal xref">Subject Information Leakage</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2">
-                <p id="section-toc.1-1.10.2.2.1"><a href="#section-10.2" class="xref">10.2</a>.  <a href="#name-previously-consented-data" class="xref">Previously Consented Data</a></p>
+                <p id="section-toc.1-1.10.2.2.1"><a href="#section-10.2" class="auto internal xref">10.2</a>.  <a href="#name-previously-consented-data" class="internal xref">Previously Consented Data</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.3">
-                <p id="section-toc.1-1.10.2.3.1"><a href="#section-10.3" class="xref">10.3</a>.  <a href="#name-new-data" class="xref">New Data</a></p>
+                <p id="section-toc.1-1.10.2.3.1"><a href="#section-10.3" class="auto internal xref">10.3</a>.  <a href="#name-new-data" class="internal xref">New Data</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.3.2.1">
-                    <p id="section-toc.1-1.10.2.3.2.1.1"><a href="#section-10.3.1" class="xref">10.3.1</a>.  <a href="#name-organizational-data" class="xref">Organizational Data</a></p>
+                    <p id="section-toc.1-1.10.2.3.2.1.1"><a href="#section-10.3.1" class="auto internal xref">10.3.1</a>.  <a href="#name-organizational-data" class="internal xref">Organizational Data</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.3.2.2">
-                    <p id="section-toc.1-1.10.2.3.2.2.1"><a href="#section-10.3.2" class="xref">10.3.2</a>.  <a href="#name-consentable-data" class="xref">Consentable Data</a></p>
+                    <p id="section-toc.1-1.10.2.3.2.2.1"><a href="#section-10.3.2" class="auto internal xref">10.3.2</a>.  <a href="#name-consentable-data" class="internal xref">Consentable Data</a></p>
 </li>
                 </ul>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
-            <p id="section-toc.1-1.11.1"><a href="#section-11" class="xref">11</a>. <a href="#name-profiles" class="xref">Profiles</a></p>
+            <p id="section-toc.1-1.11.1"><a href="#section-11" class="auto internal xref">11</a>. <a href="#name-profiles" class="internal xref">Profiles</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.1">
-                <p id="section-toc.1-1.11.2.1.1"><a href="#section-11.1" class="xref">11.1</a>.  <a href="#name-security-event-token-profil" class="xref">Security Event Token Profile</a></p>
+                <p id="section-toc.1-1.11.2.1.1"><a href="#section-11.1" class="auto internal xref">11.1</a>.  <a href="#name-security-event-token-profil" class="internal xref">Security Event Token Profile</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.1.2.1">
-                    <p id="section-toc.1-1.11.2.1.2.1.1"><a href="#section-11.1.1" class="xref">11.1.1</a>.  <a href="#name-signature-key-resolution" class="xref">Signature Key Resolution</a></p>
+                    <p id="section-toc.1-1.11.2.1.2.1.1"><a href="#section-11.1.1" class="auto internal xref">11.1.1</a>.  <a href="#name-signature-key-resolution" class="internal xref">Signature Key Resolution</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.1.2.2">
-                    <p id="section-toc.1-1.11.2.1.2.2.1"><a href="#section-11.1.2" class="xref">11.1.2</a>.  <a href="#name-ssf-event-subject" class="xref">SSF Event Subject</a></p>
+                    <p id="section-toc.1-1.11.2.1.2.2.1"><a href="#section-11.1.2" class="auto internal xref">11.1.2</a>.  <a href="#name-ssf-event-subject" class="internal xref">SSF Event Subject</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.1.2.3">
-                    <p id="section-toc.1-1.11.2.1.2.3.1"><a href="#section-11.1.3" class="xref">11.1.3</a>.  <a href="#name-ssf-event-properties" class="xref">SSF Event Properties</a></p>
+                    <p id="section-toc.1-1.11.2.1.2.3.1"><a href="#section-11.1.3" class="auto internal xref">11.1.3</a>.  <a href="#name-ssf-event-properties" class="internal xref">SSF Event Properties</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.1.2.4">
-                    <p id="section-toc.1-1.11.2.1.2.4.1"><a href="#section-11.1.4" class="xref">11.1.4</a>.  <a href="#name-explicit-typing-of-sets" class="xref">Explicit Typing of SETs</a></p>
+                    <p id="section-toc.1-1.11.2.1.2.4.1"><a href="#section-11.1.4" class="auto internal xref">11.1.4</a>.  <a href="#name-explicit-typing-of-sets" class="internal xref">Explicit Typing of SETs</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.1.2.5">
-                    <p id="section-toc.1-1.11.2.1.2.5.1"><a href="#section-11.1.5" class="xref">11.1.5</a>.  <a href="#name-the-exp-claim" class="xref">The "exp" Claim</a></p>
+                    <p id="section-toc.1-1.11.2.1.2.5.1"><a href="#section-11.1.5" class="auto internal xref">11.1.5</a>.  <a href="#name-the-exp-claim" class="internal xref">The "exp" Claim</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.1.2.6">
-                    <p id="section-toc.1-1.11.2.1.2.6.1"><a href="#section-11.1.6" class="xref">11.1.6</a>.  <a href="#name-the-aud-claim" class="xref">The "aud" Claim</a></p>
+                    <p id="section-toc.1-1.11.2.1.2.6.1"><a href="#section-11.1.6" class="auto internal xref">11.1.6</a>.  <a href="#name-the-aud-claim" class="internal xref">The "aud" Claim</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.1.2.7">
-                    <p id="section-toc.1-1.11.2.1.2.7.1"><a href="#section-11.1.7" class="xref">11.1.7</a>.  <a href="#name-the-events-claim" class="xref">The "events" claim</a></p>
+                    <p id="section-toc.1-1.11.2.1.2.7.1"><a href="#section-11.1.7" class="auto internal xref">11.1.7</a>.  <a href="#name-the-events-claim" class="internal xref">The "events" claim</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.1.2.8">
-                    <p id="section-toc.1-1.11.2.1.2.8.1"><a href="#section-11.1.8" class="xref">11.1.8</a>.  <a href="#name-security-considerations-2" class="xref">Security Considerations</a></p>
+                    <p id="section-toc.1-1.11.2.1.2.8.1"><a href="#section-11.1.8" class="auto internal xref">11.1.8</a>.  <a href="#name-security-considerations-2" class="internal xref">Security Considerations</a></p>
 </li>
                 </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.2">
-                <p id="section-toc.1-1.11.2.2.1"><a href="#section-11.2" class="xref">11.2</a>.  <a href="#name-set-token-delivery-using-ht" class="xref">SET Token Delivery Using HTTP Profile</a></p>
+                <p id="section-toc.1-1.11.2.2.1"><a href="#section-11.2" class="auto internal xref">11.2</a>.  <a href="#name-set-token-delivery-using-ht" class="internal xref">SET Token Delivery Using HTTP Profile</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.2.2.1">
-                    <p id="section-toc.1-1.11.2.2.2.1.1"><a href="#section-11.2.1" class="xref">11.2.1</a>.  <a href="#name-stream-configuration-metada" class="xref">Stream Configuration Metadata</a></p>
+                    <p id="section-toc.1-1.11.2.2.2.1.1"><a href="#section-11.2.1" class="auto internal xref">11.2.1</a>.  <a href="#name-stream-configuration-metada" class="internal xref">Stream Configuration Metadata</a></p>
 </li>
                 </ul>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
-            <p id="section-toc.1-1.12.1"><a href="#section-12" class="xref">12</a>. <a href="#name-iana-considerations" class="xref">IANA Considerations</a></p>
+            <p id="section-toc.1-1.12.1"><a href="#section-12" class="auto internal xref">12</a>. <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
-            <p id="section-toc.1-1.13.1"><a href="#section-13" class="xref">13</a>. <a href="#name-references" class="xref">References</a></p>
+            <p id="section-toc.1-1.13.1"><a href="#section-13" class="auto internal xref">13</a>. <a href="#name-references" class="internal xref">References</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.1">
-                <p id="section-toc.1-1.13.2.1.1"><a href="#section-13.1" class="xref">13.1</a>.  <a href="#name-normative-references" class="xref">Normative References</a></p>
+                <p id="section-toc.1-1.13.2.1.1"><a href="#section-13.1" class="auto internal xref">13.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.2">
-                <p id="section-toc.1-1.13.2.2.1"><a href="#section-13.2" class="xref">13.2</a>.  <a href="#name-informative-references" class="xref">Informative References</a></p>
+                <p id="section-toc.1-1.13.2.2.1"><a href="#section-13.2" class="auto internal xref">13.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
-            <p id="section-toc.1-1.14.1"><a href="#appendix-A" class="xref">Appendix A</a>.  <a href="#name-acknowledgements" class="xref">Acknowledgements</a></p>
+            <p id="section-toc.1-1.14.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-acknowledgements" class="internal xref">Acknowledgements</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15">
-            <p id="section-toc.1-1.15.1"><a href="#appendix-B" class="xref">Appendix B</a>.  <a href="#name-notices" class="xref">Notices</a></p>
+            <p id="section-toc.1-1.15.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-notices" class="internal xref">Notices</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16">
-            <p id="section-toc.1-1.16.1"><a href="#appendix-C" class="xref"></a><a href="#name-contributors" class="xref">Contributors</a></p>
+            <p id="section-toc.1-1.16.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-contributors" class="internal xref">Contributors</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.17">
-            <p id="section-toc.1-1.17.1"><a href="#appendix-D" class="xref"></a><a href="#name-authors-addresses" class="xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.17.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1519,7 +1543,7 @@ and Coordination (RISC) and the Continuous Access Evaluation Profile (<span>[<a 
 <p id="section-1.1-1">The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
 NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED",
 "MAY", and "OPTIONAL" in this document are to be interpreted as
-described in BCP 14 <span>[<a href="#RFC2119" class="xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="xref">RFC8174</a>]</span> when, and only when,
+described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when,
 they appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1558,12 +1582,12 @@ refer to exactly one Subject Principal.<a href="#section-3-1" class="pilcrow">¶
         </h3>
 <p id="section-3.1-1">A Simple Subject Member has a claim name and a value that is a "Subject
 Identifier" as defined in the Subject Identifiers for Security Event Tokens
-<span>[<a href="#SUBIDS" class="xref">SUBIDS</a>]</span>. Below is a non-normative example of a Simple Subject Member in a SSF
+<span>[<a href="#SUBIDS" class="cite xref">SUBIDS</a>]</span>. Below is a non-normative example of a Simple Subject Member in a SSF
 event.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <span id="name-example-simple-subject"></span><div id="simple-subject-ex">
 <figure id="figure-1">
-          <div id="section-3.1-2.1">
-<pre class="lang-json sourcecode">
+          <div class="lang-json sourcecode" id="section-3.1-2.1">
+<pre>
 "transferer": {
   "format": "email",
   "email": "foo@example.com"
@@ -1581,7 +1605,7 @@ event.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
         <h3 id="name-complex-subject-members">
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-complex-subject-members" class="section-name selfRef">Complex Subject Members</a>
         </h3>
-<p id="section-3.2-1">A Complex Subject Member has a name and a value that is a JSON <span>[<a href="#RFC7159" class="xref">RFC7159</a>]</span>
+<p id="section-3.2-1">A Complex Subject Member has a name and a value that is a JSON <span>[<a href="#RFC7159" class="cite xref">RFC7159</a>]</span>
 object that has a format field, and one or more Simple Subject Members. The name
 of the format field is "format", and its value is "complex". The name of each
 Simple Subject Member in this value MAY be one of the following:<a href="#section-3.2-1" class="pilcrow">¶</a></p>
@@ -1632,8 +1656,8 @@ appear at most once in the Complex Subject value.<a href="#section-3.2-16" class
 <p id="section-3.2-17">Below is a non-normative example of a Complex Subject claim in a SSF event.<a href="#section-3.2-17" class="pilcrow">¶</a></p>
 <span id="name-example-complex-subject"></span><div id="complex-subject-ex">
 <figure id="figure-2">
-          <div id="section-3.2-18.1">
-<pre class="lang-json sourcecode">
+          <div class="lang-json sourcecode" id="section-3.2-18.1">
+<pre>
 "transferee": {
   "format": "complex",
   "user" : {
@@ -1673,10 +1697,10 @@ Subject Principal.<a href="#section-3.2.1-1" class="pilcrow">¶</a></p>
 one of:<a href="#section-3.3-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.3-2.1">Defined in the IANA Registry defined in Subject Identifiers for Security
-Event Tokens <span>[<a href="#SUBIDS" class="xref">SUBIDS</a>]</span><a href="#section-3.3-2.1" class="pilcrow">¶</a>
+Event Tokens <span>[<a href="#SUBIDS" class="cite xref">SUBIDS</a>]</span><a href="#section-3.3-2.1" class="pilcrow">¶</a>
 </li>
           <li class="normal" id="section-3.3-2.2">An identifier format defined in the Additional Subject Identifier Formats
-(<a href="#additional-subject-id-formats" class="xref">Section 3.4</a>) section below, OR<a href="#section-3.3-2.2" class="pilcrow">¶</a>
+(<a href="#additional-subject-id-formats" class="auto internal xref">Section 3.4</a>) section below, OR<a href="#section-3.3-2.2" class="pilcrow">¶</a>
 </li>
           <li class="normal" id="section-3.3-2.3">A proprietary subject identifier format that is agreed to between parties.
 Members within a subject identifier that has a proprietary subject identifier
@@ -1698,20 +1722,20 @@ scope of this specification.<a href="#section-3.3-2.3" class="pilcrow">¶</a>
 <a href="#section-3.4.1" class="section-number selfRef">3.4.1. </a><a href="#name-jwt-id-subject-identifier-f" class="section-name selfRef">JWT ID Subject Identifier Format</a>
           </h4>
 <p id="section-3.4.1-1">The "JWT ID" Subject Identifier Format specifies a JSON Web Token (JWT)
-identifier, defined in  <span>[<a href="#RFC7519" class="xref">RFC7519</a>]</span>. Subject Identifiers of this type MUST
+identifier, defined in  <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>. Subject Identifiers of this type MUST
 contain the following members:<a href="#section-3.4.1-1" class="pilcrow">¶</a></p>
 <p id="section-3.4.1-2">iss<a href="#section-3.4.1-2" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-3.4.1-3.1">
               <p id="section-3.4.1-3.1.1">REQUIRED. The "iss" (issuer) claim of the JWT being identified, defined in
-  <span>[<a href="#RFC7519" class="xref">RFC7519</a>]</span><a href="#section-3.4.1-3.1.1" class="pilcrow">¶</a></p>
+  <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span><a href="#section-3.4.1-3.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <p id="section-3.4.1-4">jti<a href="#section-3.4.1-4" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-3.4.1-5.1">
               <p id="section-3.4.1-5.1.1">REQUIRED. The "jti" (JWT token ID) claim of the JWT being identified, defined
-  in <span>[<a href="#RFC7519" class="xref">RFC7519</a>]</span><a href="#section-3.4.1-5.1.1" class="pilcrow">¶</a></p>
+  in <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span><a href="#section-3.4.1-5.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <p id="section-3.4.1-6">The "JWT ID" Subject Identifier Format is identified by the name "jwt_id".<a href="#section-3.4.1-6" class="pilcrow">¶</a></p>
@@ -1719,8 +1743,8 @@ contain the following members:<a href="#section-3.4.1-1" class="pilcrow">¶</a><
 Identifier Format.<a href="#section-3.4.1-7" class="pilcrow">¶</a></p>
 <span id="name-example-jwt_id-subject-iden"></span><div id="sub-id-jwtid">
 <figure id="figure-3">
-            <div id="section-3.4.1-8.1">
-<pre class="lang-json sourcecode">
+            <div class="lang-json sourcecode" id="section-3.4.1-8.1">
+<pre>
 {
     "format": "jwt_id",
     "iss": "https://idp.example.com/123456789/",
@@ -1740,20 +1764,20 @@ Identifier Format.<a href="#section-3.4.1-7" class="pilcrow">¶</a></p>
 <a href="#section-3.4.2" class="section-number selfRef">3.4.2. </a><a href="#name-saml-assertion-id-subject-i" class="section-name selfRef">SAML Assertion ID Subject Identifier Format</a>
           </h4>
 <p id="section-3.4.2-1">The "SAML Assertion ID" Subject Identifier Format specifies a SAML 2.0
-<span>[<a href="#OASIS.saml-core-2.0-os" class="xref">OASIS.saml-core-2.0-os</a>]</span> assertion identifier. Subject Identifiers of this
+<span>[<a href="#OASIS.saml-core-2.0-os" class="cite xref">OASIS.saml-core-2.0-os</a>]</span> assertion identifier. Subject Identifiers of this
 format MUST contain the following members:<a href="#section-3.4.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.4.2-2">issuer<a href="#section-3.4.2-2" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-3.4.2-3.1">
               <p id="section-3.4.2-3.1.1">REQUIRED. The "Issuer" value of the SAML assertion being identified, defined
-  in <span>[<a href="#OASIS.saml-core-2.0-os" class="xref">OASIS.saml-core-2.0-os</a>]</span><a href="#section-3.4.2-3.1.1" class="pilcrow">¶</a></p>
+  in <span>[<a href="#OASIS.saml-core-2.0-os" class="cite xref">OASIS.saml-core-2.0-os</a>]</span><a href="#section-3.4.2-3.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <p id="section-3.4.2-4">assertion_id<a href="#section-3.4.2-4" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-3.4.2-5.1">
               <p id="section-3.4.2-5.1.1">REQUIRED. The "ID" value of the SAML assertion being identified, defined in
-  <span>[<a href="#OASIS.saml-core-2.0-os" class="xref">OASIS.saml-core-2.0-os</a>]</span><a href="#section-3.4.2-5.1.1" class="pilcrow">¶</a></p>
+  <span>[<a href="#OASIS.saml-core-2.0-os" class="cite xref">OASIS.saml-core-2.0-os</a>]</span><a href="#section-3.4.2-5.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <p id="section-3.4.2-6">The "SAML Assertion ID" Subject Identifier Format is identified by the name
@@ -1762,8 +1786,8 @@ format MUST contain the following members:<a href="#section-3.4.2-1" class="pilc
 Subject Identifier Format.<a href="#section-3.4.2-7" class="pilcrow">¶</a></p>
 <span id="name-example-saml_assertion_id-s"></span><div id="sub-id-samlassertionid">
 <figure id="figure-4">
-            <div id="section-3.4.2-8.1">
-<pre class="lang-json sourcecode">
+            <div class="lang-json sourcecode" id="section-3.4.2-8.1">
+<pre>
 {
     "format": "saml_assertion_id",
     "issuer": "https://idp.example.com/123456789/",
@@ -1786,7 +1810,7 @@ Subject Identifier Format.<a href="#section-3.4.2-7" class="pilcrow">¶</a></p>
 <a href="#section-3.5" class="section-number selfRef">3.5. </a><a href="#name-receiver-subject-processing" class="section-name selfRef">Receiver Subject Processing</a>
         </h3>
 <p id="section-3.5-1">A SSF Receiver MUST make a best effort to process all members from a Subject in
-an SSF event. The Transmitter Configuration Metadata (<a href="#discovery-meta" class="xref">Section 6.1</a>) defined
+an SSF event. The Transmitter Configuration Metadata (<a href="#discovery-meta" class="auto internal xref">Section 6.1</a>) defined
 below MAY define certain members within a Complex Subject to be Critical. A SSF
 Receiver MUST discard any event that contains a Subject with a Critical member
 that it is unable to process.<a href="#section-3.5-1" class="pilcrow">¶</a></p>
@@ -1804,7 +1828,7 @@ of these members are required and specified as such in the respective event
 types specs. If a Transmitter determines that it needs to include additional
 members that are not specified in the event types spec, then the name of such
 members MUST be a URI. The discoverability of all additional members is
-specified in the Discovery <a href="#discovery" class="xref">Section 6</a> section.<a href="#section-4-1" class="pilcrow">¶</a></p>
+specified in the Discovery <a href="#discovery" class="auto internal xref">Section 6</a> section.<a href="#section-4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="events-examples">
@@ -1815,8 +1839,8 @@ specified in the Discovery <a href="#discovery" class="xref">Section 6</a> secti
 <p id="section-5-1">The following are hypothetical examples of SETs that conform to the Shared Signals Framework.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <span id="name-example-set-containing-a-ss"></span><div id="subject-ids-ex-simple">
 <figure id="figure-5">
-        <div id="section-5-2.1">
-<pre class="lang-json sourcecode">
+        <div class="lang-json sourcecode" id="section-5-2.1">
+<pre>
 {
   "iss": "https://idp.example.com/",
   "jti": "756E69717565206964656E746966696572",
@@ -1839,8 +1863,8 @@ specified in the Discovery <a href="#discovery" class="xref">Section 6</a> secti
 </div>
 <span id="name-example-set-containing-a-ssf"></span><div id="subject-ids-ex-complex">
 <figure id="figure-6">
-        <div id="section-5-3.1">
-<pre class="lang-json sourcecode">
+        <div class="lang-json sourcecode" id="section-5-3.1">
+<pre>
 {
   "iss": "https://idp.example.com/",
   "jti": "756E69717565206964656E746966696572",
@@ -1876,8 +1900,8 @@ specified in the Discovery <a href="#discovery" class="xref">Section 6</a> secti
 </div>
 <span id="name-example-set-containing-a-ssf-"></span><div id="subject-properties-ex">
 <figure id="figure-7">
-        <div id="section-5-4.1">
-<pre class="lang-json sourcecode">
+        <div class="lang-json sourcecode" id="section-5-4.1">
+<pre>
 {
   "iss": "https://sp.example2.com/",
   "jti": "756E69717565206964656E746966696572",
@@ -1904,8 +1928,8 @@ specified in the Discovery <a href="#discovery" class="xref">Section 6</a> secti
 </div>
 <span id="name-example-set-containing-a-ssf-e"></span><div id="subject-custom-type-ex">
 <figure id="figure-8">
-        <div id="section-5-5.1">
-<pre class="lang-json sourcecode">
+        <div class="lang-json sourcecode" id="section-5-5.1">
+<pre>
 {
   "iss": "https://myservice.example3.com/",
   "jti": "756E69717565206964656E746966696534",
@@ -1956,7 +1980,7 @@ configuration information.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <p id="section-6.1-4">jwks_uri<a href="#section-6.1-4" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-6.1-5.1">
-            <p id="section-6.1-5.1.1">OPTIONAL. URL of the Transmitter's JSON Web Key Set <span>[<a href="#RFC7517" class="xref">RFC7517</a>]</span> document.
+            <p id="section-6.1-5.1.1">OPTIONAL. URL of the Transmitter's JSON Web Key Set <span>[<a href="#RFC7517" class="cite xref">RFC7517</a>]</span> document.
   This contains the signing key(s) the Receiver uses to validate signatures from
   the Transmitter. This value MUST be specified if the Transmitter intends to
   generate signed JWTs<a href="#section-6.1-5.1.1" class="pilcrow">¶</a></p>
@@ -2001,12 +2025,63 @@ configuration information.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <p id="section-6.1-18">critical_subject_members<a href="#section-6.1-18" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-6.1-19.1">
-            <p id="section-6.1-19.1.1">OPTIONAL. List of member names in a Complex Subject which, if present in
+            <p id="section-6.1-19.1.1">OPTIONAL. An array of member names in a Complex Subject which, if present in
   a Subject Member in an event, MUST be interpreted by a Receiver.<a href="#section-6.1-19.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-6.1-20">TODO: consider adding a IANA Registry for metadata, similar to Section 7.1.1 of
-<span>[<a href="#OAUTH-DISCOVERY" class="xref">OAUTH-DISCOVERY</a>]</span>. This would allow other specs to add to the metadata.<a href="#section-6.1-20" class="pilcrow">¶</a></p>
+<p id="section-6.1-20">supported_scopes<a href="#section-6.1-20" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-6.1-21.1">
+            <p id="section-6.1-21.1.1">OPTIONAL. A list of OAuth <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span> scope names that the Transmitter supports for specific endpoints. The value of this field is a JSON object that has the endpoint names as keys, and arrays of scope name strings they support as their values. OAuth tokens obtained using any of the scopes defined here MUST be accepted by the specified endpoint. Any key that is not defined as an endpoint in the Transmitter Configuration Metadata MUST be ignored. If the supported_scopes member is present in the metadata and an endpoint is not listed as a key, then that endpoint MUST not require OAuth for authorization.<a href="#section-6.1-21.1.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-6.1-22">authorization_servers<a href="#section-6.1-22" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-6.1-23.1">
+            <p id="section-6.1-23.1.1">OPTIONAL. An array of supported authorization servers and the scopes they support. Each element of the array is a Authorization Server Descriptor JSON object defined in the section <a href="#authz-server-descriptor" class="auto internal xref">Section 6.1.1</a> below. If the <code>supported_scopes</code> member is present in the metadata, then the <code>authorization_servers</code> MUST also be present, and it MUST provide a server location for every supported scope.<a href="#section-6.1-23.1.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-6.1-24">TODO: consider adding a IANA Registry for metadata, similar to Section 7.1.1 of
+<span>[<a href="#RFC8414" class="cite xref">RFC8414</a>]</span>. This would allow other specs to add to the metadata.<a href="#section-6.1-24" class="pilcrow">¶</a></p>
+<div id="authz-server-descriptor">
+<section id="section-6.1.1">
+          <h4 id="name-authorization-server-descri">
+<a href="#section-6.1.1" class="section-number selfRef">6.1.1. </a><a href="#name-authorization-server-descri" class="section-name selfRef">Authorization Server Descriptor</a>
+          </h4>
+<p id="section-6.1.1-1">An Authorization Server Descriptor is a JSON object that has two keys:<a href="#section-6.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.1.1-2">scopes<a href="#section-6.1.1-2" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-6.1.1-3.1">
+              <p id="section-6.1.1-3.1.1">REQUIRED. An array of scope names supported by the authorization server<a href="#section-6.1.1-3.1.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+<p id="section-6.1.1-4">servers<a href="#section-6.1.1-4" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-6.1.1-5.1">
+              <p id="section-6.1.1-5.1.1">REQUIRED. An array of authorization server URLs. This is the URL from which the Authorization Server Metadata MAY be obtained by following the process described in Section 3 of RFC8414 <span>[<a href="#RFC8414" class="cite xref">RFC8414</a>]</span><a href="#section-6.1.1-5.1.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+<p id="section-6.1.1-6">The following is a non-normative example of an Authorization Server Descriptor<a href="#section-6.1.1-6" class="pilcrow">¶</a></p>
+<span id="name-example-authorization-serve"></span><div id="authz-descriptor-example">
+<figure id="figure-9">
+            <div class="lang-json sourcecode" id="section-6.1.1-7.1">
+<pre>
+{
+    "scopes" : ["scope1", "scope2"],
+    "servers": [
+        "https://server1.example/base/url",
+        "https://server2.example/base/url",
+        "https://server3.example/base/url"
+    ]
+}
+</pre>
+</div>
+<figcaption><a href="#figure-9" class="selfRef">Figure 9</a>:
+<a href="#name-example-authorization-serve" class="selfRef">Example Authorization Server Descriptor</a>
+            </figcaption></figure>
+</div>
+</section>
+</div>
 </section>
 </div>
 <div id="obtaining-transmitter-configuration-information">
@@ -2019,7 +2094,7 @@ Information can be retrieved.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
 <p id="section-6.2-2">Transmitters supporting Discovery MUST make a JSON document available at the
 path formed by inserting the string "/.well-known/ssf-configuration" into the
 Issuer between the host component and the path component, if any. The syntax
-and semantics of ".well-known" are defined in <span>[<a href="#RFC5785" class="xref">RFC5785</a>]</span>.  "ssf-configuration"
+and semantics of ".well-known" are defined in <span>[<a href="#RFC5785" class="cite xref">RFC5785</a>]</span>.  "ssf-configuration"
 MUST point to a JSON document compliant with this specification and MUST be
 returned using the "application/json" content type.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
 <div id="transmitter-configuration-request">
@@ -2033,14 +2108,14 @@ at the previously specified path.<a href="#section-6.2.1-1" class="pilcrow">¶</
 "https://tr.example.com" to obtain its Configuration information, since the
 Issuer contains no path component:<a href="#section-6.2.1-2" class="pilcrow">¶</a></p>
 <span id="name-example-transmitter-configu"></span><div id="figdiscoveryrequest">
-<figure id="figure-9">
-            <div id="section-6.2.1-3.1">
-<pre class="lang-http sourcecode">
+<figure id="figure-10">
+            <div class="lang-http sourcecode" id="section-6.2.1-3.1">
+<pre>
 GET /.well-known/ssf-configuration HTTP/1.1
 Host: tr.example.com
 </pre>
 </div>
-<figcaption><a href="#figure-9" class="selfRef">Figure 9</a>:
+<figcaption><a href="#figure-10" class="selfRef">Figure 10</a>:
 <a href="#name-example-transmitter-configu" class="selfRef">Example: Transmitter Configuration Request (without path)</a>
             </figcaption></figure>
 </div>
@@ -2050,20 +2125,20 @@ component and the path component. The Receiver would make the following request
 to the Issuer "https://tr.example.com/issuer1" to obtain its Configuration
 information, since the Issuer contains a path component:<a href="#section-6.2.1-4" class="pilcrow">¶</a></p>
 <span id="name-example-transmitter-configur"></span><div id="figdiscoveryrequestpath">
-<figure id="figure-10">
-            <div id="section-6.2.1-5.1">
-<pre class="lang-http sourcecode">
+<figure id="figure-11">
+            <div class="lang-http sourcecode" id="section-6.2.1-5.1">
+<pre>
 GET /.well-known/ssf-configuration/issuer1 HTTP/1.1
 Host: tr.example.com
 </pre>
 </div>
-<figcaption><a href="#figure-10" class="selfRef">Figure 10</a>:
+<figcaption><a href="#figure-11" class="selfRef">Figure 11</a>:
 <a href="#name-example-transmitter-configur" class="selfRef">Example: Transmitter Configuration Request (with path)</a>
             </figcaption></figure>
 </div>
 <p id="section-6.2.1-6">Using path components enables supporting multiple issuers per host. This is
 required in some multi-tenant hosting configurations. This use of ".well-known"
-is for supporting multiple issuers per host; unlike its use in <span>[<a href="#RFC5785" class="xref">RFC5785</a>]</span>, it
+is for supporting multiple issuers per host; unlike its use in <span>[<a href="#RFC5785" class="cite xref">RFC5785</a>]</span>, it
 does not provide general information about the host.<a href="#section-6.2.1-6" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2080,14 +2155,14 @@ Transmitter Configuration Metadata. For example, the Transmitter Configuration
 Metadata for the Transmitter "https://risc-tr.example.com" MAY be obtained by
 making the following request:<a href="#section-6.2.2-1" class="pilcrow">¶</a></p>
 <span id="name-example-transmitter-configura"></span><div id="figolddiscoveryrequest">
-<figure id="figure-11">
-            <div id="section-6.2.2-2.1">
-<pre class="lang-http sourcecode">
+<figure id="figure-12">
+            <div class="lang-http sourcecode" id="section-6.2.2-2.1">
+<pre>
 GET /.well-known/risc-configuration HTTP/1.1
 Host: risc-tr.example.com
 </pre>
 </div>
-<figcaption><a href="#figure-11" class="selfRef">Figure 11</a>:
+<figcaption><a href="#figure-12" class="selfRef">Figure 12</a>:
 <a href="#name-example-transmitter-configura" class="selfRef">Example: Transmitter Configuration Request for RISC Transmitters</a>
             </figcaption></figure>
 </div>
@@ -2102,15 +2177,16 @@ Host: risc-tr.example.com
 all necessary endpoints and public key location information. A successful
 response MUST use the 200 OK HTTP status code and return a JSON object using the
 "application/json" content type that contains a set of Claims as its members
-that are a subset of the Metadata values defined in <a href="#discovery-meta" class="xref">Section 6.1</a>. Other
+that are a subset of the Metadata values defined in <a href="#discovery-meta" class="auto internal xref">Section 6.1</a>. Other
 Claims MAY also be returned.<a href="#section-6.2.3-1" class="pilcrow">¶</a></p>
 <p id="section-6.2.3-2">Claims that return multiple values are represented as JSON arrays. Claims with
 zero elements MUST be omitted from the response.<a href="#section-6.2.3-2" class="pilcrow">¶</a></p>
 <p id="section-6.2.3-3">An error response uses the applicable HTTP status code value.<a href="#section-6.2.3-3" class="pilcrow">¶</a></p>
+<p id="section-6.2.3-4">The following is a non-normative example of a Transmitter Configuration Response<a href="#section-6.2.3-4" class="pilcrow">¶</a></p>
 <span id="name-example-transmitter-configurat"></span><div id="figdiscoveryresponse">
-<figure id="figure-12">
-            <div id="section-6.2.3-4.1">
-<pre class="lang-http sourcecode">
+<figure id="figure-13">
+            <div class="lang-http sourcecode" id="section-6.2.3-5.1">
+<pre>
 HTTP/1.1 200 OK
 Content-Type: application/json
 
@@ -2132,11 +2208,22 @@ Content-Type: application/json
     "https://tr.example.com/ssf/mgmt/subject:remove",
   "verification_endpoint":
     "https://tr.example.com/ssf/mgmt/verification",
-  "critical_subject_members": [ "tenant", "user" ]
+  "critical_subject_members": [ "tenant", "user" ],
+  "supported_scopes":
+      {
+        "status_endpoint": ["status_scope"],
+        "configuration_endpoint": ["admin_scope", "status_scope"]
+      },
+  "authorization_servers": [
+      {
+          "scopes": ["admin_scope", "status_scope"],
+          "servers": ["https://myauthzserver.example"]
+      }
+  ]
 }
 </pre>
 </div>
-<figcaption><a href="#figure-12" class="selfRef">Figure 12</a>:
+<figcaption><a href="#figure-13" class="selfRef">Figure 13</a>:
 <a href="#name-example-transmitter-configurat" class="selfRef">Example: Transmitter Configuration Response</a>
             </figcaption></figure>
 </div>
@@ -2177,7 +2264,7 @@ which can be used by Event Receivers to create and delete one or more Event Stre
 The API can also be used to query and update the Event Stream's configuration and status,
 add and remove Subjects, and trigger verification for those streams.<a href="#section-7-2" class="pilcrow">¶</a></p>
 <span id="name-event-stream-management-api"></span><div id="figintro">
-<figure id="figure-13">
+<figure id="figure-14">
         <div class="alignLeft art-text artwork" id="section-7-3.1">
 <pre>
 +------------+                +------------+
@@ -2202,7 +2289,7 @@ add and remove Subjects, and trigger verification for those streams.<a href="#se
 +------------+                +------------+
 </pre>
 </div>
-<figcaption><a href="#figure-13" class="selfRef">Figure 13</a>:
+<figcaption><a href="#figure-14" class="selfRef">Figure 14</a>:
 <a href="#name-event-stream-management-api" class="selfRef">Event Stream Management API</a>
         </figcaption></figure>
 </div>
@@ -2267,7 +2354,7 @@ outside the scope of this specification.<a href="#section-7.1-14" class="pilcrow
           </h4>
 <p id="section-7.1.1-1">An Event Stream's configuration is a collection of data, provided by both the
 Transmitter and the Receiver, that describes the information being sent over
-the Event Stream. It is represented as a JSON <span>[<a href="#RFC7159" class="xref">RFC7159</a>]</span> object with the
+the Event Stream. It is represented as a JSON <span>[<a href="#RFC7159" class="cite xref">RFC7159</a>]</span> object with the
 following properties:<a href="#section-7.1.1-1" class="pilcrow">¶</a></p>
 <p id="section-7.1.1-2">stream_id<a href="#section-7.1.1-2" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
@@ -2290,7 +2377,7 @@ following properties:<a href="#section-7.1.1-1" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-7.1.1-7.1">
               <p id="section-7.1.1-7.1.1"><strong>Transmitter-Supplied</strong>, A string or an array of strings containing an
-  audience claim as defined in JSON Web Token (JWT)<span>[<a href="#RFC7519" class="xref">RFC7519</a>]</span> that identifies
+  audience claim as defined in JSON Web Token (JWT)<span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span> that identifies
   the Event Receiver(s) for the Event Stream. This property cannot be updated.
   If multiple Receivers are specified then the Transmitter SHOULD know that
   these Receivers are the same entity.<a href="#section-7.1.1-7.1.1" class="pilcrow">¶</a></p>
@@ -2329,7 +2416,7 @@ following properties:<a href="#section-7.1.1-1" class="pilcrow">¶</a></p>
               <p id="section-7.1.1-15.1.1">A JSON object containing a set of name/value pairs specifying configuration
   parameters for the SET delivery method. The actual delivery method is
   identified by the special key "method" with the value being a URI as defined
-  in <a href="#delivery-meta" class="xref">Section 11.2.1</a>. The value of the "delivery" field contains two
+  in <a href="#delivery-meta" class="auto internal xref">Section 11.2.1</a>. The value of the "delivery" field contains two
   sub-fields:<a href="#section-7.1.1-15.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
@@ -2386,7 +2473,7 @@ following properties:<a href="#section-7.1.1-1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <p id="section-7.1.1-24">TODO: consider adding a IANA Registry for stream configuration metadata, similar
-to Section 7.1.1 of <span>[<a href="#OAUTH-DISCOVERY" class="xref">OAUTH-DISCOVERY</a>]</span>. This would allow other specs to add to
+to Section 7.1.1 of <span>[<a href="#RFC8414" class="cite xref">RFC8414</a>]</span>. This would allow other specs to add to
 the stream configuration.<a href="#section-7.1.1-24" class="pilcrow">¶</a></p>
 <div id="creating-a-stream">
 <section id="section-7.1.1.1">
@@ -2397,9 +2484,9 @@ the stream configuration.<a href="#section-7.1.1-24" class="pilcrow">¶</a></p>
 MUST first create an Event Stream. An Event Receiver creates a stream by making
 an HTTP POST request to the Configuration Endpoint. On receiving a valid request
 the Event Transmitter responds with a "201 Created" response containing a
-<span><a href="#RFC7159" class="xref">JSON</a> [<a href="#RFC7159" class="xref">RFC7159</a>]</span> representation of the stream's configuration in the body.<a href="#section-7.1.1.1-1" class="pilcrow">¶</a></p>
+<span><a href="#RFC7159" class="internal xref">JSON</a> [<a href="#RFC7159" class="cite xref">RFC7159</a>]</span> representation of the stream's configuration in the body.<a href="#section-7.1.1.1-1" class="pilcrow">¶</a></p>
 <p id="section-7.1.1.1-2">The HTTP POST request MAY contain the Receiver-Supplied values of the Stream
-Configuration (<a href="#stream-config" class="xref">Section 7.1.1</a>) object:<a href="#section-7.1.1.1-2" class="pilcrow">¶</a></p>
+Configuration (<a href="#stream-config" class="auto internal xref">Section 7.1.1</a>) object:<a href="#section-7.1.1.1-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-7.1.1.1-3.1">
                 <code>events_requested</code><a href="#section-7.1.1.1-3.1" class="pilcrow">¶</a>
@@ -2418,9 +2505,9 @@ Transmitter MUST include a <code>delivery</code> property in the response with t
 <code>method</code> property and a <code>url</code> property.<a href="#section-7.1.1.1-4" class="pilcrow">¶</a></p>
 <p id="section-7.1.1.1-5">The following is a non-normative example request to create an Event Stream:<a href="#section-7.1.1.1-5" class="pilcrow">¶</a></p>
 <span id="name-example-create-event-stream"></span><div id="figcreatestreamreq">
-<figure id="figure-14">
-              <div id="section-7.1.1.1-6.1">
-<pre class="lang-http sourcecode">
+<figure id="figure-15">
+              <div class="lang-http sourcecode" id="section-7.1.1.1-6.1">
+<pre>
 POST /ssf/stream HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
@@ -2438,15 +2525,15 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 }
 </pre>
 </div>
-<figcaption><a href="#figure-14" class="selfRef">Figure 14</a>:
+<figcaption><a href="#figure-15" class="selfRef">Figure 15</a>:
 <a href="#name-example-create-event-stream" class="selfRef">Example: Create Event Stream Request</a>
               </figcaption></figure>
 </div>
 <p id="section-7.1.1.1-7">The following is a non-normative example response:<a href="#section-7.1.1.1-7" class="pilcrow">¶</a></p>
 <span id="name-example-create-stream-respo"></span><div id="figcreatestreamresp">
-<figure id="figure-15">
-              <div id="section-7.1.1.1-8.1">
-<pre class="lang-http sourcecode">
+<figure id="figure-16">
+              <div class="lang-http sourcecode" id="section-7.1.1.1-8.1">
+<pre>
 HTTP/1.1 200 OK
 Content-Type: application/json
 
@@ -2478,7 +2565,7 @@ Content-Type: application/json
 }
 </pre>
 </div>
-<figcaption><a href="#figure-15" class="selfRef">Figure 15</a>:
+<figcaption><a href="#figure-16" class="selfRef">Figure 16</a>:
 <a href="#name-example-create-stream-respo" class="selfRef">Example: Create Stream Response</a>
               </figcaption></figure>
 </div>
@@ -2520,7 +2607,7 @@ Content-Type: application/json
             </h5>
 <p id="section-7.1.1.2-1">An Event Receiver gets the current configuration of a stream by making an HTTP
 GET request to the Configuration Endpoint. On receiving a valid request the
-Event Transmitter responds with a "200 OK" response containing a <span><a href="#RFC7159" class="xref">JSON</a> [<a href="#RFC7159" class="xref">RFC7159</a>]</span>
+Event Transmitter responds with a "200 OK" response containing a <span><a href="#RFC7159" class="internal xref">JSON</a> [<a href="#RFC7159" class="cite xref">RFC7159</a>]</span>
 representation of the stream's configuration in the body.<a href="#section-7.1.1.2-1" class="pilcrow">¶</a></p>
 <p id="section-7.1.1.2-2">The GET request MAY include the "stream_id" as a parameter in order to
 identify the correct Event Stream. If the "stream_id" argument is missing,
@@ -2530,23 +2617,23 @@ Transmitter MUST return an empty list.<a href="#section-7.1.1.2-2" class="pilcro
 <p id="section-7.1.1.2-3">The following is a non-normative example request to read an Event Stream's
 configuration:<a href="#section-7.1.1.2-3" class="pilcrow">¶</a></p>
 <span id="name-example-read-stream-configu"></span><div id="figreadconfigreq">
-<figure id="figure-16">
-              <div id="section-7.1.1.2-4.1">
-<pre class="lang-http sourcecode">
+<figure id="figure-17">
+              <div class="lang-http sourcecode" id="section-7.1.1.2-4.1">
+<pre>
 GET /ssf/stream?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 </pre>
 </div>
-<figcaption><a href="#figure-16" class="selfRef">Figure 16</a>:
+<figcaption><a href="#figure-17" class="selfRef">Figure 17</a>:
 <a href="#name-example-read-stream-configu" class="selfRef">Example: Read Stream Configuration Request</a>
               </figcaption></figure>
 </div>
 <p id="section-7.1.1.2-5">The following is a non-normative example response:<a href="#section-7.1.1.2-5" class="pilcrow">¶</a></p>
 <span id="name-example-read-stream-configur"></span><div id="figreadconfigresp">
-<figure id="figure-17">
-              <div id="section-7.1.1.2-6.1">
-<pre class="lang-http sourcecode">
+<figure id="figure-18">
+              <div class="lang-http sourcecode" id="section-7.1.1.2-6.1">
+<pre>
 HTTP/1.1 200 OK
 Content-Type: application/json
 Cache-Control: no-store
@@ -2579,30 +2666,30 @@ Cache-Control: no-store
 }
 </pre>
 </div>
-<figcaption><a href="#figure-17" class="selfRef">Figure 17</a>:
+<figcaption><a href="#figure-18" class="selfRef">Figure 18</a>:
 <a href="#name-example-read-stream-configur" class="selfRef">Example: Read Stream Configuration Response</a>
               </figcaption></figure>
 </div>
 <p id="section-7.1.1.2-7">The following is a non-normative example request to read an Event Stream's
 configuration, with no "stream_id" indicated:<a href="#section-7.1.1.2-7" class="pilcrow">¶</a></p>
 <span id="name-example-read-stream-configura"></span><div id="figreadconfigreqnostreamid">
-<figure id="figure-18">
-              <div id="section-7.1.1.2-8.1">
-<pre class="lang-http sourcecode">
+<figure id="figure-19">
+              <div class="lang-http sourcecode" id="section-7.1.1.2-8.1">
+<pre>
 GET /ssf/stream HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 </pre>
 </div>
-<figcaption><a href="#figure-18" class="selfRef">Figure 18</a>:
+<figcaption><a href="#figure-19" class="selfRef">Figure 19</a>:
 <a href="#name-example-read-stream-configura" class="selfRef">Example: Read Stream Configuration Request</a>
               </figcaption></figure>
 </div>
 <p id="section-7.1.1.2-9">The following is a non-normative example response to a request with no "stream_id":<a href="#section-7.1.1.2-9" class="pilcrow">¶</a></p>
 <span id="name-example-read-stream-configurat"></span><div id="figreadconfigrespnostreamidmanystreams">
-<figure id="figure-19">
-              <div id="section-7.1.1.2-10.1">
-<pre class="breakable lang-http sourcecode">
+<figure id="figure-20">
+              <div class="breakable lang-http sourcecode" id="section-7.1.1.2-10.1">
+<pre>
 HTTP/1.1 200 OK
 Content-Type: application/json
 Cache-Control: no-store
@@ -2663,16 +2750,16 @@ Cache-Control: no-store
 ]
 </pre>
 </div>
-<figcaption><a href="#figure-19" class="selfRef">Figure 19</a>:
+<figcaption><a href="#figure-20" class="selfRef">Figure 20</a>:
 <a href="#name-example-read-stream-configurat" class="selfRef">Example: Read Stream Configuration Response</a>
               </figcaption></figure>
 </div>
 <p id="section-7.1.1.2-11">The following is a non-normative example response to a request with no
 "stream_id" when there is only one Event Stream configured:<a href="#section-7.1.1.2-11" class="pilcrow">¶</a></p>
 <span id="name-example-read-stream-configurati"></span><div id="figreadconfigrespnostreamidonestream">
-<figure id="figure-20">
-              <div id="section-7.1.1.2-12.1">
-<pre class="lang-http sourcecode">
+<figure id="figure-21">
+              <div class="lang-http sourcecode" id="section-7.1.1.2-12.1">
+<pre>
 HTTP/1.1 200 OK
 Content-Type: application/json
 Cache-Control: no-store
@@ -2707,16 +2794,16 @@ Cache-Control: no-store
 ]
 </pre>
 </div>
-<figcaption><a href="#figure-20" class="selfRef">Figure 20</a>:
+<figcaption><a href="#figure-21" class="selfRef">Figure 21</a>:
 <a href="#name-example-read-stream-configurati" class="selfRef">Example: Read Stream Configuration Response</a>
               </figcaption></figure>
 </div>
 <p id="section-7.1.1.2-13">The following is a non-normative example response to a request with no "stream_id"
 when there are no Event Streams configured:<a href="#section-7.1.1.2-13" class="pilcrow">¶</a></p>
 <span id="name-example-read-stream-configuratio"></span><div id="figreadconfigrespnostreamidnostreams">
-<figure id="figure-21">
-              <div id="section-7.1.1.2-14.1">
-<pre class="lang-http sourcecode">
+<figure id="figure-22">
+              <div class="lang-http sourcecode" id="section-7.1.1.2-14.1">
+<pre>
 HTTP/1.1 200 OK
 Content-Type: application/json
 Cache-Control: no-store
@@ -2724,7 +2811,7 @@ Cache-Control: no-store
 []
 </pre>
 </div>
-<figcaption><a href="#figure-21" class="selfRef">Figure 21</a>:
+<figcaption><a href="#figure-22" class="selfRef">Figure 22</a>:
 <a href="#name-example-read-stream-configuratio" class="selfRef">Example: Read Stream Configuration Response</a>
               </figcaption></figure>
 </div>
@@ -2766,9 +2853,9 @@ Cache-Control: no-store
             </h5>
 <p id="section-7.1.1.3-1">An Event Receiver updates the current configuration of a stream by making an
 HTTP PATCH request to the Configuration Endpoint. The PATCH body contains a
-<span><a href="#RFC7159" class="xref">JSON</a> [<a href="#RFC7159" class="xref">RFC7159</a>]</span> representation of the stream configuration properties to change. On
+<span><a href="#RFC7159" class="internal xref">JSON</a> [<a href="#RFC7159" class="cite xref">RFC7159</a>]</span> representation of the stream configuration properties to change. On
 receiving a valid request the Event Transmitter responds with a "200 OK"
-response containing a <span><a href="#RFC7159" class="xref">JSON</a> [<a href="#RFC7159" class="xref">RFC7159</a>]</span> representation of the entire updated stream
+response containing a <span><a href="#RFC7159" class="internal xref">JSON</a> [<a href="#RFC7159" class="cite xref">RFC7159</a>]</span> representation of the entire updated stream
 configuration in the body.<a href="#section-7.1.1.3-1" class="pilcrow">¶</a></p>
 <p id="section-7.1.1.3-2">The stream_id property MUST be present in the request. Other properties
 MAY be present in the request. Any Receiver-Supplied property present in the
@@ -2781,9 +2868,9 @@ if present, MUST match the Transmitter's expected value before any updates are a
 <p id="section-7.1.1.3-4">The following is a non-normative example request to replace an Event Stream's
 configuration:<a href="#section-7.1.1.3-4" class="pilcrow">¶</a></p>
 <span id="name-example-update-stream-confi"></span><div id="figupdateconfigreq">
-<figure id="figure-22">
-              <div id="section-7.1.1.3-5.1">
-<pre class="lang-http sourcecode">
+<figure id="figure-23">
+              <div class="lang-http sourcecode" id="section-7.1.1.3-5.1">
+<pre>
 PATCH /ssf/stream HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
@@ -2799,15 +2886,15 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 }
 </pre>
 </div>
-<figcaption><a href="#figure-22" class="selfRef">Figure 22</a>:
+<figcaption><a href="#figure-23" class="selfRef">Figure 23</a>:
 <a href="#name-example-update-stream-confi" class="selfRef">Example: Update Stream Configuration Request</a>
               </figcaption></figure>
 </div>
 <p id="section-7.1.1.3-6">The following is a non-normative example response:<a href="#section-7.1.1.3-6" class="pilcrow">¶</a></p>
 <span id="name-example-update-stream-config"></span><div id="figupdateconfigresp">
-<figure id="figure-23">
-              <div id="section-7.1.1.3-7.1">
-<pre class="lang-http sourcecode">
+<figure id="figure-24">
+              <div class="lang-http sourcecode" id="section-7.1.1.3-7.1">
+<pre>
 HTTP/1.1 200 OK
 Content-Type: application/json
 Cache-Control: no-store
@@ -2840,7 +2927,7 @@ Cache-Control: no-store
 }
 </pre>
 </div>
-<figcaption><a href="#figure-23" class="selfRef">Figure 23</a>:
+<figcaption><a href="#figure-24" class="selfRef">Figure 24</a>:
 <a href="#name-example-update-stream-config" class="selfRef">Example: Update Stream Configuration Response</a>
               </figcaption></figure>
 </div>
@@ -2890,14 +2977,14 @@ Cache-Control: no-store
             </h5>
 <p id="section-7.1.1.4-1">An Event Receiver replaces the current configuration of a stream by making an
 HTTP PUT request to the Configuration Endpoint. The PUT body contains a JSON
-<span>[<a href="#RFC7159" class="xref">RFC7159</a>]</span> representation of the new configuration. On receiving a valid
+<span>[<a href="#RFC7159" class="cite xref">RFC7159</a>]</span> representation of the new configuration. On receiving a valid
 request the Event Transmitter responds with a "200 OK" response containing a
-JSON <span>[<a href="#RFC7159" class="xref">RFC7159</a>]</span> representation of the updated stream configuration in the body.<a href="#section-7.1.1.4-1" class="pilcrow">¶</a></p>
+JSON <span>[<a href="#RFC7159" class="cite xref">RFC7159</a>]</span> representation of the updated stream configuration in the body.<a href="#section-7.1.1.4-1" class="pilcrow">¶</a></p>
 <p id="section-7.1.1.4-2">The stream_id and the full set of Receiver-Supplied properties MUST be present
 in the PUT body, not only the ones that are specifically intended to be changed.
 Missing Receiver-Supplied properties MUST be interpreted as requested to be
 deleted. Event Receivers MAY read the configuration first, modify the JSON
-<span>[<a href="#RFC7159" class="xref">RFC7159</a>]</span> representation, then make a replacement request.<a href="#section-7.1.1.4-2" class="pilcrow">¶</a></p>
+<span>[<a href="#RFC7159" class="cite xref">RFC7159</a>]</span> representation, then make a replacement request.<a href="#section-7.1.1.4-2" class="pilcrow">¶</a></p>
 <p id="section-7.1.1.4-3">Transmitter-Supplied properties besides the stream_id MAY be present,
 but they MUST match the expected value. Missing Transmitter-Supplied
 properties MUST be ignored by the Transmitter. The <code>events_delivered</code> property,
@@ -2905,9 +2992,9 @@ if present, MUST match the Transmitter's expected value <em>before</em> any upda
 <p id="section-7.1.1.4-4">The following is a non-normative example request to replace an Event Stream's
 configuration:<a href="#section-7.1.1.4-4" class="pilcrow">¶</a></p>
 <span id="name-example-replace-stream-conf"></span><div id="figreplaceconfigreq">
-<figure id="figure-24">
-              <div id="section-7.1.1.4-5.1">
-<pre class="lang-http sourcecode">
+<figure id="figure-25">
+              <div class="lang-http sourcecode" id="section-7.1.1.4-5.1">
+<pre>
 PUT /ssf/stream HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
@@ -2931,15 +3018,15 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 }
 </pre>
 </div>
-<figcaption><a href="#figure-24" class="selfRef">Figure 24</a>:
+<figcaption><a href="#figure-25" class="selfRef">Figure 25</a>:
 <a href="#name-example-replace-stream-conf" class="selfRef">Example: Replace Stream Configuration Request</a>
               </figcaption></figure>
 </div>
 <p id="section-7.1.1.4-6">The following is a non-normative example response:<a href="#section-7.1.1.4-6" class="pilcrow">¶</a></p>
 <span id="name-example-replace-stream-confi"></span><div id="figreplaceconfigresp">
-<figure id="figure-25">
-              <div id="section-7.1.1.4-7.1">
-<pre class="lang-http sourcecode">
+<figure id="figure-26">
+              <div class="lang-http sourcecode" id="section-7.1.1.4-7.1">
+<pre>
 HTTP/1.1 200 OK
 Content-Type: application/json
 Cache-Control: no-store
@@ -2972,7 +3059,7 @@ Cache-Control: no-store
 }
 </pre>
 </div>
-<figcaption><a href="#figure-25" class="selfRef">Figure 25</a>:
+<figcaption><a href="#figure-26" class="selfRef">Figure 26</a>:
 <a href="#name-example-replace-stream-confi" class="selfRef">Example: Replace Stream Configuration Response</a>
               </figcaption></figure>
 </div>
@@ -3027,15 +3114,15 @@ with an empty "204 No Content" response if the configuration was successfully re
 identify the correct Event Stream.<a href="#section-7.1.1.5-2" class="pilcrow">¶</a></p>
 <p id="section-7.1.1.5-3">The following is a non-normative example request to delete an Event Stream:<a href="#section-7.1.1.5-3" class="pilcrow">¶</a></p>
 <span id="name-example-delete-stream-reque"></span><div id="figdeletestreamreq">
-<figure id="figure-26">
-              <div id="section-7.1.1.5-4.1">
-<pre class="lang-http sourcecode">
+<figure id="figure-27">
+              <div class="lang-http sourcecode" id="section-7.1.1.5-4.1">
+<pre>
 DELETE /ssf/stream?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 </pre>
 </div>
-<figcaption><a href="#figure-26" class="selfRef">Figure 26</a>:
+<figcaption><a href="#figure-27" class="selfRef">Figure 27</a>:
 <a href="#name-example-delete-stream-reque" class="selfRef">Example: Delete Stream Request</a>
               </figcaption></figure>
 </div>
@@ -3076,7 +3163,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 <a href="#section-7.1.2" class="section-number selfRef">7.1.2. </a><a href="#name-stream-status" class="section-name selfRef">Stream Status</a>
           </h4>
 <p id="section-7.1.2-1">Event Streams are managed independently. A Receiver MAY request that events from a
-stream be interrupted by Updating the Stream Status (<a href="#updating-a-streams-status" class="xref">Section 7.1.2.2</a>).<a href="#section-7.1.2-1" class="pilcrow">¶</a></p>
+stream be interrupted by Updating the Stream Status (<a href="#updating-a-streams-status" class="auto internal xref">Section 7.1.2.2</a>).<a href="#section-7.1.2-1" class="pilcrow">¶</a></p>
 <p id="section-7.1.2-2">A Transmitter MAY decide to enable, pause or disable updates from a stream
 independently of an update request from a Receiver. If a Transmitter decides to
 start or stop events for a stream then the Transmitter MUST do the following
@@ -3085,14 +3172,14 @@ according to the status of the stream.<a href="#section-7.1.2-2" class="pilcrow"
 <p id="section-7.1.2-4">Enabled<a href="#section-7.1.2-4" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-7.1.2-5.1">
-              <p id="section-7.1.2-5.1.1">the Transmitter MUST send a stream updated (<a href="#stream-updated-event" class="xref">Section 7.1.5</a>) event
+              <p id="section-7.1.2-5.1.1">the Transmitter MUST send a stream updated (<a href="#stream-updated-event" class="auto internal xref">Section 7.1.5</a>) event
   respectively to the Receiver within the Event Stream.<a href="#section-7.1.2-5.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <p id="section-7.1.2-6">Paused<a href="#section-7.1.2-6" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-7.1.2-7.1">
-              <p id="section-7.1.2-7.1.1">the Transmitter SHOULD send a stream updated (<a href="#stream-updated-event" class="xref">Section 7.1.5</a>) after the Event Stream is
+              <p id="section-7.1.2-7.1.1">the Transmitter SHOULD send a stream updated (<a href="#stream-updated-event" class="auto internal xref">Section 7.1.5</a>) after the Event Stream is
   re-started. A Receiver MUST assume that events may have been lost during the
   time when the event stream was paused.<a href="#section-7.1.2-7.1.1" class="pilcrow">¶</a></p>
 </li>
@@ -3100,7 +3187,7 @@ according to the status of the stream.<a href="#section-7.1.2-2" class="pilcrow"
 <p id="section-7.1.2-8">Disabled<a href="#section-7.1.2-8" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-7.1.2-9.1">
-              <p id="section-7.1.2-9.1.1">the Transmitter MAY send a stream updated (<a href="#stream-updated-event" class="xref">Section 7.1.5</a>) after the Event Stream is
+              <p id="section-7.1.2-9.1.1">the Transmitter MAY send a stream updated (<a href="#stream-updated-event" class="auto internal xref">Section 7.1.5</a>) after the Event Stream is
   re-enabled.<a href="#section-7.1.2-9.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
@@ -3119,7 +3206,7 @@ GET request to the stream's Status Endpoint.<a href="#section-7.1.2.1-1" class="
 </li>
             </ul>
 <p id="section-7.1.2.1-5">On receiving a valid request the Event Transmitter responds with a 200 OK
-response containing a <span><a href="#RFC7159" class="xref">JSON</a> [<a href="#RFC7159" class="xref">RFC7159</a>]</span> object with the following attributes:<a href="#section-7.1.2.1-5" class="pilcrow">¶</a></p>
+response containing a <span><a href="#RFC7159" class="internal xref">JSON</a> [<a href="#RFC7159" class="cite xref">RFC7159</a>]</span> object with the following attributes:<a href="#section-7.1.2.1-5" class="pilcrow">¶</a></p>
 <p id="section-7.1.2.1-6">status<a href="#section-7.1.2.1-6" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-7.1.2.1-7.1">
@@ -3165,23 +3252,23 @@ the current value.<a href="#section-7.1.2.1-9.1.1" class="pilcrow">¶</a></p>
 <p id="section-7.1.2.1-17">The following is a non-normative example request to check an event stream's
 status:<a href="#section-7.1.2.1-17" class="pilcrow">¶</a></p>
 <span id="name-example-check-stream-status"></span><div id="figstatusreq">
-<figure id="figure-27">
-              <div id="section-7.1.2.1-18.1">
-<pre class="lang-http sourcecode">
+<figure id="figure-28">
+              <div class="lang-http sourcecode" id="section-7.1.2.1-18.1">
+<pre>
 GET /ssf/status?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer zzzz
 </pre>
 </div>
-<figcaption><a href="#figure-27" class="selfRef">Figure 27</a>:
+<figcaption><a href="#figure-28" class="selfRef">Figure 28</a>:
 <a href="#name-example-check-stream-status" class="selfRef">Example: Check Stream Status Request</a>
               </figcaption></figure>
 </div>
 <p id="section-7.1.2.1-19">The following is a non-normative example response:<a href="#section-7.1.2.1-19" class="pilcrow">¶</a></p>
 <span id="name-example-check-stream-status-"></span><div id="figstatusresp">
-<figure id="figure-28">
-              <div id="section-7.1.2.1-20.1">
-<pre class="lang-http sourcecode">
+<figure id="figure-29">
+              <div class="lang-http sourcecode" id="section-7.1.2.1-20.1">
+<pre>
 HTTP/1.1 200 OK
 Content-Type: application/json
 Cache-Control: no-store
@@ -3192,7 +3279,7 @@ Cache-Control: no-store
 }
 </pre>
 </div>
-<figcaption><a href="#figure-28" class="selfRef">Figure 28</a>:
+<figcaption><a href="#figure-29" class="selfRef">Figure 29</a>:
 <a href="#name-example-check-stream-status-" class="selfRef">Example: Check Stream Status Response</a>
               </figcaption></figure>
 </div>
@@ -3246,7 +3333,7 @@ Transmitter MUST respond with a 404 error status.<a href="#section-7.1.2.1-24.3"
 <a href="#section-7.1.2.2" class="section-number selfRef">7.1.2.2. </a><a href="#name-updating-a-streams-status" class="section-name selfRef">Updating a Stream's Status</a>
             </h5>
 <p id="section-7.1.2.2-1">An Event Receiver updates the current status of a stream by making an HTTP POST
-request to the Status Endpoint. The POST body contains a <span><a href="#RFC7159" class="xref">JSON</a> [<a href="#RFC7159" class="xref">RFC7159</a>]</span> object
+request to the Status Endpoint. The POST body contains a <span><a href="#RFC7159" class="internal xref">JSON</a> [<a href="#RFC7159" class="cite xref">RFC7159</a>]</span> object
 with the following fields:<a href="#section-7.1.2.2-1" class="pilcrow">¶</a></p>
 <p id="section-7.1.2.2-2">stream_id<a href="#section-7.1.2.2-2" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
@@ -3267,14 +3354,14 @@ with the following fields:<a href="#section-7.1.2.2-1" class="pilcrow">¶</a></p
 </li>
             </ul>
 <p id="section-7.1.2.2-8">On receiving a valid request the Event Transmitter responds with a "200 OK"
-response containing a <span><a href="#RFC7159" class="xref">JSON</a> [<a href="#RFC7159" class="xref">RFC7159</a>]</span> representation of the updated stream
+response containing a <span><a href="#RFC7159" class="internal xref">JSON</a> [<a href="#RFC7159" class="cite xref">RFC7159</a>]</span> representation of the updated stream
 status in the body, using the same fields as described in the request.<a href="#section-7.1.2.2-8" class="pilcrow">¶</a></p>
 <p id="section-7.1.2.2-9">The following is a non-normative example request to update an Event Stream's
 status:<a href="#section-7.1.2.2-9" class="pilcrow">¶</a></p>
 <span id="name-example-update-stream-statu"></span><div id="figupdatestatusreq">
-<figure id="figure-29">
-              <div id="section-7.1.2.2-10.1">
-<pre class="lang-http sourcecode">
+<figure id="figure-30">
+              <div class="lang-http sourcecode" id="section-7.1.2.2-10.1">
+<pre>
 POST /ssf/status HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
@@ -3285,16 +3372,16 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 }
 </pre>
 </div>
-<figcaption><a href="#figure-29" class="selfRef">Figure 29</a>:
+<figcaption><a href="#figure-30" class="selfRef">Figure 30</a>:
 <a href="#name-example-update-stream-statu" class="selfRef">Example: Update Stream Status Request Without Optional Fields</a>
               </figcaption></figure>
 </div>
 <p id="section-7.1.2.2-11">The following is a non-normative example of an Update Stream Status request with an
 optional reason:<a href="#section-7.1.2.2-11" class="pilcrow">¶</a></p>
 <span id="name-example-update-stream-status"></span><div id="figupdatestatuswithreasonreq">
-<figure id="figure-30">
-              <div id="section-7.1.2.2-12.1">
-<pre class="lang-http sourcecode">
+<figure id="figure-31">
+              <div class="lang-http sourcecode" id="section-7.1.2.2-12.1">
+<pre>
 POST /ssf/status HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
@@ -3306,15 +3393,15 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 }
 </pre>
 </div>
-<figcaption><a href="#figure-30" class="selfRef">Figure 30</a>:
+<figcaption><a href="#figure-31" class="selfRef">Figure 31</a>:
 <a href="#name-example-update-stream-status" class="selfRef">Example: Update Stream Status Request With Optional Reason</a>
               </figcaption></figure>
 </div>
 <p id="section-7.1.2.2-13">The following is a non-normative example response:<a href="#section-7.1.2.2-13" class="pilcrow">¶</a></p>
 <span id="name-example-update-stream-status-"></span><div id="figupdatestatusresp">
-<figure id="figure-31">
-              <div id="section-7.1.2.2-14.1">
-<pre class="lang-http sourcecode">
+<figure id="figure-32">
+              <div class="lang-http sourcecode" id="section-7.1.2.2-14.1">
+<pre>
 HTTP/1.1 200 OK
 Content-Type: application/json
 Cache-Control: no-store
@@ -3325,7 +3412,7 @@ Cache-Control: no-store
 }
 </pre>
 </div>
-<figcaption><a href="#figure-31" class="selfRef">Figure 31</a>:
+<figcaption><a href="#figure-32" class="selfRef">Figure 32</a>:
 <a href="#name-example-update-stream-status-" class="selfRef">Example: Update Stream Status Response</a>
               </figcaption></figure>
 </div>
@@ -3433,13 +3520,13 @@ response.  The Event Transmitter MAY choose to silently ignore the request, for
 example if the subject has previously indicated to the Transmitter that they do
 not want events to be transmitted to the Event Receiver. In this case, the
 transmitter MAY return an empty "200 OK" response or an appropriate error code.
-See Security Considerations (<a href="#management-sec" class="xref">Section 9</a>).<a href="#section-7.1.3.1-8" class="pilcrow">¶</a></p>
+See Security Considerations (<a href="#management-sec" class="auto internal xref">Section 9</a>).<a href="#section-7.1.3.1-8" class="pilcrow">¶</a></p>
 <p id="section-7.1.3.1-9">The following is a non-normative example request to add a subject to a stream,
 where the subject is identified by an Email Subject Identifier.<a href="#section-7.1.3.1-9" class="pilcrow">¶</a></p>
 <span id="name-example-add-subject-request"></span><div id="figaddreq">
-<figure id="figure-32">
-              <div id="section-7.1.3.1-10.1">
-<pre class="lang-http sourcecode">
+<figure id="figure-33">
+              <div class="lang-http sourcecode" id="section-7.1.3.1-10.1">
+<pre>
 POST /ssf/subjects:add HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
@@ -3454,21 +3541,21 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 }
 </pre>
 </div>
-<figcaption><a href="#figure-32" class="selfRef">Figure 32</a>:
+<figcaption><a href="#figure-33" class="selfRef">Figure 33</a>:
 <a href="#name-example-add-subject-request" class="selfRef">Example: Add Subject Request</a>
               </figcaption></figure>
 </div>
 <p id="section-7.1.3.1-11">The following is a non-normative example response to a successful request:<a href="#section-7.1.3.1-11" class="pilcrow">¶</a></p>
 <span id="name-example-add-subject-respons"></span><div id="figaddresp">
-<figure id="figure-33">
-              <div id="section-7.1.3.1-12.1">
-<pre class="lang-http sourcecode">
+<figure id="figure-34">
+              <div class="lang-http sourcecode" id="section-7.1.3.1-12.1">
+<pre>
 HTTP/1.1 200 OK
 Server: transmitter.example.com
 Cache-Control: no-store
 </pre>
 </div>
-<figcaption><a href="#figure-33" class="selfRef">Figure 33</a>:
+<figcaption><a href="#figure-34" class="selfRef">Figure 34</a>:
 <a href="#name-example-add-subject-respons" class="selfRef">Example: Add Subject Response</a>
               </figcaption></figure>
 </div>
@@ -3536,9 +3623,9 @@ response.<a href="#section-7.1.3.2-6" class="pilcrow">¶</a></p>
 <p id="section-7.1.3.2-7">The following is a non-normative example request where the subject is
 identified by a Phone Number Subject Identifier:<a href="#section-7.1.3.2-7" class="pilcrow">¶</a></p>
 <span id="name-example-remove-subject-requ"></span><div id="figremovereq">
-<figure id="figure-34">
-              <div id="section-7.1.3.2-8.1">
-<pre class="lang-http sourcecode">
+<figure id="figure-35">
+              <div class="lang-http sourcecode" id="section-7.1.3.2-8.1">
+<pre>
 POST /ssf/subjects:remove HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
@@ -3552,21 +3639,21 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 }
 </pre>
 </div>
-<figcaption><a href="#figure-34" class="selfRef">Figure 34</a>:
+<figcaption><a href="#figure-35" class="selfRef">Figure 35</a>:
 <a href="#name-example-remove-subject-requ" class="selfRef">Example: Remove Subject Request</a>
               </figcaption></figure>
 </div>
 <p id="section-7.1.3.2-9">The following is a non-normative example response to a successful request:<a href="#section-7.1.3.2-9" class="pilcrow">¶</a></p>
 <span id="name-example-remove-subject-resp"></span><div id="figremoveresp">
-<figure id="figure-35">
-              <div id="section-7.1.3.2-10.1">
-<pre class="lang-http sourcecode">
+<figure id="figure-36">
+              <div class="lang-http sourcecode" id="section-7.1.3.2-10.1">
+<pre>
 HTTP/1.1 204 No Content
 Server: transmitter.example.com
 Cache-Control: no-store
 </pre>
 </div>
-<figcaption><a href="#figure-35" class="selfRef">Figure 35</a>:
+<figcaption><a href="#figure-36" class="selfRef">Figure 36</a>:
 <a href="#name-example-remove-subject-resp" class="selfRef">Example: Remove Subject Response</a>
               </figcaption></figure>
 </div>
@@ -3663,7 +3750,7 @@ not requested by the Event Receiver.<a href="#section-7.1.4-2" class="pilcrow">�
 validate its claims. In particular, the Event Receiver SHALL confirm that the
 value for "state" is as expected. If the value of "state" does not match, an
 error response of "setData" SHOULD be returned (see Section 2.3 of
-<span>[<a href="#DELIVERYPUSH" class="xref">DELIVERYPUSH</a>]</span> or <span>[<a href="#DELIVERYPOLL" class="xref">DELIVERYPOLL</a>]</span>).<a href="#section-7.1.4.1-9" class="pilcrow">¶</a></p>
+<span>[<a href="#DELIVERYPUSH" class="cite xref">DELIVERYPUSH</a>]</span> or <span>[<a href="#DELIVERYPOLL" class="cite xref">DELIVERYPOLL</a>]</span>).<a href="#section-7.1.4.1-9" class="pilcrow">¶</a></p>
 <p id="section-7.1.4.1-10">In many cases, Event Transmitters MAY disable or suspend an Event Stream that
 fails to successfully verify based on the acknowledgement or lack of
 acknowledgement by the Event Receiver.<a href="#section-7.1.4.1-10" class="pilcrow">¶</a></p>
@@ -3675,7 +3762,7 @@ acknowledgement by the Event Receiver.<a href="#section-7.1.4.1-10" class="pilcr
 <a href="#section-7.1.4.2" class="section-number selfRef">7.1.4.2. </a><a href="#name-triggering-a-verification-e" class="section-name selfRef">Triggering a Verification Event.</a>
             </h5>
 <p id="section-7.1.4.2-1">To request that a verification event be sent over an Event Stream, the Event
-Receiver makes an HTTP POST request to the Verification Endpoint, with a <span><a href="#RFC7159" class="xref">JSON</a> [<a href="#RFC7159" class="xref">RFC7159</a>]</span> object containing the parameters of the verification request, if any.
+Receiver makes an HTTP POST request to the Verification Endpoint, with a <span><a href="#RFC7159" class="internal xref">JSON</a> [<a href="#RFC7159" class="cite xref">RFC7159</a>]</span> object containing the parameters of the verification request, if any.
 On a successful request, the event transmitter responds with an empty
 "204 No Content" response.<a href="#section-7.1.4.2-1" class="pilcrow">¶</a></p>
 <p id="section-7.1.4.2-2">Verification requests have the following properties:<a href="#section-7.1.4.2-2" class="pilcrow">¶</a></p>
@@ -3730,7 +3817,7 @@ particular order relative to the current queue of events.<a href="#section-7.1.4
                 </tr>
                 <tr>
                   <td class="text-left" rowspan="1" colspan="1">429</td>
-                  <td class="text-left" rowspan="1" colspan="1">if the Event Receiver is sending too many requests in a given amount of time; see related "min_verification_interval" in <a href="#stream-config" class="xref">Section 7.1.1</a>
+                  <td class="text-left" rowspan="1" colspan="1">if the Event Receiver is sending too many requests in a given amount of time; see related "min_verification_interval" in <a href="#stream-config" class="auto internal xref">Section 7.1.1</a>
 </td>
                 </tr>
               </tbody>
@@ -3738,9 +3825,9 @@ particular order relative to the current queue of events.<a href="#section-7.1.4
 </div>
 <p id="section-7.1.4.2-10">The following is a non-normative example request to trigger a verification event:<a href="#section-7.1.4.2-10" class="pilcrow">¶</a></p>
 <span id="name-example-trigger-verificatio"></span><div id="figverifyreq">
-<figure id="figure-36">
-              <div id="section-7.1.4.2-11.1">
-<pre class="lang-http sourcecode">
+<figure id="figure-37">
+              <div class="lang-http sourcecode" id="section-7.1.4.2-11.1">
+<pre>
 POST /ssf/verify HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
@@ -3752,30 +3839,30 @@ Content-Type: application/json
 }
 </pre>
 </div>
-<figcaption><a href="#figure-36" class="selfRef">Figure 36</a>:
+<figcaption><a href="#figure-37" class="selfRef">Figure 37</a>:
 <a href="#name-example-trigger-verificatio" class="selfRef">Example: Trigger Verification Request</a>
               </figcaption></figure>
 </div>
 <p id="section-7.1.4.2-12">The following is a non-normative example response to a successful request:<a href="#section-7.1.4.2-12" class="pilcrow">¶</a></p>
 <span id="name-example-trigger-verification"></span><div id="figverifyresp">
-<figure id="figure-37">
-              <div id="section-7.1.4.2-13.1">
-<pre class="lang-http sourcecode">
+<figure id="figure-38">
+              <div class="lang-http sourcecode" id="section-7.1.4.2-13.1">
+<pre>
 HTTP/1.1 204 No Content
 Server: transmitter.example.com
 Cache-Control: no-store
 </pre>
 </div>
-<figcaption><a href="#figure-37" class="selfRef">Figure 37</a>:
+<figcaption><a href="#figure-38" class="selfRef">Figure 38</a>:
 <a href="#name-example-trigger-verification" class="selfRef">Example: Trigger Verification Response</a>
               </figcaption></figure>
 </div>
 <p id="section-7.1.4.2-14">And the following is a non-normative example of a verification event sent to the
 Event Receiver as a result of the above request:<a href="#section-7.1.4.2-14" class="pilcrow">¶</a></p>
 <span id="name-example-verification-set"></span><div id="figverifyset">
-<figure id="figure-38">
-              <div id="section-7.1.4.2-15.1">
-<pre class="lang-json sourcecode">
+<figure id="figure-39">
+              <div class="lang-json sourcecode" id="section-7.1.4.2-15.1">
+<pre>
 {
   "jti": "123456",
   "iss": "https://transmitter.example.com",
@@ -3793,7 +3880,7 @@ Event Receiver as a result of the above request:<a href="#section-7.1.4.2-14" cl
 }
 </pre>
 </div>
-<figcaption><a href="#figure-38" class="selfRef">Figure 38</a>:
+<figcaption><a href="#figure-39" class="selfRef">Figure 39</a>:
 <a href="#name-example-verification-set" class="selfRef">Example: Verification SET</a>
               </figcaption></figure>
 </div>
@@ -3851,9 +3938,9 @@ Receiver that has previously been enabled to receive events for the stream.<a hr
 </li>
           </ul>
 <span id="name-example-stream-updated-set-"></span><div id="figstreamupdatedstreamset">
-<figure id="figure-39">
-            <div id="section-7.1.5-13.1">
-<pre class="lang-json sourcecode">
+<figure id="figure-40">
+            <div class="lang-json sourcecode" id="section-7.1.5-13.1">
+<pre>
 {
   "jti": "123456",
   "iss": "https://transmitter.example.com",
@@ -3872,7 +3959,7 @@ Receiver that has previously been enabled to receive events for the stream.<a hr
 }
 </pre>
 </div>
-<figcaption><a href="#figure-39" class="selfRef">Figure 39</a>:
+<figcaption><a href="#figure-40" class="selfRef">Figure 40</a>:
 <a href="#name-example-stream-updated-set-" class="selfRef">Example: Stream Updated SET with stream as the subject of single-stream Transmitter</a>
             </figcaption></figure>
 </div>
@@ -3888,9 +3975,9 @@ Receiver that has previously been enabled to receive events for the stream.<a hr
 <a href="#section-8" class="section-number selfRef">8. </a><a href="#name-authorization" class="section-name selfRef">Authorization</a>
       </h2>
 <p id="section-8-1">HTTP API calls from a Receiver to a Transmitter SHOULD be authorized by
-providing an OAuth 2.0 Access Token as defined by <span>[<a href="#RFC6750" class="xref">RFC6750</a>]</span>.<a href="#section-8-1" class="pilcrow">¶</a></p>
+providing an OAuth 2.0 Access Token as defined by <span>[<a href="#RFC6750" class="cite xref">RFC6750</a>]</span>.<a href="#section-8-1" class="pilcrow">¶</a></p>
 <p id="section-8-2">The receiver may obtain an access token using the Client
-Credential Grant <span>[<a href="#CLIENTCRED" class="xref">CLIENTCRED</a>]</span>, or any other method suitable for the Receiver and the
+Credential Grant <span>[<a href="#CLIENTCRED" class="cite xref">CLIENTCRED</a>]</span>, or any other method suitable for the Receiver and the
 Transmitter.<a href="#section-8-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -4031,15 +4118,15 @@ policy.<a href="#section-10.3.2-1" class="pilcrow">¶</a></p>
       </h2>
 <p id="section-11-1">This section is a profile of the following IETF SecEvent specifications:<a href="#section-11-1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-11-2.1">Security Event Token (SET) <span>[<a href="#RFC8417" class="xref">RFC8417</a>]</span><a href="#section-11-2.1" class="pilcrow">¶</a>
+<li class="normal" id="section-11-2.1">Security Event Token (SET) <span>[<a href="#RFC8417" class="cite xref">RFC8417</a>]</span><a href="#section-11-2.1" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-11-2.2">Push-Based SET Token Delivery Using HTTP <span>[<a href="#DELIVERYPUSH" class="xref">DELIVERYPUSH</a>]</span><a href="#section-11-2.2" class="pilcrow">¶</a>
+        <li class="normal" id="section-11-2.2">Push-Based SET Token Delivery Using HTTP <span>[<a href="#DELIVERYPUSH" class="cite xref">DELIVERYPUSH</a>]</span><a href="#section-11-2.2" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-11-2.3">Poll-Based SET Token Delivery Using HTTP <span>[<a href="#DELIVERYPOLL" class="xref">DELIVERYPOLL</a>]</span><a href="#section-11-2.3" class="pilcrow">¶</a>
+        <li class="normal" id="section-11-2.3">Poll-Based SET Token Delivery Using HTTP <span>[<a href="#DELIVERYPOLL" class="cite xref">DELIVERYPOLL</a>]</span><a href="#section-11-2.3" class="pilcrow">¶</a>
 </li>
       </ul>
 <p id="section-11-3">The RISC use cases that set the requirements are described in Security Events
-RISC Use Cases <span>[<a href="#USECASES" class="xref">USECASES</a>]</span>.<a href="#section-11-3" class="pilcrow">¶</a></p>
+RISC Use Cases <span>[<a href="#USECASES" class="cite xref">USECASES</a>]</span>.<a href="#section-11-3" class="pilcrow">¶</a></p>
 <p id="section-11-4">The CAEP use cases that set the requirements are described in CAEP Use Cases (TODO: Add
         reference when file is added to repository.)<a href="#section-11-4" class="pilcrow">¶</a></p>
 <div id="set-profle">
@@ -4048,13 +4135,13 @@ RISC Use Cases <span>[<a href="#USECASES" class="xref">USECASES</a>]</span>.<a h
 <a href="#section-11.1" class="section-number selfRef">11.1. </a><a href="#name-security-event-token-profil" class="section-name selfRef">Security Event Token Profile</a>
         </h3>
 <p id="section-11.1-1">This section provides SSF profiling specifications for the Security Event Token (SET)
-<span>[<a href="#RFC8417" class="xref">RFC8417</a>]</span> spec.<a href="#section-11.1-1" class="pilcrow">¶</a></p>
+<span>[<a href="#RFC8417" class="cite xref">RFC8417</a>]</span> spec.<a href="#section-11.1-1" class="pilcrow">¶</a></p>
 <div id="signature-key-resolution">
 <section id="section-11.1.1">
           <h4 id="name-signature-key-resolution">
 <a href="#section-11.1.1" class="section-number selfRef">11.1.1. </a><a href="#name-signature-key-resolution" class="section-name selfRef">Signature Key Resolution</a>
           </h4>
-<p id="section-11.1.1-1">The signature key can be obtained through "jwks_uri", see <a href="#discovery" class="xref">Section 6</a>.<a href="#section-11.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-11.1.1-1">The signature key can be obtained through "jwks_uri", see <a href="#discovery" class="auto internal xref">Section 6</a>.<a href="#section-11.1.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="event-subjects">
@@ -4076,9 +4163,9 @@ a SSF event.<a href="#section-11.1.2-1" class="pilcrow">¶</a></p>
 <p id="section-11.1.3-1">The SSF event MAY contain additional claims within the event payload that are
 specific to the event type.<a href="#section-11.1.3-1" class="pilcrow">¶</a></p>
 <span id="name-example-set-containing-a-ri"></span><div id="risc-event-subject-example">
-<figure id="figure-40">
-            <div id="section-11.1.3-2.1">
-<pre class="lang-json sourcecode">
+<figure id="figure-41">
+            <div class="lang-json sourcecode" id="section-11.1.3-2.1">
+<pre>
 {
   "iss": "https://idp.example.com/",
   "jti": "756E69717565206964656E746966696572",
@@ -4097,14 +4184,14 @@ specific to the event type.<a href="#section-11.1.3-1" class="pilcrow">¶</a></p
 }
 </pre>
 </div>
-<figcaption><a href="#figure-40" class="selfRef">Figure 40</a>:
+<figcaption><a href="#figure-41" class="selfRef">Figure 41</a>:
 <a href="#name-example-set-containing-a-ri" class="selfRef">Example: SET Containing a RISC Event with a Phone Number Subject</a>
             </figcaption></figure>
 </div>
 <span id="name-example-set-containing-a-ca"></span><div id="caep-event-properties-example">
-<figure id="figure-41">
-            <div id="section-11.1.3-3.1">
-<pre class="lang-json sourcecode">
+<figure id="figure-42">
+            <div class="lang-json sourcecode" id="section-11.1.3-3.1">
+<pre>
 {
   "iss": "https://idp.example.com/",
   "jti": "756E69717565206964656E746966696572",
@@ -4122,7 +4209,7 @@ specific to the event type.<a href="#section-11.1.3-1" class="pilcrow">¶</a></p
 }
 </pre>
 </div>
-<figcaption><a href="#figure-41" class="selfRef">Figure 41</a>:
+<figcaption><a href="#figure-42" class="selfRef">Figure 42</a>:
 <a href="#name-example-set-containing-a-ca" class="selfRef">Example: SET Containing a CAEP Event with Properties</a>
             </figcaption></figure>
 </div>
@@ -4133,23 +4220,23 @@ specific to the event type.<a href="#section-11.1.3-1" class="pilcrow">¶</a></p
           <h4 id="name-explicit-typing-of-sets">
 <a href="#section-11.1.4" class="section-number selfRef">11.1.4. </a><a href="#name-explicit-typing-of-sets" class="section-name selfRef">Explicit Typing of SETs</a>
           </h4>
-<p id="section-11.1.4-1">SSF events MUST use explicit typing as defined in Section 2.3 of <span>[<a href="#RFC8417" class="xref">RFC8417</a>]</span>.<a href="#section-11.1.4-1" class="pilcrow">¶</a></p>
+<p id="section-11.1.4-1">SSF events MUST use explicit typing as defined in Section 2.3 of <span>[<a href="#RFC8417" class="cite xref">RFC8417</a>]</span>.<a href="#section-11.1.4-1" class="pilcrow">¶</a></p>
 <span id="name-explicitly-typed-jose-heade"></span><div id="explicit-type-header">
-<figure id="figure-42">
-            <div id="section-11.1.4-2.1">
-<pre class="lang-json sourcecode">
+<figure id="figure-43">
+            <div class="lang-json sourcecode" id="section-11.1.4-2.1">
+<pre>
 {
   "typ":"secevent+jwt",
   "alg":"HS256"
 }
 </pre>
 </div>
-<figcaption><a href="#figure-42" class="selfRef">Figure 42</a>:
+<figcaption><a href="#figure-43" class="selfRef">Figure 43</a>:
 <a href="#name-explicitly-typed-jose-heade" class="selfRef">Explicitly Typed JOSE Header</a>
             </figcaption></figure>
 </div>
 <p id="section-11.1.4-3">The purpose is defense against confusion with other JWTs, as described in
-Sections 4.5, 4.6 and 4.7 of <span>[<a href="#RFC8417" class="xref">RFC8417</a>]</span>. While current Id Token <span>[<a href="#IDTOKEN" class="xref">IDTOKEN</a>]</span>
+Sections 4.5, 4.6 and 4.7 of <span>[<a href="#RFC8417" class="cite xref">RFC8417</a>]</span>. While current Id Token <span>[<a href="#IDTOKEN" class="cite xref">IDTOKEN</a>]</span>
 validators may not be using the "typ" header parameter, by requiring it for SSF
 SETs a distinct value is guaranteed for future validators.<a href="#section-11.1.4-3" class="pilcrow">¶</a></p>
 </section>
@@ -4161,7 +4248,7 @@ SETs a distinct value is guaranteed for future validators.<a href="#section-11.1
           </h4>
 <p id="section-11.1.5-1">The "exp" claim MUST NOT be used in SSF SETs.<a href="#section-11.1.5-1" class="pilcrow">¶</a></p>
 <p id="section-11.1.5-2">The purpose is defense in depth against confusion with other JWTs, as described
-in Sections 4.5 and 4.6 of <span>[<a href="#RFC8417" class="xref">RFC8417</a>]</span>.<a href="#section-11.1.5-2" class="pilcrow">¶</a></p>
+in Sections 4.5 and 4.6 of <span>[<a href="#RFC8417" class="cite xref">RFC8417</a>]</span>.<a href="#section-11.1.5-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="aud-claim">
@@ -4183,9 +4270,9 @@ this case the multiple Receivers might use the same service to process SETs, and
 this service might reroute SETs to respective Receivers, an "aud" claim with
 multiple Receivers would lead to unintended data disclosure.<a href="#section-11.1.6-3" class="pilcrow">¶</a></p>
 <span id="name-example-set-with-array-aud-"></span><div id="figarrayaud">
-<figure id="figure-43">
-            <div id="section-11.1.6-4.1">
-<pre class="lang-json sourcecode">
+<figure id="figure-44">
+            <div class="lang-json sourcecode" id="section-11.1.6-4.1">
+<pre>
 {
   "jti": "123456",
   "iss": "https://transmitter.example.com",
@@ -4199,7 +4286,7 @@ multiple Receivers would lead to unintended data disclosure.<a href="#section-11
 }
 </pre>
 </div>
-<figcaption><a href="#figure-43" class="selfRef">Figure 43</a>:
+<figcaption><a href="#figure-44" class="selfRef">Figure 44</a>:
 <a href="#name-example-set-with-array-aud-" class="selfRef">Example: SET with array 'aud' claim</a>
             </figcaption></figure>
 </div>
@@ -4225,14 +4312,14 @@ permitted only if they are alternative URIs defining the exact same event type.<
 <a href="#section-11.1.8.1" class="section-number selfRef">11.1.8.1. </a><a href="#name-distinguishing-sets-from-ot" class="section-name selfRef">Distinguishing SETs from other Kinds of JWTs</a>
             </h5>
 <p id="section-11.1.8.1-1">Of particular concern is the possibility that SETs are confused for other kinds
-of JWTs. The Security Considerations section of <span>[<a href="#RFC8417" class="xref">RFC8417</a>]</span> has several sub-sections
+of JWTs. The Security Considerations section of <span>[<a href="#RFC8417" class="cite xref">RFC8417</a>]</span> has several sub-sections
 on this subject. The Shared Signals Framework is asking for further restrictions:<a href="#section-11.1.8.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-11.1.8.1-2.1">The "sub" claim MUST NOT be present, as described in <a href="#event-subjects" class="xref">Section 11.1.2</a>.<a href="#section-11.1.8.1-2.1" class="pilcrow">¶</a>
+<li class="normal" id="section-11.1.8.1-2.1">The "sub" claim MUST NOT be present, as described in <a href="#event-subjects" class="auto internal xref">Section 11.1.2</a>.<a href="#section-11.1.8.1-2.1" class="pilcrow">¶</a>
 </li>
-              <li class="normal" id="section-11.1.8.1-2.2">SSF SETs MUST use explicit typing, as described in <a href="#explicit-typing" class="xref">Section 11.1.4</a>.<a href="#section-11.1.8.1-2.2" class="pilcrow">¶</a>
+              <li class="normal" id="section-11.1.8.1-2.2">SSF SETs MUST use explicit typing, as described in <a href="#explicit-typing" class="auto internal xref">Section 11.1.4</a>.<a href="#section-11.1.8.1-2.2" class="pilcrow">¶</a>
 </li>
-              <li class="normal" id="section-11.1.8.1-2.3">The "exp" claim MUST NOT be present, as described in <a href="#exp-claim" class="xref">Section 11.1.5</a>.<a href="#section-11.1.8.1-2.3" class="pilcrow">¶</a>
+              <li class="normal" id="section-11.1.8.1-2.3">The "exp" claim MUST NOT be present, as described in <a href="#exp-claim" class="auto internal xref">Section 11.1.5</a>.<a href="#section-11.1.8.1-2.3" class="pilcrow">¶</a>
 </li>
             </ul>
 </section>
@@ -4246,8 +4333,8 @@ on this subject. The Shared Signals Framework is asking for further restrictions
         <h3 id="name-set-token-delivery-using-ht">
 <a href="#section-11.2" class="section-number selfRef">11.2. </a><a href="#name-set-token-delivery-using-ht" class="section-name selfRef">SET Token Delivery Using HTTP Profile</a>
         </h3>
-<p id="section-11.2-1">This section provides SSF profiling specifications for the <span>[<a href="#DELIVERYPUSH" class="xref">DELIVERYPUSH</a>]</span> and
-<span>[<a href="#DELIVERYPOLL" class="xref">DELIVERYPOLL</a>]</span> specs.<a href="#section-11.2-1" class="pilcrow">¶</a></p>
+<p id="section-11.2-1">This section provides SSF profiling specifications for the <span>[<a href="#DELIVERYPUSH" class="cite xref">DELIVERYPUSH</a>]</span> and
+<span>[<a href="#DELIVERYPOLL" class="cite xref">DELIVERYPOLL</a>]</span> specs.<a href="#section-11.2-1" class="pilcrow">¶</a></p>
 <div id="delivery-meta">
 <section id="section-11.2.1">
           <h4 id="name-stream-configuration-metada">
@@ -4260,7 +4347,7 @@ metadata.<a href="#section-11.2.1-1" class="pilcrow">¶</a></p>
             <h5 id="name-push-delivery-using-http">
 <a href="#section-11.2.1.1" class="section-number selfRef">11.2.1.1. </a><a href="#name-push-delivery-using-http" class="section-name selfRef">Push Delivery using HTTP</a>
             </h5>
-<p id="section-11.2.1.1-1">This section provides SSF profiling specifications for the <span>[<a href="#DELIVERYPUSH" class="xref">DELIVERYPUSH</a>]</span> spec.<a href="#section-11.2.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-11.2.1.1-1">This section provides SSF profiling specifications for the <span>[<a href="#DELIVERYPUSH" class="cite xref">DELIVERYPUSH</a>]</span> spec.<a href="#section-11.2.1.1-1" class="pilcrow">¶</a></p>
 <p id="section-11.2.1.1-2">method<a href="#section-11.2.1.1-2" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-11.2.1.1-3.1">
@@ -4291,7 +4378,7 @@ metadata.<a href="#section-11.2.1-1" class="pilcrow">¶</a></p>
             <h5 id="name-polling-delivery-using-http">
 <a href="#section-11.2.1.2" class="section-number selfRef">11.2.1.2. </a><a href="#name-polling-delivery-using-http" class="section-name selfRef">Polling Delivery using HTTP</a>
             </h5>
-<p id="section-11.2.1.2-1">This section provides SSF profiling specifications for the <span>[<a href="#DELIVERYPOLL" class="xref">DELIVERYPOLL</a>]</span> spec.<a href="#section-11.2.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-11.2.1.2-1">This section provides SSF profiling specifications for the <span>[<a href="#DELIVERYPOLL" class="cite xref">DELIVERYPOLL</a>]</span> spec.<a href="#section-11.2.1.2-1" class="pilcrow">¶</a></p>
 <p id="section-11.2.1.2-2">method<a href="#section-11.2.1.2-2" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-11.2.1.2-3.1">
@@ -4321,7 +4408,7 @@ metadata.<a href="#section-11.2.1-1" class="pilcrow">¶</a></p>
       </h2>
 <p id="section-12-1">Subject Identifiers defined in this document will be added to the "Security
 Events Subject Identifier Types" registry. This registry is defined in the
-Subject Identifiers for Security Event Tokens <span>[<a href="#SUBIDS" class="xref">SUBIDS</a>]</span> specification.<a href="#section-12-1" class="pilcrow">¶</a></p>
+Subject Identifiers for Security Event Tokens <span>[<a href="#SUBIDS" class="cite xref">SUBIDS</a>]</span> specification.<a href="#section-12-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <section id="section-13">
@@ -4353,21 +4440,17 @@ Subject Identifiers for Security Event Tokens <span>[<a href="#SUBIDS" class="xr
         <dd>
 <span class="refAuthor">Cantor, S.</span>, <span class="refAuthor">Kemp, J.</span>, <span class="refAuthor">Philpott, R.</span>, and <span class="refAuthor">E. Maler</span>, <span class="refTitle">"Assertions and Protocol for the OASIS Security Assertion Markup Language (SAML) V2.0"</span>, <span class="seriesInfo">OASIS Standard saml-core-2.0-os</span>, <time datetime="2005-03" class="refDate">March 2005</time>. </dd>
 <dd class="break"></dd>
-<dt id="OAUTH-DISCOVERY">[OAUTH-DISCOVERY]</dt>
-        <dd>
-<span class="refAuthor">Jones, M. B.</span>, <span class="refAuthor">Sakimura, N.</span>, and <span class="refAuthor">J. Bradley</span>, <span class="refTitle">"OAuth 2.0 Authorization Server Metadata - Version 10"</span>, <time datetime="2018-06" class="refDate">June 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8414">https://www.rfc-editor.org/info/rfc8414</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="OPENID-DISCOVERY">[OPENID-DISCOVERY]</dt>
-        <dd>
-<span class="refAuthor">Sakimura, N.</span>, <span class="refAuthor">Bradley, J.</span>, <span class="refAuthor">Jones, M. B.</span>, and <span class="refAuthor">E. Jay</span>, <span class="refTitle">"OpenID Connect Discovery 1.0"</span>, <time datetime="2014-11" class="refDate">November 2014</time>, <span>&lt;<a href="https://openid.net/specs/openid-connect-discovery-1_0.html">https://openid.net/specs/openid-connect-discovery-1_0.html</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
-<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
+<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="httpss://www.rfc-editor.org/info/rfc2119">httpss://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC5785">[RFC5785]</dt>
         <dd>
 <span class="refAuthor">Nottingham, M.</span> and <span class="refAuthor">E. Hammer-Lahav</span>, <span class="refTitle">"Defining Well-Known Uniform Resource Identifiers (URIs)"</span>, <span class="seriesInfo">RFC 5785</span>, <span class="seriesInfo">DOI 10.17487/RFC5785</span>, <time datetime="2010-04" class="refDate">April 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5785">https://www.rfc-editor.org/info/rfc5785</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC6749">[RFC6749]</dt>
+        <dd>
+<span class="refAuthor">Hardt, D., Ed.</span>, <span class="refTitle">"The OAuth 2.0 Authorization Framework"</span>, <span class="seriesInfo">RFC 6749</span>, <span class="seriesInfo">DOI 10.17487/RFC6749</span>, <time datetime="2012-10" class="refDate">October 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6749">https://www.rfc-editor.org/info/rfc6749</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC6750">[RFC6750]</dt>
         <dd>
@@ -4387,7 +4470,11 @@ Subject Identifiers for Security Event Tokens <span>[<a href="#SUBIDS" class="xr
 <dd class="break"></dd>
 <dt id="RFC8174">[RFC8174]</dt>
         <dd>
-<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </dd>
+<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="httpss://www.rfc-editor.org/info/rfc8174">httpss://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8414">[RFC8414]</dt>
+        <dd>
+<span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Sakimura, N.</span>, and <span class="refAuthor">J. Bradley</span>, <span class="refTitle">"OAuth 2.0 Authorization Server Metadata"</span>, <span class="seriesInfo">RFC 8414</span>, <span class="seriesInfo">DOI 10.17487/RFC8414</span>, <time datetime="2018-06" class="refDate">June 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8414">https://www.rfc-editor.org/info/rfc8414</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8417">[RFC8417]</dt>
         <dd>

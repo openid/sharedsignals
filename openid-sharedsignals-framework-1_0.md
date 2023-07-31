@@ -121,44 +121,15 @@ normative:
     target: http://openid.net/specs/openid-connect-core-1_0.html#IDToken
     title: OpenID Connect Core 1.0 - ID Token
   OASIS.saml-core-2.0-os:
-  OAUTH-DISCOVERY:
-    author:
-    - ins: M.B. Jones
-      name: Michael B. Jones
-      org: Microsoft
-    - ins: N. Sakimura
-      name: Nat Sakimura
-      org: Nomura Research Institute, Ltd.
-    - ins: J. Bradley
-      name: John Bradley
-      org: Ping Identity
-    date: June 2018
-    target: https://www.rfc-editor.org/info/rfc8414
-    title: OAuth 2.0 Authorization Server Metadata - Version 10
-  OPENID-DISCOVERY:
-    author:
-    - ins: N. Sakimura
-      name: Nat Sakimura
-      org: Nomura Research Institute, Ltd.
-    - ins: J. Bradley
-      name: John Bradley
-      org: Ping Identity
-    - ins: M.B. Jones
-      name: Michael B. Jones
-      org: Microsoft
-    - ins: E. Jay
-      name: Edmund Jay
-      org: Illumila
-    date: November 2014
-    target: https://openid.net/specs/openid-connect-discovery-1_0.html
-    title: OpenID Connect Discovery 1.0
   RFC2119:
   RFC5785:
+  RFC6749:
   RFC6750:
   RFC7159:
   RFC7517:
   RFC7519:
   RFC8174:
+  RFC8414:
   RFC8417:
   SUBIDS:
     author:
@@ -564,11 +535,44 @@ verification_endpoint
 
 critical_subject_members
 
-> OPTIONAL. List of member names in a Complex Subject which, if present in
+> OPTIONAL. An array of member names in a Complex Subject which, if present in
   a Subject Member in an event, MUST be interpreted by a Receiver.
+  
+supported_scopes
+
+> OPTIONAL. A list of OAuth {{RFC6749}} scope names that the Transmitter supports for specific endpoints. The value of this field is a JSON object that has the endpoint names as keys, and arrays of scope name strings they support as their values. OAuth tokens obtained using any of the scopes defined here MUST be accepted by the specified endpoint. Any key that is not defined as an endpoint in the Transmitter Configuration Metadata MUST be ignored. If the supported_scopes member is present in the metadata and an endpoint is not listed as a key, then that endpoint MUST not require OAuth for authorization.
+
+authorization_servers
+
+> OPTIONAL. An array of supported authorization servers and the scopes they support. Each element of the array is a Authorization Server Descriptor JSON object defined in the section {{authz-server-descriptor}} below. If the `supported_scopes` member is present in the metadata, then the `authorization_servers` MUST also be present, and it MUST provide a server location for every supported scope.
 
 TODO: consider adding a IANA Registry for metadata, similar to Section 7.1.1 of
-{{OAUTH-DISCOVERY}}. This would allow other specs to add to the metadata.
+{{RFC8414}}. This would allow other specs to add to the metadata.
+
+### Authorization Server Descriptor {#authz-server-descriptor}
+An Authorization Server Descriptor is a JSON object that has two keys:
+
+scopes
+
+> REQUIRED. An array of scope names supported by the authorization server
+
+servers
+
+> REQUIRED. An array of authorization server URLs. This is the URL from which the Authorization Server Metadata MAY be obtained by following the process described in Section 3 of RFC8414 {{RFC8414}}
+
+The following is a non-normative example of an Authorization Server Descriptor
+
+~~~ json
+{
+    "scopes" : ["scope1", "scope2"],
+    "servers": [
+        "https://server1.example/base/url",
+        "https://server2.example/base/url",
+        "https://server3.example/base/url"
+    ]
+}
+~~~
+{: #authz-descriptor-example title="Example Authorization Server Descriptor"}
 
 ## Obtaining Transmitter Configuration Information
 
@@ -642,6 +646,8 @@ zero elements MUST be omitted from the response.
 
 An error response uses the applicable HTTP status code value.
 
+The following is a non-normative example of a Transmitter Configuration Response
+
 ~~~ http
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -664,7 +670,18 @@ Content-Type: application/json
     "https://tr.example.com/ssf/mgmt/subject:remove",
   "verification_endpoint":
     "https://tr.example.com/ssf/mgmt/verification",
-  "critical_subject_members": [ "tenant", "user" ]
+  "critical_subject_members": [ "tenant", "user" ],
+  "supported_scopes":
+      {
+        "status_endpoint": ["status_scope"],
+        "configuration_endpoint": ["admin_scope", "status_scope"]
+      },
+  "authorization_servers": [
+      {
+          "scopes": ["admin_scope", "status_scope"],
+          "servers": ["https://myauthzserver.example"]
+      }
+  ]
 }
 ~~~
 {: #figdiscoveryresponse title="Example: Transmitter Configuration Response"}
@@ -847,7 +864,7 @@ format
   that discloses more information than necessary.
 
 TODO: consider adding a IANA Registry for stream configuration metadata, similar
-to Section 7.1.1 of {{OAUTH-DISCOVERY}}. This would allow other specs to add to
+to Section 7.1.1 of {{RFC8414}}. This would allow other specs to add to
 the stream configuration.
 
 
@@ -2153,3 +2170,4 @@ Copyright (c) 2021 The OpenID Foundation.
 The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, or other interested party a non-exclusive, royalty free, worldwide copyright license to reproduce, prepare derivative works from, distribute, perform and display, this Implementers Draft or Final Specification solely for the purposes of (i) developing specifications, and (ii) implementing Implementers Drafts and Final Specifications based on such documents, provided that attribution be made to the OIDF as the source of the material, but that such attribution does not indicate an endorsement by the OIDF.
 
 The technology described in this specification was made available from contributions from various sources, including members of the OpenID Foundation and others. Although the OpenID Foundation has taken steps to help ensure that the technology is available for distribution, it takes no position regarding the validity or scope of any intellectual property or other rights that might be claimed to pertain to the implementation or use of the technology described in this specification or the extent to which any license under such rights might or might not be available; neither does it represent that it has made any independent effort to identify any such rights. The OpenID Foundation and the contributors to this specification make no (and hereby expressly disclaim any) warranties (express, implied, or otherwise), including implied warranties of merchantability, non-infringement, fitness for a particular purpose, or title, related to this specification, and the entire risk as to implementing this specification is assumed by the implementer. The OpenID Intellectual Property Rights policy requires contributors to offer a patent promise not to assert certain patent claims against other contributors and against implementers. The OpenID Foundation invites any interested party to bring to its attention any copyrights, patents, patent applications, or other proprietary rights that may cover technology that may be required to practice this specification.
+
