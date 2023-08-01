@@ -832,8 +832,9 @@ the Event Transmitter responds with a "201 Created" response containing a
 If a stream already exists, and the Transmitter allows multiple streams with the
 same Receiver, the Event Transmitter MUST respond with a new stream ID. If the
 Transmitter does not allow multiple streams with the same Receiver, it MUST respond
-respond with HTTP status code "200 OK" and include a [JSON][RFC7159] representation
-of the existing stream’s configuration in the body.
+respond with HTTP status code "409 Conflict". The Receiver MAY then GET the
+existing stream configuration and, if desired, use PATCH or PUT to update or
+replace the existing stream configuration.
 
 The HTTP POST request MAY contain the Receiver-Supplied values of the Stream
 Configuration ({{stream-config}}) object:
