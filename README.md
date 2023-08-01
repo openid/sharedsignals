@@ -30,3 +30,5 @@ Pay attention to errors generating the files and warnings about the document dat
 In order to run `make` you need to:
 1. install `xml2rfc` which can be done via pip: `pip install xml2rfc`
 1. install `kramdown-rfc` which can be done via Ruby gems: `gem install kramdown-rfc`
+
+**Note** The HTML and TXT files will not be uploaded to the repository. Running make only ensures that changes you made are not breaking the generation of the specifications output.
