@@ -924,6 +924,7 @@ Errors are signaled with HTTP status codes as follows:
 | 400  | if the request cannot be parsed |
 | 401  | if authorization failed or it is missing |
 | 403  | if the Event Receiver is not allowed to create a stream |
+| 409  | if the transmitter does not support multiple streams per receiver |
 {: title="Create Stream Errors" #tablecreatestream}
 
 
