@@ -1981,8 +1981,7 @@ This section is a profile of the following IETF SecEvent specifications:
 The RISC use cases that set the requirements are described in Security Events
 RISC Use Cases {{USECASES}}.
 
-The CAEP use cases that set the requirements are described in CAEP Use Cases (TODO: Add
-        reference when file is added to repository.)
+The CAEP use cases that set the requirements are described in CAEP Use Cases {{CAEP}}.
 
 ## Security Event Token Profile {#set-profle}
 This section provides SSF profiling specifications for the Security Event Token (SET)
