@@ -538,13 +538,13 @@ critical_subject_members
 > OPTIONAL. An array of member names in a Complex Subject which, if present in
   a Subject Member in an event, MUST be interpreted by a Receiver.
   
-supported_scopes
+scopes_supported
 
-> OPTIONAL. A list of OAuth {{RFC6749}} scope names that the Transmitter supports for specific endpoints. The value of this field is a JSON object that has the endpoint names as keys, and arrays of scope name strings they support as their values. OAuth tokens obtained using any of the scopes defined here MUST be accepted by the specified endpoint. Any key that is not defined as an endpoint in the Transmitter Configuration Metadata MUST be ignored. If the supported_scopes member is present in the metadata and an endpoint is not listed as a key, then that endpoint MUST not require OAuth for authorization.
+> OPTIONAL. A list of OAuth {{RFC6749}} scope names that the Transmitter supports for specific endpoints. The value of this field is a JSON object that has the endpoint names as keys, and arrays of scope name strings they support as their values. OAuth tokens obtained using any of the scopes defined here MUST be accepted by the specified endpoint. Any key that is not defined as an endpoint in the Transmitter Configuration Metadata MUST be ignored. If the scopes_supported member is present in the metadata and an endpoint is not listed as a key, then that endpoint MUST not require OAuth for authorization.
 
 authorization_servers
 
-> OPTIONAL. An array of supported authorization servers and the scopes they support. Each element of the array is a Authorization Server Descriptor JSON object defined in the section {{authz-server-descriptor}} below. If the `supported_scopes` member is present in the metadata, then the `authorization_servers` MUST also be present, and it MUST provide a server location for every supported scope.
+> OPTIONAL. An array of supported authorization servers and the scopes they support. Each element of the array is a Authorization Server Descriptor JSON object defined in the section {{authz-server-descriptor}} below. If the `scopes_supported` member is present in the metadata, then the `authorization_servers` MUST also be present, and it MUST provide a server location for every supported scope.
 
 TODO: consider adding a IANA Registry for metadata, similar to Section 7.1.1 of
 {{RFC8414}}. This would allow other specs to add to the metadata.
@@ -671,7 +671,7 @@ Content-Type: application/json
   "verification_endpoint":
     "https://tr.example.com/ssf/mgmt/verification",
   "critical_subject_members": [ "tenant", "user" ],
-  "supported_scopes":
+  "scopes_supported":
       {
         "status_endpoint": ["status_scope"],
         "configuration_endpoint": ["admin_scope", "status_scope"]
