@@ -121,44 +121,15 @@ normative:
     target: http://openid.net/specs/openid-connect-core-1_0.html#IDToken
     title: OpenID Connect Core 1.0 - ID Token
   OASIS.saml-core-2.0-os:
-  OAUTH-DISCOVERY:
-    author:
-    - ins: M.B. Jones
-      name: Michael B. Jones
-      org: Microsoft
-    - ins: N. Sakimura
-      name: Nat Sakimura
-      org: Nomura Research Institute, Ltd.
-    - ins: J. Bradley
-      name: John Bradley
-      org: Ping Identity
-    date: June 2018
-    target: https://www.rfc-editor.org/info/rfc8414
-    title: OAuth 2.0 Authorization Server Metadata - Version 10
-  OPENID-DISCOVERY:
-    author:
-    - ins: N. Sakimura
-      name: Nat Sakimura
-      org: Nomura Research Institute, Ltd.
-    - ins: J. Bradley
-      name: John Bradley
-      org: Ping Identity
-    - ins: M.B. Jones
-      name: Michael B. Jones
-      org: Microsoft
-    - ins: E. Jay
-      name: Edmund Jay
-      org: Illumila
-    date: November 2014
-    target: https://openid.net/specs/openid-connect-discovery-1_0.html
-    title: OpenID Connect Discovery 1.0
   RFC2119:
   RFC5785:
+  RFC6749:
   RFC6750:
   RFC7159:
   RFC7517:
   RFC7519:
   RFC8174:
+  RFC8414:
   RFC8417:
   SUBIDS:
     author:
@@ -625,11 +596,44 @@ verification_endpoint
 
 critical_subject_members
 
-> OPTIONAL. List of member names in a Complex Subject which, if present in
+> OPTIONAL. An array of member names in a Complex Subject which, if present in
   a Subject Member in an event, MUST be interpreted by a Receiver.
+  
+supported_scopes
+
+> OPTIONAL. A list of OAuth {{RFC6749}} scope names that the Transmitter supports for specific endpoints. The value of this field is a JSON object that has the endpoint names as keys, and arrays of scope name strings they support as their values. OAuth tokens obtained using any of the scopes defined here MUST be accepted by the specified endpoint. Any key that is not defined as an endpoint in the Transmitter Configuration Metadata MUST be ignored. If the supported_scopes member is present in the metadata and an endpoint is not listed as a key, then that endpoint MUST not require OAuth for authorization.
+
+authorization_servers
+
+> OPTIONAL. An array of supported authorization servers and the scopes they support. Each element of the array is a Authorization Server Descriptor JSON object defined in the section {{authz-server-descriptor}} below. If the `supported_scopes` member is present in the metadata, then the `authorization_servers` MUST also be present, and it MUST provide a server location for every supported scope.
 
 TODO: consider adding a IANA Registry for metadata, similar to Section 7.1.1 of
-{{OAUTH-DISCOVERY}}. This would allow other specs to add to the metadata.
+{{RFC8414}}. This would allow other specs to add to the metadata.
+
+### Authorization Server Descriptor {#authz-server-descriptor}
+An Authorization Server Descriptor is a JSON object that has two keys:
+
+scopes
+
+> REQUIRED. An array of scope names supported by the authorization server
+
+servers
+
+> REQUIRED. An array of authorization server URLs. This is the URL from which the Authorization Server Metadata MAY be obtained by following the process described in Section 3 of RFC8414 {{RFC8414}}
+
+The following is a non-normative example of an Authorization Server Descriptor
+
+~~~ json
+{
+    "scopes" : ["scope1", "scope2"],
+    "servers": [
+        "https://server1.example/base/url",
+        "https://server2.example/base/url",
+        "https://server3.example/base/url"
+    ]
+}
+~~~
+{: #authz-descriptor-example title="Example Authorization Server Descriptor"}
 
 ## Obtaining Transmitter Configuration Information
 
@@ -703,6 +707,8 @@ zero elements MUST be omitted from the response.
 
 An error response uses the applicable HTTP status code value.
 
+The following is a non-normative example of a Transmitter Configuration Response
+
 ~~~ http
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -725,7 +731,18 @@ Content-Type: application/json
     "https://tr.example.com/ssf/mgmt/subject:remove",
   "verification_endpoint":
     "https://tr.example.com/ssf/mgmt/verification",
-  "critical_subject_members": [ "tenant", "user" ]
+  "critical_subject_members": [ "tenant", "user" ],
+  "supported_scopes":
+      {
+        "status_endpoint": ["status_scope"],
+        "configuration_endpoint": ["admin_scope", "status_scope"]
+      },
+  "authorization_servers": [
+      {
+          "scopes": ["admin_scope", "status_scope"],
+          "servers": ["https://myauthzserver.example"]
+      }
+  ]
 }
 ~~~
 {: #figdiscoveryresponse title="Example: Transmitter Configuration Response"}
@@ -885,7 +902,7 @@ delivery
     any one of "urn:ietf:rfc:8935" (push) or "urn:ietf:rfc:8936" (poll), but
     not both.
 
->   url
+>   endpoint_url
 
 > > The location at which the push or poll delivery will take place. If the
     `method` value is "urn:ietf:rfc:8935" (push), then this value MUST
@@ -908,7 +925,7 @@ format
   that discloses more information than necessary.
 
 TODO: consider adding a IANA Registry for stream configuration metadata, similar
-to Section 7.1.1 of {{OAUTH-DISCOVERY}}. This would allow other specs to add to
+to Section 7.1.1 of {{RFC8414}}. This would allow other specs to add to
 the stream configuration.
 
 
@@ -923,14 +940,14 @@ The HTTP POST request MAY contain the Receiver-Supplied values of the Stream
 Configuration ({{stream-config}}) object:
 
 * `events_requested`
-* `delivery` : Note that in the case of the POLL method, the `url` value is
+* `delivery` : Note that in the case of the POLL method, the `endpoint_url` value is
   supplied by the Transmitter.
 * `format`
 
 If the request does not contain the `delivery` property, then the Transmitter
 MUST assume that the `method` is "urn:ietf:rfc:8936" (poll). The
 Transmitter MUST include a `delivery` property in the response with this
-`method` property and a `url` property.
+`method` property and a `endpoint_url` property.
 
 The following is a non-normative example request to create an Event Stream:
 
@@ -942,7 +959,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 {
   "delivery": {
     "method": "urn:ietf:rfc:8935",
-    "url": "https://receiver.example.com/events"
+    "endpoint_url": "https://receiver.example.com/events"
   },
   "events_requested": [
     "urn:example:secevent:events:type_2",
@@ -968,7 +985,7 @@ Content-Type: application/json
     ],
   "delivery": {
     "method": "urn:ietf:rfc:8935",
-    "url": "https://receiver.example.com/events"
+    "endpoint_url": "https://receiver.example.com/events"
   },
   "events_supported": [
     "urn:example:secevent:events:type_1",
@@ -1037,7 +1054,7 @@ Cache-Control: no-store
     ],
   "delivery": {
     "method": "urn:ietf:rfc:8935",
-    "url": "https://receiver.example.com/events"
+    "endpoint_url": "https://receiver.example.com/events"
   },
   "events_supported": [
     "urn:example:secevent:events:type_1",
@@ -1084,7 +1101,7 @@ Cache-Control: no-store
       ],
     "delivery": {
       "method": "urn:ietf:rfc:8935",
-      "url": "https://receiver.example.com/events"
+      "endpoint_url": "https://receiver.example.com/events"
     },
     "events_supported": [
       "urn:example:secevent:events:type_1",
@@ -1110,7 +1127,7 @@ Cache-Control: no-store
       ],
     "delivery": {
       "method": "urn:ietf:rfc:8935",
-      "url": "https://receiver.example.com/events"
+      "endpoint_url": "https://receiver.example.com/events"
     },
     "events_supported": [
       "urn:example:secevent:events:type_1",
@@ -1149,7 +1166,7 @@ Cache-Control: no-store
       ],
     "delivery": {
       "method": "urn:ietf:rfc:8935",
-      "url": "https://receiver.example.com/events"
+      "endpoint_url": "https://receiver.example.com/events"
     },
     "events_supported": [
       "urn:example:secevent:events:type_1",
@@ -1246,7 +1263,7 @@ Cache-Control: no-store
   ],
   "delivery": {
     "method": "urn:ietf:rfc:8935",
-    "url": "https://receiver.example.com/events"
+    "endpoint_url": "https://receiver.example.com/events"
   },
   "events_supported": [
     "urn:example:secevent:events:type_1",
@@ -1313,7 +1330,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
   ],
   "delivery": {
     "method": "urn:ietf:rfc:8935",
-    "url": "https://receiver.example.com/events"
+    "endpoint_url": "https://receiver.example.com/events"
   },
   "events_requested": [
     "urn:example:secevent:events:type_2",
@@ -1340,7 +1357,7 @@ Cache-Control: no-store
   ],
   "delivery": {
     "method": "urn:ietf:rfc:8935",
-    "url": "https://receiver.example.com/events"
+    "endpoint_url": "https://receiver.example.com/events"
   },
   "events_supported": [
     "urn:example:secevent:events:type_1",
@@ -1398,14 +1415,12 @@ Errors are signaled with HTTP status codes as follows:
 {: title="Delete Stream Errors" #tabdeletestream"}
 
 ### Stream Status {#status}
-Within an Event Stream, events related to different Subject Principals MAY be
-managed independently. A Receiver MAY request Subject Principals to be added to
-or removed from a stream by Updating the Stream Status
-({{updating-a-streams-status}}) and specifying the Subject in the request.
+Event Streams are managed independently. A Receiver MAY request that events from a
+stream be interrupted by Updating the Stream Status ({{updating-a-streams-status}}).
 
-A Transmitter MAY decide to enable, pause or disable updates about a Subject
+A Transmitter MAY decide to enable, pause or disable updates from a stream
 independently of an update request from a Receiver. If a Transmitter decides to
-start or stop events for a Subject then the Transmitter MUST do the following
+start or stop events for a stream then the Transmitter MUST do the following
 according to the status of the stream.
 
 If the stream is:
@@ -1435,10 +1450,6 @@ The Stream Status method takes the following parameters:
 stream_id
 
 > REQUIRED. The stream whose status is being queried.
-
-subject
-
-> OPTIONAL. The subject for which the stream status is requested.
 
 On receiving a valid request the Event Transmitter responds with a 200 OK
 response containing a [JSON][RFC7159] object with the following attributes:
@@ -1537,7 +1548,7 @@ Errors are signaled with HTTP status codes as follows:
 |------|-------------|
 | 401  | if authorization failed or it is missing |
 | 403  | if the Event Receiver is not allowed to read the stream status |
-| 404  | if there is no Event Stream with the given "stream_id" for this Event Receiver, or if the Subject specified is invalid or if the Receiver is not authorized to get status for the specified Subject. |
+| 404  | if there is no Event Stream with the given "stream_id" for this Event Receiver |
 {: title="Read Stream Status Errors" #tabreadstatus}
 
 Examples:
@@ -1549,12 +1560,6 @@ Examples:
    MAY respond with a 403 error status.
 3. If the Receiver requests the status for a stream that does not exist then the
    Transmitter MUST respond with a 404 error status.
-4. If the Receiver requests the status for a specific Subject, but the
-   Transmitter policy does not permit the Receiver to read the status of that
-   Subject, then the Transmitter MAY respond with a 404 error status in order
-   to not reveal the policy decision.
-5. If the specified Subject is invalid then the Transmitter MUST respond with a
-   404 error status.
 
 #### Updating a Stream's Status {#updating-a-streams-status}
 An Event Receiver updates the current status of a stream by making an HTTP POST
@@ -1569,17 +1574,13 @@ status
 
 > REQUIRED. The new status of the Event Stream.
 
-subject
-
-> OPTIONAL. The Subject to which the new status applies.
-
 reason
 
 > OPTIONAL. A short text description that explains the reason for the change.
 
 On receiving a valid request the Event Transmitter responds with a "200 OK"
 response containing a [JSON][RFC7159] representation of the updated stream
-status in the body.
+status in the body, using the same fields as described in the request.
 
 The following is a non-normative example request to update an Event Stream’s
 status:
@@ -1596,8 +1597,8 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 ~~~
 {: title="Example: Update Stream Status Request Without Optional Fields" #figupdatestatusreq}
 
-The following is a non-normative example of an Update Stream Status request with
-optional fields:
+The following is a non-normative example of an Update Stream Status request with an
+optional reason:
 
 ~~~ http
 POST /ssf/status HTTP/1.1
@@ -1618,7 +1619,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
   "reason": "Disabled by administrator action."
 }
 ~~~
-{: title="Example: Update Stream Status Request With Optional Fields" #figupdatestatuswithsubjectreq}
+{: title="Example: Update Stream Status Request With Optional Reason" #figupdatestatuswithreasonreq}
 
 The following is a non-normative example response:
 
@@ -1646,15 +1647,15 @@ Errors are signaled with HTTP status codes as follows:
 | 400  | if the request body cannot be parsed or if the request is otherwise invalid |
 | 401  | if authorization failed or it is missing |
 | 403  | if the Event Receiver is not allowed to update the stream status |
-| 404  | if there is no Event Stream with the given "stream_id" for this Event Receiver, or if an invalid Subject is specified. |
+| 404  | if there is no Event Stream with the given "stream_id" for this Event Receiver |
 {: title="Update Stream Status Errors" #tabupdatestatus}
 
 
 Example:
 
-1. If a Receiver makes a request to update a stream to enable it for a specific
-   Subject, and the Transmitter is unable to decide whether or not to complete
-   the request, then the Transmitter MUST respond with a 202 status code.
+1. If a Receiver makes a request to update a stream status, and the Transmitter is
+   unable to decide whether or not to complete the request, then the Transmitter MUST
+   respond with a 202 status code.
 
 ### Subjects {#subjects}
 An Event Receiver can indicate to an Event Transmitter whether or not the
@@ -1920,26 +1921,24 @@ Event Receiver as a result of the above request:
 {: title="Example: Verification SET" #figverifyset}
 
 ### Stream Updated Event {#stream-updated-event}
-A Transmitter MAY change the stream status in reference to one or more Subjects
+A Transmitter MAY change the stream status
 without a request from a Receiver. The Transmitter sends an event of type
 "https://schemas.openid.net/secevent/ssf/event-type/stream-updated" to indicate
-that it has changed the status of the Event Stream for a specific Subject.
+that it has changed the status of the Event Stream.
 
 If a Transmitter decides to change the status of an Event Stream from "enabled"
 to either "paused" or "disabled", then the Transmitter MUST send this event to
 any Receiver that is currently "enabled" to receive events from this stream.
 
-If the Transmitter changes the status of the stream for a Subject from either
+If the Transmitter changes the status of the stream from either
 "paused" or "disabled" to "enabled", then it MUST send this event to any
-Receiver that has previously been enabled to receive events for the specified
-Subject.
+Receiver that has previously been enabled to receive events for the stream.
 
 The "stream-updated" event MAY contain the following claims:
 
 status
 
-> REQUIRED. Defines the new status of the stream for the Subject Identifier
-  specified in the Subject.
+> REQUIRED. Defines the new status of the stream.
 
 reason
 
@@ -2260,7 +2259,7 @@ method
 
 > "urn:ietf:rfc:8935"
 
-url
+endpoint_url
 
 > The URL where events are pushed through HTTP POST. This is set by the
   Receiver. If a Reciever is using multiple streams from a single Transmitter
@@ -2280,7 +2279,7 @@ method
 
 > "urn:ietf:rfc:8936"
 
-url
+endpoint_url
 
 > The URL where events can be retrieved from. This is specified by the
   Transmitter. These URLs MAY be reused across Receivers, but MUST be unique per
@@ -2306,5 +2305,4 @@ Copyright (c) 2021 The OpenID Foundation.
 The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, or other interested party a non-exclusive, royalty free, worldwide copyright license to reproduce, prepare derivative works from, distribute, perform and display, this Implementers Draft or Final Specification solely for the purposes of (i) developing specifications, and (ii) implementing Implementers Drafts and Final Specifications based on such documents, provided that attribution be made to the OIDF as the source of the material, but that such attribution does not indicate an endorsement by the OIDF.
 
 The technology described in this specification was made available from contributions from various sources, including members of the OpenID Foundation and others. Although the OpenID Foundation has taken steps to help ensure that the technology is available for distribution, it takes no position regarding the validity or scope of any intellectual property or other rights that might be claimed to pertain to the implementation or use of the technology described in this specification or the extent to which any license under such rights might or might not be available; neither does it represent that it has made any independent effort to identify any such rights. The OpenID Foundation and the contributors to this specification make no (and hereby expressly disclaim any) warranties (express, implied, or otherwise), including implied warranties of merchantability, non-infringement, fitness for a particular purpose, or title, related to this specification, and the entire risk as to implementing this specification is assumed by the implementer. The OpenID Intellectual Property Rights policy requires contributors to offer a patent promise not to assert certain patent claims against other contributors and against implementers. The OpenID Foundation invites any interested party to bring to its attention any copyrights, patents, patent applications, or other proprietary rights that may cover technology that may be required to practice this specification.
-
 
