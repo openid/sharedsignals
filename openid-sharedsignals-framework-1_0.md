@@ -818,7 +818,7 @@ events_requested
 > **Receiver-Supplied**, An array of URIs identifying the set of events that
   the Receiver requested. A Receiver SHOULD request only the events that it
   understands and it can act on. This is configurable by the Receiver. A
-  Transmitter MUST ignore any array values that it does not understand.
+  Transmitter MUST ignore any array values that it does not understand. This MUST not be an empty list.
 
 events_delivered
 
@@ -878,7 +878,7 @@ the Event Transmitter responds with a "201 Created" response containing a
 The HTTP POST request MAY contain the Receiver-Supplied values of the Stream
 Configuration ({{stream-config}}) object:
 
-* `events_requested`
+* `events_requested` : This MUST not be an empty list
 * `delivery` : Note that in the case of the POLL method, the `endpoint_url` value is
   supplied by the Transmitter.
 * `format`
@@ -1154,7 +1154,7 @@ HTTP PATCH request to the Configuration Endpoint. The PATCH body contains a
 [JSON][RFC7159] representation of the stream configuration properties to change. On
 receiving a valid request the Event Transmitter responds with a "200 OK"
 response containing a [JSON][RFC7159] representation of the entire updated stream
-configuration in the body.
+configuration in the body. An event receiver MUST not PATCH `events_requested` to an empty list.
 
 The stream_id property MUST be present in the request. Other properties
 MAY be present in the request. Any Receiver-Supplied property present in the
@@ -1244,7 +1244,7 @@ JSON {{RFC7159}} representation of the updated stream configuration in the body.
 The stream_id and the full set of Receiver-Supplied properties MUST be present
 in the PUT body, not only the ones that are specifically intended to be changed.
 Missing Receiver-Supplied properties MUST be interpreted as requested to be
-deleted. Event Receivers MAY read the configuration first, modify the JSON
+deleted. Event receiver MUST not request `events_requested` to be an empty array. Event Receivers MAY read the configuration first, modify the JSON
 {{RFC7159}} representation, then make a replacement request.
 
 Transmitter-Supplied properties besides the stream_id MAY be present,
