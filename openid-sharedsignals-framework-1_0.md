@@ -840,12 +840,6 @@ min_verification_interval
   MAY respond with a 429 status code. An Event Transmitter SHOULD NOT respond
   with a 429 status code if an Event Receiver is not exceeding this frequency.
 
-format
-
-> **Receiver-Supplied**, The Subject Identifier Format that the Receiver wants
-  for the events. If not set then the Transmitter might decide to use a type
-  that discloses more information than necessary.
-
 TODO: consider adding a IANA Registry for stream configuration metadata, similar
 to Section 7.1.1 of {{OAUTH-DISCOVERY}}. This would allow other specs to add to
 the stream configuration.
@@ -864,7 +858,6 @@ Configuration ({{stream-config}}) object:
 * `events_requested`
 * `delivery` : Note that in the case of the POLL method, the `url` value is
   supplied by the Transmitter.
-* `format`
 
 If the request does not contain the `delivery` property, then the Transmitter
 MUST assume that the `method` is "urn:ietf:rfc:8936" (poll). The
@@ -887,8 +880,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
     "urn:example:secevent:events:type_2",
     "urn:example:secevent:events:type_3",
     "urn:example:secevent:events:type_4"
-  ],
-  "format": "email"
+  ]
 }
 ~~~
 {: #figcreatestreamreq title="Example: Create Event Stream Request"}
@@ -923,8 +915,7 @@ Content-Type: application/json
   "events_delivered": [
     "urn:example:secevent:events:type_2",
     "urn:example:secevent:events:type_3"
-  ],
-  "format": "email"
+  ]
 }
 ~~~
 {: #figcreatestreamresp title="Example: Create Stream Response"}
@@ -993,8 +984,7 @@ Cache-Control: no-store
   "events_delivered": [
     "urn:example:secevent:events:type_2",
     "urn:example:secevent:events:type_3"
-  ],
-  "format": "complex"
+  ]
 }
 ~~~
 {: title="Example: Read Stream Configuration Response" #figreadconfigresp}
@@ -1041,8 +1031,7 @@ Cache-Control: no-store
     "events_delivered": [
       "urn:example:secevent:events:type_2",
       "urn:example:secevent:events:type_3"
-    ],
-    "format": "iss_sub"
+    ]
   },
   {
     "stream_id": "50b2d39934264897902c0581ba7c21a3",
@@ -1068,8 +1057,7 @@ Cache-Control: no-store
     "events_delivered": [
       "urn:example:secevent:events:type_2",
       "urn:example:secevent:events:type_3"
-    ],
-    "format": "opaque"
+    ]
   }
 ]
 ~~~
@@ -1263,8 +1251,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
     "urn:example:secevent:events:type_2",
     "urn:example:secevent:events:type_3",
     "urn:example:secevent:events:type_4"
-  ],
-  "format": "did"
+  ]
 }
 ~~~
 {: title="Example: Replace Stream Configuration Request" #figreplaceconfigreq}
@@ -1300,8 +1287,7 @@ Cache-Control: no-store
   "events_delivered": [
     "urn:example:secevent:events:type_2",
     "urn:example:secevent:events:type_3"
-  ],
-  "format": "did"
+  ]
 }
 ~~~
 {: title="Example: Replace Stream Configuration Response" #figreplaceconfigresp}
