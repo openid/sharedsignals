@@ -822,10 +822,7 @@ events_requested
 
 events_delivered
 
-> **Transmitter-Supplied**, An array of URIs which is the intersection of
-  "events_supported" and "events_requested". These events MAY be delivered over
-  the Event Stream. A Receiver MUST rely on the values received in this field
-  to understand which event types it can expect from the Transmitter.
+> **Transmitter-Supplied**, In most cases, an array of URIs which is the intersection of "events_supported" and "events_requested" but in certain cases, the transmitter may reserve rights to deliver events that the receiver may not be privy to. These events MAY be delivered over the Event Stream. A Receiver MUST rely on the values received in this field to understand which event types it can expect from the Transmitter.
 
 delivery
 
