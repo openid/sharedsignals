@@ -857,12 +857,6 @@ min_verification_interval
   MAY respond with a 429 status code. An Event Transmitter SHOULD NOT respond
   with a 429 status code if an Event Receiver is not exceeding this frequency.
 
-format
-
-> **Receiver-Supplied**, The Subject Identifier Format that the Receiver wants
-  for the events. If not set then the Transmitter might decide to use a type
-  that discloses more information than necessary.
-
 TODO: consider adding a IANA Registry for stream configuration metadata, similar
 to Section 7.1.1 of {{RFC8414}}. This would allow other specs to add to
 the stream configuration.
@@ -881,7 +875,6 @@ Configuration ({{stream-config}}) object:
 * `events_requested`
 * `delivery` : Note that in the case of the POLL method, the `endpoint_url` value is
   supplied by the Transmitter.
-* `format`
 
 If the request does not contain the `delivery` property, then the Transmitter
 MUST assume that the `method` is "urn:ietf:rfc:8936" (poll). The
