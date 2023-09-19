@@ -659,7 +659,9 @@ Content-Type: application/json
     "https://tr.example.com/jwks.json",
   "delivery_methods_supported": [
     "urn:ietf:rfc:8935",
-    "urn:ietf:rfc:8936"],
+    "urn:ietf:rfc:8936",
+    "urn:ietf:rfc:8935:receive",
+    "urn:ietf:rfc:8936:receive"],
   "configuration_endpoint":
     "https://tr.example.com/ssf/mgmt/stream",
   "status_endpoint":
