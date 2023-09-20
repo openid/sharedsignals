@@ -38,7 +38,7 @@ normative:
   NIST-AUTH:
     target: https://pages.nist.gov/800-63-3/sp800-63-3.html
     title: "Digital Identity Guidelines, Authentication and Lifecycle Management"
-    author: 
+    author:
       -
         ins: P. Grassi
         name: Paul Grassi
@@ -52,7 +52,7 @@ normative:
   NIST-FED:
     target: https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-63c.pdf
     title: "Digital Identity Guidelines, Federation and Assertions"
-    author: 
+    author:
       -
         ins: P. A. Grassi
         name: Paul A. Grassi
@@ -68,7 +68,7 @@ normative:
       -
         ins: E. M. Nadeau
         name: Ellen M. Nadeau
-  NIST-IDPROOF: 
+  NIST-IDPROOF:
     target: https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-63a.pdf
     title: "Digital Identity Guidelines, Enrollment and Identity Proofing"
     author:
@@ -110,10 +110,10 @@ normative:
         name: John Bradley
         org: Yubico
     date: 2021-05
-  WebAuthn: 
+  WebAuthn:
     target: https://www.w3.org/TR/webauthn/
     title: "Web Authentication: An API for accessing Public Key Credentials Level 2"
-    author: 
+    author:
       -
         ins: D. Balfanz
         name: Dirk Balfanz
@@ -139,9 +139,9 @@ conform to the SSF Profile. This document specifies the event-types required to
 achieve this goal.
 
 ## Notational Considerations
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", 
-"SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this 
-document are to be interpreted as described in BCP 14 {{RFC2119}} {{RFC8174}} 
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+"SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this
+document are to be interpreted as described in BCP 14 {{RFC2119}} {{RFC8174}}
 when, and only when, they appear in all capitals, as shown here.
 
 # Optional Event Claims {#optional-event-claims}
@@ -150,7 +150,7 @@ definition.
 
 event_timestamp
 : OPTIONAL, JSON number: the time at which the event described by this SET
-  occurred. Its value is a JSON number representing the number of seconds 
+  occurred. Its value is a JSON number representing the number of seconds
   from 1970-01-01T0:0:0Z as measured in UTC until the date/time.
 
 initiating_entity
@@ -210,15 +210,15 @@ Event Type URI:
 
 `https://schemas.openid.net/secevent/caep/event-type/session-revoked`
 
-Session Revoked signals that the session identified by the subject has been 
-revoked. The explicit session identifier may be directly referenced in the 
+Session Revoked signals that the session identified by the subject has been
+revoked. The explicit session identifier may be directly referenced in the
 subject or other properties of the session may be included to allow the
 receiver to identify applicable sessions.
 
-When a Complex Claim is used as the subject, the revocation event applies 
+When a Complex Claim is used as the subject, the revocation event applies
 to any session derived from matching those combined claims.
 
-The actual reason why the session was revoked might be specified with the 
+The actual reason why the session was revoked might be specified with the
 nested `reason_admin` and/or `reason_user` claims described in {{optional-event-claims}}.
 
 ### Event-Specific Claims {#session-revoked-claims}
@@ -260,6 +260,7 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
             "subject": {
+                "format": "complex",
                 "session": {
                   "format": "opaque",
                   "id": "dMTlD|1600802906337.16|16008.16"
@@ -298,6 +299,7 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
             "subject": {
+                "format": "complex",
                 "user": {
                     "format": "iss_sub",
                     "iss": "https://idp.example.com/123456789/",
@@ -333,10 +335,10 @@ Event Type URI:
 
 `https://schemas.openid.net/secevent/caep/event-type/token-claims-change`
 
-Token Claims Change signals that a claim in a token, identified by the 
-subject claim, has changed. 
+Token Claims Change signals that a claim in a token, identified by the
+subject claim, has changed.
 
-The actual reason why the claims change occurred might be specified with the 
+The actual reason why the claims change occurred might be specified with the
 nested `reason_admin` and/or `reason_user` claims made in {{optional-event-claims}}.
 
 ### Event-Specific Claims {#token-claims-change-claims}
@@ -435,14 +437,14 @@ Event Type URI:
 
 `https://schemas.openid.net/secevent/caep/event-type/credential-change`
 
-The Credential Change event signals that a credential was created, changed, 
+The Credential Change event signals that a credential was created, changed,
 revoked or deleted. Credential Change scenarios include:
 
   - password/PIN change/reset
   - certificate enrollment, renewal, revocation and deletion
   - second factor / passwordless credential enrollment or deletion (U2F, FIDO2, OTP, app-based)
 
-The actual reason why the credential change occurred might be specified with the 
+The actual reason why the credential change occurred might be specified with the
 nested `reason_admin` and/or `reason_user` claims made in {{optional-event-claims}}.
 
 ### Event-Specific Claims {#credential-change-claims}
@@ -522,19 +524,19 @@ Event Type URI:
 
 `https://schemas.openid.net/secevent/caep/event-type/assurance-level-change`
 
-The Assurance Level Change event signals that there has been a change in 
-authentication method since the initial user login. This change can be from 
-a weak authentication method to a strong authentication method, or vice versa. 
+The Assurance Level Change event signals that there has been a change in
+authentication method since the initial user login. This change can be from
+a weak authentication method to a strong authentication method, or vice versa.
 
-In the first scenario, Assurance Level Change will an increase, while in the 
-second scenario it will be a decrease. For example, a user can start a session 
-with Service Provider A using single factor authentication (such as a password). 
-The user can then open another session with Service Provider B using 
-two-factor authentication (such as OTP). In this scenario an increase 
-Assurance Level Change event will signal to Service Provider A that user has 
+In the first scenario, Assurance Level Change will an increase, while in the
+second scenario it will be a decrease. For example, a user can start a session
+with Service Provider A using single factor authentication (such as a password).
+The user can then open another session with Service Provider B using
+two-factor authentication (such as OTP). In this scenario an increase
+Assurance Level Change event will signal to Service Provider A that user has
 authenticated with a stronger authentication method.
 
-The actual reason why the assurance level changed might be specified with the 
+The actual reason why the assurance level changed might be specified with the
 nested `reason_admin` and/or `reason_user` claims made in {{optional-event-claims}}.
 
 ### Event-Specific Claims {#assurance-level-change-claims}
@@ -627,7 +629,7 @@ Event Type URI:
 
 Device Compliance Change signals that a device's compliance status has changed.
 
-The actual reason why the status change occurred might be specified with the 
+The actual reason why the status change occurred might be specified with the
 nested `reason_admin` and/or `reason_user` claims made in {{optional-event-claims}}.
 
 ### Event-Specific Claims {#device-compliance-change-claims}
@@ -662,6 +664,7 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/device-compliance-change": {
             "subject": {
+                "format": "complex",
                 "device": {
                     "format": "iss_sub",
                     "iss": "https://idp.example.com/123456789/",
