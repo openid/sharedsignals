@@ -869,6 +869,13 @@ an HTTP POST request to the Configuration Endpoint. On receiving a valid request
 the Event Transmitter responds with a "201 Created" response containing a
 [JSON][RFC7159] representation of the stream’s configuration in the body.
 
+If a stream already exists, and the Transmitter allows multiple streams with the
+same Receiver, the Event Transmitter MUST respond with a new stream ID. If the
+Transmitter does not allow multiple streams with the same Receiver, it MUST respond
+respond with HTTP status code "409 Conflict". The Receiver MAY then GET the
+existing stream configuration and, if desired, use PATCH or PUT to update or
+replace the existing stream configuration.
+
 The HTTP POST request MAY contain the Receiver-Supplied values of the Stream
 Configuration ({{stream-config}}) object:
 
@@ -945,6 +952,7 @@ Errors are signaled with HTTP status codes as follows:
 | 400  | if the request cannot be parsed |
 | 401  | if authorization failed or it is missing |
 | 403  | if the Event Receiver is not allowed to create a stream |
+| 409  | if the transmitter does not support multiple streams per receiver |
 {: title="Create Stream Errors" #tablecreatestream}
 
 
