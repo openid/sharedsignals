@@ -819,7 +819,7 @@ events_requested
   the Receiver requested. A Receiver SHOULD request only the events that it
   understands and it can act on. This is configurable by the Receiver. A
   Transmitter MUST ignore any array values that it does not understand. This
-  array MUST NOT be empty.
+  array SHOULD NOT be empty.
 
 events_delivered
 
