@@ -61,6 +61,12 @@ contributor:
         contribution: |
           Steve defined the format field of Complex Subjects
 
+      -
+        ins: A. Deshpande
+        name: Apoorva Deshpande
+        org: Okta
+        email: apoorva.deshpande@okta.com
+
 normative:
   CLIENTCRED:
     author:
@@ -1163,7 +1169,7 @@ The stream_id property MUST be present in the request. Other properties
 MAY be present in the request. Any Receiver-Supplied property present in the
 request MUST be updated by the Transmitter. Any properties missing in the
 request MUST NOT be changed by the Transmitter. If `events_requested` property is
-included in the request, it MUST NOT be an empty array.
+included in the request, it SHOULD NOT be an empty array.
 
 Transmitter-Supplied properties beside the stream_id MAY be present,
 but they MUST match the expected value. Missing Transmitter-Supplied
@@ -1250,7 +1256,7 @@ in the PUT body, not only the ones that are specifically intended to be changed.
 Missing Receiver-Supplied properties MUST be interpreted as requested to be
 deleted. Event Receivers MAY read the configuration first, modify the JSON
 {{RFC7159}} representation, then make a replacement request. If `events_requested` 
-property is included in the request, it MUST NOT be an empty array.
+property is included in the request, it SHOULD NOT be an empty array.
 
 Transmitter-Supplied properties besides the stream_id MAY be present,
 but they MUST match the expected value. Missing Transmitter-Supplied
