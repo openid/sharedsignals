@@ -865,6 +865,12 @@ min_verification_interval
   MAY respond with a 429 status code. An Event Transmitter SHOULD NOT respond
   with a 429 status code if an Event Receiver is not exceeding this frequency.
 
+description
+
+> **Receiver-Supplied**, An optinal string to describe the properties of the stream.
+  This is useful in multi stream systems to identify the stream for human actors. The
+  transmitter may truncate the string beyond allowed max length.
+
 TODO: consider adding a IANA Registry for stream configuration metadata, similar
 to Section 7.1.1 of {{RFC8414}}. This would allow other specs to add to
 the stream configuration.
@@ -912,7 +918,8 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
     "urn:example:secevent:events:type_2",
     "urn:example:secevent:events:type_3",
     "urn:example:secevent:events:type_4"
-  ]
+  ],
+  "description" : "Stream for Receiver A using events type_2, type_3, type_4"
 }
 ~~~
 {: #figcreatestreamreq title="Example: Create Event Stream Request"}
@@ -947,7 +954,8 @@ Content-Type: application/json
   "events_delivered": [
     "urn:example:secevent:events:type_2",
     "urn:example:secevent:events:type_3"
-  ]
+  ],
+  "description" : "Stream for Receiver A using events type_2, type_3, type_4"
 }
 ~~~
 {: #figcreatestreamresp title="Example: Create Stream Response"}
@@ -1017,7 +1025,8 @@ Cache-Control: no-store
   "events_delivered": [
     "urn:example:secevent:events:type_2",
     "urn:example:secevent:events:type_3"
-  ]
+  ],
+  "description" : "Stream for Receiver A using events type_2, type_3, type_4"
 }
 ~~~
 {: title="Example: Read Stream Configuration Response" #figreadconfigresp}
@@ -1090,7 +1099,8 @@ Cache-Control: no-store
     "events_delivered": [
       "urn:example:secevent:events:type_2",
       "urn:example:secevent:events:type_3"
-    ]
+    ],
+    "description" : "Stream for Receiver A using events type_2, type_3, type_4"
   }
 ]
 ~~~
@@ -1192,6 +1202,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
     "urn:example:secevent:events:type_3",
     "urn:example:secevent:events:type_4"
   ],
+  "description" : "Stream for Receiver B using events type_2, type_3, type_4"
 }
 ~~~
 {: title="Example: Update Stream Configuration Request" #figupdateconfigreq}
@@ -1227,7 +1238,8 @@ Cache-Control: no-store
   "events_delivered": [
     "urn:example:secevent:events:type_2",
     "urn:example:secevent:events:type_3"
-  ]
+  ],
+  "description" : "Stream for Receiver B using events type_2, type_3, type_4"
 }
 ~~~
 {: title="Example: Update Stream Configuration Response" #figupdateconfigresp}
@@ -1286,7 +1298,8 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
     "urn:example:secevent:events:type_2",
     "urn:example:secevent:events:type_3",
     "urn:example:secevent:events:type_4"
-  ]
+  ],
+  "description" : "Stream for Receiver C"
 }
 ~~~
 {: title="Example: Replace Stream Configuration Request" #figreplaceconfigreq}
@@ -1322,7 +1335,8 @@ Cache-Control: no-store
   "events_delivered": [
     "urn:example:secevent:events:type_2",
     "urn:example:secevent:events:type_3"
-  ]
+  ],
+  "description" : "Stream for Receiver C"
 }
 ~~~
 {: title="Example: Replace Stream Configuration Response" #figreplaceconfigresp}
