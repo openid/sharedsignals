@@ -1776,7 +1776,7 @@ delivery is working, including signature verification and encryption.
 A Transmitter MAY send a Verification Event at any time, even if one was
 not requested by the Event Receiver.
 
-A Transmitter MUST respond to verification event requests even if the event is not present in the `events_requested` and / or `events_supported` fields in the Stream Configuration ({{stream-config}}).
+A Transmitter MAY respond to verification event requests even if the event is not present in the `events_requested` and / or `events_supported` fields in the Stream Configuration ({{stream-config}}).
 
 
 #### Verification Event {#verification-event}
