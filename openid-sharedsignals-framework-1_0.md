@@ -247,7 +247,7 @@ Subject Principals are identified by Subject Members defined below.
 A Subject Member of a SSF event describes a subject of the event. A top-level claim named `sub_id` MUST be used to describe the primary subject of the event.
 
 ### Existing CAEP and RISC Events
-Event types already defined in the CAEP ({{CAEP}}) and RISC ({{RISC}}) specifications MAY use a `subject` field within the `events` claim of the SSF event to describe the primary Subject Principal of the event. SSF Transmitters SHOULD include the top-level `sub_id` claim even for these existing event types.
+Event types already defined in the CAEP ({{CAEP}}) and RISC ({{RISC}}) specifications MAY use a `subject` field within the `events` claim of the SSF event to describe the primary Subject Principal of the event. SSF Transmitters MUST include the top-level `sub_id` claim even for these existing event types.
 
 ### New Event Types
 New event types MUST use the top-level `sub_id` claim and MUST NOT use the `subject` field in the `events` claim to describe the primary Subject Principal.
@@ -1522,37 +1522,6 @@ Cache-Control: no-store
 ~~~
 {: title="Example: Check Stream Status Response" #figstatusresp}
 
-The following is a non-normative example request to check an event stream's
-status for a specific subject:
-
-~~~ http
-GET /ssf/status?stream_id=f67e39a0a4d34d56b3aa1bc4cff0069f&subject=<url-encoded-subject> HTTP/1.1
-Host: transmitter.example.com
-Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
-~~~
-{: title="Example: Check Stream Status Request with Subject" #figstatuswithsubjectreq}
-
-The following is a non-normative example response with a Subject claim:
-
-~~~
-HTTP/1.1 200 OK
-Content-Type: application/json
-Cache-Control: no-store
-
-{
-  "status": "enabled",
-  "sub_id": {
-    "format": "complex",
-    "tenant" : {
-      "format" : "iss_sub",
-      "iss" : "http://example.com/idp1",
-      "sub" : "1234"
-    }
-  }
-}
-~~~
-{: title="Example: Check Stream Status Response" #figstatuswithsubjectresp}
-
 Errors are signaled with HTTP status codes as follows:
 
 | Code | Description |
@@ -1619,14 +1588,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 {
   "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
   "status": "paused",
-  "sub_id": {
-    "format": "complex",
-    "tenant" : {
-      "format" : "iss_sub",
-      "iss" : "http://example.com/idp1",
-      "sub" : "1234"
-    }
-  },
+  "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
   "reason": "Disabled by administrator action."
 }
 ~~~
@@ -1642,10 +1604,6 @@ Cache-Control: no-store
 {
   "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
   "status": "paused",
-  "sub_id": {
-    "format" : "email",
-    "email" : "user@example.com"
-  }
 }
 ~~~
 {: title="Example: Update Stream Status Response" #figupdatestatusresp}
@@ -1960,42 +1918,12 @@ As with any SSF Event, this event has a top-level `sub_id` claim:
 
 sub_id
 
-> REQUIRED. The top-level `sub_id` claim specifies the Subject Principal for whom the status has been updated.
-  If the event applies to the entire stream, the value of the `sub_id` field
-  MUST be of format `opaque`, and its `id` value MUST be the unique ID of the
-  stream.
+> REQUIRED. The top-level `sub_id` claim specifies the Stream Id for which the status has been updated. The value of the `sub_id` field MUST be of format `opaque`, and its `id` value MUST be the unique ID of the stream.
 
 > Note that the subject that identifies a stream itself is always implicitly
   added to the stream and MAY NOT be removed from the stream.
 
-Below is a non-normative example of a `stream-updated` event with a specific subject.
-
-~~~ json
-{
-  "jti": "123456",
-  "iss": "https://transmitter.example.com",
-  "aud": "receiver.example.com",
-  "iat": 1493856000,
-  "sub_id": {
-      "format" : "complex",
-      "tenant" : {
-          "format": "iss_sub",
-          "iss" : "http://example.com/idp1",
-          "sub" : "1234"
-      }
-  },
-  "events": {
-    "https://schemas.openid.net/secevent/ssf/event-type/stream-updated": {
-      "status": "paused",
-      "reason": "License is not valid"
-    }
-  }
-}
-~~~
-{: title="Example: Stream Updated SET with tenant principal" #figstreamupdatedset}
-
-> Below is a non-normative example of a `stream-updated` event with a stream
-  subject.
+> Below is a non-normative example of a `stream-updated` event.
 
 ~~~ json
 {
@@ -2015,7 +1943,7 @@ Below is a non-normative example of a `stream-updated` event with a specific sub
   }
 }
 ~~~
-{: title="Example: Stream Updated SET with stream as the subject of single-stream Transmitter" #figstreamupdatedstreamset}
+{: title="Example: Stream Updated SET" #figstreamupdatedset}
 
 # Authorization {#management-api-auth}
 HTTP API calls from a Receiver to a Transmitter SHOULD be authorized by
