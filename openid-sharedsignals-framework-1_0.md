@@ -1776,7 +1776,7 @@ delivery is working, including signature verification and encryption.
 A Transmitter MAY send a Verification Event at any time, even if one was
 not requested by the Event Receiver.
 
-A Transmitter MAY respond to verification event requests even if the event is not present in the `events_requested` and / or `events_supported` fields in the Stream Configuration ({{stream-config}}).
+A Transmitter MAY respond to verification event requests even if the event is not present in the `events_supported`, `events_requested` and / or `events_delivered` fields in the Stream Configuration ({{stream-config}}).
 
 
 #### Verification Event {#verification-event}
@@ -1905,7 +1905,7 @@ If the Transmitter changes the status of the stream from either
 "paused" or "disabled" to "enabled", then it MUST send this event to any
 Receiver that has previously been enabled to receive events for the stream.
 
-A Transmitter MAY send a Stream Updated event even if the event is not present in the `events_requested` and / or `events_supported` fields in the Stream Configuration ({{stream-config}}).
+A Transmitter MAY send a Stream Updated event even if the event is not present in the `events_supported`, `events_requested` and / or `events_delivered` fields in the Stream Configuration ({{stream-config}}).
 
 The "stream-updated" event contains the following claims:
 
