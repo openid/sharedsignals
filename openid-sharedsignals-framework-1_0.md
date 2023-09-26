@@ -1712,8 +1712,11 @@ configured correctly upon successful receipt of the event. The acknowledgment of
 a Verification Event also confirms to the Event Transmitter that end-to-end
 delivery is working, including signature verification and encryption.
 
-An Event Transmitter MAY send a Verification Event at any time, even if one was
+A Transmitter MAY send a Verification Event at any time, even if one was
 not requested by the Event Receiver.
+
+A Transmitter MUST respond to verification event requests even if the event is not present in the `events_requested` and / or `events_supported` fields in the Stream Configuration ({{stream-config}}).
+
 
 #### Verification Event {#verification-event}
 The Verification Event is a standard SET with the following attributes:
@@ -1845,7 +1848,9 @@ If the Transmitter changes the status of the stream from either
 "paused" or "disabled" to "enabled", then it MUST send this event to any
 Receiver that has previously been enabled to receive events for the stream.
 
-The "stream-updated" event MAY contain the following claims:
+A Transmitter MAY send a Stream Updated event even if the event is not present in the `events_requested` and / or `events_supported` fields in the Stream Configuration ({{stream-config}}).
+
+The "stream-updated" event contains the following claims:
 
 status
 
