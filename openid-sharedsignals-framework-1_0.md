@@ -1588,7 +1588,6 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 {
   "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
   "status": "paused",
-  "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
   "reason": "Disabled by administrator action."
 }
 ~~~
