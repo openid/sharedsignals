@@ -29,7 +29,7 @@ jobs:
       - name: Render HTML
         run: xml2rfc openid-sharedsignals-versioning-1_0.xml --html -o openid-sharedsignals-versioning-1_0.html
       - name: Render Text
-        run: xml2rfc openid-sharedsignals-versioning-1_0.xml -text -o openid-sharedsignals-versioning-1_0.txt
+        run: xml2rfc openid-sharedsignals-versioning-1_0.xml --text -o openid-sharedsignals-versioning-1_0.txt
       - name: Convert sharedsignals md to xml
         run: kramdown-rfc2629 openid-sharedsignals-framework-1_0.md > openid-sharedsignals-framework-1_0.xml
       - name: Render HTML
