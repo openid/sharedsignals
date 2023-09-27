@@ -181,6 +181,15 @@ normative:
     target: https://openid.net/specs/openid-risc-profile-specification-1_0.html
     title: OpenID RISC Profile Specification 1.0 - draft 02
 
+  VERSIONING:
+    author:
+    -
+      ins: A. Tulshibagwale
+      name: Atul Tulshibagwale
+    date: August 2023
+    target: https://openid.github.io/sharedsignals/openid-sharedsignals-versioning-1_0.html
+    title: Shared Signals Versioning Proposal
+
 informative:
   USECASES:
     author:
@@ -563,6 +572,10 @@ configuration information.
 
 Transmitters have metadata describing their configuration:
 
+version
+
+> OPTIONAL. A string representation of a decimal number including a decimal point and at least one number after the decimal point even if it is 0. This indicates the version of the specification the Transmitter adheres to. The version number is determined according to the Versioning ({{VERSIONING}}) specification. The version number of the current specification is "1.0". If the `version` field is missing in the Transmitter Configuration Metadata, then the version number is assumed to be "0.1".
+
 issuer
 
 > REQUIRED. URL using the https scheme with no query or fragment component
@@ -720,6 +733,8 @@ HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
+  "version":
+    "1.0",
   "issuer":
     "https://tr.example.com",
   "jwks_uri":

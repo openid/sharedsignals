@@ -24,6 +24,12 @@ jobs:
         run: gem install kramdown-rfc
       - name: Install xml2rfc
         run: pip install xml2rfc
+      - name: Convert versioning md to xml
+        run: kramdown-rfc2629 openid-sharedsignals-versioning-1_0.md > openid-sharedsignals-versioning-1_0.xml
+      - name: Render HTML
+        run: xml2rfc openid-sharedsignals-versioning-1_0.xml --html -o openid-sharedsignals-versioning-1_0.html
+      - name: Render Text
+        run: xml2rfc openid-sharedsignals-versioning-1_0.xml -text -o openid-sharedsignals-versioning-1_0.txt
       - name: Convert sharedsignals md to xml
         run: kramdown-rfc2629 openid-sharedsignals-framework-1_0.md > openid-sharedsignals-framework-1_0.xml
       - name: Render HTML
@@ -45,6 +51,8 @@ jobs:
         with:
           name: output
           path: |
+            openid-sharedsignals-versioning-1_0.html
+            openid-sharedsignals-versioning-1_0.txt
             openid-sharedsignals-framework-1_0.html
             openid-sharedsignals-framework-1_0.txt
             openid-risc-profile-specification-1_0.html
