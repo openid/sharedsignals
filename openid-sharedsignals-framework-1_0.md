@@ -604,42 +604,39 @@ critical_subject_members
 
 > OPTIONAL. An array of member names in a Complex Subject which, if present in
   a Subject Member in an event, MUST be interpreted by a Receiver.
-  
-supported_scopes
 
-> OPTIONAL. A list of OAuth {{RFC6749}} scope names that the Transmitter supports for specific endpoints. The value of this field is a JSON object that has the endpoint names as keys, and arrays of scope name strings they support as their values. OAuth tokens obtained using any of the scopes defined here MUST be accepted by the specified endpoint. Any key that is not defined as an endpoint in the Transmitter Configuration Metadata MUST be ignored. If the supported_scopes member is present in the metadata and an endpoint is not listed as a key, then that endpoint MUST not require OAuth for authorization.
+authorization_schemes
 
-authorization_servers
+> OPTIONAL. An array of JSON objects that specify the supported
+  authorization scheme properties defined in {{authorization-scheme}}.  To enable seamless discovery of
+  configurations, the service provider SHOULD, with the appropriate
+  security considerations, make the authorization_schemes attribute
+  publicly accessible without prior authentication.
 
-> OPTIONAL. An array of supported authorization servers and the scopes they support. Each element of the array is a Authorization Server Descriptor JSON object defined in the section {{authz-server-descriptor}} below. If the `supported_scopes` member is present in the metadata, then the `authorization_servers` MUST also be present, and it MUST provide a server location for every supported scope.
 
 TODO: consider adding a IANA Registry for metadata, similar to Section 7.1.1 of
 {{RFC8414}}. This would allow other specs to add to the metadata.
 
-### Authorization Server Descriptor {#authz-server-descriptor}
-An Authorization Server Descriptor is a JSON object that has two keys:
+### Authorization scheme {#authorization-scheme}
+SSF is an HTTP based signals sharing framework and is agnostic to the authentication and authorization schemes used to secure stream configuration APIs. It does not provide any SSF-specific authentication and authorization schemes but relies on the cooperating parties' mutual security considerations. The authorization scheme section of the metadata provides discovery information related to the transmitter's stream management APIs.
 
-scopes
+spec_urn  
 
-> REQUIRED. An array of scope names supported by the authorization server
+> REQUIRED. A URN that describes the specification of the protocol being used.
 
-servers
+The receiver will call the transmitter APIs by providing appropriate credentials as per the `spec_urn`.
 
-> REQUIRED. An array of authorization server URLs. This is the URL from which the Authorization Server Metadata MAY be obtained by following the process described in Section 3 of RFC8414 {{RFC8414}}
-
-The following is a non-normative example of an Authorization Server Descriptor
+The following is a non-normative example of the `spec_urn`
 
 ~~~ json
-{
-    "scopes" : ["scope1", "scope2"],
-    "servers": [
-        "https://server1.example/base/url",
-        "https://server2.example/base/url",
-        "https://server3.example/base/url"
-    ]
-}
+   {
+        "spec_urn": "urn:ietf:rfc:6749"
+   }
 ~~~
-{: #authz-descriptor-example title="Example Authorization Server Descriptor"}
+
+In this case, the receiver may obtain an access token using the Client
+Credential Grant {{CLIENTCRED}}, or any other method suitable for the Receiver and the
+Transmitter.
 
 ## Obtaining Transmitter Configuration Information
 
@@ -738,17 +735,14 @@ Content-Type: application/json
   "verification_endpoint":
     "https://tr.example.com/ssf/mgmt/verification",
   "critical_subject_members": [ "tenant", "user" ],
-  "supported_scopes":
+  "authorization_schemes":[
       {
-        "status_endpoint": ["status_scope"],
-        "configuration_endpoint": ["admin_scope", "status_scope"]
+        "spec_urn": "urn:ietf:rfc:6749"
       },
-  "authorization_servers": [
       {
-          "scopes": ["admin_scope", "status_scope"],
-          "servers": ["https://myauthzserver.example"]
+        "spec_urn": "urn:ietf:rfc:8705"
       }
-  ]
+    ]
 }
 ~~~
 {: #figdiscoveryresponse title="Example: Transmitter Configuration Response"}
@@ -1547,9 +1541,9 @@ Errors are signaled with HTTP status codes as follows:
 
 Examples:
 
-1. If a Receiver makes a request with an invalid OAuth token, then the
+1. If a Receiver makes an unauthorized request, then the
    Transmitter MUST respond with a 401 error status.
-2. If the Receiver presents a valid OAuth token, but the Transmitter policy
+2. If a Receiver makes an authorized request, but the Transmitter policy
    does not permit the Receiver from obtaining the status, then the Transmitter
    MAY respond with a 403 error status.
 3. If the Receiver requests the status for a stream that does not exist then the
@@ -1963,14 +1957,6 @@ sub_id
 ~~~
 {: title="Example: Stream Updated SET" #figstreamupdatedset}
 
-# Authorization {#management-api-auth}
-HTTP API calls from a Receiver to a Transmitter SHOULD be authorized by
-providing an OAuth 2.0 Access Token as defined by {{RFC6750}}.
-
-The receiver may obtain an access token using the Client
-Credential Grant {{CLIENTCRED}}, or any other method suitable for the Receiver and the
-Transmitter.
-
 # Security Considerations {#management-sec}
 
 ## Subject Probing {#management-sec-subject-probing}
@@ -2155,9 +2141,9 @@ The purpose is defense in depth against confusion with other JWTs, as described
 in Sections 4.5 and 4.6 of {{RFC8417}}.
 
 ### The "aud" Claim {#aud-claim}
-The "aud" claim can be a single value or an array. Each value SHOULD be the
-OAuth 2.0 client ID. Other values that uniquely identifies the Receiver to the
-Transmitter MAY be used, if the two parties have agreement on the format.
+The "aud" claim can be a single string or an array of strings. Values that 
+uniquely identify the Receiver to the Transmitter MAY be used, if the two parties
+have agreement on the format.
 
 More than one value can be present if the corresponding Receivers are known to
 the Transmitter to be the same entity, for example a web client and a mobile
