@@ -1442,20 +1442,20 @@ independently of an update request from a Receiver. If a Transmitter decides to
 start or stop events for a stream then the Transmitter MUST do the following
 according to the status of the stream.
 
-If the stream is:
+The allowed values of status are:
 
-Enabled
+enabled
 
 > the Transmitter MUST send a stream updated ({{stream-updated-event}}) event
   respectively to the Receiver within the Event Stream.
 
-Paused
+paused
 
 > the Transmitter SHOULD send a stream updated ({{stream-updated-event}}) after the Event Stream is
   re-started. A Receiver MUST assume that events may have been lost during the
   time when the event stream was paused.
 
-Disabled
+disabled
 
 > the Transmitter MAY send a stream updated ({{stream-updated-event}}) after the Event Stream is
   re-enabled.
@@ -1475,36 +1475,12 @@ response containing a [JSON][RFC7159] object with the following attributes:
 
 status
 
-> A string whose value MUST be one of the values described below.
+> A string whose value MUST be one of the values described above.
 
 reason
 
 > An OPTIONAL string whose value SHOULD express why the stream's status is set to
 the current value.
-
-The allowable "status" values are:
-
-enabled
-
-> The Transmitter MUST transmit events over the stream, according to the
-  stream’s configured delivery method.
-
-paused
-
-> The Transmitter MUST NOT transmit events over the stream. The transmitter
-  will hold any events it would have transmitted while paused, and SHOULD
-  transmit them when the stream’s status becomes "enabled". If a Transmitter
-  holds successive events that affect the same Subject Principal, then the
-  Transmitter MUST make sure that those events are transmitted in the order of
-  time that they were generated OR the Transmitter MUST send only the last events
-  that do not require the previous events affecting the same Subject Principal to
-  be processed by the Receiver, because the previous events are either cancelled
-  by the later events or the previous events are outdated.
-
-disabled
-
-> The Transmitter MUST NOT transmit events over the stream, and will not hold
-  any events for later transmission.
 
 The following is a non-normative example request to check an event stream’s
 status:
