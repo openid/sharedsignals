@@ -180,6 +180,11 @@ normative:
     date: April 2022
     target: https://openid.net/specs/openid-risc-profile-specification-1_0.html
     title: OpenID RISC Profile Specification 1.0 - draft 02
+  NAMINGCONVENTION:
+    author:
+    - name: OpenID Foundation
+    target: https://openid.net/wg/resources/naming-and-contents-of-specifications/
+    title: OpenID Naming and Content of Specifications
 
 informative:
   USECASES:
@@ -563,6 +568,28 @@ configuration information.
 
 Transmitters have metadata describing their configuration:
 
+spec_version
+
+> OPTIONAL. A version idenitfying the implementer's draft or final specification implemented by the Transmitter. This includes the numerical portion of the spec version as described in the document {{NAMINGCONVENTION}}. If absent, the Transmitter is assumed to conform to "1_0-ID1" version of the specification.
+
+>  The following is a non-normative example of Transmitter that implements the second implementer's draft of the Shared Signals Framework specification 1_0. 
+
+~~~ json
+   {
+        "spec_version": "1_0-ID2"
+   }
+~~~
+{: #figspecversionid2 title="Example spec_version referring to the 2nd implementer's draft of the 1_0 spec"}
+
+>  The following is a non-normative example of a Transmitter that implements the final specification of the Shared Signals Framework 1_0.
+
+~~~ json
+   {
+        "spec_version": "1_0"
+   }
+~~~
+{: #figspecversionfinal title="Example: spec_version referring to the final 1_0 spec"}
+
 issuer
 
 > REQUIRED. URL using the https scheme with no query or fragment component
@@ -633,6 +660,7 @@ The following is a non-normative example of the `spec_urn`
         "spec_urn": "urn:ietf:rfc:6749"
    }
 ~~~
+{: #figspecurn title="Example: `spec_urn` specifying the OAuth protocol for authorization"}
 
 In this case, the receiver may obtain an access token using the Client
 Credential Grant {{CLIENTCRED}}, or any other method suitable for the Receiver and the
@@ -717,6 +745,7 @@ HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
+  "spec_version": "1_0-ID2",
   "issuer":
     "https://tr.example.com",
   "jwks_uri":
