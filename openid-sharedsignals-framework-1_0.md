@@ -570,7 +570,7 @@ Transmitters have metadata describing their configuration:
 
 spec_version
 
-> OPTIONAL. A version idenitfying the implementer's draft or final specification implemented by the Transmitter. This includes the numerical portion of the spec version as described in the document {{NAMINGCONVENTION}}. If absent, the Transmitter is assumed to conform to "1_0-ID1" version of the specification.
+> OPTIONAL. A version identifying the implementer's draft or final specification implemented by the Transmitter. This includes the numerical portion of the spec version as described in the document {{NAMINGCONVENTION}}. If absent, the Transmitter is assumed to conform to "1_0-ID1" version of the specification.
 
 >  The following is a non-normative example of Transmitter that implements the second implementer's draft of the Shared Signals Framework specification 1_0. 
 
