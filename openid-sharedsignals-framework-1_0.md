@@ -1,5 +1,5 @@
 ---
-title: OpenID Shared Signals Framework Specification 1.0 - draft 03
+title: OpenID Shared Signals Framework Specification 1.0 - draft 02
 abbrev: SharedSignals
 docname: openid-sharedsignals-framework-1_0
 date: 2023-10-09
