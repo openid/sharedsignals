@@ -111,7 +111,7 @@ normative:
     date: November 2020
     target: https://www.rfc-editor.org/info/rfc8935
     title: Push-Based SET Token Delivery Using HTTP
-  IDTOKEN:
+  OpenID.Core:
     author:
     - ins: N. Sakimura
       name: Nat Sakimura
@@ -123,7 +123,7 @@ normative:
       name: Breno de Medeiros
     - ins: C. Mortimore
       name: Chuck Mortimore
-    date: April 2017
+    date: November 2014
     target: http://openid.net/specs/openid-connect-core-1_0.html#IDToken
     title: OpenID Connect Core 1.0 - ID Token
   OASIS.saml-core-2.0-os:
@@ -143,7 +143,9 @@ normative:
       name: Annabelle Backman
     - ins: M. Scurtescu
       name: Marius Scurtescu
-    date: May 2021
+    - ins: P. Jain
+      name: Prachi Jain
+    date: June 2023
     target: https://datatracker.ietf.org/doc/html/draft-ietf-secevent-subject-identifiers
     title: Subject Identifiers for Security Event Tokens
   CAEP:
@@ -2159,7 +2161,7 @@ SSF events MUST use explicit typing as defined in Section 2.3 of {{RFC8417}}.
 {: title="Explicitly Typed JOSE Header" #explicit-type-header}
 
 The purpose is defense against confusion with other JWTs, as described in
-Sections 4.5, 4.6 and 4.7 of {{RFC8417}}. While current Id Token {{IDTOKEN}}
+Sections 4.5, 4.6 and 4.7 of {{RFC8417}}. While current Id Token {{OpenID.Core}}
 validators may not be using the "typ" header parameter, by requiring it for SSF
 SETs a distinct value is guaranteed for future validators.
 
@@ -2272,9 +2274,50 @@ specification.
 
 # Notices
 
-Copyright (c) 2021 The OpenID Foundation.
+Copyright (c) 2023 The OpenID Foundation.
 
 The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, or other interested party a non-exclusive, royalty free, worldwide copyright license to reproduce, prepare derivative works from, distribute, perform and display, this Implementers Draft or Final Specification solely for the purposes of (i) developing specifications, and (ii) implementing Implementers Drafts and Final Specifications based on such documents, provided that attribution be made to the OIDF as the source of the material, but that such attribution does not indicate an endorsement by the OIDF.
 
 The technology described in this specification was made available from contributions from various sources, including members of the OpenID Foundation and others. Although the OpenID Foundation has taken steps to help ensure that the technology is available for distribution, it takes no position regarding the validity or scope of any intellectual property or other rights that might be claimed to pertain to the implementation or use of the technology described in this specification or the extent to which any license under such rights might or might not be available; neither does it represent that it has made any independent effort to identify any such rights. The OpenID Foundation and the contributors to this specification make no (and hereby expressly disclaim any) warranties (express, implied, or otherwise), including implied warranties of merchantability, non-infringement, fitness for a particular purpose, or title, related to this specification, and the entire risk as to implementing this specification is assumed by the implementer. The OpenID Intellectual Property Rights policy requires contributors to offer a patent promise not to assert certain patent claims against other contributors and against implementers. The OpenID Foundation invites any interested party to bring to its attention any copyrights, patents, patent applications, or other proprietary rights that may cover technology that may be required to practice this specification.
+
+
+# Document History
+
+  [[ To be removed from the final specification ]]
+
+  -02
+
+    * added spec version to metadata
+    * Added description as receiver supplied
+    * added language to make verification and updated events independent of events_supported
+    * added top-level sub_id claim. Modified existing language to reflect the use of the sub_id claim
+    * updated text to reflect sub_id as a top-level field in verification and stream updated events
+    * #46 add stream exists behavior
+    * update stream exists to 409
+    * Add 'format' to normative examples in CAEP
+    * Remove 'format' from stream config
+    * Remove subject from stream status (#88)
+    * Add reason to GET /status response
+    * Make reason look like an enum in the example to indicate how we expect it to be used
+    * Fixes #60 - are subjects required
+    * Added format field to complex subjects and updated examples (#71)
+    * Switch stray '204 OK' to read '204 No Content' (#73)
+    * Change 'jwt-id' to 'jwt_id' to match style of other subject formats (#63)
+    * resolving issue #45 added explanatory text to Stream Configuration (#68)
+    * #28 update delivery method references to URNs (#49)
+    * Changed jwks_uri from REQUIRED to OPTIONAL (#47)
+    * Sse to ssf (#43)
+    * updated SSE to Shared Signals in all files
+    * changed source format to md
+    * renamed files to be called sharedsignals instead of SSE. No change to the content (#41)
+    * Add stream_id to SSE Framework spec as per Issue 4: https://github.com/openid/sse/issues/4
+    * Update README with development instructions and fix error in Makefile
+    * Added note to PUSH/POLL section about uniqueness requirements for the URLs
+    * Add explanation about what an Event Stream is
+    * Change terms to Transmitter-Supplied and Receiver-Supplied
+    * Pragma is an obsolete HTTP header
+    * It's unnecessary to specify the character as UTF-8 in all examples (#10)
+    * Fix issue #18 by converting saml-assertion-id to saml_assertion_id to maintain consistent formatting with other subject identifiers (#1)
+    * updated backward compatibility language
+    * added section for Transmitter Configuration Metadata RISC compatibility
 
