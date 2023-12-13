@@ -22,7 +22,15 @@ author:
         org: SGNL
         email: atul@sgnl.ai
 
+contributor:
+      -
+        ins: A. Deshpande
+        name: Apoorva Deshpande
+        org: Okta
+        email: apoorva.deshpande@okta.com
+
 normative:
+  RFC9493: # Subject Identifier Formats for SETs
   SSF:
     target: http://openid.net/specs/openid-sse-framework-1_0.html
     title: OpenID Shared Signals and Events Framework Specification 1.0
@@ -71,17 +79,10 @@ This document defines an interoperability profile for implementations of the Sha
 SSF and CAEP together enable improved session security outcomes. This specification defines the minimum required features from SSF and CAEP that an implementation MUST offer in order to be considered as an interoperable implementation. This document defines specific use cases. An implementation may support only a subset of the use cases defined herein, and SHALL be considered an interoperable implementation for the specific use-cases it supports. The following use-cases are considered as a part of this specification:
 
 Session Revocation
-: A CAEP Transmitter or Receiver is able to respectively generate or respond to the CAEP session-revoked event
+: A SSF Transmitter or Receiver is able to respectively generate or respond to the CAEP session-revoked event
 
 Credential Change
-: A CAEP Transmitter or Receiver is able to respectively generate or respond to the CAEP credential-change event
-
-# Definitions
-CAEP Transmitter
-: A SSF Transmitter that supports generating least one event type defined in the CAEP specification.
-
-CAEP Receiver
-: A SSF Receiver that supports receiving at least one event type defined in the CAEP specification.
+: A SSF Transmitter or Receiver is able to respectively generate or respond to the CAEP credential-change event
 
 # Common Requirements {#common-requirements}
 The following requirements are common across all use-cases defined in this document.
@@ -93,7 +94,19 @@ Transmitters MUST implement the following features:
 The Transmitter Configuration Metadata MUST have a `spec_version` field, and its value MUST be `1_0-ID2` or greater
 
 ### Delivery Method {#delivery-method}
-The Transmitter Configuration Metadata MUST include the `delivery_methods_supported` field and its value MUST include the value `urn:ietf:rfc:8935` (i.e. the Push-Based Security Event Token (SET) Delivery Using HTTP specificaiton {{RFC8935}})
+The Transmitter Configuration Metadata MUST include the `delivery_methods_supported` field.
+
+### JWKS URI {#jwks-uri}
+The Transmitter Configuration Metadata MUST include the `jwks_uri` field, and its value MUST provide the current signing key of the Transmitter.
+
+### Configuration Endpoint {#configuration-endpoint}
+The Transmitter Configuration Metadata MUST include the `configuration_endpoint` field. The specified endpoint MUST provide a way to Create a Stream.
+
+### Status Endpoint {#status-endpoint}
+The Transmitter Configuration Metadata MUST include the `status_endpoint` field. The specified endpoint MUST provide a way to Get and Update the Stream Status. The Transmitter MUST be able to pause and restart streams. For streams that are paused, the Transmitter MUST specify (offline) the resource constraints on how many events it can keep, or for how long. The way a Transmitter specifies this information is outside the scope of the SSF spec.
+
+### Verification Endpoint {#verification-endpoint}
+The Transmitter Configuration Metadata MUST include the `verification_endpoint` field. The specified endpoint MUST provide a way to request verification events to be sent.
 
 ### Authorization Schemes
 The Transmitter Configuration Metadata MUST include the `authorization_schemes` field and its value MUST include the value
@@ -141,7 +154,12 @@ Receivers MUST be able to accept events using the Push-Based Security Event Toke
 Receivers MUST assume that all subjects are implicitly included in a Stream, without any `AddSubject` method invocations.
 
 ## Event Subjects {#common-event-subjects}
-Subjects of all events MUST support the `email` Simple Subject format.
+The following subject identifier formats from "Subject Identifiers for Security Event Tokens" {{RFC9493}} MUST be supported:
+
+* `email`
+* `iss_sub`
+
+Receivers MUST be prepared to accept events with any of the subject identifier formats specified in this section. Transmitters MUST be able to send events with at least one of subject identifier formats specified in this section.
 
 ## Event Signatures
 All events MUST be signed using the `RS256` algorithm using a minimum of 2048-bit keys.
@@ -150,7 +168,7 @@ All events MUST be signed using the `RS256` algorithm using a minimum of 2048-bi
 Implementations MAY choose to support one or more of the following use-cases in order to be considered interoperable implementations
 
 ## Session Revocation / Logout
-In order to support session revocation or logout, implementations MUST support the CAEP event type `session-revoked`.
+In order to support session revocation or logout, implementations MUST support the CAEP event type `session-revoked`. The `reason_admin` field of the event MUST be populated with a non-empty value.
 
 ## Credential Change
 In order to support notifying and responding to credential changes, implementations MUST support the CAEP event type `credential-change`.
@@ -168,6 +186,6 @@ Within the `credential-change` event, implementations MUST support the following
   * `fido2-roaming`
   * `fido2-u2f`
 
-
-
+`reason_admin`
+: Transmitters MUST populate this value with a non-empty string.
 
