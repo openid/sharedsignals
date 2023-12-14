@@ -142,7 +142,7 @@ The following Stream Configuration API Methods MUST be supported:
 : A Receiver MUST be able to obtain the current Stream status from the Transmitter by providing a valid authorization
 
 **Stream Verification**
-: A Receiver MUST be able to verify the liveness of the Stream by requesting that the Transmitter send it a Stream Verificaiton event
+: A Receiver MUST be able to verify the liveness of the Stream by requesting that the Transmitter send it a Stream Verificaiton event by providing a valid authorization
 
 ## Receivers {#common-receivers}
 Receivers MUST implement the following features:
@@ -185,6 +185,8 @@ Within the `credential-change` event, implementations MUST support the following
   * `fido2-platform`
   * `fido2-roaming`
   * `fido2-u2f`
+  * `phone-voice`
+  * `phone-sms`
 
 `reason_admin`
 : Transmitters MUST populate this value with a non-empty string.
