@@ -31,6 +31,8 @@ contributor:
 
 normative:
   RFC9493: # Subject Identifier Formats for SETs
+  RFC8935: # Push delivery
+  RFC8936: # POLL delivery
   SSF:
     target: https://openid.net/specs/openid-sharedsignals-framework-1_0.html
     title: OpenID Shared Signals and Events Framework Specification 1.0 - draft 02
@@ -72,7 +74,6 @@ normative:
         ins: A. Tulshibagwale
         name: Atul Tulshibagwale
         org: SGNL
-  RFC8935:
 
 
 --- abstract
