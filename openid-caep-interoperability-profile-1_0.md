@@ -189,16 +189,8 @@ Within the `credential-change` event, implementations MUST support the following
 : Receivers MUST interpret all allowable values of this field. Transmitters MAY generate any allowable value of this field
 
 `credential_type`
-: Receivers MUST interpret the following values of this field. Transmitters MAY generate any of the following values:
-
-  * `password`
-  * `pin`
-  * `fido2-platform`
-  * `fido2-roaming`
-  * `fido2-u2f`
-  * `phone-voice`
-  * `phone-sms`
+: Receivers MUST interpret all allowable values of this field. Transmitters MAY generate any allowable value of this field
 
 `reason_admin`
-: Transmitters MUST populate this value with a non-empty string.
+: Transmitters MUST populate this value with a non-empty string
 
