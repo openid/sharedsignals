@@ -72,19 +72,6 @@ normative:
         ins: A. Tulshibagwale
         name: Atul Tulshibagwale
         org: SGNL
-  RFC7525: # Recommendations for Secure Use of Transport Layer Security
-  RFC6125: # Representation and Verification of Domain-Based Application Service Identity within Internet Public Key 
-           # Infrastructure Using X.509 (PKIX) Certificates in the Context of Transport Layer Security (TLS)
-  RFC6750: # The OAuth 2.0 Authorization Framework: Bearer Token Usage
-  RFC8414: # OAuth 2.0 Authorization Server Metadata
-  RFC6749:
-    target: https://www.rfc-editor.org/info/rfc6749
-    title: The OAuth 2.0 Authorization Framework
-    author:
-      -
-        ins: D. Hardt, Ed
-        name: Dick Hardt
-        org: Microsoft
 
 --- abstract
 This document defines an interoperability profile for implementations of the Shared Signals Framework (SSF) {{SSF}}, the Continuous Access Evaluation Profile (CAEP) {{CAEP}}. This also profiles The OAuth 2.0 Authorization Framework {{RFC6749}} usage in the context of the SSF framework. The interoperability should It is organized around use-cases that improve security of authenticated sessions. It specifies certain optional elements from within the SSF and CAEP specifications as being required to be supported in order to be considered as an interoperable implementation. 
