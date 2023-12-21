@@ -40,6 +40,12 @@ jobs:
         run: xml2rfc openid-caep-specification-1_0.xml --html -o openid-caep-specification-1_0.html
       - name: Render caep text
         run: xml2rfc openid-caep-specification-1_0.xml --text -o openid-caep-specification-1_0.txt
+      - name: Convert caep-interop md to xml
+        run: kramdown-rfc2629 openid-caep-interoperability-profile-1_0.md > openid-caep-interoperability-profile-1_0.xml
+      - name: Render caep-interop html
+        run: xml2rfc openid-caep-interoperability-profile-1_0.xml --html -o openid-caep-interoperability-profile-1_0.html
+      - name: Render caep-interop text
+        run: xml2rfc openid-caep-interoperability-profile-1_0.xml --text -o openid-caep-interoperability-profile-1_0.txt
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
@@ -51,6 +57,8 @@ jobs:
             openid-risc-profile-specification-1_0.txt
             openid-caep-specification-1_0.html
             openid-caep-specification-1_0.txt
+            openid-caep-interoperability-profile-1_0.html
+            openid-caep-interoperability-profile-1_0.txt
   publish-to-pages:
     if: github.ref == 'refs/heads/main'
     needs: [build-sharedsignals]
