@@ -21,8 +21,6 @@ author:
         name: Atul Tulshibagwale
         org: SGNL
         email: atul@sgnl.ai
-
-contributor:
       -
         ins: A. Deshpande
         name: Apoorva Deshpande
@@ -74,10 +72,25 @@ normative:
         ins: A. Tulshibagwale
         name: Atul Tulshibagwale
         org: SGNL
-
+  RFC7525: # Recommendations for Secure Use of Transport Layer Security
+  RFC6125: # Representation and Verification of Domain-Based Application Service Identity within Internet Public Key 
+           # Infrastructure Using X.509 (PKIX) Certificates in the Context of Transport Layer Security (TLS)
+  RFC6750: # The OAuth 2.0 Authorization Framework: Bearer Token Usage
+  RFC8414: # OAuth 2.0 Authorization Server Metadata
+  OAUTH:
+    target: https://www.rfc-editor.org/info/rfc6749
+    title: The OAuth 2.0 Authorization Framework
+    author:
+      -
+        ins: D. Hardt, Ed
+        name: Dick Hardt
+        org: Microsoft
 
 --- abstract
-This document defines an interoperability profile for implementations of the Shared Signals Framework (SSF) {{SSF}} and the Continuous Access Evaluation Profile (CAEP) {{CAEP}}. It is organized around use-cases that improve security of authenticated sessions. It specifies certain optional elements from within the SSF and CAEP specifications as being required to be supported in order to be considered as an interoperable implementation.
+This document defines an interoperability profile for implementations of the Shared Signals Framework (SSF) {{SSF}}, the Continuous Access Evaluation Profile (CAEP) {{CAEP}} and the OAuth 2.0 Authorization Framework (OAuth) {{OAUTH}}. It is organized around use-cases that improve security of authenticated sessions. It specifies certain optional elements from within the SSF and CAEP specifications as being required to be supported in order to be considered as an interoperable implementation. 
+
+Interoperability between the SSF, CAEP and the OAuth framework empowers organizations to leverage the strengths of these standards, bringing in
+more security to the APIs.
 
 --- middle
 
@@ -92,6 +105,11 @@ Credential Change
 
 # Common Requirements {#common-requirements}
 The following requirements are common across all use-cases defined in this document.
+
+## Network layer protection
+* The SSF transmitter MUST offer TLS protected endpoints and shall establish connections to other servers using TLS. TLS connections MUST be set up to use TLS version 1.2 or later.
+* When using TLS 1.2, follow the recommendations for Secure Use of Transport Layer Security in [RFC7525]{{RFC7525}}.
+* The SSF receiver MUST perform a TLS server certificate check before calling the SSF transmitter APIs, as per [RFC6125]{{RFC6125}}.
 
 ## Transmitters {#common-transmitters}
 Transmitters MUST implement the following features:
@@ -174,6 +192,28 @@ Receivers MUST be prepared to accept events with any of the subject identifier f
 
 ## Event Signatures
 All events MUST be signed using the `RS256` algorithm using a minimum of 2048-bit keys.
+
+## OAuth Service
+
+### Authorization Server
+* SHALL distribute discovery metadata (such as the authorization endpoint) via the metadata document as specified in [RFC8414]{{RFC8414}}
+* MUST support at least one of the following to obtain a short-lived access token 
+** client credential grant flow
+** authorization code flow 
+
+### OAuth Scopes
+
+* Authorization server MUST reserve the scopes for the SSF endpoints with the prefix of `ssf`
+* All the SSF stream configuration management API operations MUST be protected using `ssf.manage` scope
+* All the SSF stream configuration Read API operations MUST be protected by `ssf.read` scope
+* Authorization server MAY decide to postfix scope names with more granular operations eg. `ssf.manage.create`, `ssf.manage.update` etc.
+* Transmitter managed poll endpoint MAY use the scope in the same nomenclature as `ssf.manage.poll`
+
+### The SSF Transmitter as a Resource Server
+* MUST accept access tokens in the HTTP header as in Section 2.1 of OAuth 2.0 Bearer Token Usage [RFC6750]{{RFC6750}}
+* MUST NOT accept access tokens in the query parameters stated in Section 2.3 of OAuth 2.0 Bearer Token Usage [RFC6750]{{RFC6750}}
+* SHALL verify the validity, integrity, expiration and revocation status of access tokens
+* SHALL verify that the authorization represented by the access token is sufficient for the requested resource access and otherwise return errors as in section 3.1 of [RFC6750]{{RFC6750}}
 
 # Use Cases
 Implementations MAY choose to support one or more of the following use-cases in order to be considered interoperable implementations
