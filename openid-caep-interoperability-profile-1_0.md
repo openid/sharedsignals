@@ -169,7 +169,7 @@ The following subject identifier formats from "Subject Identifiers for Security 
 
 * `email`
 * `iss_sub`
-* `opaque`
+* `opaque` (for the Verification event only)
 
 Receivers MUST be prepared to accept events with any of the subject identifier formats specified in this section. Transmitters MUST be able to send events with at least one of subject identifier formats specified in this section.
 
