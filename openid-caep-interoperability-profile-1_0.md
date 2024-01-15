@@ -169,6 +169,7 @@ The following subject identifier formats from "Subject Identifiers for Security 
 
 * `email`
 * `iss_sub`
+* `opaque` (for the Verification event only)
 
 Receivers MUST be prepared to accept events with any of the subject identifier formats specified in this section. Transmitters MUST be able to send events with at least one of subject identifier formats specified in this section.
 
@@ -193,4 +194,3 @@ Within the `credential-change` event, implementations MUST support the following
 
 `reason_admin`
 : Transmitters MUST populate this value with a non-empty string
-
