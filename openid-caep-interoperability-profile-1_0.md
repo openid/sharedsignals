@@ -80,7 +80,7 @@ normative:
   RFC6749:
 
 --- abstract
-This document defines an interoperability profile for implementations of the Shared Signals Framework (SSF) {{SSF}}, the Continuous Access Evaluation Profile (CAEP) {{CAEP}}. This also profiles The OAuth 2.0 Authorization Framework {{RFC6749}} usage in the context of the SSF framework. The interoperability should It is organized around use-cases that improve security of authenticated sessions. It specifies certain optional elements from within the SSF and CAEP specifications as being required to be supported in order to be considered as an interoperable implementation. 
+This document defines an interoperability profile for implementations of the Shared Signals Framework (SSF) {{SSF}}, the Continuous Access Evaluation Profile (CAEP) {{CAEP}}. This also profiles The OAuth 2.0 Authorization Framework {{RFC6749}} usage in the context of the SSF framework. The interoperability profile is organized around use-cases that improve security of authenticated sessions. It specifies certain optional elements from within the SSF and CAEP specifications as being required to be supported in order to be considered as an interoperable implementation. 
 
 Interoperability between SSF and CAEP, leveraging OAuth {{RFC6749}} provides greater assurance to implementers that their implementations will work out of the box with others.
 
@@ -102,6 +102,9 @@ The following requirements are common across all use-cases defined in this docum
 * The SSF transmitter MUST offer TLS protected endpoints and shall establish connections to other servers using TLS. TLS connections MUST be set up to use TLS version 1.2 or later.
 * When using TLS 1.2, follow the recommendations for Secure Use of Transport Layer Security in [RFC7525]{{RFC7525}}.
 * The SSF receiver MUST perform a TLS server certificate signature checks, chain of trust validations, expiry and revocation status checks before calling the SSF transmitter APIs, as per [RFC6125]{{RFC6125}}.
+
+## CAEP specification version
+This specification supports CAEP {{CAEP}} events from Implementer's Draft 1
 
 ## Transmitters {#common-transmitters}
 Transmitters MUST implement the following features:
