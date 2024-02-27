@@ -953,7 +953,7 @@ min_verification_interval
 
 description
 
-> **Receiver-Supplied**, An optinal string to describe the properties of the stream.
+> **Receiver-Supplied**, An optional string to describe the properties of the stream.
   This is useful in multi stream systems to identify the stream for human actors. The
   transmitter may truncate the string beyond allowed max length.
 
@@ -1873,6 +1873,9 @@ Event Transmitters MAY transmit the event via an asynchronous process, and SHOUL
 publish an SLA for verification event transmission times. Event Receivers MUST NOT
 depend on the verification event being transmitted synchronously or in any
 particular order relative to the current queue of events.
+
+Upon receiving the verify event, the Reciver should respond with appropriate HTTP status to
+the Transmitter described in {{DELIVERYPUSH}}.
 
 Errors are signaled with HTTP status codes as follows:
 
