@@ -986,7 +986,7 @@ Configuration ({{stream-config}}) object:
 If the request does not contain the `delivery` property, then the Transmitter
 MUST assume that the `method` is "urn:ietf:rfc:8936" (poll). The
 Transmitter MUST include a `delivery` property in the response with this
-`method` property and a `endpoint_url` property.
+`method` property and an `endpoint_url` property.
 
 The following is a non-normative example request to create an Event Stream:
 
