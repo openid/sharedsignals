@@ -437,7 +437,7 @@ of these members are required and specified as such in the respective event
 types specs. If a Transmitter determines that it needs to include additional
 members that are not specified in the event types spec, then the name of such
 members MUST be a URI. The discoverability of all additional members is
-specified in the Discovery {{discovery}} section.
+specified in the Discovery section ({{discovery}}).
 
 # Example SETs that conform to the Shared Signals Framework {#events-examples}
 
