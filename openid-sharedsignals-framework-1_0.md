@@ -603,7 +603,7 @@ jwks_uri
 > OPTIONAL. URL of the Transmitter's JSON Web Key Set {{RFC7517}} document.
   This contains the signing key(s) the Receiver uses to validate signatures from
   the Transmitter. This value MUST be specified if the Transmitter intends to
-  generate signed JWTs
+  generate signed JWTs.
 
 delivery_methods_supported
 
@@ -647,13 +647,13 @@ TODO: consider adding a IANA Registry for metadata, similar to Section 7.1.1 of
 {{RFC8414}}. This would allow other specs to add to the metadata.
 
 ### Authorization scheme {#authorization-scheme}
-SSF is an HTTP based signals sharing framework and is agnostic to the authentication and authorization schemes used to secure stream configuration APIs. It does not provide any SSF-specific authentication and authorization schemes but relies on the cooperating parties' mutual security considerations. The authorization scheme section of the metadata provides discovery information related to the transmitter's stream management APIs.
+SSF is an HTTP based signals sharing framework and is agnostic to the authentication and authorization schemes used to secure stream configuration APIs. It does not provide any SSF-specific authentication and authorization schemes but relies on the cooperating parties' mutual security considerations. The authorization scheme section of the metadata provides discovery information related to the Transmitter's stream management APIs.
 
 spec_urn  
 
 > REQUIRED. A URN that describes the specification of the protocol being used.
 
-The receiver will call the transmitter APIs by providing appropriate credentials as per the `spec_urn`.
+The Receiver will call the Transmitter APIs by providing appropriate credentials as per the `spec_urn`.
 
 The following is a non-normative example of the `spec_urn`
 
@@ -665,7 +665,7 @@ The following is a non-normative example of the `spec_urn`
 {: #figspecurn title="Example: `spec_urn` specifying the OAuth protocol for authorization"}
 
 In this case, the receiver may obtain an access token using the Client
-Credential Grant {{CLIENTCRED}}, or any other method suitable for the Receiver and the
+Credentials Grant {{CLIENTCRED}}, or any other method suitable for the Receiver and the
 Transmitter.
 
 ## Obtaining Transmitter Configuration Information
@@ -677,7 +677,7 @@ Transmitters supporting Discovery MUST make a JSON document available at the
 path formed by inserting the string "/.well-known/ssf-configuration" into the
 Issuer between the host component and the path component, if any. The syntax
 and semantics of ".well-known" are defined in {{RFC5785}}.  "ssf-configuration"
-MUST point to a JSON document compliant with this specification and MUST be
+MUST point to a JSON document compliant with this specification, that document MUST be
 returned using the "application/json" content type.
 
 ### Transmitter Configuration Request
