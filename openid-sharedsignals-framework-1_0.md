@@ -677,7 +677,7 @@ Transmitters supporting Discovery MUST make a JSON document available at the
 path formed by inserting the string "/.well-known/ssf-configuration" into the
 Issuer between the host component and the path component, if any. The syntax
 and semantics of ".well-known" are defined in {{RFC5785}}.  "ssf-configuration"
-MUST point to a JSON document compliant with this specification, that document MUST be
+MUST point to a JSON document compliant with this specification, and that document MUST be
 returned using the "application/json" content type.
 
 ### Transmitter Configuration Request
