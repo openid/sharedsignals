@@ -238,7 +238,7 @@ This Shared Signals Framework specification defines a Subject Principal to be
 the entities about which an event can be sent by Transmitters and received by
 Receivers using the Shared Signals Framework.
 
-Subject Principals are the managed entities in a SSF Transmitter or Receiver.
+Subject Principals are the managed entities in an SSF Transmitter or Receiver.
 These include human or robotic principals, devices, customer tenants in a
 multi-tenanted service, organizational units within a tenant, groups of subject
 principals, or other entities that are managed by Transmitters and Receivers.
@@ -251,7 +251,7 @@ Subject Principals are identified by Subject Members defined below.
 # Subject Members in SSF Events {#subject-ids}
 
 ## Subject Members {#subject-members}
-A Subject Member of a SSF event describes a subject of the event. A top-level claim named `sub_id` MUST be used to describe the primary subject of the event.
+A Subject Member of an SSF event describes a subject of the event. A top-level claim named `sub_id` MUST be used to describe the primary subject of the event.
 
 ### Existing CAEP and RISC Events
 Event types already defined in the CAEP ({{CAEP}}) and RISC ({{RISC}}) specifications MAY use a `subject` field within the `events` claim of the SSF event to describe the primary Subject Principal of the event. SSF Transmitters MUST include the top-level `sub_id` claim even for these existing event types.
@@ -269,7 +269,7 @@ Each Subject Member MUST refer to exactly one Subject Principal. The value of a 
 
 A Simple Subject Member has a claim name and a value that is a "Subject
 Identifier" as defined in the Subject Identifiers for Security Event Tokens
-{{SUBIDS}}. Below is a non-normative example of a Simple Subject Member in a SSF
+{{SUBIDS}}. Below is a non-normative example of a Simple Subject Member in an SSF
 event.
 
 ~~~ json
@@ -318,7 +318,7 @@ group
 Additional Subject Member names MAY be used in Complex Subjects. Each member name MAY
 appear at most once in the Complex Subject value.
 
-Below is a non-normative example of a Complex Subject claim in a SSF event.
+Below is a non-normative example of a Complex Subject claim in an SSF event.
 
 ~~~ json
 "sub_id": {
@@ -344,7 +344,7 @@ Subject Principal.
 
 ## Subject Identifiers in SSF Events {#subject-ids-in-ssf}
 
-A Subject Identifier in a SSF event MUST have an identifier format that is any
+A Subject Identifier in an SSF event MUST have an identifier format that is any
 one of:
 
 * Defined in the IANA Registry defined in Subject Identifiers for Security
@@ -463,7 +463,7 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
   }
 }
 ~~~
-{: #subject-ids-ex-simple title="Example: SET Containing a SSF Event with a Simple Subject Member"}
+{: #subject-ids-ex-simple title="Example: SET Containing an SSF Event with a Simple Subject Member"}
 
 ~~~ json
 {
@@ -507,7 +507,7 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
   }
 }
 ~~~
-{: #subject-ids-ex-complex title="Example: SET Containing a SSF Event with a Complex Subject Member"}
+{: #subject-ids-ex-complex title="Example: SET Containing an SSF Event with a Complex Subject Member"}
 
 ~~~ json
 {
@@ -533,7 +533,7 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
   }
 }
 ~~~
-{: #subject-properties-ex title="Example: SET Containing a SSF Event with a Simple Subject and a Property Member"}
+{: #subject-properties-ex title="Example: SET Containing an SSF Event with a Simple Subject and a Property Member"}
 
 ~~~ json
 {
@@ -559,7 +559,7 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
   }
 }
 ~~~
-{: #subject-custom-type-ex title="Example: SET Containing a SSF Event with a Proprietary Subject Identifier Format"}
+{: #subject-custom-type-ex title="Example: SET Containing an SSF Event with a Proprietary Subject Identifier Format"}
 
 # Transmitter Configuration Discovery {#discovery}
 
@@ -1819,7 +1819,7 @@ A Transmitter MAY respond to verification event requests even if the event is no
 
 
 #### Verification Event {#verification-event}
-The Verification Event is a SSF Event with the event type: "https://schemas.openid.net/secevent/ssf/event-type/verification". The event contains the following attribute:
+The Verification Event is an SSF Event with the event type: "https://schemas.openid.net/secevent/ssf/event-type/verification". The event contains the following attribute:
 
 state
 
@@ -2096,7 +2096,7 @@ The signature key can be obtained through "jwks_uri", see {{discovery}}.
 
 ### SSF Event Subject {#event-subjects}
 The primary Subject Member of SSF events is described in the "Subject Members" section ({{subject-ids}}). The JWT "sub" claim MUST NOT be present in any SET containing
-a SSF event.
+an SSF event.
 
 ### SSF Event Properties {#event-properties}
 The SSF event MAY contain additional claims within the event payload that are
