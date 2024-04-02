@@ -80,7 +80,7 @@ normative:
   RFC6749:
 
 --- abstract
-This document defines an interoperability profile for implementations of the Shared Signals Framework (SSF) {{SSF}}, the Continuous Access Evaluation Profile (CAEP) {{CAEP}}. This also profiles The OAuth 2.0 Authorization Framework {{RFC6749}} usage in the context of the SSF framework. The interoperability profile is organized around use-cases that improve security of authenticated sessions. It specifies certain optional elements from within the SSF and CAEP specifications as being required to be supported in order to be considered as an interoperable implementation. 
+This document defines an interoperability profile for implementations of the Shared Signals Framework (SSF) {{SSF}} and the Continuous Access Evaluation Profile (CAEP) {{CAEP}}. This also profiles The OAuth 2.0 Authorization Framework {{RFC6749}} usage in the context of the SSF framework. The interoperability profile is organized around use-cases that improve security of authenticated sessions. It specifies certain optional elements from within the SSF and CAEP specifications as being required to be supported in order to be considered as an interoperable implementation. 
 
 Interoperability between SSF and CAEP, leveraging OAuth {{RFC6749}} provides greater assurance to implementers that their implementations will work out of the box with others.
 
@@ -99,12 +99,12 @@ Credential Change
 The following requirements are common across all use-cases defined in this document.
 
 ## Network layer protection
-* The SSF transmitter MUST offer TLS protected endpoints and shall establish connections to other servers using TLS. TLS connections MUST be set up to use TLS version 1.2 or later.
+* The SSF transmitter MUST offer TLS protected endpoints and MUST establish connections to other servers using TLS. TLS connections MUST be set up to use TLS version 1.2 or later.
 * When using TLS 1.2, follow the recommendations for Secure Use of Transport Layer Security in [RFC7525]{{RFC7525}}.
 * The SSF receiver MUST perform a TLS server certificate signature checks, chain of trust validations, expiry and revocation status checks before calling the SSF transmitter APIs, as per [RFC6125]{{RFC6125}}.
 
 ## CAEP specification version
-This specification supports CAEP {{CAEP}} events from Implementer's Draft 1
+This specification supports CAEP {{CAEP}} events from Implementer's Draft 2
 
 ## Transmitters {#common-transmitters}
 Transmitters MUST implement the following features:
@@ -192,9 +192,9 @@ All events MUST be signed using the `RS256` algorithm using a minimum of 2048-bi
 
 ### Authorization Server
 * MAY distribute discovery metadata (such as the authorization endpoint) via the metadata document as specified in [RFC8414]{{RFC8414}}
-* MUST support at least one of the following to obtain a short-lived access token 
-** client credential grant flow
-** authorization code flow 
+* MUST support at least one of the following to obtain a short-lived access token. (Please check out security considerations around access token lifetime https://openid.bitbucket.io/fapi/fapi-2_0-security-profile.html#name-access-token-lifetimes) 
+** client credential grant flow {{RFC6749}} section 4.4
+** authorization code flow {{RFC6749}} section 4.1
 
 ### OAuth Scopes
 
@@ -208,7 +208,8 @@ All events MUST be signed using the `RS256` algorithm using a minimum of 2048-bi
 * MUST accept access tokens in the HTTP header as in Section 2.1 of OAuth 2.0 Bearer Token Usage [RFC6750]{{RFC6750}}
 * MUST NOT accept access tokens in the query parameters stated in Section 2.3 of OAuth 2.0 Bearer Token Usage [RFC6750]{{RFC6750}}
 * MUST verify the validity, integrity, expiration and revocation status of access tokens
-* MUST verify that the authorization represented by the access token is sufficient for the requested resource access and otherwise return errors as in section 3.1 of [RFC6750]{{RFC6750}}
+* MUST verify that the authorization represented by the access token is sufficient for the requested resource access.
+* If the access token is not sufficient for the requested action, the Resource server MUST return errors as per section 3.1 of [RFC6750]{{RFC6750}}
 
 # Use Cases
 Implementations MAY choose to support one or more of the following use-cases in order to be considered interoperable implementations
