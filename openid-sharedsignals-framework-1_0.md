@@ -134,6 +134,7 @@ normative:
   RFC7159:
   RFC7517:
   RFC7519:
+  RFC7591:
   RFC8174:
   RFC8414:
   RFC8417:
@@ -574,7 +575,7 @@ spec_version
 
 > OPTIONAL. A version idenitfying the implementer's draft or final specification implemented by the Transmitter. This includes the numerical portion of the spec version as described in the document {{NAMINGCONVENTION}}. If absent, the Transmitter is assumed to conform to "1_0-ID1" version of the specification (this document).
 
->  The following is a non-normative example of Transmitter that implements the second implementer's draft of the Shared Signals Framework specification 1_0. 
+>  The following is a non-normative example of Transmitter that implements the second implementer's draft of the Shared Signals Framework specification 1_0.
 
 ~~~ json
    {
@@ -649,7 +650,7 @@ TODO: consider adding a IANA Registry for metadata, similar to Section 7.1.1 of
 ### Authorization scheme {#authorization-scheme}
 SSF is an HTTP based signals sharing framework and is agnostic to the authentication and authorization schemes used to secure stream configuration APIs. It does not provide any SSF-specific authentication and authorization schemes but relies on the cooperating parties' mutual security considerations. The authorization scheme section of the metadata provides discovery information related to the Transmitter's stream management APIs.
 
-spec_urn  
+spec_urn
 
 > REQUIRED. A URN that describes the specification of the protocol being used.
 
@@ -957,6 +958,11 @@ description
   This is useful in multi stream systems to identify the stream for human actors. The
   transmitter may truncate the string beyond allowed max length.
 
+receiver_key
+
+> **Receiver-Supplied**, An optional JSON Web Key (JWK) that can be used to encrypt
+  events sent from the Transmitter to the Receiver.
+
 TODO: consider adding a IANA Registry for stream configuration metadata, similar
 to Section 7.1.1 of {{RFC8414}}. This would allow other specs to add to
 the stream configuration.
@@ -982,6 +988,8 @@ Configuration ({{stream-config}}) object:
 * `events_requested`
 * `delivery` : Note that in the case of the POLL method, the `endpoint_url` value is
   supplied by the Transmitter.
+* `description`
+* `receiver_key`
 
 If the request does not contain the `delivery` property, then the Transmitter
 MUST assume that the `method` is "urn:ietf:rfc:8936" (poll). The
@@ -1005,7 +1013,19 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
     "urn:example:secevent:events:type_3",
     "urn:example:secevent:events:type_4"
   ],
-  "description" : "Stream for Receiver A using events type_2, type_3, type_4"
+  "description": "Stream for Receiver A using events type_2, type_3, type_4",
+  "receiver_key": {
+    "jwk": [
+      {
+        "alg": "EC",
+        "crv": "P-256",
+        "x": "MKBCTNIcKUSDii11ySs3526iDZ8AiTo7Tu6KPAqv7D4",
+        "y": "4Etl6SRW2YiLUrN5vfvVHuhp7x8PxltmWWlbbM4IFyM",
+        "use": "enc",
+        "kid": "1"
+      }
+    ]
+  }
 }
 ~~~
 {: #figcreatestreamreq title="Example: Create Event Stream Request"}
@@ -1041,7 +1061,19 @@ Content-Type: application/json
     "urn:example:secevent:events:type_2",
     "urn:example:secevent:events:type_3"
   ],
-  "description" : "Stream for Receiver A using events type_2, type_3, type_4"
+  "description" : "Stream for Receiver A using events type_2, type_3, type_4",
+  "receiver_key": {
+    "jwk": [
+      {
+        "alg": "EC",
+        "crv": "P-256",
+        "x": "MKBCTNIcKUSDii11ySs3526iDZ8AiTo7Tu6KPAqv7D4",
+        "y": "4Etl6SRW2YiLUrN5vfvVHuhp7x8PxltmWWlbbM4IFyM",
+        "use": "enc",
+        "kid": "1"
+      }
+    ]
+  }
 }
 ~~~
 {: #figcreatestreamresp title="Example: Create Stream Response"}
@@ -1112,7 +1144,19 @@ Cache-Control: no-store
     "urn:example:secevent:events:type_2",
     "urn:example:secevent:events:type_3"
   ],
-  "description" : "Stream for Receiver A using events type_2, type_3, type_4"
+  "description" : "Stream for Receiver A using events type_2, type_3, type_4",
+  "receiver_key": {
+    "jwk": [
+      {
+        "alg": "EC",
+        "crv": "P-256",
+        "x": "MKBCTNIcKUSDii11ySs3526iDZ8AiTo7Tu6KPAqv7D4",
+        "y": "4Etl6SRW2YiLUrN5vfvVHuhp7x8PxltmWWlbbM4IFyM",
+        "use": "enc",
+        "kid": "1"
+      }
+    ]
+  }
 }
 ~~~
 {: title="Example: Read Stream Configuration Response" #figreadconfigresp}
@@ -1288,7 +1332,19 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
     "urn:example:secevent:events:type_3",
     "urn:example:secevent:events:type_4"
   ],
-  "description" : "Stream for Receiver B using events type_2, type_3, type_4"
+  "description" : "Stream for Receiver B using events type_2, type_3, type_4",
+  "receiver_key": {
+    "jwk": [
+      {
+        "alg": "EC",
+        "crv": "P-256",
+        "x": "MKBCTNIcKUSDii11ySs3526iDZ8AiTo7Tu6KPAqv7D4",
+        "y": "4Etl6SRW2YiLUrN5vfvVHuhp7x8PxltmWWlbbM4IFyM",
+        "use": "enc",
+        "kid": "1"
+      }
+    ]
+  }
 }
 ~~~
 {: title="Example: Update Stream Configuration Request" #figupdateconfigreq}
@@ -1325,7 +1381,19 @@ Cache-Control: no-store
     "urn:example:secevent:events:type_2",
     "urn:example:secevent:events:type_3"
   ],
-  "description" : "Stream for Receiver B using events type_2, type_3, type_4"
+  "description" : "Stream for Receiver B using events type_2, type_3, type_4",
+  "receiver_key": {
+    "jwk": [
+      {
+        "alg": "EC",
+        "crv": "P-256",
+        "x": "MKBCTNIcKUSDii11ySs3526iDZ8AiTo7Tu6KPAqv7D4",
+        "y": "4Etl6SRW2YiLUrN5vfvVHuhp7x8PxltmWWlbbM4IFyM",
+        "use": "enc",
+        "kid": "1"
+      }
+    ]
+  }
 }
 ~~~
 {: title="Example: Update Stream Configuration Response" #figupdateconfigresp}
@@ -1353,7 +1421,7 @@ The stream_id and the full set of Receiver-Supplied properties MUST be present
 in the PUT body, not only the ones that are specifically intended to be changed.
 Missing Receiver-Supplied properties MUST be interpreted as requested to be
 deleted. Event Receivers MAY read the configuration first, modify the JSON
-{{RFC7159}} representation, then make a replacement request. If `events_requested` 
+{{RFC7159}} representation, then make a replacement request. If `events_requested`
 property is included in the request, it SHOULD NOT be an empty array.
 
 Transmitter-Supplied properties besides the stream_id MAY be present,
@@ -1385,7 +1453,19 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
     "urn:example:secevent:events:type_3",
     "urn:example:secevent:events:type_4"
   ],
-  "description" : "Stream for Receiver C"
+  "description" : "Stream for Receiver C",
+  "receiver_key": {
+    "jwk": [
+      {
+        "alg": "EC",
+        "crv": "P-256",
+        "x": "MKBCTNIcKUSDii11ySs3526iDZ8AiTo7Tu6KPAqv7D4",
+        "y": "4Etl6SRW2YiLUrN5vfvVHuhp7x8PxltmWWlbbM4IFyM",
+        "use": "enc",
+        "kid": "1"
+      }
+    ]
+  }
 }
 ~~~
 {: title="Example: Replace Stream Configuration Request" #figreplaceconfigreq}
@@ -1422,7 +1502,19 @@ Cache-Control: no-store
     "urn:example:secevent:events:type_2",
     "urn:example:secevent:events:type_3"
   ],
-  "description" : "Stream for Receiver C"
+  "description" : "Stream for Receiver C",
+  "receiver_key": {
+    "jwk": [
+      {
+        "alg": "EC",
+        "crv": "P-256",
+        "x": "MKBCTNIcKUSDii11ySs3526iDZ8AiTo7Tu6KPAqv7D4",
+        "y": "4Etl6SRW2YiLUrN5vfvVHuhp7x8PxltmWWlbbM4IFyM",
+        "use": "enc",
+        "kid": "1"
+      }
+    ]
+  }
 }
 ~~~
 {: title="Example: Replace Stream Configuration Response" #figreplaceconfigresp}
@@ -1825,7 +1917,7 @@ state
 
 > OPTIONAL An opaque value provided by the Event Receiver when the event is
   triggered.
-  
+
 As with any SSF event, the Verification Event has a top-level `sub_id` claim:
 
 sub_id
@@ -1956,7 +2048,7 @@ reason
 
 > OPTIONAL. Provides a short description of why the Transmitter has updated the
   status.
-  
+
 As with any SSF Event, this event has a top-level `sub_id` claim:
 
 sub_id
@@ -1977,7 +2069,7 @@ sub_id
   "sub_id": {
     "format": "opaque",
     "id" : "f67e39a0a4d34d56b3aa1bc4cff0069f"
-  },   
+  },
   "events": {
     "https://schemas.openid.net/secevent/ssf/event-type/stream-updated": {
       "status": "paused",
@@ -2036,6 +2128,15 @@ Receivers MUST tolerate receiving events for subjects that have been removed
 from the stream, and MUST NOT report these events as errors to the Event
 Transmitter.
 
+## Encrypting SETs {#management-sec-encrypting-sets}
+If an Event Transmitter is sending events that contain Personally Identifiable Information
+(PII), whether in the body of the event or in the `sub_id` of the SET itself, then the
+Transmitter MUST encrypt the SET such that it is sending a JWE instead of a JWT, as
+required by the Security Event Token (SET) {{RFC8417}} spec. In order to encrypt a SET,
+the Receiver MUST share a public key with the Transmitter. This information MAY be shared
+via the stream creation and update APIs described above. Alternatively, it MAY be
+shared out-of-band when the Transmitter-Receiver relationship is first established via
+Dynamic Client Registration {{RFC7591}} or any other configuration method.
 
 # Privacy Considerations {#privacy-considerations}
 
@@ -2172,7 +2273,7 @@ The purpose is defense in depth against confusion with other JWTs, as described
 in Sections 4.5 and 4.6 of {{RFC8417}}.
 
 ### The "aud" Claim {#aud-claim}
-The "aud" claim can be a single string or an array of strings. Values that 
+The "aud" claim can be a single string or an array of strings. Values that
 uniquely identify the Receiver to the Transmitter MAY be used, if the two parties
 have agreement on the format.
 
@@ -2320,4 +2421,3 @@ The technology described in this specification was made available from contribut
     * Fix issue #18 by converting saml-assertion-id to saml_assertion_id to maintain consistent formatting with other subject identifiers (#1)
     * updated backward compatibility language
     * added section for Transmitter Configuration Metadata RISC compatibility
-
