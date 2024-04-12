@@ -78,6 +78,21 @@ normative:
   RFC6750: # The OAuth 2.0 Authorization Framework: Bearer Token Usage
   RFC8414: # OAuth 2.0 Authorization Server Metadata
   RFC6749:
+  FAPI:
+    target: https://openid.bitbucket.io/fapi/fapi-2_0-security-profile.html
+    title: FAPI 2.0 Security Profile — draft
+    author:
+      - ins: D. Fett
+      - ins: D. Tonge
+      - ins: J. Heenan
+  OPRM:
+    target: https://www.ietf.org/archive/id/draft-ietf-oauth-resource-metadata-03.html
+    title: OAuth 2.0 Protected Resource Metadata
+    author:
+      -ins: M.B. Jones
+      -ins: P. Hunt
+      -ins: A. Parecki
+
 
 --- abstract
 This document defines an interoperability profile for implementations of the Shared Signals Framework (SSF) {{SSF}} and the Continuous Access Evaluation Profile (CAEP) {{CAEP}}. This also profiles The OAuth 2.0 Authorization Framework {{RFC6749}} usage in the context of the SSF framework. The interoperability profile is organized around use-cases that improve security of authenticated sessions. It specifies certain optional elements from within the SSF and CAEP specifications as being required to be supported in order to be considered as an interoperable implementation. 
@@ -192,12 +207,12 @@ All events MUST be signed using the `RS256` algorithm using a minimum of 2048-bi
 
 ### Authorization Server
 * MAY distribute discovery metadata (such as the authorization endpoint) via the metadata document as specified in [RFC8414]{{RFC8414}}
-* MUST support at least one of the following to obtain a short-lived access token. (Please check out security considerations around access token lifetime https://openid.bitbucket.io/fapi/fapi-2_0-security-profile.html#name-access-token-lifetimes) 
+* MUST support at least one of the following to obtain a short-lived access token. Please refer Access token lifetimes in the security considerations {{FAPI}} for additional considerations.
 ** client credential grant flow {{RFC6749}} section 4.4
 ** authorization code flow {{RFC6749}} section 4.1
 
 ### OAuth Scopes
-
+The OAuth scopes required to access the resources MAY be obtained by the client using {{OPRM}} hosted by the Resource Server. In the absence of this mechanism - 
 * An OAuth {{RFC6749}} authorization that is used to issue tokens to SSF Receivers, MUST reserve the scopes for the SSF endpoints with the prefix of `ssf`
 * All the SSF stream configuration management API operations MUST be protected using `ssf.manage` scope
 * All the SSF stream configuration Read API operations MUST be protected by `ssf.read` scope
@@ -210,6 +225,7 @@ All events MUST be signed using the `RS256` algorithm using a minimum of 2048-bi
 * MUST verify the validity, integrity, expiration and revocation status of access tokens
 * MUST verify that the authorization represented by the access token is sufficient for the requested resource access.
 * If the access token is not sufficient for the requested action, the Resource server MUST return errors as per section 3.1 of [RFC6750]{{RFC6750}}
+* MAY publish the {{OPRM}} to describe the metadata needed to interact with the protected resource.
 
 # Use Cases
 Implementations MAY choose to support one or more of the following use-cases in order to be considered interoperable implementations
