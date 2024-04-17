@@ -1282,7 +1282,6 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
 {
   "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
-  "iss": "https://tr.example.com",
   "events_requested": [
     "urn:example:secevent:events:type_2",
     "urn:example:secevent:events:type_3",
@@ -1371,11 +1370,6 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 
 {
   "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
-  "iss": "https://tr.example.com",
-  "aud": [
-    "http://receiver.example.com/web",
-    "http://receiver.example.com/mobile"
-  ],
   "delivery": {
     "method": "urn:ietf:rfc:8935",
     "endpoint_url": "https://receiver.example.com/events"
