@@ -3,8 +3,29 @@ name: publish
 on:
   push:
     branches: [ main ]
+    paths-ignore: 
+      - README.md
+      - CHANGELOG.md
+      - CODE_OF_CONDUCT.md
+      - LICENSE
+      - SECURITY.md
+      - '.github/**'
+      - Makefile
+      - contributing.md
+      - .gitignore
+      
   pull_request:
     branches: [ main ]
+    paths-ignore: 
+      - README.md
+      - CHANGELOG.md
+      - CODE_OF_CONDUCT.md
+      - LICENSE
+      - SECURITY.md
+      - '.github/**'
+      - Makefile
+      - contributing.md
+      - .gitignore
 
 jobs:
   build-sharedsignals:
