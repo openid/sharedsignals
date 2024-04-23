@@ -28,6 +28,8 @@ author:
         email: atul@sgnl.ai
 
 normative:
+  RFC4001: # Textual Conventions for Internet Network Addresses
+
   ISO-IEC-29115:
     target: http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=45138
     title: "ISO/IEC 29115:2013 -- Information technology - Security techniques - Entity authentication assurance framework"
@@ -711,17 +713,19 @@ Event Type URI:
 
 `https://schemas.openid.net/secevent/caep/event-type/session-established`
 
-The Session Established event signifies that the Transmitter has created a new session for a user for use with the Transmitter. Receivers may use this information for a number of reasons, including:
+The Session Established event signifies that the Transmitter has established a new session for the subject. Receivers may use this information for a number of reasons, including:
 
 * A service acting as a Transmitter can close the loop with the IdP after a user has been federated from the IdP
 * An IdP can detect unintended logins
 * A Receiver can establish an inventory of user sessions
 
+The `event_timestamp` in this event type specifies the time at which the session was established.
+
 ### Event Specific Claims {#session-established-event-specific-claims}
 The following optional claims MAY be included in the Session Established event:
 
 ip
-: The IP address of the user as observed by the Transmitter (**NOTE**, this can be different from the one observed by the Receiver for the same user because of network translation)
+: The array of IP addresses of the user as observed by the Transmitter. The value MUST be in the format of an array of strings, each one of which represents the RFC 4001 {{RFC4001}} string represetation of an IP address. (**NOTE**, this can be different from the one observed by the Receiver for the same user because of network translation)
 
 fp_ua
 : Fingerprint of the user agent computed by the Transmitter. (**NOTE**, this is not to identify the session, but to present some qualities of the session)
@@ -730,7 +734,11 @@ acr
 : The authentication context class reference of the session, as established by the Transmitter. The value of this field MUST be interpreted in the same way as the corresponding field in an OpenID Connect ID Token {{OpenID.Core}}
 
 amr
-: The authentication method reference of the session, as established by the Transmitter. The value of this field MUST be interpreted in the same way as the corresponding field in an OpenID Connect ID Token {{OpenID.Core}}
+: The authentication methods reference of the session, as established by the Transmitter. The value of this field MUST be an array of strings, each of which MUST be interpreted in the same way as the corresponding field in an OpenID Connect ID Token {{OpenID.Core}}
+
+ext_id
+: The external session identifier, which may be used to correlate this session with a broader session (e.g., a federated session established using SAML)
+
 
 ### Examples {#session-established-examples}
 The following is a non-normative example of the `session-established` event type:
