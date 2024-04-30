@@ -124,7 +124,7 @@ normative:
     - ins: C. Mortimore
       name: Chuck Mortimore
     date: November 2014
-    target: http://openid.net/specs/openid-connect-core-1_0.html#IDToken
+    target: https://openid.net/specs/openid-connect-core-1_0.html#IDToken
     title: OpenID Connect Core 1.0 - ID Token
   OASIS.saml-core-2.0-os:
   RFC2119:
@@ -329,7 +329,7 @@ Below is a non-normative example of a Complex Subject claim in an SSF event.
   },
   "tenant" : {
     "format": "iss_sub",
-    "iss" : "http://example.com/idp1",
+    "iss" : "https://example.com/idp1",
     "sub" : "1234"
   }
 }
@@ -1020,8 +1020,8 @@ Content-Type: application/json
   "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
   "iss": "https://tr.example.com",
   "aud": [
-      "http://receiver.example.com/web",
-      "http://receiver.example.com/mobile"
+      "https://receiver.example.com/web",
+      "https://receiver.example.com/mobile"
     ],
   "delivery": {
     "method": "urn:ietf:rfc:8935",
@@ -1091,8 +1091,8 @@ Cache-Control: no-store
   "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
   "iss": "https://tr.example.com",
   "aud": [
-      "http://receiver.example.com/web",
-      "http://receiver.example.com/mobile"
+      "https://receiver.example.com/web",
+      "https://receiver.example.com/mobile"
     ],
   "delivery": {
     "method": "urn:ietf:rfc:8935",
@@ -1139,8 +1139,8 @@ Cache-Control: no-store
     "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
     "iss": "https://tr.example.com",
     "aud": [
-        "http://receiver.example.com/web",
-        "http://receiver.example.com/mobile"
+        "https://receiver.example.com/web",
+        "https://receiver.example.com/mobile"
       ],
     "delivery": {
       "method": "urn:ietf:rfc:8935",
@@ -1165,8 +1165,8 @@ Cache-Control: no-store
     "stream_id": "50b2d39934264897902c0581ba7c21a3",
     "iss": "https://tr.example.com",
     "aud": [
-        "http://receiver.example.com/web",
-        "http://receiver.example.com/mobile"
+        "https://receiver.example.com/web",
+        "https://receiver.example.com/mobile"
       ],
     "delivery": {
       "method": "urn:ietf:rfc:8935",
@@ -1205,8 +1205,8 @@ Cache-Control: no-store
     "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
     "iss": "https://tr.example.com",
     "aud": [
-        "http://receiver.example.com/web",
-        "http://receiver.example.com/mobile"
+        "https://receiver.example.com/web",
+        "https://receiver.example.com/mobile"
       ],
     "delivery": {
       "method": "urn:ietf:rfc:8935",
@@ -1304,8 +1304,8 @@ Cache-Control: no-store
   "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
   "iss": "https://tr.example.com",
   "aud": [
-    "http://receiver.example.com/web",
-    "http://receiver.example.com/mobile"
+    "https://receiver.example.com/web",
+    "https://receiver.example.com/mobile"
   ],
   "delivery": {
     "method": "urn:ietf:rfc:8935",
@@ -1373,8 +1373,8 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
   "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
   "iss": "https://tr.example.com",
   "aud": [
-    "http://receiver.example.com/web",
-    "http://receiver.example.com/mobile"
+    "https://receiver.example.com/web",
+    "https://receiver.example.com/mobile"
   ],
   "delivery": {
     "method": "urn:ietf:rfc:8935",
@@ -1401,8 +1401,8 @@ Cache-Control: no-store
   "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
   "iss": "https://tr.example.com",
   "aud": [
-    "http://receiver.example.com/web",
-    "http://receiver.example.com/mobile"
+    "https://receiver.example.com/web",
+    "https://receiver.example.com/mobile"
   ],
   "delivery": {
     "method": "urn:ietf:rfc:8935",
@@ -1995,7 +1995,7 @@ It may be possible for an Event Transmitter to leak information about subjects
 through their responses to add subject requests. A "404" response may indicate
 to the Event Receiver that the subject does not exist, which may inadvertently
 reveal information about the subject (e.g. that a particular individual does or
-does not use the Event Transmitter’s service).
+does not use the Event Transmitter service).
 
 Event Transmitters SHOULD carefully evaluate the conditions under which they
 will return error responses to add subject requests. Event Transmitters MAY
@@ -2236,7 +2236,7 @@ method
 endpoint_url
 
 > The URL where events are pushed through HTTP POST. This is set by the
-  Receiver. If a Reciever is using multiple streams from a single Transmitter
+  Receiver. If a Receiver is using multiple streams from a single Transmitter
   and needs to keep the SETs separated, it is RECOMMENDED that the URL for each
   stream be unique.
 
