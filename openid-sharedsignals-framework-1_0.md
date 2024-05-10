@@ -79,38 +79,6 @@ normative:
     target: https://tools.ietf.org/html/rfc6749#section-4.4
     title: The OAuth 2.0 Authorization Framework - Client Credentials Grant
 
-  DELIVERYPOLL:
-    author:
-    - ins: A. Backman
-      name: Annabelle Backman
-    - ins: M. Jones
-      name: Michael B. Jones
-    - ins: M.S. Scurtescu
-      name: Marius Scurtescu
-    - ins: M. Ansari
-      name: Morteza Ansari
-    - ins: A. Nadalin
-      name: Anthony Nadalin
-    date: November 2020
-    target: https://www.rfc-editor.org/info/rfc8936
-    title: Poll-Based SET Token Delivery Using HTTP
-  DELIVERYPUSH:
-    author:
-    - ins: A. Backman
-      name: Annabelle Backman
-    - ins: M. Jones
-      name: Michael B. Jones
-    - ins: P. Hunt
-      name: Phil Hunt
-    - ins: M.S. Scurtescu
-      name: Marius Scurtescu
-    - ins: M. Ansari
-      name: Morteza Ansari
-    - ins: A. Nadalin
-      name: Anthony Nadalin
-    date: November 2020
-    target: https://www.rfc-editor.org/info/rfc8935
-    title: Push-Based SET Token Delivery Using HTTP
   OpenID.Core:
     author:
     - ins: N. Sakimura
@@ -137,6 +105,8 @@ normative:
   RFC8414:
   RFC8417:
   RFC8615:
+  RFC8935:
+  RFC8936:
   RFC9493:
   CAEP:
     author:
@@ -207,8 +177,8 @@ This spec also directly profiles several IETF Security Events drafts:
 
 * Security Event Token (SET) {{RFC8417}}
 * Subject Identifiers for Security Event Tokens {{RFC9493}}
-* Push-Based SET Token Delivery Using HTTP {{DELIVERYPUSH}}
-* Poll-Based SET Token Delivery Using HTTP {{DELIVERYPOLL}}
+* Push-Based SET Token Delivery Using HTTP {{RFC8935}}
+* Poll-Based SET Token Delivery Using HTTP {{RFC8936}}
 
 --- middle
 
@@ -1830,7 +1800,7 @@ Upon receiving a Verification Event, the Event Receiver SHALL parse the SET and
 validate its claims. In particular, the Event Receiver SHALL confirm that the
 value for "state" is as expected. If the value of "state" does not match, an
 error response of "setData" SHOULD be returned (see Section 2.3 of
-{{DELIVERYPUSH}} or {{DELIVERYPOLL}}).
+{{RFC8935}} or {{RFC8936}}).
 
 In many cases, Event Transmitters MAY disable or suspend an Event Stream that
 fails to successfully verify based on the acknowledgement or lack of
@@ -2069,8 +2039,8 @@ policy.
 This section is a profile of the following IETF SecEvent specifications:
 
 * Security Event Token (SET) {{RFC8417}}
-* Push-Based SET Token Delivery Using HTTP {{DELIVERYPUSH}}
-* Poll-Based SET Token Delivery Using HTTP {{DELIVERYPOLL}}
+* Push-Based SET Token Delivery Using HTTP {{RFC8935}}
+* Poll-Based SET Token Delivery Using HTTP {{RFC8936}}
 
 The RISC use cases that set the requirements are described in Security Events
 RISC Use Cases {{USECASES}}.
@@ -2210,15 +2180,15 @@ on this subject. The Shared Signals Framework is asking for further restrictions
 * The "exp" claim MUST NOT be present, as described in {{exp-claim}}.
 
 ## SET Token Delivery Using HTTP Profile {#set-token-delivery-using-http-profile}
-This section provides SSF profiling specifications for the {{DELIVERYPUSH}} and
-{{DELIVERYPOLL}} specs.
+This section provides SSF profiling specifications for the {{RFC8935}} and
+{{RFC8936}} specs.
 
 ### Stream Configuration Metadata {#delivery-meta}
 Each delivery method is identified by a URI, specified below by the "method"
 metadata.
 
 #### Push Delivery using HTTP
-This section provides SSF profiling specifications for the {{DELIVERYPUSH}} spec.
+This section provides SSF profiling specifications for the {{RFC8935}} spec.
 
 method
 
@@ -2238,7 +2208,7 @@ authorization_header
   by the Receiver.
 
 #### Polling Delivery using HTTP
-This section provides SSF profiling specifications for the {{DELIVERYPOLL}} spec.
+This section provides SSF profiling specifications for the {{RFC8936}} spec.
 
 method
 
