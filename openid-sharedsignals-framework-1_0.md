@@ -137,17 +137,7 @@ normative:
   RFC8414:
   RFC8417:
   RFC8615:
-  SUBIDS:
-    author:
-    - ins: A. Backman
-      name: Annabelle Backman
-    - ins: M. Scurtescu
-      name: Marius Scurtescu
-    - ins: P. Jain
-      name: Prachi Jain
-    date: June 2023
-    target: https://datatracker.ietf.org/doc/html/draft-ietf-secevent-subject-identifiers
-    title: Subject Identifiers for Security Event Tokens
+  RFC9493:
   CAEP:
     author:
     -
@@ -216,7 +206,7 @@ This specification defines:
 This spec also directly profiles several IETF Security Events drafts:
 
 * Security Event Token (SET) {{RFC8417}}
-* Subject Identifiers for Security Event Tokens {{SUBIDS}}
+* Subject Identifiers for Security Event Tokens {{RFC9493}}
 * Push-Based SET Token Delivery Using HTTP {{DELIVERYPUSH}}
 * Poll-Based SET Token Delivery Using HTTP {{DELIVERYPOLL}}
 
@@ -269,7 +259,7 @@ Each Subject Member MUST refer to exactly one Subject Principal. The value of a 
 
 A Simple Subject Member has a claim name and a value that is a "Subject
 Identifier" as defined in the Subject Identifiers for Security Event Tokens
-{{SUBIDS}}. Below is a non-normative example of a Simple Subject Member in an SSF
+{{RFC9493}}. Below is a non-normative example of a Simple Subject Member in an SSF
 event.
 
 ~~~ json
@@ -348,7 +338,7 @@ A Subject Identifier in an SSF event MUST have an identifier format that is any
 one of:
 
 * Defined in the IANA Registry defined in Subject Identifiers for Security
-Event Tokens {{SUBIDS}}
+Event Tokens {{RFC9493}}
 * An identifier format defined in the Additional Subject Identifier Formats
 ({{additional-subject-id-formats}}) section below, OR
 * A proprietary subject identifier format that is agreed to between parties.
@@ -2263,7 +2253,7 @@ endpoint_url
 # IANA Considerations {#iana}
 Subject Identifiers defined in this document will be added to the "Security
 Events Subject Identifier Types" registry. This registry is defined in the
-Subject Identifiers for Security Event Tokens {{SUBIDS}} specification.
+Subject Identifiers for Security Event Tokens {{RFC9493}} specification.
 
 The `ssf-configuration` well-known endpoint is registered in IANA's Well-Known URIs
 registry, as defined by {{RFC8615}}.
