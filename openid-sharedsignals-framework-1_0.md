@@ -128,7 +128,6 @@ normative:
     title: OpenID Connect Core 1.0 - ID Token
   OASIS.saml-core-2.0-os:
   RFC2119:
-  RFC5785:
   RFC6749:
   RFC6750:
   RFC7159:
@@ -137,6 +136,7 @@ normative:
   RFC8174:
   RFC8414:
   RFC8417:
+  RFC8615:
   SUBIDS:
     author:
     - ins: A. Backman
@@ -574,7 +574,7 @@ spec_version
 
 > OPTIONAL. A version idenitfying the implementer's draft or final specification implemented by the Transmitter. This includes the numerical portion of the spec version as described in the document {{NAMINGCONVENTION}}. If absent, the Transmitter is assumed to conform to "1_0-ID1" version of the specification (this document).
 
->  The following is a non-normative example of Transmitter that implements the second implementer's draft of the Shared Signals Framework specification 1_0. 
+>  The following is a non-normative example of Transmitter that implements the second implementer's draft of the Shared Signals Framework specification 1_0.
 
 ~~~ json
    {
@@ -649,7 +649,7 @@ TODO: consider adding a IANA Registry for metadata, similar to Section 7.1.1 of
 ### Authorization scheme {#authorization-scheme}
 SSF is an HTTP based signals sharing framework and is agnostic to the authentication and authorization schemes used to secure stream configuration APIs. It does not provide any SSF-specific authentication and authorization schemes but relies on the cooperating parties' mutual security considerations. The authorization scheme section of the metadata provides discovery information related to the Transmitter's stream management APIs.
 
-spec_urn  
+spec_urn
 
 > REQUIRED. A URN that describes the specification of the protocol being used.
 
@@ -676,7 +676,7 @@ Information can be retrieved.
 Transmitters supporting Discovery MUST make a JSON document available at the
 path formed by inserting the string "/.well-known/ssf-configuration" into the
 Issuer between the host component and the path component, if any. The syntax
-and semantics of ".well-known" are defined in {{RFC5785}}.  "ssf-configuration"
+and semantics of ".well-known" are defined in {{RFC8615}}.  "ssf-configuration"
 MUST point to a JSON document compliant with this specification, and that document MUST be
 returned using the "application/json" content type.
 
@@ -1353,7 +1353,7 @@ The stream_id and the full set of Receiver-Supplied properties MUST be present
 in the PUT body, not only the ones that are specifically intended to be changed.
 Missing Receiver-Supplied properties MUST be interpreted as requested to be
 deleted. Event Receivers MAY read the configuration first, modify the JSON
-{{RFC7159}} representation, then make a replacement request. If `events_requested` 
+{{RFC7159}} representation, then make a replacement request. If `events_requested`
 property is included in the request, it SHOULD NOT be an empty array.
 
 Transmitter-Supplied properties besides the stream_id MAY be present,
@@ -1825,7 +1825,7 @@ state
 
 > OPTIONAL An opaque value provided by the Event Receiver when the event is
   triggered.
-  
+
 As with any SSF event, the Verification Event has a top-level `sub_id` claim:
 
 sub_id
@@ -1956,7 +1956,7 @@ reason
 
 > OPTIONAL. Provides a short description of why the Transmitter has updated the
   status.
-  
+
 As with any SSF Event, this event has a top-level `sub_id` claim:
 
 sub_id
@@ -1977,7 +1977,7 @@ sub_id
   "sub_id": {
     "format": "opaque",
     "id" : "f67e39a0a4d34d56b3aa1bc4cff0069f"
-  },   
+  },
   "events": {
     "https://schemas.openid.net/secevent/ssf/event-type/stream-updated": {
       "status": "paused",
@@ -2172,7 +2172,7 @@ The purpose is defense in depth against confusion with other JWTs, as described
 in Sections 4.5 and 4.6 of {{RFC8417}}.
 
 ### The "aud" Claim {#aud-claim}
-The "aud" claim can be a single string or an array of strings. Values that 
+The "aud" claim can be a single string or an array of strings. Values that
 uniquely identify the Receiver to the Transmitter MAY be used, if the two parties
 have agreement on the format.
 
@@ -2264,6 +2264,9 @@ Subject Identifiers defined in this document will be added to the "Security
 Events Subject Identifier Types" registry. This registry is defined in the
 Subject Identifiers for Security Event Tokens {{SUBIDS}} specification.
 
+The `ssf-configuration` well-known endpoint is registered in IANA's Well-Known URIs
+registry, as defined by {{RFC8615}}.
+
 --- back
 
 # Acknowledgements
@@ -2320,4 +2323,3 @@ The technology described in this specification was made available from contribut
     * Fix issue #18 by converting saml-assertion-id to saml_assertion_id to maintain consistent formatting with other subject identifiers (#1)
     * updated backward compatibility language
     * added section for Transmitter Configuration Metadata RISC compatibility
-
