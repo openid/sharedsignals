@@ -749,12 +749,12 @@ The following is a non-normative example of the `session-established` event type
     "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
     "iat": 1615305159,
     "aud": "https://sp.example.com/caep",
+    "sub_id": {
+      "format": "email",
+      "email": "someuser@somedomain.com"
+    },
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/session-established": {
-          "subject": {
-            "format": "email",
-            "email": "someuser@somedomain.com"
-          },
           "ip": "192.168.1.12",
           "fp_ua": "abb0b6e7da81a42233f8f2b1a8ddb1b9a4c81611",
           "acr": "AAL2",
