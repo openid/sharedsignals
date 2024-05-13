@@ -669,7 +669,7 @@ Host: tr.example.com
 
 Using path components enables supporting multiple issuers per host. This is
 required in some multi-tenant hosting configurations. This use of ".well-known"
-is for supporting multiple issuers per host; unlike its use in {{RFC5785}}, it
+is for supporting multiple issuers per host; unlike its use in {{RFC8615}}, it
 does not provide general information about the host.
 
 ### Backward Compatibility for RISC Transmitters
