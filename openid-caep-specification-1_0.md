@@ -238,12 +238,12 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
     "iat": 1615305159,
     "aud": "https://sp.example.com/caep",
+    "sub_id": {
+        "format": "opaque",
+        "id": "dMTlD|1600802906337.16|16008.16"
+    },
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
-            "subject": {
-                "format": "opaque",
-                "id": "dMTlD|1600802906337.16|16008.16"
-            },
             "event_timestamp": 1615304991643
         }
     }
@@ -257,24 +257,24 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
     "iat": 1615305159,
     "aud": "https://sp.example.com/caep",
+    "sub_id": {
+        "format": "complex",
+        "session": {
+          "format": "opaque",
+          "id": "dMTlD|1600802906337.16|16008.16"
+        },
+        "user": {
+          "format": "iss_sub",
+          "iss": "https://idp.example.com/123456789/",
+          "sub": "99beb27c-c1c2-4955-882a-e0dc4996fcbc"
+        },
+        "tenant": {
+          "format": "opaque",
+          "id": "123456789"
+        }
+    },
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
-            "subject": {
-                "format": "complex",
-                "session": {
-                  "format": "opaque",
-                  "id": "dMTlD|1600802906337.16|16008.16"
-                },
-                "user": {
-                  "format": "iss_sub",
-                  "iss": "https://idp.example.com/123456789/",
-                  "sub": "99beb27c-c1c2-4955-882a-e0dc4996fcbc"
-                },
-                "tenant": {
-                  "format": "opaque",
-                  "id": "123456789"
-                }
-            },
             "initiating_entity": "policy",
             "reason_admin": {
                 "en": "Landspeed Policy Violation: C076E82F"
@@ -296,25 +296,25 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
     "iat": 1615305159,
     "aud": "https://sp.example.com/caep",
+    "sub_id": {
+        "format": "complex",
+        "user": {
+            "format": "iss_sub",
+            "iss": "https://idp.example.com/123456789/",
+            "sub": "jane.smith@example.com"
+        },
+        "device": {
+            "format": "iss_sub",
+            "iss": "https://idp.example.com/123456789/",
+            "sub": "e9297990-14d2-42ec-a4a9-4036db86509a"
+        },
+        "tenant": {
+          "format": "opaque",
+          "id": "123456789"
+        }
+    },
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
-            "subject": {
-                "format": "complex",
-                "user": {
-                    "format": "iss_sub",
-                    "iss": "https://idp.example.com/123456789/",
-                    "sub": "jane.smith@example.com"
-                },
-                "device": {
-                    "format": "iss_sub",
-                    "iss": "https://idp.example.com/123456789/",
-                    "sub": "e9297990-14d2-42ec-a4a9-4036db86509a"
-                },
-                "tenant": {
-                  "format": "opaque",
-                  "id": "123456789"
-                }
-            },
             "initiating_entity": "policy",
             "reason_admin": {
                 "en": "Policy Violation: C076E822"
@@ -359,13 +359,13 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     "jti": "9afce1e4e642b165fcaacdd0e7aa4903",
     "iat": 1615305159,
     "aud": "https://sp.example2.net/caep",
+    "sub_id": {
+        "format": "jwt_id",
+        "iss": "https://idp.example.com/987654321/",
+        "jti": "f61t6e20zdo3px56gepu8rzlsp4c1dpc0fx7"
+    },
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/token-claims-change": {
-            "subject": {
-                "format": "jwt_id",
-                "iss": "https://idp.example.com/987654321/",
-                "jti": "f61t6e20zdo3px56gepu8rzlsp4c1dpc0fx7"
-            },
             "event_timestamp": 1615304991643,
             "claims": {
                 "role": "ro-admin"
@@ -382,13 +382,13 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     "jti": "9afce1e4e642b165fcaacdd0e7aa4903",
     "iat": 1615305159,
     "aud": "https://sp.example2.net/caep",
+    "sub_id": {
+        "format": "jwt_id",
+        "iss": "https://idp.example.com/987654321/",
+        "jti": "f61t6e20zdo3px56gepu8rzlsp4c1dpc0fx7"
+    },
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/token-claims-change": {
-            "subject": {
-                "format": "jwt_id",
-                "iss": "https://idp.example.com/987654321/",
-                "jti": "f61t6e20zdo3px56gepu8rzlsp4c1dpc0fx7"
-            },
             "event_timestamp": 1615304991643,
             "initiating_entity": "policy",
             "reason_admin": {
@@ -414,13 +414,13 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     "jti": "dae94fed5f459881efa38b65c6772ddc",
     "iat": 1615305159,
     "aud": "https://sp.example2.net/caep",
+    "sub_id": {
+        "format": "saml_assertion_id",
+        "issuer": "https://idp.example.com/987654321/",
+        "assertion_id": "_a75adf55-01d7-dbd8372ebdfc"
+    },
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/token-claims-change": {
-            "subject": {
-                "format": "saml_assertion_id",
-                "issuer": "https://idp.example.com/987654321/",
-                "assertion_id": "_a75adf55-01d7-dbd8372ebdfc"
-            },
             "event_timestamp": 1615304991643,
             "claims": {
                 "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/role": "ro-admin"
@@ -497,13 +497,13 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     "jti": "07efd930f0977e4fcc1149a733ce7f78",
     "iat": 1615305159,
     "aud": "https://sp.example2.net/caep",
+    "sub_id": {
+        "format": "iss_sub",
+        "iss": "https://idp.example.com/3456789/",
+        "sub": "jane.smith@example.com"
+    },
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/credential-change": {
-            "subject": {
-                "format": "iss_sub",
-                "iss": "https://idp.example.com/3456789/",
-                "sub": "jane.smith@example.com"
-            },
             "credential_type": "fido2-roaming",
             "change_type": "create",
             "fido2_aaguid": "accced6a-63f5-490a-9eea-e59bc1896cfc",
@@ -579,13 +579,13 @@ the assurance level changed.
     "jti": "07efd930f0977e4fcc1149a733ce7f78",
     "iat": 1615305159,
     "aud": "https://sp.example2.net/caep",
+    "sub_id": {
+        "format": "iss_sub",
+        "iss": "https://idp.example.com/3456789/",
+        "sub": "jane.smith@example.com"
+    },
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/assurance-level-change": {
-            "subject": {
-                "format": "iss_sub",
-                "iss": "https://idp.example.com/3456789/",
-                "sub": "jane.smith@example.com"
-            },
             "namespace": "NIST-AAL",
             "current_level": "nist-aal2",
             "previous_level": "nist-aal1",
@@ -604,13 +604,13 @@ the assurance level changed.
     "jti": "07efd930f0977e4fcc1149a733ce7f78",
     "iat": 1615305159,
     "aud": "https://sp.example2.net/caep",
+    "sub_id": {
+        "format": "iss_sub",
+        "iss": "https://idp.example.com/3456789/",
+        "sub": "jane.smith@example.com"
+    },
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/assurance-level-change": {
-            "subject": {
-                "format": "iss_sub",
-                "iss": "https://idp.example.com/3456789/",
-                "sub": "jane.smith@example.com"
-            },
             "namespace": "Retinal Scan",
             "current_level": "hi-res-scan",
             "initiating_entity": "user",
@@ -661,20 +661,20 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
     "iat": 1615305159,
     "aud": "https://sp.example.com/caep",
+    "sub_id": {
+        "format": "complex",
+        "device": {
+            "format": "iss_sub",
+            "iss": "https://idp.example.com/123456789/",
+            "sub": "e9297990-14d2-42ec-a4a9-4036db86509a"
+        },
+        "tenant": {
+            "format": "opaque",
+            "id": "123456789"
+        }
+    },
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/device-compliance-change": {
-            "subject": {
-                "format": "complex",
-                "device": {
-                    "format": "iss_sub",
-                    "iss": "https://idp.example.com/123456789/",
-                    "sub": "e9297990-14d2-42ec-a4a9-4036db86509a"
-                },
-                "tenant": {
-                    "format": "opaque",
-                    "id": "123456789"
-                }
-            },
             "current_status": "not-compliant",
             "previous_status": "compliant",
             "initiating_entity": "policy",
