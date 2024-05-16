@@ -602,6 +602,18 @@ authorization_schemes
   security considerations, make the authorization_schemes attribute
   publicly accessible without prior authentication.
 
+default_subjects
+
+> OPTIONAL. A string indicating the default behavior of newly created streams. The value
+  MUST be either "ALL" or "NONE". If not provided, the default value is "NONE".
+>  - "ALL" indicates that events for all subjects are transmitted by default. The Receiver
+    MAY remove subjects from the stream via the `remove_subject_endpoint`, causing only
+    events for those subjects to _not_ be transmitted. The Receiver MAY re-add any
+    subjects removed this way via the `add_subject_endpoint`.
+>  - "NONE" indicates that no subjects are added by default. The Receiver MAY add subjects
+    to the stream via the `add_subject_endpoint`, causing only events for those subjects
+    to be transmitted. The Receiver MAY remove subjects added this way via the
+    `remove_subject_endpoint`.
 
 TODO: consider adding a IANA Registry for metadata, similar to Section 7.1.1 of
 {{RFC8414}}. This would allow other specs to add to the metadata.
