@@ -877,7 +877,7 @@ events_delivered
 
 > **Transmitter-Supplied**, REQUIRED. An array of URIs identifying the set of events that
   the Transmitter MUST include in the stream. This is a subset (not necessarily
-  a complete subset) of the intersection of "events_supported" and
+  a proper subset) of the intersection of "events_supported" and
   "events_requested". A Receiver MUST rely on the values received in this field
   to understand which event types it can expect from the Transmitter.
 
@@ -1444,7 +1444,7 @@ Enabled
 
 Paused
 
-> the Transmitter SHOULD send a stream updated ({{stream-updated-event}}) event after the Event Stream is
+> the Transmitter SHOULD send a Stream Updated ({{stream-updated-event}}) event after the Event Stream is
   re-started. A Receiver MUST assume that events may have been lost during the
   time when the Event Stream was paused.
 
