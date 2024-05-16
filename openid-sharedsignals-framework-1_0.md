@@ -745,7 +745,8 @@ Content-Type: application/json
       {
         "spec_urn": "urn:ietf:rfc:8705"
       }
-    ]
+    ],
+  "default_subjects": "NONE"
 }
 ~~~
 {: #figdiscoveryresponse title="Example: Transmitter Configuration Response"}
