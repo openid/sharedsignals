@@ -1439,7 +1439,7 @@ If the stream is:
 
 Enabled
 
-> the Transmitter MUST send a stream updated ({{stream-updated-event}}) event
+> the Transmitter MUST send a Stream Updated ({{stream-updated-event}}) event
   to the Receiver within the Event Stream.
 
 Paused
