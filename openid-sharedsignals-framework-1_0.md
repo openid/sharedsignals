@@ -839,20 +839,20 @@ following properties:
 
 stream_id
 
-> **Transmitter-Supplied**, A string that uniquely identifies the stream. A
-  transmitter MUST generate a unique ID for each of its non-deleted streams
+> **Transmitter-Supplied**, REQUIRED. A string that uniquely identifies the stream. A
+  Transmitter MUST generate a unique ID for each of its non-deleted streams
   at the time of stream creation.
 
 iss
 
-> **Transmitter-Supplied**, A URL using the https scheme with no query or
+> **Transmitter-Supplied**, REQUIRED. A URL using the https scheme with no query or
   fragment component that the Transmitter asserts as its Issuer Identifier. This
   MUST be identical to the "iss" Claim value in Security Event Tokens issued
   from this Transmitter.
 
 aud
 
-> **Transmitter-Supplied**, A string or an array of strings containing an
+> **Transmitter-Supplied**, REQUIRED. A string or an array of strings containing an
   audience claim as defined in JSON Web Token (JWT){{RFC7519}} that identifies
   the Event Receiver(s) for the Event Stream. This property cannot be updated.
   If multiple Receivers are specified then the Transmitter SHOULD know that
@@ -860,14 +860,14 @@ aud
 
 events_supported
 
-> **Transmitter-Supplied**, An array of URIs identifying the set of events
+> **Transmitter-Supplied**, OPTIONAL. An array of URIs identifying the set of events
   supported by the Transmitter for this Receiver. If omitted, Event Transmitters
   SHOULD make this set available to the Event Receiver via some other means
   (e.g. publishing it in online documentation).
 
 events_requested
 
-> **Receiver-Supplied**, An array of URIs identifying the set of events that
+> **Receiver-Supplied**, OPTIONAL. An array of URIs identifying the set of events that
   the Receiver requested. A Receiver SHOULD request only the events that it
   understands and it can act on. This is configurable by the Receiver. A
   Transmitter MUST ignore any array values that it does not understand. This
@@ -875,7 +875,7 @@ events_requested
 
 events_delivered
 
-> **Transmitter-Supplied**, An array of URIs identifying the set of events that
+> **Transmitter-Supplied**, REQUIRED. An array of URIs identifying the set of events that
   the Transmitter MUST include in the stream. This is a subset (not necessarily
   a proper subset) of the intersection of "events_supported" and
   "events_requested". A Receiver MUST rely on the values received in this field
@@ -883,7 +883,7 @@ events_delivered
 
 delivery
 
-> A JSON object containing a set of name/value pairs specifying configuration
+> REQUIRED. A JSON object containing a set of name/value pairs specifying configuration
   parameters for the SET delivery method. The actual delivery method is
   identified by the special key "method" with the value being a URI as defined
   in {{delivery-meta}}. The value of the "delivery" field contains two
@@ -891,13 +891,13 @@ delivery
 
 >   method
 
-> > **Receiver-Supplied**, the specific delivery method to be used. This can be
+> > **Receiver-Supplied**, REQUIRED. The specific delivery method to be used. This can be
     any one of "urn:ietf:rfc:8935" (push) or "urn:ietf:rfc:8936" (poll), but
     not both.
 
 >   endpoint_url
 
-> > The location at which the push or poll delivery will take place. If the
+> > REQUIRED. The location at which the push or poll delivery will take place. If the
     `method` value is "urn:ietf:rfc:8935" (push), then this value MUST
     be supplied by the Receiver.  If the `method` value is
     "urn:ietf:rfc:8936" (poll), then this value MUST be supplied by the
@@ -905,7 +905,7 @@ delivery
 
 min_verification_interval
 
-> **Transmitter-Supplied**, An integer indicating the minimum amount of time in
+> **Transmitter-Supplied**, OPTIONAL. An integer indicating the minimum amount of time in
   seconds that must pass in between verification requests. If an Event Receiver
   submits verification requests more frequently than this, the Event Transmitter
   MAY respond with a 429 status code. An Event Transmitter SHOULD NOT respond
@@ -913,9 +913,9 @@ min_verification_interval
 
 description
 
-> **Receiver-Supplied**, An optinal string to describe the properties of the stream.
-  This is useful in multi stream systems to identify the stream for human actors. The
-  transmitter may truncate the string beyond allowed max length.
+> **Receiver-Supplied**, OPTIONAL. A string that describes the properties of the stream.
+  This is useful in multi-stream systems to identify the stream for human actors. The
+  transmitter MAY truncate the string beyond an allowed max length.
 
 TODO: consider adding a IANA Registry for stream configuration metadata, similar
 to Section 7.1.1 of {{RFC8414}}. This would allow other specs to add to
