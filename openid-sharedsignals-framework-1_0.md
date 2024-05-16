@@ -1450,7 +1450,7 @@ Paused
 
 Disabled
 
-> the Transmitter MAY send a stream updated ({{stream-updated-event}}) event after the Event Stream is
+> the Transmitter MAY send a Stream Updated ({{stream-updated-event}}) event after the Event Stream is
   re-enabled.
 
 #### Reading a Stream’s Status {#reading-a-streams-status}
