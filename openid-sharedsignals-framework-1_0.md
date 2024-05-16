@@ -1415,7 +1415,7 @@ The following is a non-normative example response of a successful request:
 HTTP/1.1 204 No Content
 Cache-Control: no-store
 ~~~
-{: title="Example: Delete Stream Response" #figreplaceconfigresp}
+{: title="Example: Delete Stream Response" #figdeletestreamresp}
 
 Errors are signaled with HTTP status codes as follows:
 
