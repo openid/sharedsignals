@@ -165,13 +165,13 @@ and Coordination (RISC) and the Continuous Access Evaluation Profile ({{CAEP}})
 
 This specification defines:
 
-* A Profile for Security Events Tokens {{RFC8417}}
-* Subject Principals
-* Subject Claims in SSF Events
-* Event Types
-* Event Properties
-* Configuration Metadata and Discovery Method for Transmitters
-* A Management API for Event Streams
+* A profile for Security Events Tokens {{RFC8417}}
+* Subject principals
+* Subject claims in SSF events
+* Event types
+* Event properties
+* Transmitter Configuration Metadata and its discovery method for Receivers
+* A management API for Event Streams
 
 This specification also directly profiles several IETF Security Events specifications:
 
@@ -1769,36 +1769,36 @@ Errors are signaled with HTTP status codes as follows:
 In some cases, the frequency of event transmission on an Event Stream will be
 very low, making it difficult for an Event Receiver to tell the difference
 between expected behavior and event transmission failure due to a misconfigured
-stream. Event Receivers can request that a Verification event be transmitted
+stream. Event Receivers can request that a Verification Event be transmitted
 over the Event Stream, allowing the Receiver to confirm that the stream is
 configured correctly upon successful receipt of the event. The acknowledgment of
-a Verification event also confirms to the Event Transmitter that end-to-end
+a Verification Event also confirms to the Event Transmitter that end-to-end
 delivery is working, including signature verification and encryption.
 
-A Transmitter MAY send a Verification event at any time, even if one was
+A Transmitter MAY send a Verification Event at any time, even if one was
 not requested by the Event Receiver.
 
-A Transmitter MAY respond to Verification event requests even if the event is not present in the `events_supported`, `events_requested` and / or `events_delivered` fields in the Stream Configuration ({{stream-config}}).
+A Transmitter MAY respond to Verification Event requests even if the event is not present in the `events_supported`, `events_requested` and / or `events_delivered` fields in the Stream Configuration ({{stream-config}}).
 
 
 #### Verification Event {#verification-event}
-The Verification event is an SSF event with the event type: "https://schemas.openid.net/secevent/ssf/event-type/verification". The event contains the following attribute:
+The Verification Event is an SSF event with the event type: "https://schemas.openid.net/secevent/ssf/event-type/verification". The event contains the following attribute:
 
 state
 
 > OPTIONAL An opaque value provided by the Event Receiver when the event is
   triggered.
 
-As with any SSF event, the Verification event has a top-level `sub_id` claim:
+As with any SSF event, the Verification Event has a top-level `sub_id` claim:
 
 sub_id
 
-> REQUIRED. The value of the top-level `sub_id` claim in a Verification event MUST always be set to have a simple value of type `opaque`. The `id` of the value MUST be the `stream_id` of the stream being verified.
+> REQUIRED. The value of the top-level `sub_id` claim in a Verification Event MUST always be set to have a simple value of type `opaque`. The `id` of the value MUST be the `stream_id` of the stream being verified.
 
 > Note that the subject that identifies a stream itself is always implicitly
   added to the stream and MAY NOT be removed from the stream.
 
-Upon receiving a Verification event, the Event Receiver SHALL parse the SET and
+Upon receiving a Verification Event, the Event Receiver SHALL parse the SET and
 validate its claims. In particular, the Event Receiver SHALL confirm that the
 value for "state" is as expected. If the value of "state" does not match, an
 error response of "setData" SHOULD be returned (see Section 2.3 of
@@ -1809,7 +1809,7 @@ fails to successfully verify based on the acknowledgement or lack of
 acknowledgement by the Event Receiver.
 
 #### Triggering a Verification Event. {#triggering-a-verification-event}
-To request that a Verification event be sent over an Event Stream, the Event
+To request that a Verification Event be sent over an Event Stream, the Event
 Receiver makes an HTTP POST request to the Verification Endpoint, with a [JSON]
 [RFC7159] object containing the parameters of the verification request, if any.
 On a successful request, the Event Transmitter responds with an empty
@@ -1819,22 +1819,22 @@ Verification requests have the following properties:
 
 stream_id
 
-> REQUIRED. The stream that the Verification event is being requested on.
+> REQUIRED. The stream that the Verification Event is being requested on.
 
 state
 
 > OPTIONAL. An arbitrary string that the Event Transmitter MUST echo back to the
-  Event Receiver in the Verification event’s payload. Event Receivers MAY use
-  the value of this parameter to correlate a Verification event with a
-  verification request. If the Verification event is initiated by the Transmitter
+  Event Receiver in the Verification Event’s payload. Event Receivers MAY use
+  the value of this parameter to correlate a Verification Event with a
+  verification request. If the Verification Event is initiated by the Transmitter
   then this parameter MUST not be set.
 
 A successful response from a POST to the Verification Endpoint does not indicate
-that the Verification event was transmitted successfully, only that the Event
+that the Verification Event was transmitted successfully, only that the Event
 Transmitter has transmitted the event or will do so at some point in the future.
 Event Transmitters MAY transmit the event via an asynchronous process, and SHOULD
-publish an SLA for Verification event transmission times. Event Receivers MUST NOT
-depend on the Verification event being transmitted synchronously or in any
+publish an SLA for Verification Event transmission times. Event Receivers MUST NOT
+depend on the Verification Event being transmitted synchronously or in any
 particular order relative to the current queue of events.
 
 Errors are signaled with HTTP status codes as follows:
@@ -1847,7 +1847,7 @@ Errors are signaled with HTTP status codes as follows:
 | 429  | if the Event Receiver is sending too many requests in a given amount of time; see related "min_verification_interval" in {{stream-config}}
 {: title="Verification Errors" #taberifyerr}
 
-The following is a non-normative example request to trigger a Verification event:
+The following is a non-normative example request to trigger a Verification Event:
 
 ~~~ http
 POST /ssf/verify HTTP/1.1
@@ -1871,7 +1871,7 @@ Cache-Control: no-store
 ~~~
 {: title="Example: Trigger Verification Response" #figverifyresp}
 
-And the following is a non-normative example of a Verification event sent to the
+And the following is a non-normative example of a Verification Event sent to the
 Event Receiver as a result of the above request:
 
 ~~~ json
