@@ -1446,7 +1446,7 @@ Paused
 
 > the Transmitter SHOULD send a Stream Updated ({{stream-updated-event}}) event after the Event Stream is
   re-started. A Receiver MUST assume that events may have been lost during the
-  time when the Event Stream was paused.
+  time when the Stream was paused.
 
 Disabled
 
