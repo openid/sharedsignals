@@ -207,18 +207,16 @@ All events MUST be signed using the `RS256` algorithm using a minimum of 2048-bi
 
 ### Authorization Server
 * MAY distribute discovery metadata (such as the authorization endpoint) via the metadata document as specified in [RFC8414]{{RFC8414}}
-* MUST support at least one of the following to obtain a short-lived access token. A short lived access token could be defined as `exp` claim no longer than 60 mins after `nbf`. Please refer Access token lifetimes in the security considerations {{FAPI}} for additional considerations. 
+* MUST support at least one of the following to obtain a short-lived access token. For example, a short lived access token could be defined as one in which the value of the `exp` claim is not longer than 60 mins after `nbf` claim. Please refer Access token lifetimes in the security considerations {{FAPI}} for additional considerations. 
 ** client credential grant flow {{RFC6749}} section 4.4
 ** authorization code flow {{RFC6749}} section 4.1
 
 ### OAuth Scopes
-The client could discover OAuth scopes needed to access the reource by 2 separate mechanisms depending on the support from the OAuth service
+Depending on the OAuth Authorization Service features, the client SHALL discover the OAuth scopes as follows:
 
-#### Resource Server
-The OAuth scopes required to access the resources MAY be obtained by the client using {{OPRM}} hosted by the Resource Server. 
+1. If the Resource Server, hosting SSF configuration APIs, supports OAuth Protected Resource Metadata {{OPRM}} then the client MUST obtain the required scopes by using it.
 
-#### Authorization Server 
-In the absence of Resource server's support for {{OPRM}} the following process should be adopted - 
+2. If the Resource Server does not support {{OPRM}}, then the following scopes MUST be supported -
 * An OAuth {{RFC6749}} authorization server that is used to issue tokens to SSF Receivers, MUST reserve the scopes for the SSF endpoints with the prefix of `ssf`
 * All the SSF stream configuration management API operations MUST accept `ssf.manage` scope
 * All the SSF stream configuration Read API operations MUST accept `ssf.read` scope
