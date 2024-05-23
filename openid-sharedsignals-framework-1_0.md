@@ -927,7 +927,9 @@ In order to communicate events from a Transmitter to a Receiver, a Receiver
 MUST first create an Event Stream. An Event Receiver creates a stream by making
 an HTTP POST request to the Configuration Endpoint. On receiving a valid request
 the Event Transmitter responds with a "201 Created" response containing a
-[JSON][RFC7159] representation of the stream’s configuration in the body.
+[JSON][RFC7159] representation of the stream’s configuration in the body. The Receiver
+SHOULD check the response and confirm that the `iss` value matches the Issuer from
+which it received the Transmitter Configuration data.
 
 If a stream already exists, and the Transmitter allows multiple streams with the
 same Receiver, the Event Transmitter MUST respond with a new stream ID. If the
@@ -1022,7 +1024,9 @@ Errors are signaled with HTTP status codes as follows:
 An Event Receiver gets the current configuration of a stream by making an HTTP
 GET request to the Configuration Endpoint. On receiving a valid request, the
 Event Transmitter responds with a "200 OK" response containing a [JSON][RFC7159]
-representation of the stream’s configuration in the body.
+representation of the stream’s configuration in the body.  The Receiver
+SHOULD check the response and confirm that the `iss` value matches the Issuer from
+which it received the Transmitter Configuration data.
 
 The GET request MAY include the "stream_id" as a query parameter in order to
 identify the correct Event Stream. If the "stream_id" parameter is missing,
@@ -1219,7 +1223,8 @@ HTTP PATCH request to the Configuration Endpoint. The PATCH body contains a
 [JSON][RFC7159] representation of the stream configuration properties to change. On
 receiving a valid request, the Event Transmitter responds with a "200 OK"
 response containing a [JSON][RFC7159] representation of the entire updated stream
-configuration in the body.
+configuration in the body. The Receiver SHOULD check the response and confirm that the
+`iss` value matches the Issuer from which it received the Transmitter Configuration data.
 
 The stream_id property MUST be present in the request. Other properties
 MAY be present in the request. Any Receiver-Supplied property present in the
@@ -1307,6 +1312,8 @@ HTTP PUT request to the Configuration Endpoint. The PUT body contains a JSON
 {{RFC7159}} representation of the new configuration. On receiving a valid
 request, the Event Transmitter responds with a "200 OK" response containing a
 JSON {{RFC7159}} representation of the updated stream configuration in the body.
+The Receiver SHOULD check the response and confirm that the `iss` value matches the
+Issuer from which it received the Transmitter Configuration data.
 
 The stream_id and the full set of Receiver-Supplied properties MUST be present
 in the PUT body, not only those specifically intended to be changed.
