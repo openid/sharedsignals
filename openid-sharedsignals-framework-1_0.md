@@ -414,12 +414,7 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
     "email": "foo@example.com"
   },
   "events": {
-    "https://schemas.openid.net/secevent/risc/event-type/account-enabled": {
-      "subject": {
-        "format": "email",
-        "email": "foo@example.com"
-      }
-    }
+    "https://schemas.openid.net/secevent/risc/event-type/account-enabled": {}
   }
 }
 ~~~
@@ -446,19 +441,6 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
   },
   "events": {
     "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
-      "subject": {
-          "format": "complex",
-          "user": {
-              "format": "iss_sub",
-              "iss": "https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/",
-              "sub": "jane.smith@example.com"
-          },
-          "device": {
-              "format": "iss_sub",
-              "iss": "https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/",
-              "sub": "e9297990-14d2-42ec-a4a9-4036db86509a"
-          }
-      },
       "initiating_entity": "policy",
       "reason_admin": "Policy Violation: C076E82F",
       "reason_user": "Landspeed violation.",
@@ -481,10 +463,6 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
   },
   "events": {
     "https://schemas.openid.net/secevent/caep/event-type/token-claims-change": {
-      "subject": {
-        "format": "email",
-        "email": "foo@example2.com"
-      },
       "event_timestamp": 1600975810,
       "claims": {
          "role": "ro-admin"
@@ -507,10 +485,6 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
   },
   "events": {
     "https://schemas.openid.net/secevent/caep/event-type/token-claims-change": {
-    "subject": {
-        "format": "catalog_item",
-        "catalog_id": "c0384/winter/2354122"
-      },
       "event_timestamp": 1600975810,
       "claims": {
          "role": "ro-admin"
@@ -2077,10 +2051,6 @@ specific to the event type.
   },
   "events": {
     "https://schemas.openid.net/secevent/risc/event-type/account-disabled": {
-      "subject": {
-        "format": "phone",
-        "phone_number": "+1 206 555 0123"
-      },
       "reason": "hijacking",
       "cause-time": 1508012752
     }
@@ -2101,11 +2071,9 @@ specific to the event type.
   },
   "events": {
     "https://schemas.openid.net/secevent/caep/event-type/token-claims-changed": {
-      "subject": {
-        "format": "email",
-        "email": "user@example.com"
-      },
-      "token": "some-token-value"
+      "claims": {
+        "token": "some-token-value"
+      }
     }
   }
 }
@@ -2157,6 +2125,10 @@ multiple Receivers would lead to unintended data disclosure.
   "iss": "https://transmitter.example.com",
   "aud": ["receiver.example.com/web", "receiver.example.com/mobile"],
   "iat": 1493856000,
+  "sub_id": {
+    "format": "opaque",
+    "id": "72e6991badb44e08a69672960053b342"
+  },
   "events": {
     "https://schemas.openid.net/secevent/ssf/event-type/verification": {
       "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
