@@ -212,7 +212,7 @@ All events MUST be signed using the `RS256` algorithm using a minimum of 2048-bi
 ** authorization code flow {{RFC6749}} section 4.1
 
 ### OAuth Scopes
-Depending on the OAuth Authorization Service features, the client SHALL discover the OAuth scopes as follows:
+Depending on the features supported by the OAuth service and the SSF APIs, the client SHALL discover the OAuth scopes as follows:
 
 1. If the Resource Server, hosting SSF configuration APIs, supports OAuth Protected Resource Metadata {{OPRM}} then the client MUST obtain the required scopes by using it.
 
@@ -221,7 +221,7 @@ Depending on the OAuth Authorization Service features, the client SHALL discover
 * All the SSF stream configuration management API operations MUST accept `ssf.manage` scope
 * All the SSF stream configuration Read API operations MUST accept `ssf.read` scope
 * Authorization server MAY postfix scope names with more granular operations eg. `ssf.manage.create`, `ssf.manage.update` etc.
-* Transmitter managed poll endpoint MAY use the scope in the same nomenclature as `ssf.manage.poll`
+* Transmitter managed poll endpoint MAY support the postfix scopes in the same nomenclature as `ssf.manage.poll`
 
 ### The SSF Transmitter as a Resource Server
 * MUST accept access tokens in the HTTP header as in Section 2.1 of OAuth 2.0 Bearer Token Usage [RFC6750]{{RFC6750}}
