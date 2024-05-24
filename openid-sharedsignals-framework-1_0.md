@@ -1461,10 +1461,14 @@ The Stream Status method takes the following parameters:
 
 stream_id
 
-> REQUIRED. The stream whose status is being queried.
+> REQUIRED. A string identifying the stream whose status is being queried.
 
 On receiving a valid request, the Event Transmitter responds with a 200 OK
 response containing a [JSON][RFC7159] object with the following attributes:
+
+stream_id
+
+> REQUIRED. A string identifying the stream whose status is being queried.
 
 status
 
@@ -1517,6 +1521,7 @@ Content-Type: application/json
 Cache-Control: no-store
 
 {
+  "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
   "status": "paused",
   "reason": "SYSTEM_DOWN_FOR_MAINTENANCE"
 }
@@ -1549,7 +1554,7 @@ with the following fields:
 
 stream_id
 
-> REQUIRED. The stream whose status is being updated.
+> REQUIRED. A string identifying the stream whose status is being updated.
 
 status
 
@@ -1652,7 +1657,7 @@ following claims:
 
 stream_id
 
-> REQUIRED. The stream to which the subject is being added.
+> REQUIRED. A string identifying the stream to which the subject is being added.
 
 subject
 
@@ -1718,7 +1723,7 @@ with the following claims:
 
 stream_id
 
-> REQUIRED. The stream from which the subject is being removed.
+> REQUIRED. A string identifying the stream from which the subject is being removed.
 
 subject
 
@@ -1819,7 +1824,7 @@ Verification requests have the following properties:
 
 stream_id
 
-> REQUIRED. The stream that the Verification Event is being requested on.
+> REQUIRED. A string identifying the stream that the Verification Event is being requested on.
 
 state
 
