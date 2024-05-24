@@ -769,8 +769,6 @@ Receiver, all Stream Management API endpoints MUST use HTTP over TLS {{RFC2818}}
 and standard HTTP authentication and authorization schemes, as per {{RFC7235}}.
 The authorization MUST scope a Receiver to specific stream IDs, such that only that
 Receiver is able to access or modify the details of the Event Stream.
-The Transmitter MAY describe the available authorization schemes in the Transmitter
-Configuration metadata, as described in {{discovery-meta}}.
 
 ~~~
 +------------+                +------------+
