@@ -1466,6 +1466,10 @@ stream_id
 On receiving a valid request, the Event Transmitter responds with a 200 OK
 response containing a [JSON][RFC7159] object with the following attributes:
 
+stream_id
+
+> REQUIRED. The stream whose status is being queried.
+
 status
 
 > REQUIRED. A string whose value MUST be one of the values described below.
@@ -1517,6 +1521,7 @@ Content-Type: application/json
 Cache-Control: no-store
 
 {
+  "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
   "status": "paused",
   "reason": "SYSTEM_DOWN_FOR_MAINTENANCE"
 }
