@@ -767,8 +767,8 @@ add and remove Subjects, and trigger verification for those streams.
 Unless there exists some other method of establishing trust between a Transmitter and
 Receiver, all Stream Management API endpoints MUST use HTTP over TLS {{RFC2818}}
 and standard HTTP authentication and authorization schemes, as per {{RFC7235}}.
-The authorization MUST scope a Receiver to specific stream IDs, such that only that
-Receiver is able to access or modify the details of the Event Stream.
+The authorization MUST associate a Receiver with one or more stream IDs, such that only
+authorized Receivers are able to access or modify the details of the associated Event Streams.
 
 ~~~
 +------------+                +------------+
