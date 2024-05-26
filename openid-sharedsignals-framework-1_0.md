@@ -1403,29 +1403,9 @@ Errors are signaled with HTTP status codes as follows:
 ### Stream Status {#status}
 Event Streams are managed independently. A Receiver MAY request that events from a
 stream be interrupted by Updating the Stream Status ({{updating-a-streams-status}}).
-
-A Transmitter MAY decide to enable, pause or disable updates from a stream
-independently of an update request from a Receiver. If a Transmitter decides to
-start or stop events for a stream then the Transmitter MUST do the following
-according to the status of the stream.
-
-If the stream is:
-
-Enabled
-
-> the Transmitter MUST send a Stream Updated ({{stream-updated-event}}) event
-  to the Receiver within the Event Stream.
-
-Paused
-
-> the Transmitter SHOULD send a Stream Updated ({{stream-updated-event}}) event after the Event Stream is
-  re-started. A Receiver MUST assume that events may have been lost during the
-  time when the Stream was paused.
-
-Disabled
-
-> the Transmitter MAY send a Stream Updated ({{stream-updated-event}}) event after the Event Stream is
-  re-enabled.
+If a Transmitter decides to enable, pause or disable updates from a stream
+independently of an update request from a Receiver, it MUST send a Stream Updated Event
+({{stream-updated-event}}) to the Receiver.
 
 #### Reading a Stream’s Status {#reading-a-streams-status}
 An Event Receiver checks the current status of an Event Stream by making an HTTP
@@ -1880,11 +1860,11 @@ that it has changed the status of the Event Stream.
 
 If a Transmitter decides to change the status of an Event Stream from "enabled"
 to either "paused" or "disabled", then the Transmitter MUST send this event to
-any Receiver that is currently "enabled" to receive events from this stream.
+the Receiver before stopping the stream.
 
 If the Transmitter changes the status of the stream from either
-"paused" or "disabled" to "enabled", then it MUST send this event to any
-Receiver that has previously been enabled to receive events for the stream.
+"paused" or "disabled" to "enabled", then it MUST send this event to the
+Receiver upon re-enabling the stream.
 
 A Transmitter MAY send a Stream Updated event even if the event is not present in the `events_supported`, `events_requested` and / or `events_delivered` fields in the Stream Configuration ({{stream-config}}).
 
