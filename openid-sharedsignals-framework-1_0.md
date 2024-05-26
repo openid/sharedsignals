@@ -414,12 +414,7 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
     "email": "foo@example.com"
   },
   "events": {
-    "https://schemas.openid.net/secevent/risc/event-type/account-enabled": {
-      "subject": {
-        "format": "email",
-        "email": "foo@example.com"
-      }
-    }
+    "https://schemas.openid.net/secevent/risc/event-type/account-enabled": {}
   }
 }
 ~~~
@@ -446,19 +441,6 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
   },
   "events": {
     "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
-      "subject": {
-          "format": "complex",
-          "user": {
-              "format": "iss_sub",
-              "iss": "https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/",
-              "sub": "jane.smith@example.com"
-          },
-          "device": {
-              "format": "iss_sub",
-              "iss": "https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/",
-              "sub": "e9297990-14d2-42ec-a4a9-4036db86509a"
-          }
-      },
       "initiating_entity": "policy",
       "reason_admin": "Policy Violation: C076E82F",
       "reason_user": "Landspeed violation.",
@@ -481,10 +463,6 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
   },
   "events": {
     "https://schemas.openid.net/secevent/caep/event-type/token-claims-change": {
-      "subject": {
-        "format": "email",
-        "email": "foo@example2.com"
-      },
       "event_timestamp": 1600975810,
       "claims": {
          "role": "ro-admin"
@@ -507,10 +485,6 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
   },
   "events": {
     "https://schemas.openid.net/secevent/caep/event-type/token-claims-change": {
-    "subject": {
-        "format": "catalog_item",
-        "catalog_id": "c0384/winter/2354122"
-      },
       "event_timestamp": 1600975810,
       "claims": {
          "role": "ro-admin"
@@ -1441,10 +1415,14 @@ The Stream Status method takes the following parameters:
 
 stream_id
 
-> REQUIRED. The stream whose status is being queried.
+> REQUIRED. A string identifying the stream whose status is being queried.
 
 On receiving a valid request, the Event Transmitter responds with a 200 OK
 response containing a [JSON][RFC7159] object with the following attributes:
+
+stream_id
+
+> REQUIRED. A string identifying the stream whose status is being queried.
 
 status
 
@@ -1497,6 +1475,7 @@ Content-Type: application/json
 Cache-Control: no-store
 
 {
+  "stream_id": "f67e39a0a4d34d56b3aa1bc4cff0069f",
   "status": "paused",
   "reason": "SYSTEM_DOWN_FOR_MAINTENANCE"
 }
@@ -1529,7 +1508,7 @@ with the following fields:
 
 stream_id
 
-> REQUIRED. The stream whose status is being updated.
+> REQUIRED. A string identifying the stream whose status is being updated.
 
 status
 
@@ -1632,7 +1611,7 @@ following claims:
 
 stream_id
 
-> REQUIRED. The stream to which the subject is being added.
+> REQUIRED. A string identifying the stream to which the subject is being added.
 
 subject
 
@@ -1698,7 +1677,7 @@ with the following claims:
 
 stream_id
 
-> REQUIRED. The stream from which the subject is being removed.
+> REQUIRED. A string identifying the stream from which the subject is being removed.
 
 subject
 
@@ -1799,7 +1778,7 @@ Verification requests have the following properties:
 
 stream_id
 
-> REQUIRED. The stream that the Verification Event is being requested on.
+> REQUIRED. A string identifying the stream that the Verification Event is being requested on.
 
 state
 
@@ -2057,10 +2036,6 @@ specific to the event type.
   },
   "events": {
     "https://schemas.openid.net/secevent/risc/event-type/account-disabled": {
-      "subject": {
-        "format": "phone",
-        "phone_number": "+1 206 555 0123"
-      },
       "reason": "hijacking",
       "cause-time": 1508012752
     }
@@ -2081,11 +2056,9 @@ specific to the event type.
   },
   "events": {
     "https://schemas.openid.net/secevent/caep/event-type/token-claims-changed": {
-      "subject": {
-        "format": "email",
-        "email": "user@example.com"
-      },
-      "token": "some-token-value"
+      "claims": {
+        "token": "some-token-value"
+      }
     }
   }
 }
@@ -2137,6 +2110,10 @@ multiple Receivers would lead to unintended data disclosure.
   "iss": "https://transmitter.example.com",
   "aud": ["receiver.example.com/web", "receiver.example.com/mobile"],
   "iat": 1493856000,
+  "sub_id": {
+    "format": "opaque",
+    "id": "72e6991badb44e08a69672960053b342"
+  },
   "events": {
     "https://schemas.openid.net/secevent/ssf/event-type/verification": {
       "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
