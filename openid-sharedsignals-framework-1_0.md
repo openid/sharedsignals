@@ -1885,7 +1885,7 @@ the Receiver before stopping the stream.
 
 If the Transmitter changes the status of the stream from either
 "paused" or "disabled" to "enabled", then it MUST send this event to the
-Receiver upon re-enabling stream.
+Receiver upon re-enabling the stream.
 
 A Transmitter MAY send a Stream Updated event even if the event is not present in the `events_supported`, `events_requested` and / or `events_delivered` fields in the Stream Configuration ({{stream-config}}).
 
