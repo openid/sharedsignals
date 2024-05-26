@@ -632,7 +632,7 @@ Transmitter.
 
 Using the Issuer URL as documented by the Transmitter, the Transmitter Configuration
 Metadata can be retrieved. Receivers SHOULD ensure that the Issuer URL comes from a
-trusted source and uses the https scheme.
+trusted source and uses the `https` scheme.
 
 Transmitters supporting Discovery MUST make a JSON document available at the
 path formed by inserting the string "/.well-known/ssf-configuration" into the
