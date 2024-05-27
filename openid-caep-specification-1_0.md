@@ -28,6 +28,8 @@ author:
         email: atul@sgnl.ai
 
 normative:
+  RFC4001: # Textual Conventions for Internet Network Addresses
+
   ISO-IEC-29115:
     target: http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=45138
     title: "ISO/IEC 29115:2013 -- Information technology - Security techniques - Entity authentication assurance framework"
@@ -79,6 +81,21 @@ normative:
         ins: J. L. Fenton
         name: James L. Fenton
     date: 2017-06
+  OpenID.Core:
+    author:
+    - ins: N. Sakimura
+      name: Nat Sakimura
+    - ins: J. Bradley
+      name: John Bradley
+    - ins: M.B. Jones
+      name: Michael B. Jones
+    - ins: B. de Medeiros
+      name: Breno de Medeiros
+    - ins: C. Mortimore
+      name: Chuck Mortimore
+    date: November 2014
+    target: http://openid.net/specs/openid-connect-core-1_0.html#IDToken
+    title: OpenID Connect Core 1.0 - ID Token
   RFC2119:
   RFC8174:
   RFC5280:
@@ -690,6 +707,62 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
 }
 ~~~
 {: #device-compliance-change-examples-out-of-compliance title="Example: Device No Longer Compliant - Complex Subject + optional claims"}
+
+## Session Established {#session-established}
+Event Type URI:
+
+`https://schemas.openid.net/secevent/caep/event-type/session-established`
+
+The Session Established event signifies that the Transmitter has established a new session for the subject. Receivers may use this information for a number of reasons, including:
+
+* A service acting as a Transmitter can close the loop with the IdP after a user has been federated from the IdP
+* An IdP can detect unintended logins
+* A Receiver can establish an inventory of user sessions
+
+The `event_timestamp` in this event type specifies the time at which the session was established.
+
+### Event Specific Claims {#session-established-event-specific-claims}
+The following optional claims MAY be included in the Session Established event:
+
+ip
+: The array of IP addresses of the user as observed by the Transmitter. The value MUST be in the format of an array of strings, each one of which represents the RFC 4001 {{RFC4001}} string represetation of an IP address. (**NOTE**, this can be different from the one observed by the Receiver for the same user because of network translation)
+
+fp_ua
+: Fingerprint of the user agent computed by the Transmitter. (**NOTE**, this is not to identify the session, but to present some qualities of the session)
+
+acr
+: The authentication context class reference of the session, as established by the Transmitter. The value of this field MUST be interpreted in the same way as the corresponding field in an OpenID Connect ID Token {{OpenID.Core}}
+
+amr
+: The authentication methods reference of the session, as established by the Transmitter. The value of this field MUST be an array of strings, each of which MUST be interpreted in the same way as the corresponding field in an OpenID Connect ID Token {{OpenID.Core}}
+
+ext_id
+: The external session identifier, which may be used to correlate this session with a broader session (e.g., a federated session established using SAML)
+
+
+### Examples {#session-established-examples}
+The following is a non-normative example of the `session-established` event type:
+
+~~~json
+{
+    "iss": "https://idp.example.com/123456789/",
+    "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
+    "iat": 1615305159,
+    "aud": "https://sp.example.com/caep",
+    "sub_id": {
+      "format": "email",
+      "email": "someuser@somedomain.com"
+    },
+    "events": {
+        "https://schemas.openid.net/secevent/caep/event-type/session-established": {
+          "ip": "192.168.1.12",
+          "fp_ua": "abb0b6e7da81a42233f8f2b1a8ddb1b9a4c81611",
+          "acr": "AAL2",
+          "amr": "otp"
+        }
+    }
+}
+~~~
 
 --- back
 
