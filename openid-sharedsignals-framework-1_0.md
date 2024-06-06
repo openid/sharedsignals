@@ -96,11 +96,9 @@ normative:
     title: OpenID Connect Core 1.0 - ID Token
   OASIS.saml-core-2.0-os:
   RFC2119:
-  RFC2818:
   RFC6749:
   RFC6750:
   RFC7159:
-  RFC7235:
   RFC7517:
   RFC7519:
   RFC8174:
@@ -765,9 +763,9 @@ The API can also be used to query and update the Event Stream's configuration an
 add and remove Subjects, and trigger verification for those streams.
 
 Unless there exists some other method of establishing trust between a Transmitter and
-Receiver, all Stream Management API endpoints MUST use HTTP over TLS {{RFC2818}}
-and standard HTTP authentication and authorization schemes, as per {{RFC7235}}.
-The authorization MUST associate a Receiver with one or more stream IDs, such that only
+Receiver, all Stream Management API endpoints MUST use HTTP over TLS {{RFC9110}}
+and standard HTTP authentication and authorization schemes, as per {{RFC9110}}.
+This authorization MUST associate a Receiver with one or more stream IDs, such that only
 authorized Receivers are able to access or modify the details of the associated Event Streams.
 
 ~~~
