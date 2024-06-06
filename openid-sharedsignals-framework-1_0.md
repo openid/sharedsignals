@@ -408,6 +408,7 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
   "iss": "https://idp.example.com/",
   "jti": "756E69717565206964656E746966696572",
   "iat": 1520364019,
+  "txn": 8675309,
   "aud": "636C69656E745F6964",
   "sub_id": {
     "format": "email",
@@ -425,6 +426,7 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
   "iss": "https://idp.example.com/",
   "jti": "756E69717565206964656E746966696572",
   "iat": 1520364019,
+  "txn": 8675309,
   "aud": "636C69656E745F6964",
   "sub_id": {
       "format": "complex",
@@ -456,6 +458,7 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
   "iss": "https://sp.example2.com/",
   "jti": "756E69717565206964656E746966696572",
   "iat": 1520364019,
+  "txn": 8675309,
   "aud": "636C69656E745F6964",
   "sub_id": {
     "format": "email",
@@ -478,6 +481,7 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
   "iss": "https://myservice.example3.com/",
   "jti": "756E69717565206964656E746966696534",
   "iat": 15203800012,
+  "txn": 8675309,
   "aud": "636C69656E745F6324",
   "sub_id": {
     "format": "catalog_item",
@@ -2013,6 +2017,8 @@ The CAEP use cases that set the requirements are described in CAEP Use Cases (TO
 This section provides SSF profiling specifications for the Security Event Token (SET)
 {{RFC8417}} spec.
 
+{{RFC8417}} includes the usage of the `txn` claim in the spec. It is being called out here, to be used in a SET, as both a feedback loop and/or reconciling events between Transmitters and Receivers.
+
 ### Signature Key Resolution {#signature-key-resolution}
 The signature key can be obtained through "jwks_uri", see {{discovery}}.
 
@@ -2029,6 +2035,7 @@ specific to the event type.
   "iss": "https://idp.example.com/",
   "jti": "756E69717565206964656E746966696572",
   "iat": 1520364019,
+  "txn": 8675309,
   "aud": "636C69656E745F6964",
   "sub_id": {
     "format": "phone",
@@ -2049,6 +2056,7 @@ specific to the event type.
   "iss": "https://idp.example.com/",
   "jti": "756E69717565206964656E746966696572",
   "iat": 1520364019,
+  "txn": 8675309,
   "aud": "636C69656E745F6964",
   "sub_id": {
     "format": "email",
@@ -2110,6 +2118,7 @@ multiple Receivers would lead to unintended data disclosure.
   "iss": "https://transmitter.example.com",
   "aud": ["receiver.example.com/web", "receiver.example.com/mobile"],
   "iat": 1493856000,
+  "txn": 8675309,
   "sub_id": {
     "format": "opaque",
     "id": "72e6991badb44e08a69672960053b342"
@@ -2210,6 +2219,7 @@ The technology described in this specification was made available from contribut
 
   -02
 
+    * added txn claims to non-normative SET examples and generic txn callout under SET Profile section RFC8417(#152)
     * added spec version to metadata
     * Added description as receiver supplied
     * added language to make verification and updated events independent of events_supported
