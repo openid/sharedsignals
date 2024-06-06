@@ -758,10 +758,65 @@ The following is a non-normative example of the `session-established` event type
           "ip": "192.168.1.12",
           "fp_ua": "abb0b6e7da81a42233f8f2b1a8ddb1b9a4c81611",
           "acr": "AAL2",
-          "amr": "otp"
+          "amr": "otp",
+          "event_timestamp": 1615304991643
         }
     }
 }
+~~~
+
+## Session Presented {#session-presented}
+Event Type URI:
+
+`https://schemas.openid.net/secevent/caep/event-type/session-presented`
+
+The Session Presented event signifies that the Transmitter has observed the session to be present at the Transmitter at the time indicated by the `event_timestamp` field in the Session Presented event. Receivers may use this information for reasons that include:
+
+* Detecting abnormal user activity
+* Establishing an inventory of live sessions belonging to a user
+
+### Event Specific Claims {#session-presented-event-specific-claims}
+The following optional claims MAY be present in a Session Presented event:
+
+ip
+: The array of IP addresses of the user as observed by the Transmitter. The value MUST be in the format of an array of strings, each one of which represents the RFC 4001 {{RFC4001}} string represetation of an IP address. (**NOTE**, this can be different from the one observed by the Receiver for the same user because of network translation)
+
+fp_ua
+: Fingerprint of the user agent computed by the Transmitter. (**NOTE**, this is not to identify the session, but to present some qualities of the session)
+
+ext_id
+: The external session identifier, which may be used to correlate this session with a broader session (e.g., a federated session established using SAML)
+
+risk_score
+: A numerical score, which indicates the Transmitter's assessment of how risky it considers the session presence to be. The possible values are:
+
+  * 0 : Session activity is low
+  * 1 : Session activity is high, but normal
+  * 2 : Session activity is abnormal, but not alarming
+  * 3 : Session activity is abnormal and alarming
+
+### Examples {#session-presented-examples}
+The following is a non-normative example of a Session Presented event:
+
+~~~json
+{
+    "iss": "https://idp.example.com/123456789/",
+    "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
+    "iat": 1615305159,
+    "aud": "https://sp.example.com/caep",
+    "sub_id": {
+      "format": "email",
+      "email": "someuser@somedomain.com"
+    },
+    "events": {
+        "https://schemas.openid.net/secevent/caep/event-type/session-presented": {
+          "ip": "192.168.1.12",
+          "fp_ua": "abb0b6e7da81a42233f8f2b1a8ddb1b9a4c81611",
+          "ext_id": "12345",
+          "risk_score": 2,
+          "event_timestamp": 1615304991643
+        }
+    }}
 ~~~
 
 --- back
