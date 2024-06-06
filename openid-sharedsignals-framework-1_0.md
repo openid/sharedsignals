@@ -2037,8 +2037,7 @@ specific to the event type.
   },
   "events": {
     "https://schemas.openid.net/secevent/risc/event-type/account-disabled": {
-      "reason": "hijacking",
-      "cause-time": 1508012752
+      "reason": "hijacking"
     }
   }
 }
