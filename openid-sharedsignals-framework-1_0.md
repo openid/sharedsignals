@@ -107,6 +107,7 @@ normative:
   RFC8615:
   RFC8935:
   RFC8936:
+  RFC9110:
   RFC9493:
   CAEP:
     author:
