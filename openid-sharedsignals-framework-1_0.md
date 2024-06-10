@@ -1761,8 +1761,8 @@ sub_id
 Upon receiving a Verification Event, the Event Receiver SHALL parse the SET and
 validate its claims. In particular, the Event Receiver SHALL confirm that the
 value for "state" is as expected. If the value of "state" does not match, an
-error response of "setData" SHOULD be returned (see Section 2.3 of
-{{RFC8935}} or {{RFC8936}}).
+error response with the "err" field set to "invalid_state" SHOULD be returned (see Section 2.4 of
+{{RFC8935}} or Section 2.4.4 of {{RFC8936}}).
 
 In many cases, Event Transmitters MAY disable or suspend an Event Stream that
 fails to successfully verify based on the acknowledgement or lack of
@@ -2186,6 +2186,25 @@ Subject Identifiers for Security Event Tokens {{RFC9493}} specification.
 
 The `ssf-configuration` well-known endpoint is registered in IANA's Well-Known URIs
 registry, as defined by {{RFC8615}}.
+
+IANA is asked to assign the error code "invalid_state", as defined in {{verification-event}}, to the
+Security Event Token Error Codes section of the Security Event Token registry, as defined
+in Section 7.1 of {{RFC8935}}. The following information is provided as required by the
+registration template:
+
+Error Code
+
+> invalid_state
+
+Description
+
+> Indicates that a Verification event contained a "state" claim that does not
+  match the value expected by the Receiver.
+
+Change Controller
+
+> OpenID - Shared Signals Working Group
+
 
 --- back
 
