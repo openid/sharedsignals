@@ -207,7 +207,7 @@ All events MUST be signed using the `RS256` algorithm using a minimum of 2048-bi
 
 ### Authorization Server
 * MAY distribute discovery metadata (such as the authorization endpoint) via the metadata document as specified in [RFC8414]{{RFC8414}}
-* MUST support at least one of the following to obtain a short-lived access token. For example, a short lived access token could be defined as one in which the value of the `exp` claim is not longer than 60 mins after `nbf` claim. Please refer Access token lifetimes in the security considerations {{FAPI}} for additional considerations. 
+* MUST support at least one of the following to obtain a short-lived access token. For example, a short lived access token could be defined as one in which the value of the `exp` claim is not longer than 60 mins after `nbf` claim. Please refer to Access token lifetimes in the security considerations of {{FAPI}} for additional considerations. 
 ** client credential grant flow {{RFC6749}} section 4.4
 ** authorization code flow {{RFC6749}} section 4.1
 
