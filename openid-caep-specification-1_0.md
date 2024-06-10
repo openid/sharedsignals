@@ -28,6 +28,8 @@ author:
         email: atul@sgnl.ai
 
 normative:
+  RFC4001: # Textual Conventions for Internet Network Addresses
+
   ISO-IEC-29115:
     target: http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=45138
     title: "ISO/IEC 29115:2013 -- Information technology - Security techniques - Entity authentication assurance framework"
@@ -79,6 +81,21 @@ normative:
         ins: J. L. Fenton
         name: James L. Fenton
     date: 2017-06
+  OpenID.Core:
+    author:
+    - ins: N. Sakimura
+      name: Nat Sakimura
+    - ins: J. Bradley
+      name: John Bradley
+    - ins: M.B. Jones
+      name: Michael B. Jones
+    - ins: B. de Medeiros
+      name: Breno de Medeiros
+    - ins: C. Mortimore
+      name: Chuck Mortimore
+    date: November 2014
+    target: http://openid.net/specs/openid-connect-core-1_0.html#IDToken
+    title: OpenID Connect Core 1.0 - ID Token
   RFC2119:
   RFC8174:
   RFC5280:
@@ -238,12 +255,12 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
     "iat": 1615305159,
     "aud": "https://sp.example.com/caep",
+    "sub_id": {
+        "format": "opaque",
+        "id": "dMTlD|1600802906337.16|16008.16"
+    },
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
-            "subject": {
-                "format": "opaque",
-                "id": "dMTlD|1600802906337.16|16008.16"
-            },
             "event_timestamp": 1615304991643
         }
     }
@@ -257,24 +274,24 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
     "iat": 1615305159,
     "aud": "https://sp.example.com/caep",
+    "sub_id": {
+        "format": "complex",
+        "session": {
+          "format": "opaque",
+          "id": "dMTlD|1600802906337.16|16008.16"
+        },
+        "user": {
+          "format": "iss_sub",
+          "iss": "https://idp.example.com/123456789/",
+          "sub": "99beb27c-c1c2-4955-882a-e0dc4996fcbc"
+        },
+        "tenant": {
+          "format": "opaque",
+          "id": "123456789"
+        }
+    },
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
-            "subject": {
-                "format": "complex",
-                "session": {
-                  "format": "opaque",
-                  "id": "dMTlD|1600802906337.16|16008.16"
-                },
-                "user": {
-                  "format": "iss_sub",
-                  "iss": "https://idp.example.com/123456789/",
-                  "sub": "99beb27c-c1c2-4955-882a-e0dc4996fcbc"
-                },
-                "tenant": {
-                  "format": "opaque",
-                  "id": "123456789"
-                }
-            },
             "initiating_entity": "policy",
             "reason_admin": {
                 "en": "Landspeed Policy Violation: C076E82F"
@@ -296,25 +313,25 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
     "iat": 1615305159,
     "aud": "https://sp.example.com/caep",
+    "sub_id": {
+        "format": "complex",
+        "user": {
+            "format": "iss_sub",
+            "iss": "https://idp.example.com/123456789/",
+            "sub": "jane.smith@example.com"
+        },
+        "device": {
+            "format": "iss_sub",
+            "iss": "https://idp.example.com/123456789/",
+            "sub": "e9297990-14d2-42ec-a4a9-4036db86509a"
+        },
+        "tenant": {
+          "format": "opaque",
+          "id": "123456789"
+        }
+    },
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
-            "subject": {
-                "format": "complex",
-                "user": {
-                    "format": "iss_sub",
-                    "iss": "https://idp.example.com/123456789/",
-                    "sub": "jane.smith@example.com"
-                },
-                "device": {
-                    "format": "iss_sub",
-                    "iss": "https://idp.example.com/123456789/",
-                    "sub": "e9297990-14d2-42ec-a4a9-4036db86509a"
-                },
-                "tenant": {
-                  "format": "opaque",
-                  "id": "123456789"
-                }
-            },
             "initiating_entity": "policy",
             "reason_admin": {
                 "en": "Policy Violation: C076E822"
@@ -359,13 +376,13 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     "jti": "9afce1e4e642b165fcaacdd0e7aa4903",
     "iat": 1615305159,
     "aud": "https://sp.example2.net/caep",
+    "sub_id": {
+        "format": "jwt_id",
+        "iss": "https://idp.example.com/987654321/",
+        "jti": "f61t6e20zdo3px56gepu8rzlsp4c1dpc0fx7"
+    },
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/token-claims-change": {
-            "subject": {
-                "format": "jwt_id",
-                "iss": "https://idp.example.com/987654321/",
-                "jti": "f61t6e20zdo3px56gepu8rzlsp4c1dpc0fx7"
-            },
             "event_timestamp": 1615304991643,
             "claims": {
                 "role": "ro-admin"
@@ -382,13 +399,13 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     "jti": "9afce1e4e642b165fcaacdd0e7aa4903",
     "iat": 1615305159,
     "aud": "https://sp.example2.net/caep",
+    "sub_id": {
+        "format": "jwt_id",
+        "iss": "https://idp.example.com/987654321/",
+        "jti": "f61t6e20zdo3px56gepu8rzlsp4c1dpc0fx7"
+    },
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/token-claims-change": {
-            "subject": {
-                "format": "jwt_id",
-                "iss": "https://idp.example.com/987654321/",
-                "jti": "f61t6e20zdo3px56gepu8rzlsp4c1dpc0fx7"
-            },
             "event_timestamp": 1615304991643,
             "initiating_entity": "policy",
             "reason_admin": {
@@ -414,13 +431,13 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     "jti": "dae94fed5f459881efa38b65c6772ddc",
     "iat": 1615305159,
     "aud": "https://sp.example2.net/caep",
+    "sub_id": {
+        "format": "saml_assertion_id",
+        "issuer": "https://idp.example.com/987654321/",
+        "assertion_id": "_a75adf55-01d7-dbd8372ebdfc"
+    },
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/token-claims-change": {
-            "subject": {
-                "format": "saml_assertion_id",
-                "issuer": "https://idp.example.com/987654321/",
-                "assertion_id": "_a75adf55-01d7-dbd8372ebdfc"
-            },
             "event_timestamp": 1615304991643,
             "claims": {
                 "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/role": "ro-admin"
@@ -497,13 +514,13 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     "jti": "07efd930f0977e4fcc1149a733ce7f78",
     "iat": 1615305159,
     "aud": "https://sp.example2.net/caep",
+    "sub_id": {
+        "format": "iss_sub",
+        "iss": "https://idp.example.com/3456789/",
+        "sub": "jane.smith@example.com"
+    },
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/credential-change": {
-            "subject": {
-                "format": "iss_sub",
-                "iss": "https://idp.example.com/3456789/",
-                "sub": "jane.smith@example.com"
-            },
             "credential_type": "fido2-roaming",
             "change_type": "create",
             "fido2_aaguid": "accced6a-63f5-490a-9eea-e59bc1896cfc",
@@ -579,13 +596,13 @@ the assurance level changed.
     "jti": "07efd930f0977e4fcc1149a733ce7f78",
     "iat": 1615305159,
     "aud": "https://sp.example2.net/caep",
+    "sub_id": {
+        "format": "iss_sub",
+        "iss": "https://idp.example.com/3456789/",
+        "sub": "jane.smith@example.com"
+    },
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/assurance-level-change": {
-            "subject": {
-                "format": "iss_sub",
-                "iss": "https://idp.example.com/3456789/",
-                "sub": "jane.smith@example.com"
-            },
             "namespace": "NIST-AAL",
             "current_level": "nist-aal2",
             "previous_level": "nist-aal1",
@@ -604,13 +621,13 @@ the assurance level changed.
     "jti": "07efd930f0977e4fcc1149a733ce7f78",
     "iat": 1615305159,
     "aud": "https://sp.example2.net/caep",
+    "sub_id": {
+        "format": "iss_sub",
+        "iss": "https://idp.example.com/3456789/",
+        "sub": "jane.smith@example.com"
+    },
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/assurance-level-change": {
-            "subject": {
-                "format": "iss_sub",
-                "iss": "https://idp.example.com/3456789/",
-                "sub": "jane.smith@example.com"
-            },
             "namespace": "Retinal Scan",
             "current_level": "hi-res-scan",
             "initiating_entity": "user",
@@ -661,20 +678,20 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
     "iat": 1615305159,
     "aud": "https://sp.example.com/caep",
+    "sub_id": {
+        "format": "complex",
+        "device": {
+            "format": "iss_sub",
+            "iss": "https://idp.example.com/123456789/",
+            "sub": "e9297990-14d2-42ec-a4a9-4036db86509a"
+        },
+        "tenant": {
+            "format": "opaque",
+            "id": "123456789"
+        }
+    },
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/device-compliance-change": {
-            "subject": {
-                "format": "complex",
-                "device": {
-                    "format": "iss_sub",
-                    "iss": "https://idp.example.com/123456789/",
-                    "sub": "e9297990-14d2-42ec-a4a9-4036db86509a"
-                },
-                "tenant": {
-                    "format": "opaque",
-                    "id": "123456789"
-                }
-            },
             "current_status": "not-compliant",
             "previous_status": "compliant",
             "initiating_entity": "policy",
@@ -690,6 +707,62 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
 }
 ~~~
 {: #device-compliance-change-examples-out-of-compliance title="Example: Device No Longer Compliant - Complex Subject + optional claims"}
+
+## Session Established {#session-established}
+Event Type URI:
+
+`https://schemas.openid.net/secevent/caep/event-type/session-established`
+
+The Session Established event signifies that the Transmitter has established a new session for the subject. Receivers may use this information for a number of reasons, including:
+
+* A service acting as a Transmitter can close the loop with the IdP after a user has been federated from the IdP
+* An IdP can detect unintended logins
+* A Receiver can establish an inventory of user sessions
+
+The `event_timestamp` in this event type specifies the time at which the session was established.
+
+### Event Specific Claims {#session-established-event-specific-claims}
+The following optional claims MAY be included in the Session Established event:
+
+ip
+: The array of IP addresses of the user as observed by the Transmitter. The value MUST be in the format of an array of strings, each one of which represents the RFC 4001 {{RFC4001}} string represetation of an IP address. (**NOTE**, this can be different from the one observed by the Receiver for the same user because of network translation)
+
+fp_ua
+: Fingerprint of the user agent computed by the Transmitter. (**NOTE**, this is not to identify the session, but to present some qualities of the session)
+
+acr
+: The authentication context class reference of the session, as established by the Transmitter. The value of this field MUST be interpreted in the same way as the corresponding field in an OpenID Connect ID Token {{OpenID.Core}}
+
+amr
+: The authentication methods reference of the session, as established by the Transmitter. The value of this field MUST be an array of strings, each of which MUST be interpreted in the same way as the corresponding field in an OpenID Connect ID Token {{OpenID.Core}}
+
+ext_id
+: The external session identifier, which may be used to correlate this session with a broader session (e.g., a federated session established using SAML)
+
+
+### Examples {#session-established-examples}
+The following is a non-normative example of the `session-established` event type:
+
+~~~json
+{
+    "iss": "https://idp.example.com/123456789/",
+    "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
+    "iat": 1615305159,
+    "aud": "https://sp.example.com/caep",
+    "sub_id": {
+      "format": "email",
+      "email": "someuser@somedomain.com"
+    },
+    "events": {
+        "https://schemas.openid.net/secevent/caep/event-type/session-established": {
+          "ip": "192.168.1.12",
+          "fp_ua": "abb0b6e7da81a42233f8f2b1a8ddb1b9a4c81611",
+          "acr": "AAL2",
+          "amr": "otp"
+        }
+    }
+}
+~~~
 
 --- back
 

@@ -197,6 +197,7 @@ The following subject identifier formats from "Subject Identifiers for Security 
 
 * `email`
 * `iss_sub`
+* `opaque` (for the Verification event only)
 
 Receivers MUST be prepared to accept events with any of the subject identifier formats specified in this section. Transmitters MUST be able to send events with at least one of subject identifier formats specified in this section.
 
@@ -231,6 +232,11 @@ Depending on the features supported by the OAuth service and the SSF APIs, the c
 * If the access token is not sufficient for the requested action, the Resource server MUST return errors as per section 3.1 of [RFC6750]{{RFC6750}}
 * MAY publish the {{OPRM}} to describe the metadata needed to interact with the protected resource.
 
+## Security Event Token
+
+### The "events" claim
+The "events" claim of the SET MUST contain only one event.
+
 # Use Cases
 Implementations MAY choose to support one or more of the following use-cases in order to be considered interoperable implementations
 
@@ -249,4 +255,3 @@ Within the `credential-change` event, implementations MUST support the following
 
 `reason_admin`
 : Transmitters MUST populate this value with a non-empty string
-
