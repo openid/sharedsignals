@@ -107,6 +107,7 @@ normative:
   RFC8615:
   RFC8935:
   RFC8936:
+  RFC9110:
   RFC9493:
   CAEP:
     author:
@@ -537,7 +538,7 @@ jwks_uri
 > OPTIONAL. URL of the Transmitter's JSON Web Key Set {{RFC7517}} document.
   This contains the signing key(s) the Receiver uses to validate signatures from
   the Transmitter. This value MUST be specified if the Transmitter intends to
-  generate signed JWTs.
+  generate signed JWTs. If present, this URL MUST use HTTP over TLS {{RFC9110}}.
 
 delivery_methods_supported
 
@@ -545,23 +546,23 @@ delivery_methods_supported
 
 configuration_endpoint
 
-> OPTIONAL. The URL of the Configuration Endpoint.
+> OPTIONAL. The URL of the Configuration Endpoint. If present, this URL MUST use HTTP over TLS {{RFC9110}}.
 
 status_endpoint
 
-> OPTIONAL. The URL of the Status Endpoint.
+> OPTIONAL. The URL of the Status Endpoint. If present, this URL MUST use HTTP over TLS {{RFC9110}}.
 
 add_subject_endpoint
 
-> OPTIONAL. The URL of the Add Subject Endpoint.
+> OPTIONAL. The URL of the Add Subject Endpoint. If present, this URL MUST use HTTP over TLS {{RFC9110}}.
 
 remove_subject_endpoint
 
-> OPTIONAL. The URL of the Remove Subject Endpoint.
+> OPTIONAL. The URL of the Remove Subject Endpoint. If present, this URL MUST use HTTP over TLS {{RFC9110}}.
 
 verification_endpoint
 
-> OPTIONAL. The URL of the Verification Endpoint.
+> OPTIONAL. The URL of the Verification Endpoint. If present, this URL MUST use HTTP over TLS {{RFC9110}}.
 
 critical_subject_members
 
@@ -736,6 +737,13 @@ This section defines an HTTP API to be implemented by Event Transmitters
 which can be used by Event Receivers to create and delete one or more Event Streams.
 The API can also be used to query and update the Event Stream's configuration and status,
 add and remove Subjects, and trigger verification for those streams.
+
+Unless there exists some other method of establishing trust between a Transmitter and
+Receiver, all Stream Management API endpoints MUST use standard HTTP
+authentication and authorization schemes, as per {{RFC9110}}.
+This authorization MUST associate a Receiver with one or more stream IDs and "aud" values,
+such that only authorized Receivers are able to access or modify the details of the
+associated Event Streams.
 
 ~~~
 +------------+                +------------+
