@@ -176,6 +176,11 @@ Receivers MUST be prepared to accept events with any of the subject identifier f
 ## Event Signatures
 All events MUST be signed using the `RS256` algorithm using a minimum of 2048-bit keys.
 
+## Security Event Token
+
+### The "events" claim
+The "events" claim of the SET MUST contain only one event.
+
 # Use Cases
 Implementations MAY choose to support one or more of the following use-cases in order to be considered interoperable implementations
 
