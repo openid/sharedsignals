@@ -67,6 +67,12 @@ contributor:
         org: Okta
         email: apoorva.deshpande@okta.com
 
+      -
+        ins: S. O'Dell
+        name: Sean O'Dell
+        org: The Walt Disney Company
+        email: sean.odentity@disney.com
+
 normative:
   CLIENTCRED:
     author:
