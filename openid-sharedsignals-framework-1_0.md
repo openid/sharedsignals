@@ -67,6 +67,12 @@ contributor:
         org: Okta
         email: apoorva.deshpande@okta.com
 
+      -
+        ins: S. O'Dell
+        name: Sean O'Dell
+        org: The Walt Disney Company
+        email: sean.odentity@disney.com
+
 normative:
   CLIENTCRED:
     author:
@@ -409,6 +415,7 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
   "iss": "https://idp.example.com/",
   "jti": "756E69717565206964656E746966696572",
   "iat": 1520364019,
+  "txn": 8675309,
   "aud": "636C69656E745F6964",
   "sub_id": {
     "format": "email",
@@ -426,6 +433,7 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
   "iss": "https://idp.example.com/",
   "jti": "756E69717565206964656E746966696572",
   "iat": 1520364019,
+  "txn": 8675309,
   "aud": "636C69656E745F6964",
   "sub_id": {
       "format": "complex",
@@ -457,6 +465,7 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
   "iss": "https://sp.example2.com/",
   "jti": "756E69717565206964656E746966696572",
   "iat": 1520364019,
+  "txn": 8675309,
   "aud": "636C69656E745F6964",
   "sub_id": {
     "format": "email",
@@ -479,6 +488,7 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
   "iss": "https://myservice.example3.com/",
   "jti": "756E69717565206964656E746966696534",
   "iat": 15203800012,
+  "txn": 8675309,
   "aud": "636C69656E745F6324",
   "sub_id": {
     "format": "catalog_item",
@@ -2045,6 +2055,7 @@ specific to the event type.
   "iss": "https://idp.example.com/",
   "jti": "756E69717565206964656E746966696572",
   "iat": 1520364019,
+  "txn": 8675309,
   "aud": "636C69656E745F6964",
   "sub_id": {
     "format": "phone",
@@ -2064,6 +2075,7 @@ specific to the event type.
   "iss": "https://idp.example.com/",
   "jti": "756E69717565206964656E746966696572",
   "iat": 1520364019,
+  "txn": 8675309,
   "aud": "636C69656E745F6964",
   "sub_id": {
     "format": "email",
@@ -2131,6 +2143,7 @@ multiple Receivers would lead to unintended data disclosure.
   "iss": "https://transmitter.example.com",
   "aud": ["receiver.example.com/web", "receiver.example.com/mobile"],
   "iat": 1493856000,
+  "txn": 8675309,
   "sub_id": {
     "format": "opaque",
     "id": "72e6991badb44e08a69672960053b342"
@@ -2143,6 +2156,9 @@ multiple Receivers would lead to unintended data disclosure.
 }
 ~~~
 {: title="Example: SET with array 'aud' claim" #figarrayaud}
+
+### The "txn" claim {#txn-claim}
+Transmitters SHOULD set the "txn" claim value in Security Event Tokens (SETs). If the value is present, it MUST be unique to the underlying event that caused the Transmitter to generate the Security Event Token (SET). The Transmitter, however, may use the same value in the "txn" claim across different Security Events Tokens (SETs), such as session revoked and credential change, to indicate that the SETs originated from the same underlying cause or reason. 
 
 ### The "events" claim {#events-claim}
 The "events" claim SHOULD contain only one event. Multiple event type URIs are
@@ -2250,6 +2266,7 @@ The technology described in this specification was made available from contribut
 
   -02
 
+    * added txn claims to non-normative SET examples and generic txn callout under SET Profile section RFC8417(#152)
     * added spec version to metadata
     * Added description as receiver supplied
     * added language to make verification and updated events independent of events_supported
