@@ -32,8 +32,6 @@ author:
         org: Workday
         email: jennifer.winer@workday.com
 
-
-
 normative:
   OpenID.Core:
     author:
@@ -81,16 +79,48 @@ normative:
         name: John Bradley
         org: Yubico
     date: 2021-05
+  informative:
+    JSONSchema:
+      target: https://json-schema.org/draft/2020-12/json-schema-validation
+      title: JSON Schema Validation: A Vocabulary for Structural Validation of JSON
+      author:
+      - ins: A. Wright
+        name: Austin Wright
+      - ins: H. Andrews
+        name: Henry Andrews
+      - ins: B. Hutton
+        name: Ben Hutton
 
 --- abstract
 
-This document defines how to define events for the Shared Signals Framework {{SSF}} using JSON Schema.
-
-blah blah add more
+This document defines how to describe events for the Shared Signals Framework {{SSF}} using JSON Schema. It specifies how to translate normative requirements for event types into JSON Schema vocabulary and the process to register and discover these schemas.
 
 --- middle
 
 # Introduction {#introduction}
+
+some text describing json schema
+what it gives us
+
+# JSON Vocabulary Transalation
+# Schema for mandatory claims in SET
+
+# Discoverability/Registry
+
+## Event Types
+
+| Event Type | Schema URI |
+|------|-------------|
+| CAEP  | <schema uri here> |
+| RISC  |  <schema uri here>  |
+
+{: title="Name this table..." #eventtypestable}
+
+### CAEP
+
+### RISC
+
+# Process for raising PRs and getting approved
 
 ## Notational Considerations
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in BCP 14 {{RFC2119}} {{RFC8174}} when, and only when, they appear in all capitals, as shown here.
