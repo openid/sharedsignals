@@ -2017,9 +2017,6 @@ The CAEP use cases that set the requirements are described in CAEP Use Cases (TO
 This section provides SSF profiling specifications for the Security Event Token (SET)
 {{RFC8417}} spec.
 
-{{RFC8417}} includes the usage of the `txn` claim in the specification. Transmitters SHOULD set the `txn` value in the Security Event Tokens (SETs). If the value is present, it MUST be unique to the underlying event that caused the Trasmitter to generate the Security Event Token (SET). The Transmitter, however, may use the same `txn` value across different Security Events Tokens(SETs), such as session revoked and credential change, to indicate that they originated from the same underlying cause or reason. 
-
-
 ### Signature Key Resolution {#signature-key-resolution}
 The signature key can be obtained through "jwks_uri", see {{discovery}}.
 
@@ -2132,6 +2129,9 @@ multiple Receivers would lead to unintended data disclosure.
 }
 ~~~
 {: title="Example: SET with array 'aud' claim" #figarrayaud}
+
+### The "txn" claim {#txn-claim}
+Transmitters SHOULD set the "txn" claim value in Security Event Tokens (SETs). If the value is present, it MUST be unique to the underlying event that caused the Trasmitter to generate the Security Event Token (SET). The Transmitter, however, may use the same value in "txn" claim across different Security Events Tokens(SETs), such as session revoked and credential change, to indicate that the SETs originated from the same underlying cause or reason. 
 
 ### The "events" claim {#events-claim}
 The "events" claim SHOULD contain only one event. Multiple event type URIs are
