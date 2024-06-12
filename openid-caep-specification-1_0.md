@@ -803,7 +803,7 @@ The following is a non-normative example of a Session Presented event:
     },
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/session-presented": {
-          "ip": "192.168.1.12",
+          "ip": ["192.168.1.12","10.1.1.1"]
           "fp_ua": "abb0b6e7da81a42233f8f2b1a8ddb1b9a4c81611",
           "ext_id": "12345",
           "risk_score": 2,
