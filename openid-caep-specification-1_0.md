@@ -796,6 +796,7 @@ The following is a non-normative example of a Session Presented event:
     "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
     "iat": 1615305159,
     "aud": "https://sp.example.com/caep",
+    "txn": 8675309,
     "sub_id": {
       "format": "email",
       "email": "someuser@somedomain.com"
