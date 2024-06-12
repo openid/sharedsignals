@@ -255,6 +255,7 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
     "iat": 1615305159,
     "aud": "https://sp.example.com/caep",
+    "txn": 8675309,
     "sub_id": {
         "format": "opaque",
         "id": "dMTlD|1600802906337.16|16008.16"
@@ -274,6 +275,7 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
     "iat": 1615305159,
     "aud": "https://sp.example.com/caep",
+    "txn": 8675309,
     "sub_id": {
         "format": "complex",
         "session": {
@@ -313,6 +315,7 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
     "iat": 1615305159,
     "aud": "https://sp.example.com/caep",
+    "txn": 8675309,
     "sub_id": {
         "format": "complex",
         "user": {
@@ -376,6 +379,7 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     "jti": "9afce1e4e642b165fcaacdd0e7aa4903",
     "iat": 1615305159,
     "aud": "https://sp.example2.net/caep",
+    "txn": 8675309,
     "sub_id": {
         "format": "jwt_id",
         "iss": "https://idp.example.com/987654321/",
@@ -399,6 +403,7 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     "jti": "9afce1e4e642b165fcaacdd0e7aa4903",
     "iat": 1615305159,
     "aud": "https://sp.example2.net/caep",
+    "txn": 8675309,
     "sub_id": {
         "format": "jwt_id",
         "iss": "https://idp.example.com/987654321/",
@@ -431,6 +436,7 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     "jti": "dae94fed5f459881efa38b65c6772ddc",
     "iat": 1615305159,
     "aud": "https://sp.example2.net/caep",
+    "txn": 8675309,
     "sub_id": {
         "format": "saml_assertion_id",
         "issuer": "https://idp.example.com/987654321/",
@@ -514,6 +520,7 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     "jti": "07efd930f0977e4fcc1149a733ce7f78",
     "iat": 1615305159,
     "aud": "https://sp.example2.net/caep",
+    "txn": 8675309,
     "sub_id": {
         "format": "iss_sub",
         "iss": "https://idp.example.com/3456789/",
@@ -596,6 +603,7 @@ the assurance level changed.
     "jti": "07efd930f0977e4fcc1149a733ce7f78",
     "iat": 1615305159,
     "aud": "https://sp.example2.net/caep",
+    "txn": 8675309,
     "sub_id": {
         "format": "iss_sub",
         "iss": "https://idp.example.com/3456789/",
@@ -621,6 +629,7 @@ the assurance level changed.
     "jti": "07efd930f0977e4fcc1149a733ce7f78",
     "iat": 1615305159,
     "aud": "https://sp.example2.net/caep",
+    "txn": 8675309,
     "sub_id": {
         "format": "iss_sub",
         "iss": "https://idp.example.com/3456789/",
@@ -678,6 +687,7 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
     "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
     "iat": 1615305159,
     "aud": "https://sp.example.com/caep",
+    "txn": 8675309,
     "sub_id": {
         "format": "complex",
         "device": {
@@ -749,6 +759,7 @@ The following is a non-normative example of the `session-established` event type
     "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
     "iat": 1615305159,
     "aud": "https://sp.example.com/caep",
+    "txn": 8675309,
     "sub_id": {
       "format": "email",
       "email": "someuser@somedomain.com"
@@ -806,7 +817,6 @@ The following is a non-normative example of a Session Presented event:
           "ips": ["192.168.1.12","10.1.1.1"],
           "fp_ua": "abb0b6e7da81a42233f8f2b1a8ddb1b9a4c81611",
           "ext_id": "12345",
-          "risk_score": 2,
           "event_timestamp": 1615304991643
         }
     }}
