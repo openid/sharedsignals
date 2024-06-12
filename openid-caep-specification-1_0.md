@@ -724,7 +724,7 @@ The `event_timestamp` in this event type specifies the time at which the session
 ### Event Specific Claims {#session-established-event-specific-claims}
 The following optional claims MAY be included in the Session Established event:
 
-ip
+ips
 : The array of IP addresses of the user as observed by the Transmitter. The value MUST be in the format of an array of strings, each one of which represents the RFC 4001 {{RFC4001}} string represetation of an IP address. (**NOTE**, this can be different from the one observed by the Receiver for the same user because of network translation)
 
 fp_ua
@@ -755,7 +755,7 @@ The following is a non-normative example of the `session-established` event type
     },
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/session-established": {
-          "ip": "192.168.1.12",
+          "ips": ["192.168.1.12", "10.1.1.1"],
           "fp_ua": "abb0b6e7da81a42233f8f2b1a8ddb1b9a4c81611",
           "acr": "AAL2",
           "amr": "otp",
@@ -778,7 +778,7 @@ The Session Presented event signifies that the Transmitter has observed the sess
 ### Event Specific Claims {#session-presented-event-specific-claims}
 The following optional claims MAY be present in a Session Presented event:
 
-ip
+ips
 : The array of IP addresses of the user as observed by the Transmitter. The value MUST be in the format of an array of strings, each one of which represents the RFC 4001 {{RFC4001}} string represetation of an IP address. (**NOTE**, this can be different from the one observed by the Receiver for the same user because of network translation)
 
 fp_ua
@@ -803,7 +803,7 @@ The following is a non-normative example of a Session Presented event:
     },
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/session-presented": {
-          "ip": ["192.168.1.12","10.1.1.1"]
+          "ips": ["192.168.1.12","10.1.1.1"],
           "fp_ua": "abb0b6e7da81a42233f8f2b1a8ddb1b9a4c81611",
           "ext_id": "12345",
           "risk_score": 2,
