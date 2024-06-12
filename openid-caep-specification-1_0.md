@@ -787,14 +787,6 @@ fp_ua
 ext_id
 : The external session identifier, which may be used to correlate this session with a broader session (e.g., a federated session established using SAML)
 
-risk_score
-: A numerical score, which indicates the Transmitter's assessment of how risky it considers the session presence to be. The possible values are:
-
-  * 0 : Session activity is low
-  * 1 : Session activity is high, but normal
-  * 2 : Session activity is abnormal, but not alarming
-  * 3 : Session activity is abnormal and alarming
-
 ### Examples {#session-presented-examples}
 The following is a non-normative example of a Session Presented event:
 
