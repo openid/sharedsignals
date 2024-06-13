@@ -593,10 +593,9 @@ default_subjects
   the value MUST be either "ALL" or "NONE". If not provided, the Transmitter behavior in
   this regard is unspecified.
 >  - "ALL" indicates that any subjects that are appropriate for the stream are added to
-    the stream by default. The Receiver
-    MAY remove subjects from the stream via the `remove_subject_endpoint`, causing only
-    events for those subjects to _not_ be transmitted. The Receiver MAY re-add any
-    subjects removed this way via the `add_subject_endpoint`.
+    the stream by default. The Receiver MAY remove subjects from the stream via the
+    `remove_subject_endpoint`, causing events for those subjects to _not_ be transmitted.
+    The Receiver MAY re-add any subjects removed this way via the `add_subject_endpoint`.
 >  - "NONE" indicates that no subjects are added by default. The Receiver MAY add subjects
     to the stream via the `add_subject_endpoint`, causing only events for those subjects
     to be transmitted. The Receiver MAY remove subjects added this way via the
@@ -2173,7 +2172,7 @@ multiple Receivers would lead to unintended data disclosure.
 {: title="Example: SET with array 'aud' claim" #figarrayaud}
 
 ### The "txn" claim {#txn-claim}
-Transmitters SHOULD set the "txn" claim value in Security Event Tokens (SETs). If the value is present, it MUST be unique to the underlying event that caused the Transmitter to generate the Security Event Token (SET). The Transmitter, however, may use the same value in the "txn" claim across different Security Events Tokens (SETs), such as session revoked and credential change, to indicate that the SETs originated from the same underlying cause or reason. 
+Transmitters SHOULD set the "txn" claim value in Security Event Tokens (SETs). If the value is present, it MUST be unique to the underlying event that caused the Transmitter to generate the Security Event Token (SET). The Transmitter, however, may use the same value in the "txn" claim across different Security Events Tokens (SETs), such as session revoked and credential change, to indicate that the SETs originated from the same underlying cause or reason.
 
 ### The "events" claim {#events-claim}
 The "events" claim SHOULD contain only one event. Multiple event type URIs are
