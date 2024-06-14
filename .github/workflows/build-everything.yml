@@ -58,11 +58,11 @@ jobs:
       - name: Render risc text
         run: xml2rfc openid-risc-profile-specification-1_0.xml --text -o openid-risc-profile-specification-1_0.txt
       - name: Convert caep md to xml
-        run: kramdown-rfc2629 openid-caep-specification-1_0.md > openid-caep-specification-1_0.xml
+        run: kramdown-rfc2629 openid-caep-1_0.md > openid-caep-1_0.xml
       - name: Render caep html
-        run: xml2rfc openid-caep-specification-1_0.xml --html -o openid-caep-specification-1_0.html
+        run: xml2rfc openid-caep-1_0.xml --html -o openid-caep-1_0.html
       - name: Render caep text
-        run: xml2rfc openid-caep-specification-1_0.xml --text -o openid-caep-specification-1_0.txt
+        run: xml2rfc openid-caep-1_0.xml --text -o openid-caep-1_0.txt
       - name: Convert caep-interop md to xml
         run: kramdown-rfc2629 openid-caep-interoperability-profile-1_0.md > openid-caep-interoperability-profile-1_0.xml
       - name: Render caep-interop html
@@ -78,8 +78,8 @@ jobs:
             openid-sharedsignals-framework-1_0.txt
             openid-risc-profile-specification-1_0.html
             openid-risc-profile-specification-1_0.txt
-            openid-caep-specification-1_0.html
-            openid-caep-specification-1_0.txt
+            openid-caep-1_0.html
+            openid-caep-1_0.txt
             openid-caep-interoperability-profile-1_0.html
             openid-caep-interoperability-profile-1_0.txt
   publish-to-pages:
