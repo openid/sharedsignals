@@ -2,7 +2,7 @@
 title: CAEP Interoperability Profile 1.0 - draft 01
 abbrev: caep-interop
 docname: caep-interoperability-profile-1_0
-date: 2023-11-17
+date: 2024-06-14
 
 ipr: none
 cat: std
