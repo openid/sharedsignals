@@ -2278,6 +2278,22 @@ The technology described in this specification was made available from contribut
 
   [[ To be removed from the final specification ]]
 
+  -03
+
+    * Removing transmitter supplied fields from stream config PUT and PATCH examples
+    * Add OPTIONAL/REQUIRED to the fields in the stream configuration
+    * Add stream_id to the response when getting stream status
+    * Update subject/sub_id in examples. Fix CAEP example
+    * Clarify language around sending Stream Updated events
+    * Add sentence suggesting that Issuer information should be validated by the Receiver
+    * Removed cause-time from RISC example
+    * Fix description of error code for invalid state
+    * Add SHOULD language about checking the issuer value
+    * Added language requiring authorization of stream management API
+    * Added description of `txn` claim
+    * Added a `default_subjects` field to Transmitter Configuration Metadata indicating expected subject behavior for new streams
+    * Editorial: Standardize terms and casing, fix some typos
+
   -02
 
     * added txn claims to non-normative SET examples and generic txn callout under SET Profile section RFC8417(#152)
