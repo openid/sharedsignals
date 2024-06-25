@@ -2292,11 +2292,11 @@ The technology described in this specification was made available from contribut
     * Added language requiring authorization of stream management API
     * Added description of `txn` claim
     * Added a `default_subjects` field to Transmitter Configuration Metadata indicating expected subject behavior for new streams
+    * added txn claims to non-normative SET examples and generic txn callout under SET Profile section RFC8417
     * Editorial: Standardize terms and casing, fix some typos
 
   -02
 
-    * added txn claims to non-normative SET examples and generic txn callout under SET Profile section RFC8417(#152)
     * added spec version to metadata
     * Added description as receiver supplied
     * added language to make verification and updated events independent of events_supported
