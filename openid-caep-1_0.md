@@ -822,6 +822,9 @@ The following is a non-normative example of a Session Presented event:
     }}
 ~~~
 
+# Security Considerations
+Any implementations of events described in this document SHOULD comply with the Shared Signals Framework {{SSF}}. Exchanging events described herein without complying with the Shared Signals Framework {{SSF}} may result in security issues.
+
 --- back
 
 # Acknowledgements

@@ -2,7 +2,7 @@
 title: CAEP Interoperability Profile 1.0 - draft 00
 abbrev: caep-interop
 docname: caep-interoperability-profile-1_0
-date: 2024-06-14
+date: 2024-06-25
 
 ipr: none
 cat: std
@@ -28,6 +28,8 @@ author:
         email: apoorva.deshpande@okta.com
 
 normative:
+  RFC2119:
+  RFC8174: 
   RFC9493: # Subject Identifier Formats for SETs
   RFC8935: # Push delivery
   RFC8936: # POLL delivery
@@ -109,6 +111,14 @@ Session Revocation
 
 Credential Change
 : A SSF Transmitter or Receiver is able to respectively generate or respond to the CAEP credential-change event
+
+## Notational Conventions
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
+NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED",
+"MAY", and "OPTIONAL" in this document are to be interpreted as
+described in BCP 14 {{RFC2119}} {{RFC8174}} when, and only when,
+they appear in all capitals, as shown here.
 
 # Common Requirements {#common-requirements}
 The following requirements are common across all use-cases defined in this document.
@@ -256,6 +266,9 @@ Within the `credential-change` event, implementations MUST support the following
 `reason_admin`
 : Transmitters MUST populate this value with a non-empty string
 
+# Security Considerations
+There are no additional security considerations that arise from this document. These are covered in the "Security Considerations" sections of {{SSF}} and {{CAEP}} specifications.
+
 --- back
 
 # Acknowledgements
@@ -266,7 +279,7 @@ specification.
 
 # Notices
 
-Copyright (c) 2021 The OpenID Foundation.
+Copyright (c) 2024 The OpenID Foundation.
 
 The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, or other interested party a non-exclusive, royalty free, worldwide copyright license to reproduce, prepare derivative works from, distribute, perform and display, this Implementers Draft or Final Specification solely for the purposes of (i) developing specifications, and (ii) implementing Implementers Drafts and Final Specifications based on such documents, provided that attribution be made to the OIDF as the source of the material, but that such attribution does not indicate an endorsement by the OIDF.
 
