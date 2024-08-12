@@ -951,14 +951,14 @@ The HTTP POST request MAY contain the Receiver-Supplied values of the Stream
 Configuration ({{stream-config}}) object:
 
 * `events_requested`
-* `delivery` : Note that in the case of the poll method, the `endpoint_url` value is
-  supplied by the Transmitter.
+* `delivery`
 * `description`
 
 If the request does not contain the `delivery` property, then the Transmitter
 MUST assume that the `method` is "urn:ietf:rfc:8936" (poll). The
 Transmitter MUST include a `delivery` property in the response with this
-`method` property and an `endpoint_url` property.
+`method` property and an `endpoint_url` property. Note that in the case of the poll
+method, the `endpoint_url` value is supplied by the Transmitter.
 
 The following is a non-normative example request to create an Event Stream:
 
