@@ -219,8 +219,8 @@ All events MUST be signed using the `RS256` algorithm using a minimum of 2048-bi
 ### Authorization Server
 * MAY distribute discovery metadata (such as the authorization endpoint) via the metadata document as specified in [RFC8414]{{RFC8414}}
 * MUST support at least one of the following to obtain a short-lived access token. For example, a short lived access token could be defined as one in which the value of the `exp` claim is not longer than 60 mins after `nbf` claim. Please refer to Access token lifetimes in the security considerations of {{FAPI}} for additional considerations. 
-** client credential grant flow {{RFC6749}} section 4.4
-** authorization code flow {{RFC6749}} section 4.1
+  - client credential grant flow {{RFC6749}} section 4.4
+  - authorization code flow {{RFC6749}} section 4.1
 
 ### OAuth Scopes
 Depending on the features supported by the OAuth service and the SSF APIs, the client SHALL discover the OAuth scopes as follows:
@@ -228,11 +228,11 @@ Depending on the features supported by the OAuth service and the SSF APIs, the c
 1. If the Resource Server, hosting SSF configuration APIs, supports OAuth Protected Resource Metadata {{OPRM}} then the client MUST obtain the required scopes by using it.
 
 2. If the Resource Server does not support {{OPRM}}, then the following scopes MUST be supported -
-* An OAuth {{RFC6749}} authorization server that is used to issue tokens to SSF Receivers, MUST reserve the scopes for the SSF endpoints with the prefix of `ssf`
-* All the SSF stream configuration management API operations MUST accept `ssf.manage` scope
-* All the SSF stream configuration Read API operations MUST accept `ssf.read` scope
-* Authorization server MAY postfix scope names with more granular operations eg. `ssf.manage.create`, `ssf.manage.update` etc.
-* Transmitter managed poll endpoint MAY support the postfix scopes in the same nomenclature as `ssf.manage.poll`
+   - An OAuth {{RFC6749}} authorization server that is used to issue tokens to SSF Receivers, MUST reserve the scopes for the SSF endpoints with the prefix of `ssf`
+   - All the SSF stream configuration management API operations MUST accept `ssf.manage` scope
+   - All the SSF stream configuration Read API operations MUST accept `ssf.read` scope
+   - Authorization server MAY postfix scope names with more granular operations eg. `ssf.manage.create`, `ssf.manage.update` etc.
+   - Transmitter managed poll endpoint MAY support the postfix scopes in the same nomenclature as `ssf.manage.poll`
 
 ### The SSF Transmitter as a Resource Server
 * MUST accept access tokens in the HTTP header as in Section 2.1 of OAuth 2.0 Bearer Token Usage [RFC6750]{{RFC6750}}
