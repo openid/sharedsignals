@@ -119,6 +119,10 @@ Using JSON Schema to describe SSF has three main benefits. First, it enables a f
 
 # JSON Schema Defintion
 
+JSON Schema Documents SHOULD define value of each event statement within the "events" claim of a JWT as defined in Section 2.2 of {{SET}} where the key (event URN) is $id of the JSON schema 
+
+^^ not sure about this. how would the even URN relate to the schema $id?
+
 Schema keywords - Normative
 Validation keywords - Normative
 Schema annotations - Non-normative
