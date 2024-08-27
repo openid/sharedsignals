@@ -111,15 +111,19 @@ This document defines how to describe events for the Shared Signals Framework {{
 
 # Introduction {#introduction}
 
-Shared Signals Framework {{SSF}} enables sharing of signals and events between cooperating peers. {{SSF}} can be profiled for different applications as event types, such as Risk Incident Sharing and Coordination {{RISC}} and the Continuous Access Evaluation Profile {{CAEP}}.
+Shared Signals Framework {{SSF}} enables sharing of signals and events between cooperating peers. It is currently leveraged by two applications – the Continuous Access Evaluation Protocol {{CAEP}} and Risk Incident Sharing and Coordination {{RISC}}.
 
 This specification defines how to translate normative SSF event requirements into a JSON Schema. JSON Schema is a standardized way to describe the structure, constraints, and data types within a JSON document. JSON Schemas can also be used as validators to automatically check if a JSON document adheres to the defined schema, ensuring data integrity.
 
-Using JSON Schema to describe SSF has three main benefits. First, it enables a faster process to create, update and get approval for new event types. Second, JSON schema, rather than spec texts, is a more appropriate format to describe event types. And lastly, it allows event types to be versioned independently thus reducing the friction between the SSF core specification and event type publication.
+Using JSON Schema to describe SSF has the following main benefits. 
+- Allows machine readability to auto generation of stubs
+- It enables a faster process to create, update and get approval for new event types. 
+- JSON schema, rather than spec texts, is a more appropriate format to describe event types. 
+- It also allows event types to be versioned independently thus reducing the friction between the SSF core specification and event type publication.
 
 # JSON Schema Defintion
 
-JSON Schema Documents SHOULD define value of each event statement within the "events" claim of a JWT as defined in Section 2.2 of {{SET}} where the key (event URN) is $id of the JSON schema 
+JSON Schema Documents MUST define value of each event statement within the "events" claim of a JWT as defined in Section 2.2 of {{SET}} where the key (event URN) is $id of the JSON schema 
 
 ^^ not sure about this. how would the even URN relate to the schema $id?
 
