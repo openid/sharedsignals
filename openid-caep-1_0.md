@@ -735,7 +735,7 @@ The `event_timestamp` in this event type specifies the time at which the session
 The following optional claims MAY be included in the Session Established event:
 
 ips
-: The array of IP addresses of the user as observed by the Transmitter. The value MUST be in the format of an array of strings, each one of which represents the RFC 4001 {{RFC4001}} string represetation of an IP address. (**NOTE**, this can be different from the one observed by the Receiver for the same user because of network translation)
+: The array of IP addresses of the user as observed by the Transmitter. The value MUST be in the format of an array of strings, each one of which represents the RFC 4001 {{RFC4001}} string representation of an IP address. (**NOTE**, this can be different from the one observed by the Receiver for the same user because of network translation)
 
 fp_ua
 : Fingerprint of the user agent computed by the Transmitter. (**NOTE**, this is not to identify the session, but to present some qualities of the session)
@@ -790,7 +790,7 @@ The Session Presented event signifies that the Transmitter has observed the sess
 The following optional claims MAY be present in a Session Presented event:
 
 ips
-: The array of IP addresses of the user as observed by the Transmitter. The value MUST be in the format of an array of strings, each one of which represents the RFC 4001 {{RFC4001}} string represetation of an IP address. (**NOTE**, this can be different from the one observed by the Receiver for the same user because of network translation)
+: The array of IP addresses of the user as observed by the Transmitter. The value MUST be in the format of an array of strings, each one of which represents the RFC 4001 {{RFC4001}} string representation of an IP address. (**NOTE**, this can be different from the one observed by the Receiver for the same user because of network translation)
 
 fp_ua
 : Fingerprint of the user agent computed by the Transmitter. (**NOTE**, this is not to identify the session, but to present some qualities of the session)
