@@ -115,6 +115,7 @@ normative:
   RFC8936:
   RFC9110:
   RFC9493:
+  RFC4001:
   CAEP:
     author:
     -
@@ -384,6 +385,31 @@ Subject Identifier Format.
     "format": "saml_assertion_id",
     "issuer": "https://idp.example.com/123456789/",
     "assertion_id": "_8e8dc5f69a98cc4c1ff3427e5ce34606fd672f91e6"
+}
+
+~~~
+{: #sub-id-ips title="Example: 'ips' Subject Identifier"}
+
+### IP Addresses Subject Identifier Format {#sub-id-ips}
+
+The "IP addresses" Subject Identifier Format specifies an array of IP addresses observed by the Transmitter.
+Subject Identifiers of this format MUST contain the following members:
+
+ips
+
+> REQUIRED. The array of IP addresses of the subject as observed by the Transmitter. The value MUST be in the format of an array of strings, each one of which represents the RFC 4001 [RFC4001] string representation of an IP address.
+
+
+The "IP addresses" Subject Identifier Format is identified by the name
+"ips".
+
+Below is a non-normative example of Subject Identifier for the "IP addresses"
+Subject Identifier Format.
+
+~~~ json
+{
+    "format": "ips",
+    "ips": ["10.29.37.75", "98.27.134.237"]
 }
 
 ~~~
