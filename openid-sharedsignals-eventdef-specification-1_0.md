@@ -115,7 +115,7 @@ Shared Signals Framework {{SSF}} enables sharing of signals and events between c
 
 This specification defines how to translate normative SSF event requirements into a JSON Schema. JSON Schema is a standardized way to describe the structure, constraints, and data types within a JSON document. JSON Schemas can also be used as validators to automatically check if a JSON document adheres to the defined schema, ensuring data integrity.
 
-Using JSON Schema to describe SSF has the following main benefits. 
+Using JSON Schema to describe SSF has the following benefits:
 - Allows machine readability to auto generation of stubs
 - It enables a faster process to create, update and get approval for new event types. 
 - JSON schema, rather than spec texts, is a more appropriate format to describe event types. 
@@ -123,20 +123,20 @@ Using JSON Schema to describe SSF has the following main benefits.
 
 # JSON Schema Defintion
 
-JSON Schema Documents MUST define value of each event statement within the "events" claim of a JWT as defined in Section 2.2 of {{SET}} where the key (event URN) is $id of the JSON schema 
+The following section describes how a map a SSF event to a JSON Schema Document.
 
-^^ not sure about this. how would the even URN relate to the schema $id?
+As defined in Section 4.3 of {{JSON Schema}}, a JSON Schema document, also called a "schema", is a JSON document used to describe another JSON Document, known as an instance.
 
-Schema keywords - Normative
-Validation keywords - Normative
-Schema annotations - Non-normative
+A JSON Schema document describes the instance of SSF SET event "payload" (Section 2 of {{SET}}). As such, the schema will defined the claims that pertian to the specific SSF event type. The $id for the schema document MUST be the same as the event identifier of the SET.
 
+
+The schema is made up of the following top-level JSON keys:
 
 \\$schema
 : REQUIRED, JSON string: URI of the version of JSON Schema that this document adheres to. E.g., `https://json-schema.org/draft/2020-12/schema`. Normative Schema Keyword.
 
 \\$id
-: REQUIRED, JSON string: URI of the schema. SHOULD be publicly accessible and resolve to the JSON Schema document. Normative Schema Keyword.
+: REQUIRED, JSON string: Event Identifier of the SET and URI of the schema. MUST be publicly accessible or available out-of-band and resolve to JSON Schema document. Normative Schema Keyword.
 
 title
 : REQUIRED, JSON string: Title of the schema. Informational Schema Annotation.
@@ -151,6 +151,7 @@ properties
 : REQUIRED JSON object: Object that defines the keys in the JSON data that are being validated. Normative Validation Keyword.
 
 
+The following is a non-normative example of a JSON Schema document for a CAEP event.
 ~~~ json
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -165,16 +166,9 @@ properties
 
 ## Properties 
 
- 
-> ### Open Questions:
-> - Should the schema contain just validate the events claim in the SET? 
->   - Typically you'd use another JWT library to validate the top level claims like iss, aud, etc.
+The top level "properties" key contains an object where each property represents a key in the JSON data that’s being validated. Within each property, all normative requirements and non-normative details are specified by using the vocabulary in {{JSONSchemaValidation}}.
 
-
-The top level "properties" key contains an object "where each property represents a key in the JSON data that’s being validated." (https://json-schema.org/learn/getting-started-step-by-step. Within each property, all normative requirements and non-normative details are specified, such as a description of the property, if its required, what values are allowed, etc.
-
-The properties key MUST follow the vocabulary specified in {{JSONSchemaValidation}}
-
+The following is a non-normative example of a "properties" object for a CAEP event schema.
 ~~~json
 {
    "properties": {
@@ -204,9 +198,6 @@ The properties key MUST follow the vocabulary specified in {{JSONSchemaValidatio
    }
 }
 ~~~
-
-# Schema for mandatory claims in SET
-
 
 # Discoverability/Registry
 
