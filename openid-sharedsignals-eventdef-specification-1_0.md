@@ -22,16 +22,15 @@ author:
         org: Okta
         email: tim.cappalli@okta.com
       -
-        ins: A. Deshpande
-        name: Apoorva Deshpande
-        org: Okta
-        email: apoorva.deshpande@okta.com
-      -
         ins: J. Schreiber
         name: Jen Schreiber
         org: Workday
         email: jennifer.winer@workday.com
-
+      -
+        ins: A. Deshpande
+        name: Apoorva Deshpande
+        org: Okta
+        email: apoorva.deshpande@okta.com
 normative:
   OpenID.Core:
     author:
@@ -198,23 +197,28 @@ The following is a non-normative example of a "properties" object for a CAEP eve
    }
 }
 ~~~
+# Registry
 
-# Discoverability/Registry
+This section serves as a registry for the schemas of all registered SSF Event Types.
 
-## Event Types
-
-| Event Type | Schema URI |
+| Event Type | Schema URI | Description
 |------|-------------|
-| CAEP  | <schema uri here> |
-| RISC  |  <schema uri here>  |
+| CAEP  | <schema uri here> | brief description |
+| RISC  |  <schema uri here>  | brief description |
 
-{: title="Name this table..." #eventtypestable}
+{: title="Registered Event Types" #eventtypestable}
 
-### CAEP
+## The Registration Process
 
-### RISC
+SSF Implementers may find that existing registered SSF event types do not meet the needs of their applications. In that case, they may propose a new SSF event type and register its schema. To do so, an implementer MUST create a request in the form of a Pull Request to https://github.com/openid/sharedsignals and meet the following requirements. The pull request will be reviewed by the Shared Signals Working Group and accepted at their discression.
 
-# Process for raising PRs and getting approved
+1. Author(s) of the pull request MUST be at least a contributing member of the OpenID Foundation.
+1. The Pull Request MUST contain a human readable description of the new SSF event type.
+1. The $id of the schema MUST be publicly accesbile on the internet and resolve to the schema document.
+1. The "title" and "description" of the schema must be meaningful and indicative of its function.
+1. The naming of all schema properties MUST be indicative of its function.
+1. Schemas may not be removed, only deprecated. Any changes to schemas must follow semantic versioning.
+
 
 ## Notational Considerations
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in BCP 14 {{RFC2119}} {{RFC8174}} when, and only when, they appear in all capitals, as shown here.
