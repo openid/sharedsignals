@@ -397,7 +397,7 @@ Subject Identifiers of this format MUST contain the following members:
 
 ips
 
-> REQUIRED. The array of IP addresses of the subject as observed by the Transmitter. The value MUST be in the format of an array of strings, each one of which represents the RFC 4001 [RFC4001] string representation of an IP address.
+> REQUIRED. The array of IP addresses of the subject as observed by the Transmitter. The value MUST be in the format of an array of strings, each one of which represents the {{RFC4001}} string representation of an IP address.
 
 
 The "IP addresses" Subject Identifier Format is identified by the name
