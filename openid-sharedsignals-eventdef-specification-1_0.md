@@ -151,17 +151,61 @@ properties
 : REQUIRED JSON object: Object that defines the keys in the JSON data that are being validated. Normative Validation Keyword.
 
 
-The following is a non-normative example of a JSON Schema document for a CAEP event.
+The following is a non-normative example of a JSON Schema document for a Session Revoked CAEP event.
 ~~~ json
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.openid.net/secevent/caep/event-type/session-revoked/v1.schema.json",
-  "title": "Session Revoked",
-  "description": "Session Revoked signals that the session identified by the subject has been revoked. The explicit session identifier may be directly referenced in the subject or other properties of the session may be included to allow the receiver to identify applicable sessions.",
-  "type": "object",
-  "properties": {}
- }
+   "$schema":"https://json-schema.org/draft/2020-12/schema",
+   "$id":"https://schemas.openid.net/secevent/caep/event-type/session-revoked/v1.schema.json",
+   "title":"Session Revoked",
+   "description":"Session Revoked signals that the session identified by the subject has been revoked. The explicit session identifier may be directly referenced in the subject or other properties of the session may be included to allow the receiver to identify applicable sessions.",
+   "type":"object",
+   "properties":{
+      "initiating_entity":{
+         "description":"Describes the entity that invoked the event.",
+         "type":"string",
+         "oneOf":[
+            {
+               "const":"admin",
+               "description":"an administrative action triggered the event"
+            },
+            {
+               "const":"user",
+               "description":"an end-user action triggered the event"
+            },
+            {
+               "const":"policy",
+               "description":"a policy evaluation triggered the event"
+            },
+            {
+               "const":"system",
+               "description":"a system or platform assertion triggered the event"
+            }
+         ]
+      },
+      "reason_admin":{
+         "type":"object",
+         "properties":{
+            "en":{
+               "type":"string"
+            }
+         }
+      },
+      "reason_user":{
+         "type":"object",
+         "properties":{
+            "en":{
+               "type":"string"
+            },
+            "es-410":{
+               "type":"string"
+            }
+         }
+      },
+      "event_timestamp":{
+         "type":"number"
+      }
+   }
+}
 ~~~
 
 ## Properties 
@@ -219,7 +263,6 @@ SSF Implementers may find that existing registered SSF event types do not meet t
 1. The "title" and "description" of the schema must be meaningful and indicative of its function.
 1. The naming of all schema properties MUST be indicative of its function.
 1. Schemas may not be removed, only deprecated. Any changes to schemas must follow semantic versioning.
-1. Event schema MUST include mandatory SET claims described in {{Section 2.2 of RFC8417}}.
 
 
 ## Notational Considerations
