@@ -112,21 +112,22 @@ This document defines how to describe events for the Shared Signals Framework {{
 
 Shared Signals Framework {{SSF}} enables sharing of signals and events between cooperating peers. It is currently leveraged by two applications – the Continuous Access Evaluation Protocol {{CAEP}} and Risk Incident Sharing and Coordination {{RISC}}.
 
-This specification defines how to translate normative SSF event requirements into a JSON Schema. JSON Schema is a standardized way to describe the structure, constraints, and data types within a JSON document. JSON Schemas can also be used as validators to automatically check if a JSON document adheres to the defined schema, ensuring data integrity.
+This specification defines how to translate normative SSF, CAEP, RISC event requirements into a JSON Schema. {{JSONSchema}} is a standardized way to describe the structure, constraints, and data types within a JSON document. JSON Schemas can also be used as {{JSONSchemaValidation}} to automatically check if a JSON document adheres to the defined schema, ensuring data integrity.
 
 Using JSON Schema to describe SSF has the following benefits:
-- Allows machine readability to auto generation of stubs
+- Allows machine readability to auto generation of stubs.
 - It enables a faster process to create, update and get approval for new event types. 
 - JSON schema, rather than spec texts, is a more appropriate format to describe event types. 
 - It also allows event types to be versioned independently thus reducing the friction between the SSF core specification and event type publication.
+- Allows more events to be incorporated easily in the standards space beyond the usecases and charters of CAEP, RISC etc.
 
 # JSON Schema Defintion
 
 The following section describes how a map a SSF event to a JSON Schema Document.
 
-As defined in Section 4.3 of {{JSON Schema}}, a JSON Schema document, also called a "schema", is a JSON document used to describe another JSON Document, known as an instance.
+As defined in {{Section 4.3 of JSON Schema}}, a JSON Schema document, also called a "schema", is a JSON document used to describe another JSON Document, known as an instance.
 
-A JSON Schema document describes the instance of SSF SET event "payload" (Section 2 of {{SET}}). As such, the schema will defined the claims that pertian to the specific SSF event type. The $id for the schema document MUST be the same as the event identifier of the SET.
+A JSON Schema document describes the instance of SSF SET event "payload" ({{Section 2 of SET}}). As such, the schema will defined the claims that pertian to the specific SSF event type. The $id for the schema document MUST be the same as the event identifier of the SET.
 
 
 The schema is made up of the following top-level JSON keys:
@@ -218,6 +219,7 @@ SSF Implementers may find that existing registered SSF event types do not meet t
 1. The "title" and "description" of the schema must be meaningful and indicative of its function.
 1. The naming of all schema properties MUST be indicative of its function.
 1. Schemas may not be removed, only deprecated. Any changes to schemas must follow semantic versioning.
+1. Event schema MUST include mandatory SET claims described in {{Section 2.2 of RFC8417}}.
 
 
 ## Notational Considerations
