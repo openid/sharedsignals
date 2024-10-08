@@ -120,7 +120,7 @@ Using JSON Schema to describe SSF has the following benefits:
 
 The following section describes how to map a SSF event to a JSON Schema Document.
 
-As defined in Section 4.3 of {{JSON Schema}}, a JSON Schema document, also called a "schema", is a JSON document used to describe another JSON Document, known as an instance.
+As defined in Section 4.3 of {{JSON Schema}}, a JSON Schema document, also called a "schema", is a JSON document used to describe another JSON document, known as an instance.
 
 A JSON Schema document describes the instance of SSF SET event "payload" ({{Section 2 of SET}}). As such, the schema will define the claims that pertain to the specific SSF event type. The $id for the schema document MUST be the same as the event identifier of the SET.
 
@@ -241,7 +241,7 @@ The following is a non-normative example of a "properties" object for a CAEP eve
 
 This section serves as a registry for the schemas of all registered SSF Event Types.
 
-| Event Type | Schema URI | Description |
+| Event Name | Schema URI | Description |
 |------|-------------|-------|
 | CAEP  | <schema uri here> | brief description |
 | RISC  |  <schema uri here>  | brief description |
