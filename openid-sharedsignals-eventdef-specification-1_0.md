@@ -107,14 +107,14 @@ This document defines how to describe events for the Shared Signals Framework {{
 
 The Shared Signals Framework {{SSF}} enables sharing of signals and events between cooperating peers. It is currently leveraged by two applications – the Continuous Access Evaluation Profile {{CAEP}} and Risk Incident Sharing and Coordination {{RISC}}.
 
-This specification defines how to translate normative SSF, CAEP, RISC event requirements into a JSON Schema. {{JSONSchema}} is a standardized way to describe the structure, constraints, and data types within a JSON document. JSON Schemas can also be used as {{JSONSchemaValidation}} to automatically check if a JSON document adheres to the defined schema, ensuring data integrity.
+This specification defines how to translate normative SSF event requirements, such as from CAEP and RISC events, into a JSON Schema. {{JSONSchema}} is a standardized way to describe the structure, constraints, and data types within a JSON document. JSON Schemas are often used with {{JSONSchemaValidation}} to automatically check if a JSON document adheres to the defined schema, thus ensuring data integrity.
 
 Using JSON Schema to describe SSF has the following benefits:
-- Allows machine readability for the auto generation of stubs.
-- It enables a faster process to create, update and get approval for new event types. 
-- JSON schema, rather than spec texts, is a more appropriate format to describe event types. 
-- It also allows event types to be versioned independently thus reducing the friction between the SSF core specification and event type publication.
-- Allows more events to be incorporated easily in the standards space beyond the use cases and charters of CAEP, RISC etc.
+- Machine readability for the auto generation of stubs
+- Faster process to create, update and get approval for new event types
+- Easy and appropriate format to describe event types, as opposed to traditional specification text
+- Independent versioning to reduce the friction between the SSF core specification and event type publications
+- Allows new SSF events to be incorporated into the SSF ecosystem
 
 # JSON Schema Defintion
 
@@ -122,8 +122,7 @@ The following section describes how to map a SSF event to a JSON Schema Document
 
 As defined in Section 4.3 of {{JSON Schema}}, a JSON Schema document, also called a "schema", is a JSON document used to describe another JSON document, known as an instance.
 
-A JSON Schema document describes the instance of SSF SET event "payload" ({{Section 2 of SET}}). As such, the schema will define the claims that pertain to the specific SSF event type. The $id for the schema document MUST be the same as the event identifier of the SET.
-
+A JSON Schema document describes the instance of SSF SET event "payload" (Section 2 of {{SET}}). As such, the schema will define the claims that pertain to the specific SSF event type. The $id for the schema document MUST be the same as the event identifier of the SET.
 
 The schema is made up of the following top-level JSON keys:
 
@@ -146,7 +145,56 @@ properties
 : REQUIRED JSON object: Object that defines the keys in the JSON data that are being validated. Normative Validation Keyword.
 
 
-The following is a non-normative example of a JSON Schema document for a Session Revoked CAEP event.
+The following is a non-normative example of the top level properties of a JSON Schema document for a Session Revoked CAEP event.
+~~~ json
+{
+   "$schema":"https://json-schema.org/draft/2020-12/schema",
+   "$id":"https://schemas.openid.net/secevent/caep/event-type/session-revoked/v1.schema.json",
+   "title":"Session Revoked",
+   "description":"Session Revoked signals that the session identified by the subject has been revoked. The explicit session identifier may be directly referenced in the subject or other properties of the session may be included to allow the receiver to identify applicable sessions.",
+   "type":"object",
+   "properties":{...}
+}
+~~~
+
+## Properties 
+
+The top level "properties" key contains an object where each property represents a key in the JSON data being validated. Within each property, all normative requirements and non-normative details are specified by using the vocabulary in {{JSONSchemaValidation}}.
+
+The following is a non-normative example of a "properties" object for a CAEP event schema.
+~~~json
+{
+   "properties": {
+    "initiating_entity": {
+      "description": "Describes the entity that invoked the event.",
+      "type": "string",
+      "oneOf": [
+        {
+          "const": "admin",
+          "description": "an administrative action triggered the event"
+        },
+        {
+          "const": "user",
+          "description": "an end-user action triggered the event"
+        },
+        {
+          "const": "policy",
+          "description": "a policy evaluation triggered the event"
+        },
+        {
+          "const": "system",
+          "description": "a system or platform assertion triggered the event"
+        }
+      ]
+    },
+    "required": [ "initiating_entity" ]
+   }
+}
+~~~
+
+## Full Example
+
+The following is a non-normative example of the top level properties of a JSON Schema document for a Session Revoked CAEP event.
 ~~~ json
 {
    "$schema":"https://json-schema.org/draft/2020-12/schema",
@@ -203,48 +251,14 @@ The following is a non-normative example of a JSON Schema document for a Session
 }
 ~~~
 
-## Properties 
-
-The top level "properties" key contains an object where each property represents a key in the JSON data that’s being validated. Within each property, all normative requirements and non-normative details are specified by using the vocabulary in {{JSONSchemaValidation}}.
-
-The following is a non-normative example of a "properties" object for a CAEP event schema.
-~~~json
-{
-   "properties": {
-    "initiating_entity": {
-      "description": "Describes the entity that invoked the event.",
-      "type": "string",
-      "oneOf": [
-        {
-          "const": "admin",
-          "description": "an administrative action triggered the event"
-        },
-        {
-          "const": "user",
-          "description": "an end-user action triggered the event"
-        },
-        {
-          "const": "policy",
-          "description": "a policy evaluation triggered the event"
-        },
-        {
-          "const": "system",
-          "description": "a system or platform assertion triggered the event"
-        }
-      ]
-    },
-    "required": [ "initiating_entity" ]
-   }
-}
-~~~
 # Registry
 
 This section serves as a registry for the schemas of all registered SSF Event Types.
 
 | Event Name | Schema URI | Description |
-|------|-------------|-------|
+|------------|------------|-------------|
 | CAEP  | <schema uri here> | brief description |
-| RISC  |  <schema uri here>  | brief description |
+| RISC  | <schema uri here> | brief description |
 
 {: title="Registered Event Types" #eventtypestable}
 
@@ -257,7 +271,7 @@ SSF Implementers may find that existing registered SSF event types do not meet t
 1. The $id of the schema MUST be publicly accessible on the internet and resolve to the schema document.
 1. The "title" and "description" of the schema must be meaningful and indicative of its function.
 1. The naming of all schema properties MUST be indicative of its function.
-1. Schemas may not be removed, only deprecated. Any changes to schemas must follow semantic versioning.
+1. Schemas may not be removed, only deprecated through . Any changes to schemas must follow semantic versioning.
 
 
 ## Notational Considerations
