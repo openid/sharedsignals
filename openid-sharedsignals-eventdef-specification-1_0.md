@@ -17,11 +17,6 @@ pi:
 
 author:
       -
-        ins: T. Cappalli
-        name: Tim Cappalli
-        org: Okta
-        email: tim.cappalli@okta.com
-      -
         ins: J. Schreiber
         name: Jen Schreiber
         org: Workday
@@ -54,7 +49,7 @@ normative:
   RFC6711:
   RFC8176:
   SSF:
-    target: http://openid.net/specs/openid-sse-framework-1_0.html
+    target: https://openid.net/specs/openid-sharedsignals-framework-1_0-03.html
     title: OpenID Shared Signals and Events Framework Specification 1.0
     author:
       -
@@ -64,7 +59,7 @@ normative:
       -
         ins: T. Cappalli
         name: Tim Cappalli
-        org: Microsoft
+        org: Okta
       -
         ins: M. Scurtescu
         name: Marius Scurtescu
@@ -110,20 +105,20 @@ This document defines how to describe events for the Shared Signals Framework {{
 
 # Introduction {#introduction}
 
-Shared Signals Framework {{SSF}} enables sharing of signals and events between cooperating peers. It is currently leveraged by two applications – the Continuous Access Evaluation Protocol {{CAEP}} and Risk Incident Sharing and Coordination {{RISC}}.
+The Shared Signals Framework {{SSF}} enables sharing of signals and events between cooperating peers. It is currently leveraged by two applications – the Continuous Access Evaluation Profile {{CAEP}} and Risk Incident Sharing and Coordination {{RISC}}.
 
 This specification defines how to translate normative SSF, CAEP, RISC event requirements into a JSON Schema. {{JSONSchema}} is a standardized way to describe the structure, constraints, and data types within a JSON document. JSON Schemas can also be used as {{JSONSchemaValidation}} to automatically check if a JSON document adheres to the defined schema, ensuring data integrity.
 
 Using JSON Schema to describe SSF has the following benefits:
-- Allows machine readability to auto generation of stubs.
+- Allows machine readability for the auto generation of stubs.
 - It enables a faster process to create, update and get approval for new event types. 
 - JSON schema, rather than spec texts, is a more appropriate format to describe event types. 
 - It also allows event types to be versioned independently thus reducing the friction between the SSF core specification and event type publication.
-- Allows more events to be incorporated easily in the standards space beyond the usecases and charters of CAEP, RISC etc.
+- Allows more events to be incorporated easily in the standards space beyond the use cases and charters of CAEP, RISC etc.
 
 # JSON Schema Defintion
 
-The following section describes how a map a SSF event to a JSON Schema Document.
+The following section describes how to map a SSF event to a JSON Schema Document.
 
 As defined in {{Section 4.3 of JSON Schema}}, a JSON Schema document, also called a "schema", is a JSON document used to describe another JSON Document, known as an instance.
 
