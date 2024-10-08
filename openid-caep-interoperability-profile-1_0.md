@@ -125,7 +125,7 @@ The following requirements are common across all use-cases defined in this docum
 
 ## Network layer protection
 * The SSF transmitter MUST offer TLS protected endpoints and MUST establish connections to other servers using TLS. TLS connections MUST be set up to use TLS version 1.2 or later.
-* When using TLS 1.2 or later, follow the recommendations for Secure Use of Transport Layer Security in [RFC9325]{{RFC9325}}.
+* The SSF transmitter MUST follow the recommendations for Secure Use of Transport Layer Security in [RFC9325]{{RFC9325}}.
 * The SSF receiver MUST perform a TLS server certificate signature checks, chain of trust validations, expiry and revocation status checks before calling the SSF transmitter APIs, as per [RFC6125]{{RFC6125}}.
 
 ## CAEP specification version
