@@ -120,9 +120,9 @@ Using JSON Schema to describe SSF has the following benefits:
 
 The following section describes how to map a SSF event to a JSON Schema Document.
 
-As defined in {{Section 4.3 of JSON Schema}}, a JSON Schema document, also called a "schema", is a JSON document used to describe another JSON Document, known as an instance.
+As defined in Section 4.3 of {{JSON Schema}}, a JSON Schema document, also called a "schema", is a JSON document used to describe another JSON Document, known as an instance.
 
-A JSON Schema document describes the instance of SSF SET event "payload" ({{Section 2 of SET}}). As such, the schema will defined the claims that pertian to the specific SSF event type. The $id for the schema document MUST be the same as the event identifier of the SET.
+A JSON Schema document describes the instance of SSF SET event "payload" ({{Section 2 of SET}}). As such, the schema will define the claims that pertain to the specific SSF event type. The $id for the schema document MUST be the same as the event identifier of the SET.
 
 
 The schema is made up of the following top-level JSON keys:
@@ -241,8 +241,8 @@ The following is a non-normative example of a "properties" object for a CAEP eve
 
 This section serves as a registry for the schemas of all registered SSF Event Types.
 
-| Event Type | Schema URI | Description
-|------|-------------|
+| Event Type | Schema URI | Description |
+|------|-------------|-------|
 | CAEP  | <schema uri here> | brief description |
 | RISC  |  <schema uri here>  | brief description |
 
@@ -250,11 +250,11 @@ This section serves as a registry for the schemas of all registered SSF Event Ty
 
 ## The Registration Process
 
-SSF Implementers may find that existing registered SSF event types do not meet the needs of their applications. In that case, they may propose a new SSF event type and register its schema. To do so, an implementer MUST create a request in the form of a Pull Request to https://github.com/openid/sharedsignals and meet the following requirements. The pull request will be reviewed by the Shared Signals Working Group and accepted at their discression.
+SSF Implementers may find that existing registered SSF event types do not meet the needs of their applications. In that case, they may propose a new SSF event type and register its schema. To do so, an implementer MUST create a request in the form of a Pull Request to https://github.com/openid/sharedsignals and meet the following requirements. The pull request will be reviewed by the Shared Signals Working Group and accepted at their discretion.
 
 1. Author(s) of the pull request MUST be at least a contributing member of the OpenID Foundation.
 1. The Pull Request MUST contain a human readable description of the new SSF event type.
-1. The $id of the schema MUST be publicly accesbile on the internet and resolve to the schema document.
+1. The $id of the schema MUST be publicly accessible on the internet and resolve to the schema document.
 1. The "title" and "description" of the schema must be meaningful and indicative of its function.
 1. The naming of all schema properties MUST be indicative of its function.
 1. Schemas may not be removed, only deprecated. Any changes to schemas must follow semantic versioning.
