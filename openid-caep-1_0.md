@@ -769,7 +769,7 @@ The following is a non-normative example of the `session-established` event type
           "ips": ["192.168.1.12", "10.1.1.1"],
           "fp_ua": "abb0b6e7da81a42233f8f2b1a8ddb1b9a4c81611",
           "acr": "AAL2",
-          "amr": "otp",
+          "amr": ["otp"],
           "event_timestamp": 1615304991643
         }
     }
