@@ -2,7 +2,7 @@
 title: OpenID Shared Signals Event Definition Specification
 abbrev: SSFEvents-Spec
 docname: openid-sharedsignals-eventdef-specification-1_0
-date: 2024-06-06
+date: 2024-10-22
 
 ipr: none
 cat: std
@@ -110,9 +110,9 @@ The Shared Signals Framework {{SSF}} enables sharing of signals and events betwe
 This specification defines how to translate normative SSF event requirements, such as from CAEP and RISC events, into a JSON Schema. {{JSONSchema}} is a standardized way to describe the structure, constraints, and data types within a JSON document. JSON Schemas are often used with {{JSONSchemaValidation}} to automatically check if a JSON document adheres to the defined schema, thus ensuring data integrity.
 
 Using JSON Schema to describe SSF has the following benefits:
-- Machine readability for the auto generation of stubs
 - Faster process to create, update and get approval for new event types
 - Easy and appropriate format to describe event types, as opposed to traditional specification text
+- Machine readability for creating and validating SSF event paylods
 - Independent versioning to reduce the friction between the SSF core specification and event type publications
 - Allows new SSF events to be incorporated into the SSF ecosystem
 
@@ -130,7 +130,7 @@ The schema is made up of the following top-level JSON keys:
 : REQUIRED, JSON string: URI of the version of JSON Schema that this document adheres to. E.g., `https://json-schema.org/draft/2020-12/schema`. Normative Schema Keyword.
 
 \\$id
-: REQUIRED, JSON string: Event Identifier of the SET and URI of the schema. MUST be publicly accessible or available out-of-band and resolve to JSON Schema document. Normative Schema Keyword.
+: REQUIRED, JSON string: URI of the schema, also known as the Event Identifier of the SET appended in accordance with[Schema Ids](#schema-ids). MUST be publicly accessible or available out-of-band and resolve to JSON Schema document. Normative Schema Keyword.
 
 title
 : REQUIRED, JSON string: Title of the schema. Informational Schema Annotation.
@@ -149,7 +149,7 @@ The following is a non-normative example of the top level properties of a JSON S
 ~~~ json
 {
    "$schema":"https://json-schema.org/draft/2020-12/schema",
-   "$id":"https://schemas.openid.net/secevent/caep/event-type/session-revoked/v1.schema.json",
+   "$id":"https://schemas.openid.net/secevent/caep/event-type/session-revoked/1.0.0/schema.json",
    "title":"Session Revoked",
    "description":"Session Revoked signals that the session identified by the subject has been revoked. The explicit session identifier may be directly referenced in the subject or other properties of the session may be included to allow the receiver to identify applicable sessions.",
    "type":"object",
@@ -198,7 +198,7 @@ The following is a non-normative example of the top level properties of a JSON S
 ~~~ json
 {
    "$schema":"https://json-schema.org/draft/2020-12/schema",
-   "$id":"https://schemas.openid.net/secevent/caep/event-type/session-revoked/v1.schema.json",
+   "$id":"https://schemas.openid.net/secevent/caep/event-type/session-revoked/1.0.0/schema.json",
    "title":"Session Revoked",
    "description":"Session Revoked signals that the session identified by the subject has been revoked. The explicit session identifier may be directly referenced in the subject or other properties of the session may be included to allow the receiver to identify applicable sessions.",
    "type":"object",
@@ -253,26 +253,30 @@ The following is a non-normative example of the top level properties of a JSON S
 
 # Registry
 
-This section serves as a registry for the schemas of all registered SSF Event Types.
+## Schema Ids
 
-| Event Name | Schema URI | Description |
-|------------|------------|-------------|
-| CAEP  | <schema uri here> | brief description |
-| RISC  | <schema uri here> | brief description |
+Ids of SSF event schemas MUST adhere the following convention:
 
-{: title="Registered Event Types" #eventtypestable}
+{event type URI}/{semantic version}/schema.json
+
+For example, the schema id for a session revoked caep event would be constructed by concatenating the following:
+- event type uri: https://schemas.openid.net/secevent/caep/event-type/session-revoked
+- semantic version: 1.0.0
+- schema.json
+
+The resulting id would be "https://schemas.openid.net/secevent/caep/event-type/session-revoked/1.0.0/schema.json"
+
 
 ## The Registration Process
 
-SSF Implementers may find that existing registered SSF event types do not meet the needs of their applications. In that case, they may propose a new SSF event type and register its schema. To do so, an implementer MUST create a request in the form of a Pull Request to https://github.com/openid/sharedsignals and meet the following requirements. The pull request will be reviewed by the Shared Signals Working Group and accepted at their discretion.
+SSF Implementers may find that existing registered SSF event types do not meet the needs of their applications. In that case, they may propose a new SSF event type and register its schema. To do so, an implementer MUST create a request in the form of a Pull Request to https://github.com/openid/sharedsignals following the PR Template and meeting the following requirements. The pull request will be reviewed by the Shared Signals Working Group and accepted at their discretion.
 
 1. Author(s) of the pull request MUST be at least a contributing member of the OpenID Foundation.
 1. The Pull Request MUST contain a human readable description of the new SSF event type.
 1. The $id of the schema MUST be publicly accessible on the internet and resolve to the schema document.
 1. The "title" and "description" of the schema must be meaningful and indicative of its function.
 1. The naming of all schema properties MUST be indicative of its function.
-1. Schemas may not be removed, only deprecated through . Any changes to schemas must follow semantic versioning.
-
+1. Schemas should not be removed, only incremented (via semantic versioning) or marked as deprecated in the repositiory. Any changes to schemas must follow semantic versioning.
 
 ## Notational Considerations
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in BCP 14 {{RFC2119}} {{RFC8174}} when, and only when, they appear in all capitals, as shown here.
