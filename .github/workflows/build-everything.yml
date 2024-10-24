@@ -70,7 +70,7 @@ jobs:
       - name: Render caep-interop text
         run: xml2rfc openid-caep-interoperability-profile-1_0.xml --text -o openid-caep-interoperability-profile-1_0.txt
       - name: Upload artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4.4.0
         with:
           name: output
           path: |
@@ -94,7 +94,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4.1.7
         with:
           name: output
       - name: Upload pages artifact
