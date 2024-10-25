@@ -4,7 +4,7 @@ abbrev: CAEP-Spec
 docname: openid-caep-1_0
 date: 2024-06-19
 
-ipr: none
+ipr: none 
 cat: std
 wg: Shared Signals
 
