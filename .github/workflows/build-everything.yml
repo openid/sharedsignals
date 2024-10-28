@@ -28,6 +28,7 @@ on:
       - contributing.md
       - .gitignore
       - working-group-charter.md
+  workflow_dispatch:
 
 jobs:
   build-sharedsignals:
