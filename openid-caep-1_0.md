@@ -829,7 +829,7 @@ Event Type URI:
 
 A vendor may deploy mechanisms to gather and analyze various signals associated with subjects such as users, devices, etc. These signals, which can originate from diverse channels and methods beyond the scope of this event description, are processed to derive an abstracted risk level representing the subject's current threat status.
 
-The Risk Level Change event is employed  by the Trasnmitter to communicate any modifications in a subject's assessed risk level at the time indicated by the `event_timestamp` field in the Risk Level Change event. The Transmitter may generate this event to indicate:
+The Risk Level Change event is employed by the Transmitter to communicate any modifications in a subject's assessed risk level at the time indicated by the `event_timestamp` field in the Risk Level Change event. The Transmitter may generate this event to indicate:
 
 * User's risk has changed due to potential suspecious access from unknown destination, password compromise, addition of strong authenticator or other reasons.
 * Device's risk has changed due to installation of unapproved software, connection to insecure pheripheral device, encryption of data or other reasons.
