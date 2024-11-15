@@ -837,10 +837,9 @@ The Risk Level Change event is employed by the Transmitter to communicate any mo
 
 
 ### Event Specific Claims {#risk-level-change-event-specific-claims}
-The following optional claims MAY be present in a Session Presented event:
 
-reason_admin
-: REQUIRED, JSON string indicates the reason that contributed to the risk level changes by the Transmitter. Overall this is an OPTIONAL claim, but marked as REQUIRED for Risk Level Change to indicate reasons behind the risk level change.
+risk_reason
+: REQUIRED, JSON string indicates the reason that contributed to the risk level changes by the Transmitter.
 
 current_level 
 : REQUIRED, JSON string indicates the current level of the risk for the subject. Value MUST be one of LOW, MEDIUM, HIGH
@@ -849,8 +848,8 @@ previous_level
 : OPTIONAL, JSON string indicates the previously known level of the risk for the subject. Value MUST be one of LOW, MEDIUM, HIGH. If the Transmitter omits this value, the Receiver MUST assume that the previous assurance level is unknown to the Transmitter.
 
 
-### Examples {#session-presented-examples}
-The following is a non-normative example of a Session Presented event:
+### Examples {#risk-level-change-examples}
+The following is a non-normative example of a Risk Level Change event:
 
 ~~~json
 {
@@ -869,7 +868,7 @@ The following is a non-normative example of a Session Presented event:
          "current_level": "LOW",
          "previous_level": "HIGH",
          "event_timestamp": 1615304991643,
-         "reason_admin":{
+         "risk_reason":{
             "en": "User's password detected in the pwned password dump"
          }
       }
