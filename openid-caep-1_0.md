@@ -839,13 +839,16 @@ The Risk Level Change event is employed by the Transmitter to communicate any mo
 ### Event Specific Claims {#risk-level-change-event-specific-claims}
 
 risk_reason
-: REQUIRED, JSON string indicates the reason that contributed to the risk level changes by the Transmitter.
+: REQUIRED, JSON string: indicates the reason that contributed to the risk level changes by the Transmitter.
+
+principal
+: REQUIRED, JSON string: representing the principal entity involved in the observed risk event, as identified by the transmitter. The subject principal can be one of the following entities USER, DEVICE, SESSION, TENANT, ORG_UNIT, GROUP, or any other entity as defined in {{Section 2 of SSF}}. This claim identifies the primary subject associated with the event, and helps to contextualize the risk relative to the entity involved.
 
 current_level 
-: REQUIRED, JSON string indicates the current level of the risk for the subject. Value MUST be one of LOW, MEDIUM, HIGH
+: REQUIRED, JSON string: indicates the current level of the risk for the subject. Value MUST be one of LOW, MEDIUM, HIGH
 
 previous_level 
-: OPTIONAL, JSON string indicates the previously known level of the risk for the subject. Value MUST be one of LOW, MEDIUM, HIGH. If the Transmitter omits this value, the Receiver MUST assume that the previous assurance level is unknown to the Transmitter.
+: OPTIONAL, JSON string: indicates the previously known level of the risk for the subject. Value MUST be one of LOW, MEDIUM, HIGH. If the Transmitter omits this value, the Receiver MUST assume that the previous risk level is unknown to the Transmitter.
 
 
 ### Examples {#risk-level-change-examples}
