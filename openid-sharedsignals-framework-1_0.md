@@ -618,11 +618,11 @@ default_subjects
     to be transmitted. The Receiver MAY remove subjects added this way via the
     `remove_subject_endpoint`.
 
-push_stream_ttl
+stream_ttl
 
-> OPTIONAL. The lifetime of a PUSH stream in seconds, after which the Transmitter MAY either pause or disable the stream if it has not received any Receiver-initiated communication in that duration.
+> OPTIONAL. The lifetime of a stream in seconds, after which the Transmitter MAY either pause or disable the stream if it has not received any Receiver-initiated communication in that duration.
   If the Transmitter decides to update the stream, it MUST send a Stream Updated Event to the Receiver as described in {{status}}.
-  If the Receiver calls any endpoint in the Event Stream Management API ({{management}}), the Transmitter must refresh the TTL of that particular stream.
+  If the Receiver calls any endpoint in the Event Stream Management API ({{management}}), the Transmitter MUST refresh the TTL of that particular stream.
   The syntax is the same as that of {{EXPIRES_IN}}.
 
 TODO: consider adding a IANA Registry for metadata, similar to Section 7.1.1 of
