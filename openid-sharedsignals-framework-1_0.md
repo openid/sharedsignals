@@ -73,6 +73,12 @@ contributor:
         org: The Walt Disney Company
         email: sean.odentity@disney.com
 
+      -
+        ins: T. Raibhandare
+        name: Tushar Raibhandare
+        org: Google
+        email: traib@google.com
+
 normative:
   CLIENTCRED:
     author:
@@ -84,6 +90,17 @@ normative:
       RFC: '6749'
     target: https://tools.ietf.org/html/rfc6749#section-4.4
     title: The OAuth 2.0 Authorization Framework - Client Credentials Grant
+
+  EXPIRES_IN:
+    author:
+    - ins: D. Hardt
+      name: D. Hardt
+    date: October 2012
+    seriesinfo:
+      DOI: 10.17487/RFC6749
+      RFC: '6749'
+    target: https://datatracker.ietf.org/doc/html/rfc6749#appendix-A.14
+    title: The OAuth 2.0 Authorization Framework - "expires_in" Syntax
 
   OpenID.Core:
     author:
@@ -600,6 +617,13 @@ default_subjects
     to the stream via the `add_subject_endpoint`, causing only events for those subjects
     to be transmitted. The Receiver MAY remove subjects added this way via the
     `remove_subject_endpoint`.
+
+push_stream_ttl
+
+> OPTIONAL. The lifetime of a PUSH stream in seconds, after which the Transmitter MAY either pause or disable the stream if it has not received any Receiver-initiated communication in that duration.
+  If the Transmitter decides to update the stream, it MUST send a Stream Updated Event to the Receiver as described in {{status}}.
+  If the Receiver calls any endpoint in the Event Stream Management API ({{management}}), the Transmitter must refresh the TTL of that particular stream.
+  The syntax is the same as that of {{EXPIRES_IN}}.
 
 TODO: consider adding a IANA Registry for metadata, similar to Section 7.1.1 of
 {{RFC8414}}. This would allow other specs to add to the metadata.
