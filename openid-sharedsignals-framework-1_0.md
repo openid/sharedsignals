@@ -73,6 +73,12 @@ contributor:
         org: The Walt Disney Company
         email: sean.odentity@disney.com
 
+      -
+        ins: J. Slocum
+        name: James Slocum
+        org: Beyond Identity
+        email: james.slocum@beyondidentity.com
+
 normative:
   CLIENTCRED:
     author:
@@ -554,6 +560,10 @@ delivery_methods_supported
 
 > RECOMMENDED. List of supported delivery method URIs.
 
+events_supported
+
+> OPTIONAL. An array of URIs identifying the set of events supported by the Transmitter for a Receiver. If omitted, Event Transmitters SHOULD make this set available to the Event Receiver via some other means (e.g. publishing it in online documentation).
+
 configuration_endpoint
 
 > OPTIONAL. The URL of the Configuration Endpoint. If present, this URL MUST use HTTP over TLS {{RFC9110}}.
@@ -714,6 +724,11 @@ Content-Type: application/json
   "delivery_methods_supported": [
     "urn:ietf:rfc:8935",
     "urn:ietf:rfc:8936"],
+  "events_supported": [
+    "https://schemas.openid.net/secevent/ssf/event-type/stream-updated",
+    "https://schemas.openid.net/secevent/ssf/event-type/verification",
+    "https://schemas.openid.net/secevent/risc/event-type/sessions-revoked"
+    "https://schemas.openid.net/secevent/caep/event-type/session-revoked"],
   "configuration_endpoint":
     "https://tr.example.com/ssf/mgmt/stream",
   "status_endpoint":
