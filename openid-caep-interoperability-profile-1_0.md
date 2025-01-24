@@ -63,7 +63,7 @@ normative:
         org: Cisco
 
   CAEP:
-    target: https://openid.net/specs/openid-caep-specification-1_0.html
+    target: https://openid.net/specs/openid-caep-1_0.html
     title: OpenID Continuous Access Evaluation Profile 1.0
     author:
       -
@@ -87,13 +87,6 @@ normative:
       - ins: D. Fett
       - ins: D. Tonge
       - ins: J. Heenan
-  OPRM:
-    target: https://www.ietf.org/archive/id/draft-ietf-oauth-resource-metadata-03.html
-    title: OAuth 2.0 Protected Resource Metadata
-    author:
-      -ins: M.B. Jones
-      -ins: P. Hunt
-      -ins: A. Parecki
 
 
 --- abstract
@@ -225,9 +218,9 @@ All events MUST be signed using the `RS256` algorithm using a minimum of 2048-bi
 ### OAuth Scopes
 Depending on the features supported by the OAuth service and the SSF APIs, the client SHALL discover the OAuth scopes as follows:
 
-1. If the Resource Server, hosting SSF configuration APIs, supports OAuth Protected Resource Metadata {{OPRM}} then the client MUST obtain the required scopes by using it.
+1. If the Resource Server, hosting SSF configuration APIs, supports OAuth Protected Resource Metadata {{RFC8414}} then the client MUST obtain the required scopes by using it.
 
-2. If the Resource Server does not support {{OPRM}}, then the following scopes MUST be supported -
+2. If the Resource Server does not support {{RFC8414}}, then the following scopes MUST be supported -
    - An OAuth {{RFC6749}} authorization server that is used to issue tokens to SSF Receivers, MUST reserve the scopes for the SSF endpoints with the prefix of `ssf`
    - All the SSF stream configuration management API operations MUST accept `ssf.manage` scope
    - All the SSF stream configuration Read API operations MUST accept `ssf.read` scope
@@ -240,7 +233,7 @@ Depending on the features supported by the OAuth service and the SSF APIs, the c
 * MUST verify the validity, integrity, expiration and revocation status of access tokens
 * MUST verify that the authorization represented by the access token is sufficient for the requested resource access.
 * If the access token is not sufficient for the requested action, the Resource server MUST return errors as per section 3.1 of [RFC6750]{{RFC6750}}
-* MAY publish the {{OPRM}} to describe the metadata needed to interact with the protected resource.
+* MAY publish the {{RFC8414}} to describe the metadata needed to interact with the protected resource.
 
 ## Security Event Token
 

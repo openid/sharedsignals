@@ -31,7 +31,7 @@ normative:
   RFC4001: # Textual Conventions for Internet Network Addresses
 
   ISO-IEC-29115:
-    target: http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=45138
+    target: https://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=45138
     title: "ISO/IEC 29115:2013 -- Information technology - Security techniques - Entity authentication assurance framework"
     author:
       -
@@ -94,7 +94,7 @@ normative:
     - ins: C. Mortimore
       name: Chuck Mortimore
     date: November 2014
-    target: http://openid.net/specs/openid-connect-core-1_0.html#IDToken
+    target: https://openid.net/specs/openid-connect-core-1_0.html#IDToken
     title: OpenID Connect Core 1.0 - ID Token
   RFC2119:
   RFC8174:
@@ -103,13 +103,13 @@ normative:
   RFC6711:
   RFC8176:
   SSF:
-    target: http://openid.net/specs/openid-sse-framework-1_0.html
+    target: https://openid.net/specs/openid-sharedsignals-framework-1_0.html
     title: OpenID Shared Signals and Events Framework Specification 1.0
     author:
       -
         ins: A. Tulshibagwale
         name: Atul Tulshibagwale
-        org: Google
+        org: SGNL
       -
         ins: T. Cappalli
         name: Tim Cappalli
@@ -126,7 +126,11 @@ normative:
         ins: John Bradley
         name: John Bradley
         org: Yubico
-    date: 2021-05
+      -
+        ins: S. Miel
+        name: Shayne Miel
+        org: Cisco
+    date: 2024-06-25
   WebAuthn:
     target: https://www.w3.org/TR/webauthn/
     title: "Web Authentication: An API for accessing Public Key Credentials Level 2"
