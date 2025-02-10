@@ -822,6 +822,7 @@ The following is a non-normative example of a Session Presented event:
     }}
 ~~~
 
+
 ## Risk Level Change {#risk-level-change}
 Event Type URI:
 
