@@ -141,7 +141,7 @@ normative:
 --- abstract
 
 This document defines the Continuous Access Evaluation Profile (CAEP) of the
-Shared Signals Framework {{SSF}}. It specifies a set of event
+Shared Signals Framework {{SharedSignals}}. It specifies a set of event
 types conforming to the Shared Signals Framework. These event types are intended to be used
 between cooperating Transmitters and Receivers such that Transmitters may send
 continuous updates using which Receivers can attenuate access to shared human or
@@ -151,7 +151,7 @@ robotic users, devices, sessions and applications.
 
 # Introduction {#introduction}
 CAEP is the application of the Shared Signals Profile of IETF
-Security Events 1.0 {{SSF}} to ensure access security in a
+Security Events 1.0 {{SharedSignals}} to ensure access security in a
 network of cooperating providers. CAEP specifies a set of event-types that
 conform to the SSF Profile. This document specifies the event-types required to
 achieve this goal.
@@ -820,7 +820,8 @@ The following is a non-normative example of a Session Presented event:
           "ext_id": "12345",
           "event_timestamp": 1615304991643
         }
-    }}
+    }
+}
 ~~~
 
 ## Risk Level Change {#risk-level-change}
@@ -843,7 +844,7 @@ risk_reason
 : RECOMMENDED, JSON string: indicates the reason that contributed to the risk level changes by the Transmitter.
 
 principal
-: REQUIRED, JSON string: representing the principal entity involved in the observed risk event, as identified by the transmitter. The subject principal can be one of the following entities USER, DEVICE, SESSION, TENANT, ORG_UNIT, GROUP, or any other entity as defined in {{Section 2 of SSF}}. This claim identifies the primary subject associated with the event, and helps to contextualize the risk relative to the entity involved.
+: REQUIRED, JSON string: representing the principal entity involved in the observed risk event, as identified by the transmitter. The subject principal can be one of the following entities USER, DEVICE, SESSION, TENANT, ORG_UNIT, GROUP, or any other entity as defined in Section 2 of {{SSF}}. This claim identifies the primary subject associated with the event, and helps to contextualize the risk relative to the entity involved.
 
 current_level 
 : REQUIRED, JSON string: indicates the current level of the risk for the subject. Value MUST be one of LOW, MEDIUM, HIGH
