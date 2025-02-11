@@ -453,23 +453,28 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
   "txn": 8675309,
   "aud": "636C69656E745F6964",
   "sub_id": {
-      "format": "complex",
-      "user": {
-          "format": "iss_sub",
-          "iss": "https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/",
-          "sub": "jane.smith@example.com"
-      },
-      "device": {
-          "format": "iss_sub",
-          "iss": "https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/",
-          "sub": "e9297990-14d2-42ec-a4a9-4036db86509a"
-      }
+    "format": "complex",
+    "user": {
+      "format": "iss_sub",
+      "iss": "https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/",
+      "sub": "jane.smith@example.com"
+    },
+    "device": {
+      "format": "iss_sub",
+      "iss": "https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/",
+      "sub": "e9297990-14d2-42ec-a4a9-4036db86509a"
+    }
   },
   "events": {
     "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
       "initiating_entity": "policy",
-      "reason_admin": "Policy Violation: C076E82F",
-      "reason_user": "Landspeed violation.",
+      "reason_admin": {
+        "en": "Policy Violation: C076E82F"
+      },
+      "reason_user": {
+        "en": "Land speed violation.",
+        "es": "Violación de velocidad en tierra."
+      },
       "event_timestamp": 1600975810
     }
   }
