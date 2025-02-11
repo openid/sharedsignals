@@ -823,6 +823,62 @@ The following is a non-normative example of a Session Presented event:
     }}
 ~~~
 
+## Risk Level Change {#risk-level-change}
+Event Type URI:
+
+`https://schemas.openid.net/secevent/caep/event-type/risk-level-change`
+
+A vendor may deploy mechanisms to gather and analyze various signals associated with subjects such as users, devices, etc. These signals, which can originate from diverse channels and methods beyond the scope of this event description, are processed to derive an abstracted risk level representing the subject's current threat status.
+
+The Risk Level Change event is employed by the Transmitter to communicate any modifications in a subject's assessed risk level at the time indicated by the `event_timestamp` field in the Risk Level Change event. The Transmitter may generate this event to indicate:
+
+* User's risk has changed due to potential suspecious access from unknown destination, password compromise, addition of strong authenticator or other reasons.
+* Device's risk has changed due to installation of unapproved software, connection to insecure pheripheral device, encryption of data or other reasons.
+* Any other subject's risk changes due to variety of reasons.
+
+
+### Event Specific Claims {#risk-level-change-event-specific-claims}
+
+risk_reason
+: RECOMMENDED, JSON string: indicates the reason that contributed to the risk level changes by the Transmitter.
+
+principal
+: REQUIRED, JSON string: representing the principal entity involved in the observed risk event, as identified by the transmitter. The subject principal can be one of the following entities USER, DEVICE, SESSION, TENANT, ORG_UNIT, GROUP, or any other entity as defined in {{Section 2 of SSF}}. This claim identifies the primary subject associated with the event, and helps to contextualize the risk relative to the entity involved.
+
+current_level 
+: REQUIRED, JSON string: indicates the current level of the risk for the subject. Value MUST be one of LOW, MEDIUM, HIGH
+
+previous_level 
+: OPTIONAL, JSON string: indicates the previously known level of the risk for the subject. Value MUST be one of LOW, MEDIUM, HIGH. If the Transmitter omits this value, the Receiver MUST assume that the previous risk level is unknown to the Transmitter.
+
+
+### Examples {#risk-level-change-examples}
+The following is a non-normative example of a Risk Level Change event:
+
+~~~json
+{
+    "iss": "https://idp.example.com/123456789/",
+    "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
+    "iat": 1615305159,
+    "aud": "https://sp.example.com/caep",
+    "txn": 8675309,
+    "sub_id": {
+      "format": "iss_sub",
+      "iss": "https://idp.example.com/3456789/",
+      "sub": "jane.doe@example.com"
+    },
+    "events":{
+      "https://schemas.openid.net/secevent/caep/event-type/risk-level-change":{
+         "current_level": "LOW",
+         "previous_level": "HIGH",
+         "event_timestamp": 1615304991643,
+         "principal": "USER",
+         "risk_reason": "PASSWORD_FOUND_IN_DATA_BREACH"
+      }
+   }
+}
+~~~
+
 # Security Considerations
 Any implementations of events described in this document SHOULD comply with the Shared Signals Framework {{SSF}}. Exchanging events described herein without complying with the Shared Signals Framework {{SSF}} may result in security issues.
 
