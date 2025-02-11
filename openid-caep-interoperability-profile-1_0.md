@@ -63,7 +63,7 @@ normative:
         org: Cisco
 
   CAEP:
-    target: https://openid.net/specs/openid-caep-specification-1_0.html
+    target: https://openid.net/specs/openid-caep-1_0.html
     title: OpenID Continuous Access Evaluation Profile 1.0
     author:
       -
