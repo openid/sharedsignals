@@ -38,9 +38,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Set up Ruby
-        uses: ruby/setup-ruby@v4
-        with:
-          ruby-version: '4'
+        uses: ruby/setup-ruby@main
       - uses: actions/setup-python@v4
         with:
           python-version: '3.10' 
