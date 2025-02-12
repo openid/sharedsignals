@@ -176,7 +176,7 @@ This specification defines:
 * Subject principals
 * Subject claims in SSF events
 * Event types
-* Event properties
+* Events
 * Transmitter Configuration Metadata and its discovery method for Receivers
 * A management API for Event Streams
 
@@ -397,14 +397,151 @@ below MAY define certain members within a Complex Subject to be Critical. A SSF
 Receiver MUST discard any event that contains a Subject with a Critical member
 that it is unable to process.
 
-# Event Properties  {#properties}
+# Events  {#events}
 
-Additional members about an event may be included in the "events" claim. Some
-of these members are required and specified as such in the respective event
-types specs. If a Transmitter determines that it needs to include additional
-members that are not specified in the event types spec, then the name of such
-members MUST be a URI. The discoverability of all additional members is
-specified in the Discovery section ({{discovery}}).
+## Security Event Token Profile {#set-profle}
+The Shared Signals Framework profiles the Security Event Token (SET)
+{{RFC8417}} specification by defining certain properties of SETs as described in this section.
+
+### Distinguishing SETs from other Kinds of JWTs
+Of particular concern is the possibility that SETs are confused for other kinds
+of JWTs. The Security Considerations section of {{RFC8417}} has several sub-sections
+on this subject. The Shared Signals Framework requires further restrictions:
+
+* The "sub" claim MUST NOT be present, as described in {{event-subjects}}.
+* SSF SETs MUST use explicit typing, as described in {{explicit-typing}}.
+* The "exp" claim MUST NOT be present, as described in {{exp-claim}}.
+
+### Signature Key Resolution {#signature-key-resolution}
+The signature key can be obtained through "jwks_uri", see {{discovery}}.
+
+### SSF Event Subject {#event-subjects}
+The primary Subject Member of SSF events is described in the "Subject Members" section ({{subject-ids}}). The JWT "sub" claim MUST NOT be present in any SET containing
+an SSF event.
+
+### SSF Event Properties {#event-properties}
+The SSF event MAY contain additional claims within the event payload that are
+specific to the event type.
+
+~~~ json
+{
+  "iss": "https://idp.example.com/",
+  "jti": "756E69717565206964656E746966696572",
+  "iat": 1520364019,
+  "txn": 8675309,
+  "aud": "636C69656E745F6964",
+  "sub_id": {
+    "format": "phone",
+    "phone_number": "+1 206 555 0123"
+  },
+  "events": {
+    "https://schemas.openid.net/secevent/risc/event-type/account-disabled": {
+      "reason": "hijacking"
+    }
+  }
+}
+~~~
+{: #risc-event-subject-example title="Example: SET Containing a RISC Event with a Phone Number Subject"}
+
+~~~ json
+{
+  "iss": "https://idp.example.com/",
+  "jti": "756E69717565206964656E746966696572",
+  "iat": 1520364019,
+  "txn": 8675309,
+  "aud": "636C69656E745F6964",
+  "sub_id": {
+    "format": "email",
+    "email": "user@example.com"
+  },
+  "events": {
+    "https://schemas.openid.net/secevent/caep/event-type/token-claims-changed": {
+      "claims": {
+        "token": "some-token-value"
+      }
+    }
+  }
+}
+~~~
+{: #caep-event-properties-example title="Example: SET Containing a CAEP Event with Properties"}
+
+### Explicit Typing of SETs {#explicit-typing}
+SSF events MUST use explicit typing as defined in Section 2.3 of {{RFC8417}}.
+
+~~~ json
+{
+  "typ":"secevent+jwt",
+  "alg":"HS256"
+}
+~~~
+{: title="Explicitly Typed JOSE Header" #explicit-type-header}
+
+The purpose is defense against confusion with other JWTs, as described in
+Sections 4.5, 4.6 and 4.7 of {{RFC8417}}. While current Id Token {{OpenID.Core}}
+validators may not be using the "typ" header parameter, requiring it for SSF
+SETs guarantees a distinct value for future validators.
+
+## The "iss" Claim {#iss-claim}
+The "iss" claim MUST match the "iss" value in the Stream Configuration data for the stream
+that the event is sent on. Receivers MUST validate that this claim matches the "iss"
+in the Stream Configuration data, as well as the Issuer from which the Receiver requested
+the Transmitter Configuration data.
+
+### The "exp" Claim {#exp-claim}
+The "exp" claim MUST NOT be used in SSF SETs.
+
+The purpose is defense in depth against confusion with other JWTs, as described
+in Sections 4.5 and 4.6 of {{RFC8417}}.
+
+### The "aud" Claim {#aud-claim}
+The "aud" claim can be a single string or an array of strings. Values that
+uniquely identify the Receiver to the Transmitter MAY be used, if the two parties
+have agreement on the format.
+
+More than one value can be present if the corresponding Receivers are known to
+the Transmitter to be the same entity, for example a web client and a mobile
+client of the same application. All the Receivers in this case MUST use the
+exact same delivery method.
+
+If multiple Receivers have the exact same delivery configuration but the
+Transmitter does not know if they belong to the same entity then the Transmitter
+SHOULD issue distinct SETs for each Receiver and deliver them separately. In
+this case the multiple Receivers might use the same service to process SETs, and
+this service might reroute SETs to respective Receivers, an "aud" claim with
+multiple Receivers would lead to unintended data disclosure.
+
+~~~ json
+{
+  "jti": "123456",
+  "iss": "https://transmitter.example.com",
+  "aud": ["receiver.example.com/web", "receiver.example.com/mobile"],
+  "iat": 1493856000,
+  "txn": 8675309,
+  "sub_id": {
+    "format": "opaque",
+    "id": "72e6991badb44e08a69672960053b342"
+  },
+  "events": {
+    "https://schemas.openid.net/secevent/ssf/event-type/verification": {
+      "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
+    }
+  }
+}
+~~~
+{: title="Example: SET with array 'aud' claim" #figarrayaud}
+
+### The "txn" claim {#txn-claim}
+Transmitters SHOULD set the "txn" claim value in Security Event Tokens (SETs). If the value is present, it MUST be unique to the underlying event that caused the Transmitter to generate the Security Event Token (SET). The Transmitter, however, may use the same value in the "txn" claim across different Security Events Tokens (SETs), such as session revoked and credential change, to indicate that the SETs originated from the same underlying cause or reason.
+
+## The "events" claim {#events-claim}
+The "events" claim SHOULD contain only one event. Multiple event type URIs are
+permitted only if they are alternative URIs defining the exact same event type. The type of the event is specified by the key in the value of the `events` claim. The value of this field is the event object.
+
+### Event type specific fields
+The event object inside the `events` claim MAY have one or more fields that are uniquely determined by the type of the event.
+
+### The "event_data" field {#event-data-claim}
+Any fields that the Transmitter wishes to communicate to the receiver, but which are not specified by the specific event type, SHOULD be placed in a `event_data` field inside the event object. If this field is present, then its value MUST be a JSON object.
 
 # Example SETs that conform to the Shared Signals Framework {#events-examples}
 
@@ -2053,146 +2190,6 @@ RISC Use Cases {{USECASES}}.
 
 The CAEP use cases that set the requirements are described in CAEP Use Cases (TODO: Add
         reference when file is added to repository.)
-
-## Security Event Token Profile {#set-profle}
-This section provides SSF profiling specifications for the Security Event Token (SET)
-{{RFC8417}} spec.
-
-### Signature Key Resolution {#signature-key-resolution}
-The signature key can be obtained through "jwks_uri", see {{discovery}}.
-
-### SSF Event Subject {#event-subjects}
-The primary Subject Member of SSF events is described in the "Subject Members" section ({{subject-ids}}). The JWT "sub" claim MUST NOT be present in any SET containing
-an SSF event.
-
-### SSF Event Properties {#event-properties}
-The SSF event MAY contain additional claims within the event payload that are
-specific to the event type.
-
-~~~ json
-{
-  "iss": "https://idp.example.com/",
-  "jti": "756E69717565206964656E746966696572",
-  "iat": 1520364019,
-  "txn": 8675309,
-  "aud": "636C69656E745F6964",
-  "sub_id": {
-    "format": "phone",
-    "phone_number": "+1 206 555 0123"
-  },
-  "events": {
-    "https://schemas.openid.net/secevent/risc/event-type/account-disabled": {
-      "reason": "hijacking"
-    }
-  }
-}
-~~~
-{: #risc-event-subject-example title="Example: SET Containing a RISC Event with a Phone Number Subject"}
-
-~~~ json
-{
-  "iss": "https://idp.example.com/",
-  "jti": "756E69717565206964656E746966696572",
-  "iat": 1520364019,
-  "txn": 8675309,
-  "aud": "636C69656E745F6964",
-  "sub_id": {
-    "format": "email",
-    "email": "user@example.com"
-  },
-  "events": {
-    "https://schemas.openid.net/secevent/caep/event-type/token-claims-changed": {
-      "claims": {
-        "token": "some-token-value"
-      }
-    }
-  }
-}
-~~~
-{: #caep-event-properties-example title="Example: SET Containing a CAEP Event with Properties"}
-
-### Explicit Typing of SETs {#explicit-typing}
-SSF events MUST use explicit typing as defined in Section 2.3 of {{RFC8417}}.
-
-~~~ json
-{
-  "typ":"secevent+jwt",
-  "alg":"HS256"
-}
-~~~
-{: title="Explicitly Typed JOSE Header" #explicit-type-header}
-
-The purpose is defense against confusion with other JWTs, as described in
-Sections 4.5, 4.6 and 4.7 of {{RFC8417}}. While current Id Token {{OpenID.Core}}
-validators may not be using the "typ" header parameter, requiring it for SSF
-SETs guarantees a distinct value for future validators.
-
-## The "iss" Claim {#iss-claim}
-The "iss" claim MUST match the "iss" value in the Stream Configuration data for the stream
-that the event is sent on. Receivers MUST validate that this claim matches the "iss"
-in the Stream Configuration data, as well as the Issuer from which the Receiver requested
-the Transmitter Configuration data.
-
-### The "exp" Claim {#exp-claim}
-The "exp" claim MUST NOT be used in SSF SETs.
-
-The purpose is defense in depth against confusion with other JWTs, as described
-in Sections 4.5 and 4.6 of {{RFC8417}}.
-
-### The "aud" Claim {#aud-claim}
-The "aud" claim can be a single string or an array of strings. Values that
-uniquely identify the Receiver to the Transmitter MAY be used, if the two parties
-have agreement on the format.
-
-More than one value can be present if the corresponding Receivers are known to
-the Transmitter to be the same entity, for example a web client and a mobile
-client of the same application. All the Receivers in this case MUST use the
-exact same delivery method.
-
-If multiple Receivers have the exact same delivery configuration but the
-Transmitter does not know if they belong to the same entity then the Transmitter
-SHOULD issue distinct SETs for each Receiver and deliver them separately. In
-this case the multiple Receivers might use the same service to process SETs, and
-this service might reroute SETs to respective Receivers, an "aud" claim with
-multiple Receivers would lead to unintended data disclosure.
-
-~~~ json
-{
-  "jti": "123456",
-  "iss": "https://transmitter.example.com",
-  "aud": ["receiver.example.com/web", "receiver.example.com/mobile"],
-  "iat": 1493856000,
-  "txn": 8675309,
-  "sub_id": {
-    "format": "opaque",
-    "id": "72e6991badb44e08a69672960053b342"
-  },
-  "events": {
-    "https://schemas.openid.net/secevent/ssf/event-type/verification": {
-      "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
-    }
-  }
-}
-~~~
-{: title="Example: SET with array 'aud' claim" #figarrayaud}
-
-### The "txn" claim {#txn-claim}
-Transmitters SHOULD set the "txn" claim value in Security Event Tokens (SETs). If the value is present, it MUST be unique to the underlying event that caused the Transmitter to generate the Security Event Token (SET). The Transmitter, however, may use the same value in the "txn" claim across different Security Events Tokens (SETs), such as session revoked and credential change, to indicate that the SETs originated from the same underlying cause or reason.
-
-### The "events" claim {#events-claim}
-The "events" claim SHOULD contain only one event. Multiple event type URIs are
-permitted only if they are alternative URIs defining the exact same event type.
-
-### Security Considerations
-
-#### Distinguishing SETs from other Kinds of JWTs
-Of particular concern is the possibility that SETs are confused for other kinds
-of JWTs. The Security Considerations section of {{RFC8417}} has several sub-sections
-on this subject. The Shared Signals Framework requires further restrictions:
-
-* The "sub" claim MUST NOT be present, as described in {{event-subjects}}.
-* SSF SETs MUST use explicit typing, as described in {{explicit-typing}}.
-* The "exp" claim MUST NOT be present, as described in {{exp-claim}}.
 
 ## SET Token Delivery Using HTTP Profile {#set-token-delivery-using-http-profile}
 This section provides SSF profiling specifications for the {{RFC8935}} and
