@@ -403,68 +403,6 @@ that it is unable to process.
 The Shared Signals Framework profiles the Security Event Token (SET)
 {{RFC8417}} specification by defining certain properties of SETs as described in this section.
 
-### Distinguishing SETs from other Kinds of JWTs
-Of particular concern is the possibility that SETs are confused for other kinds
-of JWTs. The Security Considerations section of {{RFC8417}} has several sub-sections
-on this subject. The Shared Signals Framework requires further restrictions:
-
-* The "sub" claim MUST NOT be present, as described in {{event-subjects}}.
-* SSF SETs MUST use explicit typing, as described in {{explicit-typing}}.
-* The "exp" claim MUST NOT be present, as described in {{exp-claim}}.
-
-### Signature Key Resolution {#signature-key-resolution}
-The signature key can be obtained through "jwks_uri", see {{discovery}}.
-
-### SSF Event Subject {#event-subjects}
-The primary Subject Member of SSF events is described in the "Subject Members" section ({{subject-ids}}). The JWT "sub" claim MUST NOT be present in any SET containing
-an SSF event.
-
-### SSF Event Properties {#event-properties}
-The SSF event MAY contain additional claims within the event payload that are
-specific to the event type.
-
-~~~ json
-{
-  "iss": "https://idp.example.com/",
-  "jti": "756E69717565206964656E746966696572",
-  "iat": 1520364019,
-  "txn": 8675309,
-  "aud": "636C69656E745F6964",
-  "sub_id": {
-    "format": "phone",
-    "phone_number": "+1 206 555 0123"
-  },
-  "events": {
-    "https://schemas.openid.net/secevent/risc/event-type/account-disabled": {
-      "reason": "hijacking"
-    }
-  }
-}
-~~~
-{: #risc-event-subject-example title="Example: SET Containing a RISC Event with a Phone Number Subject"}
-
-~~~ json
-{
-  "iss": "https://idp.example.com/",
-  "jti": "756E69717565206964656E746966696572",
-  "iat": 1520364019,
-  "txn": 8675309,
-  "aud": "636C69656E745F6964",
-  "sub_id": {
-    "format": "email",
-    "email": "user@example.com"
-  },
-  "events": {
-    "https://schemas.openid.net/secevent/caep/event-type/token-claims-changed": {
-      "claims": {
-        "token": "some-token-value"
-      }
-    }
-  }
-}
-~~~
-{: #caep-event-properties-example title="Example: SET Containing a CAEP Event with Properties"}
-
 ### Explicit Typing of SETs {#explicit-typing}
 SSF events MUST use explicit typing as defined in Section 2.3 of {{RFC8417}}.
 
@@ -481,7 +419,23 @@ Sections 4.5, 4.6 and 4.7 of {{RFC8417}}. While current Id Token {{OpenID.Core}}
 validators may not be using the "typ" header parameter, requiring it for SSF
 SETs guarantees a distinct value for future validators.
 
-## The "iss" Claim {#iss-claim}
+### SSF Event Subject {#event-subjects}
+The primary Subject Member of SSF events is described in the "Subject Members" section ({{subject-ids}}). The JWT "sub" claim MUST NOT be present in any SET containing
+an SSF event.
+
+### Distinguishing SETs from other Kinds of JWTs
+Of particular concern is the possibility that SETs are confused for other kinds
+of JWTs. The Security Considerations section of {{RFC8417}} has several sub-sections
+on this subject. The Shared Signals Framework requires further restrictions:
+
+* The "sub" claim MUST NOT be present, as described in {{event-subjects}}.
+* SSF SETs MUST use explicit typing, as described in {{explicit-typing}}.
+* The "exp" claim MUST NOT be present, as described in {{exp-claim}}.
+
+### Signature Key Resolution {#signature-key-resolution}
+The signature key can be obtained through "jwks_uri", see {{discovery}}.
+
+### The "iss" Claim {#iss-claim}
 The "iss" claim MUST match the "iss" value in the Stream Configuration data for the stream
 that the event is sent on. Receivers MUST validate that this claim matches the "iss"
 in the Stream Configuration data, as well as the Issuer from which the Receiver requested
@@ -533,7 +487,9 @@ multiple Receivers would lead to unintended data disclosure.
 ### The "txn" claim {#txn-claim}
 Transmitters SHOULD set the "txn" claim value in Security Event Tokens (SETs). If the value is present, it MUST be unique to the underlying event that caused the Transmitter to generate the Security Event Token (SET). The Transmitter, however, may use the same value in the "txn" claim across different Security Events Tokens (SETs), such as session revoked and credential change, to indicate that the SETs originated from the same underlying cause or reason.
 
-## The "events" claim {#events-claim}
+## Event Properties {#event-properties}
+
+### The "events" claim {#events-claim}
 The "events" claim SHOULD contain only one event. Multiple event type URIs are
 permitted only if they are alternative URIs defining the exact same event type. The type of the event is specified by the key in the value of the `events` claim. The value of this field is the event object.
 
@@ -564,6 +520,51 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
 }
 ~~~
 {: #subject-ids-ex-simple title="Example: SET Containing an SSF Event with a Simple Subject Member"}
+
+~~~ json
+{
+  "iss": "https://idp.example.com/",
+  "jti": "756E69717565206964656E746966696572",
+  "iat": 1520364019,
+  "txn": 8675309,
+  "aud": "636C69656E745F6964",
+  "sub_id": {
+    "format": "phone",
+    "phone_number": "+1 206 555 0123"
+  },
+  "events": {
+    "https://schemas.openid.net/secevent/risc/event-type/account-disabled": {
+      "reason": "hijacking"
+    }
+  }
+}
+~~~
+{: #risc-event-subject-example title="Example: SET Containing a RISC Event with a Phone Number Subject"}
+
+~~~ json
+{
+  "iss": "https://idp.example.com/",
+  "jti": "756E69717565206964656E746966696572",
+  "iat": 1520364019,
+  "txn": 8675309,
+  "aud": "636C69656E745F6964",
+  "sub_id": {
+    "format": "email",
+    "email": "user@example.com"
+  },
+  "events": {
+    "https://schemas.openid.net/secevent/caep/event-type/token-claims-changed": {
+      "claims": {
+        "token": "some-token-value"
+      },
+      "event_data": {
+        "context": "additional context of the event"
+      }
+    }
+  }
+}
+~~~
+{: #caep-event-properties-example title="Example: SET Containing a CAEP Event with Properties and Event Data"}
 
 ~~~ json
 {
@@ -647,6 +648,46 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
 }
 ~~~
 {: #subject-custom-type-ex title="Example: SET Containing an SSF Event with a Proprietary Subject Identifier Format"}
+
+# Event Delivery {#event-delivery}
+This section describes the supported methods of delivering SSF Events. It provides SSF profiling specifications for the {{RFC8935}} and {{RFC8936}} specs.
+
+## Stream Configuration Metadata {#delivery-meta}
+Each delivery method is identified by a URI, specified below by the "method"
+metadata.
+
+## Push Delivery using HTTP
+This section provides SSF profiling specifications for the {{RFC8935}} spec.
+
+method
+
+> "urn:ietf:rfc:8935"
+
+endpoint_url
+
+> The URL where events are pushed through HTTP POST. This is set by the
+  Receiver. If a Receiver is using multiple streams from a single Transmitter
+  and needs to keep the SETs separated, it is RECOMMENDED that the URL for each
+  stream be unique.
+
+authorization_header
+
+> The HTTP Authorization header that the Transmitter MUST set with each event
+  delivery, if the configuration is present. The value is optional and it is set
+  by the Receiver.
+
+## Poll Delivery using HTTP
+This section provides SSF profiling specifications for the {{RFC8936}} spec.
+
+method
+
+> "urn:ietf:rfc:8936"
+
+endpoint_url
+
+> The URL where events can be retrieved from. This is specified by the
+  Transmitter. These URLs MAY be reused across Receivers, but MUST be unique per
+  stream for a given Receiver.
 
 # Transmitter Configuration Discovery {#discovery}
 
@@ -2177,60 +2218,6 @@ If a Transmitter intends to include data in SSF events that is not previously
 consented to be released by the user, then the Transmitter MUST obtain consent
 to release such data from the user in accordance with the Transmitter's privacy
 policy.
-
-# Profiles {#profiles}
-This section is a profile of the following IETF Security Event specifications:
-
-* Security Event Token (SET) {{RFC8417}}
-* Push-Based SET Token Delivery Using HTTP {{RFC8935}}
-* Poll-Based SET Token Delivery Using HTTP {{RFC8936}}
-
-The RISC use cases that set the requirements are described in Security Events
-RISC Use Cases {{USECASES}}.
-
-The CAEP use cases that set the requirements are described in CAEP Use Cases (TODO: Add
-        reference when file is added to repository.)
-
-## SET Token Delivery Using HTTP Profile {#set-token-delivery-using-http-profile}
-This section provides SSF profiling specifications for the {{RFC8935}} and
-{{RFC8936}} specs.
-
-### Stream Configuration Metadata {#delivery-meta}
-Each delivery method is identified by a URI, specified below by the "method"
-metadata.
-
-#### Push Delivery using HTTP
-This section provides SSF profiling specifications for the {{RFC8935}} spec.
-
-method
-
-> "urn:ietf:rfc:8935"
-
-endpoint_url
-
-> The URL where events are pushed through HTTP POST. This is set by the
-  Receiver. If a Receiver is using multiple streams from a single Transmitter
-  and needs to keep the SETs separated, it is RECOMMENDED that the URL for each
-  stream be unique.
-
-authorization_header
-
-> The HTTP Authorization header that the Transmitter MUST set with each event
-  delivery, if the configuration is present. The value is optional and it is set
-  by the Receiver.
-
-#### Polling Delivery using HTTP
-This section provides SSF profiling specifications for the {{RFC8936}} spec.
-
-method
-
-> "urn:ietf:rfc:8936"
-
-endpoint_url
-
-> The URL where events can be retrieved from. This is specified by the
-  Transmitter. These URLs MAY be reused across Receivers, but MUST be unique per
-  stream for a given Receiver.
 
 # IANA Considerations {#iana}
 Subject Identifiers defined in this document will be added to the "Security
