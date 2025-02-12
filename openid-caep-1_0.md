@@ -141,7 +141,7 @@ normative:
 --- abstract
 
 This document defines the Continuous Access Evaluation Profile (CAEP) of the
-Shared Signals Framework {{SharedSignals}}. It specifies a set of event
+Shared Signals Framework {{SSF}}. It specifies a set of event
 types conforming to the Shared Signals Framework. These event types are intended to be used
 between cooperating Transmitters and Receivers such that Transmitters may send
 continuous updates using which Receivers can attenuate access to shared human or
@@ -151,7 +151,7 @@ robotic users, devices, sessions and applications.
 
 # Introduction {#introduction}
 CAEP is the application of the Shared Signals Profile of IETF
-Security Events 1.0 {{SharedSignals}} to ensure access security in a
+Security Events 1.0 {{SSF}} to ensure access security in a
 network of cooperating providers. CAEP specifies a set of event-types that
 conform to the SSF Profile. This document specifies the event-types required to
 achieve this goal.
