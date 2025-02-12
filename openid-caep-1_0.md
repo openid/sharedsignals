@@ -1,5 +1,6 @@
 ---
 title: OpenID Continuous Access Evaluation Profile 1.0 - draft 03
+
 abbrev: CAEP-Spec
 docname: openid-caep-1_0
 date: 2024-06-19
@@ -819,7 +820,8 @@ The following is a non-normative example of a Session Presented event:
           "ext_id": "12345",
           "event_timestamp": 1615304991643
         }
-    }}
+    }
+}
 ~~~
 
 ## Risk Level Change {#risk-level-change}
@@ -842,7 +844,7 @@ risk_reason
 : RECOMMENDED, JSON string: indicates the reason that contributed to the risk level changes by the Transmitter.
 
 principal
-: REQUIRED, JSON string: representing the principal entity involved in the observed risk event, as identified by the transmitter. The subject principal can be one of the following entities USER, DEVICE, SESSION, TENANT, ORG_UNIT, GROUP, or any other entity as defined in {{Section 2 of SSF}}. This claim identifies the primary subject associated with the event, and helps to contextualize the risk relative to the entity involved.
+: REQUIRED, JSON string: representing the principal entity involved in the observed risk event, as identified by the transmitter. The subject principal can be one of the following entities USER, DEVICE, SESSION, TENANT, ORG_UNIT, GROUP, or any other entity as defined in Section 2 of {{SSF}}. This claim identifies the primary subject associated with the event, and helps to contextualize the risk relative to the entity involved.
 
 current_level 
 : REQUIRED, JSON string: indicates the current level of the risk for the subject. Value MUST be one of LOW, MEDIUM, HIGH
