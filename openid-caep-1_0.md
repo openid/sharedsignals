@@ -151,7 +151,7 @@ robotic users, devices, sessions and applications.
 
 # Introduction {#introduction}
 CAEP is the application of the Shared Signals Profile of IETF
-Security Events 1.0 {{SSF}} to ensure access security in a
+Security Events 1.0 {{SSF}} (SSF Profile) to ensure access security in a
 network of cooperating providers. CAEP specifies a set of event-types that
 conform to the SSF Profile. This document specifies the event-types required to
 achieve this goal.
