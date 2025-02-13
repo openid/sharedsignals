@@ -442,7 +442,7 @@ in the Stream Configuration data, as well as the Issuer from which the Receiver 
 the Transmitter Configuration data.
 
 ### The "exp" Claim {#exp-claim}
-The "exp" claim MUST NOT be used in SSF SETs.
+The "exp" claim MUST NOT be used in SETs.
 
 The purpose is defense in depth against confusion with other JWTs, as described
 in Sections 4.5 and 4.6 of {{RFC8417}}.
@@ -495,9 +495,6 @@ permitted only if they are alternative URIs defining the exact same event type. 
 
 ### Event type specific fields
 The event object inside the `events` claim MAY have one or more fields that are uniquely determined by the type of the event.
-
-### The "event_data" field {#event-data-claim}
-Any fields that the Transmitter wishes to communicate to the receiver, but which are not specified by the specific event type, SHOULD be placed in a `event_data` field inside the event object. If this field is present, then its value MUST be a JSON object.
 
 # Example SETs that conform to the Shared Signals Framework {#events-examples}
 
@@ -556,15 +553,12 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
     "https://schemas.openid.net/secevent/caep/event-type/token-claims-changed": {
       "claims": {
         "token": "some-token-value"
-      },
-      "event_data": {
-        "context": "additional context of the event"
       }
     }
   }
 }
 ~~~
-{: #caep-event-properties-example title="Example: SET Containing a CAEP Event with Properties and Event Data"}
+{: #caep-event-properties-example title="Example: SET Containing a CAEP Event with Properties"}
 
 ~~~ json
 {
