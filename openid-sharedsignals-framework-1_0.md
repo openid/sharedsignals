@@ -397,7 +397,7 @@ below MAY define certain members within a Complex Subject to be Critical. A SSF
 Receiver MUST discard any event that contains a Subject with a Critical member
 that it is unable to process.
 
-# Events  {#events}
+# Events {#events}
 
 ## Security Event Token Profile {#set-profle}
 The Shared Signals Framework profiles the Security Event Token (SET)
