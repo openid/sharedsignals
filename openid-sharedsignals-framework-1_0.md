@@ -115,6 +115,7 @@ normative:
   RFC8936:
   RFC9110:
   RFC9493:
+  RFC3986:
   CAEP:
     author:
     -
@@ -853,7 +854,8 @@ stream_id
 
 > **Transmitter-Supplied**, REQUIRED. A string that uniquely identifies the stream. A
   Transmitter MUST generate a unique ID for each of its non-deleted streams
-  at the time of stream creation.
+  at the time of stream creation. Transmitters SHOULD use character set
+  described in Section 2.3 of {{RFC3986}}}} to generate the stream ID.
 
 iss
 
@@ -2218,9 +2220,9 @@ endpoint_url
 
 authorization_header
 
-> The HTTP Authorization header that the Transmitter MUST set with each event
-  delivery, if the configuration is present. The value is optional and it is set
-  by the Receiver.
+> If the endpoint_url requires authorization, the receiver SHOULD provide
+ this authorization header in the stream creation/updation. If present, the 
+ Transmitter MUST use the authorization header with each event delivery.
 
 #### Polling Delivery using HTTP
 This section provides SSF profiling specifications for the {{RFC8936}} spec.
