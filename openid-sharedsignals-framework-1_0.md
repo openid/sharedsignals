@@ -670,7 +670,7 @@ authorization_header
   delivery, if the configuration is present. The value is optional and it is set
   by the Receiver.
 
-## Poll Delivery using HTTP
+### Poll Delivery using HTTP
 This section provides SSF profiling specifications for the {{RFC8936}} spec.
 
 method
