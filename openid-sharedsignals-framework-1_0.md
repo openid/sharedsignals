@@ -650,7 +650,7 @@ This section describes the supported methods of delivering SSF Events. It provid
 Each delivery method is identified by a URI, specified below by the "method"
 metadata.
 
-## Push Delivery using HTTP
+### Push Delivery using HTTP
 This section provides SSF profiling specifications for the {{RFC8935}} spec.
 
 method
