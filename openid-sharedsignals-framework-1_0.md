@@ -526,7 +526,7 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
   "txn": 8675309,
   "aud": "636C69656E745F6964",
   "sub_id": {
-    "format": "phone",
+    "format": "phone_number",
     "phone_number": "+1 206 555 0123"
   },
   "events": {
