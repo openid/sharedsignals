@@ -666,9 +666,7 @@ endpoint_url
 
 authorization_header
 
-> The HTTP Authorization header that the Transmitter MUST set with each event
-  delivery, if the configuration is present. The value is optional and it is set
-  by the Receiver.
+> If the endpoint_url requires authorization, the receiver SHOULD provide this authorization header in the stream creation/updation. If present, the Transmitter MUST provide this value with every HTTP request to the `endpoint_url`.
 
 ### Poll Delivery using HTTP
 This section provides SSF profiling specifications for the {{RFC8936}} spec.
