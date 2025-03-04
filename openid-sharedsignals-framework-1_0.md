@@ -550,7 +550,7 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
     "email": "user@example.com"
   },
   "events": {
-    "https://schemas.openid.net/secevent/caep/event-type/token-claims-changed": {
+    "https://schemas.openid.net/secevent/caep/event-type/token-claims-change": {
       "claims": {
         "token": "some-token-value"
       }
