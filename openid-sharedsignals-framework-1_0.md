@@ -129,9 +129,9 @@ normative:
     -
       ins: A. Tulshibagwale
       name: Atul Tulshibagwale
-    date: August 2021
-    target: https://openid.net/specs/openid-caep-specification-1_0.html
-    title: OpenID Continuous Access Evaluation Profile 1.0 - draft 02
+    date: June 2024
+    target: https://openid.net/specs/openid-caep-1_0.html
+    title: OpenID Continuous Access Evaluation Profile 1.0 - draft 03
   RISC:
     author:
     -
