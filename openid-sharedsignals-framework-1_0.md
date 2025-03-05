@@ -108,8 +108,6 @@ normative:
     title: OpenID Connect Core 1.0 - ID Token
   OASIS.saml-core-2.0-os:
   RFC2119:
-  RFC6749:
-  RFC6750:
   RFC7159:
   RFC7517:
   RFC7519:
@@ -394,7 +392,7 @@ Subject Identifier Format.
 }
 
 ~~~
-{: #sub-id-ips title="Example: 'ips' Subject Identifier"}
+{: #sub-id-samlassertionid title="Example: 'saml_assertion_id' Subject Identifier"}
 
 ### IP Addresses Subject Identifier Format {#sub-id-ips}
 
@@ -419,7 +417,7 @@ Subject Identifier Format.
 }
 
 ~~~
-{: #sub-id-samlassertionid title="Example: 'saml_assertion_id' Subject Identifier"}
+{: #sub-id-ips-example title="Example: 'ip-addresses' Subject Identifier"}
 
 ## Receiver Subject Processing {#receiver-subject-processing}
 
