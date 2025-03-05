@@ -455,7 +455,7 @@ an SSF event.
 
 ### Distinguishing SETs from other Kinds of JWTs
 Of particular concern is the possibility that SETs are confused for other kinds
-of JWTs. The Security Considerations section of {{RFC8417}} has several sub-sections
+of JWTs. Section 4 of {{RFC8417}} has several sub-sections
 on this subject. The Shared Signals Framework requires further restrictions:
 
 * The "sub" claim MUST NOT be present, as described in {{event-subjects}}.
