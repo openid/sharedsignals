@@ -73,6 +73,12 @@ contributor:
         org: The Walt Disney Company
         email: sean.odentity@disney.com
 
+      -
+        ins: J. Slocum
+        name: James Slocum
+        org: Beyond Identity
+        email: james.slocum@beyondidentity.com
+
 normative:
   CLIENTCRED:
     author:
@@ -115,6 +121,7 @@ normative:
   RFC8936:
   RFC9110:
   RFC9493:
+  RFC4001:
   CAEP:
     author:
     -
@@ -123,9 +130,9 @@ normative:
     -
       ins: A. Tulshibagwale
       name: Atul Tulshibagwale
-    date: August 2021
-    target: https://openid.net/specs/openid-caep-specification-1_0.html
-    title: OpenID Continuous Access Evaluation Profile 1.0 - draft 02
+    date: June 2024
+    target: https://openid.net/specs/openid-caep-1_0.html
+    title: OpenID Continuous Access Evaluation Profile 1.0 - draft 03
   RISC:
     author:
     -
@@ -384,6 +391,31 @@ Subject Identifier Format.
     "format": "saml_assertion_id",
     "issuer": "https://idp.example.com/123456789/",
     "assertion_id": "_8e8dc5f69a98cc4c1ff3427e5ce34606fd672f91e6"
+}
+
+~~~
+{: #sub-id-ips title="Example: 'ips' Subject Identifier"}
+
+### IP Addresses Subject Identifier Format {#sub-id-ips}
+
+The "IP addresses" Subject Identifier Format specifies an array of IP addresses observed by the Transmitter.
+Subject Identifiers of this format MUST contain the following members:
+
+ip-addresses
+
+> REQUIRED. The array of IP addresses of the subject as observed by the Transmitter. The value MUST be in the format of an array of strings, each one of which represents the {{RFC4001}} string representation of an IP address.
+
+
+The "IP addresses" Subject Identifier Format is identified by the name
+"ip-addresses".
+
+Below is a non-normative example of Subject Identifier for the "IP addresses"
+Subject Identifier Format.
+
+~~~ json
+{
+    "format": "ip-addresses",
+    "ip-addresses": ["10.29.37.75", "2001:0db8:0000:0000:0000:8a2e:0370:7334"]
 }
 
 ~~~
@@ -729,6 +761,10 @@ delivery_methods_supported
 
 > RECOMMENDED. List of supported delivery method URIs.
 
+events_supported
+
+> OPTIONAL. An array of URIs identifying the set of events supported by the Transmitter for a Receiver. If omitted, Event Transmitters SHOULD make this set available to the Event Receiver via some other means (e.g. publishing it in online documentation).
+
 configuration_endpoint
 
 > OPTIONAL. The URL of the Configuration Endpoint. If present, this URL MUST use HTTP over TLS {{RFC9110}}.
@@ -767,10 +803,12 @@ default_subjects
 > OPTIONAL. A string indicating the default behavior of newly created streams. If present,
   the value MUST be either "ALL" or "NONE". If not provided, the Transmitter behavior in
   this regard is unspecified.
+
 >  - "ALL" indicates that any subjects that are appropriate for the stream are added to
     the stream by default. The Receiver MAY remove subjects from the stream via the
     `remove_subject_endpoint`, causing events for those subjects to _not_ be transmitted.
     The Receiver MAY re-add any subjects removed this way via the `add_subject_endpoint`.
+
 >  - "NONE" indicates that no subjects are added by default. The Receiver MAY add subjects
     to the stream via the `add_subject_endpoint`, causing only events for those subjects
     to be transmitted. The Receiver MAY remove subjects added this way via the
@@ -889,6 +927,11 @@ Content-Type: application/json
   "delivery_methods_supported": [
     "urn:ietf:rfc:8935",
     "urn:ietf:rfc:8936"],
+  "events_supported": [
+    "https://schemas.openid.net/secevent/ssf/event-type/stream-updated",
+    "https://schemas.openid.net/secevent/ssf/event-type/verification",
+    "https://schemas.openid.net/secevent/risc/event-type/sessions-revoked"
+    "https://schemas.openid.net/secevent/caep/event-type/session-revoked"],
   "configuration_endpoint":
     "https://tr.example.com/ssf/mgmt/stream",
   "status_endpoint":
@@ -1109,13 +1152,14 @@ The HTTP POST request MAY contain the Receiver-Supplied values of the Stream
 Configuration ({{stream-config}}) object:
 
 * `events_requested`
-* `delivery` : Note that in the case of the poll method, the `endpoint_url` value is
-  supplied by the Transmitter.
+* `delivery`
+* `description`
 
 If the request does not contain the `delivery` property, then the Transmitter
 MUST assume that the `method` is "urn:ietf:rfc:8936" (poll). The
 Transmitter MUST include a `delivery` property in the response with this
-`method` property and an `endpoint_url` property.
+`method` property and an `endpoint_url` property. Note that in the case of the poll
+method, the `endpoint_url` value is supplied by the Transmitter.
 
 The following is a non-normative example request to create an Event Stream:
 
