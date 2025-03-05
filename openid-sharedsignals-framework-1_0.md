@@ -1068,23 +1068,8 @@ delivery
 > REQUIRED. A JSON object containing a set of name/value pairs specifying configuration
   parameters for the SET delivery method. The actual delivery method is
   identified by the special key "method" with the value being a URI as defined
-  in {{delivery-meta}}. The value of the "delivery" field contains two
-  sub-fields:
-
->   method
-
-> > **Receiver-Supplied**, REQUIRED. The specific delivery method to be used. This can be
-    any one of "urn:ietf:rfc:8935" (push) or "urn:ietf:rfc:8936" (poll), but
-    not both.
-
->   endpoint_url
-
-> > REQUIRED. The location at which the push or poll delivery will take place. If the
-    `method` value is "urn:ietf:rfc:8935" (push), then this value MUST
-    be supplied by the Receiver.  If the `method` value is
-    "urn:ietf:rfc:8936" (poll), then this value MUST be supplied by the
-    Transmitter.
-
+  in {{delivery-meta}}. 
+  
 min_verification_interval
 
 > **Transmitter-Supplied**, OPTIONAL. An integer indicating the minimum amount of time in
