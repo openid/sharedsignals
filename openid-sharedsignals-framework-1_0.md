@@ -623,13 +623,6 @@ default_subjects
     to be transmitted. The Receiver MAY remove subjects added this way via the
     `remove_subject_endpoint`.
 
-stream_ttl
-
-> OPTIONAL. The lifetime of a stream in seconds, after which the Transmitter MAY either pause or disable the stream if it has not received any Receiver-initiated communication in that duration.
-  If the Transmitter decides to update the stream, it MUST send a Stream Updated Event to the Receiver as described in {{status}}.
-  If the Receiver calls any endpoint in the Event Stream Management API ({{management}}), the Transmitter MUST refresh the TTL of that particular stream.
-  The syntax is the same as that of {{EXPIRES_IN}}.
-
 TODO: consider adding a IANA Registry for metadata, similar to Section 7.1.1 of
 {{RFC8414}}. This would allow other specs to add to the metadata.
 
@@ -952,6 +945,19 @@ description
 > **Receiver-Supplied**, OPTIONAL. A string that describes the properties of the stream.
   This is useful in multi-stream systems to identify the stream for human actors. The
   transmitter MAY truncate the string beyond an allowed max length.
+
+stream_ttl
+
+> **Transmitter-Supplied**, OPTIONAL. The refreshable lifetime of the stream in seconds, after which the Transmitter MAY either pause or disable the stream if it has not received any Receiver-initiated communication (defined below) in that duration. The syntax is the same as that of {{EXPIRES_IN}}.
+>
+> For PUSH streams, the Transmitter MUST refresh the TTL whenever:
+> * The Receiver calls any endpoint in the Event Stream Management API ({{management}}).
+>
+> For POLL streams, the Transmitter MUST refresh the TTL whenever:
+> * The Receiver polls the Transmitter for events.
+> * The Receiver calls any endpoint in the Event Stream Management API ({{management}}).
+>
+> If the Transmitter decides to update the stream, it MUST send a Stream Updated Event to the Receiver as described in {{status}}.
 
 TODO: consider adding a IANA Registry for stream configuration metadata, similar
 to Section 7.1.1 of {{RFC8414}}. This would allow other specs to add to
