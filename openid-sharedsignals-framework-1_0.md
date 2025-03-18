@@ -120,6 +120,7 @@ normative:
   RFC9110:
   RFC9493:
   RFC4001:
+  RFC3986:
   CAEP:
     author:
     -
@@ -1063,8 +1064,9 @@ following properties:
 stream_id
 
 > **Transmitter-Supplied**, REQUIRED. A string that uniquely identifies the stream. A
-  Transmitter MUST generate a unique ID for each of its non-deleted streams
-  at the time of stream creation.
+  Transmitter MUST generate a unique ID for each of its non-deleted streams at the time
+  of stream creation. Transmitters SHOULD use character set described in 
+  Section 2.3 of {{RFC3986}} to generate the stream ID.
 
 iss
 
