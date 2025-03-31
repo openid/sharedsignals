@@ -78,7 +78,11 @@ contributor:
         name: James Slocum
         org: Beyond Identity
         email: james.slocum@beyondidentity.com
-
+      -
+        ins: J. Schreiber
+        name: Jen Schreiber
+        org: Workday
+        email: jennifer.winer@workday.com
 normative:
   CLIENTCRED:
     author:
