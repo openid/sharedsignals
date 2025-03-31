@@ -816,7 +816,9 @@ TODO: consider adding a IANA Registry for metadata, similar to Section 7.1.1 of
 {{RFC8414}}. This would allow other specs to add to the metadata.
 
 ### Authorization scheme {#authorization-scheme}
-SSF is an HTTP based signals sharing framework and is agnostic to the authentication and authorization schemes used to secure stream configuration APIs. It does not provide any SSF-specific authentication and authorization schemes but relies on the cooperating parties' mutual security considerations. The authorization scheme section of the metadata provides discovery information related to the Transmitter's stream management APIs.
+SSF is an HTTP based signals sharing framework and is agnostic to the authentication and authorization schemes used to secure stream configuration APIs. It does not provide any SSF-specific authentication and authorization schemes but relies on the cooperating parties' mutual security considerations.
+
+The `authorization_schemes` key of Transmitter Configuration Metadata provides authorization information related to the Transmitter's stream management APIs. These authorization schemes SHOULD also be used to protect any polling endpoint (used for Poll-Based SET delivery [RFC8936]) hosted by the Transmitter.
 
 spec_urn
 
