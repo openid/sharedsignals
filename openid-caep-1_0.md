@@ -173,6 +173,12 @@ event_timestamp
   occurred. Its value is a JSON number representing the number of seconds
   from 1970-01-01T0:0:0Z as measured in UTC until the date/time.
 
+event_metadata
+: OPTIONAL, JSON object: metadata specific to the event and or actions(s) in
+ the event provided by the transmitter. The object MUST contain one or more
+ key/value pairs. This claim SHOULD not be used to express information about
+ the subject.
+
 initiating_entity
 : OPTIONAL, JSON string: describes the entity that invoked the event.
 : This MUST be one of the following strings:

@@ -94,6 +94,16 @@
       <t>The base URI for RISC event types is:<vspace />
         https://schemas.openid.net/secevent/risc/event-type/</t>
 
+      <section anchor="optional-event claims" title="Optional Event Claims">
+        <t>The following claims are optional unless otherwise specified in the event type definition.
+
+        <list style="symbols">
+          <t>event_metadata - optional, JSON object, metadata specific to the event and or actions(s) in
+            the event provided by the Transmitter. The object MUST contain one or more key/value pairs.
+            This claim SHOULD not be used to express information about the subject.</t>
+        </list></t>
+      </section>
+
       <section anchor="account-credential-change-required" title="Account Credential Change Required">
         <t>Event Type URI:<vspace />
         https://schemas.openid.net/secevent/risc/event-type/account-credential-change-required</t>
