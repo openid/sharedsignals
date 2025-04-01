@@ -1154,10 +1154,12 @@ Configuration ({{stream-config}}) object:
 * `description`
 
 If the request does not contain the `delivery` property, then the Transmitter
-MUST assume that the `method` is "urn:ietf:rfc:8936" (poll). The
-Transmitter MUST include a `delivery` property in the response with this
-`method` property and an `endpoint_url` property. Note that in the case of the poll
-method, the `endpoint_url` value is supplied by the Transmitter.
+MUST assume that the `method` is "urn:ietf:rfc:8936" (poll). If the Transmitter supports
+Poll-Based Delivery, the Transmitter MUST include a `delivery` property in the response with this
+`method` property and an `endpoint_url` property. If the Transmitter does not support
+the delivery method, it MAY respond with 4XX HTTP Status Code such as "400 Bad Rquest."
+
+Note that in the case of the poll method, the `endpoint_url` value is supplied by the Transmitter.
 
 The following is a non-normative example request to create an Event Stream:
 
