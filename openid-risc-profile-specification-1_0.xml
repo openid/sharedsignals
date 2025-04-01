@@ -98,9 +98,9 @@
         <t>The following claims are optional unless otherwise specified in the event type definition.
 
         <list style="symbols">
-          <t>event_metadata - optional, JSON object, metadata specific to the event and or actions(s) in
-            the event provided by the Transmitter. The object MUST contain one or more key/value pairs.
-            This claim SHOULD not be used to express information about the subject.</t>
+          <t>event_metadata - optional, JSON object,metadata specific to the event provided by the
+          Transmitter. The object MUST contain one or more key/value pairs. This claim SHOULD be
+          used to express information about the event, not the subject.</t>
         </list></t>
       </section>
 
