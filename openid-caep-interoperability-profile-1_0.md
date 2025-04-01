@@ -216,24 +216,24 @@ All events MUST be signed using the `RS256` algorithm using a minimum of 2048-bi
 
 ## OAuth Service
 
-### The SSF Transmitter as an Authorization Server 
+### Authorization Server
 
-A Transmitter can act as an OAuth {{RFC6749}} Authorization Server. As such, it issues access tokens to Receivers.
+An OAuth {{RFC6749}} Authorization Server issues access tokens. In the context of this profile, the Authorization Server that issues access tokens can be a separate entity than the SSF Transmitter.
 
-* Transmitters MAY distribute discovery metadata (such as the authorization endpoint) via the Authorization Server Metadata as specified in [RFC8414]{{RFC8414}}
-* Transmitters MUST support at least one of the following to issue a short-lived access token.
+* The Authorization Server MAY distribute discovery metadata (such as the authorization endpoint) via Authorization Server Metadata as specified in [RFC8414]{{RFC8414}}
+* The Authorization Server MUST support at least one of the following to issue a short-lived access token to the Receiver
   - client credential grant flow {{RFC6749}} section 4.4
   - authorization code flow {{RFC6749}} section 4.1
 
 A short lived access token could be defined as one in which the value of the `exp` claim is not longer than 60 mins after `nbf` claim. Please refer to access token lifetimes in the security considerations of {{FAPI}} for additional considerations.
 
 ### OAuth Scopes
-Depending on the features supported by the OAuth service and the SSF APIs, the client SHALL discover the OAuth scopes as follows:
+Depending on the features supported by the OAuth service and the SSF APIs, the OAuth Client SHALL discover the OAuth scopes as follows:
 
 1. If the Resource Server, hosting SSF configuration APIs, supports OAuth Protected Resource Metadata {{OPRM}} then the client MUST obtain the required scopes by using it.
 
 2. If the Resource Server does not support {{OPRM}}, then the following scopes MUST be supported:
-   - An OAuth {{RFC6749}} Authorization Server that is used to issue tokens to SSF Receivers, MUST reserve the scopes for the SSF endpoints with the prefix of `ssf`
+   * An OAuth {{RFC6749}} Authorization Server that is used to issue tokens to SSF Receivers, MUST reserve the scopes for the SSF endpoints with the prefix of `ssf`
    - All the SSF stream configuration management API operations MUST accept `ssf.manage` scope
    - All the SSF stream configuration Read API operations MUST accept `ssf.read` scope
    - Authorization Server MAY postfix scope names with more granular operations eg. `ssf.manage.create`, `ssf.manage.update` etc.
