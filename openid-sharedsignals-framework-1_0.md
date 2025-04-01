@@ -1236,7 +1236,7 @@ Event Transmitter responds with a "200 OK" response containing a [JSON][RFC7159]
 representation of the stream’s configuration in the body.  The Receiver
 MUST check the response and confirm that the `iss` value matches the Issuer from
 which it received the Transmitter Configuration data. It is RECOMMENDED that the
-Receiver validates the `aud` matches the expected value.
+Receiver validates the `aud` value matches what they expect.
 
 The GET request MAY include the "stream_id" as a query parameter in order to
 identify the correct Event Stream. If the "stream_id" parameter is missing,
