@@ -29,8 +29,6 @@ author:
         email: atul@sgnl.ai
 
 normative:
-  RFC4001: # Textual Conventions for Internet Network Addresses
-
   ISO-IEC-29115:
     target: https://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=45138
     title: "ISO/IEC 29115:2013 -- Information technology - Security techniques - Entity authentication assurance framework"
@@ -739,9 +737,6 @@ The `event_timestamp` in this event type specifies the time at which the session
 ### Event Specific Claims {#session-established-event-specific-claims}
 The following optional claims MAY be included in the Session Established event:
 
-ips
-: The array of IP addresses of the user as observed by the Transmitter. The value MUST be in the format of an array of strings, each one of which represents the RFC 4001 {{RFC4001}} string representation of an IP address. (**NOTE**, this can be different from the one observed by the Receiver for the same user because of network translation)
-
 fp_ua
 : Fingerprint of the user agent computed by the Transmitter. (**NOTE**, this is not to identify the session, but to present some qualities of the session)
 
@@ -771,7 +766,6 @@ The following is a non-normative example of the `session-established` event type
     },
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/session-established": {
-          "ips": ["192.168.1.12", "10.1.1.1"],
           "fp_ua": "abb0b6e7da81a42233f8f2b1a8ddb1b9a4c81611",
           "acr": "AAL2",
           "amr": ["otp"],
@@ -793,9 +787,6 @@ The Session Presented event signifies that the Transmitter has observed the sess
 
 ### Event Specific Claims {#session-presented-event-specific-claims}
 The following optional claims MAY be present in a Session Presented event:
-
-ips
-: The array of IP addresses of the user as observed by the Transmitter. The value MUST be in the format of an array of strings, each one of which represents the RFC 4001 {{RFC4001}} string representation of an IP address. (**NOTE**, this can be different from the one observed by the Receiver for the same user because of network translation)
 
 fp_ua
 : Fingerprint of the user agent computed by the Transmitter. (**NOTE**, this is not to identify the session, but to present some qualities of the session)
@@ -819,7 +810,6 @@ The following is a non-normative example of a Session Presented event:
     },
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/session-presented": {
-          "ips": ["192.168.1.12","10.1.1.1"],
           "fp_ua": "abb0b6e7da81a42233f8f2b1a8ddb1b9a4c81611",
           "ext_id": "12345",
           "event_timestamp": 1615304991643

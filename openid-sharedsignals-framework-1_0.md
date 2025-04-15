@@ -73,6 +73,12 @@ contributor:
         org: The Walt Disney Company
         email: sean.odentity@disney.com
 
+      -
+        ins: J. Schreiber
+        name: Jen Schreiber
+        org: Workday
+        email: jennifer.winer@workday.com
+
 normative:
   CLIENTCRED:
     author:
@@ -102,8 +108,6 @@ normative:
     title: OpenID Connect Core 1.0 - ID Token
   OASIS.saml-core-2.0-os:
   RFC2119:
-  RFC6749:
-  RFC6750:
   RFC7159:
   RFC7517:
   RFC7519:
@@ -115,6 +119,8 @@ normative:
   RFC8936:
   RFC9110:
   RFC9493:
+  RFC4001:
+  RFC3986:
   CAEP:
     author:
     -
@@ -176,7 +182,7 @@ This specification defines:
 * Subject principals
 * Subject claims in SSF events
 * Event types
-* Event properties
+* Events
 * Transmitter Configuration Metadata and its discovery method for Receivers
 * A management API for Event Streams
 
@@ -389,6 +395,31 @@ Subject Identifier Format.
 ~~~
 {: #sub-id-samlassertionid title="Example: 'saml_assertion_id' Subject Identifier"}
 
+### IP Addresses Subject Identifier Format {#sub-id-ips}
+
+The "IP addresses" Subject Identifier Format specifies an array of IP addresses observed by the Transmitter.
+Subject Identifiers of this format MUST contain the following members:
+
+ip-addresses
+
+> REQUIRED. The array of IP addresses of the subject as observed by the Transmitter. The value MUST be in the format of an array of strings, each one of which represents the {{RFC4001}} string representation of an IP address.
+
+
+The "IP addresses" Subject Identifier Format is identified by the name
+"ip-addresses".
+
+Below is a non-normative example of Subject Identifier for the "IP addresses"
+Subject Identifier Format.
+
+~~~ json
+{
+    "format": "ip-addresses",
+    "ip-addresses": ["10.29.37.75", "2001:0db8:0000:0000:0000:8a2e:0370:7334"]
+}
+
+~~~
+{: #sub-id-ips-example title="Example: 'ip-addresses' Subject Identifier"}
+
 ## Receiver Subject Processing {#receiver-subject-processing}
 
 A SSF Receiver MUST make a best effort to process all members from a Subject in
@@ -397,14 +428,104 @@ below MAY define certain members within a Complex Subject to be Critical. A SSF
 Receiver MUST discard any event that contains a Subject with a Critical member
 that it is unable to process.
 
-# Event Properties  {#properties}
+# Events {#events}
 
-Additional members about an event may be included in the "events" claim. Some
-of these members are required and specified as such in the respective event
-types specs. If a Transmitter determines that it needs to include additional
-members that are not specified in the event types spec, then the name of such
-members MUST be a URI. The discoverability of all additional members is
-specified in the Discovery section ({{discovery}}).
+## Security Event Token Profile {#set-profle}
+The Shared Signals Framework profiles the Security Event Token (SET)
+{{RFC8417}} specification by defining certain properties of SETs as described in this section.
+
+### Explicit Typing of SETs {#explicit-typing}
+SSF events MUST use explicit typing as defined in Section 2.3 of {{RFC8417}}.
+
+~~~ json
+{
+  "typ":"secevent+jwt",
+  "alg":"HS256"
+}
+~~~
+{: title="Explicitly Typed JOSE Header" #explicit-type-header}
+
+The purpose is defense against confusion with other JWTs, as described in
+Sections 4.5, 4.6 and 4.7 of {{RFC8417}}. While current Id Token {{OpenID.Core}}
+validators may not be using the "typ" header parameter, requiring it for SSF
+SETs guarantees a distinct value for future validators.
+
+### SSF Event Subject {#event-subjects}
+The primary Subject Member of SSF events is described in the "Subject Members" section ({{subject-ids}}). The JWT "sub" claim MUST NOT be present in any SET containing
+an SSF event.
+
+### Distinguishing SETs from other Kinds of JWTs
+Of particular concern is the possibility that SETs are confused for other kinds
+of JWTs. Section 4 of {{RFC8417}} has several sub-sections
+on this subject. The Shared Signals Framework requires further restrictions:
+
+* The "sub" claim MUST NOT be present, as described in {{event-subjects}}.
+* SSF SETs MUST use explicit typing, as described in {{explicit-typing}}.
+* The "exp" claim MUST NOT be present, as described in {{exp-claim}}.
+
+### Signature Key Resolution {#signature-key-resolution}
+The signature key can be obtained through "jwks_uri", see {{discovery}}.
+
+### The "iss" Claim {#iss-claim}
+The "iss" claim MUST match the "iss" value in the Stream Configuration data for the stream
+that the event is sent on. Receivers MUST validate that this claim matches the "iss"
+in the Stream Configuration data, as well as the Issuer from which the Receiver requested
+the Transmitter Configuration data.
+
+### The "exp" Claim {#exp-claim}
+The "exp" claim MUST NOT be used in SETs.
+
+The purpose is defense in depth against confusion with other JWTs, as described
+in Sections 4.5 and 4.6 of {{RFC8417}}.
+
+### The "aud" Claim {#aud-claim}
+The "aud" claim can be a single string or an array of strings. Values that
+uniquely identify the Receiver to the Transmitter MAY be used, if the two parties
+have agreement on the format.
+
+More than one value can be present if the corresponding Receivers are known to
+the Transmitter to be the same entity, for example a web client and a mobile
+client of the same application. All the Receivers in this case MUST use the
+exact same delivery method.
+
+If multiple Receivers have the exact same delivery configuration but the
+Transmitter does not know if they belong to the same entity then the Transmitter
+SHOULD issue distinct SETs for each Receiver and deliver them separately. In
+this case the multiple Receivers might use the same service to process SETs, and
+this service might reroute SETs to respective Receivers, an "aud" claim with
+multiple Receivers would lead to unintended data disclosure.
+
+~~~ json
+{
+  "jti": "123456",
+  "iss": "https://transmitter.example.com",
+  "aud": ["receiver.example.com/web", "receiver.example.com/mobile"],
+  "iat": 1493856000,
+  "txn": 8675309,
+  "sub_id": {
+    "format": "opaque",
+    "id": "72e6991badb44e08a69672960053b342"
+  },
+  "events": {
+    "https://schemas.openid.net/secevent/ssf/event-type/verification": {
+      "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
+    }
+  }
+}
+~~~
+{: title="Example: SET with array 'aud' claim" #figarrayaud}
+
+### The "txn" claim {#txn-claim}
+Transmitters SHOULD set the "txn" claim value in Security Event Tokens (SETs). If the value is present, it MUST be unique to the underlying event that caused the Transmitter to generate the Security Event Token (SET). The Transmitter, however, may use the same value in the "txn" claim across different Security Events Tokens (SETs), such as session revoked and credential change, to indicate that the SETs originated from the same underlying cause or reason.
+
+## Event Properties {#event-properties}
+
+### The "events" claim {#events-claim}
+The "events" claim SHOULD contain only one event. Multiple event type URIs are
+permitted only if they are alternative URIs defining the exact same event type. The type of the event is specified by the key in the value of the `events` claim. The value of this field is the event object.
+
+### Event type specific fields
+The event object inside the `events` claim MAY have one or more fields that are uniquely determined by the type of the event.
 
 # Example SETs that conform to the Shared Signals Framework {#events-examples}
 
@@ -427,6 +548,48 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
 }
 ~~~
 {: #subject-ids-ex-simple title="Example: SET Containing an SSF Event with a Simple Subject Member"}
+
+~~~ json
+{
+  "iss": "https://idp.example.com/",
+  "jti": "756E69717565206964656E746966696572",
+  "iat": 1520364019,
+  "txn": 8675309,
+  "aud": "636C69656E745F6964",
+  "sub_id": {
+    "format": "phone_number",
+    "phone_number": "+1 206 555 0123"
+  },
+  "events": {
+    "https://schemas.openid.net/secevent/risc/event-type/account-disabled": {
+      "reason": "hijacking"
+    }
+  }
+}
+~~~
+{: #risc-event-subject-example title="Example: SET Containing a RISC Event with a Phone Number Subject"}
+
+~~~ json
+{
+  "iss": "https://idp.example.com/",
+  "jti": "756E69717565206964656E746966696572",
+  "iat": 1520364019,
+  "txn": 8675309,
+  "aud": "636C69656E745F6964",
+  "sub_id": {
+    "format": "email",
+    "email": "user@example.com"
+  },
+  "events": {
+    "https://schemas.openid.net/secevent/caep/event-type/token-claims-change": {
+      "claims": {
+        "token": "some-token-value"
+      }
+    }
+  }
+}
+~~~
+{: #caep-event-properties-example title="Example: SET Containing a CAEP Event with Properties"}
 
 ~~~ json
 {
@@ -510,6 +673,44 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
 }
 ~~~
 {: #subject-custom-type-ex title="Example: SET Containing an SSF Event with a Proprietary Subject Identifier Format"}
+
+# Event Delivery {#event-delivery}
+This section describes the supported methods of delivering SSF Events. It provides SSF profiling specifications for the {{RFC8935}} and {{RFC8936}} specs.
+
+## Stream Configuration Metadata {#delivery-meta}
+Each delivery method is identified by a URI, specified below by the "method"
+metadata.
+
+### Push Delivery using HTTP
+This section provides SSF profiling specifications for the {{RFC8935}} spec.
+
+method
+
+> "urn:ietf:rfc:8935"
+
+endpoint_url
+
+> The URL where events are pushed through HTTP POST. This is set by the
+  Receiver. If a Receiver is using multiple streams from a single Transmitter
+  and needs to keep the SETs separated, it is RECOMMENDED that the URL for each
+  stream be unique.
+
+authorization_header
+
+> If the endpoint_url requires authorization, the receiver SHOULD provide this authorization header in the stream creation/updation. If present, the Transmitter MUST provide this value with every HTTP request to the `endpoint_url`.
+
+### Poll Delivery using HTTP
+This section provides SSF profiling specifications for the {{RFC8936}} spec.
+
+method
+
+> "urn:ietf:rfc:8936"
+
+endpoint_url
+
+> The URL where events can be retrieved from. This is specified by the
+  Transmitter. These URLs MAY be reused across Receivers, but MUST be unique per
+  stream for a given Receiver.
 
 # Transmitter Configuration Discovery {#discovery}
 
@@ -597,10 +798,12 @@ default_subjects
 > OPTIONAL. A string indicating the default behavior of newly created streams. If present,
   the value MUST be either "ALL" or "NONE". If not provided, the Transmitter behavior in
   this regard is unspecified.
+
 >  - "ALL" indicates that any subjects that are appropriate for the stream are added to
     the stream by default. The Receiver MAY remove subjects from the stream via the
     `remove_subject_endpoint`, causing events for those subjects to _not_ be transmitted.
     The Receiver MAY re-add any subjects removed this way via the `add_subject_endpoint`.
+
 >  - "NONE" indicates that no subjects are added by default. The Receiver MAY add subjects
     to the stream via the `add_subject_endpoint`, causing only events for those subjects
     to be transmitted. The Receiver MAY remove subjects added this way via the
@@ -610,7 +813,9 @@ TODO: consider adding a IANA Registry for metadata, similar to Section 7.1.1 of
 {{RFC8414}}. This would allow other specs to add to the metadata.
 
 ### Authorization scheme {#authorization-scheme}
-SSF is an HTTP based signals sharing framework and is agnostic to the authentication and authorization schemes used to secure stream configuration APIs. It does not provide any SSF-specific authentication and authorization schemes but relies on the cooperating parties' mutual security considerations. The authorization scheme section of the metadata provides discovery information related to the Transmitter's stream management APIs.
+SSF is an HTTP based signals sharing framework and is agnostic to the authentication and authorization schemes used to secure stream configuration APIs. It does not provide any SSF-specific authentication and authorization schemes but relies on the cooperating parties' mutual security considerations.
+
+The `authorization_schemes` key of Transmitter Configuration Metadata provides authorization information related to the Transmitter's stream management APIs. These authorization schemes SHOULD also be used to protect any polling endpoint (used for Poll-Based SET delivery [RFC8936]) hosted by the Transmitter.
 
 spec_urn
 
@@ -852,8 +1057,9 @@ following properties:
 stream_id
 
 > **Transmitter-Supplied**, REQUIRED. A string that uniquely identifies the stream. A
-  Transmitter MUST generate a unique ID for each of its non-deleted streams
-  at the time of stream creation.
+  Transmitter MUST generate a unique ID for each of its non-deleted streams at the time
+  of stream creation. Transmitters SHOULD use character set described in 
+  Section 2.3 of {{RFC3986}} to generate the stream ID.
 
 iss
 
@@ -898,23 +1104,8 @@ delivery
 > REQUIRED. A JSON object containing a set of name/value pairs specifying configuration
   parameters for the SET delivery method. The actual delivery method is
   identified by the special key "method" with the value being a URI as defined
-  in {{delivery-meta}}. The value of the "delivery" field contains two
-  sub-fields:
-
->   method
-
-> > **Receiver-Supplied**, REQUIRED. The specific delivery method to be used. This can be
-    any one of "urn:ietf:rfc:8935" (push) or "urn:ietf:rfc:8936" (poll), but
-    not both.
-
->   endpoint_url
-
-> > REQUIRED. The location at which the push or poll delivery will take place. If the
-    `method` value is "urn:ietf:rfc:8935" (push), then this value MUST
-    be supplied by the Receiver.  If the `method` value is
-    "urn:ietf:rfc:8936" (poll), then this value MUST be supplied by the
-    Transmitter.
-
+  in {{delivery-meta}}. 
+  
 min_verification_interval
 
 > **Transmitter-Supplied**, OPTIONAL. An integer indicating the minimum amount of time in
@@ -954,13 +1145,16 @@ The HTTP POST request MAY contain the Receiver-Supplied values of the Stream
 Configuration ({{stream-config}}) object:
 
 * `events_requested`
-* `delivery` : Note that in the case of the poll method, the `endpoint_url` value is
-  supplied by the Transmitter.
+* `delivery`
+* `description`
 
 If the request does not contain the `delivery` property, then the Transmitter
-MUST assume that the `method` is "urn:ietf:rfc:8936" (poll). The
-Transmitter MUST include a `delivery` property in the response with this
-`method` property and an `endpoint_url` property.
+MUST assume that the `method` is "urn:ietf:rfc:8936" (poll). If the Transmitter supports
+Poll-Based Delivery, the Transmitter MUST include a `delivery` property in the response with this
+`method` property and an `endpoint_url` property. If the Transmitter does not support
+the delivery method, it MAY respond with HTTP Status Code "400 Bad Request."
+
+Note that in the case of the poll method, the `endpoint_url` value is supplied by the Transmitter.
 
 The following is a non-normative example request to create an Event Stream:
 
@@ -2040,200 +2234,6 @@ If a Transmitter intends to include data in SSF events that is not previously
 consented to be released by the user, then the Transmitter MUST obtain consent
 to release such data from the user in accordance with the Transmitter's privacy
 policy.
-
-# Profiles {#profiles}
-This section is a profile of the following IETF Security Event specifications:
-
-* Security Event Token (SET) {{RFC8417}}
-* Push-Based SET Token Delivery Using HTTP {{RFC8935}}
-* Poll-Based SET Token Delivery Using HTTP {{RFC8936}}
-
-The RISC use cases that set the requirements are described in Security Events
-RISC Use Cases {{USECASES}}.
-
-The CAEP use cases that set the requirements are described in CAEP Use Cases (TODO: Add
-        reference when file is added to repository.)
-
-## Security Event Token Profile {#set-profle}
-This section provides SSF profiling specifications for the Security Event Token (SET)
-{{RFC8417}} spec.
-
-### Signature Key Resolution {#signature-key-resolution}
-The signature key can be obtained through "jwks_uri", see {{discovery}}.
-
-### SSF Event Subject {#event-subjects}
-The primary Subject Member of SSF events is described in the "Subject Members" section ({{subject-ids}}). The JWT "sub" claim MUST NOT be present in any SET containing
-an SSF event.
-
-### SSF Event Properties {#event-properties}
-The SSF event MAY contain additional claims within the event payload that are
-specific to the event type.
-
-~~~ json
-{
-  "iss": "https://idp.example.com/",
-  "jti": "756E69717565206964656E746966696572",
-  "iat": 1520364019,
-  "txn": 8675309,
-  "aud": "636C69656E745F6964",
-  "sub_id": {
-    "format": "phone",
-    "phone_number": "+1 206 555 0123"
-  },
-  "events": {
-    "https://schemas.openid.net/secevent/risc/event-type/account-disabled": {
-      "reason": "hijacking"
-    }
-  }
-}
-~~~
-{: #risc-event-subject-example title="Example: SET Containing a RISC Event with a Phone Number Subject"}
-
-~~~ json
-{
-  "iss": "https://idp.example.com/",
-  "jti": "756E69717565206964656E746966696572",
-  "iat": 1520364019,
-  "txn": 8675309,
-  "aud": "636C69656E745F6964",
-  "sub_id": {
-    "format": "email",
-    "email": "user@example.com"
-  },
-  "events": {
-    "https://schemas.openid.net/secevent/caep/event-type/token-claims-changed": {
-      "claims": {
-        "token": "some-token-value"
-      }
-    }
-  }
-}
-~~~
-{: #caep-event-properties-example title="Example: SET Containing a CAEP Event with Properties"}
-
-### Explicit Typing of SETs {#explicit-typing}
-SSF events MUST use explicit typing as defined in Section 2.3 of {{RFC8417}}.
-
-~~~ json
-{
-  "typ":"secevent+jwt",
-  "alg":"HS256"
-}
-~~~
-{: title="Explicitly Typed JOSE Header" #explicit-type-header}
-
-The purpose is defense against confusion with other JWTs, as described in
-Sections 4.5, 4.6 and 4.7 of {{RFC8417}}. While current Id Token {{OpenID.Core}}
-validators may not be using the "typ" header parameter, requiring it for SSF
-SETs guarantees a distinct value for future validators.
-
-## The "iss" Claim {#iss-claim}
-The "iss" claim MUST match the "iss" value in the Stream Configuration data for the stream
-that the event is sent on. Receivers MUST validate that this claim matches the "iss"
-in the Stream Configuration data, as well as the Issuer from which the Receiver requested
-the Transmitter Configuration data.
-
-### The "exp" Claim {#exp-claim}
-The "exp" claim MUST NOT be used in SSF SETs.
-
-The purpose is defense in depth against confusion with other JWTs, as described
-in Sections 4.5 and 4.6 of {{RFC8417}}.
-
-### The "aud" Claim {#aud-claim}
-The "aud" claim can be a single string or an array of strings. Values that
-uniquely identify the Receiver to the Transmitter MAY be used, if the two parties
-have agreement on the format.
-
-More than one value can be present if the corresponding Receivers are known to
-the Transmitter to be the same entity, for example a web client and a mobile
-client of the same application. All the Receivers in this case MUST use the
-exact same delivery method.
-
-If multiple Receivers have the exact same delivery configuration but the
-Transmitter does not know if they belong to the same entity then the Transmitter
-SHOULD issue distinct SETs for each Receiver and deliver them separately. In
-this case the multiple Receivers might use the same service to process SETs, and
-this service might reroute SETs to respective Receivers, an "aud" claim with
-multiple Receivers would lead to unintended data disclosure.
-
-~~~ json
-{
-  "jti": "123456",
-  "iss": "https://transmitter.example.com",
-  "aud": ["receiver.example.com/web", "receiver.example.com/mobile"],
-  "iat": 1493856000,
-  "txn": 8675309,
-  "sub_id": {
-    "format": "opaque",
-    "id": "72e6991badb44e08a69672960053b342"
-  },
-  "events": {
-    "https://schemas.openid.net/secevent/ssf/event-type/verification": {
-      "state": "VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo="
-    }
-  }
-}
-~~~
-{: title="Example: SET with array 'aud' claim" #figarrayaud}
-
-### The "txn" claim {#txn-claim}
-Transmitters SHOULD set the "txn" claim value in Security Event Tokens (SETs). If the value is present, it MUST be unique to the underlying event that caused the Transmitter to generate the Security Event Token (SET). The Transmitter, however, may use the same value in the "txn" claim across different Security Events Tokens (SETs), such as session revoked and credential change, to indicate that the SETs originated from the same underlying cause or reason.
-
-### The "events" claim {#events-claim}
-The "events" claim SHOULD contain only one event. Multiple event type URIs are
-permitted only if they are alternative URIs defining the exact same event type.
-
-### Security Considerations
-
-#### Distinguishing SETs from other Kinds of JWTs
-Of particular concern is the possibility that SETs are confused for other kinds
-of JWTs. The Security Considerations section of {{RFC8417}} has several sub-sections
-on this subject. The Shared Signals Framework requires further restrictions:
-
-* The "sub" claim MUST NOT be present, as described in {{event-subjects}}.
-* SSF SETs MUST use explicit typing, as described in {{explicit-typing}}.
-* The "exp" claim MUST NOT be present, as described in {{exp-claim}}.
-
-## SET Token Delivery Using HTTP Profile {#set-token-delivery-using-http-profile}
-This section provides SSF profiling specifications for the {{RFC8935}} and
-{{RFC8936}} specs.
-
-### Stream Configuration Metadata {#delivery-meta}
-Each delivery method is identified by a URI, specified below by the "method"
-metadata.
-
-#### Push Delivery using HTTP
-This section provides SSF profiling specifications for the {{RFC8935}} spec.
-
-method
-
-> "urn:ietf:rfc:8935"
-
-endpoint_url
-
-> The URL where events are pushed through HTTP POST. This is set by the
-  Receiver. If a Receiver is using multiple streams from a single Transmitter
-  and needs to keep the SETs separated, it is RECOMMENDED that the URL for each
-  stream be unique.
-
-authorization_header
-
-> The HTTP Authorization header that the Transmitter MUST set with each event
-  delivery, if the configuration is present. The value is optional and it is set
-  by the Receiver.
-
-#### Polling Delivery using HTTP
-This section provides SSF profiling specifications for the {{RFC8936}} spec.
-
-method
-
-> "urn:ietf:rfc:8936"
-
-endpoint_url
-
-> The URL where events can be retrieved from. This is specified by the
-  Transmitter. These URLs MAY be reused across Receivers, but MUST be unique per
-  stream for a given Receiver.
 
 # IANA Considerations {#iana}
 Subject Identifiers defined in this document will be added to the "Security
