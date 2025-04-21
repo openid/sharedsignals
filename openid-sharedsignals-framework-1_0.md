@@ -527,6 +527,9 @@ permitted only if they are alternative URIs defining the exact same event type. 
 ### Event type specific fields
 The event object inside the `events` claim MAY have one or more fields that are uniquely determined by the type of the event.
 
+### Additional fields
+Transmitters MAY include additional fields in SSF events. These fields MAY exist anywhere in the SET, including the event object inside the "events" claim. Receivers MUST ignore any fields they do not understand from the SSF events they receive.
+
 # Example SETs that conform to the Shared Signals Framework {#events-examples}
 
 The following are hypothetical examples of SETs that conform to the Shared Signals Framework.
