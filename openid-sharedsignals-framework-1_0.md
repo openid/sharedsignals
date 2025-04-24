@@ -1229,6 +1229,12 @@ Errors are signaled with HTTP status codes as follows:
 {: title="Create Stream Errors" #tablecreatestream}
 
 
+##### Validating a Stream Creation Response
+
+* `aud`: the Receiver SHOULD validate the `aud` in the Create Stream Response.
+A Transmitter and Receiver MAY agree upon the audience value out of band.
+Regardless of how the audience value is agreed upon, the Receiver SHOULD ensure that it matches what it expects.
+
 #### Reading a Stream’s Configuration {#reading-a-streams-configuration}
 An Event Receiver gets the current configuration of a stream by making an HTTP
 GET request to the Configuration Endpoint. On receiving a valid request, the
