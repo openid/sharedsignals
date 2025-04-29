@@ -99,7 +99,7 @@ normative:
     seriesinfo:
       DOI: 10.17487/RFC6749
       RFC: '6749'
-    target: https://datatracker.ietf.org/doc/html/rfc6749#appendix-A.14
+    target: https://tools.ietf.org/html/rfc6749#appendix-A.14
     title: The OAuth 2.0 Authorization Framework - "expires_in" Syntax
 
   OpenID.Core:
@@ -948,12 +948,12 @@ description
 
 stream_ttl
 
-> **Transmitter-Supplied**, OPTIONAL. The refreshable lifetime of the stream in seconds, after which the Transmitter MAY either pause or disable the stream if it has not received any Receiver-initiated communication (defined below) in that duration. The syntax is the same as that of {{EXPIRES_IN}}.
+> **Transmitter-Supplied**, OPTIONAL. The refreshable time-to-live (TTL) of the stream in seconds, after which the Transmitter MAY either pause or disable the stream if it has not received any Receiver-initiated communication (defined below) in that duration. The syntax is the same as that of {{EXPIRES_IN}}.
 >
-> For PUSH streams, the Transmitter MUST refresh the TTL whenever:
+> For streams created with the PUSH {{RFC8935}} delivery method, the Transmitter MUST refresh the TTL whenever:
 > * The Receiver calls any endpoint in the Event Stream Management API ({{management}}).
 >
-> For POLL streams, the Transmitter MUST refresh the TTL whenever:
+> For streams created with the POLL {{RFC8936}} delivery method, the Transmitter MUST refresh the TTL whenever:
 > * The Receiver polls the Transmitter for events.
 > * The Receiver calls any endpoint in the Event Stream Management API ({{management}}).
 >
