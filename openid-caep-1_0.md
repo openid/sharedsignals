@@ -1,5 +1,6 @@
 ---
 title: OpenID Continuous Access Evaluation Profile 1.0 - draft 03
+
 abbrev: CAEP-Spec
 docname: openid-caep-1_0
 date: 2024-06-19
@@ -28,10 +29,8 @@ author:
         email: atul@sgnl.ai
 
 normative:
-  RFC4001: # Textual Conventions for Internet Network Addresses
-
   ISO-IEC-29115:
-    target: http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=45138
+    target: https://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=45138
     title: "ISO/IEC 29115:2013 -- Information technology - Security techniques - Entity authentication assurance framework"
     author:
       -
@@ -94,7 +93,7 @@ normative:
     - ins: C. Mortimore
       name: Chuck Mortimore
     date: November 2014
-    target: http://openid.net/specs/openid-connect-core-1_0.html#IDToken
+    target: https://openid.net/specs/openid-connect-core-1_0.html#IDToken
     title: OpenID Connect Core 1.0 - ID Token
   RFC2119:
   RFC8174:
@@ -103,13 +102,13 @@ normative:
   RFC6711:
   RFC8176:
   SSF:
-    target: http://openid.net/specs/openid-sse-framework-1_0.html
+    target: https://openid.net/specs/openid-sharedsignals-framework-1_0.html
     title: OpenID Shared Signals and Events Framework Specification 1.0
     author:
       -
         ins: A. Tulshibagwale
         name: Atul Tulshibagwale
-        org: Google
+        org: SGNL
       -
         ins: T. Cappalli
         name: Tim Cappalli
@@ -126,7 +125,11 @@ normative:
         ins: John Bradley
         name: John Bradley
         org: Yubico
-    date: 2021-05
+      -
+        ins: S. Miel
+        name: Shayne Miel
+        org: Cisco
+    date: 2024-06-25
   WebAuthn:
     target: https://www.w3.org/TR/webauthn/
     title: "Web Authentication: An API for accessing Public Key Credentials Level 2"
@@ -734,9 +737,6 @@ The `event_timestamp` in this event type specifies the time at which the session
 ### Event Specific Claims {#session-established-event-specific-claims}
 The following optional claims MAY be included in the Session Established event:
 
-ips
-: The array of IP addresses of the user as observed by the Transmitter. The value MUST be in the format of an array of strings, each one of which represents the RFC 4001 {{RFC4001}} string representation of an IP address. (**NOTE**, this can be different from the one observed by the Receiver for the same user because of network translation)
-
 fp_ua
 : Fingerprint of the user agent computed by the Transmitter. (**NOTE**, this is not to identify the session, but to present some qualities of the session)
 
@@ -766,7 +766,6 @@ The following is a non-normative example of the `session-established` event type
     },
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/session-established": {
-          "ips": ["192.168.1.12", "10.1.1.1"],
           "fp_ua": "abb0b6e7da81a42233f8f2b1a8ddb1b9a4c81611",
           "acr": "AAL2",
           "amr": ["otp"],
@@ -788,9 +787,6 @@ The Session Presented event signifies that the Transmitter has observed the sess
 
 ### Event Specific Claims {#session-presented-event-specific-claims}
 The following optional claims MAY be present in a Session Presented event:
-
-ips
-: The array of IP addresses of the user as observed by the Transmitter. The value MUST be in the format of an array of strings, each one of which represents the RFC 4001 {{RFC4001}} string representation of an IP address. (**NOTE**, this can be different from the one observed by the Receiver for the same user because of network translation)
 
 fp_ua
 : Fingerprint of the user agent computed by the Transmitter. (**NOTE**, this is not to identify the session, but to present some qualities of the session)
@@ -814,12 +810,68 @@ The following is a non-normative example of a Session Presented event:
     },
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/session-presented": {
-          "ips": ["192.168.1.12","10.1.1.1"],
           "fp_ua": "abb0b6e7da81a42233f8f2b1a8ddb1b9a4c81611",
           "ext_id": "12345",
           "event_timestamp": 1615304991643
         }
-    }}
+    }
+}
+~~~
+
+## Risk Level Change {#risk-level-change}
+Event Type URI:
+
+`https://schemas.openid.net/secevent/caep/event-type/risk-level-change`
+
+A vendor may deploy mechanisms to gather and analyze various signals associated with subjects such as users, devices, etc. These signals, which can originate from diverse channels and methods beyond the scope of this event description, are processed to derive an abstracted risk level representing the subject's current threat status.
+
+The Risk Level Change event is employed by the Transmitter to communicate any modifications in a subject's assessed risk level at the time indicated by the `event_timestamp` field in the Risk Level Change event. The Transmitter may generate this event to indicate:
+
+* User's risk has changed due to potential suspecious access from unknown destination, password compromise, addition of strong authenticator or other reasons.
+* Device's risk has changed due to installation of unapproved software, connection to insecure pheripheral device, encryption of data or other reasons.
+* Any other subject's risk changes due to variety of reasons.
+
+
+### Event Specific Claims {#risk-level-change-event-specific-claims}
+
+risk_reason
+: RECOMMENDED, JSON string: indicates the reason that contributed to the risk level changes by the Transmitter.
+
+principal
+: REQUIRED, JSON string: representing the principal entity involved in the observed risk event, as identified by the transmitter. The subject principal can be one of the following entities USER, DEVICE, SESSION, TENANT, ORG_UNIT, GROUP, or any other entity as defined in Section 2 of {{SSF}}. This claim identifies the primary subject associated with the event, and helps to contextualize the risk relative to the entity involved.
+
+current_level 
+: REQUIRED, JSON string: indicates the current level of the risk for the subject. Value MUST be one of LOW, MEDIUM, HIGH
+
+previous_level 
+: OPTIONAL, JSON string: indicates the previously known level of the risk for the subject. Value MUST be one of LOW, MEDIUM, HIGH. If the Transmitter omits this value, the Receiver MUST assume that the previous risk level is unknown to the Transmitter.
+
+
+### Examples {#risk-level-change-examples}
+The following is a non-normative example of a Risk Level Change event:
+
+~~~json
+{
+    "iss": "https://idp.example.com/123456789/",
+    "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
+    "iat": 1615305159,
+    "aud": "https://sp.example.com/caep",
+    "txn": 8675309,
+    "sub_id": {
+      "format": "iss_sub",
+      "iss": "https://idp.example.com/3456789/",
+      "sub": "jane.doe@example.com"
+    },
+    "events":{
+      "https://schemas.openid.net/secevent/caep/event-type/risk-level-change":{
+         "current_level": "LOW",
+         "previous_level": "HIGH",
+         "event_timestamp": 1615304991643,
+         "principal": "USER",
+         "risk_reason": "PASSWORD_FOUND_IN_DATA_BREACH"
+      }
+   }
+}
 ~~~
 
 # Security Considerations
