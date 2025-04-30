@@ -1140,9 +1140,9 @@ description
   This is useful in multi-stream systems to identify the stream for human actors. The
   transmitter MAY truncate the string beyond an allowed max length.
 
-stream_ttl
+inactivity_ttl
 
-> **Transmitter-Supplied**, OPTIONAL. The refreshable time-to-live (TTL) of the stream in seconds, after which the Transmitter MAY either pause or disable the stream if it has not received any Receiver-initiated communication (defined below) in that duration. The syntax is the same as that of {{EXPIRES_IN}}.
+> **Transmitter-Supplied**, OPTIONAL. The refreshable time-to-live (TTL) of the stream in seconds, after which the Transmitter MAY either pause, disable, or delete the stream if it has not received any Receiver-initiated communication (defined below) in that duration. The syntax is the same as that of {{EXPIRES_IN}}.
 >
 > For streams created with the PUSH {{RFC8935}} delivery method, the Transmitter MUST refresh the TTL whenever:
 > * The Receiver calls any endpoint in the Event Stream Management API ({{management}}).
