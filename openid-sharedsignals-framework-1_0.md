@@ -1151,7 +1151,7 @@ inactivity_ttl
 > * The Receiver polls the Transmitter for events.
 > * The Receiver calls any endpoint in the Event Stream Management API ({{management}}).
 >
-> If the Transmitter decides to update the stream, it MUST send a Stream Updated Event to the Receiver as described in {{status}}.
+> If the Transmitter decides to pause or disable the stream, it MUST send a Stream Updated Event to the Receiver as described in {{status}}.
 
 TODO: consider adding a IANA Registry for stream configuration metadata, similar
 to Section 7.1.1 of {{RFC8414}}. This would allow other specs to add to
