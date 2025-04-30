@@ -315,6 +315,9 @@ All members within a Complex Subject MUST represent attributes of the same
 Subject Principal. As a whole, the Complex Subject MUST refer to exactly one
 Subject Principal.
 
+For details about how to interpret unspecified claims in a Complex Subject as wildcards,
+please see the section on Subject Matching ({{subject-matching}}).
+
 ## Subject Identifiers in SSF Events {#subject-ids-in-ssf}
 
 A Subject Identifier in an SSF event MUST have an identifier format that is any
@@ -1061,7 +1064,7 @@ stream_id
 
 > **Transmitter-Supplied**, REQUIRED. A string that uniquely identifies the stream. A
   Transmitter MUST generate a unique ID for each of its non-deleted streams at the time
-  of stream creation. Transmitters SHOULD use character set described in 
+  of stream creation. Transmitters SHOULD use character set described in
   Section 2.3 of {{RFC3986}} to generate the stream ID.
 
 iss
@@ -1107,8 +1110,8 @@ delivery
 > REQUIRED. A JSON object containing a set of name/value pairs specifying configuration
   parameters for the SET delivery method. The actual delivery method is
   identified by the special key "method" with the value being a URI as defined
-  in {{delivery-meta}}. 
-  
+  in {{delivery-meta}}.
+
 min_verification_interval
 
 > **Transmitter-Supplied**, OPTIONAL. An integer indicating the minimum amount of time in
@@ -1839,9 +1842,11 @@ An Event Receiver can indicate to an Event Transmitter whether or not the
 Receiver wants to receive events about a particular subject by “adding” or
 “removing” that subject to the Event Stream, respectively.
 
+#### Subject Matching {#subject-matching}
+
 If a Receiver adds a subject to a stream, the Transmitter SHOULD send any events
-relating to the subject, which have event_types that the Receiver has subscribed to,
-and both the stream and the subject are enabled. In the case of Simple Subjects,
+relating to the subject which have event_types that the Receiver has subscribed to,
+as long as the stream is enabled. In the case of Simple Subjects,
 two subjects match if they are exactly identical. For Complex Subjects, two subjects
 match if, for all fields in the Complex Subject (i.e. `user`, `group`, `device`, etc.),
 at least one of the following statements is true:
@@ -1851,6 +1856,101 @@ at least one of the following statements is true:
 2. Subject 2's field is not defined
 
 3. Subject 1's field is identical to Subject 2's field
+
+The following is a non-normative example of wildcard matching for Complex Subjects
+when a Receiver adds a subject that is less restrictive than the subject being sent
+by the Transmitter.
+
+~~~
+The Receiver has added the following subject to their stream:
+{
+  "format": "complex",
+  "tenant": {
+    "format": "opaque",
+    "id": "example-a38h4792-uw2"
+  }
+}
+
+The Transmitter has an event to broadcast with the following subject:
+{
+  "format": "complex",
+  "tenant": {
+    "format": "opaque",
+    "id": "example-a38h4792-uw2"
+  },
+  "user": {
+    "format": "email",
+    "email": "jdoe@example.com"
+  }
+}
+
+According to the matching rules described above, the Transmitter SHOULD broadcast the
+event over the Receiver's stream.
+~~~
+
+The following is a non-normative example of wildcard matching for Complex Subjects
+when a Receiver adds a subject that is more restrictive than the subject being sent
+by the Transmitter.
+
+~~~
+The Receiver has added the following subject to their stream:
+{
+  "format": "complex",
+  "user": {
+    "format": "email",
+    "email": "jdoe@example.com"
+  },
+  "device": {
+    "format": "ip-addresses",
+    "ip-addresses": ["10.29.37.75"]
+  }
+}
+
+The Transmitter has an event to broadcast with the following subject:
+{
+  "format": "complex",
+  "user": {
+    "format": "email":
+    "email": "jdoe@example.com"
+  }
+}
+
+According to the matching rules described above, the Transmitter SHOULD broadcast the
+event over the Receiver's stream.
+~~~
+
+The following is a non-normative example of two Complex Subjects that do not match.
+
+~~~
+The Receiver has added the following subject to their stream:
+{
+  "format": "complex",
+  "user": {
+    "format": "email",
+    "email": "jdoe@example.com"
+  },
+  "group": {
+    "format": "did",
+    "url": "did:example:123456"
+  }
+}
+
+The Transmitter has an event to broadcast with the following subject:
+{
+  "format": "complex",
+  "user": {
+    "format": "email":
+    "email": "jdoe@example.com"
+  },
+  "group": {
+    "format": "did",
+    "url": "did:example:9999999"
+  }
+}
+
+According to the matching rules described above, the Transmitter SHOULD NOT broadcast the
+event over the Receiver's stream.
+~~~
 
 #### Adding a Subject to a Stream {#adding-a-subject-to-a-stream}
 To add a subject to an Event Stream, the Event Receiver makes an HTTP POST
