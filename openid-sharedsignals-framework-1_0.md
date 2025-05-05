@@ -1846,7 +1846,7 @@ Receiver wants to receive events about a particular subject by “adding” or
 
 If a Receiver adds a subject to a stream defined in {{adding-a-subject-to-a-stream}}, the Transmitter SHOULD send any events
 relating to the subject which have event_types that the Receiver has subscribed to,
-as long as the stream is enabled. In the case of Simple Subjects,
+as long as the stream status is enabled. In the case of Simple Subjects,
 two subjects match if they are exactly identical. For Complex Subjects, two subjects
 match if, for all fields in the Complex Subject (i.e. `user`, `group`, `device`, etc.),
 at least one of the following statements is true:
