@@ -1844,7 +1844,7 @@ Receiver wants to receive events about a particular subject by “adding” or
 
 #### Subject Matching {#subject-matching}
 
-If a Receiver adds a subject to a stream, the Transmitter SHOULD send any events
+If a Receiver adds a subject to a stream defined in {{adding-a-subject-to-a-stream}}, the Transmitter SHOULD send any events
 relating to the subject which have event_types that the Receiver has subscribed to,
 as long as the stream is enabled. In the case of Simple Subjects,
 two subjects match if they are exactly identical. For Complex Subjects, two subjects
