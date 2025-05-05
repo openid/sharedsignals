@@ -97,16 +97,7 @@ normative:
     target: https://tools.ietf.org/html/rfc6749#section-4.4
     title: The OAuth 2.0 Authorization Framework - Client Credentials Grant
 
-  EXPIRES_IN:
-    author:
-    - ins: D. Hardt
-      name: D. Hardt
-    date: October 2012
-    seriesinfo:
-      DOI: 10.17487/RFC6749
-      RFC: '6749'
-    target: https://tools.ietf.org/html/rfc6749#appendix-A.14
-    title: The OAuth 2.0 Authorization Framework - "expires_in" Syntax
+  RFC6749:
 
   OpenID.Core:
     author:
@@ -1142,14 +1133,14 @@ description
 
 inactivity_ttl
 
-> **Transmitter-Supplied**, OPTIONAL. The refreshable time-to-live (TTL) of the stream in seconds, after which the Transmitter MAY either pause, disable, or delete the stream if it has not received any Receiver-initiated communication (defined below) in that duration. The syntax is the same as that of {{EXPIRES_IN}}.
+> **Transmitter-Supplied**, OPTIONAL. The refreshable time-to-live (TTL) of the stream in seconds, since the last activity from the Receiver as described below, was conducted. After the TTL passes with no eligible activity from the Receiver, the Transmitter MAY either pause, disable, or delete the stream. The syntax is the same as that of `expires_in` from Section A.14 of RFC6749 {{RFC6749}}.
 >
-> For streams created with the PUSH {{RFC8935}} delivery method, the Transmitter MUST refresh the TTL whenever:
-> * The Receiver calls any endpoint in the Event Stream Management API ({{management}}).
+> For streams created with the PUSH {{RFC8935}} delivery method, the Transmitter MUST refresh the TTL duration of the stream upon the following Receiver:
+> * The Receiver calls any endpoint in the Event Stream Management API that references the stream ({{management}}).
 >
-> For streams created with the POLL {{RFC8936}} delivery method, the Transmitter MUST refresh the TTL whenever:
-> * The Receiver polls the Transmitter for events.
-> * The Receiver calls any endpoint in the Event Stream Management API ({{management}}).
+> For streams created with the POLL {{RFC8936}} delivery method, the Transmitter MUST refresh the TTL duration of the stream upon the following Receiver activity:
+> * The Receiver polls the Transmitter for events in the stream.
+> * The Receiver calls any endpoint in the Event Stream Management API that references the stream ({{management}}).
 >
 > If the Transmitter decides to pause or disable the stream, it MUST send a Stream Updated Event to the Receiver as described in {{status}}.
 
