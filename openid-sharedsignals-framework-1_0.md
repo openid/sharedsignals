@@ -1135,7 +1135,7 @@ inactivity_ttl
 
 > **Transmitter-Supplied**, OPTIONAL. The refreshable time-to-live (TTL) of the stream in seconds, since the last activity from the Receiver as described below, was conducted. After the TTL passes with no eligible activity from the Receiver, the Transmitter MAY either pause, disable, or delete the stream. The syntax is the same as that of `expires_in` from Section A.14 of RFC6749 {{RFC6749}}.
 >
-> For streams created with the PUSH {{RFC8935}} delivery method, the Transmitter MUST refresh the TTL duration of the stream upon the following Receiver:
+> For streams created with the PUSH {{RFC8935}} delivery method, the Transmitter MUST refresh the TTL duration of the stream upon the following Receiver activity:
 > * The Receiver calls any endpoint in the Event Stream Management API that references the stream ({{management}}).
 >
 > For streams created with the POLL {{RFC8936}} delivery method, the Transmitter MUST refresh the TTL duration of the stream upon the following Receiver activity:
