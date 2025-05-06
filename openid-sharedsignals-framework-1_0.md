@@ -1857,7 +1857,7 @@ at least one of the following statements is true:
 
 3. Subject 1's field is identical to Subject 2's field
 
-The following is a non-normative example of wildcard matching for Complex Subjects
+The following is a non-normative example of subject matching for Complex Subjects
 when a Receiver adds a subject that is less restrictive than the subject being sent
 by the Transmitter.
 
