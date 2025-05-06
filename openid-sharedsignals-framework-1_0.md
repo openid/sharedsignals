@@ -79,6 +79,12 @@ contributor:
         org: Workday
         email: jennifer.winer@workday.com
 
+      -
+        ins: T. Raibhandare
+        name: Tushar Raibhandare
+        org: Google
+        email: traib@google.com
+
 normative:
   CLIENTCRED:
     author:
@@ -90,6 +96,8 @@ normative:
       RFC: '6749'
     target: https://tools.ietf.org/html/rfc6749#section-4.4
     title: The OAuth 2.0 Authorization Framework - Client Credentials Grant
+
+  RFC6749:
 
   OpenID.Core:
     author:
@@ -1122,6 +1130,23 @@ description
 > **Receiver-Supplied**, OPTIONAL. A string that describes the properties of the stream.
   This is useful in multi-stream systems to identify the stream for human actors. The
   transmitter MAY truncate the string beyond an allowed max length.
+
+inactivity_timeout
+
+> **Transmitter-Supplied**, OPTIONAL. The refreshable inactivity timeout of the stream in seconds. After the timeout duration passes with no eligible activity from the Receiver, as defined below, the Transmitter MAY either pause, disable, or delete the stream. The syntax is the same as that of `expires_in` from Section A.14 of {{RFC6749}}.
+>
+> The following constitutes eligible Receiver activity. If the Transmitter observes any of these activities from the Receiver, it MUST restart the inactivity timeout counter.
+>
+> >   For streams created with the PUSH {{RFC8935}} delivery method:
+> >
+> >   * The Receiver calls any endpoint in the Event Stream Management API that references the stream ({{management}}).
+> > 
+> >   For streams created with the POLL {{RFC8936}} delivery method:
+> > 
+> >   * The Receiver polls the Transmitter for events in the stream.
+> >   * The Receiver calls any endpoint in the Event Stream Management API that references the stream ({{management}}).
+>
+> If the Transmitter decides to pause or disable the stream, it MUST send a Stream Updated Event to the Receiver as described in {{status}}.
 
 TODO: consider adding a IANA Registry for stream configuration metadata, similar
 to Section 7.1.1 of {{RFC8414}}. This would allow other specs to add to
