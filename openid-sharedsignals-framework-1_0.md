@@ -1888,7 +1888,7 @@ According to the matching rules described above, the Transmitter SHOULD broadcas
 event over the Receiver's stream.
 ~~~
 
-The following is a non-normative example of wildcard matching for Complex Subjects
+The following is a non-normative example of subject matching for Complex Subjects
 when a Receiver adds a subject that is more restrictive than the subject being sent
 by the Transmitter.
 
