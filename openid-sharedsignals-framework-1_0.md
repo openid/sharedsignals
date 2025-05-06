@@ -1135,7 +1135,7 @@ inactivity_ttl
 
 > **Transmitter-Supplied**, OPTIONAL. The refreshable time-to-live (TTL) of the stream in seconds. After the TTL passes with no eligible activity from the Receiver, as defined below, the Transmitter MAY either pause, disable, or delete the stream. The syntax is the same as that of `expires_in` from Section A.14 of {{RFC6749}}.
 >
-> The following constitutes eligible Receiver activity, upon observing which, the Transmitter MUST reset its count toward the TTL of the stream to zero.
+> The following constitutes eligible Receiver activity. If the Transmitter observes any of these activities from the Receiver, it MUST restart the inactivity timeout counter.
 >
 > >   For streams created with the PUSH {{RFC8935}} delivery method:
 > >
