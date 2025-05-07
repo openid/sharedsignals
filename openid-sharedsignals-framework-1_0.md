@@ -1168,6 +1168,8 @@ limits
 > max_time
 >
 > > The maximum time in seconds for which the Transmitter will hold events before it discards them without delivering them to the Receiver.
+>
+> If both fields are present, then the Transmitter MAY discard events if any of the limits are reached.
 
 TODO: consider adding a IANA Registry for stream configuration metadata, similar
 to Section 7.1.1 of {{RFC8414}}. This would allow other specs to add to
