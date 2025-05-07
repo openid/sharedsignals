@@ -1,8 +1,8 @@
 ---
-title: OpenID Shared Signals Framework Specification 1.0 - draft 03
+title: OpenID Shared Signals Framework Specification 1.0 - draft 21
 abbrev: SharedSignals
 docname: openid-sharedsignals-framework-1_0
-date: 2024-06-25
+date: 2024-05-06
 
 ipr: none
 cat: std
@@ -1150,6 +1150,24 @@ inactivity_timeout
 > >   * The Receiver calls any endpoint in the Event Stream Management API that references the stream ({{management}}).
 >
 > If the Transmitter decides to pause or disable the stream, it MUST send a Stream Updated Event to the Receiver as described in {{status}}.
+
+limits
+
+> **Transmitter-Supplied**, OPTIONAL. The amount of data the Transmiter is able to hold in this stream if it cannot deliver events to the Receiver. The reasons for non-delivery include
+>
+> * The stream is paused
+> * The stream uses POLL delivery and events are ready to deliver before the Receiver polls
+> * The stream uses PUSH delivery, but the Transmitter is encountering errors in delivering the events.
+>
+> If the `limits` field is present, the value of this field MUST be a JSON object that contains one or more of the following members:
+>
+>  max_events
+>
+> > The maximum number of events that the Transmitter will hold before it discards events without delivering them to the Receiver.
+>
+> max_time
+>
+> > The maximum time in seconds for which the Transmitter will hold events before it discards them without delivering them to the Receiver.
 
 TODO: consider adding a IANA Registry for stream configuration metadata, similar
 to Section 7.1.1 of {{RFC8414}}. This would allow other specs to add to
