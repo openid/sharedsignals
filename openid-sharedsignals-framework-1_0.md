@@ -1,8 +1,8 @@
 ---
-title: OpenID Shared Signals Framework Specification 1.0 - draft 20
+title: OpenID Shared Signals Framework Specification 1.0 - draft 21
 abbrev: SharedSignals
 docname: openid-sharedsignals-framework-1_0
-date: 2025-05-06
+date: 2025-05-13
 
 ipr: none
 cat: std
@@ -84,6 +84,12 @@ contributor:
         name: Tushar Raibhandare
         org: Google
         email: traib@google.com
+
+      -
+        ins: Y. Sarig
+        name: Yair Sarig
+        org: Omnissa
+        email: ysarig@omnissa.com
 
 normative:
   CLIENTCRED:
@@ -1719,14 +1725,15 @@ enabled
 paused
 
 > The Transmitter MUST NOT transmit events over the stream. The Transmitter
-  will hold any events it would have transmitted while paused, and SHOULD
-  transmit them when the stream’s status becomes "enabled". If a Transmitter
-  holds successive events that affect the same Subject Principal, then the
-  Transmitter MUST make sure that those events are transmitted in the order of
-  time that they were generated OR the Transmitter MUST send only the last events
-  that do not require the previous events affecting the same Subject Principal to
-  be processed by the Receiver, because the previous events are either cancelled
-  by the later events or the previous events are outdated.
+  SHOULD hold any events it would have transmitted while paused, and SHOULD
+  transmit them when the stream’s status becomes "enabled". The Transmitter
+  MAY drop zero or more events that are held when the stream is paused. If
+  a Transmitter holds successive events that affect the same Subject Principal,
+  then the Transmitter MUST make sure that those events are transmitted in the
+  order of time that they were generated OR the Transmitter MUST send only the
+  last events that do not require the previous events affecting the same Subject
+  Principal to be processed by the Receiver, because the previous events are
+  either cancelled by the later events or the previous events are outdated.
 
 disabled
 
