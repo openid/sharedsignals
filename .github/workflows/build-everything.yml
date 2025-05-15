@@ -55,9 +55,9 @@ jobs:
       - name: Render Text
         run: xml2rfc openid-sharedsignals-framework-1_0.xml --text
       - name: Render risc html
-        run: xml2rfc openid-risc-profile-specification-1_0.xml --html -o openid-risc-profile-specification-1_0.html
+        run: xml2rfc openid-risc-1_0.xml --html -o openid-risc-1_0.html
       - name: Render risc text
-        run: xml2rfc openid-risc-profile-specification-1_0.xml --text -o openid-risc-profile-specification-1_0.txt
+        run: xml2rfc openid-risc-1_0.xml --text -o openid-risc-1_0.txt
       - name: Convert caep md to xml
         run: kramdown-rfc2629 openid-caep-1_0.md > openid-caep-1_0.xml
       - name: Render caep html
