@@ -899,6 +899,7 @@ The technology described in this specification was made available from contribut
 
   -10
   * Fixed the example for the "session established" event
+  * ip claims removed from session established and session presented
   * New "Risk level change" event
 
   -03
