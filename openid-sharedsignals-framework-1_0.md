@@ -2432,6 +2432,7 @@ The technology described in this specification was made available from contribut
     * Specified that the poll delivery endpoint should require authorization
     * Clarified stream creation behavior for delivery method mismatch and poll delivery
     * Clarified that StreamIDs have to be of the "unreserved characters" character set from RFC3986
+    * Clarified the authorization_header requirement for the receiver
     * Rearranged the content for easier readability: Eliminated the "Profiles" section (previous section 10). Created new sections "Events" (new section 4), and "Event Delivery" (new Section 6). Incorporated text from the erstwhile "Profiles" section into other sections as appropriate. Fixed references and titles of examples.
     * Added "IP Address" as a subject identifier format
     * In Create Stream, specified that description may be included in the response, and that the `endpoint_url` is specified by the Transmitter in the `poll` delivery method
