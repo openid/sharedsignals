@@ -1,8 +1,8 @@
 ---
-title: OpenID Shared Signals Framework Specification 1.0 - draft 21
+title: OpenID Shared Signals Framework Specification 1.0 - draft 22
 abbrev: SharedSignals
 docname: openid-sharedsignals-framework-1_0
-date: 2025-05-13
+date: 2025-05-15
 
 ipr: none
 cat: std
@@ -2423,6 +2423,21 @@ The technology described in this specification was made available from contribut
 # Document History
 
   [[ To be removed from the final specification ]]
+  -20
+    * Clarified that Transmitters may drop events if they aren't able to deliver them to the receiver.
+    * Added examples to demonstrate how "wildcard matching" works in SSF event complex subjects
+    * Added an `inactivity_timeout` field to the Transmitter metadata, after which transmitters may pause, disable or delete inactive streams.
+    * Clarified that Receivers should validate the `aud` value
+    * Clarified that Transmitters may include additional fields in SSF events, and how receivers should interpret them.
+    * Specified that the poll delivery endpoint should require authorization
+    * Clarified stream creation behavior for delivery method mismatch and poll delivery
+    * Clarified that StreamIDs have to be of the "unreserved characters" character set from RFC3986
+    * Clarified the authorization_header requirement for the receiver
+    * Rearranged the content for easier readability: Eliminated the "Profiles" section (previous section 10). Created new sections "Events" (new section 4), and "Event Delivery" (new Section 6). Incorporated text from the erstwhile "Profiles" section into other sections as appropriate. Fixed references and titles of examples.
+    * Added "IP Address" as a subject identifier format
+    * In Create Stream, specified that description may be included in the response, and that the `endpoint_url` is specified by the Transmitter in the `poll` delivery method
+    * Updated URLs of linked specs and other resources
+    * Fixed example to have correct format for "reason_admin" and "reason_user"
 
   -03
 

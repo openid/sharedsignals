@@ -1,9 +1,9 @@
 ---
-title: OpenID Continuous Access Evaluation Profile 1.0 - draft 03
+title: OpenID Continuous Access Evaluation Profile 1.0 - draft 10
 
 abbrev: CAEP-Spec
 docname: openid-caep-1_0
-date: 2024-06-19
+date: 2025-05-13
 
 ipr: none 
 cat: std
@@ -896,6 +896,11 @@ The technology described in this specification was made available from contribut
 # Document History
 
   [[ To be removed from the final specification ]]
+
+  -10
+  * Fixed the example for the "session established" event
+  * ip claims removed from session established and session presented
+  * New "Risk level change" event
 
   -03
 
