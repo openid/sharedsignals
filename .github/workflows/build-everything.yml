@@ -77,8 +77,8 @@ jobs:
           path: |
             openid-sharedsignals-framework-1_0.html
             openid-sharedsignals-framework-1_0.txt
-            openid-risc-profile-specification-1_0.html
-            openid-risc-profile-specification-1_0.txt
+            openid-risc-1_0.html
+            openid-risc-1_0.txt
             openid-caep-1_0.html
             openid-caep-1_0.txt
             openid-caep-interoperability-profile-1_0.html
