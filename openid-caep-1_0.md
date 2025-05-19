@@ -1,9 +1,9 @@
 ---
-title: OpenID Continuous Access Evaluation Profile 1.0 - draft 10
+title: OpenID Continuous Access Evaluation Profile 1.0 - draft 11
 
 abbrev: CAEP-Spec
 docname: openid-caep-1_0
-date: 2025-05-13
+date: 2025-05-19
 
 ipr: none 
 cat: std
@@ -27,6 +27,15 @@ author:
         name: Atul Tulshibagwale
         org: SGNL
         email: atul@sgnl.ai
+
+contributor:
+      -
+        ins: A. Deshpande
+        name: Apoorva Deshpande
+        org: Okta
+        email: apoorva.deshpande@okta.com
+        contribution: |
+          Apoorva defined the `risk-level-change` event.
 
 normative:
   ISO-IEC-29115:
