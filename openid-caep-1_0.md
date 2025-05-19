@@ -28,6 +28,15 @@ author:
         org: SGNL
         email: atul@sgnl.ai
 
+contributor:
+      -
+        ins: A. Deshpande
+        name: Apoorva Deshpande
+        org: Okta
+        email: apoorva.deshpande@okta.com
+        contribution: |
+          Apoorva defined the `risk-level-change` event.
+
 normative:
   ISO-IEC-29115:
     target: https://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=45138
