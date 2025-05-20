@@ -743,16 +743,7 @@ Transmitters have metadata describing their configuration:
 
 spec_version
 
-> OPTIONAL. A version identifying the implementer's draft or final specification implemented by the Transmitter. This includes the numerical portion of the spec version as described in the document {{NAMINGCONVENTION}}. If absent, the Transmitter is assumed to conform to "1_0-ID1" version of the specification (this document).
-
->  The following is a non-normative example of a Transmitter that implements the third implementer's draft of the Shared Signals Framework specification 1_0.
-
-~~~ json
-   {
-        "spec_version": "1_0-ID3"
-   }
-~~~
-{: #figspecversionid2 title="Example spec_version referring to the 2nd implementer's draft of the 1_0 spec"}
+> OPTIONAL. A version identifying the implementer's draft or final specification implemented by the Transmitter. This includes the numerical portion of the spec version as described in the document {{NAMINGCONVENTION}}. If absent, the Transmitter is assumed to conform to "1_0-ID1" version of the specification.
 
 >  The following is a non-normative example of a Transmitter that implements the final specification of the Shared Signals Framework 1_0.
 
@@ -936,7 +927,7 @@ HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
-  "spec_version": "1_0-ID3",
+  "spec_version": "1_0",
   "issuer":
     "https://tr.example.com",
   "jwks_uri":
