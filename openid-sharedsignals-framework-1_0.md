@@ -164,20 +164,12 @@ normative:
     target: https://openid.net/wg/resources/naming-and-contents-of-specifications/
     title: OpenID Naming and Content of Specifications
 
-informative:
-  USECASES:
-    author:
-    - ins: M. Scurtescu
-      name: Marius Scurtescu
-    date: June 2017
-    target: https://tools.ietf.org/html/draft-scurtescu-secevent-risc-use-cases-00
-    title: Security Events RISC Use Cases
-
 --- abstract
 
 This Shared Signals Framework (SSF) enables sharing of signals and events
-between cooperating peers. It enables multiple applications such as Risk Incident
-Sharing and Coordination (RISC) and the Continuous Access Evaluation Profile ({{CAEP}})
+between cooperating peers. It enables multiple applications such as Risk
+Incident Sharing and Coordination (RISC) and the Continuous Access Evaluation
+Profile ({{CAEP}})
 
 This specification defines:
 
@@ -189,7 +181,8 @@ This specification defines:
 * Transmitter Configuration Metadata and its discovery method for Receivers
 * A management API for Event Streams
 
-This specification also directly profiles several IETF Security Events specifications:
+This specification also directly profiles several IETF Security Events
+specifications:
 
 * Security Event Token (SET) {{RFC8417}}
 * Subject Identifiers for Security Event Tokens {{RFC9493}}
@@ -901,7 +894,8 @@ The following is a non-normative example of the `spec_urn`
         "spec_urn": "urn:ietf:rfc:6749"
    }
 ~~~
-{: #figspecurn title="Example: `spec_urn` specifying the OAuth protocol for authorization"}
+{: #figspecurn title="Example: `spec_urn` specifying the OAuth protocol for
+authorization"}
 
 In this case, the Receiver may obtain an access token using the Client
 Credentials Grant {{CLIENTCRED}}, or any other method suitable for the Receiver
@@ -1408,7 +1402,8 @@ GET /ssf/stream HTTP/1.1
 Host: transmitter.example.com
 Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 ~~~
-{: title="Example: Read Stream Configuration Request" #figreadconfigreqnostreamid}
+{: title="Example: Read Stream Configuration
+Request" #figreadconfigreqnostreamid}
 
 The following is a non-normative example response to a request with no
 "stream_id":
@@ -1474,7 +1469,8 @@ Cache-Control: no-store
   }
 ]
 ~~~
-{: title="Example: Read Stream Configuration Response" #figreadconfigrespnostreamidmanystreams}
+{: title="Example: Read Stream Configuration
+ Response" #figreadconfigrespnostreamidmanystreams}
 
 The following is a non-normative example response to a request with no
 "stream_id" when there is only one Event Stream configured:
@@ -1513,7 +1509,8 @@ Cache-Control: no-store
   }
 ]
 ~~~
-{: title="Example: Read Stream Configuration Response" #figreadconfigrespnostreamidonestream}
+{: title="Example: Read Stream Configuration
+ Response" #figreadconfigrespnostreamidonestream}
 
 The following is a non-normative example response to a request with no
 "stream_id" when there are no Event Streams configured:
@@ -1525,7 +1522,8 @@ Cache-Control: no-store
 
 []
 ~~~
-{: title="Example: Read Stream Configuration Response" #figreadconfigrespnostreamidnostreams}
+{: title="Example: Read Stream Configuration
+ Response" #figreadconfigrespnostreamidnostreams}
 
 Errors are signaled with HTTP status codes as follows:
 
@@ -1634,8 +1632,8 @@ HTTP PUT request to the Configuration Endpoint. The PUT body contains a JSON
 {{RFC7159}} representation of the new configuration. On receiving a valid
 request, the Event Transmitter responds with a "200 OK" response containing a
 JSON {{RFC7159}} representation of the updated stream configuration in the body.
-The Receiver MUST check the response and confirm that the `iss` value matches the
-Issuer from which it received the Transmitter Configuration data.
+The Receiver MUST check the response and confirm that the `iss` value matches
+the Issuer from which it received the Transmitter Configuration data.
 
 The stream_id and the full set of Receiver-Supplied properties MUST be present
 in the PUT body, not only those specifically intended to be changed.
@@ -1899,7 +1897,8 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
   "status": "paused"
 }
 ~~~
-{: title="Example: Update Stream Status Request Without Optional Fields" #figupdatestatusreq}
+{: title="Example: Update Stream Status Request Without Optional
+ Fields" #figupdatestatusreq}
 
 The following is a non-normative example of an Update Stream Status request with
 an optional reason:
@@ -1915,7 +1914,8 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
   "reason": "Disabled by administrator action."
 }
 ~~~
-{: title="Example: Update Stream Status Request With Optional Reason" #figupdatestatuswithreasonreq}
+{: title="Example: Update Stream Status Request With Optional
+Reason" #figupdatestatuswithreasonreq}
 
 The following is a non-normative example response:
 
