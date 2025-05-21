@@ -116,7 +116,6 @@ normative:
   RFC7517:
   RFC7519:
   RFC8174:
-  RFC8414:
   RFC8417:
   RFC8615:
   RFC8935:
@@ -177,8 +176,8 @@ informative:
 --- abstract
 
 This Shared Signals Framework (SSF) enables sharing of signals and events
-between cooperating peers. It enables multiple applications such as Risk Incident Sharing
-and Coordination (RISC) and the Continuous Access Evaluation Profile ({{CAEP}})
+between cooperating peers. It enables multiple applications such as Risk Incident
+Sharing and Coordination (RISC) and the Continuous Access Evaluation Profile ({{CAEP}})
 
 This specification defines:
 
@@ -229,30 +228,38 @@ Subject Principals are identified by Subject Members defined below.
 
 ## Subject Members {#subject-members}
 
-A Subject Member of an SSF event describes a subject of the event. A top-level claim named `sub_id` MUST be used to describe the primary subject of the event.
+A Subject Member of an SSF event describes a subject of the event. A top-level
+claimnamed `sub_id` MUST be used to describe the primary subject of the event.
 
 ### Existing CAEP and RISC Events
 
-Event types already defined in the CAEP ({{CAEP}}) and RISC ({{RISC}}) specifications MAY use a `subject` field within the `events` claim of the SSF event to describe the primary Subject Principal of the event. SSF Transmitters MUST include the top-level `sub_id` claim even for these existing event types.
+Event types already defined in the CAEP ({{CAEP}}) and RISC ({{RISC}})
+specifications MAY use a `subject` field within the `events` claim of the SSF
+event to describe the primary Subject Principal of the event. SSF Transmitters
+MUST include the top-level `sub_id` claim even for these existing event types.
 
 ### New Event Types
 
-New event types MUST use the top-level `sub_id` claim and MUST NOT use the `subject` field in the `events` claim to describe the primary Subject Principal.
+New event types MUST use the top-level `sub_id` claim and MUST NOT use the
+`subject` field in the `events` claim to describe the primary Subject Principal.
 
 ### Additional Subject Members
 
-Specific event types MAY define additional Subject Members if required to describe additional subjects of that event type (e.g. a Transferee). These additional subject fields MAY have any field name.
+Specific event types MAY define additional Subject Members if required to
+describe additional subjects of that event type (e.g. a Transferee). These
+additional subject fields MAY have any field name.
 
 ### Subject Member Values
 
-Each Subject Member MUST refer to exactly one Subject Principal. The value of a Subject Member MAY be a "simple subject" or a "complex subject".
+Each Subject Member MUST refer to exactly one Subject Principal. The value of a
+Subject Member MAY be a "simple subject" or a "complex subject".
 
 ## Simple Subject Members {#simple-subjects}
 
 A Simple Subject Member has a claim name and a value that is a "Subject
 Identifier" as defined in the Subject Identifiers for Security Event Tokens
-{{RFC9493}}. Below is a non-normative example of a Simple Subject Member in an SSF
-event.
+{{RFC9493}}. Below is a non-normative example of a Simple Subject Member in an
+SSF event.
 
 ~~~ json
 "sub_id": {
@@ -297,8 +304,8 @@ group
 
 > OPTIONAL. A Subject Identifier that identifies a group.
 
-Additional Subject Member names MAY be used in Complex Subjects. Each member name MAY
-appear at most once in the Complex Subject value.
+Additional Subject Member names MAY be used in Complex Subjects. Each member
+name MAY appear at most once in the Complex Subject value.
 
 Below is a non-normative example of a Complex Subject claim in an SSF event.
 
@@ -324,8 +331,8 @@ All members within a Complex Subject MUST represent attributes of the same
 Subject Principal. As a whole, the Complex Subject MUST refer to exactly one
 Subject Principal.
 
-For details about how to interpret unspecified claims in a Complex Subject as wildcards,
-please see the section on Subject Matching ({{subject-matching}}).
+For details about how to interpret unspecified claims in a Complex Subject as
+wildcards, please see the section on Subject Matching ({{subject-matching}}).
 
 ## Subject Identifiers in SSF Events {#subject-ids-in-ssf}
 
@@ -394,8 +401,8 @@ assertion_id
 The "SAML Assertion ID" Subject Identifier Format is identified by the name
 "saml_assertion_id".
 
-Below is a non-normative example of Subject Identifier for the "saml_assertion_id"
-Subject Identifier Format.
+Below is a non-normative example of Subject Identifier for the
+"saml_assertion_id" Subject Identifier Format.
 
 ~~~ json
 {
@@ -405,16 +412,20 @@ Subject Identifier Format.
 }
 
 ~~~
-{: #sub-id-samlassertionid title="Example: 'saml_assertion_id' Subject Identifier"}
+{: #sub-id-samlassertionid title="Example: 'saml_assertion_id' Subject
+Identifier"}
 
 ### IP Addresses Subject Identifier Format {#sub-id-ips}
 
-The "IP addresses" Subject Identifier Format specifies an array of IP addresses observed by the Transmitter.
-Subject Identifiers of this format MUST contain the following members:
+The "IP addresses" Subject Identifier Format specifies an array of IP addresses
+observed by the Transmitter. Subject Identifiers of this format MUST contain the
+following members:
 
 ip-addresses
 
-> REQUIRED. The array of IP addresses of the subject as observed by the Transmitter. The value MUST be in the format of an array of strings, each one of which represents the {{RFC4001}} string representation of an IP address.
+> REQUIRED. The array of IP addresses of the subject as observed by the
+Transmitter. The value MUST be in the format of an array of strings, each one of
+which represents the {{RFC4001}} string representation of an IP address.
 
 The "IP addresses" Subject Identifier Format is identified by the name
 "ip-addresses".
@@ -434,17 +445,18 @@ Subject Identifier Format.
 ## Receiver Subject Processing {#receiver-subject-processing}
 
 A SSF Receiver MUST make a best effort to process all members from a Subject in
-an SSF event. The Transmitter Configuration Metadata ({{discovery-meta}}) defined
-below MAY define certain members within a Complex Subject to be Critical. A SSF
-Receiver MUST discard any event that contains a Subject with a Critical member
-that it is unable to process.
+an SSF event. The Transmitter Configuration Metadata ({{discovery-meta}})
+defined below MAY define certain members within a Complex Subject to be
+Critical. A SSF Receiver MUST discard any event that contains a Subject with a
+Critical member that it is unable to process.
 
 # Events {#events}
 
 ## Security Event Token Profile {#set-profle}
 
 The Shared Signals Framework profiles the Security Event Token (SET)
-{{RFC8417}} specification by defining certain properties of SETs as described in this section.
+{{RFC8417}} specification by defining certain properties of SETs as described in
+this section.
 
 ### Explicit Typing of SETs {#explicit-typing}
 
@@ -465,8 +477,9 @@ SETs guarantees a distinct value for future validators.
 
 ### SSF Event Subject {#event-subjects}
 
-The primary Subject Member of SSF events is described in the "Subject Members" section ({{subject-ids}}). The JWT "sub" claim MUST NOT be present in any SET containing
-an SSF event.
+The primary Subject Member of SSF events is described in the "Subject Members"
+section ({{subject-ids}}). The JWT "sub" claim MUST NOT be present in any SET
+containing an SSF event.
 
 ### Distinguishing SETs from other Kinds of JWTs
 
@@ -484,10 +497,10 @@ The signature key can be obtained through "jwks_uri", see {{discovery}}.
 
 ### The "iss" Claim {#iss-claim}
 
-The "iss" claim MUST match the "iss" value in the Stream Configuration data for the stream
-that the event is sent on. Receivers MUST validate that this claim matches the "iss"
-in the Stream Configuration data, as well as the Issuer from which the Receiver requested
-the Transmitter Configuration data.
+The "iss" claim MUST match the "iss" value in the Stream Configuration data for
+the stream that the event is sent on. Receivers MUST validate that this claim
+matches the "iss" in the Stream Configuration data, as well as the Issuer from
+which the Receiver requested the Transmitter Configuration data.
 
 ### The "exp" Claim {#exp-claim}
 
@@ -499,8 +512,8 @@ in Sections 4.5 and 4.6 of {{RFC8417}}.
 ### The "aud" Claim {#aud-claim}
 
 The "aud" claim can be a single string or an array of strings. Values that
-uniquely identify the Receiver to the Transmitter MAY be used, if the two parties
-have agreement on the format.
+uniquely identify the Receiver to the Transmitter MAY be used, if the two
+parties have agreement on the format.
 
 More than one value can be present if the corresponding Receivers are known to
 the Transmitter to be the same entity, for example a web client and a mobile
@@ -536,26 +549,38 @@ multiple Receivers would lead to unintended data disclosure.
 
 ### The "txn" claim {#txn-claim}
 
-Transmitters SHOULD set the "txn" claim value in Security Event Tokens (SETs). If the value is present, it MUST be unique to the underlying event that caused the Transmitter to generate the Security Event Token (SET). The Transmitter, however, may use the same value in the "txn" claim across different Security Events Tokens (SETs), such as session revoked and credential change, to indicate that the SETs originated from the same underlying cause or reason.
+Transmitters SHOULD set the "txn" claim value in Security Event Tokens (SETs).
+If the value is present, it MUST be unique to the underlying event that caused
+the Transmitter to generate the Security Event Token (SET). The Transmitter,
+however, may use the same value in the "txn" claim across different Security
+Events Tokens (SETs), such as session revoked and credential change, to indicate
+that the SETs originated from the same underlying cause or reason.
 
 ## Event Properties {#event-properties}
 
 ### The "events" claim {#events-claim}
 
 The "events" claim SHOULD contain only one event. Multiple event type URIs are
-permitted only if they are alternative URIs defining the exact same event type. The type of the event is specified by the key in the value of the `events` claim. The value of this field is the event object.
+permitted only if they are alternative URIs defining the exact same event type.
+The type of the event is specified by the key in the value of the `events`
+claim. The value of this field is the event object.
 
 ### Event type specific fields
 
-The event object inside the `events` claim MAY have one or more fields that are uniquely determined by the type of the event.
+The event object inside the `events` claim MAY have one or more fields that are
+uniquely determined by the type of the event.
 
 ### Additional fields
 
-Transmitters MAY include additional fields in SSF events. These fields MAY exist anywhere in the SET, including the event object inside the "events" claim. Receivers MUST ignore any fields they do not understand from the SSF events they receive.
+Transmitters MAY include additional fields in SSF events. These fields MAY exist
+anywhere in the SET, including the event object inside the "events" claim.
+Receivers MUST ignore any fields they do not understand from the SSF events they
+receive.
 
 # Example SETs that conform to the Shared Signals Framework {#events-examples}
 
-The following are hypothetical examples of SETs that conform to the Shared Signals Framework.
+The following are hypothetical examples of SETs that conform to the Shared
+Signals Framework.
 
 ~~~ json
 {
@@ -573,7 +598,8 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
   }
 }
 ~~~
-{: #subject-ids-ex-simple title="Example: SET Containing an SSF Event with a Simple Subject Member"}
+{: #subject-ids-ex-simple title="Example: SET Containing an SSF Event with a
+Simple Subject Member"}
 
 ~~~ json
 {
@@ -593,7 +619,8 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
   }
 }
 ~~~
-{: #risc-event-subject-example title="Example: SET Containing a RISC Event with a Phone Number Subject"}
+{: #risc-event-subject-example title="Example: SET Containing a RISC Event with
+a Phone Number Subject"}
 
 ~~~ json
 {
@@ -615,7 +642,8 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
   }
 }
 ~~~
-{: #caep-event-properties-example title="Example: SET Containing a CAEP Event with Properties"}
+{: #caep-event-properties-example title="Example: SET Containing a CAEP Event
+with Properties"}
 
 ~~~ json
 {
@@ -652,7 +680,8 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
   }
 }
 ~~~
-{: #subject-ids-ex-complex title="Example: SET Containing an SSF Event with a Complex Subject Member"}
+{: #subject-ids-ex-complex title="Example: SET Containing an SSF Event with a
+Complex Subject Member"}
 
 ~~~ json
 {
@@ -675,7 +704,8 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
   }
 }
 ~~~
-{: #subject-properties-ex title="Example: SET Containing an SSF Event with a Simple Subject and a Property Member"}
+{: #subject-properties-ex title="Example: SET Containing an SSF Event with a
+Simple Subject and a Property Member"}
 
 ~~~ json
 {
@@ -698,11 +728,13 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
   }
 }
 ~~~
-{: #subject-custom-type-ex title="Example: SET Containing an SSF Event with a Proprietary Subject Identifier Format"}
+{: #subject-custom-type-ex title="Example: SET Containing an SSF Event with a
+Proprietary Subject Identifier Format"}
 
 # Event Delivery {#event-delivery}
 
-This section describes the supported methods of delivering SSF Events. It provides SSF profiling specifications for the {{RFC8935}} and {{RFC8936}} specs.
+This section describes the supported methods of delivering SSF Events. It
+provides SSF profiling specifications for the {{RFC8935}} and {{RFC8936}} specs.
 
 ## Stream Configuration Metadata {#delivery-meta}
 
@@ -726,7 +758,10 @@ endpoint_url
 
 authorization_header
 
-> If the endpoint_url requires authorization, the receiver SHOULD provide this authorization header in the stream creation/updation. If present, the Transmitter MUST provide this value with every HTTP request to the `endpoint_url`.
+> If the endpoint_url requires authorization, the receiver SHOULD provide this
+authorization header in the stream creation/updation. If present, the
+Transmitter MUST provide this value with every HTTP request to the
+`endpoint_url`.
 
 ### Poll Delivery using HTTP
 
@@ -753,16 +788,21 @@ Transmitters have metadata describing their configuration:
 
 spec_version
 
-> OPTIONAL. A version identifying the implementer's draft or final specification implemented by the Transmitter. This includes the numerical portion of the spec version as described in the document {{NAMINGCONVENTION}}. If absent, the Transmitter is assumed to conform to "1_0-ID1" version of the specification.
+> OPTIONAL. A version identifying the implementer's draft or final specification
+implemented by the Transmitter. This includes the numerical portion of the spec
+version as described in the document {{NAMINGCONVENTION}}. If absent, the
+Transmitter is assumed to conform to "1_0-ID1" version of the specification.
 >
-> The following is a non-normative example of a Transmitter that implements the final specification of the Shared Signals Framework 1_0.
+> The following is a non-normative example of a Transmitter that implements the
+> final specification of the Shared Signals Framework 1_0.
 
 ~~~ json
    {
         "spec_version": "1_0"
    }
 ~~~
-{: #figspecversionfinal title="Example: spec_version referring to the final 1_0 spec"}
+{: #figspecversionfinal title="Example: spec_version referring to the final 1_0
+spec"}
 
 issuer
 
@@ -783,23 +823,28 @@ delivery_methods_supported
 
 configuration_endpoint
 
-> OPTIONAL. The URL of the Configuration Endpoint. If present, this URL MUST use HTTP over TLS {{RFC9110}}.
+> OPTIONAL. The URL of the Configuration Endpoint. If present, this URL MUST use
+HTTP over TLS {{RFC9110}}.
 
 status_endpoint
 
-> OPTIONAL. The URL of the Status Endpoint. If present, this URL MUST use HTTP over TLS {{RFC9110}}.
+> OPTIONAL. The URL of the Status Endpoint. If present, this URL MUST use HTTP
+over TLS {{RFC9110}}.
 
 add_subject_endpoint
 
-> OPTIONAL. The URL of the Add Subject Endpoint. If present, this URL MUST use HTTP over TLS {{RFC9110}}.
+> OPTIONAL. The URL of the Add Subject Endpoint. If present, this URL MUST use
+HTTP over TLS {{RFC9110}}.
 
 remove_subject_endpoint
 
-> OPTIONAL. The URL of the Remove Subject Endpoint. If present, this URL MUST use HTTP over TLS {{RFC9110}}.
+> OPTIONAL. The URL of the Remove Subject Endpoint. If present, this URL MUST
+use HTTP over TLS {{RFC9110}}.
 
 verification_endpoint
 
-> OPTIONAL. The URL of the Verification Endpoint. If present, this URL MUST use HTTP over TLS {{RFC9110}}.
+> OPTIONAL. The URL of the Verification Endpoint. If present, this URL MUST use
+HTTP over TLS {{RFC9110}}.
 
 critical_subject_members
 
@@ -809,37 +854,45 @@ critical_subject_members
 authorization_schemes
 
 > OPTIONAL. An array of JSON objects that specify the supported
-  authorization scheme properties defined in {{authorization-scheme}}. To enable seamless discovery of
-  configurations, the service provider SHOULD, with the appropriate
-  security considerations, make the authorization_schemes attribute
+  authorization scheme properties defined in {{authorization-scheme}}. To enable
+  seamless discovery of configurations, the service provider SHOULD, with the
+  appropriate security considerations, make the authorization_schemes attribute
   publicly accessible without prior authentication.
 
 default_subjects
 
-> OPTIONAL. A string indicating the default behavior of newly created streams. If present,
-  the value MUST be either "ALL" or "NONE". If not provided, the Transmitter behavior in
-  this regard is unspecified.
+> OPTIONAL. A string indicating the default behavior of newly created streams.
+  If present, the value MUST be either "ALL" or "NONE". If not provided, the
+  Transmitter behavior in this regard is unspecified.
 >
-> * "ALL" indicates that any subjects that are appropriate for the stream are added to
-    the stream by default. The Receiver MAY remove subjects from the stream via the
-    `remove_subject_endpoint`, causing events for those subjects to _not_ be transmitted.
-    The Receiver MAY re-add any subjects removed this way via the `add_subject_endpoint`.
-> * "NONE" indicates that no subjects are added by default. The Receiver MAY add subjects
-    to the stream via the `add_subject_endpoint`, causing only events for those subjects
-    to be transmitted. The Receiver MAY remove subjects added this way via the
-    `remove_subject_endpoint`.
+> * "ALL" indicates that any subjects that are appropriate for the stream are
+    added to the stream by default. The Receiver MAY remove subjects from the
+    stream via the `remove_subject_endpoint`, causing events for those subjects
+    to _not_ be transmitted. The Receiver MAY re-add any subjects removed this
+    way via the `add_subject_endpoint`.
+> * "NONE" indicates that no subjects are added by default. The Receiver MAY add
+    subjects to the stream via the `add_subject_endpoint`, causing only events
+    for those subjects to be transmitted. The Receiver MAY remove subjects added
+    this way via the `remove_subject_endpoint`.
 
 ### Authorization scheme {#authorization-scheme}
 
-SSF is an HTTP based signals sharing framework and is agnostic to the authentication and authorization schemes used to secure stream configuration APIs. It does not provide any SSF-specific authentication and authorization schemes but relies on the cooperating parties' mutual security considerations.
+SSF is an HTTP based signals sharing framework and is agnostic to the
+authentication and authorization schemes used to secure stream configuration
+APIs. It does not provide any SSF-specific authentication and authorization
+schemes but relies on the cooperating parties' mutual security considerations.
 
-The `authorization_schemes` key of Transmitter Configuration Metadata provides authorization information related to the Transmitter's stream management APIs. These authorization schemes SHOULD also be used to protect any polling endpoint (used for Poll-Based SET delivery [RFC8936]) hosted by the Transmitter.
+The `authorization_schemes` key of Transmitter Configuration Metadata provides
+authorization information related to the Transmitter's stream management APIs.
+These authorization schemes SHOULD also be used to protect any polling endpoint
+(used for Poll-Based SET delivery [RFC8936]) hosted by the Transmitter.
 
 spec_urn
 
 > REQUIRED. A URN that describes the specification of the protocol being used.
 
-The Receiver will call the Transmitter APIs by providing appropriate credentials as per the `spec_urn`.
+The Receiver will call the Transmitter APIs by providing appropriate credentials
+as per the `spec_urn`.
 
 The following is a non-normative example of the `spec_urn`
 
@@ -851,21 +904,21 @@ The following is a non-normative example of the `spec_urn`
 {: #figspecurn title="Example: `spec_urn` specifying the OAuth protocol for authorization"}
 
 In this case, the Receiver may obtain an access token using the Client
-Credentials Grant {{CLIENTCRED}}, or any other method suitable for the Receiver and the
-Transmitter.
+Credentials Grant {{CLIENTCRED}}, or any other method suitable for the Receiver
+and the Transmitter.
 
 ## Obtaining Transmitter Configuration Metadata
 
-Using the Issuer URL as documented by the Transmitter, the Transmitter Configuration
-Metadata can be retrieved. Receivers SHOULD ensure that the Issuer URL comes from a
-trusted source and uses the `https` scheme.
+Using the Issuer URL as documented by the Transmitter, the Transmitter
+Configuration Metadata can be retrieved. Receivers SHOULD ensure that the Issuer
+URL comes from a trusted source and uses the `https` scheme.
 
 Transmitters supporting Discovery MUST make a JSON document available at the
 path formed by inserting the string "/.well-known/ssf-configuration" into the
 Issuer between the host component and the path component, if any. The syntax
 and semantics of ".well-known" are defined in {{RFC8615}}.  "ssf-configuration"
-MUST point to a JSON document compliant with this specification, and that document MUST be
-returned using the "application/json" content type.
+MUST point to a JSON document compliant with this specification, and that
+document MUST be returned using the "application/json" content type.
 
 ### Transmitter Configuration Request
 
@@ -873,26 +926,28 @@ A Transmitter Configuration Document MUST be queried using an HTTP "GET" request
 at the previously specified path.
 
 The Receiver would make the following request to the Issuer
-"https://tr.example.com" to obtain its Transmitter Configuration Metadata, since the
-Issuer contains no path component:
+"https://tr.example.com" to obtain its Transmitter Configuration Metadata, since
+the Issuer contains no path component:
 
 ~~~ http
 GET /.well-known/ssf-configuration HTTP/1.1
 Host: tr.example.com
 ~~~
-{: #figdiscoveryrequest title="Example: Transmitter Configuration Request (without path)"}
+{: #figdiscoveryrequest title="Example: Transmitter Configuration Request
+(without path)"}
 
 If the  Issuer value contains a path component, any terminating "/" MUST be
 removed before inserting "/.well-known/ssf-configuration" between the host
 component and the path component. The Receiver would make the following request
-to the Issuer "https://tr.example.com/issuer1" to obtain its Transmitter Configuration
-Metadata, since the Issuer contains a path component:
+to the Issuer "https://tr.example.com/issuer1" to obtain its Transmitter
+Configuration Metadata, since the Issuer contains a path component:
 
 ~~~ http
 GET /.well-known/ssf-configuration/issuer1 HTTP/1.1
 Host: tr.example.com
 ~~~
-{: #figdiscoveryrequestpath title="Example: Transmitter Configuration Request (with path)"}
+{: #figdiscoveryrequestpath title="Example: Transmitter Configuration Request
+(with path)"}
 
 Using path components enables supporting multiple issuers per host. This is
 required in some multi-tenant hosting configurations. This use of ".well-known"
@@ -913,7 +968,8 @@ making the following request:
 GET /.well-known/risc-configuration HTTP/1.1
 Host: risc-tr.example.com
 ~~~
-{: #figolddiscoveryrequest title="Example: Transmitter Configuration Request for RISC Transmitters"}
+{: #figolddiscoveryrequest title="Example: Transmitter Configuration Request for
+RISC Transmitters"}
 
 ### Transmitter Configuration Response
 
@@ -984,22 +1040,23 @@ Transmitter.
 An Event Stream is an abstraction for how events are communicated from a
 Transmitter to a Receiver. The Event Stream's configuration, which is jointly
 managed by the Transmitter and Receiver, holds information about
-what types of events will be sent from the Transmitter, as well as the mechanism by
-which the Receiver can expect to receive the events. The Event Stream also keeps
-track of what Subjects are of interest to the Receiver, and only events with those
-Subjects are transmitted on the stream.
+what types of events will be sent from the Transmitter, as well as the mechanism
+by which the Receiver can expect to receive the events. The Event Stream also
+keeps track of what Subjects are of interest to the Receiver, and only events
+with those Subjects are transmitted on the stream.
 
 This section defines an HTTP API to be implemented by Event Transmitters
-which can be used by Event Receivers to create and delete one or more Event Streams.
-The API can also be used to query and update the Event Stream's configuration and status,
-add and remove Subjects, and trigger verification for those streams.
+which can be used by Event Receivers to create and delete one or more Event
+Streams. The API can also be used to query and update the Event Stream's
+configuration and status, add and remove Subjects, and trigger verification for
+those streams.
 
-Unless there exists some other method of establishing trust between a Transmitter and
-Receiver, all Stream Management API endpoints MUST use standard HTTP
-authentication and authorization schemes, as per {{RFC9110}}.
-This authorization MUST associate a Receiver with one or more stream IDs and "aud" values,
-such that only authorized Receivers are able to access or modify the details of the
-associated Event Streams.
+Unless there exists some other method of establishing trust between a
+Transmitter and Receiver, all Stream Management API endpoints MUST use standard
+HTTP authentication and authorization schemes, as per {{RFC9110}}. This
+authorization MUST associate a Receiver with one or more stream IDs and "aud"
+values, such that only authorized Receivers are able to access or modify the
+details of the associated Event Streams.
 
 ~~~ascii
 +------------+                +------------+
@@ -1080,86 +1137,97 @@ following properties:
 
 stream_id
 
-> **Transmitter-Supplied**, REQUIRED. A string that uniquely identifies the stream. A
-  Transmitter MUST generate a unique ID for each of its non-deleted streams at the time
-  of stream creation. Transmitters SHOULD use character set described in
-  Section 2.3 of {{RFC3986}} to generate the stream ID.
+> **Transmitter-Supplied**, REQUIRED. A string that uniquely identifies the
+  stream. A Transmitter MUST generate a unique ID for each of its non-deleted
+  streams at the time of stream creation. Transmitters SHOULD use character set
+  described in Section 2.3 of {{RFC3986}} to generate the stream ID.
 
 iss
 
-> **Transmitter-Supplied**, REQUIRED. A URL using the https scheme with no query or
-  fragment component that the Transmitter asserts as its Issuer Identifier. This
-  MUST be identical to the "iss" Claim value in Security Event Tokens issued
-  from this Transmitter.
+> **Transmitter-Supplied**, REQUIRED. A URL using the https scheme with no query
+  or fragment component that the Transmitter asserts as its Issuer Identifier.
+  This MUST be identical to the "iss" Claim value in Security Event Tokens
+  issued from this Transmitter.
 
 aud
 
-> **Transmitter-Supplied**, REQUIRED. A string or an array of strings containing an
-  audience claim as defined in JSON Web Token (JWT){{RFC7519}} that identifies
-  the Event Receiver(s) for the Event Stream. This property cannot be updated.
-  If multiple Receivers are specified then the Transmitter SHOULD know that
-  these Receivers are the same entity.
+> **Transmitter-Supplied**, REQUIRED. A string or an array of strings containing
+  an audience claim as defined in JSON Web Token (JWT){{RFC7519}} that
+  identifies the Event Receiver(s) for the Event Stream. This property cannot be
+  updated. If multiple Receivers are specified then the Transmitter SHOULD know
+  that these Receivers are the same entity.
 
 events_supported
 
-> **Transmitter-Supplied**, OPTIONAL. An array of URIs identifying the set of events
-  supported by the Transmitter for this Receiver. If omitted, Event Transmitters
-  SHOULD make this set available to the Event Receiver via some other means
-  (e.g. publishing it in online documentation).
+> **Transmitter-Supplied**, OPTIONAL. An array of URIs identifying the set of
+  events supported by the Transmitter for this Receiver. If omitted, Event
+  Transmitters SHOULD make this set available to the Event Receiver via some
+  other means (e.g. publishing it in online documentation).
 
 events_requested
 
-> **Receiver-Supplied**, OPTIONAL. An array of URIs identifying the set of events that
-  the Receiver requested. A Receiver SHOULD request only the events that it
-  understands and it can act on. This is configurable by the Receiver. A
+> **Receiver-Supplied**, OPTIONAL. An array of URIs identifying the set of
+  events that the Receiver requested. A Receiver SHOULD request only the events
+  that it understands and it can act on. This is configurable by the Receiver. A
   Transmitter MUST ignore any array values that it does not understand. This
   array SHOULD NOT be empty.
 
 events_delivered
 
-> **Transmitter-Supplied**, REQUIRED. An array of URIs identifying the set of events that
-  the Transmitter MUST include in the stream. This is a subset (not necessarily
-  a proper subset) of the intersection of "events_supported" and
+> **Transmitter-Supplied**, REQUIRED. An array of URIs identifying the set of
+  events that the Transmitter MUST include in the stream. This is a subset (not
+  necessarily a proper subset) of the intersection of "events_supported" and
   "events_requested". A Receiver MUST rely on the values received in this field
   to understand which event types it can expect from the Transmitter.
 
 delivery
 
-> REQUIRED. A JSON object containing a set of name/value pairs specifying configuration
-  parameters for the SET delivery method. The actual delivery method is
-  identified by the special key "method" with the value being a URI as defined
-  in {{delivery-meta}}.
+> REQUIRED. A JSON object containing a set of name/value pairs specifying
+  configuration parameters for the SET delivery method. The actual delivery
+  method is identified by the special key "method" with the value being a URI as
+  defined in {{delivery-meta}}.
 
 min_verification_interval
 
-> **Transmitter-Supplied**, OPTIONAL. An integer indicating the minimum amount of time in
-  seconds that must pass in between verification requests. If an Event Receiver
-  submits verification requests more frequently than this, the Event Transmitter
-  MAY respond with a 429 status code. An Event Transmitter SHOULD NOT respond
-  with a 429 status code if an Event Receiver is not exceeding this frequency.
+> **Transmitter-Supplied**, OPTIONAL. An integer indicating the minimum amount
+  of time in seconds that must pass in between verification requests. If an
+  Event Receiver submits verification requests more frequently than this, the
+  Event Transmitter MAY respond with a 429 status code. An Event Transmitter
+  SHOULD NOT respond with a 429 status code if an Event Receiver is not
+  exceeding this frequency.
 
 description
 
-> **Receiver-Supplied**, OPTIONAL. A string that describes the properties of the stream.
-  This is useful in multi-stream systems to identify the stream for human actors. The
-  transmitter MAY truncate the string beyond an allowed max length.
+> **Receiver-Supplied**, OPTIONAL. A string that describes the properties of the
+  stream. This is useful in multi-stream systems to identify the stream for
+  human actors. The transmitter MAY truncate the string beyond an allowed max
+  length.
 
 inactivity_timeout
 
-> **Transmitter-Supplied**, OPTIONAL. The refreshable inactivity timeout of the stream in seconds. After the timeout duration passes with no eligible activity from the Receiver, as defined below, the Transmitter MAY either pause, disable, or delete the stream. The syntax is the same as that of `expires_in` from Section A.14 of {{RFC6749}}.
+> **Transmitter-Supplied**, OPTIONAL. The refreshable inactivity timeout of the
+stream in seconds. After the timeout duration passes with no eligible activity
+from the Receiver, as defined below, the Transmitter MAY either pause, disable,
+or delete the stream. The syntax is the same as that of `expires_in` from
+Section A.14 of {{RFC6749}}.
 >
-> The following constitutes eligible Receiver activity. If the Transmitter observes any of these activities from the Receiver, it MUST restart the inactivity timeout counter.
+> The following constitutes eligible Receiver activity. If the Transmitter
+observes any of these activities from the Receiver, it MUST restart the
+inactivity timeout counter.
 >
 > > For streams created with the PUSH {{RFC8935}} delivery method:
 > >
-> > * The Receiver calls any endpoint in the Event Stream Management API that references the stream ({{management}}).
+> > * The Receiver calls any endpoint in the Event Stream Management API that
+references the stream ({{management}}).
 > >
 > > For streams created with the POLL {{RFC8936}} delivery method:
 > >
 > > * The Receiver polls the Transmitter for events in the stream.
-> > * The Receiver calls any endpoint in the Event Stream Management API that references the stream ({{management}}).
+> > * The Receiver calls any endpoint in the Event Stream Management API that
+references the stream ({{management}}).
 >
-> If the Transmitter decides to pause or disable the stream, it MUST send a Stream Updated Event to the Receiver as described in {{status}}.
+> If the Transmitter decides to pause or disable the stream, it MUST send a
+Stream Updated Event to the Receiver as described in {{status}}.
 
 #### Creating a Stream {#creating-a-stream}
 
@@ -1167,13 +1235,13 @@ In order to communicate events from a Transmitter to a Receiver, a Receiver
 MUST first create an Event Stream. An Event Receiver creates a stream by making
 an HTTP POST request to the Configuration Endpoint. On receiving a valid request
 the Event Transmitter responds with a "201 Created" response containing a
-JSON {{RFC7159}} representation of the stream’s configuration in the body. The Receiver
-MUST check the response and confirm that the `iss` value matches the Issuer from
-which it received the Transmitter Configuration data.
+JSON {{RFC7159}} representation of the stream’s configuration in the body. The
+Receiver MUST check the response and confirm that the `iss` value matches the
+Issuer from which it received the Transmitter Configuration data.
 
 If a stream already exists, and the Transmitter allows multiple streams with the
 same Receiver, the Event Transmitter MUST respond with a new stream ID. If the
-Transmitter does not allow multiple streams with the same Receiver, it MUST respond
+Transmitter does not allow multiple streams with the same Receiver, it MUST
 respond with HTTP status code "409 Conflict". The Receiver MAY then GET the
 existing stream configuration and, if desired, use PATCH or PUT to update or
 replace the existing stream configuration.
@@ -1186,12 +1254,14 @@ Configuration ({{stream-config}}) object:
 * `description`
 
 If the request does not contain the `delivery` property, then the Transmitter
-MUST assume that the `method` is "urn:ietf:rfc:8936" (poll). If the Transmitter supports
-Poll-Based Delivery, the Transmitter MUST include a `delivery` property in the response with this
-`method` property and an `endpoint_url` property. If the Transmitter does not support
-the delivery method, it MAY respond with HTTP Status Code "400 Bad Request."
+MUST assume that the `method` is "urn:ietf:rfc:8936" (poll). If the Transmitter
+supports Poll-Based Delivery, the Transmitter MUST include a `delivery` property
+in the response with this `method` property and an `endpoint_url` property. If
+the Transmitter does not support the delivery method, it MAY respond with HTTP
+Status Code "400 Bad Request."
 
-Note that in the case of the poll method, the `endpoint_url` value is supplied by the Transmitter.
+Note that in the case of the poll method, the `endpoint_url` value is supplied
+by the Transmitter.
 
 The following is a non-normative example request to create an Event Stream:
 
@@ -1265,16 +1335,17 @@ Errors are signaled with HTTP status codes as follows:
 
 * `aud`: the Receiver SHOULD validate the `aud` in the Create Stream Response.
 A Transmitter and Receiver MAY agree upon the audience value out of band.
-Regardless of how the audience value is agreed upon, the Receiver SHOULD ensure that it matches what it expects.
+Regardless of how the audience value is agreed upon, the Receiver SHOULD ensure
+that it matches what it expects.
 
 #### Reading a Stream’s Configuration {#reading-a-streams-configuration}
 
 An Event Receiver gets the current configuration of a stream by making an HTTP
 GET request to the Configuration Endpoint. On receiving a valid request, the
-Event Transmitter responds with a "200 OK" response containing a JSON {{RFC7159}}
-representation of the stream’s configuration in the body.  The Receiver
-MUST check the response and confirm that the `iss` value matches the Issuer from
-which it received the Transmitter Configuration data.
+Event Transmitter responds with a "200 OK" response containing a JSON
+{{RFC7159}} representation of the stream’s configuration in the body. The
+Receiver MUST check the response and confirm that the `iss` value matches the
+Issuer from which it received the Transmitter Configuration data.
 
 The GET request MAY include the "stream_id" as a query parameter in order to
 identify the correct Event Stream. If the "stream_id" parameter is missing,
@@ -1339,7 +1410,8 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 ~~~
 {: title="Example: Read Stream Configuration Request" #figreadconfigreqnostreamid}
 
-The following is a non-normative example response to a request with no "stream_id":
+The following is a non-normative example response to a request with no
+"stream_id":
 
 ~~~ http
 HTTP/1.1 200 OK
@@ -1443,8 +1515,8 @@ Cache-Control: no-store
 ~~~
 {: title="Example: Read Stream Configuration Response" #figreadconfigrespnostreamidonestream}
 
-The following is a non-normative example response to a request with no "stream_id"
-when there are no Event Streams configured:
+The following is a non-normative example response to a request with no
+"stream_id" when there are no Event Streams configured:
 
 ~~~ http
 HTTP/1.1 200 OK
@@ -1468,22 +1540,24 @@ Errors are signaled with HTTP status codes as follows:
 
 An Event Receiver updates the current configuration of a stream by making an
 HTTP PATCH request to the Configuration Endpoint. The PATCH body contains a
-JSON {{RFC7159}} representation of the stream configuration properties to change. On
-receiving a valid request, the Event Transmitter responds with a "200 OK"
-response containing a JSON {{RFC7159}} representation of the entire updated stream
-configuration in the body. The Receiver MUST check the response and confirm that the
-`iss` value matches the Issuer from which it received the Transmitter Configuration data.
+JSON {{RFC7159}} representation of the stream configuration properties to
+change. On receiving a valid request, the Event Transmitter responds with a
+"200 OK" response containing a JSON {{RFC7159}} representation of the entire
+updated stream configuration in the body. The Receiver MUST check the response
+and confirm that the `iss` value matches the Issuer from which it received the
+Transmitter Configuration data.
 
 The stream_id property MUST be present in the request. Other properties
 MAY be present in the request. Any Receiver-Supplied property present in the
 request MUST be updated by the Transmitter. Any properties missing in the
-request MUST NOT be changed by the Transmitter. If `events_requested` property is
-included in the request, it SHOULD NOT be an empty array.
+request MUST NOT be changed by the Transmitter. If `events_requested` property
+is included in the request, it SHOULD NOT be an empty array.
 
 Transmitter-Supplied properties besides the stream_id MAY be present,
 but they MUST match the expected value. Missing Transmitter-Supplied
 properties MUST be ignored by the Transmitter. The `events_delivered` property,
-if present, MUST match the Transmitter's expected value before any updates are applied.
+if present, MUST match the Transmitter's expected value before any updates are
+applied.
 
 The following is a non-normative example request to replace an Event Stream’s
 configuration:
@@ -1567,13 +1641,15 @@ The stream_id and the full set of Receiver-Supplied properties MUST be present
 in the PUT body, not only those specifically intended to be changed.
 Missing Receiver-Supplied properties MUST be interpreted as requested to be
 deleted. Event Receivers MAY read the configuration first, modify the JSON
-{{RFC7159}} representation, then make a replacement request. If `events_requested`
-property is included in the request, it SHOULD NOT be an empty array.
+{{RFC7159}} representation, then make a replacement request. If
+`events_requested` property is included in the request, it SHOULD NOT be an
+empty array.
 
 Transmitter-Supplied properties besides the stream_id MAY be present,
 but they MUST match the expected value. Missing Transmitter-Supplied
 properties MUST be ignored by the Transmitter. The `events_delivered` property,
-if present, MUST match the Transmitter's expected value _before_ any updates are applied.
+if present, MUST match the Transmitter's expected value _before_ any updates are
+applied.
 
 The following is a non-normative example request to replace an Event Stream’s
 configuration:
@@ -1651,7 +1727,8 @@ Pending conditions or errors are signaled with HTTP status codes as follows:
 
 An Event Receiver deletes a stream by making an HTTP DELETE request to the
 Configuration Endpoint. On receiving a request, the Event Transmitter responds
-with an empty "204 No Content" response if the configuration was successfully removed.
+with an empty "204 No Content" response if the configuration was successfully
+removed.
 
 The DELETE request MUST include the "stream_id" as a query parameter in order to
 identify the correct Event Stream.
@@ -1684,11 +1761,12 @@ Errors are signaled with HTTP status codes as follows:
 
 ### Stream Status {#status}
 
-Event Streams are managed independently. A Receiver MAY request that events from a
-stream be interrupted by Updating the Stream Status ({{updating-a-streams-status}}).
-If a Transmitter decides to enable, pause or disable updates from a stream
-independently of an update request from a Receiver, it MUST send a Stream Updated Event
-({{stream-updated-event}}) to the Receiver.
+Event Streams are managed independently. A Receiver MAY request that events from
+a stream be interrupted by Updating the Stream Status
+({{updating-a-streams-status}}). If a Transmitter decides to enable, pause or
+disable updates from a stream independently of an update request from a
+Receiver, it MUST send a Stream Updated Event ({{stream-updated-event}}) to the
+Receiver.
 
 #### Reading a Stream’s Status {#reading-a-streams-status}
 
@@ -1714,8 +1792,8 @@ status
 
 reason
 
-> An OPTIONAL string whose value SHOULD express why the stream's status is set to
-the current value.
+> An OPTIONAL string whose value SHOULD express why the stream's status is set
+to the current value.
 
 The allowable "status" values are:
 
@@ -1823,8 +1901,8 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
 ~~~
 {: title="Example: Update Stream Status Request Without Optional Fields" #figupdatestatusreq}
 
-The following is a non-normative example of an Update Stream Status request with an
-optional reason:
+The following is a non-normative example of an Update Stream Status request with
+an optional reason:
 
 ~~~ http
 POST /ssf/status HTTP/1.1
@@ -1867,9 +1945,9 @@ Errors are signaled with HTTP status codes as follows:
 
 Examples:
 
-1. If a Receiver makes a request to update a stream status, and the Transmitter is
-   unable to decide whether or not to complete the request, then the Transmitter MUST
-   respond with a 202 status code.
+1. If a Receiver makes a request to update a stream status, and the Transmitter
+   is unable to decide whether or not to complete the request, then the
+   Transmitter MUST respond with a 202 status code.
 
 ### Subjects {#subjects}
 
@@ -1879,12 +1957,13 @@ Receiver wants to receive events about a particular subject by “adding” or
 
 #### Subject Matching {#subject-matching}
 
-If a Receiver adds a subject to a stream defined in {{adding-a-subject-to-a-stream}}, the Transmitter SHOULD send any events
-relating to the subject which have event_types that the Receiver has subscribed to,
-as long as the stream status is enabled. In the case of Simple Subjects,
-two subjects match if they are exactly identical. For Complex Subjects, two subjects
-match if, for all fields in the Complex Subject (i.e. `user`, `group`, `device`, etc.),
-at least one of the following statements is true:
+If a Receiver adds a subject to a stream defined in
+{{adding-a-subject-to-a-stream}}, the Transmitter SHOULD send any events
+relating to the subject which have event_types that the Receiver has subscribed
+to, as long as the stream status is enabled. In the case of Simple Subjects, two
+subjects match if they are exactly identical. For Complex Subjects, two subjects
+match if, for all fields in the Complex Subject (i.e. `user`, `group`, `device`,
+etc.), at least one of the following statements is true:
 
 1. Subject 1's field is not defined
 
@@ -1892,9 +1971,9 @@ at least one of the following statements is true:
 
 3. Subject 1's field is identical to Subject 2's field
 
-The following is a non-normative example of subject matching for Complex Subjects
-when a Receiver adds a subject that is less restrictive than the subject being sent
-by the Transmitter.
+The following is a non-normative example of subject matching for Complex
+Subjects when a Receiver adds a subject that is less restrictive than the
+subject being sent by the Transmitter.
 
 The Receiver has added the following subject to their stream:
 
@@ -1924,12 +2003,12 @@ The Transmitter has an event to broadcast with the following subject:
 }
 ~~~
 
-According to the matching rules described above, the Transmitter SHOULD broadcast the
-event over the Receiver's stream.
+According to the matching rules described above, the Transmitter SHOULD
+broadcast the event over the Receiver's stream.
 
-The following is a non-normative example of subject matching for Complex Subjects
-when a Receiver adds a subject that is more restrictive than the subject being sent
-by the Transmitter.
+The following is a non-normative example of subject matching for Complex
+Subjects when a Receiver adds a subject that is more restrictive than the
+subject being sent by the Transmitter.
 
 The Receiver has added the following subject to their stream:
 
@@ -1959,10 +2038,11 @@ The Transmitter has an event to broadcast with the following subject:
 }
 ~~~
 
-According to the matching rules described above, the Transmitter SHOULD broadcast the
-event over the Receiver's stream.
+According to the matching rules described above, the Transmitter SHOULD
+broadcast the event over the Receiver's stream.
 
-The following is a non-normative example of two Complex Subjects that do not match.
+The following is a non-normative example of two Complex Subjects that do not
+match.
 
 The Receiver has added the following subject to their stream:
 
@@ -1996,8 +2076,8 @@ The Transmitter has an event to broadcast with the following subject:
 }
 ~~~
 
-According to the matching rules described above, the Transmitter SHOULD NOT broadcast the
-event over the Receiver's stream.
+According to the matching rules described above, the Transmitter SHOULD NOT
+broadcast the event over the Receiver's stream.
 
 #### Adding a Subject to a Stream {#adding-a-subject-to-a-stream}
 
@@ -2074,7 +2154,8 @@ with the following claims:
 
 stream_id
 
-> REQUIRED. A string identifying the stream from which the subject is being removed.
+> REQUIRED. A string identifying the stream from which the subject is being
+removed.
 
 subject
 
@@ -2135,11 +2216,15 @@ delivery is working, including signature verification and encryption.
 A Transmitter MAY send a Verification Event at any time, even if one was
 not requested by the Event Receiver.
 
-A Transmitter MAY respond to Verification Event requests even if the event is not present in the `events_supported`, `events_requested` and / or `events_delivered` fields in the Stream Configuration ({{stream-config}}).
+A Transmitter MAY respond to Verification Event requests even if the event is
+not present in the `events_supported`, `events_requested` and / or
+`events_delivered` fields in the Stream Configuration ({{stream-config}}).
 
 #### Verification Event {#verification-event}
 
-The Verification Event is an SSF event with the event type: "https://schemas.openid.net/secevent/ssf/event-type/verification". The event contains the following attribute:
+The Verification Event is an SSF event with the event type:
+"https://schemas.openid.net/secevent/ssf/event-type/verification". The event
+contains the following attribute:
 
 state
 
@@ -2150,7 +2235,9 @@ As with any SSF event, the Verification Event has a top-level `sub_id` claim:
 
 sub_id
 
-> REQUIRED. The value of the top-level `sub_id` claim in a Verification Event MUST always be set to have a simple value of type `opaque`. The `id` of the value MUST be the `stream_id` of the stream being verified.
+> REQUIRED. The value of the top-level `sub_id` claim in a Verification Event
+MUST always be set to have a simple value of type `opaque`. The `id` of the
+value MUST be the `stream_id` of the stream being verified.
 >
 > Note that the subject that identifies a stream itself is always implicitly
   added to the stream and MAY NOT be removed from the stream.
@@ -2158,8 +2245,8 @@ sub_id
 Upon receiving a Verification Event, the Event Receiver SHALL parse the SET and
 validate its claims. In particular, the Event Receiver SHALL confirm that the
 value for "state" is as expected. If the value of "state" does not match, an
-error response with the "err" field set to "invalid_state" SHOULD be returned (see Section 2.4 of
-{{RFC8935}} or Section 2.4.4 of {{RFC8936}}).
+error response with the "err" field set to "invalid_state" SHOULD be returned
+(see Section 2.4 of {{RFC8935}} or Section 2.4.4 of {{RFC8936}}).
 
 In many cases, Event Transmitters MAY disable or suspend an Event Stream that
 fails to successfully verify based on the acknowledgement or lack of
@@ -2168,44 +2255,46 @@ acknowledgement by the Event Receiver.
 #### Triggering a Verification Event. {#triggering-a-verification-event}
 
 To request that a Verification Event be sent over an Event Stream, the Event
-Receiver makes an HTTP POST request to the Verification Endpoint, with a [JSON]
-[RFC7159] object containing the parameters of the verification request, if any.
-On a successful request, the Event Transmitter responds with an empty
+Receiver makes an HTTP POST request to the Verification Endpoint, with a JSON
+{{RFC7159}} object containing the parameters of the verification request, if
+any. On a successful request, the Event Transmitter responds with an empty
 "204 No Content" response.
 
 Verification requests have the following properties:
 
 stream_id
 
-> REQUIRED. A string identifying the stream that the Verification Event is being requested on.
+> REQUIRED. A string identifying the stream that the Verification Event is being
+requested on.
 
 state
 
 > OPTIONAL. An arbitrary string that the Event Transmitter MUST echo back to the
   Event Receiver in the Verification Event’s payload. Event Receivers MAY use
   the value of this parameter to correlate a Verification Event with a
-  verification request. If the Verification Event is initiated by the Transmitter
-  then this parameter MUST not be set.
+  verification request. If the Verification Event is initiated by the
+  Transmitter then this parameter MUST not be set.
 
 A successful response from a POST to the Verification Endpoint does not indicate
 that the Verification Event was transmitted successfully, only that the Event
 Transmitter has transmitted the event or will do so at some point in the future.
-Event Transmitters MAY transmit the event via an asynchronous process, and SHOULD
-publish an SLA for Verification Event transmission times. Event Receivers MUST NOT
-depend on the Verification Event being transmitted synchronously or in any
-particular order relative to the current queue of events.
+Event Transmitters MAY transmit the event via an asynchronous process, and
+SHOULD publish an SLA for Verification Event transmission times. Event Receivers
+MUST NOT depend on the Verification Event being transmitted synchronously or in
+any particular order relative to the current queue of events.
 
 Errors are signaled with HTTP status codes as follows:
 
 | Code | Description |
 |------|-------------|
-| 400  | if the request body cannot be parsed or if the request is otherwise invalid |
+| 400  | if the request body cannot be parsed or if the request is otherwiseinvalid |
 | 401  | if authorization failed or it is missing |
 | 404  | if there is no Event Stream with the given "stream_id" for this Event Receiver |
 | 429  | if the Event Receiver is sending too many requests in a given amount of time; see related "min_verification_interval" in {{stream-config}}
 {: title="Verification Errors" #taberifyerr}
 
-The following is a non-normative example request to trigger a Verification Event:
+The following is a non-normative example request to trigger a Verification
+Event:
 
 ~~~ http
 POST /ssf/verify HTTP/1.1
@@ -2266,7 +2355,9 @@ If the Transmitter changes the status of the stream from either
 "paused" or "disabled" to "enabled", then it MUST send this event to the
 Receiver upon re-enabling the stream.
 
-A Transmitter MAY send a Stream Updated event even if the event is not present in the `events_supported`, `events_requested` and / or `events_delivered` fields in the Stream Configuration ({{stream-config}}).
+A Transmitter MAY send a Stream Updated event even if the event is not present
+in the `events_supported`, `events_requested` and / or `events_delivered` fields
+in the Stream Configuration ({{stream-config}}).
 
 The "stream-updated" event contains the following claims:
 
@@ -2283,7 +2374,9 @@ As with any SSF event, this event has a top-level `sub_id` claim:
 
 sub_id
 
-> REQUIRED. The top-level `sub_id` claim specifies the Stream Id for which the status has been updated. The value of the `sub_id` field MUST be of format `opaque`, and its `id` value MUST be the unique ID of the stream.
+> REQUIRED. The top-level `sub_id` claim specifies the Stream Id for which the
+status has been updated. The value of the `sub_id` field MUST be of format
+`opaque`, and its `id` value MUST be the unique ID of the stream.
 >
 > Note that the subject that identifies a stream itself is always implicitly
   added to the stream and MAY NOT be removed from the stream.
@@ -2348,10 +2441,10 @@ are outside the scope of this specification.
 
 A malicious party may find it advantageous to remove a particular subject from a
 stream, in order to reduce the Event Receiver’s ability to detect malicious
-activity related to the subject, inconvenience the subject, or for other reasons.
-Consequently it may be in the best interests of the subject for the Event
-Transmitter to continue to send events related to the subject for some time after
-the subject has been removed from a stream.
+activity related to the subject, inconvenience the subject, or for other
+reasons. Consequently it may be in the best interests of the subject for the
+Event Transmitter to continue to send events related to the subject for some
+time after the subject has been removed from a stream.
 
 Event Transmitters MAY continue sending events related to a subject for some
 amount of time after that subject has been removed from the stream. Event
@@ -2363,15 +2456,15 @@ Transmitter.
 
 ## Subject Information Leakage {#sub-info-leakage}
 
-Event Transmitters and Receivers SHOULD take precautions to ensure that they do not
-leak information about subjects via Subject Identifiers, and choose appropriate
-Subject Identifier Types accordingly. Parties SHOULD NOT identify a subject
-using a given Subject Identifier Type if doing so will allow the recipient to
-correlate different claims about the subject that they are not known to already
-have knowledge of. Transmitters and Receivers SHOULD always use the same Subject
-Identifier Type and the same claim values to identify a given subject when
-communicating with a given party in order to reduce the possibility of
-information leakage.
+Event Transmitters and Receivers SHOULD take precautions to ensure that they do
+not leak information about subjects via Subject Identifiers, and choose
+appropriate Subject Identifier Types accordingly. Parties SHOULD NOT identify a
+subject using a given Subject Identifier Type if doing so will allow the
+recipient to correlate different claims about the subject that they are not
+known to already have knowledge of. Transmitters and Receivers SHOULD always use
+the same Subject Identifier Type and the same claim values to identify a given
+subject when communicating with a given party in order to reduce the possibility
+of information leakage.
 
 ## Previously Consented Data {#previously-consented-data}
 
@@ -2388,8 +2481,8 @@ or data whose consent to exchange has expired has the following considerations:
 
 ### Organizational Data {#organizational-data}
 
-If a user has previously agreed with a Transmitter that they allow the release of
-certain data to third-parties, then the Transmitter MAY send such data in SSF
+If a user has previously agreed with a Transmitter that they allow the release
+of certain data to third-parties, then the Transmitter MAY send such data in SSF
 events without additional consent of the user. Such data MAY include
 organizational data about the Subject Principal that was generated by the
 Transmitter.
@@ -2407,13 +2500,13 @@ Subject Identifiers defined in this document will be added to the "Security
 Events Subject Identifier Types" registry. This registry is defined in the
 Subject Identifiers for Security Event Tokens {{RFC9493}} specification.
 
-The `ssf-configuration` well-known endpoint is registered in IANA's Well-Known URIs
-registry, as defined by {{RFC8615}}.
+The `ssf-configuration` well-known endpoint is registered in IANA's Well-Known
+URIs registry, as defined by {{RFC8615}}.
 
-IANA is asked to assign the error code "invalid_state", as defined in {{verification-event}}, to the
-Security Event Token Error Codes section of the Security Event Token registry, as defined
-in Section 7.1 of {{RFC8935}}. The following information is provided as required by the
-registration template:
+IANA is asked to assign the error code "invalid_state", as defined in
+{{verification-event}}, to the Security Event Token Error Codes section of the
+Security Event Token registry, as defined in Section 7.1 of {{RFC8935}}. The
+following information is provided as required by the registration template:
 
 Error Code
 
@@ -2440,9 +2533,34 @@ specification.
 
 Copyright (c) 2024 The OpenID Foundation.
 
-The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, or other interested party a non-exclusive, royalty free, worldwide copyright license to reproduce, prepare derivative works from, distribute, perform and display, this Implementers Draft or Final Specification solely for the purposes of (i) developing specifications, and (ii) implementing Implementers Drafts and Final Specifications based on such documents, provided that attribution be made to the OIDF as the source of the material, but that such attribution does not indicate an endorsement by the OIDF.
+The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer,
+or other interested party a non-exclusive, royalty free, worldwide copyright
+license to reproduce, prepare derivative works from, distribute, perform and
+display, this Implementers Draft or Final Specification solely for the purposes
+of (i) developing specifications, and (ii) implementing Implementers Drafts and
+Final Specifications based on such documents, provided that attribution be made
+to the OIDF as the source of the material, but that such attribution does not
+indicate an endorsement by the OIDF.
 
-The technology described in this specification was made available from contributions from various sources, including members of the OpenID Foundation and others. Although the OpenID Foundation has taken steps to help ensure that the technology is available for distribution, it takes no position regarding the validity or scope of any intellectual property or other rights that might be claimed to pertain to the implementation or use of the technology described in this specification or the extent to which any license under such rights might or might not be available; neither does it represent that it has made any independent effort to identify any such rights. The OpenID Foundation and the contributors to this specification make no (and hereby expressly disclaim any) warranties (express, implied, or otherwise), including implied warranties of merchantability, non-infringement, fitness for a particular purpose, or title, related to this specification, and the entire risk as to implementing this specification is assumed by the implementer. The OpenID Intellectual Property Rights policy requires contributors to offer a patent promise not to assert certain patent claims against other contributors and against implementers. The OpenID Foundation invites any interested party to bring to its attention any copyrights, patents, patent applications, or other proprietary rights that may cover technology that may be required to practice this specification.
+The technology described in this specification was made available from
+contributions from various sources, including members of the OpenID Foundation
+and others. Although the OpenID Foundation has taken steps to help ensure that
+the technology is available for distribution, it takes no position regarding the
+ validity or scope of any intellectual property or other rights that might be
+ claimed to pertain to the implementation or use of the technology described in
+ this specification or the extent to which any license under such rights might
+ or might not be available; neither does it represent that it has made any
+ independent effort to identify any such rights. The OpenID Foundation and the
+ contributors to this specification make no (and hereby expressly disclaim any)
+ warranties (express, implied, or otherwise), including implied warranties of
+ merchantability, non-infringement, fitness for a particular purpose, or title,
+ related to this specification, and the entire risk as to implementing this
+ specification is assumed by the implementer. The OpenID Intellectual Property
+ Rights policy requires contributors to offer a patent promise not to assert
+ certain patent claims against other contributors and against implementers. The
+ OpenID Foundation invites any interested party to bring to its attention any
+ copyrights, patents, patent applications, or other proprietary rights that may
+ cover technology that may be required to practice this specification.
 
 # Document History
 
@@ -2450,18 +2568,30 @@ The technology described in this specification was made available from contribut
 
 -20
 
-* Clarified that Transmitters may drop events if they aren't able to deliver them to the receiver.
-* Added examples to demonstrate how "wildcard matching" works in SSF event complex subjects
-* Added an `inactivity_timeout` field to the Transmitter metadata, after which transmitters may pause, disable or delete inactive streams.
+* Clarified that Transmitters may drop events if they aren't able to deliver
+them to the receiver.
+* Added examples to demonstrate how "wildcard matching" works in SSF event
+complex subjects
+* Added an `inactivity_timeout` field to the Transmitter metadata, after which
+transmitters may pause, disable or delete inactive streams.
 * Clarified that Receivers should validate the `aud` value
-* Clarified that Transmitters may include additional fields in SSF events, and how receivers should interpret them.
+* Clarified that Transmitters may include additional fields in SSF events, and
+how receivers should interpret them.
 * Specified that the poll delivery endpoint should require authorization
-* Clarified stream creation behavior for delivery method mismatch and poll delivery
-* Clarified that StreamIDs have to be of the "unreserved characters" character set from RFC3986
+* Clarified stream creation behavior for delivery method mismatch and poll
+delivery
+* Clarified that StreamIDs have to be of the "unreserved characters" character
+set from RFC3986
 * Clarified the authorization_header requirement for the receiver
-* Rearranged the content for easier readability: Eliminated the "Profiles" section (previous section 10). Created new sections "Events" (new section 4), and "Event Delivery" (new Section 6). Incorporated text from the erstwhile "Profiles" section into other sections as appropriate. Fixed references and titles of examples.
+* Rearranged the content for easier readability: Eliminated the "Profiles"
+section (previous section 10). Created new sections "Events" (new section 4),
+and "Event Delivery" (new Section 6). Incorporated text from the erstwhile
+"Profiles" section into other sections as appropriate. Fixed references and
+titles of examples.
 * Added "IP Address" as a subject identifier format
-* In Create Stream, specified that description may be included in the response, and that the `endpoint_url` is specified by the Transmitter in the `poll` delivery method
+* In Create Stream, specified that description may be included in the response,
+and that the `endpoint_url` is specified by the Transmitter in the `poll`
+delivery method
 * Updated URLs of linked specs and other resources
 * Fixed example to have correct format for "reason_admin" and "reason_user"
 
@@ -2472,30 +2602,37 @@ The technology described in this specification was made available from contribut
 * Add stream_id to the response when getting stream status
 * Update subject/sub_id in examples. Fix CAEP example
 * Clarify language around sending Stream Updated events
-* Add sentence suggesting that Issuer information should be validated by the Receiver
+* Add sentence suggesting that Issuer information should be validated by the
+Receiver
 * Removed cause-time from RISC example
 * Fix description of error code for invalid state
 * Add SHOULD language about checking the issuer value
 * Added language requiring authorization of stream management API
 * Added description of `txn` claim
-* Added a `default_subjects` field to Transmitter Configuration Metadata indicating expected subject behavior for new streams
-* added txn claims to non-normative SET examples and generic txn callout under SET Profile section RFC8417
+* Added a `default_subjects` field to Transmitter Configuration Metadata
+indicating expected subject behavior for new streams
+* added txn claims to non-normative SET examples and generic txn callout under
+SET Profile section RFC8417
 * Editorial: Standardize terms and casing, fix some typos
 
 -02
 
 * added spec version to metadata
 * Added description as receiver supplied
-* added language to make verification and updated events independent of events_supported
-* added top-level sub_id claim. Modified existing language to reflect the use of the sub_id claim
-* updated text to reflect sub_id as a top-level field in verification and stream updated events
+* added language to make verification and updated events independent of
+events_supported
+* added top-level sub_id claim. Modified existing language to reflect the use of
+the sub_id claim
+* updated text to reflect sub_id as a top-level field in verification and stream
+updated events
 * \#46 add stream exists behavior
 * update stream exists to 409
 * Add 'format' to normative examples in CAEP
 * Remove 'format' from stream config
 * Remove subject from stream status (#88)
 * Add reason to GET /status response
-* Make reason look like an enum in the example to indicate how we expect it to be used
+* Make reason look like an enum in the example to indicate how we expect it to
+be used
 * Fixes \#60 - are subjects required
 * Added format field to complex subjects and updated examples (#71)
 * Switch stray '204 OK' to read '204 No Content' (#73)
@@ -2506,14 +2643,17 @@ The technology described in this specification was made available from contribut
 * Sse to ssf (#43)
 * updated SSE to Shared Signals in all files
 * changed source format to md
-* renamed files to be called sharedsignals instead of SSE. No change to the content (#41)
-* Add stream_id to SSE Framework spec as per Issue 4: https://github.com/openid/sse/issues/4
+* renamed files to be called sharedsignals instead of SSE. No change to the
+content (#41)
+* Add stream_id to SSE Framework spec as per Issue 4:
+https://github.com/openid/sse/issues/4
 * Update README with development instructions and fix error in Makefile
 * Added note to PUSH/POLL section about uniqueness requirements for the URLs
 * Add explanation about what an Event Stream is
 * Change terms to Transmitter-Supplied and Receiver-Supplied
 * Pragma is an obsolete HTTP header
 * It's unnecessary to specify the character as UTF-8 in all examples (#10)
-* Fix issue \#18 by converting saml-assertion-id to saml_assertion_id to maintain consistent formatting with other subject identifiers (#1)
+* Fix issue \#18 by converting saml-assertion-id to saml_assertion_id to
+maintain consistent formatting with other subject identifiers (#1)
 * updated backward compatibility language
 * added section for Transmitter Configuration Metadata RISC compatibility

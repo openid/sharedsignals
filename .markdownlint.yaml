@@ -1,5 +1,7 @@
+default: true
 MD013:
-  line_length: 20000
+  line_length: 80
+  tables: false
 # blanks-around-fences false because of kramdown-rfc formatting
 MD031: false
 # no-bare-urls
