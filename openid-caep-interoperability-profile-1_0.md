@@ -1,8 +1,8 @@
 ---
-title: CAEP Interoperability Profile 1.0 - draft 00
+title: CAEP Interoperability Profile 1.0 - draft 01
 abbrev: caep-interop
 docname: caep-interoperability-profile-1_0
-date: 2024-06-25
+date: 2025-05-22
 
 ipr: none
 cat: std
@@ -298,32 +298,32 @@ token. For example, a short lived access token could be defined as one in which
 the value of the `exp` claim is not longer than 60 mins after `nbf` claim.
 Please efer to Access token lifetimes in the security considerations of {{FAPI}}
 for additional considerations.
-* client credential grant flow {{RFC6749}} section 4.4
-* authorization code flow {{RFC6749}} section 4.1
+  * client credential grant flow {{RFC6749}} section 4.4
+  * authorization code flow {{RFC6749}} section 4.1
 
 ### OAuth Scopes
 
 Depending on the features supported by the OAuth service and the SSF APIs, the
 client SHALL discover the OAuth scopes as follows:
 
-1. If the Resource Server, hosting SSF configuration APIs, supports OAuth
+* If the Resource Server, hosting SSF configuration APIs, supports OAuth
 Protected Resource Metadata {{OPRM}} then the client MUST obtain the required
 scopes by using it.
 
-2. If the Resource Server does not support {{OPRM}}, then the following scopes
+* If the Resource Server does not support {{OPRM}}, then the following scopes
 MUST be supported -
 
-* An OAuth {{RFC6749}} authorization server that is used to issue tokens to SSF
-Receivers, MUST reserve the scopes for the SSF endpoints with the prefix of
-`ssf`
-* All the SSF stream configuration management API operations MUST accept
-`ssf.manage` scope
-* All the SSF stream configuration Read API operations MUST accept `ssf.read`
-scope
-* Authorization server MAY postfix scope names with more granular operations eg.
-`ssf.manage.create`, `ssf.manage.update` etc.
-* Transmitter managed poll endpoint MAY support the postfix scopes in the same
-nomenclature as `ssf.manage.poll`
+  * An OAuth {{RFC6749}} authorization server that is used to issue tokens to SSF
+  Receivers, MUST reserve the scopes for the SSF endpoints with the prefix of
+  `ssf`
+  * All the SSF stream configuration management API operations MUST accept
+  `ssf.manage` scope
+  * All the SSF stream configuration Read API operations MUST accept `ssf.read`
+  scope
+  * Authorization server MAY postfix scope names with more granular operations eg.
+  `ssf.manage.create`, `ssf.manage.update` etc.
+  * Transmitter managed poll endpoint MAY support the postfix scopes in the same
+  nomenclature as `ssf.manage.poll`
 
 ### The SSF Transmitter as a Resource Server
 
@@ -429,3 +429,7 @@ cover technology that may be required to practice this specification.
 -00
   
 * Initial draft
+
+-01
+
+* Formatting adjustments
