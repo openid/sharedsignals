@@ -5,7 +5,7 @@ abbrev: CAEP-Spec
 docname: openid-caep-1_0
 date: 2025-05-19
 
-ipr: none 
+ipr: none
 cat: std
 wg: Shared Signals
 
@@ -161,6 +161,7 @@ robotic users, devices, sessions and applications.
 --- middle
 
 # Introduction {#introduction}
+
 CAEP is the application of the Shared Signals Profile of IETF
 Security Events 1.0 {{SSF}} (SSF Profile) to ensure access security in a
 network of cooperating providers. CAEP specifies a set of event-types that
@@ -168,12 +169,14 @@ conform to the SSF Profile. This document specifies the event-types required to
 achieve this goal.
 
 ## Notational Considerations
+
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this
 document are to be interpreted as described in BCP 14 {{RFC2119}} {{RFC8174}}
 when, and only when, they appear in all capitals, as shown here.
 
 # Optional Event Claims {#optional-event-claims}
+
 The following claims are optional unless otherwise specified in the event
 definition.
 
@@ -186,13 +189,13 @@ initiating_entity
 : OPTIONAL, JSON string: describes the entity that invoked the event.
 : This MUST be one of the following strings:
 
-  - `admin`:    an administrative action triggered the event
+* `admin`:    an administrative action triggered the event
 
-  - `user`:     an end-user action triggered the event
+* `user`:     an end-user action triggered the event
 
-  - `policy`:   a policy evaluation triggered the event
+* `policy`:   a policy evaluation triggered the event
 
-  - `system`:   a system or platform assertion triggered the event
+* `system`:   a system or platform assertion triggered the event
 
 reason_admin
 : OPTIONAL, JSON object: a localizable administrative message intended for
@@ -228,13 +231,14 @@ message as the value.
 ~~~
 {: #optional-claims-reason-user-example title="Example: End user reason information with multiple languages"}
 
-
 # Event Types {#event-types}
+
 The base URI for CAEP event types is:
 
 `https://schemas.openid.net/secevent/caep/event-type/`
 
 ## Session Revoked {#session-revoked}
+
 Event Type URI:
 
 `https://schemas.openid.net/secevent/caep/event-type/session-revoked`
@@ -363,6 +367,7 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
 {: #session-revoked-example-user-device title="Example: Session Revoked - Complex Subject describing user + device + tenant (includes optional claims)"}
 
 ## Token Claims Change {#token-claims-change}
+
 Event Type URI:
 
 `https://schemas.openid.net/secevent/caep/event-type/token-claims-change`
@@ -466,8 +471,8 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
 ~~~
 {: #token-claims-change-example-saml title="Example: SAML Assertion Claims Change - Required claims only"}
 
-
 ## Credential Change {#credential-change}
+
 Event Type URI:
 
 `https://schemas.openid.net/secevent/caep/event-type/credential-change`
@@ -475,9 +480,9 @@ Event Type URI:
 The Credential Change event signals that a credential was created, changed,
 revoked or deleted. Credential Change scenarios include:
 
-  - password/PIN change/reset
-  - certificate enrollment, renewal, revocation and deletion
-  - second factor / passwordless credential enrollment or deletion (U2F, FIDO2, OTP, app-based)
+* password/PIN change/reset
+* certificate enrollment, renewal, revocation and deletion
+* second factor / passwordless credential enrollment or deletion (U2F, FIDO2, OTP, app-based)
 
 The actual reason why the credential change occurred might be specified with the
 nested `reason_admin` and/or `reason_user` claims made in {{optional-event-claims}}.
@@ -488,24 +493,24 @@ credential_type
 : REQUIRED, JSON string: This MUST be one of the following strings, or any other
 credential type supported mutually by the Transmitter and the Receiver.
 
-    - `password`
-    - `pin`
-    - `x509`
-    - `fido2-platform`
-    - `fido2-roaming`
-    - `fido-u2f`
-    - `verifiable-credential`
-    - `phone-voice`
-    - `phone-sms`
-    - `app`
+* `password`
+* `pin`
+* `x509`
+* `fido2-platform`
+* `fido2-roaming`
+* `fido-u2f`
+* `verifiable-credential`
+* `phone-voice`
+* `phone-sms`
+* `app`
 
 change_type
 : REQUIRED, JSON string: This MUST be one of the following strings:
 
-    - `create`
-    - `revoke`
-    - `update`
-    - `delete`
+* `create`
+* `revoke`
+* `update`
+* `delete`
 
 friendly_name
 : OPTIONAL, JSON string: credential friendly name
@@ -556,6 +561,7 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
 {: #credential-change-example-fido2 title="Example: Provisioning a new FIDO2 authenticator - Simple Subject + optional claims"}
 
 ## Assurance Level Change {#assurance-level-change}
+
 Event Type URI:
 
 `https://schemas.openid.net/secevent/caep/event-type/assurance-level-change`
@@ -581,13 +587,13 @@ namespace:
 : REQUIRED, JSON string: the namespace of the values in the `current_level` and `previous_level` claims.
 This string MAY be one of the following strings:
 
-  - `RFC8176`: The assurance level values are from the {{RFC8176}} specification
-  - `RFC6711`: The assurance level values are from the {{RFC6711}} specification
-  - `ISO-IEC-29115`: The assurance level values are from the {{ISO-IEC-29115}} specification
-  - `NIST-IAL`: The assurance level values are from the {{NIST-IDPROOF}} specification
-  - `NIST-AAL`: The assurance level values are from the {{NIST-AUTH}} specification
-  - `NIST-FAL`: The assurance level values are from the {{NIST-FED}} specification
-  - Any other value that is an alias for a custom namespace agreed between the Transmitter and the Receiver
+* `RFC8176`: The assurance level values are from the {{RFC8176}} specification
+* `RFC6711`: The assurance level values are from the {{RFC6711}} specification
+* `ISO-IEC-29115`: The assurance level values are from the {{ISO-IEC-29115}} specification
+* `NIST-IAL`: The assurance level values are from the {{NIST-IDPROOF}} specification
+* `NIST-AAL`: The assurance level values are from the {{NIST-AUTH}} specification
+* `NIST-FAL`: The assurance level values are from the {{NIST-FED}} specification
+* Any other value that is an alias for a custom namespace agreed between the Transmitter and the Receiver
 
 current_level
 : REQUIRED, JSON string: The current assurance level, as defined in the specified `namespace`
@@ -601,8 +607,8 @@ change_direction
 If the Transmitter has specified the `previous_level`, then the Transmitter SHOULD provide a value for this claim.
 If present, this MUST be one of the following strings:
 
-  - `increase`
-  - `decrease`
+* `increase`
+* `decrease`
 
 When `event_timestamp` is included, its value MUST represent the time at which
 the assurance level changed.
@@ -659,8 +665,8 @@ the assurance level changed.
 ~~~
 {: #assurance-level-change-examples-custom title="Example: Custom Assurance Level - Simple Subject"}
 
-
 ## Device Compliance Change {#device-compliance-change}
+
 Event Type URI:
 
 `https://schemas.openid.net/secevent/caep/event-type/device-compliance-change`
@@ -676,15 +682,15 @@ previous_status
 : REQUIRED, JSON string: the compliance status prior to the change that triggered the event
 : This MUST be one of the following strings:
 
-  - `compliant`
-  - `not-compliant`
+* `compliant`
+* `not-compliant`
 
 current_status
 : REQUIRED, JSON string: the current status that triggered the event
 : This MUST be one of the following strings:
 
-  - `compliant`
-  - `not-compliant`
+* `compliant`
+* `not-compliant`
 
 When `event_timestamp` is included, its value MUST represent the time at which
 the device compliance status changed.
@@ -731,6 +737,7 @@ NOTE: The event type URI is wrapped, the backslash is the continuation character
 {: #device-compliance-change-examples-out-of-compliance title="Example: Device No Longer Compliant - Complex Subject + optional claims"}
 
 ## Session Established {#session-established}
+
 Event Type URI:
 
 `https://schemas.openid.net/secevent/caep/event-type/session-established`
@@ -744,6 +751,7 @@ The Session Established event signifies that the Transmitter has established a n
 The `event_timestamp` in this event type specifies the time at which the session was established.
 
 ### Event Specific Claims {#session-established-event-specific-claims}
+
 The following optional claims MAY be included in the Session Established event:
 
 fp_ua
@@ -758,8 +766,8 @@ amr
 ext_id
 : The external session identifier, which may be used to correlate this session with a broader session (e.g., a federated session established using SAML)
 
-
 ### Examples {#session-established-examples}
+
 The following is a non-normative example of the `session-established` event type:
 
 ~~~json
@@ -785,6 +793,7 @@ The following is a non-normative example of the `session-established` event type
 ~~~
 
 ## Session Presented {#session-presented}
+
 Event Type URI:
 
 `https://schemas.openid.net/secevent/caep/event-type/session-presented`
@@ -795,6 +804,7 @@ The Session Presented event signifies that the Transmitter has observed the sess
 * Establishing an inventory of live sessions belonging to a user
 
 ### Event Specific Claims {#session-presented-event-specific-claims}
+
 The following optional claims MAY be present in a Session Presented event:
 
 fp_ua
@@ -804,6 +814,7 @@ ext_id
 : The external session identifier, which may be used to correlate this session with a broader session (e.g., a federated session established using SAML)
 
 ### Examples {#session-presented-examples}
+
 The following is a non-normative example of a Session Presented event:
 
 ~~~json
@@ -828,6 +839,7 @@ The following is a non-normative example of a Session Presented event:
 ~~~
 
 ## Risk Level Change {#risk-level-change}
+
 Event Type URI:
 
 `https://schemas.openid.net/secevent/caep/event-type/risk-level-change`
@@ -840,7 +852,6 @@ The Risk Level Change event is employed by the Transmitter to communicate any mo
 * Device's risk has changed due to installation of unapproved software, connection to insecure pheripheral device, encryption of data or other reasons.
 * Any other subject's risk changes due to variety of reasons.
 
-
 ### Event Specific Claims {#risk-level-change-event-specific-claims}
 
 risk_reason
@@ -849,14 +860,14 @@ risk_reason
 principal
 : REQUIRED, JSON string: representing the principal entity involved in the observed risk event, as identified by the transmitter. The subject principal can be one of the following entities USER, DEVICE, SESSION, TENANT, ORG_UNIT, GROUP, or any other entity as defined in Section 2 of {{SSF}}. This claim identifies the primary subject associated with the event, and helps to contextualize the risk relative to the entity involved.
 
-current_level 
+current_level
 : REQUIRED, JSON string: indicates the current level of the risk for the subject. Value MUST be one of LOW, MEDIUM, HIGH
 
-previous_level 
+previous_level
 : OPTIONAL, JSON string: indicates the previously known level of the risk for the subject. Value MUST be one of LOW, MEDIUM, HIGH. If the Transmitter omits this value, the Receiver MUST assume that the previous risk level is unknown to the Transmitter.
 
-
 ### Examples {#risk-level-change-examples}
+
 The following is a non-normative example of a Risk Level Change event:
 
 ~~~json
@@ -884,6 +895,7 @@ The following is a non-normative example of a Risk Level Change event:
 ~~~
 
 # Security Considerations
+
 Any implementations of events described in this document SHOULD comply with the Shared Signals Framework {{SSF}}. Exchanging events described herein without complying with the Shared Signals Framework {{SSF}} may result in security issues.
 
 --- back
@@ -906,15 +918,16 @@ The technology described in this specification was made available from contribut
 
   [[ To be removed from the final specification ]]
 
-  -10
-  * Fixed the example for the "session established" event
-  * ip claims removed from session established and session presented
-  * New "Risk level change" event
+-10
 
-  -03
+* Fixed the example for the "session established" event
+* ip claims removed from session established and session presented
+* New "Risk level change" event
 
-  * New "Session Established" and "Session Presented" event types
-  * Added `namespace` required field to Assurance Level Change event
-  * Changed the name referencing SSE to SSF
-  * Added `format` to the subjects in examples in CAEP
-  * Formatting and typo changes
+-03
+
+* New "Session Established" and "Session Presented" event types
+* Added `namespace` required field to Assurance Level Change event
+* Changed the name referencing SSE to SSF
+* Added `format` to the subjects in examples in CAEP
+* Formatting and typo changes
