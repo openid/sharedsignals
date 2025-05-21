@@ -416,7 +416,6 @@ ip-addresses
 
 > REQUIRED. The array of IP addresses of the subject as observed by the Transmitter. The value MUST be in the format of an array of strings, each one of which represents the {{RFC4001}} string representation of an IP address.
 
-
 The "IP addresses" Subject Identifier Format is identified by the name
 "ip-addresses".
 
@@ -1170,7 +1169,6 @@ TODO: consider adding a IANA Registry for stream configuration metadata, similar
 to Section 7.1.1 of {{RFC8414}}. This would allow other specs to add to
 the stream configuration.
 
-
 #### Creating a Stream {#creating-a-stream}
 
 In order to communicate events from a Transmitter to a Receiver, a Receiver
@@ -1263,7 +1261,6 @@ Content-Type: application/json
 
 Errors are signaled with HTTP status codes as follows:
 
-
 | Code | Description |
 |------|-------------|
 | 400  | if the request cannot be parsed |
@@ -1271,7 +1268,6 @@ Errors are signaled with HTTP status codes as follows:
 | 403  | if the Event Receiver is not allowed to create a stream |
 | 409  | if the Transmitter does not support multiple streams per Receiver |
 {: title="Create Stream Errors" #tablecreatestream}
-
 
 ##### Validating a Stream Creation Response
 
@@ -1469,7 +1465,6 @@ Cache-Control: no-store
 
 Errors are signaled with HTTP status codes as follows:
 
-
 | Code | Description |
 |------|-------------|
 | 401  | if authorization failed or it is missing |
@@ -1556,7 +1551,6 @@ Cache-Control: no-store
 {: title="Example: Update Stream Configuration Response" #figupdateconfigresp}
 
 Pending conditions or errors are signaled with HTTP status codes as follows:
-
 
 | Code | Description |
 |------|-------------|
@@ -1879,7 +1873,6 @@ Errors are signaled with HTTP status codes as follows:
 | 404  | if there is no Event Stream with the given "stream_id" for this Event Receiver |
 {: title="Update Stream Status Errors" #tabupdatestatus}
 
-
 Examples:
 
 1. If a Receiver makes a request to update a stream status, and the Transmitter is
@@ -2140,7 +2133,6 @@ not requested by the Event Receiver.
 
 A Transmitter MAY respond to Verification Event requests even if the event is not present in the `events_supported`, `events_requested` and / or `events_delivered` fields in the Stream Configuration ({{stream-config}}).
 
-
 #### Verification Event {#verification-event}
 
 The Verification Event is an SSF event with the event type: "https://schemas.openid.net/secevent/ssf/event-type/verification". The event contains the following attribute:
@@ -2330,7 +2322,6 @@ return a "204" response even if they will not actually send any events related
 to the subject, and Event Receivers MUST NOT assume that a 204 response means
 that they will receive events related to the subject.
 
-
 ## Information Harvesting {#management-sec-information-harvesting}
 
 SETs may contain personally identifiable information (PII) or other non-public
@@ -2349,7 +2340,6 @@ information contained within an event with the Event Receiver before
 transmitting the event. The mechanisms by which such validation is performed
 are outside the scope of this specification.
 
-
 ## Malicious Subject Removal {#management-sec-malicious-subject-removal}
 
 A malicious party may find it advantageous to remove a particular subject from a
@@ -2364,7 +2354,6 @@ amount of time after that subject has been removed from the stream. Event
 Receivers MUST tolerate receiving events for subjects that have been removed
 from the stream, and MUST NOT report these events as errors to the Event
 Transmitter.
-
 
 # Privacy Considerations {#privacy-considerations}
 
@@ -2435,7 +2424,6 @@ Change Controller
 
 > OpenID - Shared Signals Working Group
 
-
 --- back
 
 # Acknowledgements
@@ -2451,7 +2439,6 @@ Copyright (c) 2024 The OpenID Foundation.
 The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, or other interested party a non-exclusive, royalty free, worldwide copyright license to reproduce, prepare derivative works from, distribute, perform and display, this Implementers Draft or Final Specification solely for the purposes of (i) developing specifications, and (ii) implementing Implementers Drafts and Final Specifications based on such documents, provided that attribution be made to the OIDF as the source of the material, but that such attribution does not indicate an endorsement by the OIDF.
 
 The technology described in this specification was made available from contributions from various sources, including members of the OpenID Foundation and others. Although the OpenID Foundation has taken steps to help ensure that the technology is available for distribution, it takes no position regarding the validity or scope of any intellectual property or other rights that might be claimed to pertain to the implementation or use of the technology described in this specification or the extent to which any license under such rights might or might not be available; neither does it represent that it has made any independent effort to identify any such rights. The OpenID Foundation and the contributors to this specification make no (and hereby expressly disclaim any) warranties (express, implied, or otherwise), including implied warranties of merchantability, non-infringement, fitness for a particular purpose, or title, related to this specification, and the entire risk as to implementing this specification is assumed by the implementer. The OpenID Intellectual Property Rights policy requires contributors to offer a patent promise not to assert certain patent claims against other contributors and against implementers. The OpenID Foundation invites any interested party to bring to its attention any copyrights, patents, patent applications, or other proprietary rights that may cover technology that may be required to practice this specification.
-
 
 # Document History
 
