@@ -1,0 +1,9 @@
+# blanks around fences
+MD031: false
+MD034: false
+# first-line-h1
+MD0041:
+  allow_preamble: true
+  front_matter_title: "---"
+# MD055/table-pipe-style
+MD055: false
