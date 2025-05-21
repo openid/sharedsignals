@@ -1,9 +1,12 @@
-# blanks-around-fences
+MD013:
+  line_length: 20000
+# blanks-around-fences false because of kramdown-rfc formatting
 MD031: false
 # no-bare-urls
 MD034: false
-# first-line-h1
-MD041:
-  allow_preamble: true
-# table-pipe-style
+# first-line-h1 false because of rfc heading
+MD041: false
+# table-pipe-style and table-column-count set to false
+# these conflict with the table title kramdown-rfc formatting
 MD055: false
+MD056: false

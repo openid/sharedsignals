@@ -754,8 +754,8 @@ Transmitters have metadata describing their configuration:
 spec_version
 
 > OPTIONAL. A version identifying the implementer's draft or final specification implemented by the Transmitter. This includes the numerical portion of the spec version as described in the document {{NAMINGCONVENTION}}. If absent, the Transmitter is assumed to conform to "1_0-ID1" version of the specification.
-
->  The following is a non-normative example of a Transmitter that implements the final specification of the Shared Signals Framework 1_0.
+>
+> The following is a non-normative example of a Transmitter that implements the final specification of the Shared Signals Framework 1_0.
 
 ~~~ json
    {
@@ -819,19 +819,15 @@ default_subjects
 > OPTIONAL. A string indicating the default behavior of newly created streams. If present,
   the value MUST be either "ALL" or "NONE". If not provided, the Transmitter behavior in
   this regard is unspecified.
-
->  - "ALL" indicates that any subjects that are appropriate for the stream are added to
+>
+> * "ALL" indicates that any subjects that are appropriate for the stream are added to
     the stream by default. The Receiver MAY remove subjects from the stream via the
     `remove_subject_endpoint`, causing events for those subjects to _not_ be transmitted.
     The Receiver MAY re-add any subjects removed this way via the `add_subject_endpoint`.
-
->  - "NONE" indicates that no subjects are added by default. The Receiver MAY add subjects
+> * "NONE" indicates that no subjects are added by default. The Receiver MAY add subjects
     to the stream via the `add_subject_endpoint`, causing only events for those subjects
     to be transmitted. The Receiver MAY remove subjects added this way via the
     `remove_subject_endpoint`.
-
-TODO: consider adding a IANA Registry for metadata, similar to Section 7.1.1 of
-{{RFC8414}}. This would allow other specs to add to the metadata.
 
 ### Authorization scheme {#authorization-scheme}
 
@@ -1005,7 +1001,7 @@ This authorization MUST associate a Receiver with one or more stream IDs and "au
 such that only authorized Receivers are able to access or modify the details of the
 associated Event Streams.
 
-~~~
+~~~ascii
 +------------+                +------------+
 |            | Stream Config  |            |
 | Event      <----------------+ Event      |
@@ -1154,20 +1150,16 @@ inactivity_timeout
 >
 > The following constitutes eligible Receiver activity. If the Transmitter observes any of these activities from the Receiver, it MUST restart the inactivity timeout counter.
 >
-> >   For streams created with the PUSH {{RFC8935}} delivery method:
+> > For streams created with the PUSH {{RFC8935}} delivery method:
 > >
-> >   * The Receiver calls any endpoint in the Event Stream Management API that references the stream ({{management}}).
-> > 
-> >   For streams created with the POLL {{RFC8936}} delivery method:
-> > 
-> >   * The Receiver polls the Transmitter for events in the stream.
-> >   * The Receiver calls any endpoint in the Event Stream Management API that references the stream ({{management}}).
+> > * The Receiver calls any endpoint in the Event Stream Management API that references the stream ({{management}}).
+> >
+> > For streams created with the POLL {{RFC8936}} delivery method:
+> >
+> > * The Receiver polls the Transmitter for events in the stream.
+> > * The Receiver calls any endpoint in the Event Stream Management API that references the stream ({{management}}).
 >
 > If the Transmitter decides to pause or disable the stream, it MUST send a Stream Updated Event to the Receiver as described in {{status}}.
-
-TODO: consider adding a IANA Registry for stream configuration metadata, similar
-to Section 7.1.1 of {{RFC8414}}. This would allow other specs to add to
-the stream configuration.
 
 #### Creating a Stream {#creating-a-stream}
 
@@ -1175,7 +1167,7 @@ In order to communicate events from a Transmitter to a Receiver, a Receiver
 MUST first create an Event Stream. An Event Receiver creates a stream by making
 an HTTP POST request to the Configuration Endpoint. On receiving a valid request
 the Event Transmitter responds with a "201 Created" response containing a
-[JSON][RFC7159] representation of the stream’s configuration in the body. The Receiver
+JSON {{RFC7159}} representation of the stream’s configuration in the body. The Receiver
 MUST check the response and confirm that the `iss` value matches the Issuer from
 which it received the Transmitter Configuration data.
 
@@ -1279,7 +1271,7 @@ Regardless of how the audience value is agreed upon, the Receiver SHOULD ensure 
 
 An Event Receiver gets the current configuration of a stream by making an HTTP
 GET request to the Configuration Endpoint. On receiving a valid request, the
-Event Transmitter responds with a "200 OK" response containing a [JSON][RFC7159]
+Event Transmitter responds with a "200 OK" response containing a JSON {{RFC7159}}
 representation of the stream’s configuration in the body.  The Receiver
 MUST check the response and confirm that the `iss` value matches the Issuer from
 which it received the Transmitter Configuration data.
@@ -1476,9 +1468,9 @@ Errors are signaled with HTTP status codes as follows:
 
 An Event Receiver updates the current configuration of a stream by making an
 HTTP PATCH request to the Configuration Endpoint. The PATCH body contains a
-[JSON][RFC7159] representation of the stream configuration properties to change. On
+JSON {{RFC7159}} representation of the stream configuration properties to change. On
 receiving a valid request, the Event Transmitter responds with a "200 OK"
-response containing a [JSON][RFC7159] representation of the entire updated stream
+response containing a JSON {{RFC7159}} representation of the entire updated stream
 configuration in the body. The Receiver MUST check the response and confirm that the
 `iss` value matches the Issuer from which it received the Transmitter Configuration data.
 
@@ -1710,7 +1702,7 @@ stream_id
 > REQUIRED. A string identifying the stream whose status is being queried.
 
 On receiving a valid request, the Event Transmitter responds with a 200 OK
-response containing a [JSON][RFC7159] object with the following attributes:
+response containing a JSON {{RFC7159}} object with the following attributes:
 
 stream_id
 
@@ -1797,7 +1789,7 @@ Examples:
 #### Updating a Stream's Status {#updating-a-streams-status}
 
 An Event Receiver updates the current status of a stream by making an HTTP POST
-request to the Status Endpoint. The POST body contains a [JSON][RFC7159] object
+request to the Status Endpoint. The POST body contains a JSON {{RFC7159}} object
 with the following fields:
 
 stream_id
@@ -1813,7 +1805,7 @@ reason
 > OPTIONAL. A short text description that explains the reason for the change.
 
 On receiving a valid request, the Event Transmitter responds with a "200 OK"
-response containing a [JSON][RFC7159] representation of the updated stream
+response containing a JSON {{RFC7159}} representation of the updated stream
 status in the body, using the same fields as described in the request.
 
 The following is a non-normative example request to update an Event Stream’s
@@ -1904,8 +1896,9 @@ The following is a non-normative example of subject matching for Complex Subject
 when a Receiver adds a subject that is less restrictive than the subject being sent
 by the Transmitter.
 
-~~~
 The Receiver has added the following subject to their stream:
+
+~~~json
 {
   "format": "complex",
   "tenant": {
@@ -1913,8 +1906,11 @@ The Receiver has added the following subject to their stream:
     "id": "example-a38h4792-uw2"
   }
 }
+~~~
 
 The Transmitter has an event to broadcast with the following subject:
+
+~~~json
 {
   "format": "complex",
   "tenant": {
@@ -1926,17 +1922,18 @@ The Transmitter has an event to broadcast with the following subject:
     "email": "jdoe@example.com"
   }
 }
+~~~
 
 According to the matching rules described above, the Transmitter SHOULD broadcast the
 event over the Receiver's stream.
-~~~
 
 The following is a non-normative example of subject matching for Complex Subjects
 when a Receiver adds a subject that is more restrictive than the subject being sent
 by the Transmitter.
 
-~~~
 The Receiver has added the following subject to their stream:
+
+~~~json
 {
   "format": "complex",
   "user": {
@@ -1948,24 +1945,28 @@ The Receiver has added the following subject to their stream:
     "ip-addresses": ["10.29.37.75"]
   }
 }
+~~~
 
 The Transmitter has an event to broadcast with the following subject:
+
+~~~json
 {
   "format": "complex",
   "user": {
-    "format": "email":
+    "format": "email",
     "email": "jdoe@example.com"
   }
 }
+~~~
 
 According to the matching rules described above, the Transmitter SHOULD broadcast the
 event over the Receiver's stream.
-~~~
 
 The following is a non-normative example of two Complex Subjects that do not match.
 
-~~~
 The Receiver has added the following subject to their stream:
+
+~~~json
 {
   "format": "complex",
   "user": {
@@ -1977,12 +1978,15 @@ The Receiver has added the following subject to their stream:
     "url": "did:example:123456"
   }
 }
+~~~
 
 The Transmitter has an event to broadcast with the following subject:
+
+~~~json
 {
   "format": "complex",
   "user": {
-    "format": "email":
+    "format": "email",
     "email": "jdoe@example.com"
   },
   "group": {
@@ -1990,10 +1994,10 @@ The Transmitter has an event to broadcast with the following subject:
     "url": "did:example:9999999"
   }
 }
+~~~
 
 According to the matching rules described above, the Transmitter SHOULD NOT broadcast the
 event over the Receiver's stream.
-~~~
 
 #### Adding a Subject to a Stream {#adding-a-subject-to-a-stream}
 
@@ -2147,7 +2151,7 @@ As with any SSF event, the Verification Event has a top-level `sub_id` claim:
 sub_id
 
 > REQUIRED. The value of the top-level `sub_id` claim in a Verification Event MUST always be set to have a simple value of type `opaque`. The `id` of the value MUST be the `stream_id` of the stream being verified.
-
+>
 > Note that the subject that identifies a stream itself is always implicitly
   added to the stream and MAY NOT be removed from the stream.
 
@@ -2280,10 +2284,10 @@ As with any SSF event, this event has a top-level `sub_id` claim:
 sub_id
 
 > REQUIRED. The top-level `sub_id` claim specifies the Stream Id for which the status has been updated. The value of the `sub_id` field MUST be of format `opaque`, and its `id` value MUST be the unique ID of the stream.
-
+>
 > Note that the subject that identifies a stream itself is always implicitly
   added to the stream and MAY NOT be removed from the stream.
-
+>
 > Below is a non-normative example of a Stream Updated event.
 
 ~~~ json
@@ -2443,71 +2447,73 @@ The technology described in this specification was made available from contribut
 # Document History
 
   [[ To be removed from the final specification ]]
-  -20
-    * Clarified that Transmitters may drop events if they aren't able to deliver them to the receiver.
-    * Added examples to demonstrate how "wildcard matching" works in SSF event complex subjects
-    * Added an `inactivity_timeout` field to the Transmitter metadata, after which transmitters may pause, disable or delete inactive streams.
-    * Clarified that Receivers should validate the `aud` value
-    * Clarified that Transmitters may include additional fields in SSF events, and how receivers should interpret them.
-    * Specified that the poll delivery endpoint should require authorization
-    * Clarified stream creation behavior for delivery method mismatch and poll delivery
-    * Clarified that StreamIDs have to be of the "unreserved characters" character set from RFC3986
-    * Clarified the authorization_header requirement for the receiver
-    * Rearranged the content for easier readability: Eliminated the "Profiles" section (previous section 10). Created new sections "Events" (new section 4), and "Event Delivery" (new Section 6). Incorporated text from the erstwhile "Profiles" section into other sections as appropriate. Fixed references and titles of examples.
-    * Added "IP Address" as a subject identifier format
-    * In Create Stream, specified that description may be included in the response, and that the `endpoint_url` is specified by the Transmitter in the `poll` delivery method
-    * Updated URLs of linked specs and other resources
-    * Fixed example to have correct format for "reason_admin" and "reason_user"
 
-  -03
+-20
 
-    * Removing transmitter supplied fields from stream config PUT and PATCH examples
-    * Add OPTIONAL/REQUIRED to the fields in the stream configuration
-    * Add stream_id to the response when getting stream status
-    * Update subject/sub_id in examples. Fix CAEP example
-    * Clarify language around sending Stream Updated events
-    * Add sentence suggesting that Issuer information should be validated by the Receiver
-    * Removed cause-time from RISC example
-    * Fix description of error code for invalid state
-    * Add SHOULD language about checking the issuer value
-    * Added language requiring authorization of stream management API
-    * Added description of `txn` claim
-    * Added a `default_subjects` field to Transmitter Configuration Metadata indicating expected subject behavior for new streams
-    * added txn claims to non-normative SET examples and generic txn callout under SET Profile section RFC8417
-    * Editorial: Standardize terms and casing, fix some typos
+* Clarified that Transmitters may drop events if they aren't able to deliver them to the receiver.
+* Added examples to demonstrate how "wildcard matching" works in SSF event complex subjects
+* Added an `inactivity_timeout` field to the Transmitter metadata, after which transmitters may pause, disable or delete inactive streams.
+* Clarified that Receivers should validate the `aud` value
+* Clarified that Transmitters may include additional fields in SSF events, and how receivers should interpret them.
+* Specified that the poll delivery endpoint should require authorization
+* Clarified stream creation behavior for delivery method mismatch and poll delivery
+* Clarified that StreamIDs have to be of the "unreserved characters" character set from RFC3986
+* Clarified the authorization_header requirement for the receiver
+* Rearranged the content for easier readability: Eliminated the "Profiles" section (previous section 10). Created new sections "Events" (new section 4), and "Event Delivery" (new Section 6). Incorporated text from the erstwhile "Profiles" section into other sections as appropriate. Fixed references and titles of examples.
+* Added "IP Address" as a subject identifier format
+* In Create Stream, specified that description may be included in the response, and that the `endpoint_url` is specified by the Transmitter in the `poll` delivery method
+* Updated URLs of linked specs and other resources
+* Fixed example to have correct format for "reason_admin" and "reason_user"
 
-  -02
+-03
 
-    * added spec version to metadata
-    * Added description as receiver supplied
-    * added language to make verification and updated events independent of events_supported
-    * added top-level sub_id claim. Modified existing language to reflect the use of the sub_id claim
-    * updated text to reflect sub_id as a top-level field in verification and stream updated events
-    * #46 add stream exists behavior
-    * update stream exists to 409
-    * Add 'format' to normative examples in CAEP
-    * Remove 'format' from stream config
-    * Remove subject from stream status (#88)
-    * Add reason to GET /status response
-    * Make reason look like an enum in the example to indicate how we expect it to be used
-    * Fixes #60 - are subjects required
-    * Added format field to complex subjects and updated examples (#71)
-    * Switch stray '204 OK' to read '204 No Content' (#73)
-    * Change 'jwt-id' to 'jwt_id' to match style of other subject formats (#63)
-    * resolving issue #45 added explanatory text to Stream Configuration (#68)
-    * #28 update delivery method references to URNs (#49)
-    * Changed jwks_uri from REQUIRED to OPTIONAL (#47)
-    * Sse to ssf (#43)
-    * updated SSE to Shared Signals in all files
-    * changed source format to md
-    * renamed files to be called sharedsignals instead of SSE. No change to the content (#41)
-    * Add stream_id to SSE Framework spec as per Issue 4: https://github.com/openid/sse/issues/4
-    * Update README with development instructions and fix error in Makefile
-    * Added note to PUSH/POLL section about uniqueness requirements for the URLs
-    * Add explanation about what an Event Stream is
-    * Change terms to Transmitter-Supplied and Receiver-Supplied
-    * Pragma is an obsolete HTTP header
-    * It's unnecessary to specify the character as UTF-8 in all examples (#10)
-    * Fix issue #18 by converting saml-assertion-id to saml_assertion_id to maintain consistent formatting with other subject identifiers (#1)
-    * updated backward compatibility language
-    * added section for Transmitter Configuration Metadata RISC compatibility
+* Removing transmitter supplied fields from stream config PUT and PATCH examples
+* Add OPTIONAL/REQUIRED to the fields in the stream configuration
+* Add stream_id to the response when getting stream status
+* Update subject/sub_id in examples. Fix CAEP example
+* Clarify language around sending Stream Updated events
+* Add sentence suggesting that Issuer information should be validated by the Receiver
+* Removed cause-time from RISC example
+* Fix description of error code for invalid state
+* Add SHOULD language about checking the issuer value
+* Added language requiring authorization of stream management API
+* Added description of `txn` claim
+* Added a `default_subjects` field to Transmitter Configuration Metadata indicating expected subject behavior for new streams
+* added txn claims to non-normative SET examples and generic txn callout under SET Profile section RFC8417
+* Editorial: Standardize terms and casing, fix some typos
+
+-02
+
+* added spec version to metadata
+* Added description as receiver supplied
+* added language to make verification and updated events independent of events_supported
+* added top-level sub_id claim. Modified existing language to reflect the use of the sub_id claim
+* updated text to reflect sub_id as a top-level field in verification and stream updated events
+* \#46 add stream exists behavior
+* update stream exists to 409
+* Add 'format' to normative examples in CAEP
+* Remove 'format' from stream config
+* Remove subject from stream status (#88)
+* Add reason to GET /status response
+* Make reason look like an enum in the example to indicate how we expect it to be used
+* Fixes \#60 - are subjects required
+* Added format field to complex subjects and updated examples (#71)
+* Switch stray '204 OK' to read '204 No Content' (#73)
+* Change 'jwt-id' to 'jwt_id' to match style of other subject formats (#63)
+* resolving issue \#45 added explanatory text to Stream Configuration (#68)
+* \#28 update delivery method references to URNs (#49)
+* Changed jwks_uri from REQUIRED to OPTIONAL (#47)
+* Sse to ssf (#43)
+* updated SSE to Shared Signals in all files
+* changed source format to md
+* renamed files to be called sharedsignals instead of SSE. No change to the content (#41)
+* Add stream_id to SSE Framework spec as per Issue 4: https://github.com/openid/sse/issues/4
+* Update README with development instructions and fix error in Makefile
+* Added note to PUSH/POLL section about uniqueness requirements for the URLs
+* Add explanation about what an Event Stream is
+* Change terms to Transmitter-Supplied and Receiver-Supplied
+* Pragma is an obsolete HTTP header
+* It's unnecessary to specify the character as UTF-8 in all examples (#10)
+* Fix issue \#18 by converting saml-assertion-id to saml_assertion_id to maintain consistent formatting with other subject identifiers (#1)
+* updated backward compatibility language
+* added section for Transmitter Configuration Metadata RISC compatibility
