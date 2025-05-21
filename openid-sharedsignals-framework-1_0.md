@@ -2,7 +2,7 @@
 title: OpenID Shared Signals Framework Specification 1.0 - draft 22
 abbrev: SharedSignals
 docname: openid-sharedsignals-framework-1_0
-date: 2025-05-15
+date: 2025-05-21
 
 ipr: none
 cat: std
@@ -21,31 +21,26 @@ author:
         name: Atul Tulshibagwale
         org: SGNL
         email: atul@sgnl.ai
-
       -
         ins: T. Cappalli
         name: Tim Cappalli
         org: Microsoft
         email: tim.cappalli@microsoft.com
-
       -
         ins: M. Scurtescu
         name: Marius Scurtescu
         org: Coinbase
         email: marius.scurtescu@coinbase.com
-
       -
         ins: A. Backman
         name: Annabelle Backman
         org: Amazon
         email: richanna@amazon.com
-
       -
         ins: J. Bradley
         name: John Bradley
         org: Yubico
         email: secevemt@ve7jtb.com
-
       -
         ins: S. Miel
         name: Shayne Miel
@@ -60,31 +55,26 @@ contributor:
         email: steve.venema@forgerock.com
         contribution: |
           Steve defined the format field of Complex Subjects
-
       -
         ins: A. Deshpande
         name: Apoorva Deshpande
         org: Okta
         email: apoorva.deshpande@okta.com
-
       -
         ins: S. O'Dell
         name: Sean O'Dell
         org: The Walt Disney Company
         email: sean.odentity@disney.com
-
       -
         ins: J. Schreiber
         name: Jen Schreiber
         org: Workday
         email: jennifer.winer@workday.com
-
       -
         ins: T. Raibhandare
         name: Tushar Raibhandare
         org: Google
         email: traib@google.com
-
       -
         ins: Y. Sarig
         name: Yair Sarig
@@ -238,18 +228,23 @@ Subject Principals are identified by Subject Members defined below.
 # Subject Members in SSF Events {#subject-ids}
 
 ## Subject Members {#subject-members}
+
 A Subject Member of an SSF event describes a subject of the event. A top-level claim named `sub_id` MUST be used to describe the primary subject of the event.
 
 ### Existing CAEP and RISC Events
+
 Event types already defined in the CAEP ({{CAEP}}) and RISC ({{RISC}}) specifications MAY use a `subject` field within the `events` claim of the SSF event to describe the primary Subject Principal of the event. SSF Transmitters MUST include the top-level `sub_id` claim even for these existing event types.
 
 ### New Event Types
+
 New event types MUST use the top-level `sub_id` claim and MUST NOT use the `subject` field in the `events` claim to describe the primary Subject Principal.
 
 ### Additional Subject Members
+
 Specific event types MAY define additional Subject Members if required to describe additional subjects of that event type (e.g. a Transferee). These additional subject fields MAY have any field name.
 
 ### Subject Member Values
+
 Each Subject Member MUST refer to exactly one Subject Principal. The value of a Subject Member MAY be a "simple subject" or a "complex subject".
 
 ## Simple Subject Members {#simple-subjects}
@@ -448,10 +443,12 @@ that it is unable to process.
 # Events {#events}
 
 ## Security Event Token Profile {#set-profle}
+
 The Shared Signals Framework profiles the Security Event Token (SET)
 {{RFC8417}} specification by defining certain properties of SETs as described in this section.
 
 ### Explicit Typing of SETs {#explicit-typing}
+
 SSF events MUST use explicit typing as defined in Section 2.3 of {{RFC8417}}.
 
 ~~~ json
@@ -468,10 +465,12 @@ validators may not be using the "typ" header parameter, requiring it for SSF
 SETs guarantees a distinct value for future validators.
 
 ### SSF Event Subject {#event-subjects}
+
 The primary Subject Member of SSF events is described in the "Subject Members" section ({{subject-ids}}). The JWT "sub" claim MUST NOT be present in any SET containing
 an SSF event.
 
 ### Distinguishing SETs from other Kinds of JWTs
+
 Of particular concern is the possibility that SETs are confused for other kinds
 of JWTs. Section 4 of {{RFC8417}} has several sub-sections
 on this subject. The Shared Signals Framework requires further restrictions:
@@ -481,21 +480,25 @@ on this subject. The Shared Signals Framework requires further restrictions:
 * The "exp" claim MUST NOT be present, as described in {{exp-claim}}.
 
 ### Signature Key Resolution {#signature-key-resolution}
+
 The signature key can be obtained through "jwks_uri", see {{discovery}}.
 
 ### The "iss" Claim {#iss-claim}
+
 The "iss" claim MUST match the "iss" value in the Stream Configuration data for the stream
 that the event is sent on. Receivers MUST validate that this claim matches the "iss"
 in the Stream Configuration data, as well as the Issuer from which the Receiver requested
 the Transmitter Configuration data.
 
 ### The "exp" Claim {#exp-claim}
+
 The "exp" claim MUST NOT be used in SETs.
 
 The purpose is defense in depth against confusion with other JWTs, as described
 in Sections 4.5 and 4.6 of {{RFC8417}}.
 
 ### The "aud" Claim {#aud-claim}
+
 The "aud" claim can be a single string or an array of strings. Values that
 uniquely identify the Receiver to the Transmitter MAY be used, if the two parties
 have agreement on the format.
@@ -533,18 +536,22 @@ multiple Receivers would lead to unintended data disclosure.
 {: title="Example: SET with array 'aud' claim" #figarrayaud}
 
 ### The "txn" claim {#txn-claim}
+
 Transmitters SHOULD set the "txn" claim value in Security Event Tokens (SETs). If the value is present, it MUST be unique to the underlying event that caused the Transmitter to generate the Security Event Token (SET). The Transmitter, however, may use the same value in the "txn" claim across different Security Events Tokens (SETs), such as session revoked and credential change, to indicate that the SETs originated from the same underlying cause or reason.
 
 ## Event Properties {#event-properties}
 
 ### The "events" claim {#events-claim}
+
 The "events" claim SHOULD contain only one event. Multiple event type URIs are
 permitted only if they are alternative URIs defining the exact same event type. The type of the event is specified by the key in the value of the `events` claim. The value of this field is the event object.
 
 ### Event type specific fields
+
 The event object inside the `events` claim MAY have one or more fields that are uniquely determined by the type of the event.
 
 ### Additional fields
+
 Transmitters MAY include additional fields in SSF events. These fields MAY exist anywhere in the SET, including the event object inside the "events" claim. Receivers MUST ignore any fields they do not understand from the SSF events they receive.
 
 # Example SETs that conform to the Shared Signals Framework {#events-examples}
@@ -695,13 +702,16 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
 {: #subject-custom-type-ex title="Example: SET Containing an SSF Event with a Proprietary Subject Identifier Format"}
 
 # Event Delivery {#event-delivery}
+
 This section describes the supported methods of delivering SSF Events. It provides SSF profiling specifications for the {{RFC8935}} and {{RFC8936}} specs.
 
 ## Stream Configuration Metadata {#delivery-meta}
+
 Each delivery method is identified by a URI, specified below by the "method"
 metadata.
 
 ### Push Delivery using HTTP
+
 This section provides SSF profiling specifications for the {{RFC8935}} spec.
 
 method
@@ -720,6 +730,7 @@ authorization_header
 > If the endpoint_url requires authorization, the receiver SHOULD provide this authorization header in the stream creation/updation. If present, the Transmitter MUST provide this value with every HTTP request to the `endpoint_url`.
 
 ### Poll Delivery using HTTP
+
 This section provides SSF profiling specifications for the {{RFC8936}} spec.
 
 method
@@ -824,6 +835,7 @@ TODO: consider adding a IANA Registry for metadata, similar to Section 7.1.1 of
 {{RFC8414}}. This would allow other specs to add to the metadata.
 
 ### Authorization scheme {#authorization-scheme}
+
 SSF is an HTTP based signals sharing framework and is agnostic to the authentication and authorization schemes used to secure stream configuration APIs. It does not provide any SSF-specific authentication and authorization schemes but relies on the cooperating parties' mutual security considerations.
 
 The `authorization_schemes` key of Transmitter Configuration Metadata provides authorization information related to the Transmitter's stream management APIs. These authorization schemes SHOULD also be used to protect any polling endpoint (used for Poll-Based SET delivery [RFC8936]) hosted by the Transmitter.
@@ -893,6 +905,7 @@ is for supporting multiple issuers per host; unlike its use in {{RFC8615}}, it
 does not provide general information about the host.
 
 ### Backward Compatibility for RISC Transmitters
+
 Existing RISC Transmitters MAY continue to use the path component
 "/risc-configuration" instead of the path component "/ssf-configuration" in the
 path for the Transmitter Configuration Metadata. New services supporting the
@@ -908,6 +921,7 @@ Host: risc-tr.example.com
 {: #figolddiscoveryrequest title="Example: Transmitter Configuration Request for RISC Transmitters"}
 
 ### Transmitter Configuration Response
+
 The response is a set of Claims about the Transmitter's configuration, including
 all necessary endpoints and public key location information. A successful
 response MUST use the 200 OK HTTP status code and return a JSON object using the
@@ -960,6 +974,7 @@ Content-Type: application/json
 {: #figdiscoveryresponse title="Example: Transmitter Configuration Response"}
 
 ### Transmitter Configuration Validation
+
 If any of the validation procedures defined in this specification fail, any
 operations requiring the information that failed to correctly validate MUST be
 aborted and the information that failed to validate MUST NOT be used.
@@ -970,6 +985,7 @@ identical to the "iss" Claim value in Security Event Tokens issued from this
 Transmitter.
 
 # Management API for SET Event Streams {#management}
+
 An Event Stream is an abstraction for how events are communicated from a
 Transmitter to a Receiver. The Event Stream's configuration, which is jointly
 managed by the Transmitter and Receiver, holds information about
@@ -1019,6 +1035,7 @@ RECOMMENDED that they implement it, especially the endpoints for querying the
 Stream Status and for triggering Verification.
 
 ## Event Stream Management {#management-api}
+
 Event Receivers manage how they receive events and the subjects about which
 they want to receive events over an Event Stream by making HTTP requests to
 endpoints in the Event Stream Management API.
@@ -1060,6 +1077,7 @@ e.g. from authentication credentials. The definition of such mechanisms is
 outside the scope of this specification.
 
 ### Stream Configuration {#stream-config}
+
 An Event Stream’s configuration is a collection of data, provided by both the
 Transmitter and the Receiver, that describes the information being sent over
 the Event Stream. It is represented as a JSON {{RFC7159}} object with the
@@ -1154,6 +1172,7 @@ the stream configuration.
 
 
 #### Creating a Stream {#creating-a-stream}
+
 In order to communicate events from a Transmitter to a Receiver, a Receiver
 MUST first create an Event Stream. An Event Receiver creates a stream by making
 an HTTP POST request to the Configuration Endpoint. On receiving a valid request
@@ -1261,6 +1280,7 @@ A Transmitter and Receiver MAY agree upon the audience value out of band.
 Regardless of how the audience value is agreed upon, the Receiver SHOULD ensure that it matches what it expects.
 
 #### Reading a Stream’s Configuration {#reading-a-streams-configuration}
+
 An Event Receiver gets the current configuration of a stream by making an HTTP
 GET request to the Configuration Endpoint. On receiving a valid request, the
 Event Transmitter responds with a "200 OK" response containing a [JSON][RFC7159]
@@ -1458,6 +1478,7 @@ Errors are signaled with HTTP status codes as follows:
 {: title="Read Stream Configuration Errors" #tabreadconfig}
 
 #### Updating a Stream’s Configuration {#updating-a-streams-configuration}
+
 An Event Receiver updates the current configuration of a stream by making an
 HTTP PATCH request to the Configuration Endpoint. The PATCH body contains a
 [JSON][RFC7159] representation of the stream configuration properties to change. On
@@ -1547,6 +1568,7 @@ Pending conditions or errors are signaled with HTTP status codes as follows:
 {: title="Update Stream Configuration Errors" #tabupdateconfig}
 
 #### Replacing a Stream’s Configuration {#replacing-a-streams-configuration}
+
 An Event Receiver replaces the current configuration of a stream by making an
 HTTP PUT request to the Configuration Endpoint. The PUT body contains a JSON
 {{RFC7159}} representation of the new configuration. On receiving a valid
@@ -1640,6 +1662,7 @@ Pending conditions or errors are signaled with HTTP status codes as follows:
 {: title="Replace Stream Configuration Errors" #tabreplaceconfig}
 
 #### Deleting a Stream {#deleting-a-stream}
+
 An Event Receiver deletes a stream by making an HTTP DELETE request to the
 Configuration Endpoint. On receiving a request, the Event Transmitter responds
 with an empty "204 No Content" response if the configuration was successfully removed.
@@ -1674,6 +1697,7 @@ Errors are signaled with HTTP status codes as follows:
 {: title="Delete Stream Errors" #tabdeletestream"}
 
 ### Stream Status {#status}
+
 Event Streams are managed independently. A Receiver MAY request that events from a
 stream be interrupted by Updating the Stream Status ({{updating-a-streams-status}}).
 If a Transmitter decides to enable, pause or disable updates from a stream
@@ -1681,6 +1705,7 @@ independently of an update request from a Receiver, it MUST send a Stream Update
 ({{stream-updated-event}}) to the Receiver.
 
 #### Reading a Stream’s Status {#reading-a-streams-status}
+
 An Event Receiver checks the current status of an Event Stream by making an HTTP
 GET request to the stream’s Status Endpoint.
 
@@ -1776,6 +1801,7 @@ Examples:
    Transmitter MUST respond with a 404 error status.
 
 #### Updating a Stream's Status {#updating-a-streams-status}
+
 An Event Receiver updates the current status of a stream by making an HTTP POST
 request to the Status Endpoint. The POST body contains a [JSON][RFC7159] object
 with the following fields:
@@ -1861,6 +1887,7 @@ Examples:
    respond with a 202 status code.
 
 ### Subjects {#subjects}
+
 An Event Receiver can indicate to an Event Transmitter whether or not the
 Receiver wants to receive events about a particular subject by “adding” or
 “removing” that subject to the Event Stream, respectively.
@@ -1976,6 +2003,7 @@ event over the Receiver's stream.
 ~~~
 
 #### Adding a Subject to a Stream {#adding-a-subject-to-a-stream}
+
 To add a subject to an Event Stream, the Event Receiver makes an HTTP POST
 request to the Add Subject Endpoint, containing in the body a JSON object the
 following claims:
@@ -2042,6 +2070,7 @@ Errors are signaled with HTTP status codes as follows:
 {: title="Add Subject Errors" #tabadderr}
 
 #### Removing a Subject {#removing-a-subject}
+
 To remove a subject from an Event Stream, the Event Receiver makes an HTTP POST
 request to the Remove Subject Endpoint, containing in the body a JSON object
 with the following claims:
@@ -2096,6 +2125,7 @@ Errors are signaled with HTTP status codes as follows:
 {: title="Remove Subject Errors" #tabremoveerr}
 
 ### Verification {#verification}
+
 In some cases, the frequency of event transmission on an Event Stream will be
 very low, making it difficult for an Event Receiver to tell the difference
 between expected behavior and event transmission failure due to a misconfigured
@@ -2112,6 +2142,7 @@ A Transmitter MAY respond to Verification Event requests even if the event is no
 
 
 #### Verification Event {#verification-event}
+
 The Verification Event is an SSF event with the event type: "https://schemas.openid.net/secevent/ssf/event-type/verification". The event contains the following attribute:
 
 state
@@ -2139,6 +2170,7 @@ fails to successfully verify based on the acknowledgement or lack of
 acknowledgement by the Event Receiver.
 
 #### Triggering a Verification Event. {#triggering-a-verification-event}
+
 To request that a Verification Event be sent over an Event Stream, the Event
 Receiver makes an HTTP POST request to the Verification Endpoint, with a [JSON]
 [RFC7159] object containing the parameters of the verification request, if any.
@@ -2224,6 +2256,7 @@ Event Receiver as a result of the above request:
 {: title="Example: Verification SET" #figverifyset}
 
 ### Stream Updated Event {#stream-updated-event}
+
 A Transmitter MAY change the stream status
 without a request from a Receiver. The Transmitter sends an event of type
 "https://schemas.openid.net/secevent/ssf/event-type/stream-updated" to indicate
@@ -2284,6 +2317,7 @@ sub_id
 # Security Considerations {#management-sec}
 
 ## Subject Probing {#management-sec-subject-probing}
+
 It may be possible for an Event Transmitter to leak information about subjects
 through their responses to add subject requests. A "404" response may indicate
 to the Event Receiver that the subject does not exist, which may inadvertently
@@ -2298,6 +2332,7 @@ that they will receive events related to the subject.
 
 
 ## Information Harvesting {#management-sec-information-harvesting}
+
 SETs may contain personally identifiable information (PII) or other non-public
 information about the Event Transmitter, the subject (of an event in the SET),
 or the relationship between the two. It is important for Event Transmitters to
@@ -2316,6 +2351,7 @@ are outside the scope of this specification.
 
 
 ## Malicious Subject Removal {#management-sec-malicious-subject-removal}
+
 A malicious party may find it advantageous to remove a particular subject from a
 stream, in order to reduce the Event Receiver’s ability to detect malicious
 activity related to the subject, inconvenience the subject, or for other reasons.
@@ -2333,6 +2369,7 @@ Transmitter.
 # Privacy Considerations {#privacy-considerations}
 
 ## Subject Information Leakage {#sub-info-leakage}
+
 Event Transmitters and Receivers SHOULD take precautions to ensure that they do not
 leak information about subjects via Subject Identifiers, and choose appropriate
 Subject Identifier Types accordingly. Parties SHOULD NOT identify a subject
@@ -2344,6 +2381,7 @@ communicating with a given party in order to reduce the possibility of
 information leakage.
 
 ## Previously Consented Data {#previously-consented-data}
+
 If SSF events contain new values for attributes of Subject Principals that were
 previously exchanged between the Transmitter and Receiver, then there are no
 additional privacy considerations introduced by providing the updated values in
@@ -2351,10 +2389,12 @@ the SSF events, unless the attribute was exchanged under a one-time consent
 obtained from the user.
 
 ## New Data {#new-data}
+
 Data that was not previously exchanged between the Transmitter and the Receiver,
 or data whose consent to exchange has expired has the following considerations:
 
 ### Organizational Data {#organizational-data}
+
 If a user has previously agreed with a Transmitter that they allow the release of
 certain data to third-parties, then the Transmitter MAY send such data in SSF
 events without additional consent of the user. Such data MAY include
@@ -2362,12 +2402,14 @@ organizational data about the Subject Principal that was generated by the
 Transmitter.
 
 ### Consentable Data {#consentable-data}
+
 If a Transmitter intends to include data in SSF events that is not previously
 consented to be released by the user, then the Transmitter MUST obtain consent
 to release such data from the user in accordance with the Transmitter's privacy
 policy.
 
 # IANA Considerations {#iana}
+
 Subject Identifiers defined in this document will be added to the "Security
 Events Subject Identifier Types" registry. This registry is defined in the
 Subject Identifiers for Security Event Tokens {{RFC9493}} specification.
