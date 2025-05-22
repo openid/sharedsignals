@@ -1,5 +1,5 @@
 ---
-title: CAEP Interoperability Profile 1.0 - draft 01
+title: CAEP Interoperability Profile 1.0 - draft 00
 abbrev: caep-interop
 docname: caep-interoperability-profile-1_0
 date: 2025-05-22
@@ -429,7 +429,3 @@ cover technology that may be required to practice this specification.
 -00
   
 * Initial draft
-
--01
-
-* Formatting adjustments
