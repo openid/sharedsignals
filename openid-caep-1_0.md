@@ -3,7 +3,7 @@ title: OpenID Continuous Access Evaluation Profile 1.0 - draft 11
 
 abbrev: CAEP-Spec
 docname: openid-caep-1_0
-date: 2025-05-21
+date: 2025-05-22
 
 ipr: none
 cat: std
@@ -184,24 +184,24 @@ The following claims are optional unless otherwise specified in the event
 definition.
 
 event_timestamp
-: OPTIONAL, JSON number: the time at which the event described by this SET
+
+> OPTIONAL, JSON number: the time at which the event described by this SET
   occurred. Its value is a JSON number representing the number of seconds
   from 1970-01-01T0:0:0Z as measured in UTC until the date/time.
 
 initiating_entity
-: OPTIONAL, JSON string: describes the entity that invoked the event.
-: This MUST be one of the following strings:
 
-* `admin`:    an administrative action triggered the event
-
-* `user`:     an end-user action triggered the event
-
-* `policy`:   a policy evaluation triggered the event
-
-* `system`:   a system or platform assertion triggered the event
+> OPTIONAL, JSON string: describes the entity that invoked the event.
+> This MUST be one of the following strings:
+>
+> * `admin`:    an administrative action triggered the event
+> * `user`:     an end-user action triggered the event
+> * `policy`:   a policy evaluation triggered the event
+> * `system`:   a system or platform assertion triggered the event
 
 reason_admin
-: OPTIONAL, JSON object: a localizable administrative message intended for
+
+> OPTIONAL, JSON object: a localizable administrative message intended for
 logging and auditing. The object MUST contain one or more key/value pairs,
 with a BCP47 {{RFC5646}} language tag as the key and the locale-specific
 administrative message as the value.
@@ -219,7 +219,8 @@ administrative message as the value.
 information with multiple languages"}
 
 reason_user
-: OPTIONAL, JSON object: a localizable user-friendly message for display
+
+> OPTIONAL, JSON object: a localizable user-friendly message for display
 to an end-user. The object MUST contain one or more key/value pairs, with a
 BCP47 {{RFC5646}} language tag as the key and the locale-specific end-user
 message as the value.
@@ -392,7 +393,8 @@ nested `reason_admin` and/or `reason_user` claims made in
 ### Event-Specific Claims {#token-claims-change-claims}
 
 claims
-: REQUIRED, JSON object: one or more claims with their new value(s)
+
+> REQUIRED, JSON object: one or more claims with their new value(s)
 
 When `event_timestamp` is included, its value MUST represent the time at which
 the claim value(s) changed.
@@ -507,41 +509,47 @@ nested `reason_admin` and/or `reason_user` claims made in
 ### Event-Specific Claims {#credential-change-claims}
 
 credential_type
-: REQUIRED, JSON string: This MUST be one of the following strings, or any other
-credential type supported mutually by the Transmitter and the Receiver.
 
-* `password`
-* `pin`
-* `x509`
-* `fido2-platform`
-* `fido2-roaming`
-* `fido-u2f`
-* `verifiable-credential`
-* `phone-voice`
-* `phone-sms`
-* `app`
+> REQUIRED, JSON string: This MUST be one of the following strings, or any other
+credential type supported mutually by the Transmitter and the Receiver.
+>
+> * `password`
+> * `pin`
+> * `x509`
+> * `fido2-platform`
+> * `fido2-roaming`
+> * `fido-u2f`
+> * `verifiable-credential`
+> * `phone-voice`
+> * `phone-sms`
+> * `app`
 
 change_type
-: REQUIRED, JSON string: This MUST be one of the following strings:
 
-* `create`
-* `revoke`
-* `update`
-* `delete`
+> REQUIRED, JSON string: This MUST be one of the following strings:
+>
+> * `create`
+> * `revoke`
+> * `update`
+> * `delete`
 
 friendly_name
-: OPTIONAL, JSON string: credential friendly name
+
+> OPTIONAL, JSON string: credential friendly name
 
 x509_issuer
-: OPTIONAL, JSON string: issuer of the X.509 certificate as defined in
+
+> OPTIONAL, JSON string: issuer of the X.509 certificate as defined in
 {{RFC5280}}
 
 x509_serial
-: OPTIONAL, JSON string: serial number of the X.509 certificate as defined in
+
+> OPTIONAL, JSON string: serial number of the X.509 certificate as defined in
 {{RFC5280}}
 
 fido2_aaguid
-: OPTIONAL, JSON string: FIDO2 Authenticator Attestation GUID as defined in
+
+> OPTIONAL, JSON string: FIDO2 Authenticator Attestation GUID as defined in
 {{WebAuthn}}
 
 When `event_timestamp` is included, its value MUST represent the time at which
@@ -607,41 +615,44 @@ nested `reason_admin` and/or `reason_user` claims made in
 ### Event-Specific Claims {#assurance-level-change-claims}
 
 namespace:
-: REQUIRED, JSON string: the namespace of the values in the `current_level` and
-`previous_level` claims.
-This string MAY be one of the following strings:
 
-* `RFC8176`: The assurance level values are from the {{RFC8176}} specification
-* `RFC6711`: The assurance level values are from the {{RFC6711}} specification
-* `ISO-IEC-29115`: The assurance level values are from the {{ISO-IEC-29115}}
+> REQUIRED, JSON string: the namespace of the values in the `current_level` and
+`previous_level` claims. This string MAY be one of the following strings:
+>
+> * `RFC8176`: The assurance level values are from the {{RFC8176}} specification
+> * `RFC6711`: The assurance level values are from the {{RFC6711}} specification
+> * `ISO-IEC-29115`: The assurance level values are from the {{ISO-IEC-29115}}
 specification
-* `NIST-IAL`: The assurance level values are from the {{NIST-IDPROOF}}
+> * `NIST-IAL`: The assurance level values are from the {{NIST-IDPROOF}}
 specification
-* `NIST-AAL`: The assurance level values are from the {{NIST-AUTH}}
+> * `NIST-AAL`: The assurance level values are from the {{NIST-AUTH}}
 specification
-* `NIST-FAL`: The assurance level values are from the {{NIST-FED}}
+> * `NIST-FAL`: The assurance level values are from the {{NIST-FED}}
 specification
-* Any other value that is an alias for a custom namespace agreed between the
+> * Any other value that is an alias for a custom namespace agreed between the
 Transmitter and the Receiver
 
 current_level
-: REQUIRED, JSON string: The current assurance level, as defined in the
+
+> REQUIRED, JSON string: The current assurance level, as defined in the
 specified `namespace`
 
 previous_level
-: OPTIONAL, JSON string: the previous assurance level, as defined in the
+
+> OPTIONAL, JSON string: the previous assurance level, as defined in the
 specified `namespace`
 If the Transmitter omits this value, the Receiver MUST assume that the previous
 assurance level is unknown to the Transmitter
 
 change_direction
-: OPTIONAL, JSON string: the assurance level increased or decreased
-If the Transmitter has specified the `previous_level`, then the Transmitter
-SHOULD provide a value for this claim.
-If present, this MUST be one of the following strings:
 
-* `increase`
-* `decrease`
+> OPTIONAL, JSON string: the assurance level increased or decreased
+If the Transmitter has specified the `previous_level`, then the Transmitter
+SHOULD provide a value for this claim. If present, this MUST be one of the
+following strings:
+>
+> * `increase`
+> * `decrease`
 
 When `event_timestamp` is included, its value MUST represent the time at which
 the assurance level changed.
@@ -715,19 +726,20 @@ nested `reason_admin` and/or `reason_user` claims made in
 ### Event-Specific Claims {#device-compliance-change-claims}
 
 previous_status
-: REQUIRED, JSON string: the compliance status prior to the change that
-triggered the event
-: This MUST be one of the following strings:
 
-* `compliant`
-* `not-compliant`
+> REQUIRED, JSON string: the compliance status prior to the change that
+triggered the event. This MUST be one of the following strings:
+>
+> * `compliant`
+> * `not-compliant`
 
 current_status
-: REQUIRED, JSON string: the current status that triggered the event
-: This MUST be one of the following strings:
 
-* `compliant`
-* `not-compliant`
+> REQUIRED, JSON string: the current status that triggered the event. This MUST
+be one of the following strings:
+>
+> * `compliant`
+> * `not-compliant`
 
 When `event_timestamp` is included, its value MUST represent the time at which
 the device compliance status changed.
@@ -798,22 +810,26 @@ was established.
 The following optional claims MAY be included in the Session Established event:
 
 fp_ua
-: Fingerprint of the user agent computed by the Transmitter. (**NOTE**, this is
+
+> Fingerprint of the user agent computed by the Transmitter. (**NOTE**, this is
 not to identify the session, but to present some qualities of the session)
 
 acr
-: The authentication context class reference of the session, as established by
+
+> The authentication context class reference of the session, as established by
 the Transmitter. The value of this field MUST be interpreted in the same way as
 the corresponding field in an OpenID Connect ID Token {{OpenID.Core}}
 
 amr
-: The authentication methods reference of the session, as established by the
+
+> The authentication methods reference of the session, as established by the
 Transmitter. The value of this field MUST be an array of strings, each of which
 MUST be interpreted in the same way as the corresponding field in an OpenID
 Connect ID Token {{OpenID.Core}}
 
 ext_id
-: The external session identifier, which may be used to correlate this session
+
+> The external session identifier, which may be used to correlate this session
 with a broader session (e.g., a federated session established using SAML)
 
 ### Examples {#session-established-examples}
@@ -862,11 +878,13 @@ information for reasons that include:
 The following optional claims MAY be present in a Session Presented event:
 
 fp_ua
-: Fingerprint of the user agent computed by the Transmitter. (**NOTE**, this is
+
+> Fingerprint of the user agent computed by the Transmitter. (**NOTE**, this is
 not to identify the session, but to present some qualities of the session)
 
 ext_id
-: The external session identifier, which may be used to correlate this session
+
+> The external session identifier, which may be used to correlate this session
 with a broader session (e.g., a federated session established using SAML)
 
 ### Examples {#session-presented-examples}
@@ -921,11 +939,13 @@ connection to insecure pheripheral device, encryption of data or other reasons.
 ### Event Specific Claims {#risk-level-change-event-specific-claims}
 
 risk_reason
-: RECOMMENDED, JSON string: indicates the reason that contributed to the risk
+
+> RECOMMENDED, JSON string: indicates the reason that contributed to the risk
 level changes by the Transmitter.
 
 principal
-: REQUIRED, JSON string: representing the principal entity involved in the
+
+> REQUIRED, JSON string: representing the principal entity involved in the
 observed risk event, as identified by the transmitter. The subject principal can
 be one of the following entities USER, DEVICE, SESSION, TENANT, ORG_UNIT, GROUP,
 or any other entity as defined in Section 2 of {{SSF}}. This claim identifies
@@ -933,11 +953,13 @@ the primary subject associated with the event, and helps to contextualize the
 risk relative to the entity involved.
 
 current_level
-: REQUIRED, JSON string: indicates the current level of the risk for the
+
+> REQUIRED, JSON string: indicates the current level of the risk for the
 subject. Value MUST be one of LOW, MEDIUM, HIGH
 
 previous_level
-: OPTIONAL, JSON string: indicates the previously known level of the risk for
+
+> OPTIONAL, JSON string: indicates the previously known level of the risk for
 the subject. Value MUST be one of LOW, MEDIUM, HIGH. If the Transmitter omits
 this value, the Receiver MUST assume that the previous risk level is unknown to
 the Transmitter.
