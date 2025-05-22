@@ -1,0 +1,16 @@
+default: true
+MD013:
+  line_length: 80
+  tables: false
+  code_blocks: false
+  stern: true
+# blanks-around-fences false because of kramdown-rfc formatting
+MD031: false
+# no-bare-urls
+MD034: false
+# first-line-h1 false because of rfc heading
+MD041: false
+# table-pipe-style and table-column-count set to false
+# these conflict with the table title kramdown-rfc formatting
+MD055: false
+MD056: false
