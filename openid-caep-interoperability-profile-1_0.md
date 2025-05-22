@@ -313,15 +313,15 @@ scopes by using it.
 * If the Resource Server does not support {{OPRM}}, then the following scopes
 MUST be supported -
 
-  * An OAuth {{RFC6749}} authorization server that is used to issue tokens to SSF
-  Receivers, MUST reserve the scopes for the SSF endpoints with the prefix of
-  `ssf`
+  * An OAuth {{RFC6749}} authorization server that is used to issue tokens to
+  SSF Receivers, MUST reserve the scopes for the SSF endpoints with the prefix
+  of `ssf`
   * All the SSF stream configuration management API operations MUST accept
   `ssf.manage` scope
   * All the SSF stream configuration Read API operations MUST accept `ssf.read`
   scope
-  * Authorization server MAY postfix scope names with more granular operations eg.
-  `ssf.manage.create`, `ssf.manage.update` etc.
+  * Authorization server MAY postfix scope names with more granular operations
+  eg. `ssf.manage.create`, `ssf.manage.update` etc.
   * Transmitter managed poll endpoint MAY support the postfix scopes in the same
   nomenclature as `ssf.manage.poll`
 
