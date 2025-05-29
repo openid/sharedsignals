@@ -484,7 +484,7 @@ on this subject. The Shared Signals Framework requires further restrictions:
 The signature key can be obtained through "jwks_uri", see {{discovery}}.
 
 ### SSF Prescriptive SETs {#prescriptive-sets}
-The Shared Signals Framework allows each deployment or integration to define its own event processing behaviors, ranging from informational input to additional processing needed, to mandatory enforcement (e.g., session revoke). See {{caep-event-prescriptive-example}}.
+The Shared Signals Framework allows each deployment or integration to define its own event processing behaviors, ranging from informational input to additional processing needed, to mandatory enforcement.
 
 ### The "iss" Claim {#iss-claim}
 The "iss" claim MUST match the "iss" value in the Stream Configuration data for the stream
@@ -696,27 +696,6 @@ The following are hypothetical examples of SETs that conform to the Shared Signa
 }
 ~~~
 {: #subject-custom-type-ex title="Example: SET Containing an SSF Event with a Proprietary Subject Identifier Format"}
-
-~~~ json
-{
-  "iss": "https://idp.example.com/",
-  "jti": "756E69717565206964656E746966696572",
-  "iat": 1520364019,
-  "txn": 8675309,
-  "aud": "636C69656E745F6964",
-  "sub_id": {
-    "format": "phone_number",
-    "phone_number": "+1 813 867 5309"
-  },
-  "events": {
-    "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {}
-  },
-  "actions": {
-    "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {}
-  }
-}
-~~~
-{: #caep-event-prescriptive-example title="Example: SET Containing a prescriptive SSF Event that will inform the receiver of the expected action to be performed"}
 
 # Event Delivery {#event-delivery}
 This section describes the supported methods of delivering SSF Events. It provides SSF profiling specifications for the {{RFC8935}} and {{RFC8936}} specs.
