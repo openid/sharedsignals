@@ -1,8 +1,8 @@
 ---
-title: OpenID Shared Signals Framework Specification 1.0 - draft 22
+title: OpenID Shared Signals Framework Specification 1.0 - draft 24
 abbrev: SharedSignals
 docname: openid-sharedsignals-framework-1_0
-date: 2025-05-15
+date: 2025-05-20
 
 ipr: none
 cat: std
@@ -720,7 +720,7 @@ endpoint_url
 
 authorization_header
 
-> If the endpoint_url requires authorization, the receiver SHOULD provide this authorization header in the stream creation/updation. If present, the Transmitter MUST provide this value with every HTTP request to the `endpoint_url`.
+> If the endpoint_url requires authorization, the receiver SHOULD provide this authorization header in the stream creation/updation. If present, the Transmitter MUST provide this value with every HTTP request to the `endpoint_url`. The Transmitter MUST specify the value of this field as the value of the `Authorization` HTTP Request Header as specified in Section 11.6.2 of RFC 9110 {{RFC9110}}
 
 ### Poll Delivery using HTTP
 This section provides SSF profiling specifications for the {{RFC8936}} spec.
