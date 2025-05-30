@@ -82,18 +82,6 @@ contributor:
         email: ysarig@omnissa.com
 
 normative:
-  CLIENTCRED:
-    author:
-    - ins: D. Hardt
-      name: D. Hardt
-    date: October 2012
-    seriesinfo:
-      DOI: 10.17487/RFC6749
-      RFC: '6749'
-    target: https://tools.ietf.org/html/rfc6749#section-4.4
-    title: The OAuth 2.0 Authorization Framework - Client Credentials Grant
-
-  RFC6749:
 
   OpenID.Core:
     author:
@@ -112,6 +100,7 @@ normative:
     title: OpenID Connect Core 1.0 - ID Token
   OASIS.saml-core-2.0-os:
   RFC2119:
+  RFC6749:
   RFC7159:
   RFC7517:
   RFC7519:
@@ -904,7 +893,7 @@ The following is a non-normative example of the `spec_urn`
 authorization"}
 
 In this case, the Receiver may obtain an access token using the Client
-Credentials Grant {{CLIENTCRED}}, or any other method suitable for the Receiver
+Credentials Grant (Section 4.4 of {{RFC6749}}), or any other method suitable for the Receiver
 and the Transmitter.
 
 ## Obtaining Transmitter Configuration Metadata
