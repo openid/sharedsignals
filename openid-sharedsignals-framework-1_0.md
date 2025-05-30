@@ -1,8 +1,8 @@
 ---
-title: OpenID Shared Signals Framework Specification 1.0 - draft 22
+title: OpenID Shared Signals Framework Specification 1.0 - draft 23
 abbrev: SharedSignals
 docname: openid-sharedsignals-framework-1_0
-date: 2025-05-22
+date: 2025-05-29
 
 ipr: none
 cat: std
@@ -489,7 +489,10 @@ on this subject. The Shared Signals Framework requires further restrictions:
 The signature key can be obtained through "jwks_uri", see {{discovery}}.
 
 ### SSF Prescriptive SETs {#prescriptive-sets}
-The Shared Signals Framework allows each deployment or integration to define its own event processing behaviors, ranging from informational input to additional processing needed, to mandatory enforcement.
+
+The Shared Signals Framework allows each deployment or integration to define its
+own event processing behaviors, ranging from informational input to additional
+processing needed, to mandatory enforcement.
 
 ### The "iss" Claim {#iss-claim}
 
@@ -2568,6 +2571,12 @@ the technology is available for distribution, it takes no position regarding the
 # Document History
 
   [[ To be removed from the final specification ]]
+
+-23
+
+* Cleaned up markdown (#91)
+* Added language to allow implementations to define their own processing
+behavior for SETS (#255)
 
 -20
 
