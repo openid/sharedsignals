@@ -488,6 +488,9 @@ on this subject. The Shared Signals Framework requires further restrictions:
 
 The signature key can be obtained through "jwks_uri", see {{discovery}}.
 
+### SSF Prescriptive SETs {#prescriptive-sets}
+The Shared Signals Framework allows each deployment or integration to define its own event processing behaviors, ranging from informational input to additional processing needed, to mandatory enforcement.
+
 ### The "iss" Claim {#iss-claim}
 
 The "iss" claim MUST match the "iss" value in the Stream Configuration data for
