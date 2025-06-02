@@ -443,7 +443,7 @@
   <back>
     <references title='Normative References'>
 
-      <reference anchor="SET" target="https://tools.ietf.org/html/draft-ietf-secevent-token-09">
+      <reference anchor="SET" target="https://datatracker.ietf.org/doc/html/rfc8417">
         <front>
           <title>Security Event Token (SET)</title>
           <author fullname="Phil Hunt" initials="P." role="editor" surname="Hunt">
@@ -464,6 +464,7 @@
 
           <date year="2018" month="April" />
         </front>
+        <seriesInfo name='RFC' value='8417'/>
       </reference>
 
       <reference anchor="RFC2119" target='https://www.rfc-editor.org/info/rfc2119'>
@@ -496,7 +497,7 @@
         <seriesInfo name="DOI" value="10.17487/RFC8174"/>
       </reference>
 
-      <reference anchor="SHARED-SIGNALS-FRAMEWORK" target="https://openid.net/specs/openid-sse-framework-1_0-01.html">
+      <reference anchor="SHARED-SIGNALS-FRAMEWORK" target="https://openid.net/specs/openid-sharedsignals-framework-1_0-ID3.html">
         <front>
           <title>OpenID Shared Signals and Events Framework Specification 1.0</title>
           <author initials="A." surname="Tulshibagwale" fullname="Atul Tulshibagwale">
@@ -534,7 +535,7 @@
         </front>
       </reference>
 
-      <reference anchor="CAEP-SPECIFICATION" target="https://openid.net/specs/openid-caep-specification-1_0-01.html">
+      <reference anchor="CAEP-SPECIFICATION" target="https://openid.net/specs/openid-caep-1_0-ID2.html">
         <front>
           <title abbrev="CAEP-Spec">OpenID Continuous Access Evaluation Profile 1.0 - draft 01</title>
           <author initials="T." surname="Cappalli" fullname="Tim Cappalli">
