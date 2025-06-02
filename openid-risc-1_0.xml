@@ -497,7 +497,7 @@
         <seriesInfo name="DOI" value="10.17487/RFC8174"/>
       </reference>
 
-      <reference anchor="SHARED-SIGNALS-FRAMEWORK" target="https://openid.net/specs/openid-sharedsignals-framework-1_0-ID3.html">
+      <reference anchor="SHARED-SIGNALS-FRAMEWORK" target="https://openid.net/specs/openid-sharedsignals-framework-1_0.html">
         <front>
           <title>OpenID Shared Signals and Events Framework Specification 1.0</title>
           <author initials="A." surname="Tulshibagwale" fullname="Atul Tulshibagwale">
@@ -535,7 +535,7 @@
         </front>
       </reference>
 
-      <reference anchor="CAEP-SPECIFICATION" target="https://openid.net/specs/openid-caep-1_0-ID2.html">
+      <reference anchor="CAEP-SPECIFICATION" target="https://openid.net/specs/openid-caep-1_0.html">
         <front>
           <title abbrev="CAEP-Spec">OpenID Continuous Access Evaluation Profile 1.0 - draft 01</title>
           <author initials="T." surname="Cappalli" fullname="Tim Cappalli">
