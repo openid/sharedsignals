@@ -24,7 +24,7 @@
   <?rfc comments="yes"?>
 
   <front>
-    <title abbrev="openid-risc-profile-specification">OpenID RISC Profile Specification 1.0 - draft 05</title>
+    <title abbrev="openid-risc-profile-specification">OpenID RISC Profile Specification 1.0</title>
 
     <author initials="M." surname="Scurtescu" fullname="Marius Scurtescu">
       <organization abbrev="Coinbase">Coinbase</organization>
@@ -63,7 +63,7 @@
       </address>
     </author>
 
-    <date year="2025" month="May" day="30"/>
+    <date year="2025" month="June" day="03"/>
 
     <workgroup>Shared Signals</workgroup>
 
@@ -591,7 +591,7 @@
         to assert certain patent claims against other contributors and against implementers.
         OpenID invites any interested party to bring to its attention any copyrights, patents,
         patent applications, or other proprietary rights that may cover technology that may be
-        required to practice this specification.      
+        required to practice this specification.
       </t>
     </section>
     <section anchor="History" title="Document History">
