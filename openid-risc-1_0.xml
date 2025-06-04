@@ -24,7 +24,7 @@
   <?rfc comments="yes"?>
 
   <front>
-    <title abbrev="openid-risc-profile-specification">OpenID RISC Profile Specification 1.0</title>
+    <title abbrev="openid-risc-profile-specification">OpenID RISC Profile Specification 1.0 - draft 02</title>
 
     <author initials="M." surname="Scurtescu" fullname="Marius Scurtescu">
       <organization abbrev="Coinbase">Coinbase</organization>

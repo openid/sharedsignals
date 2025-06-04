@@ -1,5 +1,5 @@
 ---
-title: OpenID Continuous Access Evaluation Profile 1.0
+title: OpenID Continuous Access Evaluation Profile 1.0 - draft 04
 
 abbrev: CAEP-Spec
 docname: openid-caep-1_0
