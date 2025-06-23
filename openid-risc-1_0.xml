@@ -192,7 +192,7 @@
 
         <t>This event SHOULD be issued only by the provider that is authoritative over the identifier.
           For example, if the person that owns <spanx style="verb">john.doe@example.com</spanx> goes
-          through a name change and wants the new <spanx style="verb">john.row@example.com</spanx> email
+          through a name change and wants the new <spanx style="verb">john.roe@example.com</spanx> email
           then <spanx style="strong">only</spanx> the email provider <spanx style="verb">example.com</spanx>
           SHOULD issue an Identifier Changed event as shown in the example below.</t>
 
@@ -223,7 +223,7 @@
   }
 }
             ]]></artwork>
-          <postamble>The <spanx style="verb">foo@example.com</spanx> email changed to <spanx style="verb">bar@example.com</spanx>.
+          <postamble>The <spanx style="verb">john.doe@example.com</spanx> email changed to <spanx style="verb">john.roe@example.com</spanx>.
             <spanx style="emph">(the event type URI is wrapped, the backslash is the continuation character)</spanx></postamble>
         </figure>
       </section>
@@ -255,7 +255,7 @@
   }
 }
             ]]></artwork>
-          <postamble>The 'foo@example.com' email address was recycled.
+          <postamble>The <spanx style="verb">foo@example.com</spanx> email address was recycled.
             <spanx style="emph">(the event type URI is wrapped, the backslash is the continuation character)</spanx></postamble>
         </figure>
       </section>
@@ -294,8 +294,9 @@
     "sub": "joe.smith@example.com"
   },
   "events": {
-    "https://schemas.openid.net/secevent/risc/event-type/credential-compromise": {
-    "credential_type": "password"
+    "https://schemas.openid.net/secevent/risc/event-type/\
+    credential-compromise": {
+      "credential_type": "password"
     }
   }
 }
