@@ -116,12 +116,10 @@
     "sub": "7375626A656374"
   },
   "events": {
-    "https://schemas.openid.net/secevent/risc/event-type/\
-    account-credential-change-required": {}
+    "https://schemas.openid.net/secevent/risc/event-type/account-credential-change-required": {}
   }
 }
             ]]></artwork>
-          <postamble><spanx style="emph">(the event type URI is wrapped, the backslash is the continuation character)</spanx></postamble>
         </figure>
       </section>
 
@@ -162,14 +160,12 @@
     "sub": "7375626A656374",
   },
   "events": {
-    "https://schemas.openid.net/secevent/risc/event-type/\
-    account-disabled": {
+    "https://schemas.openid.net/secevent/risc/event-type/account-disabled": {
       "reason": "hijacking"
     }
   }
 }
             ]]></artwork>
-          <postamble><spanx style="emph">(the event type URI is wrapped, the backslash is the continuation character)</spanx></postamble>
         </figure>
       </section>
 
@@ -216,15 +212,13 @@
     "email": "john.doe@example.com"
   },
   "events": {
-    "https://schemas.openid.net/secevent/risc/event-type/\
-    identifier-changed": {
+    "https://schemas.openid.net/secevent/risc/event-type/identifier-changed": {
       "new-value": "john.roe@example.com"
     }
   }
 }
             ]]></artwork>
-          <postamble>The <spanx style="verb">john.doe@example.com</spanx> email changed to <spanx style="verb">john.roe@example.com</spanx>.
-            <spanx style="emph">(the event type URI is wrapped, the backslash is the continuation character)</spanx></postamble>
+          <postamble>The <spanx style="verb">john.doe@example.com</spanx> email changed to <spanx style="verb">john.roe@example.com</spanx>.</postamble>
         </figure>
       </section>
 
@@ -250,13 +244,11 @@
     "email": "foo@example.com"
   },
   "events": {
-    "https://schemas.openid.net/secevent/risc/event-type/\
-    identifier-recycled": {}
+    "https://schemas.openid.net/secevent/risc/event-type/identifier-recycled": {}
   }
 }
             ]]></artwork>
-          <postamble>The <spanx style="verb">foo@example.com</spanx> email address was recycled.
-            <spanx style="emph">(the event type URI is wrapped, the backslash is the continuation character)</spanx></postamble>
+          <postamble>The <spanx style="verb">foo@example.com</spanx> email address was recycled.</postamble>
         </figure>
       </section>
 
@@ -294,16 +286,13 @@
     "sub": "joe.smith@example.com"
   },
   "events": {
-    "https://schemas.openid.net/secevent/risc/event-type/\
-    credential-compromise": {
+    "https://schemas.openid.net/secevent/risc/event-type/credential-compromise": {
       "credential_type": "password"
     }
   }
 }
 
     ]]></artwork>
-          <postamble><spanx style="emph">(the event type URI is wrapped, the backslash is the
-            continuation character)</spanx></postamble>
         </figure>
       </section>
 
