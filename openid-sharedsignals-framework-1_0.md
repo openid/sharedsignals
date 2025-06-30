@@ -777,7 +777,7 @@ spec_version
 > OPTIONAL. A version identifying the implementer's draft or final specification
 implemented by the Transmitter. This includes the numerical portion of the spec
 version as described in the document {{NAMINGCONVENTION}}. If absent, the
-Transmitter is assumed to conform to "1_0" version of the specification.
+Transmitter is assumed to conform to "1_0-ID1" version of the specification.
 >
 > The following is a non-normative example of a Transmitter that implements the
 > final specification of the Shared Signals Framework 1_0.
