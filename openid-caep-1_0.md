@@ -270,23 +270,20 @@ the session revocation occurred.
 
 ### Examples  {#session-revoked-examples}
 
-NOTE: The event type URI is wrapped, the backslash is the continuation
-character.
-
 ~~~ json
 {
     "iss": "https://idp.example.com/123456789/",
     "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
     "iat": 1615305159,
     "aud": "https://sp.example.com/caep",
-    "txn": 8675309,
+    "txn": "8675309",
     "sub_id": {
         "format": "opaque",
         "id": "dMTlD|1600802906337.16|16008.16"
     },
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
-            "event_timestamp": 1615304991643
+            "event_timestamp": 1615304991
         }
     }
 }
@@ -300,7 +297,7 @@ Required claims + Simple Subject"}
     "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
     "iat": 1615305159,
     "aud": "https://sp.example.com/caep",
-    "txn": 8675309,
+    "txn": "8675309",
     "sub_id": {
         "format": "complex",
         "session": {
@@ -327,7 +324,7 @@ Required claims + Simple Subject"}
                 "en": "Access attempt from multiple regions.",
                 "es-410": "Intento de acceso desde varias regiones."
             },
-            "event_timestamp": 1615304991643
+            "event_timestamp": 1615304991
         }
     }
 }
@@ -341,7 +338,7 @@ as `sub` claim (includes optional claims)"}
     "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
     "iat": 1615305159,
     "aud": "https://sp.example.com/caep",
-    "txn": 8675309,
+    "txn": "8675309",
     "sub_id": {
         "format": "complex",
         "user": {
@@ -369,7 +366,7 @@ as `sub` claim (includes optional claims)"}
                 "en": "This device is no longer compliant.",
                 "it": "Questo dispositivo non è più conforme."
             },
-            "event_timestamp": 1615304991643
+            "event_timestamp": 1615304991
         }
     }
 }
@@ -401,16 +398,13 @@ the claim value(s) changed.
 
 ### Examples  {#token-claims-change-examples}
 
-NOTE: The event type URI is wrapped, the backslash is the continuation
-character.
-
 ~~~ json
 {
     "iss": "https://idp.example.com/987654321/",
     "jti": "9afce1e4e642b165fcaacdd0e7aa4903",
     "iat": 1615305159,
     "aud": "https://sp.example2.net/caep",
-    "txn": 8675309,
+    "txn": "8675309",
     "sub_id": {
         "format": "jwt_id",
         "iss": "https://idp.example.com/987654321/",
@@ -418,7 +412,7 @@ character.
     },
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/token-claims-change": {
-            "event_timestamp": 1615304991643,
+            "event_timestamp": 1615304991,
             "claims": {
                 "role": "ro-admin"
             }
@@ -435,7 +429,7 @@ Change - Required claims only"}
     "jti": "9afce1e4e642b165fcaacdd0e7aa4903",
     "iat": 1615305159,
     "aud": "https://sp.example2.net/caep",
-    "txn": 8675309,
+    "txn": "8675309",
     "sub_id": {
         "format": "jwt_id",
         "iss": "https://idp.example.com/987654321/",
@@ -443,7 +437,7 @@ Change - Required claims only"}
     },
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/token-claims-change": {
-            "event_timestamp": 1615304991643,
+            "event_timestamp": 1615304991,
             "initiating_entity": "policy",
             "reason_admin": {
                 "en": "User left trusted network: CorpNet3"
@@ -452,9 +446,8 @@ Change - Required claims only"}
                 "en": "You're no longer connected to a trusted network.",
                 "it": "Non sei più connesso a una rete attendibile."
             },
-
             "claims": {
-                "trusted_network": "false"
+                "trusted_network": false
             }
         }
     }
@@ -469,7 +462,7 @@ Claims Change - Optional claims"}
     "jti": "dae94fed5f459881efa38b65c6772ddc",
     "iat": 1615305159,
     "aud": "https://sp.example2.net/caep",
-    "txn": 8675309,
+    "txn": "8675309",
     "sub_id": {
         "format": "saml_assertion_id",
         "issuer": "https://idp.example.com/987654321/",
@@ -477,7 +470,7 @@ Claims Change - Optional claims"}
     },
     "events": {
         "https://schemas.openid.net/secevent/caep/event-type/token-claims-change": {
-            "event_timestamp": 1615304991643,
+            "event_timestamp": 1615304991,
             "claims": {
                 "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/role": "ro-admin"
             }
@@ -557,16 +550,13 @@ the credential change occurred.
 
 ### Examples  {#credential-change-examples}
 
-NOTE: The event type URI is wrapped, the backslash is the continuation
-character.
-
 ~~~json
 {
     "iss": "https://idp.example.com/3456789/",
     "jti": "07efd930f0977e4fcc1149a733ce7f78",
     "iat": 1615305159,
     "aud": "https://sp.example2.net/caep",
-    "txn": 8675309,
+    "txn": "8675309",
     "sub_id": {
         "format": "iss_sub",
         "iss": "https://idp.example.com/3456789/",
@@ -582,7 +572,7 @@ character.
             "reason_admin": {
                 "en": "User self-enrollment"
             },
-            "event_timestamp": 1615304991643
+            "event_timestamp": 1615304991
         }
     }
 }
@@ -665,7 +655,7 @@ the assurance level changed.
     "jti": "07efd930f0977e4fcc1149a733ce7f78",
     "iat": 1615305159,
     "aud": "https://sp.example2.net/caep",
-    "txn": 8675309,
+    "txn": "8675309",
     "sub_id": {
         "format": "iss_sub",
         "iss": "https://idp.example.com/3456789/",
@@ -678,7 +668,7 @@ the assurance level changed.
             "previous_level": "nist-aal1",
             "change_direction": "increase",
             "initiating_entity": "user",
-            "event_timestamp": 1615304991643
+            "event_timestamp": 1615304991
         }
     }
 }
@@ -692,7 +682,7 @@ the assurance level changed.
     "jti": "07efd930f0977e4fcc1149a733ce7f78",
     "iat": 1615305159,
     "aud": "https://sp.example2.net/caep",
-    "txn": 8675309,
+    "txn": "8675309",
     "sub_id": {
         "format": "iss_sub",
         "iss": "https://idp.example.com/3456789/",
@@ -703,7 +693,7 @@ the assurance level changed.
             "namespace": "Retinal Scan",
             "current_level": "hi-res-scan",
             "initiating_entity": "user",
-            "event_timestamp": 1615304991643
+            "event_timestamp": 1615304991
         }
     }
 }
@@ -746,16 +736,13 @@ the device compliance status changed.
 
 ### Examples  {#device-compliance-change-examples}
 
-NOTE: The event type URI is wrapped, the backslash is the continuation
-character.
-
 ~~~json
 {
     "iss": "https://idp.example.com/123456789/",
     "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
     "iat": 1615305159,
     "aud": "https://sp.example.com/caep",
-    "txn": 8675309,
+    "txn": "8675309",
     "sub_id": {
         "format": "complex",
         "device": {
@@ -779,7 +766,7 @@ character.
             "reason_user": {
                 "en": "Device is no longer in a trusted location."
             },
-            "event_timestamp": 1615304991643
+            "event_timestamp": 1615304991
         }
     }
 }
@@ -843,7 +830,7 @@ type:
     "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
     "iat": 1615305159,
     "aud": "https://sp.example.com/caep",
-    "txn": 8675309,
+    "txn": "8675309",
     "sub_id": {
       "format": "email",
       "email": "someuser@somedomain.com"
@@ -853,7 +840,7 @@ type:
           "fp_ua": "abb0b6e7da81a42233f8f2b1a8ddb1b9a4c81611",
           "acr": "AAL2",
           "amr": ["otp"],
-          "event_timestamp": 1615304991643
+          "event_timestamp": 1615304991
         }
     }
 }
@@ -897,7 +884,7 @@ The following is a non-normative example of a Session Presented event:
     "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
     "iat": 1615305159,
     "aud": "https://sp.example.com/caep",
-    "txn": 8675309,
+    "txn": "8675309",
     "sub_id": {
       "format": "email",
       "email": "someuser@somedomain.com"
@@ -906,7 +893,7 @@ The following is a non-normative example of a Session Presented event:
         "https://schemas.openid.net/secevent/caep/event-type/session-presented": {
           "fp_ua": "abb0b6e7da81a42233f8f2b1a8ddb1b9a4c81611",
           "ext_id": "12345",
-          "event_timestamp": 1615304991643
+          "event_timestamp": 1615304991
         }
     }
 }
@@ -929,11 +916,11 @@ modifications in a subject's assessed risk level at the time indicated by the
 `event_timestamp` field in the Risk Level Change event. The Transmitter may
 generate this event to indicate:
 
-* User's risk has changed due to potential suspecious access from unknown
+* User's risk has changed due to potential suspicious access from unknown
 destination, password compromise, addition of strong authenticator or other
 reasons.
 * Device's risk has changed due to installation of unapproved software,
-connection to insecure pheripheral device, encryption of data or other reasons.
+connection to insecure peripheral device, encryption of data or other reasons.
 * Any other subject's risk changes due to variety of reasons.
 
 ### Event Specific Claims {#risk-level-change-event-specific-claims}
@@ -946,7 +933,7 @@ level changes by the Transmitter.
 principal
 
 > REQUIRED, JSON string: representing the principal entity involved in the
-observed risk event, as identified by the transmitter. The subject principal can
+observed risk event, as identified by the Transmitter. The subject principal can
 be one of the following entities USER, DEVICE, SESSION, TENANT, ORG_UNIT, GROUP,
 or any other entity as defined in Section 2 of {{SSF}}. This claim identifies
 the primary subject associated with the event, and helps to contextualize the
@@ -955,7 +942,7 @@ risk relative to the entity involved.
 current_level
 
 > REQUIRED, JSON string: indicates the current level of the risk for the
-subject. Value MUST be one of LOW, MEDIUM, HIGH
+subject. Value MUST be one of LOW, MEDIUM, HIGH.
 
 previous_level
 
@@ -974,7 +961,7 @@ The following is a non-normative example of a Risk Level Change event:
     "jti": "24c63fb56e5a2d77a6b512616ca9fa24",
     "iat": 1615305159,
     "aud": "https://sp.example.com/caep",
-    "txn": 8675309,
+    "txn": "8675309",
     "sub_id": {
       "format": "iss_sub",
       "iss": "https://idp.example.com/3456789/",
@@ -984,7 +971,7 @@ The following is a non-normative example of a Risk Level Change event:
       "https://schemas.openid.net/secevent/caep/event-type/risk-level-change":{
          "current_level": "LOW",
          "previous_level": "HIGH",
-         "event_timestamp": 1615304991643,
+         "event_timestamp": 1615304991,
          "principal": "USER",
          "risk_reason": "PASSWORD_FOUND_IN_DATA_BREACH"
       }
