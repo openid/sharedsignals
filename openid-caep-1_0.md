@@ -785,9 +785,9 @@ new session for the subject. Receivers may use this information for a number of
 reasons, including:
 
 * A service acting as a Transmitter can close the loop with the IdP after a user
-has been federated from the IdP
-* An IdP can detect unintended logins
-* A Receiver can establish an inventory of user sessions
+has been federated from the IdP. Specifically, A confirmation from an application or system, the SP, to the identity provider, IdP, that a session in the application or system has been created based on an assertion from the IdP. This could act as a reconcile event to "close the loop" with an originating "session presented" event.
+* An IdP can detect unintended logins.
+* A Receiver can establish an inventory of user sessions.
 
 The `event_timestamp` in this event type specifies the time at which the session
 was established.
@@ -854,10 +854,10 @@ Event Type URI:
 
 The Session Presented event signifies that the Transmitter has observed the
 session to be present at the Transmitter at the time indicated by the
-`event_timestamp` field in the Session Presented event. Receivers may use this
+`event_timestamp` field in the Session Presented event. A presciptive example here would be for SSO activity or events from an IdP, meaning there is an already established SSO session. This event could be used in conjuction with a "session established" event for reconciliation purposes. Receivers may use this
 information for reasons that include:
 
-* Detecting abnormal user activity
+* Detecting abnormal user activity, such as lateral movement
 * Establishing an inventory of live sessions belonging to a user
 
 ### Event Specific Claims {#session-presented-event-specific-claims}
