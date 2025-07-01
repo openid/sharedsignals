@@ -1,8 +1,8 @@
 ---
-title: OpenID Shared Signals Framework Specification 1.0 - draft 23
+title: OpenID Shared Signals Framework Specification 1.0 - draft 24
 abbrev: SharedSignals
 docname: openid-sharedsignals-framework-1_0
-date: 2025-05-29
+date: 2025-06-23
 
 ipr: none
 cat: std
@@ -521,7 +521,7 @@ multiple Receivers would lead to unintended data disclosure.
   "iss": "https://transmitter.example.com",
   "aud": ["receiver.example.com/web", "receiver.example.com/mobile"],
   "iat": 1493856000,
-  "txn": 8675309,
+  "txn": "8675309",
   "sub_id": {
     "format": "opaque",
     "id": "72e6991badb44e08a69672960053b342"
@@ -575,7 +575,7 @@ Signals Framework.
   "iss": "https://idp.example.com/",
   "jti": "756E69717565206964656E746966696572",
   "iat": 1520364019,
-  "txn": 8675309,
+  "txn": "8675309",
   "aud": "636C69656E745F6964",
   "sub_id": {
     "format": "email",
@@ -594,7 +594,7 @@ Simple Subject Member"}
   "iss": "https://idp.example.com/",
   "jti": "756E69717565206964656E746966696572",
   "iat": 1520364019,
-  "txn": 8675309,
+  "txn": "8675309",
   "aud": "636C69656E745F6964",
   "sub_id": {
     "format": "phone_number",
@@ -615,7 +615,7 @@ a Phone Number Subject"}
   "iss": "https://idp.example.com/",
   "jti": "756E69717565206964656E746966696572",
   "iat": 1520364019,
-  "txn": 8675309,
+  "txn": "8675309",
   "aud": "636C69656E745F6964",
   "sub_id": {
     "format": "email",
@@ -638,7 +638,7 @@ with Properties"}
   "iss": "https://idp.example.com/",
   "jti": "756E69717565206964656E746966696572",
   "iat": 1520364019,
-  "txn": 8675309,
+  "txn": "8675309",
   "aud": "636C69656E745F6964",
   "sub_id": {
     "format": "complex",
@@ -676,7 +676,7 @@ Complex Subject Member"}
   "iss": "https://sp.example2.com/",
   "jti": "756E69717565206964656E746966696572",
   "iat": 1520364019,
-  "txn": 8675309,
+  "txn": "8675309",
   "aud": "636C69656E745F6964",
   "sub_id": {
     "format": "email",
@@ -700,7 +700,7 @@ Simple Subject and a Property Member"}
   "iss": "https://myservice.example3.com/",
   "jti": "756E69717565206964656E746966696534",
   "iat": 15203800012,
-  "txn": 8675309,
+  "txn": "8675309",
   "aud": "636C69656E745F6324",
   "sub_id": {
     "format": "catalog_item",
