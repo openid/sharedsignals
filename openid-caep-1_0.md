@@ -20,8 +20,8 @@ author:
       -
         ins: T. Cappalli
         name: Tim Cappalli
-        org: Microsoft
-        email: tim.cappalli@microsoft.com
+        org: Okta
+        email: tim.cappalli@okta.com
       -
         ins: A. Tulshibagwale
         name: Atul Tulshibagwale
@@ -123,7 +123,7 @@ normative:
       -
         ins: T. Cappalli
         name: Tim Cappalli
-        org: Microsoft
+        org: Okta
       -
         ins: M. Scurtescu
         name: Marius Scurtescu
