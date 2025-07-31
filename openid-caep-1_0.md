@@ -3,7 +3,7 @@ title: OpenID Continuous Access Evaluation Profile 1.0 - draft 05
 
 abbrev: CAEP-Spec
 docname: openid-caep-1_0
-date: 2025-07-31
+date: 2025-07-30
 
 ipr: none
 cat: std
@@ -996,7 +996,7 @@ specification.
 
 # Notices
 
-Copyright (c) 2024 The OpenID Foundation.
+Copyright (c) 2025 The OpenID Foundation.
 
 The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer,
 or other interested party a non-exclusive, royalty free, worldwide copyright

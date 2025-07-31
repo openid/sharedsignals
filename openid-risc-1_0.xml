@@ -63,7 +63,7 @@
       </address>
     </author>
 
-    <date year="2025" month="July" day="31"/>
+    <date year="2025" month="July" day="30"/>
 
     <workgroup>Shared Signals</workgroup>
 
@@ -539,7 +539,7 @@
         specification.</t>
     </section>
     <section anchor="Notices" title="Notices">
-      <t>Copyright (c) 2022 The OpenID Foundation.</t>
+      <t>Copyright (c) 2025 The OpenID Foundation.</t>
       <t>
 	The OpenID Foundation (OIDF) grants to any Contributor, developer,
 	implementer, or other interested party a non-exclusive, royalty free,
