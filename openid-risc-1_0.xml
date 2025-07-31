@@ -418,6 +418,14 @@
           implementation to conform to this specification.</t>
       </section>
    </section>
+    <section anchor="security" title="Security Considerations">
+      <t>
+        Any implementations of events described in this document SHOULD comply with the
+        <xref target="SHARED-SIGNALS-FRAMEWORK">Shared Signals Framework</xref>.
+        Exchanging events described herein without complying with the
+        <xref target="SHARED-SIGNALS-FRAMEWORK">Shared Signals Framework</xref>
+        may result in security issues.</t>
+   </section>
   </middle>
 
   <back>
