@@ -24,7 +24,7 @@
   <?rfc comments="yes"?>
 
   <front>
-    <title abbrev="openid-risc-profile-specification">OpenID RISC Profile Specification 1.0 - draft 03</title>
+    <title abbrev="openid-risc-profile-specification">OpenID RISC Profile Specification 1.0</title>
 
     <author initials="M." surname="Scurtescu" fullname="Marius Scurtescu">
       <organization abbrev="Coinbase">Coinbase</organization>
@@ -63,7 +63,7 @@
       </address>
     </author>
 
-    <date year="2025" month="July" day="30"/>
+    <date year="2025" month="August" day="29"/>
 
     <workgroup>Shared Signals</workgroup>
 
@@ -484,9 +484,9 @@
         <seriesInfo name="DOI" value="10.17487/RFC8174"/>
       </reference>
 
-      <reference anchor="SHARED-SIGNALS-FRAMEWORK" target="https://openid.net/specs/openid-sse-framework-1_0-01.html">
+      <reference anchor="SHARED-SIGNALS-FRAMEWORK" target="https://openid.net/specs/openid-sharedsignals-framework-1_0.html">
         <front>
-          <title>OpenID Shared Signals and Events Framework Specification 1.0</title>
+          <title>OpenID Shared Signals Framework Specification 1.0</title>
           <author initials="A." surname="Tulshibagwale" fullname="Atul Tulshibagwale">
             <organization abbrev="Google">Google</organization>
             <address>
@@ -518,13 +518,19 @@
               <email>secevemt@ve7jtb.com</email>
             </address>
           </author>
-          <date year="2021" month="June" day="8"/>
+          <author initials="S." surname="Miel" fullname="Shayne Miel">
+            <organization abbrev="Cisco">Cisco</organization>
+            <address>
+              <email>smiel@cisco.com</email>
+            </address>
+          </author>
+          <date year="2025" month="August" day="29"/>
         </front>
       </reference>
 
-      <reference anchor="CAEP-SPECIFICATION" target="https://openid.net/specs/openid-caep-specification-1_0-01.html">
+      <reference anchor="CAEP-SPECIFICATION" target="https://openid.net/specs/openid-caep-1_0.html">
         <front>
-          <title abbrev="CAEP-Spec">OpenID Continuous Access Evaluation Profile 1.0 - draft 01</title>
+          <title abbrev="CAEP-Spec">OpenID Continuous Access Evaluation Profile 1.0</title>
           <author initials="T." surname="Cappalli" fullname="Tim Cappalli">
             <organization>Microsoft</organization>
             <address>
@@ -537,7 +543,7 @@
               <email>atultulshi@google.com</email>
             </address>
           </author>
-          <date year="2021" month="June" day="08"/>
+          <date year="2025" month="August" day="29"/>
         </front>
       </reference>
     </references>
@@ -579,13 +585,6 @@ OpenID invites any interested party to bring to its attention any copyrights, pa
 patent applications, or other proprietary rights that may cover technology that may be
 required to practice this specification.
       </t>
-    </section>
-    <section anchor="History" title="Document History">
-      <section anchor="v4" title="-04">
-        <list style="symbols">
-          <t> Renamed document</t>
-        </list>
-      </section>
     </section>
   </back>
 </rfc>
