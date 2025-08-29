@@ -26,12 +26,12 @@ all:
 	@ make openid-caep-1_0.txt
 
 propose:
-	@ cp openid-sharedsignals-framework-1_0.txt ../publication/sharedsignals/openid-sharedsignals-framework-1_0-05.txt
-	@ cp openid-sharedsignals-framework-1_0.html ../publication/sharedsignals/openid-sharedsignals-framework-1_0-05.html
-	@ cp openid-sharedsignals-framework-1_0.md ../publication/sharedsignals/openid-sharedsignals-framework-1_0-05.md
-	@ cp openid-risc-1_0.html ../publication/sharedsignals/openid-risc-1_0-03.html
-	@ cp openid-risc-1_0.xml ../publication/sharedsignals/openid-risc-1_0-03.xml
-	@ cp openid-risc-1_0.txt ../publication/sharedsignals/openid-risc-1_0-03.txt
-	@ cp openid-caep-1_0.txt ../publication/sharedsignals/openid-caep-1_0-05.txt
-	@ cp openid-caep-1_0.html ../publication/sharedsignals/openid-caep-1_0-05.html
-	@ cp openid-caep-1_0.md ../publication/sharedsignals/openid-caep-1_0-05.md
+	@ cp openid-sharedsignals-framework-1_0.txt ../publication/sharedsignals/openid-sharedsignals-framework-1_0.txt
+	@ cp openid-sharedsignals-framework-1_0.html ../publication/sharedsignals/openid-sharedsignals-framework-1_0.html
+	@ cp openid-sharedsignals-framework-1_0.md ../publication/sharedsignals/openid-sharedsignals-framework-1_0.md
+	@ cp openid-risc-1_0.html ../publication/sharedsignals/openid-risc-1_0.html
+	@ cp openid-risc-1_0.xml ../publication/sharedsignals/openid-risc-1_0.xml
+	@ cp openid-risc-1_0.txt ../publication/sharedsignals/openid-risc-1_0.txt
+	@ cp openid-caep-1_0.txt ../publication/sharedsignals/openid-caep-1_0.txt
+	@ cp openid-caep-1_0.html ../publication/sharedsignals/openid-caep-1_0.html
+	@ cp openid-caep-1_0.md ../publication/sharedsignals/openid-caep-1_0.md
