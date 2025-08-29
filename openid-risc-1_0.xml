@@ -586,12 +586,5 @@ patent applications, or other proprietary rights that may cover technology that 
 required to practice this specification.
       </t>
     </section>
-    <section anchor="History" title="Document History">
-      <section anchor="v4" title="-04">
-        <list style="symbols">
-          <t> Renamed document</t>
-        </list>
-      </section>
-    </section>
   </back>
 </rfc>
