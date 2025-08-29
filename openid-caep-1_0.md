@@ -1,9 +1,9 @@
 ---
-title: OpenID Continuous Access Evaluation Profile 1.0 - draft 05
+title: OpenID Continuous Access Evaluation Profile 1.0
 
 abbrev: CAEP-Spec
 docname: openid-caep-1_0
-date: 2025-07-30
+date: 2025-08-29
 
 ipr: none
 cat: std
@@ -114,7 +114,7 @@ normative:
   RFC8176:
   SSF:
     target: https://openid.net/specs/openid-sharedsignals-framework-1_0.html
-    title: OpenID Shared Signals and Events Framework Specification 1.0
+    title: OpenID Shared Signals Framework Specification 1.0
     author:
       -
         ins: A. Tulshibagwale
@@ -140,7 +140,7 @@ normative:
         ins: S. Miel
         name: Shayne Miel
         org: Cisco
-    date: 2024-06-25
+    date: 2025-08-29
   WebAuthn:
     target: https://www.w3.org/TR/webauthn/
     title: "Web Authentication: An API for accessing Public Key Credentials
@@ -1026,25 +1026,3 @@ to assert certain patent claims against other contributors and against implement
 OpenID invites any interested party to bring to its attention any copyrights, patents,
 patent applications, or other proprietary rights that may cover technology that may be
 required to practice this specification.
-
-# Document History
-
-  [[ To be removed from the final specification ]]
-
--12
-
-* Cleaned up markdown (#91)
-
--10
-
-* Fixed the example for the "session established" event
-* ip claims removed from session established and session presented
-* New "Risk level change" event
-
--03
-
-* New "Session Established" and "Session Presented" event types
-* Added `namespace` required field to Assurance Level Change event
-* Changed the name referencing SSE to SSF
-* Added `format` to the subjects in examples in CAEP
-* Formatting and typo changes
