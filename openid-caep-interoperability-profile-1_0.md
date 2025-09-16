@@ -166,7 +166,7 @@ Transmitters MUST implement the following features:
 ### Spec Version {#spec-version}
 
 The Transmitter Configuration Metadata MUST have a `spec_version` field, and its
-value MUST be `1_0-ID2` or greater
+value MUST be `1_0` or greater
 
 ### Delivery Method {#delivery-method}
 
@@ -428,6 +428,7 @@ cover technology that may be required to practice this specification.
 
 -02
 
+* Updated required SSF spec version to 1_0
 * Updated spec references (#291)
 
 -01
