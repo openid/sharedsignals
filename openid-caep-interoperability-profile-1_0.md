@@ -251,7 +251,7 @@ Transmitter by providing a valid authorization
 
 **Stream Verification**
 : A Receiver MUST be able to verify the liveness of the Stream by requesting
-that the Transmitter send it a Stream Verificaiton event by providing a valid
+that the Transmitter send it a Stream Verification event by providing a valid
 authorization
 
 ## Receivers {#common-receivers}
@@ -296,7 +296,7 @@ metadata document as specified in [RFC8414]{{RFC8414}}
 * MUST support at least one of the following to obtain a short-lived access
 token. For example, a short lived access token could be defined as one in which
 the value of the `exp` claim is not longer than 60 mins after `nbf` claim.
-Please efer to Access token lifetimes in the security considerations of {{FAPI}}
+Please refer to Access token lifetimes in the security considerations of {{FAPI}}
 for additional considerations.
   * client credential grant flow {{RFC6749}} section 4.4
   * authorization code flow {{RFC6749}} section 4.1
