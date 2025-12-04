@@ -29,6 +29,7 @@ author:
 normative:
   RFC2119:
   RFC8174:
+  RFC8417:
   RFC9493: # Subject Identifier Formats for SETs
   RFC8935: # Push delivery
   RFC8936: # POLL delivery
@@ -113,15 +114,16 @@ Framework {{SSF}}, Continuous Access Evaluation Profile ({{CAEP}}), and OAuth
 2.0 {{RFC6749}}. It provides a path to interoperability for {{SSF}} Transmitters
 and Receivers by standardizing implementations of theses specifications.
 
-The Shared Signals Framework enables sharing of signals and events
-between cooperating peers. When combined with Continuous Access Evaluation
-Profile ({{CAEP}}) to share events such as Session Revocation and Credential
-Change, implementations can greatly improve their session and secruity outcomes.
+The Shared Signals Framework enables sharing of Security Event Tokens (SETs)
+{{RFC8417}} between cooperating peers. When combined with Continuous Access
+Evaluation Profile ({{CAEP}}) to share events such as Session Revocation and
+Credential Change, implementations can greatly improve their session and
+secruity outcomes.
 
 The CAEP Interoperability Profile defines the minimum required features that
-that implementations must offer in order to be considered complaint. CAEP
-session-recvoked and credential-change events are outlined in specfic use-cases
-to further enhance interoperatibility. Support for all use-cases listed herein
+implementations must offer in order to be considered complaint. CAEP
+session-revoked and credential-change events are outlined in specific use-cases
+to further enhance interoperability. Support for all use-cases listed herein
 are not required in order to be considered compliant of this profile.
 An implementation can choose specific use-cases to support.
 
