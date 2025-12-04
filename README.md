@@ -13,7 +13,7 @@ The current drafts of the specifications under development are kept here:
 |--------------------------|---------|--------|
 | Shared Signals Framework | [HTML](https://openid.github.io/sharedsignals/openid-sharedsignals-framework-1_0.html)| [TXT](https://openid.github.io/sharedsignals/openid-sharedsignals-framework-1_0.txt)|
 | CAEP                     | [HTML](https://openid.github.io/sharedsignals/openid-caep-1_0.html)| [TXT](https://openid.github.io/sharedsignals/openid-caep-1_0.txt)|
-| RISC                     | [HTML](https://openid.github.io/sharedsignals/openid-risc-profile-specification-1_0.html)| [TXT](https://openid.github.io/sharedsignals/openid-risc-profile-specification-1_0.txt)|
+| RISC                     | [HTML](https://openid.github.io/sharedsignals/openid-risc-1_0.html)| [TXT](https://openid.github.io/sharedsignals/openid-risc-1_0.txt)|
 | CAEP Interoperability Profile                     | [HTML](https://openid.github.io/sharedsignals/openid-caep-interoperability-profile-1_0.html)| [TXT](https://openid.github.io/sharedsignals/openid-caep-interoperability-profile-1_0.txt)|
 
 
