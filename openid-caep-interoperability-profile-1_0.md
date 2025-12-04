@@ -319,7 +319,7 @@ scopes by using it.
 
 * If the Resource Server does not support {{OPRM}}, then the following scopes
 MUST be supported:
-  
+
   * An OAuth {{RFC6749}} Authorization Server that is used to issue tokens to
   SSF Receivers, MUST reserve the scopes for the SSF endpoints with the prefix
   of `ssf`
