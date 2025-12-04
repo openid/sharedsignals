@@ -236,8 +236,6 @@ Depending on the features supported by the OAuth service and the SSF APIs, the O
    - An OAuth {{RFC6749}} Authorization Server that is used to issue tokens to SSF Receivers, MUST reserve the scopes for the SSF endpoints with the prefix of `ssf`
    - All the SSF stream configuration management API operations MUST accept `ssf.manage` scope
    - All the SSF stream configuration Read API operations MUST accept `ssf.read` scope
-   - Authorization Server MAY postfix scope names with more granular operations eg. `ssf.manage.create`, `ssf.manage.update` etc.
-   - Transmitter managed poll endpoint MAY support the postfix scopes in the same nomenclature as `ssf.manage.poll`
 
 ### The SSF Transmitter as a Resource Server
 * MUST accept access tokens in the HTTP header as in Section 2.1 of OAuth 2.0 Bearer Token Usage [RFC6750]{{RFC6750}}
