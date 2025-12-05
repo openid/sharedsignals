@@ -1,8 +1,8 @@
 ---
-title: CAEP Interoperability Profile 1.0 - draft 01
+title: CAEP Interoperability Profile 1.0 - draft 02
 abbrev: caep-interop
 docname: caep-interoperability-profile-1_0
-date: 2025-05-29
+date: 2025-09-16
 
 ipr: none
 cat: std
@@ -34,8 +34,8 @@ normative:
   RFC8935: # Push delivery
   RFC8936: # POLL delivery
   SSF:
-    target: https://openid.net/specs/openid-sharedsignals-framework-1_0.html
-    title: OpenID Shared Signals and Events Framework Specification 1.0 - draft
+    target: https://openid.net/specs/openid-sharedsignals-framework-1_0-final.html
+    title: OpenID Shared Signals and Events Framework Specification 1.0
      03
     author:
       -
@@ -64,7 +64,7 @@ normative:
         org: Cisco
 
   CAEP:
-    target: https://openid.net/specs/openid-caep-1_0.html
+    target: https://openid.net/specs/openid-caep-1_0-final.html
     title: OpenID Continuous Access Evaluation Profile 1.0
     author:
       -
@@ -83,14 +83,14 @@ normative:
   RFC8414: # OAuth 2.0 Authorization Server Metadata
   RFC6749:
   FAPI:
-    target: https://openid.bitbucket.io/fapi/fapi-2_0-security-profile.html
-    title: FAPI 2.0 Security Profile — draft
+    target: https://openid.net/specs/fapi-security-profile-2_0-final.html
+    title: FAPI 2.0 Security Profile
     author:
       - ins: D. Fett
       - ins: D. Tonge
       - ins: J. Heenan
   OPRM:
-    target: https://www.ietf.org/archive/id/draft-ietf-oauth-resource-metadata-03.html
+    target: https://datatracker.ietf.org/doc/html/rfc9728
     title: OAuth 2.0 Protected Resource Metadata
     author:
       -ins: M.B. Jones
@@ -157,7 +157,7 @@ transmitter APIs, as per [RFC6125]{{RFC6125}}.
 
 ## CAEP specification version
 
-This specification supports CAEP {{CAEP}} events from Implementer's Draft 2
+This specification supports CAEP {{CAEP}} events from OpenID Continuous Access Evaluation Profile 1.0.
 
 ## Transmitters {#common-transmitters}
 
@@ -166,7 +166,7 @@ Transmitters MUST implement the following features:
 ### Spec Version {#spec-version}
 
 The Transmitter Configuration Metadata MUST have a `spec_version` field, and its
-value MUST be `1_0-ID2` or greater
+value MUST be `1_0` or greater
 
 ### Delivery Method {#delivery-method}
 
@@ -251,7 +251,7 @@ Transmitter by providing a valid authorization
 
 **Stream Verification**
 : A Receiver MUST be able to verify the liveness of the Stream by requesting
-that the Transmitter send it a Stream Verificaiton event by providing a valid
+that the Transmitter send it a Stream Verification event by providing a valid
 authorization
 
 ## Receivers {#common-receivers}
@@ -296,7 +296,7 @@ metadata document as specified in [RFC8414]{{RFC8414}}
 * MUST support at least one of the following to obtain a short-lived access
 token. For example, a short lived access token could be defined as one in which
 the value of the `exp` claim is not longer than 60 mins after `nbf` claim.
-Please efer to Access token lifetimes in the security considerations of {{FAPI}}
+Please refer to Access token lifetimes in the security considerations of {{FAPI}}
 for additional considerations.
   * client credential grant flow {{RFC6749}} section 4.4
   * authorization code flow {{RFC6749}} section 4.1
@@ -391,7 +391,7 @@ specification.
 
 # Notices
 
-Copyright (c) 2024 The OpenID Foundation.
+Copyright (c) 2025 The OpenID Foundation.
 
 The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer,
 or other interested party a non-exclusive, royalty free, worldwide copyright
@@ -426,10 +426,15 @@ cover technology that may be required to practice this specification.
 
   [[ To be removed from the final specification ]]
 
+-02
+
+* Updated required SSF spec version to 1_0
+* Updated spec references (#291)
+
 -01
 
 * Cleaned up markdown (#91)
 
 -00
-  
+
 * Initial draft
