@@ -16,22 +16,22 @@ html:   $(HTML)
 	kramdown-rfc2629 > $@ $^
 
 all:
-	@ make openid-sharedsignals-framework-1_0.xml
-	@ make openid-sharedsignals-framework-1_0.html
-	@ make openid-sharedsignals-framework-1_0.txt
-	@ make openid-risc-1_0.html
-	@ make openid-risc-1_0.txt
-	@ make openid-caep-1_0.xml
-	@ make openid-caep-1_0.html
-	@ make openid-caep-1_0.txt
+	@ make openid-sharedsignals-framework-1_1.xml
+	@ make openid-sharedsignals-framework-1_1.html
+	@ make openid-sharedsignals-framework-1_1.txt
+	@ make openid-risc-1_1.html
+	@ make openid-risc-1_1.txt
+	@ make openid-caep-1_1.xml
+	@ make openid-caep-1_1.html
+	@ make openid-caep-1_1.txt
 
 propose:
-	@ cp openid-sharedsignals-framework-1_0.txt ../publication/sharedsignals/openid-sharedsignals-framework-1_0-final.txt
-	@ cp openid-sharedsignals-framework-1_0.html ../publication/sharedsignals/openid-sharedsignals-framework-1_0-final.html
-	@ cp openid-sharedsignals-framework-1_0.md ../publication/sharedsignals/openid-sharedsignals-framework-1_0-final.md
-	@ cp openid-risc-1_0.html ../publication/sharedsignals/openid-risc-1_0-final.html
-	@ cp openid-risc-1_0.xml ../publication/sharedsignals/openid-risc-1_0-final.xml
-	@ cp openid-risc-1_0.txt ../publication/sharedsignals/openid-risc-1_0-final.txt
-	@ cp openid-caep-1_0.txt ../publication/sharedsignals/openid-caep-1_0-final.txt
-	@ cp openid-caep-1_0.html ../publication/sharedsignals/openid-caep-1_0-final.html
-	@ cp openid-caep-1_0.md ../publication/sharedsignals/openid-caep-1_0-final.md
+	@ cp openid-sharedsignals-framework-1_1.txt ../publication/sharedsignals/openid-sharedsignals-framework-1_1-final.txt
+	@ cp openid-sharedsignals-framework-1_1.html ../publication/sharedsignals/openid-sharedsignals-framework-1_1-final.html
+	@ cp openid-sharedsignals-framework-1_1.md ../publication/sharedsignals/openid-sharedsignals-framework-1_1-final.md
+	@ cp openid-risc-1_1.html ../publication/sharedsignals/openid-risc-1_1-final.html
+	@ cp openid-risc-1_1.xml ../publication/sharedsignals/openid-risc-1_1-final.xml
+	@ cp openid-risc-1_1.txt ../publication/sharedsignals/openid-risc-1_1-final.txt
+	@ cp openid-caep-1_1.txt ../publication/sharedsignals/openid-caep-1_1-final.txt
+	@ cp openid-caep-1_1.html ../publication/sharedsignals/openid-caep-1_1-final.html
+	@ cp openid-caep-1_1.md ../publication/sharedsignals/openid-caep-1_1-final.md
