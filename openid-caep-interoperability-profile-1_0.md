@@ -1,8 +1,8 @@
 ---
-title: CAEP Interoperability Profile 1.0 - draft 02
+title: CAEP Interoperability Profile 1.0 - draft 02 WIP
 abbrev: caep-interop
 docname: caep-interoperability-profile-1_0
-date: 2025-09-16
+date: 2025-12-16
 
 ipr: none
 cat: std
@@ -184,21 +184,6 @@ The Transmitter Configuration Metadata MUST include the `configuration_endpoint`
 field. The specified endpoint MUST support the `POST` method in order to be able
 to create a stream.
 
-### Status Endpoint {#status-endpoint}
-
-The Transmitter Configuration Metadata MUST include the `status_endpoint` field.
-The specified endpoint MUST support the `GET` and `POST` methods in order to get
-and update the stream status respectively. The Transmitter MUST support the
-following values in an Update Stream Status request:
-
-* `enabled`
-* `paused`
-* `disabled`
-
-For streams that are `paused`, the Transmitter MUST specify (offline) the
-resource constraints on how many events it can keep, or for how long. The way a
-Transmitter specifies this information is outside the scope of the SSF spec.
-
 ### Verification Endpoint {#verification-endpoint}
 
 The Transmitter Configuration Metadata MUST include the `verification_endpoint`
@@ -243,10 +228,6 @@ with the same Receiver
 
 **Reading Stream Configuration**
 : A Receiver MUST be able to obtain current Stream configuration from the
-Transmitter by providing a valid authorization
-
-**Getting the Stream Status**
-: A Receiver MUST be able to obtain the current Stream status from the
 Transmitter by providing a valid authorization
 
 **Stream Verification**
