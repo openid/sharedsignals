@@ -103,16 +103,11 @@ Shared Signals Framework ({{SSF}}) and the Continuous Access Evaluation
 Profile ({{CAEP}}). It specifies required attributes for SSF endpoints, how to
 use OAuth 2.0 {{RFC6749}} for their authorization, and the core use-cases
 to improve security of authenticated sessions. When implemented, the profile
-enables seamless integrations beteeen SSF Transmitters and Receivers
+enables seamless interoperability beteeen SSF Transmitters and Receivers
 
 --- middle
 
 # Introduction {#introduction}
-
-The CAEP Interoperability Profile defines requirements against Shared Signals
-Framework {{SSF}}, Continuous Access Evaluation Profile ({{CAEP}}), and OAuth
-2.0 {{RFC6749}}. It provides a path to interoperability for {{SSF}} Transmitters
-and Receivers by standardizing implementations of theses specifications.
 
 The Shared Signals Framework enables sharing of Security Event Tokens (SETs)
 {{RFC8417}} between cooperating peers. When combined with Continuous Access
@@ -120,12 +115,18 @@ Evaluation Profile ({{CAEP}}) to share events such as Session Revocation and
 Credential Change, implementations can greatly improve their session and
 secruity outcomes.
 
-The CAEP Interoperability Profile defines the minimum required features that
-implementations must offer in order to be considered complaint. CAEP
-session-revoked and credential-change events are outlined in specific use-cases
-to further enhance interoperability. Support for all use-cases listed herein
-are not required in order to be considered compliant of this profile.
-An implementation can choose specific use-cases to support.
+The CAEP Interoperability Profile outlines the minimum required features that
+implementations must offer in order to be considered complaint and to achieve
+interoperability. It describes specific use cases with CAEP session-revoked and
+credential-change events. Support for all use-cases listed herein are not
+required in order to be considered compliant of this profile. An implementation
+can choose specific use-cases to support.
+
+The follow specifications are profiled in this document:
+
+* Shared Signals Framework {{SSF}}
+* Continuous Access Evaluation Profile ({{CAEP}})
+* OAuth 2.0 {{RFC6749}}
 
 ## Notational Conventions
 
