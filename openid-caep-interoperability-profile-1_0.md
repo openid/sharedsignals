@@ -101,9 +101,9 @@ normative:
 This document defines an interoperability profile for implementations of the
 Shared Signals Framework ({{SSF}}) and the Continuous Access Evaluation
 Profile ({{CAEP}}). It specifies required attributes for SSF endpoints, how to
-use OAuth 2.0 {{RFC6749}} for their authorization, and the core use-cases
+use OAuth 2.0 {{RFC6749}} for their authorization, and the core use cases
 to improve security of authenticated sessions. When implemented, the profile
-enables seamless interoperability beteeen SSF Transmitters and Receivers
+enables seamless interoperability between SSF Transmitters and Receivers.
 
 --- middle
 
@@ -113,16 +113,16 @@ The Shared Signals Framework enables sharing of Security Event Tokens (SETs)
 {{RFC8417}} between cooperating peers. When combined with Continuous Access
 Evaluation Profile ({{CAEP}}) to share events such as Session Revocation and
 Credential Change, implementations can greatly improve their session and
-secruity outcomes.
+security outcomes.
 
 The CAEP Interoperability Profile outlines the minimum required features that
-implementations must offer in order to be considered complaint and to achieve
+implementations must offer in order to be considered compliant and to achieve
 interoperability. It describes specific use cases with CAEP session-revoked and
-credential-change events. Support for all use-cases listed herein are not
-required in order to be considered compliant of this profile. An implementation
-can choose specific use-cases to support.
+credential-change events. Support for all use cases listed herein is not
+required in order to be considered compliant with this profile. An
+implementation can choose specific use cases to support.
 
-The follow specifications are profiled in this document:
+The following specifications are profiled in this document:
 
 * Shared Signals Framework {{SSF}}
 * Continuous Access Evaluation Profile ({{CAEP}})
