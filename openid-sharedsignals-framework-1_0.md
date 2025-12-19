@@ -1,8 +1,8 @@
 ---
-title: OpenID Shared Signals Framework Specification 1.0 - draft 24
+title: OpenID Shared Signals Framework Specification 1.0
 abbrev: SharedSignals
 docname: openid-sharedsignals-framework-1_0
-date: 2025-06-23
+date: 2025-08-29
 
 ipr: none
 cat: std
@@ -24,8 +24,8 @@ author:
       -
         ins: T. Cappalli
         name: Tim Cappalli
-        org: Microsoft
-        email: tim.cappalli@microsoft.com
+        org: Okta
+        email: tim.cappalli@okta.com
       -
         ins: M. Scurtescu
         name: Marius Scurtescu
@@ -118,10 +118,11 @@ normative:
     -
       ins: T. Cappalli
       name: Tim Cappalli
+      org: Okta
     -
       ins: A. Tulshibagwale
       name: Atul Tulshibagwale
-    date: June 2024
+    date: August 2025
     target: https://openid.net/specs/openid-caep-1_0.html
     title: OpenID Continuous Access Evaluation Profile 1.0
   RISC:
@@ -144,7 +145,7 @@ normative:
     -
       ins: A. Tulshibagwale
       name: Atul Tulshibagwale
-    date: April 2022
+    date: August 2025
     target: https://openid.net/specs/openid-risc-profile-specification-1_0.html
     title: OpenID RISC Profile Specification 1.0
   NAMINGCONVENTION:
@@ -2524,135 +2525,33 @@ specification.
 
 # Notices
 
-Copyright (c) 2024 The OpenID Foundation.
+Copyright (c) 2025 The OpenID Foundation.
 
 The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer,
-or other interested party a non-exclusive, royalty free, worldwide copyright
-license to reproduce, prepare derivative works from, distribute, perform and
-display, this Implementers Draft or Final Specification solely for the purposes
-of (i) developing specifications, and (ii) implementing Implementers Drafts and
-Final Specifications based on such documents, provided that attribution be made
-to the OIDF as the source of the material, but that such attribution does not
+or other interested party a non-exclusive, royalty free, worldwide copyright license to
+reproduce, prepare derivative works from, distribute, perform and display, this
+Implementers Draft, Final Specification, or Final Specification Incorporating Errata
+Corrections solely for the purposes of (i) developing specifications, and (ii)
+implementing Implementers Drafts, Final Specifications, and Final Specification
+Incorporating Errata Corrections based on such documents, provided that attribution
+be made to the OIDF as the source of the material, but that such attribution does not
 indicate an endorsement by the OIDF.
 
-The technology described in this specification was made available from
-contributions from various sources, including members of the OpenID Foundation
-and others. Although the OpenID Foundation has taken steps to help ensure that
-the technology is available for distribution, it takes no position regarding the
- validity or scope of any intellectual property or other rights that might be
- claimed to pertain to the implementation or use of the technology described in
- this specification or the extent to which any license under such rights might
- or might not be available; neither does it represent that it has made any
- independent effort to identify any such rights. The OpenID Foundation and the
- contributors to this specification make no (and hereby expressly disclaim any)
- warranties (express, implied, or otherwise), including implied warranties of
- merchantability, non-infringement, fitness for a particular purpose, or title,
- related to this specification, and the entire risk as to implementing this
- specification is assumed by the implementer. The OpenID Intellectual Property
- Rights policy requires contributors to offer a patent promise not to assert
- certain patent claims against other contributors and against implementers. The
- OpenID Foundation invites any interested party to bring to its attention any
- copyrights, patents, patent applications, or other proprietary rights that may
- cover technology that may be required to practice this specification.
-
-# Document History
-
-  [[ To be removed from the final specification ]]
-
--23
-
-* Cleaned up markdown (#91)
-* Added language to allow implementations to define their own processing
-behavior for SETS (#255)
-
--20
-
-* Clarified that Transmitters may drop events if they aren't able to deliver
-them to the receiver.
-* Added examples to demonstrate how "wildcard matching" works in SSF event
-complex subjects
-* Added an `inactivity_timeout` field to the Transmitter metadata, after which
-transmitters may pause, disable or delete inactive streams.
-* Clarified that Receivers should validate the `aud` value
-* Clarified that Transmitters may include additional fields in SSF events, and
-how receivers should interpret them.
-* Specified that the poll delivery endpoint should require authorization
-* Clarified stream creation behavior for delivery method mismatch and poll
-delivery
-* Clarified that StreamIDs have to be of the "unreserved characters" character
-set from RFC3986
-* Clarified the authorization_header requirement for the receiver
-* Rearranged the content for easier readability: Eliminated the "Profiles"
-section (previous section 10). Created new sections "Events" (new section 4),
-and "Event Delivery" (new Section 6). Incorporated text from the erstwhile
-"Profiles" section into other sections as appropriate. Fixed references and
-titles of examples.
-* Added "IP Address" as a subject identifier format
-* In Create Stream, specified that description may be included in the response,
-and that the `endpoint_url` is specified by the Transmitter in the `poll`
-delivery method
-* Updated URLs of linked specs and other resources
-* Fixed example to have correct format for "reason_admin" and "reason_user"
-
--03
-
-* Removing transmitter supplied fields from stream config PUT and PATCH examples
-* Add OPTIONAL/REQUIRED to the fields in the stream configuration
-* Add stream_id to the response when getting stream status
-* Update subject/sub_id in examples. Fix CAEP example
-* Clarify language around sending Stream Updated events
-* Add sentence suggesting that Issuer information should be validated by the
-Receiver
-* Removed cause-time from RISC example
-* Fix description of error code for invalid state
-* Add SHOULD language about checking the issuer value
-* Added language requiring authorization of stream management API
-* Added description of `txn` claim
-* Added a `default_subjects` field to Transmitter Configuration Metadata
-indicating expected subject behavior for new streams
-* added txn claims to non-normative SET examples and generic txn callout under
-SET Profile section RFC8417
-* Editorial: Standardize terms and casing, fix some typos
-
--02
-
-* added spec version to metadata
-* Added description as receiver supplied
-* added language to make verification and updated events independent of
-events_supported
-* added top-level sub_id claim. Modified existing language to reflect the use of
-the sub_id claim
-* updated text to reflect sub_id as a top-level field in verification and stream
-updated events
-* \#46 add stream exists behavior
-* update stream exists to 409
-* Add 'format' to normative examples in CAEP
-* Remove 'format' from stream config
-* Remove subject from stream status (#88)
-* Add reason to GET /status response
-* Make reason look like an enum in the example to indicate how we expect it to
-be used
-* Fixes \#60 - are subjects required
-* Added format field to complex subjects and updated examples (#71)
-* Switch stray '204 OK' to read '204 No Content' (#73)
-* Change 'jwt-id' to 'jwt_id' to match style of other subject formats (#63)
-* resolving issue \#45 added explanatory text to Stream Configuration (#68)
-* \#28 update delivery method references to URNs (#49)
-* Changed jwks_uri from REQUIRED to OPTIONAL (#47)
-* Sse to ssf (#43)
-* updated SSE to Shared Signals in all files
-* changed source format to md
-* renamed files to be called sharedsignals instead of SSE. No change to the
-content (#41)
-* Add stream_id to SSE Framework spec as per Issue 4:
-https://github.com/openid/sse/issues/4
-* Update README with development instructions and fix error in Makefile
-* Added note to PUSH/POLL section about uniqueness requirements for the URLs
-* Add explanation about what an Event Stream is
-* Change terms to Transmitter-Supplied and Receiver-Supplied
-* Pragma is an obsolete HTTP header
-* It's unnecessary to specify the character as UTF-8 in all examples (#10)
-* Fix issue \#18 by converting saml-assertion-id to saml_assertion_id to
-maintain consistent formatting with other subject identifiers (#1)
-* updated backward compatibility language
-* added section for Transmitter Configuration Metadata RISC compatibility
+The technology described in this specification was made available from contributions
+from various sources, including members of the OpenID Foundation and others.
+Although the OpenID Foundation has taken steps to help ensure that the technology
+is available for distribution, it takes no position regarding the validity or scope of any
+intellectual property or other rights that might be claimed to pertain to the
+implementation or use of the technology described in this specification or the extent
+to which any license under such rights might or might not be available; neither does it
+represent that it has made any independent effort to identify any such rights. The
+OpenID Foundation and the contributors to this specification make no (and hereby
+expressly disclaim any) warranties (express, implied, or otherwise), including implied
+warranties of merchantability, non-infringement, fitness for a particular purpose, or
+title, related to this specification, and the entire risk as to implementing this
+specification is assumed by the implementer. The OpenID Intellectual Property
+Rights policy (found at openid.net) requires contributors to offer a patent promise not
+to assert certain patent claims against other contributors and against implementers.
+OpenID invites any interested party to bring to its attention any copyrights, patents,
+patent applications, or other proprietary rights that may cover technology that may be
+required to practice this specification.
