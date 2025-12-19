@@ -303,7 +303,7 @@ short-lived access token to the Receiver
   * client credential grant flow {{RFC6749}} section 4.4
   * authorization code flow {{RFC6749}} section 4.1
 
-A short lived access token could be defined as one in which the value of the
+A short lived access token is defined as one in which the value of the
 `exp` claim is not longer than 60 mins after `nbf` claim. Please refer to access
 token lifetimes in the security considerations of {{FAPI}} for additional
 considerations.
