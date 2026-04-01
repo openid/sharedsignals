@@ -18,13 +18,18 @@ author:
       -
         ins: A. Tulshibagwale
         name: Atul Tulshibagwale
-        org: SGNL
-        email: atul@sgnl.ai
+        org: Crowdstrike
+        email: atul.tulshibagwale@crowdstrike.com
       -
         ins: A. Deshpande
         name: Apoorva Deshpande
         org: Okta
         email: apoorva.deshpande@okta.com
+      -
+        ins: J. Schreiber
+        name: Jen Schreiber
+        org: Crowdstrike
+        email: jen.schreiber@crowdstrike.com
 
 normative:
   RFC2119:
@@ -117,20 +122,16 @@ security outcomes.
 
 The CAEP Interoperability Profile outlines the minimum required features that
 implementations must offer in order to be considered compliant and to achieve
-interoperability. It describes specific use cases with CAEP session-revoked and
-credential-change events. Support for all use cases listed herein is not
-required in order to be considered compliant with this profile. An
-implementation can choose specific use cases to support.
+interoperability. It describes specific use cases with CAEP session-revoked,
+credential-change, and device-compliance-change events. Support for all use
+cases listed herein is not required in order to be considered compliant with
+this profile. An implementation can choose specific use cases to support.
 
 The following specifications are profiled in this document:
 
-* Shared Signals Framework {{SSF}}
-* Continuous Access Evaluation Profile ({{CAEP}})
+* Shared Signals Framework 1.0 {{SSF}}
+* Continuous Access Evaluation Profile 1.0 ({{CAEP}})
 * OAuth 2.0 {{RFC6749}}
-
-Device Compliance Change
-: A SSF Transmitter or Receiver is able to respectively generate or respond to
-the CAEP device-compliance-change event
 
 ## Notational Conventions
 
@@ -147,14 +148,14 @@ document.
 
 ## Network layer protection
 
-* The SSF transmitter MUST offer TLS protected endpoints and MUST establish
+* The SSF Transmitter MUST offer TLS protected endpoints and MUST establish
 connections to other servers using TLS. TLS connections MUST be set up to use
 TLS version 1.2 or later.
-* The SSF transmitter MUST follow the recommendations for Secure Use of
+* The SSF Transmitter MUST follow the recommendations for Secure Use of
 Transport Layer Security in [RFC9325]{{RFC9325}}.
-* The SSF receiver MUST perform a TLS server certificate signature checks, chain
+* The SSF receiver MUST perform TLS server certificate signature checks, chain
 of trust validations, expiry and revocation status checks before calling the SSF
-transmitter APIs, as per [RFC6125]{{RFC6125}}.
+Transmitter APIs, as per [RFC6125]{{RFC6125}}.
 
 ## CAEP specification version
 
@@ -373,8 +374,8 @@ short-lived access token to the Receiver
   * authorization code flow {{RFC6749}} section 4.1
 
 A short lived access token is defined as one in which the value of the
-`exp` claim is not longer than 60 mins after `nbf` claim. Please refer to access
-token lifetimes in the security considerations of {{FAPI}} for additional
+`exp` claim is not longer than 60 minutes after `nbf` claim. Please refer to
+access token lifetimes in the security considerations of {{FAPI}} for additional
 considerations.
 
 ### OAuth Scopes
@@ -421,7 +422,7 @@ The "events" claim of the SET MUST contain only one event.
 # Use Cases
 
 Implementations MAY choose to support one or more of the following use-cases in
-order to be considered interoperable implementations
+order to be considered an interoperable implementation.
 
 ## Session Revocation / Logout
 
@@ -449,7 +450,11 @@ generate any allowable value of this field
 
 ## Device Compliance Change
 
-In order to support notifying and responding to changes in device compliance status, implementations MUST support the event type `device-compliance-change`. This event is used to signal that a device's adherence to a set of security or organizational compliance policies has changed. implementations MUST support the following field values:
+In order to support notifying and responding to changes in device compliance
+status, implementations MUST support the event type `device-compliance-change`.
+This event is used to signal that a device's adherence to a set of security or
+organizational compliance policies has changed. Implementations MUST support
+the following field values:
 
 `previous_status`
 : Receivers MUST interpret all allowable values of this field. Transmitters MAY
