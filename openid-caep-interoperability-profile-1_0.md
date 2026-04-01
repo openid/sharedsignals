@@ -128,7 +128,7 @@ this profile. An implementation can choose specific use cases to support.
 
 The following specifications are profiled in this document:
 
-* Shared Signals Framework 1.0 {{SSF}}
+* Shared Signals Framework Specification 1.0 {{SSF}}
 * Continuous Access Evaluation Profile 1.0 ({{CAEP}})
 * OAuth 2.0 {{RFC6749}}
 
