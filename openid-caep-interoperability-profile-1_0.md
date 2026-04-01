@@ -40,8 +40,7 @@ normative:
   RFC8936: # POLL delivery
   SSF:
     target: https://openid.net/specs/openid-sharedsignals-framework-1_0-final.html
-    title: OpenID Shared Signals and Events Framework Specification 1.0
-     03
+    title: OpenID Shared Signals Framework Specification 1.0
     author:
       -
         ins: A. Tulshibagwale
