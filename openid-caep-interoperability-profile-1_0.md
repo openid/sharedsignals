@@ -93,13 +93,6 @@ normative:
       - ins: D. Fett
       - ins: D. Tonge
       - ins: J. Heenan
-  OPRM:
-    target: https://datatracker.ietf.org/doc/html/rfc9728
-    title: OAuth 2.0 Protected Resource Metadata
-    author:
-      -ins: M.B. Jones
-      -ins: P. Hunt
-      -ins: A. Parecki
 
 --- abstract
 This document defines an interoperability profile for implementations of the
@@ -358,42 +351,13 @@ All events MUST be signed using the `RS256` algorithm using a minimum of
 
 ## OAuth Support
 
-Implementations MUST support OAuth 2.0 {{RFC6749}}. The following diagram
-illustrates the OAuth flow between the SSF Transmitter, SSF Receiver, and the
-Authorization Server.
+Implementations MUST support OAuth 2.0 {{RFC6749}}. In this context, the OAuth
+2.0 roles map to SSF roles as follows:
 
-~~~ascii
-+--------------+
-|              |                             +-----------------+
-|              | 1. AS Metadata Request      |                 |
-|              |---------------------------->|                 |
-|              |<----------------------------|  Authorization  |
-|              | Client obtains AS Metadata  |   Server (AS)   |
-|    Client    |                             |       --        |
-|(SSF Receiver)|                             | Trusted by the  |
-|              | 2. OAuth Exchange           | SSF Transmitter |
-|              |<--------------------------->|                 |
-|              | Client obtains access token |                 |
-|              |                             |                 |
-|              |                             +-----------------+
-|              |
-|              | 3. SSF API Request with     +-----------------+
-|              |    Access Token             | Resource Server |
-|              |---------------------------->|(SSF Transmitter)|
-+--------------+                             +-----------------+
-~~~
-{: #figintro title="OAuth Support for CAEP Interoperability Profile"}
-
-1. The SSF Receiver/Client makes a request to fetch the Authorization Server
-metadata at its Metadata URL. The Metadata URL can be discovered from the
-Resource Server via {{OPRM}} or out-of-band. The Authorization Server responds
-with the Authorization Server metadata document as described in {{RFC8414}}.
-
-2. The SSF Receiver/Client obtains an access token from the Authorization Server
-using either the authorization code grant or the client credentials grant.
-
-3. The SSF Receiver/Client makes a request to the Transmitter's protected
-endpoints using the access token.
+* The Resource Server is the SSF Transmitter.
+* The Client is the SSF Receiver.
+* The Authorization Server is an entity trusted by the SSF Transmitter
+  to issue access tokens.
 
 ### Authorization Server
 
@@ -416,24 +380,15 @@ considerations.
 
 ### OAuth Scopes
 
-Depending on the features supported by the Authorization Server and the SSF
-APIs, the OAuth Client SHALL discover the OAuth scopes that MAY be used as
-follows:
+The following scopes MUST be supported:
 
-* If the Resource Server, hosting SSF configuration APIs, supports OAuth
-Protected Resource Metadata {{OPRM}} then the client MUST obtain the required
-scopes by using it.
-
-* If the Resource Server does not support {{OPRM}}, then the following scopes
-MUST be supported:
-
-  * An OAuth {{RFC6749}} Authorization Server that is used to issue tokens to
-  SSF Receivers, MUST reserve the scopes for the SSF endpoints with the prefix
-  of `ssf`
-  * All the SSF stream configuration management API operations MUST accept
-  `ssf.manage` scope
-  * All the SSF stream configuration Read API operations MUST accept `ssf.read`
-  scope
+* An OAuth {{RFC6749}} Authorization Server that is used to issue tokens to
+SSF Receivers, MUST reserve the scopes for the SSF endpoints with the prefix
+of `ssf`
+* All the SSF stream configuration management API operations MUST accept
+`ssf.manage` scope
+* All the SSF stream configuration Read API operations MUST accept `ssf.read`
+scope
 
 ### The SSF Transmitter as a Resource Server
 
@@ -447,8 +402,6 @@ access tokens
 sufficient for the requested resource access.
 * If the access token is not sufficient for the requested action, the Resource
 server MUST return errors as per section 3.1 of [RFC6750]{{RFC6750}}
-* MAY publish the {{OPRM}} to describe the metadata needed to interact with the
-protected resource.
 
 ## Security Event Token
 
