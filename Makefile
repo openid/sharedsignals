@@ -13,7 +13,7 @@ html:   $(HTML)
 	xml2rfc $^
 
 %.xml: %.md
-	kramdown-rfc > $@ $^
+	kramdown-rfc2629 > $@ $^
 
 all:
 	@ make openid-sharedsignals-framework-1_0.xml
