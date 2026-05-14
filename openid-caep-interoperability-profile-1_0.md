@@ -505,18 +505,33 @@ copyrights, patents, patent applications, or other proprietary rights that may
 cover technology that may be required to practice this specification.
 
 # Document History
-
-  [[ To be removed from the final specification ]]
+{:numbered="false"}
+[[ To be removed from the final specification ]]
 
 -02
 
-* Updated required SSF spec version to 1_0
+* Updated OAuth section with clarifications (#325)
+* Minor fixes for publishing (#324)
+* Added Receiver requirements (#315)
+* Formatting fixes and device compliance change (#313)
+* Reworked introduction to remove normative language (#302)
 * Updated spec references (#291)
+* Clarify relationship between Transmitter and AS (#245)
+* Non-normative changes (#196)
+* Added security considerations (#190)
+* Added notational conventions (#190)
+* Updated network layer protection guidance (#213)
+* Updated out of date links (#227)
+* Updated required SSF spec version to 1_0
 
 -01
 
+* Added document history (#189)
+* Specify one event per "events" claim of SET (#179)
+* Include OAuth specifics (#134)
 * Cleaned up markdown (#91)
 
 -00
 
+* Add opaque to the required subject formats (#137)
 * Initial draft
