@@ -187,7 +187,7 @@ Create Stream operation as defined in {{SSF}} Section 8.1.1.
 The Transmitter Configuration Metadata MUST include the `status_endpoint` field.
 
 The endpoint identified by status_endpoint MUST support the Read Stream Status
-(HTTP GET) operation as defined in {{SSF}} Sections 8.1.2.1.
+(HTTP GET) operation as defined in {{SSF}} Section 8.1.2.1.
 
 ### Verification Endpoint {#verification-endpoint}
 
@@ -282,7 +282,7 @@ requests to the Transmitter.
 ### Implicitly Added Subjects {#common-receiver-subjects}
 
 The Receiver MUST assume that all subjects are implicitly included in a Stream,
-without any `AddSubject` method invocations.
+without any Add Subject method invocations.
 
 ### Streams {#receiver-common-stream-configuration}
 
@@ -303,7 +303,7 @@ value is one of the following, or omit the `delivery` object.
 * `urn:ietf:rfc:8936` (Poll)
 
 If the Create Stream request does not include the `delivery` property, it is
-assumed to be delivery method of `urn:ietf:rfc:8936` (Poll), as
+assumed to have a delivery method of `urn:ietf:rfc:8936` (Poll), as
 defined in {{SSF}}.
 
 #### Stream Control {#receivers-stream-control}
@@ -342,11 +342,11 @@ Event Tokens" {{RFC9493}} MUST be supported:
 
 Receivers MUST be prepared to accept events with any of the subject identifier
 formats specified in this section. Transmitters MUST be able to send events with
-at least one of subject identifier formats specified in this section.
+at least one of the subject identifier formats specified in this section.
 
 ## Event Signatures
 
-All events MUST be signed using the `RS256` algorithm using a minimum of
+All events MUST be signed using the `RS256` algorithm with a minimum of
 2048-bit keys.
 
 ## OAuth Support
@@ -363,27 +363,27 @@ Implementations MUST support OAuth 2.0 {{RFC6749}}. In this context, the OAuth
 
 An OAuth {{RFC6749}} Authorization Server issues access tokens. In the context
 of this profile, the Authorization Server that issues access tokens can be a
-separate entity than the SSF Transmitter.
+different entity than the SSF Transmitter.
 
 * The Authorization Server MAY distribute discovery metadata (such as the
 authorization endpoint) via Authorization Server Metadata as specified in
 [RFC8414]{{RFC8414}}
 * The Authorization Server MUST support at least one of the following to issue a
 short-lived access token to the Receiver
-  * client credential grant flow {{RFC6749}} section 4.4
-  * authorization code flow {{RFC6749}} section 4.1
+  * client credentials grant {{RFC6749}} section 4.4
+  * authorization code grant {{RFC6749}} section 4.1
 
-A short lived access token is defined as one in which the value of the
-`exp` claim is not longer than 60 minutes after `nbf` claim. Please refer to
-access token lifetimes in the security considerations of {{FAPI}} for additional
-considerations.
+A short-lived access token is defined as one in which the value of the
+`exp` claim is no more than 60 minutes after the value of the `nbf` claim.
+Please refer to access token lifetimes in the security considerations of
+{{FAPI}} for additional considerations.
 
 ### OAuth Scopes
 
 The following scopes MUST be supported:
 
 * An OAuth {{RFC6749}} Authorization Server that is used to issue tokens to
-SSF Receivers, MUST reserve the scopes for the SSF endpoints with the prefix
+SSF Receivers MUST reserve the scopes for the SSF endpoints with the prefix
 of `ssf`
 * All the SSF stream configuration management API operations MUST accept
 `ssf.manage` scope
@@ -411,8 +411,8 @@ The "events" claim of the SET MUST contain only one event.
 
 # Use Cases
 
-Implementations MAY choose to support one or more of the following use-cases in
-order to be considered an interoperable implementation.
+An implementation conforming to this profile MUST support at least one of the
+following use cases.
 
 ## Session Revocation / Logout
 
@@ -460,8 +460,8 @@ generate any allowable value of this field
 # Security Considerations
 
 There are no additional security considerations that arise from this document.
-These are covered in the "Security Considerations" sections of {{SSF}} and
-{{CAEP}} specifications.
+Security considerations applicable to this profile are covered in the
+"Security Considerations" sections of {{SSF}} and {{CAEP}}.
 
 --- back
 
