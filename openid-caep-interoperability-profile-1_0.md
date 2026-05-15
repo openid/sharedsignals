@@ -373,8 +373,8 @@ short-lived access token to the Receiver:
   * client credentials grant {{RFC6749}} Section 4.4
   * authorization code grant {{RFC6749}} Section 4.1
 
-A short-lived access token is defined as one in which the value of the
-`exp` claim is no more than 60 minutes after the value of the `nbf` claim.
+A short-lived access token is defined as one whose lifetime is no more than
+60 minutes.
 Please refer to access token lifetimes in the security considerations of
 {{FAPI}} for additional considerations.
 
