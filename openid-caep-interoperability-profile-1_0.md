@@ -418,7 +418,7 @@ following use cases.
 
 In order to support session revocation or logout, implementations MUST support
 the CAEP event type `session-revoked`. The `reason_admin` field of the event
-MUST be populated with a non-empty value.
+MUST be populated with a non-empty object.
 
 ## Credential Change
 
@@ -436,7 +436,7 @@ generate any allowable value of this field
 generate any allowable value of this field
 
 `reason_admin`
-: Transmitters MUST populate this value with a non-empty string
+: Transmitters MUST populate this value with a non-empty object
 
 ## Device Compliance Change
 
@@ -456,7 +456,7 @@ generate any allowable value of this field
 generate any allowable value of this field
 
 `reason_admin`
-: Transmitters MUST populate this value with a non-empty string
+: Transmitters MUST populate this value with a non-empty object
 
 # Security Considerations
 
