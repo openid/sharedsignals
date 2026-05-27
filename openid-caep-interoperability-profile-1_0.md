@@ -399,10 +399,10 @@ support the following scopes:
 * `ssf.manage`
 * `ssf.read`
 
- The SSF Transmitter MUST require the `ssf.manage` scope for
- Create Stream, Delete Stream and Stream Verification operations and the
- `ssf.read` scope for Read Stream Configuration and Get Stream Status
- operations.
+The `ssf.read` scope allows Read Stream Configuration and Get Stream Status
+operations. The `ssf.manage` scope includes all `ssf.read` permissions and
+additionally allows Create Stream, Delete Stream, and Stream Verification
+operations.
 
 ## Security Event Token
 
