@@ -393,6 +393,8 @@ Server MUST return errors as per Section 3.1 of {{RFC6750}}
 
 ### OAuth Scopes
 
+SSF Receivers MUST reserve the scopes with a prefix of `ssf.` for SSF endpoints.
+
 An OAuth {{RFC6749}} Authorization Server issuing tokens to SSF Receivers MUST
 support the following scopes:
 
