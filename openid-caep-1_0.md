@@ -247,6 +247,10 @@ The base URI for CAEP event types is:
 
 `https://schemas.openid.net/secevent/caep/event-type/`
 
+Events that were added or updated by this spec will use the following base URI:
+
+`https://schemas.openid.net/secevent/caep/event-type/v1.1`
+
 ## Session Revoked {#session-revoked}
 
 Event Type URI:
@@ -709,7 +713,7 @@ the assurance level changed.
 
 Event Type URI:
 
-`https://schemas.openid.net/secevent/caep/event-type/device-compliance-change`
+`https://schemas.openid.net/secevent/caep/event-type/v1.1/device-compliance-change`
 
 Device Compliance Change signals that a device's compliance or managed status has changed.
 
