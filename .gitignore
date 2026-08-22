@@ -5,6 +5,11 @@
 .refcache
 *.xpr
 scratch.md
+1.0/openid-caep-1_0.xml
+1.0/openid-sharedsignals-framework-1_0.xml
+openid-caep-interoperability-profile-1_0.xml
+1.1/openid-caep-1_1.xml
+1.1/openid-sharedsignals-framework-1_1.xml
+# legacy root-level build output (pre-1.0/ layout)
 openid-caep-1_0.xml
 openid-sharedsignals-framework-1_0.xml
-openid-caep-interoperability-profile-1_0.xml
