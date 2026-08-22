@@ -243,6 +243,12 @@ The base URI for CAEP event types is:
 
 `https://schemas.openid.net/secevent/caep/event-type/`
 
+Events that were added or updated by this spec will use the following base URI:
+
+`https://schemas.openid.net/secevent/caep/event-type/v1.1`
+
+This spec does not deprecate 1.0 events, you can continue to use those.
+
 ## Session Revoked {#session-revoked}
 
 Event Type URI:
