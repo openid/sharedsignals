@@ -49,21 +49,37 @@ jobs:
       - name: Install xml2rfc
         run: pip install xml2rfc
       - name: Convert sharedsignals md to xml
-        run: kramdown-rfc2629 openid-sharedsignals-framework-1_0.md > openid-sharedsignals-framework-1_0.xml
+        run: kramdown-rfc2629 1.0/openid-sharedsignals-framework-1_0.md > 1.0/openid-sharedsignals-framework-1_0.xml
       - name: Render HTML
-        run: xml2rfc openid-sharedsignals-framework-1_0.xml --html -o openid-sharedsignals-framework-1_0.html
+        run: xml2rfc 1.0/openid-sharedsignals-framework-1_0.xml --html -o 1.0/openid-sharedsignals-framework-1_0.html
       - name: Render Text
-        run: xml2rfc openid-sharedsignals-framework-1_0.xml --text
+        run: xml2rfc 1.0/openid-sharedsignals-framework-1_0.xml --text
       - name: Render risc html
-        run: xml2rfc openid-risc-1_0.xml --html -o openid-risc-1_0.html
+        run: xml2rfc 1.0/openid-risc-1_0.xml --html -o 1.0/openid-risc-1_0.html
       - name: Render risc text
-        run: xml2rfc openid-risc-1_0.xml --text -o openid-risc-1_0.txt
+        run: xml2rfc 1.0/openid-risc-1_0.xml --text -o 1.0/openid-risc-1_0.txt
       - name: Convert caep md to xml
-        run: kramdown-rfc2629 openid-caep-1_0.md > openid-caep-1_0.xml
+        run: kramdown-rfc2629 1.0/openid-caep-1_0.md > 1.0/openid-caep-1_0.xml
       - name: Render caep html
-        run: xml2rfc openid-caep-1_0.xml --html -o openid-caep-1_0.html
+        run: xml2rfc 1.0/openid-caep-1_0.xml --html -o 1.0/openid-caep-1_0.html
       - name: Render caep text
-        run: xml2rfc openid-caep-1_0.xml --text -o openid-caep-1_0.txt
+        run: xml2rfc 1.0/openid-caep-1_0.xml --text -o 1.0/openid-caep-1_0.txt
+      - name: Convert sharedsignals 1.1 md to xml
+        run: kramdown-rfc2629 1.1/openid-sharedsignals-framework-1_1.md > 1.1/openid-sharedsignals-framework-1_1.xml
+      - name: Render 1.1 HTML
+        run: xml2rfc 1.1/openid-sharedsignals-framework-1_1.xml --html -o 1.1/openid-sharedsignals-framework-1_1.html
+      - name: Render 1.1 Text
+        run: xml2rfc 1.1/openid-sharedsignals-framework-1_1.xml --text -o 1.1/openid-sharedsignals-framework-1_1.txt
+      - name: Render risc 1.1 html
+        run: xml2rfc 1.1/openid-risc-1_1.xml --html -o 1.1/openid-risc-1_1.html
+      - name: Render risc 1.1 text
+        run: xml2rfc 1.1/openid-risc-1_1.xml --text -o 1.1/openid-risc-1_1.txt
+      - name: Convert caep 1.1 md to xml
+        run: kramdown-rfc2629 1.1/openid-caep-1_1.md > 1.1/openid-caep-1_1.xml
+      - name: Render caep 1.1 html
+        run: xml2rfc 1.1/openid-caep-1_1.xml --html -o 1.1/openid-caep-1_1.html
+      - name: Render caep 1.1 text
+        run: xml2rfc 1.1/openid-caep-1_1.xml --text -o 1.1/openid-caep-1_1.txt
       - name: Convert caep-interop md to xml
         run: kramdown-rfc2629 openid-caep-interoperability-profile-1_0.md > openid-caep-interoperability-profile-1_0.xml
       - name: Render caep-interop html
@@ -75,12 +91,18 @@ jobs:
         with:
           name: specfiles
           path: |
-            openid-sharedsignals-framework-1_0.html
-            openid-sharedsignals-framework-1_0.txt
-            openid-risc-1_0.html
-            openid-risc-1_0.txt
-            openid-caep-1_0.html
-            openid-caep-1_0.txt
+            1.0/openid-sharedsignals-framework-1_0.html
+            1.0/openid-sharedsignals-framework-1_0.txt
+            1.0/openid-risc-1_0.html
+            1.0/openid-risc-1_0.txt
+            1.0/openid-caep-1_0.html
+            1.0/openid-caep-1_0.txt
+            1.1/openid-sharedsignals-framework-1_1.html
+            1.1/openid-sharedsignals-framework-1_1.txt
+            1.1/openid-risc-1_1.html
+            1.1/openid-risc-1_1.txt
+            1.1/openid-caep-1_1.html
+            1.1/openid-caep-1_1.txt
             openid-caep-interoperability-profile-1_0.html
             openid-caep-interoperability-profile-1_0.txt
   publish-to-pages:

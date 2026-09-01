@@ -7,14 +7,24 @@ The goal of the [Shared Signals](https://openid.net/wg/sharedsignals/) Working G
 * Enable users, administrators, and service providers to coordinate in order to detect and respond to incidents.
 
 ## Current Development Drafts
-The current drafts of the specifications under development are kept here:
+The 1.1 drafts of the specifications under development are kept here:
 
 | Specification            | HTML    | TXT    |
 |--------------------------|---------|--------|
-| Shared Signals Framework | [HTML](https://openid.github.io/sharedsignals/openid-sharedsignals-framework-1_0.html)| [TXT](https://openid.github.io/sharedsignals/openid-sharedsignals-framework-1_0.txt)|
-| CAEP                     | [HTML](https://openid.github.io/sharedsignals/openid-caep-1_0.html)| [TXT](https://openid.github.io/sharedsignals/openid-caep-1_0.txt)|
-| RISC                     | [HTML](https://openid.github.io/sharedsignals/openid-risc-1_0.html)| [TXT](https://openid.github.io/sharedsignals/openid-risc-1_0.txt)|
-| CAEP Interoperability Profile                     | [HTML](https://openid.github.io/sharedsignals/openid-caep-interoperability-profile-1_0.html)| [TXT](https://openid.github.io/sharedsignals/openid-caep-interoperability-profile-1_0.txt)|
+| Shared Signals Framework | [HTML](https://openid.github.io/sharedsignals/1.1/openid-sharedsignals-framework-1_1.html)| [TXT](https://openid.github.io/sharedsignals/1.1/openid-sharedsignals-framework-1_1.txt)|
+| CAEP | [HTML](https://openid.github.io/sharedsignals/1.1/openid-caep-1_1.html)| [TXT](https://openid.github.io/sharedsignals/1.1/openid-caep-1_1.txt)|
+| RISC | [HTML](https://openid.github.io/sharedsignals/1.1/openid-risc-1_1.html)| [TXT](https://openid.github.io/sharedsignals/1.1/openid-risc-1_1.txt)|
+| CAEP Interoperability Profile | [HTML](https://openid.github.io/sharedsignals/openid-caep-interoperability-profile-1_0.html)| [TXT](https://openid.github.io/sharedsignals/openid-caep-interoperability-profile-1_0.txt)|
+
+## Final Specifications
+The published 1.0 Final Specifications are retained here, and are the documents
+that any errata updates are applied to:
+
+| Specification            | HTML    | TXT    |
+|--------------------------|---------|--------|
+| Shared Signals Framework 1.0 | [HTML](https://openid.github.io/sharedsignals/1.0/openid-sharedsignals-framework-1_0.html)| [TXT](https://openid.github.io/sharedsignals/1.0/openid-sharedsignals-framework-1_0.txt)|
+| CAEP 1.0 | [HTML](https://openid.github.io/sharedsignals/1.0/openid-caep-1_0.html)| [TXT](https://openid.github.io/sharedsignals/1.0/openid-caep-1_0.txt)|
+| RISC 1.0 | [HTML](https://openid.github.io/sharedsignals/1.0/openid-risc-1_0.html)| [TXT](https://openid.github.io/sharedsignals/1.0/openid-risc-1_0.txt)|
 
 
 

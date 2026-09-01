@@ -1,0 +1,590 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type='text/xsl' href='http://xml2rfc.tools.ietf.org/authoring/rfc2629.xslt' ?>
+<!DOCTYPE rfc PUBLIC "-//IETF//DTD RFC 2629//EN" "http://xml2rfc.tools.ietf.org/authoring/rfc2629.dtd">
+<!--
+  NOTE:  This XML file is input used to produce the authoritative copy of an
+  OpenID Foundation specification.  The authoritative copy is the HTML output.
+  This XML source file is not authoritative.  The statement ipr="none" is
+  present only to satisfy the document compilation tool and is not indicative
+  of the IPR status of this specification.  The IPR for this specification is
+  described in the "Notices" section.  This is a public OpenID Foundation
+  document and not a private document, as the private="..." declaration could
+  be taken to indicate.
+-->
+
+<rfc docName="openid-risc-profile-specification-1_1" category="std" ipr="none">
+
+  <?rfc toc="yes" ?>
+  <?rfc tocdepth="5" ?>
+  <?rfc symrefs="yes" ?>
+  <?rfc sortrefs="yes"?>
+  <?rfc strict="yes" ?>
+  <?rfc iprnotified="no" ?>
+  <?rfc private="Draft" ?>
+  <?rfc comments="yes"?>
+
+  <front>
+    <title abbrev="openid-risc-profile-specification">OpenID RISC Profile Specification 1.1</title>
+
+    <author initials="M." surname="Scurtescu" fullname="Marius Scurtescu">
+      <organization abbrev="Coinbase">Coinbase</organization>
+      <address>
+        <email>marius.scurtescu@coinbase.com</email>
+      </address>
+    </author>
+    <author initials="A." surname="Backman" fullname="Annabelle Backman">
+      <organization abbrev="Amazon">Amazon</organization>
+      <address>
+        <email>richanna@amazon.com</email>
+      </address>
+    </author>
+    <author initials="P." surname="Hunt" fullname="Phil Hunt">
+      <organization abbrev="Oracle">Oracle Corporation</organization>
+      <address>
+        <email>phil.hunt@yahoo.com</email>
+      </address>
+    </author>
+    <author initials="J." surname="Bradley" fullname="John Bradley">
+      <organization abbrev="Yubico">Yubico</organization>
+      <address>
+        <email>secevemt@ve7jtb.com</email>
+      </address>
+    </author>
+    <author initials="S." surname="Bounev" fullname="Stan Bounev">
+      <organization abbrev="VeriClouds">VeriClouds</organization>
+      <address>
+        <email>stanb@vericlouds.com</email>
+      </address>
+    </author>
+    <author initials="A." surname="Tulshibagwale" fullname="Atul Tulshibagwale">
+      <organization abbrev="SGNL">SGNL</organization>
+      <address>
+        <email>atul@sgnl.ai</email>
+      </address>
+    </author>
+
+    <date/>
+
+    <workgroup>Shared Signals</workgroup>
+
+    <abstract>
+      <t>This document defines the Risk Incident Sharing and Coordination (RISC) Event
+        Types based on the <xref target="SHARED-SIGNALS-FRAMEWORK">Shared Signals
+        Framework (SSF)</xref>. Event Types are introduced and defined in <xref target="SET">
+        Security Event Token (SET)</xref>.</t>
+    </abstract>
+  </front>
+
+  <middle>
+    <section anchor="intro" title="Introduction">
+      <t>This specification defines event types and their contents based on the
+      <xref target="SHARED-SIGNALS-FRAMEWORK">Shared Signals Framework</xref> that are required to
+      implement Risk Incident Sharing and Coordination.</t>
+
+      <section anchor="conv" title="Notational Conventions">
+        <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
+          NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED",
+          "MAY", and "OPTIONAL" in this document are to be interpreted as
+          described in BCP 14 <xref target="RFC2119"/> <xref target="RFC8174"/>
+          when, and only when, they appear in all capitals, as shown here.</t>
+      </section>
+    </section>
+
+    <section anchor="event-types" title="Event Types">
+      <t>The base URI for RISC event types is:<vspace />
+        https://schemas.openid.net/secevent/risc/event-type/</t>
+
+      <section anchor="account-credential-change-required" title="Account Credential Change Required">
+        <t>Event Type URI:<vspace />
+        https://schemas.openid.net/secevent/risc/event-type/account-credential-change-required</t>
+
+        <t>Account Credential Change Required signals that the account identified by the subject was required to
+        change a credential. For example the user was required to go through a password change.</t>
+
+        <t>Attributes: none</t>
+
+        <figure anchor="account-credential-change-required-example" title="Example: Account Credential Change Required">
+          <artwork><![CDATA[
+{
+  "iss": "https://idp.example.com/",
+  "jti": "756E69717565206964656E746966696572",
+  "iat": 1508184845,
+  "aud": "636C69656E745F6964",
+  "sub_id": {
+    "format": "iss_sub",
+    "iss": "https://idp.example.com/",
+    "sub": "7375626A656374"
+  },
+  "events": {
+    "https://schemas.openid.net/secevent/risc/event-type/account-credential-change-required": {}
+  }
+}
+            ]]></artwork>
+        </figure>
+      </section>
+
+      <section anchor="account-purged" title="Account Purged">
+        <t>Event Type URI:<vspace />
+        https://schemas.openid.net/secevent/risc/event-type/account-purged</t>
+
+        <t>Account Purged signals that the account identified by the subject has been permanently deleted.</t>
+
+        <t>Attributes: none</t>
+      </section>
+
+      <section anchor="account-disabled" title="Account Disabled">
+        <t>Event Type URI:<vspace />
+        https://schemas.openid.net/secevent/risc/event-type/account-disabled</t>
+
+        <t>Account Disabled signals that the account identified by the subject has been disabled. The actual reason why the
+        account was disabled might be specified with the nested <spanx style="verb">reason</spanx> attribute described below. The account may be
+        <xref target="account-enabled">enabled</xref> in the future.</t>
+
+        <t>Attributes:<list style="symbols">
+          <t>reason - optional, describes why was the account disabled. Possible values:<list style="symbols">
+            <t>hijacking</t>
+            <t>bulk-account</t>
+          </list></t>
+        </list></t>
+
+        <figure anchor="account-disabled-example" title="Example: Account Disabled">
+          <artwork><![CDATA[
+{
+  "iss": "https://idp.example.com/",
+  "jti": "756E69717565206964656E746966696572",
+  "iat": 1508184845,
+  "aud": "636C69656E745F6964",
+  "sub_id": {
+    "format": "iss_sub",
+    "iss": "https://idp.example.com/",
+    "sub": "7375626A656374",
+  },
+  "events": {
+    "https://schemas.openid.net/secevent/risc/event-type/account-disabled": {
+      "reason": "hijacking"
+    }
+  }
+}
+            ]]></artwork>
+        </figure>
+      </section>
+
+      <section anchor="account-enabled" title="Account Enabled">
+        <t>Event Type URI:<vspace />
+        https://schemas.openid.net/secevent/risc/event-type/account-enabled</t>
+
+        <t>Account Enabled signals that the account identified by the subject has been enabled.</t>
+
+        <t>Attributes: none</t>
+      </section>
+
+      <section anchor="identifier-changed" title="Identifier Changed">
+        <t>Event Type URI:<vspace />
+          https://schemas.openid.net/secevent/risc/event-type/identifier-changed</t>
+
+        <t>Identifier Changed signals that the identifier specified in the subject has changed. The subject
+          type MUST be either <spanx style="verb">email</spanx> or <spanx style="verb">phone</spanx>
+          and it MUST specify the old value.</t>
+
+        <t>This event SHOULD be issued only by the provider that is authoritative over the identifier.
+          For example, if the person that owns <spanx style="verb">john.doe@example.com</spanx> goes
+          through a name change and wants the new <spanx style="verb">john.roe@example.com</spanx> email
+          then <spanx style="strong">only</spanx> the email provider <spanx style="verb">example.com</spanx>
+          SHOULD issue an Identifier Changed event as shown in the example below.</t>
+
+        <t>If an identifier used as a username or recovery option is changed, at a provider that is not
+          authoritative over that identifier, then <xref target="recovery-information-changed">Recovery Information Changed</xref>
+          SHOULD be used instead.</t>
+
+        <t>Attributes:<list style="symbols">
+          <t>new-value - optional, the new value of the identifier.</t>
+        </list></t>
+
+        <figure anchor="identifier-changed-example" title="Example: Identifier Changed">
+          <artwork><![CDATA[
+{
+  "iss": "https://idp.example.com/",
+  "jti": "756E69717565206964656E746966696572",
+  "iat": 1508184845,
+  "aud": "636C69656E745F6964",
+  "sub_id": {
+    "format": "email",
+    "email": "john.doe@example.com"
+  },
+  "events": {
+    "https://schemas.openid.net/secevent/risc/event-type/identifier-changed": {
+      "new-value": "john.roe@example.com"
+    }
+  }
+}
+            ]]></artwork>
+          <postamble>The <spanx style="verb">john.doe@example.com</spanx> email changed to <spanx style="verb">john.roe@example.com</spanx>.</postamble>
+        </figure>
+      </section>
+
+      <section anchor="identifier-recycled" title="Identifier Recycled">
+        <t>Event Type URI:<vspace />
+        https://schemas.openid.net/secevent/risc/event-type/identifier-recycled</t>
+
+        <t>Identifier Recycled signals that the identifier specified in the subject was recycled and now it
+        belongs to a new user. The subject type MUST be either <spanx style="verb">email</spanx> or
+        <spanx style="verb">phone</spanx>.</t>
+
+        <t>Attributes: none</t>
+
+        <figure anchor="identifier-recycled-example" title="Example: Identifier Recycled">
+          <artwork><![CDATA[
+{
+  "iss": "https://idp.example.com/",
+  "jti": "756E69717565206964656E746966696572",
+  "iat": 1508184845,
+  "aud": "636C69656E745F6964",
+  "sub_id": {
+    "format": "email",
+    "email": "foo@example.com"
+  },
+  "events": {
+    "https://schemas.openid.net/secevent/risc/event-type/identifier-recycled": {}
+  }
+}
+            ]]></artwork>
+          <postamble>The <spanx style="verb">foo@example.com</spanx> email address was recycled.</postamble>
+        </figure>
+      </section>
+
+      <section anchor="credential-compromise" title="Credential Compromise">
+        <t>Event Type URI:</t>
+        <t><spanx style="verb">https://schemas.openid.net/secevent/risc/event-type/credential-compromise</spanx></t>
+        <t>A Credential Compromise event signals that the identifier specified in the subject was found to
+          be compromised.</t>
+        <t>Attributes:<list style="symbols">
+          <t>credential_type - REQUIRED. The type of credential that is compromised. The value of this attribute
+            must be one of the values specified for the similarly named field in the <spanx style="verb">
+            Credential Change</spanx> event defined in the <xref target="CAEP-SPECIFICATION">CAEP Specification</xref>.
+          </t>
+          <t>event_timestamp - OPTIONAL. JSON number: the time at which the event described by this SET was discovered by the
+            Transmitter. Its value is a JSON number representing the number of seconds from 1970-01-01T0:0:0Z as measured in
+            UTC until the date/time.</t>
+
+            <t>reason_admin - OPTIONAL. The reason why the credential compromised event was generated, intended
+              for administrators</t>
+            <t>reason_user - OPTIONAL. The reason why the credential compromised event was generated, intended
+              for end-users</t>
+          </list>
+        </t>
+        <figure title="Example: Compromised credential found" anchor="credential-compromise-example">
+          <artwork type="json"><![CDATA[
+
+{
+  "iss": "https://idp.example.com/3456790/",
+  "jti": "756E69717565206964656E746966696572",
+  "iat": 1508184845,
+  "aud": "https://sp.example2.net/caep",
+  "sub_id": {
+    "format": "iss_sub",
+    "iss": "https://idp.example.com/3456790/",
+    "sub": "joe.smith@example.com"
+  },
+  "events": {
+    "https://schemas.openid.net/secevent/risc/event-type/credential-compromise": {
+      "credential_type": "password"
+    }
+  }
+}
+
+    ]]></artwork>
+        </figure>
+      </section>
+
+      <section anchor="opt-out" title="Opt Out">
+        <t>Users SHOULD be allowed to opt-in and out of RISC events being sent for their accounts. With regards
+        to opt-out, an account can be in one of these three states:<list style="numbers">
+          <t>opt-in - the account is participating in RISC event exchange.</t>
+          <t>opt-out-initiated - the user requested to be excluded from RISC event exchanges, but for
+          practical security reasons for a period of time RISC events are still exchanged. The main reason
+          for this state is to prevent a hijacker from immediately opting out of RISC.</t>
+          <t>opt-out - the account is NOT participating in RISC event exchange.</t>
+        </list></t>
+
+        <figure anchor="opt-out-states" title="Opt-Out States and Opt-Out Events">
+          <preamble>State changes trigger Opt-Out Events as represented below:</preamble>
+          <artwork><![CDATA[
++--------+  opt-out-initiated  +-------------------+
+|        +--------------------->                   |
+| opt-in |                     | opt-out-initiated |
+|        |  opt-out-cancelled  |                   |
+|        <---------------------+                   |
++---^----+                     +----------+--------+
+    |                                     |
+    | opt-in                              | opt-out-effective
+    |                                     |
+    |                          +----------V--------+
+    |                          |                   |
+    +--------------------------| opt-out           |
+                               |                   |
+                               +-------------------+
+          ]]></artwork>
+        </figure>
+
+        <t>Both Transmitters and Receivers SHOULD manage Opt-Out state for users. Transmitters should send the
+        events defined in this section when the Opt-Out state changes.</t>
+
+        <section anchor="opt-in" title="Opt In">
+          <t>Event Type URI:<vspace />
+          https://schemas.openid.net/secevent/risc/event-type/opt-in</t>
+
+          <t>Opt In signals that the account identified by the subject opted into RISC event exchanges.
+          The account is in the <spanx style="verb">opt-in</spanx> state.</t>
+
+          <t>Attributes: none</t>
+        </section>
+
+        <section anchor="opt-out-initiated" title="Opt Out Initiated">
+          <t>Event Type URI:<vspace />
+          https://schemas.openid.net/secevent/risc/event-type/opt-out-initiated</t>
+
+          <t>Opt Out Initiated signals that the account identified by the subject initiated to opt out
+          from RISC event exchanges. The account is in the <spanx style="verb">opt-out-initiated</spanx> state.</t>
+
+          <t>Attributes: none</t>
+        </section>
+
+        <section anchor="opt-out-cancelled" title="Opt Out Cancelled">
+          <t>Event Type URI:<vspace />
+          https://schemas.openid.net/secevent/risc/event-type/opt-out-cancelled</t>
+
+          <t>Opt Out Cancelled signals that the account identified by the subject cancelled the opt out from RISC
+          event exchanges. The account is in the <spanx style="verb">opt-in</spanx> state.</t>
+
+          <t>Attributes: none</t>
+        </section>
+
+        <section anchor="opt-out-effective" title="Opt Out Effective">
+          <t>Event Type URI:<vspace />
+          https://schemas.openid.net/secevent/risc/event-type/opt-out-effective</t>
+
+          <t>Opt Out Effective signals that the account identified by the subject was effectively opted out from
+          RISC event exchanges. The account is in the <spanx style="verb">opt-out</spanx> state.</t>
+
+          <t>Attributes: none</t>
+        </section>
+      </section>
+
+      <section anchor="recovery-activated" title="Recovery Activated">
+        <t>Event Type URI:<vspace />
+        https://schemas.openid.net/secevent/risc/event-type/recovery-activated</t>
+
+        <t>Recovery Activated signals that the account identified by the subject activated a recovery flow.</t>
+
+        <t>Attributes: none</t>
+      </section>
+
+      <section anchor="recovery-information-changed" title="Recovery Information Changed">
+        <t>Event Type URI:<vspace />
+        https://schemas.openid.net/secevent/risc/event-type/recovery-information-changed</t>
+
+        <t>Recovery Information Changed signals that the account identified by the subject has changed some of
+        its recovery information. For example a recovery email address was added or removed.</t>
+
+        <t>Attributes: none</t>
+      </section>
+
+      <section anchor="sessions-revoked" title="Sessions Revoked">
+        <t>Note: This event type is now deprecated. New implementations MUST use the <spanx style="verb">
+              session-revoked</spanx> event defined in the <xref target="CAEP-SPECIFICATION">CAEP Specification</xref>.</t>
+        <t>Event Type URI:<vspace />
+        https://schemas.openid.net/secevent/risc/event-type/sessions-revoked</t>
+
+        <t>Sessions Revoked signals that all the sessions for the account identified by the subject have been
+        revoked.</t>
+
+        <t>Attributes: none</t>
+      </section>
+    </section>
+    <section anchor="compatibility" title="Compatibility">
+      <section anchor="google-subject-type" title="Google Subject Type Value">
+        <t>
+          Implementers are hereby made aware that the existing RISC implementation
+          by Google uses the field name <spanx style="verb"> subject_type</spanx>
+          instead of the field name <spanx style="verb">format</spanx> to indicate
+          the format of the subject identifier. The usage of the field name
+          <spanx style="verb">subject_type</spanx> is deprecated and new services
+          MUST NOT use this field name.</t>
+        <t>
+          Relying parties wishing to receive events from the Google RISC
+          transmitter therefore need to have code to work around this, until such
+          time as their implementation is updated. Any such workaround should be
+          written in a manner that does not break if Google updates their
+          implementation to conform to this specification.</t>
+      </section>
+   </section>
+    <section anchor="security" title="Security Considerations">
+      <t>
+        Any implementations of events described in this document SHOULD comply with the
+        <xref target="SHARED-SIGNALS-FRAMEWORK">Shared Signals Framework</xref>.
+        Exchanging events described herein without complying with the
+        <xref target="SHARED-SIGNALS-FRAMEWORK">Shared Signals Framework</xref>
+        may result in security issues.</t>
+   </section>
+  </middle>
+
+  <back>
+    <references title='Normative References'>
+
+      <reference anchor="SET" target="https://tools.ietf.org/html/draft-ietf-secevent-token-09">
+        <front>
+          <title>Security Event Token (SET)</title>
+          <author fullname="Phil Hunt" initials="P." role="editor" surname="Hunt">
+            <organization />
+          </author>
+
+          <author fullname="Michael B. Jones" initials="M.B." surname="Jones">
+            <organization />
+          </author>
+
+          <author fullname="William Denniss" initials="W." surname="Denniss">
+            <organization />
+          </author>
+
+          <author fullname="Morteza Ansari" initials="M.A." surname="Ansari">
+            <organization />
+          </author>
+
+          <date year="2018" month="April" />
+        </front>
+      </reference>
+
+      <reference anchor="RFC2119" target='https://www.rfc-editor.org/info/rfc2119'>
+        <front>
+          <title>Key words for use in RFCs to Indicate Requirement Levels</title>
+          <author initials='S.' surname='Bradner' fullname='S. Bradner'><organization /></author>
+          <date year='1997' month='March' />
+          <abstract><t>In many standards track documents several words are used to signify the requirements in the specification.  These words are often capitalized. This document defines these words as they should be interpreted in IETF documents.  This document specifies an Internet Best Current Practices for the Internet Community, and requests discussion and suggestions for improvements.</t></abstract>
+        </front>
+        <seriesInfo name='BCP' value='14'/>
+        <seriesInfo name='RFC' value='2119'/>
+        <seriesInfo name='DOI' value='10.17487/RFC2119'/>
+      </reference>
+
+      <reference anchor="RFC8174" target="https://www.rfc-editor.org/info/rfc8174">
+        <front>
+          <title>Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words</title>
+          <author initials="B." surname="Leiba" fullname="B. Leiba">
+            <organization/>
+          </author>
+          <date year="2017" month="May"/>
+          <abstract>
+            <t>RFC 2119 specifies common key words that may be used in protocol specifications. This
+              document aims to reduce the ambiguity by clarifying that only UPPERCASE usage of the
+              key words have the defined special meanings.</t>
+          </abstract>
+        </front>
+        <seriesInfo name="BCP" value="14"/>
+        <seriesInfo name="RFC" value="8174"/>
+        <seriesInfo name="DOI" value="10.17487/RFC8174"/>
+      </reference>
+
+      <reference anchor="SHARED-SIGNALS-FRAMEWORK" target="https://openid.net/specs/openid-sharedsignals-framework-1_0.html">
+        <front>
+          <title>OpenID Shared Signals Framework Specification 1.0</title>
+          <author initials="A." surname="Tulshibagwale" fullname="Atul Tulshibagwale">
+            <organization abbrev="Google">Google</organization>
+            <address>
+              <email>atultulshi@google.com</email>
+            </address>
+          </author>
+          <author initials="T." surname="Cappalli" fullname="Tim Cappalli">
+            <organization abbrev="Microsoft">Microsoft</organization>
+            <address>
+              <email>tim.cappalli@microsoft.com</email>
+            </address>
+          </author>
+
+          <author initials="M." surname="Scurtescu" fullname="Marius Scurtescu">
+            <organization abbrev="Coinbase">Coinbase</organization>
+            <address>
+              <email>marius.scurtescu@coinbase.com</email>
+            </address>
+          </author>
+          <author initials="A." surname="Backman" fullname="Annabelle Backman">
+            <organization abbrev="Amazon">Amazon</organization>
+            <address>
+              <email>richanna@amazon.com</email>
+            </address>
+          </author>
+          <author initials="J." surname="Bradley" fullname="John Bradley">
+            <organization abbrev="Yubico">Yubico</organization>
+            <address>
+              <email>secevemt@ve7jtb.com</email>
+            </address>
+          </author>
+          <author initials="S." surname="Miel" fullname="Shayne Miel">
+            <organization abbrev="Cisco">Cisco</organization>
+            <address>
+              <email>smiel@cisco.com</email>
+            </address>
+          </author>
+          <date year="2025" month="August" day="29"/>
+        </front>
+      </reference>
+
+      <reference anchor="CAEP-SPECIFICATION" target="https://openid.net/specs/openid-caep-1_0.html">
+        <front>
+          <title abbrev="CAEP-Spec">OpenID Continuous Access Evaluation Profile 1.0</title>
+          <author initials="T." surname="Cappalli" fullname="Tim Cappalli">
+            <organization>Microsoft</organization>
+            <address>
+              <email>tim.cappalli@microsoft.com</email>
+            </address>
+          </author>
+          <author initials="A." surname="Tulshibagwale" fullname="Atul Tulshibagwale">
+            <organization>Google</organization>
+            <address>
+              <email>atultulshi@google.com</email>
+            </address>
+          </author>
+          <date year="2025" month="August" day="29"/>
+        </front>
+      </reference>
+    </references>
+    <section title="Acknowledgements" anchor="ack">
+      <t>The authors wish to thank all members of the OpenID Foundation Shared Signals
+        Working Group who contributed to the development of this
+        specification.</t>
+    </section>
+    <section anchor="Notices" title="Notices">
+      <t>Copyright (c) 2025 The OpenID Foundation.</t>
+      <t>
+The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer,
+or other interested party a non-exclusive, royalty free, worldwide copyright license to
+reproduce, prepare derivative works from, distribute, perform and display, this
+Implementers Draft, Final Specification, or Final Specification Incorporating Errata
+Corrections solely for the purposes of (i) developing specifications, and (ii)
+implementing Implementers Drafts, Final Specifications, and Final Specification
+Incorporating Errata Corrections based on such documents, provided that attribution
+be made to the OIDF as the source of the material, but that such attribution does not
+indicate an endorsement by the OIDF.
+      </t>
+      <t>
+The technology described in this specification was made available from contributions
+from various sources, including members of the OpenID Foundation and others.
+Although the OpenID Foundation has taken steps to help ensure that the technology
+is available for distribution, it takes no position regarding the validity or scope of any
+intellectual property or other rights that might be claimed to pertain to the
+implementation or use of the technology described in this specification or the extent
+to which any license under such rights might or might not be available; neither does it
+represent that it has made any independent effort to identify any such rights. The
+OpenID Foundation and the contributors to this specification make no (and hereby
+expressly disclaim any) warranties (express, implied, or otherwise), including implied
+warranties of merchantability, non-infringement, fitness for a particular purpose, or
+title, related to this specification, and the entire risk as to implementing this
+specification is assumed by the implementer. The OpenID Intellectual Property
+Rights policy (found at openid.net) requires contributors to offer a patent promise not
+to assert certain patent claims against other contributors and against implementers.
+OpenID invites any interested party to bring to its attention any copyrights, patents,
+patent applications, or other proprietary rights that may cover technology that may be
+required to practice this specification.
+      </t>
+    </section>
+  </back>
+</rfc>
