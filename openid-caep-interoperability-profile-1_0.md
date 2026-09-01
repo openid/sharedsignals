@@ -464,6 +464,28 @@ generate any allowable value of this field
 `reason_admin`
 : Transmitters MUST populate this value with a non-empty object
 
+## Risk Level Change
+
+In order to support notifying and responding to changes in a subject's assessed risk,
+implementations MUST support the CAEP event type `risk-level-change`. Implementations MUST
+support the following field values:
+
+`principal`
+: Receivers MUST interpret all allowable values of this field.
+Transmitters MAY generate any allowable value of this field.
+
+`current_level` 
+: Receivers MUST interpret all allowable values of this field
+(LOW, MEDIUM, HIGH). Transmitters MAY generate any allowable value of this field.
+
+`previous_level` 
+: remains OPTIONAL. Receivers MUST interpret all allowable values of
+this field, and MUST treat its absence as the previous risk level being unknown to the
+Transmitter, per {{CAEP}} 1.0 §3.8.1.
+
+`reason_admin` 
+: Transmitters MUST populate this value with a non-empty object.
+
 # Security Considerations
 
 There are no additional security considerations that arise from this document.
@@ -542,3 +564,6 @@ specification.
 * Specify one event per "events" claim of SET (#179)
 * Include OAuth specifics (#134)
 * Cleaned up markdown (#91)
+
+-02
+* Add Risk Level Change change use-case (#347)
