@@ -1313,7 +1313,7 @@ Errors are signaled with HTTP status codes as follows:
 
 | Code | Description |
 |------|-------------|
-| 400  | if the request cannot be parsed |
+| 400  | if the request cannot be parsed, or if the delivery method is not supported |
 | 401  | if authorization failed or it is missing |
 | 403  | if the Event Receiver is not allowed to create a stream |
 | 409  | if the Transmitter does not support multiple streams per Receiver |
