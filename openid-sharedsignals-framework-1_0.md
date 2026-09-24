@@ -102,7 +102,9 @@ normative:
   RFC2119:
   RFC6749:
   RFC7159:
+  RFC7515:
   RFC7517:
+  RFC7518:
   RFC7519:
   RFC8174:
   RFC8417:
@@ -476,6 +478,30 @@ on this subject. The Shared Signals Framework requires further restrictions:
 
 The signature key can be obtained through "jwks_uri", see {{discovery}}.
 
+### Signing Algorithm {#set-signing-alg}
+
+For streams whose configuration ({{stream-config}}) includes the
+`set_signing_alg` property, the Transmitter MUST sign each SET issued on the
+stream using the algorithm identified by that property, and the `alg` JOSE
+Header Parameter {{RFC7515}} of the SET MUST contain that value.
+
+For such streams, Receivers MUST verify that the `alg` JOSE Header Parameter of
+a received SET matches the `set_signing_alg` value of the stream's
+configuration, and MUST reject SETs signed using any other algorithm, except as
+described below for streams whose `set_signing_alg` value has been changed. For
+streams whose configuration does not include the `set_signing_alg` property,
+the algorithms accepted by the Receiver are outside the scope of this
+specification.
+
+When the `set_signing_alg` property of a stream is changed, the Transmitter MUST
+use the new algorithm for all SETs issued after the change has been applied.
+SETs issued before the change may be delivered after it, for example when they
+have been queued for Poll-Based delivery {{RFC8936}}. The Receiver therefore
+MAY continue to accept SETs signed using the previous algorithm for a bounded
+period of its own choosing after making the change, for example based on the
+delivery latency it expects from the Transmitter, after which it MUST accept
+only the new algorithm.
+
 ### SSF Prescriptive SETs {#prescriptive-sets}
 
 The Shared Signals Framework allows each deployment or integration to define its
@@ -804,6 +830,15 @@ jwks_uri
   the Transmitter. This value MUST be specified if the Transmitter intends to
   generate signed JWTs. If present, this URL MUST use HTTP over TLS {{RFC9110}}.
 
+set_signing_alg_values_supported
+
+> OPTIONAL. A JSON array containing a list of the JWS {{RFC7515}} `alg` values
+  supported by the Transmitter for signing SETs. The values MUST be registered
+  in the IANA "JSON Web Signature and Encryption Algorithms" registry
+  established by {{RFC7518}}. The value `none` MUST NOT be included. This value
+  MUST be specified if the Transmitter supports the `set_signing_alg` Stream
+  Configuration property ({{stream-config}}).
+
 delivery_methods_supported
 
 > RECOMMENDED. List of supported delivery method URIs.
@@ -985,6 +1020,10 @@ Content-Type: application/json
     "https://tr.example.com",
   "jwks_uri":
     "https://tr.example.com/jwks.json",
+  "set_signing_alg_values_supported": [
+    "RS256",
+    "PS256",
+    "ES256"],
   "delivery_methods_supported": [
     "urn:ietf:rfc:8935",
     "urn:ietf:rfc:8936"],
@@ -1175,6 +1214,19 @@ delivery
   method is identified by the special key "method" with the value being a URI as
   defined in {{delivery-meta}}.
 
+set_signing_alg
+
+> **Receiver-Supplied**, OPTIONAL. A string containing the JWS {{RFC7515}}
+  `alg` value that the Transmitter MUST use to sign SETs issued on this stream,
+  as described in {{set-signing-alg}}. The value MUST NOT be `none`. The
+  Receiver SHOULD only request a value
+  that appears in the `set_signing_alg_values_supported` property of the
+  Transmitter Configuration Metadata ({{discovery-meta}}). If the Transmitter
+  does not support the requested value, it MUST reject the request as described
+  in {{creating-a-stream}}. If the Receiver does not supply this property, a
+  Transmitter that supports it MUST select a signing algorithm and MUST include
+  the selected value in the Stream Configuration it returns.
+
 min_verification_interval
 
 > **Transmitter-Supplied**, OPTIONAL. An integer indicating the minimum amount
@@ -1240,6 +1292,7 @@ Configuration ({{stream-config}}) object:
 * `events_requested`
 * `delivery`
 * `description`
+* `set_signing_alg`
 
 If the request does not contain the `delivery` property, then the Transmitter
 MUST assume that the `method` is "urn:ietf:rfc:8936" (poll). If the Transmitter
@@ -1250,6 +1303,12 @@ Status Code "400 Bad Request."
 
 Note that in the case of the poll method, the `endpoint_url` value is supplied
 by the Transmitter.
+
+If the request contains a `set_signing_alg` property whose value the
+Transmitter does not support, the Transmitter MUST respond with HTTP Status Code
+"400 Bad Request". If the request does not contain the `set_signing_alg`
+property, a Transmitter that supports this property MUST select a signing
+algorithm and include it in the `set_signing_alg` property of the response.
 
 The following is a non-normative example request to create an Event Stream:
 
@@ -1263,6 +1322,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
     "method": "urn:ietf:rfc:8935",
     "endpoint_url": "https://receiver.example.com/events"
   },
+  "set_signing_alg": "ES256",
   "events_requested": [
     "urn:example:secevent:events:type_2",
     "urn:example:secevent:events:type_3",
@@ -1290,6 +1350,7 @@ Content-Type: application/json
     "method": "urn:ietf:rfc:8935",
     "endpoint_url": "https://receiver.example.com/events"
   },
+  "set_signing_alg": "ES256",
   "events_supported": [
     "urn:example:secevent:events:type_1",
     "urn:example:secevent:events:type_2",
@@ -1313,7 +1374,7 @@ Errors are signaled with HTTP status codes as follows:
 
 | Code | Description |
 |------|-------------|
-| 400  | if the request cannot be parsed |
+| 400  | if the request cannot be parsed, or if the requested `set_signing_alg` is not supported by the Transmitter |
 | 401  | if authorization failed or it is missing |
 | 403  | if the Event Receiver is not allowed to create a stream |
 | 409  | if the Transmitter does not support multiple streams per Receiver |
@@ -1325,6 +1386,10 @@ Errors are signaled with HTTP status codes as follows:
 A Transmitter and Receiver MAY agree upon the audience value out of band.
 Regardless of how the audience value is agreed upon, the Receiver SHOULD ensure
 that it matches what it expects.
+
+* `set_signing_alg`: if the Receiver included this property in the request, it
+SHOULD verify that the Create Stream Response contains the same value. If the
+response does not contain this property, the Transmitter does not support it.
 
 #### Reading a Stream’s Configuration {#reading-a-streams-configuration}
 
@@ -1369,6 +1434,7 @@ Cache-Control: no-store
     "method": "urn:ietf:rfc:8935",
     "endpoint_url": "https://receiver.example.com/events"
   },
+  "set_signing_alg": "ES256",
   "events_supported": [
     "urn:example:secevent:events:type_1",
     "urn:example:secevent:events:type_2",
@@ -1419,6 +1485,7 @@ Cache-Control: no-store
       "method": "urn:ietf:rfc:8935",
       "endpoint_url": "https://receiver.example.com/events"
     },
+    "set_signing_alg": "ES256",
     "events_supported": [
       "urn:example:secevent:events:type_1",
       "urn:example:secevent:events:type_2",
@@ -1445,6 +1512,7 @@ Cache-Control: no-store
       "method": "urn:ietf:rfc:8935",
       "endpoint_url": "https://receiver.example.com/events"
     },
+    "set_signing_alg": "ES256",
     "events_supported": [
       "urn:example:secevent:events:type_1",
       "urn:example:secevent:events:type_2",
@@ -1486,6 +1554,7 @@ Cache-Control: no-store
       "method": "urn:ietf:rfc:8935",
       "endpoint_url": "https://receiver.example.com/events"
     },
+    "set_signing_alg": "ES256",
     "events_supported": [
       "urn:example:secevent:events:type_1",
       "urn:example:secevent:events:type_2",
@@ -1543,7 +1612,10 @@ The stream_id property MUST be present in the request. Other properties
 MAY be present in the request. Any Receiver-Supplied property present in the
 request MUST be updated by the Transmitter. Any properties missing in the
 request MUST NOT be changed by the Transmitter. If `events_requested` property
-is included in the request, it SHOULD NOT be an empty array.
+is included in the request, it SHOULD NOT be an empty array. If the
+`set_signing_alg` property is included in the request and the Transmitter does
+not support the requested value, the Transmitter MUST respond with HTTP Status
+Code "400 Bad Request".
 
 Transmitter-Supplied properties besides the stream_id MAY be present,
 but they MUST match the expected value. Missing Transmitter-Supplied
@@ -1589,6 +1661,7 @@ Cache-Control: no-store
     "method": "urn:ietf:rfc:8935",
     "endpoint_url": "https://receiver.example.com/events"
   },
+  "set_signing_alg": "ES256",
   "events_supported": [
     "urn:example:secevent:events:type_1",
     "urn:example:secevent:events:type_2",
@@ -1635,7 +1708,11 @@ Missing Receiver-Supplied properties MUST be interpreted as requested to be
 deleted. Event Receivers MAY read the configuration first, modify the JSON
 {{RFC7159}} representation, then make a replacement request. If
 `events_requested` property is included in the request, it SHOULD NOT be an
-empty array.
+empty array. If the `set_signing_alg` property is included in the request and
+the Transmitter does not support the requested value, the Transmitter MUST
+respond with HTTP Status Code "400 Bad Request". If the `set_signing_alg`
+property is absent from the request, a Transmitter that supports this property
+MUST select a signing algorithm as described in {{creating-a-stream}}.
 
 Transmitter-Supplied properties besides the stream_id MAY be present,
 but they MUST match the expected value. Missing Transmitter-Supplied
@@ -1657,6 +1734,7 @@ Authorization: Bearer eyJ0b2tlbiI6ImV4YW1wbGUifQo=
     "method": "urn:ietf:rfc:8935",
     "endpoint_url": "https://receiver.example.com/events"
   },
+  "set_signing_alg": "ES256",
   "events_requested": [
     "urn:example:secevent:events:type_2",
     "urn:example:secevent:events:type_3",
@@ -1685,6 +1763,7 @@ Cache-Control: no-store
     "method": "urn:ietf:rfc:8935",
     "endpoint_url": "https://receiver.example.com/events"
   },
+  "set_signing_alg": "ES256",
   "events_supported": [
     "urn:example:secevent:events:type_1",
     "urn:example:secevent:events:type_2",
@@ -2445,6 +2524,20 @@ amount of time after that subject has been removed from the stream. Event
 Receivers MUST tolerate receiving events for subjects that have been removed
 from the stream, and MUST NOT report these events as errors to the Event
 Transmitter.
+
+## Signing Algorithm Selection {#management-sec-signing-alg}
+
+The `set_signing_alg_values_supported` and `set_signing_alg` properties allow
+the Receiver to select the algorithm used to sign the SETs it receives. The
+security of this mechanism depends on the Receiver enforcing the selected
+algorithm as described in {{set-signing-alg}}: a Receiver that accepts SETs
+signed using any algorithm supported by its verification library, rather than
+only the algorithm in the stream configuration, is exposed to algorithm
+substitution attacks. Changing the signing algorithm is not a substitute for
+key rotation: a compromised signing key is addressed by the Transmitter
+publishing new keys via `jwks_uri` ({{discovery-meta}}). The integrity of the
+Transmitter Configuration Metadata and the Stream Configuration relies on their
+retrieval over TLS ({{discovery}}, {{management}}).
 
 # Privacy Considerations {#privacy-considerations}
 
