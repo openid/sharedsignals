@@ -86,6 +86,7 @@ normative:
   RFC6750: # The OAuth 2.0 Authorization Framework: Bearer Token Usage
   RFC8414: # OAuth 2.0 Authorization Server Metadata
   RFC6749:
+  RFC8725: # JSON Web Token Best Current Practices
   FAPI:
     target: https://openid.net/specs/fapi-security-profile-2_0-final.html
     title: FAPI 2.0 Security Profile
@@ -344,10 +345,18 @@ Receivers MUST be prepared to accept events with any of the subject identifier
 formats specified in this section. Transmitters MUST be able to send events with
 at least one of the subject identifier formats specified in this section.
 
-## Event Signatures
+## Event Signatures {#event-signatures}
 
-All events MUST be signed using the `RS256` algorithm with a minimum of
-2048-bit keys.
+All events MUST be signed using JWS as described in {{RFC8417}} Section 5.1.
+This profile does not permit unsecured SETs, even when integrity is provided
+by other means such as TLS; the `none` algorithm MUST NOT be used or accepted.
+
+The Transmitter and Receiver MUST use a mutually supported signing algorithm,
+established by means outside the scope of this profile. Receivers MUST reject
+events signed with an algorithm they are not configured to accept.
+
+RSA keys MUST have a minimum length of 2048 bits when using an RSA-based
+algorithm.
 
 ## OAuth Support
 
@@ -488,9 +497,16 @@ Transmitter, per {{CAEP}} 1.0 §3.8.1.
 
 # Security Considerations
 
-There are no additional security considerations that arise from this document.
 Security considerations applicable to this profile are covered in the
 "Security Considerations" sections of {{SSF}} and {{CAEP}}.
+
+This profile does not mandate a SET signing algorithm (see
+{{event-signatures}}). This allows deployments to adopt stronger algorithms
+and retire weaker ones. Receivers remain responsible for enforcing their own
+algorithm policy.
+Implementers SHOULD follow {{RFC8725}} when selecting and validating signing
+algorithms, and MAY consult the cryptographic requirements in {{FAPI}}
+Section 5.4.1.
 
 --- back
 
@@ -567,3 +583,4 @@ specification.
 
 -02
 * Add Risk Level Change change use-case (#347)
+* Removed RS256 mandate for event signatures (#350)
