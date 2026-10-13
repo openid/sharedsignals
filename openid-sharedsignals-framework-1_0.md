@@ -267,6 +267,14 @@ device
 
 > OPTIONAL. A Subject Identifier that identifies a device.
 
+agent
+
+> OPTIONAL. A Subject Identifier that identifies an agent.
+
+workload
+
+> OPTIONAL. A Subject Identifier that identifies a workload.
+
 session
 
 > OPTIONAL. A Subject Identifier that identifies a session.

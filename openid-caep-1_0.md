@@ -906,7 +906,7 @@ Event Type URI:
 `https://schemas.openid.net/secevent/caep/event-type/risk-level-change`
 
 A vendor may deploy mechanisms to gather and analyze various signals associated
-with subjects such as users, devices, etc. These signals, which can originate
+with subjects such as users, devices, agents, workloads, etc. These signals, which can originate
 from diverse channels and methods beyond the scope of this event description,
 are processed to derive an abstracted risk level representing the subject's
 current threat status.
@@ -921,6 +921,10 @@ destination, password compromise, addition of strong authenticator or other
 reasons.
 * Device's risk has changed due to installation of unapproved software,
 connection to insecure peripheral device, encryption of data or other reasons.
+* Agent's risk has changed due to anomalous task execution, compromise of its
+credentials, or other reasons.
+* Workload's risk has changed due to a misconfiguration, compromised
+dependency, or other reasons.
 * Any other subject's risk changes due to variety of reasons.
 
 ### Event Specific Claims {#risk-level-change-event-specific-claims}
@@ -935,7 +939,7 @@ principal
 > REQUIRED, JSON string: representing the principal entity involved in the
 observed risk event, as identified by the Transmitter. The subject principal can
 be one of the following entities USER, DEVICE, SESSION, TENANT, ORG_UNIT, GROUP,
-or any other entity as defined in Section 2 of {{SSF}}. This claim identifies
+AGENT, WORKLOAD, or any other entity as defined in Section 2 of {{SSF}}. This claim identifies
 the primary subject associated with the event, and helps to contextualize the
 risk relative to the entity involved.
 
