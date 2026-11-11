@@ -2,7 +2,6 @@
 title: OpenID Shared Signals Framework Specification 1.1
 abbrev: SharedSignals
 docname: openid-sharedsignals-framework-1_1
-date:
 
 ipr: none
 cat: std

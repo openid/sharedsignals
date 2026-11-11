@@ -3,7 +3,6 @@ title: OpenID Continuous Access Evaluation Profile 1.1
 
 abbrev: CAEP-Spec
 docname: openid-caep-1_1
-date:
 
 ipr: none
 cat: std
