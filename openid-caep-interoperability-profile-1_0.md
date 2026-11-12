@@ -340,6 +340,10 @@ Event Tokens" {{RFC9493}} MUST be supported:
 * `iss_sub`
 * `opaque` (for the Verification event only)
 
+In addition, complex subject as defined in {{SSF}} Section 3.3 using the subject
+identifier formats referenced in this section for the simple subject members MUST
+also be supported.
+
 Receivers MUST be prepared to accept events with any of the subject identifier
 formats specified in this section. Transmitters MUST be able to send events with
 at least one of the subject identifier formats specified in this section.
