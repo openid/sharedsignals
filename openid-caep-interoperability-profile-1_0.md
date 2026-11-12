@@ -340,6 +340,10 @@ Event Tokens" {{RFC9493}} MUST be supported:
 * `iss_sub`
 * `opaque` (for the Verification event only)
 
+In addition, Complex Subject Members as defined in {{SSF}} Section 3.3, whose
+Simple Subject Members use the subject identifier formats listed in this
+section, MUST also be supported.
+
 Receivers MUST be prepared to accept events with any of the subject identifier
 formats specified in this section. Transmitters MUST be able to send events with
 at least one of the subject identifier formats specified in this section.
@@ -567,3 +571,4 @@ specification.
 
 -02
 * Add Risk Level Change change use-case (#347)
+* Add support for complex subjects in Event Subjects (#366)
