@@ -571,3 +571,4 @@ specification.
 
 -02
 * Add Risk Level Change change use-case (#347)
+* Add support for complex subjects in Event Subjects (#366)
