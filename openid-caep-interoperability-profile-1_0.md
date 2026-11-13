@@ -474,16 +474,16 @@ support the following field values:
 : Receivers MUST interpret all allowable values of this field.
 Transmitters MAY generate any allowable value of this field.
 
-`current_level` 
-: Receivers MUST interpret all allowable values of this field
-(LOW, MEDIUM, HIGH). Transmitters MAY generate any allowable value of this field.
+`current_level`
+: Receivers MUST interpret all allowable values of this field, as defined in
+{{CAEP}} 1.0 Section 3.8.1. Transmitters MAY generate any allowable value of this field.
 
-`previous_level` 
+`previous_level`
 : remains OPTIONAL. Receivers MUST interpret all allowable values of
 this field, and MUST treat its absence as the previous risk level being unknown to the
-Transmitter, per {{CAEP}} 1.0 §3.8.1.
+Transmitter, per {{CAEP}} 1.0 Section 3.8.1.
 
-`reason_admin` 
+`reason_admin`
 : Transmitters MUST populate this value with a non-empty object.
 
 # Security Considerations
