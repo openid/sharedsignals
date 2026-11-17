@@ -112,6 +112,12 @@ normative:
   RFC9493:
   RFC4001:
   RFC3986:
+  WHATWG.CORS:
+    author:
+    - org: WHATWG
+    date: June 2023
+    target: https://fetch.spec.whatwg.org/#http-cors-protocol
+    title: "Fetch Standard: CORS protocol"
   CAEP:
     author:
     -
@@ -802,6 +808,9 @@ jwks_uri
   This contains the signing key(s) the Receiver uses to validate signatures from
   the Transmitter. This value MUST be specified if the Transmitter intends to
   generate signed JWTs. If present, this URL MUST use HTTP over TLS {{RFC9110}}.
+  The endpoint at this URL SHOULD support the use of Cross-Origin Resource
+  Sharing (CORS) {{WHATWG.CORS}} and/or other methods as appropriate to
+  enable JavaScript clients and other browser-based clients to access it.
 
 delivery_methods_supported
 
@@ -906,6 +915,14 @@ Issuer between the host component and the path component, if any. The syntax
 and semantics of ".well-known" are defined in {{RFC8615}}.  "ssf-configuration"
 MUST point to a JSON document compliant with this specification, and that
 document MUST be returned using the "application/json" content type.
+
+The "ssf-configuration" endpoint SHOULD support the use of Cross-Origin Resource
+Sharing (CORS) {{WHATWG.CORS}} and/or other methods as appropriate to enable
+JavaScript clients and other browser-based clients to access it.
+
+Transmitter endpoints that require authorization, such as the stream
+configuration, status, add subject, remove subject, verification and poll
+endpoints, SHOULD NOT permit cross-origin requests.
 
 ### Transmitter Configuration Request
 
