@@ -1122,6 +1122,12 @@ Transmitter and the Receiver, that describes the information being sent over
 the Event Stream. It is represented as a JSON {{RFC7159}} object with the
 following properties:
 
+Any property below that is marked OPTIONAL MAY be omitted. A party that sends a
+Stream Configuration object SHOULD omit an OPTIONAL property that has no value,
+instead of sending the property with the JSON `null` value. A party that
+receives a Stream Configuration object MUST treat an OPTIONAL property whose
+value is JSON `null` as equivalent to that property being absent.
+
 stream_id
 
 > **Transmitter-Supplied**, REQUIRED. A string that uniquely identifies the
