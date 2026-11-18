@@ -348,11 +348,6 @@ Receivers MUST be prepared to accept events with any of the subject identifier
 formats specified in this section. Transmitters MUST be able to send events with
 at least one of the subject identifier formats specified in this section.
 
-## Event Signatures
-
-All events MUST be signed using the `RS256` algorithm with a minimum of
-2048-bit keys.
-
 ## OAuth Support
 
 Implementations MUST support OAuth 2.0 {{RFC6749}}. In this context, the OAuth
@@ -571,4 +566,5 @@ specification.
 
 -02
 * Add Risk Level Change change use-case (#347)
+* Removed Event Signatures section and the `RS256` / 2048-bit key requirement
 * Add support for complex subjects in Event Subjects (#366)
