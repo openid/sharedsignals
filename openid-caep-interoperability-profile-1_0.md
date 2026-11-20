@@ -160,8 +160,9 @@ Transmitters MUST implement the following features.
 
 ### Specification Version {#spec-version}
 
-The Transmitter Configuration Metadata MUST include a `spec_version` field, and
-its value MUST be `1_0` or greater.
+The Transmitter Configuration Metadata published at `/.well-known/ssf-configuration` MUST include a `spec_version` field, and its value MUST be `1_0` or greater.
+
+A Transmitter that additionally supports Receivers implementing `1_0-ID1` MUST publish the metadata for that version at `/.well-known/sse-configuration`, as defined in Section 6.2 of [SSE-1_0-ID1], and MUST NOT publish `1_0-ID1` metadata at `/.well-known/ssf-configuration`.
 
 ### Delivery Method {#delivery-method}
 
